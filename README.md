@@ -27,6 +27,13 @@ The public articles / tweets / microblogs published by or related to @haoel
 - @haoel 所发表的内容，如文章、幻灯、音视频、推文等。
 - 对理解这些内容所必要的上下文，例如推文的引用、回复对象等
 
+目前已经收集到的数据包括：
+
+- `blogs`: [酷壳](https://coolshell.cn) 的 blog 文章 (by [@zyqzss](https://github.com/zyqzss))
+- `tweets`: [@haoel](https://twitter.com/haoel) 发表的 tweets (by [@yihong0618](https://github.com/yihong0618))
+
+欢迎通过 pull requests 贡献数据，或者通过 issues 讨论获取数据的方法。
+
 ## 数据的版权如何处理
 
 按照转载文章处理版权，如果内容源对于转载有明确要求的，仅在满足要求的情况下才进行收录。
