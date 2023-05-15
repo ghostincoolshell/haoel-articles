@@ -1,0 +1,3488 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 41 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=41" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Sun, 05 Jul 2009 13:32:20 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>如何在Java中避免equals方法的隐藏陷阱</title>
+		<link>https://coolshell.cn/articles/1051.html</link>
+					<comments>https://coolshell.cn/articles/1051.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Thu, 18 Jun 2009 03:14:41 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1051</guid>
+
+					<description><![CDATA[<p>译者注 :你可能会觉得Java很简单，Object的equals实现也会非常简单，但是事实并不是你想象的这样，耐心的读完本文，你会发现你对Java了解的是如此的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1051.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1051.html">如何在Java中避免equals方法的隐藏陷阱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>译者注</strong> :你可能会觉得Java很简单，Object的equals实现也会非常简单，但是事实并不是你想象的这样，耐心的读完本文，你会发现你对Java了解的是如此的少。如果这篇文章是一份Java程序员的入职笔试，那么不知道有多少人会掉落到这样的陷阱中。原文转自<a href="http://www.artima.com/lejava/articles/equality.html">http://www.artima.com/lejava/articles/equality.html</a> 三位作者都是不同领域的大拿，有兴趣的读者可以从上面这个连接直接去阅读原文。</p>
+<p><strong>摘要</strong><br />
+本文描述重载equals方法的技术，这种技术即使是具现类的子类增加了字段也能保证equal语义的正确性。<br />
+在《Effective Java》的第8项中，Josh Bloch描述了当继承类作为面向对象语言中的等价关系的基础问题，要保证派生类的equal正确性语义所会面对的困难。Bloch这样写到：</p>
+<blockquote><p><strong>除非你忘记了面向对象抽象的好处，否则在当你继承一个新类或在类中增加了一个值组件时你无法同时保证equal的语义依然正确</strong></p></blockquote>
+<p><span id="more-1051"></span></p>
+<p>在《Programming in Scala》中的第28章演示了一种方法，这种方法允许即使继承了新类，增加了新的值组件，equal的语义仍然能得到保证。虽然在这本书中这项技术是在使用Scala类环境中，但是这项技术同样可以应用于Java定义的类中。在本文中的描述来自于Programming in Scala中的文字描述，但是代码被我从scala翻译成了Java</p>
+<p>　</p>
+<h4>常见的等价方法陷阱</h4>
+<p>java.lang.Object 类定义了equals这个方法，它的子类可以通过重载来覆盖它。不幸的是，在面向对象中写出正确的equals方法是非常困难的。事实上，在研究了大量的Java代码后，2007 paper的作者得出了如下的一个结论：</p>
+<blockquote><p>几乎所有的equals方法的实现都是错误的！</p></blockquote>
+<p>这个问题是因为等价是和很多其他的事物相关联。例如其中之一，一个的类型C的错误等价方法可能意味着你无法将这个类型C的对象可信赖的放入到容器中。比如说，你有两个元素elem1和elem2他们都是类型C的对象，并且他们是相等，即elem1.equals(elm2)返回ture。但是，只要这个equals方法是错误的实现，那么你就有可能会看见如下的一些行为：</p>
+<pre class="brush: java">Set hashSet&lt;C&gt; = new java.util.HashSet&lt;C&gt;();
+hashSet.add(elem1);
+hashSet.contains(elem2);    // returns false!</pre>
+<p>当equals重载时，这里有4个会引发equals行为不一致的常见陷阱：</p>
+<ol>
+<li>定义了错误的equals方法签名(signature) Defining equals with the wrong signature.</li>
+<li>重载了equals的但没有同时重载hashCode的方法。 Changing equals without also changing hashCode.</li>
+<li>建立在会变化字域上的equals定义。 Defining equals in terms of mutable fields.</li>
+<li>不满足等价关系的equals错误定义 Failing to define equals as an equivalence relation.</li>
+</ol>
+<p>在剩下的章节中我们将依次讨论这4中陷阱。</p>
+<p>　</p>
+<h4>陷阱1：定义错误equals方法签名(signature)</h4>
+<p>考虑为下面这个简单类Point增加一个等价性方法：</p>
+<pre class="brush: java">public class Point {
+
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    // ...
+}</pre>
+<p>看上去非常明显，但是按照这种方式来定义equals就是错误的。</p>
+<pre class="brush: java">// An utterly wrong definition of equals
+public boolean equals(Point other) {
+  return (this.getX() == other.getX() &amp;&amp; this.getY() == other.getY());
+}</pre>
+<p>这个方法有什么问题呢？初看起来，它工作的非常完美：</p>
+<pre class="brush: java">Point p1 = new Point(1, 2);
+Point p2 = new Point(1, 2);
+
+Point q = new Point(2, 3);
+
+System.out.println(p1.equals(p2)); // prints true
+
+System.out.println(p1.equals(q)); // prints false</pre>
+<p>然而，当我们一旦把这个Point类的实例放入到一个容器中问题就出现了：</p>
+<pre class="brush: java">import java.util.HashSet;
+
+HashSet&lt;Point&gt; coll = new HashSet&lt;Point&gt;();
+coll.add(p1);
+
+System.out.println(coll.contains(p2)); // prints false</pre>
+<p>为什么coll中没有包含p2呢？甚至是p1也被加到集合里面，p1和p2是是等价的对象吗？在下面的程序中，我们可以找到其中的一些原因，定义p2a是一个指向p2的对象，但是p2a的类型是Object而非Point类型：</p>
+<pre class="brush: java">Object p2a = p2;</pre>
+<p>现在我们重复第一个比较，但是不再使用p2而是p2a,我们将会得到如下的结果：</p>
+<pre class="brush: java">System.out.println(p1.equals(p2a)); // prints false</pre>
+<p>到底是那里出了了问题？事实上，之前所给出的equals版本并没有覆盖Object类的equals方法，因为他的类型不同。下面是Object的equals方法的定义</p>
+<pre class="brush: java">public boolean equals(Object other)</pre>
+<p>因为Point类中的equals方法使用的是以Point类而非Object类做为参数，因此它并没有覆盖Object中的equals方法。而是一种变化了的重载。在Java中重载被解析为静态的参数类型而非运行期的类型，因此当静态参数类型是Point,Point的equals方法就被调用。然而当静态参数类型是Object时，Object类的equals就被调用。因为这个方法并没有被覆盖，因此它仍然是实现成比较对象标示。这就是为什么虽然p1和p2a具有同样的x,y值，&#8221;p1.equals(p2a)&#8221;仍然返回了false。这也是会什么HasSet的contains方法返回false的原因，因为这个方法操作的是泛型，他调用的是一般化的Object上equals方法而非Point类上变化了的重载方法equals</p>
+<p>一个更好但不完美的equals方法定义如下：</p>
+<pre class="brush: java">// A better definition, but still not perfect
+@Override public boolean equals(Object other) {
+    boolean result = false;
+    if (other instanceof Point) {
+        Point that = (Point) other;
+        result = (this.getX() == that.getX() &amp;&amp; this.getY() == that.getY());
+    }
+    return result;
+}</pre>
+<p>现在equals有了正确的类型，它使用了一个Object类型的参数和一个返回布尔型的结果。这个方法的实现使用instanceof操作和做了一个造型。它首先检查这个对象是否是一个Point类，如果是，他就比较两个点的坐标并返回结果，否则返回false。</p>
+<p>　</p>
+<h4>陷阱2：重载了equals的但没有同时重载hashCode的方法</h4>
+<p>如果你使用上一个定义的Point类进行p1和p2a的反复比较，你都会得到你预期的true的结果。但是如果你将这个类对象放入到HashSet.contains()方法中测试，你就有可能仍然得到false的结果：</p>
+<pre class="brush: java">Point p1 = new Point(1, 2);
+Point p2 = new Point(1, 2);
+
+HashSet&lt;Point&gt; coll = new HashSet&lt;Point&gt;();
+coll.add(p1);
+
+System.out.println(coll.contains(p2)); // 打印 false (有可能)</pre>
+<p>事实上，这个个结果不是100%的false，你也可能有返回ture的经历。如果你得到的结果是true的话，那么你试试其他的坐标值，最终你一定会得到一个在集合中不包含的结果。导致这个结果的原因是Point重载了equals却没有重载hashCode。<br />
+注意上面例子的的容器是一个HashSet，这就意味着容器中的元素根据他们的哈希码被被放入到&#8221;哈希桶 hash buckets&#8221;中。contains方法首先根据哈希码在哈希桶中查找，然后让桶中的所有元素和所给的参数进行比较。现在，虽然最后一个Point类的版本重定义了equals方法，但是它并没有同时重定义hashCode。因此，hashCode仍然是Object类的那个版本，即：所分配对象的一个地址的变换。所以p1和p2的哈希码理所当然的不同了，甚至是即时这两个点的坐标完全相同。不同的哈希码导致他们具有极高的可能性被放入到集合中不同的哈希桶中。contains方法将会去找p2的哈希码对应哈希桶中的匹配元素。但是大多数情况下，p1一定是在另外一个桶中，因此，p2永远找不到p1进行匹配。当然p2和p2也可能偶尔会被放入到一个桶中，在这种情况下，contains的结果就为true了。</p>
+<p>最新一个Point类实现的问题是，它的实现违背了作为Object类的定义的hashCode的语义。</p>
+<blockquote><p><strong><br />
+如果两个对象根据equals(Object)方法是相等的，那么在这两个对象上调用hashCode方法应该产生同样的值<br />
+</strong></p></blockquote>
+<p>事实上，在Java中，hashCode和equals需要一起被重定义是众所周知的。此外，hashCode只可以依赖于equals依赖的域来产生值。对于Point这个类来说，下面的的hashCode定义是一个非常合适的定义。</p>
+<pre class="brush: java">public class Point {
+
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof Point) {
+            Point that = (Point) other;
+            result = (this.getX() == that.getX() &amp;&amp; this.getY() == that.getY());
+        }
+        return result;
+    }
+<span style="color: #339966;">
+    @Override public int hashCode() {
+        return (41 * (41 + getX()) + getY());
+    }
+</span>
+}</pre>
+<p>这只是hashCode一个可能的实现。x域加上常量41后的结果再乘与41并将结果在加上y域的值。这样做就可以以低成本的运行时间和低成本代码大小得到一个哈希码的合理的分布(<strong>译者注：</strong>性价比相对较高的做法)。<br />
+增加hashCode方法重载修正了定义类似Point类等价性的问题。然而，关于类的等价性仍然有其他的问题点待发现。</p>
+<p>　</p>
+<h4>陷阱3：建立在会变化字段上的equals定义</h4>
+<p>让我们在Point类做一个非常微小的变化</p>
+<pre class="brush: java">public class Point {
+<span style="color: #339966;">
+    private int x;
+    private int y;
+</span>
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+<span style="color: #339966;">
+    public void setX(int x) { // Problematic
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+</span>
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof Point) {
+            Point that = (Point) other;
+            result = (this.getX() == that.getX() &amp;&amp; this.getY() == that.getY());
+        }
+        return result;
+    }
+
+    @Override public int hashCode() {
+        return (41 * (41 + getX()) + getY());
+    }
+}</pre>
+<p>唯一的不同是x和y域不再是final，并且两个set方法被增加到类中来，并允许客户改变x和y的值。equals和hashCode这个方法的定义现在是基于在这两个会发生变化的域上，因此当他们的域的值改变时，结果也就跟着改变。因此一旦你将这个point对象放入到集合中你将会看到非常神奇的效果。</p>
+<pre class="brush: java">Point p = new Point(1, 2);
+
+HashSet&lt;Point&gt; coll = new HashSet&lt;Point&gt;();
+coll.add(p);
+
+System.out.println(coll.contains(p)); // 打印 true</pre>
+<p>现在如果你改变p中的一个域，这个集合中还会包含point吗，我们将拭目以待。</p>
+<pre class="brush: java">p.setX(p.getX() + 1);
+
+System.out.println(coll.contains(p)); // (有可能)打印 false</pre>
+<p>看起来非常的奇怪。p去那里去了？如果你通过集合的迭代器来检查p是否包含，你将会得到更奇怪的结果。</p>
+<pre class="brush: java">Iterator&lt;Point&gt; it = coll.iterator();
+boolean containedP = false;
+while (it.hasNext()) {
+    Point nextP = it.next();
+    if (nextP.equals(p)) {
+        containedP = true;
+        break;
+    }
+}
+
+System.out.println(containedP); // 打印 true</pre>
+<p>结果是，集合中不包含p，但是p在集合的元素中！到底发生了什么！当然，所有的这一切都是在x域的修改后才发生的，p最终的的hashCode是在集合coll错误的哈希桶中。即，原始哈希桶不再有其新值对应的哈希码。换句话说，p已经在集合coll的是视野范围之外，虽然他仍然属于coll的元素。</p>
+<p>从这个例子所得到的教训是，当equals和hashCode依赖于会变化的状态时，那么就会给用户带来问题。如果这样的对象被放入到集合中，用户必须小心，不要修改这些这些对象所依赖的状态，这是一个小陷阱。如果你需要根据对象当前的状态进行比较的话，你应该不要再重定义equals，应该起其他的方法名字而不是equals。对于我们的Point类的最后的定义，我们最好省略掉hashCode的重载，并将比较的方法名命名为equalsContents，或其他不同于equals的名字。那么Point将会继承原来默认的equals和hashCode的实现，因此当我们修改了x域后p依然会呆在其原来在容器中应该在位置。</p>
+<p>　</p>
+<h4>陷阱4：不满足等价关系的equals错误定义</h4>
+<p>Object中的equals的规范阐述了equals方法必须实现在非null对象上的等价关系：</p>
+<ul>
+<li>自反原则：对于任何非null值X,表达式x.equals(x)总返回true。</li>
+<li>等价性：对于任何非空值x和y，那么当且仅当y.equals(x)返回真时，x.equals(y)返回真。</li>
+<li>传递性：对于任何非空值x,y,和z，如果x.equals(y)返回真，且y.equals(z)也返回真，那么x.equals(z)也应该返回真。</li>
+<li>一致性：对于非空x,y，多次调用x.equals(y)应该一致的返回真或假。提供给equals方法比较使用的信息不应该包含改过的信息。</li>
+<li>对于任何非空值x,x.equals(null)应该总返回false.</li>
+</ul>
+<p>Point类的equals定义已经被开发成了足够满足equals规范的定义。然而，当考虑到继承的时候，事情就开始变得非常复杂起来。比如说有一个Point的子类ColoredPoint，它比Point多增加了一个类型是Color的color域。假设Color被定义为一个枚举类型：</p>
+<pre class="brush: java">public enum Color {
+    RED, ORANGE, YELLOW, GREEN, BLUE, INDIGO, VIOLET;
+}</pre>
+<p>ColoredPoint重载了equals方法，并考虑到新加入color域，代码如下：</p>
+<pre class="brush: java">public class ColoredPoint extends Point { // Problem: equals not symmetric
+
+    private final Color color;
+
+    public ColoredPoint(int x, int y, Color color) {
+        super(x, y);
+        this.color = color;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof ColoredPoint) {
+            ColoredPoint that = (ColoredPoint) other;
+            result = (this.color.equals(that.color) &amp;&amp; super.equals(that));
+        }
+        return result;
+    }
+}</pre>
+<p>这是很多程序员都有可能写成的代码。注意在本例中，类ColoredPointed不需要重载hashCode，因为新的ColoredPoint类上的equals定义，严格的重载了Point上equals的定义。hashCode的规范仍然是有效，如果两个着色点(colored point)相等，其坐标必定相等，因此它的hashCode也保证了具有同样的值。</p>
+<p>对于ColoredPoint类自身对象的比较是没有问题的，但是如果使用ColoredPoint和Point混合进行比较就要出现问题。</p>
+<pre class="brush: java">Point p = new Point(1, 2);
+
+ColoredPoint cp = new ColoredPoint(1, 2, Color.RED);
+
+System.out.println(p.equals(cp)); // 打印真 true
+
+System.out.println(cp.equals(p)); // 打印假 false</pre>
+<p>&#8220;p等价于cp&#8221;的比较这个调用的是定义在Point类上的equals方法。这个方法只考虑两个点的坐标。因此比较返回真。在另外一方面，“cp等价于p”的比较这个调用的是定义在ColoredPoint类上的equals方法，返回的结果却是false，这是因为p不是ColoredPoint，所以equals这个定义违背了对称性。</p>
+<p>违背对称性对于集合来说将导致不可以预期的后果，例如：</p>
+<pre class="brush: java">Set&lt;Point&gt; hashSet1 = new java.util.HashSet&lt;Point&gt;();
+hashSet1.add(p);
+System.out.println(hashSet1.contains(cp));    // 打印 false
+
+Set&lt;Point&gt; hashSet2 = new java.util.HashSet&lt;Point&gt;();
+hashSet2.add(cp);
+System.out.println(hashSet2.contains(p));    // 打印 true</pre>
+<p>因此虽然p和cp是等价的，但是contains测试中一个返回成功，另外一个却返回失败。<br />
+你如何修改equals的定义，才能使得这个方法满足对称性？本质上说有两种方法，你可以使得这种关系变得更一般化或更严格。更一般化的意思是这一对对象，a和b，被用于进行对比，无论是a比b还是b比a 都返回true，下面是代码：</p>
+<pre class="brush: java">public class ColoredPoint extends Point { // Problem: equals not transitive
+
+    private final Color color;
+
+    public ColoredPoint(int x, int y, Color color) {
+        super(x, y);
+        this.color = color;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof ColoredPoint) {
+            ColoredPoint that = (ColoredPoint) other;
+            result = (this.color.equals(that.color) &amp;&amp; super.equals(that));
+        }
+        else if (other instanceof Point) {
+            Point that = (Point) other;
+            result = that.equals(this);
+        }
+        return result;
+    }
+}</pre>
+<p>在ColoredPoint中的equals的新定义比老定义中检查了更多的情况:如果对象是一个Point对象而不是ColoredPoint，方法就转变为Point类的equals方法调用。这个所希望达到的效果就是equals的对称性，不管&#8221;cp.equals(p)&#8221;还是&#8221;p.equals(cp)&#8221;的结果都是true。然而这种方法，equals的规范还是被破坏了，现在的问题是这个新等价性不满足传递性。考虑下面的一段代码实例，定义了一个点和这个点上上两种不同颜色点：</p>
+<pre class="brush: java">ColoredPoint redP = new ColoredPoint(1, 2, Color.RED);
+ColoredPoint blueP = new ColoredPoint(1, 2, Color.BLUE);</pre>
+<p>redP等价于p，p等价于blueP</p>
+<pre class="brush: java">System.out.println(redP.equals(p)); // prints true
+
+System.out.println(p.equals(blueP)); // prints true</pre>
+<p>然而，对比redP和blueP的结果是false:</p>
+<pre class="brush: java">System.out.println(redP.equals(blueP)); // 打印 false</pre>
+<p>因此，equals的传递性就被违背了。<br />
+使equals的关系更一般化似乎会将我们带入到死胡同。我们应该采用更严格化的方法。一种更严格化的equals方法是认为不同类的对象是不同的。这个可以通过修改Point类和ColoredPoint类的equals方法来达到。你能增加额外的比较来检查是否运行态的这个Point类和那个Point类是同一个类，就像如下所示的代码一样：</p>
+<pre class="brush: java">// A technically valid, but unsatisfying, equals method
+public class Point {
+
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof Point) {
+            Point that = (Point) other;
+            result = (this.getX() == that.getX() &amp;&amp; this.getY() == that.getY()
+                    <span style="color: #339966;">&amp;&amp; this.getClass().equals(that.getClass())</span>);
+        }
+        return result;
+    }
+
+    @Override public int hashCode() {
+        return (41 * (41 + getX()) + getY());
+    }
+}</pre>
+<p>你现在可以将ColoredPoint类的equals实现用回刚才那个不满足对称性要的equals实现了。</p>
+<pre class="brush: java">public class ColoredPoint extends Point { // 不再违反对称性需求
+
+    private final Color color;
+
+    public ColoredPoint(int x, int y, Color color) {
+        super(x, y);
+        this.color = color;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof ColoredPoint) {
+            ColoredPoint that = (ColoredPoint) other;
+            result = (this.color.equals(that.color) &amp;&amp; super.equals(that));
+        }
+        return result;
+    }
+}</pre>
+<p>这里，Point类的实例只有当和另外一个对象是同样类，并且有同样的坐标时候，他们才被认为是相等的，即意味着 .getClass()返回的是同样的值。这个新定义的等价关系满足了对称性和传递性因为对于比较对象是不同的类时结果总是false。所以着色点(colored point)永远不会等于点(point)。通常这看起来非常合理，但是这里也存在着另外一种争论——这样的比较过于严格了。</p>
+<p>考虑我们如下这种稍微的迂回的方式来定义我们的坐标点(1,2)</p>
+<pre class="brush: java">Point pAnon = new Point(1, 1) {
+    @Override public int getY() {
+        return 2;
+    }
+};</pre>
+<p>pAnon等于p吗？答案是假，因为p和pAnon的java.lang.Class对象不同。p是Point，而pAnon是Point的一个匿名派生类。但是，非常清晰的是pAnon的确是在坐标1，2上的另外一个点。所以将他们认为是不同的点是没有理由的。</p>
+<p>　</p>
+<h4>canEqual 方法</h4>
+<p>到此，我们看其来似乎是遇到阻碍了，存在着一种正常的方式不仅可以在不同类继承层次上定义等价性，并且保证其等价的规范性吗？事实上，的确存在这样的一种方法，但是这就要求除了重定义equals和hashCode外还要另外的定义一个方法。基本思路就是在重载equals(和hashCode)的同时，它应该也要要明确的声明这个类的对象永远不等价于其他的实现了不同等价方法的超类的对象。为了达到这个目标，我们对每一个重载了equals的类新增一个方法canEqual方法。这个方法的方法签名是：</p>
+<pre class="brush: java">public boolean canEqual(Object other)</pre>
+<p>如果other 对象是canEquals(重)定义那个类的实例时，那么这个方法应该返回真，否则返回false。这个方法由equals方法调用，并保证了两个对象是可以相互比较的。下面Point类的新的也是最终的实现：</p>
+<pre class="brush: java">public class Point {
+
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof Point) {
+            Point that = (Point) other;
+            result =<span style="color: #339966;">(that.canEqual(this) &amp;&amp; </span>this.getX() == that.getX() &amp;&amp; this.getY() == that.getY());
+        }
+        return result;
+    }
+
+    @Override public int hashCode() {
+        return (41 * (41 + getX()) + getY());
+    }
+<span style="color: #339966;">
+    public boolean canEqual(Object other) {
+        return (other instanceof Point);
+    }
+</span>
+}</pre>
+<p>这个版本的Point类的equals方法中包含了一个额外的需求，通过canEquals方法来决定另外一个对象是否是是满足可以比较的对象。在Point中的canEqual宣称了所有的Point类实例都能被比较。</p>
+<p>下面是ColoredPoint相应的实现</p>
+<pre class="brush: java">public class ColoredPoint extends Point { // 不再违背对称性
+
+    private final Color color;
+
+    public ColoredPoint(int x, int y, Color color) {
+        super(x, y);
+        this.color = color;
+    }
+
+    @Override public boolean equals(Object other) {
+        boolean result = false;
+        if (other instanceof ColoredPoint) {
+            ColoredPoint that = (ColoredPoint) other;
+            result = <span style="color: #339966;">(that.canEqual(this) &amp;&amp; </span>this.color.equals(that.color) &amp;&amp; super.equals(that));
+        }
+        return result;
+    }
+
+    @Override public int hashCode() {
+        return (41 * super.hashCode() + color.hashCode());
+    }
+<span style="color: #339966;">
+    @Override public boolean canEqual(Object other) {
+        return (other instanceof ColoredPoint);
+    }
+</span>}</pre>
+<p>在上显示的新版本的Point类和ColoredPoint类定义保证了等价的规范。等价是对称和可传递的。比较一个Point和ColoredPoint类总是返回false。因为点p和着色点cp,“p.equals(cp)返回的是假。并且，因为cp.canEqual(p)总返回false。相反的比较，cp.equals(p)同样也返回false，由于p不是一个ColoredPoint，所以在ColoredPoint的equals方法体内的第一个instanceof检查就失败了。</p>
+<p>另外一个方面，不同的Point子类的实例却是可以比较的，同样没有重定义等价性方法的类也是可以比较的。对于这个新类的定义，p和pAnon的比较将总返回true。下面是一些例子：</p>
+<pre class="brush: java">Point p = new Point(1, 2);
+
+ColoredPoint cp = new ColoredPoint(1, 2, Color.INDIGO);
+
+Point pAnon = new Point(1, 1) {
+    @Override public int getY() {
+        return 2;
+    }
+};
+
+Set&lt;Point&gt; coll = new java.util.HashSet&lt;Point&gt;();
+coll.add(p);
+
+System.out.println(coll.contains(p)); // 打印 true
+
+System.out.println(coll.contains(cp)); // 打印 false
+
+System.out.println(coll.contains(pAnon)); // 打印 true</pre>
+<p>这些例子显示了如果父类在equals的实现定义并调用了canEquals，那么开发人员实现的子类就能决定这个子类是否可以和它父类的实例进行比较。例如ColoredPoint，因为它以&#8221;一个着色点永远不可以等于普通不带颜色的点重载了&#8221; canEqual，所以他们就不能比较。但是因为pAnon引用的匿名子类没有重载canEqual,因此它的实例就可以和Point的实例进行对比。</p>
+<p>canEqual方法的一个潜在的争论是它是否违背了Liskov替换准则(LSP)。例如，通过比较运行态的类来实现的比较技术(<strong>译者注：</strong> canEqual的前一版本，使用.getClass()的那个版本)，将导致不能定义出一个子类，这个子类的实例可以和其父类进行比较，因此就违背了LSP。这是因为，LSP原则是这样的，在任何你能使用父类的地方你都可以使用子类去替换它。在之前例子中，虽然cp的x,y坐标匹配那些在集合中的点，然而&#8221;coll.contains(cp)&#8221;仍然返回false，这看起来似乎违背得了LSP准则，因为你不能这里能使用Point的地方使用一个ColoredPointed。但是我们认为这种解释是错误的，因为LSP原则并没有要求子类和父类的行为一致，而仅要求其行为能一种方式满足父类的规范。</p>
+<p>通过比较运行态的类来编写equals方法(<strong>译者注：</strong> canEqual的前一版本，使用.getClass()的那个版本)的问题并不是违背LSP准则的问题，但是它也没有为你指明一种创建派生类的实例能和父类实例进行对比的的方法。例如，我们使用这种运行态比较的技术在之前的&#8221;coll.contains(pAnon)&#8221;将会返回false，并且这并不是我们希望的。相反我们希望“coll.contains(cp)”返回false，因为通过在ColoredPoint中重载的equals，我基本上可以说，一个在坐标1，2上着色点和一个坐标1，2上的普通点并不是一回事。然而，在最后的例子中，我们能传递Point两种不同的子类实例到集合中contains方法，并且我们能得到两个不同的答案，并且这两个答案都正确。</p>
+<p><strong>&#8211;全文完&#8211;</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1051.html">如何在Java中避免equals方法的隐藏陷阱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1051.html/feed</wfw:commentRss>
+			<slash:comments>27</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>高级Unix命令</title>
+		<link>https://coolshell.cn/articles/1044.html</link>
+					<comments>https://coolshell.cn/articles/1044.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 16 Jun 2009 02:42:39 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1044</guid>
+
+					<description><![CDATA[<p>在Unix操作中有太多太多的命令，这些命令的强大之处就是一个命令只干一件事，并把这件事干好。Do one thing， do it well。这是unix的哲学...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1044.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1044.html">高级Unix命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在Unix操作中有太多太多的命令，这些命令的强大之处就是一个命令只干一件事，并把这件事干好。Do one thing， do it well。这是unix的哲学。而且Unix首创的管道可以把这些命令任意地组合，以完成一个更为强大功能。这些哲学到今天都在深深地影响着整个计算机产业。比如今天最流行的“云计算”——把一个软件以碎片方式部署，然后这些功能可以任意组合。</p>
+<p>这篇文章罗列了很多Unix下比较高级的命令，当然，Unix/Linux下还有更多更多的命令，我们相信你可能见过其中的某些命令，也有可能有一些命令没有见过。不管怎么说，我们希望这些命令一方面可以让你知道怎么使用Unix/Linux操作系统，另一方面，我们也希望你能从中感到Unix的那种软件开发的哲学思想。</p>
+<p><span id="more-1044"></span></p>
+<table border="0" cellspacing="0" cellpadding="4">
+<tbody>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">ACCTCOM</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看所有用户执行过的进程（命令）</td>
+<td><span style="color: #333399;">acctcom | tail -20</span></td>
+</tr>
+<tr>
+<td>查看指定用户执行过的进程（命令）</td>
+<td><span style="color: #333399;">acctcom -u &lt;username&gt; | tail -20</span></td>
+</tr>
+<tr>
+<td>使用一个正则表达式查找相关进程</td>
+<td><span style="color: #333399;">acctcom -n &lt;pattern&gt; | tail -20</span></td>
+</tr>
+<tr>
+<td>查找所有以l开头的被用户执行过的命令</td>
+<td><span style="color: #333399;">acctcom -n &#8216;^l&#8217; | tail -30</span></td>
+</tr>
+<tr>
+<td>以反向顺序显示</td>
+<td><span style="color: #333399;">acctom -b | more</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">AGREP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>在文件中查找一个可能拼写错的单词</td>
+<td><span style="color: #333399;">agrep -2 &#8216;macropperswan&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">AT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>在未来某个时间执行某个命令</td>
+<td><span style="color: #333399;">at now + 5 days &lt; scriptfile</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">AWK</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>显示文件的第一列</td>
+<td><span style="color: #333399;">awk &#8216;{print $1}&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>反序显示文件的前两列</td>
+<td><span style="color: #333399;">awk &#8216;{print $2,&#8221;\t&#8221;,$1}&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>输出前两列的总和</td>
+<td><span style="color: #333399;">awk &#8216;{print $1 + $2}&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>查找所有包括&#8221;money&#8221; 行并输出最后一列</td>
+<td><span style="color: #333399;">awk &#8216;/money/ {print $NF}&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>查找第二列中包含 &#8220;money&#8221;</td>
+<td><span style="color: #333399;">awk &#8216;$2 ~ /money/ {print $0}&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>查找第三列中不包括&#8221;A&#8221;</td>
+<td><span style="color: #333399;">awk &#8216;$3 !~ /A$/ {print $0}&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">BC</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>计算sin(5)的值</td>
+<td><span style="color: #333399;">echo &#8216;s(5)&#8217; | bc -l</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CANCEL</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>取消一个刚开始启动的打印的作业</td>
+<td><span style="color: #333399;">cancel &lt;jobid&gt; </span>( jobid可以由lpstat -o输出)</td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CASE in ESAC </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>sh/bash/ksh中的case语句</td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CC</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>编译一个C文件file.c</td>
+<td><span style="color: #333399;">cc -o &lt;outfile&gt; &lt;infile&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CHGRP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>修改文件的组所属</td>
+<td><span style="color: #333399;">chgrp &lt;newgroupname&gt; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CHOWN</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>修改文件的所属人</td>
+<td><span style="color: #333399;">chown &lt;newowner&gt; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CMP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>比较两个文件</td>
+<td><span style="color: #333399;">cmp &lt;file1&gt; &lt;file2&gt; || &lt;command&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">COL</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>打印man pages，去除其中 &#8220;^H&#8221;</td>
+<td><span style="color: #333399;">man &lt;command&gt; | col -b | &lt;printcommand&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CRONTAB</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看你的crontab 文件</td>
+<td><span style="color: #333399;">crontab -l</span></td>
+</tr>
+<tr>
+<td>编译 crontab 文件</td>
+<td><span style="color: #333399;">crontab -e</span></td>
+</tr>
+<tr>
+<td>第周一的05:10 执行/home/fred/foo.ksh</td>
+<td><span style="color: #333399;">10 5 * * 1 /home/fred/foo.ksh</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CRYPT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>使用一个口令加密一个文件</td>
+<td><span style="color: #333399;">crypt password &lt; infile &gt; cryptfile</span></td>
+</tr>
+<tr>
+<td>解密一个被上面命令加密了的文件</td>
+<td><span style="color: #333399;">crypt password &lt; cryptfile &gt; cleanfile</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CSH </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>最好的Berkley shell</td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">CUT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>从last 命令的输出中得到hostname字段</td>
+<td><span style="color: #333399;">last | cut -c11-40</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">DATE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>设置时间(只能由root 执行)</td>
+<td><span style="color: #333399;">date &lt;mmddhhmm&gt;</span></td>
+</tr>
+<tr>
+<td>输出指定日期格式 (如：月份)</td>
+<td><span style="color: #333399;">date +%m</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">DF</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>以kB单位查看磁盘空间</td>
+<td><span style="color: #333399;">df -k</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">DIRCMP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>比较两个目录</td>
+<td><span style="color: #333399;">dircmp &lt;dir1&gt; &lt;dir2&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">DTKSH</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>dtksh 是一个 X11 图形的ksh93</td>
+<td><span style="color: #333399;">dtksh</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">DU</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>磁盘使用情况</td>
+<td><span style="color: #333399;">du -ks</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">ED </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>命令行编译器。</td>
+<td><span style="color: #333399;">ed &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">EGREP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>使用“或”条件Grep 文件</td>
+<td><span style="color: #333399;">egrep &#8216;(A|B)&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>grep文件中即不包括A也不包括B</td>
+<td><span style="color: #333399;">egrep -v &#8216;(A|B)&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">EX</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>使用一个shell脚来来编辑一个文件</td>
+<td><span style="color: #333399;">ex -s file &lt;&lt;EOF<br />
+g/money/s//cash/<br />
+EOF</span></td>
+</tr>
+<tr>
+<td>以一个脚本文件来编辑一个文件</td>
+<td><span style="color: #333399;">ex -s file &lt; scriptfile</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">EXPR</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>求模</td>
+<td><span style="color: #333399;">expr 10 % 7</span></td>
+</tr>
+<tr>
+<td>查看字串是否在变量$var中</td>
+<td><span style="color: #333399;">expr $var : &#8216;string&#8217;</span></td>
+</tr>
+<tr>
+<td>显示第一个数字组成的字串</td>
+<td><span style="color: #333399;">expr $var : &#8216;[^0-9]*\([a-z]*\)&#8217;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">FGREP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查找不匹配于某正规表达式的文件行</td>
+<td><span style="color: #333399;">fgrep &#8216;*,/.()&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">FILE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看文件类型(如： ascii)</td>
+<td><span style="color: #333399;">file &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">FIND</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>在整个文件系统中查的一个文件</td>
+<td><span style="color: #333399;">find / -type f -name &lt;file&gt; -print</span></td>
+</tr>
+<tr>
+<td>查找所有匹配于模式的文件</td>
+<td><span style="color: #333399;">find . -type f -name &#8220;*&lt;foo&gt;*&#8221; -print</span></td>
+</tr>
+<tr>
+<td>删除系统中所有的core文件</td>
+<td><span style="color: #333399;">find / -type f -name core -exec /bin/rm -f {} \;</span></td>
+</tr>
+<tr>
+<td>查找所有包含某单词的文件</td>
+<td><span style="color: #333399;">find . -type f -exec grep -l &lt;word&gt; {} \;</span></td>
+</tr>
+<tr>
+<td>查找所有修改日期在30天以前的文件</td>
+<td><span style="color: #333399;">find . -type f -ctime +30 -print</span></td>
+</tr>
+<tr>
+<td>使用xargs来备份所有的.c文件（加上.bak后缀）</td>
+<td><span style="color: #333399;">find . -name &#8220;*.c&#8221; -print | xargs -i cp {} {}.bak</span></td>
+</tr>
+<tr>
+<td>只搜索本地文件系统（不搜索nfs文件系统）</td>
+<td><span style="color: #333399;">find . -local &#8230;</span></td>
+</tr>
+<tr>
+<td>在搜索的过程中，跟随link文件的实际位置</td>
+<td><span style="color: #333399;">find . -follow &#8230;</span></td>
+</tr>
+<tr>
+<td>查找大于1M的文件</td>
+<td><span style="color: #333399;">find /path -size 1000000c -print</span></td>
+</tr>
+<tr>
+<td>运行find命令但忽略&#8221;permission denied&#8221;</td>
+<td><span style="color: #333399;">find &#8230; 2&gt;/dev/null </span>( 只能在sh/bash/ksh )</td>
+</tr>
+<tr>
+<td>查找所有的man目录</td>
+<td><span style="color: #333399;">find / -type d -print | egrep &#8216;.*/(catman|man)$&#8217;</span></td>
+</tr>
+<tr>
+<td>查找所有有写权限的目录</td>
+<td><span style="color: #333399;">find / -type d -perm -002 -print</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">GAWK </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>GNU版本的nawk</td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">GREP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>以某个正规表达式查找包含其的文件行</td>
+<td><span style="color: #333399;">grep &#8216;[a-z][0-9]&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>查找不包含指定正则表达式的文件行</td>
+<td><span style="color: #333399;">grep -v &#8216;^From&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>查找一组文件</td>
+<td><span style="color: #333399;">grep -l &#8216;^[cC]&#8217; *.f</span></td>
+</tr>
+<tr>
+<td>计算包括某正则表达式文件行的数目</td>
+<td><span style="color: #333399;">grep -c &#8216;[Ss]uccess&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>不区分大小写的查找</td>
+<td><span style="color: #333399;">grep -i &#8216;lAbEgF&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>在匹配到的文件内容前输出文件的行号</td>
+<td><span style="color: #333399;">grep -n &#8216;mo.*y&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">HINV </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>命令显示系统硬件的详细列表，包括：CPU类型、内存大小、所有的磁盘设备。</td>
+<td><span style="color: #333399;">hinv -v</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">IF then else ENDIF </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>csh/tcsh中的if 语句</td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">IF then else FI </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>sh/bash/ksh 中的if 语句</td>
+<td>if [[ condition ]];then commands;fi</td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">KSH</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>Korn shell. (ksh88)</td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">LN</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>创建一个硬链接文件a链接到文件A</td>
+<td><span style="color: #333399;">ln a B</span></td>
+</tr>
+<tr>
+<td>创建一个符号链接文件a链接到文件A</td>
+<td><span style="color: #333399;">ln -s a B</span></td>
+</tr>
+<tr>
+<td>删除链接文件B</td>
+<td><span style="color: #333399;">rm B</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">LP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>在默认打印机上打印文件</td>
+<td><span style="color: #333399;">lp &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>在指定打印机上打印文件</td>
+<td><span style="color: #333399;">lp -d &lt;destination&gt; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">LPSTAT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>显示所有的打印机</td>
+<td><span style="color: #333399;">lpstat -a</span></td>
+</tr>
+<tr>
+<td>查看打印机任务队列</td>
+<td><span style="color: #333399;">lpstat -o</span></td>
+</tr>
+<tr>
+<td>查看默认打印机</td>
+<td><span style="color: #333399;">lpstat -d</span></td>
+</tr>
+<tr>
+<td>查看打印机状态</td>
+<td><span style="color: #333399;">lpstat -p</span></td>
+</tr>
+<tr>
+<td>查看计划任何状态</td>
+<td><span style="color: #333399;">lpstat -r</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">MAKE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>执行一个 makefile中的第一个目标</td>
+<td><span style="color: #333399;">make</span></td>
+</tr>
+<tr>
+<td>执行一个 makefile中的指点目标</td>
+<td><span style="color: #333399;">make &lt;target&gt;</span></td>
+</tr>
+<tr>
+<td>指定一个特定的makefile文件名</td>
+<td><span style="color: #333399;">make -f &lt;mymakefile&gt;</span></td>
+</tr>
+<tr>
+<td>显示要做什么，但其实什么也没做</td>
+<td><span style="color: #333399;">make -n &lt;target&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">MKDIR</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>一次创键目录和子目录</td>
+<td><span style="color: #333399;">mkdir -p &lt;path&gt;/&lt;path&gt;/&lt;path&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">MOUNT </span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看挂载的文件卷</td>
+<td><span style="color: #333399;">mount</span></td>
+</tr>
+<tr>
+<td>查看挂载的文件卷（有格式的）</td>
+<td><span style="color: #333399;">mount -p</span></td>
+</tr>
+<tr>
+<td>挂载一个光驱到目录/cdrom</td>
+<td><span style="color: #333399;">mount /dev/cdrom /cdrom</span></td>
+</tr>
+<tr>
+<td>挂载一个磁盘分区到目录 /usr</td>
+<td><span style="color: #333399;">mount /dev/dsk/c0t3d0s5 /usr</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">NAWK</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>增强版的 awk</td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">NL</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>以带行号的方式输出文件</td>
+<td><span style="color: #333399;">nl -bt -nln &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">NOHUP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>启动一个命令马上退出</td>
+<td><span style="color: #333399;">nohup &lt;command&gt; &amp;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">PACK</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>一个很老的文件打包程序，现在被gzip代替了。</td>
+<td><span style="color: #333399;">pack &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">PASSWD</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>修改你的帐号口令</td>
+<td><span style="color: #333399;">passwd</span></td>
+</tr>
+<tr>
+<td>删除一个用户的口令(root使用)</td>
+<td><span style="color: #333399;">passwd -d &lt;username&gt;</span></td>
+</tr>
+<tr>
+<td>改变一个用户的口令 (root使用)</td>
+<td><span style="color: #333399;">passwd &lt;username&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">PASTE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>以列的方式把多个文件组合起来</td>
+<td><span style="color: #333399;">paste &lt;file1&gt; &lt;file2&gt; &gt; &lt;newfile&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">PERL</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>Perl脚本语言的解释器</td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">PR</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>把一个文件做成可打印的格式（76行一页）</td>
+<td><span style="color: #333399;">pr -l76 -h&#8221;title&#8221; &lt;filename&gt;</span></td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">REGCMP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>从一个文件中编译正则表达式</td>
+<td><span style="color: #333399;">regcmp &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td style="text-align: right;">文件内容示例</td>
+<td><span style="color: #333399;">varname &#8220;^[a-z].*[0-9.*$&#8221;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">RESET</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>重置终端设备</td>
+<td><span style="color: #333399;">reset</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td align="left"><span style="font-size: xx-small;">RPCINFO</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>取得某主机的TCP端口信息</td>
+<td><span style="color: #333399;">rpcinfo -p &lt;host&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">RSH</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>执行一个远程服务器上的命令</td>
+<td><span style="color: #333399;">rsh &lt;host&gt; &lt;comand&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SCRIPT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>用来捕捉当前的终端会话中的所有输入输出结果到一个指定的文件</td>
+<td><span style="color: #333399;">script &lt;logfile&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SED</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>把某文件中的fred替换成john</td>
+<td><span style="color: #333399;">sed -e &#8216;s/fred/john/g&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>替换文件中匹配正则表达式的字符串</td>
+<td><span style="color: #333399;">sed -e &#8216;s/[0-9]+/number/g&#8217; &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>把HTML文件中的 &#8220;X&#8221; 变成红色</td>
+<td><span style="color: #333399;">sed -e &#8216;s!X!&lt;font color=&#8221;#FF0000&#8243;&gt;X&lt;/font&gt;!g;</span></td>
+</tr>
+<tr>
+<td>把所有后缀为.suf1 改名成.suf2</td>
+<td><span style="color: #333399;">ls -1 | grep &#8216;\.suf1$&#8217; | sed -e &#8216;s/\(.*\.\)suf1/mv &amp; \1suf2/&#8217; | sh</span></td>
+</tr>
+<tr>
+<td>把文件中包含c的行中的a 替换成b</td>
+<td><span style="color: #333399;">sed -e &#8216;/C/s/A/B/&#8217; &lt;infile&gt; &gt;&lt;outfile&gt;</span></td>
+</tr>
+<tr>
+<td>删除所有包含 &#8220;you owe me&#8221;的文件行</td>
+<td><span style="color: #333399;">sed -e &#8216;/you owe me/d&#8217; &lt;infile&gt; &gt; &lt;outfile&gt;</span></td>
+</tr>
+<tr>
+<td>使用commandfile中的命令来编译infile文件，并输出到outfile中。其中的commandfile中包含了一系列的vi命令</td>
+<td><span style="color: #333399;">sed -f &lt;commandfile&gt; &lt;infile&gt; &gt; &lt;outfile&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SH</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>最老的 AT&amp;T shell程序，也是使用最广泛的标准确shell。</td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SHUTDOWN</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>关机</td>
+<td><span style="color: #333399;">shutdown -h now</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SLEEP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>sleep 10秒钟</td>
+<td><span style="color: #333399;">sleep 10</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SORT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>以字符顺序把文件的每一行排序</td>
+<td><span style="color: #333399;">sort &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>以数字顺序把文件的每一行排序</td>
+<td><span style="color: #333399;">sort -n &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>反向排序</td>
+<td><span style="color: #333399;">sort -r &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>排序时对于重复项只保留一个</td>
+<td><span style="color: #333399;">sort -u &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SPELL</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>检查拼写错误</td>
+<td><span style="color: #333399;">spell &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>检查拼写错误，但是忽略okfile中包含的单词</td>
+<td><span style="color: #333399;">spell +&lt;okfile&gt; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SPLIT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>拆分一个大文件，每个文件1m</td>
+<td><span style="color: #333399;">split -b1m &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>把拆分后的文件合并起来</td>
+<td><span style="color: #333399;">cat x* &gt; &lt;newfile&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">STRINGS</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>从二进制文件中读取ascii 字符串</td>
+<td><span style="color: #333399;">strings &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">STTY</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>显示终端设置</td>
+<td><span style="color: #333399;">stty -a</span></td>
+</tr>
+<tr>
+<td>设置 Ctrl+&#8221;H&#8221;为删除键</td>
+<td><span style="color: #333399;">stty erase &#8220;^H&#8221;</span></td>
+</tr>
+<tr>
+<td>对于用户的输入不回显</td>
+<td><span style="color: #333399;">stty -echo</span></td>
+</tr>
+<tr>
+<td>回显用户的输入</td>
+<td><span style="color: #333399;">stty echo</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">SU</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>切换到root用户</td>
+<td><span style="color: #333399;">su</span></td>
+</tr>
+<tr>
+<td>切换到root用户并使用其环境</td>
+<td><span style="color: #333399;">su &#8211;</span></td>
+</tr>
+<tr>
+<td>切换到另一用户</td>
+<td><span style="color: #333399;">su &lt;username&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TAIL</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>显示某文件中的文件尾中包含pattern的文件行</td>
+<td><span style="color: #333399;">tail -f &lt;file&gt; | grep &lt;pattern&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TAR</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>把整个目录打包（没有压缩）</td>
+<td><span style="color: #333399;">tar cvf &lt;outfile&gt;.tar &lt;dir&gt;</span></td>
+</tr>
+<tr>
+<td>解包某个tar文件</td>
+<td><span style="color: #333399;">tar xvf &lt;file&gt;.tar</span></td>
+</tr>
+<tr>
+<td>先解压缩再解包</td>
+<td><span style="color: #333399;">gzip -dc &lt;file&gt;.tar.gz | tar xvf &#8211;</span></td>
+</tr>
+<tr>
+<td>打包成一个压缩包</td>
+<td><span style="color: #333399;">tar xzvf &lt;file&gt;tar.gz</span></td>
+</tr>
+<tr>
+<td>在.cshrc中设置 tar命令的tape 变量</td>
+<td><span style="color: #333399;">tape=/dev/rmt/0mbn</span></td>
+</tr>
+<tr>
+<td>把一个目录打包到tape变量所指的目录中</td>
+<td><span style="color: #333399;">tar cv &lt;dir&gt;</span></td>
+</tr>
+<tr>
+<td>从tape中解包</td>
+<td><span style="color: #333399;">tar xv</span></td>
+</tr>
+<tr>
+<td>从tape中解出一个文件</td>
+<td><span style="color: #333399;">tar xv &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>从 tape中得到一个内容表</td>
+<td><span style="color: #333399;">tar t</span></td>
+</tr>
+<tr>
+<td>以合适的权限和链接拷贝一个目录</td>
+<td><span style="color: #333399;">(cd fromdir &amp;&amp; tar -cBf &#8211; . ) | ( cd todir &amp;&amp; tar -xBf &#8211; )</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TCSH</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>Berkly的另一个非常不错的shell</td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TEE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>把标准输入重定向到标准输出</td>
+<td><span style="color: #333399;">who | tee -a &gt; &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TEST</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>检查是否是一个文件</td>
+<td><span style="color: #333399;">test -a &lt;file&gt;</span></td>
+</tr>
+<tr>
+<td>检查是否某文件是否是root属性</td>
+<td><span style="color: #333399;">test -O /usr/bin/su</span></td>
+</tr>
+<tr>
+<td>检查某变量是否为 null</td>
+<td><span style="color: #333399;">test -n &#8220;$foo&#8221;</span></td>
+</tr>
+<tr>
+<td>以数字的方式比较两个数字字符串</td>
+<td><span style="color: #333399;">test $var1 -gt $var2</span></td>
+</tr>
+<tr>
+<td>在ksh 脚本中间接地使用&#8221;test&#8221;</td>
+<td><span style="color: #333399;">if [[ -a &lt;file&gt; ]];then &#8230;;fi</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TIME</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看运行一个命令需要多少时间</td>
+<td><span style="color: #333399;">time &lt;command&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TOUCH</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>更新文件的修改时间为当前时间，文件不存在则创建文件</td>
+<td><span style="color: #333399;">touch &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TR</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>使用x替换a，y替换b，c替换z</td>
+<td><span style="color: #333399;">tr &#8216;[a-c]&#8217; &#8216;[x-z]&#8217; &lt; infile &gt; outfile</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TRAP</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>捕捉&#8221;^C&#8221; 并执行子程序</td>
+<td><span style="color: #333399;">trap &#8220;mysub;exit&#8221; 0 1 2 15</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TRUE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>让个不存在的命令返回0</td>
+<td><span style="color: #333399;">ln -s /usr/bin/true ranlib</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TRUSS</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看一个命令运行时的系统调用</td>
+<td><span style="color: #333399;">truss &lt;command&gt; &gt; /dev/null</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TYPSET</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看被激活的功能</td>
+<td><span style="color: #333399;">typset</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">TTY</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看终端所在的设备文件</td>
+<td><span style="color: #333399;">tty</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">ULIMIT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看系统所支持的最大文件长度</td>
+<td><span style="color: #333399;">ulimit</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">UMASK</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看目前的umask</td>
+<td><span style="color: #333399;">umask</span></td>
+</tr>
+<tr>
+<td>设置一个umask</td>
+<td><span style="color: #333399;">umask 077</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">UNIQ</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看一个文件中有多少行是一样的</td>
+<td><span style="color: #333399;">sort &lt;file&gt; | uniq -c</span></td>
+</tr>
+<tr>
+<td>仅输出唯一的没有重复的行</td>
+<td><span style="color: #333399;">sort &lt;file&gt; | uniq -u</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">UPTIME</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>查看你的电脑开机多少时间了</td>
+<td><span style="color: #333399;">uptime</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">UUENCODE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>Encode一个文件以便发送电子邮件</td>
+<td><span style="color: #333399;">uuencode decodedname namenow &gt; codedname</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">UUDECODE</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>Decode 一个 uuencoded 文件</td>
+<td><span style="color: #333399;">uudecode &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">WAIT</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>等一个后进和运行结束</td>
+<td><span style="color: #333399;">wait $jobid</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">VI</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>最主要的unix编译器</td>
+<td><span style="color: #333399;">vi &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">WC</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>计算一个文件的行号</td>
+<td><span style="color: #333399;">wc -l &lt;file&gt;</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">XARGS</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>把标准输出作为参数来执行一条命令</td>
+<td><span style="color: #333399;">&lt;command&gt; | xargs -i grep &#8216;pattern&#8217; {}</span></td>
+</tr>
+<tr bgcolor="#ccccff">
+<td><span style="font-size: xx-small;">XON</span></td>
+<td>::</td>
+</tr>
+<tr>
+<td>从另一台电脑上得到一个xterm</td>
+<td><span style="color: #333399;">xon &lt;host&gt;</span></td>
+</tr>
+<tr>
+<td>从另一台电脑上得到所有的东西</td>
+<td><span style="color: #333399;">xon &lt;host&gt; &lt;X-client&gt;</span></td>
+</tr>
+</tbody>
+</table>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" alt="sed 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_title">sed 简明教程</a></li><li ><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" alt="AWK 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_title">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1044.html">高级Unix命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1044.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程命名中的7+1个提示</title>
+		<link>https://coolshell.cn/articles/1038.html</link>
+					<comments>https://coolshell.cn/articles/1038.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2009 14:36:17 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Coding]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1038</guid>
+
+					<description><![CDATA[<p>前几天Neo写过《编程中的命名设计那点事》，这里也有另外一篇和程序命名的文章，可以从另一个角度看看。 1.- 变量应该是尽可能的望文知意。千万不要使用教材中的命...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1038.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1038.html">编程命名中的7+1个提示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>前几天Neo写过《<a title="编程中的命名设计那点事" href="https://coolshell.cn/articles/990.html">编程中的命名设计那点事</a>》，这里也有另外一篇和程序命名的文章，可以从另一个角度看看。</p>
+<p><strong>1.- 变量应该是尽可能的望文知意。千万不要使用教材中的命名方式。</strong></p>
+<ul>
+<li><strong>好的变量</strong>：<strong> </strong>daysDateRange, flightNumber, carColor.</li>
+<li><strong>坏的变量</strong>： days, dRange, temp, data, aux…</li>
+</ul>
+<p>在我们的日常工作中，有很大数量的开发人员喜欢使用短的变量名，而不是有含义的变量名。这主要是因为我们大学教科书的那些示例所造成的，人都是先入为主，所以，教科书中的那些很抽象，带着演示的变量命名影响了我们一代又一代的程序员，并影响了他们很多年。虽然那些短的，教材式的变量名，可能会让你少打一些字，但其实，这是非常非常不好的。因为软件的维护成本远远大于了软件的开发成本，如果你不取一个好的一点的变量名，那么当进行代码评审时，当进行bug fixing时，当进行代码重构时，当进行代码维护时，你的某个变量名可能会让你一头雾水，不知道所措，还可以会让你走入陷阱，造成更大的时间成本。所以，一个可阅读的代码必然和那些不错的变量名分不开，而这也能让你的软件间接上有更好的质量。</p>
+<p><span id="more-1038"></span></p>
+<p><strong>2.- 变量名不要太长，尽可能地简短</strong></p>
+<p>只有简单和简短的变量名才是容易阅读的。因为你的变量名一定会用于程序语句中，所以，为了让你的程序语句看起来的简短，你的变量名也应该短一点，不然写出来的一个表达式就会显得很复杂。</p>
+<p>当然，在有些时候，一个有含义的变量名和一个简短的变量名可能存在一些冲突。这相当锻炼我们的语言能力——如果有最精炼的词语来表达最丰富的含义。如果实在做不到，那么，取一个有含义的变量名要比取一个简短的变量名更好一些。不管怎么样，我们希望即简短又有丰富的含义，但如果不能两全，那有含义优先级更高一些。</p>
+<ul>
+<li><strong>坏的变量</strong>：howLonDoesItTakeToOpenTheDoor， howBigIsTheMaterial…</li>
+<li><strong>好的变量</strong>：timeToOpenTheDoor， MaterialSize.</li>
+</ul>
+<p><strong>3.- 可以使用缩写，但需要有一些注释</strong></p>
+<p>有一些时候，我们需要使用一些缩写来命名变量，比如：用usr来表示user，用gp来表示group，用conf来表示configuration，用cwd来表示current working directory，用ptr来代码point to reference，等等，等等。缩写一般要用在大家可以看得懂的，而不是为了缩写而缩短一个单词，当然，如果你把缩写后的变量名加上注释，那就更加稳妥了。关于一些约定俗成的缩写，可参看本文的<strong>附录一</strong>。</p>
+<p><strong>4.- 使用合适的匈牙利命名规则</strong></p>
+<p>这里有一篇非常不错的英文文章告诉你 《<a onclick="pageTracker._trackPageview('/outgoing/www.joelonsoftware.com/articles/Wrong.html');" href="http://www.joelonsoftware.com/articles/Wrong.html" target="_blank">什么是合适的匈牙利命名</a> 》，这篇文章同时还告诉你如何去用他。基本上来说，匈牙利命名法主要是为变量加上某种前缀以标识这个变量的类型，或是一种方法的功能。其基本原则是：变量名＝属性＋类型＋对象描述。</p>
+<p>比如：在描述类型方面：指针p，函数fn，长整型 l，布尔b，浮点型（有时也指文件）f，双字 dw，字符串 sz，短整型 n，双精度浮点 d，无符号 u……等等。关于更多的命名规范，请参见<strong>附录二</strong>。</p>
+<p>注意，匈牙利命名也是有不好的地方的，比如你要把一个整形改成一个浮点型，你除了要改变这个变量的类型，你还要改变这个变量的名字。这是相当麻烦的。而且，在某些时候，这种前缀式的命名可以反而让你不知所措。另外，在C++中，有了类以后，这种命名方法就显得不容易去实施了。所以，合适地使用匈牙利命名方式背后的思想是很关键的。</p>
+<p><strong>5.- 不要使用反逻辑来命名</strong></p>
+<ul>
+<li><strong>好的命名</strong>：  IsEnabled.</li>
+<li><strong>坏的命名：</strong> IsNotEnabled.</li>
+</ul>
+<p>在阅读的时候，我们更喜欢正向的逻辑，而不是反向逻辑。这一规则不单单的命名，在条件语句中，我们也是要尽量不要使用这种反面的逻辑。如：if (! (isAdmin || isUser))，这样的语句很不符合人读代码的习惯，写成这样会更好一些——if (!isAdmin &amp;&amp; !isUser)。</p>
+<p><strong>6.- 保持一致性</strong></p>
+<p>保持所有代码的一致性。使用相同的命名规则。这外世界上没有最好的命名规范。但有一点是可以确认的，那就是在一个代码库中，应该使用一致的命名规则，即使这个规则不那么好，但整个团队使用一致的就是好的。</p>
+<p><strong>7.- 附和应用程序的领域术语</strong></p>
+<p>在不同的领域中，不同的观念会有非常特别和不同的意思。例如：单词“order”并不总是意味着“次顺”，有些时候，其意味着“订单”，有些时候，意味着“命令”，有些时候，意为着“规则”。所以，在某个领域中，某些单词会有不同的含义，所以，这需要我们的命令去附和这些领域。</p>
+<p> </p>
+<p><strong>黄金法则- 花一些时间去思考去权衡一下你的变量名</strong></p>
+<p>当你设计好一个的变量名一个函数名的时候，别着急去使用他，停下来，想一想，这个变量名是否合适，是否还有更好的？也许你正在使用的是一个很不好的变量名。有些时候，需要我们权衡利弊一下，可能还要去和同事讨论一下。</p>
+<p>总之，变量名是编程的第一步，第一步走好了，后面才走得好。试想，无论是你或你的同事在使用一些好的变量名编程是一件多么轻松的事啊。</p>
+<p> </p>
+<h4>附录：部分的缩写规范</h4>
+<table border="0" align="center">
+<tbody>
+<tr>
+<td>完整单词</td>
+<td>缩写</td>
+</tr>
+<tr>
+<td>A</td>
+<td> </td>
+</tr>
+<tr>
+<td>average</td>
+<td>avg</td>
+</tr>
+<tr>
+<td>B</td>
+<td> </td>
+</tr>
+<tr>
+<td>back</td>
+<td>bk</td>
+</tr>
+<tr>
+<td>background</td>
+<td>bg</td>
+</tr>
+<tr>
+<td>break</td>
+<td>brk</td>
+</tr>
+<tr>
+<td>buffer</td>
+<td>buf</td>
+</tr>
+<tr>
+<td>C</td>
+<td> </td>
+</tr>
+<tr>
+<td>color</td>
+<td>cr,clr</td>
+</tr>
+<tr>
+<td>control</td>
+<td>ctrl</td>
+</tr>
+<tr>
+<td>D</td>
+<td> </td>
+</tr>
+<tr>
+<td>data</td>
+<td>dat</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>del</td>
+</tr>
+<tr>
+<td>document</td>
+<td>doc</td>
+</tr>
+<tr>
+<td>E</td>
+<td> </td>
+</tr>
+<tr>
+<td>edit</td>
+<td>edt</td>
+</tr>
+<tr>
+<td>error</td>
+<td>err</td>
+</tr>
+<tr>
+<td>escape</td>
+<td>esc</td>
+</tr>
+<tr>
+<td>F</td>
+<td> </td>
+</tr>
+<tr>
+<td>flag</td>
+<td>flg</td>
+</tr>
+<tr>
+<td>form</td>
+<td>frm</td>
+</tr>
+<tr>
+<td>G</td>
+<td> </td>
+</tr>
+<tr>
+<td>grid</td>
+<td>grd</td>
+</tr>
+<tr>
+<td>I</td>
+<td> </td>
+</tr>
+<tr>
+<td>increment</td>
+<td>inc</td>
+</tr>
+<tr>
+<td>information</td>
+<td>info</td>
+</tr>
+<tr>
+<td>initial</td>
+<td>init</td>
+</tr>
+<tr>
+<td>insert</td>
+<td>ins</td>
+</tr>
+<tr>
+<td>image</td>
+<td>img</td>
+</tr>
+<tr>
+<td>L</td>
+<td> </td>
+</tr>
+<tr>
+<td>lable</td>
+<td>lab</td>
+</tr>
+<tr>
+<td>length</td>
+<td>len</td>
+</tr>
+<tr>
+<td>list</td>
+<td>lst</td>
+</tr>
+<tr>
+<td>library</td>
+<td>lib</td>
+</tr>
+<tr>
+<td>M</td>
+<td> </td>
+</tr>
+<tr>
+<td>manager</td>
+<td>mgr,mngr</td>
+</tr>
+<tr>
+<td>message</td>
+<td>msg</td>
+</tr>
+<tr>
+<td>O</td>
+<td> </td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Ora</td>
+</tr>
+<tr>
+<td>P</td>
+<td> </td>
+</tr>
+<tr>
+<td>panorama</td>
+<td>pano</td>
+</tr>
+<tr>
+<td>password</td>
+<td>pwd</td>
+</tr>
+<tr>
+<td>picture</td>
+<td>pic</td>
+</tr>
+<tr>
+<td>point</td>
+<td>pt</td>
+</tr>
+<tr>
+<td>position</td>
+<td>pos</td>
+</tr>
+<tr>
+<td>print</td>
+<td>prn</td>
+</tr>
+<tr>
+<td>program</td>
+<td>prg</td>
+</tr>
+<tr>
+<td>S</td>
+<td> </td>
+</tr>
+<tr>
+<td>server</td>
+<td>srv</td>
+</tr>
+<tr>
+<td>source</td>
+<td>src</td>
+</tr>
+<tr>
+<td>statistic</td>
+<td>stat</td>
+</tr>
+<tr>
+<td>string</td>
+<td>str</td>
+</tr>
+<tr>
+<td>Sybase</td>
+<td>Syb</td>
+</tr>
+<tr>
+<td>T</td>
+<td> </td>
+</tr>
+<tr>
+<td>temp</td>
+<td>tmp</td>
+</tr>
+<tr>
+<td>text</td>
+<td>txt</td>
+</tr>
+<tr>
+<td>U</td>
+<td> </td>
+</tr>
+<tr>
+<td>user</td>
+<td>usr</td>
+</tr>
+<tr>
+<td>W</td>
+<td> </td>
+</tr>
+<tr>
+<td>window</td>
+<td>win,wnd</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h4>附录二、匈牙利命名法</h4>
+<pre>  a       Array                       数组
+  b       BOOL (int)                  布尔(整数)
+  by      Unsigned Char (Byte)        无符号字符(字节)
+  c       Char                        字符(字节)
+  cb      Count of bytes              字节数
+  cr      Color reference value       颜色(参考)值
+  cx      Count of x (Short)          x的集合(短整数)
+  dw      DWORD   (unsigned long)     双字(无符号长整数)
+  f       Flags                       标志(一般是有多位的数值)
+  fn      Function                    函数
+  g_      global                      全局的
+  h       Handle                      句柄
+  i       Integer                     整数
+  l       Long                        长整数
+  lp      Long pointer                长指针
+  m_      Data member of a class      一个类的数据成员
+  n       Short int                   短整数
+  p       Pointer                     指针
+  s       String                      字符串
+  sz      Zero terminated String      以0结尾的字符串
+  tm      Text metric                 文本规则
+  u       Unsigned int                无符号整数
+  ul      Unsigned long (ULONG)       无符号长整数
+  w       WORD (unsigned short)       无符号短整数
+  x,y     x, y coordinates (short)    坐标值/短整数
+  v       void                        空</pre>
+<p>有关项目的全局变量用g_开始，类成员变量用m_，局部变量若函数较大则可考虑用l_用以显示说明其是局部变量。</p>
+<pre>前缀       类型        例子
+g_      全局变量       g_Servers
+C       类或者结构体   CDocument，CPrintInfo
+m_      成员变量       m_pDoc，m_nCustomers</pre>
+<p><strong>VC常用前缀列表：</strong></p>
+<pre>前缀   类型   描述                      例子
+ch     char    8位字符                   chGrade
+ch     TCHAR   16位UNICODE类型字符       chName
+b      BOOL    布尔变量                  bEnabled
+n      int     整型                      nLength
+n      UINT    无符号整型                nLength
+w      WORD    16位无符号整型            wPos
+l      LONG    32位有符号整型            lOffset
+dw     DWORD   32位无符号整型            dwRange
+p      *       内存模块指针，指针变量   pDoc
+lp     FAR*    长指针                    lpDoc
+lpsz   LPSTR   32位字符串指针           lpszName
+lpsz   LPCSTR  32位常量字符串指针       lpszName
+lpsz   LPCTSTR 32位UNICODE类型常量指针  lpszName
+h      handle  Windows对象句柄           hWnd
+lpfn   (*fn)() 回调函数指针              lpfnAbort</pre>
+<p><strong>Windows对象名称缩写：</strong></p>
+<pre>Windows对象 例子变量  MFC类       例子对象
+HWND        hWnd;      CWnd*       pWnd;
+HDLG        hDlg;      CDialog*    pDlg;
+HDC         hDC;       CDC*        pDC;
+HGDIOBJ     hGdiObj;   CGdiObject* pGdiObj;
+HPEN        hPen;      CPen*       pPen;
+HBRUSH      hBrush;    CBrush*     pBrush;
+HFONT       hFont;     CFont*      pFont;
+HBITMAP     hBitmap;   CBitmap*    pBitmap;
+HPALETTE    hPalette;  CPalette*   pPalette;
+HRGN        hRgn;      CRgn*       pRgn;
+HMENU       hMenu;     CMenu*      pMenu;
+HWND        hCtl;      CStatic*    pStatic;
+HWND        hCtl;      CButton*    pBtn;
+HWND        hCtl;      CEdit*      pEdit;
+HWND        hCtl;      CListBox*   pListBox;
+HWND        hCtl;      CComboBox*  pComboBox;
+
+（全文完）</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1038.html">编程命名中的7+1个提示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1038.html/feed</wfw:commentRss>
+			<slash:comments>19</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>16个简单实用的.htaccess小贴示</title>
+		<link>https://coolshell.cn/articles/1035.html</link>
+					<comments>https://coolshell.cn/articles/1035.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 14 Jun 2009 04:27:09 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[.htaccess]]></category>
+		<category><![CDATA[Apache]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1035</guid>
+
+					<description><![CDATA[<p>.htaccess 文件 (Hypertext Access file) 是Apache Web服务器的一个非常强大的配置文件，对于这个文件，Apache有一堆...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1035.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1035.html">16个简单实用的.htaccess小贴示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>.htaccess 文件 (Hypertext Access file) 是Apache Web服务器的一个非常强大的配置文件，对于这个文件，Apache有一堆参数可以让你配置出几乎随心所欲的功能。.htaccess 配置文件坚持了Unix的一个文化——使用一个ASCII 的纯文本文件来配置你的网站的访问策略。</p>
+<p>这篇文章包括了16个非常有用的小技巧。另外，因为.htaccess 是一个相当强大的配置文件，所以，一个轻微的语法错误会造成你整个网站的故障，所以，在你修改或是替换原有的文件时，一定要备份旧的文件，以便出现问题的时候可以方便的恢复。</p>
+<p><strong>1. 使用.htaccess 创建自定义的出错页面。</strong>对于Linux Apache来说这是一项极其简单的事情。使用下面的.htaccess语法你可以轻松的完成这一功能。（把.htaccess放在你的网站根目录下）</p>
+<p><span style="COLOR: #ff6600">ErrorDocument 401 /error/401.php<br />
+ErrorDocument 403 /error/403.php<br />
+ErrorDocument 404 /error/404.php<br />
+ErrorDocument 500 /error/500.php</span></p>
+<p><span style="COLOR: #ff6600"><span id="more-1035"></span></span></p>
+<p><strong>2. 设置网站的时区</strong></p>
+<p><span style="COLOR: #ff6600">SetEnv TZ America/Houston</span></p>
+<p><strong>3. 阻止IP列表</strong><br />
+有些时候，你需要以IP地址的方式阻止一些访问。无论是对于一个IP地址还是一个网段，这都是一件非常简单的事情，如下所示：</p>
+<p><span style="COLOR: #ff6600">allow from all<br />
+deny from 145.186.14.122<br />
+deny from 124.15</span></p>
+<p>Apache对于被拒绝的IP会返回403错误。</p>
+<p><strong>4. 把一些老的链接转到新的链接上——搜索引擎优化SEO </strong></p>
+<p><span style="COLOR: #ff6600">Redirect 301 /d/file.html </span><a href="http://www.htaccesselite.com/r/file.html"><span style="COLOR: #ff6600">http://www.htaccesselite.com/r/file.html</span></a></p>
+<p><strong>5. 为服务器管理员设置电子邮件。</strong></p>
+<p><span style="COLOR: #ff6600">ServerSignature EMail<br />
+SetEnv SERVER_ADMIN </span><a href="mailto:default@domain.com"><span style="COLOR: #ff6600">default@domain.com</span></a></p>
+<p><strong>6. 使用.htaccess 访止盗链。</strong>如果你网站上的一个图片被别的N多的网站引用了，那么，这很有可能会导致你服务器的性能下降，使用下面的代码可以保护某些热门的链接不被过多的引用。</p>
+<p><span style="COLOR: #ff6600">Options +FollowSymlinks<br />
+# Protect Hotlinking<br />
+RewriteEngine On<br />
+RewriteCond %{HTTP_REFERER} !^$<br />
+RewriteCond %{HTTP_REFERER} !^http://(</span><a href="http://www.%29/?domainname.com/"><span style="COLOR: #ff6600">www.)?domainname.com/</span></a><span style="COLOR: #ff6600"> [nc]<br />
+RewriteRule .*.(gif|jpg|png)$ </span><a href="http://domainname.com/img/hotlink_f_o.png"><span style="COLOR: #ff6600">http://domainname.com/img/hotlink_f_o.png</span></a><span style="COLOR: #ff6600"> [nc]</span></p>
+<p><strong>7. 阻止 User Agent 的所有请求</strong></p>
+<p><span style="COLOR: #ff6600">## .htaccess Code :: BEGIN<br />
+## Block Bad Bots by user-Agent<br />
+SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]<br />
+SetEnvIfNoCase user-Agent ^Java.* [NC,OR]<br />
+SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]<br />
+SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]<br />
+SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]<br />
+SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]<br />
+SetEnvIfNoCase user-Agent ^Zeus [NC]</span></p>
+<p><span style="COLOR: #ff6600">Order Allow,Deny<br />
+Allow from all<br />
+Deny from env=bad_bot</span></p>
+<p><span style="COLOR: #ff6600">## .htaccess Code :: END</span></p>
+<p><strong>8. 把某些特殊的IP地址的请求重定向到别的站点</strong></p>
+<p><span style="COLOR: #ff6600">ErrorDocument 403 </span><a href="http://www.youdomain.com/"><span style="COLOR: #ff6600">http://www.youdomain.com</span></a><br />
+<span style="COLOR: #ff6600">Order deny,allow<br />
+Deny from all<br />
+Allow from 124.34.48.165<br />
+Allow from 102.54.68.123</span></p>
+<p><strong>9. 直接找开文件而不是下载</strong> – 通常，我们打开网上文件的时候总是会出现一个对话框问我们是下载还是直接打开，使用下面的设置就不会出现这个问题了，直接打开。</p>
+<p><span style="COLOR: #ff6600">AddType application/octet-stream .pdf<br />
+AddType application/octet-stream .zip<br />
+AddType application/octet-stream .mov</span></p>
+<p><strong>10. 修改文件类型</strong> – 下面的示例可以让任何的文件都成为PHP那么被服务器解释。比如：myphp, cgi，phtml等。</p>
+<p><span style="COLOR: #ff6600">ForceType application/x-httpd-php<br />
+SetHandler application/x-httpd-php</span></p>
+<p><strong>11. 阻止存取.htaccess 文件</strong></p>
+<p><span style="COLOR: #ff6600"># secure htaccess file</span></p>
+<p><span style="COLOR: #ff6600"> order allow,deny<br />
+ deny from all</span><br />
+<strong>12. 保护服务器上的文件被存取</strong></p>
+<p><span style="COLOR: #ff6600"># prevent access of a certain file</span><span style="COLOR: #ff6600"> order allow,deny<br />
+ deny from all</span><br />
+<strong>13. 阻止目录浏览</strong></p>
+<p><span style="COLOR: #ff6600"># disable directory browsing<br />
+Options All -Indexes</span></p>
+<p><strong>14. 设置默认主页</strong></p>
+<p><span style="COLOR: #ff6600"># serve alternate default index page<br />
+DirectoryIndex about.html</span></p>
+<p><strong>15. 口令认证</strong> – 你可以创建一个文件用于认证。下面是一个示例：</p>
+<p><span style="COLOR: #ff6600"># to protect a file</span></p>
+<p><span style="COLOR: #ff6600">AuthType Basic<br />
+AuthName “Prompt”<br />
+AuthUserFile /home/path/.htpasswd<br />
+Require valid-user</span></p>
+<p><span style="COLOR: #ff6600"># password-protect a directory<br />
+resides<br />
+AuthType basic<br />
+AuthName “This directory is protected”<br />
+AuthUserFile /home/path/.htpasswd<br />
+AuthGroupFile /dev/null<br />
+Require valid-user</span></p>
+<p><strong>16. 把老的域名转像新的域名</strong></p>
+<p><span style="COLOR: #ff6600"># redirect from old domain to new domain<br />
+RewriteEngine On<br />
+RewriteRule ^(.*)$ </span><a href="http://www.yourdomain.com/$1"><span style="COLOR: #ff6600">http://www.yourdomain.com/$1</span></a><span style="COLOR: #ff6600"> [R=301,L]</span></p>
+<p><span style="color: #000000;">文章：<a href="http://rafeekphp.wordpress.com/2009/06/06/16-great-htaccess-tricks-and-hacks/" target="_blank">来源</a></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/8387.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/10/Learnable_Programming-150x150.jpg" alt="Bret Victor &#8211; Learnable Programming" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8387.html" class="wp_rp_title">Bret Victor &#8211; Learnable Programming</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/9749.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/javascript-150x150.jpg" alt="Javascript 装载和执行" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9749.html" class="wp_rp_title">Javascript 装载和执行</a></li><li ><a href="https://coolshell.cn/articles/3709.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="预发布环境,Tag发布机制和可重复的部署过程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3709.html" class="wp_rp_title">预发布环境,Tag发布机制和可重复的部署过程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1035.html">16个简单实用的.htaccess小贴示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1035.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Unix 40年：Unix年鉴</title>
+		<link>https://coolshell.cn/articles/1032.html</link>
+					<comments>https://coolshell.cn/articles/1032.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 12 Jun 2009 07:32:54 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1032</guid>
+
+					<description><![CDATA[<p>今年是Unix 40年的生日，这篇文章，主要是一个Unix的年鉴，其记录了40年来所有和Unix有关的里程碑事件。 如果你想知道Unix的一些故事，你可以查看下...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1032.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1032.html">Unix 40年：Unix年鉴</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>今年是Unix 40年的生日，这篇文章，主要是一个Unix的年鉴，其记录了40年来所有和Unix有关的里程碑事件。</p>
+<p>如果你想知道Unix的一些故事，你可以查看下面这些文章：</p>
+<ul>
+<li>《<strong><a href="https://coolshell.cn/articles/1023.html">Unix40年：昨天，今天和明天</a></strong>》</li>
+<li>《<strong>Unix</strong><strong>传奇</strong>》<strong><a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542340.aspx" target="_blank">上篇</a></strong><strong>，</strong><strong><a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542353.aspx">下篇</a></strong></li>
+<li>《<strong><a href="http://blog.csdn.net/haoel/archive/2007/07/13/1688006.aspx" target="_blank">Unix的现状与未来</a></strong>》</li>
+</ul>
+<h4>1956</h4>
+<p>美国司法部颁布法令责成AT&amp;T公司不得从事除了公共承运人提供的通信服务以外的一切商业活动。</p>
+<h4>1969</h4>
+<p><strong>三月 &#8212; </strong>AT&amp;T旗下的 Bell 实验室从操作系统项目Multics (Multiplexed Information and Computing Service)研发中撤出，这是一个前沿但很复杂的分时操作系统。一些重要的Multics理念以后来被用于Unix操作操作系统中。</p>
+<p><span id="more-1032"></span></p>
+<p><img decoding="async" loading="lazy" class="alignnone" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_pdp7_120.jpg" alt="" width="120" height="130" /><br />
+Unix 从 PDP-7 小型机上开始了它的历程<br />
+Credit: Toresbe (<a href="http://creativecommons.org/licenses/sa/1.0/" target="new">cc-by-sa 1.0</a>)</p>
+<p><strong>八月 – </strong>Bell实验室的Ken Thompson 写了第一个版本的操作系统，这时，这个操作系统还没有名字，这个操作系统是用DEC PDP-7 小型机的汇编语言写成。</p>
+<h4>1970</h4>
+<p>Thompson的操作系统命名为 Unics，全称是Uniplexed Information and Computing Service 这是一个 “被阉割了的微型的 Multics”。 （后来，这个名字被神秘地改成了Unix）</p>
+<h4>1971</h4>
+<p><strong>二月. &#8212; </strong>Unix 移植到DEC PDP-11 小型机上。</p>
+<p><strong>十一月. – </strong>写一版本的 &#8220;Unix Programmer&#8217;s Manual&#8221;（Unix程序员手册） 由Ken Thompson 和 Dennis Ritchie完成并出版。</p>
+<h4>1972<img decoding="async" loading="lazy" class="alignright" title="Thompson 和 Ritchie" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_kendennis.jpg" alt="" width="230" height="150" /></h4>
+<p>Dennis Ritchie 开发了C 编程语言。</p>
+<h4>1973</h4>
+<p>Unix 成熟期。“管道”，一个可以在两个程序中共享信息的机制问世，这项技术影响了操作系统几十年。这个技术被加入到了Unix中。同年，Unix被用C语言重写。</p>
+<h4>1974</h4>
+<p><strong>一月 – </strong>加利福尼亚大学伯克利分校收到了一份Unix的源码拷贝。</p>
+<p><strong>七月 – </strong>Dennis Ritchie 和 Ken Thompson发表论文《&#8221;The UNIX Timesharing System&#8221;》，这篇论文发表于计算机协会（Association for Computing Machinery）的月刊杂志上。作者称，这是一个“多用途的，多用户，的交互式的操作系统”。这篇论文导制了社会上对Unix大量的需求。</p>
+<h4>1976</h4>
+<p>Bell 实验室程序员Mike Lesk 开发了 UUCP (Unix-to-Unix Copy Program) ，这个程序主要是用于网络上的文件传输，电子邮件和世界性新闻网络系统Usenet。</p>
+<h4>1977</h4>
+<p>Unix 被移植到了一个非DEC的硬件上： Interdata 8/32 和 IBM 360.</p>
+<h4>1978</h4>
+<p>Bill Joy一个伯克利的毕业生，发布了第一个Unix伯克利发行版——1BSD（the first Berkeley Software Distribution ），本质上来说，这只是 Bell 实验室 Unix V6 加上了一些附加软件。BSD 一下就成为了一个有竞争力的Unix 分枝，从此和 AT&amp;T的 Unix分庭抗礼。而且，BSD以以后派生出了 FreeBSD，NetBSD， OpenBSD， DEC Ultrix，SunOS，NeXTstep/OpenStep 和 Mac OS X。</p>
+<h4>1980</h4>
+<p>4BSD，由美国国防部高级计划研究署 DARPA 资助，成为了世界上第一个支持TCP/IP的Unix。</p>
+<p><img decoding="async" loading="lazy" class="alignnone" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_bjoy_120.jpg" alt="" width="120" height="159" /> <br />
+Bill Joy 发起了Unix的 BSD 分枝 并成立了Sun公司<br />
+Credit: SqueakBox (<a href="http://creativecommons.org/licenses/by/2.0/" target="new">cc-by-sa 2.0</a>)</p>
+<h4>1982</h4>
+<p>Bill Joy 成立了 Sun Microsystems 公司生产基于 Unix的 Sun 工作站。</p>
+<h4>1983</h4>
+<p>AT&amp;T 发布了 Unix System V的第一个版本，这是最具影响力的一个版本，后来，从这个版本派生出了IBM的 AIX 和 Hewlett Packard的 HP-UX。</p>
+<p>Ken Thompson 和 Dennis Ritchie因为Unix 获得了 计算机协会 ACM授于的图灵奖（ Turing Award）—— “for their development of generic operating systems theory and specifically for the implementation of the UNIX operating system”</p>
+<p>Richard Stallman announces plans for the GNU (GNU&#8217;s not Unix) operating system, a Unix look-alike composed of free software.</p>
+<h4>1984</h4>
+<p>冬季， 在USENIX/UniForum 大会上，AT&amp;T 阐述了他们的Unix的政策：“不打广告，不作support，不发布补丁，除非先付费”</p>
+<p>X/Open 公司，一个欧洲计算机制造协会，形成了一个Unix的标准——X/Open可移植性指南。它采用了若干特定标准，填补了其他标准缺失功能的空白。这些指南的目的是改善应用程序的可移植性。</p>
+<h4>1985</h4>
+<p>AT&amp;T 发行System V Interface Definition (SVID)，其尝试去设定一个Unix如何运行的标准。</p>
+<h4>1986</h4>
+<p>Rick Rashid 及其同事 于 Carnegie Mellon 大学创造了 Mach操作系统的第一个版本，其用于取代BSD Unix内核，从而可以让操作系统有更好的可移植性，以及更强的安全性，并可用于多处理器的应用。</p>
+<h4>1987</h4>
+<p><img decoding="async" loading="lazy" class="alignnone" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_atanenbaum_120.jpg" alt="" width="120" height="156" /> <br />
+Andrew Tanenbaum 写了 Minix, 一个 Unix 的克隆仅用于教学目的。<br />
+Credit: GerardM (<a href="http://en.wikipedia.org/wiki/GNU_Free_Documentation_License" target="new">GNU FDL</a>)</p>
+<p>AT&amp;T Bell 实验室和Sun Microsystems 宣布计划一同开发一个操作系统以便统一两个主要的Unix分枝。</p>
+<p>Andrew Tanenbaum 写下了 Minix，这是一个开源的Unix克隆操作系统，仅用于计算机科学的教室。</p>
+<h4>1988</h4>
+<p>Unix战争爆发。为了对付AT&amp;T/Sun 联盟，其它 Unix 产商包括DEC，HP 和 IBM 组成了“开放软件基金会 Open Software Foundation (OSF) ”以开发一个开放的Unix标准。AT&amp;T 和它的盟友也组织了一个他们自己的标准组织： Unix International.</p>
+<p>同年，IEEE 发布了 Posix (Portable Operating System Interface for Unix)，这是一系列关于Unix接口的标准。</p>
+<h4>1989</h4>
+<p>Unix System Labs，AT&amp;T Bell 实验室所属，发布了System V Release 4 (SVR4)，这是和Sun公司合作的产物，其整合了System V， BSD， SunOS 和 Xenix.</p>
+<h4>1990</h4>
+<p>开放软件基金会 OSF 针对SVR4发布了 OSF/1，这是一个基于 Mach 和 BSD的版本。</p>
+<h4>1991</h4>
+<p>Sun Microsystems 宣布了 Solaris，一个基于 SVR4的操作系统。</p>
+<p>同年Linux Torvalds 写了 Linux，解一个开源的操作系统内核（由Minix产生的灵感）</p>
+<p><img decoding="async" loading="lazy" class="alignnone" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_ltorvalds_120.jpg" alt="" width="120" height="138" /> <br />
+Linus Torvalds</p>
+<h4>1992</h4>
+<p>Linux 内核被整合到了 GNU，并开创了免费的GNU/Linux 操作系统，大家习惯于把这个操作系统简单的叫作“Linux”。</p>
+<h4>1993</h4>
+<p>AT&amp;T 卖掉了他的 Unix System Laboratories 以及所有的Unix权利，Novell成了买主。之后Novell 又把Unix 注册商标转给了X/Open group.</p>
+<p>Microsoft 开发了 Windows NT，一个强大的32们多处理器的操作系统。Windows NT 所引发的恐慌情绪促成了Unix的标准。</p>
+<h4>1994</h4>
+<p>NASA 发明了 <a href="http://www.beowulf.org/overview/history.html" target="new">Beowulf computing</a> ，其使用了一些低成本的PC机并使用Unix或Linux作为操作系统，以及TCP/IP为网络组成了一个廉价的集群技术。</p>
+<h4>1996</h4>
+<p>X/Open 和 Open Software Foundation 合并形成了 The Open Group.</p>
+<p><img decoding="async" loading="lazy" class="alignnone" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_natmedal_230.jpg" alt="" width="230" height="177" /> <br />
+Clinton 总统授予Thompson 和 Ritchie国家科技勋章</p>
+<h4>1999</h4>
+<p>美国总统克林顿授予Ken Thompson 和 Dennis Ritchie国家科技勋章，以表彰他们在Bell实验室的成就。</p>
+<h4>2001</h4>
+<p>Apple 发布 Mac OS X，这是一个基于Mach内核和BSD开发的桌面操作系统 。</p>
+<h4>2002</h4>
+<p>The Open Group 宣布了Single UNIX Specification （以前叫 Spec 1170）的第三个版本。  </p>
+<p> </p>
+<h4>参考</h4>
+<ul>
+<li><em>Peter H. Salus</em>所著《A Quarter Century of Unix》<em></em></li>
+<li><em>Microsoft</em></li>
+<li><em>AT&amp;T</em></li>
+<li><em>The Open Grou</em></li>
+<li><em>Wikipedia </em></li>
+<li><em>其它</em></li>
+</ul>
+<p>原文：<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;taxonomyName=Operating+Systems&amp;articleId=9133628&amp;taxonomyId=89&amp;pageNumber=1" target="_blank">链接</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" alt="sed 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_title">sed 简明教程</a></li><li ><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" alt="AWK 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_title">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1032.html">Unix 40年：Unix年鉴</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1032.html/feed</wfw:commentRss>
+			<slash:comments>26</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Unix 40年：昨天，今天和明天</title>
+		<link>https://coolshell.cn/articles/1023.html</link>
+					<comments>https://coolshell.cn/articles/1023.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 11 Jun 2009 15:01:39 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1023</guid>
+
+					<description><![CDATA[<p>经历了四个十年，操作系统的未来充满了变数，但传奇将会是永久的  原文：链接&#8212;Computerworld 　 译者前言  今年是Unix40岁的生日。...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1023.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1023.html">Unix 40年：昨天，今天和明天</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span style="font-size: small;"><strong>经历了四个十年，操作系统的未来充满了变数，但传奇将会是永久的</strong></span></p>
+<p style="MARGIN: 0in 0in 0pt"> <strong style="mso-bidi-font-weight: normal">原文</strong>：<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;taxonomyName=Operating+Systems&amp;articleId=9133570&amp;taxonomyId=89&amp;pageNumber=1">链接</a>&#8212;<a href="http://www.computerworld.com/">Computerworld</a></p>
+<p>　</p>
+<h4>译者前言</h4>
+<p style="MARGIN: 0in 0in 0pt"> 今年是Unix40岁的生日。很早就看到这篇文章了，一直想转到中文社区。但一直没有时间，今天看到了CSDN首页的一篇《<a href="http://news.csdn.net/a/20090610/211863.html">昨天,今天,明天! Unix系统的40年</a>》号称是转载于<a href="http://www.cnbeta.com/articles/86179.htm">cnBeta</a>。这篇文章翻译的要有多烂有多烂，简直就是对Unix 40的历史和原文作者的一种不敬。所以，在这里给出全部译文。</p>
+<p style="MARGIN: 0in 0in 0pt"> </p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal">关于更为详细的历史，可以参考我的《Unix</strong><strong style="mso-bidi-font-weight: normal">传奇》<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542340.aspx">上篇</a></strong><strong style="mso-bidi-font-weight: normal">，<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542353.aspx">下篇</a></strong></p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal">以及一篇CSDN</strong><strong style="mso-bidi-font-weight: normal">对我的采访《<a href="http://blog.csdn.net/haoel/archive/2007/07/13/1688006.aspx">Unix的现状与未来</a></strong><strong style="mso-bidi-font-weight: normal">》</strong></p>
+<p>　</p>
+<h4>正文</h4>
+<p>40年前的一个夏天，一个程序员只用了一个月的时间就创造出了这个世界上迄今为止最重要一个软件的原型。</p>
+<p><span id="more-1023"></span></p>
+<p>在1969年8月，Ken Thompson，AT&amp;T公司Bell实验室的一个程序员，因为妻儿不在身边，所以有机会把他的一些关于新的操作系统的想法付诸实现。他用汇编语言在DEC（Digital Equipment Corp.）的PDP-7微机上写了第一个版本Unix，他只用了一周的时间就完成了一个简单的操作系统，包括一个shell，一个编译器还有一个汇编编译器。</p>
+<p>Thompson和他的一个同事Dennis Ritchie当时在开发一个叫“<a href="http://www.multicians.org/multics.html" target="new">Multics</a>（Multiplexed Information and Computing Service复杂指令和计算服务）”的分时(Time-Sharing)操作系统)，因为这个项目当时遇上了很多麻烦，所以Thompson和Dennis当时感到很没劲，他们即不想去做当时主流的“批处理（Batch）操作系统”，也不想去做那个看上去怪异和笨拙的Multics。</p>
+<p>所以，在他们来来回回讨论经了一些关于新系统的想法后，Thompson写下了第一个版本的Unix，然后，这两位老搭档在以后的几年里继续开发着这个操作系统，当然，后面有更多的同事（Doug McIlroy, Joe Ossanna 和 Rudd Canaday）加入了进来。一些当时Multics的理念也被带入到这个新的操作系统中来，不过，更为漂亮的Unix则带来了&#8211;&#8220;更少则为更多（less-is-more）&#8221;的哲学。</p>
+<p>（<strong style="mso-bidi-font-weight: normal">陈皓注：</strong>在我们所认识的历史中，这两位程序员当时是在Multics下开发一个叫&#8221;太空旅行&#8221;的游戏，后来Multics项目解体了，这两位哥们觉得自己的游戏白弄了，所以就为了这个游戏开发了一个新的操作系统Unix，Unix的取名和Multics是相反的，Multics有&#8221;复杂的&#8221;的意思，而Unix则是&#8221;小巧的&#8221;意思。后来他们觉得这个操作系统非常不错，所以在后来发表了一篇论文向全世界宣布了这一操作系统，从此开启了计算机世界崭新的文化，详情可参看我的《<strong style="mso-bidi-font-weight: normal">Unix</strong><strong style="mso-bidi-font-weight: normal">传奇</strong>》<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542340.aspx">上篇</a>，<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542353.aspx">下篇</a>）</p>
+<p>&#8220;一个强大的用于交互式的操作系统不应该在价格成本和人力成本上都是昂贵的&#8221; Ritchie 和 Thompson在开发这个操作系统5年后，他们在&#8221;计算机协会（ACM- Association for Computing Machinery）杂志&#8221;上发表了一篇文章《<em>Communications of the ACM</em> (CACM)》，文中说，&#8221;我们希望Unix的用户会找到那些非常重要的系统特性就是它是&#8217;简单的&#8217;，&#8217;一流的&#8217;和&#8217;易用的'&#8221;。</p>
+<p>显然，他们做到了，Unix的确成为了IT领域中的一块基石，被广泛地部署到了大学，政府和企业的服务器和工作站上。并且，Unix的影响力开发迅速地传播开来，这恐怕超出了所有人的估计，正如ACM在1983年给Thompson 和 Ritchie颁发最具价值的图灵奖（计算机领域的诺贝尔奖）所记录的那样&#8211;&#8220;Unix系统的模式已经在以一种全新的编程思想领导着新一代的软件开发&#8221;。</p>
+<h2 style="MARGIN: auto 0in"><a name="early"></a>Unix早期</h2>
+<p style="TEXT-ALIGN: center"> <img decoding="async" loading="lazy" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_kendennis.jpg" alt="" width="230" height="150" /></p>
+<p style="TEXT-ALIGN: center">Thompson 和 Ritchie.</p>
+<p>当然，Unix的成功不是一蹴而就的。 在1971年，它首先被移植到了PDP-11微机（一个比PDP-7更强的微机）。文本格式和文本编译程序在这时被加入进了Unix。并且，当时的实验室专利部门已经开始用这些文本编译器，这也是Unix系统除开发团队之外的第一个用户。</p>
+<p>在1972年，Ritchie引入了一个更高级的语言&#8211;C语言（基于Thompson的B语言），此后，Thompson用C语言重写了Unix，这极大地增加了Unix的可移植跨平台性。然后，他们为这个操作系统命名Unics(Uniplexed Information and Computing Service)，这是和Multics玩的一个文字游戏。但最后，Unix成了最终的名字。（<strong style="mso-bidi-font-weight: normal">陈皓注</strong>：Unix下的经常出现缩写，如usr 是 user, ed是edit，gp是group，这也是Unix的文化。Unix的更名可能也是因为这个吧）</p>
+<p>是时候向全世界宣布这个系统系统了。Ritchie 和 Thompson于1974年7月在 <em>CACM</em> 上发表了一篇论文&#8211; &#8220;<a href="http://cm.bell-labs.com/cm/cs/who/dmr/cacm.html">The UNIX Time-Sharing System</a>&#8220;《Unix分时操作系统》，这篇论文就像一个风暴一样席卷了都个IT界。直到有一天，Unix被限制在了只能由Bell实验室中的少数人使用。但是，因为有计算机协会的支持，当时的Unix处于一个引爆点。</p>
+<p>&#8221; <em>CACM</em> 的那篇论文产生了一个戏剧化的影响&#8221;， IT 历史学家 Peter Salus 在他的书《<em>The Daemon, the Gnu and the Penguin</em>》中写到， &#8220;很快，Ken 被铺天盖地的Unix的请求所淹没&#8221;</p>
+<p> </p>
+<h2 style="MARGIN: auto 0in"><a name="hackers"></a>黑客的天堂</h2>
+<p> Thompson 和 Ritchie 算得上是史上最名副其实的&#8221;黑客&#8221;，当时&#8221;黑客hacker&#8221;一词指的是那些把非同寻常的创意组合起来， 以一种超常智力，并以废寝忘食的态度解决了某个鲜为人知的软件问题的人。</p>
+<p>Thompson 和 Ritchie他们的所使用的开发方法，他们所写下的代码，极大地吸引了大学里的程序员，并在以后，这些大学中其中的一些程序员因为Unix开创了自己的公司，他们都是在Unix发展过程中的黑客，就像，加利福尼亚州大学的Bill Joy，卡内基梅隆大学的<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133574#rashid">Rick Rashid</a> ，以及Bell实验室<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133574#korn">David Korn</a>。当然，他们开创的这些公司都没有IBM，HP和Microsoft的资助。</p>
+<p>&#8220;几乎从一开始，Unix就能够，也确实是开始了自我进化&#8221;，Thompson和Ritchie在<em>CACM</em> 论文中说到，&#8221;因为所有的源代码总可以容易被人在线地更改，所以，当有一个新的想法被发明，发现或是被建议出来的时候，大家都非常自愿地修订或重写Unix系统和上面的软件&#8221;。</p>
+<p>Korn，一个今天还在AT&amp;T工作的员工，上世纪70年代曾是Bell 实验室的一个程序员。&#8221;Unix的一个特点是，一个小工具刚被完成，就被另一个更好的工具所代替&#8221;，他回忆起来说，&#8221;如果你觉得不好的话，你完全可以开完一个更好的版本&#8221;。Korn当时为Unix开发了一个很具影响力的<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133574#korn">Korn shell</a>，本质上来说，当年的Unix就像今天的开源软件。</p>
+<p>Salus，作为一个作家和技术历史家，回忆起，他上世纪70年代在多伦多大学时当教授时，在IBM System/360大机上使用APL编程语言工作时的情景&#8211;那并不很好用，但是自从1978年圣诞节以后，一个哥伦比亚大学的朋友给我演示了一下在微机上运行的Unix，&#8221;我说，&#8217;我的上帝啊&#8217;，我彻底被你征服了&#8221;。</p>
+<p>他说，Unix最关键的优势是他有一个&#8221;管道&#8221;特性（1973年引入），这么我们可以把上一个程序的输出轻松地传给下一个程序。&#8221;管道&#8221;的概念，由Bell实验室的McIlroy发明，随后&#8221;管道&#8221;这个东西被其它几乎所有的操作系统复制，包括所有的Unix， Linux，DOS和Windows。</p>
+<p style="TEXT-ALIGN: center"><img decoding="async" loading="lazy" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_murrayhill_230.jpg" alt="" width="230" height="151" /></p>
+<p style="TEXT-ALIGN: center">位于新泽西Murray Hill 的Bell 实验室总部</p>
+<p style="TEXT-ALIGN: center"><em>Credit: Alcatel-Lucent/Bell Labs</em></p>
+<p> </p>
+<p>Unix还有一个不错的地方。 &#8220;哇&#8221;，正如Salus所惊叹的，这个操作系统并不需要一个需要一百万美金的大型机才能运行的操作系统。它在极其原始的小型的DEC PDP-7微机上开发出来，因为这是当是Thompson 和 Ritchie可以找到用来写这个操作系统最好的机器（<strong style="mso-bidi-font-weight: normal">陈皓注：</strong>当时这个机器像垃圾一样被扔在实验室角落里）</p>
+<p>很多很多的大学研究者们使用Unix就是因为这是一个简单和容易修改的操作系统，而且对硬件资源要求的很少，代码也是开源和免费的。就像Sun Microsystems公司，或是一些用于特定的科学计算的主机公司，例如Multiflow Computer，他们在选择Unix作为操作系统时都和那些大学研究者们有相同的原因。</p>
+<h2 style="MARGIN: auto 0in">Unix家谱</h2>
+<p>Unix成长为一个非私有的操作系统，是因为1956年的AT&amp;T公司受命于联邦去经营电报电话服务。当然也可以开发软件，甚至那个软件可以有&#8221;合理&#8221;收费的许可证，但是这个公司却被禁止从事任何和计算机有并的商业活动。</p>
+<p>Unix，在开发的过程中，没有任何的奖励制度和管理，从一开始在AT&amp;T公司出现时，其是一种近似于好奇或兴趣的东西。</p>
+<p>然而，20世纪70年代，AT&amp;T公司开始意到Unix所带来的商业价值。公司的律师开始寻找一些手段来保护Unix，并让其成为一种商业机秘。从1979年Unix的版本V7开始，Unix的许可证开始禁止大学使用Unix的源码，包括在授课中学习。</p>
+<p>没问题！一个荷兰阿姆斯特朗Vrije大学使用版本V6的计算机科学系的教授Andrew Tanenbaum说。在1987年，他为教学目的克隆了一个Unix，创建一个叫Minix的开源的操作系统，并可以在80286的Intel芯片上运行。</p>
+<p>&#8220;Minix使用了所有和Unix一样的想法，并且这是一个非常灿烂的事物&#8221;，Salus说，&#8221;只有一个专门是程序员的并且非常了解操作系统内部的人才成干出这件事来&#8221;。Minix从此变成了另一个起点&#8211;Linus Torvalids 在1991年使用Minix创造了Linux &#8211;这并不是一个简单的Unix克隆版本，只不过它长得像Unix。</p>
+<p>让我们再回到Linux出现的十年以前，Bill Joy，毕业于加利福尼亚州大学伯克利分校，当年，他在学校的时候拷贝了Bell 实验室的Unix版本，并且所到了这是一个很不错的可以使用Pascal编译器和文本编译器的操作系统平台。</p>
+<p>于是，他更改变扩展了Unix，形成了Unix的第二个最主要的分枝&#8211;BSD（Berkeley Software Distribution）Unix。在1978年3月，Joy卖出了第一个BSD的拷贝：50美金。</p>
+<p>到了1980年，有两个最主要的Unix的版本线，一个是Berkeley的BSD，另一个是AT&amp;T的Unix，在这个时候，很显然，竞争最终引发了Unix的战争。在这场战争中，好的是，软件开发人员还是能够得到Unix的源码并对其按照自己的需要和兴致进行裁剪。而不好的是，Unix开始一发不可收拾地开发不停地出现各种各样的变种。</p>
+<p>1982年，Joy创建了Sun Microsystems公司并提供了工作站&#8211;Sun-1，运行在当一个BSD的版本，叫SunOS（Solaris以之后的十年出现）。而AT&amp;T则在随后的几年中发布了Unix System V的第一版，一个具有强大影响力的操作系统，最终造就了IBM的AIX和HP的HP-UX。</p>
+<p style="MARGIN: 0in 0in 0pt"><a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133696"></a></p>
+<p style="MARGIN: 0in 0in 0pt"> </p>
+<p style="MARGIN: 0in 0in 0pt; TEXT-ALIGN: center"><img decoding="async" loading="lazy" src="http://www.computerworld.com/common/images/site/features/2009/062009/unix_chart_420.jpg" alt="" width="420" height="267" /></p>
+<p style="MARGIN: 0in 0in 0pt; TEXT-ALIGN: center">Unix 家谱. <em>Credit: Eraserhead1 (<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="new">cc-by-sa-3.0</a>, <a href="http://en.wikipedia.org/wiki/GNU_Free_Documentation_License" target="new">GFDL</a>)</em><br />
+<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133696">点击这里下载大图</a></p>
+<p style="MARGIN: 0in 0in 0pt"> </p>
+<h2 style="MARGIN: auto 0in">Unix战争</h2>
+<p> 在上世纪80年代中期，大量的用户包括联邦政府，开始抱怨&#8221;Unix是一个理论上单一的可移植的操作系统&#8221;，但事实上应该如此却并不是这样。Unix软件供应商们，一方面为这些抱怨而为 其买单（&#8221;空头人情&#8221;），而另一方面，他们却在没日没夜地给用户们定制Unix的各种功能和APIs，旨在为了留下用户。 </p>
+<p> 而其它的Unix产商害怕At&amp;T和Sun的联盟，所以，有各种各样的派别组织开始在&#8221;标准&#8221;上竞争，这些组织大多在X或Open命名，开放软件基金会（Open Software Foundation），Unix开放系统国际和公司（Unix International and Corporation for Open Systems）等等，在这些组织中形成的各种各样的争论，辩论，抗辩和观点可以写一本厚厚的书，但他们无一例外地以肆意相互评击来主张一个统一的Unix局面。</p>
+<p> 刚形成的<a href="http://en.wikipedia.org/wiki/Open_Software_Foundation" target="new">开放软件基金会</a>，其包括了IBM，HP，DEC和其它公司共同来反抗AT&amp;T和Sun的联盟。在一个1988年未出版的文件中，DAPRA（Defense Advanced Research Projects Agency）一个著名的小型机先驱<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133574&amp;pageNumber=2#bell">Gordon Bell</a>说， &#8220;开放软件基金会OSF是一条&#8217;Unix穷人&#8217;进入正在发展的市场的一条路，他们以此来供养那个的高利润代码博物馆&#8221;。</p>
+<p> Unix战争在解决差异和设定一个操作系统标准中以失败告终。但在1993年，Unix社区听到了一个&#8221;警钟&#8221;&#8211;Microsoft发布了Windows NT，一个企业级的，32位的，支持多处理的操作系统。而Windows NT的所有者瞄准了Unix领域，并企图扩展Microsoft的桌面系统霸权到各种数据中心以及被Sun服务器所占领的地方。</p>
+<p> Microsoft的用户欢呼雀跃，Unix的产商开始惊慌。所有的主流的Unix竞争者们开始主动地联合起来形成了一个<a href="http://en.wikipedia.org/wiki/COSE" target="new">通用开放式软件环境（Common Open Software Environment）</a>，并在随后的几年中放下了他们的武器并开始着手把AT&amp;T和Sun联盟为背景的&#8221;Unix International Group&#8221;并入开放软件基金会OSF。这个合并在今天叫做&#8211;<a href="http://www.opengroup.org/" target="new">The Open Group</a>，而证明Unix系统和所有者的是<a href="http://www.unix.org/what_is_unix/single_unix_specification.html" target="new">Single Unix Specification</a>，现在官方叫法是&#8211;&#8220;Unix&#8221;。</p>
+<p> </p>
+<p>但在实践过程中，所有关于Unix的开发的确需要一个尽可能&#8221;标准化的&#8221;Unix，但是由于这些产商热衷于竞争的习惯，在Unix下并没有做到，但这一&#8221;标准化&#8221;被随后如潮水一样涌来的一个叫Linux的操作系统给完成了，这是一个开源的系统系统，则我们的Tanenbaum教授开发的Minix发展而来。</p>
+<h3 style="MARGIN: 12pt 0in 3pt"><a name="whatis"></a>什么是&#8221;Unix&#8221;?</h3>
+<p>Unix，许多人会说，是一个几十年前在Bell实验室写的操作系统，Unix包括其所有的派生版本。今天，最主要的Unix版本是从两个主干上分出来的：一个当然是从AT&amp;T出来的，另一个则是通过加利福尼亚伯克利分校产生的。今天，最顽强的分枝是IBM的AIX和HP的HP-UX以及Sun的Solaris。</p>
+<p>然而，只有&#8221;The Open Group&#8221;拥有Unix的注册商标，<a href="http://www.unix.org/what_is_unix.html" target="new">定义一个Unix</a>需要遵从<a href="http://www.unix.org/what_is_unix/single_unix_specification.html" target="new">Single Unix Specification</a> (SUS)。这包含了那些从来没有Unix思想的操作系统，比如Mac OS X Leopard（这是从BSD和Mach那边发展来）以及IBM的z/OS（这是从大型机操作系统MVS发展来的），因为它们遵从了SUS的API规范。基本上来说，只要那看起来像是一个Unix，那他就是一个Unix，而不管它是由什么代码写的。</p>
+<p>当然，一个比较宽松的Unix定包含了Unix-Like的操作系统，有些时候，也叫做Unix-Clones或Look-Alikes，这些都是复制了Unix的东西但他们却并不直接使用Unix的代码。在这堆操作系统中，领头羊是Linux。</p>
+<p>最后，我们可以把Unix叫做一种&#8221;操作系统&#8221;因为这是已成了实际习惯。另外，对于一个操作系统的内核，Unix实现了很多典型的工具比如命令行编辑器，应用程序接口，开发环境，开发库和文档&#8211;<em>Gary Anthes</em></p>
+<h2 style="MARGIN: auto 0in">Unix的未来</h2>
+<p>由于这些长期竞争的各种版本的Unix缺乏可移值性，以及在价格方面没有优势，在x86芯片上占据主导地位的Linux和Windows将会快速地让所有的IT机构把Unix替换掉。调查机构<a href="http://www.gartner.com/DisplayDocument?ref=g_search&amp;id=878016" target="new">Gartner Group</a>最近公布了这项调查结果。</p>
+<p>&#8220;在主机服务器方面，调查结果继续显示公众对Linux的热情，而Windows也有相应的增长，而Unix系统还会长期存在，但是其逐渐地下滑&#8221;，这个调查报告由2009年2月发布。</p>
+<p>&#8220;Unix还会像以前那样长期存在，但它已不如从前，而这种局面只会愈演愈烈&#8221; Gartner分析师George Weiss说，&#8221;Linux将会是Unix的另一选择&#8221;，虽然Linux并没有像Unix那样经过了这么长的开发、性能调整和压力测试的过程，但很明显他很快就要达到像Unix那样的性能，可靠和扩展性&#8221;。</p>
+<p>但是，最近一个由Computerworld发起一个<a href="http://www.computerworld.com/action/article.do?command=viewArticleBasic&amp;articleId=9133777">民意调查</a>，暗示了所有一切把Unix踢开的举动不会很快地发生。在一个由130个Unix用户和211个IT经理的问卷调查中显示，其90%的人说他们的公司&#8221;非常极端地信任Unix&#8221;。不到半数的被访者说，&#8221;Unix是一个非常基本的平台，但我们并不确定其未来是否会被保留&#8221;，而只有12%的受访者说，&#8221;我们期望在未来把Unix迁走&#8221;。节省成本，是诸多原因中最主要是一个原因。</p>
+<p>Weiss说，移值到x86处理器上会越来越快，因为这些硬件的价值实在是太便宜了。&#8221;水平扩展架构，集群技术，云计算，虚拟化技术，你只需要把这些技术合并一下，通过这些技术应用的趋势，我们可以看到操作系统的选择基本上就是Linux和Windows&#8221;，他说。</p>
+<p>&#8220;例如&#8221;，Weiss说，&#8221;在最近Cisco宣布的<a href="http://newsroom.cisco.com/dlls/2009/prod_031609.html" target="new">Unified Computing 架构</a>，你可以拥有网络，存储，计算，内存，光纤连接，但你不需要Unix。你可以安装Linux或Windows并使用x86平台。所以Intel赢得了Linux取代Unix的那半壁江山&#8221;。</p>
+<p>The Open Group，目前Single Unix Specification和Unix系统认证的所有者，开始有点退步并有点承认Linux也是一个Unix系统的选择，因为Unix是&#8221;高端性能，可扩展性和性能可以用于很多相当重要的应用&#8221;，而Linux则是一个更为小的，注重于并不太注重的应用。</p>
+<p>AT&amp;T的Korn是其中一个对Unix仍然看到的人。Korn说，Unix的长处是它的历史，自从1973年来引入&#8221;管道&#8221;技术，它就可以被分成几个部分来部署。这会把Unix带向前方，他说，&#8221;这个哲学体系可以运用在云计算中，在那里，你只需要创建一些小的可重用的碎片而不是一个巨大的应用&#8221;。</p>
+<h2 style="MARGIN: auto 0in"><a name="legacy"></a>Unix传奇</h2>
+<p> </p>
+<p>无论最后的Unix命运会怎么样，这个从Bell实验室出生的40岁的家伙，已经书写了一段传奇，而且这个传奇可能还会继续几十年。它影响并产生了一个相当相当长的流行软件列表，包括给IBM，HP和Sun提供的Unix，以及Apple的Mac OS X和Linux。它同样影响了Microsoft的Windows NT以及IBM和Microsoft弄出来的DOS。</p>
+<h2 style="MARGIN: auto 0in">请你来说</h2>
+<h3 style="MARGIN: 12pt 0in 3pt"><a href="http://www.computerworld.com/comments/node/9133570">分享你的Unix记忆！</a></h3>
+<p> </p>
+<p>因为Unix，产生了许多公司，并走向了成功，因为当时Unix给了一个低成本的平台。在Internet上的服务器，Unix是核心的建筑区，今天它也是所有通讯系统的心脏。由它孕育了许多架构上的创意，比如管道，并且，Unix引出的Mach为科学作出了巨大的贡献，同时也为多处理器计算作出了贡献。</p>
+<p>ACM在1983年因为Unix授予Thompson和Ritchie图灵奖时说过：&#8221;Unix系统最天才的部分是它的framework，它激发了程序员们沿着这一方向工作&#8221;。</p>
+<p> </p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal">作者</strong>：Gary Anthes<br />
+<strong style="mso-bidi-font-weight: normal">时间</strong>：2009年6月4日美国东部时间凌晨12:01</p>
+<p style="MARGIN: 0in 0in 0pt"> </p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal">译者</strong>：陈皓（haoel(at)hotmail.com）<br />
+<strong style="mso-bidi-font-weight: normal">时间</strong>：2009年6月11日北京时间晚上10:22</p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal"> </strong></p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal">关于更为详细的历史，可以参考我的《Unix</strong><strong style="mso-bidi-font-weight: normal">传奇》<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542340.aspx">上篇</a></strong><strong style="mso-bidi-font-weight: normal">，<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542353.aspx">下篇</a></strong></p>
+<p style="MARGIN: 0in 0in 0pt"><strong style="mso-bidi-font-weight: normal">以及一篇CSDN</strong><strong style="mso-bidi-font-weight: normal">对我的采访《<a href="http://blog.csdn.net/haoel/archive/2007/07/13/1688006.aspx">Unix的现状与未来</a></strong><strong style="mso-bidi-font-weight: normal">》</strong></p>
+<p><strong style="mso-bidi-font-weight: normal">（本文由陈皓翻译，在转载时请注明作者和出处）</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" alt="sed 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_title">sed 简明教程</a></li><li ><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" alt="AWK 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_title">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1023.html">Unix 40年：昨天，今天和明天</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1023.html/feed</wfw:commentRss>
+			<slash:comments>32</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>优质代码的十诫</title>
+		<link>https://coolshell.cn/articles/1007.html</link>
+					<comments>https://coolshell.cn/articles/1007.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 07 Jun 2009 11:20:56 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Coding]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1007</guid>
+
+					<description><![CDATA[<p>1.- DRY: Don’t repeat yourself. DRY 是一个最简单的法则，也是最容易被理解的。但它也可能是最难被应用的（因为要做到这样，我们需...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1007.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1007.html">优质代码的十诫</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<h2>1.- DRY: Don’t repeat yourself.</h2>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/06/10commandements.jpg"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-1008" title="10commandements" src="https://coolshell.cn/wp-content/uploads/2009/06/10commandements-223x300.jpg" alt="10commandements" width="223" height="300" /></a>DRY 是一个最简单的法则，也是最容易被理解的。但它也可能是最难被应用的（因为要做到这样，我们需要在泛型设计上做相当的努力，这并不是一件容易的事）。它意味着，当我们在两个或多个地方的时候发现一些相似的代码的时候，我们需要把他们的共性抽象出来形一个唯一的新方法，并且改变现有的地方的代码让他们以一些合适的参数调用这个新的方法。</p>
+<p><a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank">DRY</a> 这一法则可能是编程届中最通用的法则了，目前为止，应该没有哪个程序员对这一法则存有异议。但是，我们却能发现，一些程序在编写单元测试（unit testing）时忘记了这一法则：让我们相像一下，当你改变一个类的若干接口，如果你没有使用DRY，那么，那些通过调用一系例类的接口的unit test的程序，都需要被手动的更改。比如：如果你的unit test的诸多test cases中没有使用一个标准共有的构造类的方法，而是每个test case自己去构造类的实例，那么，当类的构造函数被改变时，你需要修改多少个test cases啊。这就是不使用DRY法则所带来的恶果。</p>
+<p><span id="more-1007"></span></p>
+<h2>2.- 短小的方法.</h2>
+<p>至少，我们有下面三个不错的理由要求程序员们写下短小的方法。</p>
+<ol>
+<li>代码会变得更容易阅读。</li>
+<li>代码会变得更容易重用（短方法可以减少代码间的耦合程度）</li>
+<li>代码会变得更容易测试。</li>
+</ol>
+<h2>3.- 良好的命名规范</h2>
+<p>使用不错的统一的命名规范可以让你的程序变得更容易阅读和维护，当一个类，一个函数，一个变量的名字达到了那种可以“望文生义”的境界话，我们就可以少一些文档，少一些沟通。文章《<a href="https://coolshell.cn/articles/990.html"><span style="color: #2970a6;">编程中的命名设计那点事 </span></a>》可以给你一些提示。</p>
+<h2>4.- 赋予每个类正确的职责</h2>
+<p>一个类，一个职责，这类规则可以参考一下类的<a href="http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod" target="_blank"><strong>S</strong>OLID </a>法则。但我们这里强调的不是一种单一的职责，而是一个正确的职责。如果你有一个类叫Customer，我们就不应该让这个类有sales 的方法，我们只能让这个类有和Customer有最直接关系的方法。</p>
+<h2>5.- 把代码组织起来</h2>
+<p>把代码组织起来有两具层次。</p>
+<ul>
+<li><strong>物理层组织</strong>：无论你使用什么样的目录，包(package)或名字空间(namespace)等的结构，你需要把你的类用一种标准的方法组织起来，这样可以方便查找。这是一种物理性质的代码组织。</li>
+<li><strong>逻辑层组织</strong>： 所谓逻辑层，主要是说，我们如果把两个不同功能的类或方法通过某种规范联系和组织起来。这里主要关注的是程序模块间的接口。这就是我们经常见到的程序模块的架构。</li>
+</ul>
+<h2>6.- 创建大量的单元测试</h2>
+<p>单元测试是最接近BUG的地方，也是修改BUG成本最低的地方，同样也是决定整个软件质量好坏的成败的地方。所以，只要有可能，你就应该写更多的，更好的单元测试案例，这样当你未来有相应代码改变的时候，你可以很简单知道你代码的改变是否影响了其它单元。</p>
+<h2>7.- 经常重构你的代码</h2>
+<p>软件开发是一种持续的发现的过程，从而让你的代码可以跟上最新的实际需求的变化。所以，我们要经常重构自己的代码来跟上这样的变化。当然，重构是有风险的，并不是所有的重构都是成功的，也不是我们随时都可以重构代码。下面是两个重构代码的先要条件，以避免让你引入更多的BUG，或是把本来就烂的代码变得更烂。</p>
+<ol>
+<li>有大量的单元测试来测试。正如前面所说，重构需要用大量的单元测试来做保障和测试。</li>
+<li>每次重构都不要大，用点点滴滴的小的重构来代替那种大型的重构。有太多的时候，当我们一开始计划重构2000行代码，而在3个小时后，我们就放弃这个计划并把代码恢复到原始的版本。所以，我们推荐的是，重构最好是从点点滴滴积累起来的。</li>
+</ol>
+<h2>8.- 程序注释是邪恶的</h2>
+<p>这一条一定是充满争议的，大多数程序员都认为程序注释是非常好的，是的，没错，程序注释在理论上是非常不错的。但是，在实际过程序当中，程序员们写出来的注释却是很糟糕的（程序员的表达能力很有问题），从而导致了程序注释成为了一切邪恶的化身，也导致了我们在阅读程序的时，大多数时候，我们都不读注释而直接读代码。所以，在这里，我们并不是鼓励不写注释，而是——如果你的注释写得不够好的话，那么，你还不如把更重要的时间花在重构一下你的代码，让你的代码更加易读，更加清楚，这比会比注释更好。</p>
+<h2>9.- 注重接口，而不是实现</h2>
+<p>这是一个最经典的规则了。接口注重的是——“What”是抽象，实现注重的是——“How”是细节。接口相当于一种合同契约，而实际的细节相当于对这种合同契约的一种运作和实现。运作是可以很灵活的，而合同契约则需要是相对需要稳定和不变的。如果，一个接口没有设计好而需要经常性的变化的话，那我们可以试想一下，这代来的后果，这绝对会是一件成本很大的事情。所以，在软件开发和调设中，接口是重中之重，而不是实现。然而我们的程序员总是注重于实现细节，所以他们局部的代码写的非常不错，但软件整体却设计得相对较差。这点需要我们多多注意。</p>
+<h2>10.- 代码审查机制</h2>
+<p>所有人都会出错，一个人出错的概率是很大的，两个人出错的概率就会小一些，人多一些，出错的概率就会越来越小。因为，人多了，就能够从不同的角度看待一个事情，虽然这样可能导致无效率的争论，但比起软件产品release后出现问题的维护成本，这点成本算是相当值得的。所以，这就是我们需要让不同的人来reivew代码，代码审查机制不但是一种发现问题的最有效的机制，同时也是一种可以知识共享的机制。当然，对于Code Review来说，下面有几个基本原则：</p>
+<ul>
+<li>审查者的能力一定要大于或等于代码作者的能力，不然，代码审查就成了一种对新手的training。</li>
+<li>而且，为了让审查者真正负责起来，而不是在敷衍审查工作，我们需要让审查者对审查过的代码负主要责任，而不是代码的作者。 </li>
+<li>另外，好的代码审查应该不是当代码完成的时候，而是在代码编写的过程中，不断地迭代代码审查。好的实践的，无论代码是否完成，代码审核需要几天一次地不断地进行。</li>
+</ul>
+<p>（<strong>我以我个人的语言叙述本文，并加入了我个人的经历，所以，请你在转载时请注意作者和出处，并且，请勿用于商业用途</strong>）</p>
+<p>文章：<a href="http://makinggoodsoftware.com/2009/06/04/10-commandments-for-creating-good-code/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1007.html">优质代码的十诫</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1007.html/feed</wfw:commentRss>
+			<slash:comments>32</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程中的命名设计那点事</title>
+		<link>https://coolshell.cn/articles/990.html</link>
+					<comments>https://coolshell.cn/articles/990.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 07 Jun 2009 08:36:49 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Coding]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=990</guid>
+
+					<description><![CDATA[<p>在我开始设计系统的时候，我会花去很多时间去设计命名，因为好的命名和好的设计是分不开的。 In the beginning was the Word, and t...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/990.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/990.html">编程中的命名设计那点事</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在我开始设计系统的时候，我会花去很多时间去设计命名，因为好的命名和好的设计是分不开的。</p>
+<blockquote><p>In the beginning was the <strong>Word</strong>, and the Word was with God, and the Word was God<br />
+太初有道。道与神同在，道就是神。 (约翰福音第一章，第一节)</p></blockquote>
+<p>在设计过程中给类，方法和函数好的命名会带来好的设计，虽然这不是一定成立，但是如果坏的命名那一定不会给你带来好的设计。在设计过程，如果你发现你很难命名某一个模块，某个方法时，可能你真正遇到的问题不是难命名的问题，而是这个设计是否真的合理，你或许应该花更多的时间来重新设计一下你的模块。</p>
+<p>好的命名不仅会带来好的设计，好的命名还提高了程序的可读性，降低代码维护的成本。另一方面，如果糟糕的命名会给代码带来一堵无形的墙，让你必须深入代码去研究代码具有的行为，增加你理解代码的时间。</p>
+<p>为此我总结了几条关于命名的指导原则，希望这几条原则能为你的命名设计带来帮助，我使用的是C++的语法，当然这些原则也很容易扩展到其他语言中去。</p>
+<h3><span style="color: #339966;">类型命名(类，接口，和结构)</span></h3>
+<p><span style="color: #339966;"><br />
+</span></p>
+<p><span style="color: #0000ff;"><strong>名字应该尽量采用名词</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Happy<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Happiness</code></p>
+<p><span id="more-990"></span></p>
+<p><span style="color: #0000ff;"><strong>不要使用类似名字空间的前缀</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SystemOnlineMessage<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System::Online:Message<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>形容词不要用太多，能描述清楚就行</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAbstractFactoryPatternBase<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IFactory<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>在类型中不要使用Manager 或则 Helper 或则其他没意义的单词</strong></span><br />
+如果你一定要在一个类型上加上Manager或Helper，那么这个类型要么就是命名的非常糟糕，要么就是设计的非常糟糕，如果是后则，那么这个类型就应该管理manage和帮助help一下自己了。<br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ConnectionManager<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XmlHelper<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connection<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XmlDocument, XmlNode, etc.<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>如果某个类不能通过简单的命名来描述它具有的功能，可以考虑用类比的方式来命名</strong></span><code><br />
+Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IncomingMessageQueue<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CharacterArray<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpatialOrganizer<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>如果你使用类比，你就应该一致的使用它们</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox,DestinationID<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailbox,Address<br />
+</code></p>
+<h3><span style="color: #339966;">函数(方法和过程)</span></h3>
+<p><span style="color: #339966;"><br />
+</span></p>
+<p><span style="color: #0000ff;"><strong>简洁</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.GetNumberOfItems()<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Count()<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>不要太简洁</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Verify()<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.ContainsNull()<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>避免缩写</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Srt()<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Sort()<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>对于完成某件事情的函数使用动词</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.RefCount();<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Clear();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Sort();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.AddReference();<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>对于返回布尔型的函数，使用类似提问的方式</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Empty();<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.IsEmpty();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Contains(item);<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>对于只是返回属性，而不改变状态的函数则使用名词</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.GetCount();<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Count();<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>不要在函数名字中重复参数的名称</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.AddItem(item);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler.ReceiveMessage(msg);<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Add(item);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler.Receive(msg);<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>不要方法的名字中重复此方法的类的名称</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.AddToList(item);<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.Add(item);<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>不要在函数的名字中加入返回类型，除非函数名必须以返回类型进行区别</strong></span><br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.GetCountInt();<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list.GetCount();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message.GetIntValue();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message.GetFloatValue();<br />
+</code></p>
+<p><span style="color: #0000ff;"><strong>不要名字中使用And 或则 Or</strong></span><br />
+如果你使用一个连接词来连接函数名，那么这个函数肯定是做了太多的事情，更好的做法是将其分成更小的函数来处理(类似面向对象设计准则中的责任单一原则)。<br />
+如果你想确保是这是一个原子的操作，那么你应该用一个名字来描述这个操作或一个类来封装他<br />
+<code>Bad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mail.VerifyAddressAndSendStatus();<br />
+Good:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mail.VerifyAddress();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mail.SendStatus();<br />
+</code></p>
+<p>这是一篇非常优秀的文章，我用我的语言在组织了一下，如果喜欢英文的读者可以点击<a href="http://journal.stuffwithstuff.com/2009/06/05/naming-things-in-code/">这里</a>阅读原文<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/990.html">编程中的命名设计那点事</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/990.html/feed</wfw:commentRss>
+			<slash:comments>29</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程语言的评测</title>
+		<link>https://coolshell.cn/articles/973.html</link>
+					<comments>https://coolshell.cn/articles/973.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sat, 06 Jun 2009 14:50:49 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[benchmark]]></category>
+		<category><![CDATA[programming language]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=973</guid>
+
+					<description><![CDATA[<p>摘要：这篇文章的原文出处在这里 我意译了整篇文章。结合计算机语言评测基准这个网站来读此文还是比较有意思。当然也不能以这个评测结果就贸然断定什么语言最好，什么语言...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/973.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/973.html">编程语言的评测</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>摘要</strong>：这篇文章的原文出处在<a href="http://gmarceau.qc.ca/blog/2009/05/speed-size-and-dependability-of.html">这里</a> 我意译了整篇文章。结合<a href="http://shootout.alioth.debian.org/">计算机语言评测基准</a>这个网站来读此文还是比较有意思。当然也不能以这个评测结果就贸然断定什么语言最好，什么语言不好。没有好不好的语言，只有适不适用于你解决问题域的语言。就文章而言请大家还是不必太过认真，就当从另一个方面来了解一下这33种编程语言吧。</p>
+<p><a href="http://shootout.alioth.debian.org/">计算机语言评测基准</a>是一个由429个程序组成的集合，它评测了33个程序语言的13的重复实现的基准程序。如果你想量化的比较不同语言，那么这个是一个非常不错的资源。</p>
+<p>在计算机评测基准中，评测者为了尽量让评测准确，非常谨慎的选择了13个基准程序，这13个基准程序并不针对某以特定语言有特殊的优化。对于评测选择33中语言都实现了13个基准程序。当然，除了速度这个指标外，程序基准评测同时也为每一个基准测试程序发布一个编码大小指标。非常感谢基准评测让我们看到程序设计中非常重要的一个方面：程序语言的性能和程序语言灵活性之间的矛盾。正是这个矛盾给所谓“高级编程语言”带上一个含蓄的轻蔑的意思。即，当你在使用这些高级语言编码时，你也许可以编写出漂亮的代码，但是你是如此的远离了硬件，你不可能获得更好的性能，是这样的吗？</p>
+<p><span id="more-973"></span></p>
+<p><a rel="attachment wp-att-976" href="https://coolshell.cn/?attachment_id=976"><img decoding="async" loading="lazy" width="457" height="457" class="aligncenter size-full wp-image-976" title="size-vs-speed-vs-depandability-context-3" src="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-context-3.png" alt="size-vs-speed-vs-depandability-context-3" srcset="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-context-3.png 457w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-context-3-150x150.png 150w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-context-3-300x300.png 300w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-context-3-200x200.png 200w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-context-3-270x270.png 270w" sizes="(max-width: 457px) 100vw, 457px" /></a><br />
+如果我们将基准测试程序的结果放在一张XY的图表上，那么我们就可以为这张表的4个角命名。快速而复杂的语言应积聚在图表的左上角。我们把这类语言称为系统语言。简洁但慢速的语言应该聚集在右下角，我们称之为脚本语言。在右上角，应该是过时的语言。除非这些语言具有非常吸引人的特性，否则语言已经被新出现的语言所淘汰。最后在左下角，基本上找不到对应的语言，因为在这一区域的语言是理想状态的语言。在这个区域的语言是又快又短又利于使用的语言。</p>
+<p>图中每一个小点就代表一种语言的一个基准程序实现，因此这图里面共有429个点，每个点的XY轴分别代表了其和最好的语言实现差距的倍数(从语言的复杂性和语言执行性能来说)，其中一些点比较分散，我们就没有在图中画出。从上面这个图我们可以看到这些粉红色点沿着Y轴(复杂性)比X轴(执行性能)分布更统一，这是不是意味着，人类在提升语言表达的灵活性上还在稳步的不断进步，而在提升语言性能方面却遇到了很多的麻烦呢：）</p>
+<p>针对每一个种语言，比如说scala语言，我们用下面的图来描述：图的中心点，是这个语言测试结果的平均值，然后做每一个评测结果的具体值到这个均值的连线就够成了一个星型图。这个图说明了scala一些特性，在X轴性能上来说，大部分点都分布在靠近左边，说明scala的性能是不错的，如果优化JVM的话，scala可以大部分提高性能，但是scala性能分布并不一致，其中的一个点甚至到了最右边。就语言复杂性(Y轴)来说，scala的表现也不错，不过有时候为了获得高性能，也会导致语言复杂提高，比如scala的其中一个点就在最顶端。</p>
+<p><a rel="attachment wp-att-974" href="https://coolshell.cn/?attachment_id=974"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-974" title="size-vs-speed-vs-depandability-scala" src="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-scala.png" alt="size-vs-speed-vs-depandability-scala" width="329" height="358" srcset="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-scala.png 329w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-scala-275x300.png 275w" sizes="(max-width: 329px) 100vw, 329px" /></a></p>
+<p>通过为每一种语言形成如上的一个图，我们最后可以为这33种语言评的测结果形成了如下的一个图，这是一个6*6的图。其中每一个小图具有同样的轴和同样的精度。这张图的目的是为了方便的比较每一个语言的星型。这些图按语言的平均性能来组织列，最左边的语言的性能最好，最右边的语言性能最差，在每一列中的语言又按照平均的语言代码量(复杂程度)进行排列，代码量最小的语言在最低端，代码量最大的在最顶端。</p>
+<figure id="attachment_975" aria-describedby="caption-attachment-975" style="width: 275px" class="wp-caption aligncenter"><a title="点击看大图" href="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-2009.png"><img decoding="async" loading="lazy" class="size-medium wp-image-975" title="size-vs-speed-vs-depandability-2009" src="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-2009-275x300.png" alt="size-vs-speed-vs-depandability-2009" width="275" height="300" srcset="https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-2009-275x300.png 275w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-2009-940x1024.png 940w, https://coolshell.cn/wp-content/uploads/2009/06/size-vs-speed-vs-depandability-2009.png 1221w" sizes="(max-width: 275px) 100vw, 275px" /></a><figcaption id="caption-attachment-975" class="wp-caption-text">点击看大图</figcaption></figure>
+<p>在图的最左边的性能是最好的，又高又瘦的星型，我们可以看到，除了GCC和G++外，其他的性能都显示了惊人的一致性(每一个基准测试程序的性能都非常接近)。而JAVA也非常骄傲的出现在一组中，这说明经过了10年的优化后，Java运行时的性能已经得到长足的提高(要用Java做大系统的人是否还会犹豫呢：）)。<br />
+在图的右边，我们看到了一些又胖又矮的星型，这些是一些脚本语言，从图中可以看出，这些脚本语言社区的人们当他们在不断改善他们语言的表达性的同时并没有花大力气在性能的改善上。然而也有例外，Lua这门脚本语言就有很好的执行性能。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/4626.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="读书笔记：对线程模型的批评" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4626.html" class="wp_rp_title">读书笔记：对线程模型的批评</a></li><li ><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/rank_scatter1-150x150.png" alt="编程语言流行度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_title">编程语言流行度</a></li><li ><a href="https://coolshell.cn/articles/3100.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/language-evolution-150x150.jpg" alt="编程语言进化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3100.html" class="wp_rp_title">编程语言进化</a></li><li ><a href="https://coolshell.cn/articles/2724.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-150x150.jpg" alt="计算机编程简史图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2724.html" class="wp_rp_title">计算机编程简史图</a></li><li ><a href="https://coolshell.cn/articles/2598.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/22.jpg" alt="五个编程语言设计的失误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2598.html" class="wp_rp_title">五个编程语言设计的失误</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/973.html">编程语言的评测</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/973.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>质量管理经中的八个法则</title>
+		<link>https://coolshell.cn/articles/971.html</link>
+					<comments>https://coolshell.cn/articles/971.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 06 Jun 2009 13:41:59 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[管理]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=971</guid>
+
+					<description><![CDATA[<p>质量管理在软件工程中是非常非常重要的一个环节，无论你有多么精妙的算法，或是使用了多么先进的技术，还是拥有了多少强的设计，在质量控制或质量管理面前，这些都可能什么...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/971.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/971.html">质量管理经中的八个法则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span><span>质量管理在软件工程中是非常非常重要的一个环节，无论你有多么精妙的算法，或是使用了多么先进的技术，还是拥有了多少强的设计，在质量控制或质量管理面前，这些都可能什么都不是。这里，有一些质量管理的法则，可以让软件的用户从中受益。如果对质量管理一言以蔽之：面对一个长期不断需要改善的软件，当其用户或是管理者们来说，他们对某个组织所提供的标准有一种完全和最基本的信任。</span></span><a href="http://choosyinfo.com/blogs/wp-content/uploads/2009/06/qualitymangement.jpg"></a></p>
+<p>下面，我们给出8个质量管理的法则：</p>
+<p><strong>1. 始终从用户角度出发:</strong> “无论何时何地，我们都需要明白用户当前的或未来的需求，并能够达到用户的需求，甚至超出用户的期望。”</p>
+<p>这是整个软件工程的重中之重。质量管理从某种意义上来说，就是实现用户需求的质量的管理。这需要我们的质量管理管理和用户的关系，以及把用户的需求和整个团队（开发组，测试组，产品组，项目组等等）进行有些的沟通管理。</p>
+<p><span id="more-971"></span></p>
+<p><strong>2. 领导能力: </strong>“领导者需要建立一个团结统一的有明确方向的团队。这个团队可以创造并维护一种良好的内部气氛，这种氛围可以使得所有的人都能参与进来，从而达到整个团队的目标。”</p>
+<p>对此，我们需要有一个有前瞻性的领导能为整个团队创建一种相互信任的环境。提倡诚实，并积极引导团队成员。从而可以激励每个人，并创建一种策略（比如奖罚机制）来达到这这些目标。</p>
+<p><strong>3. 团队成员主动参与性:</strong><span> “团队成员总是有不同分工和不同职责的，只有所有的团队成员都参与进来，那么整个项目或是整个软件的各个部分，各个方面才会得到完美的发挥。”</span></p>
+<p><span>对此，让团队成员有主人翁精神，让他们觉得自己是工作或任务的所有者，是是否能让所有成员主动参与的关键。这里，我们还需要让每个被参与者都要从关注于用户的角度出发，并且帮助和支持团队成员，以及为他们营造一个比较满意的工作环境。</span></p>
+<p><strong>4. 流程方法:</strong> “我们需要一个非常有效率的流程或方法来把所有的资源和日常工作活动整合在一起，形成一种生产线式的生产模式”</p>
+<p>对此，定义一个合适的流程（注意这里是合适的流程，好的流程并不一定就是合适的）。这个流程需要有确定整个日常生产活动的输入，输出以及其功能。风险管理，分配责任，以及管理外部和内部的用户。</p>
+<p><strong>5. 系统方法管理:</strong> “确定，理解，并管理一个系统相关的流程，以使得整个团队能够有效并快速地自我改善。”</p>
+<p>对此，定义一个系统的组织架构，这个组织架构是高效和有效的。这里我们需要了解到团队的需求（硬件的，软件的，人员的，等等），并了解一些可能会发生的限制。这样我们才能有效地管理整个团队系统。</p>
+<p><strong>6. 连续的改进:</strong> “不断地改进是一个团队需要给自己设制的永久目标”</p>
+<p>对此，工作效率上的改进是整个改进的重中之重。工作效率方面，有大程度上取决于工作流程的改进，所以，流程改进是非常重要的，也是需要长期不断去努力改进的。要达到这一目标，一般来说，我们可以使用“计划——执行——检查——总结”这样的循环。</p>
+<p><strong>7. 决策中的事实说话:</strong> “只有基于对实际数据和信息的分析后，我们才能制定出有效的决策和行动”</p>
+<p>对此，我们需要注意日常数据和信息的收集，并且我们需要对采集到的数据和信息的精确性进行测量。这样才能让我们在进行决策和行动能基于正确的数据。</p>
+<p><strong>8. 互惠互利:</strong> “一个团队中的各个部门或各个子团队虽然是在功能上是独立的，但是，一个互惠互利的局面可以增强整个团队或公司的整体能力并创建更大的价值。”</p>
+<p><span>对此，我们需要一个健康的团队之间的关系。好的沟通只能让团队获益一时，而只有建立一个长期互惠互利关系或局面，才是长期。</span></p>
+<p><span>（全文完）</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/76.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/09meeting-thumbnail-150x150.jpg" alt="怎样做一个 Program Manager" width="150" height="150" /></a><a href="https://coolshell.cn/articles/76.html" class="wp_rp_title">怎样做一个 Program Manager</a></li><li ><a href="https://coolshell.cn/articles/652.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="MySQL: InnoDB 还是 MyISAM?" width="150" height="150" /></a><a href="https://coolshell.cn/articles/652.html" class="wp_rp_title">MySQL: InnoDB 还是 MyISAM?</a></li><li ><a href="https://coolshell.cn/articles/2474.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="（麻省理工免费课程）C语言内存管理和C++面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2474.html" class="wp_rp_title">（麻省理工免费课程）C语言内存管理和C++面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/4235.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/wisdom-225x300-150x150.jpg" alt="程序员的谎谬之言还是至理名言？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4235.html" class="wp_rp_title">程序员的谎谬之言还是至理名言？</a></li><li ><a href="https://coolshell.cn/articles/6312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/4.jpg" alt="一个女程序员的故事" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6312.html" class="wp_rp_title">一个女程序员的故事</a></li><li ><a href="https://coolshell.cn/articles/1278.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="Linus Torvalds 语录 Top 10" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1278.html" class="wp_rp_title">Linus Torvalds 语录 Top 10</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/971.html">质量管理经中的八个法则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/971.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>【原创】SQL栏目树的代码</title>
+		<link>https://coolshell.cn/articles/962.html</link>
+					<comments>https://coolshell.cn/articles/962.html#comments</comments>
+		
+		<dc:creator><![CDATA[whl]]></dc:creator>
+		<pubDate>Thu, 04 Jun 2009 16:03:13 +0000</pubDate>
+				<category><![CDATA[数据库]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Oracle]]></category>
+		<category><![CDATA[SQL]]></category>
+		<category><![CDATA[栏目树]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=962</guid>
+
+					<description><![CDATA[<p>本文由网友whl供稿，特此感谢！ /**   * Desc: 取栏目树 ,过滤用户权限和无效栏目   * Author: WHL   * Date: 2009-...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/962.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/962.html">【原创】SQL栏目树的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>本文由网友whl供稿，特此感谢！<br />
+/**<br />
+  * Desc: 取栏目树 ,过滤用户权限和无效栏目<br />
+  * Author: WHL<br />
+  * Date: 2009-05-31 15:17<br />
+  */<br />
+<span id="more-962"></span><br />
+ <br />
+/** 1. 取某用户有权限（np_cms_column_security表有记录且t.action_1 = &#8216;1&#8217;）的栏目的树 **/</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">create or replace view V_NP_CTREE_BS as
+select B.* from (
+select A.*, lag(A.column_id) over(partition by A.column_id order by 0 ) RK
+  from (select /*+choose */
+         t.*
+          from np_cms_column t
+         where t.is_active = &#039;1&#039;
+        connect by prior t.column_id = t.parent_id
+         start with t.column_id in (select t.column_id
+                                      from np_cms_column_security t
+                                     where t.subject_id = &#039;mazj&#039;
+                                          /*这里添加角色过滤*/
+                                       and t.action_1 = &#039;1&#039;))A) B
+ where not exists
+ (select 0
+          from (select distinct d.column_id
+                  from np_cms_column d
+                connect by prior d.column_id = d.parent_id
+                 start with d.column_id in
+                    (select t.column_id
+                       from np_cms_column_security t
+                      where t.subject_id = &#039;mazj&#039;
+                           /* 这里添加角色过滤*/
+                        and t.action_1 = &#039;0&#039;
+                           /* 排除有权限树下的非授权ID,既 Action_1=0的*/
+                        and exists
+                      (select 0
+                               from (select distinct d.column_id
+                                       from np_cms_column d
+                                     connect by prior d.column_id =
+                                                 d.parent_id
+                                      start with d.column_id in
+                                                 (select t.column_id
+                                                    from np_cms_column_security t
+                                                   where t.subject_id =
+                                                         &#039;mazj&#039;
+                                                        /*这里添加角色过滤*/
+                                                     and t.action_1 = &#039;1&#039;)) C1
+                              where C1.column_id = t.column_id))
+                        and d.is_active = &#039;1&#039;) C
+         where C.column_id = B.column_id and B.RK is null) and B.RK is null
+union all
+select c.*, 0 RK from np_cms_column c where c.parent_id = 0;
+</pre>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+/** 2.得到栏目的虚拟父亲ID（考虑到把断层的节点接起来）**/</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">create or replace view V_NP_CTREE_PA as
+select B.*,
+       (case B.column_id
+         when 1 then 0 else nvl(B.father, 1) end) VFA
+  from (select v.*,
+               (select vv.column_id
+                  from V_NP_CTREE_BS vv
+                 where vv.column_id = v.parent_id) FATHER
+          from V_NP_CTREE_BS v) B;
+</pre>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+/** 3. 取出门户需要的栏目树 **/</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">--create or replace view V_NP_CTREE_RS as
+select
+ D.*, LPAD(&#039; &#039;, 2 * level - 1) || SYS_CONNECT_BY_PATH(D.COLUMN_NAME, &#039;/&#039;) &amp;quot;Path&amp;quot;
+  from (select c.*
+          from V_NP_CTREE_PA c
+         order by c.VFA, c.disorder desc, c.column_id desc) D
+connect by prior D.column_id = D.VFA
+ start with D.column_id = 1;
+ 
+</pre>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+（<strong>本文版权由whl所，转载时请注明作者和出处</strong>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/3463.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/01/Inner_Join-150x150.png" alt="图解SQL的Join" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3463.html" class="wp_rp_title">图解SQL的Join</a></li><li ><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="6个有用的MySQL语句" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_title">6个有用的MySQL语句</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/962.html">【原创】SQL栏目树的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/962.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>18个Web开发的IDE</title>
+		<link>https://coolshell.cn/articles/968.html</link>
+					<comments>https://coolshell.cn/articles/968.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 04 Jun 2009 15:24:17 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[IDE]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=968</guid>
+
+					<description><![CDATA[<p>Windows 下的IDE Visual Web Developer 免费 Visual Web Developer 是一个简单来说是Visual Studio...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/968.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/968.html">18个Web开发的IDE</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<h3>Windows 下的IDE</h3>
+<h4><a href="http://www.microsoft.com/express/vwd/"><span style="color: #468175;">Visual Web Developer</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/visual_web_developer.jpg" alt="Visual Web Developer" /></span></div>
+<ul>
+<li>免费</li>
+</ul>
+<p>Visual Web Developer 是一个简单来说是Visual Studio的一个剥离版本，只有web 开发。和VS一样它有一个很不错的project 管理和数据库工具。这个IDE面对的是初学者。</p>
+<p><span id="more-968"></span></p>
+<h4><a href="http://www.mpsoftware.dk/phpdesigner.php"><span style="color: #468175;">phpDesigner</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/phpdesigner.png" alt="phpDesigner" /></span></div>
+<ul>
+<li>75€ (~$105)</li>
+</ul>
+<p><a href="http://www.phpeditors.com/"><span style="color: #468175;">www.phpeditors.com</span></a> 开发的 phpDesigner 是一个五星级的产品。他是一个超级快速的拥有强大功能的PHP的IDE。phpDesigner 提供一PHP调试器和性能分析器。它还支持所有WEB标准的语言。并提供了 TortoiseSVN 支持，并且支持PHP，HTML和CSS的实时的错误检测。还有一个代码片段程序库可以让你容易地获得简单的程序。</p>
+<h4><a href="http://www.phpedit.com/"><span style="color: #468175;">PHPEdit</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/phpedit.png" alt="PPEdit" /></span></div>
+<ul>
+<li>179€ (~$248)</li>
+</ul>
+<p>PHPEdit 是另一个漂亮的PHP IDE。它提供了调试器 (甚至有一个 Firefox 调试插件) 和数据库支持 (容易查询和创建数据表) ，还有一个非常不错的keyboard templates 可以让你很快地创建PHP的代码结构。使用PHPEdit可以非常容易地连接到服务器上。而且还有自动提示，自动完成的功能。</p>
+<h4><a href="http://www.microsoft.com/visualstudio/en-us/products/standard/default.mspx"><span style="color: #468175;">Visual Studio 2008</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/visual_studio.png" alt="Visual Studio 2008" /></span></div>
+<ul>
+<li>$299 (标准版)</li>
+</ul>
+<p>Visual Studio is 简单的说来是为了.NET 项目而设计的。对于这个IDE，相信大家都很熟悉，我就不多说了。（有谣言说VS 2010要支持PHP，呵呵）</p>
+<h4><a href="http://www.microsoft.com/expression/products/overview.aspx?key=web"><span style="color: #468175;">Expression Web</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/expression_web.png" alt="Expression Web" /></span></div>
+<ul>
+<li>$299</li>
+</ul>
+<p>Expression Web 也是一个非常不错的整洁的WEB开发工具。其提供了一大堆CSS 支持。用其开发WEB程序相当方便，只要你愿意，其不但支持ASP.NET，也支持PHP 。而且，其有实时的 (X)HTML 检验。</p>
+<p>最近，Microsoft 放出了<a href="http://www.microsoft.com/Expression/features/default.aspx?key=webpreview"><span style="color: #468175;">Expression Web SuperPreview</span></a>，这是一个可以预览你所开发的网页是否支持IE6, IE7 或是IE8 。</p>
+<h4><a href="http://www.nusphere.com/products/phped.htm"><span style="color: #468175;">PhpEd</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/phped.jpg" alt="PhpEd" /></span></div>
+<ul>
+<li>$299</li>
+</ul>
+<p>PhpEd 内建了PHP, HTML, 和CSS 校验器。并提供了代码自动完成的功能。当然，也有PHP代码调试和性能profiling功能。PhpEd 有一个最有创造性的功能是动态的语法高亮。我们想像一下，如果我们有一个文件中有多种语言，这个功能会把你光标所在位置的语言高亮，而其它地方则是一般的文本。</p>
+<h3>Linux 下的 IDE</h3>
+<h4><a href="http://bluefish.openoffice.nl/"><span style="color: #468175;">BlueFish</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/bluefish.png" alt="BlueFish" /></span></div>
+<ul>
+<li>免费</li>
+</ul>
+<p>Bluefish 面对的是一个轻量级的干净的IDE。它提供了项目支持，支持远程管理服务器上的文件。有代码自动完成，并且支持 PHP, CSS, Python, 和HTML.</p>
+<h3>Windows 和Mac 的IDE</h3>
+<h4><a href="http://www.adobe.com/products/dreamweaver/"><span style="color: #468175;">Dreamweaver CS4</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/dreamweaver.png" alt="Dreamweaver" /></span></div>
+<ul>
+<li>$399</li>
+</ul>
+<p>这个IDE就不多说了，超级强大和超级有名的IDE!</p>
+<h3>Windows, Mac, 和Linux IDEs</h3>
+<h4><a href="http://www.eclipse.org/"><span style="color: #468175;">Eclipse</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/eclipse.png" alt="Eclipse" /></span></div>
+<ul>
+<li>免费</li>
+</ul>
+<p>Eclipse 是一个史上最强大的IDE，它几乎可以做所有的事情，并有一堆插件支持。总之一句话，相当强大，无论是Java，PHP，无论是调试还是语法高亮以及其它功能，总之，相当不错。</p>
+<h4><a href="http://aptana.com/"><span style="color: #468175;">Aptana Studio</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/aptana.png" alt="Aptana Studio" /></span></div>
+<ul>
+<li>免费</li>
+</ul>
+<p>Aptana Studio 可以独立运行，也可以成为Eclipse 的一个插件。它主张的是——<q>&#8220;The Leading IDE for Web App Development.&#8221;</q> ，使用其插件，你可以让这个IDE支持PHP, Ruby on Rails, Java, 等等。并也支持很多LIB，如：jQuery, Prototype, YUI, 等等。还有一个SQL 数据库工具，JavaScript 调试。总之，功能太强大了。强大到有些受不了。</p>
+<h4><a href="http://www.netbeans.org/"><span style="color: #468175;">Netbeans</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/netbeans.png" alt="Netbeans" /></span></div>
+<ul>
+<li>免费</li>
+</ul>
+<p>这是一个开源的IDE，支持：PHP, Ruby on Rails, JavaScript, 等等。支持FTP 和MySQL。对于PHP，它提供了一个不错的调试器，以及错误警告。Netbeans 也是一个很不错的代码导航器，并整合了，很多framework及其文档，如jQuery 或Mootools.</p>
+<h4><a href="http://net2.com/nvu/"><span style="color: #468175;">Nvu</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/nvu.png" alt="Nvu" /></span></div>
+<ul>
+<li>免费</li>
+</ul>
+<p>Nvu 提供一个强大的“所见及所得”功能，其和Dreamweaver 和Expression Web相似，都是强调于编辑功能。</p>
+<h4><a href="http://spket.com/"><span style="color: #468175;">Spket IDE</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/spket.png" alt="spket IDE" /></span></div>
+<ul>
+<li>$29.90 (免费的非商业使用)</li>
+</ul>
+<p>Spket 主要面对的是RIA 开发。其主要支持Javascript 和Flex,。</p>
+<h4><a href="http://www.jetbrains.com/idea/features/index.html"><span style="color: #468175;">IntlliJ IDEA</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/intellij_idea.png" alt="IntelliJ IDEA" /></span></div>
+<ul>
+<li>$249 (个人版)</li>
+</ul>
+<p>虽然IntelliJ IDEA 量个原生态的 Java 开发IDE，不过其支持一大堆的WEB技术，如HTML ，JavaScript，Flex，和SQL。提供了JavaScript 高度和重构，同样也有代码自动完成。IntelliJ IDEA 还有一个代码检查功能可以提供一些浏览器兼容性检查。</p>
+<h4><a href="http://www.activestate.com/komodo/"><span style="color: #468175;">Komodo IDE</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/komodo_ide.png" alt="Komodo IDE" /></span></div>
+<ul>
+<li>$295</li>
+</ul>
+<p>Komodo IDE 面对的是&#8221;dynamic languages and open technologies.&#8221; 其支持的是标准的WEB语言—HTML, CSS, JavaScript, PHP, 等等。同样也支持Ruby, python, Tcl, 等。这是一个坚固的编辑器。</p>
+<h4><a href="http://www.zend.com/en/products/studio/"><span style="color: #468175;">Zend Studio</span></a></h4>
+<div class="tutorial_image"><span style="color: #468175;"><img decoding="async" src="http://nettuts.s3.amazonaws.com/341_ides/zend_studio.png" alt="Zend Studio" /></span></div>
+<ul>
+<li>$399</li>
+</ul>
+<p>Zend Studio 是Eclipse 的插件，当然，它也可以独立成为一个IDE。它主要面对的是PHP开发者。并有一个Zend Framework提供了一堆功能。是个非常成熟的PHP开发的IDE，相当的强大。</p>
+<p>文章：<a href="http://net.tutsplus.com/articles/web-roundups/18-ides-for-windows-mac-linux/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/968.html">18个Web开发的IDE</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/968.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>《Vim Recipes》免费的Vim Cookbook</title>
+		<link>https://coolshell.cn/articles/956.html</link>
+					<comments>https://coolshell.cn/articles/956.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Mon, 01 Jun 2009 07:45:54 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=956</guid>
+
+					<description><![CDATA[<p>当今最流行的文本编辑器是什么，如果我的回答是vim应该不算过份吧。 在 http://vim.runpaint.org/ 你可以获得一本关于vim的cookbo...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/956.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/956.html">《Vim Recipes》免费的Vim Cookbook</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>当今最流行的文本编辑器是什么，如果我的回答是vim应该不算过份吧。</p>
+<p>在<a title="http://vim.runpaint.org/ " href="http://vim.runpaint.org/" target="_blank"> http://vim.runpaint.org/ </a>你可以获得一本关于vim的cookbook 《Vim Recipes》</p>
+<p>如果你非常喜欢vim编辑器，千万不要错过这本书，使用这本书，你将会发现你在vim遇到问题都可以迎刃而解。</p>
+<p>此书还在更新过程中，更多内容请关注<a title="http://vim.runpaint.org/ " href="http://vim.runpaint.org/" target="_blank">http://vim.runpaint.org/</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" alt="游戏：VIM大冒险" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_title">游戏：VIM大冒险</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" alt="给程序员的VIM速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_title">给程序员的VIM速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/956.html">《Vim Recipes》免费的Vim Cookbook</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/956.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C语言的谜题</title>
+		<link>https://coolshell.cn/articles/945.html</link>
+					<comments>https://coolshell.cn/articles/945.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 31 May 2009 09:39:58 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=945</guid>
+
+					<description><![CDATA[<p>这几天，本站推出了几篇关于C语言的很多文章如下所示： 语言的歧义 [酷壳链接] [CSDN链接] 谁说C语言很简单？ [酷壳链接] [CSDN链接] 6个变态的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/945.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/945.html">C语言的谜题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这几天，本站推出了几篇关于C语言的很多文章如下所示：</p>
+<ul>
+<li><strong>语言的歧义</strong>  [<a href="https://coolshell.cn/articles/830.html" target="_blank">酷壳链接</a>]  [<a href="http://blog.csdn.net/haoel/archive/2009/05/18/4197010.aspx" target="_blank">CSDN链接</a>]</li>
+<li><strong>谁说C语言很简单？</strong> [<a href="https://coolshell.cn/articles/873.html" target="_blank">酷壳链接</a>]  [<a href="http://blog.csdn.net/haoel/archive/2009/05/26/4217950.aspx" target="_blank">CSDN链接</a>]</li>
+<li><strong>6个变态的C语言Hello World程序</strong> [<a href="https://coolshell.cn/articles/914.html" target="_blank">酷壳链接</a>]  [<a href="http://blog.csdn.net/haoel/archive/2009/05/26/4217565.aspx" target="_blank">CSDN链接</a>]</li>
+<li><strong>如何加密/弄乱C源代码</strong>  [<a href="https://coolshell.cn/articles/933.html" target="_blank">酷壳链接</a>]  [<a href="http://blog.csdn.net/haoel/archive/2009/05/30/4225974.aspx" target="_blank">CSDN链接</a>]</li>
+<li><strong>C语言的谜题</strong>  [<a href="https://coolshell.cn/articles/945.html" target="_blank">酷壳链接</a>]  [<a href="http://blog.csdn.net/haoel/archive/2009/06/01/4231029.aspx" target="_blank">CSDN链接</a>]</li>
+</ul>
+<p>我们可以看到很多C语言相关的一些东西。比如《语言的歧义》主要告诉了大家C语言中你意想不到的错误以及一些歧义上的东西。而《谁说C语言很简单》则通过一些看似你从来不可能写出的代码来告诉大家C语言并不是一件容易事情。《6个变态的hello world》和《如何弄乱C的源代码》则以一种极端的方式告诉大家，不要以为咱们自己写不出混乱的代码，每个程序员其实都有把代码搞得一团乱的潜质。通过这些文章，相信你对编程或是你觉得很简单的C语言有了一些了解。是的，很不容易吧，以前是不是低估了编程和C语言？今天是否我们又在低估C++和Java呢？</p>
+<p>本篇文章《C语言的谜题》展示了14个C语言的迷题以及答案，代码应该是足够清楚的，而且我也相信有相当的一些例子可能是我们日常工作可能会见得到的。通过这些迷题，希望你能更了解C语言。如果你不看答案，不知道是否有把握回答各个谜题？让我们来试试。</p>
+<p><span id="more-945"></span></p>
+<p><strong>1、下面的程序并不见得会输出 hello-std-out，你知道为什么吗？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+int main()  
+{
+    while(1)
+    {
+        fprintf(stdout,&quot;hello-std-out&quot;);
+        fprintf(stderr,&quot;hello-std-err&quot;);
+        sleep(1);
+    }
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：stdout和stderr是不是同设备描述符。stdout是块设备，stderr则不是。对于块设备，只有当下面几种情况下才会被输入，1）遇到回车，2）缓冲区满，3）flush被调用。而stderr则不会。</p>
+<p><strong>2、下面的程序看起来是正常的，使用了一个逗号表达式来做初始化。</strong>可惜这段程序是有问题的。你知道为什么呢？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 1,2;
+    printf(&quot;a : %d\n&quot;,a);
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：这个程序会得到编译出错（语法出错），逗号表达式是没错，可是在初始化和变量声明时，逗号并不是逗号表达式的意义。这点要区分，要修改上面这个程序，你需要加上括号： int a = (1,2);</p>
+<p><strong>3、下面的程序会有什么样的输出呢？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()
+{
+    int i=43;
+    printf(&quot;%d\n&quot;,printf(&quot;%d&quot;,printf(&quot;%d&quot;,i)));
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：程序会输出4321，你知道为什么吗？要知道为什么，你需要知道printf的返回值是什么。printf返回值是输出的字符个数。</p>
+<p><strong>4、下面的程序会输出什么？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{
+    float a = 12.5;
+    printf(&quot;%d\n&quot;, a);
+    printf(&quot;%d\n&quot;, (int)a);
+    printf(&quot;%d\n&quot;, *(int *)&amp;a);
+    return 0;  
+}
+</pre>
+<p><strong>参考答案</strong>：<br />
+该项程序输出如下所示，<br />
+    0<br />
+    12<br />
+    1095237632<br />
+原因是：浮点数是4个字节，12.5f 转成二进制是：01000001010010000000000000000000，十六进制是：0x41480000，十进制是：1095237632。所以，第二和第三个输出相信大家也知道是为什么了。而对于第一个，为什么会输出0，我们需要了解一下float和double的内存布局，如下：</p>
+<ul>
+<li><strong>float</strong>: 1位符号位(s)、8位指数(e)，23位尾数(m,共32位) </li>
+<li><strong>double</strong>: 1位符号位(s)、11位指数(e)，52位尾数(m,共64位)</li>
+</ul>
+<p>然后，我们还需要了解一下printf由于类型不匹配，所以，会把float直接转成double，注意，12.5的float和double的内存二进制完全不一样。别忘了在x86芯片下使用是的反字节序，高位字节和低位字位要反过来。所以：</p>
+<ul>
+<li><strong>float版</strong>：0x41480000  (在内存中是：00 00 48 41)</li>
+<li><strong>double版</strong>：0x4029000000000000 (在内存中是：00 00 00 00 00 00 29 40)</li>
+</ul>
+<p>而我们的%d要求是一个4字节的int，对于double的内存布局，我们可以看到前四个字节是00，所以输出自然是0了。</p>
+<p>这个示例向我们说明printf并不是类型安全的，这就是为什么C++要引如cout的原因了。</p>
+<p><strong>5、下面，我们再来看一个交叉编译的事情，下面的两个文件可以编译通过吗？如果可以通过，结果是什么？</strong></p>
+<p>file1.c </p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+  int arr[80];
+</pre>
+<p>file2.c </p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+extern int *arr;
+int main()  
+{      
+    arr[1] = 100;
+    printf(&quot;%d\n&quot;, arr[1]);
+    return 0;  
+}
+</pre>
+<p><strong>参考答案</strong>：该程序可以编译通过，但运行时会出错。为什么呢？原因是，在另一个文件中用 extern int *arr来外部声明一个数组并不能得到实际的期望值，因为他们的类型并不匹配。所以导致指针实际并没有指向那个数组。注意：一个指向数组的指针，并不等于一个数组。修改：extern int arr[]。（参考：ISO C语言 6.5.4.2 节）</p>
+<p><strong>6、请说出下面的程序输出是多少？并解释为什么？</strong>（注意，该程序并不会输出 &#8220;b is 20&#8243;）</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{      
+    int a=1;      
+    switch(a)      
+    {   
+        int b=20;          
+        case 1: 
+            printf(&quot;b is %d\n&quot;,b);
+            break;
+        default:
+            printf(&quot;b is %d\n&quot;,b);
+            break;
+    }
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：该程序在编译时，可能会出现一条warning: unreachable code at beginning of switch statement。我们以为进入switch后，变量b会被初始化，其实并不然，因为switch-case语句会把变量b的初始化直接就跳过了。所以，程序会输出一个随机的内存值。</p>
+<p><strong>7、请问下面的程序会有什么潜在的危险？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{      
+    char str[80];
+    printf(&quot;Enter the string:&quot;);
+    scanf(&quot;%s&quot;,str);
+    printf(&quot;You entered:%s\n&quot;,str);
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：本题很简单了。这个程序的潜在问题是，如果用户输入了超过80个长度的字符，那么就会有数组越界的问题了，你的程序很有可以及会crash了。</p>
+<p><strong>8、请问下面的程序输出什么？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{
+    int i;
+    i = 10;
+    printf(&quot;i : %d\n&quot;,i);
+    printf(&quot;sizeof(i++) is: %d\n&quot;,sizeof(i++));
+    printf(&quot;i : %d\n&quot;,i);
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：如果你觉得输出分别是，10，4，11，那么你就错了，错在了第三个，第一个是10没有什么问题，第二个是4，也没有什么问题，因为是32位机上一个int有4个字节。但是第三个为什么输出的不是11呢？居然还是10？原因是，sizeof不是一个函数，是一个操作符，其求i++的类型的size，这是一件可以在程序运行前（编译时）完全的事情，所以，sizeof(i++)直接就被4给取代了，在运行时也就不会有了i++这个表达式。</p>
+<p><strong>9、请问下面的程序的输出值是什么？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define SIZEOF(arr) (sizeof(arr)/sizeof(arr[0]))
+#define PrintInt(expr) printf(&quot;%s:%d\n&quot;,#expr,(expr))
+
+int main()
+{
+    /* The powers of 10 */
+    int pot[] = {
+                    0001,
+                    0010,
+                    0100,
+                    1000
+                };
+
+    int i;
+    for(i=0;i&lt;SIZEOF(pot);i++)
+        PrintInt(pot[i]);
+        
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：好吧，如果你对于PrintInt这个宏有问题的话，你可以去看一看《<a href=https://coolshell.cn/articles/830.html>语言的歧义</a>》中的第四个示例。不过，本例的问题不在这里，本例的输出会是：1，8，64，1000，其实很简单了，以C/C++中，以0开头的数字都是八进制的。</p>
+<p><strong>10、请问下面的程序输出是什么？（绝对不是10）</strong></p>
+<pre>
+#include <stdio.h>
+#define PrintInt(expr) printf("%s : %dn",#expr,(expr))
+
+int main()  
+{
+    int y = 100;
+    int *p;
+    p = malloc(sizeof(int));
+    *p = 10;
+    y = y/*p; /*dividing y by *p */;
+    PrintInt(y);
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：本题输出的是100。为什么呢？问题就出在 y = y/*p;上了，我们本来想的是 y / (*p) ，然而，我们没有加入空格和括号，结果y/*p中的 /*被解释成了注释的开始。于是，这也是整个恶梦的开始。</p>
+<p><strong>11、下面的输出是什么？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{
+    int i = 6;
+    if( ((++i &lt; 7) &amp;&amp; ( i++/6)) || (++i &lt;= 9))
+        ;
+
+    printf(&quot;%d\n&quot;,i);
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：本题并不简单的是考前缀++或反缀++，本题主要考的是&#038;&#038;和||的短路求值的问题。所为短路求值：对于（条件1 &#038;&#038; 条件2），如果“条件1”是false，那“条件2”的表达式会被忽略了。对于（条件1 || 条件2），如果“条件1”为true，而“条件2”的表达式则被忽略了。所以，我相信你会知道本题的答案是什么了。</p>
+<p><strong>12、下面的C程序是合法的吗？如果是，那么输出是什么？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{ 
+    int a=3, b = 5;
+
+    printf(&amp;a[&quot;Ya!Hello! how is this? %s\n&quot;], &amp;b[&quot;junk/super&quot;]);
+    
+    printf(&amp;a[&quot;WHAT%c%c%c  %c%c  %c !\n&quot;], 1[&quot;this&quot;],
+        2[&quot;beauty&quot;],0[&quot;tool&quot;],0[&quot;is&quot;],3[&quot;sensitive&quot;],4[&quot;CCCCCC&quot;]);
+        
+    return 0;  
+}
+</pre>
+<p><strong>参考答案</strong>：<br />
+本例是合法的，输出如下：</p>
+<blockquote><p>   Hello! how is this? super<br />
+    That  is  C !</p></blockquote>
+<p>本例主要展示了一种另类的用法。下面的两种用法是相同的：</p>
+<blockquote><p>    &#8220;hello&#8221;[2]<br />
+    2[&#8220;hello&#8221;]</p></blockquote>
+<p>如果你知道：a[i] 其实就是 *(a+i)也就是 *(i+a)，所以如果写成 i[a] 应该也不难理解了。</p>
+<p><strong>13、请问下面的程序输出什么？</strong>（假设：输入 Hello, World）</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+int main()  
+{ 
+    char dummy[80];
+    printf(&quot;Enter a string:\n&quot;);
+    scanf(&quot;%[^r]&quot;,dummy);
+    printf(&quot;%s\n&quot;,dummy);
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：本例的输出是“Hello, Wo”，scanf中的&#8221;%[^r]&#8221;是从中作梗的东西。意思是遇到字符r就结束了。</p>
+<p><strong>14、下面的程序试图使用“位操作”来完成“乘5”的操作，不过这个程序中有个BUG，你知道是什么吗？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#define PrintInt(expr) printf(&quot;%s : %d\n&quot;,#expr,(expr))
+int FiveTimes(int a)  
+{
+    int t;
+    t = a&lt;&lt;2 + a;
+    return t;
+}
+
+int main()  
+{
+    int a = 1, b = 2,c = 3;
+    PrintInt(FiveTimes(a));
+    PrintInt(FiveTimes(b));
+    PrintInt(FiveTimes(c));
+    return 0;
+}
+</pre>
+<p><strong>参考答案</strong>：本题的问题在于函数FiveTimes中的表达式“t = a<<2 + a;”，对于a<<2这个位操作，优先级要比加法要低，所以这个表达式就成了“t = a << (2+a)”，于是我们就得不到我们想要的值。该程序修正如下：
+
+
+
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+int FiveTimes(int a)  
+{
+    int t;
+    t = (a&lt;&lt;2) + a;
+    return t;
+}
+</pre>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/945.html">C语言的谜题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/945.html/feed</wfw:commentRss>
+			<slash:comments>162</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>最完美的Linux桌面软件</title>
+		<link>https://coolshell.cn/articles/936.html</link>
+					<comments>https://coolshell.cn/articles/936.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 31 May 2009 04:12:44 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=936</guid>
+
+					<description><![CDATA[<p>下面是关于Linux桌面环境下，目前为止最完美的部分。之所以说他们完美，是因为他们不但很养眼，而且也使用最好的多媒体技术，有最好的可用性。在某些方面，他们甚至超...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/936.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/936.html">最完美的Linux桌面软件</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong><a href="http://lunduke.com/wp-content/uploads/2009/05/ubuntu-logo1.jpg"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-627" title="ubuntu-logo1" src="http://lunduke.com/wp-content/uploads/2009/05/ubuntu-logo1-300x274.jpg" alt="ubuntu-logo1" width="184" height="171" /></a></strong><br />
+下面是关于Linux桌面环境下，目前为止最完美的部分。之所以说他们完美，是因为他们不但很养眼，而且也使用最好的多媒体技术，有最好的可用性。在某些方面，他们甚至超过了Windows和Mac-OS。</p>
+<p> <br />
+<a href="http://lunduke.com/wp-content/uploads/2009/05/ubuntu-logo1.jpg"></a></p>
+<h2><strong>基础</strong></h2>
+<p><a href="http://www.debian.org/"><span style="color: #000000;">Debian</span></a> 或是 <a href="http://www.ubuntu.com/"><span style="color: #000000;">Ubuntu</span></a>。这两个分发包是目前使用最广泛的Linux桌面操作系统的分发包了。</p>
+<p><span id="more-936"></span></p>
+<h2><strong>软件包管理器</strong></h2>
+<p>因为我们使用debian……所以<a href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool"><span style="color: #000000;">apt</span></a> 必然是软件包管理器中最不错的一个。</p>
+<h2><strong><a href="http://lunduke.com/wp-content/uploads/2009/05/gnome2.png"><img decoding="async" loading="lazy" class="alignright size-full wp-image-628" title="gnome2" src="http://lunduke.com/wp-content/uploads/2009/05/gnome2.png" alt="gnome2" width="280" height="280" /></a>桌面环境</strong></h2>
+<p>这可能是最难的一个了。</p>
+<p><a href="http://www.kde.org/"><span style="color: #000000;">KDE4</span></a> 是出色的，相当的出色。</p>
+<p><a href="http://www.qtsoftware.com/products/"><span style="color: #000000;">QT</span></a>, 基于Gnome建造，也非常出色。</p>
+<p>而在稳重方面， <a href="http://www.gnome.org/"><span style="color: #000000;">Gnome</span></a> 桌面则是桌面中更为出色的。</p>
+<p>而且，许多的应用基本上来说都是基于 <a href="http://www.gtk.org/"><span style="color: #000000;">GTK</span></a> 开发的，而GTK则是基于GNOME桌面环境的。</p>
+<p>所以，我们在这里选择 Gnome 作为最完美的图形桌面。对于KDE，只能非常抱歉了。</p>
+<p> </p>
+<h2><strong>快捷任务条（Dock）</strong></h2>
+<p>也许你并不喜欢docks，不过其的确可以帮你更方便地使用图形界面。</p>
+<p><a href="http://www.cairo-dock.org/index.php"><span style="color: #000000;">CairoDock</span></a>吗？ 当然，非常不错。那么  <a href="http://wiki.awn-project.org/"><span style="color: #000000;">AWN</span></a> 呢？  也不错。它们都有不同的很不错的功能。</p>
+<p>但是，因为我们选择了Gnome桌面，所以<a href="http://do.davebsd.com/"><span style="color: #000000;">Gnome-Do</span></a> 在这其中则是最完美的。</p>
+<p><a href="http://lunduke.com/wp-content/uploads/2009/05/docky1.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-634" title="docky1" src="http://lunduke.com/wp-content/uploads/2009/05/docky1.jpg" alt="docky1" width="472" height="104" /></a></p>
+<h2><strong>字体</strong></h2>
+<p>Linux默认的字体必需要被改变。你可以从 <a href="http://www.blambot.com/"><span style="color: #000000;">Blambot</span></a>获得一些相当不错的字体。</p>
+<p> </p>
+<p> </p>
+<p><a href="http://lunduke.com/wp-content/uploads/2009/05/jupiteroneioss3.png"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-636" title="jupiteroneioss3" src="http://lunduke.com/wp-content/uploads/2009/05/jupiteroneioss3-300x191.png" alt="jupiteroneioss3" width="300" height="191" /></a><strong>风格/ 图标</strong></p>
+<p>这里有一些 <a href="http://www.gnome-look.org/"><span style="color: #000000;">怪异的但令人惊叹</span></a> 的风格和图标可以装典你的桌面。你可以挑选几个来美化你的桌面，的确很不错哦。</p>
+<p>在这样漂亮的桌面和背景下工作，你的心情都会变得轻松起来。</p>
+<p> </p>
+<h2><strong>应用商店（Application Store）</strong></h2>
+<p>你是不是早已听说过这个东西啦？</p>
+<p>我们需要重要Linux发行包可以被简单的拼装起来，并且包含一个“应用商店”（一个不错的桌面应用，用户可以容易地购买商业的软件和服务）。</p>
+<p>看看这个吧  <a href="http://www.cnr.com/"><span style="color: #000000;">Click N Run</span></a>。的确存在，基于Ubuntu。</p>
+<p> </p>
+<h2><strong>Office 套件</strong></h2>
+<p>这可能是最难的一个了。新面世的<a href="http://www.koffice.org/wordpress/"><span style="color: #000000;">KOffice</span></a> 的确是非常不错的。但是 <a href="http://www.openoffice.org/"><span style="color: #000000;">OpenOffice</span></a> 可能更好一些，必竟年头也最长，Bug和性能各方面应该都比较好。</p>
+<h2>音频/ 视频框架</h2>
+<p>让我们站在高山之上大喊这句话：  <a href="http://www.gstreamer.net/"><span style="color: #000000;">GStreamer</span></a> 是王中之王。</p>
+<p> <br />
+<a href="http://lunduke.com/wp-content/uploads/2009/05/screenshot-miro.png"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-639" title="screenshot-miro" src="http://lunduke.com/wp-content/uploads/2009/05/screenshot-miro-300x223.png" alt="screenshot-miro" width="300" height="223" /></a></p>
+<h2><strong>视频播放器</strong></h2>
+<p>有一个令人惊讶的播放器叫 <a href="http://www.getmiro.com/"><span style="color: #000000;">Miro</span></a> （原来叫做 Democracy Player）</p>
+<p>如果你的Linux安装了它，那么你的Linux就会变成一个最Cool的桌面系统，你可以相当轻松地找到并查看在线的视频。</p>
+<p> </p>
+<p> </p>
+<h2><strong>多媒体中心</strong></h2>
+<p>Windows 有一个<a href="http://en.wikipedia.org/wiki/Windows_Media_Center"><span style="color: #000000;">Windows Media Center</span></a>.  OS X 有<a href="http://en.wikipedia.org/wiki/Front_Row_(software)"><span style="color: #000000;">Front Row</span></a>.</p>
+<p>那么Linux下有什么？目前来说…… 几乎所有的Linux发行版没有包含这类应用。</p>
+<p>不过，我们依然有一些选择。</p>
+<p>我的选择是 <a href="http://www.moovida.com/"><span style="color: #000000;">Moovida</span></a> （正式的：Elisa）  它是有商业资助的，使用GStreamer。它比Apple的 Front Row更为强大。而且，其看上去很不错。</p>
+<p> <br />
+<a href="http://lunduke.com/wp-content/uploads/2009/05/banshee-slide-dap.png"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-640" title="banshee-slide-dap" src="http://lunduke.com/wp-content/uploads/2009/05/banshee-slide-dap-300x219.png" alt="banshee-slide-dap" width="300" height="219" /></a></p>
+<h2>音频播放器</h2>
+<p><a href="http://banshee-project.org/"><span style="color: #000000;">Banshee</span></a>，看看它到底有多简单。</p>
+<p>是的，是的，我知道。  <a href="http://amarok.kde.org/"><span style="color: #000000;">Amarok</span></a> 相当的不错。而且 <a href="http://projects.gnome.org/rhythmbox/"><span style="color: #000000;">Rhythmbox</span></a> 也很不错.</p>
+<p>不过 Banshee 更好一些，因为它被设计成为让用户有更多的选择可以去管理他们的音乐库。因为，当你的音频文件多起来时，你会发现，你是多么需要这样一个强大的管理功能的播放器啊。</p>
+<p> </p>
+<h2><strong>音频编辑器</strong></h2>
+<p>目前看下来，在音频编辑方面，Linux并不是很优秀，不过我们依然可以看到<a href="http://ardour.org/"><span style="color: #000000;">Ardour</span></a> 这样令人惊叹的软件，即使其功能还不是那么的强大。</p>
+<p>不过你可以试试<a href="http://www.jokosher.org/"><span style="color: #000000;">Jokosher</span></a>。这是一个很简单的但比较平常的音频编辑器。</p>
+<p> <br />
+<img decoding="async" loading="lazy" class="alignright size-medium wp-image-573" title="400px-capture-pitivi_v01301" src="http://lunduke.com/wp-content/uploads/2009/05/400px-capture-pitivi_v01301-300x220.jpg" alt="400px-capture-pitivi_v01301" width="300" height="220" /></p>
+<h2><strong>视频编辑器</strong></h2>
+<p><a href="http://www.pitivi.org/wiki/Main_Page"><span style="color: #000000;">Pitivi</span></a>. 商业资助的。一个绝对超前的。可以用于Gstreamer 的。如果让其和 <a href="http://en.wikipedia.org/wiki/IMovie"><span style="color: #000000;">iMovie</span></a>来比较的话，Pitivi依然是超前的… 不过，如果我们关注于其它关键应用，那么，这两个编辑器就难分高下了。</p>
+<h2><strong>图片管理器</strong></h2>
+<p><a href="http://f-spot.org/Main_Page"><span style="color: #000000;">F-Spot</span></a>. 不多说了，你试试就知道了。</p>
+<p> </p>
+<p> <br />
+<a href="http://lunduke.com/wp-content/uploads/2009/05/yofrankie10.jpg"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-643" title="yofrankie10" src="http://lunduke.com/wp-content/uploads/2009/05/yofrankie10-300x173.jpg" alt="yofrankie10" width="300" height="173" /></a></p>
+<h2>游戏</h2>
+<p>几乎所有的Linux发行版都会带有一堆游戏，当然这些游戏几乎没人去玩。</p>
+<p>下面是几个非常不错的游戏，值得你去试试。</p>
+<p>第一个是 <a href="http://www.yofrankie.org/"><span style="color: #000000;">Yo Frankie!</span></a> 这个游戏可以展示你的Linux在游戏方面比起别的操作系统来说也是非常有能力的。</p>
+<p>而<a href="http://www.hedgewars.org/"><span style="color: #000000;">Hedgewars</span></a> 游戏则相当搞笑的。如果你和几个有一些联网的话，这个游戏也是非常搞笑的。</p>
+<p> <a href="http://www.frozen-bubble.org/"><span style="color: #000000;">Frozen Bubble</span></a> 可能是另一个有些意思的游戏。你可以去试试。</p>
+<p> <br />
+<a href="http://lunduke.com/wp-content/uploads/2009/05/empathy-chat-theme.png"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-644" title="empathy-chat-theme" src="http://lunduke.com/wp-content/uploads/2009/05/empathy-chat-theme-300x245.png" alt="empathy-chat-theme" width="300" height="245" /></a></p>
+<h2><strong>聊天</strong></h2>
+<p>这个领域绝对不是 <a href="http://www.pidgin.im/"><span style="color: #000000;">Pidgin</span></a>.  Pidgin 已经出局了。</p>
+<p>如果是 <a href="http://live.gnome.org/Empathy"><span style="color: #000000;">Empathy</span></a>，它有更好一些的设计。</p>
+<p>那么，音频和视频聊天呢？</p>
+<p><a href="http://www.gnomemeeting.org/"><span style="color: #000000;">Ekiga</span></a>吗？  不是.</p>
+<p><a href="http://www.skype.com/"><span style="color: #000000;">Skype</span></a>吗？</p>
+<p>你说什么？Skype没有开源啊。是的，我们知道，不过Skype是其中表现最为出色的。而且，其用户群是非常大的。包括和电话互联，以及便宜的国际长途。</p>
+<h2><strong>浏览器</strong></h2>
+<p><a href="http://www.mozilla.com/firefox/"><span style="color: #000000;">Firefox</span></a>，不是吗？不用多解释了吧。</p>
+<p> </p>
+<h2><strong>电子邮件</strong></h2>
+<p><a href="http://projects.gnome.org/evolution/"><span style="color: #000000;">Evolution</span></a> 并不仅仅是漂亮。它也可以和Gnome桌面集成。</p>
+<h2><strong>开发环境</strong></h2>
+<p>Windows 程序员有 <a href="http://en.wikipedia.org/wiki/Microsoft_Visual_Studio"><span style="color: #000000;">Visual Studio</span></a>.  Mac 程序员有 <a href="http://en.wikipedia.org/wiki/Xcode"><span style="color: #000000;">XCode</span></a>.</p>
+<p>当然，Linux下也有很多。挑选一个很不错的开发环境，我们当然需要有一些标准的规则。有一个“标准”是，开发工具应该是和操作系统紧密结合的，而且需要有一堆可用的工具，这样可以避免程序员再重新发明轮子。</p>
+<p><a href="http://lunduke.com/wp-content/uploads/2009/05/ss-stetic.png"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-646" title="ss-stetic" src="http://lunduke.com/wp-content/uploads/2009/05/ss-stetic-300x216.png" alt="ss-stetic" width="300" height="216" /></a>Linux下有太多这样的开发工具了。  <a href="http://en.wikipedia.org/wiki/Qt_Creator"><span style="color: #000000;">QT Creator</span></a> 可能是其中最好的，但是它只能在 Gnome 桌面环境下使用。</p>
+<p>那么，最容易得到和有丰富功能的IDE又是什么呢？</p>
+<p><a href="http://monodevelop.com/"><span style="color: #000000;">MonoDevelop</span></a>.</p>
+<p>是的， 我知道有人说过 “Mono is bad cuz of teh Microsoft.” 不过，如果你确实地相信这句话，那么你自然也就不是一个专业的程序员，而且，你可能在很多地方都在焦虑着一些事情。</p>
+<p>MonoDevelop 是一个很不错的IDE开发工具。希望你能试试。</p>
+<p>文章：<a href="http://lunduke.com/?p=616" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/936.html">最完美的Linux桌面软件</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/936.html/feed</wfw:commentRss>
+			<slash:comments>17</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

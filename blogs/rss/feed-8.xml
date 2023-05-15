@@ -1,0 +1,2830 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 8 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=8" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Thu, 31 Oct 2013 08:54:31 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>程序的本质复杂性和元语言抽象</title>
+		<link>https://coolshell.cn/articles/10652.html</link>
+					<comments>https://coolshell.cn/articles/10652.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Thu, 31 Oct 2013 00:00:09 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10652</guid>
+
+					<description><![CDATA[<p>（感谢 @文艺复兴记（todd） 投递此文） 组件复用技术的局限性 常听到有人讲“我写代码很讲究，一直严格遵循DRY原则，把重复使用的功能都封装成可复用的组件，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10652.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10652.html">程序的本质复杂性和元语言抽象</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢 <a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a>（todd） 投递此文）</strong></p>
+<h4>组件复用技术的局限性</h4>
+<p>常听到有人讲“我写代码很讲究，一直严格遵循<a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY原则</a>，把重复使用的功能都封装成可复用的组件，使得代码简短优雅，同时也易于理解和维护”。显然，DRY原则和组件复用技术是最常见的改善代码质量的方法，不过，在我看来以这类方法为指导，能帮助我们写出“不错的程序”，但还不足以帮助我们写出简短、优雅、易理解、易维护的“好程序”。对于熟悉Martin Fowler《重构》和GoF《设计模式》的程序员，我常常提出这样一个问题帮助他们进一步加深对程序的理解：</p>
+<blockquote><p>如果目标是代码“简短、优雅、易理解、易维护”，组件复用技术是最好的方法吗？这种方法有没有根本性的局限？</p></blockquote>
+<p>虽然基于函数、类等形式的组件复用技术从一定程度上消除了冗余，提升了代码的抽象层次，但是这种技术却有着本质的局限性，其根源在于 <strong>每种组件形式都代表了特定的抽象维度，组件复用只能在其维度上进行抽象层次的提升</strong>。比如，我们可以把常用的HashMap等功能封装为类库，但是不管怎么封装复用类永远是类，封装虽然提升了代码的抽象层次，但是它永远不会变成Lambda，而实际问题所代表的抽象维度往往与之并不匹配。</p>
+<p>以常见的二进制消息的解析为例，组件复用技术所能做到的只是把读取字节，检查约束，计算CRC等功能封装成函数，这是远远不够的。比如，下面的表格定义了二进制消息X的格式：</p>
+<p><span id="more-10652"></span></p>
+<pre>Message X:
+--------------------------------------------------------
+| ID |  Name           | Type    | Size | Constraints  |
+--------------------------------------------------------
+| 1  | message type    | int     | 1    | = 0x01       |
+--------------------------------------------------------
+| 2  | payload size    | int     | 2    | &gt; 0          |
+--------------------------------------------------------
+| 3  | payload         | bytes   | &lt;2&gt;  |              |
+--------------------------------------------------------
+| 4  | CRC             | int     | 4    |              |
+--------------------------------------------------------</pre>
+<p>它的解析函数大概是这个样子：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+bool parse_message_x(char* data, int32 size, MessageX&amp; x) {
+    char *ptr = data;
+    if (ptr + sizeof(int8) &lt;= data + size) {
+        x.message_type = read_int8(ptr);
+        if (0x01 != x.message_type) return false;
+        ptr += sizeof(int8);
+    } else {
+        return false;
+    }
+    if (ptr + sizeof(int16) &lt;= data + size) {
+        x.payload_size = read_int16(ptr);
+        ptr += sizeof(int16);
+    } else {
+        return false;
+    }
+    if (ptr + x.payload_size &lt;= data + size) {
+        x.payload = new int8[x.payload_size];
+        read(ptr, x.payload, x.payload_size);
+        ptr += x.payload_size;
+    } else {
+        return false;
+    }
+    if (ptr + sizeof(int32) &lt;= data + size) {
+        x.crc = read_int32(ptr);
+        ptr += sizeof(int32);
+    } else {
+        delete x.payload;
+        return false;
+    }
+    if (crc(data, sizeof(int8) + sizeof(int16) + x.payload_size) != x.crc) {
+        delete x.payload;
+        return false;
+    }
+    return true;
+}
+</pre>
+<p>很明显，虽然消息X的定义非常简单，但是它的解析函数却显得很繁琐，需要小心翼翼地处理很多细节。在处理其他消息Y时，虽然虽然Y和X很相似，但是却不得不再次在解析过程中处理这些细节，就是组件复用方法的局限性，它只能帮我们按照函数或者类的语义把功能封装成可复用的组件，但是消息的结构特征既不是函数也不是类，这就是抽象维度的失配。</p>
+<h4><a href="http://www.cnblogs.com/weidagang2046/p/the-nature-of-meta.html#-2" name="-2"></a>程序的本质复杂性</h4>
+<p>上面分析了组件复用技术有着根本性的局限性，现在我们要进一步思考：</p>
+<blockquote><p>如果目标还是代码“简短、优雅、易理解、易维护”，那么代码优化是否有一个理论极限？这个极限是由什么决定的？普通代码比起最优代码多出来的“冗余部分”到底干了些什么事情？</p></blockquote>
+<p>回答这个问题要从程序的本质说起。Pascal语言之父Niklaus Wirth在70年代提出：Program = Data Structure + Algorithm，随后逻辑学家和计算机科学家R Kowalski进一步提出：Algorithm = Logic + Control。谁更深刻更有启发性？当然是后者！而且我认为数据结构和算法都属于控制策略，综合二位的观点，加上我自己的理解，程序的本质是：Program = Logic + Control。换句话说，程序包含了逻辑和控制两个维度。</p>
+<p>逻辑就是问题的定义，比如，对于排序问题来讲，逻辑就是“什么叫做有序，什么叫大于，什么叫小于，什么叫相等”？控制就是如何合理地安排时间和空间资源去实现逻辑。逻辑是程序的灵魂，它定义了程序的本质；控制是为逻辑服务的，是非本质的，可以变化的，如同排序有几十种不同的方法，时间空间效率各不相同，可以根据需要采用不同的实现。</p>
+<p>程序的复杂性包含了本质复杂性和非本质复杂性两个方面。套用这里的术语， <strong>程序的本质复杂性就是逻辑，非本质复杂性就是控制</strong>。逻辑决定了代码复杂性的下限，也就是说不管怎么做代码优化，Office程序永远比Notepad程序复杂，这是因为前者的逻辑就更为复杂。如果要代码简洁优雅，任何语言和技术所能做的只是尽量接近这个本质复杂性，而不可能超越这个理论下限。</p>
+<p>理解&#8221;程序的本质复杂性是由逻辑决定的&#8221;从理论上为我们指明了代码优化的方向：让逻辑和控制这两个维度保持正交关系。来看Java的Collections.sort方法的例子：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+interface Comparator&lt;T&gt; {
+    int compare(T o1, T o2);
+}
+public static &lt;T&gt; void sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; comparator)
+</pre>
+<p>使用者只关心逻辑部份，即提供一个Comparator对象表明序在类型T上的定义；控制的部分完全交给方法实现者，可以有多种不同的实现，这就是逻辑和控制解耦。同时，我们也可以断定，这个设计已经达到了代码优化的理论极限，不会有本质上比它更简洁的设计（忽略相同语义的语法差异），为什么？因为逻辑决定了它的本质复杂度，Comparator和Collections.sort的定义完全是逻辑的体现，不包含任何非本质的控制部分。</p>
+<p>另外需要强调的是，上面讲的“控制是非本质复杂性”并不是说控制不重要，控制往往直接决定了程序的性能，当我们因为性能等原因必须采用某种控制的时候，实际上被固化的控制策略也是一种逻辑。比如，当你的需求是“从进程虚拟地址ptr1拷贝1024个字节到地址ptr2“，那么它就是问题的定义，它就是逻辑，这时，提供进程虚拟地址直接访问语义的底层语言就与之完全匹配，反而是更高层次的语言对这个需求无能为力。</p>
+<p>介绍了逻辑和控制的关系，可能很多朋友已经开始意识到了上面二进制文件解析实现的问题在哪里，其实这也是 <strong>绝大多数程序不够简洁优雅的根本原因：逻辑与控制耦合</strong>。上面那个消息定义表格就是不包含控制的纯逻辑，我相信即使不是程序员也能读懂它；而相应的代码把逻辑和控制搅在一起之后就不那么容易读懂了。</p>
+<p>熟悉OOP和GoF设计模式的朋友可能会把“逻辑与控制解耦”与经常听说的“接口和实现解耦”联系在一起，他们是不是一回事呢？其实，把这里所说的逻辑和OOP中的接口划等号是似是而非的， 而GoF设计模式最大的问题就在于有意无意地让人们以为“what就是interface, interface就是what”，很多朋友一想到要表达what，要抽象，马上写个接口出来，这就是潜移默化的惯性思维，自己根本意识不到问题在哪里。其实，接口和前面提到的组件复用技术一样，同样受限于特定的抽象维度，它不是表达逻辑的通用方法，比如，我们无法把二进制文件格式特征用接口来表示。</p>
+<p>另外，我们熟悉的许多GoF模式以“逻辑与控制解耦”的观点来看，都不是最优的。比如，很多时候Observer模式都是典型的以控制代逻辑，来看一个例子：</p>
+<blockquote><p>对于某网页的超链接，要求其颜色随着状态不同而变化，点击之前的颜色是#FF0000，点击后颜色变成#00FF00。</p></blockquote>
+<p>基于Observer模式的实现是这样的：</p>
+<p>[javascript]<br />
+$(a).css(&#8216;color&#8217;, &#8216;#FF0000&#8217;);</p>
+<p>$(a).click(function() {<br />
+    $(this).css(&#8216;color&#8217;, &#8216;#00FF00&#8217;);<br />
+});<br />
+[/javascript]</p>
+<p>而基于纯CSS的实现是这样的：</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+a:link {color: #FF0000}
+a:visited {color: #00FF00}
+</pre>
+<p>通过对比，您看出二者的差别了吗？显然，Observer模式包含了非本质的控制，而CSS是只包含逻辑。理论上讲，CSS能做的事情，JavaScript都能通过控制做到，那么为什么浏览器的设计者要引入CSS呢，这对我们有何启发呢？</p>
+<h4><a href="http://www.cnblogs.com/weidagang2046/p/the-nature-of-meta.html#-3" name="-3"></a>元语言抽象</h4>
+<p>好的，我们继续思考下面这个问题：</p>
+<blockquote><p>
+逻辑决定了程序的本质复杂性，但接口不是表达逻辑的通用方式，那么是否存在表达逻辑的通用方式呢？</p></blockquote>
+<p>答案是：有！这就是元(Meta)，包括元语言(Meta Language)和元数据(Meta Data)两个方面。元并不神秘，我们通常所说的配置就是元，元语言就是配置的语法和语义，元数据就是具体的配置，它们之间的关系就是C语言和C程序之间的关系；但是，同时元又非常神奇，因为元既是数据也是代码，在表达逻辑和语义方面具有无与伦比的灵活性。至此，我们终于找到了让代码变得简洁、优雅、易理解、易维护的终极方法，这就是： <strong>通过元语言抽象让逻辑和控制彻底解耦</strong>！</p>
+<p>比如，对于二进制消息解析，经典的做法是类似Google的<a href="http://code.google.com/p/protobuf/">Protocol Buffers</a>，把消息结构特征抽象出来，定义消息描述元语言，再通过元数据描述消息结构。下面是Protocol Buffers元数据的例子，这个元数据是纯逻辑的表达，它的复杂度体现的是消息结构的本质复杂度，而如何序列化和解析这些控制相关的部分被Protocol Buffers编译器隐藏起来了。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+message Person {
+  required int32 id = 1;
+  required string name = 2;
+  optional string email = 3;
+}
+</pre>
+<p>元语言解决了逻辑表达问题，但是最终要与控制相结合成为具体实现，这就是元语言到目标语言的映射问题。通常有这两种方法：</p>
+<p>1) 元编程(Meta Programming)，开发从元语言到目标语言的编译器，将元数据编译为目标程序代码；</p>
+<p>2) 元驱动编程(Meta Driven Programming)，直接在目标语言中实现元语言的解释器。</p>
+<p>这两种方法各有优势，元编程由于有静态编译阶段，一般产生的目标程序代码性能更好，但是这种方式混合了两个层次的代码，增加了代码配置管理的难度，一般还需要同时配备Build脚本把整个代码生成自动集成到Build过程中，此外，和IDE的集成也是问题；元驱动编程则相反，没有静态编译过程，元语言代码是动态解析的，所以性能上有损失，但是更加灵活，开发和代码配置管理的难度也更小。除非是性能要求非常高的场合，我推荐的是元驱动编程，因为它更轻量，更易于与目标语言结合。</p>
+<p>下面是用元驱动编程解决二进制消息解析问题的例子，meta_message_x是元数据，parse_message是解释器：</p>
+<p>[javascript]<br />
+var meta_message_x = {<br />
+    id: &#8216;x&#8217;,<br />
+    fields: [<br />
+        { name: &#8216;message_type&#8217;, type: int8, value: 0x01 },<br />
+        { name: &#8216;payload_size&#8217;, type: int16 },<br />
+        { name: &#8216;payload&#8217;, type: bytes, size: &#8216;$payload_size&#8217; },<br />
+        { name: &#8216;crc&#8217;, type: crc32, source: [&#8216;message_type&#8217;, &#8216;payload_size&#8217;, &#8216;payload&#8217;] }<br />
+    ]<br />
+}</p>
+<p>var message_x = parse_message(meta_message_x, data, size);<br />
+[/javascript]</p>
+<p>这段代码我用的是JavaScript语法，因为对于支持Literal的类似JSON对象表示的语言中，实现元驱动编程最为简单。如果是Java或C++语言，语法上稍微繁琐一点，不过本质上是一样的，或者引入JSON配置文件，然后解析配置，或者定义MessageConfig类，直接把这个类对象作为配置信息。</p>
+<p>二进制文件解析问题是一个经典问题，有Protocol Buffers、Android AIDL等大量的实例，所以很多人能想到引入消息定义元语言，但是如果我们把问题稍微变换，能想到采用这种方法的人就不多了。来看下面这个问题：</p>
+<blockquote><p>某网站有新用户注册、用户信息更新，和个性设置等Web表单。出于性能和用户体验的考虑，在用户点击提交表单时，会先进行浏览器端的验证，比如：name字段至少3个字符，password字段至少8个字符，并且和repeat password要一致，email要符合邮箱格式；通过浏览器端验证以后才通过HTTP请求提交到服务器。</p></blockquote>
+<p>普通的实现是这个样子的：</p>
+<p>[javascript]<br />
+function check_form_x() {<br />
+    var name = $(&#8216;#name&#8217;).val();<br />
+    if (null == name || name.length &lt;= 3) {<br />
+        return { status : 1, message: &#8216;Invalid name&#8217; };<br />
+    }</p>
+<p>    var password = $(&#8216;#password&#8217;).val();<br />
+    if (null == password || password.length &lt;= 8) {<br />
+        return { status : 2, message: &#8216;Invalid password&#8217; };<br />
+    }</p>
+<p>    var repeat_password = $(&#8216;#repeat_password&#8217;).val();<br />
+    if (repeat_password != password.length) {<br />
+        return { status : 3, message: &#8216;Password and repeat password mismatch&#8217; };<br />
+    }</p>
+<p>    var email = $(&#8216;#email&#8217;).val();<br />
+    if (check_email_format(email)) {<br />
+        return { status : 4, message: &#8216;Invalid email&#8217; };<br />
+    }</p>
+<p>    &#8230;</p>
+<p>    return { status : 0, message: &#8216;OK&#8217; };</p>
+<p>}<br />
+[/javascript]</p>
+<p>上面的实现就是按照组建复用的思想封装了一下检测email格式之类的通用函数，这和刚才的二进制消息解析非常相似，没法在不同的表单之间进行大规模复用，很多细节都必须被重复编写。下面是用元语言抽象改进后的做法：</p>
+<p>[javascript]<br />
+var meta_create_user = {<br />
+    form_id : &#8216;create_user&#8217;,<br />
+    fields : [<br />
+        { id : &#8216;name&#8217;, type : &#8216;text&#8217;, min_length : 3 },<br />
+        { id : &#8216;password&#8217;, type : &#8216;password&#8217;, min_length : 8 },<br />
+        { id : &#8216;repeat-password&#8217;, type : &#8216;password&#8217;, min_length : 8 },<br />
+        { id : &#8217;email&#8217;, type : &#8217;email&#8217; }<br />
+    ]<br />
+};</p>
+<p>var r = check_form(meta_create_user);<br />
+[/javascript]</p>
+<p>通过定义表单属性元语言，整个逻辑顿时清晰了，细节的处理只需要在check_form中编写一次，完全实现了“简短、优雅、易理解、以维护”的目标。其实，不仅Web表单验证可以通过元语言描述，整个Web页面从布局到功能全部都可以通过一个元对象描述，完全将逻辑和控制解耦。此外，我编写的用于解析命令行参数的<a href="https://github.com/weidagang/line-parser-js">lineparser.js</a>库也是基于元语言的，有兴趣的朋友可以参考并对比它和其他命令行解析库的设计差异。</p>
+<p>最后，我们再来从代码长度的角度来分析一下元驱动编程和普通方法之间的差异。假设一个功能在系统中出现了n次，对于普通方法来讲，由于逻辑和控制的耦合，它的代码量是n * (L + C)，而元驱动编程只需要实现一次控制，代码长度是C + n * L，其中L表示逻辑相关的代码量，C表示控制相关的代码量。通常情况下L部分都是一些配置，不容易引入bug，复杂的主要是C的部分，普通方法中C被重复了n次，引入bug的可能性大大增加，同时修改一个bug也可能要改n个地方。所以，对于重复出现的功能，元驱动编程大大减少了代码量，减小了引入bug的可能，并且提高了可维护性。</p>
+<h4><a href="http://www.cnblogs.com/weidagang2046/p/the-nature-of-meta.html#-4" name="-4"></a>总结</h4>
+<p>《人月神话》的作者Fred Brooks曾在80年代阐述了它对于软件复杂性的看法，即著名的<a href="http://en.wikipedia.org/wiki/No_Silver_Bullet">No Silver Bullet</a>。他认为不存在一种技术能使得软件开发在生产力、可靠性、简洁性方面提高一个数量级。我不清楚Brooks这一论断详细的背景，但是就个人的开发经验而言，元驱动编程和普通编程方法相比在生产力、可靠性和简洁性方面的确是数量级的提升,在我看来它就是软件开发的银弹！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11629.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="「我只是认真」聊聊工匠情怀" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11629.html" class="wp_rp_title">「我只是认真」聊聊工匠情怀</a></li><li ><a href="https://coolshell.cn/articles/7657.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2-150x150.jpg" alt="持续部署，并不简单！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7657.html" class="wp_rp_title">持续部署，并不简单！</a></li><li ><a href="https://coolshell.cn/articles/4951.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="软件公司的两种管理方式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4951.html" class="wp_rp_title">软件公司的两种管理方式</a></li><li ><a href="https://coolshell.cn/articles/6312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/4.jpg" alt="一个女程序员的故事" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6312.html" class="wp_rp_title">一个女程序员的故事</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg" alt="bash代码注入的安全漏洞" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_title">bash代码注入的安全漏洞</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10652.html">程序的本质复杂性和元语言抽象</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10652.html/feed</wfw:commentRss>
+			<slash:comments>97</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>二维码的生成细节和原理</title>
+		<link>https://coolshell.cn/articles/10590.html</link>
+					<comments>https://coolshell.cn/articles/10590.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 29 Oct 2013 00:32:35 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[QR]]></category>
+		<category><![CDATA[二维码]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10590</guid>
+
+					<description><![CDATA[<p>二维码又称QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10590.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>二维码又称QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型：比如：字符，数字，日文，中文等等。这两天学习了一下二维码图片生成的相关细节，觉得这个玩意就是一个密码算法，在此写一这篇文章 ，揭露一下。供好学的人一同学习之。</p>
+<p>关于QR Code Specification，可参看这个PDF：<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">http://raidenii.net/files/datasheets/misc/qr_code.pdf </a></p>
+<h4>基础知识</h4>
+<p>首先，我们先说一下二维码一共有40个尺寸。官方叫版本Version。Version 1是21 x 21的矩阵，Version 2是 25 x 25的矩阵，Version 3是29的尺寸，每增加一个version，就会增加4的尺寸，公式是：(V-1)*4 + 21（V是版本号） 最高Version 40，(40-1)*4+21 = 177，所以最高是177 x 177 的正方形。</p>
+<p>下面我们看看一个二维码的样例：</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-10592" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview.jpeg" width="616" height="370" srcset="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview.jpeg 770w, https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-300x180.jpeg 300w, https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-768x461.jpeg 768w, https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-450x270.jpeg 450w" sizes="(max-width: 616px) 100vw, 616px" /></p>
+<p style="text-align: left;"><span id="more-10590"></span></p>
+<h5 style="text-align: left;">定位图案</h5>
+<ul>
+<li>Position Detection Pattern是定位图案，用于标记二维码的矩形大小。这三个定位图案有白边叫Separators for Postion Detection Patterns。之所以三个而不是四个意思就是三个就可以标识一个矩形了。</li>
+</ul>
+<ul>
+<li>Timing Patterns也是用于定位的。原因是二维码有40种尺寸，尺寸过大了后需要有根标准线，不然扫描的时候可能会扫歪了。</li>
+</ul>
+<ul>
+<li>Alignment Patterns 只有Version 2以上（包括Version2）的二维码需要这个东东，同样是为了定位用的。</li>
+</ul>
+<h5 style="text-align: left;">功能性数据</h5>
+<ul>
+<li>Format Information 存在于所有的尺寸中，用于存放一些格式化数据的。</li>
+</ul>
+<ul>
+<li>Version Information 在 &gt;= Version 7以上，需要预留两块3 x 6的区域存放一些版本信息。</li>
+</ul>
+<h5>数据码和纠错码</h5>
+<ul>
+<li>除了上述的那些地方，剩下的地方存放 Data Code 数据码 和 Error Correction Code 纠错码。</li>
+</ul>
+<h4>数据编码</h4>
+<p>我们先来说说数据编码。QR码支持如下的编码：</p>
+<p><strong>Numeric mode</strong> 数字编码，从0到9。如果需要编码的数字的个数不是3的倍数，那么，最后剩下的1或2位数会被转成4或7bits，则其它的每3位数字会被编成 10，12，14bits，编成多长还要看二维码的尺寸（下面有一个表Table 3说明了这点）</p>
+<p><strong>Alphanumeric mode</strong> 字符编码。包括 0-9，大写的A到Z（没有小写），以及符号$ % * + &#8211; . / : 包括空格。这些字符会映射成一个字符索引表。如下所示：（其中的SP是空格，Char是字符，Value是其索引值） 编码的过程是把字符两两分组，然后转成下表的45进制，然后转成11bits的二进制，如果最后有一个落单的，那就转成6bits的二进制。而编码模式和字符的个数需要根据不同的Version尺寸编成9, 11或13个二进制（如下表中Table 3）</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-10594" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Alphanumeric-mode.png" width="549" height="121" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Alphanumeric-mode.png 686w, https://coolshell.cn/wp-content/uploads/2013/10/Alphanumeric-mode-300x66.png 300w" sizes="(max-width: 549px) 100vw, 549px" /></p>
+<p><strong>Byte mode</strong>, 字节编码，可以是0-255的ISO-8859-1字符。有些二维码的扫描器可以自动检测是否是UTF-8的编码。</p>
+<p><strong>Kanji mode</strong> 这是日文编码，也是双字节编码。同样，也可以用于中文编码。日文和汉字的编码会减去一个值。如：在0X8140 to 0X9FFC中的字符会减去8140，在0XE040到0XEBBF中的字符要减去0XC140，然后把结果前两个16进制位拿出来乘以0XC0，然后再加上后两个16进制位，最后转成13bit的编码。如下图示例：</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-10595" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Kanji-mode.png" width="600" height="174" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Kanji-mode.png 667w, https://coolshell.cn/wp-content/uploads/2013/10/Kanji-mode-300x86.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></p>
+<p><strong>Extended Channel Interpretation (ECI) mode</strong> 主要用于特殊的字符集。并不是所有的扫描器都支持这种编码。</p>
+<p><strong>Structured Append mode</strong> 用于混合编码，也就是说，这个二维码中包含了多种编码格式。</p>
+<p><strong>FNC1 mode</strong> 这种编码方式主要是给一些特殊的工业或行业用的。比如GS1条形码之类的。</p>
+<p>简单起见，后面三种不会在本文 中讨论。</p>
+<p>下面两张表中，</p>
+<ul>
+<li>Table 2 是各个编码格式的“编号”，这个东西要写在Format Information中。注：中文是1101</li>
+</ul>
+<ul>
+<li>Table 3 表示了，不同版本（尺寸）的二维码，对于，数字，字符，字节和Kanji模式下，对于单个编码的2进制的位数。（在二维码的规格说明书中，有各种各样的编码规范表，后面还会提到）</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10596" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Mode-Indicator.png" width="442" height="332" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Mode-Indicator.png 442w, https://coolshell.cn/wp-content/uploads/2013/10/Mode-Indicator-300x225.png 300w" sizes="(max-width: 442px) 100vw, 442px" /></p>
+<p>下面我们看几个示例，</p>
+<h5>示例一：数字编码</h5>
+<p style="padding-left: 30px;">在Version 1的尺寸下，纠错级别为H的情况下，编码： 01234567</p>
+<p style="padding-left: 30px;">1. 把上述数字分成三组: 012 345 67</p>
+<p style="padding-left: 30px;">2. 把他们转成二进制:  012 转成 0000001100；  345 转成 0101011001；  67 转成 1000011。</p>
+<p style="padding-left: 30px;">3. 把这三个二进制串起来: 0000001100 0101011001 1000011</p>
+<p style="padding-left: 30px;">4. 把数字的个数转成二进制 (version 1-H是10 bits ): 8个数字的二进制是 0000001000</p>
+<p style="padding-left: 30px;">5. 把数字编码的标志0001和第4步的编码加到前面:  0001 0000001000 0000001100 0101011001 1000011</p>
+<h5>示例二：字符编码</h5>
+<p style="padding-left: 30px;">在Version 1的尺寸下，纠错级别为H的情况下，编码: AC-42</p>
+<p style="padding-left: 30px;">1. 从字符索引表中找到 AC-42 这五个字条的索引 (10,12,41,4,2)</p>
+<p style="padding-left: 30px;">2. 两两分组: (10,12) (41,4) (2)</p>
+<p style="padding-left: 30px;">3.把每一组转成11bits的二进制:</p>
+<p style="padding-left: 60px;">(10,12) 10*45+12 等于 462 转成 00111001110<br />
+(41,4) 41*45+4 等于 1849 转成 11100111001<br />
+(2) 等于 2 转成 000010</p>
+<p style="padding-left: 30px;">4. 把这些二进制连接起来：00111001110 11100111001 000010</p>
+<p style="padding-left: 30px;">5. 把字符的个数转成二进制 (Version 1-H为9 bits ): 5个字符，5转成 000000101</p>
+<p style="padding-left: 30px;">6. 在头上加上编码标识 0010 和第5步的个数编码:  0010 000000101 00111001110 11100111001 000010</p>
+<h4>结束符和补齐符</h4>
+<p>假如我们有个HELLO WORLD的字符串要编码，根据上面的示例二，我们可以得到下面的编码，</p>
+<table>
+<tbody>
+<tr>
+<th>编码</th>
+<th>字符数</th>
+<th>HELLO WORLD的编码</th>
+</tr>
+<tr>
+<td>0010</td>
+<td>000001011</td>
+<td>01100001011 01111000110 10001011100 10110111000 10011010100 001101</td>
+</tr>
+</tbody>
+</table>
+<p>我们还要加上结束符：</p>
+<table>
+<tbody>
+<tr>
+<th>编码</th>
+<th>字符数</th>
+<th>HELLO WORLD的编码</th>
+<th>结束</th>
+</tr>
+<tr>
+<td>0010</td>
+<td>000001011</td>
+<td>01100001011 01111000110 10001011100 10110111000 10011010100 001101</td>
+<td>0000</td>
+</tr>
+</tbody>
+</table>
+<h5>按8bits重排</h5>
+<p>如果所有的编码加起来不是8个倍数我们还要在后面加上足够的0，比如上面一共有78个bits，所以，我们还要加上2个0，然后按8个bits分好组：</p>
+<p>00100000   01011011   00001011   01111000   11010001   01110010   11011100   01001101   01000011   010000<span style="color: #ff0000;"><strong>00</strong></span></p>
+<h5>补齐码（Padding Bytes）</h5>
+<p>最后，如果如果还没有达到我们最大的bits数的限制，我们还要加一些补齐码（Padding Bytes），Padding Bytes就是重复下面的两个bytes：11101100 00010001 （这两个二进制转成十进制是236和17，我也不知道为什么，只知道Spec上是这么写的）关于每一个Version的每一种纠错级别的最大Bits限制，可以参看<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">QR Code Spec</a>的第28页到32页的Table-7一表。</p>
+<p>假设我们需要编码的是Version 1的Q纠错级，那么，其最大需要104个bits，而我们上面只有80个bits，所以，还需要补24个bits，也就是需要3个Padding Bytes，我们就添加三个，于是得到下面的编码：</p>
+<p>00100000 01011011 00001011 01111000 11010001 01110010 11011100 01001101 01000011 01000000 <span style="color: #ff0000;"><strong>11101100 00010001 11101100</strong></span></p>
+<p>上面的编码就是数据码了，叫Data Codewords，每一个8bits叫一个codeword，我们还要对这些数据码加上纠错信息。</p>
+<h4>纠错码</h4>
+<p>上面我们说到了一些纠错级别，Error Correction Code Level，二维码中有四种级别的纠错，这就是为什么二维码有残缺还能扫出来，也就是为什么有人在二维码的中心位置加入图标。</p>
+<table>
+<tbody>
+<tr>
+<th colspan="2">错误修正容量</th>
+</tr>
+<tr>
+<td>L水平</td>
+<td>7%的字码可被修正</td>
+</tr>
+<tr>
+<td>M水平</td>
+<td>15%的字码可被修正</td>
+</tr>
+<tr>
+<td>Q水平</td>
+<td>25%的字码可被修正</td>
+</tr>
+<tr>
+<td>H水平</td>
+<td>30%的字码可被修正</td>
+</tr>
+</tbody>
+</table>
+<p>那么，QR是怎么对数据码加上纠错码的？首先，我们需要对数据码进行分组，也就是分成不同的Block，然后对各个Block进行纠错编码，对于如何分组，我们可以查看<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">QR Code Spec</a>的第33页到44页的Table-13到Table-22的定义表。注意最后两列：</p>
+<ul>
+<li><strong>Number of Error Code Correction Blocks</strong> ：需要分多少个块。</li>
+</ul>
+<ul>
+<li><strong>Error Correction Code Per Blocks</strong>：每一个块中的code个数，所谓的code的个数，也就是有多少个8bits的字节。</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10600" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Error-Correction-Blocks.png" width="576" height="308" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Error-Correction-Blocks.png 576w, https://coolshell.cn/wp-content/uploads/2013/10/Error-Correction-Blocks-300x160.png 300w" sizes="(max-width: 576px) 100vw, 576px" /></p>
+<p>举个例子：上述的Version 5 + Q纠错级：需要4个Blocks（2个Blocks为一组，共两组），头一组的两个Blocks中各15个bits数据 + 各 9个bits的纠错码（注：表中的codewords就是一个8bits的byte）（再注：最后一例中的（c, k, r ）的公式为：c = k + 2 * r，因为后脚注解释了：纠错码的容量小于纠错码的一半）</p>
+<p>下图给一个5-Q的示例（因为二进制写起来会让表格太大，所以，我都用了十进制，我们可以看到每一块的纠错码有18个codewords，也就是18个8bits的二进制数）</p>
+<table>
+<tbody>
+<tr>
+<th>组</th>
+<th>块</th>
+<th>数据</th>
+<th>对每个块的纠错码</th>
+</tr>
+<tr>
+<td style="text-align: center;" rowspan="2">1</td>
+<td style="text-align: center;">1</td>
+<td>67 85 70 134 87 38 85 194 119 50 6 18 6 103 38</td>
+<td>213 199 11 45 115 247 241 223 229 248 154 117 154 111 86 161 111 39</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>246 246 66 7 118 134 242 7 38 86 22 198 199 146 6</td>
+<td>87 204 96 60 202 182 124 157 200 134 27 129 209 17 163 163 120 133</td>
+</tr>
+<tr>
+<td style="text-align: center;" rowspan="2">2</td>
+<td style="text-align: center;">1</td>
+<td>182 230 247 119 50 7 118 134 87 38 82 6 134 151 50 7</td>
+<td>148 116 177 212 76 133 75 242 238 76 195 230 189 10 108 240 192 141</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>70 247 118 86 194 6 151 50 16 236 17 236 17 236 17 236</td>
+<td>235 159 5 173 24 147 59 33 106 40 255 172 82 2 131 32 178 236</td>
+</tr>
+</tbody>
+</table>
+<p>注：二维码的纠错码主要是通过<a href="http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed-Solomon error correction</a>（里德-所罗门纠错算法）来实现的。对于这个算法，对于我来说是相当的复杂，里面有很多的数学计算，比如：多项式除法，把1-255的数映射成2的n次方（0&lt;=n&lt;=255）的伽罗瓦域Galois Field之类的神一样的东西，以及基于这些基础的纠错数学公式，因为我的数据基础差，对于我来说太过复杂，所以我一时半会儿还有点没搞明白，还在学习中，所以，我在这里就不展开说这些东西了。还请大家见谅了。（当然，如果有朋友很明白，也繁请教教我）</p>
+<h4>最终编码</h4>
+<h5>穿插放置</h5>
+<p>如果你以为我们可以开始画图，你就错了。二维码的混乱技术还没有玩完，它还要把数据码和纠错码的各个codewords交替放在一起。如何交替呢，规则如下：</p>
+<p>对于数据码：把每个块的第一个codewords先拿出来按顺度排列好，然后再取第一块的第二个，如此类推。如：上述示例中的Data Codewords如下：</p>
+<table class="coolshell">
+<tbody>
+<tr>
+<td class="head">块 1</td>
+<td>67</td>
+<td>85</td>
+<td>70</td>
+<td>134</td>
+<td>87</td>
+<td>38</td>
+<td>85</td>
+<td>194</td>
+<td>119</td>
+<td>50</td>
+<td>6</td>
+<td>18</td>
+<td>6</td>
+<td>103</td>
+<td>38</td>
+<td></td>
+</tr>
+<tr>
+<td class="head">块 2</td>
+<td>246</td>
+<td>246</td>
+<td>66</td>
+<td>7</td>
+<td>118</td>
+<td>134</td>
+<td>242</td>
+<td>7</td>
+<td>38</td>
+<td>86</td>
+<td>22</td>
+<td>198</td>
+<td>199</td>
+<td>146</td>
+<td>6</td>
+<td></td>
+</tr>
+<tr>
+<td class="head">块 3</td>
+<td>182</td>
+<td>230</td>
+<td>247</td>
+<td>119</td>
+<td>50</td>
+<td>7</td>
+<td>118</td>
+<td>134</td>
+<td>87</td>
+<td>38</td>
+<td>82</td>
+<td>6</td>
+<td>134</td>
+<td>151</td>
+<td>50</td>
+<td>7</td>
+</tr>
+<tr>
+<td class="head">块 4</td>
+<td>70</td>
+<td>247</td>
+<td>118</td>
+<td>86</td>
+<td>194</td>
+<td>6</td>
+<td>151</td>
+<td>50</td>
+<td>16</td>
+<td>236</td>
+<td>17</td>
+<td>236</td>
+<td>17</td>
+<td>236</td>
+<td>17</td>
+<td>236</td>
+</tr>
+</tbody>
+</table>
+<p>我们先取第一列的：67， 246， 182， 70</p>
+<p>然后再取第二列的：67， 246， 182， 70， 85，246，230 ，247</p>
+<p>如此类推：67， 246， 182， 70， 85，246，230 ，247 ………  ……… ，38，6，50，17，7，236</p>
+<p>对于纠错码，也是一样：</p>
+<table class="coolshell">
+<tbody>
+<tr>
+<td class="head">块 1</td>
+<td>213</td>
+<td>199</td>
+<td>11</td>
+<td>45</td>
+<td>115</td>
+<td>247</td>
+<td>241</td>
+<td>223</td>
+<td>229</td>
+<td>248</td>
+<td>154</td>
+<td>117</td>
+<td>154</td>
+<td>111</td>
+<td>86</td>
+<td>161</td>
+<td>111</td>
+<td>39</td>
+</tr>
+<tr>
+<td class="head">块 2</td>
+<td>87</td>
+<td>204</td>
+<td>96</td>
+<td>60</td>
+<td>202</td>
+<td>182</td>
+<td>124</td>
+<td>157</td>
+<td>200</td>
+<td>134</td>
+<td>27</td>
+<td>129</td>
+<td>209</td>
+<td>17</td>
+<td>163</td>
+<td>163</td>
+<td>120</td>
+<td>133</td>
+</tr>
+<tr>
+<td class="head">块 3</td>
+<td>148</td>
+<td>116</td>
+<td>177</td>
+<td>212</td>
+<td>76</td>
+<td>133</td>
+<td>75</td>
+<td>242</td>
+<td>238</td>
+<td>76</td>
+<td>195</td>
+<td>230</td>
+<td>189</td>
+<td>10</td>
+<td>108</td>
+<td>240</td>
+<td>192</td>
+<td>141</td>
+</tr>
+<tr>
+<td class="head">块 4</td>
+<td>235</td>
+<td>159</td>
+<td>5</td>
+<td>173</td>
+<td>24</td>
+<td>147</td>
+<td>59</td>
+<td>33</td>
+<td>106</td>
+<td>40</td>
+<td>255</td>
+<td>172</td>
+<td>82</td>
+<td>2</td>
+<td>131</td>
+<td>32</td>
+<td>178</td>
+<td>236</td>
+</tr>
+</tbody>
+</table>
+<p>和数据码取的一样，得到：213，87，148，235，199，204，116，159，…… …… 39，133，141，236</p>
+<p>然后，再把这两组放在一起（纠错码放在数据码之后）得到：</p>
+<p>67, 246, 182, 70, 85, 246, 230, 247, 70, 66, 247, 118, 134, 7, 119, 86, 87, 118, 50, 194, 38, 134, 7, 6, 85, 242, 118, 151, 194, 7, 134, 50, 119, 38, 87, 16, 50, 86, 38, 236, 6, 22, 82, 17, 18, 198, 6, 236, 6, 199, 134, 17, 103, 146, 151, 236, 38, 6, 50, 17, 7, 236, 213, 87, 148, 235, 199, 204, 116, 159, 11, 96, 177, 5, 45, 60, 212, 173, 115, 202, 76, 24, 247, 182, 133, 147, 241, 124, 75, 59, 223, 157, 242, 33, 229, 200, 238, 106, 248, 134, 76, 40, 154, 27, 195, 255, 117, 129, 230, 172, 154, 209, 189, 82, 111, 17, 10, 2, 86, 163, 108, 131, 161, 163, 240, 32, 111, 120, 192, 178, 39, 133, 141, 236</p>
+<p>这就是我们的数据区。</p>
+<h5>Remainder Bits</h5>
+<p>最后再加上Reminder Bits，对于某些Version的QR，上面的还不够长度，还要加上Remainder Bits，比如：上述的5Q版的二维码，还要加上7个bits，Remainder Bits加零就好了。关于哪些Version需要多少个Remainder bit，可以参看<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">QR Code Spec</a>的第15页的Table-1的定义表。</p>
+<h4>画二维码图</h4>
+<h5>Position Detection Pattern</h5>
+<p>首先，先把Position Detection图案画在三个角上。（无论Version如何，这个图案的尺寸就是这么大）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/finder.png" width="99" height="141" /></p>
+<h5>Alignment Pattern</h5>
+<p>然后，再把Alignment图案画上（无论Version如何，这个图案的尺寸就是这么大）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/alignment-pattern.png" width="68" height="91" /></p>
+<p>关于Alignment的位置，可以查看<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">QR Code Spec</a>的第81页的Table-E.1的定义表（下表是不完全表格）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10613" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Alignment-Position.png" width="582" height="239" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Alignment-Position.png 582w, https://coolshell.cn/wp-content/uploads/2013/10/Alignment-Position-300x123.png 300w" sizes="(max-width: 582px) 100vw, 582px" /></p>
+<p>下图是根据上述表格中的Version8的一个例子（6，24，42）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10606" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/alignment-example.png" width="241" height="288" /></p>
+<h5>Timing Pattern</h5>
+<p>接下来是Timing Pattern的线（这个不用多说了）</p>
+<p style="text-align: center;"><strong><img decoding="async" loading="lazy" class="aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Timing-Pattern.png" width="596" height="258" /></strong></p>
+<h5>Format Information</h5>
+<p>再接下来是Formation Information，下图中的蓝色部分。</p>
+<p style="text-align: left;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-10610" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Format-Information.png" width="352" height="199" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Format-Information.png 391w, https://coolshell.cn/wp-content/uploads/2013/10/Format-Information-300x169.png 300w" sizes="(max-width: 352px) 100vw, 352px" /></p>
+<p style="text-align: left;">Format Information是一个15个bits的信息，每一个bit的位置如下图所示：（注意图中的Dark Module，那是永远出现的）</p>
+<p style="text-align: left;"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10630" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Format-Info-bits-postion.png" width="363" height="381" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Format-Info-bits-postion.png 363w, https://coolshell.cn/wp-content/uploads/2013/10/Format-Info-bits-postion-285x300.png 285w" sizes="(max-width: 363px) 100vw, 363px" /></p>
+<p style="text-align: left;">这15个bits中包括：</p>
+<ul>
+<li>5个数据bits：其中，2个bits用于表示使用什么样的Error Correction Level， 3个bits表示使用什么样的Mask</li>
+<li>10个纠错bits。主要通过BCH Code来计算</li>
+</ul>
+<p>然后15个bits还要与101010000010010做XOR操作。这样就保证不会因为我们选用了00的纠错级别和000的Mask，从而造成全部为白色，这会增加我们的扫描器的图像识别的困难。</p>
+<p>下面是一个示例：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10631" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Format-Information-Example.png" width="376" height="116" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Format-Information-Example.png 376w, https://coolshell.cn/wp-content/uploads/2013/10/Format-Information-Example-300x92.png 300w" sizes="(max-width: 376px) 100vw, 376px" /></p>
+<p>关于Error Correction Level如下表所示：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10632" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Error-Correction-Indicator-Code.png" width="253" height="114" /></p>
+<p>关于Mask图案如后面的Table 23所示。</p>
+<h5 style="text-align: left;">Version Information</h5>
+<p style="text-align: left;">再接下来是Version Information（版本7以后需要这个编码），下图中的蓝色部分。<br />
+<img decoding="async" loading="lazy" class="aligncenter  wp-image-10612" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information.png" width="508" height="254" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information.png 635w, https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-300x149.png 300w" sizes="(max-width: 508px) 100vw, 508px" /></p>
+<p>Version Information一共是18个bits，其中包括6个bits的版本号以及12个bits的纠错码，下面是一个示例：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10634" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Example.png" width="405" height="63" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Example.png 405w, https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Example-300x46.png 300w" sizes="(max-width: 405px) 100vw, 405px" /></p>
+<p>而其填充位置如下：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10635" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Position.png" width="425" height="149" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Position.png 425w, https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Position-300x105.png 300w" sizes="(max-width: 425px) 100vw, 425px" /></p>
+<h5>数据和数据纠错码</h5>
+<p>然后是填接我们的最终编码，最终编码的填充方式如下：从左下角开始沿着红线填我们的各个bits，1是黑色，0是白色。如果遇到了上面的非数据区，则绕开或跳过。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Data-Placement.png" width="348" height="372" /></p>
+<h5>掩码图案</h5>
+<p>这样下来，我们的图就填好了，但是，也许那些点并不均衡，如果出现大面积的空白或黑块，会告诉我们扫描识别的困难。所以，我们还要做Masking操作（靠，还嫌不复杂）QR的Spec中说了，QR有8个Mask你可以使用，如下所示：其中，各个mask的公式在各个图下面。所谓mask，说白了，就是和上面生成的图做XOR操作。Mask只会和数据区进行XOR，不会影响功能区。（<strong>注：选择一个合适的Mask也是有算法的</strong>）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10614" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/masking-pattern.png" width="494" height="274" srcset="https://coolshell.cn/wp-content/uploads/2013/10/masking-pattern.png 494w, https://coolshell.cn/wp-content/uploads/2013/10/masking-pattern-300x166.png 300w" sizes="(max-width: 494px) 100vw, 494px" /></p>
+<p>其Mask的标识码如下所示：（其中的i,j分别对应于上图的x,y）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10633" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Mask-Pattern-Code.png" width="416" height="181" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Mask-Pattern-Code.png 416w, https://coolshell.cn/wp-content/uploads/2013/10/Mask-Pattern-Code-300x130.png 300w" sizes="(max-width: 416px) 100vw, 416px" /></p>
+<p>下面是Mask后的一些样子，我们可以看到被某些Mask XOR了的数据变得比较零散了。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10615" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/Masking-Examples.png" width="616" height="446" srcset="https://coolshell.cn/wp-content/uploads/2013/10/Masking-Examples.png 616w, https://coolshell.cn/wp-content/uploads/2013/10/Masking-Examples-300x217.png 300w" sizes="(max-width: 616px) 100vw, 616px" /></p>
+<p>Mask过后的二维码就成最终的图了。</p>
+<p>好了，大家可以去尝试去写一下QR的编码程序，当然，你可以用网上找个Reed Soloman的纠错算法的库，或是看看别人的源代码是怎么实现这个繁锁的编码。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" alt="Cuckoo Filter：设计与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_title">Cuckoo Filter：设计与实现</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li><li ><a href="https://coolshell.cn/articles/10427.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg" alt="伙伴分配器的一个极简实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10427.html" class="wp_rp_title">伙伴分配器的一个极简实现</a></li><li ><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="二叉树迭代器算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_title">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10590.html/feed</wfw:commentRss>
+			<slash:comments>165</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>伙伴分配器的一个极简实现</title>
+		<link>https://coolshell.cn/articles/10427.html</link>
+					<comments>https://coolshell.cn/articles/10427.html#comments</comments>
+		
+		<dc:creator><![CDATA[Leo]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 15:10:42 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Buddy]]></category>
+		<category><![CDATA[内存管理]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10427</guid>
+
+					<description><![CDATA[<p>（感谢网友 @我的上铺叫路遥 投稿） 提起buddy system相信很多人不会陌生，它是一种经典的内存分配算法，大名鼎鼎的Linux底层的内存管理用的就是它。...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10427.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢网友 </strong><a href="http://weibo.com/fullofbull" target="_blank"><strong>@我的上铺叫路遥</strong></a><strong> 投稿）</strong></p>
+<p>提起buddy system相信很多人不会陌生，它是一种经典的内存分配算法，大名鼎鼎的Linux底层的内存管理用的就是它。这里不探讨内核这么复杂实现，而仅仅是将该算法抽象提取出来，同时给出一份及其简洁的源码实现，以便定制扩展。</p>
+<p>伙伴分配的实质就是一种特殊的<strong>“分离适配”</strong>，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。</p>
+<p>可以在<a href="http://en.wikipedia.org/wiki/Buddy_memory_allocation" target="_blank">维基百科</a>上找到该算法的描述，大体如是：</p>
+<p><strong>分配内存：</strong></p>
+<p>1.寻找大小合适的内存块（大于等于所需大小并且最接近2的幂，比如需要27，实际分配32）</p>
+<p style="padding-left: 30px;">1.如果找到了，分配给应用程序。<br />
+2.如果没找到，分出合适的内存块。</p>
+<p style="padding-left: 60px;">1.对半分离出高于所需大小的空闲内存块<br />
+2.如果分到最低限度，分配这个大小。<br />
+3.回溯到步骤1（寻找合适大小的块）<br />
+4.重复该步骤直到一个合适的块</p>
+<p><span id="more-10427"></span></p>
+<p><strong>释放内存：</strong></p>
+<p>1.释放该内存块</p>
+<p style="padding-left: 30px;">1.寻找相邻的块，看其是否释放了。<br />
+2.如果相邻块也释放了，合并这两个块，重复上述步骤直到遇上未释放的相邻块，或者达到最高上限（即所有内存都释放了）。</p>
+<p>上面这段文字对你来说可能看起来很费劲，没事，我们看个内存分配和释放的示意图你就知道了：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10504" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation.jpg" width="598" height="346" srcset="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation.jpg 598w, https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-300x174.jpg 300w, https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-467x270.jpg 467w" sizes="(max-width: 598px) 100vw, 598px" /></p>
+<p>上图中，首先我们假设我们一个内存块有1024K，当我们需要给A分配70K内存的时候，</p>
+<ol>
+<li>我们发现1024K的一半大于70K，然后我们就把1024K的内存分成两半，一半512K。</li>
+<li>然后我们发现512K的一半仍然大于70K，于是我们再把512K的内存再分成两半，一半是128K。</li>
+<li>此时，我们发现128K的一半小于70K，于是我们就分配为A分配128K的内存。</li>
+</ol>
+<p>后面的，B，C，D都这样，而释放内存时，则会把相邻的块一步一步地合并起来（合并也必需按分裂的逆操作进行合并）。</p>
+<p>我们可以看见，这样的算法，用二叉树这个数据结构来实现再合适不过了。</p>
+<p>我在网上分别找到<a href="https://github.com/cloudwu/buddy" target="_blank">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，本文打算从后一份入手讲解，<strong>因为这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计。</strong>网友对其评价甚高，甚至可用作教科书标准实现，看完之后回过头来看cloudwu的代码就容易理解了。</p>
+<p>分配器的整体思想是，通过一个数组形式的完全二叉树来监控管理内存，二叉树的节点用于标记相应内存块的使用状态，高层节点对应大的块，低层节点对应小的块，在分配和释放中我们就通过这些节点的标记属性来进行块的分离合并。如图所示，假设总大小为16单位的内存，我们就建立一个深度为5的满二叉树，根节点从数组下标[0]开始，监控大小16的块；它的左右孩子节点下标[1~2]，监控大小8的块；第三层节点下标[3~6]监控大小4的块……依此类推。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-10502" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/伙伴分配器.jpg" width="591" height="347" srcset="https://coolshell.cn/wp-content/uploads/2013/10/伙伴分配器.jpg 844w, https://coolshell.cn/wp-content/uploads/2013/10/伙伴分配器-300x176.jpg 300w" sizes="(max-width: 591px) 100vw, 591px" /></p>
+<p>在分配阶段，首先要搜索大小适配的块，假设第一次分配3，转换成2的幂是4，我们先要对整个内存进行对半切割，从16切割到4需要两步，那么从下标[0]节点开始深度搜索到下标[3]的节点并将其标记为已分配。第二次再分配3那么就标记下标[4]的节点。第三次分配6，即大小为8，那么搜索下标[2]的节点，因为下标[1]所对应的块被下标[3~4]占用了。</p>
+<p>在释放阶段，我们依次释放上述第一次和第二次分配的块，即先释放[3]再释放[4]，当释放下标[4]节点后，我们发现之前释放的[3]是相邻的，于是我们立马将这两个节点进行合并，这样一来下次分配大小8的时候，我们就可以搜索到下标[1]适配了。若进一步释放下标[2]，同[1]合并后整个内存就回归到初始状态。</p>
+<p>还是看一下源码实现吧，首先是伙伴分配器的数据结构：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">struct buddy2 {
+  unsigned size;
+  unsigned longest[1];
+};</pre>
+<p>这里的成员size表明管理内存的总单元数目（测试用例中是32），成员longest就是二叉树的节点标记，表明所对应的内存块的空闲单位，<strong>在下文中会分析这是整个算法中最精妙的设计。</strong>此处数组大小为1表明这是可以向后扩展的（注：在GCC环境下你可以写成longest[0]，不占用空间，这里是出于可移植性考虑），我们在分配器初始化的buddy2_new可以看到这种用法。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">struct buddy2* buddy2_new( int size ) {
+  struct buddy2* self;
+  unsigned node_size;
+  int i;
+
+  if (size &lt; 1 || !IS_POWER_OF_2(size))
+    return NULL;
+
+  self = (struct buddy2*)ALLOC( 2 * size * sizeof(unsigned));
+  self-&gt;size = size;
+  node_size = size * 2;
+
+  for (i = 0; i &lt; 2 * size - 1; ++i) {
+    if (IS_POWER_OF_2(i+1))
+      node_size /= 2;
+    self-&gt;longest[i] = node_size;
+  }
+  return self;
+}</pre>
+<p>整个分配器的大小就是满二叉树节点数目，即所需管理内存单元数目的2倍。一个节点对应4个字节，longest记录了节点所对应的的内存块大小。</p>
+<p>内存分配的alloc中，入参是分配器指针和需要分配的大小，返回值是内存块索引。alloc函数首先将size调整到2的幂大小，并检查是否超过最大限度。然后进行适配搜索，深度优先遍历，当找到对应节点后，<strong>将其longest标记为0，即分离适配的块出来，</strong>并转换为内存块索引offset返回，依据二叉树排列序号，比如内存总体大小32，我们找到节点下标[8]，内存块对应大小是4，则offset = (8+1)*4-32 = 4，那么分配内存块就从索引4开始往后4个单位。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int buddy2_alloc(struct buddy2* self, int size) {
+  unsigned index = 0;
+  unsigned node_size;
+  unsigned offset = 0;
+
+  if (self==NULL)
+    return -1;
+
+  if (size &lt;= 0)
+    size = 1;
+  else if (!IS_POWER_OF_2(size))
+    size = fixsize(size);
+
+  if (self-&gt;longest[index] &lt; size)
+    return -1;
+
+  for(node_size = self-&gt;size; node_size != size; node_size /= 2 ) {
+    if (self-&gt;longest[LEFT_LEAF(index)] &gt;= size)
+      index = LEFT_LEAF(index);
+    else
+      index = RIGHT_LEAF(index);
+  }
+
+  self-&gt;longest[index] = 0;
+  offset = (index + 1) * node_size - self-&gt;size;
+
+  while (index) {
+    index = PARENT(index);
+    self-&gt;longest[index] =
+      MAX(self-&gt;longest[LEFT_LEAF(index)], self-&gt;longest[RIGHT_LEAF(index)]);
+  }
+
+  return offset;
+}</pre>
+<p>在函数返回之前需要回溯，因为小块内存被占用，大块就不能分配了，比如下标[8]标记为0分离出来，那么其父节点下标[0]、[1]、[3]也需要相应大小的分离。<strong>将它们的longest进行折扣计算，取左右子树较大值，</strong>下标[3]取4，下标[1]取8，下标[0]取16，表明其对应的最大空闲值。</p>
+<p>在内存释放的free接口，我们只要传入之前分配的内存地址索引，并确保它是有效值。之后就跟alloc做反向回溯，从最后的节点开始一直往上找到longest为0的节点，即当初分配块所适配的大小和位置。<strong>我们将longest恢复到原来满状态的值。继续向上回溯，检查是否存在合并的块，依据就是左右子树longest的值相加是否等于原空闲块满状态的大小，如果能够合并，就将父节点longest标记为相加的和</strong>（多么简单！）。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">void buddy2_free(struct buddy2* self, int offset) {
+  unsigned node_size, index = 0;
+  unsigned left_longest, right_longest;
+
+  assert(self &amp;&amp; offset &gt;= 0 &amp;&amp; offset &lt; size);
+
+  node_size = 1;
+  index = offset + self-&gt;size - 1;
+
+  for (; self-&gt;longest[index] ; index = PARENT(index)) {
+    node_size *= 2;
+    if (index == 0)
+      return;
+  }
+
+  self-&gt;longest[index] = node_size;
+
+  while (index) {
+    index = PARENT(index);
+    node_size *= 2;
+
+    left_longest = self-&gt;longest[LEFT_LEAF(index)];
+    right_longest = self-&gt;longest[RIGHT_LEAF(index)];
+
+    if (left_longest + right_longest == node_size)
+      self-&gt;longest[index] = node_size;
+    else
+      self-&gt;longest[index] = MAX(left_longest, right_longest);
+  }
+}</pre>
+<p>上面两个成对alloc/free接口的时间复杂度都是O(logN)，保证了程序运行性能。然而这段程序设计的独特之处就在于<strong>使用加权来标记内存空闲状态，而不是一般的有限状态机，实际上longest既可以表示权重又可以表示状态，状态机就毫无必要了，所谓“少即是多”嘛！</strong>反观cloudwu的实现，将节点标记为UNUSED/USED/SPLIT/FULL四个状态机，反而会带来额外的条件判断和管理实现，而且还不如数值那样精确。从逻辑流程上看，wuwenbin的实现简洁明了如同教科书一般，特别是左右子树的走向，内存块的分离合并，块索引到节点下标的转换都是一步到位，不像cloudwu充斥了大量二叉树的深度和长度的间接计算，让代码变得晦涩难读，这些都是longest的功劳。<strong>一个“极简”的设计往往在于你想不到的突破常规思维的地方。</strong></p>
+<p>这份代码唯一的缺陷就是longest的大小是4字节，内存消耗大。但<a href="http://blog.codingnow.com/2011/12/buddy_memory_allocation.html" target="_blank">cloudwu的博客</a>上有人提议用logN来保存值，这样就能实现uint8_t大小了，<strong>看，又是一个“极简”的设计！</strong></p>
+<p>说实话，很难在网上找到比这更简约更优雅的buddy system实现了——至少在Google上如此。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" alt="Cuckoo Filter：设计与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_title">Cuckoo Filter：设计与实现</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li><li ><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" alt="二维码的生成细节和原理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_title">二维码的生成细节和原理</a></li><li ><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="二叉树迭代器算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_title">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10427.html/feed</wfw:commentRss>
+			<slash:comments>55</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++11的Lambda使用一例：华容道求解</title>
+		<link>https://coolshell.cn/articles/10476.html</link>
+					<comments>https://coolshell.cn/articles/10476.html#comments</comments>
+		
+		<dc:creator><![CDATA[Solstice]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 07:50:21 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Lambda]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10476</guid>
+
+					<description><![CDATA[<p>（感谢网友 @bnu_chenshuo 投稿） 华容道是一个有益的智力游戏，游戏规则不再赘述。用计算机求解华容道也是一道不错的编程练习题，为了寻求最少步数，求解...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10476.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10476.html">C++11的Lambda使用一例：华容道求解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢网友 <a href="http://weibo.com/u/1701018393?source=webim" target="_blank"><img decoding="async" alt="" src="http://tp2.sinaimg.cn/1701018393/50/1297990315/1" /></a><a title="bnu_chenshuo" href="http://weibo.com/u/1701018393?source=webim" target="_blank"> @bnu_chenshuo </a>投稿）</strong></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="wp-image-10490 alignright" alt="" src="https://coolshell.cn/wp-content/uploads/2013/10/huarong.png" width="365" height="227" srcset="https://coolshell.cn/wp-content/uploads/2013/10/huarong.png 522w, https://coolshell.cn/wp-content/uploads/2013/10/huarong-300x186.png 300w, https://coolshell.cn/wp-content/uploads/2013/10/huarong-435x270.png 435w" sizes="(max-width: 365px) 100vw, 365px" /></p>
+<p>华容道是一个有益的智力游戏，游戏规则不再赘述。用计算机求解华容道也是一道不错的编程练习题，为了寻求最少步数，求解程序一般用广度优先搜索算法。华容道的一种常见开局如图 1 所示。</p>
+<p>广度优先搜索算法求解华容道的基本步骤：</p>
+<ol>
+<li>准备两个“全局变量”，队列 Q 和和集合 S，S 代表“已知局面”。初时 Q 和 S 皆为空。</li>
+<li>将初始局面加入队列 Q 的末尾，并将初始局面设为已知。</li>
+<li>当队列不为空时，从 Q 的队首取出当前局面 <code>curr</code>。如果队列为空则结束搜索，表明无解。</li>
+<li>如果 <code>curr</code> 是最终局面（曹操位于门口，图 2），则结束搜索，否则继续到第 5 步。</li>
+<li>考虑 <code>curr</code> 中每个可以移动的棋子，试着上下左右移动一步，得到新局面 <code>next</code>，如果新局面未知（<code>next</code> ∉ S），则把它加入队列 Q，并设为已知。这一步可能产生多个新局面。</li>
+<li>回到第2步。</li>
+</ol>
+<p>其中“局面已知”并不要求每个棋子的位置相同，而是指棋子的投影的形状相同（代码中用 mask 表示），例如交换图 1 中的张飞和赵云并不产生新局面，这一规定可以大大缩小搜索空间。</p>
+<p>以上步骤很容易转换为 C++ 代码，这篇文章重点关注的是第 5 步的实现。</p>
+<p><span id="more-10476"></span></p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">// 第 1 步
+std::unordered_set&lt;Mask&gt; seen;
+std::deque&lt;State&gt; queue;
+
+// 第 2 步
+State initial;
+// 填入 initial，略。
+queue.push_back(initial);
+seen.insert(initial.toMask());
+
+// 第 3 步
+while (!queue.empty())
+{
+  const State curr = queue.front();
+  queue.pop_front();
+
+  // 第 4 步
+  if (curr.isSolved())
+    break;
+
+  // 第 5 步
+  for (const State&amp; next : curr.moves())
+  {
+    auto result = seen.insert(next.toMask());
+    if (result.second)
+      queue.push_back(next);
+  }
+}</pre>
+<p>在以上原始实现中，<code>curr.move()</code> 将返回一个 <code>std::vector&lt;State&gt;</code> 临时对象。一种节省开销的办法是准备一个 <code>std::vector&lt;State&gt;</code> “涂改变量”，让 <code>curr.move()</code> 反复修改它，比如改成：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">// 第 1 步新增一个 scratch 变量
+std::vector&lt;State&gt; nextMoves;
+
+// 第 3 步
+while (!queue.empty())
+{
+  // ...
+  // 第 5 步
+  curr.fillMoves(&amp;nextMoves);
+  for (const State&amp; next : nextMoves)
+  { /* 略 */ }
+}</pre>
+<p>还有一种彻底不用这个 <code>std::vector&lt;State&gt;</code> 的办法，把一部分逻辑以 lambda 的形式传给 <code>curr.move()</code>，代码的结构基本不变：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">// 第 3 步
+while (!queue.empty())
+{
+  // ...
+  // 第 5 步
+  curr.move([&amp;seen, &amp;queue](const State&amp; next) {
+    auto result = seen.insert(next.toMask());
+    if (result.second)
+      queue.push_back(next);
+  });
+}</pre>
+<p>这样一来，主程序的逻辑依然清晰，不必要的开销也降到了最小。</p>
+<p>在我最早的实现中，<code>curr.move()</code> 的参数是 <code>const std::function&lt;void(const State&amp;)&gt; &amp;</code>，但是我发现这里每次构造 <code>std::function&lt;void(const State&amp;)&gt;</code> 对象都会分配一次内存，似乎有些不值。因此在现在的实现中 <code>curr.move()</code> 是个函数模板，这样就能自动匹配lambda参数（通常是个 struct 对象），省去了 <code>std::function</code>的内存分配。</p>
+<p>本文完整的代码见 <a href="https://github.com/chenshuo/recipes/blob/master/puzzle/huarong.cc">https://github.com/chenshuo/recipes/&#8230;/puzzle/huarong.cc</a>，需用 GCC 4.7 编译，求解图 1 的题目的耗时约几十毫秒。</p>
+<p><strong>练习：</strong>修改程序，打印每一步移动棋子的情况。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22422.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-150x150.png" alt="是微服务架构不香还是云不香？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22422.html" class="wp_rp_title">是微服务架构不香还是云不香？</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10476.html">C++11的Lambda使用一例：华容道求解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10476.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++面试中string类的一种正确写法</title>
+		<link>https://coolshell.cn/articles/10478.html</link>
+					<comments>https://coolshell.cn/articles/10478.html#comments</comments>
+		
+		<dc:creator><![CDATA[Solstice]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 07:40:38 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10478</guid>
+
+					<description><![CDATA[<p>（感谢网友 @bnu_chenshuo 投稿） C++ 的一个常见面试题是让你实现一个 String 类，限于时间，不可能要求具备 std::string 的功...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10478.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10478.html">C++面试中string类的一种正确写法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢网友 <a href="http://weibo.com/u/1701018393?source=webim" target="_blank"><img decoding="async" alt="" src="http://tp2.sinaimg.cn/1701018393/50/1297990315/1" /></a><a title="bnu_chenshuo" href="http://weibo.com/u/1701018393?source=webim" target="_blank"> @bnu_chenshuo </a>投稿）</strong></p>
+<p>C++ 的一个常见面试题是让你实现一个 String 类，限于时间，不可能要求具备 std::string 的功能，但至少要求能正确管理资源。具体来说：</p>
+<ol>
+<li>能像 int 类型那样定义变量，并且支持赋值、复制。</li>
+<li>能用作函数的参数类型及返回类型。</li>
+<li>能用作标准库容器的元素类型，即 vector/list/deque 的 value_type。（用作 std::map 的 key_type 是更进一步的要求，本文从略）。</li>
+</ol>
+<p>换言之，你的 String 能让以下代码编译运行通过，并且没有内存方面的错误。</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">void foo(String x)
+{
+}
+
+void bar(const String&amp; x)
+{
+}
+
+String baz()
+{
+  String ret(&quot;world&quot;);
+  return ret;
+}
+
+int main()
+{
+  String s0;
+  String s1(&quot;hello&quot;);
+  String s2(s0);
+  String s3 = s1;
+  s2 = s1;
+
+  foo(s1);
+  bar(s1);
+  foo(&quot;temporary&quot;);
+  bar(&quot;temporary&quot;);
+  String s4 = baz();
+
+  std::vector&lt;String&gt; svec;
+  svec.push_back(s0);
+  svec.push_back(s1);
+  svec.push_back(baz());
+  svec.push_back(&quot;good job&quot;);
+}</pre>
+<p><span id="more-10478"></span>本文给出我认为适合面试的答案，强调正确性及易实现（白板上写也不会错），不强调效率。某种意义上可以说是以时间（运行快慢）换空间（代码简洁）。</p>
+<p>首先选择数据成员，最简单的 String 只有一个 char* 成员变量。好处是容易实现，坏处是某些操作的复杂度较高（例如 size() 会是线性时间）。为了面试时写代码不出错，本文设计的 String 只有一个 char* data_成员。而且规定 invariant 如下：一个 valid 的 string 对象的 data_ 保证不为 NULL，data_ 以 <code>'\0'</code> 结尾，以方便配合 C 语言的 str*() 系列函数。</p>
+<p>其次决定支持哪些操作，构造、析构、拷贝构造、赋值这几样是肯定要有的（以前合称 big three，现在叫 copy control）。如果钻得深一点，C++11的移动构造和移动赋值也可以有。为了突出重点，本文就不考虑 operator[] 之类的重载了。</p>
+<p>这样代码基本上就定型了：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">#include &lt;utility&gt;
+#include &lt;string.h&gt;
+
+class String
+{
+ public:
+  String()
+    : data_(new char[1])
+  {
+    *data_ = &#039;&#092;&#048;&#039;;
+  }
+
+  String(const char* str)
+    : data_(new char[strlen(str) + 1])
+  {
+    strcpy(data_, str);
+  }
+
+  String(const String&amp; rhs)
+    : data_(new char[rhs.size() + 1])
+  {
+    strcpy(data_, rhs.c_str());
+  }
+  /* Delegate constructor in C++11
+  String(const String&amp; rhs)
+    : String(rhs.data_)
+  {
+  }
+  */
+
+  ~String()
+  {
+    delete[] data_;
+  }
+
+  /* Traditional:
+  String&amp; operator=(const String&amp; rhs)
+  {
+    String tmp(rhs);
+    swap(tmp);
+    return *this;
+  }
+  */
+  String&amp; operator=(String rhs) // yes, pass-by-value
+  {
+    swap(rhs);
+    return *this;
+  }
+
+  // C++ 11
+  String(String&amp;&amp; rhs)
+    : data_(rhs.data_)
+  {
+    rhs.data_ = nullptr;
+  }
+
+  String&amp; operator=(String&amp;&amp; rhs)
+  {
+    swap(rhs);
+    return *this;
+  }
+
+  // Accessors
+
+  size_t size() const
+  {
+    return strlen(data_);
+  }
+
+  const char* c_str() const
+  {
+    return data_;
+  }
+
+  void swap(String&amp; rhs)
+  {
+    std::swap(data_, rhs.data_);
+  }
+
+ private:
+  char* data_;
+};</pre>
+<p>注意代码的几个要点：</p>
+<ol>
+<li>只在构造函数里调用 new char[]，只在析构函数里调用 delete[]。</li>
+<li>赋值操作符采用了《C++编程规范》推荐的现代写法。</li>
+<li>每个函数都只有一两行代码，没有条件判断。</li>
+<li>析构函数不必检查 data_ 是否为 NULL。</li>
+<li>构造函数 <code>String(const char* str)</code> 没有检查 str 的合法性，这是一个永无止境的争论话题。这里在初始化列表里就用到了 str，因此在函数体内用 assert() 是无意义的。</li>
+</ol>
+<p>这恐怕是最简洁的 String 实现了。</p>
+<p><strong>练习1</strong>：增加 operator==、operator&lt;、operator[] 等操作符重载。</p>
+<p><strong>练习2</strong>：实现一个带 int size_; 成员的版本，以空间换时间。</p>
+<p><strong>练习3</strong>：受益于右值引用及移动语意，在 C++11 中对 String 实施直接插入排序的性能比C++98/03要高，试编程验证之。（g++的标准库也用到了此技术。）</p>
+<p>陈皓注：同时，大家可以移步看看我的一篇老文《<a href="http://blog.csdn.net/haoel/article/details/1491219" target="_blank">STL中String类的问题</a>》<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="又一个有趣的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_title">又一个有趣的面试题</a></li><li ><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10478.html">C++面试中string类的一种正确写法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10478.html/feed</wfw:commentRss>
+			<slash:comments>40</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++模板”&#062;&#062;”编译问题与词法消歧设计</title>
+		<link>https://coolshell.cn/articles/10449.html</link>
+					<comments>https://coolshell.cn/articles/10449.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Wed, 02 Oct 2013 10:47:36 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10449</guid>
+
+					<description><![CDATA[<p>（感谢 @文艺复兴记（todd） 投递此文） 在编译理论中，通常将编译过程抽象为5个主要阶段：词法分析(Lexical Analysis)，语法分析(Parsi...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10449.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10449.html">C++模板”>>”编译问题与词法消歧设计</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢 <a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a>（todd） 投递此文）</strong></p>
+<p>在编译理论中，通常将编译过程抽象为5个主要阶段：词法分析(Lexical Analysis)，语法分析(Parsing)，语义分析(Semantic Analysis)，优化(Optimization)，代码生成(Code Generation)。这5个阶段类似Unix管道模型，上一个阶段的输出作为下一个阶段的输入。其中，词法分析是根据输入源代码文本流，分割出词，识别类别，产生词法元素(Token)流，如：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+int a = 10;
+</pre>
+<p>​经过词法分析会得到[(Type, &#8220;int&#8221;), (Identifier, &#8220;a&#8221;), (AssignOperator, &#8220;=&#8221;), (IntLiteral, 10)]，在后续的语法分析阶段，就会根据这些词法元素匹配相应的语法规则。在我学习编译原理时，教科书中对于词法分析的介绍主要是基于正则表达式的，言下之意就是普通语言的词法规则是可以通过正则表达式描述的。比如，C语言的变量名规则是“包含字母、数字或下划线，并且以字母或下划线开头”，这就可以用正则表达式<code>[a-zA-Z_][a-zA-Z0-9_]*</code>表达。但是，在实践中我发现不管是主流语言，还是自己设计的DSL都大量存在不能简单通过正则表达式进行词法分析的例子。来看C++98的模版例子：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+map&lt;int, vector&lt;int&gt;&gt;
+</pre>
+<p>上面这段代码会被C++98编译器中报语法错误，原因在于它把“&gt;&gt;”识别成了位右移运算符而不是两个模版右括号，在C++98中必须在两个括号中间加空格，写成</p>
+<p><span id="more-10449"></span></p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+map&lt;int, vector&lt;int&gt; &gt;
+</pre>
+<p>除此了C++模版，据我所知，经典的FORTRAN语言的语法规则更是大量存在词法歧义。</p>
+<p>我认为从本质上讲，这类问题的根源在于词法分析的依据只是简单的词法规则，并不具备所有的语法信息，而词法歧义必须提升一层在语法规则中消除。所以，在我自己设计一些DSL的时候干脆就把词法分析和语法分析合二为一了，相当于让语法分析在字符层次上去进行，而不是经典的词法元素层次上，这就是所谓的<a title="Scannerless Parsing" href="http://en.wikipedia.org/wiki/Scannerless_parsing">Scannerless Parsing</a>。采用这种方法的例子并不少见，TeX, Wiki, Makefile和Perl 6等语言的语法分析器都属此类。</p>
+<p>Scannerless Parsing方法弥补了词法规则无法消歧的问题，但是同时也破坏了词法和语法分析简单清晰的管道结构，总体上增加了实现和理解的复杂度。另外，像C++这样大型的语言，如果开始是有词法分析的，稍微碰到一个歧义就整个转成Scannerless Parsing未免也显得太夸张了。这个问题困扰了我很久，直到最近才找到了一个满意的解决方案。还是以上面&#8221;&gt;&gt;&#8221;为例，我们知道现在C++11已经允许不加空格了，那么C++11编译器是如何处理这个词法歧义的呢？答案是：词法分析阶段既然分析不好&#8221;&gt;&gt;&#8221;，干脆就不分析了，直接把&#8221;&gt;&#8221; &#8220;&gt;&#8221;交给语法分析器来分析，其他没有词法歧义的照旧。当我知道这个方案的时候不由得感叹：妙！理论上，词法分析是可以什么也不做的，全部把字符一一交给语法分析器也没有问题，所以，干脆让词法分析只做有把握的部分，解决不了的交给语法分析器，这样就既保留了管道结构，又解决了词法歧义。</p>
+<p>下面我们再来看看C++11规范关于这个问题的定义：</p>
+<blockquote><p>14.2 Names of template specializations [temp.names] ###</p>
+<p>After name lookup (3.4) finds that a name is a template-name or that an operator-function-id or a literal-operator-id refers to a set of overloaded functions any member of which is a function template if this is followed by a &lt;, the &lt; is always taken as the delimiter of a template-argument-list and never as the less-than operator. When parsing a template-argument-list, the first non-nested &gt; is taken as the ending delimiter rather than a greater-than operator. Similarly, the first non-nested &gt;&gt; is treated as two consecutive but distinct &gt; tokens, the first of which is taken as the end of the template-argument-list and completes the template-id. [ Note: The second &gt; token produced by this replacement rule may terminate an enclosing template-id construct or it may be part of a different construct (e.g. a cast).—end note ]</p></blockquote>
+<p>可见，在C++11中，词法分析器是把&#8221;&gt;&gt;&#8221;直接当成两个&#8221;&gt;&#8221;传给了语法分析器，然后在语法分析中如果匹配了template-argument-lis语法，第一个&#8221;&gt;&#8221;符号会被直接认为是模版结束符，而不是大于，也不是位移符号。根据这个定义，我构造了一个例子：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+template&lt;int N&gt;
+class Foo {
+};
+
+Foo&lt;3&gt;&gt;1&gt; foo;
+</pre>
+<p>这个例子在C++98中是能正确编译的，&#8221;&gt;&gt;&#8221;被解释成了位移运算，但是它反而不能在C++11中编译了，因为根据规范第一个&#8221;&gt;&#8221;被解释成了模版参数结束符。如果要在C++11中编译，需要显式地加上括号：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+Foo&lt;(3&gt;&gt;1)&gt; foo;
+</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10449.html">C++模板”>>”编译问题与词法消歧设计</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10449.html/feed</wfw:commentRss>
+			<slash:comments>17</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>数据即代码：元驱动编程</title>
+		<link>https://coolshell.cn/articles/10337.html</link>
+					<comments>https://coolshell.cn/articles/10337.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Fri, 09 Aug 2013 02:18:31 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Lisp]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10337</guid>
+
+					<description><![CDATA[<p>（感谢 @文艺复兴记（todd） 投递此文） 几个小伙伴在考虑下面这个各个语言都会遇到的问题： 问题：设计一个命令行参数解析API 一个好的命令行参数解析库一般...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10337.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢 <a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a>（todd） 投递此文）</strong></p>
+<p>几个小伙伴在考虑下面这个各个语言都会遇到的问题：</p>
+<p><strong>问题：设计一个命令行参数解析API</strong></p>
+<p>一个好的命令行参数解析库一般涉及到这几个常见的方面：</p>
+<p>1) 支持方便地生成帮助信息</p>
+<p>2) 支持子命令，比如：git包含了push, pull, commit等多种子命令</p>
+<p>3) 支持单字符选项、多字符选项、标志选项、参数选项等多种选项和位置参数</p>
+<p>4) 支持选项默认值，比如：&#8211;port选项若未指定认为5037</p>
+<p>5) 支持使用模式，比如：tar命令的-c和-x是互斥选项，属于不同的使用模式</p>
+<p>经过一番考察，小伙伴们发现了这个几个有代表性的API设计：</p>
+<p><strong>1. getopt()：</strong></p>
+<p><a href="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">getopt()</a>是libc的标准函数，很多语言中都能找到它的移植版本。</p>
+<p><span id="more-10337"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+//C
+while ((c = getopt(argc, argv, &quot;ac:d:&quot;)) != -1) {
+    int this_option_optind = optind ? optind : 1;
+    switch (c) {
+    case &#039;a&#039;:
+        printf (&quot;option a&quot;);
+        aopt = 1;
+        break;
+    case &#039;c&#039;:
+        printf (&quot;option c with value &#039;%s&#039;&quot;, optarg);
+        copt = optarg;
+        break;
+    case &#039;d&#039;:
+        printf (&quot;option d with value &#039;%s&#039;&quot;, optarg);
+        dopt = optarg;
+        break;
+    case &#039;?&#039;:
+        break;
+    default:
+        printf (&quot;?? getopt returned character code 0%o ??&quot;, c);
+    }
+}
+</pre>
+<p>getopt()的核心是一个类似printf的格式字符串的命令行参数描述串，如上面的&#8221;ac:d:&#8221;定义了&#8221;a&#8221;, &#8220;c&#8221;，&#8221;d&#8221;3个命令行参数，其中，a是一个标志符不需要参数，&#8221;c&#8221;和&#8221;d&#8221;需要跟参数。getopt()功能非常弱，只支持单个字符的标志选项和参数选项。如果按上面的5点来比对，基本上只能说是勉强支持第3点，其他几项只能靠程序自己来实现了，所以，想直接基于getopt()实现一个像git这样复杂的命令行参数是不可能的，只有自己来做很多的解析工作。小伙伴们看过getopt()之后一致的评价是:图样图森破。</p>
+<p><strong>2. Google gflags</strong></p>
+<p>接着，小伙伴们又发现了<a href="https://code.google.com/p/gflags/">gflags</a>这个Google出品C++命令行参数解析库。</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+//C++
+DEFINE_bool(memory_pool, false, &quot;If use memory pool&quot;);
+DEFINE_bool(daemon, true, &quot;If started as daemon&quot;);
+DEFINE_string(module_id, &quot;&quot;, &quot;Server module id&quot;);
+DEFINE_int32(http_port, 80, &quot;HTTP listen port&quot;);
+DEFINE_int32(https_port, 443, &quot;HTTPS listen port&quot;);
+
+int main(int argc, char** argv) {
+    ::google::ParseCommandLineFlags(&amp;argc, &amp;argv, true);
+
+    printf(&quot;Server module id: %s&quot;, FLAGS_module_id.c_str());
+
+    if (FLAGS_daemon) {
+      printf(&quot;Run as daemon: %d&quot;, FLAGS_daemon);
+    }
+    if (FLAGS_memory_pool) {
+      printf(&quot;Use memory pool: %d&quot;, FLAGS_daemon);
+    }
+
+    Server server;
+
+    return 0;
+}
+</pre>
+<p>小伙伴们看了后不由得感叹“真心好用啊”！的确，gflags简单地通过几个宏就定义了命令行选项，基本上很好的支持了上面提到的1，3，4这几项，比起getopt()来强多了。对于类似cp这样的小命令，gflags应该是够用了，但要达到git这种级别就显得有些单薄了。</p>
+<p><strong>3. Ruby Commander</strong></p>
+<p>接下来小伙伴们又发现了Ruby Commander库：</p>
+<pre data-enlighter-language="ruby" class="EnlighterJSRAW">
+//Ruby
+# :name is optional, otherwise uses the basename of this executable
+program :name, &#039;Foo Bar&#039;
+program :version, &#039;1.0.0&#039;
+program :description, &#039;Stupid command that prints foo or bar.&#039;
+command :bar do |c|
+  c.syntax = &#039;foobar bar [options]&#039;
+  c.description = &#039;Display bar with optional prefix and suffix&#039;
+  c.option &#039;--prefix STRING&#039;, String, &#039;Adds a prefix to bar&#039;
+  c.option &#039;--suffix STRING&#039;, String, &#039;Adds a suffix to bar&#039;
+  c.action do |args, options|
+    options.default :prefix =&gt; &#039;(&#039;, :suffix =&gt; &#039;)&#039;
+    say &quot;#{options.prefix}bar#{options.suffix}&quot;
+  end
+end
+$ foobar bar
+# =&gt; (bar)
+$ foobar bar --suffix &#039;}&#039; --prefix &#039;{&#039;
+# =&gt; {bar}
+</pre>
+<p>Commander库利用Ruby酷炫的语法定义了一种描述命令行参数的内部DSL，看起来相当高端大气上档次。除了上面的第5项之外，其他几项都有很好的支持，可以说Commander库的设计基本达到了git这种级别命令行参数解析的要求。只是，要搞懂Ruby这么炫的语法和这个库的使用方法恐怕就不如getopt()和gflags容易了。有小伙伴当场表示想要学习Ruby，但是也有小伙伴表示再看看其他库再说。</p>
+<p><strong>4. Lisp cmdline库</strong></p>
+<p>接下来，小伙伴们发现了Lisp方言Racket的<a href="http://docs.racket-lang.org/reference/Command-Line_Parsing.html">cmdline库</a>。</p>
+<pre data-enlighter-language="ruby" class="EnlighterJSRAW">
+//Lisp
+(parse-command-line &quot;compile&quot; (current-command-line-arguments)
+  `((once-each
+     [(&quot;-v&quot; &quot;--verbose&quot;)
+      ,(lambda (flag) (verbose-mode #t))
+      (&quot;Compile with verbose messages&quot;)]
+     [(&quot;-p&quot; &quot;--profile&quot;)
+      ,(lambda (flag) (profiling-on #t))
+      (&quot;Compile with profiling&quot;)])
+    (once-any
+     [(&quot;-o&quot; &quot;--optimize-1&quot;)
+      ,(lambda (flag) (optimize-level 1))
+      (&quot;Compile with optimization level 1&quot;)]
+     [(&quot;--optimize-2&quot;)
+      ,(lambda (flag) (optimize-level 2))
+      ((&quot;Compile with optimization level 2,&quot;
+        &quot;which implies all optimizations of level 1&quot;))])
+    (multi
+     [(&quot;-l&quot; &quot;--link-flags&quot;)
+      ,(lambda (flag lf) (link-flags (cons lf (link-flags))))
+      (&quot;Add a flag &lt;lf&gt; for the linker&quot; &quot;lf&quot;)]))
+   (lambda (flag-accum file) file)
+   &#039;(&quot;filename&quot;))
+</pre>
+<p>这是神马浮云啊?括号套括号，看起来很厉害的样子，但又不是很明白。看到这样的设计，有的小伙伴连评价都懒得评价了，但也有的小伙伴对Lisp越发崇拜，表示Lisp就是所谓的终极语言了，没有哪门语言能写出这么不明觉历的代码来！小伙伴们正准备打完收工，突然&#8230;</p>
+<p><strong>5. Node.js的LineParser库</strong></p>
+<p>发现了Node.js的<a href="https://github.com/weidagang/line-parser-js">LineParser库</a>:</p>
+<p>[javascript]<br />
+//JavaScript<br />
+var meta = {<br />
+    program : &#8216;adb&#8217;,<br />
+    name : &#8216;Android Debug Bridge&#8217;,<br />
+    version : &#8216;1.0.3&#8217;,<br />
+    subcommands : [ &#8216;connect&#8217;, &#8216;disconnect&#8217;, &#8216;install&#8217; ],<br />
+    options : {<br />
+        flags : [<br />
+            [ &#8216;h&#8217;, &#8216;help&#8217;, &#8216;print program usage&#8217; ],<br />
+            [ &#8216;r&#8217;, &#8216;reinstall&#8217;, &#8216;reinstall package&#8217; ],<br />
+            [ &#8216;l&#8217;, &#8216;localhost&#8217;, &#8216;localhost&#8217; ]<br />
+        ],<br />
+        parameters : [<br />
+            [ null, &#8216;host&#8217;, &#8216;adb server hostname or IP address&#8217;, null ],<br />
+            [ &#8216;p&#8217;, &#8216;port&#8217;, &#8216;adb server port&#8217;, 5037 ]<br />
+        ]<br />
+    },<br />
+    usages : [<br />
+        [ &#8216;connect&#8217;, [&#8216;host&#8217;, &#8216;[port]&#8217;], null, &#8216;connect to adb server&#8217;, adb_connect ],<br />
+        [ &#8216;connect&#8217;, [ &#8216;l&#8217; ], null, &#8216;connect to the local adb server&#8217;, adb_connect ],<br />
+        [ &#8216;disconnect&#8217;, null, null, &#8216;disconnect from adb server&#8217;, adb_disconnect ],<br />
+        [ &#8216;install&#8217;, [&#8216;r&#8217;], [&#8216;package&#8217;], &#8216;install package&#8217;, adb_install ],<br />
+        [ null, [&#8216;h&#8217;], null, &#8216;help&#8217;, adb_help ],<br />
+    ]<br />
+};</p>
+<p>try {<br />
+    var lineparser = require(&#8216;lineparser&#8217;);<br />
+    var parser = lineparser.init(meta);<br />
+    // adb_install will be invoked<br />
+    parser.parse([&#8216;install&#8217;, &#8216;-r&#8217;, &#8216;/pkgs/bird.apk&#8217;]);<br />
+}<br />
+catch (e) {<br />
+    console.error(e);<br />
+}<br />
+[/javascript]</p>
+<p>天啊！？这是什么？我和小伙伴们彻底惊呆了！短短十几行代码就获得了上面5点的全面支持，重要的是小伙伴们居然一下子就看懂了，没有任何的遮遮掩掩和故弄玄虚。本来以为Ruby和Lisp很酷，小伙伴们都想马上去学Ruby和Lisp了，看到这个代码之后怎么感觉前面全是在装呢？有个小伙伴居然激动得哭着表示：我写代码多年，以为再也没有什么代码可以让我感动，没想到这段代码如此精妙，我不由得要赞叹了，实在是太漂亮了！</p>
+<p>小伙伴们的故事讲完了，您看懂了吗？如果没有看懂的话，正题开始了：</p>
+<p>在绝大多数语言中数据和代码可以说是泾渭分明，习惯C++、Java等主流语言的程序员很少去思考数据和代码之间的关系。与多数语言不同的是Lisp以“数据即代码，代码即数据”著称，Lisp用S表达式统一了数据和代码的形式而独树一帜。Lisp奇怪的S表达式和复杂的宏系统让许多人都感到Lisp很神秘，而多数Lisp教程要么强调函数式编程，要么鼓吹宏如何强大，反而掩盖了Lisp真正本质的东西，为此我曾写过一篇<a href="http://www.cnblogs.com/weidagang2046/archive/2012/06/03/tao_of_lisp.html">《Lisp的永恒之道》</a>介绍Lisp思想。</p>
+<p>设计思想和具体技术的区别在于前者往往可以在不同的环境中以不同的形式展现出来。比如，熟悉函数式编程的程序员在理解了纯函数的优点后即使是用C语言也会更倾向于写出无副作用的函数来，这就是函数式思想在命令式环境的应用。所以，理解Lisp思想一定要能在非Lisp环境应用，才算是融汇贯通。</p>
+<p>如果真正理解了Lisp的本质，那所谓的“数据即代码，代码即数据”一点儿也不神秘，这不就是我们每天打交道的配置文件吗！？如果你还不是很理解的话，我们通过下面几个问题慢慢分析：</p>
+<p>1) 配置的本质是什么？为什么要在程序中使用配置文件？</p>
+<p>不知道你是否意识到了，我们每天都在使用的各种各样的<strong>配置本质上是一种元数据也是一种DSL</strong>，这和Lisp基于S表达式的“数据即代码，代码即数据”没有本质区别。在C++、Java等程序中引入配置文件的目的正是用DSL弥补通用语言表达能力和灵活性的不足。我知道不少人喜欢从计算的角度来看到程序和语言，似乎只有图灵完备的语言如C++、Java、Python等才叫程序设计语言，而类似CSS和HTML这样的东西根本不能叫做程序设计语言。其实，在我看来这种观点过于狭隘，<strong>程序的本质是语义的表达</strong>，而语义表达不一定要是计算。</p>
+<p>2) 配置是数据还是代码？</p>
+<p>很明显，Both!说配置是数据，因为它是声明式的描述，能方便地修改和传输；说配置是代码，因为它在表达逻辑，你的程序实际上就是配置的解释器。</p>
+<p>3) 配置的格式是什么？</p>
+<p>配置的格式是任意的，可以自己定义语法，只要配以相应的解释器就行。不过更简单通用的做法是基于XML、JSON、或S表达式等标准结构，在此之上进一步定义schema。甚至完全不必是文件，在我们的项目中配置经常是放到用关系数据库中的。另外，下面我们还会看到用语言的Literal数据作为配置。</p>
+<p>4) 业务逻辑都可以放到配置中吗？</p>
+<p>这个问题的答案显然是：Yes！我没有遇到过不可以放入配置的逻辑，只是问题在于这样做是否值得，能达到什么效果。对于需要灵活变化，重复出现，有复用价值的东西放入作为配置是明智的选择。这篇文章的主要目的就在于介绍把<strong>主要业务逻辑都放到配置中，再通过程序解释执行配置的设计方法，我称之为：元驱动编程(Meta Driven Programming)</strong>。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5202.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="对象的消息模型" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5202.html" class="wp_rp_title">对象的消息模型</a></li><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/5709.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="API设计：用流畅接口构造内部DSL" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5709.html" class="wp_rp_title">API设计：用流畅接口构造内部DSL</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10337.html/feed</wfw:commentRss>
+			<slash:comments>77</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>数据的游戏：冰与火</title>
+		<link>https://coolshell.cn/articles/10192.html</link>
+					<comments>https://coolshell.cn/articles/10192.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 31 Jul 2013 00:11:17 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Big Data]]></category>
+		<category><![CDATA[Data Mining]]></category>
+		<category><![CDATA[Machine Learning]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10192</guid>
+
+					<description><![CDATA[<p>我对数据挖掘和机器学习是新手，从去年7月份在Amazon才开始接触，而且还是因为工作需要被动接触的，以前都没有接触过，做的是需求预测机器学习相关的。后来，到了淘...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10192.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10192.html">数据的游戏：冰与火</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-10305" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/game-of-thrones-300x206.jpg" width="300" height="206" />我对数据挖掘和机器学习是新手，从去年7月份在Amazon才开始接触，而且还是因为工作需要被动接触的，以前都没有接触过，做的是需求预测机器学习相关的。后来，到了淘宝后，自己凭兴趣主动地做了几个月的和用户地址相关数据挖掘上的工作，有一些浅薄的心得。下面这篇文章主要是我做为一个新人仅从事数据方面技术不到10个月的一些心得，也许对你有用，也许很傻，不管怎么样，欢迎指教和讨论。</p>
+<p>另外，注明一下，这篇文章的标题模仿了一个美剧《<a href="http://movie.douban.com/subject/3016187/" target="_blank">权力的游戏：冰与火之歌</a>》。在数据的世界里，我们看到了很多很牛，很强大也很有趣的案例。但是，<strong>数据就像一个王座一样，像征着一种权力和征服，但登上去的路途一样令人胆颤</strong>。</p>
+<h4>数据挖掘中的三种角色</h4>
+<p>在Amazon里从事机器学习的工作时，我注意到了Amazon玩数据的三种角色。</p>
+<ul>
+<li><strong>Data Analyzer：数据分析员</strong>。这类人的人主要是分析数据的，从数据中找到一些规则，并且为了数据模型的找不同场景的Training Data。另外，这些人也是把一些脏数据洗干净的的人。</li>
+</ul>
+<ul>
+<li><strong>Research Scientist：研究科学家</strong>。这种角色主要是根据不同的需求来建立数据模型的。他们把自己戏称为不近人间烟火的奇异性物种，就像《生活大爆炸》里的 那个Sheldon一样。这些人基本上玩的是数据上的科学</li>
+</ul>
+<ul>
+<li><strong>Software Developer ：软件开发工程师</strong>。主要是把 Scientist 建立的数据模型给实现出来，交给Data Analyzer去玩。这些人通常更懂的各种机器学习的算法。</li>
+</ul>
+<p>我相信其它公司的做数据挖掘或是机器学习的也就这三种工作，或者说这三种人，对于我来说，</p>
+<p><span id="more-10192"></span></p>
+<ul>
+<li><strong>最有技术含量的是 Scientist</strong>，因为数据建模和抽取最有意义的向量，以及选取不同的方法都是这类人来决定的。这类人，我觉得在国内是找不到的。</li>
+</ul>
+<ul>
+<li><strong>最苦逼，也最累，但也最重要的是Data Analyzer</strong>，他们的活也是这三个角色中最最最重要的（注意：我用了三个最）。因为，无论你的模型你的算法再怎么牛，在一堆烂数据上也只能干出一堆垃圾的活来。正所谓：Garbage In, Garbage Out ！但是这个活是最脏最累的活，也是让人最容易退缩的活。</li>
+</ul>
+<ul>
+<li><strong>最没技术含量的是Software Developer</strong>。现在国内很多玩数据的都以为算法最重要，并且，很多技术人员都在研究机器学习的算法。错了，最重要的是上面两个人，一个是苦逼地洗数据的Data Analyzer，另一个是真正懂得数据建模的Scientist！而像什么<a title="K-Means 算法" href="https://coolshell.cn/articles/7779.html" target="_blank">K-Means</a>，<a title="K Nearest Neighbor 算法" href="https://coolshell.cn/articles/8052.html" target="_blank">K Nearest Neighbor</a>，或是别的什么贝叶斯、回归、决策树、随机森林等这些玩法，都很成熟了，而且又不是人工智能，说白了，这些算法在机器学习和数据挖掘中，似乎就像Quick Sort之类的算法在软件设计中基本没什么技术含量。当然，我不是说算法不重要，我只想说这些算法在整个数据处理中是最不重要的。</li>
+</ul>
+<h4>数据的质量</h4>
+<p><strong>目前所流行的Buzz Word——大数据是相当误导人的。在我眼中，<span style="color: #ff0000;">数据不分大小，只分好坏</span>。</strong></p>
+<p>在处理数据的过程中，我第一个感受最大的就是数据质量。下面我分几个案例来说明：</p>
+<h5>案例一：数据的标准</h5>
+<p>在Amazon里，所有的商品都有一个唯一的ID，叫ASIN——Amazon Single Identify Number，这个ID是用来标识商品的唯一性的（来自于条形码）。也就是说，无论是你把商品描述成什么样，只要ASIN一样，这就是完完全全一模一样的商品。</p>
+<p>这样，就不像淘宝一样，当你搜索一个iPhone，你会出现一堆各种各样的iPhone，有的叫“超值iPhone”，有的叫“苹果iPhone”，有的叫“智能手机iPhone”，有的叫“iPhone 白色/黑色”……，这些同一个商品不同的描述是商家为了吸引用户。但是带来的问题有两点：</p>
+<p style="padding-left: 30px;">1）<strong>用户体验不好</strong>。以商品为中心的业务模型，对于消费者来说，体验明显好于以商家为中心的业务模型。</p>
+<p style="padding-left: 30px;">2）<strong>只要你不能正确读懂（识别）数据，你后面的什么算法，什么模型统统没用</strong>。</p>
+<p>所以，只要你玩数据，你就会发现，<strong>如果数据的标准没有建立起来，干什么都没用。数据标准是数据质量的第一道关卡</strong>，没这个玩意，你就什么也别玩了。所谓数据的标准，为数据做唯一标识只是其中最最基础的一步，数据的标准还单单只是这个，<strong>更重要的是把数据的标准抽象成数学向量，没有数学向量，后面也无法挖掘</strong>。</p>
+<p>所以，你会看到，<strong>洗数据的大量的工作就是在把杂乱无章的数据归并聚合，这就是在建立数据标准。这里面绝对少不了人肉的工作</strong>。无非就是：</p>
+<ul>
+<li><span style="line-height: 13px;">聪明的人在数据产生之前就定义好标准，并在数据产生之时就在干数据清洗的工作。</span></li>
+</ul>
+<ul>
+<li>一般的人是在数据产生并大量堆积之后，才来干这个事。</li>
+</ul>
+<p>另外，说一下Amazon的ASIN，这个事从十多年前就开始了，我在Amazon的内网里看到的资料并没有说为什么搞了个这样一个ID，我倒觉得这并不是因为Amazon因为玩数据发现必需建议个商品ID，也许因为Amazon的业务模型就是设计成以“商品为中心”的。今天，这个ASIN依然有很多很多的问题，ASIN一样不能完全保证商品就是一样的，ASIN不一样也不代表商品不一样，不过90%以上的商品是保证的。Amazon有专门的团队Category Team，里面有很多业务人员天天都在拼命地在对ASIN的数据进行更正。</p>
+<h5>案例二：数据的准确</h5>
+<p>用户地址是我从事过数据分析的另一个事情。我还记得当时看到那数以亿计的用户地址的数据的那种兴奋。但是随后我就兴奋不起来了。因为地址是用户自己填写的，这里面有很多的坑，都不是很容易做的。</p>
+<p>第一个是假/错地址，因为有的商家作弊或是用户做测试。所以地址是错的，</p>
+<ul>
+<li>比如，直接就输入“该地址不存在”，“13243234asdfasdi”之类的。这类的地址是可以被我的程序识别出来的。</li>
+</ul>
+<ul>
+<li>还有很难被我的程序所识别出来的。比如：“宇宙路地球小区”之类的。但这类地址可以被人识别出来。</li>
+</ul>
+<ul>
+<li>还有连人都识别不出来的，比如：“北京市东四环中路23号南航大厦5楼540室”，这个地址根本不存在。</li>
+</ul>
+<p>第二个是真地址，但是因为用户写的不标准，所以很难处理，比如：</p>
+<ul>
+<li><span style="line-height: 13px;">缩写：“建国门外大街” 和 “建外大街”，“中国工商银行”和“工行”……</span></li>
+</ul>
+<ul>
+<li>错别字：“潮阳门”，“通慧河”……</li>
+</ul>
+<ul>
+<li>颠倒：“东四环中路朝阳公园” 和 “朝阳公园 （靠东四环）” ……</li>
+</ul>
+<ul>
+<li>别名：有的人写的是开发商的小区名“东恒国际”，有的则是写行政的地名“八里庄东里”……</li>
+</ul>
+<p>这样的例子多得不能再多了。可见数据如果不准确，会增加你处理的难度。有个比喻非常好，<strong>玩数据的就像是在挖金矿一样，如果含金量高，那么，挖掘的难度就小，也就容易出效果，如果含金量低，那么挖掘的难度就大，效果就差</strong>。</p>
+<p>上面，我给了两个案例，旨在说明——</p>
+<p style="padding-left: 30px;"><strong>1）数据没有大小之分，只有含金量大的数据和垃圾量大的数据之分</strong>。</p>
+<p style="padding-left: 30px;"><strong>2）数据清洗是一件多么重要的工作，这也是一件人肉工作量很大的工作。</strong></p>
+<p><strong></strong>所以，这个工作最好是在数据产生的时候就一点一滴的完成。</p>
+<p>有一个观点：<strong>如果数据准确度在60%的时候，你干出来的事，一定会被用户骂！如果数据准确度在80%左右，那么用户会说，还不错！只有数据准确度到了90%的时候，用户才会觉得真牛B。但是从数据准确度从80%到90%要付出的成本要比60% 到 80%的付出大得多得多</strong>。大多数据的数据挖掘团队都会止步于70%这个地方。因为，再往后，这就是一件相当累的活。</p>
+<h4>数据的业务场景</h4>
+<p>我不知道有多少数据挖掘团队真正意识到了业务场景和数据挖掘的重要关系？<strong>我们需要知道，根本不可能做出能够满足所有业务的数据挖掘和分析模型</strong>。</p>
+<p>推荐音乐视频，和电子商务中的推荐商品的场景完全不一样。电商中，只要你买了一个东西没有退货，那么，有很大的概率我可以相信你是喜欢这个东西的，然后，对于音乐和视频，你完全不能通过用户听了这首歌或是看了这个视频就武断地觉得用户是喜欢这首歌和这个视频的，所以，我们可以看到，推荐算法在不同的业务场景下的实现难度也完全不一样。</p>
+<p>说到推荐算法，你是不是和我一样，有时候会对推荐有一种感觉——<strong>推荐就是一种按不同维度的排序的算法</strong>。我个人以为，就提一下推荐这个东西在某些业务场景下是比较Tricky的，比如，推荐有两种（不是按用户关系和按物品关系这两种），</p>
+<ul>
+<li>一种是共性化推荐，结果就是推荐了流行的东西，这也许是好 的，但这也许会是用户已知的东西，比如，到了北京，我想找个饭馆，你总是给我推荐烤鸭，我想去个地方，你总是给我推荐天安门故宫天坛（因为大多数人来北京就是吃烤鸭，就是去天安门的），这些我不都知道了嘛，还要你来推荐？另外，共性化的东西通常是可以被水军刷的。</li>
+</ul>
+<ul>
+<li>另一种是一种是个性化推荐，这个需要分析用户的个体喜好，好的就是总是给我我喜欢的，不好的就是也许我的口味会随我的年龄和环境所改变，而且，总是推荐符合用户口味的，不能帮用户发掘新鲜点。比如，我喜欢吃辣的，你总是给我推荐川菜和湘菜，时间长了我也会觉得烦的。</li>
+</ul>
+<p><strong>推荐有时并不是民主投票，而是专业用户或资深玩家的建议；推荐有时并不是推荐流行的，而是推荐新鲜而我不知道的</strong>。你可以看到，不同的业务场景，不同的产品形态下的玩法可能完全不一样，</p>
+<p>另外，就算是对于同一个电子商务来说，书、手机 和服装的业务形态完全不一样。我之前在Amazon做Demand Forecasting（用户需求预测）——通过历史数据来预测用户未来的需求。</p>
+<ul>
+<li>对于书、手机、家电这些东西，在Amazon里叫Hard Line的产品，你可以认为是“标品”（但也不一定），预测是比较准的，甚至可以预测到相关的产品属性的需求。</li>
+</ul>
+<ul>
+<li>但是地于服装这样的叫Soft Line的产品，Amazon干了十多年都没有办法预测得很好，因为这类东西受到的干扰因素太多了，比如：用户的对颜色款式的喜好，穿上去合不合身，爱人朋友喜不喜欢…… 这类的东西太容易变了，买得人多了反而会卖不好，所以根本没法预测好，更别Stock/Vender Manager 提出来的“预测某品牌的某种颜色的衣服或鞋子”。</li>
+</ul>
+<p>对于需求的预测，我发现，长期在这个行业中打拼的人的预测是最准的，什么机器学习都是浮云。机器学习只有在你要面对的是成千上万种不同商品和品类的时候才会有意义。</p>
+<p><strong>数据挖掘不是人工智能，而且差得还太远。不要觉得数据挖掘什么事都能干，找到一个合适的业务场景和产品形态，比什么都重要</strong>。</p>
+<h4>数据的分析结果</h4>
+<p>我看到很多的玩大数据的，基本上干的是数据统计的事，从多个不同的维度来统计数据的表现。最简单最常见的统计就是像网站统计这样的事。比如：PV是多少，UV是多少，来路是哪里，浏览器、操作系统、地理、搜索引擎的分布，等等，等等。</p>
+<p>唠叨一句，千万不要以为，你一天有十几个T的日志就是数据了，也不要以为你会用Hadoop/MapReduce分析一下日志，这就是数据挖掘了，说得难听一点，你在做的只不过是一个统计的工作。那几个T的Raw Data，基本上来说没什么意义，只能叫日志，连数据都算不上，只有你统计出来的这些数据才是有点意义的，才能叫数据。</p>
+<p>当一个用户在面对着自己网店的数据的时候，比如：每千人有5个人下单，有65%的访客是男的，18-24岁的人群有30%，等等。甚至你给出了，你打败了40%同类型商家的这样的数据。作为一个商户，面对这些数据时，大多数人的表现是完全不知道自己能干什么？是把网站改得更男性一点，还是让年轻人更喜欢一点？完全不知道所措。</p>
+<p>只要你去看一看，你会发现，好些好些的数据分析出来的结果，看上去似乎不错，但是其实完全不知道下一步该干什么？</p>
+<p>所以，我觉得，<strong>数据分析的结果并不仅仅只是把数据呈现出来，而更应该关注的是通过这些数据后面可以干什么？如果看了数据分析的结果后并不知道可以干什么，那么这个数据分析是失败的。</strong></p>
+<h4>总结</h4>
+<p>综上所述，下面是我觉得数据挖掘或机器学习最重要的东西：</p>
+<p style="padding-left: 30px;">1）<strong>数据的质量</strong>。分为数据的标准和数据的准确。数据中的杂音要尽量地排除掉。为了数据的质量，大量人肉的工作少不了。</p>
+<p style="padding-left: 30px;">2）<strong>数据的业务场景</strong>。我们不可能做所有场景下的来，所以，业务场景和产品形态很重要，我个人感觉业务场景越窄越好。</p>
+<p style="padding-left: 30px;">3）<strong>数据的分析结果</strong>，要让人能看得懂，知道接下来要干什么，而不是为了数据而数据。</p>
+<p>搞数据挖掘的人很多，但成功的案例却不多（相比起大量的尝试来说），就目前而言，<strong>我似乎觉得目前的数据挖掘的技术是一种过渡技术，还在摸索阶段。另外，好些数据挖掘的团队搞得业务不业务，技术不技术的，为其中的技术人员感到惋惜</strong>……</p>
+<p>不好意思，我只给出了问题，没有建议，这也说明数据分析中有很多的机会……</p>
+<p><span style="color: #770000; font-size: 12pt;">最后，还要提的一个是“<span style="color: #cc0000;"><strong>数据中的个人隐私问题</strong></span>”，这似乎就像那些有悖伦理的黑魔法一样，你要成功就得把自己变得黑暗。是的，<strong>数据就像一个王座一样，像征着一种权力和征服，但登上去的路途一样令人胆颤</strong>。</span></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="http://coolshell.cn/articles/8052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/220px-KnnClassification.svg_-150x150.png" alt="K Nearest Neighbor 算法" width="150" height="150" /></a><a href="http://coolshell.cn/articles/8052.html" class="wp_rp_title">K Nearest Neighbor 算法</a></li><li ><a href="http://coolshell.cn/articles/7779.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/K-Means-150x150.gif" alt="K-Means 算法" width="150" height="150" /></a><a href="http://coolshell.cn/articles/7779.html" class="wp_rp_title">K-Means 算法</a></li><li ><a href="http://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="http://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="http://coolshell.cn/articles/7048.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/11_154056_1-300x225-1-150x150.jpg" alt="挑战无处不在" width="150" height="150" /></a><a href="http://coolshell.cn/articles/7048.html" class="wp_rp_title">挑战无处不在</a></li><li ><a href="http://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="http://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="http://coolshell.cn/articles/3589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="食客还是大厨" width="150" height="150" /></a><a href="http://coolshell.cn/articles/3589.html" class="wp_rp_title">食客还是大厨</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10192.html">数据的游戏：冰与火</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10192.html/feed</wfw:commentRss>
+			<slash:comments>127</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>7个示例科普CPU Cache</title>
+		<link>https://coolshell.cn/articles/10249.html</link>
+					<comments>https://coolshell.cn/articles/10249.html#comments</comments>
+		
+		<dc:creator><![CDATA[Leo]]></dc:creator>
+		<pubDate>Tue, 30 Jul 2013 01:05:38 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[系统架构]]></category>
+		<category><![CDATA[cache]]></category>
+		<category><![CDATA[CPU]]></category>
+		<category><![CDATA[并发]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10249</guid>
+
+					<description><![CDATA[<p>（感谢网友 @我的上铺叫路遥 翻译投稿） CPU cache一直是理解计算机体系架构的重要知识点，也是并发编程设计中的技术难点，而且相关参考资料如同过江之鲫，浩...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10249.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10249.html">7个示例科普CPU Cache</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢网友 </strong><a href="http://weibo.com/fullofbull" target="_blank"><strong>@我的上铺叫路遥</strong></a><strong> 翻译投稿）</strong></p>
+<p>CPU cache一直是理解计算机体系架构的重要知识点，也是并发编程设计中的技术难点，而且相关参考资料如同过江之鲫，浩瀚繁星，阅之如临深渊，味同嚼蜡，三言两语难以入门。正好网上有人推荐了微软大牛Igor Ostrovsky一篇博文<strong>《漫游处理器缓存效应》</strong>，文章不仅仅用7个最简单的源码示例就将CPU cache的原理娓娓道来，还附加图表量化分析做数学上的佐证，个人感觉这种案例教学的切入方式绝对是俺的菜，故而忍不住贸然译之，以飨列位看官。</p>
+<p>原文地址：<a href="http://igoro.com/archive/gallery-of-processor-cache-effects/">Gallery of Processor Cache Effects</a></p>
+<p>大多数读者都知道cache是一种快速小型的内存，用以存储最近访问内存位置。这种描述合理而准确，但是更多地了解一些处理器缓存工作中的“烦人”细节对于理解程序运行性能有很大帮助。</p>
+<p>在这篇博客中，我将运用代码示例来详解cache工作的方方面面，以及对现实世界中程序运行产生的影响。</p>
+<p>下面的例子都是用C#写的，但语言的选择同程序运行状况以及得出的结论几乎没什么影响。</p>
+<h4>示例1：内存访问和运行</h4>
+<p>你认为相较于循环1，循环2会运行多快？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int[] arr = new int[64 * 1024 * 1024];
+
+// Loop 1
+for (int i = 0; i &lt; arr.Length; i++) arr[i] *= 3;
+
+// Loop 2
+for (int i = 0; i &lt; arr.Length; i += 16) arr[i] *= 3;</pre>
+<p><span id="more-10249"></span></p>
+<p>第一个循环将数组的每个值乘3，第二个循环将每16个值乘3，第二个循环只做了第一个约6%的工作，但在现代机器上，两者几乎运行相同时间：在我机器上分别是80毫秒和78毫秒。</p>
+<p>两个循环花费相同时间的原因跟内存有关。<strong>循环执行时间长短由数组的内存访问次数决定的，而非整型数的乘法运算次数。</strong>经过下面对第二个示例的解释，你会发现硬件对这两个循环的主存访问次数是相同的。</p>
+<h4>示例2：缓存行的影响</h4>
+<p>让我们进一步探索这个例子。我们将尝试不同的循环步长，而不仅仅是1和16。</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">for (int i = 0; i &lt; arr.Length; i += K) arr[i] *= 3;</code></p>
+<p>下图为该循环在不同步长(K)下的运行时间：</p>
+<p><img decoding="async" class="aligncenter" alt="running times of this loop for different step values (K)" src="http://igoro.com/wordpress/wp-content/uploads/2010/01/image6.png" /></p>
+<p>注意当步长在1到16范围内，循环运行时间几乎不变。但从16开始，每次步长加倍，运行时间减半。</p>
+<p>背后的原因是今天的CPU不再是按字节访问内存，而是以64字节为单位的块(chunk)拿取，称为一个缓存行(cache line)。当你读一个特定的内存地址，整个缓存行将从主存换入缓存，并且访问同一个缓存行内的其它值的开销是很小的。</p>
+<p>由于16个整型数占用64字节（一个缓存行），for循环步长在1到16之间必定接触到相同数目的缓存行：即数组中所有的缓存行。当步长为32，我们只有大约每两个缓存行接触一次，当步长为64，只有每四个接触一次。</p>
+<p>理解缓存行对某些类型的程序优化而言可能很重要。比如，数据字节对齐可能决定一次操作接触1个还是2个缓存行。那上面的例子来说，很显然操作不对齐的数据将损失一半性能。</p>
+<h4>示例3：L1和L2缓存大小</h4>
+<p>今天的计算机具有两级或三级缓存，通常叫做L1、L2以及可能的L3（译者注：如果你不明白什么叫二级缓存，可以参考<a href="https://coolshell.cn/articles/3236.html" target="_blank">这篇精悍的博文</a>lol）。如果你想知道不同缓存的大小，你可以使用系统内部工具<a href="http://technet.microsoft.com/en-us/sysinternals/cc835722.aspx" target="_blank">CoreInfo</a>，或者Windows API调用<a href="http://msdn.microsoft.com/en-us/library/ms683194(VS.85).aspx" target="_blank">GetLogicalProcessorInfo</a>。两者都将告诉你缓存行以及缓存本身的大小。</p>
+<p>在我的机器上，CoreInfo现实我有一个32KB的L1数据缓存，一个32KB的L1指令缓存，还有一个4MB大小L2数据缓存。L1缓存是处理器独享的，L2缓存是成对处理器共享的。</p>
+<p>Logical Processor to Cache Map:<br />
+*&#8212; Data Cache 0, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+*&#8212; Instruction Cache 0, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+-*&#8211; Data Cache 1, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+-*&#8211; Instruction Cache 1, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+**&#8211; Unified Cache 0, Level 2, 4 MB, Assoc 16, LineSize 64<br />
+&#8211;*- Data Cache 2, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+&#8211;*- Instruction Cache 2, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+&#8212;* Data Cache 3, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+&#8212;* Instruction Cache 3, Level 1, 32 KB, Assoc 8, LineSize 64<br />
+&#8211;** Unified Cache 1, Level 2, 4 MB, Assoc 16, LineSize 64</p>
+<p>（译者注：作者平台是四核机，所以L1编号为0~3，数据/指令各一个，L2只有数据缓存，两个处理器共享一个，编号0~1。关联性字段在后面例子说明。）</p>
+<p>让我们通过一个实验来验证这些数字。遍历一个整型数组，每16个值自增1——一种节约地方式改变每个缓存行。当遍历到最后一个值，就重头开始。我们将使用不同的数组大小，可以看到当数组溢出一级缓存大小，程序运行的性能将急剧滑落。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int steps = 64 * 1024 * 1024;
+// Arbitrary number of steps
+int lengthMod = arr.Length - 1;
+for (int i = 0; i &lt; steps; i++)
+{
+    arr[(i * 16) &amp; lengthMod]++; // (x &amp; lengthMod) is equal to (x % arr.Length)
+}</pre>
+<p>下图是运行时间图表：<br />
+<img decoding="async" class="aligncenter" alt="cache size" src="http://igoro.com/wordpress/wp-content/uploads/2010/02/image.png" /></p>
+<p>你可以看到在32KB和4MB之后性能明显滑落——正好是我机器上L1和L2缓存大小。</p>
+<h4>示例4：指令级别并发</h4>
+<p>现在让我们看一看不同的东西。下面两个循环中你以为哪个较快？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int steps = 256 * 1024 * 1024;
+int[] a = new int[2];
+
+// Loop 1
+for (int i=0; i&lt;steps; i++) { a[0]++; a[0]++; }
+
+// Loop 2
+for (int i=0; i&lt;steps; i++) { a[0]++; a[1]++; }</pre>
+<p>结果是第二个循环约比第一个快一倍，至少在我测试的机器上。为什么呢？这跟两个循环体内的操作指令依赖性有关。</p>
+<p>第一个循环体内，操作做是相互依赖的（译者注：下一次依赖于前一次）：<br />
+<img decoding="async" class="aligncenter" alt="same value dependency" src="http://igoro.com/wordpress/wp-content/uploads/2010/01/image.png" /><br />
+但第二个例子中，依赖性就不同了：<br />
+<img decoding="async" class="aligncenter" alt="different values dependency" src="http://igoro.com/wordpress/wp-content/uploads/2010/02/image2.png" /></p>
+<p>现代处理器中对不同部分指令拥有一点并发性（译者注：跟流水线有关，比如Pentium处理器就有U/V两条流水线，后面说明）。这使得CPU在同一时刻访问L1两处内存位置，或者执行两次简单算术操作。在第一个循环中，处理器无法发掘这种指令级别的并发性，但第二个循环中就可以。</p>
+<p>[原文更新]：许多人在reddit上询问有关编译器优化的问题，像{ a[0]++; a[0]++; }能否优化为{ a[0]+=2; }。实际上，C#编译器和CLR JIT没有做优化——在数组访问方面。我用release模式编译了所有测试（使用优化选项），但我查询了JIT汇编语言证实优化并未影响结果。</p>
+<h4>示例5：缓存关联性</h4>
+<p>缓存设计的一个关键决定是确保每个主存块(chunk)能够存储在任何一个缓存槽里，或者只是其中一些（译者注：此处一个槽位就是一个缓存行）。</p>
+<p>有三种方式将缓存槽映射到主存块中：</p>
+<ol>
+<li><strong>直接映射(Direct mapped cache)</strong><br />
+每个内存块只能映射到一个特定的缓存槽。一个简单的方案是通过块索引chunk_index映射到对应的槽位(chunk_index % cache_slots)。被映射到同一内存槽上的两个内存块是不能同时换入缓存的。（译者注：chunk_index可以通过物理地址/缓存行字节计算得到）</li>
+<li><strong>N路组关联(N-way set associative cache)</strong><br />
+每个内存块能够被映射到N路特定缓存槽中的任意一路。比如一个16路缓存，每个内存块能够被映射到16路不同的缓存槽。一般地，具有一定相同低bit位地址的内存块将共享16路缓存槽。（译者注：相同低位地址表明相距一定单元大小的连续内存）</li>
+<li><strong>完全关联(Fully associative cache)</strong><br />
+每个内存块能够被映射到任意一个缓存槽。操作效果上相当于一个散列表。</li>
+</ol>
+<p>直接映射缓存会引发冲突——当多个值竞争同一个缓存槽，它们将相互驱逐对方，导致命中率暴跌。另一方面，完全关联缓存过于复杂，并且硬件实现上昂贵。N路组关联是处理器缓存的典型方案，它在电路实现简化和高命中率之间取得了良好的折中。</p>
+<p><img decoding="async" class="aligncenter" alt="完全关联与多路关联的cache映射" src="http://my.csdn.net/uploads/201204/18/1334757273_8141.png" /><br />
+（此图由译者给出，直接映射和完全关联可以看做N路组关联的两个极端，从图中可知当N=1时，即直接映射；当N取最大值时，即完全关联。读者可以自行想象直接映射图例，具体表述见参考资料。）</p>
+<p>举个例子，4MB大小的L2缓存在我机器上是16路关联。所有64字节内存块将分割为不同组，映射到同一组的内存块将竞争L2缓存里的16路槽位。</p>
+<p>L2缓存有65,536个缓存行（译者注：4MB/64），每个组需要16路缓存行，我们将获得4096个集。这样一来，块属于哪个组取决于块索引的低12位bit(2^12=4096)。<strong>因此缓存行对应的物理地址凡是以262,144字节(4096*64)的倍数区分的，将竞争同一个缓存槽。我机器上最多维持16个这样的缓存槽。</strong>（译者注：请结合上图中的2路关联延伸理解，一个块索引对应64字节，chunk0对应组0中的任意一路槽位，chunk1对应组1中的任意一路槽位，以此类推chunk4095对应组4095中的任意一路槽位，chunk0和chunk4096地址的低12bit是相同的，所以chunk4096、chunk8192将同chunk0竞争组0中的槽位，它们之间的地址相差262,144字节的倍数，而最多可以进行16次竞争，否则就要驱逐一个chunk）。</p>
+<p>为了使得缓存关联效果更加明了，我需要重复地访问同一组中的16个以上的元素，通过如下方法证明：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">public static long UpdateEveryKthByte(byte[] arr, int K)
+{
+    Stopwatch sw = Stopwatch.StartNew();
+    const int rep = 1024*1024; // Number of iterations – arbitrary
+    int p = 0;
+    for (int i = 0; i &lt; rep; i++)
+    {
+        arr[p]++;
+        p += K;
+        if (p &gt;= arr.Length) p = 0;
+    }
+    sw.Stop();
+    return sw.ElapsedMilliseconds;
+}</pre>
+<p>该方法每次在数组中迭代K个值，当到达末尾时从头开始。循环在运行足够长（2^20次）之后停止。</p>
+<p>我使用不同的数组大小（每次增加1MB）和不同的步长传入UpdateEveryKthByte()。以下是绘制的图表，蓝色代表运行较长时间，白色代表较短时间：<br />
+<img decoding="async" class="aligncenter" alt="timing" src="http://igoro.com/wordpress/wp-content/uploads/2010/02/image_thumb1_opt.png" /><br />
+蓝色区域（较长时间）表明当我们重复数组迭代时，更新的值无法同时放在缓存中。浅蓝色区域对应80毫秒，白色区域对应10毫秒。</p>
+<p>让我们来解释一下图表中蓝色部分：</p>
+<p><strong>1.为何有垂直线？</strong>垂直线表明步长值过多接触到同一组中内存位置（大于16次）。在这些次数里，我的机器无法同时将接触过的值放到16路关联缓存中。</p>
+<p>一些糟糕的步长值为2的幂：256和512。举个例子，考虑512步长遍历8MB数组，存在32个元素以相距262,144字节空间分布，所有32个元素都会在循环遍历中更新到，因为512能够整除262,144（译者注：此处一个步长代表一个字节）。</p>
+<p>由于32大于16，这32个元素将一直竞争缓存里的16路槽位。</p>
+<p>（译者注：为何512步长的垂直线比256步长颜色更深？在同样足够多的步数下，512比256访问到存在竞争的块索引次数多一倍。比如跨越262,144字节边界512需要512步，而256需要1024步。那么当步数为2^20时，512访问了2048次存在竞争的块而256只有1024次。最差情况下步长为262,144的倍数，因为每次循环都会引发一个缓存行驱逐。）</p>
+<p>有些不是2的幂的步长运行时间长仅仅是运气不好，最终访问到的是同一组中不成比例的许多元素，这些步长值同样显示为蓝线。</p>
+<p><strong>2.为何垂直线在4MB数组长度的地方停止？</strong>因为对于小于等于4MB的数组，16路关联缓存相当于完全关联缓存。</p>
+<p>一个16路关联缓存最多能够维护16个以262,144字节分隔的缓存行，4MB内组17或更多的缓存行都没有对齐在262,144字节边界上，因为16*262,144=4,194,304。</p>
+<p><strong>3.为何左上角出现蓝色三角？</strong>在三角区域内，我们无法在缓存中同时存放所有必要的数据，不是出于关联性，而仅仅是因为L2缓存大小所限。</p>
+<p>举个例子，考虑步长128遍历16MB数组，数组中每128字节更新一次，这意味着我们一次接触两个64字节内存块。为了存储16MB数组中每两个缓存行，我们需要8MB大小缓存。但我的机器中只有4MB缓存（译者注：这意味着必然存在冲突从而延时）。</p>
+<p>即使我机器中4MB缓存是全关联，仍无法同时存放8MB数据。</p>
+<p><strong>4.为何三角最左边部分是褪色的？</strong>注意左边0~64字节部分——正好一个缓存行！就像上面示例1和2所说，额外访问相同缓存行的数据几乎没有开销。比如说，步长为16字节，它需要4步到达下一个缓存行，也就是说4次内存访问只有1次开销。</p>
+<p>在相同循环次数下的所有测试用例中，采取省力步长的运行时间来得短。</p>
+<p>将图表延伸后的模型：<br />
+<img decoding="async" class="aligncenter" alt="timing2" src="http://igoro.com/wordpress/wp-content/uploads/2010/02/assoc_big_thumb1_opt.png" /></p>
+<p>缓存关联性理解起来有趣而且确能被证实，但对于本文探讨的其它问题比起来，它肯定不会是你编程时所首先需要考虑的问题。</p>
+<h4>示例6：缓存行的伪共享(false-sharing)</h4>
+<p>在多核机器上，缓存遇到了另一个问题——一致性。不同的处理器拥有完全或部分分离的缓存。在我的机器上，L1缓存是分离的（这很普遍），而我有两对处理器，每一对共享一个L2缓存。这随着具体情况而不同，如果一个现代多核机器上拥有多级缓存，那么快速小型的缓存将被处理器独占。</p>
+<p><strong>当一个处理器改变了属于它自己缓存中的一个值，其它处理器就再也无法使用它自己原来的值，因为其对应的内存位置将被刷新(invalidate)到所有缓存。而且由于缓存操作是以缓存行而不是字节为粒度，所有缓存中整个缓存行将被刷新！</strong></p>
+<p>为证明这个问题，考虑如下例子：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">private static int[] s_counter = new int[1024];
+private void UpdateCounter(int position)
+{
+    for (int j = 0; j &lt; 100000000; j++)
+    {
+        s_counter[position] = s_counter[position] + 3;
+    }
+}</pre>
+<p>在我的四核机上，如果我通过四个线程传入参数0,1,2,3并调用UpdateCounter，所有线程将花费4.3秒。</p>
+<p>另一方面，如果我传入16,32,48,64，整个操作进花费0.28秒！</p>
+<p>为何会这样？第一个例子中的四个值很可能在同一个缓存行里，每次一个处理器增加计数，这四个计数所在的缓存行将被刷新，而其它处理器在下一次访问它们各自的计数（译者注：注意数组是private属性，每个线程独占）将失去命中(miss)一个缓存。这种多线程行为有效地禁止了缓存功能，削弱了程序性能。</p>
+<h4>示例7：硬件复杂性</h4>
+<p>即使你懂得了缓存的工作基础，有时候硬件行为仍会使你惊讶。不用处理器在工作时有不同的优化、探试和微妙的细节。</p>
+<p>有些处理器上，L1缓存能够并发处理两路访问，如果访问是来自不同的存储体，而对同一存储体的访问只能串行处理。而且处理器聪明的优化策略也会使你感到惊讶，比如在伪共享的例子中，以前在一些没有微调的机器上运行表现并不良好，但我家里的机器能够对最简单的例子进行优化来减少缓存刷新。</p>
+<p>下面是一个“硬件怪事”的奇怪例子：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">private static int A, B, C, D, E, F, G;
+private static void Weirdness()
+{
+    for (int i = 0; i &lt; 200000000; i++)
+    {
+        // do something...
+    }
+}</pre>
+<p>当我在循环体内进行三种不同操作，我得到如下运行时间：</p>
+<p><strong>           操作</strong>                    <strong>时间</strong><br />
+A++; B++; C++; D++;     719 ms<br />
+A++; C++; E++; G++;     448 ms<br />
+A++; C++;                      518 ms</p>
+<p>增加A,B,C,D字段比增加A,C,E,G字段花费更长时间，更奇怪的是，增加A,C两个字段比增加A,C,E,G执行更久！</p>
+<p>我无法肯定这些数字背后的原因，但我怀疑这跟存储体有关，如果有人能够解释这些数字，我将洗耳恭听。</p>
+<p>这个例子的教训是，你很难完全预测硬件的行为。你可以预测很多事情，但最终，衡量及验证你的假设非常重要。</p>
+<h4>关于第7个例子的一个回帖</h4>
+<p>Goz：我询问Intel的工程师最后的例子，得到以下答复：</p>
+<p>“很显然这涉及到执行单元里指令是怎样终止的，机器处理存储-命中-加载的速度，以及如何快速且优雅地处理试探性执行的循环展开（比如是否由于内部冲突而多次循环）。但这意味着你需要非常细致的流水线跟踪器和模拟器才能弄明白。在纸上预测流水线里的乱序指令是无比困难的工作，就算是设计芯片的人也一样。对于门外汉来说，没门，抱歉！”</p>
+<h4>P.S.个人感悟——局部性原理和流水线并发</h4>
+<p>程序的运行存在<strong>时间和空间上的局部性</strong>，前者是指只要内存中的值被换入缓存，今后一段时间内会被多次引用，后者是指该内存附近的值也被换入缓存。如果在编程中特别注意运用局部性原理，就会获得性能上的回报。</p>
+<p>比如<strong>C语言中应该尽量减少静态变量的引用，</strong>这是因为静态变量存储在全局数据段，在一个被反复调用的函数体内，引用该变量需要对缓存多次换入换出，而如果是分配在堆栈上的局部变量，函数每次调用CPU只要从缓存中就能找到它了，因为堆栈的重复利用率高。</p>
+<p>再比如<strong>循环体内的代码要尽量精简，</strong>因为代码是放在指令缓存里的，而指令缓存都是一级缓存，只有几K字节大小，如果对某段代码需要多次读取，而这段代码又跨越一个L1缓存大小，那么缓存优势将荡然无存。</p>
+<p>关于<strong>CPU的流水线(pipeline)并发性</strong>简单说说，Intel Pentium处理器有两条流水线U和V，每条流水线可各自独立地读写缓存，所以可以在一个时钟周期内同时执行两条指令。但这两条流水线不是对等的，U流水线可以处理所有指令集，V流水线只能处理简单指令。</p>
+<p>CPU指令通常被分为四类，第一类是常用的简单指令，像mov, nop, push, pop, add, sub, and, or, xor, inc, dec, cmp, lea，可以在任意一条流水线执行，只要相互之间不存在依赖性，完全可以做到指令并发。</p>
+<p>第二类指令需要同别的流水线配合，像一些进位和移位操作，这类指令如果在U流水线中，那么别的指令可以在V流水线并发运行，如果在V流水线中，那么U流水线是暂停的。</p>
+<p>第三类指令是一些跳转指令，如cmp,call以及条件分支，它们同第二类相反，当工作在V流水线时才能通U流水线协作，否则只能独占CPU。</p>
+<p>第四类指令是其它复杂的指令，一般不常用，因为它们都只能独占CPU。</p>
+<p>如果是汇编级别编程，<strong>要达到指令级别并发，必须要注重指令之间的配对。</strong>尽量使用第一类指令，避免第四类，还要在顺序上减少上下文依赖。</p>
+<h4>参考资料</h4>
+<p>wiki上的CPU cache解析（<a href="http://zh.wikipedia.org/zh-cn/CPU%E7%BC%93%E5%AD%98" target="_blank">中文版</a>）（<a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank">英文版</a>）。</p>
+<p>上海交通大学师生制作的一个关于<a href="http://yoursunny.com/study/EI209/?topic=cache" target="_blank">cache映射功能、命中率计算</a>的教学演示程序，模拟了不同关联模式下cache的映射和命中几率，形象直观。</p>
+<p>网易数据库大牛<a href="http://weibo.com/u/2216172320" target="_blank">@何_登成</a>自制PPT<a href="http://vdisk.weibo.com/s/dBzv2sibdUB8" target="_blank">《CPU Cache and Memory Ordering》</a>，信息量超大！</p>
+<p>南京大学计算机教学<a href="http://cs.nju.edu.cn/swang/CompArchOrg_12F/slides/lecture09.pdf" target="_blank">公开PPT</a>，温馨提示，地址域名里面改变字段&#8221;lecture&#8221;后面的数字编号可切换课程;-)</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20793.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/cpu_512x512-150x150.png" alt="与程序员相关的CPU缓存知识" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20793.html" class="wp_rp_title">与程序员相关的CPU缓存知识</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li><li ><a href="https://coolshell.cn/articles/9606.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/race_condition-150x150.jpg" alt="疫苗：Java HashMap的死循环" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9606.html" class="wp_rp_title">疫苗：Java HashMap的死循环</a></li><li ><a href="https://coolshell.cn/articles/2039.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="CPU的性价比" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2039.html" class="wp_rp_title">CPU的性价比</a></li><li ><a href="https://coolshell.cn/articles/93.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/tortoisesvn-150x150.png" alt="版本控制Subversion相关资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/93.html" class="wp_rp_title">版本控制Subversion相关资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10249.html">7个示例科普CPU Cache</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10249.html/feed</wfw:commentRss>
+			<slash:comments>73</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>加班与效率</title>
+		<link>https://coolshell.cn/articles/10217.html</link>
+					<comments>https://coolshell.cn/articles/10217.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 24 Jul 2013 00:28:10 +0000</pubDate>
+				<category><![CDATA[技术管理]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Project]]></category>
+		<category><![CDATA[Rework]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10217</guid>
+
+					<description><![CDATA[<p>微博上看到了这么一个贴子，就像以前在《腾讯，竞争力 和 用户体验》中批评过腾讯说自己的核心竞争力是员工加班一样，我顺着Winter的回复也批评了一下这个微博——...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10217.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10217.html">加班与效率</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright  wp-image-10220" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/Work-Overtime-300x201.jpg" width="240" height="161" />微博上看到了<a href="http://weibo.com/1401880315/A0LFVkB3L" target="_blank">这么一个贴子</a>，就像以前在《<a title="腾讯，竞争力 和 用户体验" href="https://coolshell.cn/articles/5901.html" target="_blank">腾讯，竞争力 和 用户体验</a>》中批评过腾讯说自己的核心竞争力是员工加班一样，我顺着Winter的回复也批评了一下这个微博——</p>
+<p style="padding-left: 30px;">“<span style="color: #808080;">靠加班超越对手？！劳动密集型么？我要是对手的话，我就来趁机挖人了，直接摁死你……//<a href="http://weibo.com/n/%E5%AF%92%E5%86%ACwinter"><span style="color: #808080;">@寒冬winter</span></a>: 当一个管理者的智慧无法衡量一支团队的产出的时候，他就会把“工时”当做最后的救命稻草，死死抱住——这是他唯一听得懂的东西了</span>。”</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-10218" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/work_overtime.png" width="539" height="120" srcset="https://coolshell.cn/wp-content/uploads/2013/07/work_overtime.png 539w, https://coolshell.cn/wp-content/uploads/2013/07/work_overtime-300x66.png 300w" sizes="(max-width: 539px) 100vw, 539px" /></p>
+<p>然后，<a title="玄了个澄的" href="http://weibo.com/jiach">@玄了个澄的</a>在微博里at我说，他在微信里看了<a href="http://weibo.com/n/Fenng">@Fenng</a> 关于加班的言论，希望我评论一下。我看了一下大辉的文章，虽然写得有点散乱，但是我和他的一些观点还是很类似的，我主要在这里加强一下我的看法。</p>
+<h4>关于加班</h4>
+<p><strong>认为加班是公司的核心竞争力，或是超越对手的手段，是一种相当 Ridiculous 的想法。这说明管理者们已经想不到自己公司的核心价值了</strong>。</p>
+<p><span id="more-10217"></span></p>
+<p>是的，这些靠堆功能没有灵魂的产品的价值就只剩下比谁跑得快了。他们愚蠢和思维有限的大脑里已经区分不出来，“跑得快”和“跑得好”的差别了。产品的发展不是短跑，而是长跑，甚至更像是登山，登山比的不是快，而比的是策略，比的是意志，目的是登顶。并不是谁一开始爬得快谁就能最先登顶的，你往往被超越的时候都在后半程。对于一些危险的雪山来说，登顶的人通常都是要做好非常很充分的准备，并且在登山的过程中学会如何保留体力，学会如何步步为营的，从来不强行登顶。</p>
+<p>在<a title="《Rework》摘录及感想" href="https://coolshell.cn/articles/9156.html">《Rework》摘录及感想</a> 中提到过两点</p>
+<ul>
+<li><strong>条件受限是好事，因为条件受限可以让你小材大用，让你没有办法再用蛮力来完成工作，让你必需去思考使用知识密集型的解决方案来更聪明的解决问题</strong>。</li>
+</ul>
+<ul>
+<li><strong>工作狂往往不得要领。他们花大把大把的时间去解决问题，他们以为能靠蛮力来弥补思维上的惰性，其结果就是折腾出一堆粗糙无用的解决方案</strong>。</li>
+</ul>
+<p>就像人肉手动的织布机一样，当面对大量订单的时候，一个简单粗暴的方法就是拼命地加人和拼命地工作来换取更大的生产力。只有你在人手不够或是人力成本太高的情况下，你才会去想是不是可以优化一下工具，制造一个更有效率更有生产力的工具。</p>
+<p><strong>在中国，劳动力的成本不高，而管理者们的智力和能力有限，所以，在这个环境下，尤其在KPI和数字的重压下，管理者们是非常非常容易想到需要靠加人或是加班来提高产能的</strong>。所以，他们放弃了知识密集型的创新，而采用了劳动密集型的简单粗暴的方式，长期下来，导致了自己再也不会思考，导致了只会使用人肉解决问题。</p>
+<p>于是，当全自动化的织布机出现的时候，这种劳动密集型的公司分分钟就成为了历史。这样的例子太多太多了，看看历史就知道了。</p>
+<p>当然，有时候，我们需要冲刺还是要适当偶尔加班的，但这绝对不应该是常态和长期的，不然，这必然是一种饮鸩止渴的行为。</p>
+<p>另外，我还要多说几种情况：</p>
+<p style="padding-left: 30px;">1）如果你的员工就像在《<a title="软件公司的两种管理方式" href="https://coolshell.cn/articles/4951.html" target="_blank">软件公司的两种管理</a>》中所说的，像Widget Factories那样，净是些X型的人的话，那么，你也只有使用加班和加人这种方式，就像长城和金字塔的建设过程一样，就像富士康一样，你的团队本质是不会思考只能用鞭子去抽他们的方式去管理。于是，你也只能用“狼性”来呼唤你的员工像那些低智商的野兽一样的行事。</p>
+<p style="padding-left: 30px;">2）有时候，我们需要去“卡位”，需要很快地去实现一个东西占领市场，这需要加班。就像Win95和Intel的奔腾芯片的浮点数问题一样。但是千万不要忘了，你在卡完位后，得马上把你产品的质量搞上去，不然，你一样会死得很难看。（Windows是有两个团队的，一个团队是用来占领市场的，另一个团队是安心搞发展的）注意：“卡位”从某种程度上来说应该是一种有价值的事，但我们依然要思考是否在用蛮力行事。</p>
+<p style="padding-left: 30px;">3）另外，有的人工作就是生活，生活就是工作，所以，对他来说，这不是一种工作，而是一种事业。我认可这样的精神和热情，但是，我还是想让这样的人反思一下自己，有没有用一种更为聪明的方式来从事自己的事业？而不是用蛮力。</p>
+<p>无论上述的哪种情况，我们都可以看到，只要你进入了劳动密集型，靠人和靠加班来解决问题，并沉迷并深 陷其中不能自拔，那们，你终有一天会玩到尽头的。</p>
+<h4>关于效率</h4>
+<p><strong>很多人不知道什么叫效率，他们以为效率就是：单位时间单位人数下干更多的活。这是错的！效率不是比谁干的活多，而是比谁干得活有更大的价值</strong>。效率的物理公式是：<span style="color: #ff0000;"><strong>有用功/总功</strong></span>。<span style="color: #000000;">换句话说，效率就是：单位时间和人数产生的价值</span>。所以，提高效率，并不是加人，也不是干更多的活，而是，你这么多人干出来了多少有价值的东西。</p>
+<p>有了公式，我们也就知道怎么来提高效率了。</p>
+<p><strong>1）增加有用功</strong></p>
+<ul>
+<li>你得多问问你的需求方，为什么要加这个需求？干这个事到底有多大的价值？能让多少人受益？</li>
+<li>你得多问问你的需求方，能不能稍微简化一下需求，这样可以让我付出的努力更少一些？</li>
+<li>你得要多去思考一下，你是在干一个建筑队的活呢？还是在干一个装修队的活？</li>
+<li>你得要多去思考一下，业务上和用户的最大的痛点是什么？</li>
+</ul>
+<p>关于增加有用功，再说两点：</p>
+<ul>
+<li>像乔布斯那样，告诉你的产品经理或是业务方，你现在提的10需求，我只能做3个，会是哪3个？为什么是这3个？<strong>有用功的来源不是拼命做需求，而是砍需求。</strong></li>
+</ul>
+<ul>
+<li><strong>关于创造价值，我们要干的不是像百度的“竞价排名”那样，把钱从别人口袋里搬运到自己的口袋里，而是要像“英国工业革命”或是“硅谷”那样，把价值真正的创造出来</strong>。</li>
+</ul>
+<p><strong>2）降低总功</strong></p>
+<ul>
+<li><span style="line-height: 13px;">你得多问问自己，你有多少时间是在干一些支持性而不是产出性的工作？</span></li>
+<li>你得多问问自己，有没有残酷无情地减少重复劳动的劳动密集型的工作？</li>
+<li>你得多问问自己，自己的管理者和员工的能力和素质有没有在降低你的团队执行的成本？</li>
+</ul>
+<p><strong>3）形成合力</strong></p>
+<p>有一个很不错的产品经理对我说，他看了南京那两个小女孩被饿死的消息，感到很震惊。与之有关联的每一方都说自己尽力，但是最终结果人还是饿死了，你几乎不敢相信这是真的。</p>
+<p>但是，类比一下我们的项目，这种事似乎又发生在我们的公司当中，尤其是大公司中。每一个团队都说自己尽力了，结果项目就是没做好，底层团队说自己只干底层，已经尽力了，前端说自己只负责前端，也尽力了，后端说自己只管后端，不管前端和底层，运维说对于这样的设计和部署自己也尽力了，产品经理，运营都这样说，自己尽力了。你会发现，你几乎很难批评他们，因为他们的确如他们所说的那样，把他们自己的那块都做得很好了，而且的确做得很好了。但是，最终的结果却是：整个产品问题很多。</p>
+<p><strong>所以说，效率不是每个团队各自的效率，而是整个团队对整个产品负责的共同使命，这样才会现整体的效率。没有整体的效率，只有个体的效率，最终也等于没有效率</strong>。</p>
+<h4>T-Shirt Size Estimation</h4>
+<p>Amazon用一种T-Shirt Size 估计的方式来做项目。</p>
+<ul>
+<li>产品经理会对每一条需求评估上业务影响力的尺寸，如：XXXL 影响一千万人以上或是可以占到上亿美金的市场，XXL，影响百万用户或是占了千万金级别以上的市场，后面还有XL，L，M，S，这样下来。</li>
+</ul>
+<ul>
+<li>开发团队也一样，要评估投入的人员时间成本，XXXL表示要干1年，XXL干半年，XL干3个月，L干两个月，M干一个月，S干两周以下。等等。</li>
+</ul>
+<p>于是，</p>
+<ul>
+<li>当业务影响力是XL，时间人员成本是S，这是最高优先级。</li>
+<li>当业务影响力是M，时间人员成本是M，这是低优先级。</li>
+<li>当业务影响力是S，时间人员成本是XL，直接砍掉这个需求。因为是亏的。</li>
+<li>当业务影响力是XXL，时间人员成本是XXL，需要简化需求，把需求简化成XL，时间人员成本变成M以下。</li>
+</ul>
+<p>大家感受一下吧。</p>
+<p>好了，我就说这么多，欢迎大家讨论。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li><li ><a href="https://coolshell.cn/articles/9156.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/03/rework-150x150.jpg" alt="《Rework》摘录及感想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9156.html" class="wp_rp_title">《Rework》摘录及感想</a></li><li ><a href="https://coolshell.cn/articles/4951.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="软件公司的两种管理方式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4951.html" class="wp_rp_title">软件公司的两种管理方式</a></li><li ><a href="https://coolshell.cn/articles/3218.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="开发时间估计" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3218.html" class="wp_rp_title">开发时间估计</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10217.html">加班与效率</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10217.html/feed</wfw:commentRss>
+			<slash:comments>194</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>类型的本质和函数式实现</title>
+		<link>https://coolshell.cn/articles/10169.html</link>
+					<comments>https://coolshell.cn/articles/10169.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Mon, 22 Jul 2013 11:46:00 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10169</guid>
+
+					<description><![CDATA[<p>（感谢 @文艺复兴记（todd） 投递此文） 在上一篇文章《二叉树迭代器算法》中，我介绍了一种基于栈的二叉树迭代器实现。程序设计语言和Haskell大牛@九瓜 ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10169.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢 </strong><a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a><strong>（todd） 投递此文）</strong></p>
+<p>在上一篇文章<a href="https://coolshell.cn/articles/9886.html">《二叉树迭代器算法》</a>中，我介绍了一种基于栈的二叉树迭代器实现。程序设计语言和Haskell大牛<a href="http://weibo.com/u/1684815495">@九瓜</a> 在看过之后评论到：</p>
+<blockquote><p>这里用了 stack 来做，有点偷懒，所以错失了一个抽象思考机会。如果我们能够理解二叉树到线性表的转换过程，完全可以把 Iterator 当作抽象的线性表来看，只要定义了关于 Iterator 的 empty, singleton, 还有 append 操作，实现二叉树的 Iterator 就变得非常直观。</p></blockquote>
+<p>“错失了一个抽象思考机会”是什么意思呢？我理解九瓜的意思是基于栈的实现虽然是正确的，但它缺乏对于迭代器类型本质的理解，不具有通用性。如果能对迭代器进行合适地抽象就可以像二叉树递归遍历一样自然地得出二叉树迭代器，甚至其他更复杂的数据结构，只要我们能写出它的遍历算法，迭代器算法都可以自然推出。</p>
+<h4>类型的本质</h4>
+<p>九瓜提到了通过empty, singleton和append操作对Iterator进行抽象，我本来打算直接根据这个思路介绍函数式的二叉树迭代器实现，但是考虑到其实首要的问题在于理解类型的本质，而并不是所有人都具备这个基础，不如先普及一下类型基础再进入具体实现。那么下面我们就先来认识一下类型到底是什么？我们先以来看看表示元素对的Pair类型，可能有人一提到Pair类型马上就会在脑海中浮现出下面的结构：</p>
+<p><span id="more-10169"></span></p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+struct Pair {
+    int left;
+    int right;
+}
+</pre>
+<p>其实，这种理解是非本质的，Pair完全可以用2个元素的数组来表示，第一个元素表示left，第二个元素表示right：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+struct Pair {
+    int elements[2];
+}
+</pre>
+<p>上面的两种不同表示是类型的不同实现，而<strong>类型的本质是由操作(Operation)和操作间的关系或不变式(Invariant)所定义的</strong>，我们称之为类型规范(Type Specification)。比如，Pair类型是这样定义的：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+Type Pair:
+    Operations:
+        Pair make_pair(int x, int y)
+        int get_left(Pair pair)
+        int get_right(Pair pair)
+    Invariants:
+        get_left(make_pair(x, y)) == x  //对x, y构造的Pair取左元素等于x
+        get_right(make_pair(x, y)) == y  //对x, y构造的Pair取右元素等于y
+</pre>
+<p>也就是说只要是满足Pair类型规范，即定义了make_pair，get_left, get_right这3种操作，并且这些操作满足上面两个不变式，那么它这就是Pair类型。我们再来看看稍微复杂一点的Stack类型：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+Type Stack:
+    Operations:
+        Stack make_stack()  //构造空栈
+        Stack push(Stack stack, int x)  //将元素x压栈，返回新栈
+        int top(stack)  //获取栈顶元素
+        Stack pop(Stack stack)  //将栈顶元素弹栈，返回新栈
+    Invariants:
+        top(push(stack, x)) == x  //栈顶元素为最后一次压栈值
+        pop(push(stack, x)) == stack  //对stack压栈后再弹栈等于原来的stack
+</pre>
+<p>Stack类型规范简言之就是FILO（先入后出），如果要形式化就是上面的不变式。为了加深理解，我们现在切换到测试视角来看一看，如果请你来编写一个Stack类的单元测试用例，你应该怎么写呢？许多朋友都不清楚单元测试到底测什么？怎么测？我见过不少人用一个测试用例单独对push做测试，用另一个测试用例对pop单独做测试，其主要原因就在于缺乏对类型本质的理解。其实，只要理解了类型的本质我们就知道孤立地看push或pop是没有任何意义的，它们的意义是在FILO关系下相互解释的，所以测试当然是基于类型规范来测试FILO不变式！这种基于类型规范的测试是一种黑盒测试，与类型的内部实现细节无关，只要单元测试覆盖了类型所定义的所有操作和不变式，那么不管内部怎么实现或优化，测试用例都不需要调整。反之，如果深入到了类型的内部实现做白盒测试，那这样的测试用例实际上就不再是反映其类型规范了，它会随着实现细节的调整而失效。</p>
+<p>更深一层来看，不仅是在Pair，Stack这样的微观层面，在一个系统的宏观层面同样可以采用类型视角，即考察系统定义了哪些操作？这些操作之间有什么样的关系或不变式？比如，你如何从类型的角度来看待MySQL这样一套数据库系统？MySQL系统定义了哪些操作？这些操作之间必须满足怎样的关系和不变式？不仅如此，类型视角除了可以应用于计算机系统，甚至还可以应用于生活中的事物，比如，你到超市购物可以寄存自己的包，在寄包的时候会获得一张密码条，取包时可以通过密码条打开箱子。你能从超市寄包这个例子中看出类型来吗？如果你看出来了，说明你对类型的理解真正融会贯通了！</p>
+<h4>类型的函数式实现</h4>
+<p>上面我们介绍了类型的本质在于操作和操作间的关系，下面我们要关注的是类型的实现。在上面的例子中，Pair的内部结构到底是什么，是一个left和一个right成员？还是一个两元素的数组？没有讲，也没关系，就好像Windows的Handle和Linux的FileDescriptor一样，它们都是一个标识，你并不需要关心它的值本身，你只需要用几个相关的函数创建和操作它就行了（上面超市寄包例子中的密码条和Windows中的Handle是什么关系，你看出来了吗？你需要理解密码条的内容吗？）。换句话说，只要满足类型规范，具体实现是可变的，使用者<strong>只依赖于类型规范而不依赖于其具体实现</strong>。这在面向对象语言中意味着接口保持不变而具体实现可以变化（这里把public方法视为一种广义的接口）。</p>
+<p>下面，我们还会看到的是不仅类型的内部实现可以变化，而且可以根本没有什么所谓的内部实现。这是什么意思呢？让我们来思考一下，是不是Pair内部一定要有什么东西来保存构造函数传入的left和right？我们能跳出这个定势吗？在函数式编程中，我们能做到：</p>
+<p>[javascript]<br />
+//Javascript<br />
+function make_pair(x, y) {<br />
+    // 返回一个支持get_left和get_right操作的闭包(Closure)<br />
+    return {<br />
+        get_left : function() { return x },<br />
+        get_right : function() { return y }<br />
+    }<br />
+}<br />
+function get_left(pair) {<br />
+    return pair.get_left();<br />
+}<br />
+function get_right(pair) {<br />
+    return pair.get_right();<br />
+}<br />
+// Test case<br />
+console.log(get_left(make_pair(1, 2))) //1<br />
+console.log(get_right(make_pair(1, 2))) //2<br />
+[/javascript]</p>
+<p>上面的关键代码在于make_pair的内部返回的不是一种具体的数据结构，而是一个支持get_left和get_right操作的闭包(Closure)，将来可以通过get_left和get_right来提取x, y。这种基于闭包的实现和我们通常采用的基于数据结构的实现的本质区别在哪里呢？不难发现，<strong>基于闭包的实现和类型规范是直接对应的</strong>，它并没有引入类型规范之外的东西，而基于数据结构的实现则隐藏了实现的细节。换句话说，如果要验证实现代码的正确性，对于前者只需要比对着类型规范，对于后者我们可能需要去仔细理解推敲其所采用的数据结构。对于Pair这样简单的结构二者差别不大，甚至基于数据结构的实现更简单，但是对于复杂的类型就容易体现出闭包实现的优势了。为了加深理解，我们再来看一个Stack的函数式实现：</p>
+<p>[javascript]<br />
+//Javascript<br />
+function make_stack() {<br />
+    return null<br />
+}<br />
+function push(stack, x) {<br />
+    return {<br />
+        top : function() { return x },<br />
+        pop : function() { return stack }<br />
+    }<br />
+}<br />
+function top(stack) {<br />
+    return stack.top()<br />
+}<br />
+function pop(stack) {<br />
+    return stack.pop()<br />
+}<br />
+// Test case<br />
+var stack = make_stack()<br />
+stack = push(stack, 1)<br />
+stack = push(stack, 2)<br />
+stack = push(stack, 3)<br />
+console.log(top(stack)) //3<br />
+stack = pop(stack)<br />
+console.log(top(stack)) //2<br />
+stack = push(stack, 4)<br />
+console.log(top(stack)) //4<br />
+[/javascript]</p>
+<p>上面的所有函数都是采用了无副作用的纯函数式设计，可能习惯面向对象编程的朋友不是很习惯，不过这不影响我们对类型的讨论，而且它也很容易改造成面向对象的风格，感兴趣的朋友可以自己尝试对上面的代码进行简单的包装让它看起来像面向对象的样子。</p>
+<h4>函数式二叉树迭代器</h4>
+<p>上面我们介绍了类型的本质和函数式实现，下面我们再来看看Iterator类型又该如何定义和实现呢？ 思路当然还是从操作入手，考虑Iterator类型对应了哪些操作，它们的关系是什么？上面九瓜提示了Iterator类型可以抽象为线性表List类型，或者说Iterator本质上是一个List。为什么呢？其实，只要跳出“如何表示数据结构”的思维，从类型角度思考就很容易理解，因为Iterator和List都定义了相同的操作，Iterator的使用者完全不关心也不知道它背后到底是链表还是二叉树，你对Iterator的操作和一个List的操作完全一样。正是这个原因，STL等范型库才能通过Iterator将算法和数据结构解耦。</p>
+<p>怎么定义一个List类型呢？九瓜提到的empty(), singleton()和append()实际上就是和List打交道最多的Lisp语言的经典定义方式。Lisp是基于s-expression的，s-expression既可以视为线性表又可以视为树，本质上Lisp为List类型了构造、取首元素和取剩余元素等几种操作：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+Type List:
+    Operations:
+        List empty()  //构造空表，通常由()这个文字量表示
+        List singleton(Element e)  //构造包含一个元素的表，通常由(e)这个文字量表示
+        Element first(List list)   //取list的第一个元素，通常又叫car操作
+        List rest(List list)  //取list除第一个元素外的剩余部分，通常又叫cdr操作
+        List append(List list1, List list2) //连接两个表
+    Invariants:
+        append(empty(), list) == list  //空表和表list连接后等于表list
+        append(list, empty()) == list  //空表和表list连接后等于表list
+        first(singleton(e)) == e  //对singleton(e)取首元素等于e
+        rest(singleton(e)) == empty()  //对singleton(e)取首元素外的剩余部分的结果为空表
+        append(first(list), rest(list)) == list  //对list的首尾两部分进行连接等于list本身
+        if list1 is not empty then
+            first(append(list1, list2)) == first(list1)  //对非空表list1于表list2的连接取首元素等于对非空表list1取首元素
+        if list1 is not empty then
+            rest(append(list1, list2)) == append(rest(list1), list2)  //对非空表list1于表list2的连接取首元素等于对非空表list1取首元素
+</pre>
+<p>有了上面的分析，我们相应地写出下面的List实现：</p>
+<p>[javascript]<br />
+//Javascript<br />
+function empty() {<br />
+    return null<br />
+}<br />
+function singleton(e) {<br />
+    return {<br />
+        first: function() { return e },<br />
+        rest: function() { return null }<br />
+    }<br />
+}<br />
+function first(list) {<br />
+    return list.first()<br />
+}<br />
+function rest(list) {<br />
+    return list.rest()<br />
+}<br />
+function append(list1, list2) {<br />
+    if (null == list1) return list2<br />
+    if (null == list2) return list1</p>
+<p>    return {<br />
+        first : function() { return first(list1) },<br />
+        rest : function() { return append(rest(list1), list2) }<br />
+    }<br />
+}<br />
+[/javascript]</p>
+<p>在此基础上可以进一步实现二叉树迭代器：</p>
+<p>[javascript]<br />
+function make_binary_tree_iterator(node) {<br />
+    return {<br />
+        first : function() {<br />
+            return null != node.left ? first(make_binary_tree_iterator(node.left)) : node<br />
+        },<br />
+        rest : function() {<br />
+            var left_it = (null == node.left ? null : make_binary_tree_iterator(node.left))<br />
+            var root_it = singleton(node)<br />
+            var right_it = (null == node.right ? null : make_binary_tree_iterator(node.right))<br />
+            var it = append(append(left_it, root_it), right_it)<br />
+            return rest(it)<br />
+        }<br />
+    }<br />
+}<br />
+//======== Test case ========<br />
+var tree = {<br />
+    value : 1,<br />
+        left : {<br />
+            value : 2,<br />
+            left : { value : 4, left : null, right : null },<br />
+            right : null<br />
+        },<br />
+        right : {<br />
+            value : 3,<br />
+            left : null,<br />
+            right : { value : 7, left : null, right : null }<br />
+    }<br />
+}<br />
+for (var it = make_binary_tree_iterator(tree); null != it; it = rest(it)) {<br />
+    console.log(first(it).value)<br />
+}<br />
+[/javascript]</p>
+<p>上面的make_binary_tree_iterator在List类型的基础上按照二叉树遍历过程构造了一个List。不知道你是否注意到了，为什么它不像下面这个例子一样直接返回一个List，而要构造一个闭包呢？</p>
+<p>[javascript]<br />
+function make_binary_tree_iterator(node) {<br />
+    var left_it = (null == node.left ? null : make_binary_tree_iterator(node.left))<br />
+    var root_it = singleton(node)<br />
+    var right_it = (null == node.right ? null : make_binary_tree_iterator(node.right))<br />
+    return append(append(left_it, root_it), right_it)<br />
+}<br />
+[/javascript]</p>
+<p>这里关键的区别在于闭包是惰性求值的，也就是说只有当真正开始迭代遍历的时候才会逐渐对各个函数进行求值，而上面的函数递归调用是非惰性的，会从一开始就把所有结点展开成线性表。如果你对这一点还不能很好地理解，可以尝试在各个函数中加log跟踪函数的调用过程。</p>
+<h4>总结</h4>
+<p>本文介绍了类型的本质在于它所定义的操作以及操作之间的关系和不变式。类型的实现关键在于满足类型规范的要求，而具体实现是可以变化的，使用者和测试用例都应该只依赖于类型规范而不依赖于具体实现。函数式的类型实现往往和类型规范是直接对应的，简单通用，但可能有性能问题，而命令式的类型实现往往会引入复杂的内部数据结构，但是其优点是高效。这两种实现并不是完全互斥的，有时候可以将二者相结合达到简单与高效的结合。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10169.html/feed</wfw:commentRss>
+			<slash:comments>32</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C语言全局变量那些事儿</title>
+		<link>https://coolshell.cn/articles/10115.html</link>
+					<comments>https://coolshell.cn/articles/10115.html#comments</comments>
+		
+		<dc:creator><![CDATA[Leo]]></dc:creator>
+		<pubDate>Sun, 21 Jul 2013 13:16:33 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=10115</guid>
+
+					<description><![CDATA[<p>（感谢网友 @我的上铺叫路遥 投稿） 作为一名程序员，如果说沉迷一门编程语言算作一种乐趣的话，那么与此同时反过来去黑一门编程语言就是这种乐趣的升华。今天我们就来...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/10115.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/10115.html">C语言全局变量那些事儿</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢网友 </strong><a href="http://weibo.com/fullofbull" target="_blank"><strong>@我的上铺叫路遥</strong></a><strong> 投稿）</strong></p>
+<p>作为一名程序员，如果说沉迷一门编程语言算作一种乐趣的话，那么与此同时反过来去黑一门编程语言就是这种乐趣的升华。今天我们就来黑一把C语言，好好展示一下这门经典语言令人抓狂的一面。</p>
+<p>我们知道，全局变量是C语言语法和语义中一个很重要的知识点，首先它的存在意义需要从三个不同角度去理解：对于程序员来说，它是一个记录内容的<strong>变量(variable)</strong>；对于编译/链接器来说，它是一个需要解析的<strong>符号(symbol)</strong>；对于计算机来说，它可能是具有地址的一块<strong>内存(memory)</strong>。其次是语法/语义：从作用域上看，带static关键字的全局变量范围只能限定在文件里，否则会外联到整个模块和项目中；从生存期来看，它是静态的，贯穿整个程序或模块运行期间（<span style="color: #ff0000;"><strong>注意，正是跨单元访问和持续生存周期这两个特点使得全局变量往往成为一段受攻击代码的突破口，了解这一点十分重要</strong></span>）；从空间分配上看，定义且初始化的全局变量在编译时在数据段(.data)分配空间，定义但未初始化的全局变量<strong>暂存(tentative definition)</strong>在.bss段，编译时自动清零，而仅仅是声明的全局变量只能算个符号，寄存在编译器的符号表内，不会分配空间，直到链接或者运行时再重定向到相应的地址上。</p>
+<p>我们将向您展现一下，<strong>非static限定全局变量</strong>在编译/链接以及程序运行时会发生哪些有趣的事情，顺便可以对C编译器/链接器的解析原理管中窥豹。以下示例对ANSI C和GNU C标准都有效，笔者的编译环境是Ubuntu下的GCC-4.4.3。</p>
+<p><span id="more-10115"></span></p>
+<h4>第一个例子</h4>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">/* t.h */
+#ifndef _H_
+#define _H_
+int a;
+#endif
+
+/* foo.c */
+#include &lt;stdio.h&gt;
+#include &quot;t.h&quot;
+
+struct {
+   char a;
+   int b;
+} b = { 2, 4 };
+
+int main();
+
+void foo()
+{
+    printf(&quot;foo:\t(&amp;a)=0x%08x\n\t(&amp;b)=0x%08x\n
+        \tsizeof(b)=%d\n\tb.a=%d\n\tb.b=%d\n\tmain:0x%08x\n&quot;,
+        &amp;a, &amp;b, sizeof b, b.a, b.b, main);
+}
+
+/* main.c */
+#include &lt;stdio.h&gt;
+#include &quot;t.h&quot;
+
+int b;
+int c;
+
+int main()
+{
+    foo();
+    printf(&quot;main:\t(&amp;a)=0x%08x\n\t(&amp;b)=0x%08x\n
+        \t(&amp;c)=0x%08x\n\tsize(b)=%d\n\tb=%d\n\tc=%d\n&quot;,
+        &amp;a, &amp;b, &amp;c, sizeof b, b, c);
+	return 0;
+}
+</pre>
+<p>Makefile如下：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+test: main.o foo.o
+	gcc -o test main.o foo.o
+
+main.o: main.c
+foo.o: foo.c
+
+clean:
+	rm *.o test
+</pre>
+<p>运行情况：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+foo:	(&amp;a)=0x0804a024
+	(&amp;b)=0x0804a014
+	sizeof(b)=8
+	b.a=2
+	b.b=4
+	main:0x080483e4
+main:	(&amp;a)=0x0804a024
+	(&amp;b)=0x0804a014
+	(&amp;c)=0x0804a028
+	size(b)=4
+	b=2
+	c=0
+</pre>
+<p>这个项目里我们定义了四个全局变量，t.h头文件定义了一个整型a，main.c里定义了两个整型b和c并且未初始化，foo.c里定义了一个初始化了的结构体，还定义了一个main的函数指针变量。由于C语言每个源文件单独编译，所以t.h分别包含了两次，所以int a就被定义了两次。两个源文件里变量b和函数指针变量main被重复定义了，实际上可以看做代码段的地址。但编译器并未报错，只给出一条警告：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">/usr/bin/ld: Warning: size of symbol &#039;b&#039; changed from 4 in main.o to 8 in foo.o</code></p>
+<p>运行程序发现，main.c打印中b大小是4个字节，而foo.c是8个字节，因为sizeof关键字是编译时决议，而源文件中对b类型定义不一样。但令人惊奇的是无论是在main.c还是foo.c中，a和b都是相同的地址，也就是说，a和b被定义了两次，b还是不同类型，但内存映像中只有一份拷贝。我们还看到，main.c中b的值居然就是foo.c中结构体第一个成员变量b.a的值，这证实了前面的推断——<strong>即便存在多次定义，内存中只有一份初始化的拷贝。</strong>另外在这里c是置身事外的一个独立变量。</p>
+<p>为何会这样呢？这涉及到<strong>C编译器对多重定义的全局符号的解析和链接。</strong>在编译阶段，编译器将全局符号信息隐含地编码在可重定位目标文件的符号表里。这里有个<strong>“强符号(strong)”</strong>和<strong>“弱符号(weak)”</strong>的概念——前者指的是定义并且初始化了的变量，比如foo.c里的结构体b，后者指的是未定义或者定义但未初始化的变量，比如main.c里的整型b和c，还有两个源文件都包含头文件里的a。当符号被多重定义时，GNU链接器(ld)使用以下规则决议：</p>
+<ul>
+<li>不允许出现多个相同强符号。</li>
+</ul>
+<ul>
+<li>如果有一个强符号和多个弱符号，则选择强符号。</li>
+</ul>
+<ul>
+<li>如果有多个弱符号，那么先决议到size最大的那个，如果同样大小，则按照链接顺序选择第一个。</li>
+</ul>
+<p>像上面这个例子中，全局变量a和b存在重复定义。如果我们将main.c中的b初始化赋值，那么就存在两个强符号而违反了规则一，编译器报错。如果满足规则二，则仅仅提出警告，实际运行时决议的是foo.c中的强符号。而变量a都是弱符号，所以只选择一个（按照目标文件链接时的顺序）。</p>
+<p>事实上，这种规则是C语言里的一个大坑，编译器对这种全局变量多重定义的“纵容”很可能会无端修改某个变量，导致程序不确定行为。如果你还没有意识到事态严重性，我再举个例子。</p>
+<h4>第二个例子</h4>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">/* foo.c */
+#include &lt;stdio.h&gt;;
+
+struct {
+    int a;
+    int b;
+} b = { 2, 4 };
+
+int main();
+
+void foo()
+{
+    printf(&quot;foo:\t(&amp;b)=0x%08x\n\tsizeof(b)=%d\n
+        \tb.a=%d\n\tb.b=%d\n\tmain:0x%08x\n&quot;,
+        &amp;b, sizeof b, b.a, b.b, main);
+}
+
+/* main.c */
+#include &lt;stdio.h&gt;
+
+int b;
+int c;
+
+int main()
+{
+    if (0 == fork()) {
+        sleep(1);
+        b = 1;
+        printf(&quot;child:\tsleep(1)\n\t(&amp;b):0x%08x\n
+            \t(&amp;c)=0x%08x\n\tsizeof(b)=%d\n\tset b=%d\n\tc=%d\n&quot;,
+            &amp;b, &amp;c, sizeof b, b, c);
+        foo();
+    } else {
+        foo();
+        printf(&quot;parent:\t(&amp;b)=0x%08x\n\t(&amp;c)=0x%08x\n
+            \tsizeof(b)=%d\n\tb=%d\n\tc=%d\n\twait child...\n&quot;,
+            &amp;b, &amp;c, sizeof b, b, c);
+        wait(-1);
+        printf(&quot;parent:\tchild over\n\t(&amp;b)=0x%08x\n
+            \t(&amp;c)=0x%08x\n\tsizeof(b)=%d\n\tb=%d\n\tc=%d\n&quot;,
+            &amp;b, &amp;c, sizeof b, b, c);
+    }
+    return 0;
+}</pre>
+<p>运行情况如下：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+foo:	(&amp;b)=0x0804a020
+	sizeof(b)=8
+	b.a=2
+	b.b=4
+	main:0x080484c8
+parent:	(&amp;b)=0x0804a020
+	(&amp;c)=0x0804a034
+	sizeof(b)=4
+	b=2
+	c=0
+	wait child...
+child:	sleep(1)
+	(&amp;b):0x0804a020
+	(&amp;c)=0x0804a034
+	sizeof(b)=4
+	set b=1
+	c=0
+foo:	(&amp;b)=0x0804a020
+	sizeof(b)=8
+	b.a=1
+	b.b=4
+	main:0x080484c8
+parent:	child over
+	(&amp;b)=0x0804a020
+	(&amp;c)=0x0804a034
+	sizeof(b)=4
+	b=2
+	c=0
+</pre>
+<p>（说明一点，运行情况是直接输出到stdout的打印，笔者曾经将./test输出重定向到log中，结果发现打印的执行序列不一致，所以采用默认输出。）</p>
+<p>这是一个<strong>多进程环境</strong>，首先我们看到无论父进程还是子进程，main.c还是foo.c，全局变量b和c的地址仍然是一致的（当然只是个<strong>逻辑地址</strong>），而且对b的大小不同模块仍然有不同的决议。这里值得注意的是，我们在子进程中对变量b进行赋值动作，从此子进程本身包括foo()调用中，整型b以及结构体成员b.a的值都是1，而父进程中整型b和结构体成员b.a的值仍是2，但它们显示的逻辑地址仍是一致的。</p>
+<p>个人认为可以这样解释，fork创建新进程时，子进程获得了父进程上下文“镜像”（自然包括全局变量），虚拟地址相同但属于不同的进程空间，而且此时真正映射的物理地址中只有一份拷贝，所以b的值是相同的（都是2）。随后子进程对b改写，触发了操作系统的<strong>写时拷贝(copy on write)</strong>机制，这时物理内存中才产生真正的两份拷贝，分别映射到不同进程空间的虚拟地址上，但虚拟地址的值本身仍然不变，这对于应用程序来说是透明的，具有隐瞒性。</p>
+<p>还有一点值得注意，这个示例编译时没有出现第一个示例的警告，即对变量b的sizeof决议，笔者也不知道为什么，或许是GCC的一个bug？</p>
+<h4>第三个例子</h4>
+<p>这个例子代码同上一个一致，只不过我们将foo.c做成一个静态链接库libfoo.a进行链接，这里只给出Makefile的改动。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+test: main.o foo.o
+	ar rcs libfoo.a foo.o
+	gcc -static -o test main.o libfoo.a
+
+main.o: main.c
+foo.o: foo.c
+
+clean:
+	rm -f *.o test
+</pre>
+<p>运行情况如下：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+foo:	(&amp;b)=0x080ca008
+	sizeof(b)=8
+	b.a=2
+	b.b=4
+	main:0x08048250
+parent:	(&amp;b)=0x080ca008
+	(&amp;c)=0x080cc084
+	sizeof(b)=4
+	b=2
+	c=0
+	wait child...
+child:	sleep(1)
+	(&amp;b):0x080ca008
+	(&amp;c)=0x080cc084
+	sizeof(b)=4
+	set b=1
+	c=0
+foo:	(&amp;b)=0x080ca008
+	sizeof(b)=8
+	b.a=1
+	b.b=4
+	main:0x08048250
+parent:	child over
+	(&amp;b)=0x080ca008
+	(&amp;c)=0x080cc084
+	sizeof(b)=4
+	b=2
+	c=0
+</pre>
+<p>从这个例子看不出有啥差别，只不过使用<strong>静态链接</strong>后，全局变量加载的地址有所改变，b和c的地址之间似乎相隔更远了些。不过这次编译器倒是给出了变量b的sizeof决议警告。</p>
+<p>到此为止，有些人可能会对上面的例子嗤之以鼻，觉得这不过是列举了C语言的某些特性而已，算不上黑。有些人认为既然如此，对于一切全局变量要么用static限死，要么定义同时初始化，杜绝弱符号，以便在编译时报错检测出来。只要小心地使用，C语言还是很完美的嘛~对于抱这样想法的人，我只想说，请你在夜深人静的时候竖起耳朵仔细聆听，你很可能听到Dennis Richie在九泉之下邪恶的笑声——不，与其说是嘲笑，不如说是诅咒……</p>
+<h4>第四个例子</h4>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">/* foo.c */
+#include &lt;stdio.h&gt;
+
+const struct {
+    int a;
+    int b;
+} b = { 3, 3 };
+
+int main();
+
+void foo()
+{
+    b.a = 4;
+    b.b = 4;
+    printf(&quot;foo:\t(&amp;b)=0x%08x\n\tsizeof(b)=%d\n
+        \tb.a=%d\n\tb.b=%d\n\tmain:0x%08x\n&quot;,
+        &amp;b, sizeof b, b.a, b.b, main);
+}
+
+/* t1.c */
+#include &lt;stdio.h&gt;
+
+int b = 1;
+int c = 1;
+
+int main()
+{
+    int count = 5;
+    while (count-- &gt; 0) {
+        t2();
+        foo();
+        printf(&quot;t1:\t(&amp;b)=0x%08x\n\t(&amp;c)=0x%08x\n
+            \tsizeof(b)=%d\n\tb=%d\n\tc=%d\n&quot;,
+            &amp;b, &amp;c, sizeof b, b, c);
+        sleep(1);
+    }
+    return 0;
+}
+
+/* t2.c */
+#include &lt;stdio.h&gt;
+
+int b;
+int c;
+
+int t2()
+{
+    printf(&quot;t2:\t(&amp;b)=0x%08x\n\t(&amp;c)=0x%08x\n
+        \tsizeof(b)=%d\n\tb=%d\n\tc=%d\n&quot;,
+        &amp;b, &amp;c, sizeof b, b, c);
+    return 0;
+}</pre>
+<p>Makefile脚本：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">export LD_LIBRARY_PATH:=.
+
+all: test
+	./test
+
+test: t1.o t2.o
+	gcc -shared -fPIC -o libfoo.so foo.c
+	gcc -o test t1.o t2.o -L. -lfoo
+
+t1.o: t1.c
+t2.o: t2.c
+
+.PHONY:clean
+clean:
+	rm -f *.o *.so test*
+</pre>
+<p>执行结果：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+./test
+t2:	(&amp;b)=0x0804a01c
+	(&amp;c)=0x0804a020
+	sizeof(b)=4
+	b=1
+	c=1
+foo:	(&amp;b)=0x0804a01c
+	sizeof(b)=8
+	b.a=4
+	b.b=4
+	main:0x08048564
+t1:	(&amp;b)=0x0804a01c
+	(&amp;c)=0x0804a020
+	sizeof(b)=4
+	b=4
+	c=4
+t2:	(&amp;b)=0x0804a01c
+	(&amp;c)=0x0804a020
+	sizeof(b)=4
+	b=4
+	c=4
+foo:	(&amp;b)=0x0804a01c
+	sizeof(b)=8
+	b.a=4
+	b.b=4
+	main:0x08048564
+t1:	(&amp;b)=0x0804a01c
+	(&amp;c)=0x0804a020
+	sizeof(b)=4
+	b=4
+	c=4
+	...</pre>
+<p>其实前面几个例子只是开胃小菜而已，真正的大坑终于出现了！而且这次编译器既没报错也没警告，但我们确实眼睁睁地看到作为main()中强符号的b被改写了，而且一旁的c也“躺枪”了。眼尖的读者发现，这次foo.c是作为动态链接库运行时加载的，当t1第一次调用t2时，libfoo.so还未加载，一旦调用了foo函数，b立马中弹，而且<strong>c的地址居然还相邻着b，这使得c一同中弹了。</strong>不过笔者有些无法解释这种行为的原因，有种说法是强符号的全局变量在数据段中是连续分布的（相应地弱符号暂存在.bss段或者符号表里），或许可以上报GNU的编译器开发小组。</p>
+<p>另外笔者尝试过将t1.c中的b和c定义前面加上<strong>const限定词</strong>，编译器仍然默认通过，但程序在main()中第一次调用foo()时触发了Segment fault异常导致奔溃，在foo.c里使用指针改写它也一样。<strong>推断这是GCC对const常量所在地址启用了类似操作系统写保护机制，但我无法确定早期版本的GCC是否会让这个const常量被改写而程序不会奔溃。</strong></p>
+<p>至于<strong>volatile关键词</strong>之于全局变量，自测似乎没有影响。</p>
+<p>怎么样？看了最后一个例子是否有点“不明觉厉”呢？C语言在你心目中是否还是当初那个“纯洁”、“干净”、“行为一致”的姑娘呢？也许趁着你不注意的时候她会偷偷给你戴顶绿帽，这一切都是通过全局变量，特别在动态链接的环境下，就算全部定义成强符号仍然无法为编译器所察觉。而一些IT界“恐怖分子”也经常<strong>将恶意代码包装成全局变量注入到root权限下存在漏洞的操作序列中，</strong>就像著名的栈溢出攻击那样。某一天当你傻傻地看着一个程序出现未定义的行为却无法定位原因的时候，请不要忘记Richie大爷那来自九泉之下最深沉的“问候”~</p>
+<p>或许有些人会偷换概念，把这一切归咎于编译器和链接器身上，认为这同语言无关，但我要提醒你，正是编译/链接器的行为支撑了整个语言的语法和语义。你可以反过来思考一下为何C的胞弟C++推出<strong>“命名空间(namespace)”</strong>的概念，或者你可以使用其它高级语言，对于重定义的全局变量是否能通过编译这一关。</p>
+<p>所以请时刻谨记，<span style="color: #ff0000;"><strong>C是一门很恐怖的语言！</strong></span></p>
+<p>P.S.题外话写在最后。我无意挑起语言之争，只是就事论事地去<strong>“黑(hack)</strong><strong>”</strong>一门语言而已，而且要黑就要黑得有理有力有层次，还要带点娱乐精神。其实黑一门语言并非什么尖端复杂的技术，个人觉得起码要做到两点：</p>
+<ul>
+<li><strong>亲自动手写测试程序。</strong>动手写测试程序是开发人员必备的基础技能，只有现成的代码才能让人心服口服，那些只会停留在口头上的争论只能算作cheap hack。</li>
+</ul>
+<ul>
+<li><strong>测试程序不能依赖于不成熟的代码。</strong>软件开发99%以上的bug都是基于不合格(substandard)开发人员导致，这并不能怪罪于语言以及编译器本身。使用诸如#define TRUE FALSE或者#define NULL 1之类的trick来黑C语言只能证明此人很有娱乐精神而不是真正的&#8221;hack value&#8221;，拿老北京梨园行当里的一句话——“那是下三滥的玩意儿”。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10115.html">C语言全局变量那些事儿</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/10115.html/feed</wfw:commentRss>
+			<slash:comments>92</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>二叉树迭代器算法</title>
+		<link>https://coolshell.cn/articles/9886.html</link>
+					<comments>https://coolshell.cn/articles/9886.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Sun, 14 Jul 2013 03:08:23 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=9886</guid>
+
+					<description><![CDATA[<p>（感谢 @文艺复兴记（todd） 投递此文） 二叉树(Binary Tree)的前序、中序和后续遍历是算法和数据结构中的基本问题，基于递归的二叉树遍历算法更是递...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/9886.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢 </strong><a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a><strong>（todd） 投递此文）</strong></p>
+<p>二叉树(Binary Tree)的前序、中序和后续遍历是算法和数据结构中的基本问题，基于递归的二叉树遍历算法更是递归的经典应用。</p>
+<p>假设二叉树结点定义如下：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+// C++
+struct Node {
+    int value;
+    Node *left;
+    Node *right;
+}
+</pre>
+<p>中序递归遍历算法：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+// C++
+void inorder_traverse(Node *node) {
+    if (NULL != node-&gt;left) {
+        inorder_traverse(node-&gt;left);
+    }
+    do_something(node);
+    if (NULL != node-&gt;right) {
+        inorder_traverse(node-&gt;right);
+    }
+}
+</pre>
+<p>前序和后序遍历算法类似。</p>
+<p>但是，仅有遍历算法是不够的，在许多应用中，我们还需要对遍历本身进行抽象。假如有一个求和的函数sum，我们希望它能应用于链表，数组，二叉树等等不同的数据结构。这时，我们可以抽象出迭代器(Iterator)的概念，通过<strong>迭代器把算法和数据结构解耦了</strong>，使得通用算法能应用于不同类型的数据结构。我们可以把sum函数定义为：</p>
+<p><span id="more-9886"></span></p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+int sum(Iterator it)
+</pre>
+<p>链表作为一种线性结构，它的迭代器实现非常简单和直观，而二叉树的迭代器实现则不那么容易，我们不能直接将递归遍历转换为迭代器。究其原因，这是因为二叉树递归遍历过程是编译器在调用栈上自动进行的，程序员对这个过程缺乏足够的控制。既然如此，那么我们如果可以自己来控制整个调用栈的进栈和出栈不是就达到控制的目的了吗？我们先来看看二叉树遍历的非递归算法：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+// C++
+void inorder_traverse_nonrecursive(Node *node) {
+    Stack stack;
+    do {
+        // node代表当前准备处理的子树，层层向下把左孩子压栈，对应递归算法的左子树递归
+        while (NULL != node) {
+            stack.push(node);
+            node = node-&gt;left;
+        }
+        do {
+            Node *top = stack.top();
+            stack.pop(); //弹出栈顶，对应递归算法的函数返回
+            do_something(top);
+            if (NULL != top-&gt;right) {
+                node = top-&gt;right; //将当前子树置为刚刚遍历过的结点的右孩子，对应递归算法的右子树递归
+                break;
+            }
+        }
+        while (!stack.empty());
+    }
+    while (!stack.empty());
+}
+</pre>
+<p>通过基于栈的非递归算法我们获得了对于遍历过程的控制，下面我们考虑如何将其封装为迭代器呢？ 这里关键在于理解遍历的过程是由栈的状态来表示的，所以显然迭代器内部应该包含一个栈结构，每次迭代的过程就是对栈的操作。假设迭代器的接口为：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+// C++
+class Iterator {
+    public:
+        virtual Node* next() = 0;
+};
+</pre>
+<p>下面是一个二叉树中序遍历迭代器的实现：</p>
+<pre data-enlighter-language="cpp" class="EnlighterJSRAW">
+//C++
+class InorderIterator : public Iterator {
+    public:
+        InorderIterator(Node *node) {
+            Node *current = node;
+            while (NULL != current) {
+                mStack.push(current);
+                current = current-&gt;left;
+            }
+        }
+        virtual Node* next() {
+            if (mStack.empty()) {
+                return NULL;
+            }
+            Node *top = mStack.top();
+            mStack.pop();
+            if (NULL != top-&gt;right) {
+                Node *current = top-&gt;right;
+                while (NULL != current) {
+                    mStack.push(current);
+                    current = current-&gt;left;
+                }
+            }
+            return top;
+         }
+    private:
+        std::stack&lt;Node*&gt; mStack;
+};
+</pre>
+<p>下面我们再来考察一下这个迭代器实现的时间和空间复杂度。很显然，由于栈中最多需要保存所有的结点，所以其空间复杂度是O(n)的。那么时间复杂度呢？一次next()调用也最多会进行n次栈操作，而整个遍历过程需要调用n次next()，那么是不是整个迭代器的时间复杂度就是O(n^2)呢？答案是否定的！因为每个结点只会进栈和出栈一次，所以整个迭代过程的时间复杂度依然为O(n)。其实，这和递归遍历的时空复杂度完全一样。</p>
+<p>除了上面显式利用栈控制代码执行顺序外，在支持yield语义的语言（C#, Python等)中，还有更为直接的做法。下面基于yield的二叉树中序遍历的Python实现：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+// Python
+def inorder(t):
+    if t:
+        for x in inorder(t.left):
+            yield x
+        yield t.label
+        for x in inorder(t.right):
+            yield x
+</pre>
+<p>yield与return区别的一种通俗解释是yield返回时系统会保留函数调用的状态，下次该函数被调用时会接着从上次的执行点继续执行，这是一种与栈语义所完全不同的流程控制语义。我们知道Python的解释器是C写的，但是C并不支持yield语义，那么解释器是如何做到对yield的支持的呢？ 有了上面把递归遍历变换为迭代遍历的经验，相信你已经猜到Python解释器一定是对yield代码进行了某种变换。如果你已经能够实现递归变非递归，不妨尝试一下能否写一段编译程序将yield代码变换为非yield代码。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/8239.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg" alt="无锁队列的实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8239.html" class="wp_rp_title">无锁队列的实现</a></li><li ><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/9886.html/feed</wfw:commentRss>
+			<slash:comments>54</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Alan Cox：大教堂、市集与市议会</title>
+		<link>https://coolshell.cn/articles/9917.html</link>
+					<comments>https://coolshell.cn/articles/9917.html#comments</comments>
+		
+		<dc:creator><![CDATA[Leo]]></dc:creator>
+		<pubDate>Mon, 08 Jul 2013 07:42:27 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术管理]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Alan Cox]]></category>
+		<category><![CDATA[Linus Torvalds]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=9917</guid>
+
+					<description><![CDATA[<p>（感谢网友 @我的上铺叫路遥 投稿） 在网上搜到的Cox大叔于1998年在开源社区写的一篇文章，当时很轰动，明眼人一看就知道是针对ESR那篇《大教堂与市集》，从...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/9917.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/9917.html">Alan Cox：大教堂、市集与市议会</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>（感谢网友 </strong><a href="http://weibo.com/fullofbull" target="_blank"><strong>@我的上铺叫路遥</strong></a><strong> 投稿）</strong></p>
+<p>在网上搜到的Cox大叔于1998年在开源社区写的一篇文章，当时很轰动，明眼人一看就知道是针对ESR那篇《大教堂与市集》，从中可见Alan在项目管理风格上乃至个人性格上都与ESR、Linus等人不同之处。顺便说一句，Alan现在出于“家庭原因”已经离开了Linux项目，他曾经评价Linus是<a href="http://apolyton.net/showthread.php/130212-Linus-Torvalds-is-a-terrible-engineer-Alan-Cox" target="_blank">a good developer but a terrible engineer</a>，甚至在Google+上直接说Linus就是一a*sh**e。不管如何，两位曾经十余年里并肩战斗惺惺相惜的大牛就此分道扬镳还是惹人唏嘘。</p>
+<p>言归正传，以下为slashdot收录的英文原文：<a href="http://news.slashdot.org/story/98/10/13/1423253/featurecathedrals-bazaars-and-the-town-council" target="_blank">Cathedrals, Bazaars and the Town Council</a>。</p>
+<p>以下是一些我对市集模式的想法，我认为这值得分享，这种模式会教你如何完全毁掉一个自由软件项目。我还举了一个我称之为“市议会”(Town Council)效应的实例（虽然那些市议员们可不这么认为，注：此处指Linux项目开发者）。</p>
+<p>关于软件开发人员，你必须去了解一些情况。首先要了解的是真正优秀的程序员相对来说并不普遍，不仅如此，在很多其它专业领域里“真正的程序员”和一些捣乱的家伙之间的区别要比“伟大”和“普通”之间的区别要大得多，研究表明生产效率上最好的同其余的比重是30:1。</p>
+<p>其次，你需要了解的是一大堆妄想型码农(wannabe programmer)总是善于发表意见。其中很多人患上了一种叫做“流行性热词”(buzzword)疾病，或者对他们“非黑即白”(one true path)的思考方式有着特殊的偏执，网上很多讨论都是廉价的。</p>
+<p><span id="more-9917"></span></p>
+<p>第三个关于软件项目的事情就是我们所谓的“闲杂人员”(the masses)。他们不是编程人员，而在其它方面有着大量贡献——文档编辑、用户支持，以及对那类经常争论你应该获得许可证才能上网的人的说服工作。</p>
+<p>我想以Linux 8086（注，Intel设计的16位处理器架构）为例来说明如何将整个工程全部搞砸。将Linux的一个子集移植到8086上大体是这世上最无聊的活动之一。整件事的发起就像个笑话并走向失控。</p>
+<p>只有极少数真正的程序员会将时间及其良好的精神状态（或许那是假的）花费在那些唯一价值在于“黑客精神”(Hack Value)的项目上，故而在任何时候那种项目也就两三个核心贡献人员而已。</p>
+<p>不幸的是大批人认为将Linux运行在8086上是干净的，为此义不容辞地想要“入伙”。这类人大多属于妄想型码农之流，以至于连闲杂人员在一个安全距离之外都会沾染上这个项目的“愚蠢”因子。</p>
+<p>问题的导火索在于一大批充满（大多善意的）危险的一知半解的人们的意识观念——不是代码，而是意识观念。他们似乎很懂得如何去编程，但很多人连“Hello World”这样的C程序都不会。他们花了几星期时间去争论并投票该使用什么编译器，甚至在项目开展一年后还在争论是否去写个充分完美的编译器。他们热衷于辩论如何生成大量二进制文件，却又对内核swapper（注，即idle task）设计一无所知。</p>
+<p>Linux 8086项目仍然进行着，真正的开发人员将邮件列表里许多其他成员加入到清除文件(kill files)中，以便他们之间可以顺畅地通过邮件列表沟通，只因半吊子打酱油的家伙实在太多了。这一切不再是市集模式，而是形成了一个核心小组，对圈子里许多人而言这是一种礼貌用语。在这种情形下人们不可避免地处于被动位置。</p>
+<p>像Linux这种基于用户/程序员的项目成长缓慢，虽然它是靠着一群贡献代码的人得以成长起来，但这些人的背景要么是从原始的Minix（注，一种微内核操作系统）黑客社区起家，要么通过艰难的方式不断从头学起。随着项目增长，人们本应该形成一个“Linux内核结构规划管理委员会”，而不是掉入将人们招来唤去，不将失败视为问题的怪圈，用Linus的话来说就是“给我看源码”。</p>
+<p>如果有人陷入困境，他可以发帖询问，在这之前包括现在很大程度上都基于人们正常地拥有时间并具备知识来回复他。在Linux 8086的案例中，开发人员很长一段时间身陷囹圄。假使主动活跃的程序员对只有潜在用处的妄想型码农的比例更高一点的话，我们就可以将一些杂音转化成生产力。项目也就获得更多有用的程序员，他们可以轮流向他人传授经验，任何学习活动都会让你变得更好，哪怕只有一些少量实习生。</p>
+<p>一些人会认为你无法将那些“次要程序员”(lesser programmer)训练成真正的程序员。就Linux项目的个人经验而言，很多人员只要获得一丁点儿的帮助和自信鼓励都将成为世界上最好的开发人员之一。只要帮助和鼓励足够多，很多人就能成功。</p>
+<p>Linux 8086总算大部分从“侵扰”中恢复过来，可至今仍是个不起眼的小项目。你可以从CVS目录树上下载这个由Alistair Riddich领导的项目，他做了很多优秀的工作。随着市议员的撤出，人们可以询问、参与并改善这个项目。</p>
+<p>我们从这个项目，还有其它相同命运的早期Linux 16位处理器项目（有的已死）中很清楚地学到以下几点教训。</p>
+<ul>
+<li>从项目一开始就发布源代码。哪怕不是很有用也无关紧要，将市议会排序分类的最好方式就是发布源代码并告知人们。Linux、KDE以及GNOME都遵循这种方式并获益良多。你可以花一辈子时间去争论怎样写代码才是正确的。只要代码公布，人们（不管水平怎样）都会把玩它。</li>
+</ul>
+<ul>
+<li>要欣赏那些给一点帮助就会对项目做出巨大贡献的人。如果他们最初的补丁有错误，不要盛气凌人，向其解释问题出在哪里并给出解决方案的建议，或者可以查询解决方法的地方。解答真正的问题，帮助别人，你所花费的一分一秒都会成十倍地回报在项目上，对社会也会带来无法估量的好处。[注]</li>
+</ul>
+<ul>
+<li>不要忘记那些非开发人员。我难过地发现许多人问起“前5名最重要的内核成员”时却极少涉及在所有人中最重要的一些——他们负责维护网站，更新日志和邮件列表，还有编辑文档，这些都是同等重要。<br />
+Linus那句“给我看源代码”对真正的项目来说是个狭隘的视角。当你听到人们说“我很想帮忙，可我不会编程”，那么他可以从事文档编写。当人们说“但英语不是我的第一语言”，这时你需要的是一位文档编辑或另一门语言翻译者。</li>
+</ul>
+<ul>
+<li>尝试将有用的人从杂音中分离出来，将有意愿帮忙的人从一大堆无聊评论中分离出来是很难的。在Linux 8086项目中我的确错误地放弃了这一目标，如何将那些只会空谈而又无所事事的人弄走是一门学问。</li>
+</ul>
+<p>下次碰到人们在项目上投票，或者问题讨论了一个月才实现这类情况，给予他们警告。这样才能使人正确地解决问题。在你看来如果一些稀奇古怪的事务不顾一切地运行着，要求他们给你发个补丁，只要能够生效的话。</p>
+<p>小心地说“我们应该怎样”之类的话，对“我该如何做”这样的人伸出援手。</p>
+<p>Alan</p>
+<p>[注]这段话举个例子说明一下。Linux IPv6源码作者以前在葡萄牙上网聊天，只会简单讨论和问一些基本问题。我们助其弄明白一些内核原理之后，他写了大约75%的IPv6协议栈代码，他最近受聘于美国思科公司。</p>
+<p>附录一：一篇针对本文的<a href="http://tech.groups.yahoo.com/group/java-os-project/message/2358?var=1&amp;p=1" target="_blank">吐槽贴</a></p>
+<p>附录二：2009年Cox回复Torvalds的<a href="https://lkml.org/lkml/2009/7/28/375" target="_blank">邮件</a>，事情起因是Cox的一个tty patch导致<a href="https://lkml.org/lkml/2009/7/11/125" target="_blank">kdesu(KDE project&#8217;s su utility)</a>程序无法工作，该问题争论长达两个星期，此后Alan离开了Linux项目投奔Intel。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" alt="Alan Cox：单向链表中prev指针的妙用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_title">Alan Cox：单向链表中prev指针的妙用</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/2322.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" alt="Unix传奇(上篇)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2322.html" class="wp_rp_title">Unix传奇(上篇)</a></li><li ><a href="https://coolshell.cn/articles/1278.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="Linus Torvalds 语录 Top 10" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1278.html" class="wp_rp_title">Linus Torvalds 语录 Top 10</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9917.html">Alan Cox：大教堂、市集与市议会</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/9917.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>IoC/DIP其实是一种管理思想</title>
+		<link>https://coolshell.cn/articles/9949.html</link>
+					<comments>https://coolshell.cn/articles/9949.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 05 Jul 2013 00:44:03 +0000</pubDate>
+				<category><![CDATA[技术管理]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[系统架构]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[design pattern]]></category>
+		<category><![CDATA[DIP]]></category>
+		<category><![CDATA[IoC]]></category>
+		<category><![CDATA[Object-Oriented]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=9949</guid>
+
+					<description><![CDATA[<p>关于IoC的的概念提出来已经很多年了，其被用于一种面象对像的设计。我在这里再简单的回顾一下这个概念。我先谈技术，再说管理。 话说，我们有一个开关要控制一个灯的开...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/9949.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-9957" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-300x200.jpg" width="300" height="200" /> 关于IoC的的概念提出来已经很多年了，其被用于一种面象对像的设计。我在这里再简单的回顾一下这个概念。我先谈技术，再说管理。</p>
+<p>话说，我们有一个开关要控制一个灯的开和关这两个动作，最常见也是最没有技术含量的实现会是这个样子：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/IoC1.jpg" width="240" height="82" /></p>
+<p>然后，有一天，我们发现需要对灯泡扩展一下，于是我们做了个抽象类：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/IoC2.jpg" width="290" height="183" /></p>
+<p>但是，如果有一天，我们发现这个开关可能还要控制别的不单单是灯泡的东西，我们就发现这个开关耦合了灯泡这种类别，非常不利于我们的扩展，于是反转控制出现了。</p>
+<p>就像现实世界一样，造开关的工厂根本不关心要控制的东西是什么，它只做一个开关应该做好的事，就是把电接通，把电断开（不管是手动的，还是声控的，还是光控，还是遥控的），而我们的造各种各样的灯泡（不管是日关灯，白炽灯）的工厂也不关心你用什么样的开关，反正我只管把灯的电源接口给做出来，然后，开关厂和电灯厂依赖于一个标准的通电和断电的接口。于是产生了IoC控制反转，如下图：</p>
+<p><span id="more-9949"></span></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="size-full wp-image-9952 aligncenter" alt="" src="https://coolshell.cn/wp-content/uploads/2013/07/IoC3.jpg" width="504" height="309" srcset="https://coolshell.cn/wp-content/uploads/2013/07/IoC3.jpg 504w, https://coolshell.cn/wp-content/uploads/2013/07/IoC3-300x183.jpg 300w" sizes="(max-width: 504px) 100vw, 504px" /></p>
+<p style="text-align: left;"><strong>所谓控制反转的意思是，开关从以前的设备的专用开关，转变到了控制电源的开关，而以前的设备要反过来依赖于开关厂声明的电源连接接口。只要符合开关厂定义的电源连接的接口，这个开关可以控制所有符合这个电源连接接口的设备</strong>。<span style="color: #ff0000;"><strong>也就是说，开关从依赖设备这种情况，变成了，设备反过来依赖于开关所定义的接口</strong></span>。</p>
+<p>只要你看过我的那篇《<a title="从面向对象的设计模式看软件设计" href="https://coolshell.cn/articles/8961.html" target="_blank">面向对象设计其实和面象对象一点关系也没有</a>》，你就知道这样的例子在生活中太多见了。比如说：</p>
+<p style="padding-left: 30px;">1）在交易的过程中，卖家向买家卖东西，一手交钱一手交货，所以，基本上来说卖家和买家必需强耦合（必需见面）。这个时候，银行出来做担保，买家把钱先垫到银行，银行让卖家发货，买家验货后，银行再把钱打给卖家。这就是反转控制。买卖双方把对对方的直接控制，反转到了让对方来依赖一个标准的交易模型的接口。股票交易也是一样的，证交所就是买卖双方的标准交易模型接口。</p>
+<p style="padding-left: 30px;">2）上面这个例子，可能还不明显，再举一个例子。海尔公司作为一个电器制商需要把自己的商品分销到全国各地，但是发现，不同的分销渠道有不同的玩法，于是派出了各种销售代表玩不同的玩法，随着渠道越来越多，发现，每增加一个渠道就要新增一批人和一个新的流程，严重耦合并依赖各渠道商的玩法。实在受不了了，于是制定业务标准，开发分销信息化系统，只有符合这个标准的渠道商才能成为海尔的分销商。让各个渠道商反过来依赖自己标准。反转了控制，倒置了依赖。</p>
+<p><strong>可见，控制反转和依赖倒置不单单的一种设计模式，反而更是一种管理模式。</strong></p>
+<p>在大公司中，有很多很多的团队，这些团队开发的软件有很多依赖，跨团队合作是一件挺麻烦的事情，下面是一些比较真实的示例：</p>
+<p style="padding-left: 30px;">1）一个网页会有很多频道，于是，我们的前端工程师进入到各个页面为各种频道开发他们的页面，随着频道越来越多，前端开发工程师的人数也越来越多，每增加一个频道，就要增加一个为这个频道服务的前端团队，于是，人数越来越多，干成了劳动密集型。为什么不反转控制，倒置依赖呢？前端的同学完全可以开发出各种页面的标准组件，布局，模板，以前与后端交互框架，然后，让后端的同学反过来依赖于前端的标准，使用前端的框架，前端的布局，模板，和组件，以向前端接入后端的模块。</p>
+<p style="padding-left: 30px;">2）一个平台需要接入各种各样的业务系统，这些垂直业务系统都有自己的账号体系，于是这个平台为了要兼这些垂直系统的账号体系以做到权限控制，需要做各个系统和自己系统中的账号映射，并为账号和分配出来的资源设置各垂直系统的标识，还要在自己的代码中要写很多很多的依赖于各种账号体系的代码。其实，一个依赖倒置和反转控制就很简单。开发一个权限体系标准，让接入方的账号系统反过来依赖并控制这个标准的权限系统，从而做出一个干净的系统。</p>
+<p style="padding-left: 30px;">3）还有一个云平台中的管理模式，一些底层服务的开发团队只管开发底层的技术，然后什么也不管了，就交给上层的开发人员，在底层团队的开发出来的产品上面开发各种管理这个底层资源的东西，比如：生产底层资源的业务，底层资源的控制台，底层资源的监控系统。这个让底层团队只干纯技术，不干与底层技术无关的东西，看似很科学，其实是做错了。因为，上层为各个云资源控制生产，开发控制台和监控的团队，随着接入的资源的越来越多，完全干不过来了，苦逼得一塌糊涂，因为底层的资源千差百怪，每接一个就要开发一堆这个产品的代码。这个时候依赖倒置和反转控制又可以解决问题了。很简单，上层为各个云资源控制生产，开发控制台，和监控的团队应该制定一个标准，让底层的IaaS云资源开发团队反过来依赖这个标准，统一接入方式，如果开发的云资源不符我的生产控制模型，没有控制台，不把监控数据喂入我的监控系统，对不起，请不要接入我这个PaaS平台。</p>
+<p style="padding-left: 30px;">4）一个集中式的处理电子商务中的订单的流程。各个垂直业务线都需要通过这个平台来处理自己的交易业务，但是垂直业务线上的个性化需求太多。于是，这个技术平台开始出现了黑魔法——“为了害怕改变数据库表结构，不得不在数据库中预留一些字段，里面存把业务方的个性化字段存成如JSON这样的东西”，并为之自豪认为可以快速解决业务问题（WTF）。然而，恶梦并没就此结束，管理这个技术平台的小组开始发现，对来自各个业务方的需求应接不暇，各种变态需求严重干扰系统，各种技术决定越来越不好做，导致需求排期排不过来。于是，不单单得到了各个业务方的各种抱怨，最可怕的是还有高层老大们压过来的Deadline，加班加点，苦逼之极，最后业务方自己要去一个自己的平台。为什么不用依赖倒置和反转控制的思想呢？开发一个插件模型、工作流引擎和Pub/Sub系统，让业务方的个性化需求可以以插件的方式插入我的订单流程中，业务方自的数据存在自己的库中，业务逻辑也不要侵入我的系统，并可以使用工作流引擎或Pub/Sub的协义标准来自己定义工作流的各个步骤（甚至把工作流引擎的各个步骤的Decider交给各个业务方自行处理）。让各个业务方来依赖于我的标准插件和工作流接口，反转迭控制，让他们来控制我的系统，依赖倒置，让他们来依赖我的标准。（这个团队想过把自己的系统内部开源出去让别的团队也进来参与，可以是可以，但一定要用Linux/Git这种方式，允许出现多个分支，多个发行版。但多个版本又造成了多个业务平台，这会上上层垂直业务不知所措）</p>
+<p style="padding-left: 30px;">5）看过《<a title="SteveY对Amazon和Google平台的吐槽 - 67,710 人阅读" href="https://coolshell.cn/articles/5701.html" target="_blank">SteveY对Amazon和Google平台的吐槽</a>》的人都知道，Amazon内部系统的SOA架构（这个SOA架构离IBM定义的那个非常变态的SOA还有一定距离），但是这基本上都是依赖倒置和控制反转的思路了—— <strong>与其让我来帮你实现你的业务逻辑，不如把我的业务逻辑开放成服务的方式让你来控制</strong>。</p>
+<p style="padding-left: 30px;">6）再说一个我在Amazon经历的例子。有一个项目是在给Amazon的各个商区（Marketplace）做国际出口的业务，我们先把Media类的产品（书，DVD之类的）做国际出口开放，项目不难，就是让商家同意一个法律协议（上传自己的签名），然后后台小改一下。美国的，欧洲的做的都没有问题，物流团队在出口报关单上打的都是Amazon仓库的地址和商家的签名（本来这就是错的，打的应该是商家的地址和商家的签名），但是到了日本，就出了问题，因为日本海关即要日文信息，也要商家的英文名和英文地址，而我们的系统里面只有商家的日文信息。本来，这是一个挺简单的事——数据库里加两个字段，在那个同意条款的网页上收集一下商家的英文名和地址，然后把这些信息传给后面的物流团队。物流团队一看这个，发现搞不了，因为他还要传给仓库，N多的地方都要加这两个字段，还要写下各种if (site == JP)这样的判断。物流团队不蛮干，重新设计自己的系统。做一个Document Template的东西，这个就是那个那个要贴在物流盒子上的单子。再也不让各个业务团队把那些信息传过来，而是把这个Document Template的东西传给上面的业务方，他们想怎么写就怎么写， 写完后，把这个东西传回来。于是，大家依赖了一个标准的协议，而不是一其字段。（当然，这个改动过多，为此改了半年多，不过非常值）</p>
+<p>所以说啊，在跨团队的工作中，</p>
+<ul>
+<li>如果依赖和控制的东西过多了，就需要制定标准，倒置依赖，反转控制。</li>
+</ul>
+<ul>
+<li>控制欲望最好不要太强，不要想着能干所有的事情，要学会控制反转和依赖倒置原则。否则只会引火烧身。</li>
+</ul>
+<ul>
+<li>反转控制和依赖倒置是一种智慧。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" alt="从Gitlab误删除数据库想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_title">从Gitlab误删除数据库想到的</a></li><li ><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" alt="关于高可用的系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_title">关于高可用的系统</a></li><li ><a href="https://coolshell.cn/articles/8961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/kiss-150x150.png" alt="从面向对象的设计模式看软件设计" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8961.html" class="wp_rp_title">从面向对象的设计模式看软件设计</a></li><li ><a href="https://coolshell.cn/articles/6950.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="需求变化与IoC" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6950.html" class="wp_rp_title">需求变化与IoC</a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/9949.html/feed</wfw:commentRss>
+			<slash:comments>66</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

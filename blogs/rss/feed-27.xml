@@ -1,0 +1,1401 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 27 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=27" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Wed, 20 Oct 2010 14:57:56 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>JS1K 演示</title>
+		<link>https://coolshell.cn/articles/2785.html</link>
+					<comments>https://coolshell.cn/articles/2785.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 09 Aug 2010 05:51:37 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[JS1K]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2785</guid>
+
+					<description><![CDATA[<p>以前本站发布过很多和Javascript相关的东西，如：《又一个Javascript试验田》、《一个Windows 3.1的Web网站》、《哥是玩程序的》。今天...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2785.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2785.html">JS1K 演示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站发布过很多和Javascript相关的东西，如：《<a rel="bookmark" href="https://coolshell.cn/articles/2276.html">又一个Javascript试验田</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/2065.html">一个Windows 3.1的Web网站</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1932.html">哥是玩程序的</a>》。今天要介绍另外一组，先看下面的这个Javascript特效（在IE下无法正常工作），你可以用Chrome查看，很炫。不过最炫的是其源码，非常的简单，不超过1K。如果你要知道这个效果的原理，这里有一个<a href="http://acko.net/blog/js1k-demo-the-making-of" target="_blank">教程</a>。这里有个网站：<a href="http://js1k.com/" target="_blank">JS1K Demo</a>， 这个站上主要收集一些Javascript不大于1K的程序。</p>
+<p align=center><iframe loading="lazy" id="1kjs" frameborder="0" style="background:#000;border:0" width="510" height="320" src="http://acko.net/files/1022b.html"></iframe><br /> <br />
+<button id="1kjs-stop" onclick="document.getElementById('1kjs').src='about:blank';document.getElementById('1kjs-stop').style.display='none';document.getElementById('1kjs-start').style.display='block';">停止演示</button><button style="display: none" id="1kjs-start" onclick="document.getElementById('1kjs').src='http://acko.net/files/1022b.html';document.getElementById('1kjs-start').style.display='none';document.getElementById('1kjs-stop').style.display='block';">开始演示</button></p>
+<p>下面是其源码：<br />
+<span id="more-2785"></span></p>
+<p>[javascript]<br />
+f=Math; _=document.body; _.style.background=&quot;#000&quot;; e=_.children[0]; e.width=w=innerWidth-10; e.height=h=innerHeight-25; g=e.getContext(&quot;2d&quot;); t=w/h; with(g){scale(w*0.5/t,h*0.5); translate(1*t,1); globalCompositeOperation=&quot;lighter&quot;; lw=45/h; $=p=m=q=r=d=0; g=u=-8; setInterval(function(){if(&#8211;d&lt; 0){h=f.random; e=h()*18-9; r2=h()*18-9; u2=h()*18-9; d=70}function A(C,B){return C+(B-C)*0.04}p=A(p,e); m=A(m,r2); g=A(g,u2); q=A(q,p); r=A(r,m); u=A(u,g); a=f.atan2(q,-u*2); b=f.atan2(r*2,f.sqrt(u*u+q*q)); $+=0.05; clearRect(-t,-1,2*t,2); for(i=12; i; &#8211;i){v=0; for(j=45; j; ){c=f.cos; s=f.sin; j&#8211;; w=$-j*0.03-i*3; A=f.sqrt(j+0.2); n=c(w+s(w*0.31))*2+s(w*0.83)*3+w*0.02; o=s(w*0.7)-c(3+w*0.23)*3; x=c(n)*c(o)*A-q; y=s(n)*c(o)*A-r; z=s(o)*A-u; n=c(a); o=s(a); k=x*n+z*o; h=z*n-x*o; n=c(b); o=s(b); l=y*n+h*o; z=h*n-y*o; lineTo(k/z,l/z); lineWidth=lw*(2+!j)/z; h=f.round; w=h(60-j)*(1+!j+f.max(0,s($*6-j/8)-0.95)*70); strokeStyle=&quot;rgb(&quot;+h(w*(!j+s(i+$*0.15)+1))+&quot;,&quot;+h(!j+w*(s(i-1)+1))+&quot;,&quot;+h(!j+w*(s(i-1.3)+1))+&quot;)&quot;; if(z&gt; 0.1){v++&amp;&amp;stroke()}else{v=0}beginPath(); moveTo(k/z,l/z)}}},33)}<br />
+[/javascript]</p>
+<p>下面，让我们再看一个只有1023字节的3D演示，同样，只有在Chrome中才能看到最佳效果。</p>
+<p align=center><iframe loading="lazy" id="1kjs1" frameborder="0" style="background:#000;border:0" width="510" height="320" src="http://js1k.com/pleaseDontHotlinkMe/15"></iframe><br /> <br />
+<button id="1kjs-stop1" onclick="document.getElementById('1kjs1').src='about:blank';document.getElementById('1kjs-stop1').style.display='none';document.getElementById('1kjs-start1').style.display='block';">停止演示</button><button style="display: none" id="1kjs-start1" onclick="document.getElementById('1kjs1').src='http://js1k.com/pleaseDontHotlinkMe/15';document.getElementById('1kjs-start1').style.display='none';document.getElementById('1kjs-stop1').style.display='block';">开始演示</button></p>
+<p>其源代码如下：</p>
+<p>[javascript]<br />
+with(document.body.style){margin=&quot;0px&quot;;overflow=&quot;hidden&quot;;}var w=window.innerWidth;var h=window.innerHeight;var ca=document.getElementById(&quot;c&quot;);ca.width=w;ca.height=h;var c=ca.getContext(&quot;2d&quot;);m=Math;fs=m.sin;fc=m.cos;fm=m.max;setInterval(d,30);function p(x,y,z){return{x:x,y:y,z:z};}function s(a,z){r=w/10;R=w/3;b=-20*fc(a*5+t);return p(w/2+(R*fc(a)+r*fs(z+2*t))/z+fc(a)*b,h/2+(R*fs(a))/z+fs(a)*b);}function q(a,da,z,dz){var v=[s(a,z),s(a+da,z),s(a+da,z+dz),s(a,z+dz)];c.beginPath();c.moveTo(v[0].x,v[0].y);for(i in v)c.lineTo(v[i].x,v[i].y);c.fill();}var Z=-0.20;var t=0;function d(){t+=1/30.0;c.fillStyle=&quot;#000&quot;;c.fillRect(0,0,w,h);c.fillStyle=&quot;#f00&quot;;var n=30;var a=0;var da=2*Math.PI/n;var dz=0.25;for(var z=Z+8;z&gt;Z;z-=dz){for(var i=0;i&lt;n;i++){fog=1/(fm((z+0.7)-3,1));if(z&lt;=2){fog=fm(0,z/2*z/2);}var k=(205*(fog*Math.abs(fs(i/n*2*3.14+t))))&gt;&gt;0;k*=(0.55+0.45*fc((i/n+0.25)*Math.PI*5));k=k&gt;&gt;0;c.fillStyle=&quot;rgb(&quot;+k+&quot;,&quot;+k+&quot;,&quot;+k+&quot;)&quot;;q(a,da,z,dz);if(i%3==0){c.fillStyle=&quot;#000&quot;;q(a,da/10,z,dz);}a+=da;}}Z-=0.05;if(Z&lt;=dz)Z+=dz;}<br />
+[/javascript]</p>
+<p>你可以前往一看更多的<a href="http://js1k.com/demos" target="_blank">演示</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3429.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/arbol_0-150x150.jpg" alt="程序员的圣诞节" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3429.html" class="wp_rp_title">程序员的圣诞节</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2785.html">JS1K 演示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2785.html/feed</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>微软最囧的UI</title>
+		<link>https://coolshell.cn/articles/2792.html</link>
+					<comments>https://coolshell.cn/articles/2792.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 09 Aug 2010 00:36:47 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Paint]]></category>
+		<category><![CDATA[UI]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2792</guid>
+
+					<description><![CDATA[<p>以前，本站介绍过一些Ugly的UI，今天我们来看看微软Windows里的“画笔”程序，看看微软的某个功能干了什么样的囧事。 我打开了一个比较大的图片，有点太大了...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2792.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2792.html">微软最囧的UI</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前，本站介绍过一些<a href="https://coolshell.cn/articles/1907.html" target="_blank">Ugly的UI</a>，今天我们来看看微软Windows里的“画笔”程序，看看微软的某个功能干了什么样的囧事。</p>
+<p>我打开了一个比较大的图片，有点太大了，我想缩小一下看看，很好，微软在菜单项里供了Zoom选项，其中有一个Custom（自定义），挺不错的。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-2793" src="https://coolshell.cn/wp-content/uploads/2010/08/ms-paint-custom-menu.jpg" alt="" width="456" height="246" srcset="https://coolshell.cn/wp-content/uploads/2010/08/ms-paint-custom-menu.jpg 456w, https://coolshell.cn/wp-content/uploads/2010/08/ms-paint-custom-menu-300x162.jpg 300w" sizes="(max-width: 456px) 100vw, 456px" /></p>
+<p>但是，当我看到这个自定义的对话框后，我彻底无语了，大哥你是怎么想的啊……</p>
+<p><span id="more-2792"></span></p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-2794" src="https://coolshell.cn/wp-content/uploads/2010/08/ms-paint-custom-diag.jpg" alt="" width="316" height="168" srcset="https://coolshell.cn/wp-content/uploads/2010/08/ms-paint-custom-diag.jpg 316w, https://coolshell.cn/wp-content/uploads/2010/08/ms-paint-custom-diag-300x159.jpg 300w" sizes="(max-width: 316px) 100vw, 316px" /><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Drop-Down-Menu-Scripts-5-150x150.jpg" alt="30+ Web下拉菜单" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_title">30+ Web下拉菜单</a></li><li ><a href="https://coolshell.cn/articles/3142.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/UI-150x150.gif" alt="用户界面和用户体验的差别" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3142.html" class="wp_rp_title">用户界面和用户体验的差别</a></li><li ><a href="https://coolshell.cn/articles/3097.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/W_600-150x150.jpg" alt="Windows的达尔文进化图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3097.html" class="wp_rp_title">Windows的达尔文进化图</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2792.html">微软最囧的UI</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2792.html/feed</wfw:commentRss>
+			<slash:comments>34</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>免费电子书列表</title>
+		<link>https://coolshell.cn/articles/2775.html</link>
+					<comments>https://coolshell.cn/articles/2775.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Wed, 04 Aug 2010 10:37:59 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[book]]></category>
+		<category><![CDATA[Cheat Sheet]]></category>
+		<category><![CDATA[ebook]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2775</guid>
+
+					<description><![CDATA[<p>在StackOverflow上，有人要打算收集个免费电子书的列表，结果很快就有人分享了一个列表。很不错，我就转过来了。原帖的地址在http://stackove...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2775.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2775.html">免费电子书列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在StackOverflow上，有人要打算收集个免费电子书的列表，结果很快就有人分享了一个列表。很不错，我就转过来了。原帖的地址在<a href="http://stackoverflow.com/questions/194812/list-of-freely-available-programming-books">http://stackoverflow.com/questions/194812/list-of-freely-available-programming-books</a> （注意：有些连接可能会被墙掉）</p>
+<p>List of Free Programming books (compiled):  <strong>Meta-List</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.htdp.org/2003-09-26/Book/">How to Design Programs: An Introduction to Computing and Programming</a></li>
+<li><a rel="nofollow" href="http://www.coderholic.com/25-free-computer-science-books/">25 Free Computer Science Ebooks</a></li>
+<li><a rel="nofollow" href="http://www.freetechbooks.com/">Free Tech Books</a></li>
+<li><a rel="nofollow" href="http://www.mindviewinc.com/Books/">MindView Inc</a> (List of Free Books)</li>
+<li><a rel="nofollow" href="http://en.wikibooks.org/wiki/Category%3aProgramming">Wikibooks: Programming</a></li>
+<li><a rel="nofollow" href="http://en.wikibooks.org/wiki/Category%3aProgramming"></a><a rel="nofollow" href="http://refcardz.dzone.com/">Cheat Sheets (Free)</a></li>
+<li><a rel="nofollow" href="http://blogs.msdn.com/wriju/archive/2009/01/07/free-ebooks-at-codeplex.aspx">CodePlex List of Free E-Books</a></li>
+<li><a rel="nofollow" href="http://www.booktraining.net/">Book Training &#8211; On Video!</a></li>
+<li><a rel="nofollow" href="http://www.spmn.com/products_guidebooks.html">Sofware Program Managers Network &#8211; Free EBooks</a></li>
+<li><a rel="nofollow" href="http://www.linbai.info/">EBook Share @ linbai.info</a></li>
+<li><a rel="nofollow" href="http://www.freebooksclub.net/">FreeBooksClub.Net</a></li>
+<li><a rel="nofollow" href="http://theassayer.org/">Theassayer.org</a> (Free Online books)</li>
+<li><a rel="nofollow" href="http://oreilly.com/openbook/">O&#8217;Reilly&#8217;s Open Books Project</a></li>
+<li><a rel="nofollow" href="http://www.techbooksforfree.com/">TechBooksForFree.com</a></li>
+<li><a rel="nofollow" href="http://www.galileocomputing.de/katalog/openbook">Galileo Computing</a> (Free Downloadable German Books)</li>
+</ul>
+<p><span id="more-2775"></span><strong>Graphics Programming</strong></p>
+<ul>
+<li>Nvidia <a rel="nofollow" href="http://http.developer.nvidia.com/GPUGems/gpugems_part01.html">GPU Gems 1</a></li>
+<li>Nvidia <a rel="nofollow" href="http://http.developer.nvidia.com/GPUGems2/gpugems2_part01.html">GPU Gems 2</a></li>
+<li>Nvidia <a rel="nofollow" href="http://http.developer.nvidia.com/GPUGems3/gpugems3_part01.html">GPU Gems 3</a></li>
+<li><a rel="nofollow" href="http://www.gamedev.net/reference/articles/article1698.asp">Graphics Programming Black Book</a></li>
+</ul>
+<p><strong>Language Agnostic</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://codebetter.com/files/folders/codebetter_downloads/entry179694.aspx">Foundations of Programming</a> by Karl Seguin</li>
+<li><a rel="nofollow" href="http://scpd.stanford.edu/knuth/index.jsp">Computer Musings</a> (Lectures by Donald Knuth)</li>
+<li><a rel="nofollow" href="http://www.catb.org/esr/writings/cathedral-bazaar/">The Cathedral and the Bazaar</a> (Introduction to Open Source Software)</li>
+<li><a rel="nofollow" href="http://www.codeplex.com/AppArchGuide">Patterns and Practices: Application Architecture Guide 2.0</a></li>
+<li><a rel="nofollow" href="http://www.cl.cam.ac.uk/~rja14/book.html">Security Engineering</a></li>
+<li><a rel="nofollow" href="http://www.dspguide.com/">Digital Signal Processing For Engineers and Scientists</a></li>
+<li><a rel="nofollow" href="http://gettingreal.37signals.com/">Getting Real</a> (Courtesy <a rel="nofollow" href="http://37signals.com/">37 Signals</a>)</li>
+<li><a rel="nofollow" href="http://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a></li>
+<li><a rel="nofollow" href="http://www.infoq.com/minibooks/domain-driven-design-quickly">Domain Driven Design Quickly</a></li>
+<li><a rel="nofollow" href="http://homepage.mac.com/s_lott/books/oodesign.html">OO Design</a></li>
+<li><a rel="nofollow" href="http://smartbear.com/codecollab-code-review-book.php">Best Kept Secrets of Peer Code Review</a></li>
+<li><a rel="nofollow" href="http://www.scribd.com/doc/7181362/NASA-Software-Measurement-Guidebook">NASA Software Measurement Handbook</a></li>
+<li><a rel="nofollow" href="http://homepages.inf.ed.ac.uk/dts/pm/Papers/nasa-manage.pdf">NASA Manager Handbook for Software Development</a></li>
+<li><a rel="nofollow" href="http://www.cl.cam.ac.uk/teaching/Lectures/funprog-jrh-1996/">Introduction to Functional Programming</a> &#8211; Class Lectures and Slides</li>
+<li><a rel="nofollow" href="http://www.htdp.org/">How to Design Programs</a> &#8211; MIT Press</li>
+<li><a rel="nofollow" href="http://www.swebok.org/stoneman/trial_1_00.html">Guide to the Software Engineering Body of Knowledge</a> &#8211; IEEE Computer Society Press</li>
+<li><a rel="nofollow" href="http://ocw.mit.edu/OcwWeb/web/home/home/index.htm">Online Course Materials</a> &#8211; MIT</li>
+<li><a rel="nofollow" href="http://www.cs.berkeley.edu/~vazirani/algorithms.html">Algorithms</a> (Draft Copy)</li>
+<li><a rel="nofollow" href="http://dotnetslackers.com/projects/Data-Structures-And-Algorithms/">Data Structures and Algorithms</a></li>
+<li><a rel="nofollow" href="http://www.agileskills.org/download.html.en">Essential Skills for Agile Development</a></li>
+<li><a rel="nofollow" href="http://www.cs.brown.edu/~sk/Publications/Books/ProgLangs/">Programming Languages: Application and Interpretation</a></li>
+<li><a rel="nofollow" href="http://pine.fm/LearnToProgram/">Learn to Program</a></li>
+<li><a rel="nofollow" href="http://www.dreamsongs.com/Files/PatternsOfSoftware.pdf">Patterns of Software: Tales from the Software Community</a></li>
+<li><a rel="nofollow" href="http://freeworld.thc.org/root/phun/unmaintain.html">How to write Unmaintainable Code</a></li>
+<li><a rel="nofollow" href="http://catb.org/esr/writings/taoup/html/">The Art of Unix Programming</a></li>
+<li><a rel="nofollow" href="http://nexus.realtimepublishers.com/dgbcq.php">The Definitive Guide to Building Code Quality</a></li>
+<li><a rel="nofollow" href="http://openbookproject.net/thinkcs/cpp.php">How to Think Like a Computer Scientist</a></li>
+<li><a rel="nofollow" href="http://planning.cs.uiuc.edu/">Planning Algorithms</a></li>
+<li><a rel="nofollow" href="http://greenteapress.com/semaphores/">The Little Book of Semaphores</a></li>
+<li><a rel="nofollow" href="http://www.ii.uib.no/~michal/und/i227/book/book.pdf">Mathematical Logic &#8211; an Introduction</a></li>
+<li><a rel="nofollow" href="http://www.cse.ohio-state.edu/~gurari/theory-bk/theory-bk.html">An Introduction to the Theory of Computation</a></li>
+<li><a rel="nofollow" href="http://devshaped.com/book">Developers Developers Developers Developers</a></li>
+<li><a rel="nofollow" href="http://www.iecc.com/linker/">Linkers and loaders</a></li>
+<li><a rel="nofollow" href="http://beej.us/guide/bgnet/">Beej&#8217;s Guide to Network Programming</a></li>
+<li><a rel="nofollow" href="http://www.infoq.com/minibooks/domain-driven-design-quickly">Domain Driven Design Quickly</a></li>
+<li><a rel="nofollow" href="http://compilers.iecc.com/crenshaw/">Let&#8217;s Build a Compiler</a></li>
+<li><a rel="nofollow" href="http://producingoss.com/">Producing Open Source Software</a></li>
+<li><a rel="nofollow" href="http://www.lindaspaces.com/book/">How to Write Parallel Programs</a></li>
+<li><a rel="nofollow" href="http://www.neildavidson.com/dontjustrollthedice.html">Don&#8217;t Just Roll the Dice</a></li>
+</ul>
+<p><strong>ASP.NET MVC</strong>:</p>
+<ul>
+<li><a rel="nofollow" href="http://weblogs.asp.net/scottgu/archive/2009/03/10/free-asp-net-mvc-ebook-tutorial.aspx">NerdDinner Walkthrough</a></li>
+</ul>
+<p><strong>Assembly Language</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://download.savannah.gnu.org/releases/pgubook/ProgrammingGroundUp-1-0-booksize.pdf">ProgrammingGroundUp</a></li>
+<li><a rel="nofollow" href="http://drpaulcarter.com/pcasm/">Paul Carter&#8217;s Tutorial on x86 Assembly</a></li>
+<li><a rel="nofollow" href="http://www.agner.org/optimize/">Software optimization resources by Agner Fog</a></li>
+</ul>
+<p><strong>Bash</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://tldp.org/LDP/abs/html/">Advanced Bash-Scripting Guide</a></li>
+</ul>
+<p><strong>C/C++</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.knosof.co.uk/cbook/cbook.html">The new C standard &#8211; an annotated reference</a></li>
+<li><a rel="nofollow" href="http://publications.gbdirect.co.uk/c_book/">The C book</a></li>
+<li><a rel="nofollow" href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Thinking in C++, Second Edition</a></li>
+<li><a rel="nofollow" href="http://cppannotations.sourceforge.net/">C++ Annotations</a></li>
+<li><a rel="nofollow" href="http://www.agner.org/optimize/">Software optimization resources by Agner Fog</a></li>
+<li><a rel="nofollow" href="http://cartan.cas.suffolk.edu/oopdocbook/opensource/index.html">Introduction to Design Patterns in C++ with Qt 4</a> (Open Publication License)</li>
+</ul>
+<p><strong>C#</strong></p>
+<ul>
+<li>See <strong>.NET</strong> below</li>
+</ul>
+<p><strong>Django</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://djangobook.com/">Djangobook.com</a></li>
+</ul>
+<p><strong>Forth</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://home.iae.nl/users/mhx/sf.html">Starting Forth</a></li>
+</ul>
+<p><strong>Git</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://progit.org/book/">Pro Git</a></li>
+<li><a rel="nofollow" href="http://book.git-scm.com/index.html">The Git Community Book</a></li>
+</ul>
+<p><strong>Haskell</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://learnyouahaskell.com/chapters">Learn You a Haskell</a></li>
+<li><a rel="nofollow" href="http://book.realworldhaskell.org/read/">Real World Haskell</a></li>
+</ul>
+<p><strong>Java</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://java.sun.com/docs/books/tutorial/">Sun&#8217;s Java Tutorials</a></li>
+<li><a rel="nofollow" href="http://www.mindview.net/Books/TIJ/">Thinking in Java</a></li>
+<li><a rel="nofollow" href="http://openbookproject.net/thinkcs/java.php">How to Think Like a Computer Scientist</a></li>
+<li><a rel="nofollow" href="http://www.redbooks.ibm.com/redbooks/SG245118.html">Java Thin-Client Programming</a></li>
+<li><a rel="nofollow" href="http://s3.amazonaws.com/neilbartlett.name/osgibook_preview_20090110.pdf">OSGi in Practice</a> (CreativeCommons Attribution Non-commercial Share Alike License)</li>
+</ul>
+<p><strong>JavaScript</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://eloquentjavascript.net/">Eloquent JavaScript</a></li>
+<li><a rel="nofollow" href="http://www.crockford.com/javascript/">Crockford&#8217;s JavaScript</a></li>
+<li><a rel="nofollow" href="http://www.rebeccamurphey.com/jqfundamentals/">jQuery Fundamentals</a> (starts with JS basics)</li>
+</ul>
+<p><strong>Linux</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.advancedlinuxprogramming.com/">Advanced Linux Programming</a></li>
+</ul>
+<p><strong>Lisp</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.gigamonkeys.com/book/">Practical Common Lisp</a></li>
+<li><a rel="nofollow" href="http://www.paulgraham.com/onlisp.html">On Lisp</a></li>
+<li><a rel="nofollow" href="http://www.paulgraham.com/acl.html">ANSI Common Lisp</a></li>
+<li><a rel="nofollow" href="http://www.cs.cmu.edu/Groups/AI/html/cltl/mirrors.html">Common Lisp the Language, 2nd Edition</a></li>
+<li><a rel="nofollow" href="http://psg.com/~dlamkins/sl/contents.html">Successful Lisp</a></li>
+<li><a rel="nofollow" href="http://letoverlambda.com/index.cl/toc">Let Over Lamda &#8211; 50 Years of Lisp</a></li>
+</ul>
+<p><strong>Lua</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.lua.org/pil/">Programming In Lua</a> (for v5 but still largely relevant)</li>
+</ul>
+<p><strong>Maven</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.maestrodev.com/better-build-maven">Better Builds with Maven</a></li>
+<li><a rel="nofollow" href="http://www.sonatype.com/books/mvnex-book/reference/public-book.html">Maven by Example</a></li>
+<li><a rel="nofollow" href="http://www.sonatype.com/books/maven-book/reference/">Maven: The Definitive Guide</a></li>
+</ul>
+<p><strong>Mercurial</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://hgbook.red-bean.com/">Mercurial: The Definitive Guide</a></li>
+<li><a rel="nofollow" href="http://hginit.com/">HGInit &#8211; Mercurial Tutorial by Joel Spolsky</a></li>
+</ul>
+<p><strong>.NET (C#)</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.programmersheaven.com/2/CSharpBook">Free C# Book</a> Covers C#1.0 and 2.0 (Courtesy of <a rel="nofollow" href="http://www.programmersheaven.com/">Programmers Heaven</a>)</li>
+<li><a rel="nofollow" href="http://www.infoq.com/minibooks/vsnettt">Visual Studio Tips and Tricks</a></li>
+<li><a rel="nofollow" href="http://weblogs.asp.net/zeeshanhirani/archive/2008/12/05/my-christmas-present-to-the-entity-framework-community.aspx">Entity Framework</a> (514 pages)</li>
+<li><a rel="nofollow" href="http://www.charlespetzold.com/dotnet/index.html">Charles Petzold&#8217;s .Net Book 0</a></li>
+<li><a rel="nofollow" href="http://www.albahari.com/threading/">Threading in C#</a></li>
+<li><a rel="nofollow" href="http://www.csharpcourse.com/">C# Yellow Book</a> (Intro to programming)</li>
+<li><a rel="nofollow" href="http://en.wikibooks.org/wiki/C_Sharp_Programming">C# Programming &#8211; Wikibook</a></li>
+<li><a rel="nofollow" href="http://www.techotopia.com/index.php/C_Sharp_Essentials">C# Essentials</a></li>
+<li><a rel="nofollow" href="http://www.brpreiss.com/books/opus6/">Data Structures and Algorithms with Object-Oriented Design Patterns in C#</a></li>
+<li><a rel="nofollow" href="http://downloads.red-gate.com/ebooks/DotNet/illustratedcsharp2008.zip">Illustrated C# 2008</a> (Download) (<strong>.ZIP</strong>) [dead link]</li>
+<li><a rel="nofollow" href="http://www.red-gate.com/products/ants_performance_profiler/be_ahead_of_the_game_ebook.htm?utm_source=simpletalk&amp;utm_medium=email&amp;utm_content=nlv_aheadofgame-ebook&amp;utm_campaign=antsperformanceprofiler">O&#8217;Reilly&#8217;s C# Pocket Reference Manual</a> (<em>Free Ebook courtesy of <a rel="nofollow" href="http://red-gate.com/">Red Gate Software</a></em>) [dead link]</li>
+</ul>
+<p><strong>NoSQL</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://books.couchdb.org/relax/">CouchDB: The Definitive Guide</a></li>
+</ul>
+<p><strong>Objective-C</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://developer.apple.com/DOCUMENTATION/Cocoa/Conceptual/ObjectiveC/">The Objective-C Programming Language</a></li>
+</ul>
+<p><strong>Parrot / Perl 6</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://github.com/perl6/book/">Perl 6</a> (Work in progress)</li>
+</ul>
+<p><strong>Perl</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://hop.perl.plover.com/book/">Higher Order Perl</a></li>
+<li><a rel="nofollow" href="http://www.greenteapress.com/perl/">Perl The Hard Way</a></li>
+<li><a rel="nofollow" href="http://www.extremeperl.org/bk/home">Extreme Perl</a></li>
+<li><a rel="nofollow" href="http://linkmingle.com/list/13-plus-List-of-Free-Great-Perl-Books-available-Online-freebooksandarticles">Perl Free Online EBooks</a> <strong>Meta-List</strong></li>
+<li><a rel="nofollow" href="http://www.masonbook.com/book/">The Mason Book</a></li>
+<li><a rel="nofollow" href="http://modperlbook.org/">Practical mod_perl</a></li>
+<li><a rel="nofollow" href="http://www.perl.org/books/beginning-perl/">Beginning Perl</a></li>
+<li><a rel="nofollow" href="http://www.masonbook.com/book/">Embedding Perl in HTML with Mason</a> (Open Publication License)</li>
+<li><a rel="nofollow" href="http://lwp.interglacial.com/index.html">Perl &amp; LWP</a></li>
+<li><a rel="nofollow" href="http://www.globalspin.com/thebook/">Perl for the Web</a></li>
+<li><a rel="nofollow" href="http://oreilly.com/openbook/webclient/">Web Client Programming with Perl</a></li>
+<li><a rel="nofollow" href="http://github.com/chromatic/modern_perl_book/">Modern Perl 5</a> (Work in progress)</li>
+</ul>
+<p><strong>PHP</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.ipbwiki.com/Practical_PHP_Programming%3aTable_Of_Contents">Practical PHP Programming</a> (Wiki that contains O&#8217;Reilly&#8217;s <em>PHP In a Nutshell</em>)</li>
+<li><a rel="nofollow" href="http://www.survivethedeepend.com/">Zend Framework: Survive the Deep End</a></li>
+</ul>
+<p><strong>PowerShell</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://powershell.com/cs/blogs/ebook/">Mastering PowerShell</a></li>
+</ul>
+<p><strong>Prolog</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.amzi.com/ExpertSystemsInProlog/">Building Expert Systems in Prolog</a></li>
+<li><a rel="nofollow" href="http://www.amzi.com/AdventureInProlog/advfrtop.htm">Adventure in Prolog</a></li>
+<li><a rel="nofollow" href="http://computing.unn.ac.uk/staff/cgpb4/prologbook/">Prolog Programming A First Course</a></li>
+<li><a rel="nofollow" href="http://www.ida.liu.se/~ulfni/lpp/">Logic, Programming and Prolog (2ed)</a></li>
+<li><a rel="nofollow" href="http://www.j-paine.org/prolog/mathnotes/files/pms/pms.html">Introduction to Prolog for Mathematicians</a></li>
+<li><a rel="nofollow" href="http://www.learnprolognow.org/">Learn Prolog Now!</a></li>
+<li><a rel="nofollow" href="http://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/">Natural Language Processing Techniques in Prolog</a></li>
+</ul>
+<p><strong>PostgreSQL</strong></p>
+<ul><a rel="nofollow" href="http://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/"> </a></p>
+<li><a rel="nofollow" href="http://www.commandprompt.com/ppbook/">Practical PostgreSQL</a></li>
+</ul>
+<p><strong>Python</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://diveintopython.org/">Dive Into Python</a></li>
+<li><a rel="nofollow" href="http://diveintopython3.org/">Dive Into Python 3</a></li>
+<li><a rel="nofollow" href="http://www.swaroopch.com/notes/Python">Byte of Python</a></li>
+<li><a rel="nofollow" href="http://homepage.mac.com/s_lott/books/python.html">Building Skills in Python Version 2.5</a></li>
+<li><a rel="nofollow" href="http://linkmingle.com/list/List-of-Free-Online-Python-Books-freebooksandarticles">Python Free Online Ebooks</a> <strong>Meta-List</strong></li>
+<li><a rel="nofollow" href="http://openbookproject.net/pybiblio/">Python Bibliotheca</a></li>
+<li><a rel="nofollow" href="http://www.greenteapress.com/thinkpython/thinkpython.pdf">Think Python</a></li>
+<li><a rel="nofollow" href="http://www.brpreiss.com/books/opus7/html/book.html">Data Structures and Algorithms in Python</a></li>
+<li><a rel="nofollow" href="http://www.greenteapress.com/thinkpython/thinkCSpy/">How to Think Like a Computer Scientist: Learning with Python</a></li>
+<li><a rel="nofollow" href="http://www.openbookproject.net/py4fun/">Python for Fun</a></li>
+<li><a rel="nofollow" href="http://inventwithpython.com/">Invent Your Own Computer Games With Python</a></li>
+<li><a rel="nofollow" href="http://www.mindview.net/Books/TIPython/">Thinking in Python</a></li>
+<li><a rel="nofollow" href="http://djangobook.com/">The Django Book</a></li>
+<li><a title="SWFK" rel="nofollow" href="http://www.briggs.net.nz/log/writing/snake-wrangling-for-kids/">Snake Wrangling For Kids</a></li>
+</ul>
+<p><strong>Ruby</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.ruby-doc.org/docs/ProgrammingRuby/">Programming Ruby</a></li>
+<li><a rel="nofollow" href="http://mislav.uniqpath.com/poignant-guide/">Why&#8217;s (Poignant) Guide to Ruby</a> (<a rel="nofollow" href="http://www.scribd.com/doc/2236084/Whys-Poignant-Guide-to-Ruby">Mirror</a> via <a rel="nofollow" href="http://www.scribd.com/">Scribd</a>)</li>
+<li><a rel="nofollow" href="http://www.humblelittlerubybook.com/">Mr. Neighborly&#8217;s Humble Little Ruby Book</a></li>
+<li><a rel="nofollow" href="http://rubybestpractices.com/">Ruby Best Practices</a></li>
+<li><a rel="nofollow" href="http://macruby.labs.oreilly.com/">MacRuby: The Definitive Guide</a></li>
+<li><a rel="nofollow" href="http://www.railstutorial.org/">Ruby on Rails Tutorial: Learn Rails By Example</a></li>
+</ul>
+<p><strong>Scala</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.scala-lang.org/docu/files/ScalaTutorial.pdf">A Scala Tutorial for Java programmers</a></li>
+<li><a rel="nofollow" href="http://www.scala-lang.org/docu/files/ScalaByExample.pdf">Scala By Example</a></li>
+<li><a rel="nofollow" href="http://programming-scala.labs.oreilly.com/index.html">Programing Scala</a></li>
+<li><a rel="nofollow" href="http://github.com/leithaus/XTrace/tree/monadic/src/main/book/content/">Xtrace</a> (Github)</li>
+<li><a rel="nofollow" href="http://github.com/tjweir/liftbook">List</a> (Github)</li>
+<li><a rel="nofollow" href="http://github.com/leithaus/XTrace/tree/monadic/src/main/book/content/">Pro Scala: Monadic Design Patterns for the Web</a></li>
+<li><a rel="nofollow" href="http://github.com/tjweir/liftbook">Exploring Lift</a> (published earlier as &#8220;The Definitive Guide to Lift&#8221;, <a rel="nofollow" href="http://groups.google.com/group/the-lift-book">pdf</a>)</li>
+</ul>
+<p><strong>Scheme</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.scheme.com/tspl4/">The Scheme Programming Language (Edition 4)</a></li>
+</ul>
+<p><strong>SmallTalk</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://stephane.ducasse.free.fr/FreeBooks.html">SmallTalk Free Ebooks</a> <em>Courtesy of Stéphane Ducasse</em></li>
+<li><a rel="nofollow" href="http://www.squeakbyexample.org/">Squeak By Example</a> (Smalltalk IDE)</li>
+</ul>
+<p><strong>Subversion</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.phptr.com/content/images/0131855182/downloads/Nagel_book.pdf">Subversion Version Control: Using the Subversion Version Control System in Development Projects</a></li>
+</ul>
+<p><strong>*<em>SQL (Implementation agnostic) *</em> </strong></p>
+<li><a rel="nofollow" href="http://www.cs.arizona.edu/people/rts/publications.html">Developing Time-Oriented Database Applications in SQL</a>,Richard T. Snodgrass</li>
+<p><strong>Vim</strong></p>
+<ul>
+<li><a rel="nofollow" href="http://www.swaroopch.com/notes/Vim">A Byte of Vim</a></li>
+</ul>
+<p>你有和我们分享的计算机电子书列表吗？欢迎在回复中和我们分享。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg" alt="两本电子书" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_title">两本电子书</a></li><li ><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg" alt="一些非常不错的资料" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_title">一些非常不错的资料</a></li><li ><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" alt="给程序员的VIM速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_title">给程序员的VIM速查卡</a></li><li ><a href="https://coolshell.cn/articles/4710.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Python 和 PyGame 的一些示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4710.html" class="wp_rp_title">Python 和 PyGame 的一些示例</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2775.html">免费电子书列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2775.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>最佳编程语录</title>
+		<link>https://coolshell.cn/articles/2753.html</link>
+					<comments>https://coolshell.cn/articles/2753.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Mon, 02 Aug 2010 00:15:45 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Bjarne Stroustrup]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Edsger Dijkstra]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2753</guid>
+
+					<description><![CDATA[<p>以前本站发布过《22条经典的编程引言》、《编程引言补充》、《Linus Torvalds 语录》还有《十条不错的编程观点》。今天向大家介绍“最佳编程语录”，条条...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2753.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2753.html">最佳编程语录</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站发布过《<a rel="bookmark" href="https://coolshell.cn/articles/808.html" target="_blank">22条经典的编程引言</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1212.html" target="_blank">编程引言补充</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1278.html" target="_blank">Linus Torvalds 语录</a>》还有《<a href="https://coolshell.cn/articles/2424.html" target="_blank">十条不错的编程观点</a>》。今天向大家介绍“最佳编程语录”，条条都是很不错的语录，如同我们的太阳，照亮了我们的方向（所以我们选用了一个红色的图片，希望能够通过五毛们的网络审查）。<img decoding="async" loading="lazy" class="alignright size-medium wp-image-2755" title="Best Programming Quotations" src="https://coolshell.cn/wp-content/uploads/2010/08/Best-Programming-Quotations-201x300.jpg" alt="" width="201" height="300" srcset="https://coolshell.cn/wp-content/uploads/2010/08/Best-Programming-Quotations-201x300.jpg 201w, https://coolshell.cn/wp-content/uploads/2010/08/Best-Programming-Quotations-181x270.jpg 181w, https://coolshell.cn/wp-content/uploads/2010/08/Best-Programming-Quotations.jpg 335w" sizes="(max-width: 201px) 100vw, 201px" />其中只有一两条在以前本站发布过的文章中出现过。这篇<a href="http://www.linfo.org/q_programming.html" target="_blank"><strong>文章的出处在这里</strong></a>，下面是“<a href="https://coolshell.cn/?author=4" target="_blank">Neo</a>”和“<a href="https://coolshell.cn/?author=2" target="_blank">陈皓</a>”的翻译，我们的翻译水平有限，所以，我们提供了中英文对照，有不当之处，还请各位指正。</p>
+<blockquote><p>A good programmer is someone who looks both ways before crossing a one-way street.   &#8212; Doug Linder, systems administrator</p>
+<p>好的程序员这样一类人，这类人在横穿一条单行道前都要先看一下路两边。&#8211; Doug Linder, 系统管理员</p></blockquote>
+<blockquote><p>A most important, but also most elusive, aspect of any tool is its influence on the habits of those who train themselves in its use. If the tool is a programming language this influence is, whether we like it or not, an influence on our thinking habits.   &#8212; Edsger Dijkstra, computer scientist</p>
+<p>关于工具，一个最重要的，也是最不易察觉的方面是，工具对使用此工具的人的习惯的潜移默化的影响。如果这个工具是一门程序语言，不管我们是否喜欢它，它都会影响我们的思维惯式。 &#8211;Edsger Dijkstra, 著名的计算机科学家。</p></blockquote>
+<blockquote><p>Being abstract is something profoundly different from being vague&#8230; The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise.   &#8212; Edsger Dijkstra</p>
+<p>抽象和模糊完全地不同，抽象的目的并不是把事情变模糊，而去创建一个新的语义层，在那里是绝对精确的描述。 &#8212; Edsger Dijkstra</p></blockquote>
+<blockquote><p>Besides a mathematical inclination, an exceptionally good mastery of one&#8217;s native tongue is the most vital asset of a competent programmer.   &#8212; Edsger Dijkstra</p>
+<p>除了数学爱好，对于一个有能力的程序员来说，出色地掌握自己的母语是最宝贵的财富。&#8211; Edsger Dijkstra</p></blockquote>
+<p><span id="more-2753"></span></p>
+<blockquote><p>C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do, it blows away your whole leg.   &#8212; Bjarne Stroustrup, developer of the C++ programming language</p>
+<p>C很容易使你搬起石头砸自己的脚，而C++把这事变得更难，但是如果一定要这么做，那么你的整条腿都会被炸飞 -Bjarne Stroustrup, C++语言的发明者</p></blockquote>
+<blockquote><p>Commentary: most debugging problems are fixed easily; identifying the location of the problem is hard.   &#8212; unknown</p>
+<p>修复bug很容易，但是定位bug却很困难 &#8211; 匿名</p></blockquote>
+<blockquote><p>Considering the current sad state of our computer programs, software development is clearly still a black art, and cannot yet be called an engineering discipline.   &#8212; Bill Clinton, former President of the United States</p>
+<p>看看当前计算机程序糟糕的事态，软件开发明显一直是一门妖术，其仍然不能被称为一个工程学。 &#8211;比尔.克林顿 美国前总统</p></blockquote>
+<blockquote><p>For a long time it puzzled me how something so expensive, so leading edge, could be so useless, and then it occurred to me that a computer is a stupid machine with the ability to do incredibly smart things, while computer programmers are smart people with the ability to do incredibly stupid things. They are, in short, a perfect match.   &#8212; Bill Bryson, author, from Notes from a Big Country</p>
+<p>长期以来，有个事一直困扰着我，那就是越是昂贵的，越是前沿的，就越可能是没用的。然后，困扰我的另一个事是，计算机是一个死的机器，却可以不可思议地去完成那些巧妙的事情，而计算机程序员是那么聪明人却在做着不可思议的愚蠢的事情，简而言之，他们真是天生的一对。&#8211; Bill Bryson旅游文学作家 Big Country中的笔记</p></blockquote>
+<blockquote><p>Given enough eyeballs, all bugs are shallow (e.g., given a large enough beta-tester and co-developer base, almost every problem will be characterized quickly and the fix obvious to someone).   &#8212; Eric S. Raymond, programmer and advocate of open source software, from The Cathedral and the Bazaar</p>
+<p>足够多的眼睛，就可让所有问题浮现(比如：只要给于足够多的beta测试者和开发人员一起工作，那么，几所所有的问题都会很快的出现，而修正也会是显而易见的）</p></blockquote>
+<blockquote><p>Good code is its own best documentation. As you&#8217;re about to add a comment, ask yourself, &#8216;How can I improve the code so that this comment isn&#8217;t needed?&#8217; Improve the code and then document it to make it even clearer.   &#8212; Steve McConnell, software engineer and author, from Code Complete</p>
+<p>好的代码自己本身就是最好的文档。当你打算加注释的时候，问问自己‘我如何才能把我的代码改善到不需增加注释？’重构自己的代码，然后使文档让其更清楚。 &#8212; Steve McConnell《代码大全》的作者</p></blockquote>
+<blockquote><p>Hey! It compiles! Ship it!   &#8212; unknown</p>
+<p>嘿，编译通过了！出货！&#8211;匿名</p></blockquote>
+<blockquote><p>Inside every well-written large program is a well-written small program.   &#8212; Charles Antony Richard Hoare, computer scientist</p>
+<p>在每个编写精良的大程序里面都是一个编写精良的小程序。 &#8211;Charles Antony Richard Hoare,计算机科学家</p></blockquote>
+<blockquote><p>It should be noted that no ethically-trained software engineer would ever consent to write a DestroyBaghdad procedure. Basic professional ethics would instead require him to write a DestroyCity procedure, to which Baghdad could be given as a parameter.   &#8212; Nathaniel S. Borenstein, computer scientist</p>
+<p>需要注意的是，没有哪个经过规范培训的工程师会赞成写一个DestoryBaghdad（摧毁巴克达）的函数。最基本的职业规范会告诉他们应该去写一个叫DestoryCity的函数，然后把“Baghdad”（巴克达）当成这个函数的参数。——　Nathaniel S. Borenstein,　计算机科学家</p></blockquote>
+<blockquote><p>Managing programmers is like herding cats.   &#8212; unknown</p>
+<p>管理程序员就如同养一群猫一样 &#8211;匿名</p></blockquote>
+<blockquote><p>Measuring programming progress by lines of code is like measuring aircraft building progress by weight.   &#8212; Bill Gates, co-founder of Microsoft Corporation</p>
+<p>用代码行数来衡量编程的进度，就如同用航空器零件的重量来衡量航空飞机的制造进度一样。——Bill Gates，微软创始人</p></blockquote>
+<blockquote><p>More good code has been written in languages denounced as bad than in languages proclaimed wonderful &#8212; much more.   &#8212; Bjarne Stroustrup, from The Design and Evolution of C++</p>
+<p>更多的优秀代码是用被认为很烂的语言写成的，而不是用那些被说的好的不得了的语言。——Bjarne Stroustrup, 摘自《The Design and Evolution of C++》</p></blockquote>
+<blockquote><p>Programs must be written for people to read, and only incidentally for machines to execute.   &#8212; Harold Abelson and Gerald Jay Sussman, computer scientists and authors, from The Structure and Interpretation of Computer Programs</p>
+<p>代码应该是写给其他人来读的，而能让机器运行的仅仅是附带着的。——　Harold Abelson 与 Gerald Jay Sussman, 计算机科学家和作家，摘自《The Structure and Interpretation of Computer Programs》</p></blockquote>
+<blockquote><p>Real programmers don&#8217;t comment their code. If it was hard to write, it should be hard to understand.   &#8212; unknown</p>
+<p>真正程序员从来不写代码的注释，如果代码非常难写，那么同样代码的注释也会非常难懂 &#8211;匿名</p></blockquote>
+<blockquote><p>Simplicity is prerequisite for reliability.   &#8212; Edsger Dijkstra</p>
+<p>简单是可靠的前提条件 &#8212; 迪杰斯特拉</p></blockquote>
+<blockquote><p>The C programming language &#8212; a language which combines the flexibility of assembly language with the power of assembly language.   &#8212; unknown</p>
+<p>C语言—— 一门同时具有了汇编语言灵活性和汇编语言强大能力的语言。&#8211; 匿名</p></blockquote>
+<blockquote><p>The first 90% of the code accounts for the first 90% of the development time. The remaining 10% of the code accounts for the other 90% of the development time.   &#8212; Tom Cargill, object-oriented programming expert at Bell Labs</p>
+<p>开始的90%的代码用了90%的开发时间，而剩下的最后的10%的代码会需要另外90%的开发时间。&#8211; Tom Cargill,贝尔实验室的面向对象编程专家。</p></blockquote>
+<blockquote><p>The important point is that the cost of adding a feature isn&#8217;t just the time it takes to code it. The cost also includes the addition of an obstacle to future expansion. Sure, any given feature list can be implemented, given enough coding time. But in addition to coming out late, you will usually wind up with a codebase that is so fragile that new ideas that should be dead-simple wind up taking longer and longer to work into the tangled existing web. The trick is to pick the features that don&#8217;t fight each other.   &#8212; John Carmack, computer game programmer</p>
+<p>增加一个功能特性的成本并不单单是为这些功能编码所花费时间的成本，还这个成本应该包括特性扩展的障碍成本。当然，任何的功能清单都可以被实现，只需要有足够的时间。但是除些之外，你应该对你的代码库的脆弱性感到紧张，而那些新的想法应该足够的简单，而不是去花费更多更多的时间去纠缠于现有的蜘蛛网。这里的决窃是挑选那些不会和别人冲突的的功能。</p></blockquote>
+<blockquote><p>The key to performance is elegance, not battalions of special cases. The terrible temptation to tweak should be resisted unless the payoff is really noticeable.   &#8212; Jon Bently and M. Douglas McIlroy, both computer scientists at Bell Labs</p>
+<p>表现的关键是精美和典雅的，并不是使用大量的特殊案例。对于任何调整的冲动都应该是被限制的，除非其回报真的是值得注意的。&#8211; Jon Bently and M. Douglas McIlroy,  二者都是贝尔试验实的计算机科学家</p></blockquote>
+<blockquote><p>The last good thing written in C was Franz Schubert&#8217;s Symphony Number 9.   &#8212; Erwin Dieterich, programmer<br />
+最后一件用C做的好作品就是弗朗茨.舒伯特的C大调第9交响曲 &#8212; Erwin Dieterich, programmer程序员</p></blockquote>
+<blockquote><p>The problem with using C++ &#8230; is that there&#8217;s already a strong tendency in the language to require you to know everything before you can do anything.   &#8212; Larry Wall, developer of the Perl language</p>
+<p>使用C++最大的问题是..在C++语言里，存在这一种很强的趋势，就是如果你不明白C++语言的细节，你就无法做好任何事情。&#8211; Larry Wall, developer of the Perl language</p></blockquote>
+<blockquote><p>The sooner you start to code, the longer the program will take.   &#8212; Roy Carlson, University of Wisconsin</p>
+<p>你越早开始都手编码，你所花费来编程的时间就越长 &#8212; Roy Carlson, University of Wisconsin</p></blockquote>
+<blockquote><p>The value of a prototype is in the education it gives you, not in the code itself.   &#8212; Alan Cooper, software author, from The Inmates are Running the Asylum</p>
+<p>原型的价值在于他给你的教训，而不是代码自身 &#8212; Alan Cooper, software author, from The Inmates are Running the Asylum</p></blockquote>
+<blockquote><p>There are only two kinds of programming languages: those people always bitch about and those nobody uses.   &#8212; Bjarne Stroustrup</p>
+<p>世界上只有两类编程语言：人们都抱怨的语言和从来没有人使用的语言 &#8212; Bjarne Stroustrup</p></blockquote>
+<blockquote><p>There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies. And the other way is to make it so complicated that there are no obvious deficiencies.   &#8212; Charles Antony Richard Hoare</p>
+<p>世界上有两个设计软件的方法，一种方法是设计的尽量简单，以至于明显的没有什么缺陷，另外一种方式是使他尽量的复杂，以至于其缺陷不那么明显。</p></blockquote>
+<blockquote><p>Ugly programs are like ugly suspension bridges: they&#8217;re much more liable to collapse than pretty ones, because the way humans (especially engineer-humans) perceive beauty is intimately related to our ability to process and understand complexity. A language that makes it hard to write elegant code makes it hard to write good code.   &#8212; Eric S. Raymond</p>
+<p>丑陋的程序就像一座丑陋的吊桥：他们相比漂亮的良好的吊桥起来，更有可能会坍塌，这是因为人类（尤其是工程师）感知漂亮的东西是和我们处理和理解复杂问题的能力相关的。所以，一个程序语言如果很难以优雅地方式编程，那么其就很难写出好的代码。</p></blockquote>
+<blockquote><p>Weeks of programming can save you hours of planning.   &#8212; unknown</p>
+<p>多做几周的编程可以节省你做计划的时间 —— 匿名 （意思为，只有实践过了，你才更容易做计划，没有实践过，做起计划来将会很头痛）</p></blockquote>
+<blockquote><p>When a programming language is created that allows programmers to program in simple English, it will be discovered that programmers cannot speak English.   &#8212; unknown</p>
+<p>当程序语言被设计成允许程序以很简单的英语来编程的时候，人们将会发现编写程序的程序员都来自不会说英语的地方。 &#8211;匿名</p></blockquote>
+<p>（全文完，翻译水平有限，如果有误，还请批评指正！）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li><li ><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif" alt="一个空格引发的惨剧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_title">一个空格引发的惨剧</a></li><li ><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="代码重构的一个示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_title">代码重构的一个示例</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2753.html">最佳编程语录</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2753.html/feed</wfw:commentRss>
+			<slash:comments>41</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>五种应该避免的代码注释</title>
+		<link>https://coolshell.cn/articles/2746.html</link>
+					<comments>https://coolshell.cn/articles/2746.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 28 Jul 2010 00:48:15 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[注释]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2746</guid>
+
+					<description><![CDATA[<p>在酷壳，有很多文章都提到了代码注释，如：《十条不错的编程观点》、《优质代码的十诫》、《整洁代码的4个提示》、《惹恼程序员的十件事》等等。今天，某国外的程序员在这...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2746.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2746.html">五种应该避免的代码注释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在酷壳，有很多文章都提到了代码注释，如：《<a rel="bookmark" href="https://coolshell.cn/articles/2424.html" target="_blank">十条不错的编程观点</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1007.html" target="_blank">优质代码的十诫</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1095.html" target="_blank">整洁代码的4个提示</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/340.html" target="_blank">惹恼程序员的十件事</a>》等等。今天，某国外的程序员在<a href="http://repeatgeek.com/career/5-types-of-comments-to-avoid-making-in-your-code/" target="_blank"><strong>这里</strong></a>列举五种应该避免的程序注释，我觉得比较有道理，但我觉得有少数几个观点也并不绝对。所以，我把原文的这五种应该避免的程序注释罗列在下面，并放上原作者和我的个人观点作为比较。希望对大家有用。</p>
+<h3>一、自恋型注释</h3>
+<p>（注：原文为Proud，我觉得“自恋”更好一点）</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+public class Program
+{
+    static void Main(string[] args)
+    {
+        string message = &quot;Hello World!&quot;;  // 07/24/2010 Bob
+        Console.WriteLine(message); // 07/24/2010 Bob
+        message = &quot;I am so proud of this code!&quot;; // 07/24/2010 Bob
+        Console.WriteLine(message); // 07/24/2010 Bob
+    }
+}</pre>
+<p><strong>原文</strong>：这样的程序员对于自己的代码改动非常骄傲和自恋，所以，他觉得需在在这些自己的代码上标上自己的名字。其实，一个版本控制工具（如：CVS或Subversion）可以完整地记录下所有的关于代码的改动的和作者相关的一切信息，只不过不是那么明显罢了。</p>
+<p><strong>陈皓</strong>：我同意原文的观点。在我的团队里也有这样的事情发生。有段时间我认真思考过这样的事情，是否应该把这样的事情在代码中铲除出去。后来，我觉得，允许这样的行为并不一定是坏事，因为两点：</p>
+<p><span id="more-2746"></span></p>
+<ol>
+<li>调动程序员下属的积极性可能更为重要。即然，这种方式可以让程序员有骄傲的感觉，能在写代码中找到成就感，为什么要阻止呢？又不是什么大问题。</li>
+<li>调动程序员的负责任的态度。程序员敢把自己的名字放在代码里，说明他对这些代码的信心，是想向大家展示其才能。所以，他当然知道，如果这段他加入的代码有问题的话，他的声誉必然受到损失，所以，他敢这么干，也就表明他敢于对自己的代码全面的负责。这不正是我们所需要的？！</li>
+</ol>
+<p>所以，基于上述考虑，我个人认为，<strong>从代码的技术角度上来说，这样的注释很不好。但从团队的激励和管理上来说，这样的方式可能也挺好的</strong>。所以，我并不阻止也不鼓励这样的注释。关键在于其是否能有更好的结果。</p>
+<h3>二、废弃代码的注释</h3>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+public class Program
+{
+    static void Main(string[] args)
+    {
+        /* This block of code is no longer needed
+         * because we found out that Y2K was a hoax
+         * and our systems did not roll over to 1/1/1900 */
+        //DateTime today = DateTime.Today;
+        //if (today == new DateTime(1900, 1, 1))
+        //{
+        //    today = today.AddYears(100);
+        //    string message = &quot;The date has been fixed for Y2K.&quot;;
+        //    Console.WriteLine(message);
+        //}
+    }
+}</pre>
+<p><strong>原文</strong>：如果某段代码不再使用了，那就应该直接删除。我们不应该使用注释来标准废弃的代码。同样，我们有版本控制工具来管理我们的源代码，在版本控制工具里，是不可能有代码能被真正的物理删除的。所以，你总是可以从以前的版本上找回你的代码的。</p>
+<p><strong>陈皓</strong>：我非常同意这样的观点。只要你是废弃的，就应该是删除，而不是注释掉。注释并不是用来删除代码的。也许你会争论到，在迭代开发中，你觉得被注释的代码很有可能在未来会被使用，但现在因为种种问题暂时用不到，所以，你先注释着，然后等到某一天再enable它。所以你注释掉一些未来会有的程序。在这样的情况，你可以注释掉这段代码，但你要明白，这段代码不是“废弃”的，而是“临时”不用的。所以，我在这里提醒你，请不要教条式地在你的程序源码中杜绝这样的注释形式，是否“废弃”是其关键。</p>
+<h3>三、明显的注释</h3>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public class Program
+{
+    static void Main(string[] args)
+    {
+        /* This is a for loop that prints the
+         * words &quot;I Rule!&quot; to the console screen
+         * 1 million times, each on its own line. It
+         * accomplishes this by starting at 0 and
+         * incrementing by 1. If the value of the
+         * counter equals 1 million the for loop
+         * stops executing.*/
+        for (int i = 0; i &lt; 1000000; i++)
+        {
+            Console.WriteLine(&quot;I Rule!&quot;);
+        }
+    }
+}</pre>
+<p><strong>原文</strong>：看看上面的例子，代码比注释还容易读。是的，大家都是程序员，对于一些简单的，显而易见的程序逻辑，不需要注释的。而且，你不需要在你的注释中教别人怎么编程，你这是在浪费时间去解释那些显而易见的东西。你应该用注释去解释你的代码功能，原因，想法，而不是代码本身。</p>
+<p><strong>陈皓</strong>：非常同意。最理解的情况是你的代码写得直接易读，代码本身就是自解释的，根本不需要注释。这是最高境界。注释应该说明下面的代码主要完成什么样的功能，为什么需要他，其主要算法怎么设计的，等等。而不是解释代码是怎么工作的。这点很多新手程序员都做得不够好。别外，我需要指出的是，代码注释不宜过多，如果太多的话，你应该去写文档，而不是写注释了。</p>
+<h3>四、故事型注释</h3>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public class Program
+{
+    static void Main(string[] args)
+    {
+       /* I discussed with Jim from Sales over coffee
+        * at the Starbucks on main street one day and he
+        * told me that Sales Reps receive commission
+        * based upon the following structure.
+        * Friday: 25%
+        * Wednesday: 15%
+        * All Other Days: 5%
+        * Did I mention that I ordered the Caramel Latte with
+        * a double shot of Espresso?
+       */
+        double price = 5.00;
+        double commissionRate;
+        double commission;
+        if (DateTime.Today.DayOfWeek == DayOfWeek.Friday)
+        {
+            commissionRate = .25;
+        }
+        else if (DateTime.Today.DayOfWeek == DayOfWeek.Wednesday)
+        {
+            commissionRate = .15;
+        }
+        else
+        {
+            commissionRate = .05;
+        }
+        commission = price * commissionRate;
+    }
+}</pre>
+<p><strong>原文</strong>：如果你不得不在你的代码注释中提及需求，那也不应该提及人名。在上面的示例中，好像程序想要告诉其它程序员，下面那些代码的典故来自销售部的Jim，如果有不懂的，你可以去问他。其实，这根本没有必要在注释中提到一些和代码不相干的事。</p>
+<p><strong>陈皓</strong>：太同意了。这里仅仅是代码，不要在代码中掺入别的和代码不相干的事。这里你也许会有以下的争辩：</p>
+<ol>
+<li>有时候，那些所谓的“高手”逼着我这么干，所以，我要把他的名字放在这里让所有人看看他有多SB。</li>
+<li>有时候，我对需求并不了解，我们应该放一个联系人在在这里，以便你可以去询问之。</li>
+</ol>
+<p>对于第一点，我觉得这是一种情绪化。如果你的上级提出一些很SB的想法，我觉得你应该做的是努力去和他沟通，说明你的想法。如果这样都不行的话，你应该让你的经理或是那个高手很正式地把他的想法和方案写在文档里或是电子邮件里，然后，你去执行。这样，当出现问题的时候，你可以用他的文档和邮件作为你的免责证据，而不是在代码里干这些事。</p>
+<p>对于第二点，这些需求的联系人应该是在需求文档中，如果有人有一天给你提了一个需求，你应该把其写在你的需求文档中，而不是你的代码里。要学会使用流程来管理你的工作，而不是用注释。</p>
+<p>最后，关于故事型的注释，我需要指出也有例外的情况，我们团队中有人写注释喜欢在注释或文档里写一些名人名言（如 <a rel="bookmark" href="https://coolshell.cn/articles/808.html" target="_blank">22条经典的编程引言</a>，<a rel="bookmark" href="https://coolshell.cn/articles/1212.html" target="_blank">编程引言补充</a>，<a rel="bookmark" href="https://coolshell.cn/articles/1278.html" target="_blank">Linus Torvalds 语录  Top 10</a> ），甚至写一些小笑话，幽默的短句。我并不鼓励这么做，但如果这样有利于培养团队文化，有利于让大家对工作更感兴趣，有利于大家在一种轻松愉快的环境下读/写代码，那不也是挺好的事吗？</p>
+<p>另外，做为一个管理者，有时候我们应该去看看程序员的注释，因为那里面可能会有程序员最直实的想法和情绪（<a href="https://coolshell.cn/articles/1850.html" target="_blank">程序员嘴最脏??</a>）。了解了他们的想法有利于你的管理。</p>
+<h3>五、“TODO”注释</h3>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public class Program
+{
+    static void Main(string[] args)
+    {
+       //TODO: I need to fix this someday – 07/24/1995 Bob
+       /* I know this error message is hard coded and
+        * I am relying on a Contains function, but
+        * someday I will make this code print a
+        * meaningful error message and exit gracefully.
+        * I just don’t have the time right now.
+       */
+       string message = &quot;An error has occurred&quot;;
+       if(message.Contains(&quot;error&quot;))
+       {
+           throw new Exception(message);
+       }
+    }
+}</pre>
+<p><strong>原文</strong>：当你在初始化一个项目的时候，TODO注释是非常有用的。但是，如果这样的注释在你的产品源码中出现了N多年，那就有问题了。如果有BUG要被fix，那就Fix吧，没有必要整一个TODO。</p>
+<p><strong>陈皓</strong>：是的，TODO是一个好的标志仅当存在于还未release的项目中，如果你的软件产品都release了，你的代码里还有TODO，这个就不对了。也许你会争辩说，那是你下一个版本要干的事。OK，那你应该使用项目管理，或是需求管理来管理你下一个版本要干的事，而不是使用代码注释。通常，在项目release的前夕，你应该走查一下你代码中的TODO标志，并且做出决定，是马上做，还是以后做。如果是以后做，那么，你应该使用项目管理或需求管理的流程。</p>
+<p>上述是你应该避免使用的注释，以及我个人的一些观点，也欢迎你留下你的观点！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2746.html">五种应该避免的代码注释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2746.html/feed</wfw:commentRss>
+			<slash:comments>54</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>HTML5 和 Flash 之争</title>
+		<link>https://coolshell.cn/articles/2735.html</link>
+					<comments>https://coolshell.cn/articles/2735.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Tue, 27 Jul 2010 00:00:04 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2735</guid>
+
+					<description><![CDATA[<p>文章来源 二者之间的竞争会演变成为一场“战争”吗？（现在甚至出现了可以把Flash转成Javascript/HTML5的工具） 首先需要弄清楚二者之间最主要的区...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2735.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2735.html">HTML5 和 Flash 之争</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><em><a href="http://html5.tomasdev.com.ar/">文章来源</a></em></p>
+<p>二者之间的竞争会演变成为一场“战争”吗？（现在甚至出现了可以<a rel="bookmark" href="https://coolshell.cn/articles/2497.html" target="_blank">把Flash转成Javascript/HTML5</a>的工具）</p>
+<p>首先需要弄清楚二者之间最主要的区别，HTML 是一种语言（超文本标记语言 &#8211; HyperText Markup Language），而 Flash 是 Adobe（其收购了Macromedia）公司的一个浏览器插件（Plugin）。HTML5 目前还是 W3.org 规范中一个草案，这意味着其还没有最终定案，希望到 2012 年这项工作能够完成。</p>
+<p>以下是二者各自的一些特点：</p>
+<h4><strong>HTML5</strong></h4>
+<p>这个新的技术更为易学和易用，比较 .FLA 和 .SWF 文件更容易编辑。并且基本上过去所有由 Flash 才能制作的动画效果都能够使用 JS + HTML5 + CSS 3 来完成，不过工作量可能会更大一些，不仅文件尺寸会增大，性能方面也会有影响。</p>
+<p>以前为 Web 表单设定风格我们一定需要使用到 JavaScript， 但是 HTML5 中的 contenteditable 属性让我们可以做得更多。一些新的输入类型（Types of Inputs）也被加入到 HTML5 中，如：电子邮件，数字，值范围等等。</p>
+<p>用户不仅仅需要一个支持 HTML5 的浏览器，还需要 CCS 3 和新的 JavaScript 引擎的支持。</p>
+<p>免费（不包括第三方字体和音频视频等等）</p>
+<p>更好地移动设备支持（HTML5 正在被运用于 iPhone，iPod，iPad 和 Android 应用的开发）</p>
+<p>拖拽，事实上这不是 HTML5 的一部分，但是在新版本的 GMail 中，从桌面拖拽文件到浏览器能够用 HTML5 很好地实现。对于 Flash 我不知道这是否可以实现？</p>
+<p><span id="more-2735"></span></p>
+<h4><strong>Flash</strong></h4>
+<p>文件经过压缩，所以文件尺寸会比 HTML5 + CSS + JavaScript + 图像 + 其他 小。</p>
+<p>硬件优化</p>
+<p>需要安装 Flash 插件， Android 2.2（代号 FroYo）同样支持 Flash 插件。</p>
+<p>Adobe 在它的 Creative Suite 5 中包含了 Flash Builder 4.0。</p>
+<p>也许对很多人来说，相对于 HTML + JavaScript + CSS，Flash 应用 更难于“破解”。</p>
+<p>以下是一些 Flash 能够实现而 HTML5 + JavaScript + CSS 3 不能的功能：</p>
+<ul>
+<li>增强现实（Augmented Reality）</li>
+<li>3D</li>
+<li>真正的面向对象，而非原型（Prototyping）</li>
+<li>对麦克风和摄像头的支持（事实上 HTML5 已经宣布要提供这些支持）</li>
+<li>混色模式（如：渐进色，重叠色等等）</li>
+<li>Action Message Format （AMF）</li>
+<li>二进制数据（Binary Data）</li>
+<li>位图数据（BitMapData，HTML5 的画布 Canvas 和矢量标记语言 VML 可以实现近似的功能）</li>
+<li>图形处理器的利用（Use of GPU）</li>
+</ul>
+<h4>结论</h4>
+<p>HTML5 是一项新技术，很多人会想要尝试它，而 Flash 业已存在很久，并且还将会有很长的生命周期。HTML5 短期内无法完全替代 Flash，而 Flash 可以作为 HTML5 的一个很好的补充。</p>
+<h4>HTML5 相关的一些链接</h4>
+<ul>
+<li><a href="http://html5test.com/">HTML5 Browser Compatibility Test</a></li>
+<li><a href="http://www.apple.com/html5/">HTML5 by Apple</a></li>
+<li><a href="http://html5demos.com/">HTML5 Demos</a></li>
+<li><a href="http://www.html5rocks.com/">HTML5 Rocks</a></li>
+<li><a href="http://html5watch.tumblr.com/">HTML5 Watch</a>, not necessarily HMTL5 but interesting applies of JS like the Google Pacman</li>
+<li><a href="http://www.chromeexperiments.com/">Chrome Experiments</a></li>
+<li><a href="http://www.webhostingsecretrevealed.com/featured-articles/learn-html5-10-must-read-lessons/">Learn HTML5: 10 must read lessons</a></li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/2926.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/WTF_HTML51-150x150.jpg" alt="你准备使用 HTML 5 吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2926.html" class="wp_rp_title">你准备使用 HTML 5 吗？</a></li><li ><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/html6-150x150.jpeg" alt="HTML6 展望" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_title">HTML6 展望</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2735.html">HTML5 和 Flash 之争</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2735.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>计算机编程简史图</title>
+		<link>https://coolshell.cn/articles/2724.html</link>
+					<comments>https://coolshell.cn/articles/2724.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 25 Jul 2010 23:54:16 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[programming language]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2724</guid>
+
+					<description><![CDATA[<p>这个图片太经典了，本来想翻译的，后来觉得这么经典的图片可能早已被人翻译了，简单的Google一下，果然有人翻译了。那我就把英文版和中文版都转过来吧。我们可以看到...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2724.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2724.html">计算机编程简史图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这个图片太经典了，本来想翻译的，后来觉得这么经典的图片可能早已被人翻译了，简单的Google一下，果然有人翻译了。那我就把英文版和中文版都转过来吧。我们可以看到，其中很大一部分人都和Unix有着不解之缘（参见《<a rel="bookmark" href="https://coolshell.cn/articles/2322.html" target="_blank">Unix传奇上篇</a>，<a href="https://coolshell.cn/articles/2324.html" target="_blank">Unix传奇下篇</a>》）</p>
+<ul>
+<li><a href="http://www.smashingmagazine.com/2010/06/06/designing-the-world-of-programming-infographic/" target="_blank">英文原版</a></li>
+<li><a href="http://www.mazingtech.com/cn/list.aspx/News/1/%E5%9B%BE%E8%AF%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%AE%80%E5%8F%B2" target="_blank">中文翻译版</a></li>
+</ul>
+<p>什么也不说了，直接上图（图片比较大，单击图片看大图）</p>
+<hr />
+<figure id="attachment_2726" aria-describedby="caption-attachment-2726" style="width: 409px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_.jpg"><img decoding="async" loading="lazy" class="size-large wp-image-2726" title="计算机编程简史图（英文版） " src="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-409x1024.jpg" alt="" width="409" height="1024" /></a><figcaption id="caption-attachment-2726" class="wp-caption-text">计算机编程简史图（英文版） </figcaption></figure>
+<hr />
+<p><span id="more-2724"></span></p>
+<p><figure id="attachment_2725" aria-describedby="caption-attachment-2725" style="width: 409px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn.jpg"><img decoding="async" loading="lazy" class="size-large wp-image-2725" title="计算机编程简史图（中文版） " src="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn-409x1024.jpg" alt="" width="409" height="1024" srcset="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn-409x1024.jpg 409w, https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn-120x300.jpg 120w, https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04_cn.jpg 1200w" sizes="(max-width: 409px) 100vw, 409px" /></a><figcaption id="caption-attachment-2725" class="wp-caption-text">计算机编程简史图（中文版） </figcaption></figure><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2724.html">计算机编程简史图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2724.html/feed</wfw:commentRss>
+			<slash:comments>32</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>苹果开发工具Xcode 4 第二预览版</title>
+		<link>https://coolshell.cn/articles/2719.html</link>
+					<comments>https://coolshell.cn/articles/2719.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 23 Jul 2010 09:40:00 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Apple]]></category>
+		<category><![CDATA[Interface Builder]]></category>
+		<category><![CDATA[iPad]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[LLVM]]></category>
+		<category><![CDATA[Mac]]></category>
+		<category><![CDATA[Xcode]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2719</guid>
+
+					<description><![CDATA[<p>今天，苹果公司向开发者发布Xcode 4 Preview 2，这是一个IDE用来开发在Mac，iPhone，iPad上应用程序的工具。在这个第二预览版中，主要有...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2719.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2719.html">苹果开发工具Xcode 4 第二预览版</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>今天，苹果公司向开发者发布Xcode 4 Preview 2，这是一个IDE用来开发在Mac，iPhone，iPad上应用程序的工具。在这个第二预览版中，主要有以下新的功能：</p>
+<ul>
+<li>这个版本不像以往的版本有太多的窗口，其把以前那些窗口督统一起来，只有一个窗口。</li>
+<li>集成了Interface Builder（以前这个东东和Xcode是两个东西）</li>
+<li>Xcode Assistant 可以让你的设计和代码同时呈现。</li>
+<li>LLVM Compiler 2.0。LLVM是下一代的编译器，其完全支持C，C++和Objective C，而且编译的速度和编译成的执行速度都快于GCC。同时也引入了LLDB做为新的调试器。</li>
+<li>多版本编译。这个功能可以让你在IDE中编译两个版本的代码，而且可以和Subversion或Git集成。</li>
+</ul>
+<p>你可以访问 <a href="http://developer.apple.com/technologies/tools/whats-new.html" target="_blank">What&#8217;s New</a> 来看看具体的细节。</p>
+<p><figure style="width: 651px" class="wp-caption aligncenter"><a href="http://developer.apple.com/technologies/tools/whats-new.html"><img decoding="async" loading="lazy" title="苹果开发工具Xcode 4 Preview 2" src="http://devimages.apple.com/technologies/tools/images/new_single_window20100721.jpg" alt="" width="651" height="409" /></a><figcaption class="wp-caption-text">苹果开发工具Xcode 4 Preview 2</figcaption></figure><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5089.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="10个必需的iOS开发工具和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5089.html" class="wp_rp_title">10个必需的iOS开发工具和资源</a></li><li ><a href="https://coolshell.cn/articles/2913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/1-150x150.png" alt="消费者的消费观" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2913.html" class="wp_rp_title">消费者的消费观</a></li><li ><a href="https://coolshell.cn/articles/11112.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/02/apple_goto_fail-150x150.png" alt="由苹果的低级Bug想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11112.html" class="wp_rp_title">由苹果的低级Bug想到的</a></li><li ><a href="https://coolshell.cn/articles/7617.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/i-hate-copycat-150x150.png" alt="抄袭，腾讯 和 产品 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/7617.html" class="wp_rp_title">抄袭，腾讯 和 产品 </a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li><li ><a href="https://coolshell.cn/articles/5901.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="腾讯，竞争力 和 用户体验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5901.html" class="wp_rp_title">腾讯，竞争力 和 用户体验</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2719.html">苹果开发工具Xcode 4 第二预览版</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2719.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>检查素数的正则表达式</title>
+		<link>https://coolshell.cn/articles/2704.html</link>
+					<comments>https://coolshell.cn/articles/2704.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 23 Jul 2010 00:22:27 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[正则表达式]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2704</guid>
+
+					<description><![CDATA[<p>一般来说，我们会使用正规表达式来做字符串匹配，今天在网上浏览的时候，看到了有人用正则表达式来检查一个数字是否为素数（质数），让我非常感兴趣，这个正则表达式如入所...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2704.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2704.html">检查素数的正则表达式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一般来说，我们会使用正规表达式来做字符串匹配，今天在网上浏览的时候，看到了有人用正则表达式来检查一个数字是否为素数（质数），让我非常感兴趣，这个正则表达式如入所示：</p>
+<figure id="attachment_2705" aria-describedby="caption-attachment-2705" style="width: 450px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="size-full wp-image-2705" title="检查素数的正则表达式" src="https://coolshell.cn/wp-content/uploads/2010/07/regexpr-for-prime-number.jpg" alt="" width="450" height="45" srcset="https://coolshell.cn/wp-content/uploads/2010/07/regexpr-for-prime-number.jpg 450w, https://coolshell.cn/wp-content/uploads/2010/07/regexpr-for-prime-number-300x30.jpg 300w" sizes="(max-width: 450px) 100vw, 450px" /><figcaption id="caption-attachment-2705" class="wp-caption-text">检查素数与否的正则表达式 </figcaption></figure>
+<p>要使用这个正规则表达式，你需要把自然数转成多个1的字符串，如：2 要写成 “11”， 3 要写成 “111”, 17 要写成“11111111111111111”，这种工作使用一些脚本语言可以轻松的完成。</p>
+<p>一开始我对这个表达式持怀疑态度，但仔细研究了一下这个表达式，发现是非常合理的，下面，让我带你来细细剖析一下是这个表达式的工作原理。</p>
+<p>首先，我们看到这个表达式中有“|”，也就是说这个表达式可以分成两个部分：/^1?$/ 和 /^(11+?)\1+$/</p>
+<ul>
+<li><strong>第一部分：/^1?$/</strong>， 这个部分相信不用我多说了，其表示匹配“空串”以及字串中只有一个“1”的字符串。</li>
+<li><strong>第二部分：/^(11+?)\1+$/</strong>，这个部分是整个表达式的关键部分。其可以分成两个部分，<strong>(11+?)</strong> 和<strong>\1+$</strong>，前半部很简单了，匹配以“11”开头的并重复0或n个1的字符串，后面的部分意思是把前半部分作为一个字串去匹配还剩下的字符串1次或多次（这句话的意思是——<span style="color: #008000;">剩余的字串的1的个数要是前面字串1个数的整数倍</span>）。</li>
+</ul>
+<p>可见这个正规则表达式是取非素数，要得到素数还得要对整个表达式求反。通过上面的分析，我们知道，第二部分是最重要的，对于第二部分，举几个例子，</p>
+<p><span id="more-2704"></span></p>
+<p><strong>示例一：判断自然数8</strong>。我们可以知道，8转成我们的格式就是“11111111”，对于<strong>(11+?)</strong>，其匹配了“11”，于是还剩下“111111”，而<strong>\1+$</strong>正好匹配了剩下的“111111”，因为，“11”这个模式在“111111”出现了三次，符合模式匹配，返回true。所以，匹配成功，于是这个数不是质数。</p>
+<p><strong>示例二：判断自然数11</strong>。转成我们需要的格式是“11111111111”（十一个1），对于<strong>(11+?)</strong>，其匹配了“11”（前两个1），还剩下“111111111”（九个1），而<strong>\1+$</strong>无法为“11”匹配那“九个1”，因为“11”这个模式并没有在“九个1”这个串中正好出现N次。于是，我们的正则表达式引擎会尝试下一种方法，先匹配“111”（前三个1），然后把“111”作为模式去匹配剩下的“11111111”（八个1），很明显，那“八个1”并没有匹配“三个1”多次。所以，引擎会继续向下尝试……直至尝试所有可能都无法匹配成功。所以11是素数。</p>
+<p>通过示例二，我们可以得到这样的等价数算算法，正则表达式会匹配这若干个1中有没有出现“二个1”的整数倍，“三个1”的整数倍，“四个1”的整数倍……，而，这正好是我们需要的算素数的算法。现在大家明白了吧。</p>
+<p>下面，我们用perl来使用这个正规则表达式不停地输出素数：（关于perl的语法我就不多说了，请注意表达式前的取反操作符）</p>
+<p>[perl]perl -e&#8217;$|++;(1 x$_)!~/^1?$|^(11+?)\1+$/&amp;&amp;print&quot;$_ &quot;while ++$_'[/perl]</p>
+<p>另外，让我们来举一反三，根据上述的这种方法，我们甚至可以用正则表达式来求证某方式是否有解，如：</p>
+<ul>
+<li><strong>二元方程</strong>：17x + 12y = 51   判断其是否有解的正则表达式是：<strong>^</strong><strong>(</strong><strong>.*</strong><strong>)</strong><strong>\1{16}</strong><strong>(</strong><strong>.*</strong><strong>)</strong><strong>\2{11}$</strong></li>
+<li><strong>三元方程</strong>：11x + 2y + 5z = 115 判断其是否有解的正则表达式是：<strong>^</strong><strong>(</strong><strong>.*</strong><strong>)</strong><strong>\1{10}</strong><strong>(</strong><strong>.*</strong><strong>)</strong><strong>\2{1}</strong><strong>(</strong><strong>.*</strong><strong>)</strong><strong>\3{4}$</strong></li>
+</ul>
+<p>大家不妨自己做做练习，为什么上述的两个正则表达式可以判断方程是否有解。如果无法参透其中的奥妙的话，你可以读读这篇<a href="http://blog.stevenlevithan.com/archives/algebra-with-regexes" target="_blank">英文文章</a>。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="浏览器正则表达式检查插件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_title">浏览器正则表达式检查插件</a></li><li ><a href="https://coolshell.cn/articles/1830.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="正则表达式生成器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1830.html" class="wp_rp_title">正则表达式生成器</a></li><li ><a href="https://coolshell.cn/articles/1387.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="十个Web开发文章和教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1387.html" class="wp_rp_title">十个Web开发文章和教程</a></li><li ><a href="https://coolshell.cn/articles/1574.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="bash 函数级重定向" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1574.html" class="wp_rp_title">bash 函数级重定向</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/1095.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="整洁代码的4个提示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1095.html" class="wp_rp_title">整洁代码的4个提示</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2704.html">检查素数的正则表达式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2704.html/feed</wfw:commentRss>
+			<slash:comments>55</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Kent Beck 谈单元测试和持续部署</title>
+		<link>https://coolshell.cn/articles/2681.html</link>
+					<comments>https://coolshell.cn/articles/2681.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Thu, 22 Jul 2010 00:00:23 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[软件开发]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2681</guid>
+
+					<description><![CDATA[<p>文章来源 2010年7月2日，Roy Osherove 和 Kent Beck 在 blog.typemock.com 进行了一次对话，话题涉及单元测试（Uni...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2681.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2681.html">Kent Beck 谈单元测试和持续部署</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><em><a href="http://blog.typemock.com/2010/07/video-kent-beck-on-junit-max-and-lean.html">文章来源</a></em></p>
+<p>2010年7月2日，Roy Osherove 和 Kent Beck 在 blog.typemock.com 进行了一次对话，话题涉及单元测试（Unit Testing），<a href="http://www.threeriversinstitute.org/junitmax/">JUnit Max</a>（Kent 开发的一个单元测试的 Eclipse Plugin，不免费），和面向初创企业的精益方法（Lean Startups）。</p>
+<p><strong>单元测试和 JUnit Max</strong><br />
+作为软件开发方法学的大师、极限编程XP的创始人、敏捷宣言的创始人之一，Kent Beck 一直在努力最大化地利用单元测试的价值，他说一些程序员仍然认为单元测试并不是他们的工作，但是单元测试确实能够提高软件的质量。目前他正在开发 JUnit Max，这是一个 Eclipse plugin，每当程序员保存一个 Java 源文件的时候，JUnit Max 就会运行测试并报告反馈信息。测试中的错误将会如同编译错误一样被报告给程序员。JUnit Max 的核心思想是测试错误应该和编译错误一样被 IDE 报告给程序员，程序员不需要额外的菜单选项或者运行其他的工具来运行测试。特别是那些经常失败的测试，对于程序员来说是非常有价值的反馈信息。在测试驱动开发（Test Driven Development &#8211; TDD）中，我们重复着这样一个循环：“编写一个‘失败’的测试（Failing Test）” &#8211; “编码实现功能以便让测试通过”，随着开发的深入，测试越来越丰富，测试能够反馈给程序员的信息也越来越多，它们可以帮助程序员找出那些需要改进的代码。JUnit Max 能够缩短这个循环的周期，因为它更为频繁地运行测试和提供反馈。Roy 问道：“当你一个人编码的时候，你是否严格地遵循 TDD，即一定要先写测试，然后写实现代码。我个人发现这并不是一件容易做到的事情，特别是当一个人编码的时候。” Kent 回答：“视情况而定，有时候并不需要死板地遵循 TDD，比如当我在做一些探索性或者说实验性的编码时，并不需要写测试，因为我只是想尝试一下某些功能和特性。”</p>
+<p><span id="more-2681"></span></p>
+<p>Roy： “你在测试驱动开发中见过的最糟糕的错误有哪些？”<br />
+Kent：“很多程序员仅仅是拷贝和粘贴测试代码，但并不理解它们。所以我们经常能看到没有断言的测试，同时测试很多逻辑和功能的测试，过于臃肿或者过于短小的测试等等。当然这些错误在学习过程中很普遍，也是我们学习的一部分。”</p>
+<p>Roy：“你下一步最想尝试的新概念是什么？”<br />
+Kent：“我最近谈论的一个主题是 Software G Forces，是关于软件产品的部署频率（Frequency of Deployment），这里的部署是指面向最终用户的部署或者说发布，是生产环境而非测试环境。从前的软件产品每年（或数年）发布一个新的版本，而现在的软件产品发布频率越来越快，从每季度，每月，每周，每天，直至每小时。Kent 提及有一些非常复杂的软件产品的发布频率甚至是每天 40 到 50 次。此时 Roy 提出了一个非常好的问题：“产品发布得如此频繁，我们如何能够在这么短的时间间隔内获得用户反馈呢？”，Kent 回答道：“持续部署（Continuous Deployment）确实需要一些基础设施建设来支持，比如：自动版本回滚，自动错误检测，系统同时运行多个版本的能力，比如一个服务器集群中不同的服务器上可以运行产品的不同版本。”</p>
+<p>Roy 问道：“当你在开发一个产品的时候，你在为客户创造价值，而持续部署创造的则是一种内在的价值，并且实施过程也是非常复杂的，你怎样投入时间去实施它呢？是否需要从产品设计的一开始就考虑这些问题呢？”，Kent 答道：“5 年之内市场上可能会有许多持续部署的产品出现，目前我们可能需要自己来寻求解决方案，因为现在它还是一个较新的领域。持续部署的重点之一是及时捕获系统错误，不仅仅是技术层面上的错误，同时也包括业务层面。以 Amazon.com 为例，他们评价系统运行的良好程度是以业务运营状况为依据的，如果销售额出现不明原因的下降，系统也会发出错误警告。”</p>
+<p>注：为了不让文章过长，下半部分的面向初创企业的精益方法（Lean Startups）将在后面发布。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" alt="我做系统架构的一些原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_title">我做系统架构的一些原则</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2681.html">Kent Beck 谈单元测试和持续部署</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2681.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>在Javascript里写Python</title>
+		<link>https://coolshell.cn/articles/2688.html</link>
+					<comments>https://coolshell.cn/articles/2688.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 21 Jul 2010 00:17:39 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[IronPython]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2688</guid>
+
+					<description><![CDATA[<p>以前，本站介绍过去一种写HTML和CSS的新方法，以一种杂交式的代码，昨天给大家介绍了.NET代码和Python及Ruby代码的互相转换工具，但是这个世界可能比...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2688.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2688.html">在Javascript里写Python</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前，本站介绍过去一种<a rel="bookmark" href="https://coolshell.cn/articles/2406.html" target="_blank">写HTML和CSS的新方法</a>，以<a href="https://coolshell.cn/articles/2529.html" target="_blank">一种杂交式的代码</a>，昨天给大家介绍了<a href="https://coolshell.cn/articles/2672.html" target="_blank">.NET代码和Python及Ruby代码的互相转换工具</a>，但是这个世界可能比我们想像的还疯狂。<a href="  http://ironpython.net/" target="_blank">IronPython</a> 是一个在.NET平台上运行Python的东西，就像那些在<a href="https://coolshell.cn/articles/2631.html" target="_blank">JVM上运行其它语言的东东</a>一样。当然，IronPython最邪恶的事情并不是在.NET上运行Python，而是在Javascript里写Python的语法。这个畸形混血儿的网址在<a href="http://ironpython.net/browser/" target="_blank">这里</a>（请注意翻墙）。</p>
+<p>使用这个玩意很简单，下面，让我们看看这个混血儿长啥样？</p>
+<p>首先，你需要链接一个js文件：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;script src=&quot;http://gestalt.ironpython.net/dlr-latest.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</pre>
+<p>然后，让我们看看如何写一个按钮事件：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;input id=&quot;button&quot; type=&quot;button&quot; value=&quot;Say, Hello!&quot; /&gt;
+&lt;script type=&quot;text/python&quot;&gt;
+  def button_onclick(s, e):
+      window.Alert(&quot;Hello from Python!&quot;)
+  document.button.events.onclick += button_onclick
+&lt;/script&gt;
+</pre>
+<p>你对此事怎么看？欢迎留下你的看法。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2688.html">在Javascript里写Python</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2688.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>.NET代码转换器</title>
+		<link>https://coolshell.cn/articles/2672.html</link>
+					<comments>https://coolshell.cn/articles/2672.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 20 Jul 2010 02:24:22 +0000</pubDate>
+				<category><![CDATA[.NET编程]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[.NET]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[VB.NET]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2672</guid>
+
+					<description><![CDATA[<p>想把.NET的代码（C#和VB.NET)互转吗？或是转成Python或Ruby吗？在 http://www.developerfusion.com/ 站点上有这...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2672.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2672.html">.NET代码转换器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>想把.NET的代码（C#和VB.NET)互转吗？或是转成Python或Ruby吗？在 <a href="http://www.developerfusion.com/" target="_blank">http://www.developerfusion.com/</a> 站点上有这样的在线工具。点击下面的链接你可以使用这些工具。当然，这些工具也有很多<a href="http://feedback.developerfusion.com/pages/code_converter" target="_blank">BUG</a>。</p>
+<ul>
+<li><a href="http://www.developerfusion.com/tools/convert/csharp-to-vb/" target="_blank">把 C# 转成 VB.NET</a></li>
+<li><a href="http://www.developerfusion.com/tools/convert/csharp-to-python/" target="_blank">把 C# 转成 Python</a></li>
+<li><a href="http://www.developerfusion.com/tools/convert/csharp-to-ruby/" target="_blank">把 C# 转成Ruby</a></li>
+<li><a href="http://www.developerfusion.com/tools/convert/vb-to-csharp/" target="_blank">把 VB.NET 转成C#</a></li>
+<li><a href="http://www.developerfusion.com/tools/convert/vb-to-python/" target="_blank">把 VB.NET 转成 Python</a></li>
+<li><a href="http://www.developerfusion.com/tools/convert/vb-to-ruby/" target="_blank">把 VB.NET 转成 Ruby</a></li>
+</ul>
+<p>老实说，我并不太清楚这些工具有什么用，看似很useless。难道是为了用来学习新的语言？就像Google的Translator的一样？就像一个并不懂中文的老外可以用Google Translator在其Facebook中整点中文耍耍酷一样，难道说，一个C#的程序员可以用这样的工具和一个Python的程序员也耍耍酷？各位看客觉得这个东西有意义吗？</p>
+<p>不过，有一点我可以确定，如果有工具把Unix/Linux下的C源码和Windows下的C源码相互自动转换，估计这会是相当划时代的，因为，这应该会让那些什么Wine或Cygwin之类的东西都统统会成为历史了。不过，这样的东西在实现上又将会有多么大的难度（OS系统API的相互转换），这个事会有可行性吗？<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11235.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="一个浮点数跨平台产生的问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11235.html" class="wp_rp_title">一个浮点数跨平台产生的问题</a></li><li ><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg" alt="一些非常不错的资料" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_title">一些非常不错的资料</a></li><li ><a href="https://coolshell.cn/articles/3008.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="Windows编程革命简史" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3008.html" class="wp_rp_title">Windows编程革命简史</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2672.html">.NET代码转换器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2672.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>浏览器正则表达式检查插件</title>
+		<link>https://coolshell.cn/articles/2667.html</link>
+					<comments>https://coolshell.cn/articles/2667.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 20 Jul 2010 00:10:40 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Chrome]]></category>
+		<category><![CDATA[Firefox]]></category>
+		<category><![CDATA[正则表达式]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2667</guid>
+
+					<description><![CDATA[<p>以前本站介绍过一个在线的《正则表达式生成器》，下面是两个在浏览器中检查正则表达式的插件，Firefox的和Chrome的，希望对你有用。 1）Firefox：R...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2667.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2667.html">浏览器正则表达式检查插件</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站介绍过一个在线的《<a rel="bookmark" href="https://coolshell.cn/articles/1830.html" target="_blank">正则表达式生成器</a>》，下面是两个在浏览器中检查正则表达式的插件，Firefox的和Chrome的，希望对你有用。</p>
+<h3>1）Firefox：<a href="https://addons.mozilla.org/en-US/firefox/addon/2077/" target="_blank">Regular Expressions Tester</a></h3>
+<figure style="width: 448px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" title="Firefox正规则表达式检查插件Regular Expressions Tester" src="http://sebastianzartner.de/new/resources/images/RExT/main.png" alt="" width="448" height="489" /><figcaption class="wp-caption-text">Firefox正规则表达式检查插件Regular Expressions Tester</figcaption></figure>
+<h3></h3>
+<h3>2）Chrome：<a href="https://chrome.google.com/extensions/detail/pgnkpcgniljiolidjmodgfljeomjjiha" target="_blank">Regular Expression Checker</a></h3>
+<p><span id="more-2667"></span></p>
+<p><figure style="width: 544px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" title="Chrome正规则表达式检查插件Regular Expression Checker" src="https://chrome.google.com/extensions/img/pgnkpcgniljiolidjmodgfljeomjjiha/1264182031.53/screenshot_big/2001" alt="" width="544" height="580" /><figcaption class="wp-caption-text">Chrome正规则表达式检查插件Regular Expression Checker</figcaption></figure><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Mozilla-150x150.jpg" alt="Mozilla的一个BUG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_title">Mozilla的一个BUG</a></li><li ><a href="https://coolshell.cn/articles/2704.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="检查素数的正则表达式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2704.html" class="wp_rp_title">检查素数的正则表达式</a></li><li ><a href="https://coolshell.cn/articles/2367.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR-150x150.png" alt="谷歌Chrome取消&#8221;http://&#8221;" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2367.html" class="wp_rp_title">谷歌Chrome取消&#8221;http://&#8221;</a></li><li ><a href="https://coolshell.cn/articles/2069.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/01/browser_history-150x150.jpg" alt="一个浏览器市场占有量的图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2069.html" class="wp_rp_title">一个浏览器市场占有量的图</a></li><li ><a href="https://coolshell.cn/articles/1830.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="正则表达式生成器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1830.html" class="wp_rp_title">正则表达式生成器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2667.html">浏览器正则表达式检查插件</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2667.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>五大基于JVM的脚本语言</title>
+		<link>https://coolshell.cn/articles/2631.html</link>
+					<comments>https://coolshell.cn/articles/2631.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 19 Jul 2010 11:40:42 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Clojure]]></category>
+		<category><![CDATA[Fantom]]></category>
+		<category><![CDATA[Groovy]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[JavaFX]]></category>
+		<category><![CDATA[JRuby]]></category>
+		<category><![CDATA[JVM]]></category>
+		<category><![CDATA[Jython]]></category>
+		<category><![CDATA[NetRexx]]></category>
+		<category><![CDATA[Scala]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2631</guid>
+
+					<description><![CDATA[<p>还记得以前本站的一篇文章《如何在Google App Engine上运行PHP》吗，其实那是借用 Quercus， 一个 100% 的用Java 实现的一个 P...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2631.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2631.html">五大基于JVM的脚本语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>还记得以前本站的一篇文章《<a rel="bookmark" href="https://coolshell.cn/articles/531.html" target="_blank">如何在Google App Engine上运行PHP</a>》吗，其实那是借用 <a href="http://www.caucho.com/resin-3.0/quercus/">Quercus</a>， 一个 100% 的用Java 实现的一个 PHP 引擎。今天，这样的东西太多了，能运行在Java的虚拟机JVM上的程序意味着有天然的跨平台性，现在JVM并不单单只能运行Java程序，在JVM上出现了若干使用Java虚拟机运行的脚本程序，比如什么PHP, Python, Ruby等等，这里有一篇<a href="http://infoworld.com/d/developer-world/top-five-scripting-languages-the-jvm-855" target="_blank">文章</a>评论了在JVM上的可以运行的排名前五脚本语言。他们分别是：</p>
+<ol>
+<li><a href="http://groovy.codehaus.org/" target="_blank"> <strong>Groovy</strong></a>。构建在强大的Java语言之上 并添加了从Python，Ruby和Smalltalk等语言中学到的诸多特征，为Java开发者提供了现代最流行的编程语言特性，而且学习成本很低（几乎为零），在开发Web，GUI，数据库或控制台程序时， 通过减少框架性代码 大大提高了开发者的效率。支持单元测试和模拟（对象），可以简化测试。无缝集成 所有已经存在的 Java对象和类库。直接编译成Java字节码，这样可以在任何使用Java的地方 使用Groovy。</li>
+<li><a href="http://jruby.org/" target="_blank"><strong>JRuby</strong></a>。一个纯Java实现的Ruby解释器。通过JRuby，你可以在JVM上直接运行Ruby程序，调用Java的类库。很多Java编写的Ruby IDE都是使用JRuby来解释语法的。</li>
+<li><a href="http://www.scala-lang.org/" target="_blank"> <strong>Scala</strong></a>。一种多范式的编程语言，设计意图是要整合面向对象编程和函数式编程的各种特性。Scala编程语言近来抓住了很多开发者的眼球。它看起来像是一种纯粹的面向对象编程语言，而又无缝地结合了命令式和函数式的编程风格。Scala的名称表明，它还是一种高度可伸缩的语言。Scala的设计始终贯穿着一个理念：创造一种更好地支持组件的语言。</li>
+<li><a href="http://fantom.org/" target="_blank"><strong>Fantom </strong></a>。Fantom 前身是 (Fan) 是一个基于 Java 和 .NET 平台的编程脚本引擎，用来在运行时产生 JVM 和 .NET 平台的字节码，该语言是面向对象的，跟 Groovy 和 JRuby 有点类似，可通过特定的接口来集成 Java 的类库。</li>
+<li><a href="http://www.jython.org/" target="_blank"><strong>Jython</strong></a>。Jython由于继承了Java和Python二者的特性而显得很独特。其是一种完整的语言，而不是一个Java翻译器或仅仅是一个Python编译器，它是一个Python语言在Java中的完全实现。Jython也有很多从CPython中继承的模块库。最有趣的事情是Jython不像CPython或其他任何高级语言，它提供了对其实现语言的一切存取。所以Jython不仅给你提供了Python的库，同时也提供了所有的Java类。这使其有一个巨大的资源库。</li>
+</ol>
+<p><a href="http://www.infoworld.com/d/developer-world/top-five-scripting-languages-the-jvm-855?page=0,1#jvm1"></a></p>
+<p><a href="http://www.infoworld.com/d/developer-world/top-five-scripting-languages-the-jvm-855?page=0,3#jvm4"></a></p>
+<p>下面是一张表格比较了这五大JVM脚本语言：</p>
+<p><span id="more-2631"></span></p>
+<table border="0" align="center">
+<tbody>
+<tr>
+<th></th>
+<th><a href="http://groovy.codehaus.org/" target="_blank"><strong>Groovy</strong></a></th>
+<th><a href="http://jruby.org/" target="_blank"><strong>JRuby</strong></a></th>
+<th><a href="http://www.scala-lang.org/" target="_blank"><strong>Scala</strong></a></th>
+<th><a href="http://fantom.org/" target="_blank"><strong>Fantom</strong></a></th>
+<th><a href="http://www.jython.org/" target="_blank"><strong>Jython</strong></a></th>
+</tr>
+<tr>
+<td><strong>风格类型</strong></td>
+<td>OO / 动态</td>
+<td>OO / 动态</td>
+<td>OO, 过程/ 静态</td>
+<td>OO / 静态</td>
+<td>OO / 动态</td>
+</tr>
+<tr>
+<td><strong>源语言</strong></td>
+<td>Java</td>
+<td>Ruby</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Python</td>
+</tr>
+<tr>
+<td><strong>运行</strong></td>
+<td>编译型</td>
+<td>编译型,<br />
+解释型</td>
+<td>编译型</td>
+<td>半编译型</td>
+<td>编译型</td>
+</tr>
+<tr>
+<td><strong>平台</strong></td>
+<td>JVM</td>
+<td>JVM</td>
+<td>JVM</td>
+<td>JVM, .Net CLR</td>
+<td>JVM</td>
+</tr>
+<tr>
+<td><strong>Java集成</strong></td>
+<td>极好</td>
+<td>极好</td>
+<td>极好</td>
+<td>好</td>
+<td>极好</td>
+</tr>
+<tr>
+<td><strong>运行速度</strong></td>
+<td>好</td>
+<td>好</td>
+<td>极好</td>
+<td>很好</td>
+<td>慢</td>
+</tr>
+<tr>
+<td><strong>工具支持</strong></td>
+<td>广泛</td>
+<td>还可以</td>
+<td>广泛</td>
+<td>几乎没有</td>
+<td>几乎没有</td>
+</tr>
+</tbody>
+</table>
+<p>其它一些JVM的脚本语言也我们可以关注一下，如：<a href="http://clojure.org/" target="_blank"><strong>Clojure</strong></a>, <a href="http://javafx.com/" target="_blank"><strong>JavaFX</strong></a>, 和IBM的 <a href="http://www.ibm.com/software/awdtools/netrexx/" target="_blank"><strong>NetRexx</strong></a>。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="语言的数据亲和力" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_title">语言的数据亲和力</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2631.html">五大基于JVM的脚本语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2631.html/feed</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>为什么敏捷方法能在软件开发中行之有效？</title>
+		<link>https://coolshell.cn/articles/2622.html</link>
+					<comments>https://coolshell.cn/articles/2622.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Sun, 18 Jul 2010 02:28:25 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[敏捷方法]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2622</guid>
+
+					<description><![CDATA[<p>文章来源 &#8211; Martin Fowler 和 Neal Ford 在 Paris &#8211; USI 2010 的演讲 有很多的书籍讨论敏捷方法...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2622.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2622.html">为什么敏捷方法能在软件开发中行之有效？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><em><a href="http://universite-du-si.com/en/conferences/6/sessions/909">文章来源 &#8211; Martin Fowler 和 Neal Ford 在 Paris &#8211; USI 2010 的演讲</a></em></p>
+<p>有很多的书籍讨论敏捷方法是怎样工作的（How it works？），在这个主题演讲中，Martin Fowler 和他的同事 Neal Ford 讨论了敏捷方法能够在软件开发项目中行之有效的原因（Why it works？）。作为敏捷方法的发起人和传道者，Martin Fowler 和 ThoughtWorks 一直试图从理论层面证明敏捷方法的可行性，同时不厌其烦地解答着客户们的各种困惑，正如他们所说，敏捷方法中的很多概念不是特别的直观，除非人们真正实践过一段时间，否则有些概念很难从字面上去完全理解。</p>
+<p>Martin Fowler 谈到一个有意思的现象，那就是今天许多人们口中谈论的敏捷方法，和最初的敏捷方法大相径庭，他把这种现象称为“语义扩散（Semantic Diffusion）”，大意是某种思想在传播的过程中，在逐渐扩散的同时，其语义也渐渐变得模糊。在敏捷开发领域里，“语义扩散”导致的一个问题是，在一些使用敏捷方法的项目或者公司中，我们甚至无法辨别出敏捷方法的影子，原因是很多人没有真正地理解敏捷方法，也就不能够正确地运用和实践，从而也就无法真正了解自己是否能够从敏捷方法中获益。</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1.jpg"><img decoding="async" loading="lazy" class="size-medium wp-image-2653 aligncenter" title="Martin Flower" src="https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-300x94.jpg" alt="" width="300" height="94" srcset="https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-300x94.jpg 300w, https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-768x241.jpg 768w, https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-604x190.jpg 604w, https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1.jpg 885w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>以下是为什么敏捷方法行之有效的原因：</p>
+<p><span id="more-2622"></span></p>
+<h4><span style="color: #000000;"><strong>1. 敏捷方法和传统的计划驱动方法的两个主要区别</strong></span></h4>
+<p>i. 预测性计划（Predictive Planning）和自适应计划（Adaptive Planning）</p>
+<p>计划驱动方法首先计划要做的工作（plan your work），然后着手工作以完成计划（work your plan）。这是一种带有预测性质的方法，其衡量项目成功的标准则是我们是否按计划、按时、按预算完成了工作。这种方法在很多领域里是适用的。但是对于软件开发而言，如果我们的需求没有办法做到不变更的话，我们就无法保证我们的计划以及其后的工作是不会变更的。Martin Fowler 向现场观众提出了一个问题，大意是你们当中有多少人的软件开发项目的需求是一成不变的，结果没有一位观众举手。因此，敏捷方法引入了自适应计划的概念，既然我们无法保证需求不变更，那么就让我们随时准备接受变更，接受挑战吧。自适应计划将计划驱动的流程缩短为以数周为单位的循环周期，在每一个周期中，我们根据当前的情况不断地调整计划以及计划的执行过程，同时不断地产生能够工作的代码，并且不断地将代码部署到应用环境中去。当然要实现这个目标我们需要一些具体方法的支持，如：自测试代码（Self-Testing Code），持续集成（Continuous Integration），重构（Refactoring），和简洁设计（Simple Design）等等这些技术层面上的方法。Martin Fowler 指出，一些公司和项目之所以受困于敏捷方法，原因之一是他们忽略了这些技术层面的方法，而仅仅实施了项目管理层面的方法。</p>
+<p>ii. 以流程为本（Process First）和以人为本（People First）</p>
+<p>在传统的方法论中，我们总是需要事先定义好工作的方法和流程，然后“工人们”被要求遵照这些方法和流程来工作。在软件开发领域，很多人把软件开发过程等同于软件本身，也就是说，软件开发的过程也如同软件程序般象机器一样运行，组件之间环环相扣，严密地协同工作。问题是软件开发的核心是人，人相对于机器零件和流水线而言，是相对不可预测的和不那么精密的。所以敏捷方法反其道而行之，提倡将“首先定义流程，然后要求软件开发人员遵照流程工作”变为“让参与软件开发的人员自己来定义和选择适合他们的流程”。简单来说就是以人为本，不把人当螺丝钉，发挥人的主观能动性，当然前提是需要团队成员有较高的平均素质。</p>
+<h4><span style="color: #000000;">2. 沟通（Communication）</span></h4>
+<p>Neal Ford 让我们回顾或想象一下失败的软件开发项目，它们的失败是由于技术因素还是人的因素呢？《人件》的作者认为都是人的因素。人类的社会性决定了沟通的重要。Neal 举了几个有趣的例子，如：监狱里的犯人宁愿和其他人渣待在一起也不愿被关禁闭。很多国家禁止驾驶员驾驶时打移动电话，那为什么和乘客聊天就没有问题呢？原因是直接对话是最为有效和便捷的沟通方式，信息的传递在对话过程中非常顺畅和完整。虽然现在的移动通讯已经非常先进，信号质量也很高，但是我们的通话过程仍然是有损的，我们的大脑这个时候就需要努力地试图将通话信息拼凑得更完整以便能够理解对方的意思，因此才会分散驾驶的注意力。随后，Martin Fowler 举了另一个例子，拿他做水果蛋糕的方法和他在酒店的浴室中冲凉的方法来进行比较。因为做水果蛋糕的整个流程和配料都是非常固定的，所以他只需要按步照搬地烹饪即可做出味道非常一致（地好或者差）的水果蛋糕。而在酒店中冲凉就有些不同，因为每一个酒店浴室的开关设计几乎都是不一样的，所以他需要不断地调整开关来获得一个理想的水温，也就是需要不断地重复“调整开关”（输入），“用手试温”（输出）这个过程。相对于做水果蛋糕，在酒店浴室冲凉更好地反应了软件开发的特征，这就是在软件开发领域中，如果我们善于根据用户反馈的信息来做出新的判断和调整，就有可能提高产品的质量和用户的满意度。</p>
+<p>沟通的确是一个非常重要的环节，它是敏捷方法的核心。在敏捷方法中，单元测试是程序员和代码组件的沟通，功能测试是程序员以及QA和系统的沟通，故事墙（Story Wall）和回顾（Retrospective）是团队和成员之间的沟通，功能演示（Showcase 或者 Demo）是团队通过产品和最终用户的沟通，持续集成（Continuous Integration）是产品和企业计算环境的沟通。沟通好了，什么事情都可以妥善解决，沟通得不好，好事也会变坏事。和广大技术爱好者交流沟通也是酷壳存在的目的和意义。</p>
+<p>整个演讲时长一个小时，本文只是节选了我认为比较有意思的观点加上本人的理解写成，如有错误之处欢迎指正，不同看法欢迎交流。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/7657.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2-150x150.jpg" alt="持续部署，并不简单！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7657.html" class="wp_rp_title">持续部署，并不简单！</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5625.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="“品质在于构建过程”吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5625.html" class="wp_rp_title">“品质在于构建过程”吗？</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/5044.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/hat-150x150.jpeg" alt="为什么Scrum不行？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5044.html" class="wp_rp_title">为什么Scrum不行？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2622.html">为什么敏捷方法能在软件开发中行之有效？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2622.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

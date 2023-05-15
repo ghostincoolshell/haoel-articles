@@ -1,0 +1,1993 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 12 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=12" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Wed, 04 Dec 2019 09:10:36 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>K-Means 算法</title>
+		<link>https://coolshell.cn/articles/7779.html</link>
+					<comments>https://coolshell.cn/articles/7779.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 29 Jun 2012 00:24:02 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Data Mining]]></category>
+		<category><![CDATA[K-Means]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7779</guid>
+
+					<description><![CDATA[<p>最近在学习一些数据挖掘的算法，看到了这个算法，也许这个算法对你来说很简单，但对我来说，我是一个初学者，我在网上翻看了很多资料，发现中文社区没有把这个问题讲得很全...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7779.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7779.html">K-Means 算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近在学习一些数据挖掘的算法，看到了这个算法，也许这个算法对你来说很简单，但对我来说，我是一个初学者，我在网上翻看了很多资料，发现中文社区没有把这个问题讲得很全面很清楚的文章，所以，把我的学习笔记记录下来，分享给大家。</p>
+<p>在数据挖掘中， <strong><em>k</em>-Means 算法</strong>是一种 <a title="Cluster analysis" href="http://en.wikipedia.org/wiki/Cluster_analysis">cluster analysis</a> 的算法，其主要是来计算数据聚集的算法，主要通过不断地取离种子点最近均值的算法。</p>
+<h4>问题</h4>
+<p>K-Means算法主要解决的问题如下图所示。我们可以看到，在图的左边有一些点，我们用肉眼可以看出来有四个点群，但是我们怎么通过计算机程序找出这几个点群来呢？于是就出现了我们的K-Means算法（<a title="K-means Clustering 算法" href="http://en.wikipedia.org/wiki/K-means_clustering" target="_blank">Wikipedia链接</a>）</p>
+<figure id="attachment_7780" aria-describedby="caption-attachment-7780" style="width: 600px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="size-full wp-image-7780" title="K-Means 要解决的问题" src="https://coolshell.cn/wp-content/uploads/2012/06/K-Means.gif" alt="" width="600" height="300" /><figcaption id="caption-attachment-7780" class="wp-caption-text">K-Means 要解决的问题</figcaption></figure>
+<h4>算法概要</h4>
+<p>这个算法其实很简单，如下图所示：</p>
+<p><span id="more-7779"></span></p>
+<figure id="attachment_7781" aria-describedby="caption-attachment-7781" style="width: 504px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="size-full wp-image-7781" title="K-Means 算法概要" src="https://coolshell.cn/wp-content/uploads/2012/06/K-Means.jpg" alt="K-Means 算法概要" width="504" height="370" srcset="https://coolshell.cn/wp-content/uploads/2012/06/K-Means.jpg 504w, https://coolshell.cn/wp-content/uploads/2012/06/K-Means-300x220.jpg 300w" sizes="(max-width: 504px) 100vw, 504px" /><figcaption id="caption-attachment-7781" class="wp-caption-text">K-Means 算法概要</figcaption></figure>
+<p>从上图中，我们可以看到，<strong>A, B, C, D, E 是五个在图中点。而灰色的点是我们的种子点，也就是我们用来找点群的点</strong>。有两个种子点，所以K=2。</p>
+<p>然后，K-Means的算法如下：</p>
+<ol>
+<li>随机在图中取K（这里K=2）个种子点。</li>
+<li>然后对图中的所有点求到这K个种子点的距离，假如点Pi离种子点Si最近，那么Pi属于Si点群。（上图中，我们可以看到A,B属于上面的种子点，C,D,E属于下面中部的种子点）</li>
+<li>接下来，我们要移动种子点到属于他的“点群”的中心。（见图上的第三步）</li>
+<li>然后重复第2）和第3）步，直到，种子点没有移动（我们可以看到图中的第四步上面的种子点聚合了A,B,C，下面的种子点聚合了D，E）。</li>
+</ol>
+<p>这个算法很简单，但是有些细节我要提一下，求距离的公式我不说了，大家有初中毕业水平的人都应该知道怎么算的。我重点想说一下“求点群中心的算法”</p>
+<h4>求点群中心的算法</h4>
+<p>一般来说，求点群中心点的算法你可以很简的使用各个点的X/Y坐标的平均值。不过，我这里想告诉大家另三个求中心点的的公式：</p>
+<p><strong>1）Minkowski Distance 公式 ——</strong> λ 可以随意取值，可以是负数，也可以是正数，或是无穷大。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7787" title="Minkowski Distance 公式" src="https://coolshell.cn/wp-content/uploads/2012/06/MinkowskiDistance_clip_image102.gif" alt="" width="131" height="51" /></p>
+<p><strong>2）Euclidean Distance 公式 </strong>—— 也就是第一个公式 λ=2 的情况</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7784" title="Euclidean Distance 公式" src="https://coolshell.cn/wp-content/uploads/2012/06/EuclideanDistance_clip_image002.gif" alt="" width="137" height="51" /></p>
+<p><strong>3）CityBlock Distance 公式 </strong>—— 也就是第一个公式 λ=1 的情况</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7782" title="CityBlock Distance 公式" src="https://coolshell.cn/wp-content/uploads/2012/06/CityBlockDistance_clip_image002.gif" alt="" width="111" height="45" /></p>
+<p>这三个公式的求中心点有一些不一样的地方，我们看下图（对于第一个 λ 在 0-1之间）。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="Minkowski Mean" src="https://coolshell.cn/wp-content/uploads/2012/06/Minkowski-Mean.jpg" alt="" width="180" height="180" />   <img decoding="async" loading="lazy" title="Euclidean distance" src="https://coolshell.cn/wp-content/uploads/2012/06/Euclidean-distance.jpg" alt="" width="180" height="180" />  <img decoding="async" loading="lazy" title="Manhattan distance" src="https://coolshell.cn/wp-content/uploads/2012/06/Manhattan-distance.jpg" alt="" width="180" height="180" /></p>
+<p style="text-align: center;"><strong>（1）Minkowski Distance     （2）<strong>Euclidean Distance    （3） <strong>CityBlock Distance</strong></strong></strong></p>
+<p style="text-align: left;">上面这几个图的大意是他们是怎么个逼近中心的，第一个图以星形的方式，第二个图以同心圆的方式，第三个图以菱形的方式。</p>
+<h4 style="text-align: left;">K-Means的演示</h4>
+<p style="text-align: left;">如果你以&#8221;<a href="https://www.google.com/search?hl=zh-CN&amp;q=K+Means+Demo" target="_blank">K Means Demo</a>&#8220;为关键字到Google里查你可以查到很多演示。这里推荐一个演示</p>
+<p style="text-align: center;"><a href="http://home.dei.polimi.it/matteucc/Clustering/tutorial_html/AppletKM.html">http://home.dei.polimi.it/matteucc/Clustering/tutorial_html/AppletKM.html</a></p>
+<p style="text-align: left;">操作是，鼠标左键是初始化点，右键初始化“种子点”，然后勾选“Show History”可以看到一步一步的迭代。</p>
+<p style="text-align: left;">注：这个演示的链接也有一个不错的 <a href="http://home.dei.polimi.it/matteucc/Clustering/tutorial_html/index.html" target="_blank">K Means Tutorial</a> 。</p>
+<h4 style="text-align: left;">K-Means ++ 算法</h4>
+<p>K-Means主要有两个最重大的缺陷——都和初始值有关：</p>
+<ul>
+<li> K 是事先给定的，这个 K 值的选定是非常难以估计的。很多时候，事先并不知道给定的数据集应该分成多少个类别才最合适。（ <a href="http://en.wikipedia.org/wiki/Multispectral_pattern_recognition" target="_blank">ISODATA 算法</a>通过类的自动合并和分裂，得到较为合理的类型数目 K）</li>
+</ul>
+<ul>
+<li>K-Means算法需要用初始随机种子点来搞，这个随机种子点太重要，不同的随机种子点会有得到完全不同的结果。（<a href="http://en.wikipedia.org/wiki/K-means%2B%2B" target="_blank">K-Means++算法</a>可以用来解决这个问题，其可以有效地选择初始点）</li>
+</ul>
+<p>我在这里重点说一下 K-Means++算法步骤：</p>
+<ol>
+<li>先从我们的数据库随机挑个随机点当“种子点”。</li>
+<li>对于每个点，我们都计算其和最近的一个“种子点”的距离D(<var>x</var>)并保存在一个数组里，然后把这些距离加起来得到Sum(D(<var>x</var>))。</li>
+<li>然后，再取一个随机值，用权重的方式来取计算下一个“种子点”。这个算法的实现是，先取一个能落在Sum(D(<var>x</var>))中的随机值Random，然后用Random -= D(<var>x</var>)，直到其&lt;=0，此时的点就是下一个“种子点”。</li>
+<li>重复第（2）和第（3）步直到所有的K个种子点都被选出来。</li>
+<li>进行K-Means算法。</li>
+</ol>
+<p>相关的代码你可以在这里找到“<a href="http://rosettacode.org/wiki/K-means%2B%2B_clustering" target="_blank">implement the K-means++ algorithm</a>”(墙) 另，<a href="http://commons.apache.org/math/api-2.1/index.html?org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.html" rel="nofollow" target="_blank">Apache 的通用数据学库也实现了这一算法</a></p>
+<h4>K-Means 算法应用</h4>
+<p>看到这里，你会说，K-Means算法看来很简单，而且好像就是在玩坐标点，没什么真实用处。而且，这个算法缺陷很多，还不如人工呢。是的，前面的例子只是玩二维坐标点，的确没什么意思。但是你想一下下面的几个问题：</p>
+<p style="padding-left: 30px;">1）如果不是二维的，是多维的，如5维的，那么，就只能用计算机来计算了。</p>
+<p style="padding-left: 30px;">2）二维坐标点的X, Y 坐标，其实是一种向量，是一种数学抽象。现实世界中很多属性是可以抽象成向量的，比如，我们的年龄，我们的喜好，我们的商品，等等，能抽象成向量的目的就是可以让计算机知道某两个属性间的距离。如：我们认为，18岁的人离24岁的人的距离要比离12岁的距离要近，鞋子这个商品离衣服这个商品的距离要比电脑要近，等等。</p>
+<p><strong>只要能把现实世界的物体的属性抽象成向量，就可以用K-Means算法来归类了</strong>。</p>
+<p>在 《<a id="ctl01_lnkTitle" href="http://www.cnblogs.com/leoo2sk/archive/2010/09/20/k-means.html">k均值聚类(K-means)</a>》 这篇文章中举了一个很不错的应用例子，作者用亚洲15支足球队的2005年到1010年的战绩做了一个向量表，然后用K-Means把球队归类，得出了下面的结果，呵呵。</p>
+<ul>
+<li>亚洲一流：日本，韩国，伊朗，沙特</li>
+<li>亚洲二流：乌兹别克斯坦，巴林，朝鲜</li>
+<li>亚洲三流：中国，伊拉克，卡塔尔，阿联酋，泰国，越南，阿曼，印尼</li>
+</ul>
+<p>其实，这样的业务例子还有很多，比如，分析一个公司的客户分类，这样可以对不同的客户使用不同的商业策略，或是电子商务中分析商品相似度，归类商品，从而可以使用一些不同的销售策略，等等。</p>
+<p>最后给一个挺好的算法的幻灯片：<a href="http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf">http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/220px-KnnClassification.svg_-150x150.png" alt="K Nearest Neighbor 算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8052.html" class="wp_rp_title">K Nearest Neighbor 算法</a></li><li ><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" alt="Cuckoo Filter：设计与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_title">Cuckoo Filter：设计与实现</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li><li ><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" alt="二维码的生成细节和原理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_title">二维码的生成细节和原理</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7779.html">K-Means 算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7779.html/feed</wfw:commentRss>
+			<slash:comments>88</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>持续部署，并不简单！</title>
+		<link>https://coolshell.cn/articles/7657.html</link>
+					<comments>https://coolshell.cn/articles/7657.html#comments</comments>
+		
+		<dc:creator><![CDATA[马基雅弗利]]></dc:creator>
+		<pubDate>Mon, 25 Jun 2012 00:20:08 +0000</pubDate>
+				<category><![CDATA[企业应用]]></category>
+		<category><![CDATA[技术管理]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[CI]]></category>
+		<category><![CDATA[部署]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7657</guid>
+
+					<description><![CDATA[<p>【感谢 @常新居士 投递此文 】 这几年，持续集成随着敏捷在国内的推广而持续走热，与之相伴的持续部署也一直备受关注。自前两年，持续交付这个延续性概念又闯进了国内...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7657.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7657.html">持续部署，并不简单！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">【<strong>感谢 <a href="http://weibo.com/renfake" target="_blank">@常新居士</a> 投递此文</strong> 】</p>
+<p style="text-align: left;">这几年，持续集成随着敏捷在国内的推广而持续走热，与之相伴的持续部署也一直备受关注。<strong>自前两年，持续交付这个延续性概念又闯进了国内IT圈，慢慢开始在社区和会议中展露头角。许多不明真相的群众跟风哭着喊着要“上”，而许多前CI的半吊子玩家换件衣服就接着干，有的甚至衣服都来不及换……</strong>。国内的这些土财主如果不巧请了某些所谓的战略家，除了建了一堆持续集成环境，以及每天嚷嚷着要这个要那个，混乱的状况在根本上没有得到改善。本文无意费力探讨持续集成和持续交付的概念，而是打算谈谈对于大型软件企业，以持续集成为基础实现持续部署（交付）时，所要面对的问题以及可行的解决方案。地主老财们，夜黑风正猛，山高路又远，注意脚下……</p>
+<p style="text-align: right;"><strong>And God Said, Let there be light: and there wa</strong>&#8212; GENSIS, Charpter 1, King James</p>
+<h4>一、起步</h4>
+<p>先来讲个故事……</p>
+<p>几年前，一对留美的夫妇通过朋友找到我，让我帮忙在国内组建一个开发团队，该团队负责为其开发一款基于社交网络的客户关系管理软件,（暂且称之为项目A）。这个项目除了尚不清晰的需求范围和很紧的期限外，作为业内人士的老公Richard根据眼下流行的软件开发过程还提了诸多额外的要求：</p>
+<ul>
+<li><strong>功能要及早交付</strong>（以便拿去和潜在的投资人洽谈）</li>
+<li><strong>功能在部署到生产环境前要先部署的一个测试环境</strong>（Richard要试用后给予反馈）</li>
+<li><strong>功能必须经过测试</strong>（长期作为软件外包的甲方，对质量要求严格）</li>
+<li><strong>要减少后期维护的工作</strong>（美国人精贵，少雇一个是一个）</li>
+<li><strong>支持协同开发</strong>（以便维护人员及早介入）</li>
+<li>&#8230;&#8230;</li>
+</ul>
+<p><span style="color: #000000;"><strong>这正是持续集成所要解决的典型场景</strong></span>。针对Richard的要求，我们只要建立一个基于Hudson（现在叫Jenkins）+Maven +SVN 的持续集成环境（再加上持续集成所要求的测试和过程）就可以很好地满足上述要要求，此方案的结构如下：</p>
+<p><span id="more-7657"></span></p>
+<p><a href="https://coolshell.cn/?attachment_id=7686" rel="attachment wp-att-7686"><img decoding="async" loading="lazy" class="alignnone  wp-image-7686 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2.jpg" alt="" width="693" height="719" srcset="https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2.jpg 866w, https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2-289x300.jpg 289w, https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2-768x797.jpg 768w, https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2-260x270.jpg 260w" sizes="(max-width: 693px) 100vw, 693px" /></a></p>
+<p>对于上述方案，让我们近距离看看各个服务器的内部情况，以及人员在这种方案下的分工协作：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7708" rel="attachment wp-att-7708"><img decoding="async" loading="lazy" class="alignnone  wp-image-7708 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/response.jpg" alt="" width="658" height="438" srcset="https://coolshell.cn/wp-content/uploads/2012/06/response.jpg 822w, https://coolshell.cn/wp-content/uploads/2012/06/response-300x199.jpg 300w" sizes="(max-width: 658px) 100vw, 658px" /></a></p>
+<p>我们先谈谈上面的图中涉及的一些概念性问题：</p>
+<h5><strong>1.1）编译时依赖</strong>和<strong>运行时依赖</strong></h5>
+<p>从字面上不难理解这两种依赖的类型。但要注意虽然编译时依赖常常也是运行时依赖，但并不能推断出一方必然是另一方。比如，在开发的过程中需要某些提供API的Jar包，而运行时可能是具体API实现的Jar包。再者，被依赖的包会有其自身的依赖，因此,项目对这些包产生间接依赖（<strong>运行时依赖</strong>），依此类推，最终形成一个<strong>依赖树</strong>。当项目运行时，这些依赖树上的包必须全部就位。</p>
+<p>Maven在POM中通scope来界定依赖的类型，从而帮助开发和运维人员摆脱手动处理依赖树的工作，然而运行时所依赖包最终是要安装到生产环境的，这部分工作Maven并不能自动完成。因此，一个常用方式是将运行时所依赖的包拷贝到项目文件中，比如Java Web应用的WEB-INF/lib，然后将项目总的打一个包。<strong>在安装项目包后，修改环境变量，将这些包所在的路径加入相应的环境变量中，如ClassPath</strong>。</p>
+<p>再看个例子，现代的操作系统和其它系统框架都考虑到了运行时依赖树的处理问题，比如Ubuntu的apt-get，CentOS的yum，Ruby的RubyGem，Node的npm等等。</p>
+<h5>1.2）依赖时的复杂度</h5>
+<p>项目除了对程序包的依赖，对于运行环境也有些具体的要求，比如，Web应用需要安装和配置Web服务器，应用服务器，数据服务器等，企业应用中可能需要消息队列，缓存，定时作业，或是对其它系统以Web Service方式暴露的服务。这些可以看做项目在系统层面对外部的依赖。这些依赖有些可以由项目自行处理，而有些则是项目无法处理的，比如运行容器，操作系统等，这些是项目的运行环境。</p>
+<p>总之，依赖的复杂度主要有两个：</p>
+<ol>
+<li>依赖包间的版本兼容性问题。兼容性问题是软件开发的恶梦</li>
+<li>间接依赖，或多重依赖问题。这个问题可以类比想像一下C++中的多重继续种出现的很多问题。</li>
+</ol>
+<div>比如：Ａ依赖于python 2.7，A还依赖于B，但是B却依赖于python 3，而Python 2.7和Python 3不兼容。这是依赖中最恶心的事。</div>
+<h5>1.3）任务分工</h5>
+<p>由于项目简单，因此并不需要专门的运维人员。以一个100人左右以交付为主业（恩，就是做外包）的公司为例，由于没有任何历史项目和代码的拖累，且各个项目间也没有任何关联，故而只需要配备一个IT支持人员进行资源方面的管理：分配机器，报修，初始化系统，分配IP地址等。各个项目的运行环境、数据库、开发环境等都由具体项目的开发人员手动完成。 环境出问题怎么办？很简单，凉拌——重装系统。实际的运行效果不错。</p>
+<h5>1.4）自动化部署</h5>
+<p>由于Hudson这样的持续集成环境提供了自动编译（定时或触发式）的功能，而且可以在编译过程中提供了一些扩展点，因此通过提供一个部署用的脚本，就可以非常容易实现简单的自动化部署。</p>
+<p>毫无疑问，持续集成就是敏捷的魔法药，它见效快、副作用小、业界的争论少。每每运用在混乱的项目中时，几周内项目就开始持续的产出经过测试的功能。对于独立项目，以持续集成为中心的持续部署绝对是不二选择。</p>
+<p><strong>但是，我们有没有想过，这会是一个自动化部署的通用解决方案吗？持续集成应该位于持续交付的中心吗？</strong></p>
+<h4>二、困境</h4>
+<p>回到我们的故事：项目A上线两年后，运营业绩不错，投资人第一轮注资后，Richard的公司进行了扩张，他们对项目进行了重构，而且随着用户数量的增长，公司分别在美国、英国和日本等地建立了运营中心，并且对亚洲市场进行的定制功能开发（项目A+），接下来，公司又投入开发了团购系统（项目B）。在获得了新一轮投资后，各条本来比较简单的业务和功能线上越来越复杂，需要不断地细分，于是公司再度扩张（开发人员达到了300人，国内200多人，而运维团队主要在美国），随后又为项目A/A+的高级用户开发了问答系统（项目C）。目前，他们正准备开发手机系统。 看看下面的图，公司增长的过程中，整个项目环境也变得复杂。（注意，这里是一种逻辑结构，而在物理层面项目B和项目A的生产环境可能部署在相同的机器上）。</p>
+<p><a href="https://coolshell.cn/?attachment_id=7694" rel="attachment wp-att-7694"><img decoding="async" loading="lazy" class="alignnone  wp-image-7694 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/sampleT1-1024x529.jpg" alt="" width="717" height="370" srcset="https://coolshell.cn/wp-content/uploads/2012/06/sampleT1-1024x529.jpg 1024w, https://coolshell.cn/wp-content/uploads/2012/06/sampleT1-300x155.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/06/sampleT1.jpg 1990w" sizes="(max-width: 717px) 100vw, 717px" /></a></p>
+<p>同时，原本单一的项目软件结构随着业务系统的增加也不再简单： <img decoding="async" loading="lazy" class="alignnone  wp-image-7697" src="https://coolshell.cn/wp-content/uploads/2012/06/software.jpg" alt="" width="763" height="414" srcset="https://coolshell.cn/wp-content/uploads/2012/06/software.jpg 954w, https://coolshell.cn/wp-content/uploads/2012/06/software-300x162.jpg 300w" sizes="(max-width: 763px) 100vw, 763px" /></p>
+<p>而软件间的版本依赖使这个问题变得更为复杂：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7700" rel="attachment wp-att-7700"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-7700 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/dependency.jpg" alt="" width="626" height="343" srcset="https://coolshell.cn/wp-content/uploads/2012/06/dependency.jpg 626w, https://coolshell.cn/wp-content/uploads/2012/06/dependency-300x164.jpg 300w" sizes="(max-width: 626px) 100vw, 626px" /></a></p>
+<p>现在，Richard的公司已经不再是一条快乐的小鱼，而是渐渐成为一直庞大的巨兽。虽然只有四个产品，但公司却要支持几百台开发机，几十台生产服务器，还有对应的测试环境，数据库服务器，以及几十个开发小组，和一大堆的内部项目。我们尽可以使用持续集成来为我们完成自动化部署。但，<strong>当我们为各个项目建立起持续集成环境后，它能满足我们对于持续部署的要求吗？我们前期的工作可以简化我们今后项目的持续交付的工作的难度吗？它需要我们为之建立一个庞大的运维团队，还是可以让我们能节省下每一毛钱来投入到真正的业务价值中去？</strong></p>
+<p><strong>让我们先来看看复杂的项目环境中的几个场景</strong>：</p>
+<p><strong>场景1：环境升级</strong></p>
+<p style="padding-left: 30px;">项目A和项目B都依赖于Web容器，公司决定升级Web容器版本，而公司要升级的机器有上百台，依赖人肉升级已不现实，维护团队因此针对各种软件开发了相应的自动化脚本，但当新的软件出现时，必须要开发新的脚本。而且当同时升级若干环境软件时，则难度随之增大，手工调度的方式极易出错，当升级失败时仍需要大量人工处理。由于存在大量升级脚本，有一定的维护成本。</p>
+<p><strong>场景2：依赖于环境的软件升级与回滚</strong></p>
+<p style="padding-left: 30px;">针对环境升级，公司为项目A和项目B开发了新的版本。但环境的升级和软件的升级不是同步进行，出错的可能性非常大（想一想间接依赖和多重依赖的情况）。当新版本部署到生产系统时，发现问题，需要回滚到之前的版本——所有运行时版本都需要回滚，而且环境也需要同步回滚。几百台机器……</p>
+<p><strong>场景3：运行时依赖</strong></p>
+<p style="padding-left: 30px;">在第一节的方案中，我们将所有的运行时依赖都打包到一起。当项目依赖关系复杂时，这样产生的包将非常臃肿，潜在地延长了部署的时间（想一想全世有几百台服务器，一个部署计划需要部署几百兆文件的情况），而且产生冲突的可能性非常大，而且对于不同类型的项目（Java和Ruby项目）缺乏通用性。06年左右，Nortel可是拿Excel统计过运行时依赖的，牵涉若干项目组，反复多次，没有个把月真搞不定。</p>
+<p><strong>场景4：泛滥的部署</strong></p>
+<p style="padding-left: 30px;">每个项目相关的持续集成环境都需要开发自己的部署脚本，重复投入大，而且各个项目的部署过程不一致，并且对于同一个项目无法同时满足不同目的部署要求，例如，环境或系统配置参数改变后，无需安装包，只需做清理和激活的工作。最后，持续集成只是支持了和代码修改有关的部署。</p>
+<p><strong>场景5：不一致的环境</strong></p>
+<p style="padding-left: 30px;">简单项目中，开发环境和运行环境都由开发人员搭建，当公司变大时，系统的运行环境将由运维人员搭建，而开发环境如果由运维人员搭建则工作量太大，由开发人员自己搭建则操作复杂又容易产生不一致的情况。</p>
+<p><strong>场景6：热切换</strong></p>
+<p style="padding-left: 30px;">对于某些部署，需要尽量减少服务的停止时间，需要在服务的同时进行部署。</p>
+<p>这些场景只是以持续集成为中心的持续部署在面对大型企业时所遇到的部分问题。大型企业，人多，项目多，机器多，项目环境复杂，部署维护工作繁多。以持续集成为基础的部署可以解决各个项目的集成问题，却无法帮助企业应对复杂的项目环境和各种不同的部署要求。<strong>究其更本，大型企业中的部署不再是一个简单的问题，而是一个交付生态圈，基础设施和环境管理必须要纳入考虑之中。</strong>要实现真正意义上的持续部署，我们就必须<strong>把环境和项目同等对待</strong>，通通纳入管理之中。同时，部署本身要得到统一。<strong>一个好的部署机制，应该是易于建立，易于使用，易于维护。</strong></p>
+<h4>三、任脉——环境管理</h4>
+<p>什么是环境？</p>
+<p>系统运行所依赖和包含的一切就是其环境：硬件、操作系统，网络资源（IP地址、域名），服务容器，服务器软件配置，环境亦是，运行时依赖的命令和包，项目本身的包和配置都是环境的一部分。对于部署而言，广义上，这些通通应该纳入环境管理的范畴，但狭义上，从软件系统的角度看，一个环境就是其运行需要的软件及其配置（我们先把操作系统和网络资源当做基础设施，其在部署时已处于就位的情况）。因此：</p>
+<p><strong>项目A的生产环境 = 项目A本身的软件包 + 项目A运行时依赖的软件包 + 项目A运行时依赖的其它软件 + 项目A的配置信息</strong></p>
+<p>由于，项目本身的软件包、项目运行时依赖的软件包，以及项目运行时依赖的其它软件在本质上没有区别——都是软件，上面的定义可以进一步抽象为：</p>
+<p><strong>环境 = 软件包 + 配置信息</strong></p>
+<p>在这个定义下，我们就必须将运行环境的软件解构，并以包的形式导入到公司的整个项目资源库中，比如Apache将作为一个包被导入，而Apache依赖的其它包也将依次被导入，并建立起正确的依赖关系。而且，在导入的过程中还必须做些相应的调整，如，环境变量的读取和设置，必须来自于环境配置模块，而不要修改系统的环境变量，防止不同环境在系统环境配置上相互影响和依赖。</p>
+<p>再回头审视我们的示例，项目A的生产环境可以部署在不同的区域，对于各个区域可能有定制化的设定。这就像面向对象中的类，可以通过继承使子类重用父类的公有属性和行为并添加自己特有的信息。因此，环境的概念模型如图：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7725" rel="attachment wp-att-7725"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-7725 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/Env.jpg" alt="" width="523" height="118" srcset="https://coolshell.cn/wp-content/uploads/2012/06/Env.jpg 523w, https://coolshell.cn/wp-content/uploads/2012/06/Env-300x67.jpg 300w" sizes="(max-width: 523px) 100vw, 523px" /></a></p>
+<p>通过这样的关系，我们很容易为示例的复杂环境建立一种简单的结构，对于项目A：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7729" rel="attachment wp-att-7729"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-7729 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/org1.jpg" alt="" width="599" height="519" srcset="https://coolshell.cn/wp-content/uploads/2012/06/org1.jpg 599w, https://coolshell.cn/wp-content/uploads/2012/06/org1-300x259.jpg 300w" sizes="(max-width: 599px) 100vw, 599px" /></a></p>
+<p>这里，环境依然是处于知识层面（Knowledge Level），它并未与具体的基础设施相关联。当我们将一个环境“具现化”成一个运行系统时，我们就产生了一个真正的环境实例。在这两者之间，我们还必须要考虑环境实例的使用目的（开发？测试？……）以及安装所依赖的其它信息（如机器），因此，我们需要增加一个环境目标来集中这些信息，而且由于不同目标的环境可能会有所差别，因此，环境目标也需要配置的能力。概念模型如图：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7731" rel="attachment wp-att-7731"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-7731 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/target.jpg" alt="" width="523" height="438" srcset="https://coolshell.cn/wp-content/uploads/2012/06/target.jpg 523w, https://coolshell.cn/wp-content/uploads/2012/06/target-300x251.jpg 300w" sizes="(max-width: 523px) 100vw, 523px" /></a></p>
+<p>图中的环境实例是如何产生的呢？<strong>部署</strong>，<strong>一次部署可能会产生一个环境实例。</strong>一系列部署将产生对应于环境目标的多个环境实例，除去当前起作用的环境实例外（最新的），其它的是历史环境实例。<strong>通过在历史环境实例中切换，我们自然而然的就可以使整个环境回滚，因为项目所依赖的一切都已经成为的环境中的软件包，而且环境依赖的包的版本会随着部署具体确定下来。</strong>如此一来，我们便可以给每个环境实例分配一个版本号，再通过环境实例的版本号与软件包的版本对应起来，从而得知一次部署时应用的具体软件包，如图：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7732" rel="attachment wp-att-7732"><img decoding="async" loading="lazy" class="alignnone  wp-image-7732 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/version.jpg" alt="" width="669" height="394" srcset="https://coolshell.cn/wp-content/uploads/2012/06/version.jpg 743w, https://coolshell.cn/wp-content/uploads/2012/06/version-300x176.jpg 300w" sizes="(max-width: 669px) 100vw, 669px" /></a></p>
+<p>目前的环境管理结构，已经可以解决场景1、2和5的问题。那<strong>么对于场景2，运行时依赖，环境管理应该如何解决呢？</strong></p>
+<p>细心的朋友，可能已经发现，<strong>在环境层面上我们确定了环境依赖的软件包</strong>，这里有两个隐藏的含义：</p>
+<ul>
+<li>环境定义的是对软件包的运行时依赖</li>
+<li>由于环境是一个逻辑上的概念，因此其所用的软件包也是一个逻辑上的概念（相对于版本控制系统中的软件包）</li>
+</ul>
+<p>我们也已经知道，在部署时，一个环境实例将具体的确定其依赖的软件包的版本。某个版本的软件包最终与代码库中的物理的软件包相关联。但软件包是运行时的安装包，因此，它应该是代码库中包编译的结果。在对代码库的包编译时，既要将结果打上版本保存起来，也好在两者的版本间建立关系，最后，编译结果应该是某种既定的安装包目录文件结构。</p>
+<p>另外，当环境包含的包比较多时，运行时版本树会非常大，手动的指定全部的包的版本将是一个非常大的体力劳动，这部分工作也要得到简化。由此，我们必须</p>
+<div>
+<ul>
+<li><strong>建立逻辑软件包版本和版本库中软件包版本间的关系</strong></li>
+<li><strong><strong>为相互依赖的包编译并打上统一的标签</strong></strong></li>
+<li><strong>简化运行时包依赖关系的生产</strong></li>
+<li><strong>简化运行时包依赖的指定（可参考apt-get和RubyGem，环境只需指定直接依赖的包，间接依赖的包从运行时依赖树中自动导入）</strong></li>
+</ul>
+<div>一个可能的简单结构如下：</div>
+<p><a href="https://coolshell.cn/?attachment_id=7736" rel="attachment wp-att-7736"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-7736 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/pkg1.jpg" alt="" width="783" height="195" srcset="https://coolshell.cn/wp-content/uploads/2012/06/pkg1.jpg 783w, https://coolshell.cn/wp-content/uploads/2012/06/pkg1-300x74.jpg 300w" sizes="(max-width: 783px) 100vw, 783px" /></a></p>
+<p>上述讨论还没有涉及操作系统，<strong>如果我们的运行机器要支持多个系统，我们又该怎么办？？？</strong></p>
+<p>配置信息也是个大问题，大家可以思考</p>
+<ul>
+<li><strong>环境配置和应用配置如何区分？</strong></li>
+<li><strong>如何简化环境配置工作？</strong></li>
+<li><strong>如何使环境配置的效果只对具体环境有效，而不会泄露到环境外部？</strong></li>
+</ul>
+</div>
+<p>再者，</p>
+<ul>
+<li><strong>如何使应用支持多运行目标？</strong></li>
+<li><strong>环境管理如何能方便开发环境的调试？</strong></li>
+<li><strong>要如何简化版本的选择?</strong></li>
+<li><strong><strong>在多个包有编译和运行时依赖时，编译时如何检查以减少引入兼容性问题的风险？</strong></strong></li>
+</ul>
+<p>这些都留待大家思考。</p>
+<h4>四、督脉——部署系统</h4>
+<p>《持续集成》和《持续交付》中都对部署有详细的讨论，不在赘述。<strong>在我看来，部署其就是按照其目的执行一系列步骤将环境置于其目的所指向的状态中</strong>。我们一会再回国头来看这段文绉绉的话，先看看第一部分持续集成的环境下，我们部署的步骤可能会是下面这个样子：</p>
+<ol>
+<li>登陆目标机（ssh）</li>
+<li>停止服务</li>
+<li>清理环境</li>
+<li>准备安装环境（创建文件夹等）</li>
+<li>安装项目包（rsync，解压，权限设置等）</li>
+<li>配置环境变量</li>
+<li>启动服务</li>
+<li>&#8230;&#8230;</li>
+</ol>
+<p>而在第二部分的<strong>情景4</strong>中，我们看到如果对不同的持续集成环境建立不同的部署脚本和环境维护脚本，这部署过程的维护会非常繁琐。基于第三部分的环境管理，我们可以将部署过程抽象为：</p>
+<p><a href="https://coolshell.cn/?attachment_id=7737" rel="attachment wp-att-7737"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-7737 aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/06/deploy.jpg" alt="" width="566" height="351" srcset="https://coolshell.cn/wp-content/uploads/2012/06/deploy.jpg 566w, https://coolshell.cn/wp-content/uploads/2012/06/deploy-300x186.jpg 300w" sizes="(max-width: 566px) 100vw, 566px" /></a></p>
+<p>现在回到开头那个文绉绉的描述：<strong>部署其就是按照其目的执行一系列步骤将环境置于其目的所指向的状态中</strong>。</p>
+<p>由于我们已经将部署作为环境管理的一部分，而环境又是对外提供服务的最小实体，因此，对环境的部署就是要根据部署的类型，在环境上按一定的步骤执行一系列操作，从而使环境置于部署类型所要的状态，这个过程中可能会生成对应的环境实例。举例来说，我们可能会修改环境相关的一些配置，然后重启环境，显然，这种情况下不需要下载安装软件包（没有改变），因此也就不需要生成环境实例。</p>
+<p>对于标准的部署——安装软件包并启动环境，可能的步骤将会是：</p>
+<ol>
+<li>选择将要部署的软件包的版本</li>
+<li>生成新的环境实例（确定环境实例的版本和其依赖包的版本，确定环境配置等）</li>
+<li>清理和准备目标机环境</li>
+<li>下载包</li>
+<li>设置环境配置</li>
+<li>环境实例切换</li>
+<li>生成部署报告</li>
+<li>……</li>
+</ol>
+<p>好，部署系统和环境管理各就各位，我们可以将各个项目环境纳入我们的环境管理之中，甚至是持续集成环境本身。再补充一句，要让部署系统和环境管理能很好的发挥作用，我们即需要一个简单一致的UI界面（为开发人员），也需要提供一个清晰明了的服务接口（供外部系统调用，如持续部署系统）。<strong>对于与环境管理相关的机器状态管理，网络资源的配置等等，本文不再涉及，大家可以自己思考</strong>。环境管理的实现、编译系统改造以及持续部署的具体实现，另作文章探讨。</p>
+<p>就技术而言（不考虑围绕持续部署的过程实践），环境管理、部署系统以及我们没有提及的编译系统改造才是生产线的真正引擎，持续部署不过是水到渠成的传送带而已。</p>
+<h4>五、没完</h4>
+<p>打通了任督二脉后，事还还没有完，还有很多细节上的问题。你想，这个工具实在是太好用了，于是公司里成百上千的工程师们都在使用这个自动化部署系统，我们又会面对很多很多问题：</p>
+<ul>
+<li><strong>部署系统的性能问题</strong>。几百号人不停地在把他们的软件部署到自己的机器上，部署到测试环境，部署到生产环境，一天之内一个人可能会要部署N次，回滚N次，不但有大量部署请求，还有大量的文件在网络上传输。你得想想这套部署系统如何解决这些性能问题，还得考虑未来更大规模的性能水平扩展问题。</li>
+</ul>
+<ul>
+<li><strong>目标机环境的管理。</strong>在目标运行机上需要解决几个问题：1）两个环境间如果有一些的一样的包，那就没有必要再下载了，这样可以节约时间。2）每次部署都需要把老的部署环境给保留下来，这样方便在新旧环境下的切换。这两点对于在生产环境下部署非常关键。（这需要环境内所有软件的绿色安装才能更容易达到这个目标，因些，Unix/Linux会比Windows更容易做到这点）</li>
+</ul>
+<ul>
+<li><strong>部署一致性事务问题</strong>。有时候，我们需要同时部署若干台服务器，比如：包A到机器MA，包B到机器MB，包C到机器MC，……（Web Service的SOA架构），这些包之间有运行依赖性和兼容性问题，要么一次性全部完成，要么就全部失败。回滚也是一样的，这是一个部署事务或部署一致性的问题。如何解决呢？</li>
+</ul>
+<ul>
+<li><strong>部署环境的版本控制问题</strong>。前面说过，我们的一个环境就会和若干个包的版本耦合，环境必需管理要部署的包的版本。于是，当你的部署越来越多的时候，各个环境的包的版本开始出现混乱，各种依赖间的版本也会出现不统一的情况，也就是说，就算你有这样的一个工具，在一个高速开发的环境下，我们的部署环境的管理还是会出现很多混乱的情况，需要你不断地统一大家的开发、测试环境。</li>
+</ul>
+<ul>
+<li><strong>部署计划</strong>。我们可能会有很多部署计划，比如：设定定时部署，提升或降低部署优先级，部署事务定义，部署策略（如：先部署10%的机器，如果没有问题，再把剩下的系统部署了），热切计划和策略…… 等等 ，等等 。</li>
+</ul>
+<ul>
+<li><strong>部署的监控和维护</strong>。任何软件和系统都会有这样的问题，当规模上去了以后，我们的自动化部署系统的监控和维护的复杂度并不亚于一个大型的互联网应用。</li>
+</ul>
+<div>这样的问题会有很多，基本上来说，<strong>这样一个持续集成持续部署的自动化系统并不是那么简单的事，其开发工作量和一个标准的大型互联网业务系统没什么两样</strong>。</div>
+<h4>六、总结</h4>
+<p>这里只谈一点自己的看法，从传统的持续集成到面向大型软件的持续部署，我们将系统所依赖的软件环境和软件包抽象为一致的实体纳入到管理之中，并将运维人员的工作真正的分摊到开发人员身上。而云计算的出现，使得计算机本身也可以自动化的创建和回收，这样环境管理的范畴将进一步扩充。相应的，部署的能力和灵活性也是一次质的飞跃，将再一次减轻运维人员的工作压力。</p>
+<p>说了这么多废话，总结一下自己的观点，对于向大型软件企业推销基于持续集成的持续部署（交付）的哥们：</p>
+<ul>
+<li><strong>你就是在耍流氓</strong>，如果你不解决环境管理！！！</li>
+<li><strong>你就是在耍流氓</strong>，如果你不建立部署系统！！！</li>
+<li><strong>你就是在耍流氓</strong>，如果你不扩展编译系统！！！</li>
+<li><strong>你就是在耍流氓</strong>，如果你只是推销小团队的实践而不考虑改造大环境！！！</li>
+<li><strong>你就是个流氓</strong>，如果你只是不断地告诉别人怎么做，自己却从来不动手写一个测试或建立一个持续集成环境！！！</li>
+</ul>
+<p>最后，用Linus最经典的话来结束本文——“ Talk is Cheap, Show me the Code！”</p>
+<p>（<strong>注：本文由<a href="http://weibo.com/renfake" target="_blank">@常新居士</a>完成初稿，我做了一些编辑，主要写了第五节“没完”</strong> ）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5625.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="“品质在于构建过程”吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5625.html" class="wp_rp_title">“品质在于构建过程”吗？</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/5044.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/hat-150x150.jpeg" alt="为什么Scrum不行？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5044.html" class="wp_rp_title">为什么Scrum不行？</a></li><li ><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Bob大叔和Jim Coplien对TDD的论战" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_title">Bob大叔和Jim Coplien对TDD的论战</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7657.html">持续部署，并不简单！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7657.html/feed</wfw:commentRss>
+			<slash:comments>48</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Git显示漂亮日志的小技巧</title>
+		<link>https://coolshell.cn/articles/7755.html</link>
+					<comments>https://coolshell.cn/articles/7755.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 24 Jun 2012 15:29:05 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Git]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[verison control]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7755</guid>
+
+					<description><![CDATA[<p>原文：http://garmoncheg.blogspot.com/2012/06/pretty-git-log.html （墙） Git的传统log如下所示，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7755.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7755.html">Git显示漂亮日志的小技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>原文：<a href="http://garmoncheg.blogspot.com/2012/06/pretty-git-log.html" target="_blank">http://garmoncheg.blogspot.com/2012/06/pretty-git-log.html</a> （墙）</p>
+<p>Git的传统log如下所示，你喜欢吗？</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="size-full wp-image-7758 aligncenter" title="默认的Git的log" src="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01.png" alt="" width="578" height="321" srcset="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01.png 578w, https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01-300x167.png 300w, https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01-360x200.png 360w, https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01-486x270.png 486w" sizes="(max-width: 578px) 100vw, 578px" /></p>
+<p style="text-align: left;">看看下面这个你喜不喜欢？（点击图片看大图）</p>
+<p style="text-align: left;"><span id="more-7755"></span></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.02.png"><img decoding="async" loading="lazy" class="aligncenter  wp-image-7759" title="改进版的Git的日志" src="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.02.png" alt="" width="620" height="280" srcset="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.02.png 1034w, https://coolshell.cn/wp-content/uploads/2012/06/git.log_.02-300x135.png 300w, https://coolshell.cn/wp-content/uploads/2012/06/git.log_.02-1024x461.png 1024w" sizes="(max-width: 620px) 100vw, 620px" /></a></p>
+<p style="text-align: left;">要做到这样，命令行如下：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">git log --graph --pretty=format:&#039;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#039; --abbrev-commit --</code></p>
+<p>这样有点长了，我们可以这样：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">git config --global alias.lg &quot;log --color --graph --pretty=format:&#039;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#039; --abbrev-commit --&quot;</code></p>
+<p>然后，我们就可以使用这样的短命令了：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">git lg</code></p>
+<p>如果你想看看git log &#8211;pretty=format的参数，你可以看看<a href="http://git-scm.com/book/zh/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2" target="_blank">这篇文章</a>。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3288.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/scmhistory-150x150.png" alt="版本管理器的发展史" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3288.html" class="wp_rp_title">版本管理器的发展史</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7755.html">Git显示漂亮日志的小技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7755.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>性能调优攻略</title>
+		<link>https://coolshell.cn/articles/7490.html</link>
+					<comments>https://coolshell.cn/articles/7490.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 20 Jun 2012 01:24:53 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[数据库]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[系统架构]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[Performance]]></category>
+		<category><![CDATA[SQL]]></category>
+		<category><![CDATA[TCP]]></category>
+		<category><![CDATA[UDP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7490</guid>
+
+					<description><![CDATA[<p>关于性能优化这是一个比较大的话题，在《由12306.cn谈谈网站性能技术》中我从业务和设计上说过一些可用的技术以及那些技术的优缺点，今天，想从一些技术细节上谈谈...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7490.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7490.html">性能调优攻略</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-7641" title="Performance Tuning" src="https://coolshell.cn/wp-content/uploads/2012/06/f1-300x216.jpg" alt="" width="300" height="216" srcset="https://coolshell.cn/wp-content/uploads/2012/06/f1-300x216.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/06/f1.jpg 350w" sizes="(max-width: 300px) 100vw, 300px" />关于性能优化这是一个比较大的话题，在《<a title="由12306.cn谈谈网站性能技术" href="https://coolshell.cn/articles/6470.html" target="_blank">由12306.cn谈谈网站性能技术</a>》中我从业务和设计上说过一些可用的技术以及那些技术的优缺点，今天，想从一些技术细节上谈谈性能优化，主要是一些代码级别的技术和方法。<strong>本文的东西是我的一些经验和知识，并不一定全对，希望大家指正和补充</strong>。</p>
+<p>在开始这篇文章之前，大家可以移步去看一下酷壳以前发表的《<a title="代码优化概要" href="https://coolshell.cn/articles/2967.html" target="_blank">代码优化概要</a>》，这篇文章基本上告诉你——<strong>要进行优化，先得找到性能瓶颈</strong>！ 但是在讲如何定位系统性能瓶劲之前，请让我讲一下系统性能的定义和测试，因为没有这两件事，后面的定位和优化无从谈起。</p>
+<h4>一、系统性能定义</h4>
+<p>让我们先来说说如何什么是系统性能。这个定义非常关键，如果我们不清楚什么是系统性能，那么我们将无法定位之。我见过很多朋友会觉得这很容易，但是仔细一问，其实他们并没有一个比较系统的方法，所以，在这里我想告诉大家如何系统地来定位性能。 总体来说，系统性能就是两个事：</p>
+<ol>
+<li><strong>Throughput</strong> ，吞吐量。也就是每秒钟可以处理的请求数，任务数。</li>
+<li><strong>Latency</strong>， 系统延迟。也就是系统在处理一个请求或一个任务时的延迟。</li>
+</ol>
+<p>一般来说，一个系统的性能受到这两个条件的约束，缺一不可。比如，我的系统可以顶得住一百万的并发，但是系统的延迟是2分钟以上，那么，这个一百万的负载毫无意义。系统延迟很短，但是吞吐量很低，同样没有意义。所以，一个好的系统的性能测试必然受到这两个条件的同时作用。 有经验的朋友一定知道，这两个东西的一些关系：</p>
+<ul>
+<li><strong>Throughput越大，Latency会越差。</strong>因为请求量过大，系统太繁忙，所以响应速度自然会低。</li>
+<li><strong>Latency越好，能支持的Throughput就会越高。</strong>因为Latency短说明处理速度快，于是就可以处理更多的请求。</li>
+</ul>
+<h4>二、系统性能测试</h4>
+<p>经过上述的说明，我们知道要测试系统的性能，需要我们收集系统的Throughput和Latency这两个值。</p>
+<p><span id="more-7490"></span></p>
+<ul>
+<li>首先，<strong>需要定义Latency这个值</strong>，比如说，对于网站系统响应时间必需是5秒以内（对于某些实时系统可能需要定义的更短，比如5ms以内，这个更根据不同的业务来定义）</li>
+</ul>
+<ul>
+<li>其次，<strong>开发性能测试工具</strong>，一个工具用来制造高强度的Throughput，另一个工具用来测量Latency。对于第一个工具，你可以参考一下“<a title="十个免费的Web压力测试工具" href="https://coolshell.cn/articles/2589.html" target="_blank">十个免费的Web压力测试工具</a>”，关于如何测量Latency，你可以在代码中测量，但是这样会影响程序的执行，而且只能测试到程序内部的Latency，真正的Latency是整个系统都算上，包括操作系统和网络的延时，你可以使用Wireshark来抓网络包来测量。这两个工具具体怎么做，这个还请大家自己思考去了。</li>
+</ul>
+<ul>
+<li>最后，<strong>开始性能测试</strong>。你需要不断地提升测试的Throughput，然后观察系统的负载情况，如果系统顶得住，那就观察Latency的值。这样，你就可以找到系统的最大负载，并且你可以知道系统的响应延时是多少。</li>
+</ul>
+<p>再多说一些，</p>
+<ul>
+<li>关于Latency，如果吞吐量很少，这个值估计会非常稳定，当吞吐量越来越大时，系统的Latency会出现非常剧烈的抖动，所以，我们在测量Latency的时候，我们需要注意到Latency的分布，也就是说，有百分之几的在我们允许的范围，有百分之几的超出了，有百分之几的完全不可接受。也许，平均下来的Latency达标了，但是其中仅有50%的达到了我们可接受的范围。那也没有意义。</li>
+</ul>
+<ul>
+<li>关于性能测试，我们还需要定义一个时间段。比如：在某个吞吐量上持续15分钟。因为当负载到达的时候，系统会变得不稳定，当过了一两分钟后，系统才会稳定。另外，也有可能是，你的系统在这个负载下前几分钟还表现正常，然后就不稳定了，甚至垮了。所以，需要这么一段时间。这个值，我们叫做峰值极限。</li>
+</ul>
+<ul>
+<li>性能测试还需要做Soak Test，也就是在某个吞吐量下，系统可以持续跑一周甚至更长。这个值，我们叫做系统的正常运行的负载极限。</li>
+</ul>
+<p>性能测试有很多很复要的东西，比如：burst test等。 这里不能一一详述，这里只说了一些和性能调优相关的东西。总之，性能测试是一细活和累活。</p>
+<h4>三、定位性能瓶颈</h4>
+<p><img decoding="async" loading="lazy" class="alignright size-full wp-image-7640" title="bottleneck" src="https://coolshell.cn/wp-content/uploads/2012/06/bottleneck.jpg" alt="" width="200" height="200" srcset="https://coolshell.cn/wp-content/uploads/2012/06/bottleneck.jpg 200w, https://coolshell.cn/wp-content/uploads/2012/06/bottleneck-150x150.jpg 150w" sizes="(max-width: 200px) 100vw, 200px" />有了上面的铺垫，我们就可以测试到到系统的性能了，再调优之前，我们先来说说如何找到性能的瓶颈。我见过很多朋友会觉得这很容易，但是仔细一问，其实他们并没有一个比较系统的方法。</p>
+<h5>3.1）查看操作系统负载</h5>
+<p>首先，当我们系统有问题的时候，我们不要急于去调查我们代码，这个毫无意义。我们首要需要看的是操作系统的报告。看看操作系统的CPU利用率，看看内存使用率，看看操作系统的IO，还有网络的IO，网络链接数，等等。Windows下的perfmon是一个很不错的工具，Linux下也有很多相关的命令和工具，比如：<a href="http://sourceware.org/systemtap/" target="_blank">SystemTap</a>，<a href="https://latencytop.org/" target="_blank">LatencyTOP</a>，vmstat, sar, iostat, top, tcpdump等等 。通过观察这些数据，我们就可以知道我们的软件的性能基本上出在哪里。比如：</p>
+<p>1）先看CPU利用率，如果CPU利用率不高，但是系统的Throughput和Latency上不去了，这说明我们的程序并没有忙于计算，而是忙于别的一些事，比如IO。（另外，CPU的利用率还要看内核态的和用户态的，内核态的一上去了，整个系统的性能就下来了。而对于多核CPU来说，CPU 0 是相当关键的，如果CPU 0的负载高，那么会影响其它核的性能，因为CPU各核间是需要有调度的，这靠CPU0完成）</p>
+<p>2）然后，我们可以看一下IO大不大，IO和CPU一般是反着来的，CPU利用率高则IO不大，IO大则CPU就小。关于IO，我们要看三个事，一个是磁盘文件IO，一个是驱动程序的IO（如：网卡），一个是内存换页率。这三个事都会影响系统性能。</p>
+<p>3）然后，查看一下网络带宽使用情况，在Linux下，你可以使用iftop, iptraf, ntop, tcpdump这些命令来查看。或是用Wireshark来查看。</p>
+<p>4）如果CPU不高，IO不高，内存使用不高，网络带宽使用不高。但是系统的性能上不去。这说明你的程序有问题，比如，你的程序被阻塞了。可能是因为等那个锁，可能是因为等某个资源，或者是在切换上下文。</p>
+<p><strong>通过了解操作系统的性能，我们才知道性能的问题，比如：带宽不够，内存不够，TCP缓冲区不够，等等，很多时候，不需要调整程序的，只需要调整一下硬件或操作系统的配置就可以了</strong>。</p>
+<h5>3.2）使用Profiler测试</h5>
+<p>接下来，我们需要使用性能检测工具，也就是使用某个Profiler来差看一下我们程序的运行性能。如：Java的JProfiler/TPTP/CodePro Profiler，GNU的gprof，IBM的PurifyPlus，Intel的VTune，AMD的CodeAnalyst，还有Linux下的OProfile/perf，后面两个可以让你对你的代码优化到CPU的微指令级别，如果你关心CPU的L1/L2的缓存调优，那么你需要考虑一下使用VTune。 使用这些Profiler工具，可以让你程序中各个模块函数甚至指令的很多东西，如：<strong>运行的时间</strong> ，<strong>调用的次数</strong>，<strong>CPU的利用率</strong>，等等。这些东西对我们来说非常有用。</p>
+<p>我们重点观察运行时间最多，调用次数最多的那些函数和指令。这里注意一下，对于调用次数多但是时间很短的函数，你可能只需要轻微优化一下，你的性能就上去了（比如：某函数一秒种被调用100万次，你想想如果你让这个函数提高0.01毫秒的时间 ，这会给你带来多大的性能）</p>
+<p>使用Profiler有个问题我们需要注意一下，因为Profiler会让你的程序运行的性能变低，像PurifyPlus这样的工具会在你的代码中插入很多代码，会导致你的程序运行效率变低，从而没发测试出在高吞吐量下的系统的性能，对此，一般有两个方法来定位系统瓶颈：</p>
+<p>1）在你的代码中自己做统计，使用微秒级的计时器和函数调用计算器，每隔10秒把统计log到文件中。</p>
+<p>2）分段注释你的代码块，让一些函数空转，做Hard Code的Mock，然后再测试一下系统的Throughput和Latency是否有质的变化，如果有，那么被注释的函数就是性能瓶颈，再在这个函数体内注释代码，直到找到最耗性能的语句。</p>
+<p>最后再说一点，<strong>对于性能测试，不同的Throughput会出现不同的测试结果，不同的测试数据也会有不同的测试结果。所以，用于性能测试的数据非常重要，性能测试中，我们需要观测试不同Throughput的结果</strong>。</p>
+<h4>四、常见的系统瓶颈</h4>
+<p>下面这些东西是我所经历过的一些问题，也许并不全，也许并不对，大家可以补充指正，我<strong>纯属抛砖引玉</strong>。关于系统架构方面的性能调优，大家可移步看一下《<a title="由12306.cn谈谈网站性能技术" href="https://coolshell.cn/articles/6470.html" target="_blank">由12306.cn谈谈网站性能技术</a>》，关于Web方面的一些性能调优的东西，大家可以看看《<a title="Web开发中需要了解的东西" href="https://coolshell.cn/articles/6043.html" target="_blank">Web开发中需要了解的东西</a>》一文中的性能一章。我在这里就不再说设计和架构上的东西了。</p>
+<p><strong></strong>一般来说，性能优化也就是下面的几个策略：</p>
+<ul>
+<li><strong>用空间换时间</strong>。各种cache如CPU L1/L2/RAM到硬盘，都是用空间来换时间的策略。这样策略基本上是把计算的过程一步一步的保存或缓存下来，这样就不用每次用的时候都要再计算一遍，比如数据缓冲，CDN，等。这样的策略还表现为冗余数据，比如数据镜象，负载均衡什么的。</li>
+</ul>
+<ul>
+<li><strong>用时间换空间</strong>。有时候，少量的空间可能性能会更好，比如网络传输，如果有一些压缩数据的算法（如前些天说的“<a title="Huffman 编码压缩算法" href="https://coolshell.cn/articles/7459.html">Huffman 编码压缩算法</a>” 和 “<a title="rsync 的核心算法" href="https://coolshell.cn/articles/7425.html">rsync 的核心算法</a>”），这样的算法其实很耗时，但是因为瓶颈在网络传输，所以用时间来换空间反而能省时间。</li>
+</ul>
+<ul>
+<li><strong>简化代码</strong>。最高效的程序就是不执行任何代码的程序，所以，代码越少性能就越高。关于代码级优化的技术大学里的教科书有很多示例了。如：减少循环的层数，减少递归，在循环中少声明变量，少做分配和释放内存的操作，尽量把循环体内的表达式抽到循环外，条件表达的中的多个条件判断的次序，尽量在程序启动时把一些东西准备好，注意函数调用的开销（栈上开销），注意面向对象语言中临时对象的开销，小心使用异常（不要用异常来检查一些可接受可忽略并经常发生的错误），…… 等等，等等，这连东西需要我们非常了解编程语言和常用的库。</li>
+</ul>
+<ul>
+<li><strong>并行处理</strong>。如果CPU只有一个核，你要玩多进程，多线程，对于计算密集型的软件会反而更慢（因为操作系统调度和切换开销很大），CPU的核多了才能真正体现出多进程多线程的优势。并行处理需要我们的程序有Scalability，不能水平或垂直扩展的程序无法进行并行处理。从架构上来说，这表再为——是否可以做到不改代码只是加加机器就可以完成性能提升？</li>
+</ul>
+<p>总之，<strong>根据2：8原则来说，20%的代码耗了你80%的性能，找到那20%的代码，你就可以优化那80%的性能</strong>。 下面的一些东西都是我的一些经验，我只例举了一些最有价值的性能调优的的方法，供你参考，也欢迎补充。</p>
+<p><strong>4.1）算法调优</strong>。算法非常重要，好的算法会有更好的性能。举几个我经历过的项目的例子，大家可以感觉一下。</p>
+<ul>
+<li>一个是<strong>过滤算法</strong>，系统需要对收到的请求做过滤，我们把可以被filter in/out的东西配置在了一个文件中，原有的过滤算法是遍历过滤配置，后来，我们找到了一种方法可以对这个过滤配置进行排序，这样就可以用二分折半的方法来过滤，系统性能增加了50%。</li>
+</ul>
+<ul>
+<li>一个是<strong>哈希算法</strong>。计算哈希算法的函数并不高效，一方面是计算太费时，另一方面是碰撞太高，碰撞高了就跟单向链表一个性能（可参看<a title="Hash Collision DoS 问题" href="https://coolshell.cn/articles/6424.html">Hash Collision DoS 问题</a>）。我们知道，算法都是和需要处理的数据很有关系的，就算是被大家所嘲笑的“冒泡排序”在某些情况下（大多数数据是排好序的）其效率会高于所有的排序算法。哈希算法也一样，广为人知的哈希算法都是用英文字典做测试，但是我们的业务在数据有其特殊性，所以，对于还需要根据自己的数据来挑选适合的哈希算法。对于我以前的一个项目，公司内某牛人给我发来了一个哈希算法，结果让我们的系统性能上升了150%。（关于各种哈希算法，你一定要看看<a href="http://programmers.stackexchange.com/questions/49550/which-hashing-algorithm-is-best-for-uniqueness-and-speed/145633#145633" target="_blank">StackExchange上的这篇关于各种hash算法的文章</a> ）</li>
+</ul>
+<ul>
+<li><strong>分而治之和预处理</strong>。以前有一个程序为了生成月报表，每次都需要计算很长的时间，有时候需要花将近一整天的时间。于是我们把我们找到了一种方法可以把这个算法发成增量式的，也就是说我每天都把当天的数据计算好了后和前一天的报表合并，这样可以大大的节省计算时间，每天的数据计算量只需要20分钟，但是如果我要算整个月的，系统则需要10个小时以上（SQL语句在大数据量面前性能成级数性下降）。这种分而治之的思路在大数据面前对性能有很帮助，就像merge排序一样。SQL语句和数据库的性能优化也是这一策略，如：使用嵌套式的Select而不是笛卡尔积的Select，使用视图，等等。</li>
+</ul>
+<p><strong>4.2）代码调优</strong>。从我的经验上来说，代码上的调优有下面这几点：</p>
+<ul>
+<li><strong>字符串操作</strong>。这是最费系统性能的事了，无论是strcpy, strcat还是strlen，最需要注意的是字符串子串匹配。所以，能用整型最好用整型。举几个例子，第一个例子是N年前做银行的时候，我的同事喜欢把日期存成字符串（如：2012-05-29 08:30:02），我勒个去，一个select  where between语句相当耗时。另一个例子是，我以前有个同事把一些状态码用字符串来处理，他的理由是，这样可以在界面上直接显示，后来性能调优的时候，我把这些状态码全改成整型，然后用位操作查状态，因为有一个每秒钟被调用了150K次的函数里面有三处需要检查状态，经过改善以后，整个系统的性能上升了30%左右。还有一个例子是，我以前从事的某个产品编程规范中有一条是要在每个函数中把函数名定义出来，如：const char fname[]=&#8221;functionName()&#8221;, 这是为了好打日志，但是为什么不声明成 static类型的呢？</li>
+</ul>
+<ul>
+<li><strong>多线程调优</strong>。有人说，thread is evil，这个对于系统性能在某些时候是个问题。因为多线程瓶颈就在于互斥和同步的锁上，以及线程上下文切换的成本，怎么样的少用锁或不用锁是根本（比如：<a title="多版本并发控制(MVCC)在分布式系统中的应用" href="https://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a> 中说的乐观锁可以解决性能问题），此外，还有读写锁也可以解决大多数是读操作的并发的性能问题。这里多说一点在C++中，我们可能会使用线程安全的智能指针AutoPtr或是别的一些容器，只要是线程安全的，其不管三七二十一都要上锁，上锁是个成本很高的操作，使用AutoPtr会让我们的系统性能下降得很快，如果你可以保证不会有线程并发问题，那么你应该不要用AutoPtr。我记得我上次我们同事去掉智能指针的引用计数，让系统性能提升了50%以上。对于Java对象的引用计数，如果我猜的没错的话，到处都是锁，所以，Java的性能问题一直是个问题。另外，线程不是越多越好，线程间的调度和上下文切换也是很夸张的事，尽可能的在一个线程里干，尽可能的不要同步线程。这会让你有很多的性能。</li>
+</ul>
+<ul>
+<li><strong>内存分配</strong>。不要小看程序的内存分配。malloc/realloc/calloc这样的系统调非常耗时，尤其是当内存出现碎片的时候。我以前的公司出过这样一个问题——在用户的站点上，我们的程序有一天不响应了，用GDB跟进去一看，系统hang在了malloc操作上，20秒都没有返回，重启一些系统就好了。这就是内存碎片的问题。这就是为什么很多人抱怨STL有严重的内存碎片的问题，因为太多的小内存的分配释放了。有很多人会以为用内存池可以解决这个问题，但是实际上他们只是重新发明了Runtime-C或操作系统的内存管理机制，完全于事无补。当然解决内存碎片的问题还是通过内存池，具体来说是一系列不同尺寸的内存池（这个留给大家自己去思考）。当然，少进行动态内存分配是最好的。说到内存池就需要说一下池化技术。比如线程池，连接池等。池化技术对于一些短作业来说（如http服务） 相当相当的有效。这项技术可以减少链接建立，线程创建的开销，从而提高性能。</li>
+</ul>
+<ul>
+<li><strong>异步操作</strong>。我们知道Unix下的文件操作是有block和non-block的方式的，像有些系统调用也是block式的，如：Socket下的select，Windows下的WaitforObject之类的，如果我们的程序是同步操作，那么会非常影响性能，我们可以改成异步的，但是改成异步的方式会让你的程序变复杂。异步方式一般要通过队列，要注间队列的性能问题，另外，异步下的状态通知通常是个问题，比如消息事件通知方式，有callback方式，等，这些方式同样可能会影响你的性能。但是通常来说，异步操作会让性能的吞吐率有很大提升（Throughput），但是会牺牲系统的响应时间（latency）。这需要业务上支持。</li>
+</ul>
+<ul>
+<li><strong>语言和代码库</strong>。我们要熟悉语言以及所使用的函数库或类库的性能。比如：STL中的很多容器分配了内存后，那怕你删除元素，内存也不会回收，其会造成内存泄露的假像，并可能造成内存碎片问题。再如，STL某些容器的size()==0  和 empty()是不一样的，因为，size()是O(n)复杂度，empty()是O(1)的复杂度，这个要小心。Java中的JVM调优需要使用的这些参数：-Xms -Xmx -Xmn -XX:SurvivorRatio -XX:MaxTenuringThreshold，还需要注意JVM的GC，GC的霸气大家都知道，尤其是full GC（还整理内存碎片），他就像“恐龙特级克赛号”一样，他运行的时候，整个世界的时间都停止了。</li>
+</ul>
+<p><strong>4.3）网络调优</strong></p>
+<p>关于网络调优，尤其是TCP Tuning（你可以以这两个关键词在网上找到很多文章），这里面有很多很多东西可以说。看看Linux下TCP/IP的那么多参数就知道了（顺便说一下，你也许不喜欢Linux，但是你不能否认Linux给我们了很多可以进行内核调优的权力）。强烈建议大家看看《<a href="http://book.douban.com/subject/1088054/" target="_blank">TCP/IP 详解 卷1:协议</a>》这本书。我在这里只讲一些概念上的东西。</p>
+<p><strong>A） TCP调优</strong></p>
+<p>我们知道TCP链接是有很多开销的，一个是会占用文件描述符，另一个是会开缓存，一般来说一个系统可以支持的TCP链接数是有限的，我们需要清楚地认识到TCP链接对系统的开销是很大的。正是因为TCP是耗资源的，所以，很多攻击都是让你系统上出现大量的TCP链接，把你的系统资源耗尽。比如著名的SYNC Flood攻击。</p>
+<p>所以，我们要注意配置KeepAlive参数，这个参数的意思是定义一个时间，如果链接上没有数据传输，系统会在这个时间发一个包，如果没有收到回应，那么TCP就认为链接断了，然后就会把链接关闭，这样可以回收系统资源开销。（注：HTTP层上也有KeepAlive参数）对于像HTTP这样的短链接，设置一个1-2分钟的keepalive非常重要。这可以在一定程度上防止DoS攻击。有下面几个参数（下面这些参数的值仅供参考）：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">net.ipv4.tcp_keepalive_probes = 5
+net.ipv4.tcp_keepalive_intvl = 20
+net.ipv4.tcp_fin_timeout = 30</pre>
+<p>对于TCP的TIME_WAIT这个状态，主动关闭的一方进入TIME_WAIT状态，TIME_WAIT状态将持续2个MSL(Max Segment Lifetime)，默认为4分钟，TIME_WAIT状态下的资源不能回收。有大量的TIME_WAIT链接的情况一般是在HTTP服务器上。对此，有两个参数需要注意，</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">net.ipv4.tcp_tw_reuse=1
+net.ipv4.tcp_tw_recycle=1</pre>
+<p>前者表示重用TIME_WAIT，后者表示回收TIME_WAIT的资源。</p>
+<p>TCP还有一个重要的概念叫RWIN（TCP Receive Window Size），这个东西的意思是，我一个TCP链接在没有向Sender发出ack时可以接收到的最大的数据包。为什么这个很重要？因为如果Sender没有收到Receiver发过来ack，Sender就会停止发送数据并会等一段时间，如果超时，那么就会重传。这就是为什么TCP链接是可靠链接的原因。重传还不是最严重的，如果有丢包发生的话，TCP的带宽使用率会马上受到影响（会盲目减半），再丢包，再减半，然后如果不丢包了，就逐步恢复。相关参数如下：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">net.core.wmem_default = 8388608
+net.core.rmem_default = 8388608
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216</pre>
+<p>一般来说，理论上的RWIN应该设置成：吞吐量  * 回路时间。Sender端的buffer应该和RWIN有一样的大小，因为Sender端发送完数据后要等Receiver端确认，如果网络延时很大，buffer过小了，确认的次数就会多，于是性能就不高，对网络的利用率也就不高了。也就是说，对于延迟大的网络，我们需要大的buffer，这样可以少一点ack，多一些数据，对于响应快一点的网络，可以少一些buffer。因为，如果有丢包（没有收到ack），buffer过大可能会有问题，因为这会让TCP重传所有的数据，反而影响网络性能。（当然，网络差的情况下，就别玩什么高性能了） 所以，高性能的网络重要的是要让网络丢包率非常非常地小（基本上是用在LAN里），如果网络基本是可信的，这样用大一点的buffer会有更好的网络传输性能（来来回回太多太影响性能了）。</p>
+<p>另外，我们想一想，如果网络质量非常好，基本不丢包，而业务上我们不怕偶尔丢几个包，如果是这样的话，那么，我们为什么不用速度更快的UDP呢？你想过这个问题了吗？</p>
+<p><strong>B）UDP调优</strong></p>
+<p>说到UDP的调优，有一些事我想重点说一样，那就是MTU——最大传输单元（其实这对TCP也一样，因为这是链路层上的东西）。所谓最大传输单元，你可以想像成是公路上的公交车，假设一个公交车可以最多坐70人，带宽就像是公路的车道数一样，如果一条路上最多可以容下100辆公交车，那意味着我最多可以运送7000人，但是如果公交车坐不满，比如平均每辆车只有20人，那么我只运送了2000人，于是我公路资源（带宽资源）就被浪费了。 所以，我们对于一个UDP的包，我们要尽量地让他大到MTU的最大尺寸再往网络上传，这样可以最大化带宽利用率。对于这个MTU，以太网是1500字节，光纤是4352字节，802.11无线网是7981。但是，当我们用TCP/UDP发包的时候，我们的有效负载Payload要低于这个值，因为IP协议会加上20个字节，UDP会加上8个字节（TCP加的更多），所以，一般来说，你的一个UDP包的最大应该是1500-8-20=1472，这是你的数据的大小。当然，如果你用光纤的话， 这个值就可以更大一些。（顺便说一下，对于某些NB的千光以态网网卡来说，在网卡上，网卡硬件如果发现你的包的大小超过了MTU，其会帮你做fragment，到了目标端又会帮你做重组，这就不需要你在程序中处理了）</p>
+<p>再多说一下，使用Socket编程的时候，你可以使用setsockopt() 设置 SO_SNDBUF/SO_RCVBUF 的大小，TTL和KeepAlive这些关键的设置，当然，还有很多，具体你可以查看一下Socket的手册。</p>
+<p>最后说一点，UDP还有一个最大的好处是multi-cast多播，这个技术对于你需要在内网里通知多台结点时非常方便和高效。而且，多播这种技术对于机会的水平扩展（需要增加机器来侦听多播信息）也很有利。</p>
+<p><strong>C）网卡调优</strong></p>
+<p><strong></strong>对于网卡，我们也是可以调优的，这对于千兆以及网网卡非常必要，在Linux下，我们可以用ifconfig查看网上的统计信息，如果我们看到overrun上有数据，我们就可能需要调整一下txqueuelen的尺寸（一般默认为1000），我们可以调大一些，如：ifconfig eth0 txqueuelen 5000。Linux下还有一个命令叫：ethtool可以用于设置网卡的缓冲区大小。在Windows下，我们可以在网卡适配器中的高级选项卡中调整相关的参数（如：Receive Buffers, Transmit Buffer等，不同的网卡有不同的参数）。把Buffer调大对于需要大数据量的网络传输非常有效。</p>
+<p><strong>D）其它网络性能</strong></p>
+<p>关于多路复用技术，也就是用一个线程来管理所有的TCP链接，有三个系统调用要重点注意：一个是select，这个系统调用只支持上限1024个链接，第二个是poll，其可以突破1024的限制，但是select和poll本质上是使用的轮询机制，轮询机制在链接多的时候性能很差，因主是O(n)的算法，所以，epoll出现了，epoll是操作系统内核支持的，仅当在链接活跃时，操作系统才会callback，这是由操作系统通知触发的，但其只有Linux Kernel 2.6以后才支持（准确说是2.5.44中引入的），当然，如果所有的链接都是活跃的，过多的使用epoll_ctl可能会比轮询的方式还影响性能，不过影响的不大。</p>
+<p>另外，关于一些和DNS Lookup的系统调用要小心，比如：gethostbyaddr/gethostbyname，这个函数可能会相当的费时，因为其要到网络上去找域名，因为DNS的递归查询，会导致严重超时，而又不能通过设置什么参数来设置time out，对此你可以通过配置hosts文件来加快速度，或是自己在内存中管理对应表，在程序启动时查好，而不要在运行时每次都查。另外，在多线程下面，gethostbyname会一个更严重的问题，就是如果有一个线程的gethostbyname发生阻塞，其它线程都会在gethostbyname处发生阻塞，这个比较变态，要小心。（你可以试试GNU的gethostbyname_r()，这个的性能要好一些） 这种到网上找信息的东西很多，比如，如果你的Linux使用了NIS，或是NFS，某些用户或文件相关的系统调用就很慢，所以要小心。</p>
+<p><strong>4.4）系统调优</strong></p>
+<p><strong>A）I/O模型</strong></p>
+<p>前面说到过select/poll/epoll这三个系统调用，我们都知道，Unix/Linux下把所有的设备都当成文件来进行I/O，所以，那三个操作更应该算是I/O相关的系统调用。说到  I/O模型，这对于我们的I/O性能相当重要，我们知道，Unix/Linux经典的I/O方式是（关于Linux下的I/O模型，大家可以读一下这篇文章《<a href="http://www.ibm.com/developerworks/cn/linux/l-async/" target="_blank">使用异步I/O大大提高性能</a>》）：</p>
+<p>第一种，同步阻塞式I/O，这个不说了。</p>
+<p>第二种，同步无阻塞方式。其通过fctnl设置 O_NONBLOCK 来完成。</p>
+<p>第三种，对于select/poll/epoll这三个是I/O不阻塞，但是在事件上阻塞，算是：I/O异步，事件同步的调用。</p>
+<p>第四种，AIO方式。这种I/O 模型是一种处理与 I/O 并行的模型。I/O请求会立即返回，说明请求已经成功发起了。在后台完成I/O操作时，向应用程序发起通知，通知有两种方式：一种是产生一个信号，另一种是执行一个基于线程的回调函数来完成这次 I/O 处理过程。</p>
+<p>第四种因为没有任何的阻塞，无论是I/O上，还是事件通知上，所以，其可以让你充分地利用CPU，比起第二种同步无阻塞好处就是，第二种要你一遍一遍地去轮询。Nginx之所所以高效，是其使用了epoll和AIO的方式来进行I/O的。</p>
+<p>再说一下Windows下的I/O模型，</p>
+<p>a）一个是WriteFile系统调用，这个系统调用可以是同步阻塞的，也可以是同步无阻塞的，关于看文件是不是以Overlapped打开的。关于同步无阻塞，需要设置其最后一个参数Overlapped，微软叫Overlapped I/O，你需要WaitForSingleObject才能知道有没有写完成。这个系统调用的性能可想而知。</p>
+<p>b）另一个叫WriteFileEx的系统调用，其可以实现异步I/O，并可以让你传入一个callback函数，等I/O结束后回调之， 但是这个回调的过程Windows是把callback函数放到了APC（<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms681951(v=vs.85).aspx" target="_blank">Asynchronous Procedure Calls</a>）的队列中，然后，只用当应用程序当前线程成为可被通知状态（Alterable）时，才会被回调。只有当你的线程使用了这几个函数时<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms687036(v=vs.85).aspx">WaitForSingleObjectEx</a>, <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms687028(v=vs.85).aspx">WaitForMultipleObjectsEx</a>, <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms684245(v=vs.85).aspx">MsgWaitForMultipleObjectsEx</a>, <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms686293(v=vs.85).aspx">SignalObjectAndWait</a> 和 <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms686307(v=vs.85).aspx">SleepEx</a>，线程才会成为Alterable状态。可见，这个模型，还是有wait，所以性能也不高。</p>
+<p>c）然后是IOCP &#8211; IO Completion Port，IOCP会把I/O的结果放在一个队列中，但是，侦听这个队列的不是主线程，而是专门来干这个事的一个或多个线程去干（老的平台要你自己创建线程，新的平台是你可以创建一个线程池）。IOCP是一个线程池模型。这个和Linux下的AIO模型比较相似，但是实现方式和使用方式完全不一样。</p>
+<p>当然，真正提高I/O性能方式是把和外设的I/O的次数降到最低，最好没有，所以，对于读来说，内存cache通常可以从质上提升性能，因为内存比外设快太多了。对于写来说，cache住要写的数据，少写几次，但是cache带来的问题就是实时性的问题，也就是latency会变大，我们需要在写的次数上和相应上做权衡。</p>
+<p><strong>B）多核<strong>CPU</strong>调优</strong></p>
+<p>关于CPU的多核技术，我们知道，CPU0是很关键的，如果0号CPU被用得过狠的话，别的CPU性能也会下降，因为CPU0是有调整功能的，所以，我们不能任由操作系统负载均衡，因为我们自己更了解自己的程序，所以，我们可以手动地为其分配CPU核，而不会过多地占用CPU0，或是让我们关键进程和一堆别的进程挤在一起。</p>
+<ul>
+<li>对于Windows来说，我们可以通过“任务管理器”中的“进程”而中右键菜单中的“设置相关性……”（Set Affinity&#8230;）来设置并限制这个进程能被运行在哪些核上。</li>
+</ul>
+<ul>
+<li>对于Linux来说，可以使用taskset命令来设置（你可以通过安装schedutils来安装这个命令：apt-get install schedutils）</li>
+</ul>
+<p>多核CPU还有一个技术叫<a href="http://en.wikipedia.org/wiki/Non-Uniform_Memory_Access" target="_blank">NUMA</a>技术（Non-Uniform Memory Access）。传统的多核运算是使用SMP(Symmetric Multi-Processor )模式，多个处理器共享一个集中的存储器和I/O总线。于是就会出现一致存储器访问的问题，一致性通常意味着性能问题。NUMA模式下，处理器被划分成多个node， 每个node有自己的本地存储器空间。关于NUMA的一些技术细节，你可以查看一下这篇文章《<a href="http://www.ibm.com/developerworks/cn/linux/l-numa/index.html" target="_blank">Linux 的 NUMA 技术</a>》，在Linux下，对NUMA调优的命令是：<strong>numactl </strong>。如下面的命令：（指定命令“myprogram arg1 arg2”运行在node 0 上，其内存分配在node 0 和 1上）</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">numactl --cpubind=0 --membind=0,1 myprogram arg1 arg2</code></p>
+<p>当然，上面这个命令并不好，因为内存跨越了两个node，这非常不好。最好的方式是只让程序访问和自己运行一样的node，如：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ numactl --membind 1 --cpunodebind 1 --localalloc myapplication</code></p>
+<p><strong>C）文件系统调优</strong></p>
+<p>关于文件系统，因为文件系统也是有cache的，所以，为了让文件系统有最大的性能。首要的事情就是分配足够大的内存，这个非常关键，在Linux下可以使用free命令来查看 free/used/buffers/cached，理想来说，buffers和cached应该有40%左右。然后是一个快速的硬盘控制器，SCSI会好很多。最快的是Intel SSD 固态硬盘，速度超快，但是写次数有限。</p>
+<p>接下来，我们就可以调优文件系统配置了，对于Linux的Ext3/4来说，几乎在所有情况下都有所帮助的一个参数是关闭文件系统访问时间，在/etc/fstab下看看你的文件系统 有没有noatime参数（一般来说应该有），还有一个是dealloc，它可以让系统在最后时刻决定写入文件发生时使用哪个块，可优化这个写入程序。还要注间一下三种日志模式：data=journal、data=ordered和data=writeback。默认设置data=ordered提供性能和防护之间的最佳平衡。</p>
+<p>当然，对于这些来说，ext4的默认设置基本上是最佳优化了。</p>
+<p>这里介绍一个Linux下的查看I/O的命令—— iotop，可以让你看到各进程的磁盘读写的负载情况。</p>
+<p>其它还有一些关于NFS、XFS的调优，大家可以上google搜索一些相关优化的文章看看。关于各文件系统，大家可以看一下这篇文章——《<a href="http://www.ibm.com/developerworks/cn/linux/l-jfs/" target="_blank">Linux日志文件系统及性能分析</a>》</p>
+<p><strong>4.5）数据库调优</strong></p>
+<p>数据库调优并不是我的强项，我就仅用我非常有限的知识说上一些吧。注意，下面的这些东西并不一定正确，因为在不同的业务场景，不同的数据库设计下可能会得到完全相反的结论，所以，我仅在这里做一些一般性的说明，具体问题还要具体分析。</p>
+<p><strong>A）数据库引擎调优</strong></p>
+<p>我对数据库引擎不是熟，但是有几个事情我觉得是一定要去了解的。</p>
+<ul>
+<li><strong>数据库的锁的方式</strong>。这个非常非常地重要。并发情况下，锁是非常非常影响性能的。各种隔离级别，行锁，表锁，页锁，读写锁，事务锁，以及各种写优先还是读优先机制。性能最高的是不要锁，所以，分库分表，冗余数据，减少一致性事务处理，可以有效地提高性能。NoSQL就是牺牲了一致性和事务处理，并冗余数据，从而达到了分布式和高性能。</li>
+<li><strong>数据库的存储机制</strong>。不但要搞清楚各种类型字段是怎么存储的，更重要的是数据库的数据存储方式，是怎么分区的，是怎么管理的，比如Oracle的数据文件，表空间，段，等等。了解清楚这个机制可以减轻很多的I/O负载。比如：MySQL下使用<span style="font-size: xx-small;">show engines;</span>可以看到各种存储引擎的支持。不同的存储引擎有不同的侧重点，针对不同的业务或数据库设计会让你有不同的性能。</li>
+<li><strong>数据库的分布式策略</strong>。最简单的就是复制或镜像，需要了解分布式的一致性算法，或是主主同步，主从同步。通过了解这种技术的机理可以做到数据库级别的水平扩展。</li>
+</ul>
+<p><strong>B）SQL语句优化</strong></p>
+<p>关于SQL语句的优化，首先也是要使用工具，比如：<a href="http://www.mysql.com/products/enterprise/query.html" target="_blank">MySQL SQL Query Analyzer</a>，<a href="http://www.oracle-base.com/articles/11g/sql-performance-analyzer-11gr1.php" target="_blank">Oracle SQL Performance Analyzer</a>，或是微软<a href="http://msdn.microsoft.com/en-us/library/aa216945(v=sql.80).aspx" target="_blank">SQL Query Analyzer</a>，基本上来说，所有的RMDB都会有这样的工具，来让你查看你的应用中的SQL的性能问题。 还可以使用explain来看看SQL语句最终Execution Plan会是什么样的。</p>
+<p>还有一点很重要，数据库的各种操作需要大量的内存，所以服务器的内存要够，优其应对那些多表查询的SQL语句，那是相当的耗内存。</p>
+<p>下面我根据我有限的数据库SQL的知识说几个会有性能问题的SQL：</p>
+<ul>
+<li><strong>全表检索</strong>。比如：select * from user where lastname = &#8220;xxxx&#8221;，这样的SQL语句基本上是全表查找，线性复杂度O(n)，记录数越多，性能也越差（如：100条记录的查找要50ms，一百万条记录需要5分钟）。对于这种情况，我们可以有两种方法提高性能：一种方法是分表，把记录数降下来，另一种方法是建索引（为lastname建索引）。索引就像是key-value的数据结构一样，key就是where后面的字段，value就是物理行号，对索引的搜索复杂度是基本上是O(log(n)) ——用B-Tree实现索引（如：100条记录的查找要50ms，一百万条记录需要100ms）。</li>
+</ul>
+<ul>
+<li><strong>索引</strong>。对于索引字段，最好不要在字段上做计算、类型转换、函数、空值判断、字段连接操作，这些操作都会破坏索引原本的性能。当然，索引一般都出现在Where或是Order by字句中，所以对Where和Order by子句中的子段最好不要进行计算操作，或是加上什么NOT之类的，或是使用什么函数。</li>
+</ul>
+<ul>
+<li><strong>多表查询</strong>。关系型数据库最多的操作就是多表查询，多表查询主要有三个关键字，EXISTS，IN和JOIN（关于各种join，可以参看<a title="图解SQL的Join" href="https://coolshell.cn/articles/3463.html" target="_blank">图解SQL的Join</a>一文）。基本来说，现代的数据引擎对SQL语句优化得都挺好的，JOIN和IN/EXISTS在结果上有些不同，但性能基本上都差不多。有人说，EXISTS的性能要好于IN，IN的性能要好于JOIN，我各人觉得，这个还要看你的数据、schema和SQL语句的复杂度，对于一般的简单的情况来说，都差不多，所以千万不要使用过多的嵌套，千万不要让你的SQL太复杂，宁可使用几个简单的SQL也不要使用一个巨大无比的嵌套N级的SQL。还有人说，如果两个表的数据量差不多，Exists的性能可能会高于In，In可能会高于Join，如果这两个表一大一小，那么子查询中，Exists用大表，In则用小表。这个，我没有验证过，放在这里让大家讨论吧。另，有一篇关于SQL Server的文章大家可以看看《<a href="http://explainextended.com/2009/06/16/in-vs-join-vs-exists/" target="_blank">IN vs JOIN vs EXISTS</a>》</li>
+</ul>
+<ul>
+<li><strong>JOIN操作</strong>。有人说，Join表的顺序会影响性能，只要Join的结果集是一样，性能和join的次序无关。因为后台的数据库引擎会帮我们优化的。Join有三种实现算法，嵌套循环，排序归并，和Hash式的Join。（MySQL只支持第一种）</li>
+</ul>
+<ul style="padding-left: 60px;">
+<ul>
+<li>嵌套循环，就好像是我们常见的多重嵌套循环。注意，前面的索引说过，数据库的索引查找算法用的是B-Tree，这是O(log(n))的算法，所以，整个算法复法度应该是O(log(n)) * O(log(m)) 这样的。</li>
+<li>Hash式的Join，主要解决嵌套循环的O(log(n))的复杂，使用一个临时的hash表来标记。</li>
+<li>排序归并，意思是两个表按照查询字段排好序，然后再合并。当然，索引字段一般是排好序的。</li>
+</ul>
+</ul>
+<p style="padding-left: 60px;">还是那句话，具体要看什么样的数据，什么样的SQL语句，你才知道用哪种方法是最好的。</p>
+<ul>
+<li><strong>部分结果集。</strong>我们知道MySQL里的Limit关键字，Oracle里的rownum，SQL Server里的Top都是在限制前几条的返回结果。这给了我们数据库引擎很多可以调优的空间。一般来说，返回top n的记录数据需要我们使用order by，注意在这里我们需要为order by的字段建立索引。有了被建索引的order by后，会让我们的select语句的性能不会被记录数的所影响。使用这个技术，一般来说我们前台会以分页方式来显现数据，Mysql用的是OFFSET，SQL Server用的是FETCH NEXT，这种Fetch的方式其实并不好是线性复杂度，所以，如果我们能够知道order by字段的第二页的起始值，我们就可以在where语句里直接使用&gt;=的表达式来select，这种技术叫seek，而不是fetch，seek的性能比fetch要高很多。</li>
+</ul>
+<ul>
+<li><strong>字符串</strong>。正如我前面所说的，字符串操作对性能上有非常大的恶梦，所以，能用数据的情况就用数字，比如：时间，工号，等。</li>
+</ul>
+<ul>
+<li><strong>全文检索</strong>。千万不要用Like之类的东西来做全文检索，如果要玩全文检索，可以尝试使用<a href="http://sphinxsearch.com/" target="_blank">Sphinx</a>。</li>
+</ul>
+<ul>
+<li><strong>其它</strong>。
+<ul>
+<li>不要select *，而是明确指出各个字段，如果有多个表，一定要在字段名前加上表名，不要让引擎去算。</li>
+<li>不要用Having，因为其要遍历所有的记录。性能差得不能再差。</li>
+<li>尽可能地使用UNION ALL  取代  UNION。</li>
+<li>索引过多，insert和delete就会越慢。而update如果update多数索引，也会慢，但是如果只update一个，则只会影响一个索引表。</li>
+<li>等等。</li>
+</ul>
+</li>
+</ul>
+<p>关于SQL语句的优化，网上有很多文章， 不同的数据库引擎有不同的优化技巧，正如本站以前转发的《<a href="https://coolshell.cn/articles/1846.html" rel="bookmark">MySQL性能优化的最佳20+条经验</a>》</p>
+<p>先写这么多吧，欢迎大家指正补充。</p>
+<blockquote><p><strong>注：</strong>这篇文章的确是个大杂烩。其实其中的说到的很多技术在网上都有很多很多的技术文章，google一下就能找到一堆有很多细节的文章，所以我也就不写了。这篇性能调优的文章写作的动机是之前看到 <a href="http://weibo.com/n/%E6%B7%98%E5%AE%9D%E8%A4%9A%E9%9C%B8">@淘宝褚霸</a> 强推的<a href="http://highscalability.com/">highscalability.com</a>上的这篇文章：<a href="http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html" target="_blank">Big List Of 20 Common Bottlenecks</a>，觉得这篇文章泛泛而谈，觉得自己能写得比它好，所以就产生了动机。</p></blockquote>
+<p>（<span style="color: #cc0000;"><strong>转载时请注明作者和出处，请勿用于商业用途</strong></span>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" alt="Alan Cox：单向链表中prev指针的妙用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_title">Alan Cox：单向链表中prev指针的妙用</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7490.html">性能调优攻略</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7490.html/feed</wfw:commentRss>
+			<slash:comments>171</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>抄袭，腾讯 和 产品</title>
+		<link>https://coolshell.cn/articles/7617.html</link>
+					<comments>https://coolshell.cn/articles/7617.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 13 Jun 2012 00:35:31 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Apple]]></category>
+		<category><![CDATA[C2C]]></category>
+		<category><![CDATA[QQ]]></category>
+		<category><![CDATA[腾讯]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7617</guid>
+
+					<description><![CDATA[<p>很早就想写这篇文章了，只是想法比较零碎，所以一直没有成文，这两天觉得思考得比较成熟了一些，所以把我的这些想法整理下来，欢迎大家一起和我讨论。 鄙视抄袭和山寨 首...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7617.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7617.html">抄袭，腾讯 和 产品</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-7620" title="i hate copycat!" src="https://coolshell.cn/wp-content/uploads/2012/06/i-hate-copycat-296x300.png" alt="" width="296" height="300" srcset="https://coolshell.cn/wp-content/uploads/2012/06/i-hate-copycat-296x300.png 296w, https://coolshell.cn/wp-content/uploads/2012/06/i-hate-copycat-267x270.png 267w, https://coolshell.cn/wp-content/uploads/2012/06/i-hate-copycat.png 395w" sizes="(max-width: 296px) 100vw, 296px" />很早就想写这篇文章了，只是想法比较零碎，所以一直没有成文，这两天觉得思考得比较成熟了一些，所以把我的这些想法整理下来，欢迎大家一起和我讨论。</p>
+<h4>鄙视抄袭和山寨</h4>
+<p>首先，先表达我的立场，我对抄袭的立场持BS和痛恨的态度，尤其是<a title="中国的C2C模式" href="https://coolshell.cn/articles/3820.html" target="_blank">那些C2C的网站</a>，痛恨这些国外有什么就山寨什么的做法，尤其是那些连界面都不改，像素级的抄袭，连CSS和img都是一样的，更甚者，连图片都链接到抄袭源的网站去了，连源代码都抄的行为，比如：<a href="http://weibo.com/1661751144/yjLfJqMZ6" target="_blank">腾讯抄新浪的代码</a>，<a href="http://yuanxing.iteye.com/blog/638129" target="_blank">新浪抄twitter的源码</a>。无法不BS之。</p>
+<p>有很多网友邀请我去那个抄袭Quora的网站上去回答问题，借此，再次声明我不会去的。因此，有一些网友说，我不一样也在Twitter的抄袭网站新浪微博上吗？说我装逼了。我想说，新浪和Twitter基本上是同一种产品的思路，但是其实现不一样，新浪微博上一些twitter上没有功能，我个人觉得这并不算抄袭，我甚至认为新浪微博和Twitter各有长处，在一些功能上新浪微博比twitter做得更好。你可以理解为，新浪微博总体上来说并没有突破我心中的那个条抄袭的底线。</p>
+<p>我个人对抄袭的理解如下：</p>
+<p style="padding-left: 30px;">1）你可以复制别人的想法和功能，但是如果你连界面设计，代码，图片，风格，布局，等等所有的一切都照抄，那我就一定要鄙视你。</p>
+<p style="padding-left: 30px;">2）你可以仿照别人的产品，但是你的出发点应该是他没做好，我来把它把做好，如果你的出发点是为了复制抄袭和山寨，我一样鄙视。</p>
+<p>所以，你可以理解我为什么不去Quora，Stackoverflow，Facebook，Google的山寨网站了，因为上述两点，1）完全复制，2）山寨地太次。</p>
+<h4>理性对待抄袭</h4>
+<p>因为很多朋友极端地理解了我对抄袭的立场，所以我有必要要说说我对“抄袭”或是“模仿”的其它一些观点：</p>
+<p><span id="more-7617"></span></p>
+<p><strong>1）“抄袭想法”</strong>。想法这个东西我不觉是有什么专有的东西，也不存在什么抄袭，好的想法，就不应该被垄断，好的想法是应该放出来让大家一起来实现的。所以，我并不觉得一个想法有什么不能被抄袭的。你做Web Server，我也做Web Server，你做论坛，我也做论坛，你做手机，我也做手机，你做便携电脑，我也做便携电脑，你做通讯软件，我也可以做通讯软件…… 等等，越是优秀的产品和思路，就越不可能不被别人学习和模仿的。</p>
+<p><strong>2）“抄袭界面”</strong>。根据法律来说，界面上的某些元件，如菜单，按钮，甚至布局，配色之类的单一的东西是没有版权的，但是这些东西组成的界面是存在版权的，你不能让你的产品界面和别人的界面长得雷同。而且，对于一些有艺术特征的设计和版式是受法律保护的。所以，对于界面来说，我们需要做一些区别，比如，很多电视机长得很相似，连摇控器都很相似，但是电视其中的菜单和功能会有不同；很多的家用小汽车形状都很相似，但是线条和外形并不相似；Unix和Linux的用户接口几乎一样，但是Unix和Linux的内部实现和功能上有很大的不同（比如文件系统，内核管理等），MacOS/Windows/X-Win/Gnome/KDE 这些桌面系统大同，但是实现和细节上又不一样。</p>
+<p>看我这样一说，你会说，嗯，你说的就是所谓的“微创新”！是的，这是个仁者见仁，智者见智的问题了。再说一遍，无所谓什么微创新不微创新，我对此的价值观很简单  —— <strong>只要你这个复制品在不违反法律的层面上，能在品质上超过原来那个产品，我是会认可的，而且还是会对复制品买帐的</strong>。</p>
+<p>总之，我想说的是——</p>
+<p style="padding-left: 30px;">1）好的东西总是会让人去学习和仿制的，而学习和仿制好的一面是会引入竞争，竞争会让这个东西更好的。</p>
+<p style="padding-left: 30px;">2）不要害怕被人仿制，被人仿制说明你做得好，如果你的仿冒者超过了你，那你应该反思自己，而不要赖别人。</p>
+<h4>如何不被腾讯抄袭</h4>
+<p>说起抄袭这个事来，就不得不说腾讯，现在互联网上一堆人都在思考，腾讯太变态，无论我做什么，都逃不出他的魔掌。很多风投都在问创业团队一个问题——“如果腾讯抄你，你怎么办？”。</p>
+<p>在我往下阐述如何不被腾讯抄的话题下，请让我先重申一下我在“<a title="腾讯，竞争力 和 用户体验" href="https://coolshell.cn/articles/5901.html" target="_blank">腾讯，竞争力 和 用户体验</a>”一文中说的那个观点：“<em>腾讯这样大规模的抄袭和山寨，对整个社会的价值就是——会让很多很多的创业团队放弃Copy，甚至让他们要放弃那些容易被复制的“业务型的项目”，而逼着他们去努力思考，如何才不能被腾讯复制，如何才能有自己的核心价值</em>”，我把这个观点再进一步阐述，“<strong>有腾讯在，会让你更清楚地认识什么叫创业的残酷，会让你更清楚认识到什么是真正产品的价值，什么是核心竞争力，你但凡有一点急功近利的想法你都要想一想那个有钱有人有势也很急功近利的企鹅！</strong>”</p>
+<p>我不知道，我写了那篇文章这段时间来，大家有没有思考过前边文章里我说的问题？其实我在“<a title="腾讯，竞争力 和 用户体验" href="https://coolshell.cn/articles/5901.html" target="_blank">腾讯，竞争力 和 用户体验</a>”一文中已经说到过一些了，不知道大家有没有去思考？</p>
+<p>老实说，其实腾讯并不可怕，先让我们来分析一下腾讯的特征和短板：</p>
+<ul>
+<li><strong>特征</strong>。腾讯的很多产品线完全雷同，比如：QQ，微信，空间，群，微博，朋友，等等，几乎完全一样，所以，这是不是说明了下面几个问题：</li>
+</ul>
+<p style="padding-left: 60px;">1）他们人太多，没事干了，所以什么都干。<br />
+2）各产品线为了规避风险都想伴QQ这个大款，所以不知道怎么创新。<br />
+3）内部竞争激烈，技术团队加班赶工，所以只能无目的地广撒网了。</p>
+<ul>
+<li><strong>短板</strong>。你看看腾讯的这些产品线和他的用户群，我觉得就目前阶段，腾讯至少有三种产品复制不出来。</li>
+</ul>
+<p style="padding-left: 60px;">1）有烦杂的线下业务的产品。比如：电子商务需要供应商，仓库，物流，等这样物理流程的业务很难复制。<br />
+2）有质量，有价值，有权威的社区。比如，豆瓣，Stackoverflow，Quora这样的有价值的社区。<br />
+3）有技术含量的产品，比如： Nginx，MySQL，Android/iOS 之流技术大于业务的产品。</p>
+<p>通过这样的分析，我想告诉大家，<strong>腾讯并不可怕，可怕的是你自己不会思考和观察，可怕的是你急功近利而没有去找有价值的东西来做</strong>。推而广之，如果你想做的东西是很快就能做出来的，那么你就不要指望不被人抄，也就是说，<strong><span style="color: #cc0000;">如果你着眼短期，你无疑会面对众多的抄袭和模仿者让你万劫不复，但是，如果你着眼长期，做一个3-5年需要花费大量精力才会成熟的产品，那么，那些急功近利的抄袭者会知难而退的</span></strong>。因为，“需要3-5年的时间”这一条完全不符合抄袭者的价值观，所以，你面对的竞争对手也会少了9成。</p>
+<h4>什么是真正的产品</h4>
+<p>说到这里，我必需要说一下什么是真正的产品！我看到现在很多创业团队把功能当产品来做，这就为模仿者们留下了很多很多机会，比如苹果商店里的很多照片分享的Apps，或是一些云存读，云分享之类的东西，如：Dropbox和Evernote，或是一些旅游类的Apps。这些东西在我眼里还不能算得上是真正的产品，所以，我们可以看到他们的模仿者有很多很多。当然，我并不是说不能把功能当成产品来做，只是我觉得这样的产品并不长久，并不具强大的可持续性，而且很容易被取代。那怕是现在风头正劲的Instgram, Dropbox, Evernote，大家试想一下，如果哪天Apple或是Canon把Instgram这样的功能集成到他的照相功能中，哪天操作系统把Dropbox/Evernote集成到他的操作系统中。（当然，我只是说有这种可能，我只是想让大家思考一下以功能为产品的弱势是什么样的）</p>
+<p>好，让我来说说什么是真正的产品：</p>
+<ul>
+<li><strong>真正的产品应该是有一个端到端的一个解决方案</strong>。比如说：电子阅读中的从购书，到阅读，再到阅读心得分享，再到推荐，这一整套的解决方案。看看苹果的产品的端到端的解决方案，就知道什么是产品的样子了。</li>
+</ul>
+<ul>
+<li><strong>真正的产品应该是有价值的</strong>。这种价值表现在——你可以从中获得有价值的内容，并且你也可以通过他创造对你有价值的东西。比如，像豆瓣，像Stackoverflow，甚至像Twitter和微博这样让信息平等让信息传递更快的社区，或是像AWS或是Apple的开发平台，等等。可见，我们无法通过QQ获得有价值的东西，我们也无法通过QQ创造有价值的东西。</li>
+</ul>
+<ul>
+<li><strong><strong>真正的产品应该是和社会有交互并能自我进化的</strong>。</strong>真正的产品应该是用户会来贡献有价值的内容，真正的产品应该是有开放的接口让其它系统容易集成的。也就是说，真正的产品应该是有一个生态圈的，在这个生态圈内，不但能自给自足，自我循环，还能自我管理，自我进化。可见，腾讯的用户群完全没有为这个平台贡献什么有价值的东西，更不谈他们会帮腾讯来进化了。</li>
+</ul>
+<ul>
+<li><strong>真正的产品应该是体现品质的</strong>。所谓有品质的意思是，你能从使用这个产品中获得一种感觉，一种档次的提升的感觉。你可以认为使用品牌而非山寨的智能手机，使用一些如Thinkpad或MacBook的笔记本电脑或iPad，因为那是一种品质的体现。但是我们都知道，使用QQ完全没有任何品质的感觉，你不会在你的简历中放上QQ号，你也不会在一些商务场合使用QQ的，不是吗？这就好像请客吃饭一样，你总是会请你的朋友去一些有品质的饭馆而不是拉面馆。</li>
+</ul>
+<p>当你把你的产品目标放在这样高的位置上，你不难发现，一来，仿冒者们无法跟上你的跟步，二来，仿冒者们几乎没有办法来复制。因为，他们只能复制到外表，但永远无法复制到产品的精髓。</p>
+<p>还是那句话，<strong>因为仿冒者们急功近利的基因就决定了他们做不到抄袭。因为QQ用户群的基因也决定了腾讯无法复制豆瓣或Stackoverflow</strong>。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5901.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="腾讯，竞争力 和 用户体验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5901.html" class="wp_rp_title">腾讯，竞争力 和 用户体验</a></li><li ><a href="https://coolshell.cn/articles/5987.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="如何设计“找回用户帐号”功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5987.html" class="wp_rp_title">如何设计“找回用户帐号”功能</a></li><li ><a href="https://coolshell.cn/articles/5966.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="腾讯帐号申诉的用户体验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5966.html" class="wp_rp_title">腾讯帐号申诉的用户体验</a></li><li ><a href="https://coolshell.cn/articles/11112.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/02/apple_goto_fail-150x150.png" alt="由苹果的低级Bug想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11112.html" class="wp_rp_title">由苹果的低级Bug想到的</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7617.html">抄袭，腾讯 和 产品</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7617.html/feed</wfw:commentRss>
+			<slash:comments>243</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Lisp的永恒之道</title>
+		<link>https://coolshell.cn/articles/7526.html</link>
+					<comments>https://coolshell.cn/articles/7526.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Mon, 04 Jun 2012 00:58:46 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Lisp]]></category>
+		<category><![CDATA[面向语言编程]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7526</guid>
+
+					<description><![CDATA[<p>【感谢 Todd投递本文 – 微博帐号：weidagang 】 Lisp之魅 长久以来，Lisp一直被许多人视为史上最非凡的编程语言。它不仅在50多年前诞生的时...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7526.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7526.html">Lisp的永恒之道</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>【<span style="color: #cc0000;">感谢 Todd投递本文 – 微博帐号：</span><a title="weidagang" href="http://weibo.com/weidagang" target="_blank">weidagang</a> 】</p>
+<h4>Lisp之魅</h4>
+<p>长久以来，Lisp一直被许多人视为史上最非凡的编程语言。它不仅在50多年前诞生的时候带来了诸多革命性的创新并极大地影响了后来编程语言的发展，即使在一大批现代语言不断涌现的今天，Lisp的诸多特性仍然未被超越。当各式各样的编程语言摆在面前，我们可以从运行效率、学习曲线、社区活跃度、厂商支持等多种不同的角度进行评判和选择，但我特别看中的一点在于语言能否有效地表达编程者的设计思想。学习C意味着学习如何用过程来表达设计思想，学习Java意味着学习如何用对象来表达设计思想，而虽然Lisp与函数式编程有很大的关系，但学习Lisp绝不仅仅是学习如何用函数表达设计思想。实际上，<strong>函数式编程并非Lisp的本质</strong>，在已经掌握了lambda、高阶函数、闭包、惰性求值等函数式编程概念之后，学习Lisp仍然大大加深了我对编程的理解。<strong>学习Lisp所收获的是如何“自由地”表达你的思想</strong>，这正是Lisp最大的魅力所在，也是这门古老的语言仍然具有很强的生命力的根本原因。</p>
+<h4>Lisp之源</h4>
+<p>Lisp意为表处理(List Processing)，源自设计者John McCarthy于1960年发表的一篇论文《符号表达式的递归函数及其机器计算》。McCarthy在这篇论文中向我们展示了用一种简单的数据结构S表达式(S-expression)来表示代码和数据，并在此基础上构建一种完整的语言。Lisp语言形式简单、内涵深刻，Paul Graham在《Lisp之根源》中将其对编程的贡献与欧几里德对几何的贡献相提并论。</p>
+<h4>Lisp之形</h4>
+<p>然而，与数学世界中简单易懂的欧氏几何形成鲜明对比，程序世界中的Lisp却一直是一种古老而又神秘的存在，真正理解其精妙的人还是少数。从表面上看，Lisp最明显的特征是它“古怪”的S表达式语法。S表达式是一个原子(atom)，或者若干S表达式组成的列表(list)，表达式之间用空格分开，放入一对括号中。“列表“这个术语可能会容易让人联想到数据结构中的链表之类的线形结构，实际上，Lisp的列表是一种可嵌套的树形结构。下面是一些S表达式的例子:</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+foo
+
+()
+
+(a b (c d) e)
+
+(+ (* 2 3) 5)
+
+(defun factorial (N)
+    (if (= N 1)
+        1
+        (* N (factorial (- N 1)))
+    )
+)
+</pre>
+<p><span id="more-7526"></span></p>
+<p>据说，这个古怪的S表达式是McCarthy在发明Lisp时候所采用的一种临时语法，他实际上是准备为Lisp加上一种被称为M表达式(M-expression)的语法，然后再把M表达式编译为S表达式。用一个通俗的类比，S表达式相当于是JVM的字节码，而M表达式相当于Java语言，但是后来Lisp的使用者都熟悉并喜欢上了直接用S表达式编写程序，并且他们发现S表达式有许多独特的优点，所以M表达式的引入也就被无限期延迟了。</p>
+<p>许多Lisp的入门文章都比较强调Lisp的函数式特性，而我认为这是一种误导。真正的Lisp之门不在函数式编程，而在S表达式本身，Lisp最大的奥秘就藏在S表达式后面。S表达式是Lisp的语法基础，语法是语义的载体，形式是实质的寄托。<strong>“S表达式”是程序的一种形，正如“七言”是诗的一种形，“微博”是信息的一种形</strong>。正是形的不同，让微博与博客有了质的差异，同样的道理，正是S表达式让Lisp与C、Java、SQL等语言有了天壤之别。</p>
+<h4>Lisp之道</h4>
+<p>一门语言能否有效地表达编程者的设计思想取决于其抽象机制的语义表达能力。根据抽象机制的不同，语言的抽象机制形成了面向过程、面向对象、函数式、并发式等不同的范式。当你采用某一种语言，基本上就表示你已经“面向XXX“了，你的思维方式和解决问题的手段就会依赖于语言所提供的抽象方式。比如，采用Java语言通常意味着采用面向对象分析设计；采用Erlang通常意味着按Actor模型对并发任务进行建模。</p>
+<p>有经验的程序员都知道，无论是面向XXX编程，程序设计都有一条“抽象原则“：What与How解耦。但是，<strong>普通语言的问题就在于表达What的手段非常有限</strong>，无非是过程、类、接口、函数等几种方式，而诸多领域问题是无法直接抽象为函数或接口的。比如，你完全可以在C语言中定义若干函数来做到make file所做的事情，但C代码很难像make file那样声明式地体现出target、depends等语义，它们只会作为实现细节被淹没在一个个的C函数之中。采用OOP或是FP等其它范式也会遇到同样的困难，也就是说make file语言所代表的抽象维度与面向过程、OOP以及FP的抽象维度是正交的，使得各种范式无法直接表达出make file的语义。这就是普通语言的“刚性”特征，它要求我们必须以语言的抽象维度去分析和解决问题，把问题映射到语言的基本语法和语义。</p>
+<p>更进一步，如果仔细探究这种刚性的根源，我们会发现正是由于普通语言<strong>语法和语义的紧耦合</strong>造成了这种刚性。比如，C语言中printf(&#8220;hello %s&#8221;, name)符合函数调用语法，它表达了函数调用语义，除此之外别无他义；Java中interface IRunnable { &#8230; }符合接口定义语法，它表达了接口定义语义，除此之外别无他义。如果你认为“语法和语义紧耦合“是理所当然的，看不出这有什么问题，那么理解Lisp就会让你对此产生更深的认识。</p>
+<p>当你看到Lisp的(f a (b c))的时候，你会想到什么？会不会马上联想到函数求值或是宏扩展？就像在C语言里看到gcd(10, 15)马上想到函数调用，或者在Java里看到class A马上想到类定义一样。如果真是这样，那它就是你理解Lisp的一道障碍，因为你已经习惯了顺着语言去思考，总是在想这一句话机器怎么解释执行？那一句话又对应语言的哪个特性？理解Lisp要反过来，让语言顺着你，Lisp的(f a (b c))可以是任何语义，完全由你来定，它可以是函数定义、类定义、数据库查询、文件依赖关系，异步任务的执行关系，业务规则 &#8230;</p>
+<p>下面我准备先通过几个具体的例子逐步展示Lisp的本质。需要说明的是，由于Lisp的S表达式和XML的语法形式都是一种树形结构，在语义表达方面二者并无本质的差别。所以，为了理解方便，下面我暂且用多数人更为熟悉的XML来写代码，请记住我们可以很轻易地把XML代码和Lisp代码相互转换。</p>
+<p>首先，我们可以轻易地用XML来定义一个求两个数最大公约数的函数：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+    &lt;func name=&#039;gcd&#039; return_type=&#039;int&#039;&gt;
+        &lt;params&gt;
+            &lt;a type=&#039;int&#039;/&gt;
+            &lt;b type=&#039;int&#039;/&gt;
+        &lt;/params&gt;
+        &lt;body&gt;
+            &lt;if&gt;
+               &lt;equals&gt;
+                   &lt;a/&gt;
+                   &lt;int&gt;0&lt;/int&gt;
+               &lt;/equals&gt;
+            &lt;/if&gt;
+            &lt;then&gt;
+                &lt;return&gt;&lt;b/&gt;&lt;/return&gt;
+            &lt;/then&gt;
+            &lt;else&gt;
+                &lt;return&gt;
+                    &lt;gcd&gt;
+                        &lt;modulo&gt;&lt;b/&gt;&lt;a/&gt;&lt;/modulo&gt;
+                        &lt;a/&gt;
+                    &lt;/gcd&gt;
+                &lt;/return&gt;
+            &lt;/else&gt;
+        &lt;/body&gt;
+    &lt;/func&gt;
+</pre>
+<p>其次，我们可以用它来定义类：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+    &lt;class name=&quot;Computer&quot;&gt;
+        &lt;field access=&quot;private&quot; type=&quot;MainBoard&quot; name=&quot;main-board&quot; /&gt;
+        &lt;field access=&quot;private&quot; type=&quot;CPU&quot; name=&quot;cpu&quot; /&gt;
+        &lt;field access=&quot;private&quot; type=&quot;Memory&quot; name=&quot;memory&quot; /&gt;
+
+        &lt;method access=&quot;public&quot; return_type=&quot;boolean&quot; name=&quot;powerOn&quot; /&gt;
+            &lt;params&gt;...&lt;/params&gt;
+            &lt;body&gt;...&lt;/body&gt;
+        &lt;/method&gt;
+
+        &lt;method access=&quot;public&quot; return_type=&quot;boolean&quot; name=&quot;powerOff&quot; /&gt;
+            &lt;params&gt;...&lt;/params&gt;
+            &lt;body&gt;...&lt;/body&gt;
+        &lt;/method&gt;
+    &lt;/class&gt;
+</pre>
+<p>还可以轻易地用它来编写关系查询：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;sql&gt;
+    &lt;select&gt;
+        &lt;column name=&quot;employees.id&quot; /&gt;
+        &lt;column name=&quot;bonus.amount&quot; /&gt;
+    &lt;/select&gt;
+    &lt;from&gt;
+        &lt;table name=&quot;employees&quot; /&gt;
+        &lt;table name=&quot;bonus&quot; /&gt;
+    &lt;/from&gt;
+    &lt;where&gt;
+        &lt;equals&gt;
+            &lt;column name=&quot;employees.id&quot; /&gt;
+            &lt;column name=&quot;bonus.employee_id&quot; /&gt;
+        &lt;/equals&gt;
+    &lt;/where&gt;
+&lt;/sql&gt;
+</pre>
+<p>还可以用它来实现类似make file的自动化构建(语法取自ant)：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+    &lt;project name=&quot;MyProject&quot; default=&quot;dist&quot; basedir=&quot;.&quot;&gt;
+        &lt;property name=&quot;src&quot; location=&quot;src&quot;/&gt;
+        &lt;property name=&quot;build&quot; location=&quot;build&quot;/&gt;
+        &lt;property name=&quot;dist&quot;  location=&quot;dist&quot;/&gt;
+
+        &lt;target name=&quot;init&quot;&gt;
+            &lt;mkdir dir=&quot;${build}&quot;/&gt;
+        &lt;/target&gt;
+
+        &lt;target name=&quot;compile&quot; depends=&quot;init&quot; description=&quot;compile the source &quot; &gt;
+            &lt;javac srcdir=&quot;${src}&quot; destdir=&quot;${build}&quot;/&gt;
+        &lt;/target&gt;
+
+        &lt;target name=&quot;dist&quot; depends=&quot;compile&quot; description=&quot;generate the distribution&quot; &gt;
+            &lt;mkdir dir=&quot;${dist}/lib&quot;/&gt;
+            &lt;jar jarfile=&quot;${dist}/lib/MyProject-${DSTAMP}.jar&quot; basedir=&quot;${build}&quot;/&gt;
+        &lt;/target&gt;
+
+        &lt;target name=&quot;clean&quot; description=&quot;clean up&quot; &gt;
+            &lt;delete dir=&quot;${build}&quot;/&gt;
+            &lt;delete dir=&quot;${dist}&quot;/&gt;
+        &lt;/target&gt;
+    &lt;/project&gt;
+</pre>
+<p>一口气举了这么多个例子，目的在于用XML这种树形结构来说明Lisp的S表达式所能够描述的语义。不知道你是否发现了S表达式和XML这种树形语法在语义构造方面有着特别的“柔性”？我们可以轻易地用它构造出函数、变量、条件判断语义；类、属性、方法语义；可以轻易地构造出关系模型的select、where语义；可以轻易地构造出make的target、depends语义，等等数不清的语义。在普通语言里，你可以定义一个函数、一个类，但你无法为C语言增加匿名函数特性，也没法给Java语言加上RAII语义，甚至连自己创造一个foreach循环都不行，而自定义语义意味着在Lisp之上<strong>你创造了一门语言</strong>！不管是面向过程，面向对象，函数式，还是关系模型，在Lisp里统统都变成了一种DSL，而Lisp本身也就成了一种定义语言的语言，即元语言(Meta Language)。</p>
+<p>Lisp的柔性与S表达式有着密切的关系。Lisp并不限制你用S表达式来表达什么语义，同样的S表达式语法可以表达各种不同领域的语义，这就是<strong>语法和语义解耦</strong>。如果说普通语言的刚性源于“语法和语义紧耦合”，那么Lisp的柔性正是源于“语法和语义解耦”！“语法和语义解耦”使得Lisp可以随意地构造各种领域的DSL，而不强制用某一种范式或是领域视角去分析和解决问题。本质上，Lisp编程是一种超越了普通编程范式的范式，这就是<strong>Lisp之道：面向语言编程(LOP, Language Oriented Programming)</strong>。Wikipedia上是这样描述LOP的：</p>
+<blockquote><p>Language oriented programming (LOP) is a style of computer programming in which, rather than solving problems in general-purpose programming languages, the programmer creates one or more domain-specific languages for the problem first, and solves the problem in those languages &#8230; The concept of Language Oriented Programming takes the approach to capture requirements in the user&#8217;s terms, and then to try to create an implementation language as isomorphic as possible to the user&#8217;s descriptions, so that the mapping between requirements and implementation is as direct as possible.</p></blockquote>
+<p>LOP范式的基本思想是从问题出发，先创建一门描述领域模型的DSL，再用DSL去解决问题，它具有高度的声明性和抽象性。SQL、make file、CSS等DSL都可以被认为是LOP的具体实例，下面我们再通过两个常见的例子来理解LOP的优势。</p>
+<p>例1：在股票交易系统中，交易协议定义若干二进制的消息格式，交易所和客户端需要对消息进行编码和解码。</p>
+<p>消息格式是一种抽象的规范，本身不对语言做任何的限制，你可以用C，C++，Java，或者Python。普通的实现方式是按照消息格式规范，在相应的语言中定义消息结构，并编写相应的编解码函数。假设为一个消息定义结构和实现编解码函数的工作量为M，不同消息类型的数量为N，这种方式的工作量大致为M*N。也就是说每增加一种消息类型，就需要为该消息定义结构，实现编解码函数，引入bug的可能性当然也和M*N成正比。如果仔细观察不难发现，各个消息结构其实是高度类似的，编解码函数也大同小异，但是普通语言却找不到一种抽象机制能表达这种共性，比如，我们无法通过面向对象的方法定义一个基类把消息结构的共性抽象出来，然后让具体的消息去继承它，达到复用的目的。这正是由于普通语言的抽象维度限制所致，在普通语言中，你只能从函数、接口等维度对事物进行抽象，而恰好消息格式共性所在的维度与这些抽象维度并不匹配。</p>
+<p>其实，不同消息类型的<strong>共性在于它们都具有相同的领域语义</strong>，比如：“某字段内容是另一个字段内容的md5码”就是一种消息格式的领域语义，这种领域语义是OOP的抽象机制无法描述的。LOP的思路是先创建一门消息定义DSL，比如，类似Google的Protocol Buffer，Android的AIDL。然后，通过DSL编写消息定义文件，直接声明式地描述消息的结构特征，比如，我们可以声明式地描述“某字段内容是另一个字段内容的md5码”。我们还需要为DSL开发编译器用于生成C、Java等通用语言的消息定义和编解码函数。</p>
+<p>有了消息定义DSL和编译器之后，由于DSL编写消息定义是一种高度声明式的编程方法，每增加一种消息的只需要多编写一个消息定义文件而已，工作量几乎可以忽略不计。所有的工作量都集中在编译器的开发上，工作量是一个常数C，与消息的数量没有关系；质量保证方面也只需要关注编译器这一点，不会因为增加新的消息类型而引入bug。</p>
+<p>例2：在图书管理系统中，需要支持在管理界面上对书籍、学生、班级等各种实体进行管理操作。</p>
+<p>如果按传统的三层架构，一般需要在后端程序中为每一种实体定义一个类，并定义相应的方法实现CRUD操作，与之相应的，还需要在前端页面中为每一个实体编写相应的管理页面。这些实体类的CRUD操作都是大同小异的，但细节又各不相同，虽然我们很想复用某些共同的设计实现，但OOP所提供的封装、继承、多态等抽象机制不足以有效捕获实体之间的共性，大量的代码还是必须放在子类中来完成。比如，Student和Book实体类的实现非常相似，但是如果要通过OOP的方式去抽象它们的共性，得出的结果多半是Entity这样的大而空的基类，很难起到复用的效果。</p>
+<p>其实，不同实体之间的共性还是在于它们具有相同的领域语义，比如：实体具有属性，属性具有类型，属性具有取值范围，属性具有可读取、可编辑等访问属性，实体之间有关联关系等。LOP方法正是直接面向这种领域语义的。采用LOP方法，我们并不需要为每一个实体类单独编写CRUD方法，也不需要单独编写管理页面，只需要定义一种DSL并实现其编译器；然后，用DSL声明式地编写实体描述文件，去描述实体的属性列表，属性的类型、取值范围，属性所支持的操作，属性之间的关系和约束条件等；最后，通过这个实体描述文件自动生成后端的实体类和前端管理页面。采用LOP，不论前后端采用何种技术，Java也好，C#也好，JSP也好，ASP.NET也好，都可以自动生成它们的代码。采用LOP的工作量和质量都集中在DSL的设计和编译器的开发，与实体的数量无关，也就是说，越是庞大的系统，实体类越多越是能体现LOP的优势。</p>
+<p>通过上面两个小例子我们可以感受到，LOP是一种面向领域的，高度声明式的编程方式，它的抽象维度与领域模型的维度完全一致。LOP能让程序员从复杂的实现细节中解脱出来，把关注点集中在问题的本质上，从而提高编程的效率和质量。</p>
+<p>接下来的问题是如果需要为某领域设计DSL，我们是应该发明一门类似SQL这样的专用DSL呢，还是用XML或S表达式去定义DSL呢？它们各有何优缺点呢？</p>
+<p>我认为采用XML或S表达式定义DSL的优点主要有：1) SQL、make file、CSS等专用DSL都只能面向各自的领域，而一个实际的领域问题通常是跨越多个领域的，有时我们需要将不同领域融合在一起，但是由于普通语言的刚性，多语言融合通常会是一件非常困难的事情，而XML和S表达式语法结构的单一性和“代码及数据”的特点使得跨领域融合毫无障碍。2) 在为DSL开发编译器或解释器的方面，二者难度不同。对XML和S表达式定义的DSL进行语法分析非常简单，相比之下，对SQL这样的专用DSL进行语法分析，虽然可以借助Lex、Yacc、ANTLR等代码生成工具，但总的来讲复杂度还是要明显高一些。</p>
+<p>当然，XML和S表达式的优点也正好是其缺点，由于XML和S表达式的语法形式是固定的，不能像专用DSL那样自由地设计语法。所以，一般来讲专用DSL的语法显得更加简洁。换句话说，XML和Lisp其实是在语法和语义间做了一个交换，用语法的限制换来了语义的灵活。</p>
+<h4>Lisp之器</h4>
+<p>接下来我们继续探讨DSL的解释执行问题。DSL代码的解释执行一般分为3种典型的方式：1) 通过专门的解释器解释执行；2) 编译生成其他语言的代码，再通过其他语言的解释器解释执行(或编译运行)；3) 自解释。比如，第1类的代表是SQL，上一节举的两个例子都属于第2类，而第3类自解释正是Lisp的特色。</p>
+<p>为了理解自解释，我们可以先从内部DSL的解释执行说起。内部DSL是指嵌入在宿主语言中的DSL，比如，Google Test单元测试框架定义了一套基于流畅接口(Fluent Interface)的C++单元测试DSL。从语义构造的角度看，内部DSL直接借用宿主语言的语法定义了自己的领域语义，是一种语法和语义解耦；从解释执行的角度看，内部DSL是随宿主语言的解释器而自动解释的，不需要像外部DSL一样开发专门的解释器，因而实现的代价很低。当然，并不是说设计内部DSL不用关心任何的解释实现，实际上，还是需要熟悉宿主语言的特性，并利用该特性使得DSL能随着宿主语言的解释器得到解释执行。</p>
+<p>Lisp拥有强大的自解释特性，这得益于独一无二的<strong>Lisp之器：宏 (macro)</strong>。宏使得Lisp编写的DSL可以被Lisp解释器直接解释执行，这在原理上与内部DSL是相通的，只是内部DSL一般是利用宿主语言的链式调用等特性，通常形式简陋，功能有限，而Lisp的宏则要强大和灵活得多。</p>
+<p>C语言中也有宏的概念，不过Lisp的宏与C语言的宏完全不同，C语言的宏是简单的字符串替换。比如，下面的宏定义：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#define square(x) (x*x)
+</pre>
+<p>square(1+1)的期望结果是4，而实际上它会被替换成(1+1*1+1)，结果是3。这个例子说明，C语言的宏只在预编译阶段进行简单的字符串替换，对程序语法结构缺乏理解，非常脆弱。Lisp的宏不是简单的字符串替换，而是一套完整的代码生成系统，它是在语法解析的基础上把Lisp代码从一种形式转换为另一种形式，本质上起到了普通语言编译器的作用。不同的是，普通编译器是把一种语言的代码转换为另一种语言的代码，比如，Java编译器把Java代码转换成Java字节码；而Lisp宏的输入和输出都是S表达式，它本质上是把一种DSL转换为另一种DSL。下面的例子是宏的一个典型用法。</p>
+<p>例3：假设Lisp解释器已经具备解释执行面向过程DSL的能力，需要实现类似ant的自动化构建工具。</p>
+<p>我们可以基于宏构建一门类ant的DSL，宏的作用是把类ant DSL通过宏展开变成面向过程的DSL，最后被Lisp解释器所解释执行。这样用Lisp编写的ant DSL就不需要被编译为其他语言，也不需要像XML的ant一样依赖于专门的解释器了。</p>
+<p>当然，和开发专门的解释器/编译器相比，Lisp的宏也并非没有缺点，宏难以理解，开发和调试更加困难。到底是开发专门的解释器/编译器还是直接采用宏应该视具体情况而定。</p>
+<h4>总结</h4>
+<p>Lisp采用单一的S表达式语法表达不同的语义，实现了语法和语义解耦。这使得Lisp具有强大的语义构造能力，擅长于构造DSL实现面向语言编程，而宏使得Lisp具有自解释能力，让不同DSL之间的转换游刃有余。进入Lisp的世界应当从理解面向语言编程入门，这是Lisp之道，而函数式编程和宏皆为Lisp之器，以道驭器方为正途。</p>
+<h4>后记</h4>
+<p>本文是我学习Lisp的一个总结，也是写给有兴趣学习Lisp的程序员的入门资料。必须说明，我还是一个标准的Lisp初学者，几乎没有写过像样的Lisp程序，文中的错误和不足在所难免，希望读者批评指正，感谢！</p>
+<h4>参考</h4>
+<p><a href="http://www.paulgraham.com/rootsoflisp.html">The Roots of Lisp</a></p>
+<p><a href="http://www.defmacro.org/ramblings/lisp.html">The Nature of Lisp</a></p>
+<p><a href="http://lists.warhead.org.uk/pipermail/iwe/2005-July/000130.html">Why Lisp macros are cool, a Perl perspective</a></p>
+<p><a href="http://en.wikipedia.org/wiki/Language-oriented_programming">Wikipedia: Language-oriented programming</a></p>
+<p><a href="http://book.douban.com/subject/6859720/">《实用Common Lisp编程》</a></p>
+<p><a href="http://book.douban.com/subject/4031906/">《冒号课堂 &#8211; 编程范式与OOP思想》</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/3928.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/4kQAz-150x150.jpg" alt="计算机专业学生的大学生活" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3928.html" class="wp_rp_title">计算机专业学生的大学生活</a></li><li ><a href="https://coolshell.cn/articles/17061.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" alt="Docker基础技术：AUFS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17061.html" class="wp_rp_title">Docker基础技术：AUFS</a></li><li ><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" alt="关于高可用的系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_title">关于高可用的系统</a></li><li ><a href="https://coolshell.cn/articles/19.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="时间1234567890" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19.html" class="wp_rp_title">时间1234567890</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7526.html">Lisp的永恒之道</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7526.html/feed</wfw:commentRss>
+			<slash:comments>93</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Javascript 中的 var</title>
+		<link>https://coolshell.cn/articles/7480.html</link>
+					<comments>https://coolshell.cn/articles/7480.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 24 May 2012 06:50:31 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[JSLint]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7480</guid>
+
+					<description><![CDATA[<p>MelonCard发布了一篇文章——&#8221;how one missing var ruined our launch&#8220;（&#8221;少写了...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7480.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7480.html">Javascript 中的 var</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>MelonCard发布了一篇文章——&#8221;<a href="http://blog.meloncard.com/post/12175941935/how-one-missing-var-ruined-our-launch" target="_blank">how one missing var ruined our launch</a>&#8220;（&#8221;少写了一个var毁了我的网站&#8221;），这篇文章是说MelonCard用Node.js做后台，因为出了一个小高峰——有50-100人注册，结果整个网站都不响应了，而且还出现了很多奇怪的问题。当他们调查到问题的要源的时候，他们发现下面的代码少写了一个var。</p>
+<p>[javascript]app.all(‘/apps/:user_id/status’, function(req, res, next) {<br />
+    // …<br />
+    initial = extractVariables(req.body);<br />
+});[/javascript]</p>
+<p>为什么inital少写一个var会引发这个问题呢？因为如果你不写var，这个局部的变量会被javascript当成全局变量，而这个变量又是一个函数，所以，当多用户并发的时候，这个本应该在不同用户下互不干扰的变量，成了各个用户共享的东西。试想，用户A的数据被用户B覆盖了，用户A和B的数据还没处理完，结果被新的C给搞乱了，程序的逻辑自然出现了问题。</p>
+<p>在stackoverflow.com上有<a href="http://stackoverflow.com/questions/1470488/difference-between-using-var-and-not-using-var-in-javascript" target="_blank">这么一个贴子说明了“有var”和“无var”</a>的差别：</p>
+<pre data-enlighter-language="js" class="EnlighterJSRAW">// These are both globals
+var foo = 1;
+bar = 2;
+
+function test()
+{
+    var foo = 1; // Local
+    bar = 2;     // Global
+
+    // Execute an anonymous function
+    (function()
+    {
+        var wibble = 1; // Local
+        foo = 2; // Inherits from scope above (creating a closure)
+        moo = 3; // Global
+    }())
+}</pre>
+<p>上面这个示例告诉我们，如果你不用var，那么这个js引擎会一层一层地向上找父作用域中的变量，如果找到了，就用，如果找不到了，就会帮你定义一个全局的变量。上面这个例子充分说明了这一点。所以，<strong>如果你想在当前的作用域用声明变量，你一定要用var</strong>。这对于一些乱写javascript代码的程序员要注意了。这里再给大家介绍一个工具——</p>
+<p><span id="more-7480"></span></p>
+<p><strong>JSLint( <a href="http://www.jslint.com/">http://www.jslint.com/</a> )</strong>，一个JS代码质量的分析工具，我们把上述stackoverflow的代码copy到JSLint这个在线工具中，我们可以看到下面的报告：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7483" title="jslint" src="https://coolshell.cn/wp-content/uploads/2012/05/jslint.jpg" alt="" width="500" height="184" srcset="https://coolshell.cn/wp-content/uploads/2012/05/jslint.jpg 500w, https://coolshell.cn/wp-content/uploads/2012/05/jslint-300x110.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p>这个报告说明了源码中的那些变量的情况。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7480.html">Javascript 中的 var</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7480.html/feed</wfw:commentRss>
+			<slash:comments>48</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Huffman 编码压缩算法</title>
+		<link>https://coolshell.cn/articles/7459.html</link>
+					<comments>https://coolshell.cn/articles/7459.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 22 May 2012 05:32:05 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Compress]]></category>
+		<category><![CDATA[Huffman Code]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7459</guid>
+
+					<description><![CDATA[<p>前两天发布那个rsync算法后，想看看数据压缩的算法，知道一个经典的压缩算法Huffman算法。相信大家应该听说过 David Huffman 和他的压缩算法—...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7459.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7459.html">Huffman 编码压缩算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>前两天发布那个<a title="rsync 的核心算法" href="https://coolshell.cn/articles/7425.html" target="_blank">rsync算法</a>后，想看看数据压缩的算法，知道一个经典的压缩算法Huffman算法。相信大家应该听说过 <a title="David Huffman" href="http://en.wikipedia.org/wiki/David_A._Huffman" target="_blank">David Huffman</a> 和他的压缩算法—— <a href="http://en.wikipedia.org/wiki/Huffman_coding" target="_blank">Huffman Code</a>，一种通过字符出现频率，<a href="http://en.wikipedia.org/wiki/Priority_queue" target="_blank">Priority Queue</a>，和二叉树来进行的一种压缩算法，这种二叉树又叫Huffman二叉树 —— 一种带权重的树。从学校毕业很长时间的我忘了这个算法，但是网上查了一下，中文社区内好像没有把这个算法说得很清楚的文章，尤其是树的构造，而正好看到一篇国外的文章《<a href="http://en.nerdaholyc.com/huffman-coding-on-a-string/" target="_blank">A Simple Example of Huffman Code on a String</a>》，其中的例子浅显易懂，相当不错，我就转了过来。注意，我没有对此文完全翻译。</p>
+<p>我们直接来看示例，如果我们需要来压缩下面的字符串：</p>
+<p style="text-align: center;"><strong> “beep boop beer!” </strong></p>
+<p>首先，我们先计算出每个字符出现的次数，我们得到下面这样一张表 :</p>
+<p><center></p>
+<table style="width: 250px; height: 200px;">
+<tbody>
+<tr>
+<td><span style="font-size: 12px;">字符</span></td>
+<td>次数</td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘b’</span></td>
+<td><span style="font-size: 12px;">3</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘e’</span></td>
+<td><span style="font-size: 12px;">4</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘p’</span></td>
+<td><span style="font-size: 12px;">2</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘ ‘</span></td>
+<td><span style="font-size: 12px;">2</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘o’</span></td>
+<td><span style="font-size: 12px;">2</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘r’</span></td>
+<td><span style="font-size: 12px;">1</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘!’</span></td>
+<td><span style="font-size: 12px;">1</span></td>
+</tr>
+</tbody>
+</table>
+<p></center><br />
+然后，我把把这些东西放到Priority Queue中（用出现的次数据当 priority），我们可以看到，Priority Queue 是以Prioirry排序一个数组，如果Priority一样，会使用出现的次序排序：下面是我们得到的Priority Queue：</p>
+<p><span id="more-7459"></span></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/coada1.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-234 aligncenter" title="coada1" src="https://coolshell.cn/wp-content/uploads/2012/05/coada1.png" alt="" width="440" height="61" /></a></p>
+<p>接下来就是我们的算法——把这个Priority Queue 转成二叉树。我们始终从queue的头取两个元素来构造一个二叉树（第一个元素是左结点，第二个是右结点），并把这两个元素的priority相加，并放回Priority中（再次注意，这里的Priority就是字符出现的次数），然后，我们得到下面的数据图表：</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/coada2.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-239" title="coada2" src="https://coolshell.cn/wp-content/uploads/2012/05/coada2.png" alt="" width="411" height="151" /></a></p>
+<p>同样，我们再把前两个取出来，形成一个Priority为2+2=4的结点，然后再放回Priority Queue中 :</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/coada31.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-242 aligncenter" title="coada3" src="https://coolshell.cn/wp-content/uploads/2012/05/coada31.png" alt="" width="325" height="201" /></a></p>
+<p>继续我们的算法（我们可以看到，这是一种自底向上的建树的过程）：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/coada4.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-244 aligncenter" title="coada4" src="https://coolshell.cn/wp-content/uploads/2012/05/coada4.png" alt="" width="326" height="221" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/coada5.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-288 aligncenter" title="coada5" src="https://coolshell.cn/wp-content/uploads/2012/05/coada5.png" alt="" width="347" height="207" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/coada61.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-290 aligncenter" title="coada6" src="https://coolshell.cn/wp-content/uploads/2012/05/coada61.png" alt="" width="344" height="273" /></a></p>
+<p>最终我们会得到下面这样一棵二叉树：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/arbore_final.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-291 aligncenter" title="arbore_final" src="https://coolshell.cn/wp-content/uploads/2012/05/arbore_final.png" alt="" width="452" height="304" /></a></p>
+<p>此时，我们把这个树的左支编码为0，右支编码为1，这样我们就可以遍历这棵树得到字符的编码，比如：‘b’的编码是 00，&#8217;p&#8217;的编码是101， ‘r&#8217;的编码是1000。<strong>我们可以看到出现频率越多的会越在上层，编码也越短，出现频率越少的就越在下层，编码也越长</strong>。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/arbore_final_numerotat.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-292 aligncenter" title="arbore_final_numerotat" src="https://coolshell.cn/wp-content/uploads/2012/05/arbore_final_numerotat.png" alt="" width="452" height="304" /></a></p>
+<p>最终我们可以得到下面这张编码表：</p>
+<p><center></p>
+<table style="width: 250px; height: 200px;">
+<tbody>
+<tr>
+<td>字符</td>
+<td>编码</td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘b’</span></td>
+<td><span style="font-size: 12px;">00</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘e’</span></td>
+<td><span style="font-size: 12px;">11</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘p’</span></td>
+<td><span style="font-size: 12px;">101</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘ ‘</span></td>
+<td><span style="font-size: 12px;">011</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘o’</span></td>
+<td><span style="font-size: 12px;">010</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘r’</span></td>
+<td><span style="font-size: 12px;">1000</span></td>
+</tr>
+<tr>
+<td><span style="font-size: 12px;">‘!’</span></td>
+<td><span style="font-size: 12px;">1001</span></td>
+</tr>
+</tbody>
+</table>
+<p></center><br />
+这里需要注意一点，当我们encode的时候，我们是按“bit”来encode，decode也是通过bit来完成，比如，如果我们有这样的bitset “1011110111″ 那么其解码后就是 “pepe”。所以，我们需要通过这个二叉树建立我们Huffman编码和解码的字典表。</p>
+<p>这里需要注意的一点是，我们的Huffman对各个字符的编码是不会冲突的，也就是说，<strong>不会存在某一个编码是另一个编码的前缀</strong>，不然的话就会大问题了。因为encode后的编码是没有分隔符的。</p>
+<p style="text-align: left; padding-left: 30px;">于是，对于我们的原始字符串  beep boop beer!</p>
+<p style="text-align: left; padding-left: 30px;">其对就能的二进制为 : 0110 0010 0110 0101 0110 0101 0111 0000 0010 0000 0110 0010 0110 1111 0110 1111 0111 0000 0010 0000 0110 0010 0110 0101 0110 0101 0111 0010 0010 0001</p>
+<p style="text-align: left; padding-left: 30px;">我们的Huffman的编码为： 0011 1110 1011 0001 0010 1010 1100 1111 1000 1001</p>
+<p>从上面的例子中，我们可以看到被压缩的比例还是很可观的。</p>
+<p>作者给出了源码你可以看看（ C99标准） <a href="http://en.nerdaholyc.com/wp-content/uploads/2012/05/huffman_string.zip">Download the source files</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" alt="Cuckoo Filter：设计与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_title">Cuckoo Filter：设计与实现</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li><li ><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" alt="二维码的生成细节和原理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_title">二维码的生成细节和原理</a></li><li ><a href="https://coolshell.cn/articles/10427.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg" alt="伙伴分配器的一个极简实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10427.html" class="wp_rp_title">伙伴分配器的一个极简实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7459.html">Huffman 编码压缩算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7459.html/feed</wfw:commentRss>
+			<slash:comments>138</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>扎克伯格的一封信：关于Facebook IPO</title>
+		<link>https://coolshell.cn/articles/7448.html</link>
+					<comments>https://coolshell.cn/articles/7448.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 19 May 2012 03:01:21 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Facebook]]></category>
+		<category><![CDATA[IPO]]></category>
+		<category><![CDATA[Joke]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7448</guid>
+
+					<description><![CDATA[<p>MENLO PARK, CA (The Borowitz Report) – 在Fackbook IPO前夕，Facebook的创始人兼CEO Mark Zuc...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7448.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7448.html">扎克伯格的一封信：关于Facebook IPO</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" id="ImageStory" class="alignleft" src="http://www.borowitzreport.com/wp-content/uploads/zuck.jpg" alt="" />MENLO PARK, CA (<strong><strong><a title="Borowitz Report" href="http://www.borowitzreport.com/2012/05/17/a-letter-from-mark-zuckerberg/" target="_blank">The Borowitz Report</a></strong></strong>) – 在Fackbook IPO前夕，Facebook的创始人兼CEO Mark Zuckerberg 给全球股民发表了封公开信：</p>
+<p>亲爱的股民们：</p>
+<p style="padding-left: 60px;">    这么多年来，你们已经在Facebook上浪费了你们的时间 ，接下来，你们会得到浪费你们金钱的机会。</p>
+<p>   明天是Facebook的IPO，并且我知道你们一定在想，Facebook怎么就和2000年的.COM泡沫不一样啦？</p>
+<p>首先，我想告诉你们，以前那些糟糕的dot-com公司玩的是概念和炒作，而没有真正的商业价值。而Facebook不一样，也就是说，我们Facebook是建立在强大的以“疯狂的小鸟”和“一群想像中的羊”的基础上的。</p>
+<p>其次，Facebook是世界上最成功的社交网络，我们的用户最近才发现，这个社交网络让人们分享了数以万计别人根本不感兴趣的信息。</p>
+<p>第三，当某人点击Faceback广告的时候，我们就会挣到钱。而且我们知道，点我们广告的人都不是故意点击，成百万的人点我们的广告是因为那时他们喝醉了。我们完全从iTunes偷到这个有创意的想法。</p>
+<p>最后，如果你买我们的股票，你将永远不会孤独。据调查，在过去几年里使用facebook的全球9亿用户，他们都有轻微或中等程度的大脑损伤，这影响了他们的作正常判断的能力。所以，这些人都成为你的朋友——Facebook的股民。</p>
+<p>有了你的帮助，如果明天一切都照计划进行，Facebook IPO将会募到1000亿美金。这是个什么概念，这相当于4到5个摩根大通银行损失的钱。</p>
+<p>最后一件事：我，Mark Zuckerberg，是否会因此IPO获得180亿美金？ 也许，我正在考虑把希腊买了，但就算是这样，我还是有180亿美金。 LOL.</p>
+<p>Friend me (粉我),</p>
+<p>Mark</p>
+<div>（新闻来源：<a href="http://www.borowitzreport.com/2012/05/17/a-letter-from-mark-zuckerberg/" target="_blank">http://www.borowitzreport.com/2012/05/17/a-letter-from-mark-zuckerberg/</a>）</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg" alt="关于Facebook 的 React 专利许可证" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_title">关于Facebook 的 React 专利许可证</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li><li ><a href="https://coolshell.cn/articles/4549.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="Facebook 的系统架构" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4549.html" class="wp_rp_title">Facebook 的系统架构</a></li><li ><a href="https://coolshell.cn/articles/3396.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png" alt="Facebook全球关系网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3396.html" class="wp_rp_title">Facebook全球关系网</a></li><li ><a href="https://coolshell.cn/articles/1941.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="程序员的相关笑话（二）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1941.html" class="wp_rp_title">程序员的相关笑话（二）</a></li><li ><a href="https://coolshell.cn/articles/1903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="程序员的相关笑话（一）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1903.html" class="wp_rp_title">程序员的相关笑话（一）</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7448.html">扎克伯格的一封信：关于Facebook IPO</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7448.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>rsync 的核心算法</title>
+		<link>https://coolshell.cn/articles/7425.html</link>
+					<comments>https://coolshell.cn/articles/7425.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 17 May 2012 00:25:38 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[adler]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[checksum]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MD5]]></category>
+		<category><![CDATA[rsync]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7425</guid>
+
+					<description><![CDATA[<p>rsync是unix/linux下同步文件的一个高效算法，它能同步更新两处计算机的文件与目录，并适当利用查找文件中的不同块以减少数据传输。rsync中一项与其他...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7425.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7425.html">rsync 的核心算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://en.wikipedia.org/wiki/Rsync" target="_blank" rel="noopener noreferrer">rsync</a>是unix/linux下同步文件的一个高效算法，它能同步更新两处计算机的文件与目录，并适当利用查找文件中的不同块以减少数据传输。rsync中一项与其他大部分类似程序或协定中所未见的重要特性是镜像是只对有变更的部分进行传送。rsync可拷贝／显示目录属性，以及拷贝文件，并可选择性的压缩以及递归拷贝。rsync利用由<a href="http://en.wikipedia.org/wiki/Andrew_Tridgell" target="_blank" rel="noopener noreferrer">Andrew Tridgell</a>发明的算法。这里不介绍其使用方法，只介绍其核心算法。我们可以看到，Unix下的东西，一个命令，一个工具都有很多很精妙的东西，怎么学也学不完，这就是<a title="Unix传奇(上篇)" href="https://coolshell.cn/articles/2322.html" target="_blank" rel="noopener noreferrer">Unix的文化</a>啊。</p>
+<p>本来不想写这篇文章的，因为原先发现有很多中文blog都说了这个算法，但是看了一下，发现这些中文blog要么翻译国外文章翻译地非常烂，要么就是介绍这个算法介绍得很乱让人看不懂，还有错误，误人不浅，所以让我觉得有必要写篇rsync算法介绍的文章。（当然，我成文比较仓促，可能会有一些错误，请指正）</p>
+<h4>问题</h4>
+<p>首先， 我们先来想一下rsync要解决的问题，如果我们要同步的文件只想传不同的部分，我们就需要对两边的文件做diff，但是这两个问题在两台不同的机器上，无法做diff。如果我们做diff，就要把一个文件传到另一台机器上做diff，但这样一来，我们就传了整个文件，这与我们只想传输不同部的初衷相背。</p>
+<p>于是我们就要想一个办法，让这两边的文件见不到面，但还能知道它们间有什么不同。这就出现了rsync的算法。</p>
+<h4>算法</h4>
+<p>rsync的算法如下：（<strong>假设我们同步源文件名为fileSrc，同步目的文件叫fileDst</strong>）</p>
+<p><span id="more-7425"></span></p>
+<p>1）<strong>分块Checksum算法</strong>。首先，我们会把fileDst的文件平均切分成若干个小块，比如每块512个字节（最后一块会小于这个数），然后对每块计算两个checksum，</p>
+<ul>
+<li>一个叫<a href="http://en.wikipedia.org/wiki/Rolling_hash" target="_blank" rel="noopener noreferrer">rolling checksum</a>，是弱checksum，32位的checksum，其使用的是Mark Adler发明的<a title="Adler-32" href="http://en.wikipedia.org/wiki/Adler-32">adler-32</a>算法，</li>
+<li>另一个是强checksum，128位的，以前用md4，现在用md5 hash算法。</li>
+</ul>
+<p>为什么要这样？因为若干年前的硬件上跑md4的算法太慢了，所以，我们需要一个快算法来鉴别文件块的不同，但是弱的adler32算法碰撞概率太高了，所以我们还要引入强的checksum算法以保证两文件块是相同的。<strong>也就是说，弱的checksum是用来区别不同，而强的是用来确认相同</strong>。（checksum的具体公式可以参看<a href="http://rsync.samba.org/tech_report/node3.html" target="_blank" rel="noopener noreferrer">这篇文章</a>）</p>
+<p>2）<strong>传输算法。</strong>同步目标端会把fileDst的一个checksum列表传给同步源，这个列表里包括了三个东西，<strong>rolling checksum(32bits)</strong>，<strong>md5 checksume(128bits)</strong>，<strong>文件块编号</strong>。</p>
+<p>我估计你猜到了同步源机器拿到了这个列表后，会对fileSrc做同样的checksum，然后和fileDst的checksum做对比，这样就知道哪些文件块改变了。</p>
+<p>但是，聪明的你一定会有以下两个疑问：</p>
+<ul>
+<li>如果我fileSrc这边在文件中间加了一个字符，这样后面的文件块都会位移一个字符，这样就完全和fileDst这边的不一样了，但理论上来说，我应该只需要传一个字符就好了。这个怎么解决？</li>
+</ul>
+<ul>
+<li>如果这个checksum列表特别长，而我的两边的相同的文件块可能并不是一样的顺序，那就需要查找，线性的查找起来应该特别慢吧。这个怎么解决？</li>
+</ul>
+<p>很好，让我们来看一下同步源端的算法。</p>
+<p>3）<strong>checksum查找算法</strong>。同步源端拿到fileDst的checksum数组后，会把这个数据存到一个hash table中，用rolling checksum做hash，以便获得O(1)时间复杂度的查找性能。这个hash table是16bits的，所以，hash table的尺寸是2的16次方，对rolling checksum的hash会被散列到0 到 2^16 &#8211; 1中的某个整数值。（对于hash table，如果你不清楚，建议回去看大学时的数据结构教科书）</p>
+<p>顺便说一下，我在网上看到很多文章说，“要对rolling checksum做排序”（比如<a href="http://www.yejun.cn/?p=472" target="_blank" rel="noopener noreferrer">这篇</a>和<a href="http://blog.csdn.net/tobeandnottobe/article/details/6719848" target="_blank" rel="noopener noreferrer">这篇</a>），这两篇文章都引用并翻译了<a href="http://rsync.samba.org/tech_report/node4.html" target="_blank" rel="noopener noreferrer">原作者的这篇文章</a>，但是他们都理解错了，不是排序，就只是把fileDst的checksum数据，按rolling checksum做存到2^16的hash table中，当然会发生碰撞，把碰撞的做成一个链表就好了。这就是<a href="http://rsync.samba.org/tech_report/node4.html" target="_blank" rel="noopener noreferrer">原文</a>中所说的第二步——搜索有碰撞的情况。</p>
+<p>4）<strong>比对算法</strong>。这是最关键的算法，细节如下：</p>
+<p style="padding-left: 30px;">4.1）取fileSrc的第一个文件块（我们假设的是512个长度），也就是从fileSrc的第1个字节到第512个字节，取出来后做rolling checksum计算。计算好的值到hash表中查。</p>
+<p style="padding-left: 30px;">4.2）如果查到了，说明发现在fileDst中有潜在相同的文件块，于是就再比较md5的checksum，因为rolling checksume太弱了，可能发生碰撞。于是还要算md5的128bits的checksum，这样一来，我们就有 2^-(32+128) = 2^-160的概率发生碰撞，这太小了可以忽略。<strong>如果rolling checksum和md5 checksum都相同，这说明在fileDst中有相同的块，我们需要记下这一块在fileDst下的文件编号</strong>。</p>
+<p style="padding-left: 30px;">4.3）如果fileSrc的rolling checksum 没有在hash table中找到，那就不用算md5 checksum了。表示这一块中有不同的信息。总之，只要rolling checksum 或 md5 checksum 其中有一个在fileDst的checksum hash表中找不到匹配项，那么就会触发算法对fileSrc的rolling动作。于是，<strong>算法会住后step 1个字节，取fileSrc中字节2-513的文件块要做checksum，go to (4.1) </strong>&#8211; 现在你明白什么叫rolling checksum了吧。</p>
+<p style="padding-left: 30px;">4.4）这样，我们就可以找出fileSrc相邻两次匹配中的那些文本字符，这些就是我们要往同步目标端传的文件内容了。</p>
+<h4 class="p1"><b>rolling checksum算法</b></h4>
+<p class="p1">这个算法很简单，也叫<a href="https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_string_search_algorithm" target="_blank" rel="noopener noreferrer">Rabin-Karp 算法</a>，由 Richard M. Karp 和 Michael O. Rabin 在 1987 年发表，它也是用来解决多模式串匹配问题的。其最大的精髓是，当我们往后面step 1个字符的时候，不用全部重新计算所有的checksum，也就是说，我们从 [0, 512] rolling 到 [1, 513] 时，我们不需要重新计算从1到513的checksum，而是重用 [0，512]的checksum直接算出来。</p>
+<p class="p1">这个算法比较简单，我举个例子，我们有一个数字：12345678，假设我们以5个长度作为一个块，那么，第一个块就是 12345 ，12345可以表示为：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW"> 1 * 10^4 + 2 * 10^3 + 3 * 10^2 + 4 * 10^1 + 5 * 10^0 = 12345 </code></p>
+<p class="p1">如果我们要step 1步，也就是要得到 23456， 我们不必计算：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">2 * 10^4 + 3 * 10^3 + 4 * 10^2 + 5 * 10^1 + 6 * 10^0</code></p>
+<p class="p1">而是直接计算：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">(12345 - 1 * 10^4) * 10 + 6 * 10 ^0</code></p>
+<p class="p1">我们可以看到，其中，我们把12345最左边第一位去掉，然后，再加上最右边的一位。这就是Rolling checksum的算法。</p>
+<p class="p1">实际的公式是：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">hash ( t[0, m-1] ) = t[0] * b^(m-1) + t[1] * b^[m-2] ..... t[m-1] * b^0</code></p>
+<p class="p1">其中的 b是一个常数基数，在 Rabin-Karp 算法中，我们一般取值为  256。</p>
+<p class="p1">于是，在计算 hash ( t[1, m] ) 时，只需要下面这样就可以了：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">hash( t[1, m] ) = hash ( t[0, m-1] ) - t[0] * b^(m-1)  + t[m] * b ^0</code></p>
+<h4>图示</h4>
+<p>怎么，你没看懂？ 好吧，我送佛送上西，画个示意图给你看看（对图中的东西我就不再解释了）。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7428" title="rsync algorithm" src="https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm.jpg" alt="" width="650" height="463" srcset="https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm.jpg 650w, https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm-300x214.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm-379x270.jpg 379w" sizes="(max-width: 650px) 100vw, 650px" /></p>
+<p>这样，最终，在同步源这端，我们的rsync算法可能会得到下面这个样子的一个数据数组，图中，红色块表示在目标端已匹配上，不用传输（注：我专门在其中显示了两块chunk #5，相信你会懂的），而白色的地方就是需要传输的内容（注意：这些白色的块是不定长的），这样，同步源这端把这个数组（白色的就是实际内容，红色的就放一个标号）压缩传到目的端，在目的端的rsync会根据这个表重新生成文件，这样，同步完成。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7427" title="rsync algorithm result" src="https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm-result.jpg" alt="" width="606" height="82" srcset="https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm-result.jpg 606w, https://coolshell.cn/wp-content/uploads/2012/05/rsync-algorithm-result-300x40.jpg 300w" sizes="(max-width: 606px) 100vw, 606px" /></p>
+<p>最后想说一下，对于某些压缩文件使用rsync传输可能会传得更多，因为被压缩后的文件可能会非常的不同。对此，对于gzip和bzip2这样的命令，记得开启 “rsyncalbe” 模式。</p>
+<p>（全文完，<strong>转载时请注明作者和出处</strong>）</p>
+<p><audio style="display: none;" controls="controls"></audio></p>
+<p><audio style="display: none;" controls="controls"></audio><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7425.html">rsync 的核心算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7425.html/feed</wfw:commentRss>
+			<slash:comments>244</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>NoSQL 数据建模技术</title>
+		<link>https://coolshell.cn/articles/7270.html</link>
+					<comments>https://coolshell.cn/articles/7270.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 15 May 2012 00:22:13 +0000</pubDate>
+				<category><![CDATA[数据库]]></category>
+		<category><![CDATA[Database]]></category>
+		<category><![CDATA[NoSQL]]></category>
+		<category><![CDATA[SQL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7270</guid>
+
+					<description><![CDATA[<p>全文译自墙外文章“NoSQL Data Modeling Techniques”，译得不好，还请见谅。这篇文章看完之后，你可能会对NoSQL的数据结构会有些感觉...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7270.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>全文译自墙外文章“<a href="http://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/" target="_blank">NoSQL Data Modeling Techniques</a>”，译得不好，还请见谅。这篇文章看完之后，你可能会对NoSQL的数据结构会有些感觉。我的感觉是，关系型数据库想把一致性，完整性，索引，CRUD都干好，NoSQL只干某一种事，但是牺牲了很多别的东西。总体来说，我觉得NoSQL更适合做Cache。下面是正文——</p>
+<p>NoSQL 数据库经常被用作很多非功能性的地方，如，扩展性，性能和一致性的地方。这些NoSQL的特性在理论和实践中都正在被大众广泛地研究着，研究的热点正是那些和性能分布式相关的非功能性的东西，我们都知道 <a href="http://en.wikipedia.org/wiki/CAP_theorem">CAP 理论</a>被很好地应用于了 NoSQL 系统中（陈皓注：CAP即，一致性(Consistency)， 可用性(Availability)， 分区容忍性(Partition tolerance)，在分布式系统中，这三个要素最多只能同时实现两个，而NoSQL一般放弃的是一致性）。但在另一方面，NoSQL的数据建模技术却因为缺乏像关系型数据库那样的基础理论没有被世人很好地研究。这篇文章从数据建模方面对NoSQL家族进行了比较，并讨论几个常见的数据建模技术。</p>
+<p>要开始讨论数据建模技术，我们不得不或多或少地先系统地看一下NoSQL数据模型的成长的趋势，以此我们可以了解一些他们内在的联系。下图是NoSQL家族的进化图，我们可以看到这样的进化：Key-Value时代，BigTable时代，Document时代，全文搜索时代，和Graph数据库时代：（陈皓注：注意图中SQL说的那句话，NoSQL再这样发展下去就是SQL了，哈哈。）</p>
+<div id="attachment_310">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/overview2.png"><img decoding="async" loading="lazy" title="overview" src="https://coolshell.cn/wp-content/uploads/2012/05/overview2.png?w=594&amp;h=699" alt="" width="594" height="699" /><br />
+</a>NoSQL Data Models</p>
+</div>
+<p>首先，我们需要注意的是SQL和关系型数据模型已存在了很长的时间，这种面向用户的自然性意味着：</p>
+<p><span id="more-7270"></span></p>
+<ul>
+<li>最终用户一般更感兴趣于数据的聚合显示，而不是分离的数据，这主要通过SQL来完成。</li>
+<li>我们无法通过人手工控制数据的并发性，完整性，一致性，或是数据类型校验这些东西的。这就是为什么SQL需要在事务，二维表结构（schema）和外表联合上做很多事。</li>
+</ul>
+<p>另一方面，SQL可以让软件应用程序在很多情况下不需要关心数据库的数据聚合，和数据完整性和有效性进行控制。而如果我们去除了数据一致性，完整性这些东西，会对性能和分布存储有着重的帮助。正因为如此，我们才有数据模型的进化：</p>
+<ul>
+<li><strong>Key-Value 键值对存储</strong>是非常简单而强大的。下面的很多技术基本上都是基于这个技术开始发展的。但是，Key-Value有一个非常致命的问题，那就是如果我们需要查找一段范围内的key。（陈皓注：学过hash-table数据结构的人都应该知道，hash-table是非序列容器，其并不像数组，链接，队列这些有序容器，我们可以控制数据存储的顺序）。于是，有序键值 （Ordered Key-Value） 数据模型被设计出来解决这一限制，来从根本上提高数据集的问题。</li>
+</ul>
+<ul>
+<li><strong>Ordered Key-Value 有序键值</strong>模型也非常强大，但是，其也没有对Value提供某种数据模型。通常来说，Value的模型可以由应用负责解析和存取。这种很不方便，于是出现了 BigTable类型的数据库，这个数据模型其实就是map里有map，map里再套map，一层一层套下去，也就是层层嵌套的key-value（value里又是一个key-value），这种数据库的Value主要通过“列族”（column families），列，和时间戳来控制版本。（陈皓注：关于时间戳来对数据的版本控制主要是解决数据存储并发问题，也就是所谓的乐观锁，详见《<a title="多版本并发控制(MVCC)在分布式系统中的应用" href="https://coolshell.cn/articles/6790.html" target="_blank">多版本并发控制(MVCC)在分布式系统中的应用</a>》）</li>
+</ul>
+<ul>
+<li><strong>Document databases 文档数据库</strong> 改进了 BigTable 模型，并提供了两个有意义的改善。第一个是允许Value中有主观的模式（scheme），而不是map套map。第二个是索引。 <strong>Full Text Search Engines 全文搜索引擎</strong>可以被看作是文档数据库的一个变种，他们可以提供灵活的可变的数据模式（scheme）以及自动索引。他们之间的不同点主要是，文档数据库用字段名做索引，而全文搜索引擎用字段值做索引。</li>
+</ul>
+<ul>
+<li><strong>Graph data models 图式数据库</strong> 可以被认为是这个进化过程中从 Ordered Key-Value 数据库发展过来的一个分支。图式数据库允许构建议图结构的数据模型。它和文档数据库有关系的原因是，它的很多实现允许value可以是一个map或是一个document。</li>
+</ul>
+<h4> NoSQL 数据模型摘要</h4>
+<p>本文剩下的章节将向你介绍数据建模的技术实现和相关模式。但是，在介绍这些技术之前，先来一段序言：</p>
+<ul>
+<li>NoSQL 数据模型设计一般从业务应用的具体数据查询入手，而不是数据间的关系：</li>
+<ul>
+<li>关系型的数据模型基本上是分析数据间的结构和关系。其设计理念是： ”<strong>What answers do I have?”</strong><em> </em></li>
+<li>NoSQL 数据模型基本上是从应用对数据的存取方式入手，如：我需要支持某种数据查询。其设计理念是<strong> ”What questions do I have?”</strong></li>
+</ul>
+</ul>
+<ul>
+<li>NoSQL 数据模型设计比关系型数据库需要对数据结构和算法的更深的了解。在这篇文章中我会和大家说那些尽人皆知的数据结构，这些数据结构并不只是被NoSQL使用，但是对于NoSQL的数据模型却非常有帮助。</li>
+</ul>
+<ul>
+<li>数据冗余和反规格化是一等公民。</li>
+</ul>
+<ul>
+<li>关系型数据库对于处理层级数据和图式数据非常的不方便。NoSQL用来解决图式数据明显是一个非常好的解决方案，几乎所有的NoSQL数据库可以很强地解决此类问题。这就是为什么这篇文章专门拿出一章来说明层级数据模型。</li>
+</ul>
+<div>下面是NoSQL的分类表，也是我用来写这篇文章时做实践的产品：</div>
+<div>
+<ul>
+<li>Key-Value 存储: Oracle Coherence, Redis, Kyoto Cabinet</li>
+<li>类BigTable存储: Apache HBase, Apache Cassandra</li>
+<li>文档数据库: MongoDB, CouchDB</li>
+<li>全文索引: Apache Lucene, Apache Solr</li>
+<li>图数据库: neo4j, FlockDB</li>
+</ul>
+</div>
+<h4>概念技术 Conceptual Techniques</h4>
+<p>这一节主要介绍NoSQL数据模型的基本原则。</p>
+<h5>(1) 反规格化 Denormalization</h5>
+<p>反规格化 Denormalization 可以被认为是把相同的数据拷贝到不同的文档或是表中，这样就可以简化和优化查询，或是正好适合用户的某中特别的数据模型。这篇文章中所说的绝大多数技术都或多或少地导向了这一技术。</p>
+<p>总体来说，反规格化需要权衡下面这些东西：</p>
+<ul>
+<li><strong><em>查询数据量 /查询IO </em></strong> VS  <strong><em>总数据量</em></strong>。使用反规格化，一方面可以把一条查询语句所需要的所有数据组合起来放到一个地方存储。这意味着，其它不同不同查询所需要的相同的数据，需要放在别不同的地方。因此，这产生了很多冗余的数据，从而导致了数据量的增大。</li>
+</ul>
+<ul>
+<li><strong><em>处理复杂度 </em></strong> VS <strong><em>总数据量</em></strong>. 在符合范式的数据模式上进行表连接的查询，很显然会增加了查询处理的复杂度，尤其对于分布式系统来说更是。反规格化的数据模型允许我们以方便查询的方式来存构造数据结构以简化查询复杂度。</li>
+</ul>
+<p><strong>适用性</strong>: Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
+<h5>(2) 聚合 Aggregates</h5>
+<p>所有类型的NoSQL数据库都会提供灵活的Schema（数据结构，对数据格式的限制）：</p>
+<ul>
+<li>Key-Value Stores 和 Graph Databases 基本上来说不会Value的形式，所以Value可以是任意格式。这样一来，这使得我们可以任意组合一个业务实体的keys。比如，我们有一个用户帐号的业务实体，其可以被如下这些key组合起来： <em>UserID_name, UserID_email, UserID_messages</em> 等等。如果一个用户没有email或message，那么相应也不会有这样的记录。</li>
+</ul>
+<ul>
+<li>BigTable 模型通过列集合来支持灵活的Schema，我们称之为列族（<em>column family</em>）。BigTable还可以在同一记录上出现不同的版本（通过时间戳）。</li>
+</ul>
+<ul>
+<li>Document databases 文档数据库是一种层级式的“去Schema”的存储，虽然有些这样的数据库允许检验需要保存的数据是否满足某种Schema。</li>
+</ul>
+<p>灵活的Schema允许你可以用一种嵌套式的内部数据方式来存储一组有关联的业务实体（陈皓注：类似于JSON这样的数据封装格式）。这样可以为我们带来两个好处。</p>
+<ul>
+<li>最小化“一对多”关系——可以通过嵌套式的方式来存储实体，这样可以少一些表联结。</li>
+</ul>
+<ul>
+<li>可以让内部技术上的数据存储更接近于业务实体，特别是那种混合式的业务实体。可能存于一个文档集或是一张表中。</li>
+</ul>
+<div>下图示意了这两种好处。图中描给了电子商务中的商品模型（陈皓注：我记得我在“<a title="挑战无处不在" href="https://coolshell.cn/articles/7048.html" target="_blank">挑战无处不在</a>”一文中说到过电商中产品分类数据库设计的挑战）</div>
+<div>
+<ul>
+<li>首先，所有的商品Product都会有一个ID，Price 和 Description。</li>
+</ul>
+<ul>
+<li>然后，我们可以知道不同的类型的商品会有不同的属性。比如，作者是书的属性，长度是牛仔裤的属性。其些属性可能是“一对多”或是“多对多”的关系，如：唱片中的曲目。</li>
+</ul>
+<ul>
+<li>接下来，我们知道，某些业务实体不可能使用固定的类型。如：牛仔裤的属性并不是所有的牌子都有的，而且，有些名牌还会搞非常特别的属性。</li>
+</ul>
+<p>对于关系型数据库来说，要设计这样的数据模型并不简单，而且设计出来的绝对离优雅很远很远。而我们NoSQL中灵活的Schema允许你使用一个聚合 Aggregate (product) 可以建出所有不同种类的商品和他们的不同的属性：</p>
+</div>
+<div>
+<div id="attachment_404">
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/soft-schema2.png"><img decoding="async" loading="lazy" class="aligncenter" title="soft-schema" src="https://coolshell.cn/wp-content/uploads/2012/05/soft-schema2.png?w=594&amp;h=439" alt="" width="594" height="439" /></a></p>
+<p style="text-align: center;">Entity Aggregation</p>
+</div>
+</div>
+<div>
+<p>上图中我们可以比较关系型数据库和NoSQL的差别。<strong>但是我们可以看到在数据更新上，非规格化的数据存储在性能和一致性上会有很大的影响，这就是我们需要重点注意和不得不牺牲的地方</strong>。</p>
+</div>
+<p><strong>适用性</strong>: Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
+<h5>(3) 应用层联结 Application Side Joins</h5>
+<p>表联结基本上不被NoSQL支持。正如我们前面所说的，NoSQL是“面向问题”而不是“面向答案”的，不支持表联结就是“面向问题”的后果。表的联结是在设计时被构造出来的，而不是在执行时建造出来的。所以，表联结在运行时是有很大开销的（陈皓注：搞过SQL表联结的都知道笛卡尔积是什么东西，大可以在参看以前酷壳的“<a title="图解SQL的Join" href="https://coolshell.cn/articles/3463.html" target="_blank">图解数据库表Joins</a>”），但是在使用了 Denormalization 和 Aggregates 技术后，我们基本不用进行表联结，如：你们使用嵌套式的数据实体。当然，如果你需要联结数据，你需要在应用层完成这个事。下面是几个主要的Use Case：</p>
+<ul>
+<li>多对多的数据实体关系——经常需要被连接或联结。</li>
+</ul>
+<ul>
+<li>聚合 Aggregates 并不适用于数据字段经常被改变的情况。对此，我们需要把那些经常被改变的字段分到另外的表中，而在查询时我们需要联结数据。例如，我们有个Message系统可以有一个User实体，其包括了一个内嵌的Message实体。但是，如果用户不断在附加 message，那么，最好把message拆分到另一个独立的实体，但在查询时联结这User和Message这两个实体。如下图：</li>
+</ul>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/aggregates-joins.png"><img decoding="async" class="aligncenter" title="aggregates-joins" src="https://coolshell.cn/wp-content/uploads/2012/05/aggregates-joins.png?w=594" alt="" /></a></p>
+<p><strong>适用性</strong>: Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库， Graph Databases 图数据库。</p>
+<h4>通用建模技术 General Modeling Techniques</h4>
+<p>在本书中，我们将讨论NoSQL中各种不同的通用的数据建模技术。</p>
+<h5>(4) 原子聚合 Atomic Aggregates</h5>
+<p>很多NoSQL的数据库（并不是所有）在事务处理上都是短板。在某些情况下，他们可以通过分布式锁技术或是<a title="Implementation of MVCC Transactions for Key-Value Stores" href="http://highlyscalable.wordpress.com/2012/01/07/mvcc-transactions-key-value/" target="_blank">应用层管理的MVCC技术</a>来实现其事务性（陈皓注：可参看本站的“<a title="多版本并发控制(MVCC)在分布式系统中的应用" href="https://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a>”）但是，通常来说只能使用聚合Aggregates技术来保证一些ACID原则。</p>
+<p>这就是为什么我们的关系型数据库需要有强大的事务处理机制——因为关系型数据库的数据是被规格化存放在了不同的地方。所以，Aggregates聚合允许我们把一个业务实体存成一个文档、存成一行，存成一个key-value，这样就可以原子式的更新了：</p>
+<div id="attachment_409">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/atomic-aggregate1.png"><img decoding="async" class="aligncenter" title="atomic-aggregate" src="https://coolshell.cn/wp-content/uploads/2012/05/atomic-aggregate1.png?w=594" alt="" /><br />
+</a>Atomic Aggregates</p>
+</div>
+<p>当然，原子聚合 Atomic Aggregates 这种数据模型并不能实现完全意义上的事务处理，但是如果支持原子性，锁，或 test-and-set 指令，那么， Atomic Aggregates 是可以适用的。</p>
+<p><strong><strong>适用性</strong>: </strong>Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
+<h5>(5) 可枚举键 Enumerable Keys</h5>
+<p>也许，对于无顺序的Key-Value最大的好处是业务实体可以被容易地hash以分区在多个服务器上。而排序了的key会把事情搞复杂，但是有些时候，一个应用能从排序key中获得很多好处，就算是数据库本身不提供这个功能。让我们来思考下email消息的数据模型：</p>
+<ol>
+<li>一些NoSQL的数据库提供原子计数器以允许生一些连续的ID。在这种情况下，我们可以使用 <em>userID_messageID</em> 来做为一个组合key。如果我们知道最新的message ID，就可以知道前一个message，也可能知道再前面和后面的Message。</li>
+<li>Messages可以被打包。比如，每天的邮件包。这样，我们就可以对邮件按指定的时间段来遍历。</li>
+</ol>
+<p><strong><strong><strong>适用性</strong>: </strong></strong>Key-Value Store 键值对数据库<strong>。</strong></p>
+<h5>(6) 降维 Dimensionality Reduction</h5>
+<p>Dimensionality Reduction 降维是一种技术可以允许把一个多维的数据映射成一个Key-Value或是其它非多给的数据模型。</p>
+<p>传统的地理位置信息系统使用一些如“四分树<a href="http://en.wikipedia.org/wiki/Quadtree" target="_blank">QuadTree</a>” 或 “<a href="http://en.wikipedia.org/wiki/R-tree" target="_blank">R-Tree</a>” 来做地理位置索引。这些数据结构的内容需要被在适当的位置更新，并且，如果数据量很大的话，操作成本会很高。另一个方法是我们可以遍历一个二维的数据结构并把其扁平化成一个列表。一个众所周知的例子是<a href="http://en.wikipedia.org/wiki/Geohash" target="_blank">Geohash</a>（地理哈希）。一个Geohash使用“之字形”的路线扫描一个2维的空间，而且遍历中的移动可以被简单地用0和1来表示其方向，然后在移动的过程中产生0/1串。下图展示了这一算法：（陈皓注：先把地图分成四份，经度为第一位，纬度为第二位，于是左边的经度是0，右边的是1，纬度也一样，上面是为1，下面的为0，这样，经纬度就可以组合成01，11，00，10这四个值，其标识了四块区域，我们可以如此不断的递归地对每个区域进行四分，然后可以得到一串1和0组成的字串，然后使用0-9，b-z 去掉（去掉a, i, l, o）这32个字母进行base32编码得到一个8个长度的编码，这就是Geohash的算法）</p>
+<div id="attachment_398">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/geohash-traversal1.png"><img decoding="async" title="geohash-traversal" src="https://coolshell.cn/wp-content/uploads/2012/05/geohash-traversal1.png?w=594" alt="" /><br />
+</a>Geohash Index</p>
+</div>
+<p>Geohash的最强大的功能是使用简单的位操作就可以知道两个区域间的距离，就像图中所示（陈皓：proximity框着的那两个，这个很像IP地址了）。Geohash把一个二维的坐标生生地变成了一个一维的数据模型，这就是降维技术。BigTable的降维技术参看到文章后面的 [6.1]。更多的关于Geohash和其它技术可以参看 [6.2] 和 [6.3]。</p>
+<p><strong><strong><strong>适用性</strong>:</strong></strong> Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
+<h5>(7) 索引表 Index Table</h5>
+<p>Index Table 索引表是一个非常直白的技术，其可以你在不支持索引的数据库中得到索引的好处。BigTable是这类最重要的数据库。这需要我们维护一个有相应存取模式的特别表。例如，我们有一个主表存着用户帐号，其可以被UserID存取。某查询需要查出某个城市里所有的用户，于是我们可以加入一张表，这张表用城市做主键，所有和这个城市相关的UserID是其Value，如下所示：</p>
+<div id="attachment_399">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/index-table.png"><img decoding="async" title="index-table" src="https://coolshell.cn/wp-content/uploads/2012/05/index-table.png?w=594" alt="" /><br />
+</a>Index Table Example</p>
+</div>
+<p>可见，城市索引表的需要和对主表用户表保持一致性，因此，主表的每一个更新可能需要对索引表进行更新，不然就是一个批处理更新。无论哪个方式，这都会损伤一些性能，因为需要保持一致性。</p>
+<p>Index Table 索引表可以被认为是关系型数据库中的视图的等价物。</p>
+<p><strong>适用性</strong>: BigTable 数据库。</p>
+<h5>(8) 键组合索引 Composite Key Index</h5>
+<p>Composite key 键组合是一个很常用的技术，对此，当我们的数据库支持键排序时能得到极大的好处。Composite key组合键的拼接成为第二排序字段可以让你构建出一种多维索引，这很像我们之前说过的 Dimensionality Reduction 降维技术。例如，我们需要存取用户统计。如果我们需要根据不同的地区来统计用户的分布情况，我们可以把Key设计成这样的格式 <em>(State:City:UserID)</em>，这样一来，就使得我们可以通过State到City来按组遍历用户，特别是我们的NoSQL数据库支持在key上按区查询（如：BigTable类的系统）：</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">SELECT Values WHERE state=&quot;CA:*&quot;
+SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
+<div id="attachment_477">
+<p style="text-align: center;"><a href="http://highlyscalable.files.wordpress.com/2012/03/composite-key-index.png"><img decoding="async" title="composite-key-index" src="http://highlyscalable.files.wordpress.com/2012/03/composite-key-index.png?w=594" alt="" /><br />
+</a>Composite Key Index</p>
+</div>
+<p><strong><strong>适用性</strong>: </strong>BigTable 数据库。</p>
+<h5>(9) 键组合聚合 Aggregation with Composite Keys</h5>
+<p>Composite keys  键组合技术并不仅仅可以用来做索引，同样可以用来区分不用的类型的数据以支持数据分组。考虑一个例子，我们有一个海量的日志数组，这个日志记录了互联网上的用户的访问来源。我们需要计算从某一网站过来的独立访客的数量，在关系型数据库中，我们可能需要下面这样的SQL查询语句：</p>
+<p><code data-enlighter-language="sql" class="EnlighterJSRAW">SELECT count(distinct(user_id)) FROM clicks GROUP BY site</code></p>
+<p>我们可以在NoSQL中建立如下的数据模型：</p>
+<div id="attachment_383">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/composite-key-collating1.png"><img decoding="async" title="composite-key-collating" src="https://coolshell.cn/wp-content/uploads/2012/05/composite-key-collating1.png?w=594" alt="" /><br />
+</a>Counting Unique Users using Composite Keys</p>
+</div>
+<p>这样，我们就可以把数据按UserID来排序，我们就可以很容易把同一个用户的数据（一个用户并不会产生太多的event）进行处理，去掉那些重复的站点（使用hash table或是别的什么）。另一个可选的技术是，我们可以对每一个用户建立一个数据实体，然后把其站点来源追加到这个数据实体中，当然，这样一来，数据的更新在性能相比之下会有一定损失。</p>
+<p><strong><strong>适用性</strong>:</strong> Ordered Key-Value Store 排序键值对数据库， BigTable风格的数据库。</p>
+<p><strong><br />
+</strong></p>
+<h5>(10) 反转搜索 Inverted Search – 直接聚合 Direct Aggregation</h5>
+<p>这个技术更多的是数据处理技术，而不是数据建模技术。尽管如此，这个技术还是会影响数据模型。这个技术最主要的想法是使用一个索引来找到满足某条件的数据，但是把数据聚合起需要使用全文搜索。还是让我们来说一个示例。还是用上面那个例子，我们有很多的日志，其中包括互联网用户和他们的访问来源。让我们假定每条记录都有一个UserID，还有用户的种类 (Men, Women, Bloggers, 等)，以及用户所在的城市，和访问过的站点。我们要干的事是，为每个用户种类找到满足某些条件（访问源，所在城市，等）的的独立用户。</p>
+<p>很明显，我们需要搜索那些满足条件的用户，如果我们使用反转搜索，这会让我们把这事干得很容易，如： <em>{Category -&gt; [user IDs]}</em> 或 <em>{Site -&gt; [user IDs]}</em>。使用这样的索引， 我们可以取两个或多个UserID要的交集或并集（这个事很容易干，而且可以干得很快，如果这些UserID是排好序的）。但是，我们要按用户种类来生成报表会变得有点麻烦，因为我们用语句可能会像下面这样</p>
+<p><code data-enlighter-language="sql" class="EnlighterJSRAW">SELECT count(distinct(user_id)) ... GROUP BY category</code></p>
+<p>但这样的SQL很没有效率，因为category数据太多了。为了应对这个问题，我们可以建立一个直接索引 <em>{UserID -&gt; [Categories]}</em> 然后我们用它来生成报表：</p>
+<div id="attachment_388">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/invert-direct1.png"><img decoding="async" loading="lazy" title="invert-direct" src="https://coolshell.cn/wp-content/uploads/2012/05/invert-direct1.png?w=594&amp;h=438" alt="" width="594" height="438" /><br />
+</a>Counting Unique Users using Inverse and Direct Indexes</p>
+</div>
+<p>最后，我们需要明白，对每个UserID的随机查询是很没有效率的。我们可以通过批查询处理来解决这个问题。这意味着，对于一些用户集，我们可以进行预处理（不同的查询条件）。</p>
+<p><strong>适用性</strong>: Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
+<h4>层级式模型 Hierarchy Modeling Techniques</h4>
+<h5>(11) 树形聚合Tree Aggregation</h5>
+<p>树形或是任意的图（需反规格化）可以被直接打成一条记录或文档存放。</p>
+<ul>
+<li>当树形结构被一次性取出时这会非常有效率（如：我们需要展示一个blog的树形评论）</li>
+<li>搜索和任何存取这个实体都会存在问题。</li>
+<li>对于大多数NoSQL的实现来说，更新数据都是很不经济的（相比起独立结点来说）</li>
+</ul>
+<div id="attachment_381">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/tree-aggregation.png"><img decoding="async" title="tree-aggregation" src="https://coolshell.cn/wp-content/uploads/2012/05/tree-aggregation.png?w=594" alt="" /><br />
+</a>Tree Aggregation</p>
+</div>
+<p><strong>适用性</strong>: Key-Value 键值对数据库, Document Databases 文档数据库</p>
+<h5>(12) 邻接列表 Adjacency Lists</h5>
+<p>Adjacency Lists 邻接列表是一种图 &#8211; 每一个结点都是一个独立的记录，其包含了 所有的父结点或子结点。这样，我们就可以通过给定的父或子结点来进行搜索。当然，我们需要通过hop查询遍历图。这个技术在广度和深度查询，以及得到某个结点的子树上没有效率。</p>
+<p><strong>适用性</strong>: Key-Value 键值对数据库, Document Databases 文档数据库</p>
+<p><strong><br />
+</strong></p>
+<h5>(13) Materialized Paths</h5>
+<p>Materialized Paths 可以帮助避免递归遍历（如：树形结构）。这个技术也可以被认为是反规格化的一种变种。其想法是为每个结点加上父结点或子结点的标识属性，这样就可以不需要遍历就知道所有的后裔结点和祖先结点了：</p>
+<div id="attachment_372">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths2.png"><img decoding="async" title="materialized-paths" src="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths2.png?w=594" alt="" /><br />
+</a>Materialized Paths for eShop Category Hierarchy</p>
+</div>
+<p>这个技术对于全文搜索引擎来说非常有帮助，因为其可以允许把一个层级结构转成一个文档。上面的示图中我们可以看到所有的商品或<em>Men’s Shoes</em>下的子分类可以被一条很短的查询语句处理——只需要给定个分类名。</p>
+<p>Materialized Paths 可以存储一个ID的集合，或是一堆ID拼出的字符串。后者允许你通过一个正则表达式来搜索一个特定的分支路径。下图展示了这个技术（分支的路径包括了结点本身）：</p>
+<div id="attachment_377">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths-2.png"><img decoding="async" title="materialized-paths-2" src="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths-2.png?w=594" alt="" /><br />
+</a>Query Materialized Paths using RegExp</p>
+</div>
+<p><strong>适用性</strong>: Key-Value 键值对数据库, Document Databases 文档数据, Search Engines 搜索引擎</p>
+<h5>(14) 嵌套集 Nested Sets</h5>
+<p><a href="http://en.wikipedia.org/wiki/Nested_set_model">Nested sets</a> 嵌套集是树形结构的标准技术。它被广泛地用在了关系性数据库中，它完全地适用于 Key-Value 键值对数据库 和 Document Databases 文档数据库。这个技术的想法是把叶子结点存储成一个数组，并通过使用索引的开始和结束来映射每一个非叶子结点到一个叶子结点集，就如下图所示一样：</p>
+<div id="attachment_360">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-sets.png"><img decoding="async" title="nested-sets" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-sets.png?w=594" alt="" /><br />
+</a>Modeling of eCommerce Catalog using Nested Sets</p>
+</div>
+<p>这样的数据结构对于immutable data不变的数据 有非常不错的效率，因为其点内存空间小，并且可以很快地找出所有的叶子结点而不需要树的遍历。尽管如此，在插入和更新上需要很高的性能成本，因为新的叶子结点需要大规模地更新索引。</p>
+<p><strong>适用性</strong>: Key-Value Stores 键值数据库, Document Databases 文档数据库</p>
+<h4>(15) 嵌套文档扁平化：有限的字段名 Nested Documents Flattening: Numbered Field Names</h4>
+<p>搜索引擎基本上来说和扁平文档一同工作，如：每一个文档是一个扁平的字段和值的例表。这种数据模型的用来把业务实体映射到一个文本文档上，如果你的业务实体有很复杂的内部结构，这可能会变得很有挑战。一个典型的挑战是把一个有层级的文档映映射出来。例如，文档中嵌套另一个文档。让我们看看下面的示例：</p>
+<div id="attachment_363">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-1.png"><img decoding="async" title="nested-documents-1" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-1.png?w=594" alt="" /><br />
+</a>Nested Documents Problem</p>
+</div>
+<p>上面的每一个业务实体代码一种简历。其包括了人名和一个技能列表。我把这个层级文档映射成一个文本文档，一种方法是创建 <em>Skill</em> 和 <em>Level</em> 字段。这个模型可以通过技术或是等级来搜索一个人，而上图标注的那样的组合查询则会失败。（陈皓注：因为分不清Excellent是否是Math还是Poetry上的）</p>
+<p>在引用中的 [4.6] 给出了一种解决方案。其为每个字段都标上数字 <em>Skill_i</em> 和 <em>Level_i</em>，这样就可以分开搜索每一个对（下图中使用了OR来遍历查找所有可能的字段）:</p>
+<div id="attachment_365">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-3.png"><img decoding="async" title="nested-documents-3" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-3.png?w=594" alt="" /><br />
+</a>Nested Document Modeling using Numbered Field Names</p>
+</div>
+<p>这样的方式根本没有扩展性，对于一些复杂的问题来说只会让代码复杂度和维护工作变大。</p>
+<p><strong>适用性</strong>: Search Engines 全文搜索</p>
+<h5>(16)嵌套文档扁平化：邻近查询 Nested Documents Flattening: Proximity Queries</h5>
+<p>在附录 [4.6]中给出了这个技术用来解决扁平层次文档。它用邻近的查询来限制可被查询的单词的范围。下图中，所有的技能和等级被放在一个字段中，叫 SkillAndLevel，查询中出现的 “Excellent” 和 “Poetry” 必需一个紧跟另一个：</p>
+<div id="attachment_364">
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-2.png"><img decoding="async" title="nested-documents-2" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-2.png?w=594" alt="" /><br />
+</a>Nested Document Modeling using Proximity Queries</p>
+</div>
+<p>附录 [4.3] 中讲述了这个技术被用在Solr中的一个成功案例。</p>
+<p><strong>适用性</strong>: Search Engines 全文搜索</p>
+<h5>(17) 图结构批处理 Batch Graph Processing</h5>
+<p>Graph databases 图数据库，如 neo4j 是一个出众的图数据库，尤其是使用一个结点来探索邻居结点，或是探索两个或少量结点前的关系。但是处理大量的图数据是很没有效率的，因为图数据库的性能和扩展性并不是其目的。分布式的图数据处理可以被 MapReduce 和 Message Passing pattern 来处理。如： <a title="MapReduce Patterns, Algorithms, and Use Cases" href="http://highlyscalable.wordpress.com/2012/02/01/mapreduce-patterns/">在我前一篇的文章中的那个示例</a>。这个方法可以让 Key-Value stores, Document databases, 和 BigTable-style databases 适合于处理大图。</p>
+<p><strong>Applicability</strong>: Key-Value Stores, Document Databases, BigTable-style Databases</p>
+<h4>参考</h4>
+<p>Finally, I provide a list of useful links related to NoSQL data modeling:</p>
+<ol>
+<li>Key-Value Stores:
+<ol>
+<li><a href="http://www.devshed.com/c/a/MySQL/Database-Design-Using-KeyValue-Tables/">http://www.devshed.com/c/a/MySQL/Database-Design-Using-KeyValue-Tables/</a></li>
+<li><a href="http://antirez.com/post/Sorting-in-key-value-data-model.html">http://antirez.com/post/Sorting-in-key-value-data-model.htm</a>l</li>
+<li><a href="http://stackoverflow.com/questions/3554169/difference-between-document-based-and-key-value-based-databases">http://stackoverflow.com/questions/3554169/difference-between-document-based-and-key-value-based-databases</a></li>
+<li><a href="http://dbmsmusings.blogspot.com/2010/03/distinguishing-two-major-types-of_29.html">http://dbmsmusings.blogspot.com/2010/03/distinguishing-two-major-types-of_29.html</a></li>
+</ol>
+</li>
+<li>BigTable-style Databases:
+<ol>
+<li><a href="http://www.slideshare.net/ebenhewitt/cassandra-datamodel-4985524">http://www.slideshare.net/ebenhewitt/cassandra-datamodel-4985524</a></li>
+<li><a href="http://www.slideshare.net/mattdennis/cassandra-data-modeling">http://www.slideshare.net/mattdennis/cassandra-data-modeling</a></li>
+<li><a href="http://nosql.mypopescu.com/post/17419074362/cassandra-data-modeling-examples-with-matthew-f-dennis">http://nosql.mypopescu.com/post/17419074362/cassandra-data-modeling-examples-with-matthew-f-dennis</a></li>
+<li><a href="http://s-expressions.com/2009/03/08/hbase-on-designing-schemas-for-column-oriented-data-stores/">http://s-expressions.com/2009/03/08/hbase-on-designing-schemas-for-column-oriented-data-stores/</a></li>
+<li><a href="http://jimbojw.com/wiki/index.php?title=Understanding_Hbase_and_BigTable">http://jimbojw.com/wiki/index.php?title=Understanding_Hbase_and_BigTable</a></li>
+</ol>
+</li>
+<li>Document Databases:
+<ol>
+<li><a href="http://www.slideshare.net/mongodb/mongodb-schema-design-richard-kreuters-mongo-berlin-preso">http://www.slideshare.net/mongodb/mongodb-schema-design-richard-kreuters-mongo-berlin-preso</a></li>
+<li><a href="http://www.michaelhamrah.com/blog/2011/08/data-modeling-at-scale-mongodb-mongoid-callbacks-and-denormalizing-data-for-efficiency/">http://www.michaelhamrah.com/blog/2011/08/data-modeling-at-scale-mongodb-mongoid-callbacks-and-denormalizing-data-for-efficiency/</a></li>
+<li><a href="http://seancribbs.com/tech/2009/09/28/modeling-a-tree-in-a-document-database/">http://seancribbs.com/tech/2009/09/28/modeling-a-tree-in-a-document-database/</a></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Schema+Design">http://www.mongodb.org/display/DOCS/Schema+Design</a></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Trees+in+MongoDB">http://www.mongodb.org/display/DOCS/Trees+in+MongoDB</a></li>
+<li><a href="http://blog.fiesta.cc/post/11319522700/walkthrough-mongodb-data-modeling">http://blog.fiesta.cc/post/11319522700/walkthrough-mongodb-data-modeling</a></li>
+</ol>
+</li>
+<li>Full Text Search Engines:
+<ol>
+<li><a href="http://www.searchworkings.org/blog/-/blogs/query-time-joining-in-lucene">http://www.searchworkings.org/blog/-/blogs/query-time-joining-in-lucene</a></li>
+<li><a href="http://www.lucidimagination.com/devzone/technical-articles/solr-and-rdbms-basics-designing-your-application-best-both">http://www.lucidimagination.com/devzone/technical-articles/solr-and-rdbms-basics-designing-your-application-best-both</a></li>
+<li><a href="http://blog.griddynamics.com/2011/07/solr-experience-search-parent-child.html">http://blog.griddynamics.com/2011/07/solr-experience-search-parent-child.html</a></li>
+<li><a href="http://www.lucidimagination.com/blog/2009/07/18/the-spanquery/">http://www.lucidimagination.com/blog/2009/07/18/the-spanquery/</a></li>
+<li><a href="http://blog.mgm-tp.com/2011/03/non-standard-ways-of-using-lucene/">http://blog.mgm-tp.com/2011/03/non-standard-ways-of-using-lucene/</a></li>
+<li><a href="http://www.slideshare.net/MarkHarwood/proposal-for-nested-document-support-in-lucene">http://www.slideshare.net/MarkHarwood/proposal-for-nested-document-support-in-lucene</a></li>
+<li><a href="http://mysolr.com/tips/denormalized-data-structure/">http://mysolr.com/tips/denormalized-data-structure/</a></li>
+<li><a href="http://sujitpal.blogspot.com/2010/10/denormalizing-maps-with-lucene-payloads.html">http://sujitpal.blogspot.com/2010/10/denormalizing-maps-with-lucene-payloads.html</a></li>
+<li><a href="http://java.dzone.com/articles/hibernate-search-mapping-entit">http://java.dzone.com/articles/hibernate-search-mapping-entit</a></li>
+</ol>
+</li>
+<li>Graph Databases:
+<ol>
+<li><a href="http://docs.neo4j.org/chunked/stable/tutorial-comparing-models.html">http://docs.neo4j.org/chunked/stable/tutorial-comparing-models.html</a></li>
+<li><a href="http://blog.neo4j.org/2010/03/modeling-categories-in-graph-database.html">http://blog.neo4j.org/2010/03/modeling-categories-in-graph-database.html</a></li>
+<li><a href="http://skillsmatter.com/podcast/nosql/graph-modelling">http://skillsmatter.com/podcast/nosql/graph-modelling</a></li>
+<li><a href="http://www.umiacs.umd.edu/%7Ejimmylin/publications/Lin_Schatz_MLG2010.pdf">http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Schatz_MLG2010.pdf</a></li>
+</ol>
+</li>
+<li>Demensionality Reduction:
+<ol>
+<li><a href="http://www.slideshare.net/mmalone/scaling-gis-data-in-nonrelational-data-stores">http://www.slideshare.net/mmalone/scaling-gis-data-in-nonrelational-data-stores</a></li>
+<li><a href="http://blog.notdot.net/2009/11/Damn-Cool-Algorithms-Spatial-indexing-with-Quadtrees-and-Hilbert-Curves">http://blog.notdot.net/2009/11/Damn-Cool-Algorithms-Spatial-indexing-with-Quadtrees-and-Hilbert-Curves</a></li>
+<li><a href="http://www.trisis.co.uk/blog/?p=1287">http://www.trisis.co.uk/blog/?p=1287</a></li>
+</ol>
+</li>
+</ol>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1889.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause-150x150.jpg" alt="SQL的Where语句" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1889.html" class="wp_rp_title">SQL的Where语句</a></li><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/5826.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="千万别用MongoDB？真的吗？！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5826.html" class="wp_rp_title">千万别用MongoDB？真的吗？！</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7270.html/feed</wfw:commentRss>
+			<slash:comments>52</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>用Unix的设计思想来应对多变的需求</title>
+		<link>https://coolshell.cn/articles/7236.html</link>
+					<comments>https://coolshell.cn/articles/7236.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 03 May 2012 00:14:20 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[design pattern]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7236</guid>
+
+					<description><![CDATA[<p>之前，@风枫峰 在“这是谁的错？”中说过开发团队对需求来者不拒，而@weidagang 也在“需求变更和IoC”中说过用IoC来最大程度地解决需求变更。今天我也...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7236.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>之前，@<a title="风枫峰" href="http://weibo.com/hfcc?source=webim" target="_blank">风枫峰</a> 在“<a title="这到底是谁之错？" href="https://coolshell.cn/articles/7126.html" target="_blank">这是谁的错？</a>”中说过开发团队对需求来者不拒，而@<a title="weidagang" href="http://weibo.com/weidagang" target="_blank">weidagang</a> 也在“<a title="需求变化与IoC" href="https://coolshell.cn/articles/6950.html" target="_blank">需求变更和IoC</a>”中说过用IoC来最大程度地解决需求变更。今天我也想从Unix设计思想的角度来说说什么是好的软件设计，什么样的设计可以把需求变更对开发的影响降低。（<strong>注意</strong>：这并不能解决用户或是PM的无理需求，面对无理需求，需要仔细分析需求，而用技术的手段无法搞定这个事，但是可以减轻需求变更带来的痛苦） 我曾经在<a href="https://coolshell.cn/articles/2324.html" target="_blank">《Unix传奇》的下篇</a>中写过一些Unix的设计哲学和思想（这里重点推荐大家看一下《<em><a href="http://product.china-pub.com/197413" target="_blank">The Art of Unix Programming</a></em>》，我推荐过多次了），以前也发过一篇《<a title="一些软件设计的原则" href="https://coolshell.cn/articles/4535.html" target="_blank">一些软件设计的原则</a>》，不过，这些东西都太多了，记不住。其实，这么多年来，我的经验告诉我，<strong>无论是Unix设计，还是面向对象设计，还是别的什么如SOA，ECB，消息，事件，MVC，网络七层模型，数据库设计，等等，他们都在干三件事——<span style="color: #cc0000;">解耦，解耦，还是解耦</span>！</strong>所谓解耦，就是让软件的模块和模块间尽量少地依赖起来。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter" title="Unix" src="https://coolshell.cn/wp-content/uploads/2012/05/Bannière-Unix-linux.jpg" alt="" width="448" height="173" /></p>
+<h4>现实当中的例子</h4>
+<p>让我先举几个现实生活中的例子：</p>
+<p style="padding-left: 30px;">1、现实社会中，制造灯具的工厂完全不关心制造灯泡的工厂，制造灯泡的工厂完全不关心制造灯具的工厂，但是，灯泡和灯饰可以很完美地组合成用户所喜欢的样子（这和@<a title="weidagang" href="http://weibo.com/weidagang" target="_blank">weidagang</a> 在“<a title="需求变化与IoC" href="https://coolshell.cn/articles/6950.html" target="_blank">需求变更和IoC</a>”说到的那个PC的例子相仿）。他们是怎么做到的？</p>
+<p style="padding-left: 30px;">2、互联网上，做网站的人完全不用关心用户在用什么样的操作系统，什么样的客户端浏览器（当然事实上，浏览器的不标准让网站那边很头痛，这里只是举个例），反过来，上网的人也不关心做网站的人在用什么的技术开发网站。但是大家在完全不关心对方的情况下，可以很正常地协同工作在一起。为什么？</p>
+<p><span id="more-7236"></span> 这样的例子太多了。为什么可以做成这样呢？因为大家依赖的是一个接口，灯具和灯泡并不互相依赖，他们依赖的是一个接口，做网站的人和浏览网站的人依赖的还是接口——HTTP协议。这就是面向对象的核心思想——依赖于接口而不是实现，这就是解耦。<strong>当你看过这两个例子以后，我希望你以后设计的软件至少不能比我们现实社会中的这些方法要差</strong>。不然，你就是在让社会倒退了，呵呵。 你会说，这和Unix，和应对需求变化有什么关系？好让我们再来看一下Unix的设计。</p>
+<h4>Unix设计的例子</h4>
+<p>下面是几个Unix下的例子：</p>
+<p style="padding-left: 30px;">1、Unix下，所有的硬件都可以通过文件的方式存取。其统统在/dev下。于是，软件和硬件的耦合被解开了，操作系统只需要把硬件统统变成文件，而程序只需要使用三个东西，一个是fd，一个是read()，一个是write()，就可以来操作任意的硬件了，这就是抽象，简单到不行。</p>
+<p style="padding-left: 30px;">2、Unix下，所有的命令都可以用管道串起来（管道绝对是个伟大的发明），这样，所有的命令间的交互全部解耦到只依赖于STD_IN, STD_OUT设备上。最酷的是，用户可以使用管道任意地拼装那些命令，以完成各式各样的功能。管道这个设计思想可以映射为今天的Web Service，你可以任意地拼装各种Web Service。</p>
+<p>看到这里，你会发现，这还是解耦，本质上来说，也是一种依赖倒置——OOD的精髓。但是，Unix还不仅仅是这些。我们再来看几个例子：</p>
+<p style="padding-left: 30px;">1、Unix下，软件都是绿色地安装。在iOS上更明显——各个程序间基本上互不干扰，这个程序产生的垃圾文件不会影响到另一个程序。你删掉一个程序不会让另一个程序不举，各是各的空间。你可以删除这些程序，只要把内核心留着，系统照样可以启动。</p>
+<p style="padding-left: 30px;">2、Unix下，你可以通过设置一些环境变量，让多种环境同时存在，比如：某个LAMP用的是Apache 2.0, Mysql 4.0, PHP 4.0，某个LAMP用的是Apache 2.2, Mysql 5.0，PHP5.3，你不但可以方便地在系统中切换这两个环境，你甚至还可以同时启动他们。</p>
+<p style="padding-left: 30px;">3、Unix下，你可以随意地替换你想要的程序。比如，你不喜欢bash，你可以替换成ksh/csh等，你不喜欢awk ，你可以替换成 gawk ，所有的东西都像零件一样，你不喜欢什么，你就可以替换什么。</p>
+<p>这三个例子告诉了我们——<strong>当你把你的软件设计地耦合度非常地低时，你可以随意地组合，随意地安排你的系统</strong>。相当的灵活，灵活到Windows到今天都学不会。</p>
+<h4>应对需求变化</h4>
+<p>看到这里，你可能明白我想说的是什么了，你可能开始觉得怎么样的系统设计会更有效了。如果你还记得《<a title="SteveY对Amazon和Google平台的长篇大论" href="https://coolshell.cn/articles/5701.html" target="_blank">Steve Y 对平台的长篇大论</a>》，你就会知道我想说什么了。是的，我想说的就是，<strong>当你真正了解了Unix的设计思想后，你会觉得今天的很多东西都是对Unix设计思想的一种传承或是变种</strong>。这种东西就是：</p>
+<p style="padding-left: 30px;">1）<strong>解耦，解耦，解耦</strong>。尽量地让你的模块不要在实现上耦合，而是耦合某个规范，某个标准。</p>
+<p style="padding-left: 30px;">2）<strong>KISS，KISS，KISS</strong>。要做到高度解耦，你的模块就一定要很简单，当然不是说简单到只有几行代码，而是简单到只干一件事，并把这件事干到极致。然后通过某个标准拼装起来。</p>
+<p style="padding-left: 30px;">3）<strong>拼装，拼装，拼装。</strong>我想不起来是谁说的了，这句话是这样的，当我想用一个模块的时候，我直接调用就好了，没有必要像C或Java一样，还要编译。是的，拼装需要一个框架，需要一种标准协议，然后让所有的系统都耦合在这种规范上，各自独立运行，就像一个机器上的各个部件一样，当我觉得这个部件不爽，换了就是了。（例如，当我们在尝试不同的算法的时候）</p>
+<p>想想建材和家俱市场，无论用户过来想装修什么，我都可以满足用户的不同需求，只要你是和家装相关，我基本上都能满足你，不是吗？无论你怎么变，只要不变态，我基本上都可以满足你。这就是解耦，拼装带来的好处。 你可能会说我说得太简单了，另一方面，你可能觉得有一些系统这样做没必要，我承认，不过，你可以有选择的或多或少地试试。（其实，我相信你已经在不自觉得或多或少地使用这种方式开发软件了） （全文完）</p>
+<div></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/kiss-150x150.png" alt="从面向对象的设计模式看软件设计" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8961.html" class="wp_rp_title">从面向对象的设计模式看软件设计</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li><li ><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" alt="IoC/DIP其实是一种管理思想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_title">IoC/DIP其实是一种管理思想</a></li><li ><a href="https://coolshell.cn/articles/6950.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="需求变化与IoC" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6950.html" class="wp_rp_title">需求变化与IoC</a></li><li ><a href="https://coolshell.cn/articles/4535.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="一些软件设计的原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4535.html" class="wp_rp_title">一些软件设计的原则</a></li><li ><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" alt="我做系统架构的一些原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_title">我做系统架构的一些原则</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7236.html/feed</wfw:commentRss>
+			<slash:comments>90</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>做个环保主义的程序员</title>
+		<link>https://coolshell.cn/articles/7186.html</link>
+					<comments>https://coolshell.cn/articles/7186.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 27 Apr 2012 00:26:44 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Green]]></category>
+		<category><![CDATA[IE]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[QQ]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7186</guid>
+
+					<description><![CDATA[<p>十多年前刚走入社会工作的时候，那时的中国软件开发根本没有什么版本管理，也没有什么编程规范，软件开发相比起今天来说非常地混乱，那时仅凭自己的一些学习总结了一些C语...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7186.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7186.html">做个环保主义的程序员</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong></strong>十多年前刚走入社会工作的时候，那时的中国软件开发根本没有什么版本管理，也没有什么编程规范，软件开发相比起今天来说非常地混乱，那时仅凭自己的一些学习总结了一些C语言编程中的好的小笔记，后来，这些笔记写成了一篇叫《<a href="http://blog.csdn.net/haoel/article/details/2872" target="_blank">编程修养</a>》的文章。今天，又有些感触，想把这个话题扩大一下，从“个人修养”扩大到“环境保护”，所谓，穷则独善其身，富则达济天下，今天的技术人员比十多年前在技术和环境上都富有了许多，所以，也应该或多或少地担负起“达济天下”的责任了。</p>
+<p>环境保护说白了就是保护一个良好的环境，为好的环境添砖加瓦，与破坏环境的人和事做斗争。其实，从技术人员来说，我们可以做一些力所能及的事。因为我们身边的技术环境还有很大的改善的空间，而一些来之不易的东西还需要我们去小心维护。另外，对于我们自己来说，少吃一些垃圾食品，健康生活，对自己也有益。</p>
+<h4>环保主义软件开发</h4>
+<p><strong><img decoding="async" loading="lazy" class="alignright" title="Green Computing" alt="" src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing.jpg" width="285" height="233" /></strong>先说说软件开发中的环保。比如：</p>
+<ul>
+<li><strong>环保需求</strong>。当我们分析需求的时候，如果我们能做到不要像“<a title="这到底是谁之错？" href="https://coolshell.cn/articles/7126.html" target="_blank">这是到底是谁的错</a>”一文中那样的来者不拒，如果我们在面对需求能多问这样几个问题：为什么 要有这样的需求？这个功能主要能解决什么 样的问题？为什么不是另外那一种？可不可以简化一下？其实，我们并不需要创新，只需要真正地问好这几个问题，我们就可以少看着一些弯路，少一些苦逼的加班，少一些内耗，少一些埋怨，也就可以为这个社会节省下一些资源，从而环保。</li>
+</ul>
+<div></div>
+<ul>
+<li><strong>环保开发</strong>。当我们做设计写代码的时候，如果我们多花一些时间去思考一下，我们就可以少一些代码（参看“<a title="多些时间能少写些代码" href="https://coolshell.cn/articles/5686.html" target="_blank">多一些时间少一些代码</a>”）。如果我们在一开始多思考一下，不要急着马上去用迭代的方式认识世界，多思考一下怎么把复杂的东西解藕，把复杂的东西简化，怎么做出一个优雅的设计，怎么让我们的程序少一些tricky的东西，怎么让我们的程序变得更简洁，更清楚，更直，在一开始思考一下未来需求可能的变化，未来软件需要怎么测试，未来的系统需要怎么的运维，那么，我们可以少一些返工，少一些重构，少欠一些债，少一些低级错误，少承担一些系统上线后的压力，那么，我们同样可以为这个社会节约一些资源。说得再直白一点，你用更少的代码产生出更高的效益，少耗一些CPU，就能省一些电，间接地保护了环境。（参看<a title="Why C++ ? 王者归来" href="https://coolshell.cn/articles/6548.html" target="_blank"> Why C++？</a>）</li>
+</ul>
+<div><span id="more-7186"></span></div>
+<ul>
+<li><strong>环保文化</strong>。当我们在做软件开发的时候，如果你能影响并帮助你身边的同事，让他们写出更有修养更有效率质量更高的代码来，并发动团队树立工程师的文化，用团队去影响你的老板，你的公司，让他们能再多一点地重视技术，重视技术人员，那么你必然也会成为一个受益者。</li>
+</ul>
+<div></div>
+<ul>
+<li><strong>环保管理</strong>。当你做为一个管理者，做为一个方法推动者，如果你能更多地注重软件开发中真正创造生产力的程序员，为他们分忧，为他们铺路，为他们创造条件，那么，他们就会更多的回馈于你，就会少了一些不信任，就会少了一些被动，就会多一些主动，就会多一分责任，不但可以激发团队热情，同时可以有更大的生产力。同样是一种环保。</li>
+</ul>
+<p>当然，这样的东西还有很多，你也可能会觉得太过理想主义了，我们不可能马上改变之，但是我们可以试一试。</p>
+<h4>技术环保主义</h4>
+<p>其实，我们身边有很多可以做的技术环保工作。比如说，在Linux下少用root用户，SQL的时候，delete前先select，这样，你就不会做出一些让你后悔的事（参看<a title="程序员那些悲催的事儿" href="https://coolshell.cn/articles/3980.html" target="_blank">程序员那些悲催的事</a>），不会让你重头来过，从而至少不会浪费电能。写代码的时候要很小心管理好内存，以及各种资源，和线程并发，组织好的你的代码中的业务逻辑，做好单元测试，自动化回归测试，等，这样你就可以少一点遇到BUG，在遇到BUG时少一些时间去做调查。操作电脑的时候少下一些破解软件，少访问一些乱七八遭的网站，这样，你就会少中一些病毒，少一些损失，少一些重做系统，一样可以节省电能，最重要的是可以节省你的很多时间，让你可以去做一些更有价值 的事情。</p>
+<p>当然，除此之外，我们更应该做为一个大气的，高瞻的环保主义者，比如下面的事情：</p>
+<ul>
+<li><strong>拒绝IE6</strong>。如果你坚决不用IE6，并影响你身边的人，让他们升级IE6，尝试Chrome 或 Firefox，多告诉一下自己身边的朋友，怎么设计口令，怎么在互联网上保护自己的隐私和安全，怎么防木马，这样就能少一些问题，少装两次系统，就能省一些电，也就能多一些时间去做一些更有意义的事。也是在为整个世界整个人类做贡献。（<strong>看看某些软件产商，占据着用户桌面的江山，还整天弹窗弹窗的，说这不安全，那不安全的。你还是做安全的，你居然能容忍IE6装在用户的机器上，你还做个屁的安全！</strong>）2011年3月份，<a title="中国仍是IE6的重灾区" href="https://coolshell.cn/articles/3921.html" target="_blank">我国的IE6用户的百分比是34%</a>， 那时中国网民4.5亿，平均每三个人中有一个，2012年3月份，中国的比例还有24%左右，不过<a href="http://it.sohu.com/20120116/n332237326.shtml" target="_blank">中国的网民数达到了5.13亿</a>，也就是说，平均5个人里有一个，但是中国依然是全世界的IE6占有量最大的，参看下图（来自：<a href="http://www.ie6countdown.com/">http://www.ie6countdown.com</a>）面对下面的图片，你作何感想呢？</li>
+</ul>
+<p style="text-align: center;"><em>“<strong><span style="color: #cc0000;">Friend Don&#8217;t Let Friend Use IE6</span></strong>”</em></p>
+<div><a href="http://www.ie6countdown.com"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7214" title="The Internet Explorer 6 Countdown" alt="" src="https://coolshell.cn/wp-content/uploads/2012/04/iecountdown2012.jpg" width="450" height="296" srcset="https://coolshell.cn/wp-content/uploads/2012/04/iecountdown2012.jpg 450w, https://coolshell.cn/wp-content/uploads/2012/04/iecountdown2012-300x197.jpg 300w" sizes="(max-width: 450px) 100vw, 450px" /></a></div>
+<div></div>
+<ul>
+<li><strong>拒绝破解软件</strong>。为什么要拒绝这些东西，因为你恐怕不知道这个软件的危害，包括一些汉化版的开源软件。这些软件中都会带 一些木马，比如：你下个putty的中文版，结果里有木马，人家就把你网站的口令盗了。关于网游，你可能不知道，连接网游私服的电脑基本上全是肉鸡，而 且，有很多的站点骗你下载软件破解程序，其实你下载到了一个木马。等等。这些生活都非常地不健康。</li>
+</ul>
+<ul>
+<li><strong>拒绝抄袭和山寨</strong>。如果你鄙视那些赤祼祼地抄袭者，不使用他们的产品，有的人会说你就是想标榜自己的高尚，ZB，假高尚，大家会说你没有必要。其实并不是，你这样做，其实是为了“环保”，为了“保护一个健康的IT环境”，虽然你没有创新，但是你的行为却是在鼓励创新的环境，这样，如果当整个大环境都是在创新文化影响之下，才会更健康，技术人员也才会被尊重，而我们自己最终会受益。虽然只是抑制抄袭和山寨，但是我们间接地为社会做了贡献。（看看那N多的抄袭团队，加入他们实在是耗费这个社会的资源） （那个整天复制这个复制这个复制那个的公司，看看你自己做的那些产品线？乱糟糟的。<strong>你自己看看，你有个人空间，还有群空间，还有校友录，然后你还要做个facebook式的“朋友”，还要搞个微博，然后还要搞个微信，大哥啊，你把这些相似度很大的东西放在了N多的服务器上，你不觉得浪费吗？你真是山寨之王啊，自己都一直在复制自己的产品</strong>。还有人说你们的产品经理一流，真是脑残啊。对于你们的复制精神，我只能拜了！）</li>
+</ul>
+<ul>
+<li><strong>拒绝百度搜索</strong>。如果你学得百度还是可以的话，你不妨看看我的微博（<a href="http://weibo.com/1401880315/ybN502xZ9" target="_blank">这个</a>，<a href="http://weibo.com/1401880315/ye6wNFTUW" target="_blank">这个</a>（<a href="http://weibo.com/1401880315/ye6E0a4zN" target="_blank">抓图</a>），还有和<a href="http://weibo.com/1401880315/yfC4yzonW" target="_blank">这个</a>和 <a href="http://weibo.com/1401880315/zlS3IbbEH" target="_blank">这个</a>）（以前，<a href="http://www.techweb.com.cn/it/2012-01-31/1145906.shtml" target="_blank">百度搜索出来的很多的开源软件（PuTTY、WinSCP）的第一个链接全是带木马的</a>，百度就是一个网上的病毒 )，你会发现百度不单单是广告的问题，很多东西根本搜不出来，包括他自己的内容。<strong>用百度就是浪费时间，浪费计算资源</strong>。如果你告诉你身边的朋友不要用百度搜索，而是用Google，并能耐心地教会他们翻墙，这样，我们就可以让那些“穷则穷凶极恶，富则为富不仁”的企业少一些自以为是，最重要的是可以让他们少制造一些垃圾信息和垃圾产品，世界少一些垃圾，自然也就环保了。</li>
+</ul>
+<ul>
+<li><strong>拒绝过重的商业氛围</strong>。很多社区的商业氛围实在是太浓了，全都是广告。整个社区根本都不是为技术人员来做的，而为了那些软件产商，为了那些公司。他们只知道为那些大公司写软文，做广告，开大会。他们只想着挣钱。网页上全是花花绿绿的广告，打开他们的网页，就会多耗许多电，浏览他们网站上的文章，到他们的大会上听他们的软件广告分享，就会让自己的生命和时间浪费，自己消耗了体力不说，却还没得到什么营养，相当的不环保。</li>
+</ul>
+<ul>
+<li><strong>拒绝浮燥</strong>。比如：浮燥地创业者们，被风投们一轮一轮地压榨。为了让风投满意，牺牲自己的初衷，去找水军刷排名，去发垃圾邮件，去烧钱买吆喝，制造虚假的繁荣，等等。另外，少去追那些新的技术，少一些浮夸，不要开口闭口的就是海量数据，高性能，要当个架构师，经理，要拿多少多少的工资，与其这样，还不如多静下心来研究一下那些十来年的技术，思考一下自己身边的问题，一步一步走踏实，少摔几个跟头，这样，你也就能多一些能力，多一些自信，也就能多做一些事，多解决一些问题，你的职业生源走好了，也就很环保了。</li>
+</ul>
+<p>还有很多，我相信大家明白我想说什么。<strong></strong>其实，我想说的是，<strong>这不单单是一种“个人修养”，这也是一种对社会贡献的方式，更是一种“低碳环保”的生活方式</strong>。</p>
+<p><span style="color: #cc0000;"><strong>让我们一起来做有修养的环保主义的程序员吧，少吃一些垃圾食品，多一些绿色的健康生活！</strong></span></p>
+<p><em><strong>—————— 更新 2012年4月27 ——————</strong></em></p>
+<p>我看到很多网友并不同意我的观点，并指责我的偏激和极端。挺好的，我知道，我说到了你们最敏感的地方，我很高兴。</p>
+<p><strong>你可以对现实妥协，你可以继续钟爱你的垃圾食品，你可以继续使用百度搜索，你可以继续生活在墙内，我虽然替你感到惋惜，但是我不会勉强你，因为我能理解你可以不环保，本来也是，这些事情，你能做到固然好，你做不到，也是你的选择。每个人的生活每个人自己去选择，想健康地生活，或是不健康地生活，都是你自己的权利</strong>。</p>
+<p>（全文完）</p>
+<div><strong><br />
+</strong></div>
+<div><strong><br />
+</strong></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7186.html">做个环保主义的程序员</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7186.html/feed</wfw:commentRss>
+			<slash:comments>461</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>游戏：VIM大冒险</title>
+		<link>https://coolshell.cn/articles/7166.html</link>
+					<comments>https://coolshell.cn/articles/7166.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 26 Apr 2012 00:22:22 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[vi]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7166</guid>
+
+					<description><![CDATA[<p>不知道大家是否还记得“Vim简明攻略”呢？你是不是对Vim的那一大堆热键很头痛呢？现在好好，下面这个游戏是一个使用VIM热键玩的游戏。你可以在玩游戏的过程中熟悉...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7166.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7166.html">游戏：VIM大冒险</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>不知道大家是否还记得“<a title="简明 Vim 练级攻略" href="https://coolshell.cn/articles/5426.html" target="_blank">Vim简明攻略</a>”呢？你是不是对Vim的那一大堆热键很头痛呢？现在好好，下面这个游戏是一个使用VIM热键玩的游戏。你可以在玩游戏的过程中熟悉Vim的热键。</p>
+<p><strong>你可以点击图片，或是图片下的网址打开这个游戏</strong></p>
+<p style="text-align: center;"><strong><a href="http://vim-adventures.com/" target="_blank">http://vim-adventures.com/</a></strong></p>
+<p style="text-align: center;"><a href="http://vim-adventures.com/" target="_blank"><img decoding="async" loading="lazy" class=" wp-image-7172 aligncenter" title="VIM Adventures" src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun.jpg" alt="VIM大冒险" width="600" height="369" srcset="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun.jpg 600w, https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-300x185.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-439x270.jpg 439w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p style="text-align: left;">我试玩了一下这个游戏，真的很不错，下面是一些我给的游戏攻略。</p>
+<p style="text-align: left;"><span id="more-7166"></span></p>
+<ul>
+<li>第一关，场景一，首先是使用vim的h, j, k, l四个键来控制方向。（如果你妄图使用光标键的话，系统会出现黄色警告的）你需要使用h, j, k, l 四个方向走到图的右边，找到一把钥匙。（注意：迷宫墙上有些斜面，你可以通过斜面），找到钥匙后，钥匙会出现在你的右上角的位置，示意着你的光标要向那个方向移动，当你到达一个门的时候，会自动开门，进入第二关。</li>
+</ul>
+<ul>
+<li>第二关，每一关的小人都会给你一些英文提示，教你怎么玩。关于第二关，你会看到你过不去，小会提示你，那些绿草地就向我们文件中的行，你在行上按上下键，光标会在这一列上移动，如果这一下面的一行没有这么长，光标会到行尾。这个vim的特性会告诉我们如何过这一关——移到最上面的行尾（因为是最长的可以越过最下面的障碍），然后按下光标键，到最后一行时你就会发现光标已经过了阻碍。如此通过第二场景，达到一个小人后，按下键，进入第二关。</li>
+</ul>
+<ul>
+<li>第三关，我们可以看到地图上有很多的字母，我们还可以看到有两个键，一个是w，一个是e，我们可以把光标移到w上吃到w后，我们就可以使用w键了——以单词为单位移动光标，这样，我们就可以吃到e了和第一把钥匙，我们按w和e我们就可以看到这两个按键都是以单词为单位移动光标的，一个是单词头，一个是单词尾（参看我以前给大家的<a title="给程序员的VIM速查卡" href="https://coolshell.cn/articles/5479.html" target="_blank">vim按键速查卡</a>）。然后，我们在最后一行通过单词跳跃到最右边吃到b—— 回到该单词的头，可以得到第二把钥匙。然后往上走，使用b 和 e键拿到第三把钥匙。然后就可以打开三个门通关了。</li>
+</ul>
+<figure id="attachment_7174" aria-describedby="caption-attachment-7174" style="width: 431px" class="wp-caption aligncenter"><a href="http://vim-adventures.com/"><img decoding="async" loading="lazy" class="size-full wp-image-7174" title="Vim Adventures 第三关" src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun02.jpg" alt="Vim Adventures 第三关" width="431" height="286" srcset="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun02.jpg 431w, https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun02-300x199.jpg 300w" sizes="(max-width: 431px) 100vw, 431px" /></a><figcaption id="caption-attachment-7174" class="wp-caption-text">Vim Adventures 第三关</figcaption></figure>
+<p style="text-align: left;">然后，就需要你注册才能玩了。作者说，因为需要发的邮件太多了，所以现在系统发不出邮件了，请等待。所以，不知道作者是用来收集邮件的，还是没有开发完，不过，<strong>这个游戏的创意实在是太赞了</strong>。推荐给大家。</p>
+<p style="text-align: left;"><strong>哪位会做游戏又熟Vim的朋友也能做一个？</strong></p>
+<p style="text-align: left;">（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg" alt="主流文本编辑器学习曲线" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_title">主流文本编辑器学习曲线</a></li><li ><a href="https://coolshell.cn/articles/3083.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="三个教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3083.html" class="wp_rp_title">三个教程</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/894.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_gvim_ars-150x150.jpg" alt="将vim变得简单:如何在vim中得到你最喜爱的IDE特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/894.html" class="wp_rp_title">将vim变得简单:如何在vim中得到你最喜爱的IDE特性</a></li><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7166.html">游戏：VIM大冒险</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7166.html/feed</wfw:commentRss>
+			<slash:comments>142</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>这到底是谁之错？</title>
+		<link>https://coolshell.cn/articles/7126.html</link>
+					<comments>https://coolshell.cn/articles/7126.html#comments</comments>
+		
+		<dc:creator><![CDATA[hfcc8685]]></dc:creator>
+		<pubDate>Thu, 19 Apr 2012 02:11:05 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7126</guid>
+
+					<description><![CDATA[<p>【感谢 @风枫峰 投递本文】 故事一： 背景介绍：RT是一个外包公司，ZWZX是项目承接公司，YD是甲方。 RT公司每天下班的时候都会接到ZWZX负责人的电话，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7126.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7126.html">这到底是谁之错？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>【感谢 @<a title="风枫峰" href="http://weibo.com/hfcc?source=webim" target="_blank">风枫峰</a> 投递本文】</p>
+<p><strong>故事一：</strong><br />
+背景介绍：RT是一个外包公司，ZWZX是项目承接公司，YD是甲方。</p>
+<p>RT公司每天下班的时候都会接到ZWZX负责人的电话，询问一天的工作情况，然后布置任务要求晚上加班做完，RT公司的员工很无奈也很气愤因为每天都要加班，员工们就问项目经理：“为什么天天加班赶需求，今天才提一个需求，明天就要上线，还让不让人活了?” 项目经理无奈的说：“我有什么办法啊？这是人家ZWZX负责人说的啊，对方逼得紧。”</p>
+<p>多次以后项目经理也忍不住了，就问ZWZX的负责人怎么天天这样啊，ZWZX的负责人就说了:&#8221;明天就要向YD的负责人展示这个页面，我也没有办法啊？YD那边老总就是这么要求的，我怎么办，我也不想这样啊？&#8221;</p>
+<p>然后RT的项目经理实在受不了了就辞职了，新上任的项目经理又会走他的老路，因为从开始我们就被培养“满足客户的需求是最重要的”。RT的员工也就这样一直抱怨着，一直忍受着。天天在心里咒骂YD的老总真是没有人性，不拿人当人看啊！</p>
+<p>人换了一批又一批，加班也就慢慢的变成了应该的，你不加班说明你不敬业，不合格。</p>
+<p><strong>故事二：</strong><br />
+IE6一直存活着，所有的前端开发人员都痛恨它，都不想兼容它，可是产品经理看到IE6的市场占有率还是这么高，就会要求前端开发人员必须兼容IE6。</p>
+<p><span id="more-7126"></span></p>
+<p>矛盾又来了，就像故事一一样，前端开发人员天天抱怨，产品经理也天天抱怨，但是面对IE6的市场份额，产品经理会劝开发人员说：“我有什么办法啊？IE6的市场份额就是这么高，不兼容怎么办啊？我也不想啊！” 开发人员也就这样忍受着，然后不断地抱怨用IE6的用户低端，没文化，怎么还用IE6啊！天天兼容IE6就够烦的了，还怎么创新啊！</p>
+<p><strong>这两个故事里出现的问题到底是谁的错误引起的？ </strong></p>
+<p>故事一的罪魁祸首是YD的老总吗？</p>
+<p>故事二的罪魁祸首是那些还用着IE6的用户吗？</p>
+<p>从这两个嫌疑最大的罪魁祸首眼中看一下这两个故事：</p>
+<p><strong>故事一：</strong><br />
+我是YD的老总，我要建立一个网站，找到了ZWZX公司，签订了合同，我提需求他们实现。</p>
+<p>我不懂制作网站，可是我才思敏捷，创意无限，不停的会有好点子从我的脑海里蹦出来，每当有一个好点子蹦出来后，我都会给ZWZX公司的负责人讲清楚我的想法，让他实现，开始我不知道做一个页面需要多长时间。第一次我试探性的说了一周必须把我这个点子做出来，ZWZX公司负责人很痛快的答应了，一周后我果然看到了这个功能。</p>
+<p>可是会不会我给他们的时间太长了？对！肯定是，要不也不会答应的这么痛快。这些人啊！天天就是想拖时间，好多骗我点钱。</p>
+<p>点子又来了，这次我要求5天做出来，这个点子和上个点子类似，我倒要看看5天能不能做出来~  ZWZX公司负责人一副痛苦的表情，我会不会逼的太紧了，5天是不是真的做不出来？到时候看看吧，如果5天没做出来估计是我给的时间太少了。</p>
+<p>5天过去了ZWZX公司的负责人很高兴的拿出了我要的功能实现，哎，看来开始真的骗了我两天。就是不知道5天会不会还是多了啊？下次给3天~</p>
+<p>又拿出来了，虽然他装的好像时间太紧似的，可别以为我不知道，你第一个功能最多3天就做出来了，我还给了你7天的项目经费，你们多赚了我多少啊！！！！ 真是没良心。 下次1天！！！</p>
+<p>啊啊啊啊啊啊啊啊!!! 1天就出来了，这些人。。。。。  有没有良心，原来做这个这么简单，以后就给1天，不 ！ 一天N个功能。</p>
+<p><strong>故事二：</strong><br />
+我买了个电脑，没什么别的用途，就是打开电脑上上网，上上QQ和儿子聊聊天，QQ是儿子给我装上的，这样我就可以和他视频了。有一次QQ提醒我说我的QQ版本太低了，不能视频了，我打电话问儿子，儿子说按提示升级一下QQ就行了，呵呵，我按QQ的提示，儿子的指示一步一步的升级QQ成功了，看来电脑也不难啊！</p>
+<p><strong>到这里您认为开始的两个故事的罪魁祸首是谁啊？</strong></p>
+<p>我们一直以加班，甚至通宵去满足客户不合理的要求，只因为他是客户。只因为人人都认为满足客户的要求是我们最大的<br />
+价值，可是不合理的要求不能去拒绝吗？套用刘欢说的一句话“我们是不是活的应该有些尊严”，一味的迎合客户，只会让我们自己越来越痛苦，反而得不到用户的尊重，肯定。</p>
+<p>我一直有个疑惑，很多人说网站不支持IE6，而选择让用户去升级IE，这样的用户体验不好！如果按照按照这个逻辑，是不是我们都应该是Web应用，而且都应该是IE6下的Web应用呢？为什么微软还要出WIN8，一直XP不是挺好的吗？让用户升级系统，用户体验多么不好啊？QQ，360，搜狗输入法，等等客户端软件用户体验不都不好吗？ 都还要用户下载。</p>
+<p>实在搞不懂为什么我们做个东西非要去支持IE6呢？检测到用户是IE6，给个提示，给个升级链接不就行了？ 这样做用户体验是有多么不好吗？ 你天天去支持IE6，还要天天磨叽用户使用IE6，你不觉的很矛盾吗？再说我一个普通用户，你如果不提醒，我怎么知道要升级IE6啊？</p>
+<p><strong>对于遭遇了故事一，故事二的人只能送上一句话“哀其不幸，怒其不争！”</strong></p>
+<p>原文链接：<a href="http://hfcc8685.github.com/blog/2012/04/19/shui-zhi-cuo/" target="_blank">http://hfcc8685.github.com/blog/2012/04/19/shui-zhi-cuo/</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7126.html">这到底是谁之错？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7126.html/feed</wfw:commentRss>
+			<slash:comments>113</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
