@@ -34,10 +34,10 @@ Detected using Scan engine version 5400.1158 DAT version 5958.0000.
 
 ### 相关文章
 
-* [![图片搜索引擎优化Checklist](https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon-150x150.jpg)](https://coolshell.cn/articles/1528.html)[图片搜索引擎优化Checklist](https://coolshell.cn/articles/1528.html)
-* [![Amazon的书为什么卖到了$2000万](https://coolshell.cn/wp-content/uploads/2011/04/lawrence_1-150x150.png)](https://coolshell.cn/articles/4605.html)[Amazon的书为什么卖到了$2000万](https://coolshell.cn/articles/4605.html)
-* [![五个方法成为更好的程序员](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/2606.html)[五个方法成为更好的程序员](https://coolshell.cn/articles/2606.html)
-* [![JS1K 演示](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg)](https://coolshell.cn/articles/2785.html)[JS1K 演示](https://coolshell.cn/articles/2785.html)
-* [![雷人的程序注释](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg)](https://coolshell.cn/articles/290.html)[雷人的程序注释](https://coolshell.cn/articles/290.html)
-* [![在线作图编辑服务](https://coolshell.cn/wp-content/uploads/2010/10/Photo-editor-150x150.jpg)](https://coolshell.cn/articles/3244.html)[在线作图编辑服务](https://coolshell.cn/articles/3244.html)
+* [![图片搜索引擎优化Checklist](../wp-content/uploads/2009/10/seo-cartoon-150x150.jpg)](https://coolshell.cn/articles/1528.html)[图片搜索引擎优化Checklist](https://coolshell.cn/articles/1528.html)
+* [![Amazon的书为什么卖到了$2000万](../wp-content/uploads/2011/04/lawrence_1-150x150.png)](https://coolshell.cn/articles/4605.html)[Amazon的书为什么卖到了$2000万](https://coolshell.cn/articles/4605.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/2606.html)[五个方法成为更好的程序员](https://coolshell.cn/articles/2606.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg](https://coolshell.cn/articles/2785.html)[JS1K 演示](https://coolshell.cn/articles/2785.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg](https://coolshell.cn/articles/290.html)[雷人的程序注释](https://coolshell.cn/articles/290.html)
+* [![在线作图编辑服务](../wp-content/uploads/2010/10/Photo-editor-150x150.jpg)](https://coolshell.cn/articles/3244.html)[在线作图编辑服务](https://coolshell.cn/articles/3244.html)
 The post [McAfee误杀svchost.exe](https://coolshell.cn/articles/2376.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

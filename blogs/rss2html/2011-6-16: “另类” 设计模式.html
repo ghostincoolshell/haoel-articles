@@ -1,10 +1,10 @@
-<p>下面这篇文章来自这里：<a href="http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns" target="_blank">http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns</a>，这篇文章有点意思了，山寨了我们著名的Design Pattern。这篇文章并不是很容易翻译，也许我翻译的不好，大家多指正。另外，这篇文章将失去原有的趣味在于其使用了经典设计模式的单词很相似的单词，一走眼你还以为是正二八经的设计模式。呵呵。所以，我在下文中，我会保留原有的英文单词，并把真正的23个经典设计模式的英文名放在旁边（灰色）。这篇文章和之前的<a href="https://coolshell.cn/articles/4758.html" target="_blank" title="如何写出无法维护的代码">如何写出无法维护的代码</a>有异曲同工，个人感觉都是比较欢乐的。</p>
-<p style="text-align: center;">&nbsp;</p>
-<p style="text-align: center; font-size: 14pt;"><strong>辞职模式<br />
-</strong><strong>Resign Patterns<br />
+<html><body><p>下面这篇文章来自这里：<a href="http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns" target="_blank">http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns</a>，这篇文章有点意思了，山寨了我们著名的Design Pattern。这篇文章并不是很容易翻译，也许我翻译的不好，大家多指正。另外，这篇文章将失去原有的趣味在于其使用了经典设计模式的单词很相似的单词，一走眼你还以为是正二八经的设计模式。呵呵。所以，我在下文中，我会保留原有的英文单词，并把真正的23个经典设计模式的英文名放在旁边（灰色）。这篇文章和之前的<a href="https://coolshell.cn/articles/4758.html" target="_blank" title="如何写出无法维护的代码">如何写出无法维护的代码</a>有异曲同工，个人感觉都是比较欢乐的。</p>
+<p style="text-align: center;"> </p>
+<p style="text-align: center; font-size: 14pt;"><strong>辞职模式<br/>
+</strong><strong>Resign Patterns<br/>
 </strong><strong><span style="color: #cccccc;">Design Patterns</span></strong></p>
-<div style="text-align: center;">不合式的非面向项目软件开发病症<br />
-Ailments of Unsuitable Project-Disoriented Software<br />
+<div style="text-align: center;">不合式的非面向项目软件开发病症<br/>
+Ailments of Unsuitable Project-Disoriented Software<br/>
 <span style="color: #cccccc;">Elements of Reusable Object-Oriented Software</span></div>
 <div style="text-align: center;"><strong>作者</strong>：<a href="mailto:mitework@yercompany.com">Michael Duell</a></div>
 <h4 style="text-align: left;"><strong>概要</strong></h4>
@@ -19,10 +19,10 @@ Ailments of Unsuitable Project-Disoriented Software<br />
 <p style="text-align: justify;">Fallacy方法主要是在于处理一些不明显的案例。代码逻辑看上去是正确的，当只要某想要去测试一下，或是某个不明显的案例发生了，那些代码中的错误也就出现了。</p>
 <p style="text-align: justify;"><span id="more-4844"></span></p>
 <h5 style="text-align: left;"><strong>1.4 ProtoTry   尝试模式| <span style="color: #999999;">Prototype 原型模式</span></strong></h5>
-<p style="text-align: justify;">ProtoTry 模式一个快速而肮脏的软件开发工作模型的尝试。这个模式的原意本来是想在后面有时间总结一下教训并改进或重写这些代码，但是可惜的是没有时间。所以，这些代码也就成了众所周知的 legacy code &#8211; 旧代码。</p>
+<p style="text-align: justify;">ProtoTry 模式一个快速而肮脏的软件开发工作模型的尝试。这个模式的原意本来是想在后面有时间总结一下教训并改进或重写这些代码，但是可惜的是没有时间。所以，这些代码也就成了众所周知的 legacy code – 旧代码。</p>
 <h5 style="text-align: left;"><strong>1.5 Simpleton 傻瓜模式 |<span style="color: #999999;"> Singleton 单例模式</span></strong></h5>
 <p style="text-align: justify;">Simpleton 模式，是把一个终极复杂的模式用于那些最最没有价值的工作上。这个模式精确地指出了人员的能力程度。</p>
-<p style="text-align: justify;">&nbsp;</p>
+<p style="text-align: justify;"> </p>
 <h4 style="text-align: left;"><strong>2. Destructural Patterns 无结构模式 | </strong><span style="color: #999999;">Structural patterns  结构模式</span></h4>
 <p style="text-align: left;">下面是七个经典的变性模式</p>
 <h5 style="text-align: left;"><strong>2.1 Adopter 领养者模式 |<span style="color: #999999;"> Adapter 适配器模式</span></strong></h5>
@@ -65,13 +65,13 @@ Ailments of Unsuitable Project-Disoriented Software<br />
 <p style="text-align: justify;">Visitor From Hell 模式一般是在运行时没有检查数组越界的一个巧合。这样一来，我们系统就可以实现Visitor From Hell 模式，因为这样可以造成重要数据的重写。</p>
 <h4 style="text-align: left;"><span style="font-size: x-small;">参考</span></h4>
 <ul>
-<li><span style="font-size: x-small;">[1] Gamma, E., Helm, R., Johnson, R., Vlissides, J., Design Patterns &#8211; </span><span style="font-size: x-small;">Elements of Reusable Object-Oriented Software. Addison-Wesley, 1995.</span></li>
+<li><span style="font-size: x-small;">[1] Gamma, E., Helm, R., Johnson, R., Vlissides, J., Design Patterns – </span><span style="font-size: x-small;">Elements of Reusable Object-Oriented Software. Addison-Wesley, 1995.</span></li>
 </ul>
 <ul>
 <li><span style="font-size: x-small;">[2] Michael Duell is an Engineer at AG Communication Systems, where his </span><span style="font-size: x-small;">Resign Patterns have been rejected in favor of the Gang </span><span style="font-size: x-small;">of Four Design Patterns.</span></li>
 </ul>
 <ul>
-<li><span style="font-size: x-small;">[3] &#8220;Resign Patterns: Ailments of Unsuitable Project-Disoriented Software,&#8221; </span><span style="font-size: x-small;">The Software Practitioner, Vol. 7, No. 3, May-June 1997, p. 14.</span></li>
+<li><span style="font-size: x-small;">[3] “Resign Patterns: Ailments of Unsuitable Project-Disoriented Software,” </span><span style="font-size: x-small;">The Software Practitioner, Vol. 7, No. 3, May-June 1997, p. 14.</span></li>
 </ul>
 <p style="text-align: left;"><span style="font-size: x-small;"> </span></p>
 <p style="text-align: left;"><span style="font-size: x-small;"> </span></p>
@@ -92,7 +92,6 @@ Ailments of Unsuitable Project-Disoriented Software<br />
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4844.html">“另类” 设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="../wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="../wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4844.html">“另类” 设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

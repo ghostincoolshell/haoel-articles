@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright size-full wp-image-18662" height="238" src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1.png" width="300" />昨天周五晚上，临下班的时候，用户给我们报了一个比较怪异的Kubernetes集群下的网络不能正常访问的问题，让我们帮助查看一下，我们从下午5点半左右一直跟进到晚上十点左右，在远程不能访问用户机器只能远程遥控用户的情况找到了的问题。这个问题比较有意思，我个人觉得其中的调查用到的的命令以及排障的一些方法可以分享一下，所以写下了这篇文章。</p>
+<html><body><p><img alt="" class="alignright size-full wp-image-18662" height="238" src="../wp-content/uploads/2018/12/docker-networking-1.png" width="300"/>昨天周五晚上，临下班的时候，用户给我们报了一个比较怪异的Kubernetes集群下的网络不能正常访问的问题，让我们帮助查看一下，我们从下午5点半左右一直跟进到晚上十点左右，在远程不能访问用户机器只能远程遥控用户的情况找到了的问题。这个问题比较有意思，我个人觉得其中的调查用到的的命令以及排障的一些方法可以分享一下，所以写下了这篇文章。</p>
 <h4>问题的症状</h4>
 <p>用户直接在微信里说，他们发现在Kuberbnetes下的某个pod被重启了几百次甚至上千次，于是开启调查这个pod，发现上面的服务时而能够访问，时而不能访问，也就是有一定概率不能访问，不知道是什么原因。而且并不是所有的pod出问题，而只是特定的一两个pod出了网络访问的问题。用户说这个pod运行着Java程序，为了排除是Java的问题，用户用 <code>docker exec -it</code> 命令直接到容器内启了一个 Python的 SimpleHttpServer来测试发现也是一样的问题。</p>
 <p>我们大概知道用户的集群是这样的版本，Kuberbnetes 是1.7，网络用的是flannel的gw模式，Docker版本未知，操作系统CentOS 7.4，直接在物理机上跑docker，物理的配置很高，512GB内存，若干CPU核，上面运行着几百个Docker容器。</p>
@@ -7,7 +7,7 @@
 <h5>问题初查</h5>
 <p>首先，我们排除了flannel的问题，因为整个集群的网络通信都正常，只有特定的某一两个pod有问题。而用 <code>telnet ip port</code> 的命令手工测试网络连接时有很大的概率出现 <code>connection refused</code> 错误，大约 1/4的概率，而3/4的情况下是可以正常连接的。</p>
 <p>当时，我们让用户抓个包看看，然后，用户抓到了有问题的TCP连接是收到了 <code>SYN</code> 后，立即返回了 <code>RST, ACK</code></p>
-<p><img alt="" class="aligncenter wp-image-18655" height="80" src="https://coolshell.cn/wp-content/uploads/2018/12/tcpdump.png" width="700" /></p>
+<p><img alt="" class="aligncenter wp-image-18655" height="80" src="../wp-content/uploads/2018/12/tcpdump.png" width="700"/></p>
 <p>我问一下用户这两个IP所在的位置，知道了，<code>10.233.14.129</code> 是 <code>docker0</code>，<code>10.233.14.145</code> 是容器内的IP。所以，这基本上可以排除了所有和kubernets或是flannel的问题，这就是本地的Docker上的网络的问题。</p>
 <p>对于这样被直接 Reset 的情况，在 <code>telnet</code> 上会显示 <code>connection refused</code> 的错误信息，对于我个人的经验，这种 <code>SYN</code>完直接返回 <code>RST, ACK</code>的情况只会有三种情况：</p>
 <ol>
@@ -51,12 +51,12 @@ $ ls /var/run/docker/netns | xargs -I {} nsenter --net=/var/run/docker/netns/{} 
 <li><code>10.233.14.145</code> 我们查到了这个IP，说明，docker的namespace下还有这个IP。</li>
 <li><code>10.233.14.137</code>，这个IP没有在docker的network namespace下查到。</li>
 </ul>
-<p>有namespace leaking？于是我上网查了一下，发现了一个docker的bug &#8211; 在docker remove/stop 一个容器的时候，没有清除相应的network namespace，这个问题被报告到了 <a href="https://github.com/moby/moby/issues/31597">Issue#31597</a> 然后被fix在了 <a href="https://github.com/moby/moby/pull/31996">PR#31996</a>，并Merge到了 Docker的 17.05版中。而用户的版本是 17.09，应该包含了这个fix。不应该是这个问题，感觉又走不下去了。</p>
+<p>有namespace leaking？于是我上网查了一下，发现了一个docker的bug – 在docker remove/stop 一个容器的时候，没有清除相应的network namespace，这个问题被报告到了 <a href="https://github.com/moby/moby/issues/31597">Issue#31597</a> 然后被fix在了 <a href="https://github.com/moby/moby/pull/31996">PR#31996</a>，并Merge到了 Docker的 17.05版中。而用户的版本是 17.09，应该包含了这个fix。不应该是这个问题，感觉又走不下去了。</p>
 <p>不过， <code>10.233.14.137</code> 这个IP可以ping得通，说明这个IP一定被绑在某个网卡，而且被隐藏到了某个network namespace下。</p>
 <p>到这里，要查看所有network namespace，只有最后一条路了，那就是到 <code>/proc/</code> 目录下，把所有的pid下的 <code>/proc/&lt;pid&gt;/ns</code> 目录给穷举出来。好在这里有一个比较方便的命令可以干这个事 ： <code>lsns</code></p>
 <p>于是我写下了如下的命令：</p>
 <pre class="EnlighterJSRAW">
-$ lsns -t net | awk ‘{print $4}&#039; | xargs -t -I {} nsenter -t {}&amp;nbsp;-n ip addr | grep -C 4 &quot;10.233.14.137&quot;
+$ lsns -t net | awk ‘{print $4}' | xargs -t -I {} nsenter -t {}&amp;nbsp;-n ip addr | grep -C 4 "10.233.14.137"
 </pre>
 <p>解释一下。</p>
 <ul>
@@ -82,13 +82,13 @@ $ lsns -t net | awk ‘{print $4}&#039; | xargs -t -I {} nsenter -t {}&amp;nbsp;
 <p>3） 各种诊断工具要比较熟悉，这会让你事半功倍。</p>
 <p>4）系统维护和做清洁比较类似，需要经常看看系统中是否有一些僵尸进程或是一些垃圾东西，这些东西要及时清理掉。</p>
 <p>最后，多说一下，很多人都说，<strong>Docker适合放在物理机内运行，这并不完全对，因为他们只考虑到了性能成本，没有考虑到运维成本，在这样512GB中启动几百个容器的玩法，其实并不好，因为这本质上是个大单体，因为你一理要重启某些关键进程或是机器，你的影响面是巨大的</strong>。</p>
-<p>&nbsp;</p>
+<p> </p>
 <p>———————— 更新 2018/12/10 —————————</p>
 <h4>问题原因</h4>
 <p>这两天在自己的环境下测试了一下，发现，只要是通过 <code>systemctl start/stop docker</code> 这样的命令来启停 Docker， 是可以把所有的进程和资源全部干掉的。这个是没有什么问题的。我唯一能重现用户问题的的操作就是直接 <code>kill -9 &lt;dockerd pid&gt;</code> 但是这个事用户应该不会干。而 Docker 如果有 crash 事件时，Systemd 是可以通过 <code>journalctl -u docker</code> 这样的命令查看相关的系统日志的。</p>
 <p>于是，我找用户了解一下他们在Docker在启停时的问题，用户说，<strong>他们的执行 <code>systemctl stop docker</code> 这个命令的时候，发现这个命令不响应了，有可能就直接按了 <code>Ctrl +C</code> 了</strong>！</p>
 <p>这个应该就是导致大量的 <code>docker-containe</code> 进程挂到 <code>PID 1</code> 下的原因了。前面说过，用户的一台物理机上运行着上百个容器，所以，那个进程树也是非常庞大的，我想，停服的时候，系统一定是要遍历所有的docker子进程来一个一个发退出信号的，这个过程可能会非常的长。导致操作员以为命令假死，而直接按了 <code>Ctrl + C</code> ，最后导致很多容器进程并没有终止……</p>
-<p>&nbsp;</p>
+<p> </p>
 <h4>其它事宜</h4>
 <p>有同学问，为什么我在这个文章里写的是 <code>docker-containe</code> 而不是 <code>containd</code> 进程？这是因为被 <code>pstree</code> 给截断了，用 <code>ps</code> 命令可以看全，只是进程名的名字有一个 <code>docker-</code>的前缀。</p>
 <p>下面是这两种不同安装包的进程树的差别（其中 <code>sleep</code> 是我用 <code>buybox</code> 镜像启动的）</p>
@@ -137,7 +137,6 @@ systemd───dockerd─┬─containerd─┬─3*[containerd-shim─┬─sl
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17200.html"><img alt="Docker基础技术：DeviceMapper" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17200.html">Docker基础技术：DeviceMapper</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17049.html"><img alt="Docker基础技术：Linux CGroup" height="150" src="https://coolshell.cn/wp-content/uploads/2015/04/filter-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17049.html">Docker基础技术：Linux CGroup</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17010.html"><img alt="Docker基础技术：Linux Namespace（上）" height="150" src="https://coolshell.cn/wp-content/uploads/2015/04/isolation-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17010.html">Docker基础技术：Linux Namespace（上）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17029.html"><img alt="Docker基础技术：Linux Namespace（下）" height="150" src="https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17029.html">Docker基础技术：Linux Namespace（下）</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17200.html"><img alt="Docker基础技术：DeviceMapper" height="150" src="../wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17200.html">Docker基础技术：DeviceMapper</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17049.html"><img alt="Docker基础技术：Linux CGroup" height="150" src="../wp-content/uploads/2015/04/filter-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17049.html">Docker基础技术：Linux CGroup</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17010.html"><img alt="Docker基础技术：Linux Namespace（上）" height="150" src="../wp-content/uploads/2015/04/isolation-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17010.html">Docker基础技术：Linux Namespace（上）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17029.html"><img alt="Docker基础技术：Linux Namespace（下）" height="150" src="../wp-content/uploads/2015/04/jail_cell-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17029.html">Docker基础技术：Linux Namespace（下）</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

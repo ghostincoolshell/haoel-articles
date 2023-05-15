@@ -171,10 +171,10 @@ return h ^ (h >>> 7) ^ (h >>> 4);
 
 ### 相关文章
 
-* [![无锁HashMap的原理与实现](https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg)](https://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](https://coolshell.cn/articles/9703.html)
-* [![疫苗：Java HashMap的死循环](https://coolshell.cn/wp-content/uploads/2013/05/race_condition-150x150.jpg)](https://coolshell.cn/articles/9606.html)[疫苗：Java HashMap的死循环](https://coolshell.cn/articles/9606.html)
-* [![网络数字身份认证术](https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-150x150.png)](https://coolshell.cn/articles/21708.html)[网络数字身份认证术](https://coolshell.cn/articles/21708.html)
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
-* [![HTTP API 认证授权术](https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![无锁HashMap的原理与实现](../wp-content/uploads/2013/05/图1-3-150x150.jpg)](https://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](https://coolshell.cn/articles/9703.html)
+* [![疫苗：Java HashMap的死循环](../wp-content/uploads/2013/05/race_condition-150x150.jpg)](https://coolshell.cn/articles/9606.html)[疫苗：Java HashMap的死循环](https://coolshell.cn/articles/9606.html)
+* [![网络数字身份认证术](../wp-content/uploads/2022/01/iStock-1175502114-150x150.png)](https://coolshell.cn/articles/21708.html)[网络数字身份认证术](https://coolshell.cn/articles/21708.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![HTTP API 认证授权术](../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
 The post [Hash Collision DoS 问题](https://coolshell.cn/articles/6424.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

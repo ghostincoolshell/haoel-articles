@@ -1,4 +1,4 @@
-<p>七、八年前写过一篇《<a href="http://blog.csdn.net/haoel/archive/2003/07/02/2879.aspx" target="_blank">用GDB调试程序</a>》，于是，从那以后，很多朋友在MSN上以及给我发邮件询问我关于GDB的问题，一直到今天，还有人在问GDB的相关问题。这么多年来，有一些问题是大家反复在问的，一方面，我觉得我以前的文章可能没有说清楚，另一方面，我觉得大家常问的问题正是最有用的，所以，在这里罗列出来。希望大家补充。</p>
+<html><body><p>七、八年前写过一篇《<a href="http://blog.csdn.net/haoel/archive/2003/07/02/2879.aspx" target="_blank">用GDB调试程序</a>》，于是，从那以后，很多朋友在MSN上以及给我发邮件询问我关于GDB的问题，一直到今天，还有人在问GDB的相关问题。这么多年来，有一些问题是大家反复在问的，一方面，我觉得我以前的文章可能没有说清楚，另一方面，我觉得大家常问的问题正是最有用的，所以，在这里罗列出来。希望大家补充。</p>
 <h4>一、多线程调试</h4>
 <p>多线程调试可能是问得最多的。其实，重要就是下面几个命令：</p>
 <ul>
@@ -18,8 +18,8 @@
 <p>在GCC编译程序的时候，加上<strong>-ggdb3</strong>参数，这样，你就可以调试宏了。</p>
 <p>另外，你可以使用下述的GDB的宏调试命令 来查看相关的宏。</p>
 <ul>
-<li>info macro &#8211; 你可以查看这个宏在哪些文件里被引用了，以及宏定义是什么样的。</li>
-<li>macro &#8211; 你可以查看宏展开的样子。</li>
+<li>info macro – 你可以查看这个宏在哪些文件里被引用了，以及宏定义是什么样的。</li>
+<li>macro – 你可以查看宏展开的样子。</li>
 </ul>
 <p><span id="more-3643"></span></p>
 <h4>三、源文件</h4>
@@ -54,7 +54,7 @@ Source directories searched: /home/hchen/src/coreutils-7.4:$cdir:$cwd
 <h4>五、命令行参数</h4>
 <p>有时候，我们需要调试的程序需要有命令行参数，很多朋友都不知道怎么设置调试的程序的命令行参数。其实，有两种方法：</p>
 <ol>
-<li>gdb命令行的 &#8211;args 参数</li>
+<li>gdb命令行的 –args 参数</li>
 <li>gdb环境中 set args命令。</li>
 </ol>
 <h4>六、gdb的变量</h4>
@@ -69,12 +69,12 @@ Source directories searched: /home/hchen/src/coreutils-7.4:$cdir:$cwd
 </pre>
 <p>当然，这里只是给一个示例，表示程序的变量和gdb的变量是可以交互的。</p>
 <h4>七、x命令</h4>
-<p>也许，你很喜欢用p命令。所以，当你不知道变量名的时候，你可能会手足无措，因为p命令总是需要一个变量名的。x命令是用来查看内存的，在gdb中 &#8220;help x&#8221; 你可以查看其帮助。</p>
+<p>也许，你很喜欢用p命令。所以，当你不知道变量名的时候，你可能会手足无措，因为p命令总是需要一个变量名的。x命令是用来查看内存的，在gdb中 “help x” 你可以查看其帮助。</p>
 <ul>
 <li>x/x 以十六进制输出</li>
 <li>x/d 以十进制输出</li>
 <li>x/c 以单字符输出</li>
-<li>x/i  反汇编 &#8211; 通常，我们会使用 <code>x/10i $ip-20 来查看当前的汇编（$ip是指令寄存器）</code></li>
+<li>x/i  反汇编 – 通常，我们会使用 <code>x/10i $ip-20 来查看当前的汇编（$ip是指令寄存器）</code></li>
 <li>x/s 以字符串输出</li>
 </ul>
 <h4>八、command命令</h4>
@@ -83,7 +83,7 @@ Source directories searched: /home/hchen/src/coreutils-7.4:$cdir:$cwd
 Breakpoint 1 at 0x3475678: file test.c, line 12.
 (gdb) command 1
 Type commands for when breakpoint 1 is hit, one per line.
-End with a line saying just &quot;end&quot;.
+End with a line saying just "end".
 &gt;print arg1
 &gt;print arg2
 &gt;print arg3
@@ -106,7 +106,6 @@ End with a line saying just &quot;end&quot;.
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1525.html"><img alt="GDB 7.0 发布" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1525.html">GDB 7.0 发布</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1502.html"><img alt="高科技：GDB回溯调试" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1502.html">高科技：GDB回溯调试</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4077.html"><img alt="纯文本配置还是注册表" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4077.html">纯文本配置还是注册表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2834.html"><img alt="史上最烂的超级玛丽" height="150" src="https://coolshell.cn/wp-content/uploads/2010/08/super_mario-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2834.html">史上最烂的超级玛丽</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3345.html"><img alt="140个Google的面试题" height="150" src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3345.html">140个Google的面试题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2806.html"><img alt="程序员版的凡客" height="150" src="https://coolshell.cn/wp-content/uploads/2010/08/coolshell.programmer-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2806.html">程序员版的凡客</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3643.html">GDB中应该知道的几个调试方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1525.html"><img alt="GDB 7.0 发布" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1525.html">GDB 7.0 发布</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1502.html"><img alt="高科技：GDB回溯调试" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1502.html">高科技：GDB回溯调试</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4077.html"><img alt="纯文本配置还是注册表" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4077.html">纯文本配置还是注册表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2834.html"><img alt="史上最烂的超级玛丽" height="150" src="../wp-content/uploads/2010/08/super_mario-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2834.html">史上最烂的超级玛丽</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3345.html"><img alt="140个Google的面试题" height="150" src="../wp-content/uploads/2010/12/googlequestion-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3345.html">140个Google的面试题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2806.html"><img alt="程序员版的凡客" height="150" src="../wp-content/uploads/2010/08/coolshell.programmer-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2806.html">程序员版的凡客</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3643.html">GDB中应该知道的几个调试方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -57,10 +57,10 @@ Telnet的源代码在这里：<http://packages.ubuntu.com/source/dapper/netkit-t
 
 ### 相关文章
 
-* [![GNU/Linux下有多少是GNU的？](https://coolshell.cn/wp-content/uploads/2011/06/GNUTotalSplit-150x150.png)](https://coolshell.cn/articles/4826.html)[GNU/Linux下有多少是GNU的？](https://coolshell.cn/articles/4826.html)
-* [![装完Ubuntu 9.10后要干的事](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/1644.html)[装完Ubuntu 9.10后要干的事](https://coolshell.cn/articles/1644.html)
-* [![Ksplice Uptrack — Ubuntu更新不用重启](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/1097.html)[Ksplice Uptrack — Ubuntu更新不用重启](https://coolshell.cn/articles/1097.html)
-* [![Ubuntu的并行启动](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/501.html)[Ubuntu的并行启动](https://coolshell.cn/articles/501.html)
-* [![Java书籍Top 10](https://coolshell.cn/wp-content/uploads/2009/03/zcover-150x150.jpg)](https://coolshell.cn/articles/14.html)[Java书籍Top 10](https://coolshell.cn/articles/14.html)
-* [![你确信你了解时间吗？](https://coolshell.cn/wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png)](https://coolshell.cn/articles/5075.html)[你确信你了解时间吗？](https://coolshell.cn/articles/5075.html)
+* [![GNU/Linux下有多少是GNU的？](../wp-content/uploads/2011/06/GNUTotalSplit-150x150.png)](https://coolshell.cn/articles/4826.html)[GNU/Linux下有多少是GNU的？](https://coolshell.cn/articles/4826.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/1644.html)[装完Ubuntu 9.10后要干的事](https://coolshell.cn/articles/1644.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/1097.html)[Ksplice Uptrack — Ubuntu更新不用重启](https://coolshell.cn/articles/1097.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/501.html)[Ubuntu的并行启动](https://coolshell.cn/articles/501.html)
+* [![Java书籍Top 10](../wp-content/uploads/2009/03/zcover-150x150.jpg)](https://coolshell.cn/articles/14.html)[Java书籍Top 10](https://coolshell.cn/articles/14.html)
+* [![你确信你了解时间吗？](../wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png)](https://coolshell.cn/articles/5075.html)[你确信你了解时间吗？](https://coolshell.cn/articles/5075.html)
 The post [telnet的一个Bug](https://coolshell.cn/articles/2352.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

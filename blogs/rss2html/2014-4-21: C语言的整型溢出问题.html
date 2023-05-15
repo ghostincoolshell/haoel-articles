@@ -1,4 +1,4 @@
-<p>整型溢出有点老生常谈了，bla, bla, bla&#8230; 但似乎没有引起多少人的重视。整型溢出会有可能导致缓冲区溢出，缓冲区溢出会导致各种黑客攻击，比如最近OpenSSL的heartbleed事件，就是一个buffer overread的事件。在这里写下这篇文章，希望大家都了解一下整型溢出，编译器的行为，以及如何防范，以写出更安全的代码。</p>
+<html><body><p>整型溢出有点老生常谈了，bla, bla, bla… 但似乎没有引起多少人的重视。整型溢出会有可能导致缓冲区溢出，缓冲区溢出会导致各种黑客攻击，比如最近OpenSSL的heartbleed事件，就是一个buffer overread的事件。在这里写下这篇文章，希望大家都了解一下整型溢出，编译器的行为，以及如何防范，以写出更安全的代码。</p>
 <h4>什么是整型溢出</h4>
 <p>C语言的整型问题相信大家并不陌生了。对于整型溢出，分为无符号整型溢出和有符号整型溢出。</p>
 <p><strong>对于unsigned整型溢出，C的规范是有定义的</strong>——“溢出后的数会以2^(8*sizeof(type))作模运算”，也就是说，如果一个unsigned char（1字符，8bits）溢出了，会把溢出的值与256求模。例如：</p>
@@ -74,7 +74,7 @@ if (nresp &gt; 0) {
 <h5>示例五：size_t 的溢出</h5>
 <pre class="EnlighterJSRAW">for (int i= strlen(s)-1;  i&gt;=0; i--)  { ... }</pre>
 <pre class="EnlighterJSRAW">for (int i=v.size()-1; i&gt;=0; i--)  { ... }</pre>
-<p>上面这两个示例是我们经常用的从尾部遍历一个数组的for循环。第一个是字符串，第二个是C++中的vector容器。strlen()和vector::size()返回的都是 size_t，size_t在32位系统下就是一个unsigned int。你想想，如果strlen(s)和v.size() 都是0呢？这个循环会成为个什么情况？于是strlen(s) &#8211; 1 和 v.size() &#8211; 1 都不会成为 -1，而是成为了 (unsigned int)(-1)，一个正的最大数。导致你的程序越界访问。</p>
+<p>上面这两个示例是我们经常用的从尾部遍历一个数组的for循环。第一个是字符串，第二个是C++中的vector容器。strlen()和vector::size()返回的都是 size_t，size_t在32位系统下就是一个unsigned int。你想想，如果strlen(s)和v.size() 都是0呢？这个循环会成为个什么情况？于是strlen(s) – 1 和 v.size() – 1 都不会成为 -1，而是成为了 (unsigned int)(-1)，一个正的最大数。导致你的程序越界访问。</p>
 <p>这样的例子有很多很多，这些整型溢出的问题如果在关键的地方，尤其是在搭配有用户输入的地方，如果被黑客利用了，就会导致很严重的安全问题。</p>
 <h4>关于编译器的行为</h4>
 <p>在谈一下如何正确的检查整型溢出之前，我们还要来学习一下编译器的一些东西。请别怪我罗嗦。</p>
@@ -98,7 +98,7 @@ if (data + len &lt; data){
 
 9
 10 if (data + len &lt; data){
-11 printf(&quot;invalid len\n&quot;);
+11 printf("invalid len\n");
 12 exit(-1);
 13 }
 14
@@ -111,7 +111,7 @@ if (data + len &lt; data){
     ... ...
 }</pre>
 <p>关于这个事，你可以看一下C99的规范说明《 <a href="http://www.open-std.org/JTC1/SC22/WG14/www/docs/n1124.pdf" rel="noopener noreferrer" target="_blank">ISO/IEC 9899:1999 C specification</a> 》第 §6.5.6 页，第8点，我截个图如下：（这段话的意思是定义了指针+/-一个整型的行为，如果越界了，则行为是undefined）</p>
-<p><img alt="" class="aligncenter size-full wp-image-11469" height="310" src="https://coolshell.cn/wp-content/uploads/2014/04/c99.jpg" width="647" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-11469" height="310" src="../wp-content/uploads/2014/04/c99.jpg" width="647"/></p>
 <p>注意上面标红线的地方，说如果指针指在数组范围内没事，如果越界了就是undefined，也就是说这事交给编译器实现了，编译器想咋干咋干，那怕你想把其优化掉也可以。在这里要重点说一下，<strong>C语言中的一个大恶魔—— Undefined! 这里都是“野兽出没”的地方，你一定要小心小心再小心</strong>。</p>
 <h5>花絮：编译器的彩蛋</h5>
 <p>上面说了所谓的undefined行为就全权交给编译器实现，gcc在1.17版本下对于undefined的行为还玩了个彩蛋（<a href="http://en.wikipedia.org/wiki/Undefined_behavior#Compiler_easter_eggs" rel="noopener noreferrer" target="_blank">参看Wikipedia</a>）。</p>
@@ -139,10 +139,10 @@ fatal("You are in a maze of twisty compiler features, all different");</pre>
         //error handling...
     }
 }</pre>
-<p>上面的代码中，大家要注意 <strong>(SIZE_MAX &#8211; m &lt; n)</strong> 这个判断，为什么不用m + n &gt; SIZE_MAX呢？因为，如果 m + n 溢出后，就被截断了，所以表达式恒真，也就检测不出来了。另外，这个表达式中，m和n分别会被提升为unsigned。</p>
+<p>上面的代码中，大家要注意 <strong>(SIZE_MAX – m &lt; n)</strong> 这个判断，为什么不用m + n &gt; SIZE_MAX呢？因为，如果 m + n 溢出后，就被截断了，所以表达式恒真，也就检测不出来了。另外，这个表达式中，m和n分别会被提升为unsigned。</p>
 <p>但是上面的代码是错的，因为：</p>
 <p style="padding-left: 30px;">1）检查的太晚了，if之前编译器的undefined行为就已经出来了（你不知道什么会发生）。</p>
-<p style="padding-left: 30px;">2）就像前面说的一样，(SIZE_MAX &#8211; m &lt; n) 可能会被编译器优化掉。</p>
+<p style="padding-left: 30px;">2）就像前面说的一样，(SIZE_MAX – m &lt; n) 可能会被编译器优化掉。</p>
 <p style="padding-left: 30px;">3）另外，SIZE_MAX是size_t的最大值，size_t在64位系统下是64位的，严谨点应该用INT_MAX或是UINT_MAX</p>
 <p> 所以，正确的代码应该是下面这样：</p>
 <pre class="EnlighterJSRAW"> void foo(int m, int n)
@@ -155,7 +155,7 @@ fatal("You are in a maze of twisty compiler features, all different");</pre>
     s = (size_t)m + (size_t)n;
 }</pre>
 <p>在《<a href="https://developer.apple.com/library/ios/documentation/Security/Conceptual/SecureCodingGuide/SecureCodingGuide.pdf" rel="noopener noreferrer" target="_blank">苹果安全编码规范</a>》（PDF）中，第28页的代码中：</p>
-<p><img alt="" class="aligncenter size-full wp-image-11472" height="94" src="https://coolshell.cn/wp-content/uploads/2014/04/apple_security_code.jpg" width="300" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-11472" height="94" src="../wp-content/uploads/2014/04/apple_security_code.jpg" width="300"/></p>
 <p>如果n和m都是signed int，那么这段代码是错的。正确的应该像上面的那个例子一样，至少要在n<em>m时要把 n 和 m 给 cast 成 size_t。因为，n</em>m可能已经溢出了，已经undefined了，undefined的代码转成size_t已经没什么意义了。（如果m和n是unsigned int，也会溢出），上面的代码仅在m和n是size_t的时候才有效。</p>
 <p>不管怎么说，《<a href="https://developer.apple.com/library/ios/documentation/Security/Conceptual/SecureCodingGuide/SecureCodingGuide.pdf" rel="noopener noreferrer" target="_blank">苹果安全编码规范</a>》绝对值得你去读一读。</p>
 <h5>二分取中搜索算法中的溢出</h5>
@@ -268,7 +268,6 @@ void f(signed int si_a, signed int si_b) {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21708.html"><img alt="网络数字身份认证术" height="150" src="https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19395.html"><img alt="HTTP API 认证授权术" height="150" src="https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19395.html">HTTP API 认证授权术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21708.html"><img alt="网络数字身份认证术" height="150" src="../wp-content/uploads/2022/01/iStock-1175502114-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19395.html"><img alt="HTTP API 认证授权术" height="150" src="../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19395.html">HTTP API 认证授权术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="../wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

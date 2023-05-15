@@ -12,7 +12,7 @@ type: post
 今天，专业的搜索引擎优化SEO（Search Engine Optimizers）会让你的网页或文章能更多得被搜索并访问到。而图片的搜索优化则是这项技术中非常特别的一部分，它可以让你的图片更容易地被人搜索到，比如：艺术图片，服务设计，或是家具等等。相信大家都知道图片远比文字更有吸引力，这是因为我们都知道——“一图胜千言”。
 
 
-[![Image SEO](https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon.jpg "Image SEO")](https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon.jpg)
+[![Image SEO](../wp-content/uploads/2009/10/seo-cartoon.jpg "Image SEO")](https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon.jpg)
 
 
 在搜索引擎的世界里，有一组有限的因素决定着图片的位置。下面是一个Checklist可以让你把你的图片搜索优化做得更好。
@@ -46,10 +46,10 @@ type: post
 
 ### 相关文章
 
-* [![Web开发中需要了解的东西](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/6043.html)[Web开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
-* [![你可能不知道的Shell](https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png)](https://coolshell.cn/articles/8619.html)[你可能不知道的Shell](https://coolshell.cn/articles/8619.html)
-* [![Mozilla的一个BUG](https://coolshell.cn/wp-content/uploads/2010/09/Mozilla-150x150.jpg)](https://coolshell.cn/articles/2936.html)[Mozilla的一个BUG](https://coolshell.cn/articles/2936.html)
-* [![类型的本质和函数式实现](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg)](https://coolshell.cn/articles/10169.html)[类型的本质和函数式实现](https://coolshell.cn/articles/10169.html)
-* [![用Unix的设计思想来应对多变的需求](https://coolshell.cn/wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg)](https://coolshell.cn/articles/7236.html)[用Unix的设计思想来应对多变的需求](https://coolshell.cn/articles/7236.html)
-* [![代码重构的一个示例](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg)](https://coolshell.cn/articles/3005.html)[代码重构的一个示例](https://coolshell.cn/articles/3005.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/6043.html)[Web开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
+* [![你可能不知道的Shell](../wp-content/uploads/2012/11/shell.01-150x150.png)](https://coolshell.cn/articles/8619.html)[你可能不知道的Shell](https://coolshell.cn/articles/8619.html)
+* [![Mozilla的一个BUG](../wp-content/uploads/2010/09/Mozilla-150x150.jpg)](https://coolshell.cn/articles/2936.html)[Mozilla的一个BUG](https://coolshell.cn/articles/2936.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg](https://coolshell.cn/articles/10169.html)[类型的本质和函数式实现](https://coolshell.cn/articles/10169.html)
+* [![用Unix的设计思想来应对多变的需求](../wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg)](https://coolshell.cn/articles/7236.html)[用Unix的设计思想来应对多变的需求](https://coolshell.cn/articles/7236.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg](https://coolshell.cn/articles/3005.html)[代码重构的一个示例](https://coolshell.cn/articles/3005.html)
 The post [图片搜索引擎优化Checklist](https://coolshell.cn/articles/1528.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

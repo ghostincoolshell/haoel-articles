@@ -1,7 +1,7 @@
-<p><strong>（<span style="color: #cc0000;">感谢网友 liuxiaori 分享其经历</span>）<br />
+<html><body><p><strong>（<span style="color: #cc0000;">感谢网友 liuxiaori 分享其经历</span>）<br/>
 </strong></p>
 <h4>背景</h4>
-<p>某日临近下班，一个同事欲取任何类中获取项目绝对路径，不通过Request方式获取，可是始终获取不到预想的路径。于是晚上回家google了一下，误以为是System.getProperty(&#8220;java.class.path&#8221;)-未实际进行测试，早上来和同事沟通，提出了使用这个内置方法，结果人家早已验证过，该方法是打印出CLASSPATH环境变量的值。</p>
+<p>某日临近下班，一个同事欲取任何类中获取项目绝对路径，不通过Request方式获取，可是始终获取不到预想的路径。于是晚上回家google了一下，误以为是System.getProperty(“java.class.path”)-未实际进行测试，早上来和同事沟通，提出了使用这个内置方法，结果人家早已验证过，该方法是打印出CLASSPATH环境变量的值。</p>
 <p>于是乎，继续google，找到了Class的getResource与getResourceAsStream两个方法。这两个方法会委托给ClassLoader对应的同名方法。以为这样就可以搞定(实际上确实可以搞定)，但验证过程中却发生了奇怪的事情。</p>
 <p>软件环境：Windows XP、Resin 3、Tomcat6.0、Myeclipse、JDK1.5</p>
 <h4>发展</h4>
@@ -16,8 +16,8 @@
 public class Path {
     public String getPath() throws IOException
     {
-        InputStream is = this.getClass().getResourceAsStream(&quot;/a.txt&quot;);
-        File file = new File(Path.class.getResource(&quot;/&quot;).getPath()+&quot;/b.txt&quot;);
+        InputStream is = this.getClass().getResourceAsStream("/a.txt");
+        File file = new File(Path.class.getResource("/").getPath()+"/b.txt");
         OutputStream os = new FileOutputStream(file);
         int bytesRead = 0;
         byte[] buffer = new byte[8192];
@@ -26,11 +26,11 @@ public class Path {
         }
         os.close();
         is.close();
-        return this.getClass().getResource(&quot;/&quot;).getPath();
+        return this.getClass().getResource("/").getPath();
     }
 }
 </pre>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">
 public class PathServlet extends HttpServlet {
     private static final long serialVersionUID = 4443655831011903288L;
@@ -38,9 +38,9 @@ public class PathServlet extends HttpServlet {
         throws ServletException, IOException
     {
         Path path = new Path();
-        request.setAttribute(&quot;path&quot;, path.getPath());
+        request.setAttribute("path", path.getPath());
         PrintWriter out = response.getWriter();
-        out.println(&quot;Class.getResource(&#039;/&#039;).getPath():&quot; + path.getPath());
+        out.println("Class.getResource('/').getPath():" + path.getPath());
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -49,15 +49,15 @@ public class PathServlet extends HttpServlet {
         doGet(request, response);
     }
 }</pre>
-<p>在此之前使用main函数测试Path.class.getResource(&#8220;/&#8221;).getPath()打印出预想的路径为：/D:/work/project/EhCacheTestAnnotation/WebRoot/WEB-INF/classes/</p>
+<p>在此之前使用main函数测试Path.class.getResource(“/”).getPath()打印出预想的路径为：/D:/work/project/EhCacheTestAnnotation/WebRoot/WEB-INF/classes/</p>
 <p>于是将WEB应用部署到Resin下，运行定义好的Servlet，出乎意料的结果是：/D:/work/resin-3.0.23/webapps/WEB-INF/classes/ 。特别奇怪，怎么会丢掉项目名称：EhCacheTestAnnotation呢？</p>
-<p>还有一点值得注意，getPath方法中使用getResourceAsStream(&#8220;/a.txt&#8221;)却正常的读到了位于下图的a.txt。<br />
-<img alt="" class="aligncenter size-full wp-image-6280" height="154" src="https://coolshell.cn/wp-content/uploads/2011/12/resin01.png" title="resin01" width="547" /></p>
-<p style="text-align: center;">然后写到了如下图的b.txt中。代码中是这样实现的：File file = new File(Path.class.getResource(&#8220;/&#8221;).getPath()+&#8221;/b.txt&#8221;);本意是想在a.txt文件目录下入b.txt。结果却和料想的不一样。<br />
-<img alt="" class="aligncenter" height="119" src="https://coolshell.cn/wp-content/uploads/2011/12/resin02.png" width="430" /></p>
+<p>还有一点值得注意，getPath方法中使用getResourceAsStream(“/a.txt”)却正常的读到了位于下图的a.txt。<br/>
+<img alt="" class="aligncenter size-full wp-image-6280" height="154" src="../wp-content/uploads/2011/12/resin01.png" title="resin01" width="547"/></p>
+<p style="text-align: center;">然后写到了如下图的b.txt中。代码中是这样实现的：File file = new File(Path.class.getResource(“/”).getPath()+”/b.txt”);本意是想在a.txt文件目录下入b.txt。结果却和料想的不一样。<br/>
+<img alt="" class="aligncenter" height="119" src="../wp-content/uploads/2011/12/resin02.png" width="430"/></p>
 <p>请注意，区别还是丢掉了项目名称。</p>
 <p>写的比较乱，稍微总结下：</p>
-<p>程序中使用ClassLoader的两个方法：getResourceAsStream和getResource。但是事实证明在WEB应用的场景下却得到了不同的结果。大家别误会啊，看名字他们两个方法肯定不一样，这个我知道，但是getResourceAsStream总会获取指定路径下的文件吧，示例中的参数为&#8221;/a.txt&#8221;，正确读取“/D:/work/resin-3.0.23/webapps/EhCacheTestAnnotation/WEB-INF/classes/ ”下的a.txt，可是将文件写到getResource方法的getPath返回路径的b.txt文件。两个位置的差别在项目名称(EhCacheTestAnnotation)。</p>
+<p>程序中使用ClassLoader的两个方法：getResourceAsStream和getResource。但是事实证明在WEB应用的场景下却得到了不同的结果。大家别误会啊，看名字他们两个方法肯定不一样，这个我知道，但是getResourceAsStream总会获取指定路径下的文件吧，示例中的参数为”/a.txt”，正确读取“/D:/work/resin-3.0.23/webapps/EhCacheTestAnnotation/WEB-INF/classes/ ”下的a.txt，可是将文件写到getResource方法的getPath返回路径的b.txt文件。两个位置的差别在项目名称(EhCacheTestAnnotation)。</p>
 <p>这样我暂且得出一个结论：通过getResourceAsStream和getResource两个方法获取的路径是不同的。但是为什么呢？</p>
 <p>于是查看了ClassLoader的源码，贴出getResource和getResourceAsStream的源码。</p>
 <pre class="EnlighterJSRAW">
@@ -90,18 +90,18 @@ public InputStream getResourceAsStream(String name) {
 <li>将其部署到Resin下，导致了getResource与getResourceAsStream获取的路径不一致。</li>
 </ol>
 <p>一个闪光点，是不是与web容器有关啊，于是换成Tomcat6.0。OMG，“奇迹”出现了，真的是这样子啊，换成Tomcat就一样了啊！和预想的一致。</p>
-<p style="text-align: center;">在Tomcat下运行结果如下图：<br />
-<img alt="" class="aligncenter" height="107" src="https://coolshell.cn/wp-content/uploads/2011/12/resin03.png" width="554" /></p>
+<p style="text-align: center;">在Tomcat下运行结果如下图：<br/>
+<img alt="" class="aligncenter" height="107" src="../wp-content/uploads/2011/12/resin03.png" width="554"/></p>
 <p>对，这就是我想要的。</p>
 <p>因此我对Resin产生了厌恶感，之前也因为在Resin下程序报错，在Tomcat下正常运行而纠结了好久。记得看《松本行弘的程序世界》中对C++中的多继承是这样评价的(大概意思)：多重继承带来的负面影响多数是由于使用不当造成的。是不是因为对Resin使用不得当才使得和Tomcat下得到不同的结果。</p>
 <p>最终，在查阅Resin配置文件resin.conf时候在&lt;host-default&gt;标签下发现了这样一段：</p>
 <pre class="EnlighterJSRAW">
 &lt;class-loader&gt;
-&lt;compiling-loader path=&quot;webapps/WEB-INF/classes&quot;/&gt;
-&lt;library-loader path=&quot;webapps/WEB-INF/lib&quot;/&gt;
+&lt;compiling-loader path="webapps/WEB-INF/classes"/&gt;
+&lt;library-loader path="webapps/WEB-INF/lib"/&gt;
 &lt;/class-loader&gt;</pre>
 <p>其中的compiling-loader很可能与之有关，遂将其注释掉，一切正常。担心是错觉，于是将compiling-loader的path属性改成：webapps/WEB-INF/classes1，然后运行pathServlet，b.txt位置如下图：</p>
-<p style="text-align: center;"><img alt="" class="aligncenter" height="93" src="https://coolshell.cn/wp-content/uploads/2011/12/resin04.png" width="483" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter" height="93" src="../wp-content/uploads/2011/12/resin04.png" width="483"/></p>
 <p>确实与compiling-loader有关。</p>
 <h4>结论</h4>
 <p>终于通过将&lt;class-loader&gt;标签注释掉，同样可以在Resin中获取“预想”的路径。验证了的确是使用Resin的人出了问题。</p>
@@ -113,10 +113,10 @@ public InputStream getResourceAsStream(String name) {
 <p>2、为何Resin中&lt;class-loader&gt;的配置会对getResource产生影响，但是对getResourceAsStream毫无影响(getResourceAsStream可是将获取路径委托给getResource的啊)。还是这里我理解或者使用错误了？</p>
 <p>本来文章到这里就结束了，本来是想问问牛人的，但是这个问题引起了很多的好奇心，于是我又花了一两周做了下面的调查。</p>
 <h4>Resin中类加载器</h4>
-<p>在我了解的<span style="font-family: 'Times New Roman';">ClassLoader</span><span>是在</span>com.caucho.loader包下，结构请看下图：<br />
-<img alt="图1" class="aligncenter" height="810" src="https://coolshell.cn/wp-content/uploads/2011/12/resin05.png" width="390" /><br />
-图1<br />
-<a href="https://coolshell.cn/wp-content/uploads/2011/12/resin06.png"><img alt="图2 （点击看大图）" class="aligncenter" height="354" src="https://coolshell.cn/wp-content/uploads/2011/12/resin06.png" width="677" /></a><br />
+<p>在我了解的<span style="font-family: 'Times New Roman';">ClassLoader</span><span>是在</span>com.caucho.loader包下，结构请看下图：<br/>
+<img alt="图1" class="aligncenter" height="810" src="../wp-content/uploads/2011/12/resin05.png" width="390"/><br/>
+图1<br/>
+<a href="https://coolshell.cn/wp-content/uploads/2011/12/resin06.png"><img alt="图2 （点击看大图）" class="aligncenter" height="354" src="../wp-content/uploads/2011/12/resin06.png" width="677"/></a><br/>
 图2</p>
 <p>从上面两幅图中可以看出，图1是与Jdk有关联的，继承自java.net.URLClassLoader。DynamicClassLoader的注释是这样的：</p>
 <pre class="EnlighterJSRAW">
@@ -125,7 +125,7 @@ public InputStream getResourceAsStream(String name) {
 * picks up new jars.
 *
 * DynamicClassLoaders can be chained creating one virtual class loader.
-* From the perspective of the JDK, it&#039;s all one classloader.  Internally,
+* From the perspective of the JDK, it's all one classloader.  Internally,
 * the class loader chain searches like a classpath.
 */
 </pre>
@@ -208,8 +208,8 @@ public URL getResource(String name)
 }
 
 </pre>
-<p>代码不难懂，我画了一张流程图，不规范，凑合看下。<br />
-<img alt="" class="aligncenter size-full wp-image-6286" height="601" src="https://coolshell.cn/wp-content/uploads/2011/12/resin07.png" title="resin07" width="326" /></p>
+<p>代码不难懂，我画了一张流程图，不规范，凑合看下。<br/>
+<img alt="" class="aligncenter size-full wp-image-6286" height="601" src="../wp-content/uploads/2011/12/resin07.png" title="resin07" width="326"/></p>
 <h4>总结</h4>
 <pre class="EnlighterJSRAW">
 boolean isNormalJdkOrder = isNormalJdkOrder(name);
@@ -249,7 +249,6 @@ boolean isNormalJdkOrder = isNormalJdkOrder(name);
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6335.html"><img alt="Resin服务器getResource揭秘" height="150" src="https://coolshell.cn/wp-content/uploads/2012/01/图片1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6335.html">Resin服务器getResource揭秘</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/6112.html">由一个问题到 Resin ClassLoader 的学习</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6335.html"><img alt="Resin服务器getResource揭秘" height="150" src="../wp-content/uploads/2012/01/图片1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6335.html">Resin服务器getResource揭秘</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/6112.html">由一个问题到 Resin ClassLoader 的学习</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

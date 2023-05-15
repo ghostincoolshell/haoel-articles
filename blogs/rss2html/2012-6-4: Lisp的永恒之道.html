@@ -1,4 +1,4 @@
-<p>【<span style="color: #cc0000;">感谢 Todd投递本文 – 微博帐号：</span><a href="http://weibo.com/weidagang" target="_blank" title="weidagang">weidagang</a> 】</p>
+<html><body><p>【<span style="color: #cc0000;">感谢 Todd投递本文 – 微博帐号：</span><a href="http://weibo.com/weidagang" target="_blank" title="weidagang">weidagang</a> 】</p>
 <h4>Lisp之魅</h4>
 <p>长久以来，Lisp一直被许多人视为史上最非凡的编程语言。它不仅在50多年前诞生的时候带来了诸多革命性的创新并极大地影响了后来编程语言的发展，即使在一大批现代语言不断涌现的今天，Lisp的诸多特性仍然未被超越。当各式各样的编程语言摆在面前，我们可以从运行效率、学习曲线、社区活跃度、厂商支持等多种不同的角度进行评判和选择，但我特别看中的一点在于语言能否有效地表达编程者的设计思想。学习C意味着学习如何用过程来表达设计思想，学习Java意味着学习如何用对象来表达设计思想，而虽然Lisp与函数式编程有很大的关系，但学习Lisp绝不仅仅是学习如何用函数表达设计思想。实际上，<strong>函数式编程并非Lisp的本质</strong>，在已经掌握了lambda、高阶函数、闭包、惰性求值等函数式编程概念之后，学习Lisp仍然大大加深了我对编程的理解。<strong>学习Lisp所收获的是如何“自由地”表达你的思想</strong>，这正是Lisp最大的魅力所在，也是这门古老的语言仍然具有很强的生命力的根本原因。</p>
 <h4>Lisp之源</h4>
@@ -27,15 +27,15 @@ foo
 <h4>Lisp之道</h4>
 <p>一门语言能否有效地表达编程者的设计思想取决于其抽象机制的语义表达能力。根据抽象机制的不同，语言的抽象机制形成了面向过程、面向对象、函数式、并发式等不同的范式。当你采用某一种语言，基本上就表示你已经“面向XXX“了，你的思维方式和解决问题的手段就会依赖于语言所提供的抽象方式。比如，采用Java语言通常意味着采用面向对象分析设计；采用Erlang通常意味着按Actor模型对并发任务进行建模。</p>
 <p>有经验的程序员都知道，无论是面向XXX编程，程序设计都有一条“抽象原则“：What与How解耦。但是，<strong>普通语言的问题就在于表达What的手段非常有限</strong>，无非是过程、类、接口、函数等几种方式，而诸多领域问题是无法直接抽象为函数或接口的。比如，你完全可以在C语言中定义若干函数来做到make file所做的事情，但C代码很难像make file那样声明式地体现出target、depends等语义，它们只会作为实现细节被淹没在一个个的C函数之中。采用OOP或是FP等其它范式也会遇到同样的困难，也就是说make file语言所代表的抽象维度与面向过程、OOP以及FP的抽象维度是正交的，使得各种范式无法直接表达出make file的语义。这就是普通语言的“刚性”特征，它要求我们必须以语言的抽象维度去分析和解决问题，把问题映射到语言的基本语法和语义。</p>
-<p>更进一步，如果仔细探究这种刚性的根源，我们会发现正是由于普通语言<strong>语法和语义的紧耦合</strong>造成了这种刚性。比如，C语言中printf(&#8220;hello %s&#8221;, name)符合函数调用语法，它表达了函数调用语义，除此之外别无他义；Java中interface IRunnable { &#8230; }符合接口定义语法，它表达了接口定义语义，除此之外别无他义。如果你认为“语法和语义紧耦合“是理所当然的，看不出这有什么问题，那么理解Lisp就会让你对此产生更深的认识。</p>
-<p>当你看到Lisp的(f a (b c))的时候，你会想到什么？会不会马上联想到函数求值或是宏扩展？就像在C语言里看到gcd(10, 15)马上想到函数调用，或者在Java里看到class A马上想到类定义一样。如果真是这样，那它就是你理解Lisp的一道障碍，因为你已经习惯了顺着语言去思考，总是在想这一句话机器怎么解释执行？那一句话又对应语言的哪个特性？理解Lisp要反过来，让语言顺着你，Lisp的(f a (b c))可以是任何语义，完全由你来定，它可以是函数定义、类定义、数据库查询、文件依赖关系，异步任务的执行关系，业务规则 &#8230;</p>
+<p>更进一步，如果仔细探究这种刚性的根源，我们会发现正是由于普通语言<strong>语法和语义的紧耦合</strong>造成了这种刚性。比如，C语言中printf(“hello %s”, name)符合函数调用语法，它表达了函数调用语义，除此之外别无他义；Java中interface IRunnable { … }符合接口定义语法，它表达了接口定义语义，除此之外别无他义。如果你认为“语法和语义紧耦合“是理所当然的，看不出这有什么问题，那么理解Lisp就会让你对此产生更深的认识。</p>
+<p>当你看到Lisp的(f a (b c))的时候，你会想到什么？会不会马上联想到函数求值或是宏扩展？就像在C语言里看到gcd(10, 15)马上想到函数调用，或者在Java里看到class A马上想到类定义一样。如果真是这样，那它就是你理解Lisp的一道障碍，因为你已经习惯了顺着语言去思考，总是在想这一句话机器怎么解释执行？那一句话又对应语言的哪个特性？理解Lisp要反过来，让语言顺着你，Lisp的(f a (b c))可以是任何语义，完全由你来定，它可以是函数定义、类定义、数据库查询、文件依赖关系，异步任务的执行关系，业务规则 …</p>
 <p>下面我准备先通过几个具体的例子逐步展示Lisp的本质。需要说明的是，由于Lisp的S表达式和XML的语法形式都是一种树形结构，在语义表达方面二者并无本质的差别。所以，为了理解方便，下面我暂且用多数人更为熟悉的XML来写代码，请记住我们可以很轻易地把XML代码和Lisp代码相互转换。</p>
 <p>首先，我们可以轻易地用XML来定义一个求两个数最大公约数的函数：</p>
 <pre class="EnlighterJSRAW">
-    &lt;func name=&#039;gcd&#039; return_type=&#039;int&#039;&gt;
+    &lt;func name='gcd' return_type='int'&gt;
         &lt;params&gt;
-            &lt;a type=&#039;int&#039;/&gt;
-            &lt;b type=&#039;int&#039;/&gt;
+            &lt;a type='int'/&gt;
+            &lt;b type='int'/&gt;
         &lt;/params&gt;
         &lt;body&gt;
             &lt;if&gt;
@@ -60,17 +60,17 @@ foo
 </pre>
 <p>其次，我们可以用它来定义类：</p>
 <pre class="EnlighterJSRAW">
-    &lt;class name=&quot;Computer&quot;&gt;
-        &lt;field access=&quot;private&quot; type=&quot;MainBoard&quot; name=&quot;main-board&quot; /&gt;
-        &lt;field access=&quot;private&quot; type=&quot;CPU&quot; name=&quot;cpu&quot; /&gt;
-        &lt;field access=&quot;private&quot; type=&quot;Memory&quot; name=&quot;memory&quot; /&gt;
+    &lt;class name="Computer"&gt;
+        &lt;field access="private" type="MainBoard" name="main-board" /&gt;
+        &lt;field access="private" type="CPU" name="cpu" /&gt;
+        &lt;field access="private" type="Memory" name="memory" /&gt;
 
-        &lt;method access=&quot;public&quot; return_type=&quot;boolean&quot; name=&quot;powerOn&quot; /&gt;
+        &lt;method access="public" return_type="boolean" name="powerOn" /&gt;
             &lt;params&gt;...&lt;/params&gt;
             &lt;body&gt;...&lt;/body&gt;
         &lt;/method&gt;
 
-        &lt;method access=&quot;public&quot; return_type=&quot;boolean&quot; name=&quot;powerOff&quot; /&gt;
+        &lt;method access="public" return_type="boolean" name="powerOff" /&gt;
             &lt;params&gt;...&lt;/params&gt;
             &lt;body&gt;...&lt;/body&gt;
         &lt;/method&gt;
@@ -80,50 +80,50 @@ foo
 <pre class="EnlighterJSRAW">
 &lt;sql&gt;
     &lt;select&gt;
-        &lt;column name=&quot;employees.id&quot; /&gt;
-        &lt;column name=&quot;bonus.amount&quot; /&gt;
+        &lt;column name="employees.id" /&gt;
+        &lt;column name="bonus.amount" /&gt;
     &lt;/select&gt;
     &lt;from&gt;
-        &lt;table name=&quot;employees&quot; /&gt;
-        &lt;table name=&quot;bonus&quot; /&gt;
+        &lt;table name="employees" /&gt;
+        &lt;table name="bonus" /&gt;
     &lt;/from&gt;
     &lt;where&gt;
         &lt;equals&gt;
-            &lt;column name=&quot;employees.id&quot; /&gt;
-            &lt;column name=&quot;bonus.employee_id&quot; /&gt;
+            &lt;column name="employees.id" /&gt;
+            &lt;column name="bonus.employee_id" /&gt;
         &lt;/equals&gt;
     &lt;/where&gt;
 &lt;/sql&gt;
 </pre>
 <p>还可以用它来实现类似make file的自动化构建(语法取自ant)：</p>
 <pre class="EnlighterJSRAW">
-    &lt;project name=&quot;MyProject&quot; default=&quot;dist&quot; basedir=&quot;.&quot;&gt;
-        &lt;property name=&quot;src&quot; location=&quot;src&quot;/&gt;
-        &lt;property name=&quot;build&quot; location=&quot;build&quot;/&gt;
-        &lt;property name=&quot;dist&quot;  location=&quot;dist&quot;/&gt;
+    &lt;project name="MyProject" default="dist" basedir="."&gt;
+        &lt;property name="src" location="src"/&gt;
+        &lt;property name="build" location="build"/&gt;
+        &lt;property name="dist"  location="dist"/&gt;
 
-        &lt;target name=&quot;init&quot;&gt;
-            &lt;mkdir dir=&quot;${build}&quot;/&gt;
+        &lt;target name="init"&gt;
+            &lt;mkdir dir="${build}"/&gt;
         &lt;/target&gt;
 
-        &lt;target name=&quot;compile&quot; depends=&quot;init&quot; description=&quot;compile the source &quot; &gt;
-            &lt;javac srcdir=&quot;${src}&quot; destdir=&quot;${build}&quot;/&gt;
+        &lt;target name="compile" depends="init" description="compile the source " &gt;
+            &lt;javac srcdir="${src}" destdir="${build}"/&gt;
         &lt;/target&gt;
 
-        &lt;target name=&quot;dist&quot; depends=&quot;compile&quot; description=&quot;generate the distribution&quot; &gt;
-            &lt;mkdir dir=&quot;${dist}/lib&quot;/&gt;
-            &lt;jar jarfile=&quot;${dist}/lib/MyProject-${DSTAMP}.jar&quot; basedir=&quot;${build}&quot;/&gt;
+        &lt;target name="dist" depends="compile" description="generate the distribution" &gt;
+            &lt;mkdir dir="${dist}/lib"/&gt;
+            &lt;jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/&gt;
         &lt;/target&gt;
 
-        &lt;target name=&quot;clean&quot; description=&quot;clean up&quot; &gt;
-            &lt;delete dir=&quot;${build}&quot;/&gt;
-            &lt;delete dir=&quot;${dist}&quot;/&gt;
+        &lt;target name="clean" description="clean up" &gt;
+            &lt;delete dir="${build}"/&gt;
+            &lt;delete dir="${dist}"/&gt;
         &lt;/target&gt;
     &lt;/project&gt;
 </pre>
 <p>一口气举了这么多个例子，目的在于用XML这种树形结构来说明Lisp的S表达式所能够描述的语义。不知道你是否发现了S表达式和XML这种树形语法在语义构造方面有着特别的“柔性”？我们可以轻易地用它构造出函数、变量、条件判断语义；类、属性、方法语义；可以轻易地构造出关系模型的select、where语义；可以轻易地构造出make的target、depends语义，等等数不清的语义。在普通语言里，你可以定义一个函数、一个类，但你无法为C语言增加匿名函数特性，也没法给Java语言加上RAII语义，甚至连自己创造一个foreach循环都不行，而自定义语义意味着在Lisp之上<strong>你创造了一门语言</strong>！不管是面向过程，面向对象，函数式，还是关系模型，在Lisp里统统都变成了一种DSL，而Lisp本身也就成了一种定义语言的语言，即元语言(Meta Language)。</p>
 <p>Lisp的柔性与S表达式有着密切的关系。Lisp并不限制你用S表达式来表达什么语义，同样的S表达式语法可以表达各种不同领域的语义，这就是<strong>语法和语义解耦</strong>。如果说普通语言的刚性源于“语法和语义紧耦合”，那么Lisp的柔性正是源于“语法和语义解耦”！“语法和语义解耦”使得Lisp可以随意地构造各种领域的DSL，而不强制用某一种范式或是领域视角去分析和解决问题。本质上，Lisp编程是一种超越了普通编程范式的范式，这就是<strong>Lisp之道：面向语言编程(LOP, Language Oriented Programming)</strong>。Wikipedia上是这样描述LOP的：</p>
-<blockquote><p>Language oriented programming (LOP) is a style of computer programming in which, rather than solving problems in general-purpose programming languages, the programmer creates one or more domain-specific languages for the problem first, and solves the problem in those languages &#8230; The concept of Language Oriented Programming takes the approach to capture requirements in the user&#8217;s terms, and then to try to create an implementation language as isomorphic as possible to the user&#8217;s descriptions, so that the mapping between requirements and implementation is as direct as possible.</p></blockquote>
+<blockquote><p>Language oriented programming (LOP) is a style of computer programming in which, rather than solving problems in general-purpose programming languages, the programmer creates one or more domain-specific languages for the problem first, and solves the problem in those languages … The concept of Language Oriented Programming takes the approach to capture requirements in the user’s terms, and then to try to create an implementation language as isomorphic as possible to the user’s descriptions, so that the mapping between requirements and implementation is as direct as possible.</p></blockquote>
 <p>LOP范式的基本思想是从问题出发，先创建一门描述领域模型的DSL，再用DSL去解决问题，它具有高度的声明性和抽象性。SQL、make file、CSS等DSL都可以被认为是LOP的具体实例，下面我们再通过两个常见的例子来理解LOP的优势。</p>
 <p>例1：在股票交易系统中，交易协议定义若干二进制的消息格式，交易所和客户端需要对消息进行编码和解码。</p>
 <p>消息格式是一种抽象的规范，本身不对语言做任何的限制，你可以用C，C++，Java，或者Python。普通的实现方式是按照消息格式规范，在相应的语言中定义消息结构，并编写相应的编解码函数。假设为一个消息定义结构和实现编解码函数的工作量为M，不同消息类型的数量为N，这种方式的工作量大致为M*N。也就是说每增加一种消息类型，就需要为该消息定义结构，实现编解码函数，引入bug的可能性当然也和M*N成正比。如果仔细观察不难发现，各个消息结构其实是高度类似的，编解码函数也大同小异，但是普通语言却找不到一种抽象机制能表达这种共性，比如，我们无法通过面向对象的方法定义一个基类把消息结构的共性抽象出来，然后让具体的消息去继承它，达到复用的目的。这正是由于普通语言的抽象维度限制所致，在普通语言中，你只能从函数、接口等维度对事物进行抽象，而恰好消息格式共性所在的维度与这些抽象维度并不匹配。</p>
@@ -158,7 +158,7 @@ foo
 <p><a href="http://lists.warhead.org.uk/pipermail/iwe/2005-July/000130.html">Why Lisp macros are cool, a Perl perspective</a></p>
 <p><a href="http://en.wikipedia.org/wiki/Language-oriented_programming">Wikipedia: Language-oriented programming</a></p>
 <p><a href="http://book.douban.com/subject/6859720/">《实用Common Lisp编程》</a></p>
-<p><a href="http://book.douban.com/subject/4031906/">《冒号课堂 &#8211; 编程范式与OOP思想》</a><!--
+<p><a href="http://book.douban.com/subject/4031906/">《冒号课堂 – 编程范式与OOP思想》</a><!--
 
 
 
@@ -174,7 +174,6 @@ foo
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10337.html"><img alt="数据即代码：元驱动编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3928.html"><img alt="计算机专业学生的大学生活" height="150" src="https://coolshell.cn/wp-content/uploads/2011/03/4kQAz-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3928.html">计算机专业学生的大学生活</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17459.html"><img alt="关于高可用的系统" height="150" src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17459.html">关于高可用的系统</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19.html"><img alt="时间1234567890" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19.html">时间1234567890</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7526.html">Lisp的永恒之道</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10337.html"><img alt="数据即代码：元驱动编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3928.html"><img alt="计算机专业学生的大学生活" height="150" src="../wp-content/uploads/2011/03/4kQAz-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3928.html">计算机专业学生的大学生活</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17459.html"><img alt="关于高可用的系统" height="150" src="../wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17459.html">关于高可用的系统</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19.html"><img alt="时间1234567890" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19.html">时间1234567890</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7526.html">Lisp的永恒之道</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

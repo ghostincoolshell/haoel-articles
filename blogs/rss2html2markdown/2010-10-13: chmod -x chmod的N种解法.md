@@ -138,10 +138,10 @@ mv /tmp/chmod /bin/chmod
 
 ### 相关文章
 
-* [![一些杂项资源](https://coolshell.cn/wp-content/uploads/2010/12/ediff-small-150x150.png)](https://coolshell.cn/articles/3437.html)[一些杂项资源](https://coolshell.cn/articles/3437.html)
-* [![主流文本编辑器学习曲线](https://coolshell.cn/wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg)](https://coolshell.cn/articles/3125.html)[主流文本编辑器学习曲线](https://coolshell.cn/articles/3125.html)
-* [![Emacs配色在线生成器](https://coolshell.cn/wp-content/uploads/2010/03/emacs_color_theme-150x150.jpg)](https://coolshell.cn/articles/2271.html)[Emacs配色在线生成器](https://coolshell.cn/articles/2271.html)
-* [![文件备份的几个简单命令](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/1640.html)[文件备份的几个简单命令](https://coolshell.cn/articles/1640.html)
-* [![Eclipse开发Android应用程序入门](https://coolshell.cn/wp-content/uploads/2011/04/install-150x150.gif)](https://coolshell.cn/articles/4270.html)[Eclipse开发Android应用程序入门](https://coolshell.cn/articles/4270.html)
-* [![Docker基础技术：AUFS](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
+* [![一些杂项资源](../wp-content/uploads/2010/12/ediff-small-150x150.png)](https://coolshell.cn/articles/3437.html)[一些杂项资源](https://coolshell.cn/articles/3437.html)
+* [![主流文本编辑器学习曲线](../wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg)](https://coolshell.cn/articles/3125.html)[主流文本编辑器学习曲线](https://coolshell.cn/articles/3125.html)
+* [![Emacs配色在线生成器](../wp-content/uploads/2010/03/emacs_color_theme-150x150.jpg)](https://coolshell.cn/articles/2271.html)[Emacs配色在线生成器](https://coolshell.cn/articles/2271.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/1640.html)[文件备份的几个简单命令](https://coolshell.cn/articles/1640.html)
+* [![Eclipse开发Android应用程序入门](../wp-content/uploads/2011/04/install-150x150.gif)](https://coolshell.cn/articles/4270.html)[Eclipse开发Android应用程序入门](https://coolshell.cn/articles/4270.html)
+* [![Docker基础技术：AUFS](../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
 The post [chmod -x chmod的N种解法](https://coolshell.cn/articles/3136.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

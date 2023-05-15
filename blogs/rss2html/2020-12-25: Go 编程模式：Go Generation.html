@@ -1,13 +1,13 @@
-<p><figure class="wp-caption alignright" id="attachment_21254" style="width: 296px;"><img alt="" class="wp-image-21254 size-medium" height="300" src="https://coolshell.cn/wp-content/uploads/2020/12/go.generate-296x300.png" width="296" /><figcaption class="wp-caption-text" id="caption-attachment-21254">图片来源：<a href="https://gophersource.com/" rel="noopener" target="_blank">GopherSource</a></figcaption></figure></p>
+<html><body><p><figure class="wp-caption alignright" id="attachment_21254" style="width: 296px;"><img alt="" class="wp-image-21254 size-medium" height="300" src="../wp-content/uploads/2020/12/go.generate-296x300.png" width="296"/><figcaption class="wp-caption-text" id="caption-attachment-21254">图片来源：<a href="https://gophersource.com/" rel="noopener" target="_blank">GopherSource</a></figcaption></figure></p>
 <p>在本篇文章中，我们将要学习一下Go语言的代码生成的玩法。Go语言代码生成主要还是用来解决编程泛型的问题，泛型编程主要解决的问题是因为静态类型语言有类型，所以，相关的算法或是对数据处理的程序会因为类型不同而需要复制一份，这样导致数据类型和算法功能耦合的问题。泛型编程可以解决这样的问题，就是说，在写代码的时候，不用关心处理数据的类型，只需要关心相当处理逻辑。泛型编程是静态语言中非常非常重要的特征，如果没有泛型，我们很难做到多态，也很难完成抽象，会导致我们的代码冗余量很大。</p>
-<section class="post-series"><h3 class="post-series-title">本文是全系列中第6 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go 编程模式：Go Generation</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-prev">&laquo; <a href="https://coolshell.cn/articles/21164.html" rel="prev" title="Go编程模式：Map-Reduce">上一篇文章</a></span><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/17929.html" rel="next" title="Go编程模式：修饰器">下一篇文章</a> &raquo;</span></nav></section>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第6 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go 编程模式：Go Generation</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-prev">« <a href="https://coolshell.cn/articles/21164.html" rel="prev" title="Go编程模式：Map-Reduce">上一篇文章</a></span><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/17929.html" rel="next" title="Go编程模式：修饰器">下一篇文章</a> »</span></nav></section>
 <h4>现实中的类比</h4>
 <p>举个现实当中的例子，用螺丝刀来做具比方，螺丝刀本来就是一个拧螺丝的动作，但是因为螺丝的类型太多，有平口的，有十字口的，有六角的……螺丝还有大小尺寸，导致我们的螺丝刀为了要适配各种千奇百怪的螺丝类型（样式和尺寸），导致要做出各种各样的螺丝刀。</p>
 <table>
 <tbody>
 <tr>
-<td><img alt="" class="aligncenter wp-image-21180 size-medium" height="225" src="https://coolshell.cn/wp-content/uploads/2020/12/type01-300x225.png" width="300" /></td>
-<td><img alt="" class="aligncenter wp-image-21181 size-medium" height="225" src="https://coolshell.cn/wp-content/uploads/2020/12/type02-300x225.png" width="300" /></td>
+<td><img alt="" class="aligncenter wp-image-21180 size-medium" height="225" src="../wp-content/uploads/2020/12/type01-300x225.png" width="300"/></td>
+<td><img alt="" class="aligncenter wp-image-21181 size-medium" height="225" src="../wp-content/uploads/2020/12/type02-300x225.png" width="300"/></td>
 </tr>
 </tbody>
 </table>
@@ -16,7 +16,7 @@
 <table>
 <tbody>
 <tr>
-<td colspan="2"><img alt="" class="aligncenter wp-image-21182 size-medium" height="226" src="https://coolshell.cn/wp-content/uploads/2020/12/type03-300x226.png" width="300" /></td>
+<td colspan="2"><img alt="" class="aligncenter wp-image-21182 size-medium" height="226" src="../wp-content/uploads/2020/12/type03-300x226.png" width="300"/></td>
 </tr>
 </tbody>
 </table>
@@ -164,9 +164,9 @@ func (c *GENERIC_NAMEContainer) Get() GENERIC_TYPE {
 }</pre>
 <p>我们可以看到函数模板中我们有如下的占位符：</p>
 <ul>
-<li><code>PACKAGE_NAME</code> &#8211; 包名</li>
-<li><code>GENERIC_NAME</code> &#8211; 名字</li>
-<li><code>GENERIC_TYPE</code> &#8211; 实际的类型</li>
+<li><code>PACKAGE_NAME</code> – 包名</li>
+<li><code>GENERIC_NAME</code> – 名字</li>
+<li><code>GENERIC_TYPE</code> – 实际的类型</li>
 </ul>
 <p>其它的代码都是一样的。</p>
 <h5>函数生成脚本</h5>
@@ -315,10 +315,10 @@ func filterEmployeeExample() {
 <h4>第三方工具</h4>
 <p>我们并不需要自己手写 <code>gen.sh</code> 这样的工具类，已经有很多第三方的已经写好的可以使用。下面是一个列表：</p>
 <ul>
-<li>Genny &#8211;  <a href="https://github.com/cheekybits/genny">https://github.com/cheekybits/genny</a></li>
-<li>Generic &#8211; <a href="https://github.com/taylorchu/generic">https://github.com/taylorchu/generic</a></li>
-<li>GenGen &#8211; <a href="https://github.com/joeshaw/gengen">https://github.com/joeshaw/gengen</a></li>
-<li>Gen &#8211; <a href="https://github.com/clipperhouse/gen">https://github.com/clipperhouse/gen</a></li>
+<li>Genny –  <a href="https://github.com/cheekybits/genny">https://github.com/cheekybits/genny</a></li>
+<li>Generic – <a href="https://github.com/taylorchu/generic">https://github.com/taylorchu/generic</a></li>
+<li>GenGen – <a href="https://github.com/joeshaw/gengen">https://github.com/joeshaw/gengen</a></li>
+<li>Gen – <a href="https://github.com/clipperhouse/gen">https://github.com/clipperhouse/gen</a></li>
 </ul>
 <p>（全文完）<!--
 
@@ -336,7 +336,6 @@ func filterEmployeeExample() {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.options-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="../wp-content/uploads/2020/12/go.line_.-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="../wp-content/uploads/2020/12/go.options-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

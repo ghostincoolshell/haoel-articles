@@ -1,7 +1,7 @@
-<p>本文主要起因是，一次在微博上和朋友关于嵌套好几层的if-else语句的代码重构的讨论（<a href="http://weibo.com/1401880315/ECmCW0oy2" rel="noopener noreferrer" target="_blank">微博原文</a>），在微博上大家有各式各样的问题和想法。按道理来说这些都是编程的基本功，似乎不太值得写一篇文章，不过我觉得很多东西可以从一个简单的东西出发，到达本质，所以，我觉得有必要在这里写一篇的文章。不一定全对，只希望得到更多的讨论，因为有了更深入的讨论才能进步。</p>
+<html><body><p>本文主要起因是，一次在微博上和朋友关于嵌套好几层的if-else语句的代码重构的讨论（<a href="http://weibo.com/1401880315/ECmCW0oy2" rel="noopener noreferrer" target="_blank">微博原文</a>），在微博上大家有各式各样的问题和想法。按道理来说这些都是编程的基本功，似乎不太值得写一篇文章，不过我觉得很多东西可以从一个简单的东西出发，到达本质，所以，我觉得有必要在这里写一篇的文章。不一定全对，只希望得到更多的讨论，因为有了更深入的讨论才能进步。</p>
 <p>文章有点长，我在文章最后会给出相关的思考和总结陈词，你可以跳到结尾。</p>
 <p>所谓箭头型代码，基本上来说就是下面这个图片所示的情况。</p>
-<p><img alt="" class="aligncenter wp-image-17758 size-full" height="511" src="https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411.jpg" width="720" /></p>
+<p><img alt="" class="aligncenter wp-image-17758 size-full" height="511" src="../wp-content/uploads/2017/04/IMG_7411.jpg" width="720"/></p>
 <p>那么，这样“箭头型”的代码有什么问题呢？看上去也挺好看的，有对称美。但是……</p>
 <p>关于箭头型代码的问题有如下几个：</p>
 <p><span id="more-17757"></span></p>
@@ -17,7 +17,7 @@ FOREACH(Ptr&lt;WfExpression&gt;, argument, node-&gt;arguments) {
         auto type = manager-&gt;expressionResolvings.Values()[index].type;
         if (! types.Contains(type.Obj())) {
             types.Add(type.Obj());
-            if (auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L&quot;CastResult&quot;, true)) {
+            if (auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L"CastResult", true)) {
                 int count = group-&gt;GetMethodCount();
                 for (int i = 0; i &lt; count; i++) { auto method = group-&gt;GetMethod(i);
                     if (method-&gt;IsStatic()) {
@@ -45,7 +45,7 @@ FOREACH(Ptr&lt;WfExpression&gt;, argument, node-&gt;arguments) {
     
     types.Add(type.Obj());
 
-    auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L&quot;CastResult&quot;, true);
+    auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L"CastResult", true);
     if  ( ! group ) continue;
  
     int count = group-&gt;GetMethodCount();
@@ -99,7 +99,7 @@ void ExpressionResolvings(auto &amp;manager, auto &amp;argument, auto &amp;symbo
     if ( types.Contains(type.Obj())) return;
 
     types.Add(type.Obj());
-    auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L&quot;CastResult&quot;, true);
+    auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L"CastResult", true);
     if  ( ! group ) return;
 
     int count = group-&gt;GetMethodCount();
@@ -254,21 +254,21 @@ int ConnectPeer2Peer(Conn *pA, Conn* pB, Manager *manager)
         if ( pB-&gt;isConnected() ) {
             manager-&gt;Prepare(pB);
             if ( manager-&gt;ConnectTogther(pA, pB) ) {
-                pA-&gt;Write(&quot;connected&quot;);
-                pB-&gt;Write(&quot;connected&quot;);
+                pA-&gt;Write("connected");
+                pB-&gt;Write("connected");
                 return S_OK;
             }else{
                 return S_ERROR;
             }
 
         }else {
-            pA-&gt;Write(&quot;Peer is not Ready, waiting...&quot;);
+            pA-&gt;Write("Peer is not Ready, waiting...");
             return S_RETRY;
         }
     }else{
         if ( pB-&gt;isConnected() ) {
             manager-&gt;Prepare();
-            pB-&gt;Write(&quot;Peer is not Ready, waiting...&quot;);
+            pB-&gt;Write("Peer is not Ready, waiting...");
             return S_RETRY;
         }else{
             pA-&gt;Close();
@@ -293,19 +293,19 @@ int ConnectPeer2Peer(Conn *pA, Conn* pB, Manager *manager)
 
     // pA = YES &amp;&amp; pB = NO
     if (pA-&gt;isConnected() &amp;&amp; ! pB-&gt;isConnected()  ) {
-        pA-&gt;Write(&quot;Peer is not Ready, waiting&quot;);
+        pA-&gt;Write("Peer is not Ready, waiting");
         return S_RETRY;
     // pA = NO &amp;&amp; pB = YES
     }else if ( !pA-&gt;isConnected() &amp;&amp; pB-&gt;isConnected() ) {
-        pB-&gt;Write(&quot;Peer is not Ready, waiting&quot;);
+        pB-&gt;Write("Peer is not Ready, waiting");
         return S_RETRY;
     // pA = YES &amp;&amp; pB = YES
     }else if (pA-&gt;isConnected() &amp;&amp; pB-&gt;isConnected()  ) {
         if ( ! manager-&gt;ConnectTogther(pA, pB) ) {
             return S_ERROR;
         }
-        pA-&gt;Write(&quot;connected&quot;);
-        pB-&gt;Write(&quot;connected&quot;);
+        pA-&gt;Write("connected");
+        pB-&gt;Write("connected");
         return S_OK;
     }
 
@@ -351,7 +351,6 @@ int ConnectPeer2Peer(Conn *pA, Conn* pB, Manager *manager)
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19612.html"><img alt="50年前的登月程序和程序员有多硬核" height="150" src="https://coolshell.cn/wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19612.html">50年前的登月程序和程序员有多硬核</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11656.html"><img alt="开发团队的效率" height="150" src="https://coolshell.cn/wp-content/uploads/2014/06/software_development-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11656.html">开发团队的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11432.html"><img alt="从Code Review 谈如何做技术" height="150" src="https://coolshell.cn/wp-content/uploads/2014/04/code_review-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11432.html">从Code Review 谈如何做技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17757.html">如何重构“箭头型”代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19612.html"><img alt="50年前的登月程序和程序员有多硬核" height="150" src="../wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19612.html">50年前的登月程序和程序员有多硬核</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="../wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11656.html"><img alt="开发团队的效率" height="150" src="../wp-content/uploads/2014/06/software_development-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11656.html">开发团队的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11432.html"><img alt="从Code Review 谈如何做技术" height="150" src="../wp-content/uploads/2014/04/code_review-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11432.html">从Code Review 谈如何做技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17757.html">如何重构“箭头型”代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

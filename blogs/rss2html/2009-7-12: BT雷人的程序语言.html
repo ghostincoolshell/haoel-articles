@@ -1,4 +1,4 @@
-<p>这个世界从来都不会缺少另类的东西，人类自然世界如此，计算机世界也一样。编程语言方面，看过本站《<a href="../?p=914" title="6个变态的C语言Hello World程序 - 661次点击">6个变态的C语言Hello World程序</a>》的朋友们一定对BT和另类不会陌生，但那都是些小儿科，真正的BT和另类要是从语言级上来完成。让我们来看看其中一个比较另类的语言BrainFuck。看到这个程序语言的名字，请不要以为这是一个搞笑的语言，这是一个“严肃事情”，请大家用“最虔诚的态度”来阅读本文。</p>
+<html><body><p>这个世界从来都不会缺少另类的东西，人类自然世界如此，计算机世界也一样。编程语言方面，看过本站《<a href="../?p=914" title="6个变态的C语言Hello World程序 - 661次点击">6个变态的C语言Hello World程序</a>》的朋友们一定对BT和另类不会陌生，但那都是些小儿科，真正的BT和另类要是从语言级上来完成。让我们来看看其中一个比较另类的语言BrainFuck。看到这个程序语言的名字，请不要以为这是一个搞笑的语言，这是一个“严肃事情”，请大家用“最虔诚的态度”来阅读本文。</p>
 <h4>BF语言介绍</h4>
 <p><strong>Brainfuck</strong>，是一种极小化的计算机语言，它是由Urban Müller在1993年创建的。由于“绿王八”的原因，这种语言有时被称为<strong>brainf**k</strong>或<strong>brainf***</strong>，甚至被简称为<strong>BF</strong>。这种 语言，是一种按照“Turing complete（完整图灵机）”思想设计的语言，它的主要设计思路是：用最小的概念实现一种“简单”的语言，BrainF**k 语言只有八种符号，所有的操作都由这八种符号的组合来完成。</p>
 <p>BF基于一个简单的机器模型，除了八个指令，这个机器还包括：一个以字节为单位、被初始化为零的数组、一个指向该数组的指针(初始时指向数组的第一个字节)、以及用于输入输出的两个字节流。</p>
@@ -45,7 +45,7 @@
 </tbody>
 </table>
 <p>（按照更节省时间的简单说法，<code>]</code>也可以说成“向后跳转到对应的<code>[</code>状态”。这两解释是一样的。）</p>
-<p>（第三种同价的说法，<code>[</code>意思是&#8221;向前跳转到对应的<code>]</code>&#8220;，<code>]</code>意思是&#8221;向后跳转到对应的<code>[</code>指令的次一指令处，如果指针指向的字节非零。&#8221;）</p>
+<p>（第三种同价的说法，<code>[</code>意思是”向前跳转到对应的<code>]</code>“，<code>]</code>意思是”向后跳转到对应的<code>[</code>指令的次一指令处，如果指针指向的字节非零。”）</p>
 <p>Brainfuck程序可以用下面的替换方法翻译成C语言（假设<code>ptr</code>是<code>char*</code>类型）：</p>
 <table border="0">
 <tbody>
@@ -101,35 +101,35 @@ void interpret(char *c)
 
     r++;
     while( *c ) {
-        //if(strchr(&quot;&lt;&gt;;+-,.[]\n&quot;,*c))printf(&quot;%c&quot;,*c);
+        //if(strchr("&lt;&gt;;+-,.[]\n",*c))printf("%c",*c);
         switch(o=1,*c++) {
-            case &#039;&lt;&#039;: p--;        break;
-            case &#039;&gt;;&#039;: p++;       break;
-            case &#039;+&#039;: a[p]++;     break;
-            case &#039;-&#039;: a[p]--;     break;
-            case &#039;.&#039;: putchar(a[p]); fflush(stdout); break;
-            case &#039;,&#039;: a[p]=getchar();fflush(stdout); break;
-            case &#039;[&#039;:
+            case '&lt;': p--;        break;
+            case '&gt;;': p++;       break;
+            case '+': a[p]++;     break;
+            case '-': a[p]--;     break;
+            case '.': putchar(a[p]); fflush(stdout); break;
+            case ',': a[p]=getchar();fflush(stdout); break;
+            case '[':
                 for( b=1,d=c; b &amp;&amp; *c; c++ )
-                b+=*c==&#039;[&#039;, b-=*c==&#039;]&#039;;
+                b+=*c=='[', b-=*c==']';
                 if(!b) {
                     c[-1]=0;
                     while( a[p] )
                     interpret(d);
-                    c[-1]=&#039;]&#039;;
+                    c[-1]=']';
                     break;
                 }
-            case &#039;]&#039;:
-                puts(&quot;UNBALANCED BRACKETS&quot;), exit(0);
-            case &#039;#&#039;:
+            case ']':
+                puts("UNBALANCED BRACKETS"), exit(0);
+            case '#':
                 if(q&gt;;2)
-                printf(&quot;%2d %2d %2d %2d %2d %2d %2d %2d %2d %2d\n%*s\n&quot;,
-                *a,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],3*p+2,&quot;^&quot;);
+                printf("%2d %2d %2d %2d %2d %2d %2d %2d %2d %2d\n%*s\n",
+                *a,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],3*p+2,"^");
                 break;
             default: o=0;
         }
         if( p&lt;0 || p&gt;;100)
-            puts(&quot;RANGE ERROR&quot;), exit(0);
+            puts("RANGE ERROR"), exit(0);
     }
     r--;
     //        chkabort();
@@ -141,7 +141,7 @@ main(int argc,char *argv[])
 
     q=argc;
 
-    if(z=fopen(argv[1],&quot;r&quot;)) {
+    if(z=fopen(argv[1],"r")) {
         while( (b=getc(z))&gt;;0 )
             *s++=b;
         *s=0;
@@ -185,7 +185,7 @@ main(int argc,char *argv[])
 <p>如果你要觉得BF已经很BT了，那么你就错了，下面这些程序语言更BT。</p>
 <p><strong>WhiteSpace语言</strong></p>
 <p style="padding-left: 30px;">这是一种只用空白字符（空格，TAB和回车）编程的语言，而其它可见字符统统为注释。下面是它的一个示例：</p>
-<p style="padding-left: 30px;">&nbsp;</p>
+<p style="padding-left: 30px;"> </p>
 <pre style="padding-left: 60px;">  		 	
 	
   	
@@ -205,7 +205,7 @@ KTHXBYE</pre>
 我可以用 STDIO 么？
 显示一下 “HAI WORLD!”
 谢谢啊，再见</pre>
-<p style="padding-left: 30px;">&nbsp;</p>
+<p style="padding-left: 30px;"> </p>
 <p style="padding-left: 30px;">官网：<a href="http://lolcode.com/">http://lolcode.com/</a></p>
 <p><strong>中文编程语言</strong></p>
 <p style="padding-left: 30px;">不要以为只有老外才那么BT，咱们中国也有自己的BT编程语言。</p>
@@ -278,7 +278,6 @@ KTHXBYE</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4626.html"><img alt="读书笔记：对线程模型的批评" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4626.html">读书笔记：对线程模型的批评</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4458.html"><img alt="BT雷人的程序语言（大全）" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4458.html">BT雷人的程序语言（大全）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3385.html"><img alt="编程语言流行度" height="150" src="https://coolshell.cn/wp-content/uploads/2010/12/rank_scatter1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3385.html">编程语言流行度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3100.html"><img alt="编程语言进化" height="150" src="https://coolshell.cn/wp-content/uploads/2010/10/language-evolution-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3100.html">编程语言进化</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2724.html"><img alt="计算机编程简史图" height="150" src="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2724.html">计算机编程简史图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1142.html">BT雷人的程序语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="../wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4626.html"><img alt="读书笔记：对线程模型的批评" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4626.html">读书笔记：对线程模型的批评</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4458.html"><img alt="BT雷人的程序语言（大全）" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4458.html">BT雷人的程序语言（大全）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3385.html"><img alt="编程语言流行度" height="150" src="../wp-content/uploads/2010/12/rank_scatter1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3385.html">编程语言流行度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3100.html"><img alt="编程语言进化" height="150" src="../wp-content/uploads/2010/10/language-evolution-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3100.html">编程语言进化</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2724.html"><img alt="计算机编程简史图" height="150" src="../wp-content/uploads/2010/07/aboutprogramming04.eng_-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2724.html">计算机编程简史图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1142.html">BT雷人的程序语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

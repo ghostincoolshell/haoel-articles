@@ -1,4 +1,4 @@
-<p><img alt="isolation" class="alignright size-full wp-image-17085" height="237" src="https://coolshell.cn/wp-content/uploads/2015/04/isolation.jpg" width="359" />时下最热的技术莫过于Docker了，很多人都觉得Docker是个新技术，其实不然，Docker除了其编程语言用go比较新外，其实它还真不是个新东西，也就是个新瓶装旧酒的东西，所谓的The New &#8220;Old Stuff&#8221;。Docker和Docker衍生的东西用到了很多很酷的技术，我会用几篇 文章来把这些技术给大家做个介绍，希望通过这些文章大家可以自己打造一个山寨版的docker。</p>
+<html><body><p><img alt="isolation" class="alignright size-full wp-image-17085" height="237" src="../wp-content/uploads/2015/04/isolation.jpg" width="359"/>时下最热的技术莫过于Docker了，很多人都觉得Docker是个新技术，其实不然，Docker除了其编程语言用go比较新外，其实它还真不是个新东西，也就是个新瓶装旧酒的东西，所谓的The New “Old Stuff”。Docker和Docker衍生的东西用到了很多很酷的技术，我会用几篇 文章来把这些技术给大家做个介绍，希望通过这些文章大家可以自己打造一个山寨版的docker。</p>
 <p>当然，文章的风格一定会尊重时下的“流行”——<strong>我们再也没有整块整块的时间去看书去专研，而我们只有看微博微信那样的碎片时间</strong>（那怕我们有整块的时间，也被那些在手机上的APP碎片化了）。所以，这些文章的风格必然坚持“马桶风格”（希望简单到占用你拉一泡屎就时间，而且你还不用动脑子，并能学到些东西）</p>
 <p>废话少说，我们开始。先从Linux Namespace开始。</p>
 <h4> 简介</h4>
@@ -49,9 +49,9 @@
 </table>
 <p>主要是三个系统调用</p>
 <ul>
-<li><b><code>clone</code></b><b>() </b>&#8211; 实现线程的系统调用，用来创建一个新的进程，并可以通过设计上述参数达到隔离。</li>
-<li><b><code>unshare</code></b><b>() </b>&#8211; 使某进程脱离某个namespace</li>
-<li><b><code>setns</code></b><b>() </b>&#8211; 把某进程加入到某个namespace</li>
+<li><b><code>clone</code></b><b>() </b>– 实现线程的系统调用，用来创建一个新的进程，并可以通过设计上述参数达到隔离。</li>
+<li><b><code>unshare</code></b><b>() </b>– 使某进程脱离某个namespace</li>
+<li><b><code>setns</code></b><b>() </b>– 把某进程加入到某个namespace</li>
 </ul>
 <p>unshare() 和 setns() 都比较简单，大家可以自己man，我这里不说了。</p>
 <p>下面还是让我们来看一些示例（以下的测试程序最好在Linux 内核为3.8以上的版本中运行，我用的是ubuntu 14.04）。</p>
@@ -240,7 +240,7 @@ devices    kcore        mpt         sys
 diskstats  keys         mtrr        sysrq-trigger
 </pre>
 <p>下图，我们也可以看到在子进程中的top命令只看得到两个进程了。</p>
-<p><img alt="" class="aligncenter size-full wp-image-17020" height="300" src="https://coolshell.cn/wp-content/uploads/2015/04/mount.namespace.jpg" width="570" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-17020" height="300" src="../wp-content/uploads/2015/04/mount.namespace.jpg" width="570"/></p>
 <p>这里，多说一下。在通过CLONE_NEWNS创建mount namespace后，父进程会把自己的文件结构复制给子进程中。而子进程中新的namespace中的所有mount操作都只影响自身的文件系统，而不对外界产生任何影响。这样可以做到比较严格地隔离。</p>
 <p><!--另外，如果你熟悉mount命令，你会知道，mount命令有以下这些参数：
 
@@ -292,10 +292,10 @@ awk  env  groups  head  id  mesg  sort  strace  tail  top  uniq  vi  wc  xargs
 <p>注：你可以使用ldd命令把这些命令相关的那些so文件copy到对应的目录：</p>
 <pre class="EnlighterJSRAW">
 hchen@ubuntu:~/rootfs/bin$ ldd bash
-  linux-vdso.so.1 =>  (0x00007fffd33fc000)
-  libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007f4bd42c2000)
-  libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f4bd40be000)
-  libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f4bd3cf8000)
+  linux-vdso.so.1 =&gt;  (0x00007fffd33fc000)
+  libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007f4bd42c2000)
+  libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f4bd40be000)
+  libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f4bd3cf8000)
   /lib64/ld-linux-x86-64.so.2 (0x00007f4bd4504000)
 </pre>
 <p>下面是我的rootfs中的一些so文件：</p>
@@ -334,9 +334,9 @@ hostname     hosts     resolv.conf</pre>
 <p>好了，终于到了我们的程序。</p>
 <pre class="EnlighterJSRAW">
 #define _GNU_SOURCE
-#include types.h>
-#include wait.h>
-#include mount.h>
+#include types.h&gt;
+#include wait.h&gt;
+#include mount.h&gt;
 #include 
 #include 
 #include 
@@ -461,7 +461,6 @@ awk  env  groups  head  id  mesg  sort  strace  tail  top  uniq  vi  wc  xargs
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17029.html"><img alt="Docker基础技术：Linux Namespace（下）" height="150" src="https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17029.html">Docker基础技术：Linux Namespace（下）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17200.html"><img alt="Docker基础技术：DeviceMapper" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17200.html">Docker基础技术：DeviceMapper</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17049.html"><img alt="Docker基础技术：Linux CGroup" height="150" src="https://coolshell.cn/wp-content/uploads/2015/04/filter-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17049.html">Docker基础技术：Linux CGroup</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17010.html">Docker基础技术：Linux Namespace（上）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17029.html"><img alt="Docker基础技术：Linux Namespace（下）" height="150" src="../wp-content/uploads/2015/04/jail_cell-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17029.html">Docker基础技术：Linux Namespace（下）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17200.html"><img alt="Docker基础技术：DeviceMapper" height="150" src="../wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17200.html">Docker基础技术：DeviceMapper</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17049.html"><img alt="Docker基础技术：Linux CGroup" height="150" src="../wp-content/uploads/2015/04/filter-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17049.html">Docker基础技术：Linux CGroup</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17010.html">Docker基础技术：Linux Namespace（上）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

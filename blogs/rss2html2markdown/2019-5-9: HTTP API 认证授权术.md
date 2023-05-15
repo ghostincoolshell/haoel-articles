@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200.png)我们知道，HTTP是无状态的，所以，当我们需要获得用户是否在登录的状态时，我们需要检查用户的登录状态，一般来说，用户的登录成功后，服务器会发一个登录凭证（又被叫作Token），就像你去访问某个公司，在前台被认证过合法后，这个公司的前台会给你的一个访客卡一样，之后，你在这个公司内去到哪都用这个访客卡来开门，而不再校验你是哪一个人。在计算机的世界里，这个登录凭证的相关数据会放在两种地方，一个地方在用户端，以Cookie的方式（一般不会放在浏览器的Local Storage，因为这很容易出现登录凭证被XSS攻击），另一个地方是放在服务器端，又叫Session的方式（SessonID存于Cookie）。
+![](../wp-content/uploads/2019/05/Authorization-360x200.png)我们知道，HTTP是无状态的，所以，当我们需要获得用户是否在登录的状态时，我们需要检查用户的登录状态，一般来说，用户的登录成功后，服务器会发一个登录凭证（又被叫作Token），就像你去访问某个公司，在前台被认证过合法后，这个公司的前台会给你的一个访客卡一样，之后，你在这个公司内去到哪都用这个访客卡来开门，而不再校验你是哪一个人。在计算机的世界里，这个登录凭证的相关数据会放在两种地方，一个地方在用户端，以Cookie的方式（一般不会放在浏览器的Local Storage，因为这很容易出现登录凭证被XSS攻击），另一个地方是放在服务器端，又叫Session的方式（SessonID存于Cookie）。
 
 
 但是，这个世界还是比较复杂的，除了用户访问，还有用户委托的第三方的应用，还有企业和企业间的调用，这里，我想把业内常用的一些 API认证技术相对系统地总结归纳一下，这样可以让大家更为全面的了解这些技术。**注意，这是一篇长文！**
@@ -105,7 +105,7 @@ Authorization: Digest username="Mufasa",
  
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/MAC-1024x634.png)
+![](../wp-content/uploads/2019/05/MAC-1024x634.png)
 
 
 （图片来自 [Wikipedia – MAC 词条](https://en.wikipedia.org/wiki/Message_authentication_code) ）
@@ -123,7 +123,7 @@ Authorization: Digest username="Mufasa",
 4. 用第三步的 `SigningKey`来对第二步的 `StringToSign` 签名。
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/sigV4-using-query-params.png)
+![](../wp-content/uploads/2019/05/sigV4-using-query-params.png)
 
 
  
@@ -220,7 +220,7 @@ OAuth也是一个API认证的协议，这个协议最初在2006年由Twitter的�
 下图附上一个Yahoo!的流程图可以看到整个过程的相关细节。
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/oauth_graph.gif)
+![](../wp-content/uploads/2019/05/oauth_graph.gif)
 
 
 因为上面这个流程有三方：User，Consumer 和 Service Provide，所以，又叫 3-legged flow，三脚流程。OAuth 1.0 也有不需要用户参与的，只有Consumer 和 Service Provider 的， 也就是 2-legged flow 两脚流程，其中省掉了用户认证的事。整个过程如下所示：
@@ -250,7 +250,7 @@ OAuth也是一个API认证的协议，这个协议最初在2006年由Twitter的�
 下图是整个签名的示意图：
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/oauth_singature.png)
+![](../wp-content/uploads/2019/05/oauth_singature.png)
 
 
 图片还是比较直观的，我就不多解释了。
@@ -281,7 +281,7 @@ OAuth也是一个API认证的协议，这个协议最初在2006年由Twitter的�
 Authorization Code 是最常使用的OAuth 2.0的授权许可类型，它适用于用户给第三方应用授权访问自己信息的场景。这个Flow也是OAuth 2.0四个Flow中我个人觉得最完整的一个Flow，其流程图如下所示。
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/auth_code_flow.png)
+![](../wp-content/uploads/2019/05/auth_code_flow.png)
 
 
  
@@ -390,7 +390,7 @@ Authorization: Bearer iJKV1QiLCJhbGciOiJSUzI1NiI
 Client Credential 是一个简化版的API认证，主要是用于认证服务器到服务器的调用，也就是没有用户参与的的认证流程。下面是相关的流程图。
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/client_credentials_flow.png)
+![](../wp-content/uploads/2019/05/client_credentials_flow.png)
 
 
 这个过程非常简单，本质上就是Client用自己的 `client_id`和 `client_secret`向Authorization Server 要一个 Access Token，然后使用Access Token访问相关的资源。
@@ -427,7 +427,7 @@ grant_type=client_credentials
 这里，容我多扯一句，微信公从平台的开发文档中，使用了OAuth 2.0 的 Client Credentials的方式（参看文档“[微信公众号获取access token](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183)”），我截了个图如下所谓。我们可以看到，**微信公众号使用的是GET方式的请求，把AppID和AppSecret放在了URL中，虽然这也符合OAuth 2.0，但是并不好，因为大多数网关代理会把整个URI请求记到日志中。我们只要脑补一下腾讯的网关的Access Log，里面的日志一定会有很多的各个用户的AppID和AppSecret……**
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/05/wechat.dev_-1024x876.png)
+![](../wp-content/uploads/2019/05/wechat.dev_-1024x876.png)
 
 
  
@@ -479,10 +479,10 @@ grant_type=client_credentials
 
 ### 相关文章
 
-* [![网络数字身份认证术](https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-150x150.png)](https://coolshell.cn/articles/21708.html)[网络数字身份认证术](https://coolshell.cn/articles/21708.html)
-* [![如何免费的让网站启用HTTPS](https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
-* [![从“黑掉Github”学Web安全开发](https://coolshell.cn/wp-content/uploads/2014/02/Github-Security-150x150.png)](https://coolshell.cn/articles/11021.html)[从“黑掉Github”学Web安全开发](https://coolshell.cn/articles/11021.html)
-* [![计时攻击 Timing Attacks](https://coolshell.cn/wp-content/uploads/2020/06/time-bomb-150x150.png)](https://coolshell.cn/articles/21003.html)[计时攻击 Timing Attacks](https://coolshell.cn/articles/21003.html)
-* [![从 MongoDB “赎金事件” 看安全问题](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB-150x150.jpg)](https://coolshell.cn/articles/17607.html)[从 MongoDB “赎金事件” 看安全问题](https://coolshell.cn/articles/17607.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
+* [![网络数字身份认证术](../wp-content/uploads/2022/01/iStock-1175502114-150x150.png)](https://coolshell.cn/articles/21708.html)[网络数字身份认证术](https://coolshell.cn/articles/21708.html)
+* [![如何免费的让网站启用HTTPS](../wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
+* [![从“黑掉Github”学Web安全开发](../wp-content/uploads/2014/02/Github-Security-150x150.png)](https://coolshell.cn/articles/11021.html)[从“黑掉Github”学Web安全开发](https://coolshell.cn/articles/11021.html)
+* [![计时攻击 Timing Attacks](../wp-content/uploads/2020/06/time-bomb-150x150.png)](https://coolshell.cn/articles/21003.html)[计时攻击 Timing Attacks](https://coolshell.cn/articles/21003.html)
+* [![从 MongoDB “赎金事件” 看安全问题](../wp-content/uploads/2017/01/MongoDB-150x150.jpg)](https://coolshell.cn/articles/17607.html)[从 MongoDB “赎金事件” 看安全问题](https://coolshell.cn/articles/17607.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
 The post [HTTP API 认证授权术](https://coolshell.cn/articles/19395.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

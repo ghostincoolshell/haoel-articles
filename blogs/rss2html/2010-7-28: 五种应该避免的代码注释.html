@@ -1,4 +1,4 @@
-<p>在酷壳，有很多文章都提到了代码注释，如：《<a href="https://coolshell.cn/articles/2424.html" rel="bookmark" target="_blank">十条不错的编程观点</a>》、《<a href="https://coolshell.cn/articles/1007.html" rel="bookmark" target="_blank">优质代码的十诫</a>》、《<a href="https://coolshell.cn/articles/1095.html" rel="bookmark" target="_blank">整洁代码的4个提示</a>》、《<a href="https://coolshell.cn/articles/340.html" rel="bookmark" target="_blank">惹恼程序员的十件事</a>》等等。今天，某国外的程序员在<a href="http://repeatgeek.com/career/5-types-of-comments-to-avoid-making-in-your-code/" target="_blank"><strong>这里</strong></a>列举五种应该避免的程序注释，我觉得比较有道理，但我觉得有少数几个观点也并不绝对。所以，我把原文的这五种应该避免的程序注释罗列在下面，并放上原作者和我的个人观点作为比较。希望对大家有用。</p>
+<html><body><p>在酷壳，有很多文章都提到了代码注释，如：《<a href="https://coolshell.cn/articles/2424.html" rel="bookmark" target="_blank">十条不错的编程观点</a>》、《<a href="https://coolshell.cn/articles/1007.html" rel="bookmark" target="_blank">优质代码的十诫</a>》、《<a href="https://coolshell.cn/articles/1095.html" rel="bookmark" target="_blank">整洁代码的4个提示</a>》、《<a href="https://coolshell.cn/articles/340.html" rel="bookmark" target="_blank">惹恼程序员的十件事</a>》等等。今天，某国外的程序员在<a href="http://repeatgeek.com/career/5-types-of-comments-to-avoid-making-in-your-code/" target="_blank"><strong>这里</strong></a>列举五种应该避免的程序注释，我觉得比较有道理，但我觉得有少数几个观点也并不绝对。所以，我把原文的这五种应该避免的程序注释罗列在下面，并放上原作者和我的个人观点作为比较。希望对大家有用。</p>
 <h3>一、自恋型注释</h3>
 <p>（注：原文为Proud，我觉得“自恋”更好一点）</p>
 <pre class="EnlighterJSRAW">
@@ -6,9 +6,9 @@ public class Program
 {
     static void Main(string[] args)
     {
-        string message = &quot;Hello World!&quot;;  // 07/24/2010 Bob
+        string message = "Hello World!";  // 07/24/2010 Bob
         Console.WriteLine(message); // 07/24/2010 Bob
-        message = &quot;I am so proud of this code!&quot;; // 07/24/2010 Bob
+        message = "I am so proud of this code!"; // 07/24/2010 Bob
         Console.WriteLine(message); // 07/24/2010 Bob
     }
 }</pre>
@@ -33,7 +33,7 @@ public class Program
         //if (today == new DateTime(1900, 1, 1))
         //{
         //    today = today.AddYears(100);
-        //    string message = &quot;The date has been fixed for Y2K.&quot;;
+        //    string message = "The date has been fixed for Y2K.";
         //    Console.WriteLine(message);
         //}
     }
@@ -46,7 +46,7 @@ public class Program
     static void Main(string[] args)
     {
         /* This is a for loop that prints the
-         * words &quot;I Rule!&quot; to the console screen
+         * words "I Rule!" to the console screen
          * 1 million times, each on its own line. It
          * accomplishes this by starting at 0 and
          * incrementing by 1. If the value of the
@@ -54,7 +54,7 @@ public class Program
          * stops executing.*/
         for (int i = 0; i &lt; 1000000; i++)
         {
-            Console.WriteLine(&quot;I Rule!&quot;);
+            Console.WriteLine("I Rule!");
         }
     }
 }</pre>
@@ -115,8 +115,8 @@ public class Program
         * meaningful error message and exit gracefully.
         * I just don’t have the time right now.
        */
-       string message = &quot;An error has occurred&quot;;
-       if(message.Contains(&quot;error&quot;))
+       string message = "An error has occurred";
+       if(message.Contains("error"))
        {
            throw new Exception(message);
        }
@@ -140,7 +140,6 @@ public class Program
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5201.html"><img alt="重构代码的7个阶段" height="150" src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5201.html">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2746.html">五种应该避免的代码注释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5201.html"><img alt="重构代码的7个阶段" height="150" src="../wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5201.html">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2746.html">五种应该避免的代码注释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

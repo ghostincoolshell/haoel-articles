@@ -160,10 +160,10 @@ class SortThread extends Thread{
 
 ### 相关文章
 
-* [![Cuckoo Filter：设计与实现](https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg)](https://coolshell.cn/articles/17225.html)[Cuckoo Filter：设计与实现](https://coolshell.cn/articles/17225.html)
-* [![Leetcode 编程训练](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/12052.html)[Leetcode 编程训练](https://coolshell.cn/articles/12052.html)
-* [![谜题的答案和活动的心得体会](https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
-* [![【活动】解迷题送礼物](https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg)](https://coolshell.cn/articles/11832.html)[【活动】解迷题送礼物](https://coolshell.cn/articles/11832.html)
-* [![二维码的生成细节和原理](https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg)](https://coolshell.cn/articles/10590.html)[二维码的生成细节和原理](https://coolshell.cn/articles/10590.html)
-* [![伙伴分配器的一个极简实现](https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg)](https://coolshell.cn/articles/10427.html)[伙伴分配器的一个极简实现](https://coolshell.cn/articles/10427.html)
+* [![Cuckoo Filter：设计与实现](../wp-content/uploads/2015/08/cuckoo-150x150.jpg)](https://coolshell.cn/articles/17225.html)[Cuckoo Filter：设计与实现](https://coolshell.cn/articles/17225.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/12052.html)[Leetcode 编程训练](https://coolshell.cn/articles/12052.html)
+* [![谜题的答案和活动的心得体会](../wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
+* [![【活动】解迷题送礼物](../wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg)](https://coolshell.cn/articles/11832.html)[【活动】解迷题送礼物](https://coolshell.cn/articles/11832.html)
+* [![二维码的生成细节和原理](../wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg)](https://coolshell.cn/articles/10590.html)[二维码的生成细节和原理](https://coolshell.cn/articles/10590.html)
+* [![伙伴分配器的一个极简实现](../wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg)](https://coolshell.cn/articles/10427.html)[伙伴分配器的一个极简实现](https://coolshell.cn/articles/10427.html)
 The post [排序算法 Sleep Sort](https://coolshell.cn/articles/4883.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

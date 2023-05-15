@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](http://www.review-board.org/media/rbsite/images/logo.png?1238930581 "Code Review")Code Review中文应该译作“代码审查”或是“代码评审”，这是一个流程，当开发人员写好代码后，需要让别人来review一下他的代码，这是一种有效发现BUG的方法。由此，我们可以审查代码的风格、逻辑、思路……，找出问题，以及改进代码。因为这是代码刚刚出炉的时候，所以，这也是代码重构，代码调整，代码修改的最佳时候。所以，Code Review是编码实现中最最重要的一个环节。
+http://www.review-board.org/media/rbsite/images/logo.png?1238930581 "Code Review"Code Review中文应该译作“代码审查”或是“代码评审”，这是一个流程，当开发人员写好代码后，需要让别人来review一下他的代码，这是一种有效发现BUG的方法。由此，我们可以审查代码的风格、逻辑、思路……，找出问题，以及改进代码。因为这是代码刚刚出炉的时候，所以，这也是代码重构，代码调整，代码修改的最佳时候。所以，Code Review是编码实现中最最重要的一个环节。
 
 
 长时间以来，Code Review需要有一些有效的工具来支持，这样我们就可以更容易，更有效率地来进行代码审查工作。下面是5个开源的代码审查工具，他们可以帮助你更容易地进行这项活动。
@@ -29,7 +29,7 @@ Yahoo 是[review-board](http://www.review-board.org/)的其中一个用户。
 ### [Detailed review requests](http://www.review-board.org/media/screenshots/2009/02/02/review-requests.png)
 
 
-[![Powerful diff viewer](http://www.review-board.org/media/screenshots/2009/02/02/diffviewer_thumb.png)](http://www.review-board.org/media/screenshots/2009/02/02/diffviewer.png)
+[http://www.review-board.org/media/screenshots/2009/02/02/diffviewer_thumb.png](http://www.review-board.org/media/screenshots/2009/02/02/diffviewer.png)
 **2. [Codestriker](http://codestriker.sourceforge.net/):**  
 
 [Codestriker](http://codestriker.sourceforge.net/) 也是一个基于Web的应用，其主要使用 GCI-Perl 脚本支持在线的代码审查。[Codestriker](http://codestriker.sourceforge.net/) 可以集成于CVS, [Subversion](http://subversion.tigris.org/), [ClearCase](http://www-01.ibm.com/software/awdtools/clearcase/), [Perforce](http://www.perforce.com/) 和Visual SourceSafe。并有一些插件可以提供支持其它的源码管理工具。
@@ -38,7 +38,7 @@ Yahoo 是[review-board](http://www.review-board.org/)的其中一个用户。
 David Sitsky 是 [Codestriker](http://codestriker.sourceforge.net/) 的作者，并也是最活跃的开发人员之一。 Jason Remillard 是另一个活路的开发者，并给这个项目提供了最深远最有意义的贡献。大量的程序员贡献他们的代码给 [Codestriker](http://codestriker.sourceforge.net/) 项目，导致了这个项目空前的繁荣。
 
 
-![http://codestriker.sourceforge.net/viewtopicdetail.png](http://codestriker.sourceforge.net/viewtopicdetail.png)
+http://codestriker.sourceforge.net/viewtopicdetail.png
 
 
 **3. [Groogle](http://groogle.sourceforge.net/):**  
@@ -53,7 +53,7 @@ David Sitsky 是 [Codestriker](http://codestriker.sourceforge.net/) 的作者�
 * 认证机制。
 
 
-![Screenshot](http://sourceforge.net/dbimage.php?id=218190)
+http://sourceforge.net/dbimage.php?id=218190
 
 
 **4. [Rietveld](http://code.google.com/p/rietveld/):**  
@@ -61,7 +61,7 @@ David Sitsky 是 [Codestriker](http://codestriker.sourceforge.net/) 的作者�
 [Rietveld](http://code.google.com/p/rietveld/) 由Guido van Rossum 开发（他是Python的创造者，现在是Google的员工），这个工具是基于Mondrian 工具，作者一开始是为了Google 开发的，并且，它在很多方面和[Review board](http://www.review-board.org/) 很像。它也是一个基于Web的应用，并在[Google App Engine](http://code.google.com/appengine/) 上。它使用了目前最流行的Web开发框架 [django](http://www.djangoproject.com/) 并支持 [Subversion](http://subversion.tigris.org/) 。当前，任何一个使用 Google Code 的项目都可以使用 [Rietveld](http://code.google.com/p/rietveld/) 并且使用 [python](http://www.python.org/) [Subversion](http://subversion.tigris.org/) 服务器。当然，它同样支持其它的Subversion服务器。
 
 
-![](http://info-database.csdn.net/Upload/2008-11-13/Reviewboard.jpg "下一张")
+http://info-database.csdn.net/Upload/2008-11-13/Reviewboard.jpg "下一张"
 
 
  
@@ -84,7 +84,7 @@ David Sitsky 是 [Codestriker](http://codestriker.sourceforge.net/) 的作者�
 [JCR](http://jcodereview.sourceforge.net/) 主要面对的是大型的项目，或是非常正式的代码评审，从这方面看来，他并不像上面的那些工具。
 
 
-![Screenshot](http://sourceforge.net/projects/jcodereview/screenshots/242251)
+http://sourceforge.net/projects/jcodereview/screenshots/242251
 
 
 **[Jupiter](http://code.google.com/p/jupiter-eclipse-plugin/)**：最后我们要提一下[Jupiter](http://code.google.com/p/jupiter-eclipse-plugin/)，这是另一个代码review的工具你可以去考虑使用的，它是一个Eclipse IDE 的插件。
@@ -100,10 +100,10 @@ David Sitsky 是 [Codestriker](http://codestriker.sourceforge.net/) 的作者�
 
 ### 相关文章
 
-* [![一个空格引发的惨剧](https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
-* [![API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
-* [![如何重构“箭头型”代码](https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411-150x150.jpg)](https://coolshell.cn/articles/17757.html)[如何重构“箭头型”代码](https://coolshell.cn/articles/17757.html)
-* [![从Code Review 谈如何做技术](https://coolshell.cn/wp-content/uploads/2014/04/code_review-150x150.jpg)](https://coolshell.cn/articles/11432.html)[从Code Review 谈如何做技术](https://coolshell.cn/articles/11432.html)
-* [![Linus：利用二级指针删除单向链表](https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
-* [![如此理解面向对象编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg)](https://coolshell.cn/articles/8745.html)[如此理解面向对象编程](https://coolshell.cn/articles/8745.html)
+* [![一个空格引发的惨剧](../wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
+* [![API设计原则 – Qt官网的设计实践总结](../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
+* [![如何重构“箭头型”代码](../wp-content/uploads/2017/04/IMG_7411-150x150.jpg)](https://coolshell.cn/articles/17757.html)[如何重构“箭头型”代码](https://coolshell.cn/articles/17757.html)
+* [![从Code Review 谈如何做技术](../wp-content/uploads/2014/04/code_review-150x150.jpg)](https://coolshell.cn/articles/11432.html)[从Code Review 谈如何做技术](https://coolshell.cn/articles/11432.html)
+* [![Linus：利用二级指针删除单向链表](../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg](https://coolshell.cn/articles/8745.html)[如此理解面向对象编程](https://coolshell.cn/articles/8745.html)
 The post [简单实用的Code Review工具](https://coolshell.cn/articles/1218.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

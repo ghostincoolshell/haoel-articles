@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright size-medium" height="186" src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186.jpeg" width="300" />50年前，除了Apollo上天之外，还有一个大事的发生，就是Unix操作系统的诞生，若干年前我写过《Unix的传奇，<a href="https://coolshell.cn/articles/2322.html" rel="noopener noreferrer" target="_blank">上篇</a>，<a href="https://coolshell.cn/articles/2324.html" rel="noopener noreferrer" target="_blank">下篇</a>》，Unix是我入行前十年伴我成长的操作系统，虽然现在Linux早已接过了Unix的时代交接棒，但是，Unix文化对我个人的技术观影响是非常大的（注：《<a href="https://book.douban.com/subject/1467587/" rel="noopener noreferrer" target="_blank">Unix编程艺术</a>》是一本对影响我很深的书），而对于 <a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> 和 <a href="https://en.wikipedia.org/wiki/Dennis_Ritchie" rel="noopener noreferrer" target="_blank">Dennis Ritchie</a> 这两位 Unix 的缔造者，也是计算机圈中的神一般的人物。今天，Dennis已经去逝，Ken在Google里跟 Rob Pike和 Robert Griesemer 这两位大神在开发Go语言。</p>
+<html><body><p><img alt="" class="alignright size-medium" height="186" src="../wp-content/uploads/2019/11/ken.dennis-300x186.jpeg" width="300"/>50年前，除了Apollo上天之外，还有一个大事的发生，就是Unix操作系统的诞生，若干年前我写过《Unix的传奇，<a href="https://coolshell.cn/articles/2322.html" rel="noopener noreferrer" target="_blank">上篇</a>，<a href="https://coolshell.cn/articles/2324.html" rel="noopener noreferrer" target="_blank">下篇</a>》，Unix是我入行前十年伴我成长的操作系统，虽然现在Linux早已接过了Unix的时代交接棒，但是，Unix文化对我个人的技术观影响是非常大的（注：《<a href="https://book.douban.com/subject/1467587/" rel="noopener noreferrer" target="_blank">Unix编程艺术</a>》是一本对影响我很深的书），而对于 <a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> 和 <a href="https://en.wikipedia.org/wiki/Dennis_Ritchie" rel="noopener noreferrer" target="_blank">Dennis Ritchie</a> 这两位 Unix 的缔造者，也是计算机圈中的神一般的人物。今天，Dennis已经去逝，Ken在Google里跟 Rob Pike和 Robert Griesemer 这两位大神在开发Go语言。</p>
 <p>P.S. 今年，我一直想写篇Unix 50周年纪念的文章，但一直无从下手，因为不想写过大的命题，如果能写个轶事最好不过。正好过完国庆节，技术圈里有个“热搜”——Ken Thompson的密码。但一直没有时间，所以拖到今天才写下来。</p>
 <p>正文开始，2014年，有个叫Leah Neukirchen的程序员（<a href="https://leahneukirchen.org/blog/" rel="noopener noreferrer" target="_blank">blog</a>）在 BSD 3 的源代码中的 <code><a href="https://leahneukirchen.org/blog/archive/2019/10/ken-thompson-s-unix-password.html" rel="noopener noreferrer" target="_blank">/etc/passwd</a></code> 看到了早年Unix黑客们的被 hash了的密码，该文件如下所示：</p>
 <p><span id="more-19996"></span></p>
@@ -41,15 +41,15 @@ tty::504:50::/:/bin/tty我</pre>
 <p>在2019年10月份，在 <a href="https://www.tuhs.org/">The Unix Heritage Society</a> 这个社区中，<a href="https://inbox.vuxu.org/tuhs/6dceffe228804a76de1e12f18d1fc0dc@inventati.org/" rel="noopener noreferrer" target="_blank">这个事又被人问起来</a>，说以前有个人破解这些密码，不知道有没有全破解出来了？于是Leah看到了，就回应说，那个人是我，但是还是没干出来……于是好些人进来留言。</p>
 <p>5天后，2019年10月08日，一个来自澳大利亚的程序员Nigel Williams说，<a href="https://inbox.vuxu.org/tuhs/CACCFpdx_6oeyNkgH_5jgfxbxWbZ6VtOXQNKOsonHPF2=747ZOw@mail.gmail.com/" rel="noopener noreferrer" target="_blank">Ken的密码我破解出来了</a>，哈希串<code>ZghOT0eRm4U9s</code> 明文是 <code>p/q2-q4!</code>（果然是有数字有特殊字符），小伙说，我在 AMD Radeon Vega 64 的 GPU上运行了 <code>hashcat</code> 这个命令，干了我 4天多，每秒钟的“配速”是930MH/s （每秒钟9亿3千万次hash运算）。然后，<a href="https://inbox.vuxu.org/tuhs/CAG=a+rj8VcXjS-ftaj8P2_duLFSUpmNgB4-dYwnTsY_8g5WdEA@mail.gmail.com/" rel="noopener noreferrer" target="_blank">Ken Thompson 也留言到 “恭喜”</a> ，这样，Ken 的密码在40年后被破解了……</p>
 <p>马上，就有人问到，这个密码是不是国际象棋的走棋？嗯，很像中国象棋中的“车五进一”，“马三退一”，这个密码中的 <code>p</code> 代表 <code>pawn</code> 小兵，从 <code>q2</code> 的位置走到 <code>q4</code>，这个看来是国际象棋中的开局进兵——用来做登录密码，非常合适。而且，Ken Thompson 在 Unix中写下的一个国际象棋的程序 <a href="https://en.wikipedia.org/wiki/Belle_(chess_machine)" rel="noopener noreferrer" target="_blank">Belle</a>，在1978年首次参加<a href="https://en.wikipedia.org/wiki/North_American_Computer_Chess_Championship">计算机协会的北美计算机国际象棋锦标赛</a>时，它获得了第一个冠军头衔，其搜索深度为八层。之后又赢得了四次冠军。1983年，它也成为第一台获得国际象棋“大师”称号的计算机。所以，Ken用这个做密码相当make sense!</p>
-<p style="text-align: center;"><img alt="" class="aligncenter size-full" height="800" src="https://coolshell.cn/wp-content/uploads/2019/11/ken.chess_.jpg" width="600" />Ken在贝尔实验室调程序（图片来源：<a href="https://spectrum.ieee.org/tech-history/silicon-revolution/in-1983-this-bell-labs-computer-was-the-first-machine-to-become-a-chess-master" rel="noopener noreferrer" target="_blank">IEEE SPECTRUM</a>）</p>
+<p style="text-align: center;"><img alt="" class="aligncenter size-full" height="800" src="../wp-content/uploads/2019/11/ken.chess_.jpg" width="600"/>Ken在贝尔实验室调程序（图片来源：<a href="https://spectrum.ieee.org/tech-history/silicon-revolution/in-1983-this-bell-labs-computer-was-the-first-machine-to-become-a-chess-master" rel="noopener noreferrer" target="_blank">IEEE SPECTRUM</a>）</p>
 <p>当然，还有一个人的密码是所有人里最难破解的，这个人就是<a href="https://en.wikipedia.org/wiki/Bill_Joy" rel="noopener noreferrer" target="_blank">Bill Joy</a>，他最初作为加州大学伯克利分校的研究生，在校期间着手改进Unix 内核，并管理BSD发行版。他最著名的贡献是ex和vi编辑器以及C shell。在Sun公司成立6个月后，他正式成为公司的联合创始人，他在Sun公司的推动了NFS，SPARC处理器，以及Java语言。他还是一个风险投资人员。</p>
 <p>在Ken的密被破解后两周（2019年10月19日），有人号称已经破解了Bill的密码，他在<a href="https://minnie.tuhs.org/pipermail/tuhs/2019-October/019124.html" rel="noopener noreferrer" target="_blank">邮件组中这样写到</a>：</p>
 <blockquote><p>一开始，我使用了大小写字符和数字，8位长度来破解所有的组合，花了我6天的时间，失败了。然后，我开始尝试只用小写字母和控制字符，结果在40分钟内就破解了。但是因为Bill现健在，所以，只要bill同意他才公布这个密码。</p></blockquote>
 <p>在密码里存控制字符？这脑洞，Ctrl+C么？破解者还说，他在一个有三个结点的DELL 的HPC集群上完成这个工作，每个结点包括两个 Tesla V100 nVidia GPU 的显卡，一共30720个CUDA核…… 关于这个显卡多少钱，你可以上网搜吧…… 相当于一块劳力士吧……（我估计这组机器平时是用来挖矿的……[狗头]）</p>
 <p>好了，我们来看一下这个 <code>/etc/passwd</code> 中的这些人的密码是什么样的，<strong>但最主要的是向这些为人类做过巨大贡献的程序员科学家们致敬</strong>！</p>
 <ul>
-<li><strong><a href="https://en.wikipedia.org/wiki/Ken_Thompson" rel="noopener noreferrer" target="_blank">Ken Thompson</a></strong><br />
-除了是Unix、B语言和Go语言作者之外，他还贡献过正则表达式，QED/ed编辑器，UTF-8编码定义，以及计算机国际象棋Belle……</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Ken_Thompson" rel="noopener noreferrer" target="_blank">Ken Thompson</a></strong><br/>
+除了是Unix、B语言和Go语言作者之外，他还贡献过正则表达式，QED/ed编辑器，UTF-8编码定义，以及计算机国际象棋Belle……
 <table>
 <tbody>
 <tr>
@@ -65,8 +65,8 @@ tty::504:50::/:/bin/tty我</pre>
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Dennis_Ritchie" rel="noopener noreferrer" target="_blank">Dennis Ritchie</a></strong><br />
-Unix和C语言之父，与Ken于1983年获图灵奖，1990年美国国家海明奖章，于2011年去世。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Dennis_Ritchie" rel="noopener noreferrer" target="_blank">Dennis Ritchie</a></strong><br/>
+Unix和C语言之父，与Ken于1983年获图灵奖，1990年美国国家海明奖章，于2011年去世。
 <table>
 <tbody>
 <tr>
@@ -82,8 +82,8 @@ Unix和C语言之父，与Ken于1983年获图灵奖，1990年美国国家海明�
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Brian_Kernighan" rel="noopener noreferrer" target="_blank">Brian W. Kernighan</a></strong><br />
-AWK的作者，是AWK中的“K”，也是与Dennis写的K&amp;C的C语言编程书中的“K”，他还编写了很多Unix的其它程序，如：<code>ditroff</code>，而且，设计了著名的<a href="https://en.wikipedia.org/wiki/Heuristic" rel="noopener noreferrer" target="_blank">启发式算法</a>。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Brian_Kernighan" rel="noopener noreferrer" target="_blank">Brian W. Kernighan</a></strong><br/>
+AWK的作者，是AWK中的“K”，也是与Dennis写的K&amp;C的C语言编程书中的“K”，他还编写了很多Unix的其它程序，如：<code>ditroff</code>，而且，设计了著名的<a href="https://en.wikipedia.org/wiki/Heuristic" rel="noopener noreferrer" target="_blank">启发式算法</a>。
 <table>
 <tbody>
 <tr>
@@ -99,8 +99,8 @@ AWK的作者，是AWK中的“K”，也是与Dennis写的K&amp;C的C语言编�
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Stephen_R._Bourne" rel="noopener noreferrer" target="_blank">Stephen R. Bourne</a></strong><br />
-Bourne shell（<code>sh</code>）的作者，Unix Shell作者，同时也是Unix调试器的作者。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Stephen_R._Bourne" rel="noopener noreferrer" target="_blank">Stephen R. Bourne</a></strong><br/>
+Bourne shell（<code>sh</code>）的作者，Unix Shell作者，同时也是Unix调试器的作者。
 <table>
 <tbody>
 <tr>
@@ -116,8 +116,8 @@ Bourne shell（<code>sh</code>）的作者，Unix Shell作者，同时也是Unix
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Eric_Schmidt" rel="noopener noreferrer" target="_blank">Eric Schmidt</a></strong><br />
-你可能知道他是Google的CEO，苹果的董事，但是你可能不知道，他当年是是贝尔实施室的实习生，他对Unix的词法分析器 Lex 进行为了完全的重写。他的密码是中的wendy应该是他的妻子。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Eric_Schmidt" rel="noopener noreferrer" target="_blank">Eric Schmidt</a></strong><br/>
+你可能知道他是Google的CEO，苹果的董事，但是你可能不知道，他当年是是贝尔实施室的实习生，他对Unix的词法分析器 Lex 进行为了完全的重写。他的密码是中的wendy应该是他的妻子。
 <table>
 <tbody>
 <tr>
@@ -133,8 +133,8 @@ Bourne shell（<code>sh</code>）的作者，Unix Shell作者，同时也是Unix
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Stuart_Feldman" rel="noopener noreferrer" target="_blank">Stuart Feldman</a></strong><br />
-他除了是Unix系统小组的成员，他还是第一个Fortran 77 编译器的作者，也是 <code>make</code> 的作者。他还是楼上Shmidt慈善基金会的科学负责人，在Google/IBM Research任过职，也担任过ACM的主席。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Stuart_Feldman" rel="noopener noreferrer" target="_blank">Stuart Feldman</a></strong><br/>
+他除了是Unix系统小组的成员，他还是第一个Fortran 77 编译器的作者，也是 <code>make</code> 的作者。他还是楼上Shmidt慈善基金会的科学负责人，在Google/IBM Research任过职，也担任过ACM的主席。
 <table>
 <tbody>
 <tr>
@@ -150,8 +150,8 @@ Bourne shell（<code>sh</code>）的作者，Unix Shell作者，同时也是Unix
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Mary_Ann_Horton" rel="noopener noreferrer" target="_blank">Mark Horton</a></strong><br />
-Unix贡献者，包括vi和curses，后来变性为女性，新的名字叫Mary Ann Horton。原来的照片在<a href="http://www.ugu.com/sui/ugu/show?I=info.Mark_R._Horton" rel="noopener noreferrer" target="_blank">Unix Guru Universe</a></p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Mary_Ann_Horton" rel="noopener noreferrer" target="_blank">Mark Horton</a></strong><br/>
+Unix贡献者，包括vi和curses，后来变性为女性，新的名字叫Mary Ann Horton。原来的照片在<a href="http://www.ugu.com/sui/ugu/show?I=info.Mark_R._Horton" rel="noopener noreferrer" target="_blank">Unix Guru Universe</a>
 <table>
 <tbody>
 <tr>
@@ -167,8 +167,8 @@ Unix贡献者，包括vi和curses，后来变性为女性，新的名字叫Mary 
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Marshall_Kirk_McKusick" rel="noopener noreferrer" target="_blank">Kirk McKusick</a></strong><br />
-BSD贡献者，主要负责文件系统UFS以及fsck命令，同时也是<code>gprof</code>的贡献者，公开的同性恋者。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Marshall_Kirk_McKusick" rel="noopener noreferrer" target="_blank">Kirk McKusick</a></strong><br/>
+BSD贡献者，主要负责文件系统UFS以及fsck命令，同时也是<code>gprof</code>的贡献者，公开的同性恋者。
 <table>
 <tbody>
 <tr>
@@ -184,8 +184,8 @@ BSD贡献者，主要负责文件系统UFS以及fsck命令，同时也是<code>g
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Richard_Fateman" rel="noopener noreferrer" target="_blank">Richard Fateman</a></strong><br />
-他在伯克利的VAX UNIX系统的开发工作中发挥了重要作用，以及开发了<a href="https://en.wikipedia.org/wiki/Franz_Lisp" rel="noopener noreferrer" target="_blank"> Franz Lisp</a>。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Richard_Fateman" rel="noopener noreferrer" target="_blank">Richard Fateman</a></strong><br/>
+他在伯克利的VAX UNIX系统的开发工作中发挥了重要作用，以及开发了<a href="https://en.wikipedia.org/wiki/Franz_Lisp" rel="noopener noreferrer" target="_blank"> Franz Lisp</a>。
 <table>
 <tbody>
 <tr>
@@ -201,8 +201,8 @@ BSD贡献者，主要负责文件系统UFS以及fsck命令，同时也是<code>g
 </tbody>
 </table>
 </li>
-<li><strong>Peter Kessler</strong><br />
-这位老兄能在网上查到的资料基本没有，可以查到他是 <code>gprof</code> 的贡献者，以及有名字的<a href="https://web.eecs.umich.edu/~weimerw/2009-4610/reading/graham-gprof.pdf" rel="noopener noreferrer" target="_blank">gprof的一篇论文</a></p>
+<li><strong>Peter Kessler</strong><br/>
+这位老兄能在网上查到的资料基本没有，可以查到他是 <code>gprof</code> 的贡献者，以及有名字的<a href="https://web.eecs.umich.edu/~weimerw/2009-4610/reading/graham-gprof.pdf" rel="noopener noreferrer" target="_blank">gprof的一篇论文</a>
 <table>
 <tbody>
 <tr>
@@ -218,8 +218,8 @@ BSD贡献者，主要负责文件系统UFS以及fsck命令，同时也是<code>g
 </tbody>
 </table>
 </li>
-<li><strong>Kurt Shoens</strong><br />
-BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>sendmail</code> 来进行远程消息传递，1978年，Kurt为Unix编写了一个邮件用户代理 Berkeley Mail。相关的历史可以参看<a href="http://heirloom.sourceforge.net/mailx_history.html" rel="noopener noreferrer" target="_blank">这篇文章</a>。</p>
+<li><strong>Kurt Shoens</strong><br/>
+BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>sendmail</code> 来进行远程消息传递，1978年，Kurt为Unix编写了一个邮件用户代理 Berkeley Mail。相关的历史可以参看<a href="http://heirloom.sourceforge.net/mailx_history.html" rel="noopener noreferrer" target="_blank">这篇文章</a>。
 <table>
 <tbody>
 <tr>
@@ -235,8 +235,8 @@ BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://franz.com/about/press_room/foderaro_2-2-2015.lhtml" rel="noopener noreferrer" target="_blank">John Foderaro</a></strong><br />
-他为Berkeley的Lisp语言编写原始的编译器，Lisp语言是一种类似于数据代数的语言，在计算机历史上有和C语言一样的作用。后来他成立了Franz公司，主要开发和部署图形搜索解决方案。</p>
+<li><strong><a href="https://franz.com/about/press_room/foderaro_2-2-2015.lhtml" rel="noopener noreferrer" target="_blank">John Foderaro</a></strong><br/>
+他为Berkeley的Lisp语言编写原始的编译器，Lisp语言是一种类似于数据代数的语言，在计算机历史上有和C语言一样的作用。后来他成立了Franz公司，主要开发和部署图形搜索解决方案。
 <table>
 <tbody>
 <tr>
@@ -252,8 +252,8 @@ BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Peter_J._Weinberger" rel="noopener noreferrer" target="_blank">Peter J. Weinberger</a></strong><br />
-他就是AWK中的那个“W”，同时也是Fortan编译器f77的贡献者，后来是<a href="https://en.wikipedia.org/wiki/Renaissance_Technologies" title="">Renaissance Technologies</a> （一家对冲基金）的CTO，现在在Google工作，</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Peter_J._Weinberger" rel="noopener noreferrer" target="_blank">Peter J. Weinberger</a></strong><br/>
+他就是AWK中的那个“W”，同时也是Fortan编译器f77的贡献者，后来是<a href="https://en.wikipedia.org/wiki/Renaissance_Technologies" title="">Renaissance Technologies</a> （一家对冲基金）的CTO，现在在Google工作，
 <table>
 <tbody>
 <tr>
@@ -269,8 +269,8 @@ BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>
 </tbody>
 </table>
 </li>
-<li><strong>John Reiser</strong><br />
-他主要工作是将Unix和C移植到了DEC VAX上，这个机器在学术界相当流行（陈皓注：我在1994年上大学的时候，就是在这个机器上学习的C语言）。这扩大了Unix和C的影响力。</p>
+<li><strong>John Reiser</strong><br/>
+他主要工作是将Unix和C移植到了DEC VAX上，这个机器在学术界相当流行（陈皓注：我在1994年上大学的时候，就是在这个机器上学习的C语言）。这扩大了Unix和C的影响力。
 <table>
 <tbody>
 <tr>
@@ -286,8 +286,8 @@ BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Stephen_C._Johnson" rel="noopener noreferrer" target="_blank">Steve Johnson</a></strong><br />
-曾在贝尔实验室和AT＆T工作近20年。他以Yacc，Lint，spell和Portable C编译器而闻名。后来他去了硅谷，加入了一些创业公司，主要从事编译器的工作，以及2D和3D图形，大规模并行系统和嵌入式系统的开发工作。现在他在Wave Computing从事机器学习的工作。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Stephen_C._Johnson" rel="noopener noreferrer" target="_blank">Steve Johnson</a></strong><br/>
+曾在贝尔实验室和AT＆T工作近20年。他以Yacc，Lint，spell和Portable C编译器而闻名。后来他去了硅谷，加入了一些创业公司，主要从事编译器的工作，以及2D和3D图形，大规模并行系统和嵌入式系统的开发工作。现在他在Wave Computing从事机器学习的工作。
 <table>
 <tbody>
 <tr>
@@ -303,8 +303,8 @@ BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>
 </tbody>
 </table>
 </li>
-<li><strong>Bob Kridle</strong><br />
-这位老兄的资料在没有太多，只能在 <a href="https://www.oreilly.com/openbook/opensources/book/kirkmck.html_original" rel="noopener noreferrer" target="_blank">Berkeley Unix 20 年</a> 上看到他跟Ken Thompson混过一段时间。</p>
+<li><strong>Bob Kridle</strong><br/>
+这位老兄的资料在没有太多，只能在 <a href="https://www.oreilly.com/openbook/opensources/book/kirkmck.html_original" rel="noopener noreferrer" target="_blank">Berkeley Unix 20 年</a> 上看到他跟Ken Thompson混过一段时间。
 <table>
 <tbody>
 <tr>
@@ -320,8 +320,8 @@ BSD电子邮件开发者。Unix早期版本中使用 <code>uux</code> 和 <code>
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://people.eecs.berkeley.edu/~sklower/" rel="noopener noreferrer" target="_blank">Keith Sklower</a></strong><br />
-BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大学，信息分析师，主要研究一些网络通信相关的技术。</p>
+<li><strong><a href="https://people.eecs.berkeley.edu/~sklower/" rel="noopener noreferrer" target="_blank">Keith Sklower</a></strong><br/>
+BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大学，信息分析师，主要研究一些网络通信相关的技术。
 <table>
 <tbody>
 <tr>
@@ -337,8 +337,8 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 </tbody>
 </table>
 </li>
-<li><strong>Robert Henry</strong><br />
-网上的资料不多，只在<a href="https://www.tuhs.org/Archive/Documentation/Books/Life_with_Unix.pdf" rel="noopener noreferrer" target="_blank">Life with Unix</a>这本电子书中查到，他写了 <code>error</code></p>
+<li><strong>Robert Henry</strong><br/>
+网上的资料不多，只在<a href="https://www.tuhs.org/Archive/Documentation/Books/Life_with_Unix.pdf" rel="noopener noreferrer" target="_blank">Life with Unix</a>这本电子书中查到，他写了 <code>error</code>
 <table>
 <tbody>
 <tr>
@@ -354,8 +354,8 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 </tbody>
 </table>
 </li>
-<li><strong>Howard Katseff</strong><br />
-网上的资料不多，只在<a href="https://www.tuhs.org/Archive/Documentation/Books/Life_with_Unix.pdf" rel="noopener noreferrer" target="_blank">Life with Unix</a>这本电子书中查到，他写了 <code>sdb</code> 和 <code>last</code></p>
+<li><strong>Howard Katseff</strong><br/>
+网上的资料不多，只在<a href="https://www.tuhs.org/Archive/Documentation/Books/Life_with_Unix.pdf" rel="noopener noreferrer" target="_blank">Life with Unix</a>这本电子书中查到，他写了 <code>sdb</code> 和 <code>last</code>
 <table>
 <tbody>
 <tr>
@@ -371,8 +371,8 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/%C3%96zalp_Babao%C4%9Flu" rel="noopener noreferrer" target="_blank">Özalp Babaoğlu</a></strong><br />
-土耳其计算机科学家，1981年在Berkeley担任 BSD Unix的首席设计师，曾经与Sun的创造人Bill Joy在BSD上实现了虚拟内存。</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/%C3%96zalp_Babao%C4%9Flu" rel="noopener noreferrer" target="_blank">Özalp Babaoğlu</a></strong><br/>
+土耳其计算机科学家，1981年在Berkeley担任 BSD Unix的首席设计师，曾经与Sun的创造人Bill Joy在BSD上实现了虚拟内存。
 <table>
 <tbody>
 <tr>
@@ -388,8 +388,8 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 </tbody>
 </table>
 </li>
-<li><strong><a href="https://en.wikipedia.org/wiki/Bob_Fabry" rel="noopener noreferrer" target="_blank">Bob Fabry</a></strong><br />
-他主要推动美国国防部高级研究计划局DARPA采用了Unix系统</p>
+<li><strong><a href="https://en.wikipedia.org/wiki/Bob_Fabry" rel="noopener noreferrer" target="_blank">Bob Fabry</a></strong><br/>
+他主要推动美国国防部高级研究计划局DARPA采用了Unix系统
 <table>
 <tbody>
 <tr>
@@ -405,8 +405,8 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 </tbody>
 </table>
 </li>
-<li><strong>Tom London</strong><br />
-他和John Reiser在把Unix移植到了VAX-11机上。</p>
+<li><strong>Tom London</strong><br/>
+他和John Reiser在把Unix移植到了VAX-11机上。
 <table>
 <tbody>
 <tr>
@@ -440,7 +440,7 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 <li><a href="http://en.wikipedia.org/wiki/BSD_Unix" rel="nofollow noopener noreferrer" target="_blank">Berkeley Software Distribution</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Unix_philosophy" rel="nofollow noopener noreferrer" target="_blank">Unix philosophy</a></li>
 </ul>
-<p>还有Unix的社区：TUHS: The Unix Heritage Society &#8211; <a href="http://minnie.tuhs.org/cgi-bin/utree.pl" rel="nofollow">The Unix Tree</a></p>
+<p>还有Unix的社区：TUHS: The Unix Heritage Society – <a href="http://minnie.tuhs.org/cgi-bin/utree.pl" rel="nofollow">The Unix Tree</a></p>
 <p>（全文完）<!--
 
 
@@ -457,7 +457,6 @@ BSD 的一个程序员。从他的主页上可以看到他目前在Berkeley大�
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2322.html"><img alt="Unix传奇(上篇)" height="150" src="https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2322.html">Unix传奇(上篇)</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9410.html"><img alt="Unix考古记：一个“遗失”的shell" height="150" src="https://coolshell.cn/wp-content/uploads/2013/04/figure1-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9410.html">Unix考古记：一个“遗失”的shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1761.html"><img alt="Go语言源码的一个改动" height="150" src="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1761.html">Go语言源码的一个改动</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12103.html"><img alt="vfork 挂掉的一个问题" height="150" src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/19996.html">Unix 50 年：Ken Thompson 的密码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2322.html"><img alt="Unix传奇(上篇)" height="150" src="../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2322.html">Unix传奇(上篇)</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9410.html"><img alt="Unix考古记：一个“遗失”的shell" height="150" src="../wp-content/uploads/2013/04/figure1-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9410.html">Unix考古记：一个“遗失”的shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1761.html"><img alt="Go语言源码的一个改动" height="150" src="../wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1761.html">Go语言源码的一个改动</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12103.html"><img alt="vfork 挂掉的一个问题" height="150" src="../wp-content/uploads/2014/11/tux-fork-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/19996.html">Unix 50 年：Ken Thompson 的密码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

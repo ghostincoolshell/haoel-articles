@@ -26,7 +26,7 @@ Subversion客户端
 * [Tortoise SVN](http://tortoisesvn.tigris.org/) (Windows only)
 
 
-[![tortoisesvn](https://coolshell.cn/wp-content/uploads/2009/03/tortoisesvn.png "tortoisesvn")](https://coolshell.cn/wp-content/uploads/2009/03/tortoisesvn.png)
+[![tortoisesvn](../wp-content/uploads/2009/03/tortoisesvn.png "tortoisesvn")](https://coolshell.cn/wp-content/uploads/2009/03/tortoisesvn.png)
 
 
 
@@ -35,19 +35,19 @@ Subversion客户端
 * [SmartSVN](http://www.syntevo.com/smartsvn/index.html)
 
 
-[![auto](https://coolshell.cn/wp-content/uploads/2009/03/auto-300x105.gif "auto")](https://coolshell.cn/wp-content/uploads/2009/03/auto.gif)
+[![auto](../wp-content/uploads/2009/03/auto-300x105.gif "auto")](https://coolshell.cn/wp-content/uploads/2009/03/auto.gif)
 
 
 * [Versions](http://www.versionsapp.com/) (Mac only)
 
 
-[![versions](https://coolshell.cn/wp-content/uploads/2009/03/versions-300x193.jpg "versions")](https://coolshell.cn/wp-content/uploads/2009/03/versions.jpg)
+[![versions](../wp-content/uploads/2009/03/versions-300x193.jpg "versions")](https://coolshell.cn/wp-content/uploads/2009/03/versions.jpg)
 
 
 * [Subclipse](http://subclipse.tigris.org/)
 
 
-[![ecl](https://coolshell.cn/wp-content/uploads/2009/03/ecl-297x300.gif "ecl")](https://coolshell.cn/wp-content/uploads/2009/03/ecl.gif)
+[![ecl](../wp-content/uploads/2009/03/ecl-297x300.gif "ecl")](https://coolshell.cn/wp-content/uploads/2009/03/ecl.gif)
 
 
 * [Subcommander](http://subcommander.tigris.org/)
@@ -55,7 +55,7 @@ Subversion客户端
 * [Syncro SVN Client](http://www.syncrosvnclient.com/)
 
 
-[![jano](https://coolshell.cn/wp-content/uploads/2009/03/jano-300x277.gif "jano")](https://coolshell.cn/wp-content/uploads/2009/03/jano.gif)
+[![jano](../wp-content/uploads/2009/03/jano-300x277.gif "jano")](https://coolshell.cn/wp-content/uploads/2009/03/jano.gif)
 
 
 * [scplugin](http://scplugin.tigris.org/) (Mac only)
@@ -69,14 +69,14 @@ IDE插件
 * [Subclipse](http://subclipse.tigris.org/)（[Eclipse IDE](http://www.eclipse.org/) for Java）
 
 
-[![subclipse](https://coolshell.cn/wp-content/uploads/2009/03/subclipse-300x168.png "subclipse")](https://coolshell.cn/wp-content/uploads/2009/03/subclipse.png)
+[![subclipse](../wp-content/uploads/2009/03/subclipse-300x168.png "subclipse")](https://coolshell.cn/wp-content/uploads/2009/03/subclipse.png)
 
 
 
 * [AnkhSVN](http://ankhsvn.open.collab.net/)（Microsoft’s [Visual Studio](http://www.microsoft.com/visualstudio/en-us/default.mspx)）
 
 
-[![ankshsvn](https://coolshell.cn/wp-content/uploads/2009/03/ankshsvn-300x236.png "ankshsvn")](https://coolshell.cn/wp-content/uploads/2009/03/ankshsvn.png)
+[![ankshsvn](../wp-content/uploads/2009/03/ankshsvn-300x236.png "ankshsvn")](https://coolshell.cn/wp-content/uploads/2009/03/ankshsvn.png)
 
 
 * [How to Ignore IDE Project Files in Subversion](https://www.opends.org/wiki/page/ConfiguringSubversionToIgnoreIDEProjectFiles)
@@ -93,7 +93,7 @@ SVN 浏览器
 * [Polarion WebClient for SVN](http://www.polarion.org/index.php?page=overview&project=svnwebclient)
 
 
-[![warehouse2](https://coolshell.cn/wp-content/uploads/2009/03/warehouse2-300x240.jpg "warehouse2")](https://coolshell.cn/wp-content/uploads/2009/03/warehouse2.jpg)
+[![warehouse2](../wp-content/uploads/2009/03/warehouse2-300x240.jpg "warehouse2")](https://coolshell.cn/wp-content/uploads/2009/03/warehouse2.jpg)
 
 
 SVN主机
@@ -151,10 +151,10 @@ Subversion 相关文章
 
 ### 相关文章
 
-* [![版本管理器的发展史](https://coolshell.cn/wp-content/uploads/2010/11/scmhistory-150x150.png)](https://coolshell.cn/articles/3288.html)[版本管理器的发展史](https://coolshell.cn/articles/3288.html)
-* [![Git显示漂亮日志的小技巧](https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01-150x150.png)](https://coolshell.cn/articles/7755.html)[Git显示漂亮日志的小技巧](https://coolshell.cn/articles/7755.html)
-* [![WTF Javascript](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg)](https://coolshell.cn/articles/2492.html)[WTF Javascript](https://coolshell.cn/articles/2492.html)
-* [![程序员需要具备的基本技能](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg)](https://coolshell.cn/articles/428.html)[程序员需要具备的基本技能](https://coolshell.cn/articles/428.html)
-* [![Twitter的禁用口令](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/2451.html)[Twitter的禁用口令](https://coolshell.cn/articles/2451.html)
-* [![软件真的好难做啊](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/4811.html)[软件真的好难做啊](https://coolshell.cn/articles/4811.html)
+* [![版本管理器的发展史](../wp-content/uploads/2010/11/scmhistory-150x150.png)](https://coolshell.cn/articles/3288.html)[版本管理器的发展史](https://coolshell.cn/articles/3288.html)
+* [![Git显示漂亮日志的小技巧](../wp-content/uploads/2012/06/git.log_.01-150x150.png)](https://coolshell.cn/articles/7755.html)[Git显示漂亮日志的小技巧](https://coolshell.cn/articles/7755.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg](https://coolshell.cn/articles/2492.html)[WTF Javascript](https://coolshell.cn/articles/2492.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg](https://coolshell.cn/articles/428.html)[程序员需要具备的基本技能](https://coolshell.cn/articles/428.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/2451.html)[Twitter的禁用口令](https://coolshell.cn/articles/2451.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/4811.html)[软件真的好难做啊](https://coolshell.cn/articles/4811.html)
 The post [版本控制Subversion相关资源](https://coolshell.cn/articles/93.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

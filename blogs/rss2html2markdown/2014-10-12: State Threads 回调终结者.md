@@ -48,7 +48,7 @@ type: post
 整个过程都是单线程的。**这种处理本质上就是将一堆互不相交（disjoint）的回调实现同步控制，就像串联在一个顺序链表上。**见图1，黑色的双箭头表示I/O事件复用，回调是个筐，里面装着对各种请求的处理（当然不是每个请求都有回调，一个请求也可以对应不同的回调），每个回调被串联起来由dispatcher激活。这里请求等价于thread的概念（不是操作系统的线程），只不过“上下文切换”（context switch）发生在每个回调结束之时（假设不同请求对应不同回调），注册下一个回调以待事件触发时恢复其它请求的处理。至于dispatcher的执行状态（execute state）可作为回调函数的参数保存和传递。
 
 
-![EDSM](https://coolshell.cn/wp-content/uploads/2014/10/edsm.gif)
+![EDSM](../wp-content/uploads/2014/10/edsm.gif)
 
 
 异步回调的缺陷在于**难以实现和扩展**，虽然已经有libevent这样的通用库，以及其它actor/reacotor的设计模式及其框架，但正如Dean Gaudet（Apache开发者）所说：“其内在的复杂性——**将线性思维分解成一堆回调的负担**（breaking up linear thought into a bucketload of callbacks）——仍然存在”。从上图可见，**回调之间请求例程不是连续的，比如回调之间的切换会打断部分请求，又比如有新的请求需要重新注册。**
@@ -57,7 +57,7 @@ type: post
 **ST本质上仍然是基于EDSM模型，但旨在取代传统的异步回调方式。**ST将请求抽象为thread概念以更接近自然编程模式（所谓的linear thought吧，就像操作系统的线程之间切换那样自然）。ST的调度器（scheduler）对于用户来说是透明的，不像dispatcher那种将执行状态（execute state）暴露给回调方式。每个thread的现场环境可以保存在栈上（一段连续的大小确定的内存空间），由C的运行环境管理。从图2看到，**ST的threads可以并发地线性地处理I/O事件，模型比异步回调简单得多。**
 
 
-![State Threads](https://coolshell.cn/wp-content/uploads/2014/10/st_edsm.gif)
+![State Threads](../wp-content/uploads/2014/10/st_edsm.gif)
 
 
 这里稍微解释一下ST调度工作原理，ST运行环境维护了四种队列，分别是IOQ、RUNQ、SLEEPQ以及ZOMBIEQ，**当每个thread处于不同队列中对应不同的状态（ST顾名思义所谓thread状态机）。**比如polling请求的时候，当前thread就加入IOQ表示等待事件（如果有timeout同时会被放到SLEEPQ中），当事件触发时，thread就从IOQ（如果有timeout同时会从SLEEPQ）移除并转移到RUNQ等待被调度，成为当前的running thread，相当于操作系统的就绪队列，跟传统EDSM对应起来就是注册回调以及激活回调。再比如模拟同步控制wait/sleep/lock的时候，当前thread会被放入SLEEPQ，直到被唤醒或者超时再次进入RUNQ以待调度。
@@ -196,7 +196,7 @@ void foo()
 下面来聊聊ST在多核环境下的应用。服务器领域多核的优势在于实现了物理上真正的并发，所以如何充分利用系统优势也是线程库的一大难点。这对ST来说也许正是它的拿手好戏，前面提及ST曾作为Apache的多核引擎模块发布。这里要补充一下前面漏掉的ST的一个重要概念——**虚拟处理器**（virtual processor，简称vp），见图3，多个cpu通过内核的SMP模拟出多个“核”（core），一个core对应一个内核任务（kernel task），同时对应一个用户进程（process），一个process对应ST的一个vp，每个vp下就是ST的thread（是协程不是线程），结合前面所述，vp初始化先创建idle thread，然后根据I/O事件驱动其它threads，这就是ST的多核架构。
 
 
-![multi-core](https://coolshell.cn/wp-content/uploads/2014/10/st_app.gif)
+![multi-core](../wp-content/uploads/2014/10/st_app.gif)
 
 
 这里要指出的是，**ST只负责自身thread调度，进程管理是应用程序的事情，**也就是说由用户来决定fork多少进程，每个进程分配多少资源，如何进行IPC等。这种架构的好处就是每个vp有自己独立的空间，避免了资源同步竞态（比如杜绝了多进程里的多线程这样混乱的模型）。我们知道这种**基于进程的架构是非常健壮的，一个进程奔溃不会影响到其它进程，同时充分利用多核硬件的高并发。**同时对于具体逻辑业务使用vp里的thread处理，这是基于EDSM的，如此一来做到了**逻辑业务与内核执行对象之间的解耦**，没必要因为1K个连接去创建1K的进程。这就是ST的扩展性和灵活性。
@@ -245,10 +245,10 @@ ST的主要限制在于，应用程序所有I/O操作必须使用ST提供的API�
 
 ### 相关文章
 
-* [![一个“蝇量级” C 语言协程库](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg)](http://coolshell.cn/articles/10975.html)[一个“蝇量级” C 语言协程库](http://coolshell.cn/articles/10975.html)
-* [![程序员疫苗：代码注入](https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](http://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](http://coolshell.cn/articles/8711.html)
-* [![如何设计“找回用户帐号”功能](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](http://coolshell.cn/articles/5987.html)[如何设计“找回用户帐号”功能](http://coolshell.cn/articles/5987.html)
-* [![C/C++语言中闭包的探究及比较](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg)](http://coolshell.cn/articles/8309.html)[C/C++语言中闭包的探究及比较](http://coolshell.cn/articles/8309.html)
-* [![无锁队列的实现](https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg)](http://coolshell.cn/articles/8239.html)[无锁队列的实现](http://coolshell.cn/articles/8239.html)
-* [![一个fork的面试题](https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg)](http://coolshell.cn/articles/7965.html)[一个fork的面试题](http://coolshell.cn/articles/7965.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg](http://coolshell.cn/articles/10975.html)[一个“蝇量级” C 语言协程库](http://coolshell.cn/articles/10975.html)
+* [![程序员疫苗：代码注入](../wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](http://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](http://coolshell.cn/articles/8711.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](http://coolshell.cn/articles/5987.html)[如何设计“找回用户帐号”功能](http://coolshell.cn/articles/5987.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg](http://coolshell.cn/articles/8309.html)[C/C++语言中闭包的探究及比较](http://coolshell.cn/articles/8309.html)
+* [![无锁队列的实现](../wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg)](http://coolshell.cn/articles/8239.html)[无锁队列的实现](http://coolshell.cn/articles/8239.html)
+* [![一个fork的面试题](../wp-content/uploads/2012/07/fork01jpg-150x150.jpg)](http://coolshell.cn/articles/7965.html)[一个fork的面试题](http://coolshell.cn/articles/7965.html)
 The post [State Threads 回调终结者](https://coolshell.cn/articles/12012.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

@@ -11,7 +11,7 @@ type: post
 新闻来源：[Computer World](http://www.computerworld.com/s/article/9135958/Sun_s_JRuby_team_jumps_ship_to_Engine_Yard?taxonomyId=57&pageNumber=1)
 
 
-![](http://media.xircles.codehaus.org/_projects/jruby/_logos/medium.png)Sun公司的JRuby团队正在离开他们的老东家Sun，投奔Engine Yard公司。他们声称这是因为Oracle并购Sun后的前途不明朗的原因。Sun的新闻发言人已确定了这一消息的真实性。
+http://media.xircles.codehaus.org/_projects/jruby/_logos/medium.pngSun公司的JRuby团队正在离开他们的老东家Sun，投奔Engine Yard公司。他们声称这是因为Oracle并购Sun后的前途不明朗的原因。Sun的新闻发言人已确定了这一消息的真实性。
 
 
 在两年半前，Sun招募了Charles Nutter 和Thomas Enebo，这两人叫“the JRuby Guys”，他们主要实现在Java虚似机上运行Ruby，后来Sun又招了一个叫Nick Sieger的人。今天，这三个核心开发人员会在下周一的时候到新公司上班。他们认为Oracle可能会不支持他们继续在JVM上运行Ruby这个事情，而JRuby又是他们的未来。
@@ -43,10 +43,10 @@ Nutter说，JRuby的下一个版本是1.4，会在今年9月份发布，在这�
 
 ### 相关文章
 
-* [![五大基于JVM的脚本语言](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg)](https://coolshell.cn/articles/2631.html)[五大基于JVM的脚本语言](https://coolshell.cn/articles/2631.html)
-* [![如何设计“找回用户帐号”功能](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg)](https://coolshell.cn/articles/5987.html)[如何设计“找回用户帐号”功能](https://coolshell.cn/articles/5987.html)
-* [![Internet 技术演变图](https://coolshell.cn/wp-content/uploads/2009/07/Internet-150x150.jpg)](https://coolshell.cn/articles/1178.html)[Internet 技术演变图](https://coolshell.cn/articles/1178.html)
-* [![Java中的CopyOnWrite容器](https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg)](https://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](https://coolshell.cn/articles/11175.html)
-* [![谜题的答案和活动的心得体会](https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
-* [![如何知道某网站运行在GAE上](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/780.html)[如何知道某网站运行在GAE上](https://coolshell.cn/articles/780.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg](https://coolshell.cn/articles/2631.html)[五大基于JVM的脚本语言](https://coolshell.cn/articles/2631.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg](https://coolshell.cn/articles/5987.html)[如何设计“找回用户帐号”功能](https://coolshell.cn/articles/5987.html)
+* [![Internet 技术演变图](../wp-content/uploads/2009/07/Internet-150x150.jpg)](https://coolshell.cn/articles/1178.html)[Internet 技术演变图](https://coolshell.cn/articles/1178.html)
+* [![Java中的CopyOnWrite容器](../wp-content/uploads/2014/03/cow-copy-150x150.jpg)](https://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](https://coolshell.cn/articles/11175.html)
+* [![谜题的答案和活动的心得体会](../wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/780.html)[如何知道某网站运行在GAE上](https://coolshell.cn/articles/780.html)
 The post [JRuby核心成员投奔Engine Yard](https://coolshell.cn/articles/1194.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

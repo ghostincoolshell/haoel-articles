@@ -57,10 +57,10 @@ Martin Fowler 反复强调这只是一个公司内部的调查，并无误导市
 
 ### 相关文章
 
-* [![一个空格引发的惨剧](https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
-* [![Linux基金会的广告](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg)](https://coolshell.cn/articles/1283.html)[Linux基金会的广告](https://coolshell.cn/articles/1283.html)
-* [![如何测试洗牌程序](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/8593.html)[如何测试洗牌程序](https://coolshell.cn/articles/8593.html)
-* [![Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg)](https://coolshell.cn/articles/19996.html)[Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/articles/19996.html)
-* [![Python处理中文的时候的一些小技巧](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg)](https://coolshell.cn/articles/461.html)[Python处理中文的时候的一些小技巧](https://coolshell.cn/articles/461.html)
-* [![为什么敏捷方法能在软件开发中行之有效？](https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-150x150.jpg)](https://coolshell.cn/articles/2622.html)[为什么敏捷方法能在软件开发中行之有效？](https://coolshell.cn/articles/2622.html)
+* [![一个空格引发的惨剧](../wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg](https://coolshell.cn/articles/1283.html)[Linux基金会的广告](https://coolshell.cn/articles/1283.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/8593.html)[如何测试洗牌程序](https://coolshell.cn/articles/8593.html)
+* [![Unix 50 年：Ken Thompson 的密码](../wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg)](https://coolshell.cn/articles/19996.html)[Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/articles/19996.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg](https://coolshell.cn/articles/461.html)[Python处理中文的时候的一些小技巧](https://coolshell.cn/articles/461.html)
+* [![为什么敏捷方法能在软件开发中行之有效？](../wp-content/uploads/2010/07/Martin-Flower1-150x150.jpg)](https://coolshell.cn/articles/2622.html)[为什么敏捷方法能在软件开发中行之有效？](https://coolshell.cn/articles/2622.html)
 The post [Martin Fowler 在 ThoughtWorks 内部关于版本控制工具的调查](https://coolshell.cn/articles/2135.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

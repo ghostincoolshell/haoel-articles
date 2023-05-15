@@ -1,4 +1,4 @@
-<p><strong> (本文由<a href="https://github.com/onetwogoo" rel="author">onetwogoo</a>投稿)</strong></p>
+<html><body><p><strong> (本文由<a href="https://github.com/onetwogoo" rel="author">onetwogoo</a>投稿)</strong></p>
 <p>在《<a href="https://coolshell.cn/articles/9606.html" target="_blank" title="疫苗：Java HashMap的死循环">疫苗：Java HashMap的死循环</a>》中，我们看到，java.util.HashMap并不能直接应用于多线程环境。对于多线程环境中应用HashMap，主要有以下几种选择：</p>
 <ol>
 <li><span style="line-height: 13px;">使用线程安全的java.util.Hashtable作为替代。</span></li>
@@ -10,7 +10,7 @@
 <h4>Java中的原子操作</h4>
 <p>在java.util.concurrent.atomic包中，Java为我们提供了很多方便的原子类型，它们底层完全基于CAS操作。</p>
 <p>例如我们希望实现一个全局公用的计数器，那么可以：</p>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">private AtomicInteger counter = new AtomicInteger(3);
 
 public void addCounter() {
@@ -33,7 +33,7 @@ public void addCounter() {
 <li><span style="line-height: 13px;">然后新建一个节点C，并使其next指针指向节点B。（见图1）</span></li>
 <li>最后使节点A的next指针指向节点C。（见图2）</li>
 </ol>
-<p><img alt="" class="aligncenter size-full wp-image-9743" height="479" src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3.jpg" width="600" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-9743" height="479" src="../wp-content/uploads/2013/05/图1-3.jpg" width="600"/></p>
 <p>但在操作中途，有可能其他线程在A与B直接也插入了一些节点（假设为D），如果我们不做任何判断，可能造成其他线程插入节点的丢失。（见图3）我们可以利用CAS操作，在为节点A的next指针赋值时，判断其是否仍然指向B，如果节点A的next指针发生了变化则重试整个插入操作。大致代码如下：</p>
 <pre class="EnlighterJSRAW">private void listInsert(Node head, Node c) {
     for (;;) {
@@ -47,7 +47,7 @@ public void addCounter() {
 <p>无锁链表的查找操作与普通链表没有区别。而其删除操作，则需要找到待删除节点前方的节点A和后方的节点B，利用CAS操作验证并更新节点A的next指针，使其指向节点B。</p>
 <h4>无锁HashMap的难点与突破</h4>
 <p>HashMap主要有<strong>插入</strong>、<strong>删除</strong>、<strong>查找</strong>以及<strong>ReHash</strong>四种基本操作。一个典型的HashMap实现，会用到一个数组，数组的每项元素为一个节点的链表。对于此链表，我们可以利用上文提到的操作方法，执行插入、删除以及查找操作，但对于ReHash操作则比较困难。</p>
-<p><img alt="" class="aligncenter size-full wp-image-9744" height="265" src="https://coolshell.cn/wp-content/uploads/2013/05/图4.jpg" width="648" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-9744" height="265" src="../wp-content/uploads/2013/05/图4.jpg" width="648"/></p>
 <p>如图4，在ReHash过程中，一个典型的操作是遍历旧表中的每个节点，计算其在新表中的位置，然后将其移动至新表中。期间我们需要操纵3次指针：</p>
 <ol>
 <li>将A的next指针指向D</li>
@@ -56,14 +56,14 @@ public void addCounter() {
 </ol>
 <p>而这三次指针操作必须同时完成，才能保证移动操作的原子性。但我们不难看出，CAS操作每次只能保证<strong>一个</strong>变量的值被原子性地验证并更新，无法满足同时验证并更新三个指针的需求。</p>
 <p>于是我们不妨换一个思路，既然移动节点的操作如此困难，我们可以使所有节点始终保持有序状态，从而避免了移动操作。在典型的HashMap实现中，数组的长度始终保持为2<sup>i</sup>，而从Hash值映射为数组下标的过程，只是简单地对数组长度执行取模运算（即仅保留Hash二进制的后i位）。当ReHash时，数组长度加倍变为2<sup>i+1</sup>，旧数组第j项链表中的每个节点，要么移动到新数组中第j项，要么移动到新数组中第j+2<sup>i</sup>项，而它们的唯一区别在于Hash值第i+1位的不同（第i+1位为0则仍为第j项，否则为第j+2<sup>i</sup>项）。</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-9745" height="297" src="https://coolshell.cn/wp-content/uploads/2013/05/图5-6.jpg" width="690" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9745" height="297" src="../wp-content/uploads/2013/05/图5-6.jpg" width="690"/></p>
 <p>如图5，我们将所有节点按照Hash值的翻转位序（如1101-&gt;1011）由小到大排列。当数组大小为8时，2、18在一个组内；3、11、27在另一个组内。每组的开始，插入一个哨兵节点，以方便后续操作。为了使哨兵节点正确排在组的最前方，我们将正常节点Hash的最高位（翻转后变为最低位）置为1，而哨兵节点不设置这一位。</p>
 <p>当数组扩容至16时（见图6），第二组分裂为一个只含3的组和一个含有11、27的组，但节点之间的相对顺序并未改变。这样在ReHash时，我们就不需要移动节点了。</p>
 <h4>实现细节</h4>
 <p>由于扩容时数组的复制会占用大量的时间，这里我们采用了将整个数组分块，懒惰建立的方法。这样，当访问到某下标时，仅需判断此下标所在块是否已建立完毕（如果没有则建立）。</p>
 <p>另外定义size为当前已使用的下标范围，其初始值为2，数组扩容时仅需将size加倍即可；定义count代表目前HashMap中包含的总节点个数（不算哨兵节点）。</p>
 <p>初始时，数组中除第0项外，所有项都为null。第0项指向一个仅有一个哨兵节点的链表，代表整条链的起点。初始时全貌见图7，其中浅绿色代表当前未使用的下标范围，虚线箭头代表逻辑上存在，但实际未建立的块。</p>
-<p><img alt="" class="aligncenter size-full wp-image-9746" height="282" src="https://coolshell.cn/wp-content/uploads/2013/05/图7.jpg" width="446" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-9746" height="282" src="../wp-content/uploads/2013/05/图7.jpg" width="446"/></p>
 <h5>初始化下标操作</h5>
 <p>数组中为null的项都认为处于未初始化状态，初始化某个下标即代表建立其对应的哨兵节点。初始化是递归进行的，即若其父下标未初始化，则先初始化其父下标。（一个下标的父下标是其移除最高二进制位后得到的下标）大致代码如下：</p>
 <pre class="EnlighterJSRAW">private void initializeBucket(int bucketIdx) {
@@ -116,7 +116,6 @@ public void addCounter() {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9606.html"><img alt="疫苗：Java HashMap的死循环" height="150" src="https://coolshell.cn/wp-content/uploads/2013/05/race_condition-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9606.html">疫苗：Java HashMap的死循环</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9169.html"><img alt="并发框架Disruptor译文" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/Disruptor-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9169.html">并发框架Disruptor译文</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6424.html"><img alt="Hash Collision DoS 问题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6424.html">Hash Collision DoS 问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22242.html"><img alt="ETCD的内存问题" height="150" src="https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22242.html">ETCD的内存问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9606.html"><img alt="疫苗：Java HashMap的死循环" height="150" src="../wp-content/uploads/2013/05/race_condition-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9606.html">疫苗：Java HashMap的死循环</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9169.html"><img alt="并发框架Disruptor译文" height="150" src="../wp-content/uploads/2013/02/Disruptor-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9169.html">并发框架Disruptor译文</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6424.html"><img alt="Hash Collision DoS 问题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6424.html">Hash Collision DoS 问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22242.html"><img alt="ETCD的内存问题" height="150" src="../wp-content/uploads/2022/05/etcd-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22242.html">ETCD的内存问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

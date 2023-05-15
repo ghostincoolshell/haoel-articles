@@ -11,7 +11,7 @@ type: post
 Google 本周一发布了一个新的工作可以让任何人创建Android手机应用。这个工具叫[**Google App Inventor**](http://appinventor.googlelabs.com/)。（目前， App Inventor好像只对教育者开放）Google说：“你不必是一个专业开发人员就能轻松使用App Inventor。使用App Inventor无须掌握编程知识。因为你根本就不需要编写代码，你只需在可视化界面上设计应用的界面，并使用“blocks”指定应用的行为（behavior）。”
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/07/androidappinventor.jpg "Android App Inventor")](http://appinventor.googlelabs.com/)Google Android App Inventor
+[![](../wp-content/uploads/2010/07/androidappinventor.jpg "Android App Inventor")](http://appinventor.googlelabs.com/)Google Android App Inventor
 注意，Google说的是任何人，也就是包括那些不会编程的人。这个工具可以将枯燥的代码变成了一块一块的拼图，你需要做的只是把这些零散的拼图按照你自己的意思组合在一起，点击生成，你的第一个 Android 程序就诞生了。这里有一篇来自 [纽约时代的报道](http://www.nytimes.com/2010/07/12/technology/12google.html)，《纽约时代》报道称，App Inventor已经在六年级的孩子们中完成测试，他们能够使用App Inventor制作简单的应用。如果你可以访问Youtube的话，你可以看看这个[视频](http://www.youtube.com/watch?v=8ADwPLSFeY8)。
 
 
@@ -32,10 +32,10 @@ Google 本周一发布了一个新的工作可以让任何人创建Android手机
 
 ### 相关文章
 
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![Android将允许纯C/C++开发应用](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/3549.html)[Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html)
-* [![实用Android开发工具和资源精选](https://coolshell.cn/wp-content/uploads/2010/08/android_dev_01-150x150.jpg)](https://coolshell.cn/articles/2853.html)[实用Android开发工具和资源精选](https://coolshell.cn/articles/2853.html)
-* [![关于 Chrome OS 的一些推论](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/1152.html)[关于 Chrome OS 的一些推论](https://coolshell.cn/articles/1152.html)
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/3549.html)[Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html)
+* [![实用Android开发工具和资源精选](../wp-content/uploads/2010/08/android_dev_01-150x150.jpg)](https://coolshell.cn/articles/2853.html)[实用Android开发工具和资源精选](https://coolshell.cn/articles/2853.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/1152.html)[关于 Chrome OS 的一些推论](https://coolshell.cn/articles/1152.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
 The post [Google App Inventor](https://coolshell.cn/articles/2608.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

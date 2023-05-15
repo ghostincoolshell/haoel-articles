@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![Alan Cox](https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-200x300.jpg "Alan Cox")Alan Cox
+![Alan Cox](../wp-content/uploads/2013/06/Alan-Cox-200x300.jpg "Alan Cox")Alan Cox
 
 
  **（感谢网友** [**@我的上铺叫路遥**](http://weibo.com/fullofbull)**投稿）**
@@ -137,7 +137,7 @@ kfree_skb(skb, FREE_WRITE);
 最后，让我们感谢尊敬的[Alan Cox](http://en.wikipedia.org/wiki/Alan_Cox)大大对Linux社区卓越精细、无与伦比的贡献！（Alan是图中中部戴红帽子的那位）
 
 
-![Linux Kernel Team](http://old.lwn.net/images/ks/group2.jpg)
+http://old.lwn.net/images/ks/group2.jpg
 
 
 **附注：**
@@ -168,10 +168,10 @@ kfree_skb(skb, FREE_WRITE);
 
 ### 相关文章
 
-* [![Linus：利用二级指针删除单向链表](https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
-* [![记一次Kubernetes/Docker网络排障](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Alan Cox：大教堂、市集与市议会](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/9917.html)[Alan Cox：大教堂、市集与市议会](https://coolshell.cn/articles/9917.html)
-* [![对技术的态度](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/8088.html)[对技术的态度](https://coolshell.cn/articles/8088.html)
-* [![性能调优攻略](https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
+* [![Linus：利用二级指针删除单向链表](../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
+* [![记一次Kubernetes/Docker网络排障](../wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/9917.html)[Alan Cox：大教堂、市集与市议会](https://coolshell.cn/articles/9917.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/8088.html)[对技术的态度](https://coolshell.cn/articles/8088.html)
+* [![性能调优攻略](../wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
 The post [Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

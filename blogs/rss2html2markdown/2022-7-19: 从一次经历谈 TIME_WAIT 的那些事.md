@@ -8,13 +8,13 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2022/07/wall_clock-300x167.jpeg)今天来讲一讲TCP 的 `TIME_WAIT` 的问题。这个问题尽人皆知，不过，这次遇到的是不太一样的场景，前两天也解决了，正好写篇文章，顺便把 `TIME_WAIT` 的那些事都说一说。对了，这个场景，跟我开源的探活小工具 [EaseProbe](https://github.com/megaease/easeprobe) 有关，我先说说这个场景里的问题，然后，顺着这个场景跟大家好好说一下这个事。
+![](../wp-content/uploads/2022/07/wall_clock-300x167.jpeg)今天来讲一讲TCP 的 `TIME_WAIT` 的问题。这个问题尽人皆知，不过，这次遇到的是不太一样的场景，前两天也解决了，正好写篇文章，顺便把 `TIME_WAIT` 的那些事都说一说。对了，这个场景，跟我开源的探活小工具 [EaseProbe](https://github.com/megaease/easeprobe) 有关，我先说说这个场景里的问题，然后，顺着这个场景跟大家好好说一下这个事。
 
 
 #### 问题背景
 
 
-先说一下背景，[EaseProbe](https://github.com/megaease/easeprobe) 是一个轻量独立的用来探活服务健康状况的小工具，支持http/tcp/shell/ssh/tls/host以及各种中间件的探活，然后，直接发送通知到主流的IM上，如：Slack/Telegram/Discrod/Email/Team，包括国内的企业微信/钉钉/飞书， 非常好用，用过的人都说好 ![😏](https://s.w.org/images/core/emoji/14.0.0/72x72/1f60f.png)。
+先说一下背景，[EaseProbe](https://github.com/megaease/easeprobe) 是一个轻量独立的用来探活服务健康状况的小工具，支持http/tcp/shell/ssh/tls/host以及各种中间件的探活，然后，直接发送通知到主流的IM上，如：Slack/Telegram/Discrod/Email/Team，包括国内的企业微信/钉钉/飞书， 非常好用，用过的人都说好 https://s.w.org/images/core/emoji/14.0.0/72x72/1f60f.png。
 
 
 这个探活工具在每次探活的时候，必须要从头开始建立整个网络链接，也就是说，需要从头开始进行DNS查询，建立TCP链接，然后进行通信，再关闭链接。这里，我们不会设置 TCP 的 KeepAlive 重用链接，因为探活工具除了要探活所远端的服务，还要探活整个网络的情况，所以，每次探活都需要从新来过，这样才能捕捉得到整个链路的情况。
@@ -45,7 +45,7 @@ type: post
 1） 为了 **防止来自一个连接的延迟段**被依赖于相同四元组（源地址、源端口、目标地址、目标端口）的稍后连接接受（被接受后，就会被马上断掉，TCP状态机紊乱）。虽然，可以通过指定 TCP 的 sequence number 一定范围内才能被接受。但这也只是让问题发生的概率低了一些，对于一个吞吐量大的的应用来说，依然能够出现问题，尤其是在具有大接收窗口的快速连接上。[RFC 1337](https://tools.ietf.org/html/rfc1337 "RFC 1337：TCP 中的 TIME-WAIT 暗杀危险")详细解释了当 `TIME-WAIT`状态不足时会发生什么。`TIME-WAIT`以下是如果不缩短状态可以避免的示例：
 
 
-![](https://coolshell.cn/wp-content/uploads/2022/07/duplicate-segment.png)由于缩短的 TIME-WAIT 状态，后续的 TCP 段已在不相关的连接中被接受（[来源](https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux)）
+![](../wp-content/uploads/2022/07/duplicate-segment.png)由于缩短的 TIME-WAIT 状态，后续的 TCP 段已在不相关的连接中被接受（[来源](https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux)）
  
 
 
@@ -55,7 +55,7 @@ type: post
  
 
 
-![](https://coolshell.cn/wp-content/uploads/2022/07/last-ack.png)如果远端因为最后一个 ACK​​ 丢失而停留在 LAST-ACK 状态，则打开具有相同四元组的新连接将不起作用 （[来源](https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux)）
+![](../wp-content/uploads/2022/07/last-ack.png)如果远端因为最后一个 ACK​​ 丢失而停留在 LAST-ACK 状态，则打开具有相同四元组的新连接将不起作用 （[来源](https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux)）
 `TIME_WAIT` 的这个超时时间的值如下所示：
 
 
@@ -187,10 +187,10 @@ client := &http.Client{
 
 ### 相关文章
 
-* [![TCP 的那些事儿（上）](https://coolshell.cn/wp-content/uploads/2014/05/tin-can-phone-150x150.jpg)](https://coolshell.cn/articles/11564.html)[TCP 的那些事儿（上）](https://coolshell.cn/articles/11564.html)
-* [![HTTP的前世今生](https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg)](https://coolshell.cn/articles/19840.html)[HTTP的前世今生](https://coolshell.cn/articles/19840.html)
-* [![TCP 的那些事儿（下）](https://coolshell.cn/wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg)](https://coolshell.cn/articles/11609.html)[TCP 的那些事儿（下）](https://coolshell.cn/articles/11609.html)
-* [![Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg)](https://coolshell.cn/articles/9859.html)[Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html)
-* [![性能调优攻略](https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
-* [![TCP网络关闭的状态变换时序图](https://coolshell.cn/wp-content/uploads/2009/09/tcp1-150x150.jpg)](https://coolshell.cn/articles/1484.html)[TCP网络关闭的状态变换时序图](https://coolshell.cn/articles/1484.html)
+* [![TCP 的那些事儿（上）](../wp-content/uploads/2014/05/tin-can-phone-150x150.jpg)](https://coolshell.cn/articles/11564.html)[TCP 的那些事儿（上）](https://coolshell.cn/articles/11564.html)
+* [![HTTP的前世今生](../wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg)](https://coolshell.cn/articles/19840.html)[HTTP的前世今生](https://coolshell.cn/articles/19840.html)
+* [![TCP 的那些事儿（下）](../wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg)](https://coolshell.cn/articles/11609.html)[TCP 的那些事儿（下）](https://coolshell.cn/articles/11609.html)
+* [![Alan Cox：单向链表中prev指针的妙用](../wp-content/uploads/2013/06/Alan-Cox-150x150.jpg)](https://coolshell.cn/articles/9859.html)[Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html)
+* [![性能调优攻略](../wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
+* [![TCP网络关闭的状态变换时序图](../wp-content/uploads/2009/09/tcp1-150x150.jpg)](https://coolshell.cn/articles/1484.html)[TCP网络关闭的状态变换时序图](https://coolshell.cn/articles/1484.html)
 The post [从一次经历谈 TIME\_WAIT 的那些事](https://coolshell.cn/articles/22263.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

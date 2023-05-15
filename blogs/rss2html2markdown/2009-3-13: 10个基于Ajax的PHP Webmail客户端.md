@@ -18,7 +18,7 @@ RoundCube Webmail 是一个基于浏览器的IMAP 客户端，其提供了丰富
 
 
 
-[![webmail1](https://coolshell.cn/wp-content/uploads/2009/03/webmail1.jpg "webmail1")](https://coolshell.cn/wp-content/uploads/2009/03/webmail1.jpg)
+[![webmail1](../wp-content/uploads/2009/03/webmail1.jpg "webmail1")](https://coolshell.cn/wp-content/uploads/2009/03/webmail1.jpg)
 
 
 
@@ -58,7 +58,7 @@ SquirrelMail 这是一个中规中矩的webmail，PHP语言写成，并没有使
 AtMail, 一个免费的轻量级的 Ajax Webmail 客户端，由PHP写成，支持WEB和WAP。
 
 
-[![webmail5](https://coolshell.cn/wp-content/uploads/2009/03/webmail5.jpg "webmail5")](https://coolshell.cn/wp-content/uploads/2009/03/webmail5.jpg)
+[![webmail5](../wp-content/uploads/2009/03/webmail5.jpg "webmail5")](https://coolshell.cn/wp-content/uploads/2009/03/webmail5.jpg)
 
 
 ### 6. [afterlogic](http://www.afterlogic.com/products/webmail-lite)
@@ -67,7 +67,7 @@ AtMail, 一个免费的轻量级的 Ajax Webmail 客户端，由PHP写成，支
 AfterLogic WebMail Lite PHP 是一个非常易用的 webmail 但其界面又非常Cool，其支持 AJAX 和皮肤。支持POP3 和 SMTP。支持收发邮件，多附件，多帐号，多域，邮件预览，站点管理。安装非常容易，需要PHP 4.1+，完全开源并完全免费。
 
 
-[![webmail6](https://coolshell.cn/wp-content/uploads/2009/03/webmail6.jpg "webmail6")](https://coolshell.cn/wp-content/uploads/2009/03/webmail6.jpg)
+[![webmail6](../wp-content/uploads/2009/03/webmail6.jpg "webmail6")](https://coolshell.cn/wp-content/uploads/2009/03/webmail6.jpg)
 
 
  
@@ -79,7 +79,7 @@ AfterLogic WebMail Lite PHP 是一个非常易用的 webmail 但其界面又非�
 Hastymail 是一个有完整功能的 IMAP/SMTP 客户端，由 PHP 写成。兼容于 PDAs, 手机, 文本浏览器，以及所有的主流浏览器。 Hastymail 有强大的 [插件](http://www.hastymail.org/plugins/) 系统，因为PHP程序员可以随意地改变或增加自己想要的插件。
 
 
-[![webmail7](https://coolshell.cn/wp-content/uploads/2009/03/webmail7.jpg "webmail7")](https://coolshell.cn/wp-content/uploads/2009/03/webmail7.jpg)
+[![webmail7](../wp-content/uploads/2009/03/webmail7.jpg "webmail7")](https://coolshell.cn/wp-content/uploads/2009/03/webmail7.jpg)
 
 
 ### 8. [Mailr](http://mailr.org/)
@@ -88,7 +88,7 @@ Hastymail 是一个有完整功能的 IMAP/SMTP 客户端，由 PHP 写成。
 Mailr 是一个开源的 webmail 由 Ruby写成，它使用 Ruby On Rails 的web application 框架。
 
 
-[![webmail8](https://coolshell.cn/wp-content/uploads/2009/03/webmail8.jpg "webmail8")](https://coolshell.cn/wp-content/uploads/2009/03/webmail8.jpg)
+[![webmail8](../wp-content/uploads/2009/03/webmail8.jpg "webmail8")](https://coolshell.cn/wp-content/uploads/2009/03/webmail8.jpg)
 
 
 ### 9. [Claros inTouch](http://www.claros.org/web/home.do)
@@ -97,7 +97,7 @@ Mailr 是一个开源的 webmail 由 Ruby写成，它使用 Ruby On Rails 的we
 Claros inTouch 是一个Ajax 消息套装其包含了主要特性有webmail，地址本，记事本，日历(还在开发)，网络硬盘 (还在开发)，内建的即时聊天，以及RSS阅读器。这是第一个开源的webmail其包含了内建的垃圾邮件保护和即时聊天功能的项目。但主要使用了Java语言，利用 JSP/Servlets 及 J2EE技术和 MySQL 数据库。
 
 
-[![webmail9](https://coolshell.cn/wp-content/uploads/2009/03/webmail9.jpg "webmail9")](https://coolshell.cn/wp-content/uploads/2009/03/webmail9.jpg)
+[![webmail9](../wp-content/uploads/2009/03/webmail9.jpg "webmail9")](https://coolshell.cn/wp-content/uploads/2009/03/webmail9.jpg)
 
 
 ### 10. [Postaci](http://www.postaciwebmail.org/)
@@ -106,7 +106,7 @@ Claros inTouch 是一个Ajax 消息套装其包含了主要特性有webmail，�
 Postaci 是一个基于 PHP 的POP3/IMAP 邮件客户端，其支持 SMTP 认证。 其使用MySQL, mSQL, Microsoft SQL, Sybase 或PostgreSQL数据库。
 
 
-[![webmail10](https://coolshell.cn/wp-content/uploads/2009/03/webmail10.jpg "webmail10")](https://coolshell.cn/wp-content/uploads/2009/03/webmail10.jpg)
+[![webmail10](../wp-content/uploads/2009/03/webmail10.jpg "webmail10")](https://coolshell.cn/wp-content/uploads/2009/03/webmail10.jpg)
 
 
 文章：[来源](http://www.noupe.com/ajax/10-ajax-webmail-clients.html)
@@ -120,10 +120,10 @@ Postaci 是一个基于 PHP 的POP3/IMAP 邮件客户端，其支持 SMTP 认�
 
 ### 相关文章
 
-* [![Javascript 装载和执行](https://coolshell.cn/wp-content/uploads/2013/06/javascript-150x150.jpg)](https://coolshell.cn/articles/9749.html)[Javascript 装载和执行](https://coolshell.cn/articles/9749.html)
-* [![一次Ajax查错的经历](https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
-* [![疯狂的 Web 应用开源项目](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/5132.html)[疯狂的 Web 应用开源项目](https://coolshell.cn/articles/5132.html)
-* [![一些非常有意思的杂项资源](https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
-* [![Web版的VNC](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/2593.html)[Web版的VNC](https://coolshell.cn/articles/2593.html)
-* [![Ajax开发利器UIzard ](https://coolshell.cn/wp-content/uploads/2009/10/uizard2-150x150.jpg)](https://coolshell.cn/articles/1611.html)[Ajax开发利器UIzard](https://coolshell.cn/articles/1611.html)
+* [![Javascript 装载和执行](../wp-content/uploads/2013/06/javascript-150x150.jpg)](https://coolshell.cn/articles/9749.html)[Javascript 装载和执行](https://coolshell.cn/articles/9749.html)
+* [![一次Ajax查错的经历](../wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/5132.html)[疯狂的 Web 应用开源项目](https://coolshell.cn/articles/5132.html)
+* [![一些非常有意思的杂项资源](../wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/2593.html)[Web版的VNC](https://coolshell.cn/articles/2593.html)
+* [![Ajax开发利器UIzard ](../wp-content/uploads/2009/10/uizard2-150x150.jpg)](https://coolshell.cn/articles/1611.html)[Ajax开发利器UIzard](https://coolshell.cn/articles/1611.html)
 The post [10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/articles/154.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

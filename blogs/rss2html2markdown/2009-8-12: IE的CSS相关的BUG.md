@@ -110,10 +110,10 @@ type: post
 
 ### 相关文章
 
-* [![一些非常有意思的杂项资源](https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
-* [![Chrome开发者工具的小技巧](https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
-* [![浏览器的渲染原理简介](https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
-* [![一次Ajax查错的经历](https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
-* [![做个环保主义的程序员](https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg)](https://coolshell.cn/articles/7186.html)[做个环保主义的程序员](https://coolshell.cn/articles/7186.html)
-* [![神奇的CSS形状 ](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/6913.html)[神奇的CSS形状](https://coolshell.cn/articles/6913.html)
+* [![一些非常有意思的杂项资源](../wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
+* [![Chrome开发者工具的小技巧](../wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
+* [![浏览器的渲染原理简介](../wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
+* [![一次Ajax查错的经历](../wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
+* [![做个环保主义的程序员](../wp-content/uploads/2012/04/Green-Computing-150x150.jpg)](https://coolshell.cn/articles/7186.html)[做个环保主义的程序员](https://coolshell.cn/articles/7186.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/6913.html)[神奇的CSS形状](https://coolshell.cn/articles/6913.html)
 The post [IE的CSS相关的BUG](https://coolshell.cn/articles/1245.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

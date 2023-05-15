@@ -1,22 +1,22 @@
-<p>从Rob Pike 的 Google+上的一个推看到了一篇叫《<a href="http://www.csis.pace.edu/~bergin/patterns/ppoop.html" target="_blank">Understanding Object Oriented Programming</a>》的文章，我先把这篇文章简述一下，然后再说说老牌黑客Rob Pike的评论。</p>
+<html><body><p>从Rob Pike 的 Google+上的一个推看到了一篇叫《<a href="http://www.csis.pace.edu/~bergin/patterns/ppoop.html" target="_blank">Understanding Object Oriented Programming</a>》的文章，我先把这篇文章简述一下，然后再说说老牌黑客Rob Pike的评论。</p>
 <p>先看这篇教程是怎么来讲述OOP的。它先给了下面这个问题，这个问题需要输出一段关于操作系统的文字：假设Unix很不错，Windows很差。</p>
 <p>这个把下面这段代码描述成是<strong>Hacker Solution</strong>。（这帮人觉得下面这叫黑客？我估计这帮人真是没看过C语言的代码）</p>
 <pre class="EnlighterJSRAW">public class PrintOS
 {
 	public static void main(final String[] args)
 	{
-		String osName = System.getProperty(&quot;os.name&quot;) ;
-		if (osName.equals(&quot;SunOS&quot;) || osName.equals(&quot;Linux&quot;))
+		String osName = System.getProperty("os.name") ;
+		if (osName.equals("SunOS") || osName.equals("Linux"))
 		{
-			System.out.println(&quot;This is a UNIX box and therefore good.&quot;) ;
+			System.out.println("This is a UNIX box and therefore good.") ;
 		}
-		else if (osName.equals(&quot;Windows NT&quot;) || osName.equals(&quot;Windows 95&quot;))
+		else if (osName.equals("Windows NT") || osName.equals("Windows 95"))
 		{
-			System.out.println(&quot;This is a Windows box and therefore bad.&quot;) ;
+			System.out.println("This is a Windows box and therefore bad.") ;
 		}
 		else
 		{
-			System.out.println(&quot;This is not a box.&quot;) ;
+			System.out.println("This is not a box.") ;
 		}
 	}
 }</pre>
@@ -28,23 +28,23 @@
 {
 	private static String unixBox()
 	{
-		return &quot;This is a UNIX box and therefore good.&quot; ;
+		return "This is a UNIX box and therefore good." ;
 	}
 	private static String windowsBox()
   	{
-		return &quot;This is a Windows box and therefore bad.&quot; ;
+		return "This is a Windows box and therefore bad." ;
 	}
 	private static String defaultBox()
 	{
-		return &quot;This is not a box.&quot; ;
+		return "This is not a box." ;
 	}
 	private static String getTheString(final String osName)
 	{
-		if (osName.equals(&quot;SunOS&quot;) || osName.equals(&quot;Linux&quot;))
+		if (osName.equals("SunOS") || osName.equals("Linux"))
 		{
 			return unixBox() ;
 		}
-		else if (osName.equals(&quot;Windows NT&quot;) ||osName.equals(&quot;Windows 95&quot;))
+		else if (osName.equals("Windows NT") ||osName.equals("Windows 95"))
 		{
 			return windowsBox() ;
 		}
@@ -55,7 +55,7 @@
   	}
 	public static void main(final String[] args)
 	{
-		System.out.println(getTheString(System.getProperty(&quot;os.name&quot;))) ;
+		System.out.println(getTheString(System.getProperty("os.name"))) ;
 	}
 }</pre>
 <p>然后是一个幼稚的面向对象的思路。</p>
@@ -68,7 +68,7 @@ public class PrintOS
 		System.out.println(OSDiscriminator.getBoxSpecifier().getStatement()) ;
  	}
 }</pre>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">
 public class OSDiscriminator // Factory Pattern
 {
@@ -77,12 +77,12 @@ public class OSDiscriminator // Factory Pattern
 	{
 		if (theBoxSpecifier == null)
 		{
-			String osName = System.getProperty(&quot;os.name&quot;) ;
- 			if (osName.equals(&quot;SunOS&quot;) || osName.equals(&quot;Linux&quot;))
+			String osName = System.getProperty("os.name") ;
+ 			if (osName.equals("SunOS") || osName.equals("Linux"))
  			{
 				theBoxSpecifier = new UNIXBox() ;
 			}
-			else if (osName.equals(&quot;Windows NT&quot;) || osName.equals(&quot;Windows 95&quot;))
+			else if (osName.equals("Windows NT") || osName.equals("Windows 95"))
 			{
 				theBoxSpecifier = new WindowsBox() ;
 			}
@@ -94,37 +94,37 @@ public class OSDiscriminator // Factory Pattern
 		return theBoxSpecifier ;
 	}
 }</pre>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">
 public interface BoxSpecifier
 {
 	String getStatement() ;
 }</pre>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">
 public class DefaultBox implements BoxSpecifier
 {
 	public String getStatement()
 	{
-		return &quot;This is not a box.&quot; ;
+		return "This is not a box." ;
   	}
 }</pre>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">
 public class UNIXBox implements BoxSpecifier
 {
 	public String getStatement()
 	{
-		return &quot;This is a UNIX box and therefore good.&quot; ;
+		return "This is a UNIX box and therefore good." ;
   	}
 }</pre>
-<p>&nbsp;</p>
+<p> </p>
 <pre class="EnlighterJSRAW">
 public class WindowsBox implements BoxSpecifier
 {
   	public String getStatement()
 	{
-		return &quot;This is a Windows box and therefore bad.&quot; ;
+		return "This is a Windows box and therefore bad." ;
 	}
 }</pre>
 <p>他们觉得上面这段代码没有消除if语句，他们说这叫代码的“logic bottleneck”（逻辑瓶颈），因为如果你要增加一个操作系统的判断的话，你不但要加个类，还要改那段if-else的语句。</p>
@@ -146,7 +146,7 @@ public class OSDiscriminator // Factory Pattern
 
  	public static BoxSpecifier getBoxSpecifier()
 	{
-		BoxSpecifier value = (BoxSpecifier)storage.get(System.getProperty(&quot;os.name&quot;)) ;
+		BoxSpecifier value = (BoxSpecifier)storage.get(System.getProperty("os.name")) ;
 		if (value == null)
 			return DefaultBox.value ;
 		return value ;
@@ -174,7 +174,7 @@ public class DefaultBox implements BoxSpecifier // Singleton Pattern
 	private DefaultBox() { }
 	public String getStatement()
 	{
-		return &quot;This is not a box.&quot; ;
+		return "This is not a box." ;
 	}
 }</pre>
 <pre class="EnlighterJSRAW">
@@ -184,12 +184,12 @@ public class UNIXBox implements BoxSpecifier // Singleton Pattern
 	private UNIXBox() { }
 	public  String getStatement()
    	{
-		return &quot;This is a UNIX box and therefore good.&quot; ;
+		return "This is a UNIX box and therefore good." ;
  	}
   	public static final void register()
   	{
-		OSDiscriminator.register(&quot;SunOS&quot;, value) ;
-  		OSDiscriminator.register(&quot;Linux&quot;, value) ;
+		OSDiscriminator.register("SunOS", value) ;
+  		OSDiscriminator.register("Linux", value) ;
  	}
 }</pre>
 <pre class="EnlighterJSRAW">
@@ -199,12 +199,12 @@ public class WindowsBox implements BoxSpecifier  // Singleton Pattern
 	private WindowsBox() { }
 	public String getStatement()
 	{
-		return &quot;This is a Windows box and therefore bad.&quot; ;
+		return "This is a Windows box and therefore bad." ;
   	}
   	public static final void register()
   	{
-		OSDiscriminator.register(&quot;Windows NT&quot;, value) ;
-  		OSDiscriminator.register(&quot;Windows 95&quot;, value) ;
+		OSDiscriminator.register("Windows NT", value) ;
+  		OSDiscriminator.register("Windows 95", value) ;
 	}
 }</pre>
 <pre class="EnlighterJSRAW">
@@ -214,11 +214,11 @@ public class MacBox implements BoxSpecifier // Singleton Pattern
 	private MacBox() { }
 	public  String getStatement()
    	{
-		return &quot;This is a Macintosh box and therefore far superior.&quot; ;
+		return "This is a Macintosh box and therefore far superior." ;
  	}
   	public static final void register()
   	{
-		OSDiscriminator.register(&quot;Mac OS&quot;, value) ;
+		OSDiscriminator.register("Mac OS", value) ;
  	}
 }</pre>
 <p>作者还非常的意地说，他加了一个“Mac OS”的东西。<strong>老实说，当我看到最后这段OO大师搞出来的代码，我快要吐了</strong>。我瞬间想到了两件事：一个是以前酷壳上的《<a href="https://coolshell.cn/articles/3036.html" style="line-height: 13px;" target="_blank" title="面向对象是个骗局？！">面向对象是个骗局</a>》和 《<a href="https://coolshell.cn/articles/2058.html" style="line-height: 13px;" target="_blank" title="各种流行的编程风格">各种流行的编程方式</a>》中说的“设计模式驱动编程”，另一个我想到了那些被敏捷洗过脑的程序员和咨询师，也是这种德行。</p>
@@ -250,7 +250,6 @@ public class MacBox implements BoxSpecifier // Singleton Pattern
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4535.html"><img alt="一些软件设计的原则" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3036.html"><img alt="面向对象是个骗局？！" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3036.html">面向对象是个骗局？！</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8961.html"><img alt="从面向对象的设计模式看软件设计" height="150" src="https://coolshell.cn/wp-content/uploads/2013/01/kiss-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8961.html">从面向对象的设计模式看软件设计</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4535.html"><img alt="一些软件设计的原则" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3036.html"><img alt="面向对象是个骗局？！" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3036.html">面向对象是个骗局？！</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="../wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8961.html"><img alt="从面向对象的设计模式看软件设计" height="150" src="../wp-content/uploads/2013/01/kiss-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8961.html">从面向对象的设计模式看软件设计</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

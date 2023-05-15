@@ -10,7 +10,7 @@ type: post
 
 编程的人应该都知道什么是Hello World。这是一个最简单的程序，其只在屏幕上输出“Hello World”字样，这通常是初学者的在学习编程时的第一个示例。把打印出 “Hello World” 作为第一个范例程序，现在已经成为编程语言学习的传统。  
 
-![hello_world](https://coolshell.cn/wp-content/uploads/2009/03/hello_world-150x150.png "hello_world")  
+![hello_world](../wp-content/uploads/2009/03/hello_world-150x150.png "hello_world")  
 
 “Hello World”起源于Brian Kernighan 和Dennis MacAlistair Ritchie写的计算机程序设计教程《C语言程序设计》（[*The C Programming Language*](http://en.wikipedia.org/wiki/The_C_Programming_Language "en:The C Programming Language")）而广泛流传；但这本书并不是 “hello, world” 的滥觞，虽然这是一个普遍存在的错误认知。
 
@@ -81,10 +81,10 @@ public class Hello
 
 ### 相关文章
 
-* [![这多年来我一直在钻研的技术](https://coolshell.cn/wp-content/uploads/2016/08/Architecture-Internships-Abroad-e1471517643765-150x150.jpg)](https://coolshell.cn/articles/17446.html)[这多年来我一直在钻研的技术](https://coolshell.cn/articles/17446.html)
-* [![一些软件设计的原则](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/4535.html)[一些软件设计的原则](https://coolshell.cn/articles/4535.html)
-* [![如何超过大多数人](https://coolshell.cn/wp-content/uploads/2019/06/competition-360x200-1-150x150.png)](https://coolshell.cn/articles/19464.html)[如何超过大多数人](https://coolshell.cn/articles/19464.html)
-* [![十个免费的Web压力测试工具](https://coolshell.cn/wp-content/uploads/2010/07/get_more_web_traffic-150x150.jpg)](https://coolshell.cn/articles/2589.html)[十个免费的Web压力测试工具](https://coolshell.cn/articles/2589.html)
-* [![Hash Collision DoS 问题](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/6424.html)[Hash Collision DoS 问题](https://coolshell.cn/articles/6424.html)
-* [![9个最常见IE的Bug及其fix](https://coolshell.cn/wp-content/uploads/2009/11/200x200-150x150.jpg)](https://coolshell.cn/articles/1817.html)[9个最常见IE的Bug及其fix](https://coolshell.cn/articles/1817.html)
+* [![这多年来我一直在钻研的技术](../wp-content/uploads/2016/08/Architecture-Internships-Abroad-e1471517643765-150x150.jpg)](https://coolshell.cn/articles/17446.html)[这多年来我一直在钻研的技术](https://coolshell.cn/articles/17446.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/4535.html)[一些软件设计的原则](https://coolshell.cn/articles/4535.html)
+* [![如何超过大多数人](../wp-content/uploads/2019/06/competition-360x200-1-150x150.png)](https://coolshell.cn/articles/19464.html)[如何超过大多数人](https://coolshell.cn/articles/19464.html)
+* [![十个免费的Web压力测试工具](../wp-content/uploads/2010/07/get_more_web_traffic-150x150.jpg)](https://coolshell.cn/articles/2589.html)[十个免费的Web压力测试工具](https://coolshell.cn/articles/2589.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/6424.html)[Hash Collision DoS 问题](https://coolshell.cn/articles/6424.html)
+* [![9个最常见IE的Bug及其fix](../wp-content/uploads/2009/11/200x200-150x150.jpg)](https://coolshell.cn/articles/1817.html)[9个最常见IE的Bug及其fix](https://coolshell.cn/articles/1817.html)
 The post [Hello World 集中营](https://coolshell.cn/articles/169.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

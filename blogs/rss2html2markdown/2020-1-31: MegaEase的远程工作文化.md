@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2020/01/remote-300x177.jpg)[MegaEase](https://megaease.com/) 是我创业的公司，主要是想把云计算（PaaS/SaaS层）的那些高可用高并发的分布式技术普及到那需要对技术自主可控的公司，这样就不需要去使用不能自主可控的闭源系统或是大公司的云平台。我于2016年开始成立MegaEase，从早期8个人，直到今天有20来个人，我们从一开始到今天都是在远程工作的公司文化。因为我很喜欢《[Rework](https://coolshell.cn/articles/9156.html)》这本书，写这本书的公司叫37signal（现名basecamp），这家公司在发《Rework》这本书的时候，整个公司只有16个人，分布在全世界8个城市，这种Geek的公司的文化很吸引我，所以，在我决定创业的时候，我就止不住地想成立这样能够远程工作的公司，于是，远程工作的团队文化就这样成为了MegaEase的基因。**下面我会分享一下，我们公司的远程工作文化和其中的一些问题，最后还有一个工作协议**。
+![](../wp-content/uploads/2020/01/remote-300x177.jpg)[MegaEase](https://megaease.com/) 是我创业的公司，主要是想把云计算（PaaS/SaaS层）的那些高可用高并发的分布式技术普及到那需要对技术自主可控的公司，这样就不需要去使用不能自主可控的闭源系统或是大公司的云平台。我于2016年开始成立MegaEase，从早期8个人，直到今天有20来个人，我们从一开始到今天都是在远程工作的公司文化。因为我很喜欢《[Rework](https://coolshell.cn/articles/9156.html)》这本书，写这本书的公司叫37signal（现名basecamp），这家公司在发《Rework》这本书的时候，整个公司只有16个人，分布在全世界8个城市，这种Geek的公司的文化很吸引我，所以，在我决定创业的时候，我就止不住地想成立这样能够远程工作的公司，于是，远程工作的团队文化就这样成为了MegaEase的基因。**下面我会分享一下，我们公司的远程工作文化和其中的一些问题，最后还有一个工作协议**。
 
 
 我们在早期的时候，8个员工来自5个城市，现在的20来个员工来自8个城市2个国家。虽然我们现在使用“共享办公室”，但是本质上，我们的整个文化是远程工作的文化。在2017-2018年度，我们公司产品商业化以来，公司早期的8个工程师在远程工作的状态下成功支持了得到的老罗的跨年演讲活动，以及其它几个客户，一方面验证了用户愿意付费购买我们的产品和服务之后，另一方面也有一些不错的收入，客单价都在百万左右。还记得当时，有几个投资人并不相信我们连个办公室都没有，而且8个人分布在5个城市，觉得我们是个骗子公司（哈哈）。在过去的一年，我们通过我们的产品和服务帮助银行电信互联网等公司进行了他们的系统架构的改造和升级，让复杂和高门槛的分布式技术和架构可以被更多的企业所掌握所应用。这说明，远程工作是没有什么问题的。实际上远程团队远程工作真的不新鲜，Github上有个Repo维护着一个[支持远程工作的公司列表](https://github.com/remoteintech/remote-jobs)，还有一个[跟远程工作相关的Awesome索引](https://github.com/lukasz-madon/awesome-remote-job)。
@@ -311,10 +311,10 @@ Practices
 
 ### 相关文章
 
-* [![加班与效率](https://coolshell.cn/wp-content/uploads/2013/07/Work-Overtime-150x150.jpg)](https://coolshell.cn/articles/10217.html)[加班与效率](https://coolshell.cn/articles/10217.html)
-* [![《Rework》摘录及感想](https://coolshell.cn/wp-content/uploads/2013/03/rework-150x150.jpg)](https://coolshell.cn/articles/9156.html)[《Rework》摘录及感想](https://coolshell.cn/articles/9156.html)
-* [![聊聊团队协同和协同工具](https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![谈谈公司对员工的监控](https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
-* [![如何做一个有质量的技术分享](https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
+* [![加班与效率](../wp-content/uploads/2013/07/Work-Overtime-150x150.jpg)](https://coolshell.cn/articles/10217.html)[加班与效率](https://coolshell.cn/articles/10217.html)
+* [![《Rework》摘录及感想](../wp-content/uploads/2013/03/rework-150x150.jpg)](https://coolshell.cn/articles/9156.html)[《Rework》摘录及感想](https://coolshell.cn/articles/9156.html)
+* [![聊聊团队协同和协同工具](../wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![谈谈公司对员工的监控](../wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
+* [![如何做一个有质量的技术分享](../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
 The post [MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

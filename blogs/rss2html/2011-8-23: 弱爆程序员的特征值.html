@@ -1,8 +1,8 @@
-<p>【<strong><span style="color: #cc0000;">感谢网友</span><a href="https://coolshell.cn/articles/author/sumtec" rel="author" title="由 sumtec 发布">sumtec</a><span style="color: #cc0000;">投递此文，很欢乐也有意思，与大家共勉</span></strong>】</p>
+<html><body><p>【<strong><span style="color: #cc0000;">感谢网友</span><a href="https://coolshell.cn/articles/author/sumtec" rel="author" title="由 sumtec 发布">sumtec</a><span style="color: #cc0000;">投递此文，很欢乐也有意思，与大家共勉</span></strong>】</p>
 <p>首先说明：</p>
-<p>1、以下特征是真实遇到过的，同事犯过的，乃至我自己也犯过的；<br />
-2、为了剧情需要，某些例子进行了一些夸张修饰等演绎创作，如无雷同，请勿生气；<br />
-3、如果你出现过以下症状之一，并不代表你就是弱爆了，但是如果你一直出现，乃至一说到这个大家就能联想到你，那么你就得小心了；<br />
+<p>1、以下特征是真实遇到过的，同事犯过的，乃至我自己也犯过的；<br/>
+2、为了剧情需要，某些例子进行了一些夸张修饰等演绎创作，如无雷同，请勿生气；<br/>
+3、如果你出现过以下症状之一，并不代表你就是弱爆了，但是如果你一直出现，乃至一说到这个大家就能联想到你，那么你就得小心了；<br/>
 4、如果你是集这几个的大乘者，恭喜你，你已经找到了离开这个行业的充足理由了。</p>
 <h4>好了，搞定！</h4>
 <p>“那个Bug解决了吗？”</p>
@@ -45,8 +45,8 @@ controlPropertyPanel.PropertyChanged += this.UpdatePropertyOnChanged;</pre>
 <p>“嗯，会不会是图片放的位置不对呢？”</p>
 <p>哈，还是很夸张对吧？没办法，写博客有时候需要夸张的文字，否则你无法理解我的意思是：有时候，大家会倾向于从自己的记忆中寻找一些相似的物品，然后选择相似度自认为比较高的东西出来当作答案，而全然不管两者之间的逻辑是否有哪怕那么一丝的关联。也许很多时候，我们确实需要从相似的东西开始，但请别把他当作终点。程序是需要严谨的逻辑的，所以你也必须非常严谨的去推演。</p>
 <p>关于这类的问题真的太多太多了，比如我指着下面这段代码当中的红字：</p>
-<p>var dictionary = new Dictionary&lt;string, string&gt;();<br />
-dictionary<strong><span style="color: #ff0000;">[&#8220;someKey&#8221;]</span></strong> = &#8220;someValue&#8221;;</p>
+<p>var dictionary = new Dictionary&lt;string, string&gt;();<br/>
+dictionary<strong><span style="color: #ff0000;">[“someKey”]</span></strong> = “someValue”;</p>
 <p>“这句话说明了什么？”</p>
 <p>“说明dictionary是一个数组。”</p>
 <h4>集大成者</h4>
@@ -58,7 +58,7 @@ dictionary<strong><span style="color: #ff0000;">[&#8220;someKey&#8221;]</span></
   }
   else if (window.sidebar)
   {
-    window.sidebar.addPanel(LabeName, Url, &#039;&#039;);
+    window.sidebar.addPanel(LabeName, Url, '');
   }
 }</pre>
 <p>然后直接扒下来就放上去了，通过某种方式在SilverLight中调用这段JavaScript，签入，搞定了！结果到了测试那边发现完全不能用，无论在IE6/7/8/9/10，还是在FireFox/Safari/Chrome上面，都不能使用。我问：</p>
@@ -78,12 +78,12 @@ dictionary<strong><span style="color: #ff0000;">[&#8220;someKey&#8221;]</span></
     }
     else if (window.sidebar)
     {
-      window.sidebar.addPanel(LabeName, Url, &#039;&#039;);
+      window.sidebar.addPanel(LabeName, Url, '');
     }
   }
   catch
   {
-    alert(&quot;您的浏览器因为安全设置的问题无法收藏，请手动添加收藏！&quot;);
+    alert("您的浏览器因为安全设置的问题无法收藏，请手动添加收藏！");
   }
 }</pre>
 <p>看到这样的代码，我彻底震惊了。亲自调试了一下，发现确实报告了一个“没有权限”的异常。但是，我还发现，那个Url参数的值是“www.adomainname.com\test\page.html”。那这不废话么！浏览器认为你要收藏的是一个本地硬盘上的路径，怎么可能在一个Internet Zone上允许收藏这种路径呢？我于是指着代码问：</p>
@@ -108,7 +108,6 @@ dictionary<strong><span style="color: #ff0000;">[&#8220;someKey&#8221;]</span></
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3005.html"><img alt="代码重构的一个示例" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3005.html">代码重构的一个示例</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2058.html"><img alt="各种流行的编程风格" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2058.html">各种流行的编程风格</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5292.html">弱爆程序员的特征值</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3005.html"><img alt="代码重构的一个示例" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3005.html">代码重构的一个示例</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2058.html"><img alt="各种流行的编程风格" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2058.html">各种流行的编程风格</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="../wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5292.html">弱爆程序员的特征值</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

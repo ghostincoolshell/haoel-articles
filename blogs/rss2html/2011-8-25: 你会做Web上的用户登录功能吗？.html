@@ -1,4 +1,4 @@
-<p>Web上的用户登录功能应该是最基本的功能了，可是在我看过一些站点的用户登录功能后，我觉得很有必要写一篇文章教大家怎么来做用户登录功能。下面的文章告诉大家这个功能可能并没有你所想像的那么简单，这是一个关系到用户安全的功能，希望大家能从下面的文章中能知道什么样的方法才是一个好的用户登录功能。<span style="color: #cc0000;"><strong>以下内容，转载时请保持原文一致，并请注明作者和出处</strong></span>。</p>
+<html><body><p>Web上的用户登录功能应该是最基本的功能了，可是在我看过一些站点的用户登录功能后，我觉得很有必要写一篇文章教大家怎么来做用户登录功能。下面的文章告诉大家这个功能可能并没有你所想像的那么简单，这是一个关系到用户安全的功能，希望大家能从下面的文章中能知道什么样的方法才是一个好的用户登录功能。<span style="color: #cc0000;"><strong>以下内容，转载时请保持原文一致，并请注明作者和出处</strong></span>。</p>
 <h4>用户名和口令</h4>
 <p>首先，我们先来说说用户名和口令的事。这并不是本站第一次谈论这个事了。<a href="https://coolshell.cn/articles/2428.html" target="_blank" title="如何管理并设计你的口令">如何管理自己的口令</a>让你知道怎么管理自己的口令，<a href="https://coolshell.cn/articles/3801.html" target="_blank" title="破解你的口令">破解你的口令</a>让你知道在现代这样速度的计算速度下，用穷举法破解你的口令可能会是一件很轻松的事。在这里我想告诉从开发者的角度上来做设计这个用户名和口令的事。下面一几件规则：</p>
 <ul style="font-weight: bold;">
@@ -21,12 +21,12 @@
 <li><strong>千万不要在cookie中存放用户的密码</strong>。加密的密码都不行。因为这个密码可以被人获取并尝试离线穷举。所以，你一定不能把用户的密码保存在cookie中。我看到太多的站点这么干了。</li>
 </ul>
 <ul>
-<li><strong>正确设计“记住密码”</strong>。这个功能简直就是一个安全隐患，我觉得并不是所有的程序员都知道怎么设计这个事。一般的设计 是——一时用户勾选了这个功能，系统会生成一个cookie，cookie包括用户名和一个固定的散列值，这个固定的散列值一直使用。这样，你就可以在所有的设备和客户上都可以登录，而且可以有多个用户同时登录。这个并不是很安全。下面是一些更为安全的方法供你参考：<br />
+<li><strong>正确设计“记住密码”</strong>。这个功能简直就是一个安全隐患，我觉得并不是所有的程序员都知道怎么设计这个事。一般的设计 是——一时用户勾选了这个功能，系统会生成一个cookie，cookie包括用户名和一个固定的散列值，这个固定的散列值一直使用。这样，你就可以在所有的设备和客户上都可以登录，而且可以有多个用户同时登录。这个并不是很安全。下面是一些更为安全的方法供你参考：<br/>
 <span style="color: #000080;">（——<em><strong>更新 2011/08/26，原文中有些小错误，并且说的不清楚，重新调整了一下——</strong></em>）</span></li>
 </ul>
 <p style="padding-left: 60px;">1）在cookie中，保存三个东西——<strong>用户名</strong>，<strong>登录序列</strong>，<strong>登录token</strong>。</p>
-<p style="padding-left: 90px;"><strong>用户名</strong>：明文存放。<br />
-<strong>登录序列</strong>：一个被MD5散列过的随机数，<span style="color: #cc0000;">仅当强制用户输入口令时更新（如：用户修改了口令）</span>。<br />
+<p style="padding-left: 90px;"><strong>用户名</strong>：明文存放。<br/>
+<strong>登录序列</strong>：一个被MD5散列过的随机数，<span style="color: #cc0000;">仅当强制用户输入口令时更新（如：用户修改了口令）</span>。<br/>
 <strong>登录token</strong>：一个被MD5散列过的随机数，<span style="color: #cc0000;">仅一个登录session内有效，新的登录session会更新它</span>。</p>
 <p style="padding-left: 60px;">2）上述三个东西会存在服务器上，服务器的验证用户需要验证客户端cookie里的这三个事。</p>
 <p style="padding-left: 60px;">3）这样的设计会有什么样的效果，会有下面的效果，</p>
@@ -35,7 +35,7 @@
 <p style="padding-left: 60px;">4）当然，<strong>上述这样的设计还是会有一些问题，比如：同一用户的不同设备登录，甚至在同一个设备上使用不同的浏览器保登录</strong>。一个设备会让另一个设备的<strong>登录token</strong>和<strong>登录序列</strong>失效，从而让其它设备和浏览器需要重新登录，并会造成cookie被盗用的假象。所以，你在服务器服还需要考虑- <strong>IP 地址</strong>，</p>
 <p style="padding-left: 90px;">a) 如果以口令方式登录，我们无需更新服务器的“<strong>登录序列</strong>”和 “<strong>登录token</strong>”（但需要更新cookie）。因为我们认为口令只有真正的用户知道。</p>
 <p style="padding-left: 90px;">b) 如果 <strong>IP相同</strong> ，那么，我们无需更新服务器的“<strong>登录序列</strong>”和 “<strong>登录token</strong>”（但需要更新cookie）。因为我们认为是同一用户有同一IP（当然，同一个局域网里也有同一IP，但我们认为这个局域网是用户可以控制的。网吧内并不推荐使用这一功能）。</p>
-<p style="padding-left: 90px;">c) 如果 （<strong>IP不同 </strong>&amp;&amp;<strong> 没有用口令登录</strong>），那么，“<strong>登录token</strong>” 就会在多个IP间发生变化（登录token在两个或多个ip间被来来回回的变换），当在一定时间内达到一定次数后，系统才会真正觉得被盗用的可能性很高，此时系统在后台清除“<strong>登录序列</strong>”和“<strong>登录token</strong>&#8220;，让Cookie失效，强制用户输入口令（或是要求用户更改口令），以保证多台设备上的cookie一致。</p>
+<p style="padding-left: 90px;">c) 如果 （<strong>IP不同 </strong>&amp;&amp;<strong> 没有用口令登录</strong>），那么，“<strong>登录token</strong>” 就会在多个IP间发生变化（登录token在两个或多个ip间被来来回回的变换），当在一定时间内达到一定次数后，系统才会真正觉得被盗用的可能性很高，此时系统在后台清除“<strong>登录序列</strong>”和“<strong>登录token</strong>“，让Cookie失效，强制用户输入口令（或是要求用户更改口令），以保证多台设备上的cookie一致。</p>
 <ul>
 <li><strong>不要让cookie有权限访问所有的操作</strong>。否则就是XSS攻击，这个功能请参看<a href="https://coolshell.cn/articles/4914.html" target="_blank" title="新浪微博的XSS攻击">新浪微博的XSS攻击</a>。下面的这些功能一定要用户输入口令：</li>
 </ul>
@@ -77,7 +77,7 @@
 <ul>
 <li><a href="http://www.owasp.org/index.php/Guide_to_Authentication" rel="nofollow">OWASP Guide To Authentication</a></li>
 <li><a href="http://www.cs.umass.edu/~kevinfu/papers/webauth_tr.pdf" rel="nofollow">Dos and Don’ts of Client Authentication on the Web </a>（PDF）</li>
-<li><a href="http://fishbowl.pastiche.org/2004/01/19/persistent_login_cookie_best_practice/" rel="nofollow">Charles Miller&#8217;s Persistent Login Cookie Best Practice</a></li>
+<li><a href="http://fishbowl.pastiche.org/2004/01/19/persistent_login_cookie_best_practice/" rel="nofollow">Charles Miller’s Persistent Login Cookie Best Practice</a></li>
 <li><a href="http://en.wikipedia.org/wiki/HTTP_cookie#Drawbacks_of_cookies" rel="nofollow">Wikipedia: HTTP cookie</a></li>
 <li><a href="http://cups.cs.cmu.edu/soups/2008/proceedings/p13Rabkin.pdf" rel="nofollow">Personal knowledge questions for fallback authentication: Security questions in the era of Facebook </a></li>
 </ul>
@@ -98,7 +98,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6193.html"><img alt="CSDN明文口令泄露的启示" height="150" src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6193.html">CSDN明文口令泄露的启示</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3877.html"><img alt="另类UX让你输入强口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3801.html"><img alt="破解你的口令" height="150" src="https://coolshell.cn/wp-content/uploads/2011/02/passwords-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3801.html">破解你的口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2451.html"><img alt="Twitter的禁用口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2428.html"><img alt="如何管理并设计你的口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2078.html"><img alt="如何防范密码被破解" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6193.html"><img alt="CSDN明文口令泄露的启示" height="150" src="../wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6193.html">CSDN明文口令泄露的启示</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3877.html"><img alt="另类UX让你输入强口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3801.html"><img alt="破解你的口令" height="150" src="../wp-content/uploads/2011/02/passwords-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3801.html">破解你的口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2451.html"><img alt="Twitter的禁用口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2428.html"><img alt="如何管理并设计你的口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2078.html"><img alt="如何防范密码被破解" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

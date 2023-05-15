@@ -1,4 +1,4 @@
-<p>上周，在Sun的Java论坛上出现了一个这样的帖子，这个贴子的链接如下：<br />
+<html><body><p>上周，在Sun的Java论坛上出现了一个这样的帖子，这个贴子的链接如下：<br/>
 <a href="http://forums.sun.com/thread.jspa?threadID=5404590&amp;start=0&amp;tstart=0" target="_blank">http://forums.sun.com/thread.jspa?threadID=5404590&amp;start=0&amp;tstart=0</a></p>
 <p>LZ的贴子翻译如下：</p>
 <blockquote><p>大家好，我是一个Java的新手，我有一个简单的问题：请问我怎么才能反转一个整数的符号啊。比如把-12转成+12。是的，毫无疑问这是个简单的问题，但我弄了一整天我也找不到什么好的方法。非常感谢如果你能告诉我Java有什么方法可以做到这个事，或者告诉我一个正确的方向——比如使用一些数学库或是二进制方法什么的。谢谢！</p></blockquote>
@@ -31,12 +31,12 @@ int n = ....;
  n = (0xffffffff ^ n) + 1;
 </pre>
 <p>然后，又出现了一些看似简单，其实是比较晦涩的方案</p>
-<p><code><code class="EnlighterJSRAW">n = ~n + 1; </code></p>
+<p><code><code class="EnlighterJSRAW">n = ~n + 1; </code></code></p>
 <p> </p>
-<p></code><code><code><code class="EnlighterJSRAW">n = ~--n; </code></p>
+<p><code><code><code class="EnlighterJSRAW">n = ~--n; </code></code></code></p>
 <p> </p>
-<p></code></code><code><code>继续，有才的人从来就不少：</code></code></p>
-<p><code><code></p>
+<p><code><code>继续，有才的人从来就不少：</code></code></p>
+<p><code><code></code></code></p>
 <pre class="EnlighterJSRAW">
 n^= 0xffffffff;
 int m;
@@ -46,7 +46,7 @@ if (m == 0) n= m;
 else for (m &gt;&gt;= 1; m != 0; n^= m, m&gt;&gt;=1);
 </pre>
 <p> </p>
-<p></code></code><code><code>呵呵，开始越来越强大了，我以前也向大家介绍过《<a href="https://coolshell.cn/articles/933.html" rel="bookmark">如何加密/弄乱C源代码</a>》的文章，和这些恶搞的人可能有点相似吧。上面这个例子一出，大家都在讨论上面例子中的for循环语句，呵呵，很费解啊。</code></code></p>
+<p><code><code>呵呵，开始越来越强大了，我以前也向大家介绍过《<a href="https://coolshell.cn/articles/933.html" rel="bookmark">如何加密/弄乱C源代码</a>》的文章，和这些恶搞的人可能有点相似吧。上面这个例子一出，大家都在讨论上面例子中的for循环语句，呵呵，很费解啊。</code></code></p>
 <p><code><code>然后，后面几个就开始乱来了：</code></code></p>
 <pre class="EnlighterJSRAW">public int invert(int i) {
   return i - (i + i);
@@ -77,10 +77,10 @@ else for (m &gt;&gt;= 1; m != 0; n^= m, m&gt;&gt;=1);
 <pre class="EnlighterJSRAW">public int invert(int n) {
     String nStr = String.valueOf(n);
  
-    if (nStr.startsWith(&quot;-&quot;)) {
-        nStr = nStr.replace(&quot;-&quot;, &quot;&quot;);
+    if (nStr.startsWith("-")) {
+        nStr = nStr.replace("-", "");
     } else {
-        nStr = &quot;-&quot; + nStr;
+        nStr = "-" + nStr;
     }
  
     return Integer.parseInt(nStr);
@@ -105,7 +105,7 @@ public abstract class NegatableInteger implements Negatable&lt;Integer&gt; {
       return new NegatablePositiveInteger(value);
     }
     else if (value == Integer.MIN_VALUE) {
-      throw new IllegalArgumentException(&quot;cannot negate &quot; + value);
+      throw new IllegalArgumentException("cannot negate " + value);
     }
     else if (value &lt; 0) {
       return new NegatableNegativeInteger(value);
@@ -137,7 +137,7 @@ public class NegatablePositiveInteger extends NegatableInteger {
  
   protected String negateValueAsString () {
     String valueAsString = String.valueOf (value());
-    return &quot;-&quot; + valueAsString;
+    return "-" + valueAsString;
   }
 }
  
@@ -189,7 +189,6 @@ public class NegatableZeroInteger extends NegatableInteger {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4758.html"><img alt="如何写出无法维护的代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1992.html"><img alt="程序员眼中的编程语言" height="150" src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1391.html">编程真难啊</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4758.html"><img alt="如何写出无法维护的代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1992.html"><img alt="程序员眼中的编程语言" height="150" src="../wp-content/uploads/2009/12/language-fanboys-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1391.html">编程真难啊</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

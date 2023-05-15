@@ -105,10 +105,10 @@ httpd.serve\_forever()
 
 ### 相关文章
 
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![HTTP的前世今生](https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg)](https://coolshell.cn/articles/19840.html)[HTTP的前世今生](https://coolshell.cn/articles/19840.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![如何免费的让网站启用HTTPS](https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
-* [![Python修饰器的函数式编程](https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg)](https://coolshell.cn/articles/11265.html)[Python修饰器的函数式编程](https://coolshell.cn/articles/11265.html)
-* [![函数式编程](https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png)](https://coolshell.cn/articles/10822.html)[函数式编程](https://coolshell.cn/articles/10822.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![HTTP的前世今生](../wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg)](https://coolshell.cn/articles/19840.html)[HTTP的前世今生](https://coolshell.cn/articles/19840.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![如何免费的让网站启用HTTPS](../wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
+* [![Python修饰器的函数式编程](../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg)](https://coolshell.cn/articles/11265.html)[Python修饰器的函数式编程](https://coolshell.cn/articles/11265.html)
+* [![函数式编程](../wp-content/uploads/2013/12/yoda-lambda-150x150.png)](https://coolshell.cn/articles/10822.html)[函数式编程](https://coolshell.cn/articles/10822.html)
 The post [非常简单的Python HTTP服务](https://coolshell.cn/articles/1480.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

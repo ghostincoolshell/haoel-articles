@@ -1,6 +1,6 @@
-<p><img alt="" class="alignright size-medium wp-image-21234" height="169" src="https://coolshell.cn/wp-content/uploads/2020/12/go.slices-300x169.png" width="300" /></p>
+<html><body><p><img alt="" class="alignright size-medium wp-image-21234" height="169" src="../wp-content/uploads/2020/12/go.slices-300x169.png" width="300"/></p>
 <p>在本篇文章中，我会对Go语言编程模式的一些基本技术和要点，这样可以让你更容易掌握Go语言编程。其中，主要包括，数组切片的一些小坑，还有接口编程，以及时间和程序运行性能相关的话题。</p>
-<section class="post-series"><h3 class="post-series-title">本文是全系列中第1 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go编程模式：切片，接口，时间和性能</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/21140.html" rel="next" title="Go 编程模式：错误处理">下一篇文章</a> &raquo;</span></nav></section>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第1 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go编程模式：切片，接口，时间和性能</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/21140.html" rel="next" title="Go 编程模式：错误处理">下一篇文章</a> »</span></nav></section>
 <h4>Slice</h4>
 <p>首先，我们先来讨论一下Slice，中文翻译叫“切片”，这个东西在Go语言中不是数组，而是一个结构体，其定义如下：</p>
 <pre class="EnlighterJSRAW">type slice struct {
@@ -9,7 +9,7 @@
     cap   int            //容量有多大
 }</pre>
 <p>用图示来看，一个空的slice的表现如下：</p>
-<p><img alt="" class="aligncenter wp-image-21129 size-medium" height="190" src="https://coolshell.cn/wp-content/uploads/2020/12/slice1-300x190.png" width="300" /> 熟悉C/C++的同学一定会知道，在结构体里用数组指针的问题——数据会发生共享！下面我们来看一下slice的一些操作</p>
+<p><img alt="" class="aligncenter wp-image-21129 size-medium" height="190" src="../wp-content/uploads/2020/12/slice1-300x190.png" width="300"/> 熟悉C/C++的同学一定会知道，在结构体里用数组指针的问题——数据会发生共享！下面我们来看一下slice的一些操作</p>
 <p><span id="more-21128"></span></p>
 <pre class="EnlighterJSRAW">foo = make([]int, 5)
 foo[3] = 42
@@ -23,7 +23,7 @@ bar[1] = 99</pre>
 <li>然后开始对foo所指向的数组中的索引为3和4的元素进行赋值</li>
 <li>然后，对foo做切片后赋值给bar，再修改bar[1]</li>
 </ul>
-<p><img alt="" class="aligncenter size-full wp-image-21130" height="362" src="https://coolshell.cn/wp-content/uploads/2020/12/slice2.png" width="818" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-21130" height="362" src="../wp-content/uploads/2020/12/slice2.png" width="818"/></p>
 <p>通过上图我们可以看到，因为foo和bar的内存是共享的，所以，foo和bar的对数组内容的修改都会影响到对方。</p>
 <p>接下来，我们再来看一个数据操作 <code>append()</code> 的示例</p>
 <pre class="EnlighterJSRAW">a := make([]int, 32)
@@ -31,7 +31,7 @@ b := a[1:16]
 a = append(a, 1)
 a[2] = 42</pre>
 <p>上面这段代码中，把 <code>a[1:16]</code> 的切片赋给到了 <code>b</code> ，此时，<code>a</code> 和 <code>b</code> 的内存空间是共享的，然后，对 <code>a</code>做了一个 <code>append()</code>的操作，这个操作会让 <code>a</code> 重新分享内存，导致 <code>a</code> 和 <code>b</code> 不再共享，如下图所示：</p>
-<p><img alt="" class="aligncenter size-large wp-image-21326" height="321" src="https://coolshell.cn/wp-content/uploads/2020/12/go.slices.append-1024x513.png" width="640" /></p>
+<p><img alt="" class="aligncenter size-large wp-image-21326" height="321" src="../wp-content/uploads/2020/12/go.slices.append-1024x513.png" width="640"/></p>
 <p>从上图我们可以看以看到 <code>append()</code>操作让 <code>a</code> 的容量变成了64，而长度是33。这里，需要重点注意一下——<strong><code>append()</code>这个函数在 <code>cap</code> 不够用的时候就会重新分配内存以扩大容量，而如果够用的时候不不会重新分享内存！</strong></p>
 <p>我们再看来看一个例子：</p>
 <pre class="EnlighterJSRAW">func main() {
@@ -50,7 +50,7 @@ a[2] = 42</pre>
     fmt.Println("dir2 =&gt;",string(dir2)) //prints: dir2 =&gt; uffixBBBB
 }</pre>
 <p>上面这个例子中，<code>dir1</code> 和 <code>dir2</code> 共享内存，虽然 <code>dir1</code> 有一个 <code>append()</code> 操作，但是因为 cap 足够，于是数据扩展到了<code>dir2</code> 的空间。下面是相关的图示（注意上图中 <code>dir1</code> 和 <code>dir2</code> 结构体中的 <code>cap</code> 和 <code>len</code> 的变化）</p>
-<p><img alt="" class="aligncenter size-large wp-image-21328" height="463" src="https://coolshell.cn/wp-content/uploads/2020/12/slice4-1024x740.png" width="640" /></p>
+<p><img alt="" class="aligncenter size-large wp-image-21328" height="463" src="../wp-content/uploads/2020/12/slice4-1024x740.png" width="640"/></p>
 <p>如果要解决这个问题，我们只需要修改一行代码。</p>
 <pre class="EnlighterJSRAW">dir1 := path[:sepIndex]
 </pre>
@@ -234,21 +234,21 @@ func main() {
 <h4>参考文档</h4>
 <p>还有很多不错的技巧，下面的这些参考文档可以让你写出更好的Go的代码，必读！</p>
 <ul>
-<li><b>Effective</b> <b>Go<br />
+<li><b>Effective</b> <b>Go<br/>
 </b><a href="https://golang.org/doc/effective_go.html">https://golang.org/doc/effective_go.html</a></li>
-<li><b>Uber</b> <b>Go</b> <b>Style<br />
+<li><b>Uber</b> <b>Go</b> <b>Style<br/>
 </b><a href="https://github.com/uber-go/guide/blob/master/style.md">https://github.com/uber-go/guide/blob/master/style.md</a></li>
-<li><b>50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs<br />
+<li><b>50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs<br/>
 </b><a href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/">http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/</a></li>
-<li><b>Go</b> <b>Advice<br />
+<li><b>Go</b> <b>Advice<br/>
 </b><a href="https://github.com/cristaloleg/go-advice">https://github.com/cristaloleg/go-advice</a><b></b></li>
-<li><b>Practical Go Benchmarks<br />
+<li><b>Practical Go Benchmarks<br/>
 </b><a href="https://www.instana.com/blog/practical-golang-benchmarks/">https://www.instana.com/blog/practical-golang-benchmarks/</a><b></b></li>
-<li><b>Benchmarks of Go serialization methods<br />
+<li><b>Benchmarks of Go serialization methods<br/>
 </b><a href="https://github.com/alecthomas/go_serialization_benchmarks">https://github.com/alecthomas/go_serialization_benchmarks</a><b></b></li>
-<li><b>Debugging</b> <b>performance</b> <b>issues</b> <b>in</b> <b>Go</b> <b>programs<br />
+<li><b>Debugging</b> <b>performance</b> <b>issues</b> <b>in</b> <b>Go</b> <b>programs<br/>
 </b><a href="https://github.com/golang/go/wiki/Performance">https://github.com/golang/go/wiki/Performance</a><b></b></li>
-<li><b>Go</b> <b>code</b> <b>refactoring:</b> <b>the</b> <b>23x</b> <b>performance</b> <b>hunt<br />
+<li><b>Go</b> <b>code</b> <b>refactoring:</b> <b>the</b> <b>23x</b> <b>performance</b> <b>hunt<br/>
 </b><a href="https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7">https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7</a></li>
 </ul>
 <p>（全文完）<!--
@@ -267,7 +267,6 @@ func main() {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="../wp-content/uploads/2020/12/go.line_.-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="../wp-content/uploads/2020/12/go.generate-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

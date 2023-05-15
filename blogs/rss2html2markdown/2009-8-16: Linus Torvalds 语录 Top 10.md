@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![linus torvalds](https://coolshell.cn/wp-content/uploads/2009/08/linus_torvalds_talking.jpg "linus torvalds")下面是Linux的创始人Linus Torvalds的一些言论，这是我个人认为最有意思的10句。如果你想看更多的Linus Torvalds说过的话，你可以看看他在维基百科上的词条：[Linux Torvalds](http://en.wikiquote.org/wiki/Linus_Torvalds)。我们在下面给出中英文对照，希望你能喜欢。
+![linus torvalds](../wp-content/uploads/2009/08/linus_torvalds_talking.jpg "linus torvalds")下面是Linux的创始人Linus Torvalds的一些言论，这是我个人认为最有意思的10句。如果你想看更多的Linus Torvalds说过的话，你可以看看他在维基百科上的词条：[Linux Torvalds](http://en.wikiquote.org/wiki/Linus_Torvalds)。我们在下面给出中英文对照，希望你能喜欢。
 
 
 
@@ -82,10 +82,10 @@ type: post
 
 ### 相关文章
 
-* [![Alan Cox：大教堂、市集与市议会](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/9917.html)[Alan Cox：大教堂、市集与市议会](https://coolshell.cn/articles/9917.html)
-* [![Linus：利用二级指针删除单向链表](https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
-* [![Unix传奇(上篇)](https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
-* [![eBPF 介绍](https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
-* [![打造高效的工作环境 – Shell 篇](https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png)](https://coolshell.cn/articles/19219.html)[打造高效的工作环境 – Shell 篇](https://coolshell.cn/articles/19219.html)
-* [![记一次Kubernetes/Docker网络排障](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/9917.html)[Alan Cox：大教堂、市集与市议会](https://coolshell.cn/articles/9917.html)
+* [![Linus：利用二级指针删除单向链表](../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
+* [![Unix传奇(上篇)](../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
+* [![eBPF 介绍](../wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
+* [![打造高效的工作环境 – Shell 篇](../wp-content/uploads/2019/03/linux.ninja_-150x150.png)](https://coolshell.cn/articles/19219.html)[打造高效的工作环境 – Shell 篇](https://coolshell.cn/articles/19219.html)
+* [![记一次Kubernetes/Docker网络排障](../wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
 The post [Linus Torvalds 语录 Top 10](https://coolshell.cn/articles/1278.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

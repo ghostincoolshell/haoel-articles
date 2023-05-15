@@ -1,5 +1,5 @@
-<p>先是在微博上看到了个<a href="http://weibo.com/1876004965/zueproucp" target="_blank">微博</a>和云风的评论，然后我回了“楼主对C的内存管理不了解”。</p>
-<p><a href="https://coolshell.cn/wp-content/uploads/2013/04/weibo.jpg"><img alt="" class="aligncenter size-full wp-image-9544" height="211" src="https://coolshell.cn/wp-content/uploads/2013/04/weibo.jpg" width="580" /></a></p>
+<html><body><p>先是在微博上看到了个<a href="http://weibo.com/1876004965/zueproucp" target="_blank">微博</a>和云风的评论，然后我回了“楼主对C的内存管理不了解”。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2013/04/weibo.jpg"><img alt="" class="aligncenter size-full wp-image-9544" height="211" src="../wp-content/uploads/2013/04/weibo.jpg" width="580"/></a></p>
 <p>后来引发了很多人的讨论，大量的人又借机来黑C++，比如：</p>
 <blockquote><p>//<a href="http://weibo.com/n/Baidu-ThursdayWang">@Baidu-ThursdayWang</a>:这不就c++弱爆了的地方吗，需要记忆太多东西</p>
 <p>//<a href="http://weibo.com/n/%E7%BC%96%E7%A8%8B%E6%B5%AA%E5%AD%90%E5%BC%A0%E5%8F%91%E8%B4%A2">@编程浪子张发财</a>:这个跟C关系真不大。不过我得验证一下，感觉真的不应该是这样的。如果基类的析构这种情况不能 调用，就太弱了。</p>
@@ -16,13 +16,13 @@
 <pre class="EnlighterJSRAW">class Base
 {
   public:
-    virtual ~B(){ cout &lt;&lt;&quot;B::~B()&quot;&lt;&lt;endl; }
+    virtual ~B(){ cout &lt;&lt;"B::~B()"&lt;&lt;endl; }
 };
 
 class Derived : public Base
 {
   public:
-    virtual ~D() { cout &lt;&lt;&quot;D::D~()&quot;&lt;&lt;endl; }
+    virtual ~D() { cout &lt;&lt;"D::D~()"&lt;&lt;endl; }
 };
 
 Base* pBase = new Derived[10];
@@ -58,8 +58,8 @@ pChar = (char*)pInt;</pre>
         char c;
         int j;
     }b[2] ={
-        {(void*)0x01, 100, &#039;a&#039;, -1},
-        {(void*)0x02, 200, &#039;A&#039;, -2}
+        {(void*)0x01, 100, 'a', -1},
+        {(void*)0x02, 200, 'A', -2}
     };
 </pre>
 <p>注意：我用的是G++编译的，在64bits平台上编译的，其中的sizeof(void*)的值是8。</p>
@@ -69,7 +69,7 @@ pChar = (char*)pInt;</pre>
 </pre>
 <p>用gdb我们可以看到下面的情况：(pa1[1]的成员的值完全乱掉了)</p>
 <pre class="EnlighterJSRAW">(gdb) p b
-$7 = {{vptr = 0x1, i = 100, c = 97 &#039;a&#039;, j = -1}, {vptr = 0x2, i = 200, c = 65 &#039;A&#039;, j = -2}}
+$7 = {{vptr = 0x1, i = 100, c = 97 'a', j = -1}, {vptr = 0x2, i = 200, c = 65 'A', j = -2}}
 (gdb) p pa1[0]
 $8 = {vptr = 0x1, i = 100}
 (gdb) p pa1[1]
@@ -92,9 +92,9 @@ $1 = {vptr = 0x1, i = 100}
 (gdb) p pa[1]
 $2 = {vptr = 0x2, i = 200}
 (gdb) p pb[0]
-$3 = {vptr = 0x1, i = 100, c = 0 &#039;&#092;&#048;00&#039;, j = 2}
+$3 = {vptr = 0x1, i = 100, c = 0 '\000', j = 2}
 (gdb) p pb[1]
-$4 = {vptr = 0xc8, i = 0, c = 0 &#039;&#092;&#048;00&#039;, j = 0}
+$4 = {vptr = 0xc8, i = 0, c = 0 '\000', j = 0}
 </pre>
 <p>可见，这完全就是C语言里乱转型造成了内存的混乱，这和C++一点关系都没有。而且，C++的任何一本书都说过，父类对象和子类对象的转型会带来严重的内存问题。</p>
 <p>但是，如果在64bits平台下，如果把我们的structB改一下，改成如下（把struct B中的int j给注释掉）：</p>
@@ -110,8 +110,8 @@ $4 = {vptr = 0xc8, i = 0, c = 0 &#039;&#092;&#048;00&#039;, j = 0}
         char c;
         //int j; &lt;---注释掉int j
     }b[2] ={
-        {(void*)0x01, 100, &#039;a&#039;},
-        {(void*)0x02, 200, &#039;A&#039;}
+        {(void*)0x01, 100, 'a'},
+        {(void*)0x02, 200, 'A'}
     };
 </pre>
 <p>你就会发现，上面的内存混乱的问题都没有了，因为struct A和struct B的size是一样的：</p>
@@ -133,19 +133,19 @@ class B
 {
   int b;
   public:
-    virtual ~B(){ cout &lt;&lt;&quot;B::~B()&quot;&lt;&lt;endl; }
+    virtual ~B(){ cout &lt;&lt;"B::~B()"&lt;&lt;endl; }
 };
 
 class D: public B
 {
   int i;
   public:
-    virtual ~D() { cout &lt;&lt;&quot;D::~D()&quot;&lt;&lt;endl; }
+    virtual ~D() { cout &lt;&lt;"D::~D()"&lt;&lt;endl; }
 };
 
 int main(void)
 {
-    cout &lt;&lt; &quot;sizeB:&quot; &lt;&lt; sizeof(B) &lt;&lt; &quot; sizeD:&quot;&lt;&lt; sizeof(D) &lt;&lt;endl;
+    cout &lt;&lt; "sizeB:" &lt;&lt; sizeof(B) &lt;&lt; " sizeD:"&lt;&lt; sizeof(D) &lt;&lt;endl;
     B *pb = new D[2];
 
     delete [] pb;
@@ -161,7 +161,7 @@ int main(void)
 
 delete[] pBase;</pre>
 <p>所以，微软C++编程译器define这个事让我非常不解，对微软的C++编译器再度失望，看似默默地把其编译对了很漂亮，实则误导了好多人把这种undefined的东西当成defined来用，还赞扬做得好，真是令人无语。<strong>（</strong><a href="http://weibo.com/2087077260/zup0V7LLM" target="_blank">就像微博上的这个贴一样</a>，说VC多么牛，还说这是OO的特性。我勒个去！<strong>）</strong></p>
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2013/04/hehe.png"><img alt="" height="173" src="https://coolshell.cn/wp-content/uploads/2013/04/hehe.png" width="530" /></a></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2013/04/hehe.png"><img alt="" height="173" src="../wp-content/uploads/2013/04/hehe.png" width="530"/></a></p>
 <p>现在，你终于知道Base* pBase = new Derived[10];这个问题是C语言的转型的问题，你也应该知道用于数组的指针是怎么回事了吧？<strong>这是一个很奇葩的代码！请你不要像那些人一样在微博上和这里的评论里高呼并和我理论到：“微软的C++编译器支持这个事！”。</strong></p>
 <p>最后，我越来越发现，<span style="color: #cc0000; font-size: 14px;"><strong>很多说C++难用的人，其实是不懂C语言</strong></span>。</p>
 <p>（全文完）<!--
@@ -180,7 +180,6 @@ delete[] pBase;</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5388.html"><img alt="C语言中史上最愚蠢的Bug" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5388.html">C语言中史上最愚蠢的Bug</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9543.html">“C++的数组不支持多态”？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5388.html"><img alt="C语言中史上最愚蠢的Bug" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5388.html">C语言中史上最愚蠢的Bug</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9543.html">“C++的数组不支持多态”？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

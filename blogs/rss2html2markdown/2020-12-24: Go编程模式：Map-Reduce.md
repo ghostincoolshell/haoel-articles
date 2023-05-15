@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-300x192.png)在本篇文章中，我们学习一下函数式编程的中非常重要的Map、Reduce、Filter的三种操作，这三种操作可以让我们非常方便灵活地进行一些数据处理——我们的程序中大多数情况下都是在到倒腾数据，尤其对于一些需要统计的业务场景，Map/Reduce/Filter是非常通用的玩法。下面先来看几个例子：
+![](../wp-content/uploads/2020/12/go.map_.reduce-300x192.png)在本篇文章中，我们学习一下函数式编程的中非常重要的Map、Reduce、Filter的三种操作，这三种操作可以让我们非常方便灵活地进行一些数据处理——我们的程序中大多数情况下都是在到倒腾数据，尤其对于一些需要统计的业务场景，Map/Reduce/Filter是非常通用的玩法。下面先来看几个例子：
 
 
 ### 本文是全系列中第5 / 10篇：[Go编程模式](https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f)
@@ -141,7 +141,7 @@ fmt.Printf("%v\n", out)
 下图是一个比喻，其非常形象地说明了Map-Reduce是的业务语义，其在数据处理中非常有用。
 
 
-![](https://coolshell.cn/wp-content/uploads/2020/12/map-reduce.png)
+![](../wp-content/uploads/2020/12/map-reduce.png)
 
 
 #### 业务示例
@@ -643,10 +643,10 @@ func filter(slice, function interface{}, inPlace bool) (interface{}, int) {
 
 ### 相关文章
 
-* [![Go 编程模式：Functional Options](https://coolshell.cn/wp-content/uploads/2020/12/go.options-150x150.png)](https://coolshell.cn/articles/21146.html)[Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html)
-* [![Go编程模式：修饰器](https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png)](https://coolshell.cn/articles/17929.html)[Go编程模式：修饰器](https://coolshell.cn/articles/17929.html)
-* [![Go编程模式 ： 泛型编程](https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
-* [![Go 编程模式：k8s Visitor 模式](https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png)](https://coolshell.cn/articles/21263.html)[Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html)
-* [![Go编程模式：Pipeline](https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png)](https://coolshell.cn/articles/21228.html)[Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html)
-* [![Go编程模式：委托和反转控制](https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
+* [![Go 编程模式：Functional Options](../wp-content/uploads/2020/12/go.options-150x150.png)](https://coolshell.cn/articles/21146.html)[Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html)
+* [![Go编程模式：修饰器](../wp-content/uploads/2017/06/go-hardhat-150x150.png)](https://coolshell.cn/articles/17929.html)[Go编程模式：修饰器](https://coolshell.cn/articles/17929.html)
+* [![Go编程模式 ： 泛型编程](../wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
+* [![Go 编程模式：k8s Visitor 模式](../wp-content/uploads/2020/12/go.k8s-150x150.png)](https://coolshell.cn/articles/21263.html)[Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html)
+* [![Go编程模式：Pipeline](../wp-content/uploads/2020/12/go.line_.-150x150.png)](https://coolshell.cn/articles/21228.html)[Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html)
+* [![Go编程模式：委托和反转控制](../wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
 The post [Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

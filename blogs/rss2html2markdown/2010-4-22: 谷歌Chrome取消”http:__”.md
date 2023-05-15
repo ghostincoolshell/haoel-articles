@@ -11,7 +11,7 @@ type: post
 谷歌下一个版本的Chrome浏览器软件将缺少一个在近20年来一直是浏览器的一个特点的功能：在地址栏中的“http://”。目前开发人员版本的Chrome浏览器已经做了这种改变。这个变化虽然看起来很小，但是，已经在Chrome网站引起了程序员们很大的争议。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR.png "Google Chrome 取消 http://")](https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR.png)
+[![](../wp-content/uploads/2010/04/URL-BAR.png "Google Chrome 取消 http://")](https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR.png)
 
 
 在Google Chrome的开发站点上，又有了一个很热的BUG——[Issue  41467](http://code.google.com/p/chromium/issues/detail?id=41467)（上一次的一热议的BUG是的《[Go语言更名Issue 9](https://coolshell.cn/articles/1781.html)》），这个BUG目前已被关闭。不过在其它地方还在热议中，如：[Reddit.com](http://www.reddit.com/r/programming/comments/bt0oh/issue_41467_url_bar_no_longer_shows_http/)。基本上来说，90%以上的程序员反对的，他们希望Google的Chrome可以给一个设置关闭或打开这一功能。
@@ -42,10 +42,10 @@ iPhone浏览器的也是这样的， 不过当你把光标放到地址栏中，�
 
 ### 相关文章
 
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![HTTP的前世今生](https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg)](https://coolshell.cn/articles/19840.html)[HTTP的前世今生](https://coolshell.cn/articles/19840.html)
-* [![如何免费的让网站启用HTTPS](https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
-* [![Chrome开发者工具的小技巧](https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![HTTP的前世今生](../wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg)](https://coolshell.cn/articles/19840.html)[HTTP的前世今生](https://coolshell.cn/articles/19840.html)
+* [![如何免费的让网站启用HTTPS](../wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
+* [![Chrome开发者工具的小技巧](../wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
 The post [谷歌Chrome取消”http://”](https://coolshell.cn/articles/2367.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

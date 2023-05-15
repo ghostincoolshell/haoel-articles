@@ -1,15 +1,15 @@
-<p>Javascript是一个类C的语言，他的面向对象的东西相对于C++/Java比较奇怪，但是其的确相当的强大，在 <a href="http://www.cnblogs.com/weidagang2046/" target="_blank">Todd 同学</a>的“<a href="https://coolshell.cn/articles/5202.html" rel="bookmark" target="_blank" title="对象的消息模型">对象的消息模型</a>”一文中我们已经可以看到一些端倪了。这两天有个前同事总在问我Javascript面向对象的东西，所以，索性写篇文章让他看去吧，这里这篇文章主要想从一个整体的角度来说明一下Javascript的面向对象的编程。（<strong>成文比较仓促，应该有不准确或是有误的地方，请大家批评指正</strong>）</p>
+<html><body><p>Javascript是一个类C的语言，他的面向对象的东西相对于C++/Java比较奇怪，但是其的确相当的强大，在 <a href="http://www.cnblogs.com/weidagang2046/" target="_blank">Todd 同学</a>的“<a href="https://coolshell.cn/articles/5202.html" rel="bookmark" target="_blank" title="对象的消息模型">对象的消息模型</a>”一文中我们已经可以看到一些端倪了。这两天有个前同事总在问我Javascript面向对象的东西，所以，索性写篇文章让他看去吧，这里这篇文章主要想从一个整体的角度来说明一下Javascript的面向对象的编程。（<strong>成文比较仓促，应该有不准确或是有误的地方，请大家批评指正</strong>）</p>
 <p>另，这篇文章主要基于 <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank">ECMAScript 5</a>， 旨在介绍新技术。关于兼容性的东西，请看最后一节。</p>
 <h4>初探</h4>
 <p>我们知道Javascript中的变量定义基本如下：</p>
-<pre class="EnlighterJSRAW">var name = &#039;Chen Hao&#039;;;
-var email = &#039;haoel(@)hotmail.com&#039;;
-var website = &#039;https://coolshell.cn&#039;;</pre>
+<pre class="EnlighterJSRAW">var name = 'Chen Hao';;
+var email = 'haoel(@)hotmail.com';
+var website = 'https://coolshell.cn';</pre>
 <p>如果要用对象来写的话，就是下面这个样子：</p>
 <pre class="EnlighterJSRAW">var chenhao = {
-    name :&#039;Chen Hao&#039;,
-    email : &#039;haoel(@)hotmail.com&#039;,
-    website : &#039;https://coolshell.cn&#039;
+    name :'Chen Hao',
+    email : 'haoel(@)hotmail.com',
+    website : 'https://coolshell.cn'
 };</pre>
 <p>于是，我就可以这样访问：</p>
 <pre class="EnlighterJSRAW">
@@ -19,21 +19,21 @@ chenhao.email;
 chenhao.website;
 
 //以hash map的方式
-chenhao[&quot;name&quot;];
-chenhao[&quot;email&quot;];
-chenhao[&quot;website&quot;];
+chenhao["name"];
+chenhao["email"];
+chenhao["website"];
 </pre>
 <p>关于函数，我们知道Javascript的函数是这样的：</p>
 <p><span id="more-6441"></span></p>
 <pre class="EnlighterJSRAW">var doSomething = function(){
-   alert(&#039;Hello World.&#039;);
+   alert('Hello World.');
 };</pre>
 <p>于是，我们可以这么干：</p>
 <pre class="EnlighterJSRAW">
 var sayHello = function(){
-   var hello = &quot;Hello, I&#039;m &quot;+ this.name
-                + &quot;, my email is: &quot; + this.email
-                + &quot;, my website is: &quot; + this.website;
+   var hello = "Hello, I'm "+ this.name
+                + ", my email is: " + this.email
+                + ", my website is: " + this.website;
    alert(hello);
 };
 
@@ -52,18 +52,18 @@ var Person = function(name, email, website){
     this.website = website;
 
     this.sayHello = function(){
-        var hello = &quot;Hello, I&#039;m &quot;+ this.name  + &quot;, \n&quot; +
-                    &quot;my email is: &quot; + this.email + &quot;, \n&quot; +
-                    &quot;my website is: &quot; + this.website;
+        var hello = "Hello, I'm "+ this.name  + ", \n" +
+                    "my email is: " + this.email + ", \n" +
+                    "my website is: " + this.website;
         alert(hello);
     };
 };
 
-var chenhao = new Person(&quot;Chen Hao&quot;, &quot;haoel@hotmail.com&quot;,
-                                     &quot;https://coolshell.cn&quot;);
+var chenhao = new Person("Chen Hao", "haoel@hotmail.com",
+                                     "https://coolshell.cn");
 chenhao.sayHello(); </pre>
 <p>顺便说一下，要删除对象的属性，很简单：</p>
-<p><code class="EnlighterJSRAW">delete chenhao[&#039;email&#039;]</code></p>
+<p><code class="EnlighterJSRAW">delete chenhao['email']</code></p>
 <p>上面的这些例子，我们可以看到这样几点：</p>
 <ol>
 <li>Javascript的数据和成员封装很简单。没有类完全是对象操作。纯动态！</li>
@@ -71,7 +71,7 @@ chenhao.sayHello(); </pre>
 <li>Javascript对象成员函数可以在使用时临时声明，并把一个全局函数直接赋过去就好了。</li>
 <li>Javascript的成员函数可以在实例上进行修改，也就是说不同实例相同函数名的行为不一定一样。</li>
 </ol>
-<h4>属性配置 &#8211; Object.defineProperty</h4>
+<h4>属性配置 – Object.defineProperty</h4>
 <p>先看下面的代码：</p>
 <pre class="EnlighterJSRAW">
 //创建对象
@@ -79,7 +79,7 @@ var chenhao = Object.create(null);
 
 //设置一个属性
  Object.defineProperty( chenhao,
-                &#039;name&#039;, { value:  &#039;Chen Hao&#039;,
+                'name', { value:  'Chen Hao',
                           writable:     true,
                           configurable: true,
                           enumerable:   true });
@@ -87,11 +87,11 @@ var chenhao = Object.create(null);
 //设置多个属性
 Object.defineProperties( chenhao,
     {
-        &#039;email&#039;  : { value:  &#039;haoel@hotmail.com&#039;,
+        'email'  : { value:  'haoel@hotmail.com',
                      writable:     true,
                      configurable: true,
                      enumerable:   true },
-        &#039;website&#039;: { value: &#039;https://coolshell.cn&#039;,
+        'website': { value: 'https://coolshell.cn',
                      writable:     true,
                      configurable: true,
                      enumerable:   true }
@@ -102,7 +102,7 @@ Object.defineProperties( chenhao,
 <ul>
 <li>writable：这个属性的值是否可以改。</li>
 <li>configurable：这个属性的配置是否可以改。</li>
-<li>enumerable：这个属性是否能在for&#8230;in循环中遍历出来或在Object.keys中列举出来。</li>
+<li>enumerable：这个属性是否能在for…in循环中遍历出来或在Object.keys中列举出来。</li>
 <li>value：属性值。</li>
 <li>get()/set(_value)：get和set访问器。</li>
 </ul>
@@ -110,7 +110,7 @@ Object.defineProperties( chenhao,
 <p>关于get/set访问器，它的意思就是用get/set来取代value（其不能和value一起使用），示例如下：</p>
 <pre class="EnlighterJSRAW">var  age = 0;
 Object.defineProperty( chenhao,
-            &#039;age&#039;, {
+            'age', {
                       get: function() {return age+1;},
                       set: function(value) {age = value;}
                       enumerable : true,
@@ -123,7 +123,7 @@ alert(chenhao.age); //调用get 输出101（get中+1了）;
 <p>我们再看一个更为实用的例子——利用已有的属性(age)通过get和set构造新的属性(birth_year)：</p>
 <pre class="EnlighterJSRAW">
 Object.defineProperty( chenhao,
-            &#039;birth_year&#039;,
+            'birth_year',
             {
                 get: function() {
                     var d = new Date();
@@ -145,9 +145,9 @@ alert(chenhao.age);
 <p>这样做好像有点麻烦，你说，我为什么不写成下面这个样子：</p>
 <pre class="EnlighterJSRAW">
 var chenhao = {
-    name: &quot;Chen Hao&quot;,
-    email: &quot;haoel@hotmail.com&quot;,
-    website: &quot;https://coolshell.cn&quot;,
+    name: "Chen Hao",
+    email: "haoel@hotmail.com",
+    website: "https://coolshell.cn",
     age: 100,
     get birth_year() {
         var d = new Date();
@@ -165,15 +165,15 @@ alert(chenhao.birth_year);
 chenhao.birth_year = 2000;
 alert(chenhao.age);
 </pre>
-<p>是的，你的确可以这样的，不过通过defineProperty()你可以干这些事：<br />
-1）设置如 writable，configurable，enumerable 等这类的属性配置。<br />
+<p>是的，你的确可以这样的，不过通过defineProperty()你可以干这些事：<br/>
+1）设置如 writable，configurable，enumerable 等这类的属性配置。<br/>
 2）动态地为一个对象加属性。比如：一些HTML的DOM对像。</p>
 <h4>查看对象属性配置</h4>
 <p>如果查看并管理对象的这些配置，下面有个程序可以输出对象的属性和配置等东西：</p>
 <pre class="EnlighterJSRAW">//列出对象的属性.
 function listProperties(obj)
 {
-    var newLine = &quot;&lt;br /&gt;&quot;;
+    var newLine = "&lt;br /&gt;";
     var names = Object.getOwnPropertyNames(obj);
     for (var i = 0; i &lt; names.length; i++) {
         var prop = names[i];
@@ -182,7 +182,7 @@ function listProperties(obj)
         // 列出对象的属性配置（descriptor）动用getOwnPropertyDescriptor函数。
         var descriptor = Object.getOwnPropertyDescriptor(obj, prop);
         for (var attr in descriptor) {
-            document.write(&quot;...&quot; + attr + &#039;: &#039; + descriptor[attr]);
+            document.write("..." + attr + ': ' + descriptor[attr]);
             document.write(newLine);
         }
         document.write(newLine);
@@ -193,30 +193,30 @@ listProperties(chenhao);</pre>
 <h4>call，apply， bind 和 this</h4>
 <p>关于Javascript的this指针，和C++/Java很类似。 我们来看个示例：（这个示例很简单了，我就不多说了）</p>
 <pre class="EnlighterJSRAW">function print(text){
-    document.write(this.value + &#039; - &#039; + text+ &#039;&lt;br&gt;&#039;);
+    document.write(this.value + ' - ' + text+ '&lt;br&gt;');
 }
 
 var a = {value: 10, print : print};
 var b = {value: 20, print : print};
 
-print(&#039;hello&#039;);// this =&gt; global, output &quot;undefined - hello&quot;
+print('hello');// this =&gt; global, output "undefined - hello"
 
-a.print(&#039;a&#039;);// this =&gt; a, output &quot;10 - a&quot;
-b.print(&#039;b&#039;); // this =&gt; b, output &quot;20 - b&quot;
+a.print('a');// this =&gt; a, output "10 - a"
+b.print('b'); // this =&gt; b, output "20 - b"
 
-a[&#039;print&#039;](&#039;a&#039;); // this =&gt; a, output &quot;10 - a&quot;
+a['print']('a'); // this =&gt; a, output "10 - a"
 </pre>
 <p>我们再来看看call 和 apply，这两个函数的差别就是参数的样子不一样，另一个就是性能不一样，apply的性能要差很多。（关于性能，可到 <a href="http://jsperf.com/" target="_blank">JSPerf</a> 上去跑跑看看）</p>
-<pre class="EnlighterJSRAW">print.call(a, &#039;a&#039;); // this =&gt; a, output &quot;10 - a&quot;
-print.call(b, &#039;b&#039;); // this =&gt; b, output &quot;20 - b&quot;
+<pre class="EnlighterJSRAW">print.call(a, 'a'); // this =&gt; a, output "10 - a"
+print.call(b, 'b'); // this =&gt; b, output "20 - b"
 
-print.apply(a, [&#039;a&#039;]); // this =&gt; a, output &quot;10 - a&quot;
-print.apply(b, [&#039;b&#039;]); // this =&gt; b, output &quot;20 - b&quot;</pre>
+print.apply(a, ['a']); // this =&gt; a, output "10 - a"
+print.apply(b, ['b']); // this =&gt; b, output "20 - b"</pre>
 <p>但是在bind后，this指针，可能会有不一样，但是因为Javascript是动态的。如下面的示例</p>
 <pre class="EnlighterJSRAW">var p = print.bind(a);
-p(&#039;a&#039;);             // this =&gt; a, output &quot;10 - a&quot;
-p.call(b, &#039;b&#039;);     // this =&gt; a, output &quot;10 - b&quot;
-p.apply(b, [&#039;b&#039;]);  // this =&gt; a, output &quot;10 - b&quot;</pre>
+p('a');             // this =&gt; a, output "10 - a"
+p.call(b, 'b');     // this =&gt; a, output "10 - b"
+p.apply(b, ['b']);  // this =&gt; a, output "10 - b"</pre>
 <h4>继承 和 重载</h4>
 <p>通过上面的那些示例，我们可以通过Object.create()来实际继承，请看下面的代码，Student继承于Object。</p>
 <pre class="EnlighterJSRAW">
@@ -226,61 +226,61 @@ Object.defineProperties
 (
     Person,
     {
-        &#039;name&#039;  : {  value: &#039;Chen Hao&#039;},
-        &#039;email&#039;  : { value : &#039;haoel@hotmail.com&#039;},
-        &#039;website&#039;: { value: &#039;https://coolshell.cn&#039;}
+        'name'  : {  value: 'Chen Hao'},
+        'email'  : { value : 'haoel@hotmail.com'},
+        'website': { value: 'https://coolshell.cn'}
     }
 );
 
 Person.sayHello = function () {
-    var hello = &quot;&lt;p&gt;Hello, I am &quot;+ this.name  + &quot;, &lt;br&gt;&quot; +
-                &quot;my email is: &quot; + this.email + &quot;, &lt;br&gt;&quot; +
-                &quot;my website is: &quot; + this.website;
-    document.write(hello + &quot;&lt;br&gt;&quot;);
+    var hello = "&lt;p&gt;Hello, I am "+ this.name  + ", &lt;br&gt;" +
+                "my email is: " + this.email + ", &lt;br&gt;" +
+                "my website is: " + this.website;
+    document.write(hello + "&lt;br&gt;");
 }
 
 var Student = Object.create(Person);
-Student.no = &quot;1234567&quot;; //学号
-Student.dept = &quot;Computer Science&quot;; //系
+Student.no = "1234567"; //学号
+Student.dept = "Computer Science"; //系
 
 //使用Person的属性
-document.write(Student.name + &#039; &#039; + Student.email + &#039; &#039; + Student.website +&#039;&lt;br&gt;&#039;);
+document.write(Student.name + ' ' + Student.email + ' ' + Student.website +'&lt;br&gt;');
 
 //使用Person的方法
 Student.sayHello();
 
 //重载SayHello方法
 Student.sayHello = function (person) {
-    var hello = &quot;&lt;p&gt;Hello, I am &quot;+ this.name  + &quot;, &lt;br&gt;&quot; +
-                &quot;my email is: &quot; + this.email + &quot;, &lt;br&gt;&quot; +
-                &quot;my website is: &quot; + this.website + &quot;, &lt;br&gt;&quot; +
-                &quot;my student no is: &quot; + this. no + &quot;, &lt;br&gt;&quot; +
-                &quot;my departent is: &quot; + this. dept;
-    document.write(hello + &#039;&lt;br&gt;&#039;);
+    var hello = "&lt;p&gt;Hello, I am "+ this.name  + ", &lt;br&gt;" +
+                "my email is: " + this.email + ", &lt;br&gt;" +
+                "my website is: " + this.website + ", &lt;br&gt;" +
+                "my student no is: " + this. no + ", &lt;br&gt;" +
+                "my departent is: " + this. dept;
+    document.write(hello + '&lt;br&gt;');
 }
 //再次调用
 Student.sayHello();
 
 //查看Student的属性（只有 no 、 dept 和 重载了的sayHello）
-document.write(&#039;&lt;p&gt;&#039; + Object.keys(Student) + &#039;&lt;br&gt;&#039;);
+document.write('&lt;p&gt;' + Object.keys(Student) + '&lt;br&gt;');
 </pre>
 <p>通用上面这个示例，我们可以看到，Person里的属性并没有被真正复制到了Student中来，但是我们可以去存取。这是因为Javascript用委托实现了这一机制。其实，这就是Prototype，Person是Student的Prototype。</p>
 <p>当我们的代码需要一个属性的时候，Javascript的引擎会先看当前的这个对象中是否有这个属性，如果没有的话，就会查找他的Prototype对象是否有这个属性，一直继续下去，直到找到或是直到没有Prototype对象。</p>
 <p>为了证明这个事，我们可以使用Object.getPrototypeOf()来检验一下：</p>
-<pre class="EnlighterJSRAW">Student.name = &#039;aaa&#039;;
+<pre class="EnlighterJSRAW">Student.name = 'aaa';
 
 //输出 aaa
-document.write(&#039;&lt;p&gt;&#039; + Student.name + &#039;&lt;/p&gt;&#039;);
+document.write('&lt;p&gt;' + Student.name + '&lt;/p&gt;');
 
 //输出 Chen Hao
-document.write(&#039;&lt;p&gt;&#039; +Object.getPrototypeOf(Student).name + &#039;&lt;/p&gt;&#039;);</pre>
+document.write('&lt;p&gt;' +Object.getPrototypeOf(Student).name + '&lt;/p&gt;');</pre>
 <p>于是，你还可以在子对象的函数里调用父对象的函数，就好像C++里的 Base::func() 一样。于是，我们重载hello的方法就可以使用父类的代码了，如下所示：</p>
 <pre class="EnlighterJSRAW">//新版的重载SayHello方法
 Student.sayHello = function (person) {
     Object.getPrototypeOf(this).sayHello.call(this);
-    var hello = &quot;my student no is: &quot; + this. no + &quot;, &lt;br&gt;&quot; +
-                &quot;my departent is: &quot; + this. dept;
-    document.write(hello + &#039;&lt;br&gt;&#039;);
+    var hello = "my student no is: " + this. no + ", &lt;br&gt;" +
+                "my departent is: " + this. dept;
+    document.write(hello + '&lt;br&gt;');
 }</pre>
 <p>这个很强大吧。</p>
 <h4>组合</h4>
@@ -306,55 +306,55 @@ function Composition(target, source)
 //艺术家
 var Artist = Object.create(null);
 Artist.sing = function() {
-    return this.name + &#039; starts singing...&#039;;
+    return this.name + ' starts singing...';
 }
 Artist.paint = function() {
-    return this.name + &#039; starts painting...&#039;;
+    return this.name + ' starts painting...';
 }
 
 //运动员
 var Sporter = Object.create(null);
 Sporter.run = function() {
-    return this.name + &#039; starts running...&#039;;
+    return this.name + ' starts running...';
 }
 Sporter.swim = function() {
-    return this.name + &#039; starts swimming...&#039;;
+    return this.name + ' starts swimming...';
 }
 
 Composition(Person, Artist);
-document.write(Person.sing() + &#039;&lt;br&gt;&#039;);
-document.write(Person.paint() + &#039;&lt;br&gt;&#039;);
+document.write(Person.sing() + '&lt;br&gt;');
+document.write(Person.paint() + '&lt;br&gt;');
 
 Composition(Person, Sporter);
-document.write(Person.run() + &#039;&lt;br&gt;&#039;);
-document.write(Person.swim() + &#039;&lt;br&gt;&#039;);
+document.write(Person.run() + '&lt;br&gt;');
+document.write(Person.swim() + '&lt;br&gt;');
 
 //看看 Person中有什么？（输出：sayHello,sing,paint,swim,run）
-document.write(&#039;&lt;p&gt;&#039; + Object.keys(Person) + &#039;&lt;br&gt;&#039;);
+document.write('&lt;p&gt;' + Object.keys(Person) + '&lt;br&gt;');
 </pre>
 <h4>Prototype 和 继承</h4>
 <p>我们先来说说Prototype。我们先看下面的例程，这个例程不需要解释吧，很像C语言里的函数指针，在C语言里这样的东西见得多了。</p>
 <pre class="EnlighterJSRAW">var plus = function(x,y){
-    document.write( x + &#039; + &#039; + y + &#039; = &#039; + (x+y) + &#039;&lt;br&gt;&#039;);
+    document.write( x + ' + ' + y + ' = ' + (x+y) + '&lt;br&gt;');
     return x + y;
 };
 
 var minus = function(x,y){
-    document.write(x + &#039; - &#039; + y + &#039; = &#039; + (x-y) + &#039;&lt;br&gt;&#039;);
+    document.write(x + ' - ' + y + ' = ' + (x-y) + '&lt;br&gt;');
     return x - y;
 };
 
 var operations = {
-    &#039;+&#039;: plus,
-    &#039;-&#039;: minus
+    '+': plus,
+    '-': minus
 };
 
 var calculate = function(x, y, operation){
     return operations[operation](x, y);
 };
 
-calculate(12, 4, &#039;+&#039;);
-calculate(24, 3, &#039;-&#039;);
+calculate(12, 4, '+');
+calculate(24, 3, '-');
 </pre>
 <p>那么，我们能不能把这些东西封装起来呢，我们需要使用prototype。看下面的示例：</p>
 <pre class="EnlighterJSRAW">var Cal = function(x, y){
@@ -363,8 +363,8 @@ calculate(24, 3, &#039;-&#039;);
 }
 
 Cal.prototype.operations = {
-    &#039;+&#039;: function(x, y) { return x+y;},
-    &#039;-&#039;: function(x, y) { return x-y;}
+    '+': function(x, y) { return x+y;},
+    '-': function(x, y) { return x-y;}
 };
 
 Cal.prototype.calculate = function(operation){
@@ -373,8 +373,8 @@ Cal.prototype.calculate = function(operation){
 
 var c = new Cal(4, 5);
 
-c.calculate(&#039;+&#039;);
-c.calculate(&#039;-&#039;);</pre>
+c.calculate('+');
+c.calculate('-');</pre>
 <p>这就是prototype的用法，prototype 是javascript这个语言中最重要的内容。网上有太多的文章介始这个东西了。说白了，prototype就是对一对象进行扩展，其特点在于通过“复制”一个已经存在的实例来返回新的实例,而不是新建实例。被复制的实例就是我们所称的“原型”，这个原型是可定制的（当然，这里没有真正的复制，实际只是委托）。上面的这个例子中，我们扩展了实例Cal，让其有了一个operations的属性和一个calculate的方法。</p>
 <p>这样，我们可以通过这一特性来实现继承。还记得我们最最前面的那个Person吧， 下面的示例是创建一个Student来继承Person。</p>
 <pre class="EnlighterJSRAW">
@@ -385,9 +385,9 @@ function Person(name, email, website){
 };
 
 Person.prototype.sayHello = function(){
-    var hello = &quot;Hello, I am &quot;+ this.name  + &quot;, &lt;br&gt;&quot; +
-                &quot;my email is: &quot; + this.email + &quot;, &lt;br&gt;&quot; +
-                &quot;my website is: &quot; + this.website;
+    var hello = "Hello, I am "+ this.name  + ", &lt;br&gt;" +
+                "my email is: " + this.email + ", &lt;br&gt;" +
+                "my website is: " + this.website;
     return hello;
 };
 
@@ -407,18 +407,18 @@ Student.prototype.constructor = Student;
 //重载sayHello()
 Student.prototype.sayHello = function(){
     var proto = Object.getPrototypeOf;
-    var hello = proto(Student.prototype).sayHello.call(this) + &#039;&lt;br&gt;&#039;;
-    hello += &quot;my student no is: &quot; + this. no + &quot;, &lt;br&gt;&quot; +
-             &quot;my departent is: &quot; + this. dept;
+    var hello = proto(Student.prototype).sayHello.call(this) + '&lt;br&gt;';
+    hello += "my student no is: " + this. no + ", &lt;br&gt;" +
+             "my departent is: " + this. dept;
     return hello;
 };
 
 var me = new Student(
-    &quot;Chen Hao&quot;,
-    &quot;haoel@hotmail.com&quot;,
-    &quot;https://coolshell.cn&quot;,
-    &quot;12345678&quot;,
-    &quot;Computer Science&quot;
+    "Chen Hao",
+    "haoel@hotmail.com",
+    "https://coolshell.cn",
+    "12345678",
+    "Computer Science"
 );
 document.write(me.sayHello());</pre>
 <h4>兼容性</h4>
@@ -460,7 +460,7 @@ var me = clone(Person);
 <h5>Object.getPrototypeOf() 函数</h5>
 <pre class="EnlighterJSRAW">function proto(object) {
     return !object?                null
-         : &#039;__proto__&#039; in object?  object.__proto__
+         : '__proto__' in object?  object.__proto__
          : /* not exposed? */      object.constructor.prototype
 }</pre>
 <h5>bind 函数</h5>
@@ -496,7 +496,6 @@ function bind(fn, bound_this) { var bound_args
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6731.html"><img alt="理解Javascript的闭包" height="150" src="https://coolshell.cn/wp-content/uploads/2012/03/closure-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6731.html">理解Javascript的闭包</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6668.html"><img alt="再谈javascript面向对象编程 " height="150" src="https://coolshell.cn/wp-content/uploads/2012/02/joo_1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6668.html">再谈javascript面向对象编程 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5202.html"><img alt="对象的消息模型" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5202.html">对象的消息模型</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/6441.html">Javascript 面向对象编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6731.html"><img alt="理解Javascript的闭包" height="150" src="../wp-content/uploads/2012/03/closure-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6731.html">理解Javascript的闭包</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6668.html"><img alt="再谈javascript面向对象编程 " height="150" src="../wp-content/uploads/2012/02/joo_1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6668.html">再谈javascript面向对象编程 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5202.html"><img alt="对象的消息模型" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5202.html">对象的消息模型</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/6441.html">Javascript 面向对象编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

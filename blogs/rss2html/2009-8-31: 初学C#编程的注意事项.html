@@ -1,4 +1,4 @@
-<p>下面是8个C#编程时的注意事项是给初学者的，可能你知道，也可能你不知道，不过这些都是一些可能会让人疏忽的地方，还是要注意一下。</p>
+<html><body><p>下面是8个C#编程时的注意事项是给初学者的，可能你知道，也可能你不知道，不过这些都是一些可能会让人疏忽的地方，还是要注意一下。</p>
 <p><strong>1.使用String变量:</strong></p>
 <p>考虑有下面的一个程序想判断一下字符串是否有内容。</p>
 <pre class="EnlighterJSRAW">
@@ -38,7 +38,7 @@ s.Append(”com”);
 </pre>
 <p><strong>3.使用Console</strong></p>
 <pre class="EnlighterJSRAW">
-Console.WriteLine(&quot;A= &quot; + 1 + &quot; B=&quot; + 2 + &quot; C= &quot; + someValue);
+Console.WriteLine("A= " + 1 + " B=" + 2 + " C= " + someValue);
 </pre>
 <p>和第二点说的一样，这并没有效率，使用下面的语句，会更有效率。</p>
 <pre class="EnlighterJSRAW">
@@ -46,12 +46,12 @@ Console.WriteLine(”A: {0}\nB: {1}\nC: {2}”, 1, 2, someValue);
 </pre>
 <p><strong>4.字符串转整型</strong></p>
 <pre class="EnlighterJSRAW">
-int i = int.Parse(Request.QueryString[&quot;id&quot;]);
+int i = int.Parse(Request.QueryString["id"]);
 </pre>
 <p>这样做的问题是，如果有人这样请求你的页面：yourpage.aspx?id=A6，那么A6将会导致你的程序抛出一个异常。因为A6不是一个整数字符串。使用TryParse会好一点。</p>
 <pre class="EnlighterJSRAW">
 int i;
-if (!int.TryParse(Request.QueryString[&quot;id&quot;] , out i))
+if (!int.TryParse(Request.QueryString["id"] , out i))
 {
     //…
 }
@@ -128,12 +128,12 @@ else if(mode == SomeEnumerator.NormalMode) { … }
 </pre>
 <p><strong>8.字符串替换</strong></p>
 <pre class="EnlighterJSRAW">
-string s = &quot;www.coolshell.cn is a amazing site&quot;;
-s.Replace(&quot;amazing&quot;, &quot;awful&quot;);
+string s = "www.coolshell.cn is a amazing site";
+s.Replace("amazing", "awful");
 </pre>
 <p>字符串s的内容什么也不会改变，因为string返回的是替换过的字串。这点很多初学者经常忘了。下面就没有问题了。</p>
 <pre class="EnlighterJSRAW">
-s = s.Replace(&quot;amazing&quot;, &quot;awful&quot;);
+s = s.Replace("amazing", "awful");
 </pre>
 <p>文章：<a href="http://dev-the-web.com/blog/2009/08/27/top-csharp-programming-mistakes/" target="_blank">来源</a><!--
 
@@ -151,7 +151,6 @@ s = s.Replace(&quot;amazing&quot;, &quot;awful&quot;);
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1375.html">初学C#编程的注意事项</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1375.html">初学C#编程的注意事项</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

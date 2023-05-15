@@ -1,8 +1,8 @@
-<p><img alt="" class="alignright size-medium wp-image-20817" height="300" src="https://coolshell.cn/wp-content/uploads/2020/03/cpu_512x512-300x300.png" width="300" />好久没有写一些微观方面的文章了，今天写一篇关于CPU Cache相关的文章，这篇文章比较长，主要分成这么几个部分：基础知识、缓存的命中、缓存的一致性、相关的代码示例和延伸阅读。其中会讲述一些多核 CPU 的系统架构以及其原理，包括对程序性能上的影响，以及在进行并发编程的时候需要注意到的一些问题。这篇文章我会尽量地写简单和通俗易懂一些，主要是讲清楚相关的原理和问题，而对于一些细节和延伸阅读我会在文章最后会给出相关的资源。</p>
+<html><body><p><img alt="" class="alignright size-medium wp-image-20817" height="300" src="../wp-content/uploads/2020/03/cpu_512x512-300x300.png" width="300"/>好久没有写一些微观方面的文章了，今天写一篇关于CPU Cache相关的文章，这篇文章比较长，主要分成这么几个部分：基础知识、缓存的命中、缓存的一致性、相关的代码示例和延伸阅读。其中会讲述一些多核 CPU 的系统架构以及其原理，包括对程序性能上的影响，以及在进行并发编程的时候需要注意到的一些问题。这篇文章我会尽量地写简单和通俗易懂一些，主要是讲清楚相关的原理和问题，而对于一些细节和延伸阅读我会在文章最后会给出相关的资源。</p>
 <p>因为无论你写什么样的代码都会交给CPU来执行，所以，如果你想写出性能比较高的代码，这篇文章中提到的技术还是值得认真学习的。另外，千万别觉得这些东西没用，这些东西非常有用，十多年前就是这些知识在性能调优上帮了我的很多大忙，从而跟很多人拉开了差距……</p>
 <h4>基础知识</h4>
 <p>首先，我们都知道现在的CPU多核技术，都会有几级缓存，老的CPU会有两级内存（L1和L2），新的CPU会有三级内存（L1，L2，L3 ），如下图所示：</p>
-<p><img alt="" class="aligncenter size-full wp-image-20794" height="371" src="https://coolshell.cn/wp-content/uploads/2020/02/cache.architecture.png" width="729" /><span id="more-20793"></span></p>
+<p><img alt="" class="aligncenter size-full wp-image-20794" height="371" src="../wp-content/uploads/2020/02/cache.architecture.png" width="729"/><span id="more-20793"></span></p>
 <p>其中：</p>
 <ul>
 <li>L1缓存分成两种，一种是指令缓存，一种是数据缓存。L2缓存和L3缓存不分指令和数据。</li>
@@ -38,7 +38,7 @@
 <li>另一种方法，为了降低缓存搜索算法，我们需要使用像Hash Table这样的数据结构，最简单的hash table就是做“求模运算”，比如：我们的L1 Cache有512个Cache Line，那么，公式：<code>（内存地址 mod 512）* 64</code> 就可以直接找到所在的Cache地址的偏移了。但是，这样的方式需要我们的程序对内存地址的访问要非常地平均，不然冲突就会非常严重。这成了一种非常理想的情况了。</li>
 <li>为了避免上述的两种方案的问题，于是就要容忍一定的hash冲突，也就出现了 N-Way 关联。也就是把连续的N个Cache Line绑成一组，然后，先把找到相关的组，然后再在这个组内找到相关的Cache Line。这叫 Set Associativity。如下图所示。</li>
 </ul>
-<p><img alt="" class="aligncenter size-full wp-image-20806" height="271" src="https://coolshell.cn/wp-content/uploads/2020/02/cache-associative-fill-both.png" width="546" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-20806" height="271" src="../wp-content/uploads/2020/02/cache-associative-fill-both.png" width="546"/></p>
 <p>对于 N-Way 组关联，可能有点不好理解，这里个例子，并多说一些细节（不然后面的代码你会不能理解），Intel 大多数处理器的L1 Cache都是32KB，8-Way 组相联，Cache Line 是64 Bytes。这意味着，</p>
 <ul>
 <li>32KB的可以分成，32KB / 64 = 512 条 Cache Line。</li>
@@ -53,9 +53,9 @@
 </ul>
 <p>如下图所示：（图片来自《<a href="https://manybutfinite.com/post/intel-cpu-caches/" rel="noopener noreferrer" target="_blank">Cache: a place for concealment and safekeeping</a>》）</p>
 <p>当拿到一个内存地址的时候，先拿出中间的 6bits 来，找到是哪组。</p>
-<p style="text-align: center;"><img alt="" class="aligncenter size-full wp-image-20809" height="461" src="https://coolshell.cn/wp-content/uploads/2020/03/L1CacheExample.png" width="687" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter size-full wp-image-20809" height="461" src="../wp-content/uploads/2020/03/L1CacheExample.png" width="687"/></p>
 <p>然后，在这一个8组的cache line中，再进行O(n) n=8 的遍历，主是要匹配前24bits的tag。如果匹配中了，就算命中，如果没有匹配到，那就是cache miss，如果是读操作，就需要进向后面的缓存进行访问了。L2/L3同样是这样的算法。而淘汰算法有两种，一种是随机一种是LRU。现在一般都是以LRU的算法（通过增加一个访问计数器来实现）</p>
-<p><img alt="" class="aligncenter size-full wp-image-20840" height="283" src="https://coolshell.cn/wp-content/uploads/2020/03/selectingCacheLine.png" width="681" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-20840" height="283" src="../wp-content/uploads/2020/03/selectingCacheLine.png" width="681"/></p>
 <p>这也意味着：</p>
 <ul>
 <li>L1 Cache 可映射 36bits 的内存地址，一共 2^36 = 64GB的内存</li>
@@ -78,12 +78,12 @@
 <li><strong>Directory 协议</strong>。这种方法的典型实现是要设计一个集中式控制器，它是主存储器控制器的一部分。其中有一个目录存储在主存储器中，其中包含有关各种本地缓存内容的全局状态信息。当单个CPU Cache 发出读写请求时，这个集中式控制器会检查并发出必要的命令，以在主存和CPU Cache之间或在CPU Cache自身之间进行数据同步和传输。</li>
 <li><strong>Snoopy 协议</strong>。这种协议更像是一种数据通知的总线型的技术。CPU Cache通过这个协议可以识别其它Cache上的数据状态。如果有数据共享的话，可以通过广播机制将共享数据的状态通知给其它CPU Cache。这个协议要求每个CPU Cache 都可以<strong class="hu je"><em class="io">“</em>窥探<em class="io">”</em></strong>数据事件的通知并做出相应的反应。如下图所示，有一个Snoopy Bus的总线。</li>
 </ul>
-<p><strong><img alt="" class="aligncenter wp-image-20797" height="217" src="https://coolshell.cn/wp-content/uploads/2020/02/The-cache-coherence-problem-Initially-processors-0-and-1-both-read-location-x.png" style="font-weight: 400;" width="400" /></strong></p>
+<p><strong><img alt="" class="aligncenter wp-image-20797" height="217" src="../wp-content/uploads/2020/02/The-cache-coherence-problem-Initially-processors-0-and-1-both-read-location-x.png" style="font-weight: 400;" width="400"/></strong></p>
 <p>因为Directory协议是一个中心式的，会有性能瓶颈，而且会增加整体设计的复杂度。而Snoopy协议更像是微服务+消息通讯，所以，现在基本都是使用Snoopy的总线的设计。</p>
 <p>这里，我想多写一些细节，因为这种微观的东西，让人不自然地就会跟分布式系统关联起来，在分布式系统中我们一般用Paxos/Raft这样的分布式一致性的算法。而在CPU的微观世界里，则不必使用这样的算法，原因是因为CPU的多个核的硬件不必考虑网络会断会延迟的问题。所以，CPU的多核心缓存间的同步的核心就是要管理好数据的状态就好了。</p>
 <p>这里介绍几个状态协议，先从最简单的开始，MESI协议，这个协议跟那个著名的足球运动员梅西没什么关系，其主要表示缓存数据有四个状态：Modified（已修改）, Exclusive（独占的）,Shared（共享的），Invalid（无效的）。</p>
 <p>这些状态的状态机如下所示（有点复杂，你可以先不看，这个图就是想告诉你状态控制有多复杂）：</p>
-<p><img alt="" class="aligncenter size-full wp-image-20804" height="406" src="https://coolshell.cn/wp-content/uploads/2020/02/MESI.png" width="420" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-20804" height="406" src="../wp-content/uploads/2020/02/MESI.png" width="420"/></p>
 <p>下面是个示例（如果你想看一下动画演示的话，这里有一个网页（<a href="https://www.scss.tcd.ie/Jeremy.Jones/VivioJS/caches/MESIHelp.htm" rel="noopener noreferrer" target="_blank">MESI Interactive Animations</a>），你可以进行交互操作，这个动画演示中使用的Write Through算法）：</p>
 <table>
 <thead>
@@ -101,7 +101,7 @@
 <td> x=1 (E)</td>
 <td></td>
 <td>x=1</td>
-<td>只有一个CPU有 x 变量，<br />
+<td>只有一个CPU有 x 变量，<br/>
 所以，状态是 Exclusive</td>
 </tr>
 <tr>
@@ -109,7 +109,7 @@
 <td> x=1 (S)</td>
 <td>x=1(S)</td>
 <td>x=1</td>
-<td>有两个CPU都读取 x 变量，<br />
+<td>有两个CPU都读取 x 变量，<br/>
 所以状态变成 Shared</td>
 </tr>
 <tr>
@@ -117,8 +117,8 @@
 <td> x=<span style="color: #ff0000;">9</span> (M)</td>
 <td>x=1(I)</td>
 <td>x=1</td>
-<td>变量改变，在CPU0中状态<br />
-变成 Modified，在CPU1中<br />
+<td>变量改变，在CPU0中状态<br/>
+变成 Modified，在CPU1中<br/>
 状态变成 Invalid</td>
 </tr>
 <tr>
@@ -133,12 +133,12 @@
 <td> x=9 (S)</td>
 <td>x=9(S)</td>
 <td>x=9</td>
-<td>变量同步到所有的Cache中，<br />
+<td>变量同步到所有的Cache中，<br/>
 状态回到Shared</td>
 </tr>
 </tbody>
 </table>
-<p>&nbsp;</p>
+<p> </p>
 <p>MESI 这种协议在数据更新后，会标记其它共享的CPU缓存的数据拷贝为Invalid状态，然后当其它CPU再次read的时候，就会出现 cache miss 的问题，此时再从内存中更新数据。从内存中更新数据意味着20倍速度的降低。我们能不能直接从我隔壁的CPU缓存中更新？是的，这就可以增加很多速度了，但是状态控制也就变麻烦了。还需要多来一个状态：Owner(宿主)，用于标记，我是更新数据的源。于是，出现了 <a href="https://en.wikipedia.org/wiki/MOESI_protocol" rel="noopener noreferrer" target="_blank">MOESI 协议</a></p>
 <p>MOESI协议的状态机和演示示例我就不贴了（有兴趣可以上<a href="https://inst.eecs.berkeley.edu/~cs61c/su18/disc/11/Disc11Sol.pdf" rel="noopener" target="_blank">Berkeley上看看相关的课件</a>），<strong>我们只需要理解MOESI协议允许 CPU Cache 间同步数据，于是也降低了对内存的操作</strong>，性能是非常大的提升，但是控制逻辑也非常复杂。</p>
 <p>顺便说一下，与 MOESI 协议类似的一个协议是 <a href="https://en.wikipedia.org/wiki/MESIF_protocol" rel="noopener noreferrer" target="_blank">MESIF</a>，其中的 F 是 Forward，同样是把更新过的数据转发给别的 CPU Cache 但是，MOESI 中的 Owner 状态 和MESIF 中的 Forward 状态有一个非常大的不一样—— <strong>Owner状态下的数据是dirty的，还没有写回内存，Forward状态下的数据是clean的，可以丢弃而不用另行通知</strong>。</p>
@@ -264,7 +264,7 @@ void thread_func (int id) {
     result[id] = c;
 }</pre>
 <p>我们把两个程序分别在 1 到 32 个线程上跑一下，得出的结果画一张图如下所示（横轴是线程数，纵轴是完成统的时间，单位是微秒）：</p>
-<p><img alt="" class="aligncenter size-large wp-image-20813" height="402" src="https://coolshell.cn/wp-content/uploads/2020/03/false.sharing-1024x643.png" width="640" /></p>
+<p><img alt="" class="aligncenter size-large wp-image-20813" height="402" src="../wp-content/uploads/2020/03/false.sharing-1024x643.png" width="640"/></p>
 <p>上图中，我们可以看到，灰色的曲线就是第一种方法，橙色的就是第二种（用局部变量的）方法。当只有一个线程的时候，两个方法相当，基本没有什么差别，但是在线程数增加的时候的时候，你会发现，第二种方法的性能提高的非常快。直到到达6个线程的时候，开始变得稳定（前面说过，我的CPU是6核的）。而第一种方法无论加多少线程也没有办法超过第二种方法。因为第一种方法不是CPU Cache 友好的。也就是说，第二种方法，<strong>只要我的CPU核数足够多，就可以做到线性的性能扩展，让每一个CPU核都跑起来，而第一种则不能</strong>。</p>
 <p>篇幅问题，示例就写到这里，相关的代码参看<a href="https://github.com/haoel/cpu-cache" rel="noopener noreferrer" target="_blank">我的Github相关仓库</a>。</p>
 <h4>延伸阅读</h4>
@@ -297,7 +297,6 @@ void thread_func (int id) {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10249.html"><img alt="7个示例科普CPU Cache" height="150" src="https://coolshell.cn/wp-content/uploads/2013/07/image6-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10249.html">7个示例科普CPU Cache</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2039.html"><img alt="CPU的性价比" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2039.html">CPU的性价比</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1044.html"><img alt="高级Unix命令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1044.html">高级Unix命令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5479.html"><img alt="给程序员的VIM速查卡" height="150" src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5479.html">给程序员的VIM速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/20793.html">与程序员相关的CPU缓存知识</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10249.html"><img alt="7个示例科普CPU Cache" height="150" src="../wp-content/uploads/2013/07/image6-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10249.html">7个示例科普CPU Cache</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2039.html"><img alt="CPU的性价比" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2039.html">CPU的性价比</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1044.html"><img alt="高级Unix命令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1044.html">高级Unix命令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5479.html"><img alt="给程序员的VIM速查卡" height="150" src="../wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5479.html">给程序员的VIM速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="../wp-content/uploads/2013/02/awk-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/20793.html">与程序员相关的CPU缓存知识</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

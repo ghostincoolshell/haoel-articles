@@ -244,10 +244,10 @@ type: post
 
 ### 相关文章
 
-* [![“单元测试要做多细？”](https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg)](https://coolshell.cn/articles/8209.html)[“单元测试要做多细？”](https://coolshell.cn/articles/8209.html)
-* [![Test-Driven Development？别逗了](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg)](https://coolshell.cn/articles/5531.html)[Test-Driven Development？别逗了](https://coolshell.cn/articles/5531.html)
-* [![在新浪微博上关于敏捷的一些讨论](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/5143.html)[在新浪微博上关于敏捷的一些讨论](https://coolshell.cn/articles/5143.html)
-* [![Bob大叔和Jim Coplien对TDD的论战](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/4891.html)[Bob大叔和Jim Coplien对TDD的论战](https://coolshell.cn/articles/4891.html)
-* [![敏捷水管工](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/3778.html)[敏捷水管工](https://coolshell.cn/articles/3778.html)
+* [![“单元测试要做多细？”](../wp-content/uploads/2012/09/fight-150x150.jpg)](https://coolshell.cn/articles/8209.html)[“单元测试要做多细？”](https://coolshell.cn/articles/8209.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg](https://coolshell.cn/articles/5531.html)[Test-Driven Development？别逗了](https://coolshell.cn/articles/5531.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/5143.html)[在新浪微博上关于敏捷的一些讨论](https://coolshell.cn/articles/5143.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/4891.html)[Bob大叔和Jim Coplien对TDD的论战](https://coolshell.cn/articles/4891.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/3778.html)[敏捷水管工](https://coolshell.cn/articles/3778.html)
 * [![[转]TDD到底美还是不美？](https://coolshell.cn/wp-content/uploads/2011/02/feedback_cycle-150x150.jpg)](https://coolshell.cn/articles/3766.html)[[转]TDD到底美还是不美？](https://coolshell.cn/articles/3766.html)
 The post [再谈敏捷和ThoughtWorks中国咨询师](https://coolshell.cn/articles/3745.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

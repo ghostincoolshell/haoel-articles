@@ -14,7 +14,7 @@ type: post
 点击图片可以大图
 
 
-[![windows_7_created_in_future2](https://coolshell.cn/wp-content/uploads/2009/03/windows_7_created_in_future2-300x179.jpg "windows_7_created_in_future2")](https://coolshell.cn/wp-content/uploads/2009/03/windows_7_created_in_future2.jpg)
+[![windows_7_created_in_future2](../wp-content/uploads/2009/03/windows_7_created_in_future2-300x179.jpg "windows_7_created_in_future2")](https://coolshell.cn/wp-content/uploads/2009/03/windows_7_created_in_future2.jpg)
 
 
 
@@ -25,10 +25,10 @@ type: post
 
 ### 相关文章
 
-* [![性能调优攻略](https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
-* [![10大经典错误](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg)](https://coolshell.cn/articles/5107.html)[10大经典错误](https://coolshell.cn/articles/5107.html)
-* [![如何学好C语言](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg)](https://coolshell.cn/articles/4102.html)[如何学好C语言](https://coolshell.cn/articles/4102.html)
-* [![纯文本配置还是注册表](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4077.html)[纯文本配置还是注册表](https://coolshell.cn/articles/4077.html)
-* [![两本电子书](https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
-* [![Windows的达尔文进化图](https://coolshell.cn/wp-content/uploads/2010/10/W_600-150x150.jpg)](https://coolshell.cn/articles/3097.html)[Windows的达尔文进化图](https://coolshell.cn/articles/3097.html)
+* [![性能调优攻略](../wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg](https://coolshell.cn/articles/5107.html)[10大经典错误](https://coolshell.cn/articles/5107.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg](https://coolshell.cn/articles/4102.html)[如何学好C语言](https://coolshell.cn/articles/4102.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4077.html)[纯文本配置还是注册表](https://coolshell.cn/articles/4077.html)
+* [![两本电子书](../wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
+* [![Windows的达尔文进化图](../wp-content/uploads/2010/10/W_600-150x150.jpg)](https://coolshell.cn/articles/3097.html)[Windows的达尔文进化图](https://coolshell.cn/articles/3097.html)
 The post [OMG, Windows 7 来自未来](https://coolshell.cn/articles/179.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

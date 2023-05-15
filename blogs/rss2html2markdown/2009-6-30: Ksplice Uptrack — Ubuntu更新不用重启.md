@@ -35,10 +35,10 @@ Ksplice目前支持Linux内核的更新，但它声称其免重启更新技术�
 
 ### 相关文章
 
-* [![GNU/Linux下有多少是GNU的？](https://coolshell.cn/wp-content/uploads/2011/06/GNUTotalSplit-150x150.png)](https://coolshell.cn/articles/4826.html)[GNU/Linux下有多少是GNU的？](https://coolshell.cn/articles/4826.html)
-* [![Ubuntu的并行启动](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/501.html)[Ubuntu的并行启动](https://coolshell.cn/articles/501.html)
-* [![eBPF 介绍](https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
-* [![打造高效的工作环境 – Shell 篇](https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png)](https://coolshell.cn/articles/19219.html)[打造高效的工作环境 – Shell 篇](https://coolshell.cn/articles/19219.html)
-* [![记一次Kubernetes/Docker网络排障](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![GNU/Linux下有多少是GNU的？](../wp-content/uploads/2011/06/GNUTotalSplit-150x150.png)](https://coolshell.cn/articles/4826.html)[GNU/Linux下有多少是GNU的？](https://coolshell.cn/articles/4826.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/501.html)[Ubuntu的并行启动](https://coolshell.cn/articles/501.html)
+* [![eBPF 介绍](../wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
+* [![打造高效的工作环境 – Shell 篇](../wp-content/uploads/2019/03/linux.ninja_-150x150.png)](https://coolshell.cn/articles/19219.html)[打造高效的工作环境 – Shell 篇](https://coolshell.cn/articles/19219.html)
+* [![记一次Kubernetes/Docker网络排障](../wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
 The post [Ksplice Uptrack — Ubuntu更新不用重启](https://coolshell.cn/articles/1097.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

@@ -1,14 +1,14 @@
-<p>周末天气不好，只能宅在家里，于是就顺便看了一下Go语言，觉得比较有意思，所以写篇文章介绍一下。<strong>我想写一篇你可以在乘坐地铁或公交车上下班时就可以初步了解一门语言的文章</strong>。所以，下面的文章主要是以代码和注释为主。只需要你对C语言，Unix，Python有一点基础，我相信你会在30分钟左右读完并对Go语言有一些初步了解的。</p>
-<p><img alt="" class="aligncenter size-full wp-image-8485" height="255" src="https://coolshell.cn/wp-content/uploads/2012/11/go2.jpg" title="go" width="435" /></p>
+<html><body><p>周末天气不好，只能宅在家里，于是就顺便看了一下Go语言，觉得比较有意思，所以写篇文章介绍一下。<strong>我想写一篇你可以在乘坐地铁或公交车上下班时就可以初步了解一门语言的文章</strong>。所以，下面的文章主要是以代码和注释为主。只需要你对C语言，Unix，Python有一点基础，我相信你会在30分钟左右读完并对Go语言有一些初步了解的。</p>
+<p><img alt="" class="aligncenter size-full wp-image-8485" height="255" src="../wp-content/uploads/2012/11/go2.jpg" title="go" width="435"/></p>
 <h4>Hello World</h4>
 <pre class="EnlighterJSRAW">
 //文件名：hello.go
 package main //声明本文件的package名
 
-import &quot;fmt&quot; //import语言的fmt库——用于输出
+import "fmt" //import语言的fmt库——用于输出
 
 func main() {
-    fmt.Println(&quot;hello world&quot;)
+    fmt.Println("hello world")
 }</pre>
 <p><span id="more-8460"></span></p>
 <h4>运行</h4>
@@ -33,11 +33,11 @@ hello world</pre>
 <p style="padding-left: 30px;">2）<strong>如果没有使用相对路径，那么，go会去找$GOPATH/src/目录。</strong></p>
 <pre class="EnlighterJSRAW">
 //使用相对路径
-import &quot;./haoel&quot;  //import当前目录里haoel子目录里的所有的go文件
+import "./haoel"  //import当前目录里haoel子目录里的所有的go文件
 </pre>
 <pre class="EnlighterJSRAW">
 //使用GOPATH路径
-import &quot;haoel&quot;  //import 环境变量 $GOPATH/src/haoel子目录里的所有的go文件
+import "haoel"  //import 环境变量 $GOPATH/src/haoel子目录里的所有的go文件
 </pre>
 <h4>fmt输出格式</h4>
 <p>fmt包和libc里的那堆使用printf， scanf，fprintf，fscanf 很相似。下面的东西对于C程序员不会陌生。</p>
@@ -45,19 +45,19 @@ import &quot;haoel&quot;  //import 环境变量 $GOPATH/src/haoel子目录里�
 <pre class="EnlighterJSRAW">
 package main
 
-import &quot;fmt&quot;
-import &quot;math&quot;
+import "fmt"
+import "math"
 
 func main() {
-    fmt.Println(&quot;hello world&quot;)
+    fmt.Println("hello world")
 
-    fmt.Printf(&quot;%t\n&quot;, 1==2)
-    fmt.Printf(&quot;二进制：%b\n&quot;, 255)
-    fmt.Printf(&quot;八进制：%o\n&quot;, 255)
-    fmt.Printf(&quot;十六进制：%X\n&quot;, 255)
-    fmt.Printf(&quot;十进制：%d\n&quot;, 255)
-    fmt.Printf(&quot;浮点数：%f\n&quot;, math.Pi)
-    fmt.Printf(&quot;字符串：%s\n&quot;, &quot;hello world&quot;)
+    fmt.Printf("%t\n", 1==2)
+    fmt.Printf("二进制：%b\n", 255)
+    fmt.Printf("八进制：%o\n", 255)
+    fmt.Printf("十六进制：%X\n", 255)
+    fmt.Printf("十进制：%d\n", 255)
+    fmt.Printf("浮点数：%f\n", math.Pi)
+    fmt.Printf("字符串：%s\n", "hello world")
 }</pre>
 <p>当然，也可以使用如\n\t\r这样的和C语言一样的控制字符</p>
 <h4>变量和常量</h4>
@@ -65,7 +65,7 @@ func main() {
 <pre class="EnlighterJSRAW">
 //声明初始化一个变量
 var  x int = 100
-var str string = &quot;hello world&quot;&lt;/pre&gt;
+var str string = "hello world"&lt;/pre&gt;
 //声明初始化多个变量
 var  i, j, k int = 1, 2, 3
 
@@ -78,7 +78,7 @@ x := 100 //等价于 var x int = 100;
 </pre>
 <p>常量很简单，使用const关键字：</p>
 <pre class="EnlighterJSRAW">
-const s string = &quot;hello world&quot;
+const s string = "hello world"
 const pi float32 = 3.1415926
 </pre>
 <h4>数组</h4>
@@ -86,16 +86,16 @@ const pi float32 = 3.1415926
 <pre class="EnlighterJSRAW">
 func main() {
     var a [5]int
-    fmt.Println(&quot;array a:&quot;, a)
+    fmt.Println("array a:", a)
 
     a[1] = 10
     a[3] = 30
-    fmt.Println(&quot;assign:&quot;, a)
+    fmt.Println("assign:", a)
 
-    fmt.Println(&quot;len:&quot;, len(a))
+    fmt.Println("len:", len(a))
 
     b := [5]int{1, 2, 3, 4, 5}
-    fmt.Println(&quot;init:&quot;, b)
+    fmt.Println("init:", b)
 
     var c [2][3]int
     for i := 0; i &lt; 2; i++ {
@@ -103,7 +103,7 @@ func main() {
             c[i][j] = i + j
         }
     }
-    fmt.Println(&quot;2d: &quot;, c)
+    fmt.Println("2d: ", c)
 }
 </pre>
 <p>运行结果：</p>
@@ -162,15 +162,15 @@ if num &lt; 0 {
 <pre class="EnlighterJSRAW">
 switch i {
     case 1:
-        fmt.Println(&quot;one&quot;)
+        fmt.Println("one")
     case 2:
-        fmt.Println(&quot;two&quot;)
+        fmt.Println("two")
     case 3:
-        fmt.Println(&quot;three&quot;)
+        fmt.Println("three")
     case 4,5,6:
-        fmt.Println(&quot;four, five, six&quot;)
+        fmt.Println("four, five, six")
     default:
-        fmt.Println(&quot;invalid value!&quot;)
+        fmt.Println("invalid value!")
 }
 </pre>
 <p><strong>for 语句</strong></p>
@@ -209,24 +209,24 @@ for {
 func main(){
     m := make(map[string]int) //使用make创建一个空的map
 
-    m[&quot;one&quot;] = 1
-    m[&quot;two&quot;] = 2
-    m[&quot;three&quot;] = 3
+    m["one"] = 1
+    m["two"] = 2
+    m["three"] = 3
 
     fmt.Println(m) //输出 map[three:3 two:2 one:1] (顺序在运行时可能不一样)
     fmt.Println(len(m)) //输出 3
 
-    v := m[&quot;two&quot;] //从map里取值
+    v := m["two"] //从map里取值
     fmt.Println(v) // 输出 2
 
-    delete(m, &quot;two&quot;)
+    delete(m, "two")
     fmt.Println(m) //输出 map[three:3 one:1]
 
-    m1 := map[string]int{&quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3}
+    m1 := map[string]int{"one": 1, "two": 2, "three": 3}
     fmt.Println(m1) //输出 map[two:2 three:3 one:1] (顺序在运行时可能不一样)
 
     for key, val := range m1{
-        fmt.Printf(&quot;%s =&gt; %d \n&quot;, key, val)
+        fmt.Printf("%s =&gt; %d \n", key, val)
         /*输出：(顺序在运行时可能不一样)
             three =&gt; 3
             one =&gt; 1
@@ -241,15 +241,15 @@ func main(){
 var i int = 1
 var pInt *int = &amp;i
 //输出：i=1     pInt=0xf8400371b0       *pInt=1
-fmt.Printf(&quot;i=%d\tpInt=%p\t*pInt=%d\n&quot;, i, pInt, *pInt)
+fmt.Printf("i=%d\tpInt=%p\t*pInt=%d\n", i, pInt, *pInt)
 
 *pInt = 2
 //输出：i=2     pInt=0xf8400371b0       *pInt=2
-fmt.Printf(&quot;i=%d\tpInt=%p\t*pInt=%d\n&quot;, i, pInt, *pInt)
+fmt.Printf("i=%d\tpInt=%p\t*pInt=%d\n", i, pInt, *pInt)
 
 i = 3
 //输出：i=3     pInt=0xf8400371b0       *pInt=3
-fmt.Printf(&quot;i=%d\tpInt=%p\t*pInt=%d\n&quot;, i, pInt, *pInt)
+fmt.Printf("i=%d\tpInt=%p\t*pInt=%d\n", i, pInt, *pInt)
 
 </pre>
 <p>Go具有两个分配内存的机制，分别是内建的函数new和make。他们所做的事不同，所应用到的类型也不同，这可能引起混淆，但规则却很简单。</p>
@@ -278,7 +278,7 @@ fmt.Println(v) //输出：[0 0 0 0 0 0 0 0 0 0]
 <p>老实说，我对Go语言这种反过来声明变量类型和函数返回值的做法有点不满（保持和C一样的不可以吗? 呵呵）</p>
 <pre class="EnlighterJSRAW">
 package main
-import &quot;fmt&quot;
+import "fmt"
 
 func max(a int, b int) int { //注意参数和返回值是怎么声明的
 
@@ -297,17 +297,17 @@ func main(){
 <p>Go中很多Package 都会返回两个值，一个是正常值，一个是错误，如下所示：</p>
 <pre class="EnlighterJSRAW">
 package main
-import &quot;fmt&quot;
+import "fmt"
 
 func main(){
-    v, e := multi_ret(&quot;one&quot;)
+    v, e := multi_ret("one")
     fmt.Println(v,e) //输出 1 true
 
-    v, e = multi_ret(&quot;four&quot;)
+    v, e = multi_ret("four")
     fmt.Println(v,e) //输出 0 false
 
     //通常的用法(注意分号后有e)
-    if v, e = multi_ret(&quot;four&quot;); e {
+    if v, e = multi_ret("four"); e {
         // 正常返回
     }else{
         // 出错返回
@@ -315,7 +315,7 @@ func main(){
 }
 
 func multi_ret(key string) (int, bool){
-    m := map[string]int{&quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3}
+    m := map[string]int{"one": 1, "two": 2, "three": 3}
 
     var err bool
     var val int
@@ -329,7 +329,7 @@ func multi_ret(key string) (int, bool){
 <p>例子很清楚了，我就不多说了</p>
 <pre class="EnlighterJSRAW">
 func sum(nums ...int) {
-    fmt.Print(nums, &quot; &quot;)  //输出如 [1, 2, 3] 之类的数组
+    fmt.Print(nums, " ")  //输出如 [1, 2, 3] 之类的数组
     total := 0
     for _, num := range nums { //要的是值而不是下标
         total += num
@@ -387,8 +387,8 @@ type Person struct {
 
 func main() {
     //初始化
-    person := Person{&quot;Tom&quot;, 30, &quot;tom@gmail.com&quot;}
-    person = Person{name:&quot;Tom&quot;, age: 30, email:&quot;tom@gmail.com&quot;}
+    person := Person{"Tom", 30, "tom@gmail.com"}
+    person = Person{name:"Tom", age: 30, email:"tom@gmail.com"}
 
     fmt.Println(person) //输出 {Tom 30 tom@gmail.com}
 
@@ -397,7 +397,7 @@ func main() {
     fmt.Println(pPerson) //输出 &amp;{Tom 30 tom@gmail.com}
 
     pPerson.age = 40
-    person.name = &quot;Jerry&quot;
+    person.name = "Jerry"
     fmt.Println(person) //输出 {Jerry 40 tom@gmail.com}
 }
 </pre>
@@ -420,12 +420,12 @@ func (r *rect) perimeter() int{ //求周长
 func main() {
     r := rect{width: 10, height: 15}
 
-    fmt.Println(&quot;面积: &quot;, r.area())
-    fmt.Println(&quot;周长: &quot;, r.perimeter())
+    fmt.Println("面积: ", r.area())
+    fmt.Println("周长: ", r.perimeter())
 
     rp := &amp;r
-    fmt.Println(&quot;面积: &quot;, rp.area())
-    fmt.Println(&quot;周长: &quot;, rp.perimeter())
+    fmt.Println("面积: ", rp.area())
+    fmt.Println("周长: ", rp.perimeter())
 }
 </pre>
 <h4>接口和多态</h4>
@@ -477,7 +477,7 @@ func interface_test() {
     }
 }
 </pre>
-<h4>错误处理 &#8211; Error接口</h4>
+<h4>错误处理 – Error接口</h4>
 <p>函数错误返回可能是C/C++时最让人纠结的东西的，Go的多值返回可以让我们更容易的返回错误，其可以在返回一个常规的返回值之外，还能轻易地返回一个详细的错误描述。通常情况下，错误的类型是error，它有一个内建的接口。</p>
 <pre class="EnlighterJSRAW">type error interface {
     Error() string
@@ -485,8 +485,8 @@ func interface_test() {
 <p>还是看个示例吧：</p>
 <pre class="EnlighterJSRAW">package main
 
-import &quot;fmt&quot;
-import &quot;errors&quot;
+import "fmt"
+import "errors"
 
 //自定义的出错结构
 type myError struct {
@@ -495,15 +495,15 @@ type myError struct {
 }
 //实现Error接口
 func (e *myError) Error() string {
-    return fmt.Sprintf(&quot;%d - %s&quot;, e.arg, e.errMsg)
+    return fmt.Sprintf("%d - %s", e.arg, e.errMsg)
 }
 
 //两种出错
 func error_test(arg int) (int, error) {
     if arg &lt; 0  {
-         return -1, errors.New(&quot;Bad Arguments - negtive!&quot;)
+         return -1, errors.New("Bad Arguments - negtive!")
      }else if arg &gt;256 {
-        return -1, &amp;myError{arg, &quot;Bad Arguments - too large!&quot;}
+        return -1, &amp;myError{arg, "Bad Arguments - too large!"}
     }
     return arg*arg, nil
 }
@@ -512,9 +512,9 @@ func error_test(arg int) (int, error) {
 func main() {
     for _, i := range []int{-1, 4, 1000} {
         if r, e := error_test(i); e != nil {
-            fmt.Println(&quot;failed:&quot;, e)
+            fmt.Println("failed:", e)
         } else {
-            fmt.Println(&quot;success:&quot;, r)
+            fmt.Println("success:", r)
         }
     }
 }</pre>
@@ -524,7 +524,7 @@ failed: Bad Arguments - negtive!
 success: 16
 failed: 1000 - Bad Arguments - too large!
 </pre>
-<h4>错误处理 &#8211; Defer</h4>
+<h4>错误处理 – Defer</h4>
 <p>下面的程序对于每一个熟悉C语言的人来说都不陌生（有资源泄露的问题），C++使用RAII来解决这种问题。</p>
 <pre class="EnlighterJSRAW">
 func CopyFile(dstName, srcName string) (written int64, err error) {
@@ -545,12 +545,12 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 }</pre>
 <p>Go语言引入了Defer来确保那些被打开的文件能被关闭。如下所示：（这种解决方式还是比较优雅的）</p>
 <p>&lt;</p>
-<p>pre class=&#8221;EnlighterJSRAW&#8221; data-enlighter-language=&#8221;golang&#8221; data-enlighter-highlight=&#8221;6,12&#8243;><br />
-func CopyFile(dstName, srcName string) (written int64, err error) {<br />
-    src, err := os.Open(srcName)<br />
-    if err != nil {<br />
-        return<br />
-    }<br />
+<p>pre class=”EnlighterJSRAW” data-enlighter-language=”golang” data-enlighter-highlight=”6,12″&gt;<br/>
+func CopyFile(dstName, srcName string) (written int64, err error) {<br/>
+    src, err := os.Open(srcName)<br/>
+    if err != nil {<br/>
+        return<br/>
+    }<br/>
     defer src.Close()</p>
 <pre><code>dst, err := os.Create(dstName)
 if err != nil {
@@ -565,19 +565,19 @@ return io.Copy(dst, src)
 <p>我们再来看一个defer函数的示例：</p>
 <pre class="EnlighterJSRAW">
 for i := 0; i &lt; 5; i++ {
-    defer fmt.Printf(&quot;%d &quot;, i)
+    defer fmt.Printf("%d ", i)
 }</pre>
 <p>被延期的函数以后进先出（LIFO）的顺行执行，因此以上代码在返回时将打印4 3 2 1 0。</p>
 <p>总之，我个人觉得defer的函数行为有点怪异，我现在还没有完全搞清楚。</p>
-<h4>错误处理 &#8211; Panic/Recover</h4>
+<h4>错误处理 – Panic/Recover</h4>
 <p>对于不可恢复的错误，Go提供了一个内建的panic函数，它将创建一个运行时错误并使程序停止（相当暴力）。该函数接收一个任意类型（往往是字符串）作为程序死亡时要打印的东西。当编译器在函数的结尾处检查到一个panic时，就会停止进行常规的return语句检查。</p>
 <p>下面的仅仅是一个示例。实际的库函数应避免panic。如果问题可以容忍，最好是让事情继续下去而不是终止整个程序。</p>
 <pre class="EnlighterJSRAW">
-var user = os.Getenv(&quot;USER&quot;)
+var user = os.Getenv("USER")
 
 func init() {
-    if user == &quot;&quot; {
-        panic(&quot;no value for $USER&quot;)
+    if user == "" {
+        panic("no value for $USER")
     }
 }</pre>
 <p>当panic被调用时，它将立即停止当前函数的执行并开始逐级解开函数堆栈，同时运行所有被defer的函数。如果这种解开达到堆栈的顶端，程序就死亡了。但是，也可以使用内建的recover函数来重新获得Go程的控制权并恢复正常的执行。 对recover的调用会通知解开堆栈并返回传递到panic的参量。由于仅在解开期间运行的代码处在被defer的函数之内，recover仅在被延期的函数内部才是有用的。</p>
@@ -586,8 +586,8 @@ func init() {
 <pre class="EnlighterJSRAW">
 func g(i int) {
     if i&gt;1 {
-        fmt.Println(&quot;Panic!&quot;)
-        panic(fmt.Sprintf(&quot;%v&quot;, i))
+        fmt.Println("Panic!")
+        panic(fmt.Sprintf("%v", i))
     }
 
 }
@@ -595,20 +595,20 @@ func g(i int) {
 func f() {
     defer func() {
         if r := recover(); r != nil {
-            fmt.Println(&quot;Recovered in f&quot;, r)
+            fmt.Println("Recovered in f", r)
         }
     }()
 
     for i := 0; i &lt; 4; i++ {
-        fmt.Println(&quot;Calling g with &quot;, i)
+        fmt.Println("Calling g with ", i)
         g(i)
-        fmt.Println(&quot;Returned normally from g.&quot;)
+        fmt.Println("Returned normally from g.")
      }
 }
 
 func main() {
     f()
-    fmt.Println(&quot;Returned normally from f.&quot;)
+    fmt.Println("Returned normally from f.")
 }</pre>
 <p>运行结果如下：（我们可以看到Painc后的for循环就没有往下执行了，但是main的程序还在往下走）</p>
 <pre class="EnlighterJSRAW">
@@ -638,7 +638,6 @@ Returned normally from f.
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8460.html">Go 语言简介（上）— 语法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="../wp-content/uploads/2020/12/go.line_.-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="../wp-content/uploads/2020/12/go.generate-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8460.html">Go 语言简介（上）— 语法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

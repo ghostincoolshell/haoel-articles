@@ -191,10 +191,10 @@ type: post
 
 ### 相关文章
 
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
-* [![Leetcode 编程训练](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/12052.html)[Leetcode 编程训练](https://coolshell.cn/articles/12052.html)
-* [![State Threads 回调终结者](https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif)](https://coolshell.cn/articles/12012.html)[State Threads 回调终结者](https://coolshell.cn/articles/12012.html)
-* [![C语言的整型溢出问题](https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg)](https://coolshell.cn/articles/11466.html)[C语言的整型溢出问题](https://coolshell.cn/articles/11466.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![API设计原则 – Qt官网的设计实践总结](../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/12052.html)[Leetcode 编程训练](https://coolshell.cn/articles/12052.html)
+* [![State Threads 回调终结者](../wp-content/uploads/2014/10/edsm-150x150.gif)](https://coolshell.cn/articles/12012.html)[State Threads 回调终结者](https://coolshell.cn/articles/12012.html)
+* [![C语言的整型溢出问题](../wp-content/uploads/2014/04/c99-150x150.jpg)](https://coolshell.cn/articles/11466.html)[C语言的整型溢出问题](https://coolshell.cn/articles/11466.html)
 The post [6个变态的C语言Hello World程序](https://coolshell.cn/articles/914.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

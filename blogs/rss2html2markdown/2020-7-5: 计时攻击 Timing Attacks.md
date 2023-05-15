@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2020/06/time-bomb-300x300.png)本文来自读者“程序猿石头”的投稿文章《[这 10 行比较字符串相等的代码给我整懵了，不信你也来看看](http://mp.weixin.qq.com/s?__biz=MzI3OTUzMzcwNw==&mid=100002290&idx=1&sn=8829db16a065f485b257fba0c691d94f&chksm=6b4708165c30810096133f36523c8c781ce5333d851c31905d6cc49dd9b756a3f08141fbc9e8#rd)》，原文写的很好，但不够直接了当，信息密度不够高，所以我对原文进行大量的删减、裁剪、改写和添加，主要删除了一些没有信息的段落，主要加入了如何实施计时攻击相关的其它内容，让这篇文章中的知识更系统一些，并且还指出了其它的一些问题。所以，我把标题也改成了《计时攻击 Timing Attacks》。
+![](../wp-content/uploads/2020/06/time-bomb-300x300.png)本文来自读者“程序猿石头”的投稿文章《[这 10 行比较字符串相等的代码给我整懵了，不信你也来看看](http://mp.weixin.qq.com/s?__biz=MzI3OTUzMzcwNw==&mid=100002290&idx=1&sn=8829db16a065f485b257fba0c691d94f&chksm=6b4708165c30810096133f36523c8c781ce5333d851c31905d6cc49dd9b756a3f08141fbc9e8#rd)》，原文写的很好，但不够直接了当，信息密度不够高，所以我对原文进行大量的删减、裁剪、改写和添加，主要删除了一些没有信息的段落，主要加入了如何实施计时攻击相关的其它内容，让这篇文章中的知识更系统一些，并且还指出了其它的一些问题。所以，我把标题也改成了《计时攻击 Timing Attacks》。
 
 
 #### 另类的字符串比较
@@ -311,10 +311,10 @@ func ConstantTimeSelect(v, x, y int) int
 
 ### 相关文章
 
-* [![网络数字身份认证术](https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-150x150.png)](https://coolshell.cn/articles/21708.html)[网络数字身份认证术](https://coolshell.cn/articles/21708.html)
-* [![我做系统架构的一些原则](https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png)](https://coolshell.cn/articles/21672.html)[我做系统架构的一些原则](https://coolshell.cn/articles/21672.html)
-* [![HTTP API 认证授权术](https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
-* [![最完美的Linux桌面软件](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/936.html)[最完美的Linux桌面软件](https://coolshell.cn/articles/936.html)
-* [![优质代码的十诫](https://coolshell.cn/wp-content/uploads/2009/06/10commandements-150x150.jpg)](https://coolshell.cn/articles/1007.html)[优质代码的十诫](https://coolshell.cn/articles/1007.html)
-* [![Sony PS3 Root Key 被破解](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/3453.html)[Sony PS3 Root Key 被破解](https://coolshell.cn/articles/3453.html)
+* [![网络数字身份认证术](../wp-content/uploads/2022/01/iStock-1175502114-150x150.png)](https://coolshell.cn/articles/21708.html)[网络数字身份认证术](https://coolshell.cn/articles/21708.html)
+* [![我做系统架构的一些原则](../wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png)](https://coolshell.cn/articles/21672.html)[我做系统架构的一些原则](https://coolshell.cn/articles/21672.html)
+* [![HTTP API 认证授权术](../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/936.html)[最完美的Linux桌面软件](https://coolshell.cn/articles/936.html)
+* [![优质代码的十诫](../wp-content/uploads/2009/06/10commandements-150x150.jpg)](https://coolshell.cn/articles/1007.html)[优质代码的十诫](https://coolshell.cn/articles/1007.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/3453.html)[Sony PS3 Root Key 被破解](https://coolshell.cn/articles/3453.html)
 The post [计时攻击 Timing Attacks](https://coolshell.cn/articles/21003.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

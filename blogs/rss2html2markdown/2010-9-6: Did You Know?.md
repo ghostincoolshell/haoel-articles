@@ -30,10 +30,10 @@ type: post
 
 ### 相关文章
 
-* [![C/C++返回内部静态成员的陷阱](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/12192.html)[C/C++返回内部静态成员的陷阱](https://coolshell.cn/articles/12192.html)
-* [![【引文】如何用Python往Google Spreadsheet上写数据](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg)](https://coolshell.cn/articles/37.html)[【引文】如何用Python往Google Spreadsheet上写数据](https://coolshell.cn/articles/37.html)
-* [![10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/wp-content/uploads/2009/03/webmail1-150x150.jpg)](https://coolshell.cn/articles/154.html)[10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/articles/154.html)
-* [![C 语言整型谜题](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg)](https://coolshell.cn/articles/1857.html)[C 语言整型谜题](https://coolshell.cn/articles/1857.html)
-* [![Glassfish ESB 的教程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg)](https://coolshell.cn/articles/732.html)[Glassfish ESB 的教程](https://coolshell.cn/articles/732.html)
-* [![C++和JAVA传统中积极的一面](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/209.html)[C++和JAVA传统中积极的一面](https://coolshell.cn/articles/209.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/12192.html)[C/C++返回内部静态成员的陷阱](https://coolshell.cn/articles/12192.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg](https://coolshell.cn/articles/37.html)[【引文】如何用Python往Google Spreadsheet上写数据](https://coolshell.cn/articles/37.html)
+* [![10个基于Ajax的PHP Webmail客户端](../wp-content/uploads/2009/03/webmail1-150x150.jpg)](https://coolshell.cn/articles/154.html)[10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/articles/154.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg](https://coolshell.cn/articles/1857.html)[C 语言整型谜题](https://coolshell.cn/articles/1857.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg](https://coolshell.cn/articles/732.html)[Glassfish ESB 的教程](https://coolshell.cn/articles/732.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/209.html)[C++和JAVA传统中积极的一面](https://coolshell.cn/articles/209.html)
 The post [Did You Know?](https://coolshell.cn/articles/2917.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

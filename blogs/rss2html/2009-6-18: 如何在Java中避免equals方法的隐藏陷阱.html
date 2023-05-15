@@ -1,6 +1,6 @@
-<p><strong>译者注</strong> :你可能会觉得Java很简单，Object的equals实现也会非常简单，但是事实并不是你想象的这样，耐心的读完本文，你会发现你对Java了解的是如此的少。如果这篇文章是一份Java程序员的入职笔试，那么不知道有多少人会掉落到这样的陷阱中。原文转自<a href="http://www.artima.com/lejava/articles/equality.html">http://www.artima.com/lejava/articles/equality.html</a> 三位作者都是不同领域的大拿，有兴趣的读者可以从上面这个连接直接去阅读原文。</p>
-<p><strong>摘要</strong><br />
-本文描述重载equals方法的技术，这种技术即使是具现类的子类增加了字段也能保证equal语义的正确性。<br />
+<html><body><p><strong>译者注</strong> :你可能会觉得Java很简单，Object的equals实现也会非常简单，但是事实并不是你想象的这样，耐心的读完本文，你会发现你对Java了解的是如此的少。如果这篇文章是一份Java程序员的入职笔试，那么不知道有多少人会掉落到这样的陷阱中。原文转自<a href="http://www.artima.com/lejava/articles/equality.html">http://www.artima.com/lejava/articles/equality.html</a> 三位作者都是不同领域的大拿，有兴趣的读者可以从上面这个连接直接去阅读原文。</p>
+<p><strong>摘要</strong><br/>
+本文描述重载equals方法的技术，这种技术即使是具现类的子类增加了字段也能保证equal语义的正确性。<br/>
 在《Effective Java》的第8项中，Josh Bloch描述了当继承类作为面向对象语言中的等价关系的基础问题，要保证派生类的equal正确性语义所会面对的困难。Bloch这样写到：</p>
 <blockquote><p><strong>除非你忘记了面向对象抽象的好处，否则在当你继承一个新类或在类中增加了一个值组件时你无法同时保证equal的语义依然正确</strong></p></blockquote>
 <p><span id="more-1051"></span></p>
@@ -71,7 +71,7 @@ System.out.println(coll.contains(p2)); // prints false</pre>
 <pre class="brush: java">System.out.println(p1.equals(p2a)); // prints false</pre>
 <p>到底是那里出了了问题？事实上，之前所给出的equals版本并没有覆盖Object类的equals方法，因为他的类型不同。下面是Object的equals方法的定义</p>
 <pre class="brush: java">public boolean equals(Object other)</pre>
-<p>因为Point类中的equals方法使用的是以Point类而非Object类做为参数，因此它并没有覆盖Object中的equals方法。而是一种变化了的重载。在Java中重载被解析为静态的参数类型而非运行期的类型，因此当静态参数类型是Point,Point的equals方法就被调用。然而当静态参数类型是Object时，Object类的equals就被调用。因为这个方法并没有被覆盖，因此它仍然是实现成比较对象标示。这就是为什么虽然p1和p2a具有同样的x,y值，&#8221;p1.equals(p2a)&#8221;仍然返回了false。这也是会什么HasSet的contains方法返回false的原因，因为这个方法操作的是泛型，他调用的是一般化的Object上equals方法而非Point类上变化了的重载方法equals</p>
+<p>因为Point类中的equals方法使用的是以Point类而非Object类做为参数，因此它并没有覆盖Object中的equals方法。而是一种变化了的重载。在Java中重载被解析为静态的参数类型而非运行期的类型，因此当静态参数类型是Point,Point的equals方法就被调用。然而当静态参数类型是Object时，Object类的equals就被调用。因为这个方法并没有被覆盖，因此它仍然是实现成比较对象标示。这就是为什么虽然p1和p2a具有同样的x,y值，”p1.equals(p2a)”仍然返回了false。这也是会什么HasSet的contains方法返回false的原因，因为这个方法操作的是泛型，他调用的是一般化的Object上equals方法而非Point类上变化了的重载方法equals</p>
 <p>一个更好但不完美的equals方法定义如下：</p>
 <pre class="brush: java">// A better definition, but still not perfect
 @Override public boolean equals(Object other) {
@@ -93,11 +93,11 @@ HashSet&lt;Point&gt; coll = new HashSet&lt;Point&gt;();
 coll.add(p1);
 
 System.out.println(coll.contains(p2)); // 打印 false (有可能)</pre>
-<p>事实上，这个个结果不是100%的false，你也可能有返回ture的经历。如果你得到的结果是true的话，那么你试试其他的坐标值，最终你一定会得到一个在集合中不包含的结果。导致这个结果的原因是Point重载了equals却没有重载hashCode。<br />
-注意上面例子的的容器是一个HashSet，这就意味着容器中的元素根据他们的哈希码被被放入到&#8221;哈希桶 hash buckets&#8221;中。contains方法首先根据哈希码在哈希桶中查找，然后让桶中的所有元素和所给的参数进行比较。现在，虽然最后一个Point类的版本重定义了equals方法，但是它并没有同时重定义hashCode。因此，hashCode仍然是Object类的那个版本，即：所分配对象的一个地址的变换。所以p1和p2的哈希码理所当然的不同了，甚至是即时这两个点的坐标完全相同。不同的哈希码导致他们具有极高的可能性被放入到集合中不同的哈希桶中。contains方法将会去找p2的哈希码对应哈希桶中的匹配元素。但是大多数情况下，p1一定是在另外一个桶中，因此，p2永远找不到p1进行匹配。当然p2和p2也可能偶尔会被放入到一个桶中，在这种情况下，contains的结果就为true了。</p>
+<p>事实上，这个个结果不是100%的false，你也可能有返回ture的经历。如果你得到的结果是true的话，那么你试试其他的坐标值，最终你一定会得到一个在集合中不包含的结果。导致这个结果的原因是Point重载了equals却没有重载hashCode。<br/>
+注意上面例子的的容器是一个HashSet，这就意味着容器中的元素根据他们的哈希码被被放入到”哈希桶 hash buckets”中。contains方法首先根据哈希码在哈希桶中查找，然后让桶中的所有元素和所给的参数进行比较。现在，虽然最后一个Point类的版本重定义了equals方法，但是它并没有同时重定义hashCode。因此，hashCode仍然是Object类的那个版本，即：所分配对象的一个地址的变换。所以p1和p2的哈希码理所当然的不同了，甚至是即时这两个点的坐标完全相同。不同的哈希码导致他们具有极高的可能性被放入到集合中不同的哈希桶中。contains方法将会去找p2的哈希码对应哈希桶中的匹配元素。但是大多数情况下，p1一定是在另外一个桶中，因此，p2永远找不到p1进行匹配。当然p2和p2也可能偶尔会被放入到一个桶中，在这种情况下，contains的结果就为true了。</p>
 <p>最新一个Point类实现的问题是，它的实现违背了作为Object类的定义的hashCode的语义。</p>
-<blockquote><p><strong><br />
-如果两个对象根据equals(Object)方法是相等的，那么在这两个对象上调用hashCode方法应该产生同样的值<br />
+<blockquote><p><strong><br/>
+如果两个对象根据equals(Object)方法是相等的，那么在这两个对象上调用hashCode方法应该产生同样的值<br/>
 </strong></p></blockquote>
 <p>事实上，在Java中，hashCode和equals需要一起被重定义是众所周知的。此外，hashCode只可以依赖于equals依赖的域来产生值。对于Point这个类来说，下面的的hashCode定义是一个非常合适的定义。</p>
 <pre class="brush: java">public class Point {
@@ -132,7 +132,7 @@ System.out.println(coll.contains(p2)); // 打印 false (有可能)</pre>
     }
 </span>
 }</pre>
-<p>这只是hashCode一个可能的实现。x域加上常量41后的结果再乘与41并将结果在加上y域的值。这样做就可以以低成本的运行时间和低成本代码大小得到一个哈希码的合理的分布(<strong>译者注：</strong>性价比相对较高的做法)。<br />
+<p>这只是hashCode一个可能的实现。x域加上常量41后的结果再乘与41并将结果在加上y域的值。这样做就可以以低成本的运行时间和低成本代码大小得到一个哈希码的合理的分布(<strong>译者注：</strong>性价比相对较高的做法)。<br/>
 增加hashCode方法重载修正了定义类似Point类等价性的问题。然而，关于类的等价性仍然有其他的问题点待发现。</p>
 <p>　</p>
 <h4>陷阱3：建立在会变化字段上的equals定义</h4>
@@ -243,7 +243,7 @@ ColoredPoint cp = new ColoredPoint(1, 2, Color.RED);
 System.out.println(p.equals(cp)); // 打印真 true
 
 System.out.println(cp.equals(p)); // 打印假 false</pre>
-<p>&#8220;p等价于cp&#8221;的比较这个调用的是定义在Point类上的equals方法。这个方法只考虑两个点的坐标。因此比较返回真。在另外一方面，“cp等价于p”的比较这个调用的是定义在ColoredPoint类上的equals方法，返回的结果却是false，这是因为p不是ColoredPoint，所以equals这个定义违背了对称性。</p>
+<p>“p等价于cp”的比较这个调用的是定义在Point类上的equals方法。这个方法只考虑两个点的坐标。因此比较返回真。在另外一方面，“cp等价于p”的比较这个调用的是定义在ColoredPoint类上的equals方法，返回的结果却是false，这是因为p不是ColoredPoint，所以equals这个定义违背了对称性。</p>
 <p>违背对称性对于集合来说将导致不可以预期的后果，例如：</p>
 <pre class="brush: java">Set&lt;Point&gt; hashSet1 = new java.util.HashSet&lt;Point&gt;();
 hashSet1.add(p);
@@ -252,7 +252,7 @@ System.out.println(hashSet1.contains(cp));    // 打印 false
 Set&lt;Point&gt; hashSet2 = new java.util.HashSet&lt;Point&gt;();
 hashSet2.add(cp);
 System.out.println(hashSet2.contains(p));    // 打印 true</pre>
-<p>因此虽然p和cp是等价的，但是contains测试中一个返回成功，另外一个却返回失败。<br />
+<p>因此虽然p和cp是等价的，但是contains测试中一个返回成功，另外一个却返回失败。<br/>
 你如何修改equals的定义，才能使得这个方法满足对称性？本质上说有两种方法，你可以使得这种关系变得更一般化或更严格。更一般化的意思是这一对对象，a和b，被用于进行对比，无论是a比b还是b比a 都返回true，下面是代码：</p>
 <pre class="brush: java">public class ColoredPoint extends Point { // Problem: equals not transitive
 
@@ -276,7 +276,7 @@ System.out.println(hashSet2.contains(p));    // 打印 true</pre>
         return result;
     }
 }</pre>
-<p>在ColoredPoint中的equals的新定义比老定义中检查了更多的情况:如果对象是一个Point对象而不是ColoredPoint，方法就转变为Point类的equals方法调用。这个所希望达到的效果就是equals的对称性，不管&#8221;cp.equals(p)&#8221;还是&#8221;p.equals(cp)&#8221;的结果都是true。然而这种方法，equals的规范还是被破坏了，现在的问题是这个新等价性不满足传递性。考虑下面的一段代码实例，定义了一个点和这个点上上两种不同颜色点：</p>
+<p>在ColoredPoint中的equals的新定义比老定义中检查了更多的情况:如果对象是一个Point对象而不是ColoredPoint，方法就转变为Point类的equals方法调用。这个所希望达到的效果就是equals的对称性，不管”cp.equals(p)”还是”p.equals(cp)”的结果都是true。然而这种方法，equals的规范还是被破坏了，现在的问题是这个新等价性不满足传递性。考虑下面的一段代码实例，定义了一个点和这个点上上两种不同颜色点：</p>
 <pre class="brush: java">ColoredPoint redP = new ColoredPoint(1, 2, Color.RED);
 ColoredPoint blueP = new ColoredPoint(1, 2, Color.BLUE);</pre>
 <p>redP等价于p，p等价于blueP</p>
@@ -285,7 +285,7 @@ ColoredPoint blueP = new ColoredPoint(1, 2, Color.BLUE);</pre>
 System.out.println(p.equals(blueP)); // prints true</pre>
 <p>然而，对比redP和blueP的结果是false:</p>
 <pre class="brush: java">System.out.println(redP.equals(blueP)); // 打印 false</pre>
-<p>因此，equals的传递性就被违背了。<br />
+<p>因此，equals的传递性就被违背了。<br/>
 使equals的关系更一般化似乎会将我们带入到死胡同。我们应该采用更严格化的方法。一种更严格化的equals方法是认为不同类的对象是不同的。这个可以通过修改Point类和ColoredPoint类的equals方法来达到。你能增加额外的比较来检查是否运行态的这个Point类和那个Point类是同一个类，就像如下所示的代码一样：</p>
 <pre class="brush: java">// A technically valid, but unsatisfying, equals method
 public class Point {
@@ -436,10 +436,10 @@ System.out.println(coll.contains(p)); // 打印 true
 System.out.println(coll.contains(cp)); // 打印 false
 
 System.out.println(coll.contains(pAnon)); // 打印 true</pre>
-<p>这些例子显示了如果父类在equals的实现定义并调用了canEquals，那么开发人员实现的子类就能决定这个子类是否可以和它父类的实例进行比较。例如ColoredPoint，因为它以&#8221;一个着色点永远不可以等于普通不带颜色的点重载了&#8221; canEqual，所以他们就不能比较。但是因为pAnon引用的匿名子类没有重载canEqual,因此它的实例就可以和Point的实例进行对比。</p>
-<p>canEqual方法的一个潜在的争论是它是否违背了Liskov替换准则(LSP)。例如，通过比较运行态的类来实现的比较技术(<strong>译者注：</strong> canEqual的前一版本，使用.getClass()的那个版本)，将导致不能定义出一个子类，这个子类的实例可以和其父类进行比较，因此就违背了LSP。这是因为，LSP原则是这样的，在任何你能使用父类的地方你都可以使用子类去替换它。在之前例子中，虽然cp的x,y坐标匹配那些在集合中的点，然而&#8221;coll.contains(cp)&#8221;仍然返回false，这看起来似乎违背得了LSP准则，因为你不能这里能使用Point的地方使用一个ColoredPointed。但是我们认为这种解释是错误的，因为LSP原则并没有要求子类和父类的行为一致，而仅要求其行为能一种方式满足父类的规范。</p>
-<p>通过比较运行态的类来编写equals方法(<strong>译者注：</strong> canEqual的前一版本，使用.getClass()的那个版本)的问题并不是违背LSP准则的问题，但是它也没有为你指明一种创建派生类的实例能和父类实例进行对比的的方法。例如，我们使用这种运行态比较的技术在之前的&#8221;coll.contains(pAnon)&#8221;将会返回false，并且这并不是我们希望的。相反我们希望“coll.contains(cp)”返回false，因为通过在ColoredPoint中重载的equals，我基本上可以说，一个在坐标1，2上着色点和一个坐标1，2上的普通点并不是一回事。然而，在最后的例子中，我们能传递Point两种不同的子类实例到集合中contains方法，并且我们能得到两个不同的答案，并且这两个答案都正确。</p>
-<p><strong>&#8211;全文完&#8211;</strong><!--
+<p>这些例子显示了如果父类在equals的实现定义并调用了canEquals，那么开发人员实现的子类就能决定这个子类是否可以和它父类的实例进行比较。例如ColoredPoint，因为它以”一个着色点永远不可以等于普通不带颜色的点重载了” canEqual，所以他们就不能比较。但是因为pAnon引用的匿名子类没有重载canEqual,因此它的实例就可以和Point的实例进行对比。</p>
+<p>canEqual方法的一个潜在的争论是它是否违背了Liskov替换准则(LSP)。例如，通过比较运行态的类来实现的比较技术(<strong>译者注：</strong> canEqual的前一版本，使用.getClass()的那个版本)，将导致不能定义出一个子类，这个子类的实例可以和其父类进行比较，因此就违背了LSP。这是因为，LSP原则是这样的，在任何你能使用父类的地方你都可以使用子类去替换它。在之前例子中，虽然cp的x,y坐标匹配那些在集合中的点，然而”coll.contains(cp)”仍然返回false，这看起来似乎违背得了LSP准则，因为你不能这里能使用Point的地方使用一个ColoredPointed。但是我们认为这种解释是错误的，因为LSP原则并没有要求子类和父类的行为一致，而仅要求其行为能一种方式满足父类的规范。</p>
+<p>通过比较运行态的类来编写equals方法(<strong>译者注：</strong> canEqual的前一版本，使用.getClass()的那个版本)的问题并不是违背LSP准则的问题，但是它也没有为你指明一种创建派生类的实例能和父类实例进行对比的的方法。例如，我们使用这种运行态比较的技术在之前的”coll.contains(pAnon)”将会返回false，并且这并不是我们希望的。相反我们希望“coll.contains(cp)”返回false，因为通过在ColoredPoint中重载的equals，我基本上可以说，一个在坐标1，2上着色点和一个坐标1，2上的普通点并不是一回事。然而，在最后的例子中，我们能传递Point两种不同的子类实例到集合中contains方法，并且我们能得到两个不同的答案，并且这两个答案都正确。</p>
+<p><strong>–全文完–</strong><!--
 
 
 
@@ -455,7 +455,6 @@ System.out.println(coll.contains(pAnon)); // 打印 true</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1051.html">如何在Java中避免equals方法的隐藏陷阱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="../wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1051.html">如何在Java中避免equals方法的隐藏陷阱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

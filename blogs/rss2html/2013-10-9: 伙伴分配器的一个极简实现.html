@@ -1,22 +1,22 @@
-<p><strong>（感谢网友 </strong><a href="http://weibo.com/fullofbull" target="_blank"><strong>@我的上铺叫路遥</strong></a><strong> 投稿）</strong></p>
+<html><body><p><strong>（感谢网友 </strong><a href="http://weibo.com/fullofbull" target="_blank"><strong>@我的上铺叫路遥</strong></a><strong> 投稿）</strong></p>
 <p>提起buddy system相信很多人不会陌生，它是一种经典的内存分配算法，大名鼎鼎的Linux底层的内存管理用的就是它。这里不探讨内核这么复杂实现，而仅仅是将该算法抽象提取出来，同时给出一份及其简洁的源码实现，以便定制扩展。</p>
 <p>伙伴分配的实质就是一种特殊的<strong>“分离适配”</strong>，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。</p>
 <p>可以在<a href="http://en.wikipedia.org/wiki/Buddy_memory_allocation" target="_blank">维基百科</a>上找到该算法的描述，大体如是：</p>
 <p><strong>分配内存：</strong></p>
 <p>1.寻找大小合适的内存块（大于等于所需大小并且最接近2的幂，比如需要27，实际分配32）</p>
-<p style="padding-left: 30px;">1.如果找到了，分配给应用程序。<br />
+<p style="padding-left: 30px;">1.如果找到了，分配给应用程序。<br/>
 2.如果没找到，分出合适的内存块。</p>
-<p style="padding-left: 60px;">1.对半分离出高于所需大小的空闲内存块<br />
-2.如果分到最低限度，分配这个大小。<br />
-3.回溯到步骤1（寻找合适大小的块）<br />
+<p style="padding-left: 60px;">1.对半分离出高于所需大小的空闲内存块<br/>
+2.如果分到最低限度，分配这个大小。<br/>
+3.回溯到步骤1（寻找合适大小的块）<br/>
 4.重复该步骤直到一个合适的块</p>
 <p><span id="more-10427"></span></p>
 <p><strong>释放内存：</strong></p>
 <p>1.释放该内存块</p>
-<p style="padding-left: 30px;">1.寻找相邻的块，看其是否释放了。<br />
+<p style="padding-left: 30px;">1.寻找相邻的块，看其是否释放了。<br/>
 2.如果相邻块也释放了，合并这两个块，重复上述步骤直到遇上未释放的相邻块，或者达到最高上限（即所有内存都释放了）。</p>
 <p>上面这段文字对你来说可能看起来很费劲，没事，我们看个内存分配和释放的示意图你就知道了：</p>
-<p><img alt="" class="aligncenter size-full wp-image-10504" height="346" src="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation.jpg" width="598" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10504" height="346" src="../wp-content/uploads/2013/10/buddy-memory-allocation.jpg" width="598"/></p>
 <p>上图中，首先我们假设我们一个内存块有1024K，当我们需要给A分配70K内存的时候，</p>
 <ol>
 <li>我们发现1024K的一半大于70K，然后我们就把1024K的内存分成两半，一半512K。</li>
@@ -27,7 +27,7 @@
 <p>我们可以看见，这样的算法，用二叉树这个数据结构来实现再合适不过了。</p>
 <p>我在网上分别找到<a href="https://github.com/cloudwu/buddy" target="_blank">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，本文打算从后一份入手讲解，<strong>因为这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计。</strong>网友对其评价甚高，甚至可用作教科书标准实现，看完之后回过头来看cloudwu的代码就容易理解了。</p>
 <p>分配器的整体思想是，通过一个数组形式的完全二叉树来监控管理内存，二叉树的节点用于标记相应内存块的使用状态，高层节点对应大的块，低层节点对应小的块，在分配和释放中我们就通过这些节点的标记属性来进行块的分离合并。如图所示，假设总大小为16单位的内存，我们就建立一个深度为5的满二叉树，根节点从数组下标[0]开始，监控大小16的块；它的左右孩子节点下标[1~2]，监控大小8的块；第三层节点下标[3~6]监控大小4的块……依此类推。</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10502" height="347" src="https://coolshell.cn/wp-content/uploads/2013/10/伙伴分配器.jpg" width="591" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10502" height="347" src="../wp-content/uploads/2013/10/伙伴分配器.jpg" width="591"/></p>
 <p>在分配阶段，首先要搜索大小适配的块，假设第一次分配3，转换成2的幂是4，我们先要对整个内存进行对半切割，从16切割到4需要两步，那么从下标[0]节点开始深度搜索到下标[3]的节点并将其标记为已分配。第二次再分配3那么就标记下标[4]的节点。第三次分配6，即大小为8，那么搜索下标[2]的节点，因为下标[1]所对应的块被下标[3~4]占用了。</p>
 <p>在释放阶段，我们依次释放上述第一次和第二次分配的块，即先释放[3]再释放[4]，当释放下标[4]节点后，我们发现之前释放的[3]是相邻的，于是我们立马将这两个节点进行合并，这样一来下次分配大小8的时候，我们就可以搜索到下标[1]适配了。若进一步释放下标[2]，同[1]合并后整个内存就回归到初始状态。</p>
 <p>还是看一下源码实现吧，首先是伙伴分配器的数据结构：</p>
@@ -141,7 +141,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10590.html"><img alt="二维码的生成细节和原理" height="150" src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9886.html"><img alt="二叉树迭代器算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="../wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="../wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10590.html"><img alt="二维码的生成细节和原理" height="150" src="../wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9886.html"><img alt="二叉树迭代器算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

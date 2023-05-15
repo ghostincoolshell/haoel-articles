@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![isolation](https://coolshell.cn/wp-content/uploads/2015/04/isolation.jpg)时下最热的技术莫过于Docker了，很多人都觉得Docker是个新技术，其实不然，Docker除了其编程语言用go比较新外，其实它还真不是个新东西，也就是个新瓶装旧酒的东西，所谓的The New “Old Stuff”。Docker和Docker衍生的东西用到了很多很酷的技术，我会用几篇 文章来把这些技术给大家做个介绍，希望通过这些文章大家可以自己打造一个山寨版的docker。
+![isolation](../wp-content/uploads/2015/04/isolation.jpg)时下最热的技术莫过于Docker了，很多人都觉得Docker是个新技术，其实不然，Docker除了其编程语言用go比较新外，其实它还真不是个新东西，也就是个新瓶装旧酒的东西，所谓的The New “Old Stuff”。Docker和Docker衍生的东西用到了很多很酷的技术，我会用几篇 文章来把这些技术给大家做个介绍，希望通过这些文章大家可以自己打造一个山寨版的docker。
 
 
 当然，文章的风格一定会尊重时下的“流行”——**我们再也没有整块整块的时间去看书去专研，而我们只有看微博微信那样的碎片时间**（那怕我们有整块的时间，也被那些在手机上的APP碎片化了）。所以，这些文章的风格必然坚持“马桶风格”（希望简单到占用你拉一泡屎就时间，而且你还不用动脑子，并能学到些东西）
@@ -341,7 +341,7 @@ diskstats  keys         mtrr        sysrq-trigger
 下图，我们也可以看到在子进程中的top命令只看得到两个进程了。
 
 
-![](https://coolshell.cn/wp-content/uploads/2015/04/mount.namespace.jpg)
+![](../wp-content/uploads/2015/04/mount.namespace.jpg)
 
 
 这里，多说一下。在通过CLONE\_NEWNS创建mount namespace后，父进程会把自己的文件结构复制给子进程中。而子进程中新的namespace中的所有mount操作都只影响自身的文件系统，而不对外界产生任何影响。这样可以做到比较严格地隔离。
@@ -597,10 +597,10 @@ awk  env  groups  head  id  mesg  sort  strace  tail  top  uniq  vi  wc  xargs
 
 ### 相关文章
 
-* [![Docker基础技术：Linux Namespace（下）](https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
-* [![记一次Kubernetes/Docker网络排障](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
-* [![Docker基础技术：DeviceMapper](https://coolshell.cn/wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
-* [![Docker基础技术：AUFS](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
-* [![Docker基础技术：Linux CGroup](https://coolshell.cn/wp-content/uploads/2015/04/filter-150x150.png)](https://coolshell.cn/articles/17049.html)[Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html)
-* [![eBPF 介绍](https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
+* [![Docker基础技术：Linux Namespace（下）](../wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
+* [![记一次Kubernetes/Docker网络排障](../wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
+* [![Docker基础技术：DeviceMapper](../wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
+* [![Docker基础技术：AUFS](../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
+* [![Docker基础技术：Linux CGroup](../wp-content/uploads/2015/04/filter-150x150.png)](https://coolshell.cn/articles/17049.html)[Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html)
+* [![eBPF 介绍](../wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
 The post [Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

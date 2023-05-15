@@ -1,6 +1,6 @@
-<p></p>
+<html><body><p></p>
 <blockquote><p><strong>注：本文由<a href="https://github.com/rayjun" rel="noopener noreferrer" target="_blank">雷俊</a>(Javaer/Emacser)和我一起编辑，所以文章版权归雷俊与我共同所有，转载者必需注明出处和我们两位作者。原文最早发于酷壳微信公众号，后来我又做了一些修改，再发到博客这边。</strong></p></blockquote>
-<p><img alt="" class="alignright size-full wp-image-19230" height="220" src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_.png" width="255" />程序员是一个很懒的群体，总想着能够让代码为自己干活，他们不断地把工作生活中的一些事情用代码自动化了，从而让整个社会的效率运作地越来越高。所以，程序员在准备去优化这个世界的时候，都会先要优化自己的工作环境，是所谓“工欲善其事，必先利其器”。</p>
+<p><img alt="" class="alignright size-full wp-image-19230" height="220" src="../wp-content/uploads/2019/03/linux.ninja_.png" width="255"/>程序员是一个很懒的群体，总想着能够让代码为自己干活，他们不断地把工作生活中的一些事情用代码自动化了，从而让整个社会的效率运作地越来越高。所以，程序员在准备去优化这个世界的时候，都会先要优化自己的工作环境，是所谓“工欲善其事，必先利其器”。</p>
 <p>我们每个程序员都应该打造一套让自己更为高效的工作环境。那怕就是让你少输入一次命令，少按一次键，少在鼠标和键盘间切换一次，都会让程序员的工作变得更为的高效。所以，程序员一般需要一台性能比较好，不会因为开了太多的网页或程序就卡得不行的电脑，还要配备多个显示器，一个显示器写代码，一个查文档，一个测试运行结果，而不必在各种窗口来来回回的切换……在大量的窗口间切换经常会迷路，而且也容易出错（分不清线上或测试环境）……</p>
 <p>除了硬件上的装备，软件上也是能够提升程序员生产力的地方，<strong>在软件层面提升程序员生产力的东西有一个很重要的事就是命令行和脚本</strong>，使用鼠标和图形界面则会大大降低程序员的生产力。酷壳以前也写过一些，如《<a href="https://coolshell.cn/articles/8619.html" rel="noopener noreferrer" target="_blank">你可能不知道的Shell</a>》和《 <a href="https://coolshell.cn/articles/8883.html" rel="noopener noreferrer" target="_blank">应该知道的Linux技巧</a>》，但是Unix/Linux Shell就是一个大宝库，怎么写也写不完，不然，怎么会有“Where is the Shell, there is a way”。</p>
 <p><span id="more-19219"></span></p>
@@ -19,15 +19,15 @@
 <p>在命令行中使用 <strong>alias</strong> 可以将使用频率很高命令或者比较复杂的命令合并成一个命令，或者修改原生的命令。</p>
 <p>下面这几个命令，可能是你天天都在敲的。所以，你应该设置成 alias 来提高效率</p>
 <pre class="EnlighterJSRAW">
-alias nis=&quot;npm install --save &quot;
-alias svim=&#039;sudo vim&#039;
-alias mkcd=&#039;foo(){ mkdir -p &quot;$1&quot;; cd &quot;$1&quot; }; foo &#039;
-alias install=&#039;sudo apt get install&#039;
-alias update=&#039;sudo apt-get update; sudo apt-get upgrade&#039;
-alias ..=&quot;cd ..&quot;
-alias ...=&quot;cd ..; cd ..&quot;
-alias www=&#039;python -m SimpleHTTPServer 8000&#039;
-alias sock5=&#039;ssh -D 8080 -q -C -N -f user@your.server&#039;
+alias nis="npm install --save "
+alias svim='sudo vim'
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+alias install='sudo apt get install'
+alias update='sudo apt-get update; sudo apt-get upgrade'
+alias ..="cd .."
+alias ...="cd ..; cd .."
+alias www='python -m SimpleHTTPServer 8000'
+alias sock5='ssh -D 8080 -q -C -N -f user@your.server'
 </pre>
 <p>你还可以参考如下的一些文章，看看别人是怎么用好 <code>alias</code> 的</p>
 <ul>
@@ -78,7 +78,7 @@ alias sock5=&#039;ssh -D 8080 -q -C -N -f user@your.server&#039;
 <p>所以，<strong>我们还要学会只使用传统的grep/awk/sed等等这些POSIX的原生的系统默认安装的命令</strong>。</p>
 <p>当然，要写好一个脚本并不容易，下面有一些小模板供你参考：</p>
 <p>处理命令行参数的一个样例</p>
-<pre class="EnlighterJSRAW">while [ &quot;$1&quot; != &quot;&quot; ]; do
+<pre class="EnlighterJSRAW">while [ "$1" != "" ]; do
     case $1 in
         -s  )   shift	
 		SERVER=$1 ;;  
@@ -98,57 +98,57 @@ done </pre>
 #!/bin/bash
 # Bash Menu Script Example
 
-PS3=&#039;Please enter your choice: &#039;
-options=(&quot;Option 1&quot; &quot;Option 2&quot; &quot;Option 3&quot; &quot;Quit&quot;)
-select opt in &quot;${options[@]}&quot;
+PS3='Please enter your choice: '
+options=("Option 1" "Option 2" "Option 3" "Quit")
+select opt in "${options[@]}"
 do
     case $opt in
-        &quot;Option 1&quot;)
-            echo &quot;you chose choice 1&quot;
+        "Option 1")
+            echo "you chose choice 1"
             ;;
-        &quot;Option 2&quot;)
-            echo &quot;you chose choice 2&quot;
+        "Option 2")
+            echo "you chose choice 2"
             ;;
-        &quot;Option 3&quot;)
-            echo &quot;you chose choice $REPLY which is $opt&quot;
+        "Option 3")
+            echo "you chose choice $REPLY which is $opt"
             ;;
-        &quot;Quit&quot;)
+        "Quit")
             break
             ;;
-        *) echo &quot;invalid option $REPLY&quot;;;
+        *) echo "invalid option $REPLY";;
     esac
 done
 </pre>
 <p>颜色定义，你可以使用 <code>echo -e "${Blu}blue ${Red}red ${RCol}etc...."</code> 进行有颜色文本的输出</p>
 <pre class="EnlighterJSRAW">
-RCol=&#039;\e[0m&#039;    # Text Reset
+RCol='\e[0m'    # Text Reset
 
 # Regular           Bold                Underline           High Intensity      BoldHigh Intens     Background          High Intensity Backgrounds
-Bla=&#039;\e[0;30m&#039;;     BBla=&#039;\e[1;30m&#039;;    UBla=&#039;\e[4;30m&#039;;    IBla=&#039;\e[0;90m&#039;;    BIBla=&#039;\e[1;90m&#039;;   On_Bla=&#039;\e[40m&#039;;    On_IBla=&#039;\e[0;100m&#039;;
-Red=&#039;\e[0;31m&#039;;     BRed=&#039;\e[1;31m&#039;;    URed=&#039;\e[4;31m&#039;;    IRed=&#039;\e[0;91m&#039;;    BIRed=&#039;\e[1;91m&#039;;   On_Red=&#039;\e[41m&#039;;    On_IRed=&#039;\e[0;101m&#039;;
-Gre=&#039;\e[0;32m&#039;;     BGre=&#039;\e[1;32m&#039;;    UGre=&#039;\e[4;32m&#039;;    IGre=&#039;\e[0;92m&#039;;    BIGre=&#039;\e[1;92m&#039;;   On_Gre=&#039;\e[42m&#039;;    On_IGre=&#039;\e[0;102m&#039;;
-Yel=&#039;\e[0;33m&#039;;     BYel=&#039;\e[1;33m&#039;;    UYel=&#039;\e[4;33m&#039;;    IYel=&#039;\e[0;93m&#039;;    BIYel=&#039;\e[1;93m&#039;;   On_Yel=&#039;\e[43m&#039;;    On_IYel=&#039;\e[0;103m&#039;;
-Blu=&#039;\e[0;34m&#039;;     BBlu=&#039;\e[1;34m&#039;;    UBlu=&#039;\e[4;34m&#039;;    IBlu=&#039;\e[0;94m&#039;;    BIBlu=&#039;\e[1;94m&#039;;   On_Blu=&#039;\e[44m&#039;;    On_IBlu=&#039;\e[0;104m&#039;;
-Pur=&#039;\e[0;35m&#039;;     BPur=&#039;\e[1;35m&#039;;    UPur=&#039;\e[4;35m&#039;;    IPur=&#039;\e[0;95m&#039;;    BIPur=&#039;\e[1;95m&#039;;   On_Pur=&#039;\e[45m&#039;;    On_IPur=&#039;\e[0;105m&#039;;
-Cya=&#039;\e[0;36m&#039;;     BCya=&#039;\e[1;36m&#039;;    UCya=&#039;\e[4;36m&#039;;    ICya=&#039;\e[0;96m&#039;;    BICya=&#039;\e[1;96m&#039;;   On_Cya=&#039;\e[46m&#039;;    On_ICya=&#039;\e[0;106m&#039;;
-Whi=&#039;\e[0;37m&#039;;     BWhi=&#039;\e[1;37m&#039;;    UWhi=&#039;\e[4;37m&#039;;    IWhi=&#039;\e[0;97m&#039;;    BIWhi=&#039;\e[1;97m&#039;;   On_Whi=&#039;\e[47m&#039;;    On_IWhi=&#039;\e[0;107m&#039;;
+Bla='\e[0;30m';     BBla='\e[1;30m';    UBla='\e[4;30m';    IBla='\e[0;90m';    BIBla='\e[1;90m';   On_Bla='\e[40m';    On_IBla='\e[0;100m';
+Red='\e[0;31m';     BRed='\e[1;31m';    URed='\e[4;31m';    IRed='\e[0;91m';    BIRed='\e[1;91m';   On_Red='\e[41m';    On_IRed='\e[0;101m';
+Gre='\e[0;32m';     BGre='\e[1;32m';    UGre='\e[4;32m';    IGre='\e[0;92m';    BIGre='\e[1;92m';   On_Gre='\e[42m';    On_IGre='\e[0;102m';
+Yel='\e[0;33m';     BYel='\e[1;33m';    UYel='\e[4;33m';    IYel='\e[0;93m';    BIYel='\e[1;93m';   On_Yel='\e[43m';    On_IYel='\e[0;103m';
+Blu='\e[0;34m';     BBlu='\e[1;34m';    UBlu='\e[4;34m';    IBlu='\e[0;94m';    BIBlu='\e[1;94m';   On_Blu='\e[44m';    On_IBlu='\e[0;104m';
+Pur='\e[0;35m';     BPur='\e[1;35m';    UPur='\e[4;35m';    IPur='\e[0;95m';    BIPur='\e[1;95m';   On_Pur='\e[45m';    On_IPur='\e[0;105m';
+Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    BICya='\e[1;96m';   On_Cya='\e[46m';    On_ICya='\e[0;106m';
+Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
 </pre>
 <p>取当前运行脚本绝对路径的示例：（注：Linux下可以用 <code>dirname $(readlink -f $0)</code> ）</p>
 <pre class="EnlighterJSRAW">
-FILE=&quot;$0&quot;
+FILE="$0"
 while [[ -h ${FILE} ]]; do
-    FILE=&quot;`readlink &quot;${FILE}&quot;`&quot;
+    FILE="`readlink "${FILE}"`"
 done
-pushd &quot;`dirname &quot;${FILE}&quot;`&quot; &gt; /dev/null
+pushd "`dirname "${FILE}"`" &gt; /dev/null
 DIR=`pwd -P`
 popd &gt; /dev/null
 </pre>
 <p>如何在远程服务器运行一个本地脚本</p>
 <pre class="EnlighterJSRAW">#无参数
-ssh user@server &#039;bash -s&#039; &lt; local.script.sh
+ssh user@server 'bash -s' &lt; local.script.sh
 
 #有参数
-ssh user@server ARG1=&quot;arg1&quot; ARG2=&quot;arg2&quot; &#039;bash -s&#039; &lt; local_script.sh
+ssh user@server ARG1="arg1" ARG2="arg2" 'bash -s' &lt; local_script.sh
 </pre>
 <p>如何检查一个命令是否存在，用 <code>which</code> 吗？最好不要用，因为很多操作系统的 <code>which</code> 命令没有设置退出状态码，这样你不知道是否是有那个命令。所以，你应该使用下面的方式。</p>
 <pre class="EnlighterJSRAW">
@@ -162,9 +162,9 @@ type [the_command]
 # 示例：
 gnudate() {
     if hash gdate 2&gt; /dev/null; then
-        gdate &quot;$@&quot;
+        gdate "$@"
     else
-        date &quot;$@&quot;
+        date "$@"
     fi
 }
 </pre>
@@ -181,7 +181,7 @@ gnudate() {
 <li>使用 <code>$()</code> 而不是 <code class="EnlighterJSRAW"></code> 来获得命令行的输出，主要原因是易读。</li>
 <li>小心不同的平台，尤其是 MacOS 和 Linux 的跨平台。</li>
 <li>对于 <code>rm -rf</code> 这样的高危操作，需要检查后面的变量名是否为空，比如：<code>rm -rf $MYDIDR/*</code> 如果 <code>$MYDIR</code>为空，结果是灾难性的。</li>
-<li>考虑使用 &#8220;find/while&#8221; 而不是 “for/find”。如：<code>for F in $(find . -type f) ; do echo $F; done</code> 写成 <code>find . -type f | while read F ; do echo $F ; done</code> 不但可以容忍空格，而且还更快。</li>
+<li>考虑使用 “find/while” 而不是 “for/find”。如：<code>for F in $(find . -type f) ; do echo $F; done</code> 写成 <code>find . -type f | while read F ; do echo $F ; done</code> 不但可以容忍空格，而且还更快。</li>
 <li>防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在。</li>
 </ul>
 <p>你还可以使用ShellCheck 来帮助你检查你的脚本。</p>
@@ -236,7 +236,6 @@ gnudate() {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

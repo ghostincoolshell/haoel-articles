@@ -19,7 +19,7 @@ type: post
 跟着本教程，你需要上一篇教程中的代码，如果你想直接使用代码，你可以使用如下的指令从[GitHub](http://github.com/cblunt/BrewClock)上check out出tutorial\_par\_1标记的代码：
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full.jpg "1_starting_point_full")  
+![](../wp-content/uploads/2011/04/1_starting_point_full.jpg "1_starting_point_full")  
 
 [code]  
 
@@ -108,7 +108,7 @@ SQLite 是一种流行的轻量级SQL数据库引擎，它将数据存在单个�
 
 通过菜单File → New → Class.在BrewClock项目中创建一个TeaData的新类。确保TeaData扩展于android.database.sqlite.SQLiteOpenHelper 类，并选中“Constructors from superclass”复选框。  
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/2_create_teadata_class1.jpg "1_starting_point_full")
+![](../wp-content/uploads/2011/04/2_create_teadata_class1.jpg "1_starting_point_full")
 
 
 TeaData 类将为你自动地处理SQLite数据库的创建和版本。我们需要增加一些方法来作为其他代码到数据库的接口。
@@ -358,7 +358,7 @@ public void onCreate(Bundle savedInstanceState) {
 运行你的程序以确保新的界面正确地生效。你应该在泡茶计数器下看见一个空白的弹出式菜单（或者是Spinner)。如果点击spinner，Android将显示一个弹出式的菜单并为你提供选择列表。在这时，菜单的内容因该是空的，现在让我们来绑定Spinner和我们的茶叶数据库。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/3_blank_spinner.jpg "3_blank_spinner")
+![](../wp-content/uploads/2011/04/3_blank_spinner.jpg "3_blank_spinner")
 
 
 #### 数据绑定
@@ -436,7 +436,7 @@ public void onCreate(Bundle savedInstanceState) {
 现在再次运行你的应用程序。你将会发现茶叶Spinner有了一条选择。点击Spinner让你可以从数据库选择你要的茶叶。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/4_populated_spinner.jpg "4_populated_spinner")
+![](../wp-content/uploads/2011/04/4_populated_spinner.jpg "4_populated_spinner")
 
 
 恭喜你！你已经成功关联了你的界面和代码。这是任何软件开发过程中一个非常重要的方面。正如你所看见的，Android将这一步简化的非常容易，但是功能有是非常的NB。使用游标和适配器，你可以将数据源（丛简单的字符串数组到复杂的数据库查询）绑定到任何类型的视图：spinner或列表，设置是类似iTunes cover-flow gallery!
@@ -505,7 +505,7 @@ public void onCreate() {
 你当然可以，回到之前的代码中去增加一些茶叶种类你满足你的口味。但是如果你发布BrewClock程序到Android Market，每当有人向增加新的茶叶数据到数据库中，我就需要去手动的取更新数据中的内容并重新发布它；这样所有的人就必须去更新它，并且所有的人都有一个同样的列表。这听起来非常的不灵活，因此我们还有很多的工作需要完成！
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/5_default_teas.jpg "3_blank_spinner")
+![](../wp-content/uploads/2011/04/5_default_teas.jpg "3_blank_spinner")
 
 
 如果用户自己有方法新增茶叶种类到数据库里面，将会非常的不错的做法。因此我们将在下一章继续。。。
@@ -567,7 +567,7 @@ public void onCreate() {
 选择资源的类型为 “Menu”，保存文件名为main.xml。Eclipse将为你自动的创建一个目录*res/menu*, 来存放你的菜单文件。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/7_new_menu_xml.jpg)
+![](../wp-content/uploads/2011/04/7_new_menu_xml.jpg)
 
 
 打开*res/menus/main.xml* 文件, 通过窗口底部的“main.xml”选项页来切换到XML视图。
@@ -617,7 +617,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
 为了测试菜单，保存并在模拟器中并运行应用程序。当程序运行起来使，点击“Menu”按键，你将会看到一个弹出式的菜单显示了一个“Add Tea”选项。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/8_add_teas_options_menu.jpg)
+![](../wp-content/uploads/2011/04/8_add_teas_options_menu.jpg)
 
 
 如果你点击“Add Tea”选项，Android自动地检测到点击并关闭菜单。在后台，Android将会提醒应用程序选项已经被点击。
@@ -629,7 +629,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
 当用户点击 “Add Tea” 菜单选项，我们想要显示一个新的Activity以便我们能进入增加新茶叶种类的界面。通过选择File → New → Class来创建一个的Activiy。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/9_new_activity_settings.jpg)
+![](../wp-content/uploads/2011/04/9_new_activity_settings.jpg)
 
 
 将新类命名为 AddTeaActivity,并确保它继承于android.app.Activity类。这个类也放在com.example.brewclock包中:
@@ -699,7 +699,7 @@ Intent功能强大而复杂的主体, 因此它值得你从官方的文档[offic
 不如你预期的，你并没有看到 “Add Tea” Activity，出现在你面前的是一个Android开发者经常看到的对话框：
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/10_crash.jpg)
+![](../wp-content/uploads/2011/04/10_crash.jpg)
 
 
 虽然我们创建了一个Intent并告诉Android启动我们的AddTeaActivity Activity, 由于我们没有将这个Activity注册到Android系统中，我们的应用程序最终还是crash掉了。系统不知道从哪里去找到我们试图运行的Activity（应该还记得Intent可以启动安装在设备上的任何Activity吧）。让我们在应用程序的mainfest文件来注册这些Acitivity。
@@ -740,7 +740,7 @@ Intent功能强大而复杂的主体, 因此它值得你从官方的文档[offic
 和主界面开发所有不同的是，你可以使用Android最近改进的Eclipse布局编辑器来开界面。创建一个新的XML文件来定义你的布局。从菜单File → New然后选择 “Android XML File,” 选择 “Layout”类型。并将文件命令为*add\_tea.xml*。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/11_new_layout_xml.jpg)
+![](../wp-content/uploads/2011/04/11_new_layout_xml.jpg)
 
 
 用下面的布局内容替换*add\_tea.xml* 文件的内容：
@@ -833,7 +833,7 @@ public void onCreate(Bundle savedInstanceState) {
 现在通过运行项目来测试你的应用程序，按下“Menu”按键，并点击“Add Tea”菜单。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/12_add_tea_interface.jpg)
+![](../wp-content/uploads/2011/04/12_add_tea_interface.jpg)
 
 
 你将从“Add Tea”屏幕上看到你的新界面。你可以在文本域中输入文字和从左到右拖动SeekBar。但是由于我们没有增加相关代码，这个界面并没有实现什么具体的功能。
@@ -943,7 +943,7 @@ public void onCreate(Bundle savedInstanceState) {
 现在运行你的程序，并拖动SeekBar,泡茶时间标签的内容将会同步更新为正确地值：
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/13_seekbar.jpg)
+![](../wp-content/uploads/2011/04/13_seekbar.jpg)
 
 
 #### 保存新增茶叶
@@ -1072,7 +1072,7 @@ public boolean saveTea() {
 在模拟器中运行你的程序，按下“Menu”按键，点击屏幕上的“Add Tea”。试图通过在此按下“Menu”和点击屏幕的 “Save Tea.”来保存空茶叶名的茶叶数据。由于是没有茶叶名，一条错误消息将出现在你的面前：
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/14_invalid_tea.jpg)
+![](../wp-content/uploads/2011/04/14_invalid_tea.jpg)
 
 
 下一步，试着键入你的茶叶名，并选择合适的泡茶时间，再次从菜单选择 “Save Tea” 。这一次，你将不在看到错误的消息。事实上，你什么都看消息不到。
@@ -1122,7 +1122,7 @@ switch(item.getItemId()) {
 现在，重新运行应用程序，并增加和保存一些新茶叶。你将会看到弹出式的Toast并让你知道你的茶叶信息已经被保存成功。getString()方法用于连接存在XML文件中的String和茶叶名称，并将%s替换成茶叶的名称。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/16_valid_save.jpg)
+![](../wp-content/uploads/2011/04/16_valid_save.jpg)
 
 
 按下“Back”按键，返回应用程序的主屏幕，点击茶叶spinner。你新增的在数据库中的茶叶已近可以显示在spinner的选项中！
@@ -1232,7 +1232,7 @@ BrewClockActivity的setBrewCount中增加下面的代码：
 无论你要开发神马样类型的应用程序，数据存储和持久化是一个重要的主题。从工具程序和业务工具到3-D游戏，几乎每个应用程序都需要使用到Android提供的数据工具类。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/17_brew_up.jpg)
+![](../wp-content/uploads/2011/04/17_brew_up.jpg)
 
 
 #### Activities
@@ -1279,10 +1279,10 @@ $ git checkout tutorial\_2
 
 ### 相关文章
 
-* [![Eclipse开发Android应用程序入门](https://coolshell.cn/wp-content/uploads/2011/04/install-150x150.gif)](https://coolshell.cn/articles/4270.html)[Eclipse开发Android应用程序入门](https://coolshell.cn/articles/4270.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
-* [![DHH 谈混合移动应用开发](https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![一些有意思的文章和资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
-* [![食客还是大厨](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/3589.html)[食客还是大厨](https://coolshell.cn/articles/3589.html)
+* [![Eclipse开发Android应用程序入门](../wp-content/uploads/2011/04/install-150x150.gif)](https://coolshell.cn/articles/4270.html)[Eclipse开发Android应用程序入门](https://coolshell.cn/articles/4270.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
+* [![DHH 谈混合移动应用开发](../wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/3589.html)[食客还是大厨](https://coolshell.cn/articles/3589.html)
 The post [Eclipse开发Android应用程序入门:重装上阵](https://coolshell.cn/articles/4334.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

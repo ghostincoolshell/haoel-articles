@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](http://www.borowitzreport.com/wp-content/uploads/zuck.jpg)MENLO PARK, CA (****[The Borowitz Report](http://www.borowitzreport.com/2012/05/17/a-letter-from-mark-zuckerberg/ "Borowitz Report")****) – 在Fackbook IPO前夕，Facebook的创始人兼CEO Mark Zuckerberg 给全球股民发表了封公开信：
+![](../wp-content/uploads/zuck.jpg)MENLO PARK, CA (****[The Borowitz Report](http://www.borowitzreport.com/2012/05/17/a-letter-from-mark-zuckerberg/ "Borowitz Report")****) – 在Fackbook IPO前夕，Facebook的创始人兼CEO Mark Zuckerberg 给全球股民发表了封公开信：
 
 
 亲爱的股民们：
@@ -53,10 +53,10 @@ Mark
 
 ### 相关文章
 
-* [![关于Facebook 的 React 专利许可证](https://coolshell.cn/wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg)](https://coolshell.cn/articles/18140.html)[关于Facebook 的 React 专利许可证](https://coolshell.cn/articles/18140.html)
-* [![Quora使用到的技术](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
-* [![Facebook 的系统架构](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4549.html)[Facebook 的系统架构](https://coolshell.cn/articles/4549.html)
-* [![Facebook全球关系网](https://coolshell.cn/wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png)](https://coolshell.cn/articles/3396.html)[Facebook全球关系网](https://coolshell.cn/articles/3396.html)
-* [![程序员的相关笑话（二）](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/1941.html)[程序员的相关笑话（二）](https://coolshell.cn/articles/1941.html)
-* [![程序员的相关笑话（一）](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/1903.html)[程序员的相关笑话（一）](https://coolshell.cn/articles/1903.html)
+* [![关于Facebook 的 React 专利许可证](../wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg)](https://coolshell.cn/articles/18140.html)[关于Facebook 的 React 专利许可证](https://coolshell.cn/articles/18140.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4549.html)[Facebook 的系统架构](https://coolshell.cn/articles/4549.html)
+* [![Facebook全球关系网](../wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png)](https://coolshell.cn/articles/3396.html)[Facebook全球关系网](https://coolshell.cn/articles/3396.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/1941.html)[程序员的相关笑话（二）](https://coolshell.cn/articles/1941.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/1903.html)[程序员的相关笑话（一）](https://coolshell.cn/articles/1903.html)
 The post [扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/articles/7448.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

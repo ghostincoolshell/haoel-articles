@@ -1,11 +1,11 @@
-<p><strong>（感谢 <a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a>（todd） 投递此文）</strong></p>
+<html><body><p><strong>（感谢 <a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a>（todd） 投递此文）</strong></p>
 <p>几个小伙伴在考虑下面这个各个语言都会遇到的问题：</p>
 <p><strong>问题：设计一个命令行参数解析API</strong></p>
 <p>一个好的命令行参数解析库一般涉及到这几个常见的方面：</p>
 <p>1) 支持方便地生成帮助信息</p>
 <p>2) 支持子命令，比如：git包含了push, pull, commit等多种子命令</p>
 <p>3) 支持单字符选项、多字符选项、标志选项、参数选项等多种选项和位置参数</p>
-<p>4) 支持选项默认值，比如：&#8211;port选项若未指定认为5037</p>
+<p>4) 支持选项默认值，比如：–port选项若未指定认为5037</p>
 <p>5) 支持使用模式，比如：tar命令的-c和-x是互斥选项，属于不同的使用模式</p>
 <p>经过一番考察，小伙伴们发现了这个几个有代表性的API设计：</p>
 <p><strong>1. getopt()：</strong></p>
@@ -13,49 +13,49 @@
 <p><span id="more-10337"></span></p>
 <pre class="EnlighterJSRAW">
 //C
-while ((c = getopt(argc, argv, &quot;ac:d:&quot;)) != -1) {
+while ((c = getopt(argc, argv, "ac:d:")) != -1) {
     int this_option_optind = optind ? optind : 1;
     switch (c) {
-    case &#039;a&#039;:
-        printf (&quot;option a&quot;);
+    case 'a':
+        printf ("option a");
         aopt = 1;
         break;
-    case &#039;c&#039;:
-        printf (&quot;option c with value &#039;%s&#039;&quot;, optarg);
+    case 'c':
+        printf ("option c with value '%s'", optarg);
         copt = optarg;
         break;
-    case &#039;d&#039;:
-        printf (&quot;option d with value &#039;%s&#039;&quot;, optarg);
+    case 'd':
+        printf ("option d with value '%s'", optarg);
         dopt = optarg;
         break;
-    case &#039;?&#039;:
+    case '?':
         break;
     default:
-        printf (&quot;?? getopt returned character code 0%o ??&quot;, c);
+        printf ("?? getopt returned character code 0%o ??", c);
     }
 }
 </pre>
-<p>getopt()的核心是一个类似printf的格式字符串的命令行参数描述串，如上面的&#8221;ac:d:&#8221;定义了&#8221;a&#8221;, &#8220;c&#8221;，&#8221;d&#8221;3个命令行参数，其中，a是一个标志符不需要参数，&#8221;c&#8221;和&#8221;d&#8221;需要跟参数。getopt()功能非常弱，只支持单个字符的标志选项和参数选项。如果按上面的5点来比对，基本上只能说是勉强支持第3点，其他几项只能靠程序自己来实现了，所以，想直接基于getopt()实现一个像git这样复杂的命令行参数是不可能的，只有自己来做很多的解析工作。小伙伴们看过getopt()之后一致的评价是:图样图森破。</p>
+<p>getopt()的核心是一个类似printf的格式字符串的命令行参数描述串，如上面的”ac:d:”定义了”a”, “c”，”d”3个命令行参数，其中，a是一个标志符不需要参数，”c”和”d”需要跟参数。getopt()功能非常弱，只支持单个字符的标志选项和参数选项。如果按上面的5点来比对，基本上只能说是勉强支持第3点，其他几项只能靠程序自己来实现了，所以，想直接基于getopt()实现一个像git这样复杂的命令行参数是不可能的，只有自己来做很多的解析工作。小伙伴们看过getopt()之后一致的评价是:图样图森破。</p>
 <p><strong>2. Google gflags</strong></p>
 <p>接着，小伙伴们又发现了<a href="https://code.google.com/p/gflags/">gflags</a>这个Google出品C++命令行参数解析库。</p>
 <pre class="EnlighterJSRAW">
 //C++
-DEFINE_bool(memory_pool, false, &quot;If use memory pool&quot;);
-DEFINE_bool(daemon, true, &quot;If started as daemon&quot;);
-DEFINE_string(module_id, &quot;&quot;, &quot;Server module id&quot;);
-DEFINE_int32(http_port, 80, &quot;HTTP listen port&quot;);
-DEFINE_int32(https_port, 443, &quot;HTTPS listen port&quot;);
+DEFINE_bool(memory_pool, false, "If use memory pool");
+DEFINE_bool(daemon, true, "If started as daemon");
+DEFINE_string(module_id, "", "Server module id");
+DEFINE_int32(http_port, 80, "HTTP listen port");
+DEFINE_int32(https_port, 443, "HTTPS listen port");
 
 int main(int argc, char** argv) {
     ::google::ParseCommandLineFlags(&amp;argc, &amp;argv, true);
 
-    printf(&quot;Server module id: %s&quot;, FLAGS_module_id.c_str());
+    printf("Server module id: %s", FLAGS_module_id.c_str());
 
     if (FLAGS_daemon) {
-      printf(&quot;Run as daemon: %d&quot;, FLAGS_daemon);
+      printf("Run as daemon: %d", FLAGS_daemon);
     }
     if (FLAGS_memory_pool) {
-      printf(&quot;Use memory pool: %d&quot;, FLAGS_daemon);
+      printf("Use memory pool: %d", FLAGS_daemon);
     }
 
     Server server;
@@ -69,22 +69,22 @@ int main(int argc, char** argv) {
 <pre class="EnlighterJSRAW">
 //Ruby
 # :name is optional, otherwise uses the basename of this executable
-program :name, &#039;Foo Bar&#039;
-program :version, &#039;1.0.0&#039;
-program :description, &#039;Stupid command that prints foo or bar.&#039;
+program :name, 'Foo Bar'
+program :version, '1.0.0'
+program :description, 'Stupid command that prints foo or bar.'
 command :bar do |c|
-  c.syntax = &#039;foobar bar [options]&#039;
-  c.description = &#039;Display bar with optional prefix and suffix&#039;
-  c.option &#039;--prefix STRING&#039;, String, &#039;Adds a prefix to bar&#039;
-  c.option &#039;--suffix STRING&#039;, String, &#039;Adds a suffix to bar&#039;
+  c.syntax = 'foobar bar [options]'
+  c.description = 'Display bar with optional prefix and suffix'
+  c.option '--prefix STRING', String, 'Adds a prefix to bar'
+  c.option '--suffix STRING', String, 'Adds a suffix to bar'
   c.action do |args, options|
-    options.default :prefix =&gt; &#039;(&#039;, :suffix =&gt; &#039;)&#039;
-    say &quot;#{options.prefix}bar#{options.suffix}&quot;
+    options.default :prefix =&gt; '(', :suffix =&gt; ')'
+    say "#{options.prefix}bar#{options.suffix}"
   end
 end
 $ foobar bar
 # =&gt; (bar)
-$ foobar bar --suffix &#039;}&#039; --prefix &#039;{&#039;
+$ foobar bar --suffix '}' --prefix '{'
 # =&gt; {bar}
 </pre>
 <p>Commander库利用Ruby酷炫的语法定义了一种描述命令行参数的内部DSL，看起来相当高端大气上档次。除了上面的第5项之外，其他几项都有很好的支持，可以说Commander库的设计基本达到了git这种级别命令行参数解析的要求。只是，要搞懂Ruby这么炫的语法和这个库的使用方法恐怕就不如getopt()和gflags容易了。有小伙伴当场表示想要学习Ruby，但是也有小伙伴表示再看看其他库再说。</p>
@@ -92,67 +92,67 @@ $ foobar bar --suffix &#039;}&#039; --prefix &#039;{&#039;
 <p>接下来，小伙伴们发现了Lisp方言Racket的<a href="http://docs.racket-lang.org/reference/Command-Line_Parsing.html">cmdline库</a>。</p>
 <pre class="EnlighterJSRAW">
 //Lisp
-(parse-command-line &quot;compile&quot; (current-command-line-arguments)
+(parse-command-line "compile" (current-command-line-arguments)
   `((once-each
-     [(&quot;-v&quot; &quot;--verbose&quot;)
+     [("-v" "--verbose")
       ,(lambda (flag) (verbose-mode #t))
-      (&quot;Compile with verbose messages&quot;)]
-     [(&quot;-p&quot; &quot;--profile&quot;)
+      ("Compile with verbose messages")]
+     [("-p" "--profile")
       ,(lambda (flag) (profiling-on #t))
-      (&quot;Compile with profiling&quot;)])
+      ("Compile with profiling")])
     (once-any
-     [(&quot;-o&quot; &quot;--optimize-1&quot;)
+     [("-o" "--optimize-1")
       ,(lambda (flag) (optimize-level 1))
-      (&quot;Compile with optimization level 1&quot;)]
-     [(&quot;--optimize-2&quot;)
+      ("Compile with optimization level 1")]
+     [("--optimize-2")
       ,(lambda (flag) (optimize-level 2))
-      ((&quot;Compile with optimization level 2,&quot;
-        &quot;which implies all optimizations of level 1&quot;))])
+      (("Compile with optimization level 2,"
+        "which implies all optimizations of level 1"))])
     (multi
-     [(&quot;-l&quot; &quot;--link-flags&quot;)
+     [("-l" "--link-flags")
       ,(lambda (flag lf) (link-flags (cons lf (link-flags))))
-      (&quot;Add a flag &lt;lf&gt; for the linker&quot; &quot;lf&quot;)]))
+      ("Add a flag &lt;lf&gt; for the linker" "lf")]))
    (lambda (flag-accum file) file)
-   &#039;(&quot;filename&quot;))
+   '("filename"))
 </pre>
-<p>这是神马浮云啊?括号套括号，看起来很厉害的样子，但又不是很明白。看到这样的设计，有的小伙伴连评价都懒得评价了，但也有的小伙伴对Lisp越发崇拜，表示Lisp就是所谓的终极语言了，没有哪门语言能写出这么不明觉历的代码来！小伙伴们正准备打完收工，突然&#8230;</p>
+<p>这是神马浮云啊?括号套括号，看起来很厉害的样子，但又不是很明白。看到这样的设计，有的小伙伴连评价都懒得评价了，但也有的小伙伴对Lisp越发崇拜，表示Lisp就是所谓的终极语言了，没有哪门语言能写出这么不明觉历的代码来！小伙伴们正准备打完收工，突然…</p>
 <p><strong>5. Node.js的LineParser库</strong></p>
 <p>发现了Node.js的<a href="https://github.com/weidagang/line-parser-js">LineParser库</a>:</p>
-<p>[javascript]<br />
-//JavaScript<br />
-var meta = {<br />
-    program : &#8216;adb&#8217;,<br />
-    name : &#8216;Android Debug Bridge&#8217;,<br />
-    version : &#8216;1.0.3&#8217;,<br />
-    subcommands : [ &#8216;connect&#8217;, &#8216;disconnect&#8217;, &#8216;install&#8217; ],<br />
-    options : {<br />
-        flags : [<br />
-            [ &#8216;h&#8217;, &#8216;help&#8217;, &#8216;print program usage&#8217; ],<br />
-            [ &#8216;r&#8217;, &#8216;reinstall&#8217;, &#8216;reinstall package&#8217; ],<br />
-            [ &#8216;l&#8217;, &#8216;localhost&#8217;, &#8216;localhost&#8217; ]<br />
-        ],<br />
-        parameters : [<br />
-            [ null, &#8216;host&#8217;, &#8216;adb server hostname or IP address&#8217;, null ],<br />
-            [ &#8216;p&#8217;, &#8216;port&#8217;, &#8216;adb server port&#8217;, 5037 ]<br />
-        ]<br />
-    },<br />
-    usages : [<br />
-        [ &#8216;connect&#8217;, [&#8216;host&#8217;, &#8216;[port]&#8217;], null, &#8216;connect to adb server&#8217;, adb_connect ],<br />
-        [ &#8216;connect&#8217;, [ &#8216;l&#8217; ], null, &#8216;connect to the local adb server&#8217;, adb_connect ],<br />
-        [ &#8216;disconnect&#8217;, null, null, &#8216;disconnect from adb server&#8217;, adb_disconnect ],<br />
-        [ &#8216;install&#8217;, [&#8216;r&#8217;], [&#8216;package&#8217;], &#8216;install package&#8217;, adb_install ],<br />
-        [ null, [&#8216;h&#8217;], null, &#8216;help&#8217;, adb_help ],<br />
-    ]<br />
+<p>[javascript]<br/>
+//JavaScript<br/>
+var meta = {<br/>
+    program : ‘adb’,<br/>
+    name : ‘Android Debug Bridge’,<br/>
+    version : ‘1.0.3’,<br/>
+    subcommands : [ ‘connect’, ‘disconnect’, ‘install’ ],<br/>
+    options : {<br/>
+        flags : [<br/>
+            [ ‘h’, ‘help’, ‘print program usage’ ],<br/>
+            [ ‘r’, ‘reinstall’, ‘reinstall package’ ],<br/>
+            [ ‘l’, ‘localhost’, ‘localhost’ ]<br/>
+        ],<br/>
+        parameters : [<br/>
+            [ null, ‘host’, ‘adb server hostname or IP address’, null ],<br/>
+            [ ‘p’, ‘port’, ‘adb server port’, 5037 ]<br/>
+        ]<br/>
+    },<br/>
+    usages : [<br/>
+        [ ‘connect’, [‘host’, ‘[port]’], null, ‘connect to adb server’, adb_connect ],<br/>
+        [ ‘connect’, [ ‘l’ ], null, ‘connect to the local adb server’, adb_connect ],<br/>
+        [ ‘disconnect’, null, null, ‘disconnect from adb server’, adb_disconnect ],<br/>
+        [ ‘install’, [‘r’], [‘package’], ‘install package’, adb_install ],<br/>
+        [ null, [‘h’], null, ‘help’, adb_help ],<br/>
+    ]<br/>
 };</p>
-<p>try {<br />
-    var lineparser = require(&#8216;lineparser&#8217;);<br />
-    var parser = lineparser.init(meta);<br />
-    // adb_install will be invoked<br />
-    parser.parse([&#8216;install&#8217;, &#8216;-r&#8217;, &#8216;/pkgs/bird.apk&#8217;]);<br />
-}<br />
-catch (e) {<br />
-    console.error(e);<br />
-}<br />
+<p>try {<br/>
+    var lineparser = require(‘lineparser’);<br/>
+    var parser = lineparser.init(meta);<br/>
+    // adb_install will be invoked<br/>
+    parser.parse([‘install’, ‘-r’, ‘/pkgs/bird.apk’]);<br/>
+}<br/>
+catch (e) {<br/>
+    console.error(e);<br/>
+}<br/>
 [/javascript]</p>
 <p>天啊！？这是什么？我和小伙伴们彻底惊呆了！短短十几行代码就获得了上面5点的全面支持，重要的是小伙伴们居然一下子就看懂了，没有任何的遮遮掩掩和故弄玄虚。本来以为Ruby和Lisp很酷，小伙伴们都想马上去学Ruby和Lisp了，看到这个代码之后怎么感觉前面全是在装呢？有个小伙伴居然激动得哭着表示：我写代码多年，以为再也没有什么代码可以让我感动，没想到这段代码如此精妙，我不由得要赞叹了，实在是太漂亮了！</p>
 <p>小伙伴们的故事讲完了，您看懂了吗？如果没有看懂的话，正题开始了：</p>
@@ -183,7 +183,6 @@ catch (e) {<br />
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5202.html"><img alt="对象的消息模型" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5202.html">对象的消息模型</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10739.html"><img alt="Lua简明教程" height="150" src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10739.html">Lua简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5709.html"><img alt="API设计：用流畅接口构造内部DSL" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5709.html">API设计：用流畅接口构造内部DSL</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5202.html"><img alt="对象的消息模型" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5202.html">对象的消息模型</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10739.html"><img alt="Lua简明教程" height="150" src="../wp-content/uploads/2013/12/lua-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10739.html">Lua简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5709.html"><img alt="API设计：用流畅接口构造内部DSL" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5709.html">API设计：用流畅接口构造内部DSL</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

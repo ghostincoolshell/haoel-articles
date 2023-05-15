@@ -33,7 +33,7 @@ type: post
 首先，看LongAdder的继承树：
 
 
-![la1](http://www.liuinsect.com/wp-content/uploads/2014/04/la1.png)
+![la1](../wp-content/uploads/2014/04/la1.png)
 
 
 继承自Striped64，这个类包装了一些很重要的内部类和操作。稍候会看到。
@@ -46,17 +46,17 @@ type: post
 再看看LongAdder的方法：
 
 
-![la2](http://www.liuinsect.com/wp-content/uploads/2014/04/la2.png)  
+![la2](../wp-content/uploads/2014/04/la2.png)  
 
 怪不得可以和AtomicLong作比较，连API都这么像。我们随便挑一个API入手分析，这个API通了，其他API都大同小异，因此，我选择了add这个方法。事实上,其他API也都依赖这个方法。
 
 
-![la3](http://www.liuinsect.com/wp-content/uploads/2014/04/la3.png)  
+![la3](../wp-content/uploads/2014/04/la3.png)  
 
 LongAdder中包含了一个Cell 数组，Cell是Striped64的一个内部类，顾名思义，Cell 代表了一个最小单元，这个单元有什么用，稍候会说道。先看定义：
 
 
-![la4](http://www.liuinsect.com/wp-content/uploads/2014/04/la4.png)  
+![la4](../wp-content/uploads/2014/04/la4.png)  
 
 Cell内部有一个非常重要的value变量，并且提供了一个CAS更新其值的方法。
 
@@ -64,7 +64,7 @@ Cell内部有一个非常重要的value变量，并且提供了一个CAS更新�
 回到add方法：
 
 
-![la3](http://www.liuinsect.com/wp-content/uploads/2014/04/la3.png)
+![la3](../wp-content/uploads/2014/04/la3.png)
 
 
 这里，我有个疑问，AtomicLong已经使用CAS指令，非常高效了（比起各种锁），LongAdder如果还是用CAS指令更新值，怎么可能比AtomicLong高效了？ 何况内部还这么多判断！！！
@@ -76,7 +76,7 @@ Cell内部有一个非常重要的value变量，并且提供了一个CAS更新�
 第一if 判断，第一次调用的时候cells数组肯定为null,因此，进入casBase方法：
 
 
-![la5](http://www.liuinsect.com/wp-content/uploads/2014/04/la5.png)  
+![la5](../wp-content/uploads/2014/04/la5.png)  
 
 原子更新base没啥好说的，如果更新成功，本地调用开始返回，否则进入分支内部。
 
@@ -87,7 +87,7 @@ Cell内部有一个非常重要的value变量，并且提供了一个CAS更新�
 分支内部，通过一个Threadlocal变量threadHashCode 获取一个HashCode对象，该HashCode对象依然是Striped64类的内部类，看定义：
 
 
-![la6](http://www.liuinsect.com/wp-content/uploads/2014/04/la6.png)  
+![la6](../wp-content/uploads/2014/04/la6.png)  
 
 有个code变量，保存了一个非0的随机数随机值。
 
@@ -95,7 +95,7 @@ Cell内部有一个非常重要的value变量，并且提供了一个CAS更新�
 回到add方法：
 
 
-![la3](http://www.liuinsect.com/wp-content/uploads/2014/04/la3.png)
+![la3](../wp-content/uploads/2014/04/la3.png)
 
 
 拿到该线程相关的HashCode对象后，获取它的code变量，as[(n-1)&h] 这句话相当于对h取模，只不过比起取模，因为是 与 的运算所以效率更高。
@@ -119,7 +119,7 @@ Cell内部有一个非常重要的value变量，并且提供了一个CAS更新�
 答案是不好，不是不行，因为，casBase操作等价于AtomicLong中的CAS操作，要知道，LongAdder这样的处理方式是有坏处的，分段操作必然带来空间上的浪费，可以空间换时间，但是，**能不换就不换，看空间时间都节约~！** 所以，**casBase操作保证了在低并发时，不会立即进入分支做分段更新操作**，因为低并发时，casBase操作基本都会成功，只有并发高到一定程度了，才会进入分支，所以，Doug Lea对该类的说明是： **低并发时LongAdder和AtomicLong性能差不多，高并发时LongAdder更高效！**
 
 
-![la7](http://www.liuinsect.com/wp-content/uploads/2014/04/la7.png)
+![la7](../wp-content/uploads/2014/04/la7.png)
 
 
 但是，Doung Lea 还是没这么简单，聪明之处还没有结束……
@@ -277,7 +277,7 @@ Cell内部有一个非常重要的value变量，并且提供了一个CAS更新�
 base在调用intValue等方法的时候是会汇总的：
 
 
-[![LA10](http://www.liuinsect.com/wp-content/uploads/2014/04/LA101.bmp)](http://www.liuinsect.com/wp-content/uploads/2014/04/LA101.bmp)
+[![LA10](../wp-content/uploads/2014/04/LA101.bmp)](http://www.liuinsect.com/wp-content/uploads/2014/04/LA101.bmp)
 
 
 3. 如果cell被创建后，原来的casBase就不走了，会不会性能更差？ base的顺序可不可以调换?  
@@ -301,11 +301,11 @@ base在调用intValue等方法的时候是会汇总的：
 
 ### 相关文章
 
-* [![无锁队列的实现](https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg)](http://coolshell.cn/articles/8239.html)[无锁队列的实现](http://coolshell.cn/articles/8239.html)
-* [![无锁HashMap的原理与实现](https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg)](http://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](http://coolshell.cn/articles/9703.html)
-* [![并发框架Disruptor译文](https://coolshell.cn/wp-content/uploads/2013/02/Disruptor-150x150.png)](http://coolshell.cn/articles/9169.html)[并发框架Disruptor译文](http://coolshell.cn/articles/9169.html)
-* [![疫苗：Java HashMap的死循环](https://coolshell.cn/wp-content/uploads/2013/05/race_condition-150x150.jpg)](http://coolshell.cn/articles/9606.html)[疫苗：Java HashMap的死循环](http://coolshell.cn/articles/9606.html)
-* [![Hash Collision DoS 问题](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](http://coolshell.cn/articles/6424.html)[Hash Collision DoS 问题](http://coolshell.cn/articles/6424.html)
-* [![Java中的CopyOnWrite容器](https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg)](http://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](http://coolshell.cn/articles/11175.html)
+* [![无锁队列的实现](../wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg)](http://coolshell.cn/articles/8239.html)[无锁队列的实现](http://coolshell.cn/articles/8239.html)
+* [![无锁HashMap的原理与实现](../wp-content/uploads/2013/05/图1-3-150x150.jpg)](http://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](http://coolshell.cn/articles/9703.html)
+* [![并发框架Disruptor译文](../wp-content/uploads/2013/02/Disruptor-150x150.png)](http://coolshell.cn/articles/9169.html)[并发框架Disruptor译文](http://coolshell.cn/articles/9169.html)
+* [![疫苗：Java HashMap的死循环](../wp-content/uploads/2013/05/race_condition-150x150.jpg)](http://coolshell.cn/articles/9606.html)[疫苗：Java HashMap的死循环](http://coolshell.cn/articles/9606.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](http://coolshell.cn/articles/6424.html)[Hash Collision DoS 问题](http://coolshell.cn/articles/6424.html)
+* [![Java中的CopyOnWrite容器](../wp-content/uploads/2014/03/cow-copy-150x150.jpg)](http://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](http://coolshell.cn/articles/11175.html)
 The post [从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).
 

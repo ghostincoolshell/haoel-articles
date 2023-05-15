@@ -12,13 +12,13 @@ type: post
 源文：[链接](http://duartes.org/gustavo/blog/post/richard-feynman-challenger-disaster-software-engineering)  （本文主要根据挑战者号的问题，以及Richard Feynman那对NASA严厉的批评报告，批评了不适当的“自顶向下”的设计方法，并总结了一下软件工程和其它工程的相通的一些观点。翻译水平有限，欢迎指正）
 
 
-![Challenger Crew](http://static.duartes.org/img/blogPosts/250px-ChallengerCrew.jpg)
+http://static.duartes.org/img/blogPosts/250px-ChallengerCrew.jpg
 
 
 佛罗里达州，美国东部时间1986年1月28日上午11时39分，[挑战者号航天飞机](http://zh.wikipedia.org/wiki/%E6%8C%91%E6%88%98%E8%80%85%E5%8F%B7%E8%88%AA%E5%A4%A9%E9%A3%9E%E6%9C%BA%E7%81%BE%E9%9A%BE) 执行为期6天的[STS-51-L 任务](http://en.wikipedia.org/wiki/STS-51-L)，在发射后，其右侧固体火箭助推器（SRB – [Solid Rocket Booster](http://en.wikipedia.org/wiki/Space_Shuttle_Solid_Rocket_Booster)）的O型环密封圈（用于连接两节助推器）失效，泄漏出来的热汽达到了5000华氏度，直接蒸发了O型密封圈，并灼烧了毗邻的外部燃料舱，在几秒钟内，外部燃料舱出现结构连接失效，空气的动力迅速分解了航天飞机。在而航天飞机上升72秒以后，助推器脱落，导致航天发飞向侧面滑出。几乎在引航员 Michael J. Smith 发出”Uh oh” 的同时，整个航天飞机完全解体，片刻，航天飞机内部发生爆炸，所有7名宇航员罹难。 那时的我还只是一个小孩，我从电视下方滚动的新闻条目知道了这一惨剧。
 
 
-在那个时候，火箭助推器工程师曾经警告过这个O型环可能存在问题，但可惜的是，NASA的管理层忽略了这个问题。![Challenger Explosion](http://static.duartes.org/img/blogPosts/ChallengerExplosion.jpg)美国总统里根委派[罗杰斯委员会](http://en.wikipedia.org/wiki/Rogers_Commission)对事故进行了调查，调查成员包括著名的物理学家Richard Feynman。其不羁的态度和直来直去的方法和罗杰斯委员会的风格形成了鲜明的反差。主席罗杰斯，一个政客，评论Feynman是一个“真正的痛苦”。最后，在委员会提交的报告中，Feynman反判的观点几乎被清除了出去。并且，Feynman曾被主席威胁过要把他的名字从报告中完全除掉，但最终，他们还是同意在报告中加一个附录，但只是个人观点—— [Appendix F – Personal Observations on Reliability of Shuttle](http://www.ralentz.com/old/space/feynman-report.html)。
+在那个时候，火箭助推器工程师曾经警告过这个O型环可能存在问题，但可惜的是，NASA的管理层忽略了这个问题。http://static.duartes.org/img/blogPosts/ChallengerExplosion.jpg美国总统里根委派[罗杰斯委员会](http://en.wikipedia.org/wiki/Rogers_Commission)对事故进行了调查，调查成员包括著名的物理学家Richard Feynman。其不羁的态度和直来直去的方法和罗杰斯委员会的风格形成了鲜明的反差。主席罗杰斯，一个政客，评论Feynman是一个“真正的痛苦”。最后，在委员会提交的报告中，Feynman反判的观点几乎被清除了出去。并且，Feynman曾被主席威胁过要把他的名字从报告中完全除掉，但最终，他们还是同意在报告中加一个附录，但只是个人观点—— [Appendix F – Personal Observations on Reliability of Shuttle](http://www.ralentz.com/old/space/feynman-report.html)。
 
 
 
@@ -40,7 +40,7 @@ type: post
 > 
 
 
-![Richard Feynman](http://static.duartes.org/img/blogPosts/feynman.jpg)
+http://static.duartes.org/img/blogPosts/feynman.jpg
 
 
 “不合适的自顶向下的设计方式，导致了问题很难去发现和修正，最终没有完成设计需求，频繁性地维护”这些描述方式，听起来是不是似曾相识？我们每天在做的软件工程和这个不一样吗？Feynman 详细说明了为什么“自顶向下”的设计会让发现和解决这些问题成为那么的难和痛苦的一件事：
@@ -92,10 +92,10 @@ type: post
 
 ### 相关文章
 
-* [![Kent Beck 谈单元测试和持续部署](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg)](https://coolshell.cn/articles/2681.html)[Kent Beck 谈单元测试和持续部署](https://coolshell.cn/articles/2681.html)
-* [![参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/2539.html)[参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/articles/2539.html)
-* [![怎样做一个 Program Manager](https://coolshell.cn/wp-content/uploads/2009/03/09meeting-thumbnail-150x150.jpg)](https://coolshell.cn/articles/76.html)[怎样做一个 Program Manager](https://coolshell.cn/articles/76.html)
-* [![4月14日，微软补丁日](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/404.html)[4月14日，微软补丁日](https://coolshell.cn/articles/404.html)
-* [![一些非常不错的资料](https://coolshell.cn/wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg)](https://coolshell.cn/articles/3192.html)[一些非常不错的资料](https://coolshell.cn/articles/3192.html)
-* [![9个最常见IE的Bug及其fix](https://coolshell.cn/wp-content/uploads/2009/11/200x200-150x150.jpg)](https://coolshell.cn/articles/1817.html)[9个最常见IE的Bug及其fix](https://coolshell.cn/articles/1817.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg](https://coolshell.cn/articles/2681.html)[Kent Beck 谈单元测试和持续部署](https://coolshell.cn/articles/2681.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/2539.html)[参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/articles/2539.html)
+* [![怎样做一个 Program Manager](../wp-content/uploads/2009/03/09meeting-thumbnail-150x150.jpg)](https://coolshell.cn/articles/76.html)[怎样做一个 Program Manager](https://coolshell.cn/articles/76.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/404.html)[4月14日，微软补丁日](https://coolshell.cn/articles/404.html)
+* [![一些非常不错的资料](../wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg)](https://coolshell.cn/articles/3192.html)[一些非常不错的资料](https://coolshell.cn/articles/3192.html)
+* [![9个最常见IE的Bug及其fix](../wp-content/uploads/2009/11/200x200-150x150.jpg)](https://coolshell.cn/articles/1817.html)[9个最常见IE的Bug及其fix](https://coolshell.cn/articles/1817.html)
 The post [Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/articles/1654.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

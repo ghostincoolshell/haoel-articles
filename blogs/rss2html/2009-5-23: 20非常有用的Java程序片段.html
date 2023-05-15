@@ -1,11 +1,11 @@
-<p>下面是20个非常有用的Java程序片段，希望能对你有用。</p>
+<html><body><p>下面是20个非常有用的Java程序片段，希望能对你有用。</p>
 <p><strong>1. 字符串有整型的相互转换</strong></p>
 <pre class="EnlighterJSRAW"> 
 String a = String.valueOf(2);   //integer to numeric string  
 int i = Integer.parseInt(a); //numeric string to an int 
 
 </pre>
-<p><span id="more-889"></span><br />
+<p><span id="more-889"></span><br/>
 <strong>2. 向文件末尾添加内容</strong></p>
 <pre class="EnlighterJSRAW"> 
 BufferedWriter out = null;  
@@ -30,14 +30,14 @@ java.util.Date = java.text.DateFormat.getDateInstance().parse(date String); 
 </pre>
 <p>或者是：</p>
 <pre class="EnlighterJSRAW"> 
-SimpleDateFormat format = new SimpleDateFormat( &quot;dd.MM.yyyy&quot; );  
+SimpleDateFormat format = new SimpleDateFormat( "dd.MM.yyyy" );  
 Date date = format.parse( myString ); 
 </pre>
 <p><strong>5. 使用JDBC链接Oracle</strong></p>
 <pre class="EnlighterJSRAW">
 public class OracleJdbcTest  
 {  
-    String driverClass = &quot;oracle.jdbc.driver.OracleDriver&quot;;  
+    String driverClass = "oracle.jdbc.driver.OracleDriver";  
  
     Connection con;  
  
@@ -45,9 +45,9 @@ public class OracleJdbcTest  
     {  
         Properties props = new Properties();  
         props.load(fs);  
-        String url = props.getProperty(&quot;db.url&quot;);  
-        String userName = props.getProperty(&quot;db.user&quot;);  
-        String password = props.getProperty(&quot;db.password&quot;);  
+        String url = props.getProperty("db.url");  
+        String userName = props.getProperty("db.user");  
+        String password = props.getProperty("db.password");  
         Class.forName(driverClass);  
  
         con=DriverManager.getConnection(url, userName, password);  
@@ -55,7 +55,7 @@ public class OracleJdbcTest  
  
     public void fetch() throws SQLException, IOException  
     {  
-        PreparedStatement ps = con.prepareStatement(&quot;select SYSDATE from dual&quot;);  
+        PreparedStatement ps = con.prepareStatement("select SYSDATE from dual");  
         ResultSet rs = ps.executeQuery();  
  
         while (rs.next())  
@@ -79,7 +79,7 @@ public class OracleJdbcTest  
 java.util.Date utilDate = new java.util.Date();  
 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); 
 </pre>
-<p><strong>7. 使用NIO进行快速的文件拷贝</strong><br />
+<p><strong>7. 使用NIO进行快速的文件拷贝</strong><br/>
  </p>
 <pre class="EnlighterJSRAW">
 public static void fileCopy( File in, File out )  
@@ -155,15 +155,15 @@ private void createThumbnail(String filename, int thumbWidth, int thumbHeight, i
     } 
 </pre>
 <p><strong>9. 创建 JSON 格式的数据</strong></p>
-<p>请先阅读<a href="http://viralpatel.net/blogs/2009/02/creating-parsing-json-data-with-java-servlet-struts-jsp-json.html"><span style="color: #366799;">这篇文章</span></a> 了解一些细节，<br />
+<p>请先阅读<a href="http://viralpatel.net/blogs/2009/02/creating-parsing-json-data-with-java-servlet-struts-jsp-json.html"><span style="color: #366799;">这篇文章</span></a> 了解一些细节，<br/>
 并下面这个JAR 文件：<a href="http://viralpatel.net/blogs/download/json/json-rpc-1.0.jar"><span style="color: #366799;">json-rpc-1.0.jar (75 kb)</span></a></p>
 <pre class="EnlighterJSRAW">
 import org.json.JSONObject;  
 ...  
 ...  
 JSONObject json = new JSONObject();  
-json.put(&quot;city&quot;, &quot;Mumbai&quot;);  
-json.put(&quot;country&quot;, &quot;India&quot;);  
+json.put("city", "Mumbai");  
+json.put("country", "India");  
 ...  
 String output = json.toString();  
 ... 
@@ -184,12 +184,12 @@ public class GeneratePDF {  
  
     public static void main(String[] args) {  
         try {  
-            OutputStream file = new FileOutputStream(new File(&quot;C:\\Test.pdf&quot;));  
+            OutputStream file = new FileOutputStream(new File("C:\\Test.pdf"));  
  
             Document document = new Document();  
             PdfWriter.getInstance(document, file);  
             document.open();  
-            document.add(new Paragraph(&quot;Hello Kiran&quot;));  
+            document.add(new Paragraph("Hello Kiran"));  
             document.add(new Paragraph(new Date().toString()));  
  
             document.close();  
@@ -205,10 +205,10 @@ public class GeneratePDF {  
 <p><strong>11. HTTP 代理设置</strong></p>
 <p>阅读这篇 <a href="http://viralpatel.net/blogs/2009/04/http-proxy-setting-java-setting-proxy-java.html"><span style="color: #366799;">文章</span></a> 了解更多细节。</p>
 <pre class="EnlighterJSRAW"> 
-System.getProperties().put(&quot;http.proxyHost&quot;, &quot;someProxyURL&quot;);  
-System.getProperties().put(&quot;http.proxyPort&quot;, &quot;someProxyPort&quot;);  
-System.getProperties().put(&quot;http.proxyUser&quot;, &quot;someUserName&quot;);  
-System.getProperties().put(&quot;http.proxyPassword&quot;, &quot;somePassword&quot;); 
+System.getProperties().put("http.proxyHost", "someProxyURL");  
+System.getProperties().put("http.proxyPort", "someProxyPort");  
+System.getProperties().put("http.proxyUser", "someUserName");  
+System.getProperties().put("http.proxyPassword", "somePassword"); 
 </pre>
 <p><strong>12. 单实例Singleton 示例</strong></p>
 <p>请先阅读这篇<a href="http://viralpatel.net/blogs/2009/01/java-singleton-design-pattern-tutorial-example-singleton-j2ee-design-pattern.html"><span style="color: #366799;">文章</span></a> 了解更多信息</p>
@@ -258,7 +258,7 @@ public void captureScreen(String fileName) throws Exception {  
    Rectangle screenRectangle = new Rectangle(screenSize);  
    Robot robot = new Robot();  
    BufferedImage image = robot.createScreenCapture(screenRectangle);  
-   ImageIO.write(image, &quot;png&quot;, new File(fileName));  
+   ImageIO.write(image, "png", new File(fileName));  
  
 }  
 ... 
@@ -267,7 +267,7 @@ public void captureScreen(String fileName) throws Exception {  
 <p> </p>
 <p><strong>14. 列出文件和目录</strong></p>
 <pre class="EnlighterJSRAW">
-File dir = new File(&quot;directoryName&quot;);  
+File dir = new File("directoryName");  
   String[] children = dir.list();  
   if (children == null) {  
       // Either dir does not exist or is not a directory  
@@ -279,10 +279,10 @@ File dir = new File(&quot;directoryName&quot;);  
   }  
  
   // It is also possible to filter the list of returned files.  
-  // This example does not return any files that start with `.&#039;.  
+  // This example does not return any files that start with `.'.  
   FilenameFilter filter = new FilenameFilter() {  
       public boolean accept(File dir, String name) {  
-          return !name.startsWith(&quot;.&quot;);  
+          return !name.startsWith(".");  
       }  
   };  
   children = dir.list(filter);  
@@ -298,7 +298,7 @@ File dir = new File(&quot;directoryName&quot;);  
   };  
   files = dir.listFiles(fileFilter); 
 </pre>
-<p><strong>15. 创建ZIP和JAR文件<br />
+<p><strong>15. 创建ZIP和JAR文件<br/>
 </strong></p>
 <pre class="EnlighterJSRAW"> 
 import java.util.zip.*;  
@@ -307,12 +307,12 @@ import java.io.*;  
 public class ZipIt {  
     public static void main(String args[]) throws IOException {  
         if (args.length &lt; 2) {  
-            System.err.println(&quot;usage: java ZipIt Zip.zip file1 file2 file3&quot;);  
+            System.err.println("usage: java ZipIt Zip.zip file1 file2 file3");  
             System.exit(-1);  
         }  
         File zipFile = new File(args[0]);  
         if (zipFile.exists()) {  
-            System.err.println(&quot;Zip file already exists, please try another&quot;);  
+            System.err.println("Zip file already exists, please try another");  
             System.exit(-2);  
         }  
         FileOutputStream fos = new FileOutputStream(zipFile);  
@@ -324,7 +324,7 @@ public class ZipIt {  
             String name = args[i];  
             File file = new File(name);  
             if (!file.exists()) {  
-                System.err.println(&quot;Skipping: &quot; + name);  
+                System.err.println("Skipping: " + name);  
                 continue;  
             }  
             BufferedInputStream bis = new BufferedInputStream(  
@@ -353,10 +353,10 @@ public class ZipIt {  
 } 
 </pre>
 <p><strong>16. 解析/读取XML 文件</strong></p>
-<p>XML文件<br />
+<p>XML文件<br/>
  </p>
 <pre class="EnlighterJSRAW">
-&lt;?xml version=&quot;1.0&quot;?&gt; 
+&lt;?xml version="1.0"?&gt; 
 &lt;students&gt; 
     &lt;student&gt; 
         &lt;name&gt;John&lt;/name&gt; 
@@ -400,14 +400,14 @@ public class XMLParser {  
                 Element docEle = doc.getDocumentElement();  
  
                 // Print root element of the document  
-                System.out.println(&quot;Root element of the document: &quot; 
+                System.out.println("Root element of the document: " 
                         + docEle.getNodeName());  
  
-                NodeList studentList = docEle.getElementsByTagName(&quot;student&quot;);  
+                NodeList studentList = docEle.getElementsByTagName("student");  
  
                 // Print total student elements in document  
                 System.out  
-                        .println(&quot;Total students: &quot; + studentList.getLength());  
+                        .println("Total students: " + studentList.getLength());  
  
                 if (studentList != null &amp;&amp; studentList.getLength() &gt; 0) {  
                     for (int i = 0; i &lt; studentList.getLength(); i++) {  
@@ -417,21 +417,21 @@ public class XMLParser {  
                         if (node.getNodeType() == Node.ELEMENT_NODE) {  
  
                             System.out  
-                                    .println(&quot;=====================&quot;);  
+                                    .println("=====================");  
  
                             Element e = (Element) node;  
-                            NodeList nodeList = e.getElementsByTagName(&quot;name&quot;);  
-                            System.out.println(&quot;Name: &quot; 
+                            NodeList nodeList = e.getElementsByTagName("name");  
+                            System.out.println("Name: " 
                                     + nodeList.item(0).getChildNodes().item(0)  
                                             .getNodeValue());  
  
-                            nodeList = e.getElementsByTagName(&quot;grade&quot;);  
-                            System.out.println(&quot;Grade: &quot; 
+                            nodeList = e.getElementsByTagName("grade");  
+                            System.out.println("Grade: " 
                                     + nodeList.item(0).getChildNodes().item(0)  
                                             .getNodeValue());  
  
-                            nodeList = e.getElementsByTagName(&quot;age&quot;);  
-                            System.out.println(&quot;Age: &quot; 
+                            nodeList = e.getElementsByTagName("age");  
+                            System.out.println("Age: " 
                                     + nodeList.item(0).getChildNodes().item(0)  
                                             .getNodeValue());  
                         }  
@@ -447,7 +447,7 @@ public class XMLParser {  
     public static void main(String[] args) {  
  
         XMLParser parser = new XMLParser();  
-        parser.getAllUserNames(&quot;c:\\test.xml&quot;);  
+        parser.getAllUserNames("c:\\test.xml");  
     }  
 } 
 </pre>
@@ -459,13 +459,13 @@ import org.apache.commons.lang.ArrayUtils;  
 public class Main {  
  
   public static void main(String[] args) {  
-    String[][] countries = { { &quot;United States&quot;, &quot;New York&quot; }, { &quot;United Kingdom&quot;, &quot;London&quot; },  
-        { &quot;Netherland&quot;, &quot;Amsterdam&quot; }, { &quot;Japan&quot;, &quot;Tokyo&quot; }, { &quot;France&quot;, &quot;Paris&quot; } };  
+    String[][] countries = { { "United States", "New York" }, { "United Kingdom", "London" },  
+        { "Netherland", "Amsterdam" }, { "Japan", "Tokyo" }, { "France", "Paris" } };  
  
     Map countryCapitals = ArrayUtils.toMap(countries);  
  
-    System.out.println(&quot;Capital of Japan is &quot; + countryCapitals.get(&quot;Japan&quot;));  
-    System.out.println(&quot;Capital of France is &quot; + countryCapitals.get(&quot;France&quot;));  
+    System.out.println("Capital of Japan is " + countryCapitals.get("Japan"));  
+    System.out.println("Capital of France is " + countryCapitals.get("France"));  
   }  
 } 
 </pre>
@@ -481,7 +481,7 @@ public void postMail( String recipients[ ], String subject, String message , Str
  
      //Set the host smtp address  
      Properties props = new Properties();  
-     props.put(&quot;mail.smtp.host&quot;, &quot;smtp.example.com&quot;);  
+     props.put("mail.smtp.host", "smtp.example.com");  
  
     // create some properties and get the default Session  
     Session session = Session.getDefaultInstance(props, null);  
@@ -502,11 +502,11 @@ public void postMail( String recipients[ ], String subject, String message , Str
     msg.setRecipients(Message.RecipientType.TO, addressTo);  
  
     // Optional : You can also set your custom headers in the Email if you Want  
-    msg.addHeader(&quot;MyHeaderName&quot;, &quot;myHeaderValue&quot;);  
+    msg.addHeader("MyHeaderName", "myHeaderValue");  
  
     // Setting the Subject and Content Type  
     msg.setSubject(subject);  
-    msg.setContent(message, &quot;text/plain&quot;);  
+    msg.setContent(message, "text/plain");  
     Transport.send(msg);  
 } 
 </pre>
@@ -519,9 +519,9 @@ import java.net.URL;  
 public class Main {  
     public static void main(String[] args)  {  
         try {  
-            URL my_url = new URL(&quot;https://coolshell.cn/&quot;);  
+            URL my_url = new URL("https://coolshell.cn/");  
             BufferedReader br = new BufferedReader(new InputStreamReader(my_url.openStream()));  
-            String strTemp = &quot;&quot;;  
+            String strTemp = "";  
             while(null != (strTemp = br.readLine())){  
             System.out.println(strTemp);  
         }  
@@ -577,7 +577,6 @@ public static void main (String[] args) {  
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/889.html">20非常有用的Java程序片段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="../wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/889.html">20非常有用的Java程序片段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

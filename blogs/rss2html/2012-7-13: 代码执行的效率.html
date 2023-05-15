@@ -1,4 +1,4 @@
-<p>在《<a href="https://coolshell.cn/articles/7490.html" target="_blank" title="性能调优攻略">性能调优攻略</a>》里，我说过，要调优性需要找到程序中的Hotspot，也就是被调用最多的地方，这种地方，只要你能优化一点点，你的性能就会有质的提高。在这里我给大家举三个关于代码执行效率的例子（它们都来自于网上）</p>
+<html><body><p>在《<a href="https://coolshell.cn/articles/7490.html" target="_blank" title="性能调优攻略">性能调优攻略</a>》里，我说过，要调优性需要找到程序中的Hotspot，也就是被调用最多的地方，这种地方，只要你能优化一点点，你的性能就会有质的提高。在这里我给大家举三个关于代码执行效率的例子（它们都来自于网上）</p>
 <h4><strong>第一个例子</strong></h4>
 <p><strong> PHP中Getter和Setter的效率</strong>（<a href="http://www.reddit.com/r/programming/comments/wdsgn/today_i_learned_that_creating_getters_setters_in/" target="_blank">来源reddit</a>）</p>
 <p>这个例子比较简单，你可以跳过。</p>
@@ -7,7 +7,7 @@
 	//dog_naive.php
 
 	class dog {
-		public $name = &quot;&quot;;
+		public $name = "";
 		public function setName($name) {
 			$this-&amp;gt;name = $name;
 		}
@@ -21,33 +21,33 @@
 	for ($x=0; $x&lt;10; $x++) {
 		$t = microtime(true);
 		for ($i=0; $i&lt;1000000; $i++) {
-			$rover-&gt;setName(&quot;rover&quot;);
+			$rover-&gt;setName("rover");
 			$n = $rover-&gt;getName();
 		}
 		echo microtime(true) - $t;
-		echo &quot;\n&quot;;
+		echo "\n";
 	}
         //直接存取变量方式
         for ($x=0; $x&lt;10; $x++) {
 		$t = microtime(true);
 		for($i=0; $i&lt;1000000; $i++) {
-			$rover-&gt;name = &quot;rover&quot;;
+			$rover-&gt;name = "rover";
 			$n = $rover-&gt;name;
 		}
 		echo microtime(true) - $t;
-		echo &quot;\n&quot;;
+		echo "\n";
 	}
 ?&gt;</pre>
 <p>这个并没有什么稀，因为有函数调用的开销，函数调用需要压栈出栈，需要传值，有时还要需要中断，要干的事太多了。所以，代码多了，效率自然就慢了。所有的语言都这个德行，这就是为什么C++要引入inline的原因。而且Java在打开优化的时候也可以优化之。但是对于动态语言来说，这个事就变得有点困难了。</p>
 <p><span id="more-7886"></span></p>
 <p>你可能会以为使用下面的代码（Magic Function）会好一些，但实际其性能更差。</p>
 <pre class="EnlighterJSRAW">class dog {
-	private $_name = &quot;&quot;;
+	private $_name = "";
 	function __set($property,$value) {
-		if($property == &#039;name&#039;) $this-&gt;_name = $value;
+		if($property == 'name') $this-&gt;_name = $value;
 	}
 	function __get($property) {
-		if($property == &#039;name&#039;) return $this-&gt;_name;
+		if($property == 'name') return $this-&gt;_name;
 	}
 }</pre>
 <p>动态语言的效率从来都是一个问题，如果你需要PHP有更好的性能，你可能需要使用<a href="https://github.com/facebook/hiphop-php" target="_blank">FaceBook的HipHop</a>来把PHP编译成C语言。</p>
@@ -87,10 +87,10 @@ main()</pre>
 <p>这个问题的原因是——<strong> <a href="http://en.wikipedia.org/wiki/Branch_predictor">branch prediction</a> （分支预判）</strong>伟大的stackoverflow给了一个非常不错的解释。</p>
 <p>考虑我们一个铁路分叉，当我们的列车来的时候， 扳道员知道分个分叉通往哪，但不知道这个列车要去哪儿，司机知道要去哪，但是不知道走哪条分叉。所以，我们需要让列车停下来，然后司机和扳道员沟通一下。这样的性能太差了。</p>
 <p>所以，我们可以优化一下，那就是猜，我们至少有50%的概率猜对，如果猜对了，火车行驶性能巨高，猜错了，就得让火车退回来。如果我猜对的概率高，那么，我们的性能就会高，否则老是猜错了，性能就很差。</p>
-<p><img alt="" class="aligncenter size-full wp-image-7893" height="330" src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt.jpg" title="muxnt" width="440" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-7893" height="330" src="../wp-content/uploads/2012/07/muxnt.jpg" title="muxnt" width="440"/></p>
 <p style="text-align: center;">Image by Mecanismo, from Wikimedia Commons:<a href="http://commons.wikimedia.org/wiki/File:Entroncamento_do_Transpraia.JPG">http://commons.wikimedia.org/wiki/File:Entroncamento_do_Transpraia.JPG</a></p>
 <p>我们的if-else 就像这个铁路分叉一样，下面红箭头所指的就是搬道器。</p>
-<p><img alt="" class="aligncenter size-full wp-image-7892" height="91" src="https://coolshell.cn/wp-content/uploads/2012/07/pyfwC.png" title="pyfwC" width="567" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-7892" height="91" src="../wp-content/uploads/2012/07/pyfwC.png" title="pyfwC" width="567"/></p>
 <p>那么，我们的搬道器是怎么预判的呢？就是使用过去的历史数据，如果历史数据有90%以上的走左边，那么就走左边。所以，我们排好序的数据就更容易猜得对。</p>
 <pre class="EnlighterJSRAW">T = 走分支（条件表达式为true）
 N = 不走分支(条件表达式为false)
@@ -131,7 +131,6 @@ sum += ~t &amp; data[j];</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1532.html"><img alt="到处都是Unix的胎记" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1532.html">到处都是Unix的胎记</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7886.html">代码执行的效率</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1532.html"><img alt="到处都是Unix的胎记" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1532.html">到处都是Unix的胎记</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7886.html">代码执行的效率</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

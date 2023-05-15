@@ -92,12 +92,12 @@ public class PathServlet extends HttpServlet {
 
 还有一点值得注意，getPath方法中使用getResourceAsStream(“/a.txt”)却正常的读到了位于下图的a.txt。  
 
-![](https://coolshell.cn/wp-content/uploads/2011/12/resin01.png "resin01")
+![](../wp-content/uploads/2011/12/resin01.png "resin01")
 
 
 然后写到了如下图的b.txt中。代码中是这样实现的：File file = new File(Path.class.getResource(“/”).getPath()+”/b.txt”);本意是想在a.txt文件目录下入b.txt。结果却和料想的不一样。  
 
-![](https://coolshell.cn/wp-content/uploads/2011/12/resin02.png)
+![](../wp-content/uploads/2011/12/resin02.png)
 
 
 请注意，区别还是丢掉了项目名称。
@@ -157,7 +157,7 @@ public InputStream getResourceAsStream(String name) {
 
 在Tomcat下运行结果如下图：  
 
-![](https://coolshell.cn/wp-content/uploads/2011/12/resin03.png)
+![](../wp-content/uploads/2011/12/resin03.png)
 
 
 对，这就是我想要的。
@@ -181,7 +181,7 @@ public InputStream getResourceAsStream(String name) {
 其中的compiling-loader很可能与之有关，遂将其注释掉，一切正常。担心是错觉，于是将compiling-loader的path属性改成：webapps/WEB-INF/classes1，然后运行pathServlet，b.txt位置如下图：
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/12/resin04.png)
+![](../wp-content/uploads/2011/12/resin04.png)
 
 
 确实与compiling-loader有关。
@@ -217,11 +217,11 @@ public InputStream getResourceAsStream(String name) {
 
 在我了解的ClassLoader是在com.caucho.loader包下，结构请看下图：  
 
-![图1](https://coolshell.cn/wp-content/uploads/2011/12/resin05.png)  
+![图1](../wp-content/uploads/2011/12/resin05.png)  
 
 图1  
 
-[![图2 （点击看大图）](https://coolshell.cn/wp-content/uploads/2011/12/resin06.png)](https://coolshell.cn/wp-content/uploads/2011/12/resin06.png)  
+[![图2 （点击看大图）](../wp-content/uploads/2011/12/resin06.png)](https://coolshell.cn/wp-content/uploads/2011/12/resin06.png)  
 
 图2
 
@@ -369,7 +369,7 @@ public URL getResource(String name)
 
 代码不难懂，我画了一张流程图，不规范，凑合看下。  
 
-![](https://coolshell.cn/wp-content/uploads/2011/12/resin07.png "resin07")
+![](../wp-content/uploads/2011/12/resin07.png "resin07")
 
 
 #### 总结
@@ -421,10 +421,10 @@ OK，完事儿，后续还有，准备好好写几篇。
 
 ### 相关文章
 
-* [![Resin服务器getResource揭秘](https://coolshell.cn/wp-content/uploads/2012/01/图片1-150x150.png)](https://coolshell.cn/articles/6335.html)[Resin服务器getResource揭秘](https://coolshell.cn/articles/6335.html)
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![面向GC的Java编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/11541.html)[面向GC的Java编程](https://coolshell.cn/articles/11541.html)
-* [![从LongAdder看更高效的无锁实现](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/11454.html)[从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html)
-* [![Java中的CopyOnWrite容器](https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg)](https://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](https://coolshell.cn/articles/11175.html)
+* [![Resin服务器getResource揭秘](../wp-content/uploads/2012/01/图片1-150x150.png)](https://coolshell.cn/articles/6335.html)[Resin服务器getResource揭秘](https://coolshell.cn/articles/6335.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/11541.html)[面向GC的Java编程](https://coolshell.cn/articles/11541.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/11454.html)[从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html)
+* [![Java中的CopyOnWrite容器](../wp-content/uploads/2014/03/cow-copy-150x150.jpg)](https://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](https://coolshell.cn/articles/11175.html)
 The post [由一个问题到 Resin ClassLoader 的学习](https://coolshell.cn/articles/6112.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

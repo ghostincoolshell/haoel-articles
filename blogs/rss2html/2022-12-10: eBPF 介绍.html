@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright wp-image-22329 size-full" height="167" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.jpeg" width="301" />很早前就想写一篇关于eBPF的文章，但是迟迟没有动手，这两天有点时间，所以就来写一篇，这文章主要还是简单的介绍eBPF 是用来干什么的，并通过几个示例来介绍是怎么玩的，这个技术非常非常之强，Linux 操作系统的观测性实在是太强大了，并在 BCC 加持下变得一览无余。这个技术不是一般的运维人员或是系统管理员可以驾驭的，这个还是要有底层系统知识并有一定开发能力的技术人员才能驾驭的了的。<strong>我在这篇文章的最后给了个彩蛋。</strong></p>
+<html><body><p><img alt="" class="alignright wp-image-22329 size-full" height="167" src="../wp-content/uploads/2022/12/eBPF.jpeg" width="301"/>很早前就想写一篇关于eBPF的文章，但是迟迟没有动手，这两天有点时间，所以就来写一篇，这文章主要还是简单的介绍eBPF 是用来干什么的，并通过几个示例来介绍是怎么玩的，这个技术非常非常之强，Linux 操作系统的观测性实在是太强大了，并在 BCC 加持下变得一览无余。这个技术不是一般的运维人员或是系统管理员可以驾驭的，这个还是要有底层系统知识并有一定开发能力的技术人员才能驾驭的了的。<strong>我在这篇文章的最后给了个彩蛋。</strong></p>
 <h4>介绍</h4>
 <p>eBPF（extened Berkeley Packet Filter）是一种内核技术，它允许开发人员在不修改内核代码的情况下运行特定的功能。eBPF 的概念源自于 Berkeley Packet Filter（BPF），后者是由贝尔实验室开发的一种网络过滤器，可以捕获和过滤网络数据包。</p>
 <p>出于对更好的 Linux 跟踪工具的需求，eBPF 从 <a href="https://illumos.org/books/dtrace/chp-intro.html">dtrace</a>中汲取灵感，dtrace 是一种主要用于 Solaris 和 BSD 操作系统的动态跟踪工具。与 dtrace 不同，Linux 无法全面了解正在运行的系统，因为它仅限于系统调用、库调用和函数的特定框架。<a href="https://www.kernel.org/doc/html/latest/bpf/index.html">在Berkeley Packet Filter</a>  (BPF)（一种使用内核 VM 编写打包过滤代码的工具）的基础上，一小群工程师开始扩展 BPF 后端以提供与 dtrace 类似的功能集。 eBPF 诞生了。<strong>2014 年随 Linux 3.18 首次限量发布，充分利用 eBPF 至少需要 Linux 4.4 以上版本</strong>。</p>
@@ -64,14 +64,14 @@
 <p>eBPF 需要在内核中运行。这通常是由用户态的应用程序完成的，它会通过系统调用来加载 eBPF 程序。在加载过程中，内核会将 eBPF 程序的代码复制到内核空间。</p>
 <p>eBPF 程序需要经过编译和执行。这通常是由Clang/LLVM的编译器完成，然后形成字节码后，将用户态的字节码装载进内核，Verifier会对要注入内核的程序进行一些内核安全机制的检查,这是为了确保 eBPF 程序不会破坏内核的稳定性和安全性。在检查过程中，内核会对 eBPF 程序的代码进行分析，以确保它不会进行恶意操作，如系统调用、内存访问等。如果 eBPF 程序通过了内核安全机制的检查，它就可以在内核中正常运行了，其会通过通过一个JIT编译步骤将程序的通用字节码转换为机器特定指令集，以优化程序的执行速度。</p>
 <p>下图是其架构图。</p>
-<p><img class="aligncenter" src="https://imgopt.infoq.com/fit-in/1200x2400/filters:quality(80)/filters:no_upscale()/articles/gentle-linux-ebpf-introduction/en/resources/47image005-1619704397592.jpg" /></p>
+<p><img class="aligncenter" src="https://imgopt.infoq.com/fit-in/1200x2400/filters:quality(80)/filters:no_upscale()/articles/gentle-linux-ebpf-introduction/en/resources/47image005-1619704397592.jpg"/></p>
 <p style="text-align: center;">（图片来自：<a href="https://www.infoq.com/articles/gentle-linux-ebpf-introduction/" rel="noopener" target="_blank">https://www.infoq.com/articles/gentle-linux-ebpf-introduction/</a>）</p>
 <p>在内核中运行时，eBPF 程序通常会挂载到一个内核钩子（hook）上，以便在特定的事件发生时被执行。例如，</p>
 <ul>
 <li><span>系统调用——当用户空间函数将执行转移到内核时插入</span></li>
 <li><span>函数进入和退出——拦截对预先存在的函数的调用</span></li>
-<li><span>网络事件 &#8211; 在收到数据包时执行</span></li>
-<li><span>Kprobes 和 uprobes &#8211; 附加到内核或用户函数的探测器</span></li>
+<li><span>网络事件 – 在收到数据包时执行</span></li>
+<li><span>Kprobes 和 uprobes – 附加到内核或用户函数的探测器</span></li>
 </ul>
 <p>最后 eBPF Maps，允许eBPF程序在调用之间保持状态，以便进行相关的数据统计，并与用户空间的应用程序共享数据。一个eBPF映射基本上是一个键值存储，其中的值通常被视为任意数据的二进制块。它们是通过带有BPF_MAP_CREATE参数的<code>bpf_cmd</code>系统调用来创建的，和Linux世界中的其他东西一样，它们是通过文件描述符来寻址。与地图的交互是通过查找/更新/删除系统调用进行的</p>
 <p>总之，eBPF 的工作原理是通过动态加载、执行和检查<strong>无损编译</strong>过的代码来实现的。<code>[1]</code></p>
@@ -234,7 +234,7 @@ while True:
     except KeyboardInterrupt:
         exit()</pre>
 <p>上面这个程序通过捕获每个数据包的时间戳来统计传输时间。在捕获 <code>tcp_sendmsg</code> 事件时，记录数据包的发送时间；在捕获 <code>tcp_v4_do_rcv</code> 事件时，记录数据包的接收时间；最后，通过比较两个时间戳来计算传输时间。</p>
-<p>从上面的两个程序我们可以看到，eBPF 的一个编程的基本方法，这样的在Python里向内核的某些事件挂载一段 &#8220;C语言” 的方式就是 eBPF 的编程方式。实话实说，这样的代码很不好写，而且有很多非常诡异的东西，一般人是很难驾驭的（上面的代码我也不是很容易都能写通的，把 Google 都用了个底儿掉，读了很多晦涩的文档……）好在这样的代码已经有人写了，我们不必再写了，在 <a href="https://github.com/iovisor/bcc/tree/master/tools" rel="noopener" target="_blank">Github 上的 bcc 库下的 tools 目录</a>有很多……</p>
+<p>从上面的两个程序我们可以看到，eBPF 的一个编程的基本方法，这样的在Python里向内核的某些事件挂载一段 “C语言” 的方式就是 eBPF 的编程方式。实话实说，这样的代码很不好写，而且有很多非常诡异的东西，一般人是很难驾驭的（上面的代码我也不是很容易都能写通的，把 Google 都用了个底儿掉，读了很多晦涩的文档……）好在这样的代码已经有人写了，我们不必再写了，在 <a href="https://github.com/iovisor/bcc/tree/master/tools" rel="noopener" target="_blank">Github 上的 bcc 库下的 tools 目录</a>有很多……</p>
 <p>BCC（<a href="https://github.com/iovisor/bcc" rel="noopener" target="_blank">BPF Compiler Collection</a>）是一套开源的工具集，可以在 Linux 系统中使用 BPF（Berkeley Packet Filter）程序进行系统级性能分析和监测。BCC 包含了许多实用工具，如：</p>
 <ol>
 <li>bcc-tools：一个包含许多常用的 BCC 工具的软件包。</li>
@@ -249,13 +249,13 @@ while True:
 <li>profile：一个用于分析系统 CPU 使用情况的工具。</li>
 </ol>
 <p>下面这张图你可能见过多次了，你可以看看他可以干多少事，内核里发生什么事一览无余。</p>
-<p><img src="https://github.com/iovisor/bcc/raw/master/images/bcc_tracing_tools_2019.png" /></p>
+<p><img src="https://github.com/iovisor/bcc/raw/master/images/bcc_tracing_tools_2019.png"/></p>
 <h4>延伸阅读</h4>
 <p>一些经典的文章和书籍关于 eBPF 包括：</p>
 <ul>
 <li>Brendan Gregg 的《<a href="https://book.douban.com/subject/34467459/" rel="noopener" target="_blank">BPF Performance Tools: Linux System and Application Observability</a>》一书是一个全面的指南，涵盖了 eBPF 的基础知识和实践应用。</li>
 <li>eBPF 的官网：<a href="https://ebpf.io/" rel="noopener" target="_blank">https://ebpf.io/</a> 由 <a href="https://cilium.io/" rel="nofollow">Cilium</a> 建立</li>
-<li><a href="http://docs.cilium.io/en/latest/bpf/" rel="nofollow">Cilium&#8217;s BPF and XDP Reference Guide</a></li>
+<li><a href="http://docs.cilium.io/en/latest/bpf/" rel="nofollow">Cilium’s BPF and XDP Reference Guide</a></li>
 <li><a href="https://www.kernel.org/doc/html/latest/bpf/index.html" rel="nofollow">BPF Documentation</a></li>
 <li><a href="https://www.kernel.org/doc/html/latest/bpf/bpf_design_QA.html" rel="nofollow">BPF Design Q&amp;A</a></li>
 <li>还有 Github 上的 <a href="https://github.com/zoidbergwill/awesome-ebpf" rel="noopener" target="_blank">Awesome eBPF</a></li>
@@ -270,9 +270,9 @@ while True:
 <tbody>
 <tr>
 <td>
-<p><figure class="wp-caption aligncenter" id="attachment_22325" style="width: 195px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1.png"><img alt="" class="wp-image-22325 size-medium" height="300" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-195x300.png" width="195" /></a><figcaption class="wp-caption-text" id="caption-attachment-22325">点击看大图</figcaption></figure></td>
+<p><figure class="wp-caption aligncenter" id="attachment_22325" style="width: 195px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1.png"><img alt="" class="wp-image-22325 size-medium" height="300" src="../wp-content/uploads/2022/12/eBPF.ref_.1-195x300.png" width="195"/></a><figcaption class="wp-caption-text" id="caption-attachment-22325">点击看大图</figcaption></figure></p></td>
 <td>
-<p><figure class="wp-caption aligncenter" id="attachment_22326" style="width: 286px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2.png"><img alt="" class="wp-image-22326 size-medium" height="300" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2-286x300.png" width="286" /></a><figcaption class="wp-caption-text" id="caption-attachment-22326">点击看大图</figcaption></figure></td>
+<p><figure class="wp-caption aligncenter" id="attachment_22326" style="width: 286px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2.png"><img alt="" class="wp-image-22326 size-medium" height="300" src="../wp-content/uploads/2022/12/eBPF.ref_.2-286x300.png" width="286"/></a><figcaption class="wp-caption-text" id="caption-attachment-22326">点击看大图</figcaption></figure></p></td>
 </tr>
 </tbody>
 </table>
@@ -306,9 +306,9 @@ while True:
 <tbody>
 <tr>
 <td>
-<p><figure class="wp-caption aligncenter" id="attachment_22328" style="width: 180px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/fake.png"><img alt="" class="wp-image-22328 size-medium" height="300" src="https://coolshell.cn/wp-content/uploads/2022/12/fake-180x300.png" width="180" /></a><figcaption class="wp-caption-text" id="caption-attachment-22328">点击看大图</figcaption></figure></td>
+<p><figure class="wp-caption aligncenter" id="attachment_22328" style="width: 180px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/fake.png"><img alt="" class="wp-image-22328 size-medium" height="300" src="../wp-content/uploads/2022/12/fake-180x300.png" width="180"/></a><figcaption class="wp-caption-text" id="caption-attachment-22328">点击看大图</figcaption></figure></p></td>
 <td>
-<p><figure class="wp-caption aligncenter" id="attachment_22335" style="width: 223px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/fake.term_.png"><img alt="" class="wp-image-22335 size-medium" height="300" src="https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-223x300.png" width="223" /></a><figcaption class="wp-caption-text" id="caption-attachment-22335">点击看大图</figcaption></figure></td>
+<p><figure class="wp-caption aligncenter" id="attachment_22335" style="width: 223px;"><a href="https://coolshell.cn/wp-content/uploads/2022/12/fake.term_.png"><img alt="" class="wp-image-22335 size-medium" height="300" src="../wp-content/uploads/2022/12/fake.term_-223x300.png" width="223"/></a><figcaption class="wp-caption-text" id="caption-attachment-22335">点击看大图</figcaption></figure></p></td>
 </tr>
 </tbody>
 </table>
@@ -328,7 +328,6 @@ while True:
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1379.html"><img alt="如何调试bash脚本" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1379.html">如何调试bash脚本</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 &#8211; Shell 篇" height="150" src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 &#8211; Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1379.html"><img alt="如何调试bash脚本" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1379.html">如何调试bash脚本</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

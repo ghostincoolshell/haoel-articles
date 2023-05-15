@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1.png)昨天周五晚上，临下班的时候，用户给我们报了一个比较怪异的Kubernetes集群下的网络不能正常访问的问题，让我们帮助查看一下，我们从下午5点半左右一直跟进到晚上十点左右，在远程不能访问用户机器只能远程遥控用户的情况找到了的问题。这个问题比较有意思，我个人觉得其中的调查用到的的命令以及排障的一些方法可以分享一下，所以写下了这篇文章。
+![](../wp-content/uploads/2018/12/docker-networking-1.png)昨天周五晚上，临下班的时候，用户给我们报了一个比较怪异的Kubernetes集群下的网络不能正常访问的问题，让我们帮助查看一下，我们从下午5点半左右一直跟进到晚上十点左右，在远程不能访问用户机器只能远程遥控用户的情况找到了的问题。这个问题比较有意思，我个人觉得其中的调查用到的的命令以及排障的一些方法可以分享一下，所以写下了这篇文章。
 
 
 #### 问题的症状
@@ -33,7 +33,7 @@ type: post
 当时，我们让用户抓个包看看，然后，用户抓到了有问题的TCP连接是收到了 `SYN` 后，立即返回了 `RST, ACK`
 
 
-![](https://coolshell.cn/wp-content/uploads/2018/12/tcpdump.png)
+![](../wp-content/uploads/2018/12/tcpdump.png)
 
 
 我问一下用户这两个IP所在的位置，知道了，`10.233.14.129` 是 `docker0`，`10.233.14.145` 是容器内的IP。所以，这基本上可以排除了所有和kubernets或是flannel的问题，这就是本地的Docker上的网络的问题。
@@ -278,10 +278,10 @@ systemd───dockerd─┬─containerd─┬─3*[containerd-shim─┬─sl
 
 ### 相关文章
 
-* [![Linux PID 1 和 Systemd](https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg)](https://coolshell.cn/articles/17998.html)[Linux PID 1 和 Systemd](https://coolshell.cn/articles/17998.html)
-* [![Docker基础技术：DeviceMapper](https://coolshell.cn/wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
-* [![Docker基础技术：AUFS](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
-* [![Docker基础技术：Linux CGroup](https://coolshell.cn/wp-content/uploads/2015/04/filter-150x150.png)](https://coolshell.cn/articles/17049.html)[Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html)
-* [![Docker基础技术：Linux Namespace（上）](https://coolshell.cn/wp-content/uploads/2015/04/isolation-150x150.jpg)](https://coolshell.cn/articles/17010.html)[Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html)
-* [![Docker基础技术：Linux Namespace（下）](https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
+* [![Linux PID 1 和 Systemd](../wp-content/uploads/2017/07/systemd-1-150x150.jpeg)](https://coolshell.cn/articles/17998.html)[Linux PID 1 和 Systemd](https://coolshell.cn/articles/17998.html)
+* [![Docker基础技术：DeviceMapper](../wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
+* [![Docker基础技术：AUFS](../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
+* [![Docker基础技术：Linux CGroup](../wp-content/uploads/2015/04/filter-150x150.png)](https://coolshell.cn/articles/17049.html)[Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html)
+* [![Docker基础技术：Linux Namespace（上）](../wp-content/uploads/2015/04/isolation-150x150.jpg)](https://coolshell.cn/articles/17010.html)[Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html)
+* [![Docker基础技术：Linux Namespace（下）](../wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
 The post [记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

@@ -71,7 +71,7 @@ var array1= [ 1,2,3];
 
 比如上上面定义的数组对象array1。当我们创建出array1这个对象的时候，array1实际在Javascript引擎中的对象模型如下：  
 
-![](https://coolshell.cn/wp-content/uploads/2012/02/joo_1.png)  
+![](../wp-content/uploads/2012/02/joo_1.png)  
 
 array1对象具有一个length属性值为3，但是我们可以通过如下的方法来为array1增加元素：
 
@@ -122,7 +122,7 @@ Base这个函数对象就具有一个prototype成员，关于构造子其实Base
 
 上面这段代码在Javascript引擎的对象模型是这样的  
 
-![](https://coolshell.cn/wp-content/uploads/2012/02/joo_2.png)
+![](../wp-content/uploads/2012/02/joo_2.png)
 
 
 #### **new 操作符**
@@ -142,7 +142,7 @@ var obj = new Base();
 
 这样代码的结果是什么，我们在Javascript引擎中看到的对象模型是：  
 
-![](https://coolshell.cn/wp-content/uploads/2012/02/joo_3.png)
+![](../wp-content/uploads/2012/02/joo_3.png)
 
 
 new操作符具体干了什么呢?其实很简单，就干了三件事情。
@@ -215,7 +215,7 @@ var newObj = new Derive("derive");
 
 这段代码执行后的对象模型又是怎么样的呢？根据之前的推导，应该是如下的对象模型  
 
-![](https://coolshell.cn/wp-content/uploads/2012/02/joo_4.png)  
+![](../wp-content/uploads/2012/02/joo_4.png)  
 
 这样我们的newObj也继承了基类Base的toString方法，并且具有自身的成员id。关于这个对象模型是如何被推导出来的就留给各位同学了，参照前面的描述，推导这个对象模型应该不难。  
 
@@ -269,7 +269,7 @@ var derive = object(base);
 
 上面函数的执行后的对象模型是：  
 
-![](https://coolshell.cn/wp-content/uploads/2012/02/joo_5.png)  
+![](../wp-content/uploads/2012/02/joo_5.png)  
 
 如何形成这样的对象模型，原理也很简单，只要把object这个函数扩展一下，就能画出这个模型，怎么画留给读者自己去画吧。  
 
@@ -299,10 +299,10 @@ web2.0后，web应用可谓飞速发展，如今在HTML5发布之际，浏览器
 
 ### 相关文章
 
-* [![理解Javascript的闭包](https://coolshell.cn/wp-content/uploads/2012/03/closure-150x150.png)](https://coolshell.cn/articles/6731.html)[理解Javascript的闭包](https://coolshell.cn/articles/6731.html)
-* [![Javascript 面向对象编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/6441.html)[Javascript 面向对象编程](https://coolshell.cn/articles/6441.html)
-* [![对象的消息模型](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg)](https://coolshell.cn/articles/5202.html)[对象的消息模型](https://coolshell.cn/articles/5202.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Chrome开发者工具的小技巧](https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
-* [![如何读懂并写出装逼的函数式代码](https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg)](https://coolshell.cn/articles/17524.html)[如何读懂并写出装逼的函数式代码](https://coolshell.cn/articles/17524.html)
+* [![理解Javascript的闭包](../wp-content/uploads/2012/03/closure-150x150.png)](https://coolshell.cn/articles/6731.html)[理解Javascript的闭包](https://coolshell.cn/articles/6731.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/6441.html)[Javascript 面向对象编程](https://coolshell.cn/articles/6441.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg](https://coolshell.cn/articles/5202.html)[对象的消息模型](https://coolshell.cn/articles/5202.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![Chrome开发者工具的小技巧](../wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
+* [![如何读懂并写出装逼的函数式代码](../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg)](https://coolshell.cn/articles/17524.html)[如何读懂并写出装逼的函数式代码](https://coolshell.cn/articles/17524.html)
 The post [再谈javascript面向对象编程](https://coolshell.cn/articles/6668.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

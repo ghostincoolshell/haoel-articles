@@ -1,4 +1,4 @@
-<p>Dennis Ritchie  过世了，他发明了C语言，一个影响深远并彻底改变世界的计算机语言。一门经历40多年的到今天还长盛不衰的语言，今天很多语言都受到C的影响，C++，Java，C#，Perl， PHP， Javascript， 等等。但是，你对C了解吗？相信你看过本站的《<a href="https://coolshell.cn/articles/945.html" target="_blank" title="C语言的谜题">C语言的谜题</a>》还有《<a href="https://coolshell.cn/articles/873.html" target="_blank" title="谁说C语言很简单？">谁说C语言很简单？</a>》，这里，我再写一篇关于深入理解C语言的文章，一方面是缅怀Dennis，另一方面是告诉大家应该如何学好一门语言。（顺便注明一下，下面的一些例子来源于<a href="http://www.slideshare.net/olvemaudal/deep-c" target="_blank">这个slides</a>）</p>
+<html><body><p>Dennis Ritchie  过世了，他发明了C语言，一个影响深远并彻底改变世界的计算机语言。一门经历40多年的到今天还长盛不衰的语言，今天很多语言都受到C的影响，C++，Java，C#，Perl， PHP， Javascript， 等等。但是，你对C了解吗？相信你看过本站的《<a href="https://coolshell.cn/articles/945.html" target="_blank" title="C语言的谜题">C语言的谜题</a>》还有《<a href="https://coolshell.cn/articles/873.html" target="_blank" title="谁说C语言很简单？">谁说C语言很简单？</a>》，这里，我再写一篇关于深入理解C语言的文章，一方面是缅怀Dennis，另一方面是告诉大家应该如何学好一门语言。（顺便注明一下，下面的一些例子来源于<a href="http://www.slideshare.net/olvemaudal/deep-c" target="_blank">这个slides</a>）</p>
 <p>首先，我们先来看下面这个经典的代码：</p>
 <pre class="EnlighterJSRAW">int main()
 {
@@ -10,8 +10,8 @@
 <ul>
 <li>这段代码在C++下无法编译，因为C++需要明确声明函数</li>
 <li>这段代码在C的编译器下会编译通过，因为在编译期，编译器会生成一个printf的函数定义，并生成.o文件，链接时，会找到标准的链接库，所以能编译通过。</li>
-<li> 但是，你知道这段程序的退出码吗？在ANSI-C下，退出码是一些未定义的垃圾数。但在C89下，退出码是3，因为其取了printf的返回值。为什么printf函数返回3呢？因为其输出了&#8217;4&#8242;, &#8216;2&#8217;,&#8217;\n&#8217; 三个字符。而在C99下，其会返回0，也就是成功地运行了这段程序。你可以使用gcc的 -std=c89或是-std=c99来编译上面的程序看结果。</li>
-<li>另外，我们还要注意main()，在C标准下，如果一个函数不要参数，应该声明成main(void)，而main()其实相当于main(&#8230;)，也就是说其可以有任意多的参数。</li>
+<li> 但是，你知道这段程序的退出码吗？在ANSI-C下，退出码是一些未定义的垃圾数。但在C89下，退出码是3，因为其取了printf的返回值。为什么printf函数返回3呢？因为其输出了’4′, ‘2’,’\n’ 三个字符。而在C99下，其会返回0，也就是成功地运行了这段程序。你可以使用gcc的 -std=c89或是-std=c99来编译上面的程序看结果。</li>
+<li>另外，我们还要注意main()，在C标准下，如果一个函数不要参数，应该声明成main(void)，而main()其实相当于main(…)，也就是说其可以有任意多的参数。</li>
 </ul>
 <p>我们再来看一段代码：</p>
 <p><span id="more-5761"></span></p>
@@ -22,9 +22,9 @@ void f(void)
    static int b;
    int c;
    ++a; ++b; ++c;
-   printf(&quot;a=%d\n&quot;, a);
-   printf(&quot;b=%d\n&quot;, b);
-   printf(&quot;c=%d\n&quot;, c);
+   printf("a=%d\n", a);
+   printf("b=%d\n", b);
+   printf("c=%d\n", c);
 }
 int main(void)
 {
@@ -46,7 +46,7 @@ int main(void)
 void foo(void)
 {
     int a;
-    printf(&quot;%d\n&quot;, a);
+    printf("%d\n", a);
 }
 void bar(void)
 {
@@ -75,20 +75,20 @@ int main(void)
 }</pre>
 <p>这段程序会输出什么？，你会说是，3，4，7。但是我想告诉你，这也有可能输出，4，3，7。为什么呢？ 这是因为，在C/C++中，表达的评估次序是没有标准定义的。编译器可以正着来，也可以反着来，所以，不同的编译器会有不同的输出。你知道这个特性以后，你就知道这样的程序是没有可移植性的。</p>
 <p>我们再来看看下面的这堆代码，他们分别输出什么呢？</p>
-<p><code class="EnlighterJSRAW">int a=41; a++; printf(&quot;%d\n&quot;, a);</code><br />
-<code class="EnlighterJSRAW">int a=41; a++ &amp; printf(&quot;%d\n&quot;, a);</code><br />
-<code class="EnlighterJSRAW">int a=41; a++ &amp;&amp; printf(&quot;%d\n&quot;, a);</code><br />
-<code class="EnlighterJSRAW">int a=41; if (a++ &lt; 42) printf(&quot;%d\n&quot;, a);</code><br />
-<code class="EnlighterJSRAW">int a=41; a = a++; printf(&quot;%d\n&quot;, a);</code></p>
+<p><code class="EnlighterJSRAW">int a=41; a++; printf("%d\n", a);</code><br/>
+<code class="EnlighterJSRAW">int a=41; a++ &amp; printf("%d\n", a);</code><br/>
+<code class="EnlighterJSRAW">int a=41; a++ &amp;&amp; printf("%d\n", a);</code><br/>
+<code class="EnlighterJSRAW">int a=41; if (a++ &lt; 42) printf("%d\n", a);</code><br/>
+<code class="EnlighterJSRAW">int a=41; a = a++; printf("%d\n", a);</code></p>
 <p>只有示例一，示例三，示例四输出42，而示例二和五的行为则是未定义的。关于这种未定义的东西是因为Sequence Points的影响（Sequence Points是一种规则，也就是程序执行的序列点，在两点之间的表达式只能对变量有一次修改），因为这会让编译器不知道在一个表达式顺列上如何存取变量的值。比如a = a++，a + a++，不过，在C中，这样的情况很少。</p>
 <p>下面，再看一段代码：（假设int为4字节，char为1字节）</p>
 <pre class="EnlighterJSRAW">struct X { int a; char b; int c; };
-printf(&quot;%d,&quot;, sizeof(struct X));
+printf("%d,", sizeof(struct X));
 struct Y { int a; char b; int c; char d};
-printf(&quot;%d\n&quot;, sizeof(struct Y));</pre>
+printf("%d\n", sizeof(struct Y));</pre>
 <p>这个代码会输出什么?</p>
-<p style="padding-left: 30px;">a) 9，10<br />
-b)12, 12<br />
+<p style="padding-left: 30px;">a) 9，10<br/>
+b)12, 12<br/>
 c)12, 16</p>
 <p>答案是C，我想，你一定知道字节对齐，是向4的倍数对齐。</p>
 <ul>
@@ -101,7 +101,7 @@ c)12, 16</p>
 int main(void)
 {
     int a;
-    printf(&quot;%d\n&quot;, a);
+    printf("%d\n", a);
 }</pre>
 <p>考虑下面两种编译代码的方式 ：</p>
 <ul>
@@ -114,10 +114,10 @@ int main(void)
 int main(void)
 {
     int a[5];
-    printf(&quot;%x\n&quot;, a);
-    printf(&quot;%x\n&quot;, a+1);
-    printf(&quot;%x\n&quot;, &amp;a);
-    printf(&quot;%x\n&quot;, &amp;a+1);
+    printf("%x\n", a);
+    printf("%x\n", a+1);
+    printf("%x\n", &amp;a);
+    printf("%x\n", &amp;a+1);
 }</pre>
 <p>假如我们的a的地址是：0Xbfe2e100, 而且是32位机，那么这个程序会输出什么？</p>
 <ul>
@@ -147,7 +147,6 @@ int main(void)
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19996.html"><img alt="Unix 50 年：Ken Thompson 的密码" height="150" src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19996.html">Unix 50 年：Ken Thompson 的密码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5761.html">深入理解C语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19996.html"><img alt="Unix 50 年：Ken Thompson 的密码" height="150" src="../wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19996.html">Unix 50 年：Ken Thompson 的密码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5761.html">深入理解C语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

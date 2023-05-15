@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright size-medium wp-image-10861" height="300" src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-204x300.png" width="204" />当我们说起函数式编程来说，我们会看到如下函数式编程的长相：</p>
+<html><body><p><img alt="" class="alignright size-medium wp-image-10861" height="300" src="../wp-content/uploads/2013/12/yoda-lambda-204x300.png" width="204"/>当我们说起函数式编程来说，我们会看到如下函数式编程的长相：</p>
 <ul>
 <li>函数式编程的三大特性：
 <ul>
@@ -36,7 +36,7 @@
 void increment(){
     cnt++;
 }</pre>
-<p>&nbsp;</p>
+<p> </p>
 <p>那么，函数式的应该怎么写呢？</p>
 <pre class="EnlighterJSRAW">int increment(int cnt){
     return cnt+1;
@@ -124,9 +124,9 @@ copy_if(num.begin(), num.end(), back_inserter(p_num), [](int i){ return (i&gt;0)
 int average = accumulate(p_num.begin(), p_num.end(), 0) / p_num.size();
 cout &lt;&lt; "averge: " &lt;&lt; average &lt;&lt; endl;</pre>
 <p>我们可以看到，函数式编程有如下好处：</p>
-<p style="padding-left: 30px;">1）代码更简单了。<br />
-2）数据集，操作，返回值都放到了一起。<br />
-3）你在读代码的时候，没有了循环体，于是就可以少了些临时变量，以及变量倒来倒去逻辑。<br />
+<p style="padding-left: 30px;">1）代码更简单了。<br/>
+2）数据集，操作，返回值都放到了一起。<br/>
+3）你在读代码的时候，没有了循环体，于是就可以少了些临时变量，以及变量倒来倒去逻辑。<br/>
 4）你的代码变成了在描述你要干什么，而不是怎么去干。</p>
 <p>最后，我们来看一下Map/Reduce这样的函数是怎么来实现的（下面是Javascript代码）</p>
 <pre class="EnlighterJSRAW">//map函数
@@ -155,7 +155,7 @@ function reduce(actionFunction, list, initial){
     return accumulate;
 };</pre>
 <h4>Declarative Programming vs Imperative Programming</h4>
-<p>前面提到过多次的函数式编程关注的是：describe what to do, rather than how to do it. 于是，我们把以前的过程式的编程范式叫做 <a href="http://en.wikipedia.org/wiki/Imperative_programming" rel="noopener noreferrer" target="_blank">Imperative Programming</a> &#8211; 指令式编程，而把函数式的这种范式叫做 <a href="http://en.wikipedia.org/wiki/Declarative_programming" rel="noopener noreferrer" target="_blank">Declarative Programming</a> &#8211; 声明式编程。</p>
+<p>前面提到过多次的函数式编程关注的是：describe what to do, rather than how to do it. 于是，我们把以前的过程式的编程范式叫做 <a href="http://en.wikipedia.org/wiki/Imperative_programming" rel="noopener noreferrer" target="_blank">Imperative Programming</a> – 指令式编程，而把函数式的这种范式叫做 <a href="http://en.wikipedia.org/wiki/Declarative_programming" rel="noopener noreferrer" target="_blank">Declarative Programming</a> – 声明式编程。</p>
 <p>下面我们看一下相关的示例（本示例来自<a href="http://maryrosecook.com/post/a-practical-introduction-to-functional-programming" rel="noopener noreferrer" target="_blank">这篇文章</a> ）。</p>
 <p>比如，我们有3辆车比赛，简单起见，我们分别给这3辆车有70%的概率可以往前走一步，一共有5次机会，我们打出每一次这3辆车的前行状态。</p>
 <p>对于Imperative Programming来说，代码如下（Python）：</p>
@@ -225,13 +225,13 @@ def race(state):
 race({'time': 5,
       'car_positions': [1, 1, 1]})</pre>
 <p>上面的代码依然把程序的逻辑分成了函数，不过这些函数都是functional的。因为它们有三个症状：</p>
-<p style="padding-left: 30px;">1）它们之间没有共享的变量。<br />
-2）函数间通过参数和返回值来传递数据。<br />
+<p style="padding-left: 30px;">1）它们之间没有共享的变量。<br/>
+2）函数间通过参数和返回值来传递数据。<br/>
 3）在函数里没有临时变量。</p>
 <p>我们还可以看到，for循环被递归取代了（见race函数）—— 递归是函数式编程中带用到的技术，正如前面所说的，递归的本质就是描述问题是什么。</p>
-<p><img alt="" class="aligncenter size-full wp-image-10900" height="382" src="https://coolshell.cn/wp-content/uploads/2013/12/forrest-gump.jpg" width="490" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10900" height="382" src="../wp-content/uploads/2013/12/forrest-gump.jpg" width="490"/></p>
 <h4>Pipeline</h4>
-<p>pipeline 管道借鉴于Unix Shell的管道操作——把若干个命令串起来，前面命令的输出成为后面命令的输入，如此完成一个流式计算。（注：管道绝对是一个伟大的发明，他的设哲学就是KISS &#8211; 让每个功能就做一件事，并把这件事做到极致，软件或程序的拼装会变得更为简单和直观。这个设计理念影响非常深远，包括今天的Web Service，云计算，以及大数据的流式计算等等）</p>
+<p>pipeline 管道借鉴于Unix Shell的管道操作——把若干个命令串起来，前面命令的输出成为后面命令的输入，如此完成一个流式计算。（注：管道绝对是一个伟大的发明，他的设哲学就是KISS – 让每个功能就做一件事，并把这件事做到极致，软件或程序的拼装会变得更为简单和直观。这个设计理念影响非常深远，包括今天的Web Service，云计算，以及大数据的流式计算等等）</p>
 <p>比如，我们如下的shell命令：</p>
 <pre class="EnlighterJSRAW">ps auwwx | awk '{print $2}' | sort -n | xargs echo</pre>
 <p>如果我们抽象成函数式的语言，就像下面这样：</p>
@@ -240,8 +240,8 @@ race({'time': 5,
 <pre class="EnlighterJSRAW">pids = for_each(result, [ps_auwwx, awk_p2, sort_n, xargs_echo])</pre>
 <p>好了，让我们来看看函数式编程的Pipeline怎么玩？</p>
 <p>我们先来看一个如下的程序，这个程序的process()有三个步骤：</p>
-<p style="padding-left: 30px;">1）找出偶数。<br />
-2）乘以3<br />
+<p style="padding-left: 30px;">1）找出偶数。<br/>
+2）乘以3<br/>
 3）转成字符串返回</p>
 <pre class="EnlighterJSRAW">def process(num):
     # filter out non-evens
@@ -327,7 +327,7 @@ for num in pipeline:
 <li><a href="http://stackoverflow.com/q/23277/211232" rel="noopener noreferrer" target="_blank">What is the difference between procedural programming and functional programming?</a></li>
 <li><a href="http://stackoverflow.com/q/3249863/211232" rel="noopener noreferrer" target="_blank">Can someone give me examples of functional programming vs imperative/procedural programming?</a></li>
 <li><a href="http://stackoverflow.com/q/552336/211232" rel="noopener noreferrer" target="_blank">OOP vs Functional Programming vs Procedural</a></li>
-<li>Python &#8211; <a href="http://docs.python.org/2/howto/functional.html#" rel="noopener noreferrer" target="_blank">Functional Programming HOWTO</a></li>
+<li>Python – <a href="http://docs.python.org/2/howto/functional.html#" rel="noopener noreferrer" target="_blank">Functional Programming HOWTO</a></li>
 </ul>
 <p><strong>补充</strong>：评论中<a href="http://weibo.com/redraiment" title="redraiment">redraiment</a>的<a href="https://coolshell.cn/articles/10822.html#comment-1111518">这个评论</a>大家也可以读一读。</p>
 <p>感谢谢网友S142857 提供的shell风格的python pipeline：</p>
@@ -381,7 +381,6 @@ force(nums | even_filter | multiply_by_three | convert_to_string | echo)</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10822.html">函数式编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="../wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10822.html">函数式编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

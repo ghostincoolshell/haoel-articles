@@ -1,10 +1,10 @@
-<p>看到这个标题大家一定会想到这篇神文《<a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank">How Browsers Work</a>》，这篇文章把浏览器的很多细节讲得很细，而且也被<a href="http://ux.sohu.com/topics/50972d9ae7de3e752e0081ff" target="_blank">翻译成了中文</a>。为什么我还想写一篇呢？因为两个原因，</p>
+<html><body><p>看到这个标题大家一定会想到这篇神文《<a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank">How Browsers Work</a>》，这篇文章把浏览器的很多细节讲得很细，而且也被<a href="http://ux.sohu.com/topics/50972d9ae7de3e752e0081ff" target="_blank">翻译成了中文</a>。为什么我还想写一篇呢？因为两个原因，</p>
 <p style="padding-left: 30px;">1）这篇文章太长了，阅读成本太大，不能一口气读完。</p>
 <p style="padding-left: 30px;">2）花了大力气读了这篇文章后可以了解很多，但似乎对工作没什么帮助。</p>
 <p>所以，我准备写下这篇文章来解决上述两个问题。希望你能在上班途中，或是坐马桶时就能读完，并能从中学会一些能用在工作上的东西。</p>
 <h4>浏览器工作大流程</h4>
 <p>废话少说，先来看个图：</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-9667" height="231" src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process.jpg" width="712" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9667" height="231" src="../wp-content/uploads/2013/05/Render-Process.jpg" width="712"/></p>
 <p style="text-align: left;">从上面这个图中，我们可以看到那么几个事：</p>
 <p><span id="more-9666"></span></p>
 <p style="text-align: left;">1）浏览器会解析三个东西：</p>
@@ -45,47 +45,47 @@
 &lt;/html&gt;
 </pre>
 <p>上面这段HTML会解析成这样：</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-9669" height="300" src="https://coolshell.cn/wp-content/uploads/2013/05/DOM-Tree-01.jpg" width="456" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9669" height="300" src="../wp-content/uploads/2013/05/DOM-Tree-01.jpg" width="456"/></p>
 <p>下面是另一个有SVG标签的情况。</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-9670" height="320" src="https://coolshell.cn/wp-content/uploads/2013/05/DOM-Tree-02.jpg" width="408" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9670" height="320" src="../wp-content/uploads/2013/05/DOM-Tree-02.jpg" width="408"/></p>
 <h4>CSS解析</h4>
 <p>CSS的解析大概是下面这个样子（下面主要说的是Gecko也就是Firefox的玩法），假设我们有下面的HTML文档：</p>
 <pre class="EnlighterJSRAW">
 &lt;doc&gt;
 &lt;title&gt;A few quotes&lt;/title&gt;
 &lt;para&gt;
-  Franklin said that &lt;quote&gt;&quot;A penny saved is a penny earned.&quot;&lt;/quote&gt;
+  Franklin said that &lt;quote&gt;"A penny saved is a penny earned."&lt;/quote&gt;
 &lt;/para&gt;
 &lt;para&gt;
-  FDR said &lt;quote&gt;&quot;We have nothing to fear but &lt;span&gt;fear itself.&lt;/span&gt;&quot;&lt;/quote&gt;
+  FDR said &lt;quote&gt;"We have nothing to fear but &lt;span&gt;fear itself.&lt;/span&gt;"&lt;/quote&gt;
 &lt;/para&gt;
 &lt;/doc&gt;
 </pre>
 <p>于是DOM Tree是这个样子：</p>
-<p><img alt="" class="aligncenter size-full wp-image-9672" height="318" src="https://coolshell.cn/wp-content/uploads/2013/05/DOM-Tree-Example.jpg" width="368" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-9672" height="318" src="../wp-content/uploads/2013/05/DOM-Tree-Example.jpg" width="368"/></p>
 <p>然后我们的CSS文档是这样的：</p>
 <pre class="EnlighterJSRAW">  /* rule 1 */ doc { display: block; text-indent: 1em; }
 /* rule 2 */ title { display: block; font-size: 3em; }
 /* rule 3 */ para { display: block; }
-/* rule 4 */ [class=&quot;emph&quot;] { font-style: italic; }</pre>
+/* rule 4 */ [class="emph"] { font-style: italic; }</pre>
 <p>于是我们的CSS Rule Tree会是这个样子：</p>
-<p><img alt="" class="aligncenter size-full wp-image-9673" height="238" src="https://coolshell.cn/wp-content/uploads/2013/05/CSS-Rule-Tree-Example.jpg" width="397" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-9673" height="238" src="../wp-content/uploads/2013/05/CSS-Rule-Tree-Example.jpg" width="397"/></p>
 <p>注意，图中的第4条规则出现了两次，一次是独立的，一次是在规则3的子结点。所以，我们可以知道，建立CSS Rule Tree是需要比照着DOM Tree来的。CSS匹配DOM Tree主要是从右到左解析CSS的Selector，好多人以为这个事会比较快，其实并不一定。关键还看我们的CSS的Selector怎么写了。</p>
 <p><strong>注意：CSS匹配HTML元素是一个相当复杂和有性能问题的事情。所以，你就会在N多地方看到很多人都告诉你，DOM树要小，CSS尽量用id和class，千万不要过渡层叠下去，……</strong></p>
 <p>通过这两个树，我们可以得到一个叫Style Context Tree，也就是下面这样（把CSS Rule结点Attach到DOM Tree上）：</p>
-<p><img alt="" class="aligncenter size-full wp-image-9674" height="318" src="https://coolshell.cn/wp-content/uploads/2013/05/CSS-Content-Tree-Example.jpg" width="405" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-9674" height="318" src="../wp-content/uploads/2013/05/CSS-Content-Tree-Example.jpg" width="405"/></p>
 <p>所以，Firefox基本上来说是通过CSS 解析 生成 CSS Rule Tree，然后，通过比对DOM生成Style Context Tree，然后Firefox通过把Style Context Tree和其Render Tree（Frame Tree）关联上，就完成了。注意：Render Tree会把一些不可见的结点去除掉。而<strong>Firefox中所谓的Frame就是一个DOM结点，不要被其名字所迷惑了</strong>。</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-9677" height="366" src="https://coolshell.cn/wp-content/uploads/2013/05/Firefox-style-context-tree.png" width="328" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9677" height="366" src="../wp-content/uploads/2013/05/Firefox-style-context-tree.png" width="328"/></p>
 <p>注：Webkit不像Firefox要用两个树来干这个，Webkit也有Style对象，它直接把这个Style对象存在了相应的DOM结点上了。</p>
 <h4>渲染</h4>
 <p>渲染的流程基本上如下（黄色的四个步骤）：</p>
 <ol>
 <li>计算CSS样式</li>
 <li>构建Render Tree</li>
-<li>Layout &#8211; 定位坐标和大小，是否换行，各种position, overflow, z-index属性 ……</li>
+<li>Layout – 定位坐标和大小，是否换行，各种position, overflow, z-index属性 ……</li>
 <li>正式开画</li>
 </ol>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-9675" height="196" src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-Skipping.jpg" width="712" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9675" height="196" src="../wp-content/uploads/2013/05/Render-Process-Skipping.jpg" width="712"/></p>
 <p style="text-align: left;">注意：上图流程中有很多连接线，这表示了Javascript动态修改了DOM属性或是CSS属会导致重新Layout，有些改变不会，就是那些指到天上的箭头，比如，修改后的CSS rule没有被匹配到，等。</p>
 <p style="text-align: left;">这里重要要说两个概念，一个是Reflow，另一个是Repaint。这两个不是一回事。</p>
 <ul>
@@ -95,7 +95,7 @@
 <li>Reflow——意味着元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。这就是Reflow，或是Layout。（<strong>HTML使用的是flow based layout，也就是流式布局，所以，如果某元件的几何尺寸发生了变化，需要重新布局，也就叫reflow</strong>）reflow 会从&lt;html&gt;这个root frame开始递归往下，依次计算所有的结点几何尺寸和位置，在reflow过程中，可能会增加一些frame，比如一个文本字符串必需被包装起来。</li>
 </ul>
 <p>下面是一个打开Wikipedia时的Layout/reflow的视频（注：HTML在初始化的时候也会做一次reflow，叫 <dfn>intial reflow</dfn>），你可以感受一下：</p>
-<p><center></center>Reflow的成本比Repaint的成本高得多的多。DOM Tree里的每个结点都会有reflow方法，一个结点的reflow很有可能导致子结点，甚至父点以及同级结点的reflow。<strong>在一些高性能的电脑上也许还没什么，但是如果reflow发生在手机上，那么这个过程是非常痛苦和耗电的</strong>。</p>
+<p></p><center></center>Reflow的成本比Repaint的成本高得多的多。DOM Tree里的每个结点都会有reflow方法，一个结点的reflow很有可能导致子结点，甚至父点以及同级结点的reflow。<strong>在一些高性能的电脑上也许还没什么，但是如果reflow发生在手机上，那么这个过程是非常痛苦和耗电的</strong>。
 <p>所以，下面这些动作有很大可能会是成本比较高的。</p>
 <ul>
 <li>当你增加、删除、修改DOM结点时，会导致Reflow或Repaint</li>
@@ -116,13 +116,13 @@
 </ul>
 <p style="text-align: left;">好了，我们来看一个示例吧：</p>
 <p>[javascript]var bstyle = document.body.style; // cache</p>
-<p>bstyle.padding = &quot;20px&quot;; // reflow, repaint<br />
-bstyle.border = &quot;10px solid red&quot;; //  再一次的 reflow 和 repaint</p>
-<p>bstyle.color = &quot;blue&quot;; // repaint<br />
-bstyle.backgroundColor = &quot;#fad&quot;; // repaint</p>
-<p>bstyle.fontSize = &quot;2em&quot;; // reflow, repaint</p>
-<p>// new DOM element &#8211; reflow, repaint<br />
-document.body.appendChild(document.createTextNode(&#8216;dude!&#8217;));[/javascript]</p>
+<p>bstyle.padding = "20px"; // reflow, repaint<br/>
+bstyle.border = "10px solid red"; //  再一次的 reflow 和 repaint</p>
+<p>bstyle.color = "blue"; // repaint<br/>
+bstyle.backgroundColor = "#fad"; // repaint</p>
+<p>bstyle.fontSize = "2em"; // reflow, repaint</p>
+<p>// new DOM element – reflow, repaint<br/>
+document.body.appendChild(document.createTextNode(‘dude!’));[/javascript]</p>
 <p style="text-align: left;">当然，我们的浏览器是聪明的，它不会像上面那样，你每改一次样式，它就reflow或repaint一次。<strong>一般来说，浏览器会把这样的操作积攒一批，然后做一次reflow，这又叫异步reflow或增量异步reflow</strong>。但是有些情况浏览器是不会这么做的，比如：resize窗口，改变了页面默认的字体，等。对于这些操作，浏览器会马上进行reflow。</p>
 <p style="text-align: left;">但是有些时候，我们的脚本会阻止浏览器这么干，比如：如果我们请求下面的一些DOM值：</p>
 <ol>
@@ -135,15 +135,15 @@ document.body.appendChild(document.createTextNode(&#8216;dude!&#8217;));[/javasc
 <h4 style="text-align: left;">减少reflow/repaint</h4>
 <p>下面是一些Best Practices：</p>
 <p><strong>1）不要一条一条地修改DOM的样式。与其这样，还不如预先定义好css的class，然后修改DOM的className。</strong></p>
-<p>[javascript]// bad<br />
-var left = 10,<br />
-top = 10;<br />
-el.style.left = left + &quot;px&quot;;<br />
-el.style.top  = top  + &quot;px&quot;;</p>
-<p>// Good<br />
-el.className += &quot; theclassname&quot;;</p>
-<p>// Good<br />
-el.style.cssText += &quot;; left: &quot; + left + &quot;px; top: &quot; + top + &quot;px;&quot;;[/javascript]</p>
+<p>[javascript]// bad<br/>
+var left = 10,<br/>
+top = 10;<br/>
+el.style.left = left + "px";<br/>
+el.style.top  = top  + "px";</p>
+<p>// Good<br/>
+el.className += " theclassname";</p>
+<p>// Good<br/>
+el.style.cssText += "; left: " + left + "px; top: " + top + "px;";[/javascript]</p>
 <p><strong>2）把DOM离线后修改。如：</strong></p>
 <ul>
 <li>使用documentFragment 对象在内存里操作DOM</li>
@@ -171,9 +171,9 @@ el.style.cssText += &quot;; left: &quot; + left + &quot;px; top: &quot; + top + 
 </ul>
 <p>最后，别忘了下面这几篇提高浏览器性能的文章：</p>
 <ul>
-<li><a href="http://code.google.com/speed/page-speed/docs/rules_intro.html">Google &#8211; Web Performance Best Practices</a></li>
-<li><a href="http://developer.yahoo.com/performance/rules.html">Yahoo &#8211; Best Practices for Speeding Up Your Web Site</a></li>
-<li><a href="http://stevesouders.com/hpws/rules.php">Steve Souders &#8211; 14 Rules for Faster-Loading Web Sites</a></li>
+<li><a href="http://code.google.com/speed/page-speed/docs/rules_intro.html">Google – Web Performance Best Practices</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html">Yahoo – Best Practices for Speeding Up Your Web Site</a></li>
+<li><a href="http://stevesouders.com/hpws/rules.php">Steve Souders – 14 Rules for Faster-Loading Web Sites</a></li>
 </ul>
 <h4>参考</h4>
 <ul>
@@ -213,7 +213,6 @@ el.style.cssText += &quot;; left: &quot; + left + &quot;px; top: &quot; + top + 
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9749.html"><img alt="Javascript 装载和执行" height="150" src="https://coolshell.cn/wp-content/uploads/2013/06/javascript-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9749.html">Javascript 装载和执行</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5537.html"><img alt="一些文章资源和趣闻" height="150" src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5537.html">一些文章资源和趣闻</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9749.html"><img alt="Javascript 装载和执行" height="150" src="../wp-content/uploads/2013/06/javascript-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9749.html">Javascript 装载和执行</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5537.html"><img alt="一些文章资源和趣闻" height="150" src="../wp-content/uploads/2011/11/stackparts.com_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5537.html">一些文章资源和趣闻</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -18,7 +18,7 @@ type: post
 <http://www.joelonsoftware.com/items/2009/03/09.html>
 
 
-[![09meeting-thumbnail](https://coolshell.cn/wp-content/uploads/2009/03/09meeting-thumbnail-300x198.jpg "09meeting-thumbnail")](https://coolshell.cn/wp-content/uploads/2009/03/09meeting-thumbnail.jpg)这篇文章的作者叫Joel Spolsky，在Microsoft做过Program Manager，这篇文章非常值得一读。下面是我给大家做的一个导读：
+[![09meeting-thumbnail](../wp-content/uploads/2009/03/09meeting-thumbnail-300x198.jpg "09meeting-thumbnail")](https://coolshell.cn/wp-content/uploads/2009/03/09meeting-thumbnail.jpg)这篇文章的作者叫Joel Spolsky，在Microsoft做过Program Manager，这篇文章非常值得一读。下面是我给大家做的一个导读：
 
 
 首先，他讲了两个人，一个是负责WYSIWYG 字处理的天才级的Program Manager——Charles Simonyi，第二个是上世纪80年代的负责Mac OS上的Excel项目的程序员Jabe Blumenthal，他发现了程序员和市场人员的代沟，Marketing的人很难通过把MBA-Speaking翻译成实际的Feature，并且，有太多的和编码不相关的工作，比如说，和用户交谈，运行usability测试，Reivew竞争者的产品，并且得冥思苦想怎么能让事情变得更简单，而我们的程序员通常来说即不具备这样的时间，也不具备这样的能力。于是，Jabe开始了他的Program Manager的生涯。
@@ -117,10 +117,10 @@ type: post
 
 ### 相关文章
 
-* [![Kent Beck 谈单元测试和持续部署](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg)](https://coolshell.cn/articles/2681.html)[Kent Beck 谈单元测试和持续部署](https://coolshell.cn/articles/2681.html)
-* [![参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/2539.html)[参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/articles/2539.html)
-* [![Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/wp-content/uploads/2009/11/250px-ChallengerCrew-150x150.jpg)](https://coolshell.cn/articles/1654.html)[Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/articles/1654.html)
-* [![质量管理经中的八个法则](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/971.html)[质量管理经中的八个法则](https://coolshell.cn/articles/971.html)
-* [![5个不错的3D素材网站](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/796.html)[5个不错的3D素材网站](https://coolshell.cn/articles/796.html)
-* [![Amazon的书为什么卖到了$2000万](https://coolshell.cn/wp-content/uploads/2011/04/lawrence_1-150x150.png)](https://coolshell.cn/articles/4605.html)[Amazon的书为什么卖到了$2000万](https://coolshell.cn/articles/4605.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg](https://coolshell.cn/articles/2681.html)[Kent Beck 谈单元测试和持续部署](https://coolshell.cn/articles/2681.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/2539.html)[参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/articles/2539.html)
+* [![Richard Feynman, 挑战者号, 软件工程](../wp-content/uploads/2009/11/250px-ChallengerCrew-150x150.jpg)](https://coolshell.cn/articles/1654.html)[Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/articles/1654.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/971.html)[质量管理经中的八个法则](https://coolshell.cn/articles/971.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/796.html)[5个不错的3D素材网站](https://coolshell.cn/articles/796.html)
+* [![Amazon的书为什么卖到了$2000万](../wp-content/uploads/2011/04/lawrence_1-150x150.png)](https://coolshell.cn/articles/4605.html)[Amazon的书为什么卖到了$2000万](https://coolshell.cn/articles/4605.html)
 The post [怎样做一个 Program Manager](https://coolshell.cn/articles/76.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

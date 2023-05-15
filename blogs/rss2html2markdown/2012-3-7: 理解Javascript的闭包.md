@@ -79,7 +79,7 @@ ECMAScript到底是如何实现闭包的呢？想深入了解的亲们可以获�
 
 例如上面我们例子的闭包模型应该是这样，sayHello函数在最下层，上层是函数greeting，最外层是全局场景。如下图：  
 
-![](https://coolshell.cn/wp-content/uploads/2012/03/closure.png)  
+![](../wp-content/uploads/2012/03/closure.png)  
 
 因此当sayHello被调用的时候，sayHello会通过上下文场景找到局部变量text的值，因此在屏幕的对话框中显示出”Hello Closure”  
 
@@ -328,10 +328,10 @@ var singleton = function () {
 
 ### 相关文章
 
-* [![再谈javascript面向对象编程 ](https://coolshell.cn/wp-content/uploads/2012/02/joo_1-150x150.png)](https://coolshell.cn/articles/6668.html)[再谈javascript面向对象编程](https://coolshell.cn/articles/6668.html)
-* [![Javascript 面向对象编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/6441.html)[Javascript 面向对象编程](https://coolshell.cn/articles/6441.html)
-* [![对象的消息模型](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg)](https://coolshell.cn/articles/5202.html)[对象的消息模型](https://coolshell.cn/articles/5202.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Chrome开发者工具的小技巧](https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
-* [![如何读懂并写出装逼的函数式代码](https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg)](https://coolshell.cn/articles/17524.html)[如何读懂并写出装逼的函数式代码](https://coolshell.cn/articles/17524.html)
+* [![再谈javascript面向对象编程 ](../wp-content/uploads/2012/02/joo_1-150x150.png)](https://coolshell.cn/articles/6668.html)[再谈javascript面向对象编程](https://coolshell.cn/articles/6668.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/6441.html)[Javascript 面向对象编程](https://coolshell.cn/articles/6441.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg](https://coolshell.cn/articles/5202.html)[对象的消息模型](https://coolshell.cn/articles/5202.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![Chrome开发者工具的小技巧](../wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
+* [![如何读懂并写出装逼的函数式代码](../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg)](https://coolshell.cn/articles/17524.html)[如何读懂并写出装逼的函数式代码](https://coolshell.cn/articles/17524.html)
 The post [理解Javascript的闭包](https://coolshell.cn/articles/6731.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

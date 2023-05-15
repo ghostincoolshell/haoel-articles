@@ -14,7 +14,7 @@ type: post
 你可以理解为这是一个Web开发的IDE，不过其集成了Ajax方面的东西。这并不仅仅简单的是那种“所见即所得”的编辑器。而且，它也不信仅可以让那些非程序员非常简单地创建一个从前端到后端的Web应用，而且，他还可以让你连接数据库，创建非常复杂的布局和时间线，甚至于一些套件（白板，在线的类Word，Excel，PPT等功能），所有这些，你只需要简单的点几下按钮就可以了。真是相当的强大。（下面是个抓图）
 
 
-![UIzard](https://coolshell.cn/wp-content/uploads/2009/10/uizard2.jpg "UIzard")
+![UIzard](../wp-content/uploads/2009/10/uizard2.jpg "UIzard")
 
 
 
@@ -36,7 +36,7 @@ type: post
 <http://www.uizard.org/UIzard/uizard.php>
 
 
-[![UIzard创建工程](https://coolshell.cn/wp-content/uploads/2009/10/uizard1.jpg "UIzard创建工程")](https://coolshell.cn/wp-content/uploads/2009/10/uizard1.jpg)
+[![UIzard创建工程](../wp-content/uploads/2009/10/uizard1.jpg "UIzard创建工程")](https://coolshell.cn/wp-content/uploads/2009/10/uizard1.jpg)
 
 
 (全文完)
@@ -49,10 +49,10 @@ type: post
 
 ### 相关文章
 
-* [![Javascript 装载和执行](https://coolshell.cn/wp-content/uploads/2013/06/javascript-150x150.jpg)](https://coolshell.cn/articles/9749.html)[Javascript 装载和执行](https://coolshell.cn/articles/9749.html)
-* [![一次Ajax查错的经历](https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
-* [![一些非常有意思的杂项资源](https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
-* [![Web版的VNC](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/2593.html)[Web版的VNC](https://coolshell.cn/articles/2593.html)
-* [![7个免费强大的Ajax文件管理器](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/909.html)[7个免费强大的Ajax文件管理器](https://coolshell.cn/articles/909.html)
-* [![10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/wp-content/uploads/2009/03/webmail1-150x150.jpg)](https://coolshell.cn/articles/154.html)[10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/articles/154.html)
+* [![Javascript 装载和执行](../wp-content/uploads/2013/06/javascript-150x150.jpg)](https://coolshell.cn/articles/9749.html)[Javascript 装载和执行](https://coolshell.cn/articles/9749.html)
+* [![一次Ajax查错的经历](../wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
+* [![一些非常有意思的杂项资源](../wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/2593.html)[Web版的VNC](https://coolshell.cn/articles/2593.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/909.html)[7个免费强大的Ajax文件管理器](https://coolshell.cn/articles/909.html)
+* [![10个基于Ajax的PHP Webmail客户端](../wp-content/uploads/2009/03/webmail1-150x150.jpg)](https://coolshell.cn/articles/154.html)[10个基于Ajax的PHP Webmail客户端](https://coolshell.cn/articles/154.html)
 The post [Ajax开发利器UIzard](https://coolshell.cn/articles/1611.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

@@ -51,10 +51,10 @@ Uncle Bob 本人的大作。
 
 ### 相关文章
 
-* [![千万别惹程序员 ](https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg)](https://coolshell.cn/articles/6639.html)[千万别惹程序员](https://coolshell.cn/articles/6639.html)
-* [![读书笔记：对线程模型的批评](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg)](https://coolshell.cn/articles/4626.html)[读书笔记：对线程模型的批评](https://coolshell.cn/articles/4626.html)
-* [![编程语言流行度](https://coolshell.cn/wp-content/uploads/2010/12/rank_scatter1-150x150.png)](https://coolshell.cn/articles/3385.html)[编程语言流行度](https://coolshell.cn/articles/3385.html)
-* [![两本电子书](https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
-* [![一些非常不错的资料](https://coolshell.cn/wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg)](https://coolshell.cn/articles/3192.html)[一些非常不错的资料](https://coolshell.cn/articles/3192.html)
-* [![编程语言进化](https://coolshell.cn/wp-content/uploads/2010/10/language-evolution-150x150.jpg)](https://coolshell.cn/articles/3100.html)[编程语言进化](https://coolshell.cn/articles/3100.html)
+* [![千万别惹程序员 ](../wp-content/uploads/2012/02/programming-language-150x150.jpg)](https://coolshell.cn/articles/6639.html)[千万别惹程序员](https://coolshell.cn/articles/6639.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg](https://coolshell.cn/articles/4626.html)[读书笔记：对线程模型的批评](https://coolshell.cn/articles/4626.html)
+* [![编程语言流行度](../wp-content/uploads/2010/12/rank_scatter1-150x150.png)](https://coolshell.cn/articles/3385.html)[编程语言流行度](https://coolshell.cn/articles/3385.html)
+* [![两本电子书](../wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
+* [![一些非常不错的资料](../wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg)](https://coolshell.cn/articles/3192.html)[一些非常不错的资料](https://coolshell.cn/articles/3192.html)
+* [![编程语言进化](../wp-content/uploads/2010/10/language-evolution-150x150.jpg)](https://coolshell.cn/articles/3100.html)[编程语言进化](https://coolshell.cn/articles/3100.html)
 The post [参透软件开发的本质 – Uncle Bob Martin 推荐的经典书籍](https://coolshell.cn/articles/2539.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).
