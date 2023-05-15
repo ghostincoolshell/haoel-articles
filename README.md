@@ -31,6 +31,7 @@ The public articles / tweets / microblogs published by or related to @haoel
 
 - `blogs`: [酷壳](https://coolshell.cn) 的 blog 文章 (by [@zyqzss](https://github.com/zyqzss))
 - `tweets`: [@haoel](https://twitter.com/haoel) 发表的 tweets (by [@yihong0618](https://github.com/yihong0618))
+- `weibo`: [@左耳朵耗子](https://weibo.com/n/%E5%B7%A6%E8%80%B3%E6%9C%B5%E8%80%97%E5%AD%90) 发表的微博 (by [@hongqn](https://github.com/hongqn))
 
 欢迎通过 pull requests 贡献数据，或者通过 issues 讨论获取数据的方法。
 
