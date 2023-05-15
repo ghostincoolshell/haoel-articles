@@ -1,4 +1,4 @@
-<p><img alt="tux-fork" class="alignright wp-image-12105" height="200" src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-298x300.gif" width="199" />在知乎上，有个人问了这样的<a href="http://www.zhihu.com/question/26591968" target="_blank">一个问题</a>——为什么vfork的子进程里用return，整个程序会挂掉，而且exit()不会？并给出了如下的代码，下面的代码一运行就挂掉了，但如果把子进程的return改成exit(0)就没事。</p>
+<html><body><p><img alt="tux-fork" class="alignright wp-image-12105" height="200" src="../wp-content/uploads/2014/11/tux-fork-298x300.gif" width="199"/>在知乎上，有个人问了这样的<a href="http://www.zhihu.com/question/26591968" target="_blank">一个问题</a>——为什么vfork的子进程里用return，整个程序会挂掉，而且exit()不会？并给出了如下的代码，下面的代码一运行就挂掉了，但如果把子进程的return改成exit(0)就没事。</p>
 <p>我受邀后本来不想回答这个问题的，因为这个问题明显就是RTFM的事，后来，发现这个问题放在那里好长时间，而挂在下面的几个答案又跑偏得比较严重，我觉得可能有些朋友看到那样的答案会被误导，所以就上去回答了一下这个问题。</p>
 <p>下面我把问题和我的回答发布在这里，也供更多的人查看。</p>
 <pre class="EnlighterJSRAW">#include &lt;stdio.h&gt;
@@ -8,13 +8,13 @@ int main(void) {
     int var;
     var = 88;
     if ((pid = vfork()) &lt; 0) {
-        printf(&quot;vfork error&quot;);
+        printf("vfork error");
         exit(-1);
     } else if (pid == 0) { /* 子进程 */
         var++;
         return 0;
     }
-    printf(&quot;pid=%d, glob=%d, var=%d\n&quot;, getpid(), glob, var);
+    printf("pid=%d, glob=%d, var=%d\n", getpid(), glob, var);
     return 0;
 }
 </pre>
@@ -27,7 +27,7 @@ int main(void) {
 </ul>
 <p>这两个的差别是，一个是copy，一个是share。（关于fork，可以参看酷壳之前的《<a href="https://coolshell.cn/articles/7965.html" target="_blank" title="一个fork的面试题">一道fork的面试题</a>》）</p>
 <p>你 man vfork 一下，你可以看到，vfork是这样的工作的，</p>
-<p style="padding-left: 30px;">1）保证子进程先执行。<br />
+<p style="padding-left: 30px;">1）保证子进程先执行。<br/>
 2）当子进程调用exit()或exec()后，父进程往下执行。</p>
 <p>那么，为什么要干出一个vfork这个玩意？ 原因在man page也讲得很清楚了：</p>
 <blockquote><p><strong>Historic Description</strong></p>
@@ -45,9 +45,9 @@ int main(void) {
 <h4>关于fork的优化</h4>
 <p>很明显，fork太重，而vfork又太危险，所以，就有人开始优化fork这个系统调用。优化的技术用到了著名的<b>写时拷贝（COW）</b>。</p>
 <p>也就是说，<strong>对于fork后并不是马上拷贝内存，而是只有你在需要改变的时候，才会从父进程中拷贝到子进程中，这样fork后立马执行exec的成本就非常小了</strong>。所以，Linux的Man Page中并不鼓励使用vfork() ——</p>
-<blockquote><p>“ It is rather unfortunate that Linux revived this specter from the past. The BSD man page states: &#8220;This system call will be eliminated when proper system sharing mechanisms are implemented. Users should not depend on the memory sharing semantics of vfork() as it will, in that case, be made synonymous to fork(2).&#8221;”</p></blockquote>
+<blockquote><p>“ It is rather unfortunate that Linux revived this specter from the past. The BSD man page states: “This system call will be eliminated when proper system sharing mechanisms are implemented. Users should not depend on the memory sharing semantics of vfork() as it will, in that case, be made synonymous to fork(2).””</p></blockquote>
 <p>于是，从BSD4.4开始，他们让vfork和fork变成一样的了</p>
-<p>但在后来，NetBSD 1.3 又把传统的vfork给捡了回来，说是vfork的性能在 Pentium Pro 200MHz 的机器（这机器好古董啊）上有可以提高几秒钟的性能。详情见——“<a class=" wrap external" href="http://www.netbsd.org/docs/kernel/vfork.html" rel="nofollow noreferrer" target="_blank">NetBSD Documentation: Why implement traditional vfork()<i class="icon-external"></i></a>”</p>
+<p>但在后来，NetBSD 1.3 又把传统的vfork给捡了回来，说是vfork的性能在 Pentium Pro 200MHz 的机器（这机器好古董啊）上有可以提高几秒钟的性能。详情见——“<a class="wrap external" href="http://www.netbsd.org/docs/kernel/vfork.html" rel="nofollow noreferrer" target="_blank">NetBSD Documentation: Why implement traditional vfork()<i class="icon-external"></i></a>”</p>
 <p>今天的Linux下，fork和vfork还是各是各的，不过，还是建议你不要用vfork，除非你非常关注性能。</p>
 <p>（全文完）<!--
 
@@ -65,7 +65,6 @@ int main(void) {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9104.html"><img alt="sed 简明教程" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9104.html">sed 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9104.html"><img alt="sed 简明教程" height="150" src="../wp-content/uploads/2013/02/sed-superman-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9104.html">sed 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="../wp-content/uploads/2013/02/awk-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

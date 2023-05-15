@@ -1,8 +1,8 @@
-<p>全文译自墙外文章“<a href="http://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/" target="_blank">NoSQL Data Modeling Techniques</a>”，译得不好，还请见谅。这篇文章看完之后，你可能会对NoSQL的数据结构会有些感觉。我的感觉是，关系型数据库想把一致性，完整性，索引，CRUD都干好，NoSQL只干某一种事，但是牺牲了很多别的东西。总体来说，我觉得NoSQL更适合做Cache。下面是正文——</p>
+<html><body><p>全文译自墙外文章“<a href="http://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/" target="_blank">NoSQL Data Modeling Techniques</a>”，译得不好，还请见谅。这篇文章看完之后，你可能会对NoSQL的数据结构会有些感觉。我的感觉是，关系型数据库想把一致性，完整性，索引，CRUD都干好，NoSQL只干某一种事，但是牺牲了很多别的东西。总体来说，我觉得NoSQL更适合做Cache。下面是正文——</p>
 <p>NoSQL 数据库经常被用作很多非功能性的地方，如，扩展性，性能和一致性的地方。这些NoSQL的特性在理论和实践中都正在被大众广泛地研究着，研究的热点正是那些和性能分布式相关的非功能性的东西，我们都知道 <a href="http://en.wikipedia.org/wiki/CAP_theorem">CAP 理论</a>被很好地应用于了 NoSQL 系统中（陈皓注：CAP即，一致性(Consistency)， 可用性(Availability)， 分区容忍性(Partition tolerance)，在分布式系统中，这三个要素最多只能同时实现两个，而NoSQL一般放弃的是一致性）。但在另一方面，NoSQL的数据建模技术却因为缺乏像关系型数据库那样的基础理论没有被世人很好地研究。这篇文章从数据建模方面对NoSQL家族进行了比较，并讨论几个常见的数据建模技术。</p>
 <p>要开始讨论数据建模技术，我们不得不或多或少地先系统地看一下NoSQL数据模型的成长的趋势，以此我们可以了解一些他们内在的联系。下图是NoSQL家族的进化图，我们可以看到这样的进化：Key-Value时代，BigTable时代，Document时代，全文搜索时代，和Graph数据库时代：（陈皓注：注意图中SQL说的那句话，NoSQL再这样发展下去就是SQL了，哈哈。）</p>
 <div id="attachment_310">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/overview2.png"><img alt="" height="699" src="https://coolshell.cn/wp-content/uploads/2012/05/overview2.png?w=594&amp;h=699" title="overview" width="594" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/overview2.png"><img alt="" height="699" src="../wp-content/uploads/2012/05/overview2.png?w=594&amp;h=699" title="overview" width="594"/><br/>
 </a>NoSQL Data Models</p>
 </div>
 <p>首先，我们需要注意的是SQL和关系型数据模型已存在了很长的时间，这种面向用户的自然性意味着：</p>
@@ -97,7 +97,7 @@
 </div>
 <div>
 <div id="attachment_404">
-<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/soft-schema2.png"><img alt="" class="aligncenter" height="439" src="https://coolshell.cn/wp-content/uploads/2012/05/soft-schema2.png?w=594&amp;h=439" title="soft-schema" width="594" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/soft-schema2.png"><img alt="" class="aligncenter" height="439" src="../wp-content/uploads/2012/05/soft-schema2.png?w=594&amp;h=439" title="soft-schema" width="594"/></a></p>
 <p style="text-align: center;">Entity Aggregation</p>
 </div>
 </div>
@@ -113,7 +113,7 @@
 <ul>
 <li>聚合 Aggregates 并不适用于数据字段经常被改变的情况。对此，我们需要把那些经常被改变的字段分到另外的表中，而在查询时我们需要联结数据。例如，我们有个Message系统可以有一个User实体，其包括了一个内嵌的Message实体。但是，如果用户不断在附加 message，那么，最好把message拆分到另一个独立的实体，但在查询时联结这User和Message这两个实体。如下图：</li>
 </ul>
-<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/aggregates-joins.png"><img alt="" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/05/aggregates-joins.png?w=594" title="aggregates-joins" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/05/aggregates-joins.png"><img alt="" class="aligncenter" src="../wp-content/uploads/2012/05/aggregates-joins.png?w=594" title="aggregates-joins"/></a></p>
 <p><strong>适用性</strong>: Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库， Graph Databases 图数据库。</p>
 <h4>通用建模技术 General Modeling Techniques</h4>
 <p>在本书中，我们将讨论NoSQL中各种不同的通用的数据建模技术。</p>
@@ -121,7 +121,7 @@
 <p>很多NoSQL的数据库（并不是所有）在事务处理上都是短板。在某些情况下，他们可以通过分布式锁技术或是<a href="http://highlyscalable.wordpress.com/2012/01/07/mvcc-transactions-key-value/" target="_blank" title="Implementation of MVCC Transactions for Key-Value Stores">应用层管理的MVCC技术</a>来实现其事务性（陈皓注：可参看本站的“<a href="https://coolshell.cn/articles/6790.html" title="多版本并发控制(MVCC)在分布式系统中的应用">多版本并发控制(MVCC)在分布式系统中的应用</a>”）但是，通常来说只能使用聚合Aggregates技术来保证一些ACID原则。</p>
 <p>这就是为什么我们的关系型数据库需要有强大的事务处理机制——因为关系型数据库的数据是被规格化存放在了不同的地方。所以，Aggregates聚合允许我们把一个业务实体存成一个文档、存成一行，存成一个key-value，这样就可以原子式的更新了：</p>
 <div id="attachment_409">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/atomic-aggregate1.png"><img alt="" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/05/atomic-aggregate1.png?w=594" title="atomic-aggregate" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/atomic-aggregate1.png"><img alt="" class="aligncenter" src="../wp-content/uploads/2012/05/atomic-aggregate1.png?w=594" title="atomic-aggregate"/><br/>
 </a>Atomic Aggregates</p>
 </div>
 <p>当然，原子聚合 Atomic Aggregates 这种数据模型并不能实现完全意义上的事务处理，但是如果支持原子性，锁，或 test-and-set 指令，那么， Atomic Aggregates 是可以适用的。</p>
@@ -137,7 +137,7 @@
 <p>Dimensionality Reduction 降维是一种技术可以允许把一个多维的数据映射成一个Key-Value或是其它非多给的数据模型。</p>
 <p>传统的地理位置信息系统使用一些如“四分树<a href="http://en.wikipedia.org/wiki/Quadtree" target="_blank">QuadTree</a>” 或 “<a href="http://en.wikipedia.org/wiki/R-tree" target="_blank">R-Tree</a>” 来做地理位置索引。这些数据结构的内容需要被在适当的位置更新，并且，如果数据量很大的话，操作成本会很高。另一个方法是我们可以遍历一个二维的数据结构并把其扁平化成一个列表。一个众所周知的例子是<a href="http://en.wikipedia.org/wiki/Geohash" target="_blank">Geohash</a>（地理哈希）。一个Geohash使用“之字形”的路线扫描一个2维的空间，而且遍历中的移动可以被简单地用0和1来表示其方向，然后在移动的过程中产生0/1串。下图展示了这一算法：（陈皓注：先把地图分成四份，经度为第一位，纬度为第二位，于是左边的经度是0，右边的是1，纬度也一样，上面是为1，下面的为0，这样，经纬度就可以组合成01，11，00，10这四个值，其标识了四块区域，我们可以如此不断的递归地对每个区域进行四分，然后可以得到一串1和0组成的字串，然后使用0-9，b-z 去掉（去掉a, i, l, o）这32个字母进行base32编码得到一个8个长度的编码，这就是Geohash的算法）</p>
 <div id="attachment_398">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/geohash-traversal1.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/geohash-traversal1.png?w=594" title="geohash-traversal" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/geohash-traversal1.png"><img alt="" src="../wp-content/uploads/2012/05/geohash-traversal1.png?w=594" title="geohash-traversal"/><br/>
 </a>Geohash Index</p>
 </div>
 <p>Geohash的最强大的功能是使用简单的位操作就可以知道两个区域间的距离，就像图中所示（陈皓：proximity框着的那两个，这个很像IP地址了）。Geohash把一个二维的坐标生生地变成了一个一维的数据模型，这就是降维技术。BigTable的降维技术参看到文章后面的 [6.1]。更多的关于Geohash和其它技术可以参看 [6.2] 和 [6.3]。</p>
@@ -145,7 +145,7 @@
 <h5>(7) 索引表 Index Table</h5>
 <p>Index Table 索引表是一个非常直白的技术，其可以你在不支持索引的数据库中得到索引的好处。BigTable是这类最重要的数据库。这需要我们维护一个有相应存取模式的特别表。例如，我们有一个主表存着用户帐号，其可以被UserID存取。某查询需要查出某个城市里所有的用户，于是我们可以加入一张表，这张表用城市做主键，所有和这个城市相关的UserID是其Value，如下所示：</p>
 <div id="attachment_399">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/index-table.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/index-table.png?w=594" title="index-table" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/index-table.png"><img alt="" src="../wp-content/uploads/2012/05/index-table.png?w=594" title="index-table"/><br/>
 </a>Index Table Example</p>
 </div>
 <p>可见，城市索引表的需要和对主表用户表保持一致性，因此，主表的每一个更新可能需要对索引表进行更新，不然就是一个批处理更新。无论哪个方式，这都会损伤一些性能，因为需要保持一致性。</p>
@@ -153,10 +153,10 @@
 <p><strong>适用性</strong>: BigTable 数据库。</p>
 <h5>(8) 键组合索引 Composite Key Index</h5>
 <p>Composite key 键组合是一个很常用的技术，对此，当我们的数据库支持键排序时能得到极大的好处。Composite key组合键的拼接成为第二排序字段可以让你构建出一种多维索引，这很像我们之前说过的 Dimensionality Reduction 降维技术。例如，我们需要存取用户统计。如果我们需要根据不同的地区来统计用户的分布情况，我们可以把Key设计成这样的格式 <em>(State:City:UserID)</em>，这样一来，就使得我们可以通过State到City来按组遍历用户，特别是我们的NoSQL数据库支持在key上按区查询（如：BigTable类的系统）：</p>
-<pre class="EnlighterJSRAW">SELECT Values WHERE state=&quot;CA:*&quot;
-SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
+<pre class="EnlighterJSRAW">SELECT Values WHERE state="CA:*"
+SELECT Values WHERE city="CA:San Francisco*"</pre>
 <div id="attachment_477">
-<p style="text-align: center;"><a href="http://highlyscalable.files.wordpress.com/2012/03/composite-key-index.png"><img alt="" src="http://highlyscalable.files.wordpress.com/2012/03/composite-key-index.png?w=594" title="composite-key-index" /><br />
+<p style="text-align: center;"><a href="http://highlyscalable.files.wordpress.com/2012/03/composite-key-index.png"><img alt="" src="http://highlyscalable.files.wordpress.com/2012/03/composite-key-index.png?w=594" title="composite-key-index"/><br/>
 </a>Composite Key Index</p>
 </div>
 <p><strong><strong>适用性</strong>: </strong>BigTable 数据库。</p>
@@ -165,12 +165,12 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
 <p><code class="EnlighterJSRAW">SELECT count(distinct(user_id)) FROM clicks GROUP BY site</code></p>
 <p>我们可以在NoSQL中建立如下的数据模型：</p>
 <div id="attachment_383">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/composite-key-collating1.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/composite-key-collating1.png?w=594" title="composite-key-collating" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/composite-key-collating1.png"><img alt="" src="../wp-content/uploads/2012/05/composite-key-collating1.png?w=594" title="composite-key-collating"/><br/>
 </a>Counting Unique Users using Composite Keys</p>
 </div>
 <p>这样，我们就可以把数据按UserID来排序，我们就可以很容易把同一个用户的数据（一个用户并不会产生太多的event）进行处理，去掉那些重复的站点（使用hash table或是别的什么）。另一个可选的技术是，我们可以对每一个用户建立一个数据实体，然后把其站点来源追加到这个数据实体中，当然，这样一来，数据的更新在性能相比之下会有一定损失。</p>
 <p><strong><strong>适用性</strong>:</strong> Ordered Key-Value Store 排序键值对数据库， BigTable风格的数据库。</p>
-<p><strong><br />
+<p><strong><br/>
 </strong></p>
 <h5>(10) 反转搜索 Inverted Search – 直接聚合 Direct Aggregation</h5>
 <p>这个技术更多的是数据处理技术，而不是数据建模技术。尽管如此，这个技术还是会影响数据模型。这个技术最主要的想法是使用一个索引来找到满足某条件的数据，但是把数据聚合起需要使用全文搜索。还是让我们来说一个示例。还是用上面那个例子，我们有很多的日志，其中包括互联网用户和他们的访问来源。让我们假定每条记录都有一个UserID，还有用户的种类 (Men, Women, Bloggers, 等)，以及用户所在的城市，和访问过的站点。我们要干的事是，为每个用户种类找到满足某些条件（访问源，所在城市，等）的的独立用户。</p>
@@ -178,7 +178,7 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
 <p><code class="EnlighterJSRAW">SELECT count(distinct(user_id)) ... GROUP BY category</code></p>
 <p>但这样的SQL很没有效率，因为category数据太多了。为了应对这个问题，我们可以建立一个直接索引 <em>{UserID -&gt; [Categories]}</em> 然后我们用它来生成报表：</p>
 <div id="attachment_388">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/invert-direct1.png"><img alt="" height="438" src="https://coolshell.cn/wp-content/uploads/2012/05/invert-direct1.png?w=594&amp;h=438" title="invert-direct" width="594" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/invert-direct1.png"><img alt="" height="438" src="../wp-content/uploads/2012/05/invert-direct1.png?w=594&amp;h=438" title="invert-direct" width="594"/><br/>
 </a>Counting Unique Users using Inverse and Direct Indexes</p>
 </div>
 <p>最后，我们需要明白，对每个UserID的随机查询是很没有效率的。我们可以通过批查询处理来解决这个问题。这意味着，对于一些用户集，我们可以进行预处理（不同的查询条件）。</p>
@@ -192,32 +192,32 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
 <li>对于大多数NoSQL的实现来说，更新数据都是很不经济的（相比起独立结点来说）</li>
 </ul>
 <div id="attachment_381">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/tree-aggregation.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/tree-aggregation.png?w=594" title="tree-aggregation" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/tree-aggregation.png"><img alt="" src="../wp-content/uploads/2012/05/tree-aggregation.png?w=594" title="tree-aggregation"/><br/>
 </a>Tree Aggregation</p>
 </div>
 <p><strong>适用性</strong>: Key-Value 键值对数据库, Document Databases 文档数据库</p>
 <h5>(12) 邻接列表 Adjacency Lists</h5>
-<p>Adjacency Lists 邻接列表是一种图 &#8211; 每一个结点都是一个独立的记录，其包含了 所有的父结点或子结点。这样，我们就可以通过给定的父或子结点来进行搜索。当然，我们需要通过hop查询遍历图。这个技术在广度和深度查询，以及得到某个结点的子树上没有效率。</p>
+<p>Adjacency Lists 邻接列表是一种图 – 每一个结点都是一个独立的记录，其包含了 所有的父结点或子结点。这样，我们就可以通过给定的父或子结点来进行搜索。当然，我们需要通过hop查询遍历图。这个技术在广度和深度查询，以及得到某个结点的子树上没有效率。</p>
 <p><strong>适用性</strong>: Key-Value 键值对数据库, Document Databases 文档数据库</p>
-<p><strong><br />
+<p><strong><br/>
 </strong></p>
 <h5>(13) Materialized Paths</h5>
 <p>Materialized Paths 可以帮助避免递归遍历（如：树形结构）。这个技术也可以被认为是反规格化的一种变种。其想法是为每个结点加上父结点或子结点的标识属性，这样就可以不需要遍历就知道所有的后裔结点和祖先结点了：</p>
 <div id="attachment_372">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths2.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths2.png?w=594" title="materialized-paths" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths2.png"><img alt="" src="../wp-content/uploads/2012/05/materialized-paths2.png?w=594" title="materialized-paths"/><br/>
 </a>Materialized Paths for eShop Category Hierarchy</p>
 </div>
 <p>这个技术对于全文搜索引擎来说非常有帮助，因为其可以允许把一个层级结构转成一个文档。上面的示图中我们可以看到所有的商品或<em>Men’s Shoes</em>下的子分类可以被一条很短的查询语句处理——只需要给定个分类名。</p>
 <p>Materialized Paths 可以存储一个ID的集合，或是一堆ID拼出的字符串。后者允许你通过一个正则表达式来搜索一个特定的分支路径。下图展示了这个技术（分支的路径包括了结点本身）：</p>
 <div id="attachment_377">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths-2.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths-2.png?w=594" title="materialized-paths-2" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/materialized-paths-2.png"><img alt="" src="../wp-content/uploads/2012/05/materialized-paths-2.png?w=594" title="materialized-paths-2"/><br/>
 </a>Query Materialized Paths using RegExp</p>
 </div>
 <p><strong>适用性</strong>: Key-Value 键值对数据库, Document Databases 文档数据, Search Engines 搜索引擎</p>
 <h5>(14) 嵌套集 Nested Sets</h5>
 <p><a href="http://en.wikipedia.org/wiki/Nested_set_model">Nested sets</a> 嵌套集是树形结构的标准技术。它被广泛地用在了关系性数据库中，它完全地适用于 Key-Value 键值对数据库 和 Document Databases 文档数据库。这个技术的想法是把叶子结点存储成一个数组，并通过使用索引的开始和结束来映射每一个非叶子结点到一个叶子结点集，就如下图所示一样：</p>
 <div id="attachment_360">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-sets.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-sets.png?w=594" title="nested-sets" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-sets.png"><img alt="" src="../wp-content/uploads/2012/05/nested-sets.png?w=594" title="nested-sets"/><br/>
 </a>Modeling of eCommerce Catalog using Nested Sets</p>
 </div>
 <p>这样的数据结构对于immutable data不变的数据 有非常不错的效率，因为其点内存空间小，并且可以很快地找出所有的叶子结点而不需要树的遍历。尽管如此，在插入和更新上需要很高的性能成本，因为新的叶子结点需要大规模地更新索引。</p>
@@ -225,13 +225,13 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
 <h4>(15) 嵌套文档扁平化：有限的字段名 Nested Documents Flattening: Numbered Field Names</h4>
 <p>搜索引擎基本上来说和扁平文档一同工作，如：每一个文档是一个扁平的字段和值的例表。这种数据模型的用来把业务实体映射到一个文本文档上，如果你的业务实体有很复杂的内部结构，这可能会变得很有挑战。一个典型的挑战是把一个有层级的文档映映射出来。例如，文档中嵌套另一个文档。让我们看看下面的示例：</p>
 <div id="attachment_363">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-1.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-1.png?w=594" title="nested-documents-1" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-1.png"><img alt="" src="../wp-content/uploads/2012/05/nested-documents-1.png?w=594" title="nested-documents-1"/><br/>
 </a>Nested Documents Problem</p>
 </div>
 <p>上面的每一个业务实体代码一种简历。其包括了人名和一个技能列表。我把这个层级文档映射成一个文本文档，一种方法是创建 <em>Skill</em> 和 <em>Level</em> 字段。这个模型可以通过技术或是等级来搜索一个人，而上图标注的那样的组合查询则会失败。（陈皓注：因为分不清Excellent是否是Math还是Poetry上的）</p>
 <p>在引用中的 [4.6] 给出了一种解决方案。其为每个字段都标上数字 <em>Skill_i</em> 和 <em>Level_i</em>，这样就可以分开搜索每一个对（下图中使用了OR来遍历查找所有可能的字段）:</p>
 <div id="attachment_365">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-3.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-3.png?w=594" title="nested-documents-3" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-3.png"><img alt="" src="../wp-content/uploads/2012/05/nested-documents-3.png?w=594" title="nested-documents-3"/><br/>
 </a>Nested Document Modeling using Numbered Field Names</p>
 </div>
 <p>这样的方式根本没有扩展性，对于一些复杂的问题来说只会让代码复杂度和维护工作变大。</p>
@@ -239,7 +239,7 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
 <h5>(16)嵌套文档扁平化：邻近查询 Nested Documents Flattening: Proximity Queries</h5>
 <p>在附录 [4.6]中给出了这个技术用来解决扁平层次文档。它用邻近的查询来限制可被查询的单词的范围。下图中，所有的技能和等级被放在一个字段中，叫 SkillAndLevel，查询中出现的 “Excellent” 和 “Poetry” 必需一个紧跟另一个：</p>
 <div id="attachment_364">
-<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-2.png"><img alt="" src="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-2.png?w=594" title="nested-documents-2" /><br />
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/05/nested-documents-2.png"><img alt="" src="../wp-content/uploads/2012/05/nested-documents-2.png?w=594" title="nested-documents-2"/><br/>
 </a>Nested Document Modeling using Proximity Queries</p>
 </div>
 <p>附录 [4.3] 中讲述了这个技术被用在Solr中的一个成功案例。</p>
@@ -322,7 +322,6 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1889.html"><img alt="SQL的Where语句" height="150" src="https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1889.html">SQL的Where语句</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5826.html"><img alt="千万别用MongoDB？真的吗？！" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5826.html">千万别用MongoDB？真的吗？！</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1889.html"><img alt="SQL的Where语句" height="150" src="../wp-content/uploads/2009/12/sql.where_.clause-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1889.html">SQL的Where语句</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="../wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5826.html"><img alt="千万别用MongoDB？真的吗？！" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5826.html">千万别用MongoDB？真的吗？！</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

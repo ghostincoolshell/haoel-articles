@@ -45,10 +45,10 @@ GAE 最近发布了正式[支持Java](http://googleappengine.blogspot.com/2009/
 
 ### 相关文章
 
-* [![一些文章和各种资源](https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![PFIF网上寻人协议](https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png)](https://coolshell.cn/articles/9508.html)[PFIF网上寻人协议](https://coolshell.cn/articles/9508.html)
-* [![代码执行的效率](https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg)](https://coolshell.cn/articles/7886.html)[代码执行的效率](https://coolshell.cn/articles/7886.html)
-* [![来信， 创业 和 移动互联网](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
+* [![一些文章和各种资源](../wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [![PFIF网上寻人协议](../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png)](https://coolshell.cn/articles/9508.html)[PFIF网上寻人协议](https://coolshell.cn/articles/9508.html)
+* [![代码执行的效率](../wp-content/uploads/2012/07/muxnt-150x150.jpg)](https://coolshell.cn/articles/7886.html)[代码执行的效率](https://coolshell.cn/articles/7886.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
 The post [如何在Google App Engine上运行PHP](https://coolshell.cn/articles/531.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

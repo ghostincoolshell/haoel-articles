@@ -276,10 +276,10 @@ Larry Tesler有可能说服了Bezos相信他并不是Steve Jobs，但Bezos意识
 
 ### 相关文章
 
-* [![来信， 创业 和 移动互联网](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![PFIF网上寻人协议](https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png)](https://coolshell.cn/articles/9508.html)[PFIF网上寻人协议](https://coolshell.cn/articles/9508.html)
-* [![三个事和三个问题](https://coolshell.cn/wp-content/uploads/2011/12/amazon_global_selling-150x150.jpg)](https://coolshell.cn/articles/6142.html)[三个事和三个问题](https://coolshell.cn/articles/6142.html)
-* [![腾讯，竞争力 和 用户体验](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/5901.html)[腾讯，竞争力 和 用户体验](https://coolshell.cn/articles/5901.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [![PFIF网上寻人协议](../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png)](https://coolshell.cn/articles/9508.html)[PFIF网上寻人协议](https://coolshell.cn/articles/9508.html)
+* [![三个事和三个问题](../wp-content/uploads/2011/12/amazon_global_selling-150x150.jpg)](https://coolshell.cn/articles/6142.html)[三个事和三个问题](https://coolshell.cn/articles/6142.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/5901.html)[腾讯，竞争力 和 用户体验](https://coolshell.cn/articles/5901.html)
 The post [SteveY对Amazon和Google平台的吐槽](https://coolshell.cn/articles/5701.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

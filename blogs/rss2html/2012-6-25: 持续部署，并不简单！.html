@@ -1,7 +1,7 @@
-<p></p>
+<html><body><p></p>
 <p style="text-align: left;">【<strong>感谢 <a href="http://weibo.com/renfake" target="_blank">@常新居士</a> 投递此文</strong> 】</p>
 <p style="text-align: left;">这几年，持续集成随着敏捷在国内的推广而持续走热，与之相伴的持续部署也一直备受关注。<strong>自前两年，持续交付这个延续性概念又闯进了国内IT圈，慢慢开始在社区和会议中展露头角。许多不明真相的群众跟风哭着喊着要“上”，而许多前CI的半吊子玩家换件衣服就接着干，有的甚至衣服都来不及换……</strong>。国内的这些土财主如果不巧请了某些所谓的战略家，除了建了一堆持续集成环境，以及每天嚷嚷着要这个要那个，混乱的状况在根本上没有得到改善。本文无意费力探讨持续集成和持续交付的概念，而是打算谈谈对于大型软件企业，以持续集成为基础实现持续部署（交付）时，所要面对的问题以及可行的解决方案。地主老财们，夜黑风正猛，山高路又远，注意脚下……</p>
-<p style="text-align: right;"><strong>And God Said, Let there be light: and there wa</strong>&#8212; GENSIS, Charpter 1, King James</p>
+<p style="text-align: right;"><strong>And God Said, Let there be light: and there wa</strong>— GENSIS, Charpter 1, King James</p>
 <h4>一、起步</h4>
 <p>先来讲个故事……</p>
 <p>几年前，一对留美的夫妇通过朋友找到我，让我帮忙在国内组建一个开发团队，该团队负责为其开发一款基于社交网络的客户关系管理软件,（暂且称之为项目A）。这个项目除了尚不清晰的需求范围和很紧的期限外，作为业内人士的老公Richard根据眼下流行的软件开发过程还提了诸多额外的要求：</p>
@@ -11,13 +11,13 @@
 <li><strong>功能必须经过测试</strong>（长期作为软件外包的甲方，对质量要求严格）</li>
 <li><strong>要减少后期维护的工作</strong>（美国人精贵，少雇一个是一个）</li>
 <li><strong>支持协同开发</strong>（以便维护人员及早介入）</li>
-<li>&#8230;&#8230;</li>
+<li>……</li>
 </ul>
 <p><span style="color: #000000;"><strong>这正是持续集成所要解决的典型场景</strong></span>。针对Richard的要求，我们只要建立一个基于Hudson（现在叫Jenkins）+Maven +SVN 的持续集成环境（再加上持续集成所要求的测试和过程）就可以很好地满足上述要要求，此方案的结构如下：</p>
 <p><span id="more-7657"></span></p>
-<p><a href="https://coolshell.cn/?attachment_id=7686" rel="attachment wp-att-7686"><img alt="" class="alignnone  wp-image-7686 aligncenter" height="719" src="https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2.jpg" width="693" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7686" rel="attachment wp-att-7686"><img alt="" class="alignnone wp-image-7686 aligncenter" height="719" src="../wp-content/uploads/2012/06/hudsonCI2.jpg" width="693"/></a></p>
 <p>对于上述方案，让我们近距离看看各个服务器的内部情况，以及人员在这种方案下的分工协作：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7708" rel="attachment wp-att-7708"><img alt="" class="alignnone  wp-image-7708 aligncenter" height="438" src="https://coolshell.cn/wp-content/uploads/2012/06/response.jpg" width="658" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7708" rel="attachment wp-att-7708"><img alt="" class="alignnone wp-image-7708 aligncenter" height="438" src="../wp-content/uploads/2012/06/response.jpg" width="658"/></a></p>
 <p>我们先谈谈上面的图中涉及的一些概念性问题：</p>
 <h5><strong>1.1）编译时依赖</strong>和<strong>运行时依赖</strong></h5>
 <p>从字面上不难理解这两种依赖的类型。但要注意虽然编译时依赖常常也是运行时依赖，但并不能推断出一方必然是另一方。比如，在开发的过程中需要某些提供API的Jar包，而运行时可能是具体API实现的Jar包。再者，被依赖的包会有其自身的依赖，因此,项目对这些包产生间接依赖（<strong>运行时依赖</strong>），依此类推，最终形成一个<strong>依赖树</strong>。当项目运行时，这些依赖树上的包必须全部就位。</p>
@@ -39,10 +39,10 @@
 <p><strong>但是，我们有没有想过，这会是一个自动化部署的通用解决方案吗？持续集成应该位于持续交付的中心吗？</strong></p>
 <h4>二、困境</h4>
 <p>回到我们的故事：项目A上线两年后，运营业绩不错，投资人第一轮注资后，Richard的公司进行了扩张，他们对项目进行了重构，而且随着用户数量的增长，公司分别在美国、英国和日本等地建立了运营中心，并且对亚洲市场进行的定制功能开发（项目A+），接下来，公司又投入开发了团购系统（项目B）。在获得了新一轮投资后，各条本来比较简单的业务和功能线上越来越复杂，需要不断地细分，于是公司再度扩张（开发人员达到了300人，国内200多人，而运维团队主要在美国），随后又为项目A/A+的高级用户开发了问答系统（项目C）。目前，他们正准备开发手机系统。 看看下面的图，公司增长的过程中，整个项目环境也变得复杂。（注意，这里是一种逻辑结构，而在物理层面项目B和项目A的生产环境可能部署在相同的机器上）。</p>
-<p><a href="https://coolshell.cn/?attachment_id=7694" rel="attachment wp-att-7694"><img alt="" class="alignnone  wp-image-7694 aligncenter" height="370" src="https://coolshell.cn/wp-content/uploads/2012/06/sampleT1-1024x529.jpg" width="717" /></a></p>
-<p>同时，原本单一的项目软件结构随着业务系统的增加也不再简单： <img alt="" class="alignnone  wp-image-7697" height="414" src="https://coolshell.cn/wp-content/uploads/2012/06/software.jpg" width="763" /></p>
+<p><a href="https://coolshell.cn/?attachment_id=7694" rel="attachment wp-att-7694"><img alt="" class="alignnone wp-image-7694 aligncenter" height="370" src="../wp-content/uploads/2012/06/sampleT1-1024x529.jpg" width="717"/></a></p>
+<p>同时，原本单一的项目软件结构随着业务系统的增加也不再简单： <img alt="" class="alignnone wp-image-7697" height="414" src="../wp-content/uploads/2012/06/software.jpg" width="763"/></p>
 <p>而软件间的版本依赖使这个问题变得更为复杂：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7700" rel="attachment wp-att-7700"><img alt="" class="alignnone size-full wp-image-7700 aligncenter" height="343" src="https://coolshell.cn/wp-content/uploads/2012/06/dependency.jpg" width="626" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7700" rel="attachment wp-att-7700"><img alt="" class="alignnone size-full wp-image-7700 aligncenter" height="343" src="../wp-content/uploads/2012/06/dependency.jpg" width="626"/></a></p>
 <p>现在，Richard的公司已经不再是一条快乐的小鱼，而是渐渐成为一直庞大的巨兽。虽然只有四个产品，但公司却要支持几百台开发机，几十台生产服务器，还有对应的测试环境，数据库服务器，以及几十个开发小组，和一大堆的内部项目。我们尽可以使用持续集成来为我们完成自动化部署。但，<strong>当我们为各个项目建立起持续集成环境后，它能满足我们对于持续部署的要求吗？我们前期的工作可以简化我们今后项目的持续交付的工作的难度吗？它需要我们为之建立一个庞大的运维团队，还是可以让我们能节省下每一毛钱来投入到真正的业务价值中去？</strong></p>
 <p><strong>让我们先来看看复杂的项目环境中的几个场景</strong>：</p>
 <p><strong>场景1：环境升级</strong></p>
@@ -66,13 +66,13 @@
 <p><strong>环境 = 软件包 + 配置信息</strong></p>
 <p>在这个定义下，我们就必须将运行环境的软件解构，并以包的形式导入到公司的整个项目资源库中，比如Apache将作为一个包被导入，而Apache依赖的其它包也将依次被导入，并建立起正确的依赖关系。而且，在导入的过程中还必须做些相应的调整，如，环境变量的读取和设置，必须来自于环境配置模块，而不要修改系统的环境变量，防止不同环境在系统环境配置上相互影响和依赖。</p>
 <p>再回头审视我们的示例，项目A的生产环境可以部署在不同的区域，对于各个区域可能有定制化的设定。这就像面向对象中的类，可以通过继承使子类重用父类的公有属性和行为并添加自己特有的信息。因此，环境的概念模型如图：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7725" rel="attachment wp-att-7725"><img alt="" class="alignnone size-full wp-image-7725 aligncenter" height="118" src="https://coolshell.cn/wp-content/uploads/2012/06/Env.jpg" width="523" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7725" rel="attachment wp-att-7725"><img alt="" class="alignnone size-full wp-image-7725 aligncenter" height="118" src="../wp-content/uploads/2012/06/Env.jpg" width="523"/></a></p>
 <p>通过这样的关系，我们很容易为示例的复杂环境建立一种简单的结构，对于项目A：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7729" rel="attachment wp-att-7729"><img alt="" class="alignnone size-full wp-image-7729 aligncenter" height="519" src="https://coolshell.cn/wp-content/uploads/2012/06/org1.jpg" width="599" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7729" rel="attachment wp-att-7729"><img alt="" class="alignnone size-full wp-image-7729 aligncenter" height="519" src="../wp-content/uploads/2012/06/org1.jpg" width="599"/></a></p>
 <p>这里，环境依然是处于知识层面（Knowledge Level），它并未与具体的基础设施相关联。当我们将一个环境“具现化”成一个运行系统时，我们就产生了一个真正的环境实例。在这两者之间，我们还必须要考虑环境实例的使用目的（开发？测试？……）以及安装所依赖的其它信息（如机器），因此，我们需要增加一个环境目标来集中这些信息，而且由于不同目标的环境可能会有所差别，因此，环境目标也需要配置的能力。概念模型如图：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7731" rel="attachment wp-att-7731"><img alt="" class="alignnone size-full wp-image-7731 aligncenter" height="438" src="https://coolshell.cn/wp-content/uploads/2012/06/target.jpg" width="523" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7731" rel="attachment wp-att-7731"><img alt="" class="alignnone size-full wp-image-7731 aligncenter" height="438" src="../wp-content/uploads/2012/06/target.jpg" width="523"/></a></p>
 <p>图中的环境实例是如何产生的呢？<strong>部署</strong>，<strong>一次部署可能会产生一个环境实例。</strong>一系列部署将产生对应于环境目标的多个环境实例，除去当前起作用的环境实例外（最新的），其它的是历史环境实例。<strong>通过在历史环境实例中切换，我们自然而然的就可以使整个环境回滚，因为项目所依赖的一切都已经成为的环境中的软件包，而且环境依赖的包的版本会随着部署具体确定下来。</strong>如此一来，我们便可以给每个环境实例分配一个版本号，再通过环境实例的版本号与软件包的版本对应起来，从而得知一次部署时应用的具体软件包，如图：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7732" rel="attachment wp-att-7732"><img alt="" class="alignnone  wp-image-7732 aligncenter" height="394" src="https://coolshell.cn/wp-content/uploads/2012/06/version.jpg" width="669" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7732" rel="attachment wp-att-7732"><img alt="" class="alignnone wp-image-7732 aligncenter" height="394" src="../wp-content/uploads/2012/06/version.jpg" width="669"/></a></p>
 <p>目前的环境管理结构，已经可以解决场景1、2和5的问题。那<strong>么对于场景2，运行时依赖，环境管理应该如何解决呢？</strong></p>
 <p>细心的朋友，可能已经发现，<strong>在环境层面上我们确定了环境依赖的软件包</strong>，这里有两个隐藏的含义：</p>
 <ul>
@@ -89,7 +89,7 @@
 <li><strong>简化运行时包依赖的指定（可参考apt-get和RubyGem，环境只需指定直接依赖的包，间接依赖的包从运行时依赖树中自动导入）</strong></li>
 </ul>
 <div>一个可能的简单结构如下：</div>
-<p><a href="https://coolshell.cn/?attachment_id=7736" rel="attachment wp-att-7736"><img alt="" class="alignnone size-full wp-image-7736 aligncenter" height="195" src="https://coolshell.cn/wp-content/uploads/2012/06/pkg1.jpg" width="783" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7736" rel="attachment wp-att-7736"><img alt="" class="alignnone size-full wp-image-7736 aligncenter" height="195" src="../wp-content/uploads/2012/06/pkg1.jpg" width="783"/></a></p>
 <p>上述讨论还没有涉及操作系统，<strong>如果我们的运行机器要支持多个系统，我们又该怎么办？？？</strong></p>
 <p>配置信息也是个大问题，大家可以思考</p>
 <ul>
@@ -116,10 +116,10 @@
 <li>安装项目包（rsync，解压，权限设置等）</li>
 <li>配置环境变量</li>
 <li>启动服务</li>
-<li>&#8230;&#8230;</li>
+<li>……</li>
 </ol>
 <p>而在第二部分的<strong>情景4</strong>中，我们看到如果对不同的持续集成环境建立不同的部署脚本和环境维护脚本，这部署过程的维护会非常繁琐。基于第三部分的环境管理，我们可以将部署过程抽象为：</p>
-<p><a href="https://coolshell.cn/?attachment_id=7737" rel="attachment wp-att-7737"><img alt="" class="alignnone size-full wp-image-7737 aligncenter" height="351" src="https://coolshell.cn/wp-content/uploads/2012/06/deploy.jpg" width="566" /></a></p>
+<p><a href="https://coolshell.cn/?attachment_id=7737" rel="attachment wp-att-7737"><img alt="" class="alignnone size-full wp-image-7737 aligncenter" height="351" src="../wp-content/uploads/2012/06/deploy.jpg" width="566"/></a></p>
 <p>现在回到开头那个文绉绉的描述：<strong>部署其就是按照其目的执行一系列步骤将环境置于其目的所指向的状态中</strong>。</p>
 <p>由于我们已经将部署作为环境管理的一部分，而环境又是对外提供服务的最小实体，因此，对环境的部署就是要根据部署的类型，在环境上按一定的步骤执行一系列操作，从而使环境置于部署类型所要的状态，这个过程中可能会生成对应的环境实例。举例来说，我们可能会修改环境相关的一些配置，然后重启环境，显然，这种情况下不需要下载安装软件包（没有改变），因此也就不需要生成环境实例。</p>
 <p>对于标准的部署——安装软件包并启动环境，可能的步骤将会是：</p>
@@ -183,7 +183,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8209.html"><img alt="“单元测试要做多细？”" height="150" src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8209.html">“单元测试要做多细？”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5531.html"><img alt="Test-Driven Development？别逗了" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5531.html">Test-Driven Development？别逗了</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5625.html"><img alt="“品质在于构建过程”吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5625.html">“品质在于构建过程”吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5143.html"><img alt="在新浪微博上关于敏捷的一些讨论" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5143.html">在新浪微博上关于敏捷的一些讨论</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5044.html"><img alt="为什么Scrum不行？" height="150" src="https://coolshell.cn/wp-content/uploads/2011/07/hat-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5044.html">为什么Scrum不行？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4891.html"><img alt="Bob大叔和Jim Coplien对TDD的论战" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4891.html">Bob大叔和Jim Coplien对TDD的论战</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7657.html">持续部署，并不简单！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8209.html"><img alt="“单元测试要做多细？”" height="150" src="../wp-content/uploads/2012/09/fight-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8209.html">“单元测试要做多细？”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5531.html"><img alt="Test-Driven Development？别逗了" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5531.html">Test-Driven Development？别逗了</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5625.html"><img alt="“品质在于构建过程”吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5625.html">“品质在于构建过程”吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5143.html"><img alt="在新浪微博上关于敏捷的一些讨论" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5143.html">在新浪微博上关于敏捷的一些讨论</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5044.html"><img alt="为什么Scrum不行？" height="150" src="../wp-content/uploads/2011/07/hat-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5044.html">为什么Scrum不行？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4891.html"><img alt="Bob大叔和Jim Coplien对TDD的论战" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4891.html">Bob大叔和Jim Coplien对TDD的论战</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7657.html">持续部署，并不简单！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

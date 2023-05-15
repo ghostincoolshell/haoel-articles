@@ -96,10 +96,10 @@ Android本来就是用C/C++写的，要跨平台，首先是Android自己跨平�
 
 ### 相关文章
 
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![一些有意思的文章和资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
-* [![Google图片搜索下的的C String](https://coolshell.cn/wp-content/uploads/2011/02/C_String-150x150.jpg)](https://coolshell.cn/articles/3806.html)[Google图片搜索下的的C String](https://coolshell.cn/articles/3806.html)
-* [![Google App Inventor ](https://coolshell.cn/wp-content/uploads/2010/07/androidappinventor-150x150.jpg)](https://coolshell.cn/articles/2608.html)[Google App Inventor](https://coolshell.cn/articles/2608.html)
-* [![关于 Chrome OS 的一些推论](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/1152.html)[关于 Chrome OS 的一些推论](https://coolshell.cn/articles/1152.html)
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
+* [![Google图片搜索下的的C String](../wp-content/uploads/2011/02/C_String-150x150.jpg)](https://coolshell.cn/articles/3806.html)[Google图片搜索下的的C String](https://coolshell.cn/articles/3806.html)
+* [![Google App Inventor ](../wp-content/uploads/2010/07/androidappinventor-150x150.jpg)](https://coolshell.cn/articles/2608.html)[Google App Inventor](https://coolshell.cn/articles/2608.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/1152.html)[关于 Chrome OS 的一些推论](https://coolshell.cn/articles/1152.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
 The post [Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

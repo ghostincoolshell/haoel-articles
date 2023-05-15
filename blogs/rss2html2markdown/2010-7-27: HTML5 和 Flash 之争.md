@@ -100,10 +100,10 @@ HTML5 是一项新技术，很多人会想要尝试它，而 Flash 业已存在�
 
 ### 相关文章
 
-* [![Web开发人员速查卡](https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg)](https://coolshell.cn/articles/3684.html)[Web开发人员速查卡](https://coolshell.cn/articles/3684.html)
-* [![一些非常有意思的杂项资源](https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
-* [![你准备使用 HTML 5 吗？](https://coolshell.cn/wp-content/uploads/2010/09/WTF_HTML51-150x150.jpg)](https://coolshell.cn/articles/2926.html)[你准备使用 HTML 5 吗？](https://coolshell.cn/articles/2926.html)
-* [![HTML6 展望](https://coolshell.cn/wp-content/uploads/2014/12/html6-150x150.jpeg)](https://coolshell.cn/articles/12206.html)[HTML6 展望](https://coolshell.cn/articles/12206.html)
-* [![浏览器的渲染原理简介](https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
-* [![CSS 布局:40个教程、技巧、例子和最佳实践](https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif)](https://coolshell.cn/articles/6840.html)[CSS 布局:40个教程、技巧、例子和最佳实践](https://coolshell.cn/articles/6840.html)
+* [![Web开发人员速查卡](../wp-content/uploads/2011/02/1128-150x150.jpg)](https://coolshell.cn/articles/3684.html)[Web开发人员速查卡](https://coolshell.cn/articles/3684.html)
+* [![一些非常有意思的杂项资源](../wp-content/uploads/2010/09/biolab-150x150.jpg)](https://coolshell.cn/articles/3013.html)[一些非常有意思的杂项资源](https://coolshell.cn/articles/3013.html)
+* [![你准备使用 HTML 5 吗？](../wp-content/uploads/2010/09/WTF_HTML51-150x150.jpg)](https://coolshell.cn/articles/2926.html)[你准备使用 HTML 5 吗？](https://coolshell.cn/articles/2926.html)
+* [![HTML6 展望](../wp-content/uploads/2014/12/html6-150x150.jpeg)](https://coolshell.cn/articles/12206.html)[HTML6 展望](https://coolshell.cn/articles/12206.html)
+* [![浏览器的渲染原理简介](../wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
+* [![CSS 布局:40个教程、技巧、例子和最佳实践](../wp-content/uploads/2012/03/css-layouts-150x150.gif)](https://coolshell.cn/articles/6840.html)[CSS 布局:40个教程、技巧、例子和最佳实践](https://coolshell.cn/articles/6840.html)
 The post [HTML5 和 Flash 之争](https://coolshell.cn/articles/2735.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

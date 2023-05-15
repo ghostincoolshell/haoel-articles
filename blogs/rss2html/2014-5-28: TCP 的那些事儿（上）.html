@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright wp-image-11654" height="257" src="https://coolshell.cn/wp-content/uploads/2014/05/tin-can-phone.jpg" width="360" />TCP是一个巨复杂的协议，因为他要解决很多问题，而这些问题又带出了很多子问题和阴暗面。所以学习TCP本身是个比较痛苦的过程，但对于学习的过程却能让人有很多收获。关于TCP这个协议的细节，我还是推荐你去看<a href="http://www.kohala.com/start/" target="_blank">W.Richard Stevens</a>的《<a href="http://book.douban.com/subject/1088054/" target="_blank">TCP/IP 详解 卷1：协议</a>》（当然，你也可以去读一下<a href="http://tools.ietf.org/html/rfc793" target="_blank">RFC793</a>以及后面N多的RFC）。另外，本文我会使用英文术语，这样方便你通过这些英文关键词来查找相关的技术文档。</p>
+<html><body><p><img alt="" class="alignright wp-image-11654" height="257" src="../wp-content/uploads/2014/05/tin-can-phone.jpg" width="360"/>TCP是一个巨复杂的协议，因为他要解决很多问题，而这些问题又带出了很多子问题和阴暗面。所以学习TCP本身是个比较痛苦的过程，但对于学习的过程却能让人有很多收获。关于TCP这个协议的细节，我还是推荐你去看<a href="http://www.kohala.com/start/" target="_blank">W.Richard Stevens</a>的《<a href="http://book.douban.com/subject/1088054/" target="_blank">TCP/IP 详解 卷1：协议</a>》（当然，你也可以去读一下<a href="http://tools.ietf.org/html/rfc793" target="_blank">RFC793</a>以及后面N多的RFC）。另外，本文我会使用英文术语，这样方便你通过这些英文关键词来查找相关的技术文档。</p>
 <p>之所以想写这篇文章，目的有三个，</p>
 <ul>
 <li>一个是想锻炼一下自己是否可以用简单的篇幅把这么复杂的TCP协议描清楚的能力。</li>
@@ -16,7 +16,7 @@
 <p>首先，我们需要知道，我们程序的数据首先会打到TCP的Segment中，然后TCP的Segment会打到IP的Packet中，然后再打到以太网Ethernet的Frame中，传到对端后，各个层解析自己的协议，然后把数据交给更高层的协议处理。</p>
 <h4>TCP头格式</h4>
 <p>接下来，我们来看一下TCP头的格式</p>
-<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11572" height="284" src="https://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-01.jpg" width="700" />TCP头格式（<a href="http://nmap.org/book/tcpip-ref.html" target="_blank">图片来源</a>）</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11572" height="284" src="../wp-content/uploads/2014/05/TCP-Header-01.jpg" width="700"/>TCP头格式（<a href="http://nmap.org/book/tcpip-ref.html" target="_blank">图片来源</a>）</p>
 <p>你需要注意这么几点：</p>
 <ul>
 <li>TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口。</li>
@@ -31,12 +31,12 @@
 </li>
 </ul>
 <p>关于其它的东西，可以参看下面的图示</p>
-<p><img alt="" class="aligncenter wp-image-11573" height="214" src="https://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-02.jpg" width="700" /></p>
+<p><img alt="" class="aligncenter wp-image-11573" height="214" src="../wp-content/uploads/2014/05/TCP-Header-02.jpg" width="700"/></p>
 <p style="text-align: center;">（<a href="http://nmap.org/book/tcpip-ref.html" target="_blank">图片来源</a>）</p>
 <h4>TCP的状态机</h4>
 <p>其实，<strong>网络上的传输是没有连接的，包括TCP也是一样的</strong>。而TCP所谓的“连接”，其实只不过是在通讯的双方维护一个“连接状态”，让它看上去好像有连接一样。所以，TCP的状态变换是非常重要的。</p>
 <p>下面是：“<strong>TCP协议的状态机</strong>”（<a href="http://www.tcpipguide.com/free/t_TCPOperationalOverviewandtheTCPFiniteStateMachineF-2.htm" target="_blank">图片来源</a>） 和 “<strong>TCP建链接</strong>”、“<strong>TCP断链接</strong>”、“<strong>传数据</strong>” 的对照图，我把两个图并排放在一起，这样方便在你对照着看。另外，下面这两个图非常非常的重要，你一定要记牢。（吐个槽：看到这样复杂的状态机，就知道这个协议有多复杂，复杂的东西总是有很多坑爹的事情，所以TCP协议其实也挺坑爹的）</p>
-<p><img align="top" alt="" height="550" src="https://coolshell.cn/wp-content/uploads/2014/05/tcpfsm.png" width="386" /> <img alt="" height="520" src="https://coolshell.cn/wp-content/uploads/2014/05/tcp_open_close.jpg" width="370" /></p>
+<p><img align="top" alt="" height="550" src="../wp-content/uploads/2014/05/tcpfsm.png" width="386"/> <img alt="" height="520" src="../wp-content/uploads/2014/05/tcp_open_close.jpg" width="370"/></p>
 <p>很多人会问，为什么建链接要3次握手，断链接需要4次挥手？</p>
 <ul>
 <li><strong>对于建链接的3次握手，</strong>主要是要初始化Sequence Number 的初始值。通信的双方要互相通知对方自己的初始化的Sequence Number（缩写为ISN：Inital Sequence Number）——所以叫SYN，全称Synchronize Sequence Numbers。也就上图中的 x 和 y。这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输的问题而乱序（TCP会用这个序号来拼接数据）。</li>
@@ -44,9 +44,9 @@
 <ul>
 <li><strong>对于4次挥手，</strong>其实你仔细看是2次，因为TCP是全双工的，所以，发送方和接收方都需要Fin和Ack。只不过，有一方是被动的，所以看上去就成了所谓的4次挥手。如果两边同时断连接，那就会就进入到CLOSING状态，然后到达TIME_WAIT状态。下图是双方同时断连接的示意图（你同样可以对照着TCP状态机看）：</li>
 </ul>
-<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11586" height="395" src="https://coolshell.cn/wp-content/uploads/2014/05/tcpclosesimul.png" width="500" /><br />
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11586" height="395" src="../wp-content/uploads/2014/05/tcpclosesimul.png" width="500"/><br/>
 两端同时断连接（<a href="http://www.tcpipguide.com/free/t_TCPConnectionTermination-4.htm" target="_blank">图片来源</a>）</p>
-<p>&nbsp;</p>
+<p> </p>
 <p>另外，有几个事情需要注意一下：</p>
 <ul>
 <li><strong>关于建连接时SYN超时</strong>。试想一下，如果server端接到了clien发的SYN后回了SYN-ACK后client掉线了，server端没有收到client回来的ACK，那么，这个连接处于一个中间状态，即没成功，也没失败。于是，server端如果在一定时间内没有收到的TCP会重发SYN-ACK。在Linux下，默认重试次数为5次，重试的间隔时间从1s开始每次都翻售，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s都知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 2^6 -1 = 63s，TCP才会把断开这个连接。</li>
@@ -55,7 +55,7 @@
 <li><strong>关于SYN Flood攻击</strong>。一些恶意的人就为此制造了SYN Flood攻击——给服务器发了一个SYN后，就下线了，于是服务器需要默认等63s才会断开连接，这样，攻击者就可以把服务器的syn连接的队列耗尽，让正常的连接请求不能处理。于是，Linux下给了一个叫<strong>tcp_syncookies</strong>的参数来应对这个事——当SYN队列满了后，TCP会通过源地址端口、目标地址端口和时间戳打造出一个特别的Sequence Number发回去（又叫cookie），如果是攻击者则不会有响应，如果是正常连接，则会把这个 SYN Cookie发回来，然后服务端可以通过cookie建连接（即使你不在SYN队列中）。请注意，<strong>请先千万别用tcp_syncookies来处理正常的大负载的连接的情况</strong>。因为，synccookies是妥协版的TCP协议，并不严谨。对于正常的请求，你应该调整三个TCP参数可供你选择，第一个是：tcp_synack_retries 可以用他来减少重试次数；第二个是：tcp_max_syn_backlog，可以增大SYN连接数；第三个是：tcp_abort_on_overflow 处理不过来干脆就直接拒绝连接了。</li>
 </ul>
 <ul>
-<li><strong>关于ISN的初始化</strong>。ISN是不能hard code的，不然会出问题的——比如：如果连接建好后始终用1来做ISN，如果client发了30个segment过去，但是网络断了，于是 client重连，又用了1做ISN，但是之前连接的那些包到了，于是就被当成了新连接的包，此时，client的Sequence Number 可能是3，而Server端认为client端的这个号是30了。全乱了。<a href="http://tools.ietf.org/html/rfc793" target="_blank">RFC793</a>中说，ISN会和一个假的时钟绑在一起，这个时钟会在每4微秒对ISN做加一操作，直到超过2^32，又从0开始。这样，一个ISN的周期大约是4.55个小时。因为，我们假设我们的TCP Segment在网络上的存活时间不会超过Maximum Segment Lifetime（缩写为MSL &#8211; <a href="http://en.wikipedia.org/wiki/Maximum_Segment_Lifetime" target="_blank">Wikipedia语条</a>），所以，只要MSL的值小于4.55小时，那么，我们就不会重用到ISN。</li>
+<li><strong>关于ISN的初始化</strong>。ISN是不能hard code的，不然会出问题的——比如：如果连接建好后始终用1来做ISN，如果client发了30个segment过去，但是网络断了，于是 client重连，又用了1做ISN，但是之前连接的那些包到了，于是就被当成了新连接的包，此时，client的Sequence Number 可能是3，而Server端认为client端的这个号是30了。全乱了。<a href="http://tools.ietf.org/html/rfc793" target="_blank">RFC793</a>中说，ISN会和一个假的时钟绑在一起，这个时钟会在每4微秒对ISN做加一操作，直到超过2^32，又从0开始。这样，一个ISN的周期大约是4.55个小时。因为，我们假设我们的TCP Segment在网络上的存活时间不会超过Maximum Segment Lifetime（缩写为MSL – <a href="http://en.wikipedia.org/wiki/Maximum_Segment_Lifetime" target="_blank">Wikipedia语条</a>），所以，只要MSL的值小于4.55小时，那么，我们就不会重用到ISN。</li>
 </ul>
 <ul>
 <li><strong>关于 MSL 和 TIME_WAIT</strong>。通过上面的ISN的描述，相信你也知道MSL是怎么来的了。我们注意到，在TCP的状态图中，从TIME_WAIT状态到CLOSED状态，有一个超时设置，这个超时设置是 2*MSL（<a href="http://tools.ietf.org/html/rfc793" target="_blank">RFC793</a>定义了MSL为2分钟，Linux设置成了30s）为什么要这有TIME_WAIT？为什么不直接给转成CLOSED状态呢？主要有两个原因：1）TIME_WAIT确保有足够的时间让对端收到了ACK，如果被动关闭的那方没有收到Ack，就会触发被动端重发Fin，一来一去正好2个MSL，2）有足够的时间让这个连接不会跟后面的连接混在一起（你要知道，有些自做主张的路由器会缓存IP数据包，如果连接被重用了，那么这些延迟收到的包就有可能会跟新连接混在一起）。你可以看看这篇文章《<a href="http://www.serverframework.com/asynchronousevents/2011/01/time-wait-and-its-design-implications-for-protocols-and-scalable-servers.html" target="_blank">TIME_WAIT and its design implications for protocols and scalable client server systems</a>》</li>
@@ -81,8 +81,8 @@
 <p><strong>Again，使用tcp_tw_reuse和tcp_tw_recycle来解决TIME_WAIT的问题是非常非常危险的，因为这两个参数违反了TCP协议（<a href="http://tools.ietf.org/html/rfc1122" target="_blank">RFC 1122</a>） </strong></p>
 <p>其实，TIME_WAIT表示的是你主动断连接，所以，这就是所谓的“不作死不会死”。试想，如果让对端断连接，那么这个破问题就是对方的了，呵呵。另外，如果你的服务器是于HTTP服务器，那么设置一个<a href="http://en.wikipedia.org/wiki/HTTP_persistent_connection" target="_blank">HTTP的KeepAlive</a>有多重要（浏览器会重用一个TCP连接来处理多个HTTP请求），然后让客户端去断链接（你要小心，浏览器可能会非常贪婪，他们不到万不得已不会主动断连接）。</p>
 <h4>数据传输中的Sequence Number</h4>
-<p>下图是我从Wireshark中截了个我在访问coolshell.cn时的有数据传输的图给你看一下，SeqNum是怎么变的。（使用Wireshark菜单中的Statistics -&gt;Flow Graph&#8230; ）</p>
-<p><img alt="" class="aligncenter size-full wp-image-11595" height="361" src="https://coolshell.cn/wp-content/uploads/2014/05/tcp_data_seq_num.jpg" width="381" /></p>
+<p>下图是我从Wireshark中截了个我在访问coolshell.cn时的有数据传输的图给你看一下，SeqNum是怎么变的。（使用Wireshark菜单中的Statistics -&gt;Flow Graph… ）</p>
+<p><img alt="" class="aligncenter size-full wp-image-11595" height="361" src="../wp-content/uploads/2014/05/tcp_data_seq_num.jpg" width="381"/></p>
 <p>你可以看到，<strong>SeqNum的增加是和传输的字节数相关的</strong>。上图中，三次握手后，来了两个Len:1440的包，而第二个包的SeqNum就成了1441。然后第一个ACK回的是1441，表示第一个1440收到了。</p>
 <p><strong>注意</strong>：如果你用Wireshark抓包程序看3次握手，你会发现SeqNum总是为0，不是这样的，Wireshark为了显示更友好，使用了Relative SeqNum——相对序号，你只要在右键菜单中的protocol preference 中取消掉就可以看到“Absolute SeqNum”了</p>
 <h4>TCP重传机制</h4>
@@ -100,15 +100,15 @@
 <h5>快速重传机制</h5>
 <p>于是，TCP引入了一种叫<strong>Fast Retransmit</strong> 的算法，<strong>不以时间驱动，而以数据驱动重传</strong>。也就是说，如果，包没有连续到达，就ack最后那个可能被丢了的包，如果发送方连续收到3次相同的ack，就重传。Fast Retransmit的好处是不用等timeout了再重传。</p>
 <p>比如：如果发送方发出了1，2，3，4，5份数据，第一份先到送了，于是就ack回2，结果2因为某些原因没收到，3到达了，于是还是ack回2，后面的4和5都到了，但是还是ack回2，因为2还是没有收到，于是发送端收到了三个ack=2的确认，知道了2还没有到，于是就马上重转2。然后，接收端收到了2，此时因为3，4，5都收到了，于是ack回6。示意图如下：</p>
-<p><img alt="" class="aligncenter size-full wp-image-11599" height="291" src="https://coolshell.cn/wp-content/uploads/2014/05/FASTIncast021.png" width="450" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-11599" height="291" src="../wp-content/uploads/2014/05/FASTIncast021.png" width="450"/></p>
 <p>Fast Retransmit只解决了一个问题，就是timeout的问题，它依然面临一个艰难的选择，就是，是重传之前的一个还是重传所有的问题。对于上面的示例来说，是重传#2呢还是重传#2，#3，#4，#5呢？因为发送端并不清楚这连续的3个ack(2)是谁传回来的？也许发送端发了20份数据，是#6，#10，#20传来的呢。这样，发送端很有可能要重传从2到20的这堆数据（这就是某些TCP的实际的实现）。可见，这是一把双刃剑。</p>
 <h5>SACK 方法</h5>
 <p>另外一种更好的方式叫：<strong>Selective Acknowledgment (SACK)</strong>（参看<a href="http://tools.ietf.org/html/rfc2018" target="_blank">RFC 2018</a>），这种方式需要在TCP头里加一个SACK的东西，ACK还是Fast Retransmit的ACK，SACK则是汇报收到的数据碎版。参看下图：</p>
-<p><img alt="" class="aligncenter wp-image-11600" height="338" src="https://coolshell.cn/wp-content/uploads/2014/05/tcp_sack_example-1024x577.jpg" width="600" /></p>
+<p><img alt="" class="aligncenter wp-image-11600" height="338" src="../wp-content/uploads/2014/05/tcp_sack_example-1024x577.jpg" width="600"/></p>
 <p>这样，在发送端就可以根据回传的SACK来知道哪些数据到了，哪些没有到。于是就优化了Fast Retransmit的算法。当然，这个协议需要两边都支持。在 Linux下，可以通过<strong>tcp_sack</strong>参数打开这个功能（Linux 2.4后默认打开）。</p>
 <p>这里还需要注意一个问题——<strong>接收方Reneging，所谓Reneging的意思就是接收方有权把已经报给发送端SACK里的数据给丢了</strong>。这样干是不被鼓励的，因为这个事会把问题复杂化了，但是，接收方这么做可能会有些极端情况，比如要把内存给别的更重要的东西。<strong>所以，发送方也不能完全依赖SACK，还是要依赖ACK，并维护Time-Out，如果后续的ACK没有增长，那么还是要把SACK的东西重传，另外，接收端这边永远不能把SACK的包标记为Ack。</strong></p>
 <p>注意：SACK会消费发送方的资源，试想，如果一个攻击者给数据发送方发一堆SACK的选项，这会导致发送方开始要重传甚至遍历已经发出的数据，这会消耗很多发送端的资源。详细的东西请参看《<a href="http://www.ibm.com/developerworks/cn/linux/l-tcp-sack/" target="_blank">TCP SACK的性能权衡</a>》</p>
-<h5>Duplicate SACK &#8211; 重复收到数据的问题</h5>
+<h5>Duplicate SACK – 重复收到数据的问题</h5>
 <p>Duplicate SACK又称D-SACK，<strong>其主要使用了SACK来告诉发送方有哪些数据被重复接收了</strong>。<a href="http://www.ietf.org/rfc/rfc2883.txt" target="_blank">RFC-2883 </a>里有详细描述和示例。下面举几个例子（来源于<a href="http://www.ietf.org/rfc/rfc2883.txt" target="_blank">RFC-2883</a>）</p>
 <p>D-SACK使用了SACK的第一个段来做标志，</p>
 <ul>
@@ -142,7 +142,7 @@
     1000-1499      1000-1499   3000
                    1000-1499   3000, SACK=1000-1500
                                           ---------</pre>
-<p>&nbsp;</p>
+<p> </p>
 <p>可见，引入了D-SACK，有这么几个好处：</p>
 <p style="padding-left: 30px;">1）可以让发送方知道，是发出去的包丢了，还是回来的ACK包丢了。</p>
 <p style="padding-left: 30px;">2）是不是自己的timeout太小了，导致重传。</p>
@@ -169,7 +169,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22263.html"><img alt="从一次经历谈 TIME_WAIT 的那些事" height="150" src="https://coolshell.cn/wp-content/uploads/2022/07/wall_clock-300x167-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22263.html">从一次经历谈 TIME_WAIT 的那些事</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19840.html"><img alt="HTTP的前世今生" height="150" src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19840.html">HTTP的前世今生</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11609.html"><img alt="TCP 的那些事儿（下）" height="150" src="https://coolshell.cn/wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11609.html">TCP 的那些事儿（下）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9859.html"><img alt="Alan Cox：单向链表中prev指针的妙用" height="150" src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9859.html">Alan Cox：单向链表中prev指针的妙用</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1484.html"><img alt="TCP网络关闭的状态变换时序图" height="150" src="https://coolshell.cn/wp-content/uploads/2009/09/tcp1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1484.html">TCP网络关闭的状态变换时序图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11564.html">TCP 的那些事儿（上）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22263.html"><img alt="从一次经历谈 TIME_WAIT 的那些事" height="150" src="../wp-content/uploads/2022/07/wall_clock-300x167-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22263.html">从一次经历谈 TIME_WAIT 的那些事</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19840.html"><img alt="HTTP的前世今生" height="150" src="../wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19840.html">HTTP的前世今生</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11609.html"><img alt="TCP 的那些事儿（下）" height="150" src="../wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11609.html">TCP 的那些事儿（下）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9859.html"><img alt="Alan Cox：单向链表中prev指针的妙用" height="150" src="../wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9859.html">Alan Cox：单向链表中prev指针的妙用</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1484.html"><img alt="TCP网络关闭的状态变换时序图" height="150" src="../wp-content/uploads/2009/09/tcp1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1484.html">TCP网络关闭的状态变换时序图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11564.html">TCP 的那些事儿（上）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -14,11 +14,11 @@ type: post
 在Vim中拥有Eclipse的功能，在Eclipse里有Vim的功能，那么eclim是你的选择了。<http://eclim.org/> 相关的[中文文档](http://eclim.org/translations/zh_TW/vim/cheatsheet.html#translations-zh-tw-vim-cheatsheet)。使用eclim，你可以在vim中有Eclipse的功能，也可以在Eclipse中嵌入Vim编辑器。很酷。
 
 
-![](https://coolshell.cn/wp-content/uploads/2009/11/eclim.png "eclim")
+![](../wp-content/uploads/2009/11/eclim.png "eclim")
 
 
 
-![_images/java_editor_eclim_view.png](http://eclim.org/_images/gvim_eclim_view.png)
+http://eclim.org/_images/gvim_eclim_view.png
 
 
 还有一个工具是**Vrapper**，这个工具是在Eclipse中使用Vim，你只需要在Eclipse的工具栏上点一下那个gvim的按钮就可以了。
@@ -27,7 +27,7 @@ type: post
 <http://vrapper.sourceforge.net/home/>
 
 
-![](http://vrapper.sourceforge.net/img/toolbar_button.png "Vrapper")
+http://vrapper.sourceforge.net/img/toolbar_button.png "Vrapper"
 
 
 （全文完）
@@ -40,10 +40,10 @@ type: post
 
 ### 相关文章
 
-* [![Eclipse和Vim快捷键桌面](https://coolshell.cn/wp-content/uploads/2010/10/EclipseCanoo1440x900-150x150.png)](https://coolshell.cn/articles/3181.html)[Eclipse和Vim快捷键桌面](https://coolshell.cn/articles/3181.html)
-* [![无插件Vim编程技巧](https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg)](https://coolshell.cn/articles/11312.html)[无插件Vim编程技巧](https://coolshell.cn/articles/11312.html)
-* [![应该知道的Linux技巧](https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg)](https://coolshell.cn/articles/8883.html)[应该知道的Linux技巧](https://coolshell.cn/articles/8883.html)
-* [![28个Unix/Linux的命令行神器](https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png)](https://coolshell.cn/articles/7829.html)[28个Unix/Linux的命令行神器](https://coolshell.cn/articles/7829.html)
-* [![游戏：VIM大冒险](https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg)](https://coolshell.cn/articles/7166.html)[游戏：VIM大冒险](https://coolshell.cn/articles/7166.html)
-* [![一些文章和各种资源](https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
+* [![Eclipse和Vim快捷键桌面](../wp-content/uploads/2010/10/EclipseCanoo1440x900-150x150.png)](https://coolshell.cn/articles/3181.html)[Eclipse和Vim快捷键桌面](https://coolshell.cn/articles/3181.html)
+* [![无插件Vim编程技巧](../wp-content/uploads/2014/03/success_vim-150x150.jpg)](https://coolshell.cn/articles/11312.html)[无插件Vim编程技巧](https://coolshell.cn/articles/11312.html)
+* [![应该知道的Linux技巧](../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg)](https://coolshell.cn/articles/8883.html)[应该知道的Linux技巧](https://coolshell.cn/articles/8883.html)
+* [![28个Unix/Linux的命令行神器](../wp-content/uploads/2012/07/dstat_screenshot-150x150.png)](https://coolshell.cn/articles/7829.html)[28个Unix/Linux的命令行神器](https://coolshell.cn/articles/7829.html)
+* [![游戏：VIM大冒险](../wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg)](https://coolshell.cn/articles/7166.html)[游戏：VIM大冒险](https://coolshell.cn/articles/7166.html)
+* [![一些文章和各种资源](../wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
 The post [Eclipse 和 Vim](https://coolshell.cn/articles/1837.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

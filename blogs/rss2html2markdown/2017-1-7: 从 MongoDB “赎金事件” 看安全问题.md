@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB-360x200.jpg)今天上午（2017年1月7日），我的微信群中同时出现了两个MongoDB被黑掉要赎金的情况，于是在调查过程中，发现了这个事件。这个事件应该是2017年开年的第一次比较大的安全事件吧，发现国内居然没有什么报道，国内安全圈也没有什么动静（当然，他们也许知道，只是不想说吧），Anyway，让我这个非安全领域的人来帮补补位。
+![](../wp-content/uploads/2017/01/MongoDB-360x200.jpg)今天上午（2017年1月7日），我的微信群中同时出现了两个MongoDB被黑掉要赎金的情况，于是在调查过程中，发现了这个事件。这个事件应该是2017年开年的第一次比较大的安全事件吧，发现国内居然没有什么报道，国内安全圈也没有什么动静（当然，他们也许知道，只是不想说吧），Anyway，让我这个非安全领域的人来帮补补位。
 
 
 #### 事件回顾
@@ -30,7 +30,7 @@ type: post
 
 
 
-![MongoDB ransom demand (via Victor Gevers)](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB-ransom.png)MongoDB ransom demand (via Victor Gevers)
+![MongoDB ransom demand (via Victor Gevers)](../wp-content/uploads/2017/01/MongoDB-ransom.png)MongoDB ransom demand (via Victor Gevers)
 说白了就是黑客留下的东西——**老子把你的MongoDB里的数据库给转走了，如果你要你的数据的话，给我0.2个的比特币（大约USD200）**。然后，他的twitter上不断地发布这个“赎金事件”的跟踪报道。与此同时，中国区的V2EX上也发现了相关的攻击问题 《[自己装的 mongo 没有设置密码结果被黑了](https://www.v2ex.com/t/331887)》
 
 
@@ -49,7 +49,7 @@ type: post
 然后是0704341626asdf，他们留下的数据库名字叫PWNED，他们至少干掉了740个MongoDB，赎金0.15个比特币（USD150），看看他们在数据库里留下的文字——**你的MongoDB没有任何的认证，并且暴露在公网里（你TMD是怎么想的？）……**
 
 
-![0704341626asdf group ransom note (via Victor Gerves)](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB-Group-3.jpg)0704341626asdf group ransom note (via Victor Gerves)
+![0704341626asdf group ransom note (via Victor Gerves)](../wp-content/uploads/2017/01/MongoDB-Group-3.jpg)0704341626asdf group ransom note (via Victor Gerves)
 就在这两天，有两个新的黑客也来了
 
 
@@ -72,7 +72,7 @@ BBC新闻也于昨天报道了这一情况——《[Web databases hit in ransom 
 让我们去看一下Shodan上可以看到的有多少个在暴露在公网上而且没有防范的MongoDB？我了个去！**4万7千个，还是很触目惊心的**（下图来自我刚刚创建的 [Shodan关于MongoDB的报表](https://www.shodan.io/report/h0bgF6zM)）
 
 
-![](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB_Shodan-1024x485.png)
+![](../wp-content/uploads/2017/01/MongoDB_Shodan-1024x485.png)
 
 
  
@@ -81,7 +81,7 @@ BBC新闻也于昨天报道了这一情况——《[Web databases hit in ransom 
 那么，怎么会有这么多的对外暴露的MongoDB？看了一下Shodan的报告，发现主要还是来自公有云平台，Amazon，Alibaba，Digital Ocean，OVH，Azure 的云平台上有很多这样的服务。不过，像AWS这样的云平台，有很完善的默认安全组设置和VPC是可以不把这样的后端服务暴露到公有云上的，为什么还会有那么多？
 
 
-![](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB_Org.png)
+![](../wp-content/uploads/2017/01/MongoDB_Org.png)
 
 
  
@@ -96,7 +96,7 @@ BBC新闻也于昨天报道了这一情况——《[Web databases hit in ransom 
 再到Shodan上看到相关的在公网裸奔的MongoDB的版本如下，发现3.x的也是主流：
 
 
-![](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB_Version.png)
+![](../wp-content/uploads/2017/01/MongoDB_Version.png)
 
 
  
@@ -108,7 +108,7 @@ BBC新闻也于昨天报道了这一情况——《[Web databases hit in ransom 
 **你看，我在阿里云随便找了几台机器，一登就登上去了。**
 
 
-![](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB_Aliyun.png)
+![](../wp-content/uploads/2017/01/MongoDB_Aliyun.png)
 
 
 真是如那些黑客中的邮件所说的：WTF，你们是怎么想的？
@@ -138,7 +138,7 @@ BBC新闻也于昨天报道了这一情况——《[Web databases hit in ransom 
 最后，提醒大家一下，被黑了也不要去付赎金，因为目前来说没有任何证据证明黑客们真正保存了你的数据，因为，被黑的服务器太多了，估计有几百T的数据，估计是不会为你保存的。下面也是Victor Gevers的提示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2017/01/MongoDB_Twitter.png)
+![](../wp-content/uploads/2017/01/MongoDB_Twitter.png)
 
 
 （全文完）
@@ -151,10 +151,10 @@ BBC新闻也于昨天报道了这一情况——《[Web databases hit in ransom 
 
 ### 相关文章
 
-* [![bash代码注入的安全漏洞](https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg)](http://coolshell.cn/articles/11973.html)[bash代码注入的安全漏洞](http://coolshell.cn/articles/11973.html)
-* [![谈谈数据安全和云存储](https://coolshell.cn/wp-content/uploads/2012/04/61e04755jw1drlo96bsktj-150x150.jpg)](http://coolshell.cn/articles/6976.html)[谈谈数据安全和云存储](http://coolshell.cn/articles/6976.html)
-* [![程序员疫苗：代码注入](https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](http://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](http://coolshell.cn/articles/8711.html)
-* [![从“黑掉Github”学Web安全开发](https://coolshell.cn/wp-content/uploads/2014/02/Github-Security-150x150.png)](http://coolshell.cn/articles/11021.html)[从“黑掉Github”学Web安全开发](http://coolshell.cn/articles/11021.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](http://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](http://coolshell.cn/articles/17066.html)
-* [![Hash Collision DoS 问题](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](http://coolshell.cn/articles/6424.html)[Hash Collision DoS 问题](http://coolshell.cn/articles/6424.html)
+* [![bash代码注入的安全漏洞](../wp-content/uploads/2014/09/bashbug-150x150.jpg)](http://coolshell.cn/articles/11973.html)[bash代码注入的安全漏洞](http://coolshell.cn/articles/11973.html)
+* [![谈谈数据安全和云存储](../wp-content/uploads/2012/04/61e04755jw1drlo96bsktj-150x150.jpg)](http://coolshell.cn/articles/6976.html)[谈谈数据安全和云存储](http://coolshell.cn/articles/6976.html)
+* [![程序员疫苗：代码注入](../wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](http://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](http://coolshell.cn/articles/8711.html)
+* [![从“黑掉Github”学Web安全开发](../wp-content/uploads/2014/02/Github-Security-150x150.png)](http://coolshell.cn/articles/11021.html)[从“黑掉Github”学Web安全开发](http://coolshell.cn/articles/11021.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](http://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](http://coolshell.cn/articles/17066.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](http://coolshell.cn/articles/6424.html)[Hash Collision DoS 问题](http://coolshell.cn/articles/6424.html)
 The post [从 MongoDB “赎金事件” 看安全问题](https://coolshell.cn/articles/17607.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

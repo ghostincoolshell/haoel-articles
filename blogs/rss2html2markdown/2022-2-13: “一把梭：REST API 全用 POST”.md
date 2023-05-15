@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2022/02/http_method-300x169.png)
+![](../wp-content/uploads/2022/02/http_method-300x169.png)
 
 
 写这篇文章的原因主要还是因为V2EX上的这个[贴子](https://www.v2ex.com/t/830030?p=1)，这个贴子中说——
@@ -222,7 +222,7 @@ HTTP的动词（或是Method）是在协议头中，所以，其主要用于控�
 **希望大家都能尊重自己从事的这个职业，成为真正的职业化的程序员，而不是一个码农！**
 
 
-![](https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75.jpeg)你的工作给你权力，而只有你的行为才会给你尊重
+![](../wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75.jpeg)你的工作给你权力，而只有你的行为才会给你尊重
 （全文完）
 
 
@@ -233,10 +233,10 @@ HTTP的动词（或是Method）是在协议头中，所以，其主要用于控�
 
 ### 相关文章
 
-* [![聊聊团队协同和协同工具](https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
-* [![谈谈公司对员工的监控](https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
-* [![如何做一个有质量的技术分享](https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
-* [![程序员如何把控自己的职业](https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
-* [![MegaEase的远程工作文化](https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
-* [![别让自己“墙”了自己](https://coolshell.cn/wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg)](https://coolshell.cn/articles/20276.html)[别让自己“墙”了自己](https://coolshell.cn/articles/20276.html)
+* [![聊聊团队协同和协同工具](../wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
+* [![谈谈公司对员工的监控](../wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
+* [![如何做一个有质量的技术分享](../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
+* [![程序员如何把控自己的职业](../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
+* [![MegaEase的远程工作文化](../wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
+* [![别让自己“墙”了自己](../wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg)](https://coolshell.cn/articles/20276.html)[别让自己“墙”了自己](https://coolshell.cn/articles/20276.html)
 The post [“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

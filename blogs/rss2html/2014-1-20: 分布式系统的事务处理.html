@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright size-full wp-image-10946" height="200" src="https://coolshell.cn/wp-content/uploads/2014/01/trade-off.jpg" width="251" />当我们在生产线上用一台服务器来提供数据服务的时候，我会遇到如下的两个问题：</p>
+<html><body><p><img alt="" class="alignright size-full wp-image-10946" height="200" src="../wp-content/uploads/2014/01/trade-off.jpg" width="251"/>当我们在生产线上用一台服务器来提供数据服务的时候，我会遇到如下的两个问题：</p>
 <p style="padding-left: 30px;">1）一台服务器的性能不足以提供足够的能力服务于所有的网络请求。</p>
 <p style="padding-left: 30px;">2）我们总是害怕我们的这台服务器停机，造成服务不可用或是数据丢失。</p>
 <p>于是我们不得不对我们的服务器进行扩展，加入更多的机器来分担性能上的问题，以及来解决单点故障问题。 通常，我们会通过两种手段来扩展我们的数据服务：</p>
@@ -56,7 +56,7 @@
 <ul>
 <li>如果有一个参与者回应“拒绝提交”，那么，协调者向所有的参与者发送“回滚操作”，并释放所有资源，然后回应“回滚完成”，协调者收集各结点的“回滚”回应后，取消这个Global Transaction。</li>
 </ul>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10929" height="195" src="https://coolshell.cn/wp-content/uploads/2014/01/Two-phase_commit.png" width="518" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10929" height="195" src="../wp-content/uploads/2014/01/Two-phase_commit.png" width="518"/></p>
 <p>我们可以看到，2PC说白了就是第一阶段做Vote，第二阶段做决定的一个算法，也可以看到2PC这个事是强一致性的算法。在前面我们讨论过Master-Slave的强一致性策略，和2PC有点相似，只不过2PC更为保守一些——先尝试再提交。 2PC用的是比较多的，在一些系统设计中，会串联一系列的调用，比如：A -&gt; B -&gt; C -&gt; D，每一步都会分配一些资源或改写一些数据。比如我们B2C网上购物的下单操作在后台会有一系列的流程需要做。如果我们一步一步地做，就会出现这样的问题，如果某一步做不下去了，那么前面每一次所分配的资源需要做反向操作把他们都回收掉，所以，操作起来比较复杂。现在很多处理流程（Workflow）都会借鉴2PC这个算法，使用 try -&gt; confirm的流程来确保整个流程的能够成功完成。 举个通俗的例子，西方教堂结婚的时候，都有这样的桥段：</p>
 <p style="padding-left: 30px;">1）牧师分别问新郎和新娘：你是否愿意……不管生老病死……（询问阶段）</p>
 <p style="padding-left: 30px;">2）当新郎和新娘都回答愿意后（锁定一生的资源），牧师就会说：我宣布你们……（事务提交）</p>
@@ -65,10 +65,10 @@
 <p style="padding-left: 30px;">2）如果第二阶段中，正式提交发出后，如果有的参与者没有收到，或是参与者提交/回滚后的确认信息没有返回，一旦参与者的回应超时，要么重试，要么把那个参与者标记为问题结点剔除整个集群，这样可以保证服务结点都是数据一致性的。</p>
 <p style="padding-left: 30px;">3）糟糕的情况是，第二阶段中，如果参与者收不到协调者的commit/fallback指令，参与者将处于“状态未知”阶段，参与者完全不知道要怎么办，比如：如果所有的参与者完成第一阶段的回复后（可能全部yes，可能全部no，可能部分yes部分no），如果协调者在这个时候挂掉了。那么所有的结点完全不知道怎么办（问别的参与者都不行）。为了一致性，要么死等协调者，要么重发第一阶段的yes/no命令。</p>
 <p>两段提交最大的问题就是第3）项，<strong>如果第一阶段完成后，参与者在第二阶没有收到决策，那么数据结点会进入“不知所措”的状态，这个状态会block住整个事务</strong>。也就是说，协调者Coordinator对于事务的完成非常重要，Coordinator的可用性是个关键。 因些，我们引入三段提交，三段提交在<a href="http://en.wikipedia.org/wiki/Three-phase_commit_protocol" target="_blank">Wikipedia</a>上的描述如下，他把二段提交的第一个段break成了两段：询问，然后再锁资源。最后真正提交。三段提交的示意图如下：</p>
-<p style="padding-left: 30px;"><img alt="" class="aligncenter" height="321" src="https://coolshell.cn/wp-content/uploads/2014/01/Three-phase_commit_diagram.png" width="611" /></p>
+<p style="padding-left: 30px;"><img alt="" class="aligncenter" height="321" src="../wp-content/uploads/2014/01/Three-phase_commit_diagram.png" width="611"/></p>
 <p>三段提交的核心理念是：<strong>在询问的时候并不锁定资源，除非所有人都同意了，才开始锁资源</strong>。</p>
-<p style="text-align: left;">理论上来说，如果第一阶段所有的结点返回成功，那么有理由相信成功提交的概率很大。这样一来，可以降低参与者Cohorts的状态未知的概率。也就是说，一旦参与者收到了PreCommit，意味他知道大家其实都同意修改了。这一点很重要。下面我们来看一下3PC的状态迁移图：（<strong>注意图中的虚线，那些F,T是Failuer或Timeout</strong>，其中的：状态含义是 q &#8211; Query，a &#8211; Abort，w &#8211; Wait，p &#8211; PreCommit，c &#8211; Commit）</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10931" height="374" src="https://coolshell.cn/wp-content/uploads/2014/01/Three-phase_commit_status.png" width="614" /></p>
+<p style="text-align: left;">理论上来说，如果第一阶段所有的结点返回成功，那么有理由相信成功提交的概率很大。这样一来，可以降低参与者Cohorts的状态未知的概率。也就是说，一旦参与者收到了PreCommit，意味他知道大家其实都同意修改了。这一点很重要。下面我们来看一下3PC的状态迁移图：（<strong>注意图中的虚线，那些F,T是Failuer或Timeout</strong>，其中的：状态含义是 q – Query，a – Abort，w – Wait，p – PreCommit，c – Commit）</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10931" height="374" src="../wp-content/uploads/2014/01/Three-phase_commit_status.png" width="614"/></p>
 <p style="text-align: left;">从上图的状态变化图我们可以从虚线（那些F,T是Failuer或Timeout）看到——<strong>如果结点处在P状态（PreCommit）的时候发生了F/T的问题，三段提交比两段提交的好处是，三段提交可以继续直接把状态变成C状态（Commit），而两段提交则不知所措</strong>。</p>
 <p style="text-align: left;">其实，三段提交是一个很复杂的事情，实现起来相当难，而且也有一些问题。</p>
 <p style="text-align: left;">看到这里，我相信你有很多很多的问题，你一定在思考2PC/3PC中各种各样的失败场景，<strong>你会发现Timeout是个非常难处理的事情，因为网络上的Timeout在很多时候让你无所事从，你也不知道对方是做了还是没有做。于是你好好的一个状态机就因为Timeout成了个摆设</strong>。</p>
@@ -80,7 +80,7 @@
 <p style="padding-left: 30px;">3）于是，似乎我们还要让第一位将军再发送一条确认消息——“我收到了你的确认”。然而，如果这位信使被抓怎么办呢？</p>
 <p style="padding-left: 30px;">4）这样一来，是不是我们还要第二位将军发送一个“确认收到你的确认”的信息。</p>
 <p>靠，于是你会发现，这事情很快就发展成为不管发送多少个确认消息，都没有办法来保证两位将军有足够的自信自己的信使没有被敌军捕获。</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10933" height="251" src="https://coolshell.cn/wp-content/uploads/2014/01/two-generals-problems.jpg" width="538" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10933" height="251" src="../wp-content/uploads/2014/01/two-generals-problems.jpg" width="538"/></p>
 <p style="text-align: left;"><strong style="line-height: 1.5em;">这个问题是无解的</strong><span style="line-height: 1.5em;">。</span><span style="line-height: 1.5em;">两个将军问题和它的无解证明首先由E.A.Akkoyunlu,K.Ekanadham和R.V.Huber于1975年在《一些限制与折衷的网络通信设计》一文中发表，就在这篇文章的第73页中一段描述两个黑帮之间的通信中被阐明。 1978年，在Jim Gray的《数据库操作系统注意事项》一书中（从第465页开始）被命名为两个将军悖论。作为两个将军问题的定义和无解性的证明的来源，这一参考被广泛提及。</span></p>
 <p style="text-align: left;">这个实验意在阐明：试图通过建立在一个不可靠的连接上的交流来协调一项行动的隐患和设计上的巨大挑战。</p>
 <p style="text-align: left;">从工程上来说，一个解决两个将军问题的实际方法是使用一个能够承受通信信道不可靠性的方案，并不试图去消除这个不可靠性，但要将不可靠性削减到一个可以接受的程度。比如，第一位将军排出了100位信使并预计他们都被捕的可能性很小。在这种情况下，不管第二位将军是否会攻击或者受到任何消息，第一位将军都会进行攻击。另外，第一位将军可以发送一个消息流，而第二位将军可以对其中的每一条消息发送一个确认消息，这样如果每条消息都被接收到，两位将军会感觉更好。然而我们可以从证明中看出，他们俩都不能肯定这个攻击是可以协调的。他们没有算法可用（比如，收到4条以上的消息就攻击）能够确保防止仅有一方攻击。再者，第一位将军还可以为每条消息编号，说这是1号，2号……直到n号。这种方法能让第二位将军知道通信信道到底有多可靠，并且返回合适的数量的消息来确保最后一条消息被接收到。如果信道是可靠的话，只要一条消息就行了，其余的就帮不上什么忙了。最后一条和第一条消息丢失的概率是相等的。</p>
@@ -88,7 +88,7 @@
 <h4>Paxos算法</h4>
 <p><a href="http://en.wikipedia.org/wiki/Paxos_(computer_science)" target="_blank">Wikipedia上的各种Paxos算法</a>的描述非常详细，大家可以去围观一下。</p>
 <p>Paxos 算法解决的问题是在一个可能发生上述异常的分布式系统中如何就某个值达成一致，保证不论发生以上任何异常，都不会破坏决议的一致性。一个典型的场景是，在一个分布式数据库系统中，如果各节点的初始状态一致，每个节点都执行相同的操作序列，那么他们最后能得到一个一致的状态。为保证每个节点执行相同的命令序列，需要在每一条指令上执行一个「一致性算法」以保证每个节点看到的指令一致。一个通用的一致性算法可以应用在许多场景中，是分布式计算中的重要问题。从20世纪80年代起对于一致性算法的研究就没有停止过。</p>
-<p><strong>Notes</strong>：Paxos算法是莱斯利·兰伯特（Leslie Lamport，就是 LaTeX 中的&#8221;La&#8221;，此人现在在微软研究院）于1990年提出的一种基于消息传递的一致性算法。由于算法难以理解起初并没有引起人们的重视，使Lamport在八年后1998年重新发表到ACM Transactions on Computer Systems上（<a href="http://research.microsoft.com/users/lamport/pubs/lamport-paxos.pdf" rel="nofollow">The Part-Time Parliament</a>）。即便如此paxos算法还是没有得到重视，2001年Lamport 觉得同行无法接受他的幽默感，于是用容易接受的方法重新表述了一遍（<a href="http://research.microsoft.com/users/lamport/pubs/paxos-simple.pdf" rel="nofollow">Paxos Made Simple</a>）。可见Lamport对Paxos算法情有独钟。近几年Paxos算法的普遍使用也证明它在分布式一致性算法中的重要地位。2006年Google的三篇论文初现“云”的端倪，其中的Chubby Lock服务使用Paxos作为Chubby Cell中的一致性算法，Paxos的人气从此一路狂飙。（Lamport 本人在 <a href="http://research.microsoft.com/users/lamport/pubs/pubs.html#lamport-paxos" target="_blank">他的blog 中</a>描写了他用9年时间发表这个算法的前前后后）</p>
+<p><strong>Notes</strong>：Paxos算法是莱斯利·兰伯特（Leslie Lamport，就是 LaTeX 中的”La”，此人现在在微软研究院）于1990年提出的一种基于消息传递的一致性算法。由于算法难以理解起初并没有引起人们的重视，使Lamport在八年后1998年重新发表到ACM Transactions on Computer Systems上（<a href="http://research.microsoft.com/users/lamport/pubs/lamport-paxos.pdf" rel="nofollow">The Part-Time Parliament</a>）。即便如此paxos算法还是没有得到重视，2001年Lamport 觉得同行无法接受他的幽默感，于是用容易接受的方法重新表述了一遍（<a href="http://research.microsoft.com/users/lamport/pubs/paxos-simple.pdf" rel="nofollow">Paxos Made Simple</a>）。可见Lamport对Paxos算法情有独钟。近几年Paxos算法的普遍使用也证明它在分布式一致性算法中的重要地位。2006年Google的三篇论文初现“云”的端倪，其中的Chubby Lock服务使用Paxos作为Chubby Cell中的一致性算法，Paxos的人气从此一路狂飙。（Lamport 本人在 <a href="http://research.microsoft.com/users/lamport/pubs/pubs.html#lamport-paxos" target="_blank">他的blog 中</a>描写了他用9年时间发表这个算法的前前后后）</p>
 <p>注：Amazon的AWS中，所有的云服务都基于一个ALF（Async Lock Framework）的框架实现的，这个ALF用的就是Paxos算法。我在Amazon的时候，看内部的分享视频时，设计者在内部的Principle Talk里说他参考了ZooKeeper的方法，但他用了另一种比ZooKeeper更易读的方式实现了这个算法。</p>
 <p>简单说来，Paxos的目的是让整个集群的结点对某个值的变更达成一致。Paxos算法基本上来说是个民主选举的算法——大多数的决定会成个整个集群的统一决定。任何一个点都可以提出要修改某个数据的提案，是否通过这个提案取决于这个集群中是否有超过半数的结点同意（所以Paxos算法需要集群中的结点是单数）。</p>
 <p><span style="line-height: 1.5em;">这个算法有两个阶段（假设这个有三个结点：A，B，C）：</span></p>
@@ -105,7 +105,7 @@
 <p>多说一下，自从Lamport在1998年发表Paxos算法后，对Paxos的各种改进工作就从未停止，其中动作最大的莫过于2005年发表的<a href="http://research.microsoft.com/apps/pubs/default.aspx?id=64624" target="_blank">Fast Paxos</a>。无论何种改进，其重点依然是在消息延迟与性能、吞吐量之间作出各种权衡。为了容易地从概念上区分二者，称前者Classic Paxos，改进后的后者为Fast Paxos。</p>
 <h4>总结</h4>
 <div id="Msg_18730">下图来自：Google App Engine的co-founder Ryan Barrett在2009年的google i/o上的演讲《<a href="http://snarfed.org/transactions_across_datacenters_io.html" target="_blank">Transaction Across DataCenter</a>》（视频： <a href="http://www.youtube.com/watch?v=srOgpXECblk" target="_blank" title="阿里旺旺无法确定该链接的安全性">http://www.youtube.com/watch?v=srOgpXECblk</a>）</div>
-<p style="text-align: center;"><img alt="" class="aligncenter size-full wp-image-10942" height="255" src="https://coolshell.cn/wp-content/uploads/2014/01/Transaction-Across-DataCenter.jpg" width="566" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter size-full wp-image-10942" height="255" src="../wp-content/uploads/2014/01/Transaction-Across-DataCenter.jpg" width="566"/></p>
 <p style="text-align: left;">前面，我们说过，要想让数据有高可用性，就需要冗余数据写多份。写多份的问题会带来一致性的问题，而一致性的问题又会带来性能问题。从上图我们可以看到，我们基本上来说不可以让所有的项都绿起来，这就是著名的CAP理论：一致性，可用性，分区容忍性，你只可能要其中的两个。</p>
 <h4>NWR模型</h4>
 <p><strong>最后我还想提一下Amazon Dynamo的NWR模型。这个NWR模型把CAP的选择权交给了用户，让用户自己的选择你的CAP中的哪两个</strong>。</p>
@@ -132,7 +132,7 @@
 <p style="padding-left: 30px;">6）这个时候可以判断出，D2已经是旧版本（已经包含在D3/D4中），可以舍弃。</p>
 <p style="padding-left: 30px;">7）但是D3和D4是明显的版本冲突。于是，交给调用方自己去做版本冲突处理。就像源代码版本管理一样。</p>
 <p>很明显，上述的Dynamo的配置用的是CAP里的A和P。</p>
-<p>我非常推大家都去看看这篇论文：《<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf" target="_blank">Dynamo：Amazon&#8217;s Highly Available Key-Value Store</a>》，如果英文痛苦，你可以<a href="http://vdisk.weibo.com/s/AKRQZMLLc1ol" target="_blank">看看译文</a>（译者不详）。</p>
+<p>我非常推大家都去看看这篇论文：《<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf" target="_blank">Dynamo：Amazon’s Highly Available Key-Value Store</a>》，如果英文痛苦，你可以<a href="http://vdisk.weibo.com/s/AKRQZMLLc1ol" target="_blank">看看译文</a>（译者不详）。</p>
 <p>（全文完）<!--
 
 
@@ -149,7 +149,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/6470.html"><img alt="由12306.cn谈谈网站性能技术 " height="150" src="https://coolshell.cn/wp-content/uploads/2012/01/12306-150x150.png" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/6470.html">由12306.cn谈谈网站性能技术 </a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/9169.html"><img alt="并发框架Disruptor译文" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/Disruptor-150x150.png" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/9169.html">并发框架Disruptor译文</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/6790.html"><img alt="多版本并发控制(MVCC)在分布式系统中的应用" height="150" src="https://coolshell.cn/wp-content/uploads/2012/03/o_conditional_update_1-150x150.png" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/8239.html"><img alt="无锁队列的实现" height="150" src="https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/8239.html">无锁队列的实现</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/7236.html"><img alt="用Unix的设计思想来应对多变的需求" height="150" src="https://coolshell.cn/wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10910.html">分布式系统的事务处理</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/6470.html"><img alt="由12306.cn谈谈网站性能技术 " height="150" src="../wp-content/uploads/2012/01/12306-150x150.png" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/6470.html">由12306.cn谈谈网站性能技术 </a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/9169.html"><img alt="并发框架Disruptor译文" height="150" src="../wp-content/uploads/2013/02/Disruptor-150x150.png" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/9169.html">并发框架Disruptor译文</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/6790.html"><img alt="多版本并发控制(MVCC)在分布式系统中的应用" height="150" src="../wp-content/uploads/2012/03/o_conditional_update_1-150x150.png" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/8239.html"><img alt="无锁队列的实现" height="150" src="../wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/8239.html">无锁队列的实现</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/7236.html"><img alt="用Unix的设计思想来应对多变的需求" height="150" src="../wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10910.html">分布式系统的事务处理</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

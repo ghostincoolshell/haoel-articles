@@ -124,10 +124,10 @@ type: post
 
 ### 相关文章
 
-* [![一些有意思的文章和资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
-* [![两本电子书](https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
-* [![如何使用Python操作摄像头](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg)](https://coolshell.cn/articles/1928.html)[如何使用Python操作摄像头](https://coolshell.cn/articles/1928.html)
-* [![Python 自然语言处理](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg)](https://coolshell.cn/articles/1157.html)[Python 自然语言处理](https://coolshell.cn/articles/1157.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Python修饰器的函数式编程](https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg)](https://coolshell.cn/articles/11265.html)[Python修饰器的函数式编程](https://coolshell.cn/articles/11265.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
+* [![两本电子书](../wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg](https://coolshell.cn/articles/1928.html)[如何使用Python操作摄像头](https://coolshell.cn/articles/1928.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg](https://coolshell.cn/articles/1157.html)[Python 自然语言处理](https://coolshell.cn/articles/1157.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![Python修饰器的函数式编程](../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg)](https://coolshell.cn/articles/11265.html)[Python修饰器的函数式编程](https://coolshell.cn/articles/11265.html)
 The post [Python 和 PyGame 的一些示例](https://coolshell.cn/articles/4710.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

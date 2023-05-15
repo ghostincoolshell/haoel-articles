@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![Code Reivew](https://coolshell.cn/wp-content/uploads/2009/08/review.jpg "Code Reivew")Code Review应该是软件工程最最有价值的一个活动，之前，本站发表过《[简单实用的Code Review工具](https://coolshell.cn/articles/1218.html)》，那些工具主要是用来帮助更有效地进行这个活动，这里的这篇文章，我们主要想和大家分享一下Code Review代码审查的一些心得。
+![Code Reivew](../wp-content/uploads/2009/08/review.jpg "Code Reivew")Code Review应该是软件工程最最有价值的一个活动，之前，本站发表过《[简单实用的Code Review工具](https://coolshell.cn/articles/1218.html)》，那些工具主要是用来帮助更有效地进行这个活动，这里的这篇文章，我们主要想和大家分享一下Code Review代码审查的一些心得。
 
 
 首先，我们先来看看Code Reivew的用处：
@@ -115,10 +115,10 @@ type: post
 
 ### 相关文章
 
-* [![如何重构“箭头型”代码](https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411-150x150.jpg)](https://coolshell.cn/articles/17757.html)[如何重构“箭头型”代码](https://coolshell.cn/articles/17757.html)
-* [![从Code Review 谈如何做技术](https://coolshell.cn/wp-content/uploads/2014/04/code_review-150x150.jpg)](https://coolshell.cn/articles/11432.html)[从Code Review 谈如何做技术](https://coolshell.cn/articles/11432.html)
-* [![一个空格引发的惨剧](https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
-* [![橡皮鸭程序调试法](https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg)](https://coolshell.cn/articles/1719.html)[橡皮鸭程序调试法](https://coolshell.cn/articles/1719.html)
-* [![简单实用的Code Review工具](https://coolshell.cn/wp-content/uploads/2009/08/viewtopicdetail-150x150.png)](https://coolshell.cn/articles/1218.html)[简单实用的Code Review工具](https://coolshell.cn/articles/1218.html)
-* [![你准备使用 HTML 5 吗？](https://coolshell.cn/wp-content/uploads/2010/09/WTF_HTML51-150x150.jpg)](https://coolshell.cn/articles/2926.html)[你准备使用 HTML 5 吗？](https://coolshell.cn/articles/2926.html)
+* [![如何重构“箭头型”代码](../wp-content/uploads/2017/04/IMG_7411-150x150.jpg)](https://coolshell.cn/articles/17757.html)[如何重构“箭头型”代码](https://coolshell.cn/articles/17757.html)
+* [![从Code Review 谈如何做技术](../wp-content/uploads/2014/04/code_review-150x150.jpg)](https://coolshell.cn/articles/11432.html)[从Code Review 谈如何做技术](https://coolshell.cn/articles/11432.html)
+* [![一个空格引发的惨剧](../wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
+* [![橡皮鸭程序调试法](../wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg)](https://coolshell.cn/articles/1719.html)[橡皮鸭程序调试法](https://coolshell.cn/articles/1719.html)
+* [![简单实用的Code Review工具](../wp-content/uploads/2009/08/viewtopicdetail-150x150.png)](https://coolshell.cn/articles/1218.html)[简单实用的Code Review工具](https://coolshell.cn/articles/1218.html)
+* [![你准备使用 HTML 5 吗？](../wp-content/uploads/2010/09/WTF_HTML51-150x150.jpg)](https://coolshell.cn/articles/2926.html)[你准备使用 HTML 5 吗？](https://coolshell.cn/articles/2926.html)
 The post [Code Review中的几个提示](https://coolshell.cn/articles/1302.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

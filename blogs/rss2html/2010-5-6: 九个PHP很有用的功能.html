@@ -1,17 +1,17 @@
-<p>下面是九个PHP中很有用的功能，不知道你用过了吗？</p>
+<html><body><p>下面是九个PHP中很有用的功能，不知道你用过了吗？</p>
 <h4><span>1. 函数的任意数目的参数</span></h4>
 <p>你可能知道PHP允许你定义一个默认参数的函数。但你可能并不知道PHP还允许你定义一个完全任意的参数的函数</p>
 <p>下面是一个示例向你展示了默认参数的函数：</p>
 <pre class="EnlighterJSRAW">
 // 两个默认参数的函数
-function foo($arg1 = &#039;&#039;, $arg2 = &#039;&#039;) {
+function foo($arg1 = '', $arg2 = '') {
 
-	echo &quot;arg1: $arg1\n&quot;;
-	echo &quot;arg2: $arg2\n&quot;;
+	echo "arg1: $arg1\n";
+	echo "arg2: $arg2\n";
 
 }
 
-foo(&#039;hello&#039;,&#039;world&#039;);
+foo('hello','world');
 /* 输出:
 arg1: hello
 arg2: world
@@ -23,7 +23,7 @@ arg1:
 arg2:
 */
 </pre>
-<p>现在我们来看一看一个不定参数的函数，其使用到了?<a href="http://us2.php.net/manual/en/function.func-get-args.php">func_get_args()</a>方法：<br />
+<p>现在我们来看一看一个不定参数的函数，其使用到了?<a href="http://us2.php.net/manual/en/function.func-get-args.php">func_get_args()</a>方法：<br/>
 <span id="more-2394"></span></p>
 <pre class="EnlighterJSRAW">
 // 是的，形参列表为空
@@ -33,7 +33,7 @@ function foo() {
 	$args = func_get_args();
 
 	foreach ($args as $k =&gt; $v) {
-		echo &quot;arg&quot;.($k+1).&quot;: $v\n&quot;;
+		echo "arg".($k+1).": $v\n";
 	}
 
 }
@@ -41,12 +41,12 @@ function foo() {
 foo();
 /* 什么也不会输出 */
 
-foo(&#039;hello&#039;);
+foo('hello');
 /* 输出
 arg1: hello
 */
 
-foo(&#039;hello&#039;, &#039;world&#039;, &#039;again&#039;);
+foo('hello', 'world', 'again');
 /* 输出
 arg1: hello
 arg2: world
@@ -58,7 +58,7 @@ arg3: again
 <p>你可以认为这个函数就好?<a href="http://php.net/manual/en/function.scandir.php">scandir()</a> 一样，其可以用来查找文件。</p>
 <pre class="EnlighterJSRAW">
 // 取得所有的后缀为PHP的文件
-$files = glob(&#039;*.php&#039;);
+$files = glob('*.php');
 
 print_r($files);
 /* 输出:
@@ -74,7 +74,7 @@ Array
 <p>你还可以查找多种后缀名</p>
 <pre class="EnlighterJSRAW">
 // 取PHP文件和TXT文件
-$files = glob(&#039;*.{php,txt}&#039;, GLOB_BRACE);
+$files = glob('*.{php,txt}', GLOB_BRACE);
 
 print_r($files);
 /* 输出:
@@ -91,7 +91,7 @@ Array
 </pre>
 <p>你还可以加上路径：</p>
 <pre class="EnlighterJSRAW">
-$files = glob(&#039;../images/a*.jpg&#039;);
+$files = glob('../images/a*.jpg');
 
 print_r($files);
 /* 输出:
@@ -104,10 +104,10 @@ Array
 </pre>
 <p>如果你想得到绝对路径，你可以调用?<a href="http://php.net/manual/en/function.realpath.php">realpath()</a> 函数：</p>
 <pre class="EnlighterJSRAW">
-$files = glob(&#039;../images/a*.jpg&#039;);
+$files = glob('../images/a*.jpg');
 
 // applies the function to each array element
-$files = array_map(&#039;realpath&#039;,$files);
+$files = array_map('realpath',$files);
 
 print_r($files);
 /* output looks like:
@@ -122,7 +122,7 @@ Array
 <p>观察你程序的内存使用能够让你更好的优化你的代码。</p>
 <p>PHP 是有垃圾回收机制的，而且有一套很复杂的内存管理机制。你可以知道你的脚本所使用的内存情况。要知道当前内存使用情况，你可以使用?<a href="http://us2.php.net/manual/en/function.memory-get-usage.php">memory_get_usage()</a> 函数，如果你想知道使用内存的峰值，你可以调用<a href="http://us2.php.net/manual/en/function.memory-get-peak-usage.php">memory_get_peak_usage()</a> 函数。</p>
 <pre class="EnlighterJSRAW">
-echo &quot;Initial: &quot;.memory_get_usage().&quot; bytes \n&quot;;
+echo "Initial: ".memory_get_usage()." bytes \n";
 /* 输出
 Initial: 361400 bytes
 */
@@ -137,12 +137,12 @@ for ($i = 0; $i &lt; 100000; $i++) {
 	unset($array[$i]);
 }
 
-echo &quot;Final: &quot;.memory_get_usage().&quot; bytes \n&quot;;
+echo "Final: ".memory_get_usage()." bytes \n";
 /* prints
 Final: 885912 bytes
 */
 
-echo &quot;Peak: &quot;.memory_get_peak_usage().&quot; bytes \n&quot;;
+echo "Peak: ".memory_get_peak_usage()." bytes \n";
 /* 输出峰值
 Peak: 13687072 bytes
 */
@@ -201,12 +201,12 @@ Array
 sleep(3);
 
 $data = getrusage();
-echo &quot;User time: &quot;.
-	($data[&#039;ru_utime.tv_sec&#039;] +
-	$data[&#039;ru_utime.tv_usec&#039;] / 1000000);
-echo &quot;System time: &quot;.
-	($data[&#039;ru_stime.tv_sec&#039;] +
-	$data[&#039;ru_stime.tv_usec&#039;] / 1000000);
+echo "User time: ".
+	($data['ru_utime.tv_sec'] +
+	$data['ru_utime.tv_usec'] / 1000000);
+echo "System time: ".
+	($data['ru_stime.tv_sec'] +
+	$data['ru_stime.tv_usec'] / 1000000);
 
 /* 输出
 User time: 0.011552
@@ -221,12 +221,12 @@ for($i=0;$i&lt;10000000;$i++) {
 }
 
 $data = getrusage();
-echo &quot;User time: &quot;.
-	($data[&#039;ru_utime.tv_sec&#039;] +
-	$data[&#039;ru_utime.tv_usec&#039;] / 1000000);
-echo &quot;System time: &quot;.
-	($data[&#039;ru_stime.tv_sec&#039;] +
-	$data[&#039;ru_stime.tv_usec&#039;] / 1000000);
+echo "User time: ".
+	($data['ru_utime.tv_sec'] +
+	$data['ru_utime.tv_usec'] / 1000000);
+echo "System time: ".
+	($data['ru_stime.tv_sec'] +
+	$data['ru_stime.tv_usec'] / 1000000);
 
 /* 输出
 User time: 1.424592
@@ -243,12 +243,12 @@ while(microtime(true) - $start &lt; 3) {
 }
 
 $data = getrusage();
-echo &quot;User time: &quot;.
-	($data[&#039;ru_utime.tv_sec&#039;] +
-	$data[&#039;ru_utime.tv_usec&#039;] / 1000000);
-echo &quot;System time: &quot;.
-	($data[&#039;ru_stime.tv_sec&#039;] +
-	$data[&#039;ru_stime.tv_usec&#039;] / 1000000);
+echo "User time: ".
+	($data['ru_utime.tv_sec'] +
+	$data['ru_utime.tv_usec'] / 1000000);
+echo "System time: ".
+	($data['ru_stime.tv_sec'] +
+	$data['ru_stime.tv_usec'] / 1000000);
 
 /* prints
 User time: 1.088171
@@ -260,32 +260,32 @@ System time: 1.675315
 <p>PHP 提供非常有用的<a href="http://php.net/manual/en/language.constants.predefined.php">系统常量</a> 可以让你得到当前的行号 (__LINE__)，文件 (__FILE__)，目录 (__DIR__)，函数名 (__FUNCTION__)，类名(__CLASS__)，方法名(__METHOD__) 和名字空间 (__NAMESPACE__)，很像C语言。</p>
 <p>我们可以以为这些东西主要是用于调试，当也不一定，比如我们可以在include其它文件的时候使用?__FILE__ (当然，你也可以在 PHP 5.3以后使用 __DIR__ )，下面是一个例子。</p>
 <pre class="EnlighterJSRAW">
-// this is relative to the loaded script&#039;s path
+// this is relative to the loaded script's path
 // it may cause problems when running scripts from different directories
-require_once(&#039;config/database.php&#039;);
+require_once('config/database.php');
 
-// this is always relative to this file&#039;s path
+// this is always relative to this file's path
 // no matter where it was included from
-require_once(dirname(__FILE__) . &#039;/config/database.php&#039;);
+require_once(dirname(__FILE__) . '/config/database.php');
 </pre>
 <p>下面是使用 __LINE__ 来输出一些debug的信息，这样有助于你调试程序：</p>
 <pre class="EnlighterJSRAW">
 // some code
 // ...
-my_debug(&quot;some debug message&quot;, __LINE__);
+my_debug("some debug message", __LINE__);
 /* 输出
 Line 4: some debug message
 */
 
 // some more code
 // ...
-my_debug(&quot;another debug message&quot;, __LINE__);
+my_debug("another debug message", __LINE__);
 /* 输出
 Line 11: another debug message
 */
 
 function my_debug($msg, $line) {
-	echo &quot;Line $line: $msg\n&quot;;
+	echo "Line $line: $msg\n";
 }
 </pre>
 <h4><span>6.生成唯一的ID</span></h4>
@@ -312,19 +312,19 @@ echo uniqid();
 <p>你还可以加上前缀避免重名：</p>
 <pre class="EnlighterJSRAW">
 // 前缀
-echo uniqid(&#039;foo_&#039;);
+echo uniqid('foo_');
 /* 输出
 foo_4bd67d6cd8b8f
 */
 
 // 有更多的熵
-echo uniqid(&#039;&#039;,true);
+echo uniqid('',true);
 /* 输出
 4bd67d6cd8b926.12135106
 */
 
 // 都有
-echo uniqid(&#039;bar_&#039;,true);
+echo uniqid('bar_',true);
 /* 输出
 bar_4bd67da367b650.43684647
 */
@@ -335,10 +335,10 @@ bar_4bd67da367b650.43684647
 <pre class="EnlighterJSRAW">
 // 一个复杂的数组
 $myvar = array(
-	&#039;hello&#039;,
+	'hello',
 	42,
-	array(1,&#039;two&#039;),
-	&#039;apple&#039;
+	array(1,'two'),
+	'apple'
 );
 
 // 序列化
@@ -346,7 +346,7 @@ $string = serialize($myvar);
 
 echo $string;
 /* 输出
-a:4:{i:0;s:5:&quot;hello&quot;;i:1;i:42;i:2;a:2:{i:0;i:1;i:1;s:3:&quot;two&quot;;}i:3;s:5:&quot;apple&quot;;}
+a:4:{i:0;s:5:"hello";i:1;i:42;i:2;a:2:{i:0;i:1;i:1;s:3:"two";}i:3;s:5:"apple";}
 */
 
 // 反序例化
@@ -372,10 +372,10 @@ Array
 <pre class="EnlighterJSRAW">
 // a complex array
 $myvar = array(
-	&#039;hello&#039;,
+	'hello',
 	42,
-	array(1,&#039;two&#039;),
-	&#039;apple&#039;
+	array(1,'two'),
+	'apple'
 );
 
 // convert to a string
@@ -383,7 +383,7 @@ $string = json_encode($myvar);
 
 echo $string;
 /* prints
-[&quot;hello&quot;,42,[1,&quot;two&quot;],&quot;apple&quot;]
+["hello",42,[1,"two"],"apple"]
 */
 
 // you can reproduce the original variable
@@ -410,7 +410,7 @@ Array
 <p>当我们说到压缩，我们可能会想到文件压缩，其实，字符串也是可以压缩的。PHP提供了?<a href="http://php.net/manual/en/function.gzcompress.php">gzcompress()</a> 和 <a href="http://www.php.net/manual/en/function.gzuncompress.php">gzuncompress()</a> 函数：</p>
 <pre class="EnlighterJSRAW">
 $string =
-&quot;Lorem ipsum dolor sit amet, consectetur
+"Lorem ipsum dolor sit amet, consectetur
 adipiscing elit. Nunc ut elit id mi ultricies
 adipiscing. Nulla facilisi. Praesent pulvinar,
 sapien vel feugiat vestibulum, nulla dui pretium orci,
@@ -425,16 +425,16 @@ augue. Sed magna nisi, ornare in mollis in, mollis
 sed nunc. Etiam at justo in leo congue mollis.
 Nullam in neque eget metus hendrerit scelerisque
 eu non enim. Ut malesuada lacus eu nulla bibendum
-id euismod urna sodales. &quot;;
+id euismod urna sodales. ";
 
 $compressed = gzcompress($string);
 
-echo &quot;Original size: &quot;. strlen($string).&quot;\n&quot;;
+echo "Original size: ". strlen($string)."\n";
 /* 输出原始大小
 Original size: 800
 */
 
-echo &quot;Compressed size: &quot;. strlen($compressed).&quot;\n&quot;;
+echo "Compressed size: ". strlen($compressed)."\n";
 /* 输出压缩后的大小
 Compressed size: 418
 */
@@ -453,16 +453,16 @@ $start_time = microtime(true);
 // ...
 
 // display how long the script took
-echo &quot;execution took: &quot;.
+echo "execution took: ".
 		(microtime(true) - $start_time).
-		&quot; seconds.&quot;;
+		" seconds.";
 </pre>
 <p>上面这个示例只不过是用来计算某个函数运行的时间。然后，如果你在函数中间调用?<a href="http://php.net/manual/en/function.exit.php">exit()</a> 函数，那么你的最后的代码将不会被运行到。并且，如果该脚本在浏览器终止（用户按停止按钮），其也无法被运行。</p>
 <p>而当我们使用了register_shutdown_function()后，你的程序就算是在脚本被停止后也会被运行：</p>
 <pre class="EnlighterJSRAW">
 $start_time = microtime(true);
 
-register_shutdown_function(&#039;my_shutdown&#039;);
+register_shutdown_function('my_shutdown');
 
 // do some stuff
 // ...
@@ -470,9 +470,9 @@ register_shutdown_function(&#039;my_shutdown&#039;);
 function my_shutdown() {
 	global $start_time;
 
-	echo &quot;execution took: &quot;.
+	echo "execution took: ".
 			(microtime(true) - $start_time).
-			&quot; seconds.&quot;;
+			" seconds.";
 }
 </pre>
 <p>文章：<a href="http://net.tutsplus.com/tutorials/php/9-useful-php-functions-and-features-you-need-to-know/" target="_blank">来源</a><!--
@@ -491,7 +491,6 @@ function my_shutdown() {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5160.html"><img alt="PHP分页技术的代码和示例" height="150" src="https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5160.html">PHP分页技术的代码和示例</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2053.html"><img alt="最为奇怪的程序语言的特性" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2053.html">最为奇怪的程序语言的特性</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2394.html">九个PHP很有用的功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5160.html"><img alt="PHP分页技术的代码和示例" height="150" src="../wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5160.html">PHP分页技术的代码和示例</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2053.html"><img alt="最为奇怪的程序语言的特性" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2053.html">最为奇怪的程序语言的特性</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2394.html">九个PHP很有用的功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

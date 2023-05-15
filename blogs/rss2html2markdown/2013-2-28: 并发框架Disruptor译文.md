@@ -11,7 +11,7 @@ type: post
 **（感谢同事[方腾飞](http://ifeve.com)投递本文）**
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/02/Disruptor-300x144.png)Martin Fowler在自己网站上写了一篇[LMAX架构](http://ifeve.com/lmax)的文章，在文章中他介绍了LMAX是一种新型零售金融交易平台，它能够以很低的延迟产生大量交易。这个系统是建立在JVM平台上，其核心是一个业务逻辑处理器，它能够在一个线程里每秒处理6百万订单。业务逻辑处理器完全是运行在内存中，使用事件源驱动方式。业务逻辑处理器的核心是Disruptor。
+![](../wp-content/uploads/2013/02/Disruptor-300x144.png)Martin Fowler在自己网站上写了一篇[LMAX架构](http://ifeve.com/lmax)的文章，在文章中他介绍了LMAX是一种新型零售金融交易平台，它能够以很低的延迟产生大量交易。这个系统是建立在JVM平台上，其核心是一个业务逻辑处理器，它能够在一个线程里每秒处理6百万订单。业务逻辑处理器完全是运行在内存中，使用事件源驱动方式。业务逻辑处理器的核心是Disruptor。
 
 
 Disruptor它是一个开源的并发框架，并获得[2011 Duke’s](http://www.java.net/dukeschoice)程序框架创新奖，能够在无锁的情况下实现网络的Queue并发操作。本文是[Disruptor官网](https://code.google.com/p/disruptor/wiki/BlogsAndArticles)中发布的文章的译文（[现在被移到了GitHub](http://lmax-exchange.github.com/disruptor/)）。
@@ -79,10 +79,10 @@ Disruptor它是一个开源的并发框架，并获得[2011 Duke’s](http://www
 
 ### 相关文章
 
-* [![从LongAdder看更高效的无锁实现](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/11454.html)[从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html)
-* [![无锁HashMap的原理与实现](https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg)](https://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](https://coolshell.cn/articles/9703.html)
-* [![ETCD的内存问题](https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png)](https://coolshell.cn/articles/22242.html)[ETCD的内存问题](https://coolshell.cn/articles/22242.html)
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![性能测试应该怎么做？](https://coolshell.cn/wp-content/uploads/2016/07/PerfTest-150x150.png)](https://coolshell.cn/articles/17381.html)[性能测试应该怎么做？](https://coolshell.cn/articles/17381.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/11454.html)[从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html)
+* [![无锁HashMap的原理与实现](../wp-content/uploads/2013/05/图1-3-150x150.jpg)](https://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](https://coolshell.cn/articles/9703.html)
+* [![ETCD的内存问题](../wp-content/uploads/2022/05/etcd-150x150.png)](https://coolshell.cn/articles/22242.html)[ETCD的内存问题](https://coolshell.cn/articles/22242.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![性能测试应该怎么做？](../wp-content/uploads/2016/07/PerfTest-150x150.png)](https://coolshell.cn/articles/17381.html)[性能测试应该怎么做？](https://coolshell.cn/articles/17381.html)
 The post [并发框架Disruptor译文](https://coolshell.cn/articles/9169.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

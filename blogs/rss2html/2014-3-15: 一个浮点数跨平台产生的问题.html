@@ -1,4 +1,4 @@
-<p><strong>感谢网友<a href="http://www.tanglei.name/" target="_blank">唐磊</a>（微博@<a href="http://weibo.com/tangleithu?from=feed&amp;loc=nickname" title="唐磊_name">唐磊_name</a>）投稿，本文原文在唐磊的博客上（<a href="http://www.tanglei.name/a-bug-relate-with-float-point-between-x86-and-x64-in-csharp/">原文地址</a>），原文分析还不够好，而且可能对人有误导，所以，我对原文做了很多修改，并加了Linux下的内容。浮点数是一个很复杂的事情，希望这篇文章有助于大家了解浮点数与其相关的C/C++的编译选项。</strong>（注：我没有Windows 32位以及C#的环境，所以，对于Windows 32位的程序和C#的程序没有验证过）</p>
+<html><body><p><strong>感谢网友<a href="http://www.tanglei.name/" target="_blank">唐磊</a>（微博@<a href="http://weibo.com/tangleithu?from=feed&amp;loc=nickname" title="唐磊_name">唐磊_name</a>）投稿，本文原文在唐磊的博客上（<a href="http://www.tanglei.name/a-bug-relate-with-float-point-between-x86-and-x64-in-csharp/">原文地址</a>），原文分析还不够好，而且可能对人有误导，所以，我对原文做了很多修改，并加了Linux下的内容。浮点数是一个很复杂的事情，希望这篇文章有助于大家了解浮点数与其相关的C/C++的编译选项。</strong>（注：我没有Windows 32位以及C#的环境，所以，对于Windows 32位的程序和C#的程序没有验证过）</p>
 <p>背景就简单点儿说，最近一个项目C#编写，涉及浮点运算，来龙去脉省去，直接看如下代码。</p>
 <pre class="EnlighterJSRAW">float p3x = 80838.0f;
 float p2y = -2499.0f;
@@ -98,41 +98,41 @@ int main()
 <p><span style="line-height: 1.5em;"><strong>而且，要解决这个问题也不是要修改编译器选项，因为这个问题明显不是FPU或是SSE的问题，FPU是个过时的技术，SSE才是合理的技术，所以，<span style="color: #cc0000;">如果你不想你的浮点数在计算上有什么问题，而且你需要精度准确，正确的解决方案不是搞编译参数，而是——你一定要使用精度更高字节数更多的数据类型，比如：double 或是long double</span>。</strong></span></p>
 <p>另外，大家在写代码的时候得保证实际运行环境/测试环境/开发环境的<strong>一致性(包括OS架构啊、编译选项等)</strong>啊（<strong>尤其是C/C++ 而且，编译器上的参数可能会有很多坑，而且有些坑可能会掩盖你程序中的问题</strong>），不然莫名其妙的问题会产生（本文就是开发环境与运行环境不一致导致的问题，纠结了好久才发现是这个原因）；遇到涉及浮点运算的时候别忘了有可能是这个原因产生的；<strong>float/double混用的情况得特别注意</strong>。</p>
 <p><strong>Reference：</strong></p>
-<p>[1] <a href="http://msdn.microsoft.com/en-us/library/aa691146(v=vs.71).aspx">C# Language Specification Floating point types</a><br />
-[2] <a href="http://stackoverflow.com/questions/6683059/are-floating-point-numbers-consistent-in-c-can-they-be">Are floating-point numbers consistent in C#? Can they be? </a><br />
+<p>[1] <a href="http://msdn.microsoft.com/en-us/library/aa691146(v=vs.71).aspx">C# Language Specification Floating point types</a><br/>
+[2] <a href="http://stackoverflow.com/questions/6683059/are-floating-point-numbers-consistent-in-c-can-they-be">Are floating-point numbers consistent in C#? Can they be? </a><br/>
 [3] <a href="http://www.plantation-productions.com/Webster/www.artofasm.com/Linux/HTML/RealArithmetica2.html">The FPU Instruction Set</a></p>
 <h4><strong>附录</strong></h4>
 <h5><strong>80838.0f * -2499.0f = -202014160.0浮点运算过程的说明</strong></h5>
-<p>32位浮点数在计算机中的表示方式为：1位符号位(s)-8位指数位(E)-23位有效数字(M)。<br />
+<p>32位浮点数在计算机中的表示方式为：1位符号位(s)-8位指数位(E)-23位有效数字(M)。<br/>
 32位Float = (-1)^s * (1+m) * 2^(e-127), 其中e是实际转换成1.xxxxx*2^e的指数,m是前面的xxxxx(节约1位)</p>
-<p>80838.0f = 1 0011 1011 1100 0110.0= 1.00111011110001100*2^16<br />
-有效位M = 0011 1011 1100 0110 0000 000<br />
-指数位E = 16 + 127 = 143 =  10001111<br />
-内部表示 80838.0 =  0 [1000 1111] [0011 1011 1100 0110 0000 000]<br />
-= 0100 0111 1001 1101 1110 0011 0000 0000<br />
+<p>80838.0f = 1 0011 1011 1100 0110.0= 1.00111011110001100*2^16<br/>
+有效位M = 0011 1011 1100 0110 0000 000<br/>
+指数位E = 16 + 127 = 143 =  10001111<br/>
+内部表示 80838.0 =  0 [1000 1111] [0011 1011 1100 0110 0000 000]<br/>
+= 0100 0111 1001 1101 1110 0011 0000 0000<br/>
 = 47 9d e3 00 //实际调试时看到的内存值 可能是00 e3 9d 47是因为调试环境用了小端表示法法：低位字节排内存低地址端，高位排内存高地址</p>
-<p>-2499.0 = -100111000011.0 = -1.001110000110 * 2^11<br />
-有效位M = 0011 1000 0110 0000 0000 000<br />
-指数位E = 11+127=138= 10001010<br />
-符号位s = 1<br />
-内部表示-2499.0 = 1 [10001010] [0011 1000 0110 0000 0000 000]<br />
-=1100 0101 0001 1100 0011 0000 0000 0000<br />
+<p>-2499.0 = -100111000011.0 = -1.001110000110 * 2^11<br/>
+有效位M = 0011 1000 0110 0000 0000 000<br/>
+指数位E = 11+127=138= 10001010<br/>
+符号位s = 1<br/>
+内部表示-2499.0 = 1 [10001010] [0011 1000 0110 0000 0000 000]<br/>
+=1100 0101 0001 1100 0011 0000 0000 0000<br/>
 =c5 1c 30 00</p>
 <p>80838.0 * -2499.0 = ?</p>
-<p>首先是指数 e = 11+16 = 27<br />
-指数位E = e + 127 = 154 = 10011010<br />
-有效位相乘结果为 1.1000 0001 0100 1111 1011 1010 01 //可以自己动手实际算下<br />
-实际中只能有23位，后面的被截断即1000 0001 0100 1111 1011 101<span style="text-decoration: line-through;">0 01 </span><br />
-相乘结果内部表示=1[10011010][1000 0001 0100 1111 1011 101]<br />
-= 1100 1101 0100 0000 1010 0111 1101 1101<br />
+<p>首先是指数 e = 11+16 = 27<br/>
+指数位E = e + 127 = 154 = 10011010<br/>
+有效位相乘结果为 1.1000 0001 0100 1111 1011 1010 01 //可以自己动手实际算下<br/>
+实际中只能有23位，后面的被截断即1000 0001 0100 1111 1011 101<span style="text-decoration: line-through;">0 01 </span><br/>
+相乘结果内部表示=1[10011010][1000 0001 0100 1111 1011 101]<br/>
+= 1100 1101 0100 0000 1010 0111 1101 1101<br/>
 = cd 40 a7 dd</p>
-<p>结果 =  -1.1000 0001 0100 1111 1011 101 *2^27<br />
-=  -11000 0001 0100 1111 1011 1010000<br />
-=  -202014160<br />
+<p>结果 =  -1.1000 0001 0100 1111 1011 101 *2^27<br/>
+=  -11000 0001 0100 1111 1011 1010000<br/>
+=  -202014160<br/>
 再转成double后还是-202014160.</p>
-<p>如果是FPU的话，上面的有效位结果不会被截断，即<br />
-FPU结果 = -1.1000 0001 0100 1111 1011 101<strong>001</strong> *2^27<br />
-= -11000 0001 0100 1111 1011 101<strong>001</strong>0<br />
+<p>如果是FPU的话，上面的有效位结果不会被截断，即<br/>
+FPU结果 = -1.1000 0001 0100 1111 1011 101<strong>001</strong> *2^27<br/>
+= -11000 0001 0100 1111 1011 101<strong>001</strong>0<br/>
 = -202014162</p>
 <p>全文完，若本文有纰漏之处欢迎指正。<!--
 
@@ -150,7 +150,6 @@ FPU结果 = -1.1000 0001 0100 1111 1011 101<strong>001</strong> *2^27<br />
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3008.html"><img alt="Windows编程革命简史" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3008.html">Windows编程革命简史</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2672.html"><img alt=".NET代码转换器" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2672.html">.NET代码转换器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11235.html">一个浮点数跨平台产生的问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3008.html"><img alt="Windows编程革命简史" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3008.html">Windows编程革命简史</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2672.html"><img alt=".NET代码转换器" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2672.html">.NET代码转换器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11235.html">一个浮点数跨平台产生的问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

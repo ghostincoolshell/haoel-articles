@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2010/06/splash-html5-flash.jpg)[SmokeScreen](http://smokescreen.us/)是这样一个开源软件，它可以把Flash的swf文件转成Javascript/HTML5，它的口号是：Flash without plugin。为什么要这样做呢？它说主要是因主Apple的iPhone/iPod/iPad不支持flash，而且看似Steve Jobs也不愿意在以后支持flash。所以，他们搞了这样一个玩意。目前，这个开源软件还在开发阶段，在其主页上，你可以看到一些[Demo](http://smokescreen.us/demo/)，在Chrome上看上去很不错，虽然还有一些小问题，不过已经很不错了。
+![](../wp-content/uploads/2010/06/splash-html5-flash.jpg)[SmokeScreen](http://smokescreen.us/)是这样一个开源软件，它可以把Flash的swf文件转成Javascript/HTML5，它的口号是：Flash without plugin。为什么要这样做呢？它说主要是因主Apple的iPhone/iPod/iPad不支持flash，而且看似Steve Jobs也不愿意在以后支持flash。所以，他们搞了这样一个玩意。目前，这个开源软件还在开发阶段，在其主页上，你可以看到一些[Demo](http://smokescreen.us/demo/)，在Chrome上看上去很不错，虽然还有一些小问题，不过已经很不错了。
 
 
 HTML5几乎颠覆了原来的HTML，其可以让你用HTML不单单只是做网页布局，而且还让你可以开发更强的东西，比如：[WebSockets](http://dev.w3.org/html5/websockets/)，使用这项技术，已经有人在搞Web版的Quake 2了（<http://code.google.com/p/quake2-gwt-port/>），还有[Google的3D Javascript API](https://coolshell.cn/articles/599.html)，所以，把swf完美地转成Javscript/HTML5可能也只是一个时间问题。
@@ -24,10 +24,10 @@ HTML5几乎颠覆了原来的HTML，其可以让你用HTML不单单只是做网�
 
 ### 相关文章
 
-* [![Chrome开发者工具的小技巧](https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
-* [![浏览器的渲染原理简介](https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
-* [![一些文章资源和趣闻](https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png)](https://coolshell.cn/articles/5537.html)[一些文章资源和趣闻](https://coolshell.cn/articles/5537.html)
-* [![开源中最好的Web开发的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
-* [![Web开发人员速查卡](https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg)](https://coolshell.cn/articles/3684.html)[Web开发人员速查卡](https://coolshell.cn/articles/3684.html)
-* [![JS游戏引擎列表](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg)](https://coolshell.cn/articles/3516.html)[JS游戏引擎列表](https://coolshell.cn/articles/3516.html)
+* [![Chrome开发者工具的小技巧](../wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
+* [![浏览器的渲染原理简介](../wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
+* [![一些文章资源和趣闻](../wp-content/uploads/2011/11/stackparts.com_-150x150.png)](https://coolshell.cn/articles/5537.html)[一些文章资源和趣闻](https://coolshell.cn/articles/5537.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
+* [![Web开发人员速查卡](../wp-content/uploads/2011/02/1128-150x150.jpg)](https://coolshell.cn/articles/3684.html)[Web开发人员速查卡](https://coolshell.cn/articles/3684.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg](https://coolshell.cn/articles/3516.html)[JS游戏引擎列表](https://coolshell.cn/articles/3516.html)
 The post [把Flash转成Javascript/HTML5](https://coolshell.cn/articles/2497.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

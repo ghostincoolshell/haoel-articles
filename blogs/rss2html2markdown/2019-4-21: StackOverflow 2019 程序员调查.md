@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2019/04/2019-Dev-Survey-Blog-360x200.png)前些天，StackOverflow 发布了 [2019年的年度程序员调查](https://insights.stackoverflow.com/survey/2019)，这个调查报查有90000名程序员参与，这份调度报告平均花了20分钟，可见，这份报告有很多的问题，也是很详细的。这份报告有一些地方，让我有了一些思考。
+![](../wp-content/uploads/2019/04/2019-Dev-Survey-Blog-360x200.png)前些天，StackOverflow 发布了 [2019年的年度程序员调查](https://insights.stackoverflow.com/survey/2019)，这个调查报查有90000名程序员参与，这份调度报告平均花了20分钟，可见，这份报告有很多的问题，也是很详细的。这份报告有一些地方，让我有了一些思考。
 
 
 首先，我们先来看一下之份报告的 Key Results：
@@ -28,13 +28,13 @@ type: post
 在第一部分中，我们可以看到，中国程序员参与这个调查的并不多，程序员主要集中在美国、欧洲、印度这三个地方。所以，这份报告更偏国际上一些。这对于我们中国程序员也有很大的帮助，因为一方面可以看到世界发展的趋势，另一方面也可以了解我们和世界有什么不一样。
 
 
-对于技术职业来说，整个世界的程序员开始趋于全栈和后端，有51.9%的人是全栈，50%的人是后端，32.8%的人是前端……在这些人中，很多程序员都选了多项，中位数是3项，最常见是前端、后端和全栈全选的。然后，接下来是选两项的，选两项目的包括：数据库管理员和系统管理员，DevOps Specialist 和 Site Reliablility Engineer， 学术研究者和科学家，设计师和前端工程师。![](https://coolshell.cn/wp-content/uploads/2019/04/06-01.Developers.Rols_-1024x259.png)
+对于技术职业来说，整个世界的程序员开始趋于全栈和后端，有51.9%的人是全栈，50%的人是后端，32.8%的人是前端……在这些人中，很多程序员都选了多项，中位数是3项，最常见是前端、后端和全栈全选的。然后，接下来是选两项的，选两项目的包括：数据库管理员和系统管理员，DevOps Specialist 和 Site Reliablility Engineer， 学术研究者和科学家，设计师和前端工程师。![](../wp-content/uploads/2019/04/06-01.Developers.Rols_-1024x259.png)
 
 
 从这些数据中我们可以看见：**前后端的界限越来越不明显，设计师和前端的界限也开始模糊。这应该说明，工具和框架的成熟，让后端程序员和设计师也可以进入到前端工程师的领域，或是前端工程师开始进入后端和设计的领域**。总之，复合型人才越来越越成为主流，而前后端也趋于一个相互融合的态势。
 
 
-在接下来的图表中，我们可以看到有80%以上的人是把编程当成自己的爱好（包括相关的女性）。![](https://coolshell.cn/wp-content/uploads/2019/04/06-02.Coding.as_.a.Hobby_.png)
+在接下来的图表中，我们可以看到有80%以上的人是把编程当成自己的爱好（包括相关的女性）。![](../wp-content/uploads/2019/04/06-02.Coding.as_.a.Hobby_.png)
 
 
 真是应了那句话——“Programmers who don’t code in their spare time for fun will never become as good as those that do”，是的，如果你对编程没有感到一种快乐，没有在你空闲的时候去以一种的兴趣爱好方式去面对，那么，无论是编程，还是运动，还是去旅游，都不会有太多成效的。
@@ -56,7 +56,7 @@ type: post
 下面我们再来看一个年龄图：
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/04/06-05.Age_-1024x710.png)
+![](../wp-content/uploads/2019/04/06-05.Age_-1024x710.png)
 
 
 调查报告从20岁开始每隔5年划分一个年龄段，我们不难发现从25-29岁开始每个年龄段都比前一个年龄段人数急剧减少大约30-50%，比如25-29年龄段占总人数27.6%，而30-34则只有19.3%。以此类推，到60岁以上，就只剩1%。可以看出5年是大多数程序员的转型周期。这是合理的，因为5年时间足够一个人积累足够的经验技能为职业转型做准备。
@@ -138,7 +138,7 @@ type: post
 接下来，StackOverflow给了一个技术圈的图
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/04/06-08.Technology.Circle-1024x1024.png)
+![](../wp-content/uploads/2019/04/06-08.Technology.Circle-1024x1024.png)
 
 
 从上面这个图中，我们可以看以技术的几圈子：
@@ -175,7 +175,7 @@ type: post
 最后用一张程序员的“**每周工作时间**” 来结束本文！
 
 
-![](https://coolshell.cn/wp-content/uploads/2019/04/07-09.Hours_.Worked.Per_.Week_-1024x640.png)
+![](../wp-content/uploads/2019/04/07-09.Hours_.Worked.Per_.Week_-1024x640.png)
 
 
 祝大家快乐！
@@ -191,10 +191,10 @@ type: post
 
 ### 相关文章
 
-* [![聊聊团队协同和协同工具](https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![谈谈公司对员工的监控](https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
-* [![如何做一个有质量的技术分享](https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
-* [![程序员如何把控自己的职业](https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
-* [![MegaEase的远程工作文化](https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
+* [![聊聊团队协同和协同工具](../wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![谈谈公司对员工的监控](../wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
+* [![如何做一个有质量的技术分享](../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
+* [![程序员如何把控自己的职业](../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
+* [![MegaEase的远程工作文化](../wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
 The post [StackOverflow 2019 程序员调查](https://coolshell.cn/articles/19307.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

@@ -11,7 +11,7 @@ type: post
 2009年6月23日，Martin Fowler到公司访问，与我们开了一个小型座谈会并顺便拜访了他在ThoughtWorks的同事们。
 
 
-![MeetMartinFowlerSmall](https://coolshell.cn/wp-content/uploads/2009/07/MeetMartinFowlerSmall.JPG "MeetMartinFowlerSmall")
+![MeetMartinFowlerSmall](../wp-content/uploads/2009/07/MeetMartinFowlerSmall.JPG "MeetMartinFowlerSmall")
 
 
 以下是座谈的内容：
@@ -64,10 +64,10 @@ Martin强烈反对项目成员分散式办公，甚至觉得如果你需要业�
 
 ### 相关文章
 
-* [![为什么敏捷方法能在软件开发中行之有效？](https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-150x150.jpg)](https://coolshell.cn/articles/2622.html)[为什么敏捷方法能在软件开发中行之有效？](https://coolshell.cn/articles/2622.html)
-* [![ETCD的内存问题](https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png)](https://coolshell.cn/articles/22242.html)[ETCD的内存问题](https://coolshell.cn/articles/22242.html)
-* [![Linux 相关的资源站makelinux.net](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/194.html)[Linux 相关的资源站makelinux.net](https://coolshell.cn/articles/194.html)
-* [![iPad进化图](https://coolshell.cn/wp-content/uploads/2010/02/ipad-150x150.jpg)](https://coolshell.cn/articles/2086.html)[iPad进化图](https://coolshell.cn/articles/2086.html)
-* [![图解SQL的Join](https://coolshell.cn/wp-content/uploads/2011/01/Inner_Join-150x150.png)](https://coolshell.cn/articles/3463.html)[图解SQL的Join](https://coolshell.cn/articles/3463.html)
-* [![HTTP API 认证授权术](https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
+* [![为什么敏捷方法能在软件开发中行之有效？](../wp-content/uploads/2010/07/Martin-Flower1-150x150.jpg)](https://coolshell.cn/articles/2622.html)[为什么敏捷方法能在软件开发中行之有效？](https://coolshell.cn/articles/2622.html)
+* [![ETCD的内存问题](../wp-content/uploads/2022/05/etcd-150x150.png)](https://coolshell.cn/articles/22242.html)[ETCD的内存问题](https://coolshell.cn/articles/22242.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/194.html)[Linux 相关的资源站makelinux.net](https://coolshell.cn/articles/194.html)
+* [![iPad进化图](../wp-content/uploads/2010/02/ipad-150x150.jpg)](https://coolshell.cn/articles/2086.html)[iPad进化图](https://coolshell.cn/articles/2086.html)
+* [![图解SQL的Join](../wp-content/uploads/2011/01/Inner_Join-150x150.png)](https://coolshell.cn/articles/3463.html)[图解SQL的Join](https://coolshell.cn/articles/3463.html)
+* [![HTTP API 认证授权术](../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
 The post [与Martin Fowler关于敏捷方法的问答](https://coolshell.cn/articles/1113.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

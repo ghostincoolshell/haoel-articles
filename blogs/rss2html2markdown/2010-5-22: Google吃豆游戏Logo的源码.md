@@ -11,7 +11,7 @@ type: post
 这两天，Google的logo换成了那个经典的吃豆游戏，很强大，也引发了大众的热议。如果你想要其源代码的话，你可以到这里下载：[**http://github.com/macek/google\_pacman**](http://github.com/macek/google_pacman)。而在线演示在这里：<http://macek.github.com/google_pacman/>。
 
 
-![Google 吃豆游戏 Logo](https://coolshell.cn/wp-content/uploads/2010/05/google_pacman.jpg "Google 吃豆游戏 Logo")Google 吃豆游戏 Logo
+![Google 吃豆游戏 Logo](../wp-content/uploads/2010/05/google_pacman.jpg "Google 吃豆游戏 Logo")Google 吃豆游戏 Logo
 需要注意的是，那个源程序在你的本机是不会有声音的，因为这跟flash的设置有关系，如果你需要有游戏声音，你还需要有以下的设置：
 
 
@@ -35,10 +35,10 @@ type: post
 
 ### 相关文章
 
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![PFIF网上寻人协议](https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png)](https://coolshell.cn/articles/9508.html)[PFIF网上寻人协议](https://coolshell.cn/articles/9508.html)
-* [![28个Unix/Linux的命令行神器](https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png)](https://coolshell.cn/articles/7829.html)[28个Unix/Linux的命令行神器](https://coolshell.cn/articles/7829.html)
-* [![一些文章资源和趣闻](https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png)](https://coolshell.cn/articles/5537.html)[一些文章资源和趣闻](https://coolshell.cn/articles/5537.html)
-* [![来信， 创业 和 移动互联网](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [![PFIF网上寻人协议](../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png)](https://coolshell.cn/articles/9508.html)[PFIF网上寻人协议](https://coolshell.cn/articles/9508.html)
+* [![28个Unix/Linux的命令行神器](../wp-content/uploads/2012/07/dstat_screenshot-150x150.png)](https://coolshell.cn/articles/7829.html)[28个Unix/Linux的命令行神器](https://coolshell.cn/articles/7829.html)
+* [![一些文章资源和趣闻](../wp-content/uploads/2011/11/stackparts.com_-150x150.png)](https://coolshell.cn/articles/5537.html)[一些文章资源和趣闻](https://coolshell.cn/articles/5537.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
 The post [Google吃豆游戏Logo的源码](https://coolshell.cn/articles/2466.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

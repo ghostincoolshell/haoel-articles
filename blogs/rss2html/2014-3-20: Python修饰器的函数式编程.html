@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright wp-image-11300" height="233" src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960.jpg" width="280" />Python的修饰器的英文名叫Decorator，当你看到这个英文名的时候，你可能会把其跟Design Pattern里的Decorator搞混了，其实这是完全不同的两个东西。虽然好像，他们要干的事都很相似——都是想要对一个已有的模块做一些“修饰工作”，所谓修饰工作就是想给现有的模块加上一些小装饰（一些小功能，这些小功能可能好多模块都会用到），但又不让这个小装饰（小功能）侵入到原有的模块中的代码里去。但是OO的Decorator简直就是一场恶梦，不信你就去看看wikipedia上的词条（<a href="http://en.wikipedia.org/wiki/Decorator_pattern" rel="noopener noreferrer" target="_blank">Decorator Pattern</a>）里的UML图和那些代码，这就是我在《 <a href="https://coolshell.cn/articles/8961.html" rel="bookmark" title="链接：从面向对象的设计模式看软件设计">从面向对象的设计模式看软件设计</a>》“餐后甜点”一节中说的，OO鼓励了——“厚重地胶合和复杂层次”，也是《 <a href="https://coolshell.cn/articles/8745.html" rel="bookmark" title="链接：如此理解面向对象编程">如此理解面向对象编程</a>》中所说的“OO的狂热者们非常害怕处理数据”，Decorator Pattern搞出来的代码简直就是OO的反面教程。</p>
+<html><body><p><img alt="" class="alignright wp-image-11300" height="233" src="../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960.jpg" width="280"/>Python的修饰器的英文名叫Decorator，当你看到这个英文名的时候，你可能会把其跟Design Pattern里的Decorator搞混了，其实这是完全不同的两个东西。虽然好像，他们要干的事都很相似——都是想要对一个已有的模块做一些“修饰工作”，所谓修饰工作就是想给现有的模块加上一些小装饰（一些小功能，这些小功能可能好多模块都会用到），但又不让这个小装饰（小功能）侵入到原有的模块中的代码里去。但是OO的Decorator简直就是一场恶梦，不信你就去看看wikipedia上的词条（<a href="http://en.wikipedia.org/wiki/Decorator_pattern" rel="noopener noreferrer" target="_blank">Decorator Pattern</a>）里的UML图和那些代码，这就是我在《 <a href="https://coolshell.cn/articles/8961.html" rel="bookmark" title="链接：从面向对象的设计模式看软件设计">从面向对象的设计模式看软件设计</a>》“餐后甜点”一节中说的，OO鼓励了——“厚重地胶合和复杂层次”，也是《 <a href="https://coolshell.cn/articles/8745.html" rel="bookmark" title="链接：如此理解面向对象编程">如此理解面向对象编程</a>》中所说的“OO的狂热者们非常害怕处理数据”，Decorator Pattern搞出来的代码简直就是OO的反面教程。</p>
 <p>Python 的 Decorator在使用上和Java/C#的Annotation很相似，就是在方法名前面加一个@XXX注解来为这个方法装饰一些东西。但是，Java/C#的Annotation也很让人望而却步，太TMD的复杂了，你要玩它，你需要了解一堆Annotation的类库文档，让人感觉就是在学另外一门语言。</p>
 <p>而Python使用了一种相对于Decorator Pattern和Annotation来说非常优雅的方法，这种方法不需要你去掌握什么复杂的OO模型或是Annotation的各种类库规定，完全就是语言层面的玩法：一种函数式编程的技巧。如果你看过本站的《<a href="https://coolshell.cn/articles/10822.html">函数式编程</a>》，你一定会为函数式编程的那种“描述你想干什么，而不是描述你要怎么去实现”的编程方式感到畅快。（如果你不了解函数式编程，那在读本文之前，还请你移步去看看《<a href="https://coolshell.cn/articles/10822.html">函数式编程</a>》） 好了，我们先来点感性认识，看一个Python修饰器的Hello World的代码。</p>
 <p><span id="more-11265"></span></p>
@@ -94,9 +94,9 @@ aFunction()
 # Finished decorating aFunction()
 # inside aFunction()
 # inside myDecorator.__call__()</pre>
-<p>上面这个示例展示了，用类的方式声明一个decorator。我们可以看到这个类中有两个成员：<br />
-1）一个是<strong>init</strong>()，这个方法是在我们给某个函数decorator时被调用，所以，需要有一个fn的参数，也就是被decorator的函数。<br />
-2）一个是<strong>call</strong>()，这个方法是在我们调用被decorator函数时被调用的。<br />
+<p>上面这个示例展示了，用类的方式声明一个decorator。我们可以看到这个类中有两个成员：<br/>
+1）一个是<strong>init</strong>()，这个方法是在我们给某个函数decorator时被调用，所以，需要有一个fn的参数，也就是被decorator的函数。<br/>
+2）一个是<strong>call</strong>()，这个方法是在我们调用被decorator函数时被调用的。<br/>
 上面输出可以看到整个程序的执行顺序。</p>
 <p>这看上去要比“函数式”的方式更易读一些。</p>
 <p>下面，我们来看看用类的方式来重写上面的html.py的代码（文件名：html.py）：</p>
@@ -120,8 +120,8 @@ def hello(name):
 
 print hello("Hao Chen")
 </pre>
-<p>上面这段代码中，我们需要注意这几点：<br />
-1）如果decorator有参数的话，<strong>init</strong>() 成员就不能传入fn了，而fn是在<strong>call</strong>的时候传入的。<br />
+<p>上面这段代码中，我们需要注意这几点：<br/>
+1）如果decorator有参数的话，<strong>init</strong>() 成员就不能传入fn了，而fn是在<strong>call</strong>的时候传入的。<br/>
 2）这段代码还展示了 wrapped(*args, **kwargs) 这种方式来传递被decorator函数的参数。（其中：args是一个参数列表，kwargs是参数dict，具体的细节，请参考Python的文档或是<a href="http://stackoverflow.com/questions/3394835/args-and-kwargs" rel="noopener noreferrer" target="_blank">StackOverflow的这个问题</a>，这里就不展开了）</p>
 <h4>用Decorator设置函数的调用参数</h4>
 <p>你有三种方法可以干这个事：</p>
@@ -306,8 +306,8 @@ def next_page_func():
 print app.call_method('/')
 print app.call_method('/next_page')
 </pre>
-<p>注意：<br />
-1）上面这个示例中，用类的实例来做decorator。<br />
+<p>注意：<br/>
+1）上面这个示例中，用类的实例来做decorator。<br/>
 2）decorator类中没有<strong>call</strong>()，但是wrapper返回了原函数。所以，原函数没有发生任何变化。</p>
 <h5>给函数打日志</h5>
 <p>下面这个示例演示了一个logger的decorator，这个decorator输出了函数名，参数，返回值，和运行时间。</p>
@@ -360,8 +360,8 @@ def logger(loglevel):
             return result
         return wrapper
     return log_decorator</pre>
-<p>但是，上面这个带log level参数的有两具不好的地方，<br />
-1） loglevel不是debug的时候，还是要计算函数调用的时间。<br />
+<p>但是，上面这个带log level参数的有两具不好的地方，<br/>
+1） loglevel不是debug的时候，还是要计算函数调用的时间。<br/>
 2） 不同level的要写在一起，不易读。</p>
 <p>我们再接着改进：</p>
 <pre class="EnlighterJSRAW">import inspect
@@ -399,8 +399,8 @@ def advance_logger(loglevel):
     else:
         return info_log_decorator
 </pre>
-<p>你可以看到两点，<br />
-1）我们分了两个log level，一个是info的，一个是debug的，然后我们在外尾根据不同的参数返回不同的decorator。<br />
+<p>你可以看到两点，<br/>
+1）我们分了两个log level，一个是info的，一个是debug的，然后我们在外尾根据不同的参数返回不同的decorator。<br/>
 2）我们把info和debug中的相同的代码抽到了一个叫_basic_log的函数里，DRY原则。</p>
 <h5>一个MySQL的Decorator</h5>
 <p>下面这个decorator是我在工作中用到的代码，我简化了一下，把DB连接池的代码去掉了，这样能简单点，方便阅读。</p>
@@ -517,7 +517,6 @@ if __name__ == '__main__':
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="https://coolshell.cn/wp-content/uploads/2020/12/go.options-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19612.html"><img alt="50年前的登月程序和程序员有多硬核" height="150" src="https://coolshell.cn/wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19612.html">50年前的登月程序和程序员有多硬核</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="../wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="../wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="../wp-content/uploads/2020/12/go.options-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19612.html"><img alt="50年前的登月程序和程序员有多硬核" height="150" src="../wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19612.html">50年前的登月程序和程序员有多硬核</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

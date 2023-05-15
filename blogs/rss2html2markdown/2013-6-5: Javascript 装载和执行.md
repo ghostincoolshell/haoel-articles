@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2013/06/javascript.jpg)一两个月前在淘宝内网里看到一个优化Javascript代码的竞赛，发现有不少的人对Javascript的执行和装载的基础并不懂，所以，从那天起我就想写一篇文章，但一直耽搁了。自上篇《[浏览器渲染原理简介](https://coolshell.cn/articles/9666.html "浏览器的渲染原理简介")》，正好也可以承前启后。
+![](../wp-content/uploads/2013/06/javascript.jpg)一两个月前在淘宝内网里看到一个优化Javascript代码的竞赛，发现有不少的人对Javascript的执行和装载的基础并不懂，所以，从那天起我就想写一篇文章，但一直耽搁了。自上篇《[浏览器渲染原理简介](https://coolshell.cn/articles/9666.html "浏览器的渲染原理简介")》，正好也可以承前启后。
 
 
 首先，我想说一下Javascript的装载和执行。通常来说，浏览器对于Javascript的运行有两大特性：**1）载入后马上执行，2）执行时会阻塞页面后续的内容（包括页面的渲染、其它资源的下载）**。于是，如果有多个js文件被引入，那么对于浏览器来说，这些js文件被被串行地载入，并依次执行。
@@ -232,10 +232,10 @@ xhr.send('');
 
 ### 相关文章
 
-* [![浏览器的渲染原理简介](https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![一次Ajax查错的经历](https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
-* [![Web开发中需要了解的东西](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/6043.html)[Web开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
-* [![一些文章资源和趣闻](https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png)](https://coolshell.cn/articles/5537.html)[一些文章资源和趣闻](https://coolshell.cn/articles/5537.html)
-* [![开源中最好的Web开发的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
+* [![浏览器的渲染原理简介](../wp-content/uploads/2013/05/Render-Process-150x150.jpg)](https://coolshell.cn/articles/9666.html)[浏览器的渲染原理简介](https://coolshell.cn/articles/9666.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![一次Ajax查错的经历](../wp-content/uploads/2012/08/ajax_error-150x150.jpg)](https://coolshell.cn/articles/8170.html)[一次Ajax查错的经历](https://coolshell.cn/articles/8170.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/6043.html)[Web开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
+* [![一些文章资源和趣闻](../wp-content/uploads/2011/11/stackparts.com_-150x150.png)](https://coolshell.cn/articles/5537.html)[一些文章资源和趣闻](https://coolshell.cn/articles/5537.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
 The post [Javascript 装载和执行](https://coolshell.cn/articles/9749.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

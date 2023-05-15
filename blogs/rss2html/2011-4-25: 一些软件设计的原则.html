@@ -1,4 +1,4 @@
-<p>以前本站向大家介绍过一些软件开发的原则，比如<a href="https://coolshell.cn/articles/1007.html" rel="bookmark noopener" target="_blank" title="优质代码的十诫">优质代码的十诫</a>和<a href="https://coolshell.cn/articles/2324.html" rel="noopener" target="_blank" title="Unix传奇(下篇)">Unix传奇(下篇)</a>中所以说的UNIX的设计原则。相信大家从中能够从中学了解到一些设计原理方面的知识，正如我在《<a href="https://coolshell.cn/articles/4506.html" rel="noopener" target="_blank" title="再谈“我是怎么招聘程序员的”（上）">再谈“我是怎么招聘程序”</a>》中所说的，一个好的程序员通常由其操作技能、知识水平，经验层力和能力四个方面组成。在这里想和大家说说设计中的一些原则，我认为这些东西属于长期经验总结出来的知识。这些原则，每一个程序员都应该了解。但是请不要教条主义，在使用的时候还是要多多考虑实际情况。其实，<strong>下面这些原则，不单单只是软件开发，可以推广到其它生产活动中，甚至我们的生活中</strong>。</p>
+<html><body><p>以前本站向大家介绍过一些软件开发的原则，比如<a href="https://coolshell.cn/articles/1007.html" rel="bookmark noopener" target="_blank" title="优质代码的十诫">优质代码的十诫</a>和<a href="https://coolshell.cn/articles/2324.html" rel="noopener" target="_blank" title="Unix传奇(下篇)">Unix传奇(下篇)</a>中所以说的UNIX的设计原则。相信大家从中能够从中学了解到一些设计原理方面的知识，正如我在《<a href="https://coolshell.cn/articles/4506.html" rel="noopener" target="_blank" title="再谈“我是怎么招聘程序员的”（上）">再谈“我是怎么招聘程序”</a>》中所说的，一个好的程序员通常由其操作技能、知识水平，经验层力和能力四个方面组成。在这里想和大家说说设计中的一些原则，我认为这些东西属于长期经验总结出来的知识。这些原则，每一个程序员都应该了解。但是请不要教条主义，在使用的时候还是要多多考虑实际情况。其实，<strong>下面这些原则，不单单只是软件开发，可以推广到其它生产活动中，甚至我们的生活中</strong>。</p>
 <h4>Don’t Repeat Yourself (DRY)</h4>
 <p>DRY 是一个最简单的法则，也是最容易被理解的。但它也可能是最难被应用的（因为要做到这样，我们需要在泛型设计上做相当的努力，这并不是一件容易的事）。它意味着，当我们在两个或多个地方的时候发现一些相似的代码的时候，我们需要把他们的共性抽象出来形一个唯一的新方法，并且改变现有的地方的代码让他们以一些合适的参数调用这个新的方法。</p>
 <p><strong>参考</strong>：<a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" rel="nofollow" title="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">http://en.wikipedia.org/wiki/Don%27t_repeat_yourself</a></p>
@@ -33,7 +33,7 @@
 </ul>
 <p>和狗的四肢说话？让店员自己从钱包里拿钱？这听起来有点荒唐，不过在我们的代码里这几乎是见怪不怪的事情了。</p>
 <p>对于LoD，正式的表述如下：</p>
-<blockquote><p>对于对象 &#8216;O&#8217; 中一个方法&#8217;M&#8217;，M应该只能够访问以下对象中的方法：</p>
+<blockquote><p>对于对象 ‘O’ 中一个方法’M’，M应该只能够访问以下对象中的方法：</p>
 <ol>
 <li>对象O；</li>
 <li>与O直接相关的Component Object；</li>
@@ -43,7 +43,7 @@
 </blockquote>
 <p>在《Clean Code》一书中，有一段Apache framework中的一段违反了LoD的代码：</p>
 <p style="padding-left: 30px;">final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();</p>
-<p>这么长的一串对其它对象的细节，以及细节的细节，细节的细节的细节&#8230;&#8230;的调用，增加了耦合，使得代码结构复杂、僵化，难以扩展和维护。</p>
+<p>这么长的一串对其它对象的细节，以及细节的细节，细节的细节的细节……的调用，增加了耦合，使得代码结构复杂、僵化，难以扩展和维护。</p>
 <p>在《重构》一书中的代码的环味道中有一种叫做“Feature Envy”(依恋情结），形象的描述了一种违反了LoC的情况。Feature Envy就是说一个对象对其它对象的内容更有兴趣，也就是说老是羡慕别的对象的成员、结构或者功能，大老远的调用人家的东西。这样的结构显然是不合理的。我们的程序应该写得比较“害羞”。不能像前面例子中的那个不把自己当外人的店员一样，拿过客人的钱包自己把钱拿出来。“害羞”的程序只和自己最近的朋友交谈。这种情况下应该调整程序的结构，让那个对象自己拥有它羡慕的feature，或者使用合理的设计模式（例如Facade和Mediator）。</p>
 <p><strong>参考</strong>：<a href="http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge" rel="nofollow" title="http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge">http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge</a></p>
 <h4>面向对象的S.O.L.I.D 原则</h4>
@@ -83,7 +83,7 @@
 <p>CCP则让系统的维护者受益。CCP让包尽可能大（CCP原则加入功能相关的类），CRP则让包尽可能小（CRP原则剔除不使用的类）。它们的出发点不一样，但不相互冲突。</p>
 <p><strong>参考</strong>：<a href="http://c2.com/cgi/wiki?CommonReusePrinciple">http://c2.com/cgi/wiki?CommonReusePrinciple</a></p>
 <h4>Hollywood Principle – 好莱坞原则</h4>
-<p>好莱坞原则就是一句话——“don&#8217;t call us, we&#8217;ll call you.”。意思是，好莱坞的经纪人们不希望你去联系他们，而是他们会在需要的时候来联系你。也就是说，所有的组件都是被动的，所有的组件初始化和调用都由容器负责。组件处在一个容器当中，由容器负责管理。</p>
+<p>好莱坞原则就是一句话——“don’t call us, we’ll call you.”。意思是，好莱坞的经纪人们不希望你去联系他们，而是他们会在需要的时候来联系你。也就是说，所有的组件都是被动的，所有的组件初始化和调用都由容器负责。组件处在一个容器当中，由容器负责管理。</p>
 <p>简单的来讲，就是由容器控制程序之间的关系，而非传统实现中，由程序代码直接操控。这也就是所谓“控制反转”的概念所在：</p>
 <ol>
 <li>不创建对象，而是描述创建对象的方式。</li>
@@ -178,7 +178,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8961.html"><img alt="从面向对象的设计模式看软件设计" height="150" src="https://coolshell.cn/wp-content/uploads/2013/01/kiss-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8961.html">从面向对象的设计模式看软件设计</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7236.html"><img alt="用Unix的设计思想来应对多变的需求" height="150" src="https://coolshell.cn/wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8961.html"><img alt="从面向对象的设计模式看软件设计" height="150" src="../wp-content/uploads/2013/01/kiss-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8961.html">从面向对象的设计模式看软件设计</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="../wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7236.html"><img alt="用Unix的设计思想来应对多变的需求" height="150" src="../wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

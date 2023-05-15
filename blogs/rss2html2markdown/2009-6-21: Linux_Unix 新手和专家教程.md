@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-*![Linux](http://educhoices.org/cimages/multimages/1/linux_tutorials.jpg)*你正在找一些高质量的Linux 和 UNIX 的教程吗？如果是，这篇文章会告诉你到哪去找到这些教程。这里我们将给出超过30个相当的不错的 Linux 和 UNIX 在线的教程。
+*http://educhoices.org/cimages/multimages/1/linux_tutorials.jpg*你正在找一些高质量的Linux 和 UNIX 的教程吗？如果是，这篇文章会告诉你到哪去找到这些教程。这里我们将给出超过30个相当的不错的 Linux 和 UNIX 在线的教程。
 
 
 需要大家注意的是，他们都是英文的，也许有一些也经被翻译到了中文社区，你可以搜索一下。但不管怎么样，我的建议是应该尽可能的去阅读英文。
@@ -113,10 +113,10 @@ Linux 和 UNIX 专家培训教程
 
 ### 相关文章
 
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Linux PID 1 和 Systemd](https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg)](https://coolshell.cn/articles/17998.html)[Linux PID 1 和 Systemd](https://coolshell.cn/articles/17998.html)
-* [![vfork 挂掉的一个问题](https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif)](https://coolshell.cn/articles/12103.html)[vfork 挂掉的一个问题](https://coolshell.cn/articles/12103.html)
-* [![谜题的答案和活动的心得体会](https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
-* [![sed 简明教程](https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png)](https://coolshell.cn/articles/9104.html)[sed 简明教程](https://coolshell.cn/articles/9104.html)
-* [![AWK 简明教程](https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg)](https://coolshell.cn/articles/9070.html)[AWK 简明教程](https://coolshell.cn/articles/9070.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![Linux PID 1 和 Systemd](../wp-content/uploads/2017/07/systemd-1-150x150.jpeg)](https://coolshell.cn/articles/17998.html)[Linux PID 1 和 Systemd](https://coolshell.cn/articles/17998.html)
+* [![vfork 挂掉的一个问题](../wp-content/uploads/2014/11/tux-fork-150x150.gif)](https://coolshell.cn/articles/12103.html)[vfork 挂掉的一个问题](https://coolshell.cn/articles/12103.html)
+* [![谜题的答案和活动的心得体会](../wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
+* [![sed 简明教程](../wp-content/uploads/2013/02/sed-superman-150x150.png)](https://coolshell.cn/articles/9104.html)[sed 简明教程](https://coolshell.cn/articles/9104.html)
+* [![AWK 简明教程](../wp-content/uploads/2013/02/awk-150x150.jpg)](https://coolshell.cn/articles/9070.html)[AWK 简明教程](https://coolshell.cn/articles/9070.html)
 The post [Linux/Unix 新手和专家教程](https://coolshell.cn/articles/1042.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

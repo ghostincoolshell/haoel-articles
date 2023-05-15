@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![Douglas McIlroy](https://coolshell.cn/wp-content/uploads/2009/08/Douglas-McIlroy.jpg "Douglas McIlroy")
+![Douglas McIlroy](../wp-content/uploads/2009/08/Douglas-McIlroy.jpg "Douglas McIlroy")
 
 
 40年前，Unix操作系统横空出世，Unix不仅仅带来了一个操作系统，还创造C语言，Socket，开源，黑客等等文化，这些文化影响着整个计算机世界的文明，直到今天。
@@ -31,7 +31,7 @@ type: post
 
 
 
-![Unix Pipes](https://coolshell.cn/wp-content/uploads/2009/08/pipe.png "Unix Pipes")
+![Unix Pipes](../wp-content/uploads/2009/08/pipe.png "Unix Pipes")
 
 
 全文如下：
@@ -72,10 +72,10 @@ switching.
 
 ### 相关文章
 
-* [![Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg)](https://coolshell.cn/articles/19996.html)[Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/articles/19996.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Linux PID 1 和 Systemd](https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg)](https://coolshell.cn/articles/17998.html)[Linux PID 1 和 Systemd](https://coolshell.cn/articles/17998.html)
-* [![vfork 挂掉的一个问题](https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif)](https://coolshell.cn/articles/12103.html)[vfork 挂掉的一个问题](https://coolshell.cn/articles/12103.html)
-* [![谜题的答案和活动的心得体会](https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
-* [![Unix考古记：一个“遗失”的shell](https://coolshell.cn/wp-content/uploads/2013/04/figure1-150x150.gif)](https://coolshell.cn/articles/9410.html)[Unix考古记：一个“遗失”的shell](https://coolshell.cn/articles/9410.html)
+* [![Unix 50 年：Ken Thompson 的密码](../wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg)](https://coolshell.cn/articles/19996.html)[Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/articles/19996.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![Linux PID 1 和 Systemd](../wp-content/uploads/2017/07/systemd-1-150x150.jpeg)](https://coolshell.cn/articles/17998.html)[Linux PID 1 和 Systemd](https://coolshell.cn/articles/17998.html)
+* [![vfork 挂掉的一个问题](../wp-content/uploads/2014/11/tux-fork-150x150.gif)](https://coolshell.cn/articles/12103.html)[vfork 挂掉的一个问题](https://coolshell.cn/articles/12103.html)
+* [![谜题的答案和活动的心得体会](../wp-content/uploads/2014/08/puzzle-150x150.png)](https://coolshell.cn/articles/11847.html)[谜题的答案和活动的心得体会](https://coolshell.cn/articles/11847.html)
+* [![Unix考古记：一个“遗失”的shell](../wp-content/uploads/2013/04/figure1-150x150.gif)](https://coolshell.cn/articles/9410.html)[Unix考古记：一个“遗失”的shell](https://coolshell.cn/articles/9410.html)
 The post [Unix Pipes 管道原稿](https://coolshell.cn/articles/1351.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

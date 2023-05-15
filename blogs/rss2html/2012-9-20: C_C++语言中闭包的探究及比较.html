@@ -1,9 +1,9 @@
-<p>（<strong><span style="color: #cc0000;">感谢投稿人</span> <a href="http://weibo.com/jasonmblog" target="_blank">@思禽饮霜</a> </strong>）</p>
+<html><body><p>（<strong><span style="color: #cc0000;">感谢投稿人</span> <a href="http://weibo.com/jasonmblog" target="_blank">@思禽饮霜</a> </strong>）</p>
 <p>这里主要讨论的是C语言的扩展特性<a href="http://en.wikipedia.org/wiki/Blocks_(C_language_extension)" target="_blank">block</a>。该特性是Apple为C、C++、Objective-C增加的扩展，让这些语言可以用类Lambda表达式的语法来创建<a href="http://en.wikipedia.org/wiki/Closure_(computer_science)" target="_blank">闭包</a>。前段时间，在对CoreData存取进行封装时（让开发人员可以更简洁快速地写相关代码），我对block机制有了进一步了解，觉得可以和C++ 11中的Lambda表达式相互印证，所以最近重新做了下整理，分享给大家。</p>
 <h4>0. 简单创建匿名函数</h4>
 <p>下面两段代码的作用都是创建匿名函数并调用，输出Hello, World语句。分别使用Objective-C和C++ 11：</p>
-<p><code class="EnlighterJSRAW">^{ printf(&quot;Hello, World!\n&quot;); } ();</code><br />
-<code class="EnlighterJSRAW">[] { cout &lt;&lt; &quot;Hello, World&quot; &lt;&lt; endl; } ();</code></p>
+<p><code class="EnlighterJSRAW">^{ printf("Hello, World!\n"); } ();</code><br/>
+<code class="EnlighterJSRAW">[] { cout &lt;&lt; "Hello, World" &lt;&lt; endl; } ();</code></p>
 <p>Lambda表达式的一个好处就是让开发人员可以在需要的时候临时创建函数，便捷。</p>
 <p>在创建闭包（或者说Lambda函数）的语法上，Objective-C采用的是上尖号<span style="color: #ff0000;">^</span>，而C++ 11采用的是配对的方括号<span style="color: #ff0000;">[]</span>。</p>
 <p>不过“<span style="color: #808000;">匿名函数</span>”一词是针对程序员而言的，编译器还是采取了一定的命名规则。</p>
@@ -15,10 +15,10 @@ int (^maxBlk)(int , int) = ^(int m, int n){ return m &gt; n ? m : n; };
 
 int main(int argc, const char * argv[])
 {
-    ^{ printf(&quot;Hello, World!\n&quot;); } ();
+    ^{ printf("Hello, World!\n"); } ();
 
     int i = 1024;
-    void (^blk)(void) = ^{ printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ printf("%d\n", i); };
     blk();
 
     return 0;
@@ -36,15 +36,15 @@ __main_block_func_1
 <p>在上面的代码中，已经看到“<span style="color: #808000;">匿名函数</span>”可以直接访问外围作用域的变量i：</p>
 <pre class="EnlighterJSRAW">
 int i = 1024;
-void (^blk)(void) = ^{ printf(&quot;%d\n&quot;, i); };
+void (^blk)(void) = ^{ printf("%d\n", i); };
 blk();
 </pre>
-<p>当匿名函数和non-local变量结合起来，就形成了闭包（个人看法）。<br />
+<p>当匿名函数和non-local变量结合起来，就形成了闭包（个人看法）。<br/>
 这一段代码可以成功输出i的值。</p>
 <p>我们把一样的逻辑搬到C++上：</p>
 <pre class="EnlighterJSRAW">
 int i = 1024;
-auto func = [] { printf(&quot;%d\n&quot;, i); };
+auto func = [] { printf("%d\n", i); };
 func();
 </pre>
 <p>GCC会输出：<span style="color: #808000;"><span style="color: #ff0000;">错误</span>：‘i’未被捕获</span>。可见在C++中无法直接捕获外围作用域的变量。</p>
@@ -59,7 +59,7 @@ lambda-introducer : [ lambda-captureopt ]
 [&amp;]       Capture any referenced variable by reference
 [=]       Capture any referenced variable by making a copy
 [=, &amp;foo] Capture any referenced variable by making a copy, but capture variable foo by reference
-[bar]     Capture bar by making a copy; don&#039;t copy anything else
+[bar]     Capture bar by making a copy; don't copy anything else
 [this]    Capture the this pointer of the enclosing class
 </pre>
 <p>根据文法，对代码加以修改，使其能够成功运行：</p>
@@ -76,7 +76,7 @@ using  namespace std;
 int main()
 {
      int i = 1024;
-     auto func = [=] { printf(&quot;%d\n&quot;, i); };
+     auto func = [=] { printf("%d\n", i); };
      func();
 
      return 0;
@@ -84,10 +84,10 @@ int main()
 bash-3.2#
 </pre>
 <h4>2. 从语法上看如何修改外部变量</h4>
-<p>上面代码中使用了符号<span style="color: #ff0000;">=</span>，通过<span style="color: #808000;">拷贝方式</span>捕获了外部变量i。<br />
+<p>上面代码中使用了符号<span style="color: #ff0000;">=</span>，通过<span style="color: #808000;">拷贝方式</span>捕获了外部变量i。<br/>
 但是如果尝试在Lambda表达式中修改变量i：</p>
 <pre class="EnlighterJSRAW">
-auto func = [=] { i = 0; printf(&quot;%d\n&quot;, i); };
+auto func = [=] { i = 0; printf("%d\n", i); };
 </pre>
 <p>会得到错误：</p>
 <pre class="EnlighterJSRAW">
@@ -106,23 +106,23 @@ foo()
 <p>在C++的闭包语法中，如果需要对外部变量的写权限，可以使用符号<span style="color: #ff0000;">&amp;</span>，通过<span style="color: #808000;"><em>引用方式</em></span>捕获：</p>
 <pre class="EnlighterJSRAW">
 int i = 1024;
-auto func = [&amp;] { i = 0; printf(&quot;%d\n&quot;, i); };
+auto func = [&amp;] { i = 0; printf("%d\n", i); };
 func();
 </pre>
 <p>反过来，将修改外部变量的逻辑放到Objective-C代码中：</p>
 <pre class="EnlighterJSRAW">
 int i = 1024;
-void (^blk)(void) = ^{ i = 0; printf(&quot;%d\n&quot;, i); };
+void (^blk)(void) = ^{ i = 0; printf("%d\n", i); };
 blk();
 </pre>
 <p>会得到如下错误：</p>
 <pre class="EnlighterJSRAW">
 main.m:14:29: error: variable is not assignable (missing __block type specifier)
-    void (^blk)(void) = ^{ i++; printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ i++; printf("%d\n", i); };
                            ~^
 1 error generated.
 </pre>
-<p>可见在block的语法中，默认捕获的外部变量也是只读的，如果要修改外部变量，需要使用<span style="color: #ff0000;">__block</span>类型指示符进行修饰。<br />
+<p>可见在block的语法中，默认捕获的外部变量也是只读的，如果要修改外部变量，需要使用<span style="color: #ff0000;">__block</span>类型指示符进行修饰。<br/>
 为什么呢？请继续往下看 ：）</p>
 <h4>3. 从实现上看如何捕获外部变量</h4>
 <p>闭包对于编程语言来说是一种语法糖，包括Block和Lambda，是为了方便程序员开发而引入的。因此，对Block特性的支持会落地在<span style="color: #808000;"><em>编译器前端</em></span>，中间代码将会是C语言。</p>
@@ -131,7 +131,7 @@ main.m:14:29: error: variable is not assignable (missing __block type specifier)
 int main(int argc, const char * argv[])
 {
     int i = 1024;
-    void (^blk)(void) = ^{ printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ printf("%d\n", i); };
     blk();
 
     return 0;
@@ -157,10 +157,10 @@ struct __block_impl {
 <pre class="EnlighterJSRAW">
 static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
     int i = __cself-&gt;i; // bound by copy
-    printf(&quot;%d\n&quot;, i);
+    printf("%d\n", i);
 }
 </pre>
-<p>函数__main_block_func_0引入了参数<span style="color: #808000;">__cself</span>，为struct __main_block_impl_0 *类型，从参数名称就可以看出它的功能类似于C++中的this指针或者Objective-C的self。<br />
+<p>函数__main_block_func_0引入了参数<span style="color: #808000;">__cself</span>，为struct __main_block_impl_0 *类型，从参数名称就可以看出它的功能类似于C++中的this指针或者Objective-C的self。<br/>
 而struct __main_block_impl_0的结构如下：</p>
 <pre class="EnlighterJSRAW">
 struct __main_block_impl_0 {
@@ -203,7 +203,7 @@ int main(int argc, const char * argv[])
 int main(int argc, const char * argv[])
 {
     __block int i = 1024;
-    void (^blk)(void) = ^{ i = 0; printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ i = 0; printf("%d\n", i); };
     blk();
 
     return 0;
@@ -240,7 +240,7 @@ struct __main_block_impl_0 {
 static void __main_block_func_0(struct  __main_block_impl_0 *__cself) {
     __Block_byref_i_0 *i = __cself-&gt;i; // bound by ref
     (i-&gt;__forwarding-&gt;i) = 0; // 看起来很厉害的样子
-    printf(&quot;%d\n&quot;, (i-&gt;__forwarding-&gt;i));
+    printf("%d\n", (i-&gt;__forwarding-&gt;i));
 }
 </pre>
 <p>main函数也有了变动：</p>
@@ -276,9 +276,9 @@ void *testBlock(void *blk);
 
 int main(int argc, const char * argv[])
 {
-    printf(&quot;Before test()\n&quot;);
+    printf("Before test()\n");
     test();
-    printf(&quot;After test()\n&quot;);
+    printf("After test()\n");
 
     sleep(5);
     return 0;
@@ -287,11 +287,11 @@ int main(int argc, const char * argv[])
 void test()
 {
     __block int i = 1024;
-    void (^blk)(void) = ^{ i = 2048; printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ i = 2048; printf("%d\n", i); };
 
     pthread_t thread;
     int ret = pthread_create(&amp;thread, NULL, testBlock, (void *)blk);
-    printf(&quot;thread returns : %d\n&quot;, ret);
+    printf("thread returns : %d\n", ret);
 
     sleep(3); // 这里睡眠1s的话，程序会崩溃
 }
@@ -300,7 +300,7 @@ void *testBlock(void *blk)
 {
     sleep(2);
 
-    printf(&quot;testBlock : Begin to exec blk.\n&quot;);
+    printf("testBlock : Begin to exec blk.\n");
     DemoBlock demoBlk = (DemoBlock)blk;
     demoBlk();
 
@@ -330,11 +330,11 @@ testBlock : Begin to exec blk.
 void test()
 {
     __block int i = 1024;
-    void (^blk)(void) = ^{ i = 2048; printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ i = 2048; printf("%d\n", i); };
 
     pthread_t thread;
     int ret = pthread_create(&amp;thread, NULL, testBlock, (void *)[blk copy]);
-    printf(&quot;thread returns : %d\n&quot;, ret);
+    printf("thread returns : %d\n", ret);
 
     sleep(1);
 }
@@ -343,7 +343,7 @@ void *testBlock(void *blk)
 {
     sleep(2);
 
-    printf(&quot;testBlock : Begin to exec blk.\n&quot;);
+    printf("testBlock : Begin to exec blk.\n");
     DemoBlock demoBlk = (DemoBlock)blk;
     demoBlk();
     [demoBlk release];
@@ -382,11 +382,11 @@ static struct __main_block_desc_0 {
 void test()
 {
     __block int i = 1024;
-    void (^blk)(void) = ^{ i++; printf(&quot;%d\n&quot;, i); };
+    void (^blk)(void) = ^{ i++; printf("%d\n", i); };
 
     pthread_t thread;
     int ret = pthread_create(&amp;thread, NULL, testBlock, (void *)[blk copy]);
-    printf(&quot;thread returns : %d\n&quot;, ret);
+    printf("thread returns : %d\n", ret);
 
     sleep(1);
     blk();
@@ -396,7 +396,7 @@ void *testBlock(void *blk)
 {
     sleep(2);
 
-    printf(&quot;testBlock : Begin to exec blk.\n&quot;);
+    printf("testBlock : Begin to exec blk.\n");
     DemoBlock demoBlk = (DemoBlock)blk;
     demoBlk();
     [demoBlk release];
@@ -445,7 +445,6 @@ testBlock : Begin to exec blk.
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8309.html">C/C++语言中闭包的探究及比较</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8309.html">C/C++语言中闭包的探究及比较</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -59,10 +59,10 @@ Bryan 有超过 [一打的建议](http://www.bryancook.net/2008/06/test-naming
 
 ### 相关文章
 
-* [![如何测试洗牌程序](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/8593.html)[如何测试洗牌程序](https://coolshell.cn/articles/8593.html)
-* [![“单元测试要做多细？”](https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg)](https://coolshell.cn/articles/8209.html)[“单元测试要做多细？”](https://coolshell.cn/articles/8209.html)
-* [![一些杂项资源](https://coolshell.cn/wp-content/uploads/2010/12/ediff-small-150x150.png)](https://coolshell.cn/articles/3437.html)[一些杂项资源](https://coolshell.cn/articles/3437.html)
-* [![两本电子书](https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
-* [![PHP分页技术的代码和示例](https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg)](https://coolshell.cn/articles/5160.html)[PHP分页技术的代码和示例](https://coolshell.cn/articles/5160.html)
-* [![Guido认为程序员大多数工作不需要递归](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/694.html)[Guido认为程序员大多数工作不需要递归](https://coolshell.cn/articles/694.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/8593.html)[如何测试洗牌程序](https://coolshell.cn/articles/8593.html)
+* [![“单元测试要做多细？”](../wp-content/uploads/2012/09/fight-150x150.jpg)](https://coolshell.cn/articles/8209.html)[“单元测试要做多细？”](https://coolshell.cn/articles/8209.html)
+* [![一些杂项资源](../wp-content/uploads/2010/12/ediff-small-150x150.png)](https://coolshell.cn/articles/3437.html)[一些杂项资源](https://coolshell.cn/articles/3437.html)
+* [![两本电子书](../wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg)](https://coolshell.cn/articles/3270.html)[两本电子书](https://coolshell.cn/articles/3270.html)
+* [![PHP分页技术的代码和示例](../wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg)](https://coolshell.cn/articles/5160.html)[PHP分页技术的代码和示例](https://coolshell.cn/articles/5160.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/694.html)[Guido认为程序员大多数工作不需要递归](https://coolshell.cn/articles/694.html)
 The post [一些单元测试的Guideline](https://coolshell.cn/articles/1192.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

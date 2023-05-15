@@ -20,7 +20,7 @@ type: post
 这个示例主要是展示了一个排序的纵向或横向的下拉式菜单导航条。
 
 
-[![menumatic](http://images.sixrevisions.com/2009/04/29-02_menu_matic.jpg)](http://greengeckodesign.com/projects/menumatic/examples/vertical/)
+[http://images.sixrevisions.com/2009/04/29-02_menu_matic.jpg](http://greengeckodesign.com/projects/menumatic/examples/vertical/)
 
 
 [演示页面](http://greengeckodesign.com/projects/menumatic/examples/vertical/)
@@ -33,7 +33,7 @@ type: post
 当鼠标经过的时候，按钮会有下压的感觉。
 
 
-[![Animated Menu using jQuery](http://images.sixrevisions.com/2009/04/29-07_animated_menu.jpg)](http://www.shopdev.co.uk/blog/menuDemo.html)
+[http://images.sixrevisions.com/2009/04/29-07_animated_menu.jpg](http://www.shopdev.co.uk/blog/menuDemo.html)
 
 
 [演示页面](http://www.shopdev.co.uk/blog/menuDemo.html)
@@ -45,7 +45,7 @@ type: post
 [Gaya Kessler](http://www.gayadesign.com/about/) 设计了这样一种卷帘门式导航条，相当的酷。
 
 
-[![Garagedoor Effect using jQuery](http://images.sixrevisions.com/2009/04/29-01_garage_door.jpg)](http://www.gayadesign.com/scripts/jquerygaragedoor/)
+[http://images.sixrevisions.com/2009/04/29-01_garage_door.jpg](http://www.gayadesign.com/scripts/jquerygaragedoor/)
 
 
 [演示页面](http://www.gayadesign.com/scripts/jquerygaragedoor/)
@@ -57,7 +57,7 @@ type: post
 一个独特的平面式菜单，整个菜单可以被随意拖动。
 
 
-[![JGlide Menu](http://images.sixrevisions.com/2009/04/29-18_jglide.jpg)](http://sonicradish.com/labs/jGlideMenu/current/static_demo.html)
+[http://images.sixrevisions.com/2009/04/29-18_jglide.jpg](http://sonicradish.com/labs/jGlideMenu/current/static_demo.html)
 
 
 [演示页面](http://sonicradish.com/labs/jGlideMenu/current/static_demo.html)
@@ -69,7 +69,7 @@ type: post
 [HVDesigns](http://hv-designs.co.uk/) 设计这个下拉式滑动式菜单。
 
 
-[![Sliding jQuery Menu](http://images.sixrevisions.com/2009/04/29-03_verticle_sliding.jpg)](http://www.hv-designs.co.uk/tutorials/sliding_menu/sliding_menu.html)
+[http://images.sixrevisions.com/2009/04/29-03_verticle_sliding.jpg](http://www.hv-designs.co.uk/tutorials/sliding_menu/sliding_menu.html)
 
 
 [演示页面](http://www.hv-designs.co.uk/tutorials/sliding_menu/sliding_menu.html)
@@ -81,7 +81,7 @@ type: post
 这个技术很酷了，有点类似于iPhone，通过鼠标可以滚动导航条。
 
 
-[![Perspective Tabs](http://images.sixrevisions.com/2009/04/29-13_mootools_tabs.jpg)](http://www.mattweltman.com/sliding_tabs.html)
+[http://images.sixrevisions.com/2009/04/29-13_mootools_tabs.jpg](http://www.mattweltman.com/sliding_tabs.html)
 
 
 [演示页面](http://www.mattweltman.com/sliding_tabs.html)
@@ -93,7 +93,7 @@ type: post
 这个digg.com式的下拉菜单只使用了非常小的Javascript代码。
 
 
-[![Vertical Digg-like Menu](http://images.sixrevisions.com/2009/04/29-09_digg_like_menu.jpg)](http://woork.blogspot.com/2008/01/simple-css-vertical-menu-digg-like.html)
+[http://images.sixrevisions.com/2009/04/29-09_digg_like_menu.jpg](http://woork.blogspot.com/2008/01/simple-css-vertical-menu-digg-like.html)
 
 
 ### 8. [LavaLamp](http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers/)
@@ -102,7 +102,7 @@ type: post
 当鼠标经过的时候，菜单项上会有一个小阴影尾随着。以前，这样的技术基本上通过Flash完成的。
 
 
-[![LavaLamp](http://images.sixrevisions.com/2009/04/29-14_mootools_fancy_menu.jpg)](http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers/)
+[http://images.sixrevisions.com/2009/04/29-14_mootools_fancy_menu.jpg](http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers/)
 
 
 ### 9. [鱼眼菜单](http://marcgrabanski.com/pages/code/fisheye-menu)
@@ -111,7 +111,7 @@ type: post
 鼠标经过的时候，图标会变得大起来。这个技术相当不错。
 
 
-[![Fisheye Menu](http://images.sixrevisions.com/2009/04/29-17_fisheye.jpg)](http://marcgrabanski.com/pages/code/fisheye-menu)
+[http://images.sixrevisions.com/2009/04/29-17_fisheye.jpg](http://marcgrabanski.com/pages/code/fisheye-menu)
 
 
 ### 10. [简单的JavaScript折叠式菜单](http://www.dezinerfolio.com/2007/07/19/simple-javascript-accordions/)
@@ -120,7 +120,7 @@ type: post
 相当不错的一相折叠式菜单。
 
 
-[![Simple JavaScript Accordions](http://images.sixrevisions.com/2009/04/29-04_javascript_accordian.jpg)](http://www.dezinerfolio.com/wp-content/uploads/accordemo/01.html)
+[http://images.sixrevisions.com/2009/04/29-04_javascript_accordian.jpg](http://www.dezinerfolio.com/wp-content/uploads/accordemo/01.html)
 
 
 [演示页面](http://www.dezinerfolio.com/wp-content/uploads/accordemo/01.html)
@@ -132,7 +132,7 @@ type: post
 这个特效和第8个很类似。
 
 
-[![Sliding JavaScript Menu Highlight](http://images.sixrevisions.com/2009/04/29-08_highlight_menu.jpg)](http://www.leigeber.com/2008/05/sliding-javascript-menu-highlight-1kb/)
+[http://images.sixrevisions.com/2009/04/29-08_highlight_menu.jpg](http://www.leigeber.com/2008/05/sliding-javascript-menu-highlight-1kb/)
 
 
 ### 12. [高亮式菜单](http://css-tricks.com/learning-jquery-fading-menu-replacing-content/)
@@ -141,7 +141,7 @@ type: post
 鼠标经过的时候，菜单项会高亮起来。而没有鼠标的经过的时候，其是暗淡的。
 
 
-[![Fading Menu - Replacing Content](http://images.sixrevisions.com/2009/04/29-05_fading_menu.jpg)](http://css-tricks.com/examples/MenuFader/)
+[http://images.sixrevisions.com/2009/04/29-05_fading_menu.jpg](http://css-tricks.com/examples/MenuFader/)
 
 
  [演示页面](http://css-tricks.com/examples/MenuFader/)
@@ -153,13 +153,13 @@ type: post
 这是一个教程，教你怎么做这个菜单。
 
 
-[![Simple Multi-level Drop-Down Menu](http://images.sixrevisions.com/2009/04/29-06_multil_level_drop_down.jpg)](http://javascript-array.com/scripts/simple_drop_down_menu/)
+[http://images.sixrevisions.com/2009/04/29-06_multil_level_drop_down.jpg](http://javascript-array.com/scripts/simple_drop_down_menu/)
 
 
 ### 14. [jQuery 制作的背景图动画菜单](http://snook.ca/archives/javascript/jquery-bg-image-animations/)
 
 
-[![Using jQuery for Background Image Animations](http://images.sixrevisions.com/2009/04/29-12_background_position.jpg)](http://snook.ca/technical/jquery-bg/)
+[http://images.sixrevisions.com/2009/04/29-12_background_position.jpg](http://snook.ca/technical/jquery-bg/)
 
 
  [演示页面](http://snook.ca/technical/jquery-bg/)
@@ -171,7 +171,7 @@ type: post
 使用MooTools 制作的一个“鱼眼”式的导航条。
 
 
-[![Mootools Redux](http://images.sixrevisions.com/2009/04/29-10_mootools_demo.jpg)](http://www.chromasynthetic.com/blog/uploads/mootools_nav_example.html)
+[http://images.sixrevisions.com/2009/04/29-10_mootools_demo.jpg](http://www.chromasynthetic.com/blog/uploads/mootools_nav_example.html)
 
 
  [演示页面](http://www.chromasynthetic.com/blog/uploads/mootools_nav_example.html)
@@ -180,7 +180,7 @@ type: post
 ### 16. [折叠式边栏菜单](http://berndmatzner.de/jquery/hoveraccordion/)
 
 
-[![Using jQuery for Background Image Animations](http://images.sixrevisions.com/2009/04/29-11_hover_accordion.jpg)](http://berndmatzner.de/jquery/hoveraccordion/)
+[http://images.sixrevisions.com/2009/04/29-11_hover_accordion.jpg](http://berndmatzner.de/jquery/hoveraccordion/)
 
 
 ### 17. [UvumiTools 式的下拉菜单](http://tools.uvumi.com/dropdown.html)
@@ -189,7 +189,7 @@ type: post
 另一个基于MooTools 制作的下拉菜单。
 
 
-[![UvumiTools Dropdown Menu](http://images.sixrevisions.com/2009/04/29-15_uvumitools%20_menu.jpg)](http://tools.uvumi.com/dropdown.html)
+[http://images.sixrevisions.com/2009/04/29-15_uvumitools%20_menu.jpg](http://tools.uvumi.com/dropdown.html)
 
 
 ### 18. [jQuery UI Tabs](http://stilbuero.de/jquery/tabs_3/)
@@ -198,7 +198,7 @@ type: post
 使用jQuery制作的Tab页.
 
 
-[![jQuery UI Tabs](http://images.sixrevisions.com/2009/04/29-16_jquery_ui_tabs.jpg)](http://stilbuero.de/jquery/tabs_3/)
+[http://images.sixrevisions.com/2009/04/29-16_jquery_ui_tabs.jpg](http://stilbuero.de/jquery/tabs_3/)
 
 
  [演示页面](http://stilbuero.de/jquery/tabs_3/)
@@ -210,7 +210,7 @@ type: post
 使用Prototype 框架制作的右键菜单。
 
 
-[![Proto.Menu: Right Click Menu](http://images.sixrevisions.com/2009/04/29-19_right_click.jpg)](http://yura.thinkweb2.com/scripting/contextMenu/)
+[http://images.sixrevisions.com/2009/04/29-19_right_click.jpg](http://yura.thinkweb2.com/scripting/contextMenu/)
 
 
 ### 20. [展开/收起式菜单](http://www.456bereastreet.com/archive/200705/accessible_expanding_and_collapsing_menu/)
@@ -219,7 +219,7 @@ type: post
 一个支持两层的有点类似于树形的菜单。
 
 
-[![Accessible Expanding and Collapsing menu](http://images.sixrevisions.com/2009/04/29-20_exp_col_menu.jpg)](http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/)
+[http://images.sixrevisions.com/2009/04/29-20_exp_col_menu.jpg](http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/)
 
 
 [演示页面](http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/)
@@ -235,10 +235,10 @@ type: post
 
 ### 相关文章
 
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![Chrome开发者工具的小技巧](https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
-* [![如何读懂并写出装逼的函数式代码](https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg)](https://coolshell.cn/articles/17524.html)[如何读懂并写出装逼的函数式代码](https://coolshell.cn/articles/17524.html)
-* [![函数式编程](https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png)](https://coolshell.cn/articles/10822.html)[函数式编程](https://coolshell.cn/articles/10822.html)
-* [![Lua简明教程](https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif)](https://coolshell.cn/articles/10739.html)[Lua简明教程](https://coolshell.cn/articles/10739.html)
-* [![数据即代码：元驱动编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/10337.html)[数据即代码：元驱动编程](https://coolshell.cn/articles/10337.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![Chrome开发者工具的小技巧](../wp-content/uploads/2017/01/pretty-code-150x150.gif)](https://coolshell.cn/articles/17634.html)[Chrome开发者工具的小技巧](https://coolshell.cn/articles/17634.html)
+* [![如何读懂并写出装逼的函数式代码](../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg)](https://coolshell.cn/articles/17524.html)[如何读懂并写出装逼的函数式代码](https://coolshell.cn/articles/17524.html)
+* [![函数式编程](../wp-content/uploads/2013/12/yoda-lambda-150x150.png)](https://coolshell.cn/articles/10822.html)[函数式编程](https://coolshell.cn/articles/10822.html)
+* [![Lua简明教程](../wp-content/uploads/2013/12/lua-150x150.gif)](https://coolshell.cn/articles/10739.html)[Lua简明教程](https://coolshell.cn/articles/10739.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/10337.html)[数据即代码：元驱动编程](https://coolshell.cn/articles/10337.html)
 The post [20个优秀的Javascript导航技术](https://coolshell.cn/articles/918.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

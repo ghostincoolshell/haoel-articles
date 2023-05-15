@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright size-sup_wechat_big wp-image-20925" height="200" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-360x200.jpg" width="360" />总是有很多很多人来问我对Rust语言怎么看的问题，在各种地方被at，其实，我不是很想表达我的想法。因为在不同的角度，你会看到不同的东西。编程语言这个东西，老实说很难评价，在学术上来说，Lisp就是很好的语言，然而在工程使用的时候，你会发现Lisp没什么人用，而Javascript或是PHP这样在学术很糟糕设计的语言反而成了主流，你觉得C++很反人类，在我看来，C++有很多不错的设计，而且对于了解编程语言和编译器的和原理非常有帮助。<strong>但是C++也很危险，所以，出现在像Java或Go 语言来改善它，Rust本质上也是在改善C++的。他们各自都有各自的长处和优势</strong>。</p>
+<html><body><p><img alt="" class="alignright size-sup_wechat_big wp-image-20925" height="200" src="../wp-content/uploads/2020/03/rust-social-wide-360x200.jpg" width="360"/>总是有很多很多人来问我对Rust语言怎么看的问题，在各种地方被at，其实，我不是很想表达我的想法。因为在不同的角度，你会看到不同的东西。编程语言这个东西，老实说很难评价，在学术上来说，Lisp就是很好的语言，然而在工程使用的时候，你会发现Lisp没什么人用，而Javascript或是PHP这样在学术很糟糕设计的语言反而成了主流，你觉得C++很反人类，在我看来，C++有很多不错的设计，而且对于了解编程语言和编译器的和原理非常有帮助。<strong>但是C++也很危险，所以，出现在像Java或Go 语言来改善它，Rust本质上也是在改善C++的。他们各自都有各自的长处和优势</strong>。</p>
 <p>因为各个语言都有好有不好，因此，我不想用别的语言来说Rust的问题，或是把Rust吹成朵花以打压别的语言，写成这样的文章，是很没有营养的事。<strong>本文主要想通过Rust的语言设计来看看编程中的一些挑战，尤其是Rust重要的一些编程范式，这样反而更有意义一些，因为这样你才可能一通百通</strong>。</p>
 <p>这篇文章的篇幅比较长，而且有很多代码，信息量可能会非常大，所以，<strong>在读本文前，你需要有如下的知识准备</strong>：</p>
 <ul>
@@ -150,8 +150,8 @@ impl Render {
 <li>Rust编译器不让我们在成员方法中把成员Move走，因为 <code>self</code> 引用就不完整了。</li>
 <li>Rust要我们实现 <code>Copy</code> Trait，但是我们不想要拷贝，因为我们就是想把 <code>next_buffer</code> move 到 <code>current_buffer</code> 中</li>
 </ul>
-<p>我们想要同时 Move 两个变量，参数 <code>buf</code> move 到 <code>next_buffer</code> 的同时，还要把 <code>next_buffer</code> 里的东西 move 到 <code>current_buffer</code> 中。 我们需要一个“杂耍”的技能。<br />
-<img alt="" class="aligncenter size-full wp-image-20872" height="264" src="https://coolshell.cn/wp-content/uploads/2020/03/indy.gif" width="500" /></p>
+<p>我们想要同时 Move 两个变量，参数 <code>buf</code> move 到 <code>next_buffer</code> 的同时，还要把 <code>next_buffer</code> 里的东西 move 到 <code>current_buffer</code> 中。 我们需要一个“杂耍”的技能。<br/>
+<img alt="" class="aligncenter size-full wp-image-20872" height="264" src="../wp-content/uploads/2020/03/indy.gif" width="500"/></p>
 <p>这个需要动用 <code>std::mem::replace(&amp;dest, src)</code> 函数了， 这个函数技把 <code>src</code> 的值 move 到 <code>dest</code> 中，然后把 <code>dest</code> 再返回出来（这其中使用了 unsafe 的一些底层骚操作才能完成）。Anyway，最终是这样实现的：</p>
 <pre class="EnlighterJSRAW">use std::mem::replace
 fn update_buffer(&amp; mut self, buf : String) { 
@@ -187,7 +187,7 @@ let (long_str, short_str) = order_string(str1.as_str(), str2);
 
 println!(" long={} nshort={} ", long_str, short_str);
 </pre>
-<p>我们有两个字符串，<code>str1</code> 和 <code>str2</code> 我们想通过函数 <code>order_string()</code> 把这两个字串符返回成 <code>long_str</code> 和 <code>short_str</code>  这样方便后面的代码进行处理。这是一段很常见的处理代码的示例。然而，你会发现，这段代码编译不过。编译器会告诉你，<code>order_string()</code> 返回的 引用类型 <code>&amp;str</code> 需要一个 lifetime的参数 &#8211; “ expected lifetime parameter”。这是因为Rust编译无法通过观察静态代码分析返回的两个引用返回值，到底是<code>(s1, s2)</code> 还是 <code>(s2, s1)</code> ，因为这是运行时决定的。所以，返回值的两个参数的引用没法确定其生命周期到底是跟 <code>s1</code> 还是跟 <code>s2</code>，这个时候，编译器就不知道了。</p>
+<p>我们有两个字符串，<code>str1</code> 和 <code>str2</code> 我们想通过函数 <code>order_string()</code> 把这两个字串符返回成 <code>long_str</code> 和 <code>short_str</code>  这样方便后面的代码进行处理。这是一段很常见的处理代码的示例。然而，你会发现，这段代码编译不过。编译器会告诉你，<code>order_string()</code> 返回的 引用类型 <code>&amp;str</code> 需要一个 lifetime的参数 – “ expected lifetime parameter”。这是因为Rust编译无法通过观察静态代码分析返回的两个引用返回值，到底是<code>(s1, s2)</code> 还是 <code>(s2, s1)</code> ，因为这是运行时决定的。所以，返回值的两个参数的引用没法确定其生命周期到底是跟 <code>s1</code> 还是跟 <code>s2</code>，这个时候，编译器就不知道了。</p>
 <h5>生命周期</h5>
 <p>如果你的代码是下面这个样子，编程器可以自己推导出来，函数 <code>foo()</code> 的参数和返回值都是一个引用，他们的生命周期是一样的，所以，也就可以编译通过。</p>
 <pre class="EnlighterJSRAW">fn foo (s: &amp;mut String) -&gt; &amp;String {
@@ -378,7 +378,7 @@ if let Some(val) = Rc::get_mut(&amp;mut strong) {
 *Rc::make_mut(&amp;mut strong) = 555;
 </pre>
 <p>如果不这样做，就会出现很多内存不安全的情况。<strong>这些小细节一定要注意，不然你的代码怎么运作的你会一脸蒙逼的</strong>。</p>
-<p>嗯，如果你想更快乐地使用智能指针，这里还有个选择 &#8211; <code>Cell</code> 和 <code>RefCell</code>，它们弥补了 Rust 所有权机制在灵活性上和某些场景下的不足。他们提供了 <code>set()</code>/<code>get()</code> 以及 <code>borrow()</code>/<code>borrow_mut()</code> 的方法，让你的程序更灵活，而不会被限制得死死的。参看下面的示例。</p>
+<p>嗯，如果你想更快乐地使用智能指针，这里还有个选择 – <code>Cell</code> 和 <code>RefCell</code>，它们弥补了 Rust 所有权机制在灵活性上和某些场景下的不足。他们提供了 <code>set()</code>/<code>get()</code> 以及 <code>borrow()</code>/<code>borrow_mut()</code> 的方法，让你的程序更灵活，而不会被限制得死死的。参看下面的示例。</p>
 <pre class="EnlighterJSRAW">use std::cell::Cell;
 use std::cell::RefCell
 
@@ -497,7 +497,7 @@ for i in v.iter() {
    println!("{}", i.to_string() );
 }</pre>
 <h5>向下转型</h5>
-<p>但是，在C++中，多态的类型是抽象类型，我们还想把其转成实际的具体类型，在C++中叫运行进实别RTTI，需要使用像 <code>type_id</code> 或是 <code>dynamic_cast</code> 这两个技术。在Rust中，转型是使用 &#8216;<code>as</code>&#8216; 关键字，然而，这是编译时识别，不是运行时。那么，在Rust中是怎么做呢？</p>
+<p>但是，在C++中，多态的类型是抽象类型，我们还想把其转成实际的具体类型，在C++中叫运行进实别RTTI，需要使用像 <code>type_id</code> 或是 <code>dynamic_cast</code> 这两个技术。在Rust中，转型是使用 ‘<code>as</code>‘ 关键字，然而，这是编译时识别，不是运行时。那么，在Rust中是怎么做呢？</p>
 <p>嗯，这里需要使用 Rust 的 <code>std::any::Any</code> 这个东西，这个东西就可以使用 <code>downcast_ref</code> 这个东西来进行具体类型的转换。于是我们要对现有的代码进行改造。</p>
 <p>首先，先得让 <code>IShape</code> 继承于 <code>Any</code> ，并增加一个 <code>as_any()</code> 的转型接口。</p>
 <pre class="EnlighterJSRAW">use std::any::Any;
@@ -638,7 +638,6 @@ println!("{:?}", v);</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7992.html"><img alt="C++的坑真的多吗？" height="150" src="https://coolshell.cn/wp-content/uploads/2012/08/cpp_small-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7992.html">C++的坑真的多吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5576.html"><img alt="那些曾伴我走过编程之路的软件" height="150" src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5576.html">那些曾伴我走过编程之路的软件</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4905.html"><img alt="语言的数据亲和力" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7992.html"><img alt="C++的坑真的多吗？" height="150" src="../wp-content/uploads/2012/08/cpp_small-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7992.html">C++的坑真的多吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5576.html"><img alt="那些曾伴我走过编程之路的软件" height="150" src="../wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5576.html">那些曾伴我走过编程之路的软件</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4905.html"><img alt="语言的数据亲和力" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

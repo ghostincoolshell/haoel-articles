@@ -45,10 +45,10 @@ type: post
 
 ### 相关文章
 
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![Android将允许纯C/C++开发应用](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/3549.html)[Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html)
-* [![Google App Inventor ](https://coolshell.cn/wp-content/uploads/2010/07/androidappinventor-150x150.jpg)](https://coolshell.cn/articles/2608.html)[Google App Inventor](https://coolshell.cn/articles/2608.html)
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
-* [![DHH 谈混合移动应用开发](https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/3549.html)[Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html)
+* [![Google App Inventor ](../wp-content/uploads/2010/07/androidappinventor-150x150.jpg)](https://coolshell.cn/articles/2608.html)[Google App Inventor](https://coolshell.cn/articles/2608.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
+* [![DHH 谈混合移动应用开发](../wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
 The post [关于 Chrome OS 的一些推论](https://coolshell.cn/articles/1152.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

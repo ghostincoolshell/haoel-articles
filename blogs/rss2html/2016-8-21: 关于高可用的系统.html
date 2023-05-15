@@ -1,4 +1,4 @@
-<p><img alt="HighAvailability-BK" class="alignright size-medium wp-image-17475" height="300" src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-300x300.png" width="300" />在《<a href="https://coolshell.cn/articles/17446.html" target="_blank">这多年来我一直在钻研的技术</a>》这篇文章中，我讲述了一下，我这么多年来一直在关注的技术领域，其中我多次提到了工业级的软件，我还以为有很多人会问我怎么定义工业级？以及一个高可用性的软件系统应该要怎么干出来？这样我也可以顺理成章的写下这篇文章，但是没有人问，那么，我只好厚颜无耻的自己写下这篇文章了。哈哈。</p>
+<html><body><p><img alt="HighAvailability-BK" class="alignright size-medium wp-image-17475" height="300" src="../wp-content/uploads/2016/08/HighAvailability-BK-300x300.png" width="300"/>在《<a href="https://coolshell.cn/articles/17446.html" target="_blank">这多年来我一直在钻研的技术</a>》这篇文章中，我讲述了一下，我这么多年来一直在关注的技术领域，其中我多次提到了工业级的软件，我还以为有很多人会问我怎么定义工业级？以及一个高可用性的软件系统应该要怎么干出来？这样我也可以顺理成章的写下这篇文章，但是没有人问，那么，我只好厚颜无耻的自己写下这篇文章了。哈哈。</p>
 <p>另外，我在一些讨论高可用系统的地方看到大家只讨论各个公司的技术方案，<strong>其实，高可用的系统并不简单的是技术方案，一个高可用的系统其实还包括很多别的东西，所以，我觉得大家对高可用的系统了解的还不全面，为了让大家的认识更全面，所以，我写下这篇文章</strong>。</p>
 <h4>理解高可用系统</h4>
 <p>首先，我们需要理解什么是高可用，英文叫High Availability（<a href="https://en.wikipedia.org/wiki/High_availability">Wikipedia词条</a>），基本上来说，就是要让我们的计算环境（包括软硬件）做到full-time的可用性。在设计上一般来说，需要做好如下的设计：</p>
@@ -25,7 +25,7 @@
 </ul>
 <h4>高可用系统的技术解决方案</h4>
 <p>我在《<a href="https://coolshell.cn/articles/10910.html" target="_blank">分布式系统的事务处理</a>》中引用过下面这个图：这个图来自来自：Google App Engine的co-founder Ryan Barrett在2009年的Google I/O上的演讲《<a href="http://snarfed.org/transactions_across_datacenters_io.html" target="_blank">Transaction Across DataCenter</a>》（视频： <a href="http://www.youtube.com/watch?v=srOgpXECblk" target="_blank" title="阿里旺旺无法确定该链接的安全性">http://www.youtube.com/watch?v=srOgpXECblk</a>）</p>
-<p><img alt="Transaction Across DataCenter" class="size-full wp-image-10942 aligncenter" height="255" src="https://coolshell.cn/wp-content/uploads/2014/01/Transaction-Across-DataCenter.jpg" width="566" /></p>
+<p><img alt="Transaction Across DataCenter" class="size-full wp-image-10942 aligncenter" height="255" src="../wp-content/uploads/2014/01/Transaction-Across-DataCenter.jpg" width="566"/></p>
 <p>这个图基本上来说是目前高可用系统中能看得到的所有的解决方案的基础了。M/S、MM实现起来不难，但是会有很多问题，2PC的问题就是性能不行，而Paxos的问题就是太复杂，实现难度太大。</p>
 <p>总结一下各个高可用方案的的问题：</p>
 <ul>
@@ -36,7 +36,7 @@
 <p>另外，现今开源软件中，很多缓存，消息中间件或数据库都有持久化和Replication的设计，从而也都有高可用解决方案，但是开源软件一般都没有比较高的SLA，所以，如果我们使用开源软件的话，需要注意这一点。</p>
 <h4>高可用技术方案的示例</h4>
 <p>下面，我们来看一下MySQL的高可用的方案的SLA（下图下面红色的标识表示了这个方案有几个9）：</p>
-<p><a href="http://www.slideshare.net/andrewjamesmorgan/mysql-high-availability-solutions-feb-2015-webinar"><img alt="mysql-high-availability-solutions-feb-2015-webinar-9-638" class="aligncenter size-full wp-image-17461" height="359" src="https://coolshell.cn/wp-content/uploads/2016/08/mysql-high-availability-solutions-feb-2015-webinar-9-638.jpg" width="638" /></a></p>
+<p><a href="http://www.slideshare.net/andrewjamesmorgan/mysql-high-availability-solutions-feb-2015-webinar"><img alt="mysql-high-availability-solutions-feb-2015-webinar-9-638" class="aligncenter size-full wp-image-17461" height="359" src="../wp-content/uploads/2016/08/mysql-high-availability-solutions-feb-2015-webinar-9-638.jpg" width="638"/></a></p>
 <p style="text-align: center;">图片来源：<a href="http://www.slideshare.net/andrewjamesmorgan/mysql-high-availability-solutions-feb-2015-webinar">MySQL High Availability Solutions</a></p>
 <p>简单解释一下MySQL的这几个方案（主要是想表达一个越多的9就越复杂）</p>
 <ul>
@@ -108,16 +108,16 @@
 <p>简而言之，SLA的几个9就是能持续提供可用服务的级别，不过，工业界中，会把服务不可用的因素分成两种：一种是有计划的，一种是无计划的。</p>
 <h5>无计划的宕机原因</h5>
 <p>下图来自Oracle的 《<a href="https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshavdtl.htm">High Availability Concepts and Best Practices</a>》</p>
-<p>&nbsp;</p>
-<h5><img alt="unplaned_downtime" class="aligncenter size-full wp-image-17467" height="602" src="https://coolshell.cn/wp-content/uploads/2016/08/unplaned_downtime.gif" width="600" />有计划的宕机原因</h5>
+<p> </p>
+<h5><img alt="unplaned_downtime" class="aligncenter size-full wp-image-17467" height="602" src="../wp-content/uploads/2016/08/unplaned_downtime.gif" width="600"/>有计划的宕机原因</h5>
 <p>下图来自Oracle的 《<a href="https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshavdtl.htm">High Availability Concepts and Best Practices</a>》</p>
-<p><img alt="planned_downtime" class="aligncenter size-full wp-image-17466" height="356" src="https://coolshell.cn/wp-content/uploads/2016/08/planned_downtime.gif" width="600" /></p>
-<p>&nbsp;</p>
+<p><img alt="planned_downtime" class="aligncenter size-full wp-image-17466" height="356" src="../wp-content/uploads/2016/08/planned_downtime.gif" width="600"/></p>
+<p> </p>
 <p>我们可以看到，上面的宕机原因包括如下：</p>
 <p>无计划的</p>
 <ul>
-<li>系统级的故障 &#8211;  包括主机、操作系统、中间件、数据库、网络、电源以及外围设备</li>
-<li>数据和中介的故障 &#8211; 包括人员误操作、硬盘故障、数据乱了</li>
+<li>系统级的故障 –  包括主机、操作系统、中间件、数据库、网络、电源以及外围设备</li>
+<li>数据和中介的故障 – 包括人员误操作、硬盘故障、数据乱了</li>
 <li>还有：自然灾害、人为破坏、以及供电问题。</li>
 </ul>
 <p>有计划的</p>
@@ -164,7 +164,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17680.html"><img alt="从Gitlab误删除数据库想到的" height="150" src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17680.html">从Gitlab误删除数据库想到的</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10910.html"><img alt="分布式系统的事务处理" height="150" src="https://coolshell.cn/wp-content/uploads/2014/01/trade-off-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10910.html">分布式系统的事务处理</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6775.html"><img alt="Bret Victor &#8211; Inventing on Principle" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6775.html">Bret Victor &#8211; Inventing on Principle</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17459.html">关于高可用的系统</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17680.html"><img alt="从Gitlab误删除数据库想到的" height="150" src="../wp-content/uploads/2017/02/gitlab-600-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17680.html">从Gitlab误删除数据库想到的</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10910.html"><img alt="分布式系统的事务处理" height="150" src="../wp-content/uploads/2014/01/trade-off-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10910.html">分布式系统的事务处理</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="../wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6775.html"><img alt="Bret Victor – Inventing on Principle" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6775.html">Bret Victor – Inventing on Principle</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17459.html">关于高可用的系统</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

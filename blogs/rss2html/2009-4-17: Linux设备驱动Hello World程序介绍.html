@@ -1,4 +1,4 @@
-<p>by Valerie Henson<br />
+<html><body><p>by Valerie Henson<br/>
 07/05/2007</p>
 <p>(<strong>译者注：本文的例子是只能在linux的2.6内核下使用的，2.6以上的内核，译者没有做过实验，2.4是要修改make文件才能运行</strong>。)</p>
 <p>本文的出处：<a href="http://www.linuxdevcenter.com/pub/a/linux/2007/07/05/devhelloworld-a-simple-introduction-to-device-drivers-under-linux.html?page=1">这里</a></p>
@@ -34,10 +34,10 @@ $ make menuconfig</pre>
 <p>当编译完成后，可以调用如下命令安装你的内核</p>
 <p><code class="EnlighterJSRAW">$ sudo tar -C / -xvf linux-&lt;version&gt;.tar</code></p>
 <p>在标准位置建立的到内核源代码的链接</p>
-<p><code class="EnlighterJSRAW">$ sudo ln -s &lt;location of top-level source directory&gt; /lib/modules/&#039;uname -r&#039;/build</code></p>
+<p><code class="EnlighterJSRAW">$ sudo ln -s &lt;location of top-level source directory&gt; /lib/modules/'uname -r'/build</code></p>
 <p>现在已经内核源代码已经可以用于编译内核模块了，重启你的机器以使得你根据新内核程序编译的内核可以被装载。</p>
-<h4>使用printk()函数打印&#8221;Hello World&#8221;</h4>
-<p>我们的第一个内核模块，我们将以一个在内核中使用函数printk()打印&#8221;Hello world&#8221;的内核模块为开始。printk是内核中的printf函数。printk的输出打印在内核的消息缓存kernel message buffer并拷贝到/var/log/messages(关于拷贝的变化依赖于如何配置syslogd)</p>
+<h4>使用printk()函数打印”Hello World”</h4>
+<p>我们的第一个内核模块，我们将以一个在内核中使用函数printk()打印”Hello world”的内核模块为开始。printk是内核中的printf函数。printk的输出打印在内核的消息缓存kernel message buffer并拷贝到/var/log/messages(关于拷贝的变化依赖于如何配置syslogd)</p>
 <p>下载<a href="http://www.linuxdevcenter.com/linux/2007/07/05/examples/hello_printk.tar.gz">hello_printk</a> 模块的tar包 并解包：</p>
 <p><code class="EnlighterJSRAW">$ tar xzvf hello_printk.tar.gz</code></p>
 <p>这个包中包含两个文件:Makefile，里面包含如何创建内核模块的指令和一个包含内核模块源代码的hello_printk.c文件。首先，我们将简要的过一下这个Makefile 文件。</p>
@@ -67,11 +67,11 @@ default:
 <pre class="EnlighterJSRAW">
 static int __init
 hello_init(void){
-    printk(&quot;Hello, world!n&quot;);
+    printk("Hello, world!n");
     return 0;
 }
 </pre>
-<p>这是内核模块的初始化函数，这个函数在内核模块初始化被装载的时候调用。__init关键字告诉内核这个代码只会被运行一次，而且是在内核装载的时候。printk()函数这一行将打印一个&#8221;Hello, world&#8221;到内核消息缓存。printk参数的形式在大多数情况和printf(3)一模一样。</p>
+<p>这是内核模块的初始化函数，这个函数在内核模块初始化被装载的时候调用。__init关键字告诉内核这个代码只会被运行一次，而且是在内核装载的时候。printk()函数这一行将打印一个”Hello, world”到内核消息缓存。printk参数的形式在大多数情况和printf(3)一模一样。</p>
 <pre class="EnlighterJSRAW">
 module_init(hello_init); 
 module_init()
@@ -80,16 +80,16 @@ module_init()
 <pre class="EnlighterJSRAW">
 static void __exit
 hello_exit(void){
-    printk(&quot;Goodbye, world!n&quot;);
+    printk("Goodbye, world!n");
 }
 module_exit(hello_exit);
 </pre>
 <p>同样地，退出函数也只在内核模块被卸载的时候会运行一次，module_exit()宏标示了退出函数。__exit关键字告诉内核这段代码只在内核模块被卸载的时候运行一次。</p>
 <pre class="EnlighterJSRAW">
-MODULE_LICENSE(&quot;GPL&quot;);
-MODULE_AUTHOR(&quot;Valerie Henson val@nmt.edu&quot;);
-MODULE_DESCRIPTION(&quot;Hello, world!&quot; minimal module&quot;);
-MODULE_VERSION(&quot;printk&quot;);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Valerie Henson val@nmt.edu");
+MODULE_DESCRIPTION("Hello, world!" minimal module");
+MODULE_VERSION("printk");
 MODULE_LICENSE()
 </pre>
 <p>宏告诉内核，内核模块代码在什么样的license之下，这将影响主那些符号(函数和变量，等等)可以访问主内核。GPLv2 下的模块(如同本例子中)能访问所有的符号。某些内核模块license将会损害内核开源的特性，这些license指示内核将装载一些非公开或不受信的代码。如果内核模块不使用MODULE_LICENSE()宏，就被假定为非GPLv2的，这会损害内核的开源特性，并且大部分Linux内核开发人员都会忽略来自受损内核的bug报告，因为他们无法访问所有的源代码，这使得调试变得更加困难。剩下的MODULE_*()这些宏以标准格式提供有用的标示该内核模块的信息(译者注：这里意思是，你必须使用GPLv2的license，否则你的驱动程序很有可能得不到Linux社区的开发者的支持 ：）)</p>
@@ -103,7 +103,7 @@ $ make
 $ sudo insmod ./hello_printk.ko  
 $ dmesg | tail
 </pre>
-<p>你将从dmesg的屏幕输出中看见&#8221;Hello world!&#8221;信息。现在卸载使用rmmod卸载内核模块，并检查退出信息。</p>
+<p>你将从dmesg的屏幕输出中看见”Hello world!”信息。现在卸载使用rmmod卸载内核模块，并检查退出信息。</p>
 <pre class="EnlighterJSRAW">
 $ sudo rmmod hello_printk  
 $ dmesg | tail
@@ -117,7 +117,7 @@ $ dmesg | tail
 #include &lt;linux/module.h&gt;
 #include &lt;linux/proc_fs.h&gt;
 </pre>
-<p>这次，我们将增加一个proc_fs头文件，这个头文件包括驱动注册到/proc文件系统的支持。当另外一个进程调用read()时，下一个函数将会被调用。这个函数的实现比一个完整的普通内核驱动的read系统调用实现要简单的多，因为我们仅做了让&#8221;Hello world&#8221;这个字符串缓存被一次读完。</p>
+<p>这次，我们将增加一个proc_fs头文件，这个头文件包括驱动注册到/proc文件系统的支持。当另外一个进程调用read()时，下一个函数将会被调用。这个函数的实现比一个完整的普通内核驱动的read系统调用实现要简单的多，因为我们仅做了让”Hello world”这个字符串缓存被一次读完。</p>
 <pre class="EnlighterJSRAW">
 static int
 hello_read_proc(char *buffer, char **start,off_t offset,
@@ -126,8 +126,8 @@ hello_read_proc(char *buffer, char **start,off_t offset,
 </pre>
 <p>这个函数的参数值得明确的解释一下。buffer是指向内核缓存的指针，我们将把read输出的内容写到这个buffer中。start参数多用更复杂的/proc文件；我们在这里将忽略这个参数；并且我只明确的允许offset这个的值为0。size是指buffer中包含多字节数；我们必须检查这个参数已避免出现内存越界的情况，eof参数一个EOF的简写，用于返回文件是否已经读到结束，而不需要通过调用read返回0来判断文件是否结束。这里我们不讨论依靠更复杂的/proc文件传输数据的方法。这个函数方法体罗列如下：</p>
 <pre class="EnlighterJSRAW">
-    char *hello_str = &quot;Hello, world!\n&quot;;
-    int len = strlen(hello_str); /* Don&#039;t include the null byte. */
+    char *hello_str = "Hello, world!\n";
+    int len = strlen(hello_str); /* Don't include the null byte. */
     /*     * We only support reading the whole string at once.     */
     if (size &lt; len)
         return&lt; -EINVAL;
@@ -148,13 +148,13 @@ hello_read_proc(char *buffer, char **start,off_t offset,
 static int __init
 hello_init(void){
     /*
-    * Create an entry in /proc named &quot;hello_world&quot; that calls
+    * Create an entry in /proc named "hello_world" that calls
     * hello_read_proc() when the file is read.
     */
-    if (create_proc_read_entry(&quot;hello_world&quot;, 0, 
+    if (create_proc_read_entry("hello_world", 0, 
                         NULL, hello_read_proc, NULL) == 0) {
         printk(KERN_ERR
-        &quot;Unable to register &quot;Hello, world!&quot; proc filen&quot;);
+        "Unable to register "Hello, world!" proc filen");
         return -ENOMEM;
     }
     return 0;
@@ -165,13 +165,13 @@ module_init(hello_init);
 <pre class="EnlighterJSRAW">
 static void __exit
 hello_exit(void){
-    remove_proc_entry(&quot;hello_world&quot;, NULL);
+    remove_proc_entry("hello_world", NULL);
 }
 module_exit(hello_exit);
-MODULE_LICENSE(&quot;GPL&quot;);
-MODULE_AUTHOR(&quot;Valerie Henson val@nmt.edu&quot;);
-MODULE_DESCRIPTION(&quot;&quot;Hello, world!&quot; minimal module&quot;);
-MODULE_VERSION(&quot;proc&quot;);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Valerie Henson val@nmt.edu");
+MODULE_DESCRIPTION(""Hello, world!" minimal module");
+MODULE_VERSION("proc");
 </pre>
 <p>下面我们将准备编译和装载模组</p>
 <pre class="EnlighterJSRAW">
@@ -179,14 +179,14 @@ $ cd hello_proc
 $ make  
 $ sudo insmod ./hello_proc.ko
 </pre>
-<p>现在，将会有一个称为/proc/hello_world的文件，并且读这个文件的，将会返回一个&#8221;Hello world&#8221;字符串。</p>
+<p>现在，将会有一个称为/proc/hello_world的文件，并且读这个文件的，将会返回一个”Hello world”字符串。</p>
 <pre class="EnlighterJSRAW">
 $ cat /proc/hello_world
 Hello, world!
 </pre>
 <p>你可以为为同一个驱动程序创建多个/proc文件，并增加相应写/proc文件的函数，创建包含多个/proc文件的目录，或者更多的其他操作。如果要写比这个更复杂的驱动程序，可以使用seq_file函数集来编写是更安全和容易的。关于这些更多的信息可以看<a href="http://lwn.net/Articles/22355/">《Driver porting: The seq_file interface》</a></p>
 <h4>Hello, World! 使用 /dev/hello_world</h4>
-<p>现在我们将使用在/dev目录下的一个设备文件/dev/hello_world实现&#8221;Hello,world!&#8221; 。追述以前的日子，设备文件是通过MAKEDEV脚本调用mknod命令在/dev目录下产生的一个特定的文件，这个文件和设备是否运行在改机器上无关。到后来设备文件使用了devfs，devfs在设备第一被访问的时候创建/dev文件，这样将会导致很多有趣的加锁问题和多次打开设备文件的检查设备是否存在的重试问题。当前的/dev版本支持被称为udev，因为他将在用户程序空间创建到/dev的符号连接。当内核模块注册设备时，他们将出现在sysfs文件系统中，并mount在/sys下。一个用户空间的程序，udev,注意到/sys下的改变将会根据在/etc/udev/下的一些规则在/dev下创建相关的文件项。</p>
+<p>现在我们将使用在/dev目录下的一个设备文件/dev/hello_world实现”Hello,world!” 。追述以前的日子，设备文件是通过MAKEDEV脚本调用mknod命令在/dev目录下产生的一个特定的文件，这个文件和设备是否运行在改机器上无关。到后来设备文件使用了devfs，devfs在设备第一被访问的时候创建/dev文件，这样将会导致很多有趣的加锁问题和多次打开设备文件的检查设备是否存在的重试问题。当前的/dev版本支持被称为udev，因为他将在用户程序空间创建到/dev的符号连接。当内核模块注册设备时，他们将出现在sysfs文件系统中，并mount在/sys下。一个用户空间的程序，udev,注意到/sys下的改变将会根据在/etc/udev/下的一些规则在/dev下创建相关的文件项。</p>
 <p>下载<a href="http://www.linuxdevcenter.com/linux/2007/07/05/examples/hello_dev.tar.gz">hello world</a>内核模块的gzip的tar包，我们将开始先看一下hello_dev.c这个源文件。</p>
 <pre class="EnlighterJSRAW">
 #include &lt;linux/fs.h&gt;
@@ -195,12 +195,12 @@ Hello, world!
 #include &lt;linux/module.h&gt;
 #include &lt;asm/uaccess.h&gt;
 </pre>
-<p>正如我们看到的必须的头文件外，创建一个新设备还需要更多的内核头文件支持。fs.sh包含所有文件操作的结构，这些结构将由设备驱动程序来填值，并关联到我们相关的/dev文件。miscdevice.h头文件包含了对通用miscellaneous设备文件注册的支持。 asm/uaccess.h包含了测试我们是否违背访问权限读写用户内存空间的函数。hello_read将在其他进程在/dev/hello调用read()函数被调用的是一个函数。他将输出&#8221;Hello world!&#8221;到由read()传入的缓存。</p>
+<p>正如我们看到的必须的头文件外，创建一个新设备还需要更多的内核头文件支持。fs.sh包含所有文件操作的结构，这些结构将由设备驱动程序来填值，并关联到我们相关的/dev文件。miscdevice.h头文件包含了对通用miscellaneous设备文件注册的支持。 asm/uaccess.h包含了测试我们是否违背访问权限读写用户内存空间的函数。hello_read将在其他进程在/dev/hello调用read()函数被调用的是一个函数。他将输出”Hello world!”到由read()传入的缓存。</p>
 <pre class="EnlighterJSRAW">
 static ssize_t hello_read(struct file * file, char * buf, size_t count, loff_t *ppos)
 {
-    char *hello_str = &quot;Hello, world!n&quot;;
-    int len = strlen(hello_str); /* Don&#039;t include the null byte. */
+    char *hello_str = "Hello, world!n";
+    int len = strlen(hello_str); /* Don't include the null byte. */
     /*     * We only support reading the whole string at once.     */
     if (count &lt; len)
         return -EINVAL;
@@ -235,14 +235,14 @@ static const struct file_operations hello_fops = {
 <pre class="EnlighterJSRAW">
 static struct miscdevice hello_dev = {
     /*
-    * We don&#039;t care what minor number we end up with, so tell the
+    * We don't care what minor number we end up with, so tell the
     * kernel to just pick one.
     */
     MISC_DYNAMIC_MINOR,
     /*     
     * Name ourselves /dev/hello.     
     */
-    &quot;hello&quot;,
+    "hello",
     /*     
     * What functions to call when a program performs file
     * operations on the device.
@@ -256,14 +256,14 @@ static int __init
 hello_init(void){
     int ret;
     /*
-    * Create the &quot;hello&quot; device in the /sys/class/misc directory.
+    * Create the "hello" device in the /sys/class/misc directory.
     * Udev will automatically create the /dev/hello device using
     * the default rules.
     */
     ret = misc_register(&amp;hello_dev);
     if (ret)
         printk(KERN_ERR
-            &quot;Unable to register &quot;Hello, world!&quot; misc devicen&quot;);
+            "Unable to register "Hello, world!" misc devicen");
     return ret;
 }
 module_init(hello_init);
@@ -275,10 +275,10 @@ hello_exit(void){
     misc_deregister(&amp;hello_dev);
 }
 module_exit(hello_exit);
-MODULE_LICENSE(&quot;GPL&quot;);
-MODULE_AUTHOR(&quot;Valerie Henson val@nmt.edu&gt;&quot;);
-MODULE_DESCRIPTION(&quot;&quot;Hello, world!&quot; minimal module&quot;);
-MODULE_VERSION(&quot;dev&quot;);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Valerie Henson val@nmt.edu&gt;");
+MODULE_DESCRIPTION(""Hello, world!" minimal module");
+MODULE_VERSION("dev");
 </pre>
 <p>编译并加载模块:</p>
 <pre class="EnlighterJSRAW">
@@ -286,7 +286,7 @@ $ cd hello_dev
 $ make  
 $ sudo insmod ./hello_dev.ko
 </pre>
-<p>现在我们将有一个称为/dev/hello的设备文件，并且这个设备文件被root访问时将会产生一个&#8221;Hello, world!&#8221;</p>
+<p>现在我们将有一个称为/dev/hello的设备文件，并且这个设备文件被root访问时将会产生一个”Hello, world!”</p>
 <pre class="EnlighterJSRAW">
 $ sudo cat /dev/hello
  Hello, world!
@@ -303,15 +303,15 @@ $ ls -l
 <p>这是有默认的udev规则导致的，这个条规将标明当一个普通设备出现时，他的名字将会是/dev/，并且默认的访问权限是0660(用户和组读写访问，其他用户无法访问)。我们在真实情况中可能会希望创建一个被普通用户访问的设备驱动程序，并且给这个设备起一个相应的连接名。为达到这个目的，我们将编写一条udev规则。</p>
 <p>udev规则必须做两件事情：第一创建一个符号连接，第二修改设备的访问权限。</p>
 <p>下面这条规则可以达到这个目的：</p>
-<p><code class="EnlighterJSRAW">KERNEL==&quot;hello&quot;, SYMLINK+=&quot;hello_world&quot;, MODE=&quot;0444&quot;</code></p>
-<p>我们将详细的分解这条规则，并解释每一个部分。KERNEL==&#8221;hello&#8221; 标示下面的的规则将作用于/sys中设备名字&#8221;hello&#8221;的设备(==是比较符)。hello 设备是我们通过调用misc_register()并传递了一个包含设备名为&#8221;hello&#8221;的文件操作结构file_operations为参数而达到的。你可以自己通过如下的命令在/sys下查看</p>
+<p><code class="EnlighterJSRAW">KERNEL=="hello", SYMLINK+="hello_world", MODE="0444"</code></p>
+<p>我们将详细的分解这条规则，并解释每一个部分。KERNEL==”hello” 标示下面的的规则将作用于/sys中设备名字”hello”的设备(==是比较符)。hello 设备是我们通过调用misc_register()并传递了一个包含设备名为”hello”的文件操作结构file_operations为参数而达到的。你可以自己通过如下的命令在/sys下查看</p>
 <pre class="EnlighterJSRAW">
 $ ls -d /sys/class/misc/hello//sys/class/misc/hello/
 </pre>
-<p>SYMLINK+=&#8221;hello_world&#8221; 的意思是在符号链接列表中增加 (+= 符号的意思着追加)一个hello_world ，这个符号连接在设备出现时创建。在我们场景下，我们知道我们的列表的中的只有这个符号连接，但是其他设备驱动程序可能会存在多个不同的符号连接，因此使用将设备追加入到符号列表中，而不是覆盖列表将会是更好的实践中的做法。</p>
-<p>MODE=&#8221;0444&#8243;的意思是原始的设备的访问权限是0444,这个权限允许用户，组，和其他用户可以访问。</p>
+<p>SYMLINK+=”hello_world” 的意思是在符号链接列表中增加 (+= 符号的意思着追加)一个hello_world ，这个符号连接在设备出现时创建。在我们场景下，我们知道我们的列表的中的只有这个符号连接，但是其他设备驱动程序可能会存在多个不同的符号连接，因此使用将设备追加入到符号列表中，而不是覆盖列表将会是更好的实践中的做法。</p>
+<p>MODE=”0444″的意思是原始的设备的访问权限是0444,这个权限允许用户，组，和其他用户可以访问。</p>
 <p>通常，使用正确的操作符号(==, +=, or =)是非常重要的，否则将会出现不可预知的情况。</p>
-<p>现在我们理解这个规则是怎么工作的，让我们将其安装在/etc/udev目录下。udev规则文件以和System V初始脚本目录命名的同种方式的目录下，/etc/udeve/rules.d这个目录，并以字母/数字的顺序。和System V的初始化脚本一样，/etc/udev/rules.d下的目录通常符号连接到真正的文件，通过使用符号连接名，将使得规则文件已正确的次序得到执行。<br />
+<p>现在我们理解这个规则是怎么工作的，让我们将其安装在/etc/udev目录下。udev规则文件以和System V初始脚本目录命名的同种方式的目录下，/etc/udeve/rules.d这个目录，并以字母/数字的顺序。和System V的初始化脚本一样，/etc/udev/rules.d下的目录通常符号连接到真正的文件，通过使用符号连接名，将使得规则文件已正确的次序得到执行。<br/>
 使用如下的命令，拷贝hello.rules文件从/hello_dev目录到/etc/udev目录下，并创建一一个最先被执行的规则文件链接在/etc/udev/rules.d目录下。</p>
 <pre class="EnlighterJSRAW">
 $ sudo cp hello.rules /etc/udev/  
@@ -349,7 +349,6 @@ Hello, world!
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 &#8211; Shell 篇" height="150" src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 &#8211; Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/566.html">Linux设备驱动Hello World程序介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/566.html">Linux设备驱动Hello World程序介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-1024x191.png)
+![](../wp-content/uploads/2020/12/go.line_.-1024x191.png)
 
 
 本篇文章，我们着重介绍Go编程中的Pipeline模式。对于Pipeline用过Unix/Linux命令行的人都不会陌生，他是一种把各种命令拼接起来完成一个更强功能的技术方法。在今天，流式处理，函数式编程，以及应用网关对微服务进行简单的API编排，其实都是受pipeline这种技术方式的影响，Pipeline这种技术在可以很容易的把代码按单一职责的原则拆分成多个高内聚低耦合的小模块，然后可以很方便地拼装起来去完成比较复杂的功能。
@@ -304,7 +304,7 @@ func merge(cs []<-chan int) <-chan int {
 用图片表示一下，整个程序的结构如下所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2020/12/pipeline-1024x425.png)
+![](../wp-content/uploads/2020/12/pipeline-1024x425.png)
 
 
 #### 延伸阅读
@@ -334,10 +334,10 @@ func merge(cs []<-chan int) <-chan int {
 
 ### 相关文章
 
-* [![Go编程模式 ： 泛型编程](https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
-* [![Go 编程模式：k8s Visitor 模式](https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png)](https://coolshell.cn/articles/21263.html)[Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html)
-* [![Go编程模式：委托和反转控制](https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
-* [![Go 编程模式：Go Generation](https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png)](https://coolshell.cn/articles/21179.html)[Go 编程模式：Go Generation](https://coolshell.cn/articles/21179.html)
-* [![Go编程模式：Map-Reduce](https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png)](https://coolshell.cn/articles/21164.html)[Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html)
-* [![Go 编程模式：Functional Options](https://coolshell.cn/wp-content/uploads/2020/12/go.options-150x150.png)](https://coolshell.cn/articles/21146.html)[Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html)
+* [![Go编程模式 ： 泛型编程](../wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
+* [![Go 编程模式：k8s Visitor 模式](../wp-content/uploads/2020/12/go.k8s-150x150.png)](https://coolshell.cn/articles/21263.html)[Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html)
+* [![Go编程模式：委托和反转控制](../wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
+* [![Go 编程模式：Go Generation](../wp-content/uploads/2020/12/go.generate-150x150.png)](https://coolshell.cn/articles/21179.html)[Go 编程模式：Go Generation](https://coolshell.cn/articles/21179.html)
+* [![Go编程模式：Map-Reduce](../wp-content/uploads/2020/12/go.map_.reduce-150x150.png)](https://coolshell.cn/articles/21164.html)[Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html)
+* [![Go 编程模式：Functional Options](../wp-content/uploads/2020/12/go.options-150x150.png)](https://coolshell.cn/articles/21146.html)[Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html)
 The post [Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

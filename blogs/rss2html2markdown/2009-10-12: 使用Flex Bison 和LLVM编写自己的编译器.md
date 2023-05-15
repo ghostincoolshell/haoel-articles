@@ -80,7 +80,7 @@ type: post
 一个编译器是由一组有三个到四个组件(还有一些子组件)构成，数据以管道的方式从一个组件输入并流向下一个组件。在我们这个编译器中，可能会用到一些稍微不同的工具。下面这个图展示了我们构造一个编译器的步骤，和每个步骤中将使用的工具。
 
 
-![Compiler Pipeline](http://gnuu.org/wp-content/uploads/2009/09/pipeline.png) 
+![Compiler Pipeline](../wp-content/uploads/2009/09/pipeline.png) 
 
 
 从上图你可以看到在Linking这一步是灰掉的。我们的语言将不支持编译器的连接(很多的语言都不支持编译器的连接)。在文法分析阶段，我们将使用开源工具Lex，即如今的[Flex](http://flex.sourceforge.net/)，文法分析一般都伴随者语法分析，我们使用的语法分析工具将会是Yacc，或者说是[Bison](http://www.gnu.org/software/bison/)，最后一旦语义分析完成，我们将遍历我们的抽象语法树，并生成我们的”bytecode 字节码”，或”机器码 matchine code”。做这一步，我们将使用[LLVM](http://llvm.org/)，它能生成快速字节码，我们将使用LLVM的JIT(Just In Tinme)来在我们的机器上编译执行它
@@ -204,7 +204,7 @@ extern "C" int yywrap() { }
 
 文本形式字符串，例如”int x”代表了我们语言的文本形式，和这个类似，抽象语法树AST则代表了我们语言在内存中的表现形式一样(在语言在组装成而进程码之前)。正因如此，我们要在把这些插入在语法分析中的数据结构首先设计好。这个过程是非常直接的，因为我们为语法中的每个语义单元创建了一个结构。方法声明、方法调用，变量声明，引用，这些都构成了抽象语法树的节点。我们语言的抽象语法树的节点如下图：  
 
-![Our Toy Language AST](http://gnuu.org/wp-content/uploads/2009/09/ClassDiagram.png)  
+![Our Toy Language AST](../wp-content/uploads/2009/09/ClassDiagram.png)  
 
 上图的C++代码如下：  
 
@@ -960,10 +960,10 @@ Code was run.
 
 ### 相关文章
 
-* [![Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/wp-content/uploads/2009/11/250px-ChallengerCrew-150x150.jpg)](https://coolshell.cn/articles/1654.html)[Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/articles/1654.html)
-* [![两个C++的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg)](https://coolshell.cn/articles/2365.html)[两个C++的资源](https://coolshell.cn/articles/2365.html)
-* [![MySQL: InnoDB 还是 MyISAM?](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/652.html)[MySQL: InnoDB 还是 MyISAM?](https://coolshell.cn/articles/652.html)
-* [![13个不错的Javascript和CSS的菜单](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/1660.html)[13个不错的Javascript和CSS的菜单](https://coolshell.cn/articles/1660.html)
-* [![扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/7448.html)[扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/articles/7448.html)
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![Richard Feynman, 挑战者号, 软件工程](../wp-content/uploads/2009/11/250px-ChallengerCrew-150x150.jpg)](https://coolshell.cn/articles/1654.html)[Richard Feynman, 挑战者号, 软件工程](https://coolshell.cn/articles/1654.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg](https://coolshell.cn/articles/2365.html)[两个C++的资源](https://coolshell.cn/articles/2365.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/652.html)[MySQL: InnoDB 还是 MyISAM?](https://coolshell.cn/articles/652.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/1660.html)[13个不错的Javascript和CSS的菜单](https://coolshell.cn/articles/1660.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/7448.html)[扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/articles/7448.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
 The post [使用Flex Bison 和LLVM编写自己的编译器](https://coolshell.cn/articles/1547.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

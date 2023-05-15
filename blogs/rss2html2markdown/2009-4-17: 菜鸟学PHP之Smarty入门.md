@@ -48,11 +48,11 @@ type: post
 
 　　模版引擎的运作原理，首先我们先看看以下的运行图：  
 
-　　 　![](http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.31.13.1.gif)  
+　　 　http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.31.13.1.gif  
 
 　　一般的模版引擎 (如 PHPLib) 都是在建立模版对象时取得要解析的模版，然后把变量套入后，透过 parse() 这个方法来解析模版，最后再将网页输出。  
 
-　　 　![](http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.38.13.2.gif)  
+　　 　http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.38.13.2.gif  
 
 　　对 Smarty 的使用者来说，程序里也不需要做任何 parse 的动作了，这些 Smarty 自动会帮我们做。而且已经编译过的网页，如果模版没有变动的话， Smarty 就自动跳过编译的动作，直接执行编译过的网页，以节省编译的时间。  
 
@@ -122,7 +122,7 @@ type: post
 
 　　以笔者在[Windows](http://windows.chinaitlab.com/)安装Appserv为例，程序的主资料夹是「d:\appserv\web\demo\」。安装好Smarty后，我们在主资料夹下再建立这样的资料夹：  
 
-　　 　![](http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.46.13.3.gif)  
+　　 　http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.46.13.3.gif  
 
 　　在 Linux 底下，请记得将 templates\_c 的权限变更为 777 。Windows 下则将其只读取消。  
 
@@ -212,7 +212,7 @@ type: post
 
 　　请打开浏览器，输入 http://localhost/demo/test.php 试试看(依您的环境决定网址)，应该会看到以下的画面：  
 
-　　 　![](http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.52.13.4.gif)  
+　　 　http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.52.13.4.gif  
 
 　　再到 templates\_c 底下，我们会看到一个奇怪的资料夹 (%%179) ，再点选下去也是一个奇怪的资料夹 (%%1798044067) ，而其中有一个档案：  
 
@@ -311,7 +311,7 @@ type: post
 
 　　上面我们也提到 main.php ，这是整个程序的主要核心，不论是常数定义、外部程序加载、共享变量建立等，都是在这里开始的。所以之后的模块都只要将这个档案包含进来就可以啦。因此在程序流程规划期间，就必须好好构思 main.php 中应该要放那些东西；当然利用 include 或 require 指令，把每个环节清楚分离是再好不过了。  
 
-　　 　![](http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.59.13.5.gif)  
+　　 　http://linux.chinaitlab.com/imgfiles/2005.11.30.14.32.59.13.5.gif  
 
 　　在上节提到的 Smarty 程序 5 步骤， main.php 就会帮我们先将前 3 个步骤做好，后面的模块程序只要做后面两个步骤就可以了。  
 
@@ -945,10 +945,10 @@ type: post
 
 ### 相关文章
 
-* [![9个强大免费的PHP库](https://coolshell.cn/wp-content/uploads/2009/04/akismet-150x150.jpg)](https://coolshell.cn/articles/455.html)[9个强大免费的PHP库](https://coolshell.cn/articles/455.html)
-* [![代码执行的效率](https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg)](https://coolshell.cn/articles/7886.html)[代码执行的效率](https://coolshell.cn/articles/7886.html)
-* [![一些文章和各种资源](https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
-* [![PHP分页技术的代码和示例](https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg)](https://coolshell.cn/articles/5160.html)[PHP分页技术的代码和示例](https://coolshell.cn/articles/5160.html)
-* [![开源中最好的Web开发的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
-* [![Web开发人员速查卡](https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg)](https://coolshell.cn/articles/3684.html)[Web开发人员速查卡](https://coolshell.cn/articles/3684.html)
+* [![9个强大免费的PHP库](../wp-content/uploads/2009/04/akismet-150x150.jpg)](https://coolshell.cn/articles/455.html)[9个强大免费的PHP库](https://coolshell.cn/articles/455.html)
+* [![代码执行的效率](../wp-content/uploads/2012/07/muxnt-150x150.jpg)](https://coolshell.cn/articles/7886.html)[代码执行的效率](https://coolshell.cn/articles/7886.html)
+* [![一些文章和各种资源](../wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
+* [![PHP分页技术的代码和示例](../wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg)](https://coolshell.cn/articles/5160.html)[PHP分页技术的代码和示例](https://coolshell.cn/articles/5160.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
+* [![Web开发人员速查卡](../wp-content/uploads/2011/02/1128-150x150.jpg)](https://coolshell.cn/articles/3684.html)[Web开发人员速查卡](https://coolshell.cn/articles/3684.html)
 The post [菜鸟学PHP之Smarty入门](https://coolshell.cn/articles/559.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

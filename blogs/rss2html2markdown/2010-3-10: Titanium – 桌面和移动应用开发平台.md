@@ -11,7 +11,7 @@ type: post
 *[文章来源 www.readwriteweb.com](http://www.readwriteweb.com/archives/titanium_10_launches_build_native_apps_for_desktop_mobile_ipad.php)*
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/03/PROD_tit_mobile.png)](https://coolshell.cn/wp-content/uploads/2010/03/PROD_tit_mobile.png)
+[![](../wp-content/uploads/2010/03/PROD_tit_mobile.png)](https://coolshell.cn/wp-content/uploads/2010/03/PROD_tit_mobile.png)
 
 
 2010年3月8日，Appcelerator 公司发布了 Titanium 的 1.0 版本。 Titanium 是一个桌面和移动应用程序开发平台，基于此平台，开发人员可以使用标准的 WEB 技术如 HTML，JavaScript，和 CSS 来开发桌面和移动应用程序。
@@ -39,10 +39,10 @@ Titanium 支持的平台包括： PC， Mac，Linux，最新版本则支持 iPho
 
 ### 相关文章
 
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![ C++11 中值得关注的几大变化（详解）](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg)](https://coolshell.cn/articles/5265.html) [C++11 中值得关注的几大变化（详解）](https://coolshell.cn/articles/5265.html)
-* [![Internet 技术演变图](https://coolshell.cn/wp-content/uploads/2009/07/Internet-150x150.jpg)](https://coolshell.cn/articles/1178.html)[Internet 技术演变图](https://coolshell.cn/articles/1178.html)
-* [![对技术的态度](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/8088.html)[对技术的态度](https://coolshell.cn/articles/8088.html)
-* [![某Python实现的尾部递归](https://coolshell.cn/wp-content/uploads/2009/04/snake-150x150.jpg)](https://coolshell.cn/articles/737.html)[某Python实现的尾部递归](https://coolshell.cn/articles/737.html)
-* [![Unix传奇(上篇)](https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg](https://coolshell.cn/articles/5265.html) [C++11 中值得关注的几大变化（详解）](https://coolshell.cn/articles/5265.html)
+* [![Internet 技术演变图](../wp-content/uploads/2009/07/Internet-150x150.jpg)](https://coolshell.cn/articles/1178.html)[Internet 技术演变图](https://coolshell.cn/articles/1178.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/8088.html)[对技术的态度](https://coolshell.cn/articles/8088.html)
+* [![某Python实现的尾部递归](../wp-content/uploads/2009/04/snake-150x150.jpg)](https://coolshell.cn/articles/737.html)[某Python实现的尾部递归](https://coolshell.cn/articles/737.html)
+* [![Unix传奇(上篇)](../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
 The post [Titanium – 桌面和移动应用开发平台](https://coolshell.cn/articles/2117.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

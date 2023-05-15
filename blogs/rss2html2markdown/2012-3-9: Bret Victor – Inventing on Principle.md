@@ -72,10 +72,10 @@ Bret通过这些例子继续强调——他并不是要大家样做，他只是�
 
 ### 相关文章
 
-* [![API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
-* [![从Gitlab误删除数据库想到的](https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg)](https://coolshell.cn/articles/17680.html)[从Gitlab误删除数据库想到的](https://coolshell.cn/articles/17680.html)
-* [![关于高可用的系统](https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png)](https://coolshell.cn/articles/17459.html)[关于高可用的系统](https://coolshell.cn/articles/17459.html)
-* [![IoC/DIP其实是一种管理思想](https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg)](https://coolshell.cn/articles/9949.html)[IoC/DIP其实是一种管理思想](https://coolshell.cn/articles/9949.html)
-* [![Bret Victor – Learnable Programming](https://coolshell.cn/wp-content/uploads/2012/10/Learnable_Programming-150x150.jpg)](https://coolshell.cn/articles/8387.html)[Bret Victor – Learnable Programming](https://coolshell.cn/articles/8387.html)
-* [![多些时间能少写些代码](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/5686.html)[多些时间能少写些代码](https://coolshell.cn/articles/5686.html)
+* [![API设计原则 – Qt官网的设计实践总结](../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
+* [![从Gitlab误删除数据库想到的](../wp-content/uploads/2017/02/gitlab-600-150x150.jpg)](https://coolshell.cn/articles/17680.html)[从Gitlab误删除数据库想到的](https://coolshell.cn/articles/17680.html)
+* [![关于高可用的系统](../wp-content/uploads/2016/08/HighAvailability-BK-150x150.png)](https://coolshell.cn/articles/17459.html)[关于高可用的系统](https://coolshell.cn/articles/17459.html)
+* [![IoC/DIP其实是一种管理思想](../wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg)](https://coolshell.cn/articles/9949.html)[IoC/DIP其实是一种管理思想](https://coolshell.cn/articles/9949.html)
+* [![Bret Victor – Learnable Programming](../wp-content/uploads/2012/10/Learnable_Programming-150x150.jpg)](https://coolshell.cn/articles/8387.html)[Bret Victor – Learnable Programming](https://coolshell.cn/articles/8387.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/5686.html)[多些时间能少写些代码](https://coolshell.cn/articles/5686.html)
 The post [Bret Victor – Inventing on Principle](https://coolshell.cn/articles/6775.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

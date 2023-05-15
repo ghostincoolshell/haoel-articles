@@ -1,4 +1,4 @@
-<p>之前发表了《<strong>6个变态的C语言Hello World程序</strong>》[<a href="https://coolshell.cn/articles/914.html" target="_blank">酷壳链接</a>] [<a href="http://blog.csdn.net/haoel/archive/2009/05/26/4217565.aspx" target="_blank">CSDN链接</a>]，主要是是像大家展示了一些C语言的变态玩法。也向大家展示了一下程序是可以写得让人看不懂的，在那篇文章中，可以看到很多人的留言，很多人都觉得很好玩，是的，那本来是用来<span style="color: #000000;">供朋友们“消遣作乐”，供娱乐娱东而已，不必太过认真。</span></p>
+<html><body><p>之前发表了《<strong>6个变态的C语言Hello World程序</strong>》[<a href="https://coolshell.cn/articles/914.html" target="_blank">酷壳链接</a>] [<a href="http://blog.csdn.net/haoel/archive/2009/05/26/4217565.aspx" target="_blank">CSDN链接</a>]，主要是是像大家展示了一些C语言的变态玩法。也向大家展示了一下程序是可以写得让人看不懂的，在那篇文章中，可以看到很多人的留言，很多人都觉得很好玩，是的，那本来是用来<span style="color: #000000;">供朋友们“消遣作乐”，供娱乐娱东而已，不必太过认真。</span></p>
 <p>不过，通过这种极端的写法，大家可以看到源代码都可以写得那么复杂难懂的。大家也许在赞叹之余一笑了之，而我则希望，大家能够在娱乐以后认真思考一下，你不要以为咱们自己不会把代码搞得那么复杂，只不过没有像那6个Hello World一样那么极端，不过，说句老实话，<strong>咱们每个程序都有把清晰的程序搞得一团混乱的潜能，只不过程度不一样罢了，我并不是在这里危言耸听，大家好自为之</strong>。</p>
 <p>下面是一个Step by Step的教程，教你如何把一个清晰的代码变得复杂难懂的。当然，这只是一个“简明教程”了。还是那句话——“<span style="color: #800000;">本文仅供朋友们“消遣作乐”，如果你要觉得有意思的话，顶个贴。如果你觉得没什么意思的话，一笑了之。仅供娱乐而已，不必太过认真。</span>”</p>
 <p><span id="more-933"></span></p>
@@ -15,7 +15,7 @@ void primes(int cap)
             composite += !(i % j);
         }
         if(!composite){
-            printf(&quot;%dt&quot;, i);
+            printf("%dt", i);
         }
     }
 }
@@ -40,7 +40,7 @@ void primes(int cap)
         else if(!j)
             composite = j;
         else if(j == i &amp;&amp; !composite)
-            printf(&quot;%dt&quot;,i);
+            printf("%dt",i);
         else if(j &gt; 1 &amp;&amp; j &lt; i)
             composite += !(i % j);
     }
@@ -64,7 +64,7 @@ void primes(int cap, int t, int composite)
     else if(!j)
         primes(cap,t+1,j);
     else if(j == i &amp;&amp; !composite)
-        (printf(&quot;%dt&quot;,i), primes(cap,t+1,composite));
+        (printf("%dt",i), primes(cap,t+1,composite));
     else if(j &gt; 1 &amp;&amp; j &lt; i)
         primes(cap,t+1, composite + !(i % j));
     else if(t &lt; cap * cap)
@@ -85,7 +85,7 @@ void primes(int m, int t, int c)
     i = t / m;
     j = t % m;
     (i &lt;= 1) ? primes(m,t+1,c) : (!j) ? primes(m,t+1,j) : (j == i &amp;&amp; !c) ?
-    (printf(&quot;%dt&quot;,i), primes(m,t+1,c)) : (j &gt; 1 &amp;&amp; j &lt; i) ?
+    (printf("%dt",i), primes(m,t+1,c)) : (j &gt; 1 &amp;&amp; j &lt; i) ?
     primes(m,t+1,c + !(i % j)) : (t &lt; m * m) ? primes(m,t+1,c) : 0;
 }
 
@@ -100,7 +100,7 @@ int main()
 void primes(int m, int t, int c)
 {
   ((t / m) &lt;= 1) ? primes(m,t+1,c) : !(t % m) ? primes(m,t+1, t % m) :
-  ((t % m)==(t / m) &amp;&amp; !c) ? (printf(&quot;%dt&quot;,(t / m)), primes(m,t+1,c)) :
+  ((t % m)==(t / m) &amp;&amp; !c) ? (printf("%dt",(t / m)), primes(m,t+1,c)) :
   ((t % m)&gt; 1 &amp;&amp; (t % m) &lt; (t / m)) ? primes(m,t+1,c + !((t / m) % (t % m))) :
   (t &lt; m * m) ? primes(m,t+1,c) : 0;
 }
@@ -116,7 +116,7 @@ int main()
 void _(int __, int ___, int ____)
 {
     ((___ / __) &lt;= 1) ? _(__,___+1,____) : !(___ % __) ? _(__,___+1,___ % __) :
-    ((___ % __)==(___ / __) &amp;&amp; !____) ? (printf(&quot;%dt&quot;,(___ / __)),
+    ((___ % __)==(___ / __) &amp;&amp; !____) ? (printf("%dt",(___ / __)),
     _(__,___+1,____)) : ((___ % __) &gt; 1 &amp;&amp; (___ % __) &lt; (___ / __)) ?
     _(__,___+1,____ + !((___ / __) % (___ % __))) : (___ &lt; __ * __) ?
     _(__,___+1,____) : 0;
@@ -133,7 +133,7 @@ int main()
 void _(int __, int ___, int ____, int _____)
 {
     ((___ / __) &lt;= _____) ? _(__,___+_____,____,_____) : !(___ % __) ? _(__,___+_____,___ % __, _____) :
-    ((___ % __)==(___ / __) &amp;&amp; !____) ? (printf(&quot;%dt&quot;,(___ / __)),
+    ((___ % __)==(___ / __) &amp;&amp; !____) ? (printf("%dt",(___ / __)),
     _(__,___+_____,____,_____)) : ((___ % __) &gt; _____ &amp;&amp; (___ % __) &lt; (___ / __)) ?
     _(__,___+_____,____,_____ + !((___ / __) % (___ % __))) : (___ &lt; __ * __) ?
     _(__,___+_____,____,_____) : 0;
@@ -159,7 +159,6 @@ int main() {
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/933.html">如何加密/混乱C源代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/933.html">如何加密/混乱C源代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

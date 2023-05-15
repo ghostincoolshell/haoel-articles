@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![filter](https://coolshell.cn/wp-content/uploads/2015/04/filter.png)前面，我们介绍了[Linux Namespace](https://coolshell.cn/articles/17010.html "Docker基础技术：Linux Namespace")，但是Namespace解决的问题主要是环境隔离的问题，这只是虚拟化中最最基础的一步，我们还需要解决对计算机资源使用上的隔离。也就是说，虽然你通过Namespace把我Jail到一个特定的环境中去了，但是我在其中的进程使用用CPU、内存、磁盘等这些计算资源其实还是可以随心所欲的。所以，我们希望对进程进行资源利用上的限制或控制。这就是Linux CGroup出来了的原因。
+![filter](../wp-content/uploads/2015/04/filter.png)前面，我们介绍了[Linux Namespace](https://coolshell.cn/articles/17010.html "Docker基础技术：Linux Namespace")，但是Namespace解决的问题主要是环境隔离的问题，这只是虚拟化中最最基础的一步，我们还需要解决对计算机资源使用上的隔离。也就是说，虽然你通过Namespace把我Jail到一个特定的环境中去了，但是我在其中的进程使用用CPU、内存、磁盘等这些计算资源其实还是可以随心所欲的。所以，我们希望对进程进行资源利用上的限制或控制。这就是Linux CGroup出来了的原因。
 
 
 Linux CGroup全称Linux Control Group， 是Linux内核的一个功能，用来限制，控制与分离一个进程组群的资源（如CPU、内存、磁盘输入输出等）。这个项目最早是由Google的工程师在2006年发起（主要是Paul Menage和Rohit Seth），最早的名称为进程容器（process containers）。在2007年时，因为在Linux内核中，容器（container）这个名词太过广泛，为避免混乱，被重命名为cgroup，并且被合并到2.6.24版的内核中去。然后，其它开始了他的发展。
@@ -495,10 +495,10 @@ cpuset cpu cpuacct memory devices freezer net_cls blkio perf_event net_prio huge
 
 ### 相关文章
 
-* [![记一次Kubernetes/Docker网络排障](https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
-* [![Docker基础技术：DeviceMapper](https://coolshell.cn/wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
-* [![Docker基础技术：AUFS](https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
-* [![Docker基础技术：Linux Namespace（上）](https://coolshell.cn/wp-content/uploads/2015/04/isolation-150x150.jpg)](https://coolshell.cn/articles/17010.html)[Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html)
-* [![Docker基础技术：Linux Namespace（下）](https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
-* [![eBPF 介绍](https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
+* [![记一次Kubernetes/Docker网络排障](../wp-content/uploads/2018/12/docker-networking-1-150x150.png)](https://coolshell.cn/articles/18654.html)[记一次Kubernetes/Docker网络排障](https://coolshell.cn/articles/18654.html)
+* [![Docker基础技术：DeviceMapper](../wp-content/uploads/2015/08/how_to_set_up_an_iSCSI_LUN_with_thin-150x150.jpg)](https://coolshell.cn/articles/17200.html)[Docker基础技术：DeviceMapper](https://coolshell.cn/articles/17200.html)
+* [![Docker基础技术：AUFS](../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png)](https://coolshell.cn/articles/17061.html)[Docker基础技术：AUFS](https://coolshell.cn/articles/17061.html)
+* [![Docker基础技术：Linux Namespace（上）](../wp-content/uploads/2015/04/isolation-150x150.jpg)](https://coolshell.cn/articles/17010.html)[Docker基础技术：Linux Namespace（上）](https://coolshell.cn/articles/17010.html)
+* [![Docker基础技术：Linux Namespace（下）](../wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
+* [![eBPF 介绍](../wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
 The post [Docker基础技术：Linux CGroup](https://coolshell.cn/articles/17049.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

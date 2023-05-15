@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright wp-image-22176" height="183" src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-300x169.png" width="325" /></p>
+<html><body><p><img alt="" class="alignright wp-image-22176" height="183" src="../wp-content/uploads/2022/02/http_method-300x169.png" width="325"/></p>
 <p>写这篇文章的原因主要还是因为V2EX上的这个<a href="https://www.v2ex.com/t/830030?p=1" rel="noopener" target="_blank">贴子</a>，这个贴子中说——</p>
 <blockquote><p>“对接同事的接口，他定义的所有接口都是 post 请求，理由是 https 用 post 更安全，之前习惯使用 restful api ，如果说 https 只有 post 请求是安全的话？那为啥还需要 get 、put 、delete ？我该如何反驳他。”</p></blockquote>
 <p>然后该贴中大量的回复大概有这么几种论调，1）POST挺好的，就应该这么干，沟通少，2）一把梭，早点干完早点回家，3）吵赢了又怎么样？工作而已，优雅不能当饭吃。虽然评论没有一边倒，但是也有大量的人支持。然后，我在Twitter上嘲讽了一下，用POST干一切就像看到了来你家装修工人说，“老子干活就是用钉子钉一切，什么螺丝、螺栓、卡扣、插销……通通不用，钉枪一把梭，方便，快捷，安全，干完早回家……不过，还是有一些网友觉得用POST挺好的，而且可以节约时间。所以，正好，我在《<a href="https://coolshell.cn/articles/21672.html" rel="noopener" target="_blank" title="我做系统架构的一些原则">我做系统架构的原则</a>》中的“<a href="https://coolshell.cn/articles/21672.html#%E5%8E%9F%E5%88%99%E4%BA%94%EF%BC%9A%E5%88%B6%E5%AE%9A%E5%B9%B6%E9%81%B5%E5%BE%AA%E6%9C%8D%E4%BB%8E%E6%A0%87%E5%87%86%E3%80%81%E8%A7%84%E8%8C%83%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" rel="noopener" target="_blank">原则五</a>”中反对API返回码无论对错全是200的返回那，我专门写下这一篇文章，以正视听。</p>
@@ -24,7 +24,7 @@
 </ul>
 <p>网络协议也是一样的，一般来说，<strong>几乎所有的主流网络协议都有两个部分，一个是协议头，一个是协议体。协议头中是协议自己要用的数据，协议体才是用户的数据。所以，协议头主要是用于协议的控制逻辑，而协议体则是业务逻辑。</strong></p>
 <p>HTTP的动词（或是Method）是在协议头中，所以，其主要用于控制逻辑。</p>
-<p dir="auto">下面是HTTP的动词规范，一般来说，REST API 需要开发人员严格遵循下面的标准规范（参看<a href="https://www.rfc-editor.org/rfc/rfc7231#section-4.2.2" rel="noopener" target="_blank">RFC7231 章节4.2.2 &#8211; Idempotent Methods</a>）</p>
+<p dir="auto">下面是HTTP的动词规范，一般来说，REST API 需要开发人员严格遵循下面的标准规范（参看<a href="https://www.rfc-editor.org/rfc/rfc7231#section-4.2.2" rel="noopener" target="_blank">RFC7231 章节4.2.2 – Idempotent Methods</a>）</p>
 <table>
 <thead>
 <tr>
@@ -37,17 +37,17 @@
 <tr>
 <td>GET</td>
 <td>用于查询操作，对应于数据库的 <code>select</code> 操作</td>
-<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;" />︎</td>
+<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;"/>︎</td>
 </tr>
 <tr>
 <td>PUT</td>
 <td>用于所有的信息更新，对应于数据库的 <code>update </code>操作</td>
-<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;" />︎︎</td>
+<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;"/>︎︎</td>
 </tr>
 <tr>
 <td>DELETE</td>
 <td>用于更新操作，对应于数据库的 <code>delete</code> 操作</td>
-<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;" />︎︎</td>
+<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;"/>︎︎</td>
 </tr>
 <tr>
 <td>POST</td>
@@ -57,7 +57,7 @@
 <tr>
 <td>HEAD</td>
 <td>用于返回一个资源对象的“元数据”，或是用于探测API是否健康</td>
-<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;" />︎</td>
+<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;"/>︎</td>
 </tr>
 <tr>
 <td>PATCH</td>
@@ -67,7 +67,7 @@
 <tr>
 <td>OPTIONS</td>
 <td>获取API的相关的信息。</td>
-<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;" />︎</td>
+<td style="text-align: center;"><img alt="✔" class="wp-smiley" src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" style="height: 1em;"/>︎</td>
 </tr>
 </tbody>
 </table>
@@ -110,7 +110,7 @@
 <li>使用<code>page</code>和<code>per_page</code>代表页码和每页数据量，比如：<code>GET /books?page=3&amp;per_page=20</code>。</li>
 <li><strong>可选</strong>。上面提到的<code>page</code>方式为使用相对位置来获取数据，可能会存在两个问题：性能（大数据量）与数据偏差（高频更新）。此时可以使用绝对位置来获取数据：事先记录下当前已获取数据里最后一条数据的<code>ID</code>、<code>时间</code>等信息，以此获取 “<strong>该ID之前的数据</strong>” 或 “<strong>该时刻之前的数据</strong>”。示例：<code>GET /news?max_id=23454345&amp;per_page=20</code> 或 <code>GET /news?published_before=2011-01-01T00:00:00Z&amp;per_page=20</code>。
 <p dir="auto">
-</li>
+</p></li>
 </ul>
 </li>
 </ul>
@@ -168,7 +168,7 @@
 <p>其一，遵循个规范而已，把“正常”叫“优雅”，可见标准有多低。这么低的标准也只能“为了吃饭而生存了”。</p>
 <p>其二，<strong>作为一个“职业程序员”，要学会热爱和尊重自己的职业，热爱自己职业最重要的就是不要让外行人看扁这个职业，自己都不尊重这个职业，你让别人怎么尊重？尊重自己的职业，不仅仅只是能够获得让人羡慕的报酬，而更是要让自己的这个职业的更有含金量</strong>。</p>
 <p><strong>希望大家都能尊重自己从事的这个职业，成为真正的职业化的程序员，而不是一个码农！</strong></p>
-<figure class="wp-caption aligncenter" id="attachment_22177" style="width: 834px;"><img alt="" class="wp-image-22177 size-full" height="319" src="https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75.jpeg" width="834" /><figcaption class="wp-caption-text" id="caption-attachment-22177">你的工作给你权力，而只有你的行为才会给你尊重</figcaption></figure>
+<figure class="wp-caption aligncenter" id="attachment_22177" style="width: 834px;"><img alt="" class="wp-image-22177 size-full" height="319" src="../wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75.jpeg" width="834"/><figcaption class="wp-caption-text" id="caption-attachment-22177">你的工作给你权力，而只有你的行为才会给你尊重</figcaption></figure>
 <p>（全文完）<!--
 
 
@@ -185,7 +185,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20765.html"><img alt="MegaEase的远程工作文化" height="150" src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20765.html">MegaEase的远程工作文化</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20276.html"><img alt="别让自己“墙”了自己" height="150" src="https://coolshell.cn/wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20276.html">别让自己“墙”了自己</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="../wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20765.html"><img alt="MegaEase的远程工作文化" height="150" src="../wp-content/uploads/2020/01/remote-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20765.html">MegaEase的远程工作文化</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20276.html"><img alt="别让自己“墙”了自己" height="150" src="../wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20276.html">别让自己“墙”了自己</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

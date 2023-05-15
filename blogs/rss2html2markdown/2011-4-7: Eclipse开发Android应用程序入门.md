@@ -59,7 +59,7 @@ Android应用程序的推荐开发环境是带有Android开发包插件(Android 
 * 检查可用软件中有Developer Tools并点击OK按钮。这将安装Android Development Tools 和DDMS, Android的调试工具。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/install.gif "install")
+![](../wp-content/uploads/2011/04/install.gif "install")
 
 
 * 点击Next和Finish按钮以完成安装，安装完成后，你需要重启你的Eclipse一次。
@@ -67,7 +67,7 @@ Android应用程序的推荐开发环境是带有Android开发包插件(Android 
 * 现在需要告诉Eclipse，你的Android SDK安装在什么地方。点击Android项后浏览选择你解压后的Android SDK所在的路径。例如/opt/local/android-sdk。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/eclipse_android_preferences.jpg "eclipse_android_preferences")
+![](../wp-content/uploads/2011/04/eclipse_android_preferences.jpg "eclipse_android_preferences")
 
 
 * 点击OK按钮，保存信息。
@@ -87,7 +87,7 @@ Android应用程序的推荐开发环境是带有Android开发包插件(Android 
 * 你可以选择列表中所需要的平台，或全选下载所有有效的平台。当你选择完毕，单击*Install Selected* 并完成安装。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/sdk.jpg "sdk")  
+![](../wp-content/uploads/2011/04/sdk.jpg "sdk")  
 
 一旦成功的下载所有的平台后，你就可以准备开始开发Android应用程序了。
 
@@ -120,7 +120,7 @@ Min SDK Version: 4
 [/code]
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/eclipse_new_project_settings.jpg "eclipse_new_project_settings")
+![](../wp-content/uploads/2011/04/eclipse_new_project_settings.jpg "eclipse_new_project_settings")
 
 
 在点击了完成按钮之后，Eclipse将为你创建一个新的可以运行的Android项目。注意，你通知了Eclipse生成了一个叫做BrewClockActivity的Activity。这个Activity的代码用于运行你的应用程序。生成的代码将在程序运行时非常简单地显示一条“Hello World”消息。
@@ -150,7 +150,7 @@ Min SDK Version 是你的Android程序所能运行得最早版本号。对于每
 
 Eclipse 将会在一个Android设备上运行一个应用程序。在这个时候，由于你没有任何Android设备，因此在运行时一定会返回一个失败，并且询问你是否要新建一个Android的虚拟设备。（AVD）  
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/eclipse_no_avd.jpg "eclipse_no_avd")
+![](../wp-content/uploads/2011/04/eclipse_no_avd.jpg "eclipse_no_avd")
 
 
 #### Android 虚拟设备
@@ -191,7 +191,7 @@ Skin Built In: Default (HVGA)
 * 关闭the *Android SDK and AVD Manager* 对话框.
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/sdk_manager_new_avd.jpg "sdk_manager_new_avd")
+![](../wp-content/uploads/2011/04/sdk_manager_new_avd.jpg "sdk_manager_new_avd")
 
 
 #### 运行代码
@@ -202,7 +202,7 @@ Skin Built In: Default (HVGA)
 当你的模拟器启动后，Eclipse自动地安装并运行你的应用程序。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/app_running-550-e1287474474253.jpg "app_running-550-e1287474474253")
+![](../wp-content/uploads/2011/04/app_running-550-e1287474474253.jpg "app_running-550-e1287474474253")
 
 
 ### 开发你第一个Android应用
@@ -223,7 +223,7 @@ Skin Built In: Default (HVGA)
 在开发任何Android应用程序之前的第一步就是设计和开发用户界面。下面是一个我们这个应用程序的用户界面的一个概览。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/design_sketch.jpg "design_sketch")
+![](../wp-content/uploads/2011/04/design_sketch.jpg "design_sketch")
 
 
 用户将能通过+和-按钮设置一个泡茶的定时器。当单击开始按钮，定时器将开始按指定的时间递减。除非用户再次点击按钮以取消计时，否则当定时器为0的时候，累计的泡茶计数brew将增加1。
@@ -659,7 +659,7 @@ brewLabel.setText(R.string.brew\_up\_label);
 代码完成之后，现在是试运行程序的时候了。单击*Run* 或 *Ctrl+F11* 在模拟器中启动我们的应用. 所有都运行良好，你将会看到你创建的用户界面在准备时间一到就可以喝你所泡的茶了！试着设置不同的时间，并点击*Start* 观看倒计时。
 
 
-![](https://coolshell.cn/wp-content/uploads/2011/04/app_finished-550-e1287474491689.jpg "app_finished-550-e1287474491689")
+![](../wp-content/uploads/2011/04/app_finished-550-e1287474491689.jpg "app_finished-550-e1287474491689")
 
 
 ### 总结
@@ -684,10 +684,10 @@ brewLabel.setText(R.string.brew\_up\_label);
 
 ### 相关文章
 
-* [![Eclipse开发Android应用程序入门:重装上阵](https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full-150x150.jpg)](https://coolshell.cn/articles/4334.html)[Eclipse开发Android应用程序入门:重装上阵](https://coolshell.cn/articles/4334.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
-* [![DHH 谈混合移动应用开发](https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
-* [![Google Inbox如何跨平台重用代码？](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
-* [![一些有意思的文章和资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
-* [![食客还是大厨](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/3589.html)[食客还是大厨](https://coolshell.cn/articles/3589.html)
+* [![Eclipse开发Android应用程序入门:重装上阵](../wp-content/uploads/2011/04/1_starting_point_full-150x150.jpg)](https://coolshell.cn/articles/4334.html)[Eclipse开发Android应用程序入门:重装上阵](https://coolshell.cn/articles/4334.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
+* [![DHH 谈混合移动应用开发](../wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
+* [![Google Inbox如何跨平台重用代码？](../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg)](https://coolshell.cn/articles/12136.html)[Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/4220.html)[一些有意思的文章和资源](https://coolshell.cn/articles/4220.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/3589.html)[食客还是大厨](https://coolshell.cn/articles/3589.html)
 The post [Eclipse开发Android应用程序入门](https://coolshell.cn/articles/4270.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

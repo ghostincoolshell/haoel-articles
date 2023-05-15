@@ -257,7 +257,7 @@ w2=w1;
 请看下图：
 
 
-![o_string](https://coolshell.cn/wp-content/uploads/2014/12/o_string.jpg)
+![o_string](../wp-content/uploads/2014/12/o_string.jpg)
 
 
 于是，有了这样一个机制，每当我们为string分配内存时，我们总是要多分配一个空间用来存放这个引用计数的值，只要发生拷贝构造可是赋值时，这个内存的值就会加一。而在内容修改时，string类为查看这个引用计数是否为0，如果不为零，表示有人在共享这块内存，那么自己需要先做一份拷贝，然后把引用计数减去一，再把数据拷贝过来。下面的几个程序片段说明了这两个动作：
@@ -417,10 +417,10 @@ main()
 
 ### 相关文章
 
-* [![Google图片搜索下的的C String](https://coolshell.cn/wp-content/uploads/2011/02/C_String-150x150.jpg)](https://coolshell.cn/articles/3806.html)[Google图片搜索下的的C String](https://coolshell.cn/articles/3806.html)
-* [![面向对象是个骗局？！](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg)](https://coolshell.cn/articles/3036.html)[面向对象是个骗局？！](https://coolshell.cn/articles/3036.html)
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
-* [![Leetcode 编程训练](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/12052.html)[Leetcode 编程训练](https://coolshell.cn/articles/12052.html)
+* [![Google图片搜索下的的C String](../wp-content/uploads/2011/02/C_String-150x150.jpg)](https://coolshell.cn/articles/3806.html)[Google图片搜索下的的C String](https://coolshell.cn/articles/3806.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg](https://coolshell.cn/articles/3036.html)[面向对象是个骗局？！](https://coolshell.cn/articles/3036.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [![API设计原则 – Qt官网的设计实践总结](../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg)](https://coolshell.cn/articles/18024.html)[API设计原则 – Qt官网的设计实践总结](https://coolshell.cn/articles/18024.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/12052.html)[Leetcode 编程训练](https://coolshell.cn/articles/12052.html)
 The post [C++ STL string的Copy-On-Write技术](https://coolshell.cn/articles/12199.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

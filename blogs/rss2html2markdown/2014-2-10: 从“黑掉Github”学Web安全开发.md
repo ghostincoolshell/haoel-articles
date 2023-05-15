@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2014/02/Github-Security.png)Egor Homakov（Twitter: [@homakov](http://twitter.com/homakov) 个人网站: [EgorHomakov.com](http://egorhomakov.com/)）是一个Web安全的布道士，他这两天把github给黑了，并给github报了5个安全方面的bug，他在他的这篇blog——《[How I hacked Github again](http://homakov.blogspot.com/2014/02/how-i-hacked-github-again.html)》（墙）说明了这5个安全bug以及他把github黑掉的思路。Egor的这篇文章讲得比较简单，很多地方一笔带过，所以，**我在这里用我的语言给大家阐述一下黑掉Github的思路以及原文中所提到的那5个bug。希望这篇文章能让从事Web开发的同学们警惕**。关于Web开发中的安全事项，大家可以看看这篇文章《[Web开发中的你需要了解的东西](https://coolshell.cn/articles/6043.html "Web开发中需要了解的东西")》
+![](../wp-content/uploads/2014/02/Github-Security.png)Egor Homakov（Twitter: [@homakov](http://twitter.com/homakov) 个人网站: [EgorHomakov.com](http://egorhomakov.com/)）是一个Web安全的布道士，他这两天把github给黑了，并给github报了5个安全方面的bug，他在他的这篇blog——《[How I hacked Github again](http://homakov.blogspot.com/2014/02/how-i-hacked-github-again.html)》（墙）说明了这5个安全bug以及他把github黑掉的思路。Egor的这篇文章讲得比较简单，很多地方一笔带过，所以，**我在这里用我的语言给大家阐述一下黑掉Github的思路以及原文中所提到的那5个bug。希望这篇文章能让从事Web开发的同学们警惕**。关于Web开发中的安全事项，大家可以看看这篇文章《[Web开发中的你需要了解的东西](https://coolshell.cn/articles/6043.html "Web开发中需要了解的东西")》
 
 
 #### OAuth简介
@@ -18,7 +18,7 @@ type: post
 
 
 
-![](https://coolshell.cn/wp-content/uploads/2014/02/oauth-authentication.png)
+![](../wp-content/uploads/2014/02/oauth-authentication.png)
 
 
 从上面的流程图中，我们可以看OAuth不管是1.0还是2.0版本都是一个比较复杂的协议，所以，在Server端要把OAuth实现对并不是一些容易事，其总是或多或少会有些小错误。Egor就找到了几个Github的OAuth的实现的问题。
@@ -167,7 +167,7 @@ https://gist.github.com/homakov/8820324?code=CODE
 于是Egor在用户的cookie里找到了 github\_token
 
 
-![](https://coolshell.cn/wp-content/uploads/2014/02/gist_cookie.png)
+![](../wp-content/uploads/2014/02/gist_cookie.png)
 
 
 但是这个token没什么用，因为授权的Scope只有gists。但是，这个token不应该放在用户端的cookie里，本身就是一个安全事故，这个东西只能放在服务端（关于Web开发中的安全事项，可以看看这篇文章《[Web开发中的你需要了解的东西](https://coolshell.cn/articles/6043.html "Web开发中需要了解的东西")》）。
@@ -197,7 +197,7 @@ https://github.com/login/oauth/authorize?client\_id=7e0a3cd836d3e544dbd9&redirec
 下图是Github上的赏金猎手的排行榜（<https://bounty.github.com/index.html#leaderboard>）你可以上去挨个看看他们找到的问题，你会发现好些安全问题都很小，有些只能说是不是很规范的问题，Github都赏了几百刀。我查看了一下github的赏金政策，github赏金至少100刀，到5000刀不等。
 
 
-![](https://coolshell.cn/wp-content/uploads/2014/02/github_bounty_leaderboard.jpg)
+![](../wp-content/uploads/2014/02/github_bounty_leaderboard.jpg)
 
 
 让我们扪心自问一下，我们花了多少时间在玩那些“红包游戏”，而又搞到了多少红包？人家4个小时找了5个bug，挣了$4000美金。**老天给了你我一样的时间，我们用来抽几块钱的红包，人家用自己的技能来挣奖金。这就是人和人的差距。这就是所谓的效率**——你可以移步看看我写的《[加班与效率](https://coolshell.cn/articles/10217.html "加班与效率")》
@@ -213,10 +213,10 @@ https://github.com/login/oauth/authorize?client\_id=7e0a3cd836d3e544dbd9&redirec
 
 ### 相关文章
 
-* [![HTTP API 认证授权术](https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
-* [![如何免费的让网站启用HTTPS](https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
-* [![程序员疫苗：代码注入](https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](https://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](https://coolshell.cn/articles/8711.html)
-* [![Web开发中需要了解的东西](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/6043.html)[Web开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
-* [![如何设计“找回用户帐号”功能](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg)](https://coolshell.cn/articles/5987.html)[如何设计“找回用户帐号”功能](https://coolshell.cn/articles/5987.html)
-* [![你会做Web上的用户登录功能吗？](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/5353.html)[你会做Web上的用户登录功能吗？](https://coolshell.cn/articles/5353.html)
+* [![HTTP API 认证授权术](../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png)](https://coolshell.cn/articles/19395.html)[HTTP API 认证授权术](https://coolshell.cn/articles/19395.html)
+* [![如何免费的让网站启用HTTPS](../wp-content/uploads/2017/08/enable-https-banner-150x150.png)](https://coolshell.cn/articles/18094.html)[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
+* [![程序员疫苗：代码注入](../wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](https://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](https://coolshell.cn/articles/8711.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/6043.html)[Web开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg](https://coolshell.cn/articles/5987.html)[如何设计“找回用户帐号”功能](https://coolshell.cn/articles/5987.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/5353.html)[你会做Web上的用户登录功能吗？](https://coolshell.cn/articles/5353.html)
 The post [从“黑掉Github”学Web安全开发](https://coolshell.cn/articles/11021.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

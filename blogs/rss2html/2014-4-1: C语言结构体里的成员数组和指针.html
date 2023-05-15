@@ -1,5 +1,5 @@
-<p>单看这文章的标题，你可能会觉得好像没什么意思。你先别下这个结论，相信这篇文章会对你理解C语言有帮助。这篇文章产生的背景是在微博上，看到<a href="http://weibo.com/laruence" target="_blank" title="Laruence">@Laruence</a>同学出了一个关于C语言的题，<a href="http://weibo.com/1170999921/ADojDbuSe" target="_blank">微博链接</a>。微博截图如下。我觉得好多人对这段代码的理解还不够深入，所以写下了这篇文章。</p>
-<p style="text-align: center;"><a href="http://weibo.com/1170999921/ADojDbuSe" target="_blank"><img alt="zero_array" class="aligncenter size-full wp-image-11378" height="204" src="https://coolshell.cn/wp-content/uploads/2014/03/zero_array.png" width="549" /></a></p>
+<html><body><p>单看这文章的标题，你可能会觉得好像没什么意思。你先别下这个结论，相信这篇文章会对你理解C语言有帮助。这篇文章产生的背景是在微博上，看到<a href="http://weibo.com/laruence" target="_blank" title="Laruence">@Laruence</a>同学出了一个关于C语言的题，<a href="http://weibo.com/1170999921/ADojDbuSe" target="_blank">微博链接</a>。微博截图如下。我觉得好多人对这段代码的理解还不够深入，所以写下了这篇文章。</p>
+<p style="text-align: center;"><a href="http://weibo.com/1170999921/ADojDbuSe" target="_blank"><img alt="zero_array" class="aligncenter size-full wp-image-11378" height="204" src="../wp-content/uploads/2014/03/zero_array.png" width="549"/></a></p>
 <p>为了方便你把代码copy过去编译和调试，我把代码列在下面：</p>
 <pre class="EnlighterJSRAW">#include &lt;stdio.h&gt;
 struct str{
@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 <p>你编译一下上面的代码，在VC++和GCC下都会在14行的printf处crash掉你的程序。<a href="http://weibo.com/laruence" target="_blank" title="Laruence">@Laruence</a> 说这个是个经典的坑，我觉得这怎么会是经典的坑呢？上面这代码，你一定会问，为什么if语句判断的不是f.a？而是f.a里面的数组？写这样代码的人脑子里在想什么？还是用这样的代码来玩票？不管怎么样，看过原微博的回复，我个人觉得大家主要还是对C语言理解不深，如果这算坑的话，那么全都是坑。</p>
 <p><span id="more-11377"></span></p>
 <p>接下来，你调试一下，或是你把14行的printf语句改成：</p>
-<p><code class="EnlighterJSRAW">printf(&quot;%x\n&quot;, f.a-&gt;s);</code></p>
+<p><code class="EnlighterJSRAW">printf("%x\n", f.a-&gt;s);</code></p>
 <p>你会看到程序不crash了。程序输出：4。 这下你知道了，访问0x4的内存地址，不crash才怪。于是，你一定会有如下的问题：</p>
 <p style="padding-left: 30px;"><strong>1）为什么不是 13行if语句出错？f.a被初始化为空了嘛，用空指针访问成员变量为什么不crash？</strong></p>
 <p style="padding-left: 30px;"><strong>2）为什么会访问到了0x4的地址？靠，4是怎么出来的？</strong></p>
@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 <p>我们用gdb跟进去，对于实例t，我们可以看到：</p>
 <pre class="EnlighterJSRAW"># t实例中的p就是一个野指针
 (gdb) p t
-$1 = {i = 0, c = 0 &#039;&#092;&#048;00&#039;, d = 0 &#039;&#092;&#048;00&#039;, p = 0x4003e0 &quot;1\355I\211\...&quot;}
+$1 = {i = 0, c = 0 '\000', d = 0 '\000', p = 0x4003e0 "1\355I\211\..."}
 
 # 输出t的地址
 (gdb) p &amp;t
@@ -98,10 +98,10 @@ Cannot access memory at address 0x8</pre>
 
 int main(){
     struct test *pt=NULL;
-    printf(&quot;&amp;s = %x\n&quot;, pt-&gt;s); //等价于 printf(&quot;%x\n&quot;, &amp;(pt-&gt;s) );
-    printf(&quot;&amp;i = %x\n&quot;, &amp;pt-&gt;i); //因为操作符优先级，我没有写成&amp;(pt-&gt;i)
-    printf(&quot;&amp;c = %x\n&quot;, &amp;pt-&gt;c);
-    printf(&quot;&amp;p = %x\n&quot;, &amp;pt-&gt;p);
+    printf("&amp;s = %x\n", pt-&gt;s); //等价于 printf("%x\n", &amp;(pt-&gt;s) );
+    printf("&amp;i = %x\n", &amp;pt-&gt;i); //因为操作符优先级，我没有写成&amp;(pt-&gt;i)
+    printf("&amp;c = %x\n", &amp;pt-&gt;c);
+    printf("&amp;p = %x\n", &amp;pt-&gt;p);
     return 0;
 }</pre>
 <p><strong>看到这里，你觉得这能算坑吗？不要出什么事都去怪语言，大家要想想是不是问题出在自己身上。</strong></p>
@@ -121,7 +121,7 @@ int main(){
     struct line *thisline = (struct line *)
                      malloc (sizeof (struct line) + this_length);
     thisline-&gt;length = this_length;
-    memset(thisline-&gt;contents, &#039;a&#039;, this_length);
+    memset(thisline-&gt;contents, 'a', this_length);
     return 0;
 }</pre>
 <p>上面这段代码的意思是：我想分配一个不定长的数组，于是我有一个结构体，其中有两个成员，一个是length，代表数组的长度，一个是contents，代码数组的内容。后面代码里的 this_length（长度是10）代表是我想分配的数据的长度。（这看上去是不是像一个C++的类？）这种玩法英文叫：Flexible Array，中文翻译叫：柔性数组。</p>
@@ -130,10 +130,10 @@ int main(){
 $1 = (struct line *) 0x601010
 
 (gdb) p *thisline
-$2 = {length = 10, contents = 0x601010 &quot;\n&quot;}
+$2 = {length = 10, contents = 0x601010 "\n"}
 
 (gdb) p thisline-&gt;contents
-$3 = 0x601014 &quot;aaaaaaaaaa&quot;</pre>
+$3 = 0x601014 "aaaaaaaaaa"</pre>
 <p>我们可以看到：在输出*thisline时，我们发现其中的成员变量contents的地址居然和thisline是一样的（偏移量为0x0??!!）。但是当我们输出thisline-&gt;contents的时候，你又发现contents的地址是被offset了0x4了的，内容也变成了10个‘a’。（我觉得这是一个GDB的bug，VC++的调试器就能很好的显示）</p>
 <p>我们继续，如果你sizeof(char[0])或是 sizeof(int[0]) 之类的零长度数组，你会发现sizeof返回了0，这就是说，零长度的数组是存在于结构体内的，但是不占结构体的size。你可以简单的理解为一个没有内容的占位标识，直到我们给结构体分配了内存，这个占位标识才变成了一个有长度的数组。</p>
 <p>看到这里，你会说，为什么要这样搞啊，把contents声明成一个指针，然后为它再分配一下内存不行么？就像下面一样。</p>
@@ -147,7 +147,7 @@ int main(){
     struct line *thisline = (struct line *)malloc (sizeof (struct line));
     thisline-&gt;contents = (char*) malloc( sizeof(char) * this_length );
     thisline-&gt;length = this_length;
-    memset(thisline-&gt;contents, &#039;a&#039;, this_length);
+    memset(thisline-&gt;contents, 'a', this_length);
     return 0;
 }</pre>
 <p>这不一样清楚吗？而且也没什么怪异难懂的东西。是的，这也是普遍的编程方式，代码是很清晰，也让人很容易理解。即然这样，那为什么要搞一个零长度的数组？有毛意义？！</p>
@@ -195,7 +195,6 @@ int main(){
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/11235.html"><img alt="一个浮点数跨平台产生的问题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/11235.html">一个浮点数跨平台产生的问题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/873.html"><img alt="谁说C语言很简单？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/873.html">谁说C语言很简单？</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/945.html"><img alt="C语言的谜题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/945.html">C语言的谜题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/830.html"><img alt="语言的歧义" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/830.html">语言的歧义</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/5761.html"><img alt="深入理解C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/5761.html">深入理解C语言</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/9859.html"><img alt="Alan Cox：单向链表中prev指针的妙用" height="150" src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="http://coolshell.cn/articles/9859.html">Alan Cox：单向链表中prev指针的妙用</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11377.html">C语言结构体里的成员数组和指针</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/11235.html"><img alt="一个浮点数跨平台产生的问题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/11235.html">一个浮点数跨平台产生的问题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/873.html"><img alt="谁说C语言很简单？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/873.html">谁说C语言很简单？</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/945.html"><img alt="C语言的谜题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/945.html">C语言的谜题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/830.html"><img alt="语言的歧义" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/830.html">语言的歧义</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/5761.html"><img alt="深入理解C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/5761.html">深入理解C语言</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/9859.html"><img alt="Alan Cox：单向链表中prev指针的妙用" height="150" src="../wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/9859.html">Alan Cox：单向链表中prev指针的妙用</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11377.html">C语言结构体里的成员数组和指针</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -11,14 +11,14 @@ type: post
 [xkcd](http://xkcd.com/)对于经常浏览国外网站的朋友一定不会陌生。不过，还是先让我来介绍一下xkcd（[维基百科词条](http://en.wikipedia.org/wiki/Xkcd)）。这是一个漫画网站，它主要是发布一些很简单的随手画的漫画，它主要有四种体裁——浪漫、讽刺、数学 和 语言。也会经常出现一些和IT有关的漫画，比如下面这个漫画—— （懂Unix的人一眼就看懂了，不懂的怎么看也看不懂）
 
 
-![](https://coolshell.cn/wp-content/uploads/2012/10/xkcd-sandwich.png "xkcd-sandwich")
+![](../wp-content/uploads/2012/10/xkcd-sandwich.png "xkcd-sandwich")
 
 
 本质上来说，xkcd是一种Geek文化，里面的东西都非常的Geek和晦涩，讽刺很辛辣，但很多只有特定人群可以看得懂。而且表达的形式自由到天马行空，飘忽不定。
 
 
 
-xkcd.com的网站创建者、所有的漫画的作者叫[Randall Munroe](http://en.wikipedia.org/wiki/Randall_Munroe "Randall Munroe")![](http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Randall_Munroe_ducks.JPG/230px-Randall_Munroe_ducks.JPG "Randall Munroe")，他以前在 NASA工作，是那里的Roboticist——机器人专家，80后，同样，也是一个程序员。他还会画漫画。
+xkcd.com的网站创建者、所有的漫画的作者叫[Randall Munroe](http://en.wikipedia.org/wiki/Randall_Munroe "Randall Munroe")http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Randall_Munroe_ducks.JPG/230px-Randall_Munroe_ducks.JPG "Randall Munroe"，他以前在 NASA工作，是那里的Roboticist——机器人专家，80后，同样，也是一个程序员。他还会画漫画。
 
 
 xkcd是他于2005年创建的，他本来只是想把他大学里在记事本里画的漫画放到他的个人主页上，但结果却搞成了一个独立的以漫画为主的网站，他用他画的这些漫画做成T恤卖。为什么要取名叫xkcd，据Munroe说，这四个字母，没有任何意义，就是为了让人不能把他们通过拼成一个单词读出来。现在他全职在搞xkcd.com。他现在一周会更新三次漫画，分别在周一，周三，和周五。
@@ -87,7 +87,7 @@ xkcd是他于2005年创建的，他本来只是想把他大学里在记事本里
 有人说，创作这么这个大图很费时间。不过我觉得这对于Geek来说不是问题，因为这应该是可以通过矢量图的拼装来搞定。
 
 
-[![xkcd 1110全景缩略图（点击看大缩略图）](https://coolshell.cn/wp-content/uploads/2012/10/xkcd1110-1024x346.png "xkcd 1110全景缩略图（点击看大缩略图）")](https://coolshell.cn/wp-content/uploads/2012/10/xkcd1110.png)xkcd 1110全景缩略图（点击看大缩略图）
+[![xkcd 1110全景缩略图（点击看大缩略图）](../wp-content/uploads/2012/10/xkcd1110-1024x346.png "xkcd 1110全景缩略图（点击看大缩略图）")](https://coolshell.cn/wp-content/uploads/2012/10/xkcd1110.png)xkcd 1110全景缩略图（点击看大缩略图）
 #### 看看技术宅们干了什么
 
 
@@ -137,10 +137,10 @@ xkcd是他于2005年创建的，他本来只是想把他大学里在记事本里
 
 ### 相关文章
 
-* [![聊聊团队协同和协同工具](https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![谈谈公司对员工的监控](https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
-* [![如何做一个有质量的技术分享](https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
-* [![程序员如何把控自己的职业](https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
-* [![MegaEase的远程工作文化](https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
+* [![聊聊团队协同和协同工具](../wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![谈谈公司对员工的监控](../wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
+* [![如何做一个有质量的技术分享](../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
+* [![程序员如何把控自己的职业](../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
+* [![MegaEase的远程工作文化](../wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
 The post [xkcd 神图“Click and Drag”](https://coolshell.cn/articles/8398.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

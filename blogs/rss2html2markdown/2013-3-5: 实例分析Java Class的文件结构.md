@@ -30,7 +30,7 @@ type: post
 
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/1.png "点击查看原始大小图片")
+![](../wp-content/uploads/2013/03/1.png "点击查看原始大小图片")
 
 
 （上图来自The Java Virtual Machine Specification Java SE 7 Edition)
@@ -72,7 +72,7 @@ type: post
 
 6） u2 access\_flags 表示类或者接口的访问信息，具体如下图所示：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/2.png "点击查看原始大小图片")
+![](../wp-content/uploads/2013/03/2.png "点击查看原始大小图片")
 
 
 7）u2 this\_class 表示类的常量池索引，指向常量池中CONSTANT\_Class\_info的常量
@@ -93,7 +93,7 @@ type: post
 12） field\_info fields[fields\_count]表示字段表的信息，其中字段表的结构如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/3.png)
+![](../wp-content/uploads/2013/03/3.png)
 
 
 上图中access\_flags表示字段的访问表示，比如字段是public,private，protect 等，name\_index表示字段名 称，指向常量池中类型是CONSTANT\_UTF8\_info的常量，descriptor\_index表示字段的描述符，它也指向常量池中类型为 CONSTANT\_UTF8\_info的常量，attributes\_count表示字段表中的属性表的数量，而属性表是则是一种用与描述字段，方法以及 类的属性的可扩展的结构，不同版本的Java虚拟机所支持的属性表的数量是不同的。
@@ -105,7 +105,7 @@ type: post
 14）method\_info 表示方法表，方法表的具体结构如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/4.png)  
+![](../wp-content/uploads/2013/03/4.png)  
 
 其中access\_flags表示方法的访问表示，name\_index表示名称的索引，descriptor\_index表示方法的描述 符，attributes\_count以及attribute\_info类似字段表中的属性表，只不过字段表和方法表中属性表中的属性是不同的，比如方法 表中就Code属性，表示方法的代码，而字段表中就没有Code属性。其中具体Class中到底有多少种属性，等到Class文件结构中的属性表的时候再 说说。
 
@@ -142,7 +142,7 @@ interface Super{ }
 通过jdk1.6.0\_37的javac 编译后的TestClass.java对应的TestClass.class的二进制结构如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/5.png)
+![](../wp-content/uploads/2013/03/5.png)
 
 
 下面我们就根据前面所说的Class的文件结构来解析以下上图中字节流。
@@ -168,7 +168,7 @@ interface Super{ }
 我们上面说了常量池中有不同类型的常量，下面就来看看TestClass.class的第一个常量，我们知道每个常量都有一个u1类型的tag标识来表示 常量的类型，上图中0000000ah处的内容为0x0A，转换成二级制是10，有上面的关于常量类型的描述可知tag为10的常量是Constant\_Methodref\_info,而Constant\_Methodref\_info的结够如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/6.png)
+![](../wp-content/uploads/2013/03/6.png)
 
 
 其中class\_index指向常量池中类型为CONSTANT\_Class\_info的常量，从TestClass的二进制文件结构中可以看出 class\_index的值为0x0004（地址为0000000bh-0000000ch)，也就是说指向第四个常量。
@@ -180,7 +180,7 @@ name\_and\_type\_index指向常量池中类型为CONSTANT\_NameAndType\_info常�
 接下来又可以通过同样的方法来找到常量池中的所有常量。不过JDK提供了一个方便的工具可以让我们查看常量池中所包含的常量。通过javap -verbose TestClass 即可得到所有常量池中的常量，截图如下：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/7.png)
+![](../wp-content/uploads/2013/03/7.png)
 
 
 从上图我们可以清楚的看到，TestClass中常量池有24个常量，不要忘记了第0个常量，因为第0个常量被用来表示 Class中的数据项不引用任何常量池中的常量。从上面的分析中我们得知TestClass的第一个常量表示方法，其中class\_index指向的第四 个常量为java/lang/Object，name\_and\_type\_index指向的第19个常量值为<init>:()V,从这里可 以看出第一个表示方法的常量表示的是java编译器生成的实例构造器方法。通过同样的方法可以分析常量池的其它常量。OK，分析完常量池，我们接下来再分 析下access\_flags。  
@@ -191,7 +191,7 @@ name\_and\_type\_index指向常量池中类型为CONSTANT\_NameAndType\_info常�
 **6）u2 this\_class** 表示类的索引值，用来表示类的全限定名称，类的索引值如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/8.png)
+![](../wp-content/uploads/2013/03/8.png)
 
 
 从上图可以清楚到看到，类索引值为0x0003，对应常量池的第三个常量，通过javap的结果，我们知道第三个常量为 CONSTANT\_Class\_info类型的常量，通过它可以知道类的全限定名称为：com/ejushang/TestClass /TestClass
@@ -200,28 +200,28 @@ name\_and\_type\_index指向常量池中类型为CONSTANT\_NameAndType\_info常�
  **7）u2 super\_class** 表示当前类的父类的索引值，索引值所指向的常量池中类型为CONSTANT\_Class\_info的常量，父类的索引值如下图所示，其值为0x0004, 查看常量池的第四个常量，可知TestClass的父类的全限定名称为：java/lang/Object
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/9.png)
+![](../wp-content/uploads/2013/03/9.png)
 
 
 **8）interfaces\_count和  interfaces[interfaces\_count]**表示接口数量以及具体的每一个接口，TestClass的接口数量以及接口如下图所示，其中 0x0001表示接口数量为1，而0x0005表示接口在常量池的索引值，找到常量池的第五个常量，其类型为CONSTANT\_Class\_info，其 值为：com/ejushang/TestClass/Super
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/10.png)
+![](../wp-content/uploads/2013/03/10.png)
 
 
 **9）fields\_count 和 field\_info**, fields\_count表示类中field\_info表的数量，而field\_info表示类的实例变量和类变量，这里需要注意的是 field\_info不包含从父类继承过来的字段，field\_info的结构如下图所示：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/11.png)
+![](../wp-content/uploads/2013/03/11.png)
 
 
 其中access\_flags表示字段的访问标示，比如public,private,protected，static,final等，access\_flags的取值如下图所示：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/12.png "点击查看原始大小图片")
+![](../wp-content/uploads/2013/03/12.png "点击查看原始大小图片")
 
 
 其中name\_index 和 descriptor\_index都是常量池的索引值，分别表示字段的名称和字段的描述符，字段的名称容易理解，但是字段的描述符如何理解呢？其实在JVM 规范中，对于字段的描述符规定如下图所示：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/13.png "点击查看原始大小图片")  
+![](../wp-content/uploads/2013/03/13.png "点击查看原始大小图片")  
 
 其中大家需要关注一下上图最后一行，它表示的是对一维数组的描述符，对于String[][]的描述符将是[[ Ljava/lang/String,而对于int[][]的描述符为[[I。接下来的attributes\_count以及 attribute\_info分别表示属性表的数量以及属性表。下面我们还是以上面的TestClass为例，来看看TestClass的字段表吧。
 
@@ -229,17 +229,17 @@ name\_and\_type\_index指向常量池中类型为CONSTANT\_NameAndType\_info常�
 首先我们来看一下字段的数量，TestClass的字段的数量如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/14.png)
+![](../wp-content/uploads/2013/03/14.png)
 
 
 从上图中可以看出TestClass有两个字段，查看TestClass的源代码可知，确实也只有两个字段，接下来我们看看第一个字段，我们知道第一个字段应该为private int staticVar,它在Class文件中的二进制表示如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/15.png)  
+![](../wp-content/uploads/2013/03/15.png)  
 
 其中0x001A表示访问标示，通过查看access\_flags表可知，其为ACC\_PRIVATE,ACC\_STATIC,ACC\_FINAL,接下 来0x0006和0x0007分别表示常量池中第6和第7个常量，通过查看常量池可知，其值分别为：staticVar和I，其中staticVar为字 段名称，而I为字段的描述符，通过上面对描述符的解释，I所描述的是int类型的变量，接下来0x0001表示staticVar这个字段表中的属性表的 数量，从上图可以staticVar字段对应的属性表有1个，0x0008表示常量池中的第8个常量，查看常量池可以得知此属性为 ConstantValue属性，而ConstantValue属性的格式如下图所示：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/16.png)
+![](../wp-content/uploads/2013/03/16.png)
 
 
 其中attribute\_name\_index表述属性名的常量池索引，本例中为ConstantValue，而ConstantValue的 attribute\_length固定长度为2，而constantValue\_index表示常量池中的引用，本例中，其中为0x0009，查看第9个 常量可以知道，它表示一个类型为CONSTANT\_Integer\_info的常量，其值为0。
@@ -248,7 +248,7 @@ name\_and\_type\_index指向常量池中类型为CONSTANT\_NameAndType\_info常�
 上面说完了private static final int staticVar=0，下面我们接着说一下TestClass的private int instanceVar=0,在本例中对instanceVar的二进制表示如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/17.png)  
+![](../wp-content/uploads/2013/03/17.png)  
 
 其中0x0002表示访问标示为ACC\_PRIVATE,0x000A表示字段的名称，它指向常量池中的第10个常量，查看常量池可以知道字段名称为 instanceVar，而0x0007表示字段的描述符，它指向常量池中的第7个常量，查看常量池可以知道第7个常量为I，表示类型为 instanceVar的类型为I，最后0x0000表示属性表的数量为0.
 
@@ -256,32 +256,32 @@ name\_and\_type\_index指向常量池中类型为CONSTANT\_NameAndType\_info常�
  **10）methods\_count 和 method\_info** ，其中methods\_count表示方法的数量，而method\_info表示的方法表，其中方法表的结构如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/18.png)
+![](../wp-content/uploads/2013/03/18.png)
 
 
 从上图可以看出method\_info和field\_info的结构是很类似的，方法表的access\_flag的所有标志位以及取值如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/19.png "点击查看原始大小图片")
+![](../wp-content/uploads/2013/03/19.png "点击查看原始大小图片")
 
 
 其中name\_index和descriptor\_index表示的是方法的名称和描述符，他们分别是指向常量池的索引。这里需要结解释一下方法的描述 符，方法的描述符的结构为：（参数列表）返回值，比如public int instanceMethod(int param)的描述符为：（I）I，表示带有一个int类型参数且返回值也为int类型的方法，接下来就是属性数量以及属性表了，方法表和字段表虽然都有 属性数量和属性表，但是他们里面所包含的属性是不同。接下来我们就以TestClass来看一下方法表的二进制表示。首先来看一下方法表数量，截图如下：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/20.png)  
+![](../wp-content/uploads/2013/03/20.png)  
 
 从上图可以看出方法表的数量为0x0002表示有两个方法，接下来我们来分析第一个方法，我们首先来看一下TestClass的第一个方法的access\_flag，name\_index,descriptor\_index，截图如下：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/21.png)  
+![](../wp-content/uploads/2013/03/21.png)  
 
 从上图可以知道access\_flags为0x0001，从上面对access\_flags标志位的描述，可知方法的access\_flags的取值为 ACC\_PUBLIC,name\_index为0x000B，查看常量池中的第11个常量，知道方法的名称为<init>，0x000C表示 descriptor\_index表示常量池中的第12常量，其值为()V,表示<init>方法没有参数和返回值，其实这是编译器自动生成 的实例构造器方法。接下来的0x0001表示<init>方法的方法表有1个属性，属性截图如下：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/22.png)  
+![](../wp-content/uploads/2013/03/22.png)  
 
 从上图可以看出0x000D对应的常量池中的常量为Code,表示的方法的Code属性，所以到这里大家应该明白方法的那些代码是存储在Class文件方法表中的属性表中的Code属性中。接下来我们在分析一下Code属性，Code属性的结构如下图所示：  
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/23.png)
+![](../wp-content/uploads/2013/03/23.png)
 
 
 其中attribute\_name\_index指向常量池中值为Code的常量，attribute\_length的长度表示Code属性表的长度（这里 需要注意的时候长度不包括attribute\_name\_index和attribute\_length的6个字节的长度）。
@@ -305,37 +305,37 @@ attributes\_count和attribute\_info分别表示了Code属性中的属性数量�
 接下来我们继续以上面的例子来分析一下，从上面init方法的Code属性的截图中可以看出，属性表的长度为0x00000026,max\_stack的 值为0x0002,max\_locals的取值为0x0001,code\_length的长度为0x0000000A，那么00000149h- 00000152h为字节码，接下来exception\_table\_length的长度为0x0000，而attribute\_count的值为 0x0001，00000157h-00000158h的值为0x000E,它表示常量池中属性的名称，查看常量池得知第14个常量的值为 LineNumberTable，LineNumberTable用于描述java源代码的行号和字节码行号的对应关系，它不是运行时必需的属性，如果通 过-g:none的编译器参数来取消生成这项信息的话，最大的影响就是异常发生的时候，堆栈中不能显示出出错的行号，调试的时候也不能按照源代码来设置断 点，接下来我们再看一下LineNumberTable的结构如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/24.png)
+![](../wp-content/uploads/2013/03/24.png)
 
 
 其中attribute\_name\_index上面已经提到过，表示常量池的索引，attribute\_length表示属性长度，而start\_pc和 line\_number分表表示字节码的行号和源代码的行号。本例中LineNumberTable属性的字节流如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/25.png)
+![](../wp-content/uploads/2013/03/25.png)
 
 
 上面分析完了TestClass的第一个方法，通过同样的方式我们可以分析出TestClass的第二个方法，截图如下：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/26.png)
+![](../wp-content/uploads/2013/03/26.png)
 
 
 其中access\_flags为0x0001,name\_index为0x000F,descriptor\_index为0x0010，通过查看常量池可 以知道此方法为public int instanceMethod(int param)方法。通过和上面类似的方法我们可以知道instanceMethod的Code属性为下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/27.png)
+![](../wp-content/uploads/2013/03/27.png)
 
 
 最后我们来分析一下，Class文件的属性，从00000191h-00000199h为Class文件中的属性表，其中0x0011表示属性的名称，查看常量池可以知道属性名称为SourceFile，我们再来看看SourceFile的结构如下图所示：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/28.png)
+![](../wp-content/uploads/2013/03/28.png)
 
 
 其中attribute\_length为属性的长度，sourcefile\_index指向常量池中值为源代码文件名称的常量，在本例中SourceFile属性截图如下：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/03/29.png)  
+![](../wp-content/uploads/2013/03/29.png)  
 
 其中attribute\_length为0x00000002表示长度为2个字节，而soucefile\_index的值为0x0012,查看常量池的第18个常量可以知道源代码文件的名称为TestClass.java
 
@@ -352,10 +352,10 @@ attributes\_count和attribute\_info分别表示了Code属性中的属性数量�
 
 ### 相关文章
 
-* [![Rust语言的编程范式](https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
-* [![程序员练级攻略（2018)  与我的专栏](https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
-* [![面向GC的Java编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg)](https://coolshell.cn/articles/11541.html)[面向GC的Java编程](https://coolshell.cn/articles/11541.html)
-* [![从LongAdder看更高效的无锁实现](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg)](https://coolshell.cn/articles/11454.html)[从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html)
-* [![Java中的CopyOnWrite容器](https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg)](https://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](https://coolshell.cn/articles/11175.html)
-* [![无锁HashMap的原理与实现](https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg)](https://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](https://coolshell.cn/articles/9703.html)
+* [![Rust语言的编程范式](../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg)](https://coolshell.cn/articles/20845.html)[Rust语言的编程范式](https://coolshell.cn/articles/20845.html)
+* [![程序员练级攻略（2018)  与我的专栏](../wp-content/uploads/2018/05/300x262-150x150.jpg)](https://coolshell.cn/articles/18360.html)[程序员练级攻略（2018) 与我的专栏](https://coolshell.cn/articles/18360.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg](https://coolshell.cn/articles/11541.html)[面向GC的Java编程](https://coolshell.cn/articles/11541.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg](https://coolshell.cn/articles/11454.html)[从LongAdder看更高效的无锁实现](https://coolshell.cn/articles/11454.html)
+* [![Java中的CopyOnWrite容器](../wp-content/uploads/2014/03/cow-copy-150x150.jpg)](https://coolshell.cn/articles/11175.html)[Java中的CopyOnWrite容器](https://coolshell.cn/articles/11175.html)
+* [![无锁HashMap的原理与实现](../wp-content/uploads/2013/05/图1-3-150x150.jpg)](https://coolshell.cn/articles/9703.html)[无锁HashMap的原理与实现](https://coolshell.cn/articles/9703.html)
 The post [实例分析Java Class的文件结构](https://coolshell.cn/articles/9229.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

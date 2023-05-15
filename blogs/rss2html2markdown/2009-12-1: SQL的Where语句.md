@@ -11,7 +11,7 @@ type: post
 某DBA在查看自己的数库日志的时候，看到了数据库服务器上出现了很多很怪异的SQL的Where条件语句，是下面这个样子：（所有的where语句前都有了一个叫“1=1”的子条件）呵呵。
 
 
-![SQL Where Clause](https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause.jpg "SQL Where Clause")
+![SQL Where Clause](../wp-content/uploads/2009/12/sql.where_.clause.jpg "SQL Where Clause")
 
 
 要理解这个事情的原因其实并不难。只要你是一个编写数据库的程序员，你就会知道——动态生成where后的条件的“麻烦”，那就是条件的“分隔”-and或or。下面听我慢慢说来。
@@ -125,10 +125,10 @@ echo construct_sql(construct_sql("UPDATE table SET", ", ", $updates) . " WHERE "
 
 ### 相关文章
 
-* [![NoSQL 数据建模技术](https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png)](https://coolshell.cn/articles/7270.html)[NoSQL 数据建模技术](https://coolshell.cn/articles/7270.html)
-* [![开源中最好的Web开发的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
-* [![MySQL性能优化的最佳20+条经验](https://coolshell.cn/wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg)](https://coolshell.cn/articles/1846.html)[MySQL性能优化的最佳20+条经验](https://coolshell.cn/articles/1846.html)
-* [![程序员疫苗：代码注入](https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](https://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](https://coolshell.cn/articles/8711.html)
-* [![代码执行的效率](https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg)](https://coolshell.cn/articles/7886.html)[代码执行的效率](https://coolshell.cn/articles/7886.html)
-* [![性能调优攻略](https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
+* [![NoSQL 数据建模技术](../wp-content/uploads/2012/05/overview2-1-150x150.png)](https://coolshell.cn/articles/7270.html)[NoSQL 数据建模技术](https://coolshell.cn/articles/7270.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
+* [![MySQL性能优化的最佳20+条经验](../wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg)](https://coolshell.cn/articles/1846.html)[MySQL性能优化的最佳20+条经验](https://coolshell.cn/articles/1846.html)
+* [![程序员疫苗：代码注入](../wp-content/uploads/2012/12/200906020837401710-150x150.jpg)](https://coolshell.cn/articles/8711.html)[程序员疫苗：代码注入](https://coolshell.cn/articles/8711.html)
+* [![代码执行的效率](../wp-content/uploads/2012/07/muxnt-150x150.jpg)](https://coolshell.cn/articles/7886.html)[代码执行的效率](https://coolshell.cn/articles/7886.html)
+* [![性能调优攻略](../wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
 The post [SQL的Where语句](https://coolshell.cn/articles/1889.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

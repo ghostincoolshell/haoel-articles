@@ -23,7 +23,7 @@ Unix作为一个举世闻名的操作系统已有40余年的历史，围绕着�
 和操作系统一样，shell也经历了一个漫长的演变史。如今大部分资料讲述最古老的shell都是从1977年的[Bourne Shell](http://en.wikipedia.org/wiki/Bourne_shell)说起的，它最初移植到[Unix V7](http://en.wikipedia.org/wiki/Version_7_Unix)上，被追认整个shell家族成员的鼻祖，后来的种群都是从其身上分支出来的。
 
 
-![Linux shells since 1977 ](https://www.ibm.com/developerworks/linux/library/l-linux-shells/figure1.gif)
+https://www.ibm.com/developerworks/linux/library/l-linux-shells/figure1.gif
 
 
 对于1977年之前的历史很多资料大多一笔带过或略过不提。事实上，第一个移植到Unix上的shell却不是[Steve Bourne](http://en.wikipedia.org/wiki/Stephen_Richard_Bourne)写的，早在1975年5月，贝尔实验室就对外发布了第一个广泛传播的Unix版本——[Unix V6](http://en.wikipedia.org/wiki/UNIX_V6)（之前开发的版本只供内部研究之用），其根目录下的/bin/sh是第一个Unix自带的shell，由Ken Thompson写的，因此也被称为[Thompson Shell](http://en.wikipedia.org/wiki/Thompson_shell)。甚至，更早可以追溯到1971年的时候，Thompson Shell就作为一个独立于内核的应用程序而实现了，只不过从1975年正式问世到1977年被取代，短短两年的寿命使得它很少为大多数人所认识。
@@ -114,7 +114,7 @@ Unix作为一个举世闻名的操作系统已有40余年的历史，围绕着�
 举一个例子，当我们输入命令”(ls; cat tail) >junk”，那么token列表映像将是这样的：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/04/图1.jpg)
+![](../wp-content/uploads/2013/04/图1.jpg)
 
 
 #### 语法分析(syntax parser)
@@ -176,13 +176,13 @@ Unix作为一个举世闻名的操作系统已有40余年的历史，围绕着�
 依旧举两个个例子，比如命令”A & ; B | C”对应的语法树
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/04/图2.jpg)
+![](../wp-content/uploads/2013/04/图2.jpg)
 
 
 命令”(A ; B) | C”对应的语法树：
 
 
-![](https://coolshell.cn/wp-content/uploads/2013/04/图3.jpg)
+![](../wp-content/uploads/2013/04/图3.jpg)
 
 
 #### 语义分析(Semantic Analyzer)
@@ -253,7 +253,7 @@ Unix作为一个举世闻名的操作系统已有40余年的历史，围绕着�
 最后再八卦一下，2011年Dennis Ritchie去世了，有人生前问过他“学C需要多久才能成为熟练开发者并写出重要产品代码？”，Ritchie回答“我不知道，我从没去学过C。”[(I don’t know. I never had to learn C.)](http://www.cs.columbia.edu/~aho/Talks/12-09-07_DMR.pdf)其实这里已经给出了答案——**那就是没有比去阅读Unix源代码更好的选择了，某种意义上C语言就是为Unix而生的。**
 
 
-![Dennis Mac Ritchie](http://th05.deviantart.net/fs71/PRE/f/2011/296/7/2/dennis_ritchie_by_juanosborne-d4dooi9.jpg)
+http://th05.deviantart.net/fs71/PRE/f/2011/296/7/2/dennis_ritchie_by_juanosborne-d4dooi9.jpg
 
 
 #### 参考资料
@@ -287,10 +287,10 @@ Unix作为一个举世闻名的操作系统已有40余年的历史，围绕着�
 
 ### 相关文章
 
-* [![Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg)](https://coolshell.cn/articles/19996.html)[Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/articles/19996.html)
-* [![AWK 简明教程](https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg)](https://coolshell.cn/articles/9070.html)[AWK 简明教程](https://coolshell.cn/articles/9070.html)
-* [![应该知道的Linux技巧](https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg)](https://coolshell.cn/articles/8883.html)[应该知道的Linux技巧](https://coolshell.cn/articles/8883.html)
-* [![你可能不知道的Shell](https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png)](https://coolshell.cn/articles/8619.html)[你可能不知道的Shell](https://coolshell.cn/articles/8619.html)
-* [![Unix传奇(上篇)](https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
-* [![Go语言源码的一个改动](https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg)](https://coolshell.cn/articles/1761.html)[Go语言源码的一个改动](https://coolshell.cn/articles/1761.html)
+* [![Unix 50 年：Ken Thompson 的密码](../wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg)](https://coolshell.cn/articles/19996.html)[Unix 50 年：Ken Thompson 的密码](https://coolshell.cn/articles/19996.html)
+* [![AWK 简明教程](../wp-content/uploads/2013/02/awk-150x150.jpg)](https://coolshell.cn/articles/9070.html)[AWK 简明教程](https://coolshell.cn/articles/9070.html)
+* [![应该知道的Linux技巧](../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg)](https://coolshell.cn/articles/8883.html)[应该知道的Linux技巧](https://coolshell.cn/articles/8883.html)
+* [![你可能不知道的Shell](../wp-content/uploads/2012/11/shell.01-150x150.png)](https://coolshell.cn/articles/8619.html)[你可能不知道的Shell](https://coolshell.cn/articles/8619.html)
+* [![Unix传奇(上篇)](../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
+* [![Go语言源码的一个改动](../wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg)](https://coolshell.cn/articles/1761.html)[Go语言源码的一个改动](https://coolshell.cn/articles/1761.html)
 The post [Unix考古记：一个“遗失”的shell](https://coolshell.cn/articles/9410.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

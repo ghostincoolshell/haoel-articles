@@ -1,9 +1,9 @@
-<p>二维码又称QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型：比如：字符，数字，日文，中文等等。这两天学习了一下二维码图片生成的相关细节，觉得这个玩意就是一个密码算法，在此写一这篇文章 ，揭露一下。供好学的人一同学习之。</p>
+<html><body><p>二维码又称QR Code，QR全称Quick Response，是一个近几年来移动设备上超流行的一种编码方式，它比传统的Bar Code条形码能存更多的信息，也能表示更多的数据类型：比如：字符，数字，日文，中文等等。这两天学习了一下二维码图片生成的相关细节，觉得这个玩意就是一个密码算法，在此写一这篇文章 ，揭露一下。供好学的人一同学习之。</p>
 <p>关于QR Code Specification，可参看这个PDF：<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">http://raidenii.net/files/datasheets/misc/qr_code.pdf </a></p>
 <h4>基础知识</h4>
 <p>首先，我们先说一下二维码一共有40个尺寸。官方叫版本Version。Version 1是21 x 21的矩阵，Version 2是 25 x 25的矩阵，Version 3是29的尺寸，每增加一个version，就会增加4的尺寸，公式是：(V-1)*4 + 21（V是版本号） 最高Version 40，(40-1)*4+21 = 177，所以最高是177 x 177 的正方形。</p>
 <p>下面我们看看一个二维码的样例：</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10592" height="370" src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview.jpeg" width="616" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10592" height="370" src="../wp-content/uploads/2013/10/QR-Code-Overview.jpeg" width="616"/></p>
 <p style="text-align: left;"><span id="more-10590"></span></p>
 <h5 style="text-align: left;">定位图案</h5>
 <ul>
@@ -29,11 +29,11 @@
 <h4>数据编码</h4>
 <p>我们先来说说数据编码。QR码支持如下的编码：</p>
 <p><strong>Numeric mode</strong> 数字编码，从0到9。如果需要编码的数字的个数不是3的倍数，那么，最后剩下的1或2位数会被转成4或7bits，则其它的每3位数字会被编成 10，12，14bits，编成多长还要看二维码的尺寸（下面有一个表Table 3说明了这点）</p>
-<p><strong>Alphanumeric mode</strong> 字符编码。包括 0-9，大写的A到Z（没有小写），以及符号$ % * + &#8211; . / : 包括空格。这些字符会映射成一个字符索引表。如下所示：（其中的SP是空格，Char是字符，Value是其索引值） 编码的过程是把字符两两分组，然后转成下表的45进制，然后转成11bits的二进制，如果最后有一个落单的，那就转成6bits的二进制。而编码模式和字符的个数需要根据不同的Version尺寸编成9, 11或13个二进制（如下表中Table 3）</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10594" height="121" src="https://coolshell.cn/wp-content/uploads/2013/10/Alphanumeric-mode.png" width="549" /></p>
+<p><strong>Alphanumeric mode</strong> 字符编码。包括 0-9，大写的A到Z（没有小写），以及符号$ % * + – . / : 包括空格。这些字符会映射成一个字符索引表。如下所示：（其中的SP是空格，Char是字符，Value是其索引值） 编码的过程是把字符两两分组，然后转成下表的45进制，然后转成11bits的二进制，如果最后有一个落单的，那就转成6bits的二进制。而编码模式和字符的个数需要根据不同的Version尺寸编成9, 11或13个二进制（如下表中Table 3）</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10594" height="121" src="../wp-content/uploads/2013/10/Alphanumeric-mode.png" width="549"/></p>
 <p><strong>Byte mode</strong>, 字节编码，可以是0-255的ISO-8859-1字符。有些二维码的扫描器可以自动检测是否是UTF-8的编码。</p>
 <p><strong>Kanji mode</strong> 这是日文编码，也是双字节编码。同样，也可以用于中文编码。日文和汉字的编码会减去一个值。如：在0X8140 to 0X9FFC中的字符会减去8140，在0XE040到0XEBBF中的字符要减去0XC140，然后把结果前两个16进制位拿出来乘以0XC0，然后再加上后两个16进制位，最后转成13bit的编码。如下图示例：</p>
-<p style="text-align: center;"><img alt="" class="aligncenter  wp-image-10595" height="174" src="https://coolshell.cn/wp-content/uploads/2013/10/Kanji-mode.png" width="600" /></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-10595" height="174" src="../wp-content/uploads/2013/10/Kanji-mode.png" width="600"/></p>
 <p><strong>Extended Channel Interpretation (ECI) mode</strong> 主要用于特殊的字符集。并不是所有的扫描器都支持这种编码。</p>
 <p><strong>Structured Append mode</strong> 用于混合编码，也就是说，这个二维码中包含了多种编码格式。</p>
 <p><strong>FNC1 mode</strong> 这种编码方式主要是给一些特殊的工业或行业用的。比如GS1条形码之类的。</p>
@@ -45,7 +45,7 @@
 <ul>
 <li>Table 3 表示了，不同版本（尺寸）的二维码，对于，数字，字符，字节和Kanji模式下，对于单个编码的2进制的位数。（在二维码的规格说明书中，有各种各样的编码规范表，后面还会提到）</li>
 </ul>
-<p><img alt="" class="aligncenter size-full wp-image-10596" height="332" src="https://coolshell.cn/wp-content/uploads/2013/10/Mode-Indicator.png" width="442" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10596" height="332" src="../wp-content/uploads/2013/10/Mode-Indicator.png" width="442"/></p>
 <p>下面我们看几个示例，</p>
 <h5>示例一：数字编码</h5>
 <p style="padding-left: 30px;">在Version 1的尺寸下，纠错级别为H的情况下，编码： 01234567</p>
@@ -59,8 +59,8 @@
 <p style="padding-left: 30px;">1. 从字符索引表中找到 AC-42 这五个字条的索引 (10,12,41,4,2)</p>
 <p style="padding-left: 30px;">2. 两两分组: (10,12) (41,4) (2)</p>
 <p style="padding-left: 30px;">3.把每一组转成11bits的二进制:</p>
-<p style="padding-left: 60px;">(10,12) 10*45+12 等于 462 转成 00111001110<br />
-(41,4) 41*45+4 等于 1849 转成 11100111001<br />
+<p style="padding-left: 60px;">(10,12) 10*45+12 等于 462 转成 00111001110<br/>
+(41,4) 41*45+4 等于 1849 转成 11100111001<br/>
 (2) 等于 2 转成 000010</p>
 <p style="padding-left: 30px;">4. 把这些二进制连接起来：00111001110 11100111001 000010</p>
 <p style="padding-left: 30px;">5. 把字符的个数转成二进制 (Version 1-H为9 bits ): 5个字符，5转成 000000101</p>
@@ -138,7 +138,7 @@
 <ul>
 <li><strong>Error Correction Code Per Blocks</strong>：每一个块中的code个数，所谓的code的个数，也就是有多少个8bits的字节。</li>
 </ul>
-<p><img alt="" class="aligncenter size-full wp-image-10600" height="308" src="https://coolshell.cn/wp-content/uploads/2013/10/Error-Correction-Blocks.png" width="576" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10600" height="308" src="../wp-content/uploads/2013/10/Error-Correction-Blocks.png" width="576"/></p>
 <p>举个例子：上述的Version 5 + Q纠错级：需要4个Blocks（2个Blocks为一组，共两组），头一组的两个Blocks中各15个bits数据 + 各 9个bits的纠错码（注：表中的codewords就是一个8bits的byte）（再注：最后一例中的（c, k, r ）的公式为：c = k + 2 * r，因为后脚注解释了：纠错码的容量小于纠错码的一半）</p>
 <p>下图给一个5-Q的示例（因为二进制写起来会让表格太大，所以，我都用了十进制，我们可以看到每一块的纠错码有18个codewords，也就是18个8bits的二进制数）</p>
 <table>
@@ -359,22 +359,22 @@
 <h4>画二维码图</h4>
 <h5>Position Detection Pattern</h5>
 <p>首先，先把Position Detection图案画在三个角上。（无论Version如何，这个图案的尺寸就是这么大）</p>
-<p><img alt="" class="aligncenter" height="141" src="https://coolshell.cn/wp-content/uploads/2013/10/finder.png" width="99" /></p>
+<p><img alt="" class="aligncenter" height="141" src="../wp-content/uploads/2013/10/finder.png" width="99"/></p>
 <h5>Alignment Pattern</h5>
 <p>然后，再把Alignment图案画上（无论Version如何，这个图案的尺寸就是这么大）</p>
-<p><img alt="" class="aligncenter" height="91" src="https://coolshell.cn/wp-content/uploads/2013/10/alignment-pattern.png" width="68" /></p>
+<p><img alt="" class="aligncenter" height="91" src="../wp-content/uploads/2013/10/alignment-pattern.png" width="68"/></p>
 <p>关于Alignment的位置，可以查看<a href="http://raidenii.net/files/datasheets/misc/qr_code.pdf" target="_blank">QR Code Spec</a>的第81页的Table-E.1的定义表（下表是不完全表格）</p>
-<p><img alt="" class="aligncenter size-full wp-image-10613" height="239" src="https://coolshell.cn/wp-content/uploads/2013/10/Alignment-Position.png" width="582" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10613" height="239" src="../wp-content/uploads/2013/10/Alignment-Position.png" width="582"/></p>
 <p>下图是根据上述表格中的Version8的一个例子（6，24，42）</p>
-<p><img alt="" class="aligncenter size-full wp-image-10606" height="288" src="https://coolshell.cn/wp-content/uploads/2013/10/alignment-example.png" width="241" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10606" height="288" src="../wp-content/uploads/2013/10/alignment-example.png" width="241"/></p>
 <h5>Timing Pattern</h5>
 <p>接下来是Timing Pattern的线（这个不用多说了）</p>
-<p style="text-align: center;"><strong><img alt="" class="aligncenter" height="258" src="https://coolshell.cn/wp-content/uploads/2013/10/Timing-Pattern.png" width="596" /></strong></p>
+<p style="text-align: center;"><strong><img alt="" class="aligncenter" height="258" src="../wp-content/uploads/2013/10/Timing-Pattern.png" width="596"/></strong></p>
 <h5>Format Information</h5>
 <p>再接下来是Formation Information，下图中的蓝色部分。</p>
-<p style="text-align: left;"><img alt="" class="aligncenter  wp-image-10610" height="199" src="https://coolshell.cn/wp-content/uploads/2013/10/Format-Information.png" width="352" /></p>
+<p style="text-align: left;"><img alt="" class="aligncenter wp-image-10610" height="199" src="../wp-content/uploads/2013/10/Format-Information.png" width="352"/></p>
 <p style="text-align: left;">Format Information是一个15个bits的信息，每一个bit的位置如下图所示：（注意图中的Dark Module，那是永远出现的）</p>
-<p style="text-align: left;"><img alt="" class="aligncenter size-full wp-image-10630" height="381" src="https://coolshell.cn/wp-content/uploads/2013/10/Format-Info-bits-postion.png" width="363" /></p>
+<p style="text-align: left;"><img alt="" class="aligncenter size-full wp-image-10630" height="381" src="../wp-content/uploads/2013/10/Format-Info-bits-postion.png" width="363"/></p>
 <p style="text-align: left;">这15个bits中包括：</p>
 <ul>
 <li>5个数据bits：其中，2个bits用于表示使用什么样的Error Correction Level， 3个bits表示使用什么样的Mask</li>
@@ -382,27 +382,27 @@
 </ul>
 <p>然后15个bits还要与101010000010010做XOR操作。这样就保证不会因为我们选用了00的纠错级别和000的Mask，从而造成全部为白色，这会增加我们的扫描器的图像识别的困难。</p>
 <p>下面是一个示例：</p>
-<p><img alt="" class="aligncenter size-full wp-image-10631" height="116" src="https://coolshell.cn/wp-content/uploads/2013/10/Format-Information-Example.png" width="376" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10631" height="116" src="../wp-content/uploads/2013/10/Format-Information-Example.png" width="376"/></p>
 <p>关于Error Correction Level如下表所示：</p>
-<p><img alt="" class="aligncenter size-full wp-image-10632" height="114" src="https://coolshell.cn/wp-content/uploads/2013/10/Error-Correction-Indicator-Code.png" width="253" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10632" height="114" src="../wp-content/uploads/2013/10/Error-Correction-Indicator-Code.png" width="253"/></p>
 <p>关于Mask图案如后面的Table 23所示。</p>
 <h5 style="text-align: left;">Version Information</h5>
-<p style="text-align: left;">再接下来是Version Information（版本7以后需要这个编码），下图中的蓝色部分。<br />
-<img alt="" class="aligncenter  wp-image-10612" height="254" src="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information.png" width="508" /></p>
+<p style="text-align: left;">再接下来是Version Information（版本7以后需要这个编码），下图中的蓝色部分。<br/>
+<img alt="" class="aligncenter wp-image-10612" height="254" src="../wp-content/uploads/2013/10/Version-Information.png" width="508"/></p>
 <p>Version Information一共是18个bits，其中包括6个bits的版本号以及12个bits的纠错码，下面是一个示例：</p>
-<p><img alt="" class="aligncenter size-full wp-image-10634" height="63" src="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Example.png" width="405" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10634" height="63" src="../wp-content/uploads/2013/10/Version-Information-Example.png" width="405"/></p>
 <p>而其填充位置如下：</p>
-<p><img alt="" class="aligncenter size-full wp-image-10635" height="149" src="https://coolshell.cn/wp-content/uploads/2013/10/Version-Information-Position.png" width="425" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10635" height="149" src="../wp-content/uploads/2013/10/Version-Information-Position.png" width="425"/></p>
 <h5>数据和数据纠错码</h5>
 <p>然后是填接我们的最终编码，最终编码的填充方式如下：从左下角开始沿着红线填我们的各个bits，1是黑色，0是白色。如果遇到了上面的非数据区，则绕开或跳过。</p>
-<p><img alt="" class="aligncenter" height="372" src="https://coolshell.cn/wp-content/uploads/2013/10/Data-Placement.png" width="348" /></p>
+<p><img alt="" class="aligncenter" height="372" src="../wp-content/uploads/2013/10/Data-Placement.png" width="348"/></p>
 <h5>掩码图案</h5>
 <p>这样下来，我们的图就填好了，但是，也许那些点并不均衡，如果出现大面积的空白或黑块，会告诉我们扫描识别的困难。所以，我们还要做Masking操作（靠，还嫌不复杂）QR的Spec中说了，QR有8个Mask你可以使用，如下所示：其中，各个mask的公式在各个图下面。所谓mask，说白了，就是和上面生成的图做XOR操作。Mask只会和数据区进行XOR，不会影响功能区。（<strong>注：选择一个合适的Mask也是有算法的</strong>）</p>
-<p><img alt="" class="aligncenter size-full wp-image-10614" height="274" src="https://coolshell.cn/wp-content/uploads/2013/10/masking-pattern.png" width="494" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10614" height="274" src="../wp-content/uploads/2013/10/masking-pattern.png" width="494"/></p>
 <p>其Mask的标识码如下所示：（其中的i,j分别对应于上图的x,y）</p>
-<p><img alt="" class="aligncenter size-full wp-image-10633" height="181" src="https://coolshell.cn/wp-content/uploads/2013/10/Mask-Pattern-Code.png" width="416" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10633" height="181" src="../wp-content/uploads/2013/10/Mask-Pattern-Code.png" width="416"/></p>
 <p>下面是Mask后的一些样子，我们可以看到被某些Mask XOR了的数据变得比较零散了。</p>
-<p><img alt="" class="aligncenter size-full wp-image-10615" height="446" src="https://coolshell.cn/wp-content/uploads/2013/10/Masking-Examples.png" width="616" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-10615" height="446" src="../wp-content/uploads/2013/10/Masking-Examples.png" width="616"/></p>
 <p>Mask过后的二维码就成最终的图了。</p>
 <p>好了，大家可以去尝试去写一下QR的编码程序，当然，你可以用网上找个Reed Soloman的纠错算法的库，或是看看别人的源代码是怎么实现这个繁锁的编码。</p>
 <p>（全文完）<!--
@@ -421,7 +421,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10427.html"><img alt="伙伴分配器的一个极简实现" height="150" src="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9886.html"><img alt="二叉树迭代器算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="../wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="../wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10427.html"><img alt="伙伴分配器的一个极简实现" height="150" src="../wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9886.html"><img alt="二叉树迭代器算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

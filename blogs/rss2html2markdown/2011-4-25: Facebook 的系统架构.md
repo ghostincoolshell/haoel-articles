@@ -108,10 +108,10 @@ type: post
 
 ### 相关文章
 
-* [![Quora使用到的技术](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
-* [![关于Facebook 的 React 专利许可证](https://coolshell.cn/wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg)](https://coolshell.cn/articles/18140.html)[关于Facebook 的 React 专利许可证](https://coolshell.cn/articles/18140.html)
-* [![扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/7448.html)[扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/articles/7448.html)
-* [![Stack Exchange 的架构](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg)](https://coolshell.cn/articles/3721.html)[Stack Exchange 的架构](https://coolshell.cn/articles/3721.html)
-* [![Facebook全球关系网](https://coolshell.cn/wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png)](https://coolshell.cn/articles/3396.html)[Facebook全球关系网](https://coolshell.cn/articles/3396.html)
-* [![30种时尚的CSS网站导航条](https://coolshell.cn/wp-content/uploads/2009/04/13-09_menu_menu-150x150.jpg)](https://coolshell.cn/articles/562.html)[30种时尚的CSS网站导航条](https://coolshell.cn/articles/562.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
+* [![关于Facebook 的 React 专利许可证](../wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg)](https://coolshell.cn/articles/18140.html)[关于Facebook 的 React 专利许可证](https://coolshell.cn/articles/18140.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/7448.html)[扎克伯格的一封信：关于Facebook IPO](https://coolshell.cn/articles/7448.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg](https://coolshell.cn/articles/3721.html)[Stack Exchange 的架构](https://coolshell.cn/articles/3721.html)
+* [![Facebook全球关系网](../wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png)](https://coolshell.cn/articles/3396.html)[Facebook全球关系网](https://coolshell.cn/articles/3396.html)
+* [![30种时尚的CSS网站导航条](../wp-content/uploads/2009/04/13-09_menu_menu-150x150.jpg)](https://coolshell.cn/articles/562.html)[30种时尚的CSS网站导航条](https://coolshell.cn/articles/562.html)
 The post [Facebook 的系统架构](https://coolshell.cn/articles/4549.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

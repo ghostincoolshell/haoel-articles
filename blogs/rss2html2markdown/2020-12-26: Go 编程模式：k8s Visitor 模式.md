@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-265x300.png)本篇文章主要想讨论一下，Kubernetes 的 `kubectl` 命令中的使用到到的一个编程模式 – Visitor（注：其实，`kubectl` 主要使用到了两个一个是Builder，另一个是Visitor）。本来，Visitor 是面向对象设计模英中一个很重要的设计模款（参看Wikipedia [Visitor Pattern词条](https://en.wikipedia.org/wiki/Visitor_pattern)），这个模式是一种将算法与操作对象的结构分离的一种方法。这种分离的实际结果是能够在不修改结构的情况下向现有对象结构添加新操作，是遵循开放/封闭原则的一种方法。这篇文章我们重点看一下 `kubelet` 中是怎么使用函数式的方法来实现这个模式的。
+![](../wp-content/uploads/2020/12/go.k8s-265x300.png)本篇文章主要想讨论一下，Kubernetes 的 `kubectl` 命令中的使用到到的一个编程模式 – Visitor（注：其实，`kubectl` 主要使用到了两个一个是Builder，另一个是Visitor）。本来，Visitor 是面向对象设计模英中一个很重要的设计模款（参看Wikipedia [Visitor Pattern词条](https://en.wikipedia.org/wiki/Visitor_pattern)），这个模式是一种将算法与操作对象的结构分离的一种方法。这种分离的实际结果是能够在不修改结构的情况下向现有对象结构添加新操作，是遵循开放/封闭原则的一种方法。这篇文章我们重点看一下 `kubelet` 中是怎么使用函数式的方法来实现这个模式的。
 
 
 ### 本文是全系列中第9 / 10篇：[Go编程模式](https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f)
@@ -383,10 +383,10 @@ v.Visit(LoadFile)
 
 ### 相关文章
 
-* [![Go编程模式 ： 泛型编程](https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
-* [![Go编程模式：Pipeline](https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png)](https://coolshell.cn/articles/21228.html)[Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html)
-* [![Go编程模式：委托和反转控制](https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
-* [![Go 编程模式：Go Generation](https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png)](https://coolshell.cn/articles/21179.html)[Go 编程模式：Go Generation](https://coolshell.cn/articles/21179.html)
-* [![Go编程模式：Map-Reduce](https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png)](https://coolshell.cn/articles/21164.html)[Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html)
-* [![Go 编程模式：Functional Options](https://coolshell.cn/wp-content/uploads/2020/12/go.options-150x150.png)](https://coolshell.cn/articles/21146.html)[Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html)
+* [![Go编程模式 ： 泛型编程](../wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
+* [![Go编程模式：Pipeline](../wp-content/uploads/2020/12/go.line_.-150x150.png)](https://coolshell.cn/articles/21228.html)[Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html)
+* [![Go编程模式：委托和反转控制](../wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
+* [![Go 编程模式：Go Generation](../wp-content/uploads/2020/12/go.generate-150x150.png)](https://coolshell.cn/articles/21179.html)[Go 编程模式：Go Generation](https://coolshell.cn/articles/21179.html)
+* [![Go编程模式：Map-Reduce](../wp-content/uploads/2020/12/go.map_.reduce-150x150.png)](https://coolshell.cn/articles/21164.html)[Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html)
+* [![Go 编程模式：Functional Options](../wp-content/uploads/2020/12/go.options-150x150.png)](https://coolshell.cn/articles/21146.html)[Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html)
 The post [Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

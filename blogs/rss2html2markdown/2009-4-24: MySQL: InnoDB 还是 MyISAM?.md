@@ -34,7 +34,7 @@ MyISAM 是MySQL中默认的存储引擎，一般来说不是有太多人关心�
 所以，到底你检使用哪一个呢？根据经验来看，如果是一些小型的应用或项目，那么MyISAM 也许会更适合。当然，在大型的环境下使用MyISAM 也会有很大成功的时候，但却不总是这样的。如果你正在计划使用一个超大数据量的项目，而且需要事务处理或外键支持，那么你真的应该直接使用InnoDB方式。但需要记住InnoDB 的表需要更多的内存和存储，转换100GB 的MyISAM 表到InnoDB 表可能会让你有非常坏的体验。
 
 
-![](http://blog.inetu.net/wp-content/plugins/wp-spamfree/img/wpsf-img.php)
+http://blog.inetu.net/wp-content/plugins/wp-spamfree/img/wpsf-img.php
 
 
 文章：[来源](http://blog.inetu.net/2009/04/mysql-innodb-or-myisam/)
@@ -48,10 +48,10 @@ MyISAM 是MySQL中默认的存储引擎，一般来说不是有太多人关心�
 
 ### 相关文章
 
-* [![MySQL性能优化的最佳20+条经验](https://coolshell.cn/wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg)](https://coolshell.cn/articles/1846.html)[MySQL性能优化的最佳20+条经验](https://coolshell.cn/articles/1846.html)
-* [![性能调优攻略](https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
-* [![NoSQL 数据建模技术](https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png)](https://coolshell.cn/articles/7270.html)[NoSQL 数据建模技术](https://coolshell.cn/articles/7270.html)
-* [![千万别用MongoDB？真的吗？！](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg)](https://coolshell.cn/articles/5826.html)[千万别用MongoDB？真的吗？！](https://coolshell.cn/articles/5826.html)
-* [![Quora使用到的技术](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
-* [![开源中最好的Web开发的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
+* [![MySQL性能优化的最佳20+条经验](../wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg)](https://coolshell.cn/articles/1846.html)[MySQL性能优化的最佳20+条经验](https://coolshell.cn/articles/1846.html)
+* [![性能调优攻略](../wp-content/uploads/2012/06/f1-150x150.jpg)](https://coolshell.cn/articles/7490.html)[性能调优攻略](https://coolshell.cn/articles/7490.html)
+* [![NoSQL 数据建模技术](../wp-content/uploads/2012/05/overview2-1-150x150.png)](https://coolshell.cn/articles/7270.html)[NoSQL 数据建模技术](https://coolshell.cn/articles/7270.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg](https://coolshell.cn/articles/5826.html)[千万别用MongoDB？真的吗？！](https://coolshell.cn/articles/5826.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4795.html)[开源中最好的Web开发的资源](https://coolshell.cn/articles/4795.html)
 The post [MySQL: InnoDB 还是 MyISAM?](https://coolshell.cn/articles/652.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

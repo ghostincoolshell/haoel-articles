@@ -11,7 +11,7 @@ type: post
 原文链接《[How Google Inbox shares 70% of its code across Android, iOS, and the Web](http://arstechnica.com/information-technology/2014/11/how-google-inbox-shares-70-of-its-code-across-android-ios-and-the-web)》
 
 
-[![inbox2-640x264](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-300x123.jpg)](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264.jpg)
+[![inbox2-640x264](../wp-content/uploads/2014/11/inbox2-640x264-300x123.jpg)](https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264.jpg)
 
 
 开发一个移动应用在当下并不是一件容易的事情。如果想要获得最多的用户，你的应用通常需要覆盖 iOS, Android, 和 Web 三大平台。这就意味着同一个应用需要开发三个版本，使用 Objective-C 或者 Swift 开发 iOS 版本，使用 Java 开发 Android 版本，使用 JavaScript/CSS/HTML5 开发 Web 版本。工作量增大的同时也意味着有更多的 bug 需要修复。
@@ -51,10 +51,10 @@ Google 使用的整套方法解决了跨平台移动开发中的一个很重要�
 
 ### 相关文章
 
-* [![DHH 谈混合移动应用开发](https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
-* [![关于移动端的钓鱼式攻击](https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
-* [![来信， 创业 和 移动互联网](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
-* [![一些文章和各种资源](https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
-* [![Android将允许纯C/C++开发应用](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/3549.html)[Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html)
-* [![Google App Inventor ](https://coolshell.cn/wp-content/uploads/2010/07/androidappinventor-150x150.jpg)](https://coolshell.cn/articles/2608.html)[Google App Inventor](https://coolshell.cn/articles/2608.html)
+* [![DHH 谈混合移动应用开发](../wp-content/uploads/2014/12/1053-DHH-150x150.jpg)](https://coolshell.cn/articles/12225.html)[DHH 谈混合移动应用开发](https://coolshell.cn/articles/12225.html)
+* [![关于移动端的钓鱼式攻击](../wp-content/uploads/2015/04/phishing-1-150x150.jpg)](https://coolshell.cn/articles/17066.html)[关于移动端的钓鱼式攻击](https://coolshell.cn/articles/17066.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/5815.html)[来信， 创业 和 移动互联网](https://coolshell.cn/articles/5815.html)
+* [![一些文章和各种资源](../wp-content/uploads/2011/09/image008-150x150.jpg)](https://coolshell.cn/articles/5224.html)[一些文章和各种资源](https://coolshell.cn/articles/5224.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/3549.html)[Android将允许纯C/C++开发应用](https://coolshell.cn/articles/3549.html)
+* [![Google App Inventor ](../wp-content/uploads/2010/07/androidappinventor-150x150.jpg)](https://coolshell.cn/articles/2608.html)[Google App Inventor](https://coolshell.cn/articles/2608.html)
 The post [Google Inbox如何跨平台重用代码？](https://coolshell.cn/articles/12136.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

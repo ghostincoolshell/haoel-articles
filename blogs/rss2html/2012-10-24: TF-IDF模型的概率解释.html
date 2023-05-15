@@ -1,6 +1,6 @@
-<p><strong><span style="color: #cc0000;">（感谢 </span></strong><a href="http://weibo.com/weidagang" target="_blank">@猫叔shiro</a><strong><span style="color: #cc0000;">（以前的todd） 投递此文）</span></strong></p>
+<html><body><p><strong><span style="color: #cc0000;">（感谢 </span></strong><a href="http://weibo.com/weidagang" target="_blank">@猫叔shiro</a><strong><span style="color: #cc0000;">（以前的todd） 投递此文）</span></strong></p>
 <h4>信息检索概述</h4>
-<p>信息检索是当前应用十分广泛的一种技术，论文检索、搜索引擎都属于信息检索的范畴。通常，人们把信息检索问题抽象为：在文档集合D上，对于由关键词w[1] &#8230; w[k]组成的查询串q，返回一个按查询q和文档d匹配度relevance(q, d)排序的相关文档列表D&#8217;。</p>
+<p>信息检索是当前应用十分广泛的一种技术，论文检索、搜索引擎都属于信息检索的范畴。通常，人们把信息检索问题抽象为：在文档集合D上，对于由关键词w[1] … w[k]组成的查询串q，返回一个按查询q和文档d匹配度relevance(q, d)排序的相关文档列表D’。</p>
 <p>对于这一问题，先后出现了布尔模型、向量模型等各种经典的信息检索模型，它们从不同的角度提出了自己的一套解决方案。布尔模型以集合的布尔运算为基础，查询效率高，但模型过于简单，无法有效地对不同文档进行排序，查询效果不佳。向量模型把文档和查询串都视为词所构成的多维向量，而文档与查询的相关性即对应于向量间的夹角。不过，由于通常词的数量巨大，向量维度非常高，而大量的维度都是0，计算向量夹角的效果并不好。另外，庞大的计算量也使得向量模型几乎不具有在互联网搜索引擎这样海量数据集上实施的可行性。</p>
 <h4>tf-idf模型</h4>
 <p>目前，真正在搜索引擎等实际应用中广泛使用的是tf-idf模型。tf-idf模型的主要思想是：如果词w在一篇文档d中出现的频率高，并且在其他文档中很少出现，则认为词w具有很好的区分能力，适合用来把文章d和其他文章区分开来。该模型主要包含了两个因素：</p>
@@ -9,7 +9,7 @@
 <pre><code>tf(w,d) = count(w, d) / size(d) </code></pre>
 <p>2) 词w在整个文档集合中的逆向文档频率idf (Inverse Document Frequency)，即文档总数n与词w所出现文件数docs(w, D)比值的对数:</p>
 <pre><code>idf = log(n / docs(w, D)) </code></pre>
-<p>tf-idf模型根据tf和idf为每一个文档d和由关键词w[1]&#8230;w[k]组成的查询串q计算一个权值，用于表示查询串q与文档d的匹配度：</p>
+<p>tf-idf模型根据tf和idf为每一个文档d和由关键词w[1]…w[k]组成的查询串q计算一个权值，用于表示查询串q与文档d的匹配度：</p>
 <pre><code>
 tf-idf(q, d) 
 = sum { i = 1..k | tf-idf(w[i], d) } 
@@ -23,11 +23,11 @@ tf-idf(q, d)
 <p>4) 为什么多个关键词的tf-idf值是加法关系，而不是乘法或者指数关系？</p>
 <p>5) 除了tf-idf值，Google还会计算网页的PageRank值，二者相乘得到最后的权值，为什么是乘法，而不是加法或指数？</p>
 <p>据说，最初甚至tf-idf的提出者自己也没有对诸如“为什么idf是log形式”这个问题给出有力的解释，虽然后来有人从信息论的角度对idf的log形式给出了令人信服的解释，但是剩下的其他一些疑问仍然存在。在我了解的范围内，对于tf-idf模型还没有一个真正统一完整的理论解释。在试图为tf-idf找到更好的理论解释的过程中，我意识到对tf-idf模型种种疑问的根源在于tf-idf试图表达的“查询q和文档的匹配度”本身就有一定的模糊性，什么叫做“匹配度”，这就有很大的自由发挥空间。如果说向量模型的用向量夹角来表示匹配度概念还有一定的理论基础，那么用tf-idf来表达匹配度就有点“与其说是科学，不如说是艺术”的味道。</p>
-<p>更进一步，其实，信息检索问题的抽象方式“在文档集合D上，对于给定查询串q，返回一个按查询q和文档d匹配度relevance(q, d)排序的相关文档列表D&#8217;”本身是值得反思的。我们应当考虑抛弃“匹配度”这种模糊的目标，从根源上寻求一种具有明确数学意义的目标。如果我们从概率视角来看，<strong>把“查询串q和文档d的匹配度”问题转换为“当查询串是q时，用户期望获得文档d的概率”问题</strong>，信息检索问题就清晰多了。一方面这个概率描述是站在人的角度来看待信息检索问题的，更加贴近实际的用户体验；另一方面，概率本身是有明确数学意义的，这样我们就首先从目标上对问题进行了严格化。</p>
+<p>更进一步，其实，信息检索问题的抽象方式“在文档集合D上，对于给定查询串q，返回一个按查询q和文档d匹配度relevance(q, d)排序的相关文档列表D’”本身是值得反思的。我们应当考虑抛弃“匹配度”这种模糊的目标，从根源上寻求一种具有明确数学意义的目标。如果我们从概率视角来看，<strong>把“查询串q和文档d的匹配度”问题转换为“当查询串是q时，用户期望获得文档d的概率”问题</strong>，信息检索问题就清晰多了。一方面这个概率描述是站在人的角度来看待信息检索问题的，更加贴近实际的用户体验；另一方面，概率本身是有明确数学意义的，这样我们就首先从目标上对问题进行了严格化。</p>
 <p>下面，我将通过一个模型，从概率的视角，一边解释tf-idf的概率意义，一边指出其不合理之处。</p>
 <h4>盒子小球模型</h4>
 <p>为了分析“当查询串是q时，用户期望获得文档d的概率”问题，我首先建立了一种称为“盒子小球模型”的简化模型。盒子小球模型把词想象成各种不同颜色的小球，文档想象成装有若干小球的盒子，把“当查询串是q时，用户期望获得文档d的概率“转换为下面的问题：</p>
-<p><strong>有n个盒子d[1], d[2], &#8230; d[n]，每个盒子中有若干不同颜色的小球，有人随机地选择了一个盒子，并从盒子中随机地拿出了一个颜色为w[j]的小球，那么这个小球来自于盒子d[i]的概率是多少？</strong></p>
+<p><strong>有n个盒子d[1], d[2], … d[n]，每个盒子中有若干不同颜色的小球，有人随机地选择了一个盒子，并从盒子中随机地拿出了一个颜色为w[j]的小球，那么这个小球来自于盒子d[i]的概率是多少？</strong></p>
 <p>其实，这就是经典的条件概率问题P(d[i] | w[j])，采用贝叶斯推断将其转化为：</p>
 <pre><code>
 P(d[i] | w[j]) 
@@ -38,7 +38,7 @@ P(d[i] | w[j])
 <h4>文档先验概率P(d)与PageRank</h4>
 <p>首先，我们来看盒子d[i]被选中的先验概率P(d[i])是什么。P(d[i])的意义是：当用户什么也没有输入的时候，它可能对文档d[i]感兴趣的概率。在没有更多信息的情况下，我们可以认为每个盒子被选中的先验概率P(d[i])是相等的，都等于1 / m，其中m表示总文档数（总盒子数），这时P(d[i])作为公共系数可被忽略。不过，在实际应用中，我们通常可以根据其他知识获得各文档的先验概率，比如，学术文献和网页通常可以基于引用度模型计算其先验概率，这些经典论文和热门网页是多数人乐于见到的。说到这里，你可能已经发现，Google PageRank本质上就是这个先验概率P(d[i])乘以某个系数！所以，PageRank实际上也被纳入这个条件概率模型中来了，这就不难解释为什么在Google的排序算法中PageRank权重和tf-idf权重是一种乘积关系而不是加或者指数关系。另一方面，在理解了文档先验概率对整个搜索结果概率的影响后，当搜索引擎中针对PageRank出现各种假链接SEO时，我们可以不拘泥于基于链接引用模型的PageRank，只要是以网页先验概率为目标，不论是采用基于链接引用的PageRank，还是基于搜索结果点击数模型，或是其他模型，都是可以的。这就是“变通”，从原理上“通”了，就可以在方法上“变”。</p>
 <h4>词的先验概率P(w)</h4>
-<p>下面我们来考察词w[j]的先验概率P(w[j])。P(w[j])的意义是：在整个文档集合中，w[j]被作为搜索关键词的概率，比如：“iPhone 5”，“青花瓷”这类词被用作搜索关键词的概率较高，而“的”，“什么”，“我们”这类高频词不大可能成为搜索关键词。那么，我们如何来定量计算P(w[j])呢？一种思路就是把w[j]在文档集中出现的频率作为其先验概率。不过，显然存在更好的方案：在大量的搜索查询中进行统计，统计方法得出P(w[j])的方法很接近P(w[j])本质的，不需要引入额外的假设。比如，一段时间内某搜索引擎的搜索总次数为10^10次，“公积金”这个词出现了100次，那么，我们可以认为先验概率P(&#8220;公积金&#8221;)就是100 / 10^10 = 10^-8。</p>
+<p>下面我们来考察词w[j]的先验概率P(w[j])。P(w[j])的意义是：在整个文档集合中，w[j]被作为搜索关键词的概率，比如：“iPhone 5”，“青花瓷”这类词被用作搜索关键词的概率较高，而“的”，“什么”，“我们”这类高频词不大可能成为搜索关键词。那么，我们如何来定量计算P(w[j])呢？一种思路就是把w[j]在文档集中出现的频率作为其先验概率。不过，显然存在更好的方案：在大量的搜索查询中进行统计，统计方法得出P(w[j])的方法很接近P(w[j])本质的，不需要引入额外的假设。比如，一段时间内某搜索引擎的搜索总次数为10^10次，“公积金”这个词出现了100次，那么，我们可以认为先验概率P(“公积金”)就是100 / 10^10 = 10^-8。</p>
 <h4>词代表文档主题的条件概率P(w | d)</h4>
 <p>最后，我们来看条件概率P(w[j] | d[i])。P(w[j] | d[i])的意义是在文档d[i]中，人们用关键词w[j]来搜索它的概率。那么，什么样的词是人们会用来搜索一篇文档的呢？多数情况下，是那些代表一篇文档主题的词。比如，有一篇新闻是关于iPhone 5发布会的，那么“iPhone5”， “发布会”，“库克”，“苹果”这些词基本上就构成了文章的主题；那么，反过来说，如果用户想搜索这篇关于iPhone 5发布会的新闻，他就有很大的可能通过这几个词来进行搜索。我们应当注意分辨P(w[j] | d[i])与P(w[j])的区别，后者可以通过大量的查询统计得来，而前者不能与后者直接划等号，因为前者的意义是w[j]代表d[i]主题的概率。如果非要引入统计方法，那么P(w[j] | d[i])对应的统计是：当搜索关键词是w[j]且搜索结果包含d[i]时，用户点击（满意）d[i]作为搜索结果的频率。比如，用“iPhone5 发布会”的搜索，在结果中有都10000次出现了网页x，其中，用户8000次点击了网页x，那么，可以认为有80%的概率网页x的主题是关于“iPhone5 发布会”的。</p>
 <h4>词的信息量和idf</h4>
@@ -88,7 +88,6 @@ P(d[i] | w[x], w[y])
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17391.html"><img alt="为什么我不在微信公众号上写文章" height="150" src="https://coolshell.cn/wp-content/uploads/2016/07/Community-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17391.html">为什么我不在微信公众号上写文章</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10590.html"><img alt="二维码的生成细节和原理" height="150" src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8422.html">TF-IDF模型的概率解释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17391.html"><img alt="为什么我不在微信公众号上写文章" height="150" src="../wp-content/uploads/2016/07/Community-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17391.html">为什么我不在微信公众号上写文章</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="../wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="../wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10590.html"><img alt="二维码的生成细节和原理" height="150" src="../wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8422.html">TF-IDF模型的概率解释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

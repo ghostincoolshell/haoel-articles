@@ -85,10 +85,10 @@ fink的出现完全让我避开了以上问题，或许上述问题的出现有�
 
 ### 相关文章
 
-* [![苹果开发工具Xcode 4 第二预览版](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/2719.html)[苹果开发工具Xcode 4 第二预览版](https://coolshell.cn/articles/2719.html)
-* [![操作系统航空公司](https://coolshell.cn/wp-content/uploads/2009/08/linux_airline-150x150.jpg)](https://coolshell.cn/articles/1272.html)[操作系统航空公司](https://coolshell.cn/articles/1272.html)
-* [![菜鸟学PHP之Smarty入门](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg)](https://coolshell.cn/articles/559.html)[菜鸟学PHP之Smarty入门](https://coolshell.cn/articles/559.html)
-* [![6个有用的MySQL语句](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg)](https://coolshell.cn/articles/3433.html)[6个有用的MySQL语句](https://coolshell.cn/articles/3433.html)
-* [![一个人脸识别的Javascript](https://coolshell.cn/wp-content/uploads/2010/11/jpDEK-150x150.jpg)](https://coolshell.cn/articles/3254.html)[一个人脸识别的Javascript](https://coolshell.cn/articles/3254.html)
-* [![JavaMail使用](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg)](https://coolshell.cn/articles/4261.html)[JavaMail使用](https://coolshell.cn/articles/4261.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/2719.html)[苹果开发工具Xcode 4 第二预览版](https://coolshell.cn/articles/2719.html)
+* [![操作系统航空公司](../wp-content/uploads/2009/08/linux_airline-150x150.jpg)](https://coolshell.cn/articles/1272.html)[操作系统航空公司](https://coolshell.cn/articles/1272.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg](https://coolshell.cn/articles/559.html)[菜鸟学PHP之Smarty入门](https://coolshell.cn/articles/559.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg](https://coolshell.cn/articles/3433.html)[6个有用的MySQL语句](https://coolshell.cn/articles/3433.html)
+* [![一个人脸识别的Javascript](../wp-content/uploads/2010/11/jpDEK-150x150.jpg)](https://coolshell.cn/articles/3254.html)[一个人脸识别的Javascript](https://coolshell.cn/articles/3254.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg](https://coolshell.cn/articles/4261.html)[JavaMail使用](https://coolshell.cn/articles/4261.html)
 The post [[推荐]基于Mac的Port工具Fink](https://coolshell.cn/articles/1592.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

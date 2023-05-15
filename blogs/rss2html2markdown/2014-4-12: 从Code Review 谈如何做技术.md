@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2014/04/code_review-225x300.jpg)（这篇文章缘由我的微博，我想多说一些，有些杂乱，想到哪写到哪）
+![](../wp-content/uploads/2014/04/code_review-225x300.jpg)（这篇文章缘由我的微博，我想多说一些，有些杂乱，想到哪写到哪）
 
 
 这两天，在微博上表达了一下Code Review的重要性。因为翻看了阿里内部的Review Board上的记录，从上面发现Code Review做得好的是一些比较偏技术的团队，而偏业务的技术团队基本上没有看到Code Review的记录。当然，这并不能说没有记录他们就没有做Code Review，于是，我就问了一下以前在业务团队做过的同事有没有Code Review，他告诉我不但没有Code Review，而且他认为Code Review没用，因为：
@@ -192,10 +192,10 @@ type: post
 
 ### 相关文章
 
-* [![一个空格引发的惨剧](https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
-* [![聊聊团队协同和协同工具](https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![谈谈公司对员工的监控](https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
-* [![如何做一个有质量的技术分享](https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
-* [![程序员如何把控自己的职业](https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
+* [![一个空格引发的惨剧](../wp-content/uploads/2011/06/20110620115951113-150x150.gif)](https://coolshell.cn/articles/4875.html)[一个空格引发的惨剧](https://coolshell.cn/articles/4875.html)
+* [![聊聊团队协同和协同工具](../wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![谈谈公司对员工的监控](../wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
+* [![如何做一个有质量的技术分享](../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
+* [![程序员如何把控自己的职业](../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
 The post [从Code Review 谈如何做技术](https://coolshell.cn/articles/11432.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

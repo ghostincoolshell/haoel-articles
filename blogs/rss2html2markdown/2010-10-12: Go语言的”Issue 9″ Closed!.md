@@ -42,10 +42,10 @@ type: post
 
 ### 相关文章
 
-* [![Go语言更名Issue 9？](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg)](https://coolshell.cn/articles/1781.html)[Go语言更名Issue 9？](https://coolshell.cn/articles/1781.html)
-* [![Go语言源码的一个改动](https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg)](https://coolshell.cn/articles/1761.html)[Go语言源码的一个改动](https://coolshell.cn/articles/1761.html)
-* [![Go 语言：Google 的新编程语言](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/1751.html)[Go 语言：Google 的新编程语言](https://coolshell.cn/articles/1751.html)
-* [![我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
-* [![ETCD的内存问题](https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png)](https://coolshell.cn/articles/22242.html)[ETCD的内存问题](https://coolshell.cn/articles/22242.html)
-* [![Go编程模式 ： 泛型编程](https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg](https://coolshell.cn/articles/1781.html)[Go语言更名Issue 9？](https://coolshell.cn/articles/1781.html)
+* [![Go语言源码的一个改动](../wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg)](https://coolshell.cn/articles/1761.html)[Go语言源码的一个改动](https://coolshell.cn/articles/1761.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/1751.html)[Go 语言：Google 的新编程语言](https://coolshell.cn/articles/1751.html)
+* [![我看ChatGPT: 为啥谷歌掉了千亿美金](../wp-content/uploads/2023/02/chatgpt-150x150.jpg)](https://coolshell.cn/articles/22398.html)[我看ChatGPT: 为啥谷歌掉了千亿美金](https://coolshell.cn/articles/22398.html)
+* [![ETCD的内存问题](../wp-content/uploads/2022/05/etcd-150x150.png)](https://coolshell.cn/articles/22242.html)[ETCD的内存问题](https://coolshell.cn/articles/22242.html)
+* [![Go编程模式 ： 泛型编程](../wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
 The post [Go语言的”Issue 9″ Closed!](https://coolshell.cn/articles/3156.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

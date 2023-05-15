@@ -1,4 +1,4 @@
-<p><img alt="" class="alignright size-full wp-image-8899" height="225" src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225.jpg" width="300" />这篇文章来源于Quroa的一个问答《<a href="http://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#" target="_blank">What are some time-saving tips that every Linux user should know?</a>》—— Linux用户有哪些应该知道的提高效率的技巧。我觉得挺好的，总结得比较好，把其转过来，并加了一些自己的理解。 首先，我想告诉大家，<strong>在Unix/Linux下，最有效率技巧的不是操作图形界面，而是命令行操作，因为命令行意味着自动化</strong>。如果你看过《<a href="https://coolshell.cn/articles/8619.html" target="_blank" title="你可能不知道的Shell">你可能不知道的Shell</a>》以及《<a href="https://coolshell.cn/articles/7829.html" target="_blank" title="28个Unix/Linux的命令行神器">28个Unix/Linux的命令行神器</a>》你就会知道Linux有多强大，这个强大完全来自于命令行，于是，就算你不知道怎么去<a href="https://coolshell.cn/articles/7186.html" target="_blank" title="做个环保主义的程序员">做一个环保主义的程序员</a>，至少他们可以让你少熬点夜，从而有利于你的身体健康和性生活。下面是一个有点长的列表，正如作者所说，你并不需要知道所有的这些东西，但是如果你还在很沉重地在使用Linux的话，这些东西都值得你看一看。 （注：如果你想知道下面涉及到的命令的更多的用法，你一定要man一点。对于一些命令，你可以需要先yum或apt-get来安装一下，如果有什么问题，别忘了Google。如果你要Baidu的话，我仅代表这个地球上所有的生物包括微生物甚至细菌病毒和小强BS你到宇宙毁灭）</p>
+<html><body><p><img alt="" class="alignright size-full wp-image-8899" height="225" src="../wp-content/uploads/2013/01/linux-bash-300x225.jpg" width="300"/>这篇文章来源于Quroa的一个问答《<a href="http://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#" target="_blank">What are some time-saving tips that every Linux user should know?</a>》—— Linux用户有哪些应该知道的提高效率的技巧。我觉得挺好的，总结得比较好，把其转过来，并加了一些自己的理解。 首先，我想告诉大家，<strong>在Unix/Linux下，最有效率技巧的不是操作图形界面，而是命令行操作，因为命令行意味着自动化</strong>。如果你看过《<a href="https://coolshell.cn/articles/8619.html" target="_blank" title="你可能不知道的Shell">你可能不知道的Shell</a>》以及《<a href="https://coolshell.cn/articles/7829.html" target="_blank" title="28个Unix/Linux的命令行神器">28个Unix/Linux的命令行神器</a>》你就会知道Linux有多强大，这个强大完全来自于命令行，于是，就算你不知道怎么去<a href="https://coolshell.cn/articles/7186.html" target="_blank" title="做个环保主义的程序员">做一个环保主义的程序员</a>，至少他们可以让你少熬点夜，从而有利于你的身体健康和性生活。下面是一个有点长的列表，正如作者所说，你并不需要知道所有的这些东西，但是如果你还在很沉重地在使用Linux的话，这些东西都值得你看一看。 （注：如果你想知道下面涉及到的命令的更多的用法，你一定要man一点。对于一些命令，你可以需要先yum或apt-get来安装一下，如果有什么问题，别忘了Google。如果你要Baidu的话，我仅代表这个地球上所有的生物包括微生物甚至细菌病毒和小强BS你到宇宙毁灭）</p>
 <h4>基础</h4>
 <ul>
 <li><strong>学习 <a href="http://www.quora.com/Bash-shell" target="_blank">Bash</a> </strong>。你可以man bash来看看bash的东西，并不复杂也并不长。你用别的shell也行，但是bash是很强大的并且也是系统默认的。（学习zsh或tsch只会让你在很多情况下受到限制）</li>
@@ -14,7 +14,7 @@
 <li><strong>熟悉bash的作业管理</strong>，如： &amp;, Ctrl-Z, Ctrl-C, jobs, fg, bg, kill, 等等。当然，你也要知道Ctrl+\（SIGQUIT）和Ctrl+C （SIGINT）的区别。</li>
 </ul>
 <ul>
-<li><strong>简单的文件管理</strong> ： ls 和 ls -l (你最好知道 &#8220;ls -l&#8221; 的每一列的意思), less, head, tail 和 tail -f, ln 和 ln -s (你知道明白hard link和soft link的不同和优缺点), chown, chmod, du (如果你想看看磁盘的大小 du -sk *), df, mount。当然，原作者忘了find命令。</li>
+<li><strong>简单的文件管理</strong> ： ls 和 ls -l (你最好知道 “ls -l” 的每一列的意思), less, head, tail 和 tail -f, ln 和 ln -s (你知道明白hard link和soft link的不同和优缺点), chown, chmod, du (如果你想看看磁盘的大小 du -sk *), df, mount。当然，原作者忘了find命令。</li>
 </ul>
 <ul>
 <li><strong>基础的网络管理</strong>： ip 或 ifconfig, dig。当然，原作者还忘了如netstat, ping, traceroute, 等</li>
@@ -33,7 +33,7 @@
 <li>在 bash里，使用 Ctrl-W 来删除最后一个单词，使用 Ctrl-U 来删除一行。请man bash后查找Readline Key Bindings一节来看看bash的默认热键，比如：Alt-. 把上一次命令的最后一个参数打出来，而Alt-* 则列出你可以输入的命令。</li>
 </ul>
 <ul>
-<li>回到上一次的工作目录： cd &#8211;  （回到home是 cd ~）</li>
+<li>回到上一次的工作目录： cd –  （回到home是 cd ~）</li>
 </ul>
 <ul>
 <li>使用 xargs。这是一个很强大的命令。你可以使用-L来限定有多少个命令，也可以用-P来指定并行的进程数。如果你不知道你的命令会变成什么样，你可以使用xargs echo来看看会是什么样。当然， -I{} 也很好用。示例：</li>
@@ -70,16 +70,16 @@ cat hosts | xargs -I{} ssh root@{} hostname</pre>
 # continue in original dir</pre>
 </blockquote>
 <ul>
-<li>在 bash 中，注意那里有很多的变量展开。如：检查一个变量是否存在: ${name:?error message}。如果一个bash的脚本需要一个参数，也许就是这样一个表达式 input_file=${1:?usage: $0 input_file}。一个计算表达式： i=$(( (i + 1) % 5 ))。一个序列： {1..10}。 截断一个字符串： ${var%suffix} 和 ${var#prefix}。 示例： if var=foo.pdf, then echo ${var%.pdf}.txt prints &#8220;foo.txt&#8221;.</li>
+<li>在 bash 中，注意那里有很多的变量展开。如：检查一个变量是否存在: ${name:?error message}。如果一个bash的脚本需要一个参数，也许就是这样一个表达式 input_file=${1:?usage: $0 input_file}。一个计算表达式： i=$(( (i + 1) % 5 ))。一个序列： {1..10}。 截断一个字符串： ${var%suffix} 和 ${var#prefix}。 示例： if var=foo.pdf, then echo ${var%.pdf}.txt prints “foo.txt”.</li>
 </ul>
 <ul>
 <li>通过 &lt;(some command) 可以把某命令当成一个文件。示例：比较一个本地文件和远程文件 /etc/hosts： diff /etc/hosts &lt;(ssh somehost cat /etc/hosts)</li>
 </ul>
 <ul>
-<li>了解什么叫 &#8220;<a href="http://zh.wikipedia.org/wiki/Here%E6%96%87%E6%A1%A3" target="_blank">here documents</a>&#8221; ，就是诸如 cat &lt;&lt;EOF 这样的东西。</li>
+<li>了解什么叫 “<a href="http://zh.wikipedia.org/wiki/Here%E6%96%87%E6%A1%A3" target="_blank">here documents</a>” ，就是诸如 cat &lt;&lt;EOF 这样的东西。</li>
 </ul>
 <ul>
-<li>在 bash中，使用重定向到标准输出和标准错误。如： some-command &gt;logfile 2&gt;&amp;1。另外，要确认某命令没有把某个打开了的文件句柄重定向给标准输入，最佳实践是加上 &#8220;&lt;/dev/null&#8221;，把/dev/null重定向到标准输入。</li>
+<li>在 bash中，使用重定向到标准输出和标准错误。如： some-command &gt;logfile 2&gt;&amp;1。另外，要确认某命令没有把某个打开了的文件句柄重定向给标准输入，最佳实践是加上 “&lt;/dev/null”，把/dev/null重定向到标准输入。</li>
 </ul>
 <ul>
 <li>使用 man ascii 来查看 ASCII 表。</li>
@@ -137,7 +137,7 @@ cat a b b | sort | uniq -u &gt; c   # c is set difference a - b 差集</pre>
 <li>了解和字符集相关的命令行工具，包括排序和性能。很多的Linux安装程序都会设置LANG 或是其它和字符集相关的环境变量。这些东西可能会让一些命令（如：sort）的执行性能慢N多倍（注：就算是你用UTF-8编码文本文件，你也可以很安全地使用ASCII来对其排序）。如果你想Disable那个i18n 并使用传统的基于byte的排序方法，那就设置export LC_ALL=C （实际上，你可以把其放在 .bashrc）。如果这设置这个变量，你的sort命令很有可能会是错的。</li>
 </ul>
 <ul>
-<li>了解 awk 和 sed，并用他们来做一些简单的数据修改操作。例如：求第三列的数字之和： awk &#8216;{ x += $3 } END { print x }&#8217;。这可能会比Python快3倍，并比Python的代码少三倍。</li>
+<li>了解 awk 和 sed，并用他们来做一些简单的数据修改操作。例如：求第三列的数字之和： awk ‘{ x += $3 } END { print x }’。这可能会比Python快3倍，并比Python的代码少三倍。</li>
 </ul>
 <ul>
 <li>使用 shuf 来打乱一个文件中的行或是选择文件中一个随机的行。</li>
@@ -149,7 +149,7 @@ cat a b b | sort | uniq -u &gt; c   # c is set difference a - b 差集</pre>
 <li>Stable sort (sort -s) 会很有用。例如：如果你要想对两例排序，先是以第二列，然后再以第一列，那么你可以这样： sort -k1,1 | sort -s -k2,2</li>
 </ul>
 <ul>
-<li>我们知道，在bash命令行下，Tab键是用来做目录文件自动完成的事的。但是如果你想输入一个Tab字符（比如：你想在sort -t选项后输入&lt;tab&gt;字符），你可以先按Ctrl-V，然后再按Tab键，就可以输入&lt;tab&gt;字符了。当然，你也可以使用$&#8217;\t&#8217;。</li>
+<li>我们知道，在bash命令行下，Tab键是用来做目录文件自动完成的事的。但是如果你想输入一个Tab字符（比如：你想在sort -t选项后输入&lt;tab&gt;字符），你可以先按Ctrl-V，然后再按Tab键，就可以输入&lt;tab&gt;字符了。当然，你也可以使用$’\t’。</li>
 </ul>
 <ul>
 <li>如果你想查看二进制文件，你可以使用hd命令（在CentOS下是hexdump命令），如果你想编译二进制文件，你可以使用bvi命令（<a href="http://bvi.sourceforge.net/" target="_blank">http://bvi.sourceforge.net/</a> 墙）</li>
@@ -203,7 +203,7 @@ cat a b b | sort | uniq -u &gt; c   # c is set difference a - b 差集</pre>
 <ul>
 <li>使用 dmesg 来查看一些硬件或驱动程序的信息或问题。</li>
 </ul>
-<p>作者最后加了一个免责声明：Disclaimer: Just because you <i>can</i> do something in bash, doesn&#8217;t necessarily mean you should. ;) （全文完）<!--
+<p>作者最后加了一个免责声明：Disclaimer: Just because you <i>can</i> do something in bash, doesn’t necessarily mean you should. ;) （全文完）<!--
 
 
 
@@ -219,7 +219,6 @@ cat a b b | sort | uniq -u &gt; c   # c is set difference a - b 差集</pre>
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8619.html"><img alt="你可能不知道的Shell" height="150" src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8619.html">你可能不知道的Shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7829.html"><img alt="28个Unix/Linux的命令行神器" height="150" src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 &#8211; Shell 篇" height="150" src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 &#8211; Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8619.html"><img alt="你可能不知道的Shell" height="150" src="../wp-content/uploads/2012/11/shell.01-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8619.html">你可能不知道的Shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7829.html"><img alt="28个Unix/Linux的命令行神器" height="150" src="../wp-content/uploads/2012/07/dstat_screenshot-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="../wp-content/uploads/2013/02/awk-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

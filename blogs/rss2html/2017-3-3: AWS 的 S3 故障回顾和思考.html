@@ -1,4 +1,4 @@
-<p><img class="alignright wp-image-17738" height="197" src="https://coolshell.cn/wp-content/uploads/2017/03/Amazon-Web-Services-Down.png" width="360" />继<a href="https://coolshell.cn/articles/17680.html" target="_blank">Gitlab的误删除数据事件</a>没几天，“不沉航母” AWS S3 （Simple Storage Service）几天前也“沉”了4个小时，墙外的半个互联网也跟着挂了。如约，按 AWS 惯例，AWS今天给出了一个简单的故障报告《<span class="s1"><a href="https://aws.amazon.com/cn/message/41926/" target="_blank">Summary of the Amazon S3 Service Disruption in the Northern Virginia (US-EAST-1) Region</a>》。这个故障和简单来说和Gitlab一样，也是人员误操作。先简单的说一下这份报中说了什么。</span></p>
+<html><body><p><img class="alignright wp-image-17738" height="197" src="../wp-content/uploads/2017/03/Amazon-Web-Services-Down.png" width="360"/>继<a href="https://coolshell.cn/articles/17680.html" target="_blank">Gitlab的误删除数据事件</a>没几天，“不沉航母” AWS S3 （Simple Storage Service）几天前也“沉”了4个小时，墙外的半个互联网也跟着挂了。如约，按 AWS 惯例，AWS今天给出了一个简单的故障报告《<span class="s1"><a href="https://aws.amazon.com/cn/message/41926/" target="_blank">Summary of the Amazon S3 Service Disruption in the Northern Virginia (US-EAST-1) Region</a>》。这个故障和简单来说和Gitlab一样，也是人员误操作。先简单的说一下这份报中说了什么。</span></p>
 <h4>故障原因</h4>
 <p>简单来说，这天，有一个 AWS 工程师在调查 <span class="s1">Northern Virginia (US-EAST-1) Region 上 S3 的一个和账务系统相关的问题，这个问题是S3的账务系统变慢了（我估计这个故障在Amazon里可能是Sev2级，Sev2级的故障在Amazon算是比较大的故障，需要很快解决），Oncall的开发工程师（注：Amazon的运维都是由开发工程师来干的，所以Amazon内部嬉称SDE-Software Developer Engineer 为 Someone Do Everything）想移除一个账务系统里的一个子系统下的一些少量的服务器（估计这些服务器上有问题，所以想移掉后重新部署），结果呢，有一条命令搞错了，导致了移除了大量的S3的控制系统。包括两个很重要的子系统：</span></p>
 <p><span id="more-17737"></span></p>
@@ -24,12 +24,12 @@
 </ul>
 <p>2）<strong>改进恢复过程。</strong>对于恢复时间过长的问题，有如下改进：</p>
 <ul>
-<li><strong>分解现有厚重的重要服务成更小的单元</strong>（在 AWS，Service是大服务，小服务被称之为 Cell），AWS 会把这几个重要的服务重构成 Cell服务。（陈皓注：这应该就是所谓的“微服务”了吧）。这样，服务粒度变小，重启也会快一些，而且还可以减少故障面（原文：blast radius &#8211; 爆炸半径）</li>
+<li><strong>分解现有厚重的重要服务成更小的单元</strong>（在 AWS，Service是大服务，小服务被称之为 Cell），AWS 会把这几个重要的服务重构成 Cell服务。（陈皓注：这应该就是所谓的“微服务”了吧）。这样，服务粒度变小，重启也会快一些，而且还可以减少故障面（原文：blast radius – 爆炸半径）</li>
 </ul>
 <ul>
 <li><strong>今年内完成对 Index 索引服务的分区计划</strong>。</li>
 </ul>
-<p>&nbsp;</p>
+<p> </p>
 <h4>相关思考</h4>
 <p>下面是我对这一故障的相关思考——</p>
 <p>0）<strong>太喜欢像Gitlab和AWS这样的故障公开了</strong>，那怕是一个自己人为的低级错误。不掩盖，不文过饰非，透明且诚恳。Cool!</p>
@@ -46,7 +46,7 @@
 <p>这还是我老生长谈的那句话——<strong>如果你是一个技术公司，你就会更多的相信技术而不是管理。相信技术会用技术来解决问题，相信管理，那就只会有制度、流程和价值观来解决问题</strong>。（注意：这里我并没有隔离技术和管理，只是更为倾向于用技术解决问题）</p>
 <p><strong>最后，你是要建一个 “高可用的技术系统” ，还是一个 “高用的管理系统”？ ;-)</strong></p>
 <p>（全文完）</p>
-<p>&nbsp;<!--
+<p> <!--
 
 
 
@@ -62,7 +62,6 @@
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17680.html"><img alt="从Gitlab误删除数据库想到的" height="150" src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17680.html">从Gitlab误删除数据库想到的</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17459.html"><img alt="关于高可用的系统" height="150" src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17459.html">关于高可用的系统</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22422.html"><img alt="是微服务架构不香还是云不香？" height="150" src="https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22422.html">是微服务架构不香还是云不香？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21672.html"><img alt="我做系统架构的一些原则" height="150" src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21672.html">我做系统架构的一些原则</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17737.html">AWS 的 S3 故障回顾和思考</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17680.html"><img alt="从Gitlab误删除数据库想到的" height="150" src="../wp-content/uploads/2017/02/gitlab-600-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17680.html">从Gitlab误删除数据库想到的</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17459.html"><img alt="关于高可用的系统" height="150" src="../wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17459.html">关于高可用的系统</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22422.html"><img alt="是微服务架构不香还是云不香？" height="150" src="../wp-content/uploads/2023/05/monolith.microservices-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22422.html">是微服务架构不香还是云不香？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21672.html"><img alt="我做系统架构的一些原则" height="150" src="../wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21672.html">我做系统架构的一些原则</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17737.html">AWS 的 S3 故障回顾和思考</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -14,25 +14,25 @@ type: post
 首先，让我先看一下小的程序是怎么做的，呵呵，很简单，两步。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/01.Small_.jpg "01.Small")](https://coolshell.cn/wp-content/uploads/2010/09/01.Small_.jpg)
+[![](../wp-content/uploads/2010/09/01.Small_.jpg "01.Small")](https://coolshell.cn/wp-content/uploads/2010/09/01.Small_.jpg)
 
 
 接下来，就是我们最经典的Waterfall软件工程模型了，用户需求，软件需求，需求分析，设计，编码，测试，运维。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/02.Large_.jpg "02.Large")](https://coolshell.cn/wp-content/uploads/2010/09/02.Large_.jpg)
+[![](../wp-content/uploads/2010/09/02.Large_.jpg "02.Large")](https://coolshell.cn/wp-content/uploads/2010/09/02.Large_.jpg)
 
 
 为了保证每个步骤都能正确实施，于是，每个步骤之间需要有一定的交互，这是我们所希望的样子。
 
 
- [![](https://coolshell.cn/wp-content/uploads/2010/09/03.Iteraction.jpg "03.Iteraction")](https://coolshell.cn/wp-content/uploads/2010/09/03.Iteraction.jpg)
+ [![](../wp-content/uploads/2010/09/03.Iteraction.jpg "03.Iteraction")](https://coolshell.cn/wp-content/uploads/2010/09/03.Iteraction.jpg)
 
 
 然后，不幸的是，我们总是在测试的时候发现了设计甚至需求的问题，因此，不得不让我们返工。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/04.Design.jpg "04.Design")](https://coolshell.cn/wp-content/uploads/2010/09/04.Design.jpg)
+[![](../wp-content/uploads/2010/09/04.Design.jpg "04.Design")](https://coolshell.cn/wp-content/uploads/2010/09/04.Design.jpg)
 
 
 为了解决上面的“返工”问题，我们可以使用下面的几步来解决。
@@ -41,37 +41,37 @@ type: post
 第一步，叫Preliminary Design，程序设计先行，确定在进入需求分析之前，我们的概要设计要完整。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/05.01.Preliminary.Design.jpg "05.01.Preliminary.Design")](https://coolshell.cn/wp-content/uploads/2010/09/05.01.Preliminary.Design.jpg)
+[![](../wp-content/uploads/2010/09/05.01.Preliminary.Design.jpg "05.01.Preliminary.Design")](https://coolshell.cn/wp-content/uploads/2010/09/05.01.Preliminary.Design.jpg)
 
 
 第二步，我们叫Document Design，书写设计文档，确认我们的设计是完整的。看到了吧，总共6个文档，1）软件需求，2）概要设计，3）接口设计，4）各种最终设计，5）测试设计/计划，6）测试结果。流程开始变得复杂了。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/05.02.Documentation.jpg "05.02.Documentation")](https://coolshell.cn/wp-content/uploads/2010/09/05.02.Documentation.jpg)
+[![](../wp-content/uploads/2010/09/05.02.Documentation.jpg "05.02.Documentation")](https://coolshell.cn/wp-content/uploads/2010/09/05.02.Documentation.jpg)
 
 
 第三步，我们叫“Do it Twice”，双保险，把文档了的东西试着预先走一遍，看看能否成为最终产品。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/05.03.Double.Work_.jpg "05.03.Double.Work")](https://coolshell.cn/wp-content/uploads/2010/09/05.03.Double.Work_.jpg)
+[![](../wp-content/uploads/2010/09/05.03.Double.Work_.jpg "05.03.Double.Work")](https://coolshell.cn/wp-content/uploads/2010/09/05.03.Double.Work_.jpg)
 
 
 第四步，计划，控制和监控测试。哇，流程很乱了。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/05.04.Test_.jpg "05.04.Test")](https://coolshell.cn/wp-content/uploads/2010/09/05.04.Test_.jpg)
+[![](../wp-content/uploads/2010/09/05.04.Test_.jpg "05.04.Test")](https://coolshell.cn/wp-content/uploads/2010/09/05.04.Test_.jpg)
 
 
 第五步，用户介入，全程review各个环节。
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/05.05.Involve.Customer.jpg "05.05.Involve.Customer")](https://coolshell.cn/wp-content/uploads/2010/09/05.05.Involve.Customer.jpg) 
+[![](../wp-content/uploads/2010/09/05.05.Involve.Customer.jpg "05.05.Involve.Customer")](https://coolshell.cn/wp-content/uploads/2010/09/05.05.Involve.Customer.jpg) 
 
 
 好了，问题解决了，让我们看看最终的“无比强大的”——Waterfall软件工程模型！
 
 
-[![](https://coolshell.cn/wp-content/uploads/2010/09/06.Summary.jpg "06.Summary")](https://coolshell.cn/wp-content/uploads/2010/09/06.Summary.jpg)
+[![](../wp-content/uploads/2010/09/06.Summary.jpg "06.Summary")](https://coolshell.cn/wp-content/uploads/2010/09/06.Summary.jpg)
 
 
 现在，当你在使用waterfall开发软件的时候，知道为什么痛苦了吧，40年前就已经如此了。
@@ -87,10 +87,10 @@ type: post
 
 ### 相关文章
 
-* [![DEMO Spring 2010 获奖产品](https://coolshell.cn/wp-content/uploads/2010/03/Zosh-150x150.jpg)](https://coolshell.cn/articles/2191.html)[DEMO Spring 2010 获奖产品](https://coolshell.cn/articles/2191.html)
-* [![深入浅出CORBA](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/514.html)[深入浅出CORBA](https://coolshell.cn/articles/514.html)
-* [![用Python写NCurses UI](https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example-150x150.jpg)](https://coolshell.cn/articles/677.html)[用Python写NCurses UI](https://coolshell.cn/articles/677.html)
-* [![InfoQ的ArchSummit大会对我的采访](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/8031.html)[InfoQ的ArchSummit大会对我的采访](https://coolshell.cn/articles/8031.html)
-* [![十个让你变成糟糕的程序员的行为](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg)](https://coolshell.cn/articles/1081.html)[十个让你变成糟糕的程序员的行为](https://coolshell.cn/articles/1081.html)
-* [![两个C++的资源](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg)](https://coolshell.cn/articles/2365.html)[两个C++的资源](https://coolshell.cn/articles/2365.html)
+* [![DEMO Spring 2010 获奖产品](../wp-content/uploads/2010/03/Zosh-150x150.jpg)](https://coolshell.cn/articles/2191.html)[DEMO Spring 2010 获奖产品](https://coolshell.cn/articles/2191.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/514.html)[深入浅出CORBA](https://coolshell.cn/articles/514.html)
+* [![用Python写NCurses UI](../wp-content/uploads/2009/04/ncurses_example-150x150.jpg)](https://coolshell.cn/articles/677.html)[用Python写NCurses UI](https://coolshell.cn/articles/677.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/8031.html)[InfoQ的ArchSummit大会对我的采访](https://coolshell.cn/articles/8031.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg](https://coolshell.cn/articles/1081.html)[十个让你变成糟糕的程序员的行为](https://coolshell.cn/articles/1081.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg](https://coolshell.cn/articles/2365.html)[两个C++的资源](https://coolshell.cn/articles/2365.html)
 The post [Waterfall 软件工程](https://coolshell.cn/articles/2941.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

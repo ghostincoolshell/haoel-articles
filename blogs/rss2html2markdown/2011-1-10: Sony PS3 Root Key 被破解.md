@@ -51,10 +51,10 @@ pub: C2 D4 AA F3 19 35 50 19 AF 99 D4 4E 2B 58 CA 29 25 2C 89 12 3D 11 D6 21 8F 
 
 ### 相关文章
 
-* [![C 语言整型谜题](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg)](https://coolshell.cn/articles/1857.html)[C 语言整型谜题](https://coolshell.cn/articles/1857.html)
-* [![Go编程模式 ： 泛型编程](https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
-* [![PI小数点位数的新纪录](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg)](https://coolshell.cn/articles/2043.html)[PI小数点位数的新纪录](https://coolshell.cn/articles/2043.html)
-* [![编译vim解决中文支持](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg)](https://coolshell.cn/articles/1432.html)[编译vim解决中文支持](https://coolshell.cn/articles/1432.html)
-* [![Linux Distribution Timeline](https://coolshell.cn/wp-content/uploads/2009/03/gldt92-150x150.png)](https://coolshell.cn/articles/85.html)[Linux Distribution Timeline](https://coolshell.cn/articles/85.html)
-* [![如此理解面向对象编程](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg)](https://coolshell.cn/articles/8745.html)[如此理解面向对象编程](https://coolshell.cn/articles/8745.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg](https://coolshell.cn/articles/1857.html)[C 语言整型谜题](https://coolshell.cn/articles/1857.html)
+* [![Go编程模式 ： 泛型编程](../wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg](https://coolshell.cn/articles/2043.html)[PI小数点位数的新纪录](https://coolshell.cn/articles/2043.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg](https://coolshell.cn/articles/1432.html)[编译vim解决中文支持](https://coolshell.cn/articles/1432.html)
+* [![Linux Distribution Timeline](../wp-content/uploads/2009/03/gldt92-150x150.png)](https://coolshell.cn/articles/85.html)[Linux Distribution Timeline](https://coolshell.cn/articles/85.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg](https://coolshell.cn/articles/8745.html)[如此理解面向对象编程](https://coolshell.cn/articles/8745.html)
 The post [Sony PS3 Root Key 被破解](https://coolshell.cn/articles/3453.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

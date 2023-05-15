@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![](https://coolshell.cn/wp-content/uploads/2020/12/go.options-300x186.png)在本篇文章中，我们来讨论一下Functional Options这个编程模式。这是一个函数式编程的应用案例，编程技巧也很好，是目前在Go语言中最流行的一种编程模式。但是，在我们正式讨论这个模式之前，我们需要先来看看要解决什么样的问题。
+![](../wp-content/uploads/2020/12/go.options-300x186.png)在本篇文章中，我们来讨论一下Functional Options这个编程模式。这是一个函数式编程的应用案例，编程技巧也很好，是目前在Go语言中最流行的一种编程模式。但是，在我们正式讨论这个模式之前，我们需要先来看看要解决什么样的问题。
 
 
 ### 本文是全系列中第3 / 10篇：[Go编程模式](https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f)
@@ -312,10 +312,10 @@ s3, _ := NewServer("0.0.0.0", 8080, Timeout(300*time.Second), MaxConns(1000))
 
 ### 相关文章
 
-* [![Go编程模式：Map-Reduce](https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png)](https://coolshell.cn/articles/21164.html)[Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html)
-* [![Go编程模式：修饰器](https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png)](https://coolshell.cn/articles/17929.html)[Go编程模式：修饰器](https://coolshell.cn/articles/17929.html)
-* [![Go编程模式 ： 泛型编程](https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
-* [![Go 编程模式：k8s Visitor 模式](https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png)](https://coolshell.cn/articles/21263.html)[Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html)
-* [![Go编程模式：Pipeline](https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png)](https://coolshell.cn/articles/21228.html)[Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html)
-* [![Go编程模式：委托和反转控制](https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
+* [![Go编程模式：Map-Reduce](../wp-content/uploads/2020/12/go.map_.reduce-150x150.png)](https://coolshell.cn/articles/21164.html)[Go编程模式：Map-Reduce](https://coolshell.cn/articles/21164.html)
+* [![Go编程模式：修饰器](../wp-content/uploads/2017/06/go-hardhat-150x150.png)](https://coolshell.cn/articles/17929.html)[Go编程模式：修饰器](https://coolshell.cn/articles/17929.html)
+* [![Go编程模式 ： 泛型编程](../wp-content/uploads/2021/09/go-generics-150x150.png)](https://coolshell.cn/articles/21615.html)[Go编程模式 ： 泛型编程](https://coolshell.cn/articles/21615.html)
+* [![Go 编程模式：k8s Visitor 模式](../wp-content/uploads/2020/12/go.k8s-150x150.png)](https://coolshell.cn/articles/21263.html)[Go 编程模式：k8s Visitor 模式](https://coolshell.cn/articles/21263.html)
+* [![Go编程模式：Pipeline](../wp-content/uploads/2020/12/go.line_.-150x150.png)](https://coolshell.cn/articles/21228.html)[Go编程模式：Pipeline](https://coolshell.cn/articles/21228.html)
+* [![Go编程模式：委托和反转控制](../wp-content/uploads/2020/12/go.pair_-150x150.png)](https://coolshell.cn/articles/21214.html)[Go编程模式：委托和反转控制](https://coolshell.cn/articles/21214.html)
 The post [Go 编程模式：Functional Options](https://coolshell.cn/articles/21146.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

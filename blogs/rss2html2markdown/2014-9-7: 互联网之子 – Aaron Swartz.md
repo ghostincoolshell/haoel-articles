@@ -8,7 +8,7 @@ published: true
 type: post
 ---
 
-![Aaron_Swartz_profile](https://coolshell.cn/wp-content/uploads/2014/09/Aaron_Swartz_profile-216x300.jpg) 1986年11月8日，有个叫Aaron Swartz的人在美国芝加哥伊利诺伊州出生。因为他父母创办了一个软件公司，所以，Aaron在3岁的时候就接触到了电脑，然后就着迷了。
+![Aaron_Swartz_profile](../wp-content/uploads/2014/09/Aaron_Swartz_profile-216x300.jpg) 1986年11月8日，有个叫Aaron Swartz的人在美国芝加哥伊利诺伊州出生。因为他父母创办了一个软件公司，所以，Aaron在3岁的时候就接触到了电脑，然后就着迷了。
 
 
 我们先通过Aaron Swartz 的青少年时期来看一下他是怎么样的一个天才：
@@ -90,7 +90,7 @@ Aaron觉得那些对人类有价值的科学和文化遗产属于全人类，美
 在起诉期间，大家是否还记得美国那个臭名昭著的SOPA（ [Stop Online Piracy Act](http://en.wikipedia.org/wiki/Stop_Online_Piracy_Act "Stop Online Piracy Act")）法案？Aaron通过他的 [Demand Progress](http://en.wikipedia.org/wiki/Demand_Progress "Demand Progress") 把民众们网聚起来，和政府做斗争，最终导致了整个社会都在反对SOPA，也导致了那些议员纷纷改变自己的想法，并导致了白宫最终放弃了这个法案。这是一次民主的胜利，与Aaron有密切的相关。（相信大家都还记得那时美国各大网站都在反对这个网络审查制度）
 
 
-![斯沃茨在2012年反对禁止网络盗版法案(SOPA)的抗议活动上发言](https://coolshell.cn/wp-content/uploads/2014/09/800px-AaronSwartzPIPA.jpg)斯沃茨在2012年反对禁止网络盗版法案(SOPA)的抗议活动上发言
+![斯沃茨在2012年反对禁止网络盗版法案(SOPA)的抗议活动上发言](../wp-content/uploads/2014/09/800px-AaronSwartzPIPA.jpg)斯沃茨在2012年反对禁止网络盗版法案(SOPA)的抗议活动上发言
 而在次年2012年9月，政府对Aaron进行了更为严厉的起诉，新加入了另外9条起诉，如果成立，Aaron最多获刑50年外加100万美金的罚款。同样，检察官给出了优惠条件，只要Aaron认罪，那就只起诉他6个月的监禁。Aaron再次拒绝。
 
 
@@ -106,7 +106,7 @@ Aaron觉得那些对人类有价值的科学和文化遗产属于全人类，美
 **这就是Aaron Swartz传奇的一生。他用他的生命捍卫了互联网的开放和自由。**
 
 
-![87d31fea0996abbedb297c70b8b0b945_b](https://coolshell.cn/wp-content/uploads/2014/09/87d31fea0996abbedb297c70b8b0b945_b.jpg)
+![87d31fea0996abbedb297c70b8b0b945_b](../wp-content/uploads/2014/09/87d31fea0996abbedb297c70b8b0b945_b.jpg)
 
 
 互联网之父，[Tim Berners-Lee](http://en.wikipedia.org/wiki/Tim_Berners-Lee)，在2012伦敦奥运会上的网络环节我们都见过这个人。世界上第一个web网站是1991年8月6日在CERN内的NeXT服务器上运行（今天这个网站依然可以访问：[链接](http://info.cern.ch/hypertext/WWW/TheProject.html)），Tim并被没有用这个发明挣钱，而是无偿地把WWW的构想和设计推广给了全世界。《时代》周刊评论他的时候用了这样的一条话：“与所有的推动人类进程的发明不同，这是一件纯粹个人的劳动成果”。
@@ -149,7 +149,7 @@ Aaron说的一句话让我挺有感触的——
  
 
 
-![aaron_swartz__freedom_fighter_by_caq_qoq-d5rzbi8](https://coolshell.cn/wp-content/uploads/2014/09/aaron_swartz__freedom_fighter_by_caq_qoq-d5rzbi8.jpg)
+![aaron_swartz__freedom_fighter_by_caq_qoq-d5rzbi8](../wp-content/uploads/2014/09/aaron_swartz__freedom_fighter_by_caq_qoq-d5rzbi8.jpg)
 
 
 **延伸阅读**：[偷了世界的程序员](https://coolshell.cn/articles/3363.html "偷了世界的程序员")
@@ -165,10 +165,10 @@ Aaron说的一句话让我挺有感触的——
 
 ### 相关文章
 
-* [![聊聊团队协同和协同工具](https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
-* [![“一把梭：REST API 全用 POST”](https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
-* [![谈谈公司对员工的监控](https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
-* [![如何做一个有质量的技术分享](https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
-* [![程序员如何把控自己的职业](https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
-* [![MegaEase的远程工作文化](https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
+* [![聊聊团队协同和协同工具](../wp-content/uploads/2022/10/communication-150x150.png)](https://coolshell.cn/articles/22298.html)[聊聊团队协同和协同工具](https://coolshell.cn/articles/22298.html)
+* [![“一把梭：REST API 全用 POST”](../wp-content/uploads/2022/02/http_method-150x150.png)](https://coolshell.cn/articles/22173.html)[“一把梭：REST API 全用 POST”](https://coolshell.cn/articles/22173.html)
+* [![谈谈公司对员工的监控](../wp-content/uploads/2022/02/monitoring-150x150.jpeg)](https://coolshell.cn/articles/22157.html)[谈谈公司对员工的监控](https://coolshell.cn/articles/22157.html)
+* [![如何做一个有质量的技术分享](../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg)](https://coolshell.cn/articles/21589.html)[如何做一个有质量的技术分享](https://coolshell.cn/articles/21589.html)
+* [![程序员如何把控自己的职业](../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png)](https://coolshell.cn/articles/20977.html)[程序员如何把控自己的职业](https://coolshell.cn/articles/20977.html)
+* [![MegaEase的远程工作文化](../wp-content/uploads/2020/01/remote-150x150.jpg)](https://coolshell.cn/articles/20765.html)[MegaEase的远程工作文化](https://coolshell.cn/articles/20765.html)
 The post [互联网之子 – Aaron Swartz](https://coolshell.cn/articles/11928.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

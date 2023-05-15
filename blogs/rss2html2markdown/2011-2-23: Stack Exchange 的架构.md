@@ -79,10 +79,10 @@ type: post
 
 ### 相关文章
 
-* [![你确信你了解时间吗？](https://coolshell.cn/wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png)](https://coolshell.cn/articles/5075.html)[你确信你了解时间吗？](https://coolshell.cn/articles/5075.html)
-* [![Quora使用到的技术](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg)](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
-* [![Facebook 的系统架构](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg)](https://coolshell.cn/articles/4549.html)[Facebook 的系统架构](https://coolshell.cn/articles/4549.html)
-* [![StackOverflow的404错误页](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg)](https://coolshell.cn/articles/2529.html)[StackOverflow的404错误页](https://coolshell.cn/articles/2529.html)
-* [![23,148,855,308,184,500](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg)](https://coolshell.cn/articles/1242.html)[23,148,855,308,184,500](https://coolshell.cn/articles/1242.html)
-* [![如何防范密码被破解](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg)](https://coolshell.cn/articles/2078.html)[如何防范密码被破解](https://coolshell.cn/articles/2078.html)
+* [![你确信你了解时间吗？](../wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png)](https://coolshell.cn/articles/5075.html)[你确信你了解时间吗？](https://coolshell.cn/articles/5075.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg](https://coolshell.cn/articles/4939.html)[Quora使用到的技术](https://coolshell.cn/articles/4939.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg](https://coolshell.cn/articles/4549.html)[Facebook 的系统架构](https://coolshell.cn/articles/4549.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg](https://coolshell.cn/articles/2529.html)[StackOverflow的404错误页](https://coolshell.cn/articles/2529.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg](https://coolshell.cn/articles/1242.html)[23,148,855,308,184,500](https://coolshell.cn/articles/1242.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg](https://coolshell.cn/articles/2078.html)[如何防范密码被破解](https://coolshell.cn/articles/2078.html)
 The post [Stack Exchange 的架构](https://coolshell.cn/articles/3721.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

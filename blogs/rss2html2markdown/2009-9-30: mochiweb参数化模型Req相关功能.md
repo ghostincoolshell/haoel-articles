@@ -100,10 +100,10 @@ mochiweb\_headers:to\_list(Headers)).
 
 ### 相关文章
 
-* [![erlang打包独立环境](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg)](https://coolshell.cn/articles/2111.html)[erlang打包独立环境](https://coolshell.cn/articles/2111.html)
-* [![编程语言汽车](https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg)](https://coolshell.cn/articles/1839.html)[编程语言汽车](https://coolshell.cn/articles/1839.html)
-* [![Erlang和Python互通](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg)](https://coolshell.cn/articles/1313.html)[Erlang和Python互通](https://coolshell.cn/articles/1313.html)
-* [![一张关于操作系统的图](https://coolshell.cn/wp-content/uploads/2009/10/operating-systems-150x150.jpg)](https://coolshell.cn/articles/1579.html)[一张关于操作系统的图](https://coolshell.cn/articles/1579.html)
-* [![sed 简明教程](https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png)](https://coolshell.cn/articles/9104.html)[sed 简明教程](https://coolshell.cn/articles/9104.html)
-* [![消费者的消费观](https://coolshell.cn/wp-content/uploads/2010/09/1-150x150.png)](https://coolshell.cn/articles/2913.html)[消费者的消费观](https://coolshell.cn/articles/2913.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg](https://coolshell.cn/articles/2111.html)[erlang打包独立环境](https://coolshell.cn/articles/2111.html)
+* [![编程语言汽车](../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg)](https://coolshell.cn/articles/1839.html)[编程语言汽车](https://coolshell.cn/articles/1839.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg](https://coolshell.cn/articles/1313.html)[Erlang和Python互通](https://coolshell.cn/articles/1313.html)
+* [![一张关于操作系统的图](../wp-content/uploads/2009/10/operating-systems-150x150.jpg)](https://coolshell.cn/articles/1579.html)[一张关于操作系统的图](https://coolshell.cn/articles/1579.html)
+* [![sed 简明教程](../wp-content/uploads/2013/02/sed-superman-150x150.png)](https://coolshell.cn/articles/9104.html)[sed 简明教程](https://coolshell.cn/articles/9104.html)
+* [![消费者的消费观](../wp-content/uploads/2010/09/1-150x150.png)](https://coolshell.cn/articles/2913.html)[消费者的消费观](https://coolshell.cn/articles/2913.html)
 The post [mochiweb参数化模型Req相关功能](https://coolshell.cn/articles/1516.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

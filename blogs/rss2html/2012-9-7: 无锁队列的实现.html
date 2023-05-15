@@ -1,8 +1,8 @@
-<p></p>
+<html><body><p></p>
 <p style="text-align: center;"><strong><em>————注：本文于2019年11月4日更新————</em></strong></p>
 <p>关于无锁队列的实现，网上有很多文章，虽然本文可能和那些文章有所重复，但是我还是想以我自己的方式把这些文章中的重要的知识点串起来和大家讲一讲这个技术。下面开始正文。</p>
 <h4>关于CAS等原子操作</h4>
-<p><img alt="" class="alignright size-full wp-image-8245" height="261" src="https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle.jpg" title="lock free bicycle" width="350" />在开始说无锁队列之前，我们需要知道一个很重要的技术就是CAS操作——Compare &amp; Set，或是 Compare &amp; Swap，<strong>现在几乎所有的CPU指令都支持CAS的原子操作，X86下对应的是 <span style="color: #ff0000;">CMPXCHG </span>汇编指令。</strong>有了这个原子操作，我们就可以用其来实现各种无锁（lock free）的数据结构。</p>
+<p><img alt="" class="alignright size-full wp-image-8245" height="261" src="../wp-content/uploads/2012/09/lock_free_bicycle.jpg" title="lock free bicycle" width="350"/>在开始说无锁队列之前，我们需要知道一个很重要的技术就是CAS操作——Compare &amp; Set，或是 Compare &amp; Swap，<strong>现在几乎所有的CPU指令都支持CAS的原子操作，X86下对应的是 <span style="color: #ff0000;">CMPXCHG </span>汇编指令。</strong>有了这个原子操作，我们就可以用其来实现各种无锁（lock free）的数据结构。</p>
 <p>这个操作用C语言来描述就是下面这个样子：（代码来自<a href="http://en.wikipedia.org/wiki/Compare-and-swap" rel="noopener noreferrer" target="_blank">Wikipedia的Compare And Swap</a>词条）意思就是说，看一看内存<code>*reg</code>里的值是不是<code>oldval</code>，如果是的话，则对其赋值<code>newval</code>。</p>
 <pre class="EnlighterJSRAW">
 int compare_and_swap (int* reg, int oldval, int newval)
@@ -155,7 +155,7 @@ DeQueue(Q) //出队列
 }</pre>
 <p><strong>我们可以看到，DeQueue的代码操作的是 <code>head-&gt;next</code>，而不是 <code>head</code> 本身。这样考虑是因为一个边界条件，我们需要一个dummy的头指针来解决链表中如果只有一个元素，<code>head</code> 和 <code>tail</code> 都指向同一个结点的问题，这样 <code>EnQueue</code> 和 <code>DeQueue</code> 要互相排斥了</strong>。</p>
 <p>但是，如果 <code>head</code> 和 <code>tail</code> 都指向同一个结点，这意味着队列为空，应该返回 <code>ERR_EMPTY_QUEUE</code>，但是，在判断 <code>p-&gt;next == NULL</code> 时，另外一个EnQueue操作做了一半，此时的 p-&gt;next 不为 NULL了，但是 tail 指针还差最后一步，没有更新到新加的结点，这个时候就会出现，在 EnQueue 并没有完成的时候， DeQueue 已经把新增加的结点给取走了，此时，队列为空，但是，head 与 tail 并没有指向同一个结点。如下所示：</p>
-<p><img alt="" class="aligncenter wp-image-20047" height="537" src="https://coolshell.cn/wp-content/uploads/2012/09/lock.free_.queue_-224x300.png" width="400" /></p>
+<p><img alt="" class="aligncenter wp-image-20047" height="537" src="../wp-content/uploads/2012/09/lock.free_.queue_-224x300.png" width="400"/></p>
 <p>虽然，EnQueue的函数会把 tail 指针置对，但是，这种情况可能还是会导致一些并发问题，所以，严谨来说，我们需要避免这种情况。于是，我们需要加入更多的判断条件，还确保这个问题。下面是相关的改进代码：</p>
 <pre class="EnlighterJSRAW">
 DeQueue(Q) //出队列，改进版
@@ -241,7 +241,7 @@ DeQueue(Q) //出队列，改进版
 <p style="padding-left: 30px;">2）这两个计算器使用使用Fetch&amp;ADD来进行原子累加，在EnQueue或DeQueue完成的时候累加就好了。</p>
 <p style="padding-left: 30px;">3）累加后求个模什么的就可以知道TAIL和HEAD的位置了。</p>
 <p>如下图所示：</p>
-<p><img alt="" class="aligncenter size-full wp-image-8240" height="215" src="https://coolshell.cn/wp-content/uploads/2012/09/lock-free-array.jpg" title="Lock-Free Queue(Array)" width="477" /></p>
+<p><img alt="" class="aligncenter size-full wp-image-8240" height="215" src="../wp-content/uploads/2012/09/lock-free-array.jpg" title="Lock-Free Queue(Array)" width="477"/></p>
 <h4 style="text-align: left;"> 小结</h4>
 <p style="text-align: left;">以上基本上就是所有的无锁队列的技术细节，这些技术都可以用在其它的无锁数据结构上。</p>
 <p style="text-align: left; padding-left: 30px;">1）无锁队列主要是通过CAS、FAA这些原子操作，和Retry-Loop实现。</p>
@@ -249,7 +249,7 @@ DeQueue(Q) //出队列，改进版
 <p style="text-align: left;">还有一些和Lock Free的文章你可以去看看：</p>
 <ul>
 <li>Code Project 上的雄文 《<a href="http://www.codeproject.com/Articles/153898/Yet-another-implementation-of-a-lock-free-circular" rel="noopener noreferrer" target="_blank">Yet another implementation of a lock-free circular array queue</a>》</li>
-<li>Herb Sutter的《<a href="http://www.drdobbs.com/parallel/writing-lock-free-code-a-corrected-queue/210604448?pgno=1" rel="noopener noreferrer" target="_blank">Writing Lock-Free Code: A Corrected Queue</a>》&#8211; 用C++11的std::atomic模板。</li>
+<li>Herb Sutter的《<a href="http://www.drdobbs.com/parallel/writing-lock-free-code-a-corrected-queue/210604448?pgno=1" rel="noopener noreferrer" target="_blank">Writing Lock-Free Code: A Corrected Queue</a>》– 用C++11的std::atomic模板。</li>
 <li>IBM developerWorks的《<a href="http://www.ibm.com/developerworks/cn/aix/library/au-multithreaded_structures2/index.html" rel="noopener noreferrer" target="_blank">设计不使用互斥锁的并发数据结构</a>》</li>
 </ul>
 <div>【<strong>注：我配了一张look-free的自行车，寓意为——如果不用专门的车锁，那么自行得自己锁自己！</strong>】</div>
@@ -272,7 +272,6 @@ DeQueue(Q) //出队列，改进版
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10975.html"><img alt="一个“蝇量级” C 语言协程库" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10975.html">一个“蝇量级” C 语言协程库</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9886.html"><img alt="二叉树迭代器算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6548.html"><img alt="Why C++ ? 王者归来" height="150" src="https://coolshell.cn/wp-content/uploads/2012/02/WhyCPP.01-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6548.html">Why C++ ? 王者归来</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6010.html"><img alt="一些有意思的算法代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6010.html">一些有意思的算法代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8239.html">无锁队列的实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10975.html"><img alt="一个“蝇量级” C 语言协程库" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10975.html">一个“蝇量级” C 语言协程库</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9886.html"><img alt="二叉树迭代器算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9886.html">二叉树迭代器算法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6548.html"><img alt="Why C++ ? 王者归来" height="150" src="../wp-content/uploads/2012/02/WhyCPP.01-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6548.html">Why C++ ? 王者归来</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6010.html"><img alt="一些有意思的算法代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6010.html">一些有意思的算法代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8239.html">无锁队列的实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

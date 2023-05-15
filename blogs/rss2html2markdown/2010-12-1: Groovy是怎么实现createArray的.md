@@ -73,10 +73,10 @@ public class ArrayUtil {
 
 ### 相关文章
 
-* [![语言的数据亲和力](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg)](https://coolshell.cn/articles/4905.html)[语言的数据亲和力](https://coolshell.cn/articles/4905.html)
-* [![五大基于JVM的脚本语言](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg)](https://coolshell.cn/articles/2631.html)[五大基于JVM的脚本语言](https://coolshell.cn/articles/2631.html)
-* [![【问题】传球问题](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg)](https://coolshell.cn/articles/1976.html)[【问题】传球问题](https://coolshell.cn/articles/1976.html)
-* [![Linus：利用二级指针删除单向链表](https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
-* [![结对编程的利与弊](https://coolshell.cn/wp-content/uploads/2009/03/cccpairprogramming-150x150.jpg)](https://coolshell.cn/articles/16.html)[结对编程的利与弊](https://coolshell.cn/articles/16.html)
-* [![Docker基础技术：Linux Namespace（下）](https://coolshell.cn/wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg](https://coolshell.cn/articles/4905.html)[语言的数据亲和力](https://coolshell.cn/articles/4905.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg](https://coolshell.cn/articles/2631.html)[五大基于JVM的脚本语言](https://coolshell.cn/articles/2631.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg](https://coolshell.cn/articles/1976.html)[【问题】传球问题](https://coolshell.cn/articles/1976.html)
+* [![Linus：利用二级指针删除单向链表](../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
+* [![结对编程的利与弊](../wp-content/uploads/2009/03/cccpairprogramming-150x150.jpg)](https://coolshell.cn/articles/16.html)[结对编程的利与弊](https://coolshell.cn/articles/16.html)
+* [![Docker基础技术：Linux Namespace（下）](../wp-content/uploads/2015/04/jail_cell-150x150.jpg)](https://coolshell.cn/articles/17029.html)[Docker基础技术：Linux Namespace（下）](https://coolshell.cn/articles/17029.html)
 The post [Groovy是怎么实现createArray的](https://coolshell.cn/articles/3335.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).

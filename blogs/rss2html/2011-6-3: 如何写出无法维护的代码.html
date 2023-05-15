@@ -1,26 +1,26 @@
-<p>酷壳里有很多我觉得很不错的文章，但是访问量最大的却是那篇《<a href="https://coolshell.cn/articles/914.html" target="_blank" title="6个变态的C语言Hello World程序">6个变态的Hello World</a>》，和它能在本站右边栏“<strong>全站热门</strong>”中出现的还有“<a href="https://coolshell.cn/articles/933.html" target="_blank" title="如何加密/混乱C源代码">如何加密源代码</a>”，以及<a href="https://coolshell.cn/articles/1391.html" target="_blank" title="编程真难啊">编程真难啊</a>等这样的文章。可见本站的读者们的偏好，我也相信你们都是“身怀绝技”的程序员。所以，今天给大家推荐这篇文章，相信一定能触动大家的兴奋点。</p>
+<html><body><p>酷壳里有很多我觉得很不错的文章，但是访问量最大的却是那篇《<a href="https://coolshell.cn/articles/914.html" target="_blank" title="6个变态的C语言Hello World程序">6个变态的Hello World</a>》，和它能在本站右边栏“<strong>全站热门</strong>”中出现的还有“<a href="https://coolshell.cn/articles/933.html" target="_blank" title="如何加密/混乱C源代码">如何加密源代码</a>”，以及<a href="https://coolshell.cn/articles/1391.html" target="_blank" title="编程真难啊">编程真难啊</a>等这样的文章。可见本站的读者们的偏好，我也相信你们都是“身怀绝技”的程序员。所以，今天给大家推荐这篇文章，相信一定能触动大家的兴奋点。</p>
 <p>这篇文章的原文在这里（<a href="http://mindprod.com/jgloss/unmain.html" target="_blank">http://mindprod.com/jgloss/unmain.html</a>），我看完后我想说——</p>
 <ol>
 <li><strong>什么叫“创造力”，创造力就是——就算是要干一件烂事都能干得那么漂亮那么有创意的能力。</strong></li>
 <li><strong>什么叫“抓狂”，抓狂就是——以一种沉着老练的不屈不挠的一本正经的精神一点一点把你推向崩溃的边缘</strong>。</li>
 </ol>
 <p>我把文章节选了一些，也并没有完全翻译，简译一下，也加入了一些自己的调侃。对于有下面这些编程习惯的朋友，请大家对号入座。另外，维护程序的朋友们，你们死定了！！</p>
-<blockquote><p><img align="left" alt="woodpecker" border="0" height="64" src="http://mindprod.com/image/icon64/woodpecker.png" width="64" />If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. （如果建筑师盖房子就像程序员写程序一样，那么，第一只到来的啄木鸟就能毁掉我们的文明）</p>
+<blockquote><p><img align="left" alt="woodpecker" border="0" height="64" src="http://mindprod.com/image/icon64/woodpecker.png" width="64"/>If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. （如果建筑师盖房子就像程序员写程序一样，那么，第一只到来的啄木鸟就能毁掉我们的文明）</p>
 <p>~ Gerald Weinberg (born: 1933-10-27 age: 77) <a href="http://www.geraldmweinberg.com/Site/Home.html">Weinberg’s Second Law</a></p></blockquote>
 <h4>程序命名</h4>
 <ul>
 <li><strong>容易输入的名字</strong>。比如：Fred，asdf</li>
-<li><strong>单字母的变量名</strong>。比如：a,b,c, x,y,z（陈皓注：如果不够用，可以考虑a1,a2,a3,a4,&#8230;.）</li>
+<li><strong>单字母的变量名</strong>。比如：a,b,c, x,y,z（陈皓注：如果不够用，可以考虑a1,a2,a3,a4,….）</li>
 <li><strong>有创意地拼写错误</strong>。比如：SetPintleOpening， SetPintalClosing。这样可以让人很难搜索代码。</li>
-<li><strong>抽象</strong>。比如：ProcessData, DoIt, GetData&#8230; 抽象到就跟什么都没说一样。</li>
+<li><strong>抽象</strong>。比如：ProcessData, DoIt, GetData… 抽象到就跟什么都没说一样。</li>
 <li><strong>缩写</strong>。比如：WTF，RTFSC …… （陈皓注：使用拼音缩写也同样给力，比如： BT，TMD，TJJTDS）</li>
 <li><strong>随机大写字母</strong>。比如：gEtnuMbER..</li>
 <li><strong>重用命名</strong>。在内嵌的语句块中使用相同的变量名有奇效。</li>
 <li><strong>使用重音字母</strong>。比如：int  ínt（注：第二个 ínt不是int）</li>
 <li><strong>使用下划线</strong>。比如：_, __, ___。</li>
 <li><strong>使用不同的语言</strong>。比如混用英语，德语，或是中文拼音。</li>
-<li><strong>使用字符命名</strong>。比如：slash, asterix, comma&#8230;</li>
-<li><strong>使用无关的单词</strong>。比如：god, superman, iloveu&#8230;.</li>
+<li><strong>使用字符命名</strong>。比如：slash, asterix, comma…</li>
+<li><strong>使用无关的单词</strong>。比如：god, superman, iloveu….</li>
 <li><strong>混淆l和1</strong>。字母l和数字1有时候是看不出来的。</li>
 </ul>
 <h4><span id="more-4758"></span>伪装欺诈</h4>
@@ -93,7 +93,7 @@ void g(std::string str);
 <li><strong>注释明显的东西</strong>。比如：/* add 1 to i */。（参看本站的“<a href="https://coolshell.cn/articles/2746.html" target="_blank" title="五种应该避免的代码注释">五种应该避免的注释</a>”）</li>
 <li><strong>只注释是什么，而不是为什么</strong>。</li>
 <li><strong>不要注释秘密</strong>。如果你开发一个航班系统，请你一定要保证每有一个新的航班被加入，就得要修改25个以上的位置的程序。千万别把这个事写在文档中。</li>
-<li><strong>注重细节</strong>。当你设计一个很复杂的算法的时候，你一定要把所有的详细细设计都写下来，没有100页不能罢休，段落要有5级以上，段落编号要有500个以上，例如：1.2.4.6.3.13 &#8211; Display all impacts for activity where selected mitigations can apply (short pseudocode omitted). 这样，当你写代码的时候，你就可以让你的代码和文档一致，如：Act1_2_4_6_3_13()</li>
+<li><strong>注重细节</strong>。当你设计一个很复杂的算法的时候，你一定要把所有的详细细设计都写下来，没有100页不能罢休，段落要有5级以上，段落编号要有500个以上，例如：1.2.4.6.3.13 – Display all impacts for activity where selected mitigations can apply (short pseudocode omitted). 这样，当你写代码的时候，你就可以让你的代码和文档一致，如：Act1_2_4_6_3_13()</li>
 <li><strong>千万不要注释度衡单位</strong>。比如时间用的是秒还是毫秒，尺寸用的是像素还是英寸，大小是MB还是KB。等等。另外，在你的代码里，你可以混用不同的度衡单位，但也不要注释。</li>
 <li><strong>Gotchas</strong>。陷阱，千万不要注释代码中的陷阱。</li>
 <li><strong>在注释和文档中发泄不满</strong>。（参看本站的“<a href="https://coolshell.cn/articles/2746.html" target="_blank" title="五种应该避免的代码注释">五种应该避免的注释</a>”）</li>
@@ -105,7 +105,7 @@ void g(std::string str);
 <li><strong>从不验证</strong>。从不验证输入的数据，从不验证函数的返回值。这样做可以向大家展示你是多么的信任公司的设备和其它程序员。</li>
 <li><strong>不要封装</strong>。调用者需要知道被调用的所有的细节。</li>
 <li><strong>克隆和拷贝</strong>。为了效率，你要学会使用copy + paste。你几乎都不用理解别人的代码，你就可以高效地编程了。（陈皓注：Copy + Paste出来的代码bug多得不能再多）</li>
-<li><strong>巨大的listener</strong>。写一个listener，然后让你的所有的button类都使用这个listener，这样你可以在这个listener中整出一大堆if&#8230;else&#8230;语句，相当的刺激。</li>
+<li><strong>巨大的listener</strong>。写一个listener，然后让你的所有的button类都使用这个listener，这样你可以在这个listener中整出一大堆if…else…语句，相当的刺激。</li>
 <li><strong>使用三维数组</strong>。如果你觉得三维还不足够，你可以试试四维。</li>
 <li><strong>混用</strong>。同时使用类的get/set方法和直接访问那个public变量。这样做的好处是可以极大的挫败维护人员。</li>
 <li><strong>包装，包装，包装</strong>。把你所有的API都包装上6到8遍，包装深度多达4层以上。然后包装出相似的功能。</li>
@@ -113,10 +113,10 @@ void g(std::string str);
 <li><strong>排列和阻碍</strong>。把drawRectangle(height, width) 改成 drawRectangle(width, height)，等release了几个版本后，再把其改回去。这样维护程序的程序员们将不能很快地明白哪一个是对的。</li>
 <li><strong>把变量改在名字上</strong>。例如，把setAlignment(int alignment)改成，setLeftAlignment, setRightAlignment, setCenterAlignment。</li>
 <li><strong>Packratting</strong>。保留你所有的没有使用的和陈旧的变量，方法和代码。</li>
-<li><strong>That&#8217;s Fina</strong>l。Final你所有的子结点的类，这样，当你做完这个项目后，没有人可以通过继承来扩展你的类。java.lang.String不也是这样吗？</li>
+<li><strong>That’s Fina</strong>l。Final你所有的子结点的类，这样，当你做完这个项目后，没有人可以通过继承来扩展你的类。java.lang.String不也是这样吗？</li>
 <li><strong>避免使用接口</strong>。在java中，BS接口，在C++中BS使用虚函数。</li>
 <li><strong>避免使用layout</strong>。这样就使得我们只能使用绝对坐标。如果你的老大强制你使用layout，你可以考虑使用GridBagLayout，然后把grid坐标hard code.</li>
-<li><strong>环境变量</strong>。如果你的代码需要使用环境变量。(getenv() &#8211; C++ / System.getProperty() &#8211; Java )，那么，你应该把你的类的成员的初始化使用环境变量，而不是构造函数。</li>
+<li><strong>环境变量</strong>。如果你的代码需要使用环境变量。(getenv() – C++ / System.getProperty() – Java )，那么，你应该把你的类的成员的初始化使用环境变量，而不是构造函数。</li>
 <li><strong>使用Magic numbe</strong>r。参看《<a href="https://coolshell.cn/articles/4576.html" target="_blank" title="Linux 2.6.39-rc3的一个插曲">Linux一个插曲</a>》。</li>
 <li><strong>使用全局变量</strong>。1）把全局变量的初始化放在不同的函数中，就算这个函数和这个变量没有任何关系，这样能够让我们的维护人员就像做侦探工作一样。2）使用全局变量可以让你的函数的参数变得少一些。</li>
 <li><strong>配置文件</strong>。配置文件主要用于一些参数的初始化。在编程中，我们可以让配置文件中的参数名和实际程序中的名字不一样。</li>
@@ -140,7 +140,7 @@ void g(std::string str);
 <li><strong>不要使用{}</strong>。不要在if else使用{}，尤其是在你重量地使用if-else嵌套时，你甚至可以在其中乱缩进代码，这样一来，就算是最有经验的程序员也会踩上陷阱。</li>
 <li><strong>使用宏定义</strong>。宏定义绝对是混乱C/C++代码的最佳利器。参看 <a href="https://coolshell.cn/articles/2420.html" target="_blank" title="老手是这样教新手编程的">老手是这样教新手编程的</a>。</li>
 <li><strong>琐碎的封装</strong>。比较封装一个bool类，类里面什么都做，就是一个bool.</li>
-<li><strong>循环</strong>。千万不可用for(int i=0; i&lt;n; i++)使用while代替for，交换n和i，把&lt;改成&lt;=，使用 i&#8211;调整步伐 。</li>
+<li><strong>循环</strong>。千万不可用for(int i=0; i&lt;n; i++)使用while代替for，交换n和i，把&lt;改成&lt;=，使用 i–调整步伐 。</li>
 </ul>
 <h4>测试</h4>
 <ul>
@@ -175,7 +175,6 @@ void g(std::string str);
 
 --></p>
 <div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
-<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
-
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 &#8211; Qt官网的设计实践总结" height="150" src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1992.html"><img alt="程序员眼中的编程语言" height="150" src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1992.html"><img alt="程序员眼中的编程语言" height="150" src="../wp-content/uploads/2009/12/language-fanboys-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

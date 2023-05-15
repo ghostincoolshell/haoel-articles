@@ -1,4 +1,4 @@
-<p><strong>高中时期</strong></p>
+<html><body><p><strong>高中时期</strong></p>
 <pre class="vb" name="code">
   10 PRINT "HELLO WORLD"
   20 END
@@ -10,7 +10,7 @@
       writeln(\'Hello World\')
     end.
 </pre>
-<p><span id="more-172"></span><br />
+<p><span id="more-172"></span><br/>
 <strong>高年级大学生</strong></p>
 <pre class="c" name="code">
 #include 
@@ -29,11 +29,7 @@ int main(void)
     char *message[] = {"Hello ", "World"};
     int i;
  
-    for(i = 0; i < 2; ++i)
-      printf("%s", message[i]);
-    printf("\\n");
-  }
-</pre>
+    for(i = 0; i 
 <p>职业老手</p>
 <pre class="c++" name="code">
   #include 
@@ -59,37 +55,7 @@ int main(void)
       delete [] ptr;
     }
  
-    friend ostream &amp;operator <<(ostream &#038;, const string &#038;);
-    string &#038;operator=(const char *);
-  };
- 
-  ostream &#038;operator<<(ostream &#038;stream, const string &#038;s)
-  {
-    return(stream << s.ptr);
-  }
- 
-  string &#038;string::operator=(const char *chrs)
-  {
-    if (this != &#038;chrs)
-    {
-      delete [] ptr;
-     size = strlen(chrs);
-      ptr = new char[size + 1];
-      strcpy(ptr, chrs);
-    }
-    return(*this);
-  }
- 
-  int main()
-  {
-    string str;
- 
-    str = "Hello World";
-    cout << str << endl;
- 
-    return(0);
-  }
-</pre>
+    friend ostream &amp;operator 
 <p><strong>大师级</strong></p>
 <pre class="c++" name="code">
   [
@@ -229,7 +195,7 @@ int main(void)
  
   // revoke and release the class object
   CoRevokeClassObject(dwRegistration);
-  ulRef = pCF->Release();
+  ulRef = pCF-&gt;Release();
  
   // Tell OLE we are going away.
   CoUninitialize();
@@ -276,7 +242,7 @@ int main(void)
   // get object path
   wcsPath[0] = \'\\0\';
   wcsT[0] = \'\\0\';
-  if( argc > 1) {
+  if( argc &gt; 1) {
       mbstowcs(wcsPath, argv[1], strlen(argv[1]) + 1);
       wcsupr(wcsPath);
       }
@@ -286,7 +252,7 @@ int main(void)
       }
  
   // get print string
-  if(argc > 2)
+  if(argc &gt; 2)
       mbstowcs(wcsT, argv[2], strlen(argv[2]) + 1);
   else
       wcscpy(wcsT, L"Hello World");
@@ -307,10 +273,10 @@ int main(void)
       if(SUCCEEDED(hRslt)) {
  
    // print a string out
-   pHello->PrintSz(wcsT);
+   pHello-&gt;PrintSz(wcsT);
  
    Sleep(2000);
-   ulCnt = pHello->Release();
+   ulCnt = pHello-&gt;Release();
    }
       else
    printf("Failure to connect, status: %lx", hRslt);
@@ -326,10 +292,10 @@ int main(void)
 <pre class="perl" name="code">
   #!/usr/local/bin/perl
   $msg="Hello, world.\\n";
-  if ($#ARGV >= 0) {
+  if ($#ARGV &gt;= 0) {
     while(defined($arg=shift(@ARGV))) {
       $outfilename = $arg;
-      open(FILE, ">" . $outfilename) || die "Can\'t write $arg: $!\\n";
+      open(FILE, "&gt;" . $outfilename) || die "Can\'t write $arg: $!\\n";
       print (FILE $msg);
       close(FILE) || die "Can\'t close $arg: $!\\n";
     }
@@ -383,7 +349,7 @@ int main(void)
   % logout
 </pre>
 <p>来源：未知</p>
-<p>关于更多的“hello world”请参看：《<a href="https://coolshell.cn/articles/169.html">Hello World 集中营</a>》<br />
+<p>关于更多的“hello world”请参看：《<a href="https://coolshell.cn/articles/169.html">Hello World 集中营</a>》<br/>
 <!--
 
 
@@ -403,4 +369,4 @@ int main(void)
 <p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 - CoolShell</a> ，请勿用于任何商业用途）</strong></p>
 </div>
 
-<div class="wp_rp_wrap  wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20765.html"><img alt="MegaEase的远程工作文化" height="150" src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" width="150" /></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20765.html">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/172.html">幽默：程序员的进化</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="../wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20765.html"><img alt="MegaEase的远程工作文化" height="150" src="../wp-content/uploads/2020/01/remote-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20765.html">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/172.html">幽默：程序员的进化</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</pre></pre></body></html>

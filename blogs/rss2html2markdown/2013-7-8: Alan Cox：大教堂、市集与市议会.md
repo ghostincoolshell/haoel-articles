@@ -99,10 +99,10 @@ Alan
 
 ### 相关文章
 
-* [![Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg)](https://coolshell.cn/articles/9859.html)[Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html)
-* [![Linus：利用二级指针删除单向链表](https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
-* [![Unix传奇(上篇)](https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
-* [![Linus Torvalds 语录 Top 10](https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg)](https://coolshell.cn/articles/1278.html)[Linus Torvalds 语录 Top 10](https://coolshell.cn/articles/1278.html)
-* [![eBPF 介绍](https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
-* [![打造高效的工作环境 – Shell 篇](https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png)](https://coolshell.cn/articles/19219.html)[打造高效的工作环境 – Shell 篇](https://coolshell.cn/articles/19219.html)
+* [![Alan Cox：单向链表中prev指针的妙用](../wp-content/uploads/2013/06/Alan-Cox-150x150.jpg)](https://coolshell.cn/articles/9859.html)[Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html)
+* [![Linus：利用二级指针删除单向链表](../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg)](https://coolshell.cn/articles/8990.html)[Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
+* [![Unix传奇(上篇)](../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg)](https://coolshell.cn/articles/2322.html)[Unix传奇(上篇)](https://coolshell.cn/articles/2322.html)
+* [https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg](https://coolshell.cn/articles/1278.html)[Linus Torvalds 语录 Top 10](https://coolshell.cn/articles/1278.html)
+* [![eBPF 介绍](../wp-content/uploads/2022/12/eBPF-150x150.jpeg)](https://coolshell.cn/articles/22320.html)[eBPF 介绍](https://coolshell.cn/articles/22320.html)
+* [![打造高效的工作环境 – Shell 篇](../wp-content/uploads/2019/03/linux.ninja_-150x150.png)](https://coolshell.cn/articles/19219.html)[打造高效的工作环境 – Shell 篇](https://coolshell.cn/articles/19219.html)
 The post [Alan Cox：大教堂、市集与市议会](https://coolshell.cn/articles/9917.html) first appeared on [酷 壳 - CoolShell](https://coolshell.cn).
