@@ -1,0 +1,2669 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 32 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=32" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Wed, 21 Dec 2011 15:17:10 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>如何防范密码被破解</title>
+		<link>https://coolshell.cn/articles/2078.html</link>
+					<comments>https://coolshell.cn/articles/2078.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 01 Feb 2010 09:18:36 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[bcrypt]]></category>
+		<category><![CDATA[password]]></category>
+		<category><![CDATA[口令]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2078</guid>
+
+					<description><![CDATA[<p>你会用什么样的算法来为你的用户保存密码？如果你还在用明码的话，那么一旦你的网站被hack了，那么你所有的用户口令都会被泄露了，这意味着，你的系统或是网站就此完蛋...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2078.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>你会用什么样的算法来为你的用户保存密码？如果你还在用明码的话，那么一旦你的网站被hack了，那么你所有的用户口令都会被泄露了，这意味着，你的系统或是网站就此完蛋了。所以，我们需要通过一些不可逆的算法来保存用户的密码。比如：MD5, SHA1, SHA256, SHA512, SHA-3,等Hash算法。这些算法都是不可逆的。系统在验证用户的口令时，需要把Hash加密过后的口令与后面存放口令的数据库中的口令做比较，如果一致才算验证通过。</p>
+<p>但你觉得这些算法好吗？我说的是：MD5, SHA1, SHA256, SHA512, SHA-3。如果你使用的是MD5算法来加密你的口令，如果你的口令长度只有小写字母再加上数字，假设口令的长度是6位，那么在目前一台比较新一点的PC机上，穷举所有的口令只需要40秒钟。而据我们了解，几乎有90%以上的用户只用小写字母和数字来组织其口令。对于6位长度的密码只需要最多40秒就可以破解了，这可能会吓到你。</p>
+<p>如果你愿意花2000美金和一周的时间来构建一个<a href="http://www.nvidia.com/object/cuda_home.html" target="_blank">CUDA</a>，那么，你可以在你组建的这个集群中使用进行密码穷举运算，其速度是，<a href="http://www.win.tue.nl/cccc/sha-1-challenge.html" target="_blank">1秒钟可以计算7亿个口令</a>。对于目前实际当中使用的比较复杂的口令，其破解率也可以高达每秒一个。当然，这里说的算法是MD5，SHA之类的算法。</p>
+<p>那么，对于这样的一种情况来说，我们怎么办？我们还是有办法的。</p>
+<p><span id="more-2078"></span></p>
+<p>我们知道MD5，SHA的算法速度太快了。所以，我们需要一个“慢一点”的加密算法。呵呵。bcrypt是这样的一个算法，因为它很慢，对于计算机来说，其慢得有点BT了，但却慢得刚刚好！对于验证用户口令来说是不慢的，对于穷举用户口令来说，其会让那些计算机变得如同蜗牛一样。</p>
+<p>因为bcrypt采用了一系列各种不同的Blowfish加密算法，并引入了一个work factor，这个工作因子可以让你决定这个算法的代价有多大。因为这些，这个算法不会因为计算机CPU处理速度变快了，而导致算法的时间会缩短了。因为，你可以增加work factor来把其性能降下来。呵呵。</p>
+<p>那么，bcrypt到底有多慢？如果和MD5一起来比较的话，如果使用值为12的work factor的话，如果加密“cool”的话，bcrypt需要0.3秒，而MD5只需要一微秒（百万分之一秒）。也就是说，前面我们说的那个只需要40秒就可以穷举完所有的可能的MD5编码的口令的算法，在使用bcrypt下，需要12年。</p>
+<p>这就是bcrypt给你带来的选择，<strong>你可以一个安全的口令和一个快速的加密算法，或是一个不怎么安全的口令和一个性能不好的加密算法</strong>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/passwords-150x150.png" alt="破解你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_title">破解你的口令</a></li><li ><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" alt="CSDN明文口令泄露的启示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_title">CSDN明文口令泄露的启示</a></li><li ><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Twitter的禁用口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_title">Twitter的禁用口令</a></li><li ><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何管理并设计你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_title">如何管理并设计你的口令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2078.html/feed</wfw:commentRss>
+			<slash:comments>95</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个浏览器市场占有量的图</title>
+		<link>https://coolshell.cn/articles/2069.html</link>
+					<comments>https://coolshell.cn/articles/2069.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 25 Jan 2010 06:24:18 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Firefox]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2069</guid>
+
+					<description><![CDATA[<p>下面这个网站是一个关于Web浏览器的市场占有量的图： http://www.michaelvandaniker.com/labs/browserVisualiz...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2069.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2069.html">一个浏览器市场占有量的图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面这个网站是一个关于Web浏览器的市场占有量的图：</p>
+<p style="text-align: center;"><a href="http://www.michaelvandaniker.com/labs/browserVisualization/" target="_blank">http://www.michaelvandaniker.com/labs/browserVisualization/</a></p>
+<p style="text-align: left;">这个图是从2002年到2009年，也许未来还会更新，把鼠标移到每个弧上你可以看到那个浏览器的的占有量的百分比。如下图：</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/01/browser_history.jpg"><img decoding="async" loading="lazy" title="浏览器市场占有量图" src="https://coolshell.cn/wp-content/uploads/2010/01/browser_history.jpg" alt="" width="500" height="396" /></a> </p>
+<p>这个图本来没有什么，但制作者把其做成了一个圆弧形，这样，看下来就有些不一样了。你还没有看出来？让我们来对比一下这个图和FireFox的logo吧。</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/01/firefoxlogo.jpg"><img decoding="async" loading="lazy" title="firefox的logo比较" src="https://coolshell.cn/wp-content/uploads/2010/01/firefoxlogo.jpg" alt="" width="400" height="210" /></a></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Mozilla-150x150.jpg" alt="Mozilla的一个BUG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_title">Mozilla的一个BUG</a></li><li ><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="浏览器正则表达式检查插件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_title">浏览器正则表达式检查插件</a></li><li ><a href="https://coolshell.cn/articles/1714.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="Firefox插件WebMail Notifier" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1714.html" class="wp_rp_title">Firefox插件WebMail Notifier</a></li><li ><a href="https://coolshell.cn/articles/11609.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg" alt="TCP 的那些事儿（下）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11609.html" class="wp_rp_title">TCP 的那些事儿（下）</a></li><li ><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg" alt="bash代码注入的安全漏洞" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_title">bash代码注入的安全漏洞</a></li><li ><a href="https://coolshell.cn/articles/799.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="电子书：编译器设计基础" width="150" height="150" /></a><a href="https://coolshell.cn/articles/799.html" class="wp_rp_title">电子书：编译器设计基础</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2069.html">一个浏览器市场占有量的图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2069.html/feed</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个Windows 3.1的Web网站</title>
+		<link>https://coolshell.cn/articles/2065.html</link>
+					<comments>https://coolshell.cn/articles/2065.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 25 Jan 2010 05:50:02 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2065</guid>
+
+					<description><![CDATA[<p>啥也不说了，请大家围观下面这个网站吧。 http://www.michaelv.org/ 打开这个网站，你会看到N年前DOS时代的Windows 3.1的界面，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2065.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2065.html">一个Windows 3.1的Web网站</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>啥也不说了，请大家围观下面这个网站吧。</p>
+<p style="text-align: center;"><a href="http://www.michaelv.org/" target="_blank"><strong>http://www.michaelv.org/</strong></a></p>
+<p style="text-align: left;">打开这个网站，你会看到N年前DOS时代的Windows 3.1的界面，居然还可以扫雷，呵呵。真应了那句话——“只要是可以被Javascript实现的应用或程序，最终都会被Javascript所实现”。另，关于其它Web上更为疯狂的程序，可以查看本站的<a href="https://coolshell.cn/articles/1932.html" target="_blank">这篇文章</a>。还有这个<a href="https://coolshell.cn/articles/1883.html" target="_blank">在线的IDE</a>。下面是win3.1的截图：</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/01/Win32web.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2066" title="一个Windows3.1的web网站" src="https://coolshell.cn/wp-content/uploads/2010/01/Win32web.jpg" alt="" width="640" height="480" srcset="https://coolshell.cn/wp-content/uploads/2010/01/Win32web.jpg 640w, https://coolshell.cn/wp-content/uploads/2010/01/Win32web-300x225.jpg 300w, https://coolshell.cn/wp-content/uploads/2010/01/Win32web-360x270.jpg 360w" sizes="(max-width: 640px) 100vw, 640px" /></a> </p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2065.html">一个Windows 3.1的Web网站</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2065.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>各种流行的编程风格</title>
+		<link>https://coolshell.cn/articles/2058.html</link>
+					<comments>https://coolshell.cn/articles/2058.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 22 Jan 2010 00:39:24 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[program]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2058</guid>
+
+					<description><![CDATA[<p>在过去的N年中，我遇到了很多使用囧然不同风格的开发者，下面是我所知道的一些，你还知道其它的吗？ 散弹枪编程 这种编程风格是一种开发者使用非常随意的方式对待代码。...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2058.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2058.html">各种流行的编程风格</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在过去的N年中，我遇到了很多使用囧然不同风格的开发者，下面是我所知道的一些，你还知道其它的吗？</p>
+<h4>散弹枪编程</h4>
+<p>这种编程风格是一种开发者使用非常随意的方式对待代码。“嗯，这个方法调用出错了……那么我会试着把传出的参数从 <strong>false</strong> 变成 <strong>true</strong>!”，当然依然出错，于是我们的程序员会这样：“好吧，那我就注释掉整个方法吧”，或是其它更为随意的处理方式，直到最后让这个调用成功。或是被旁边的某个程序员指出一个正确的方法。</p>
+<p>如果我们把一个正规的程序员和一个撞大运的程序员放在一起做结地，那么，那个正规的程序可以马上变得发疯起来，并且，可以把正规的程序员的智商降到最低。两个撞大运的程序员不应该在一起做结对编程，这是因为他们破坏性的才能会造成的伤害会比只有一个还差。</p>
+<h4>撞大运编程</h4>
+<p>这是一种比散弹枪编程要温和一些的编程方式，我相信这种方式可能会是大多数程序员都会使用的方式。这种编程方式经常出现于程序员并不确切知道他们在干什么，也不知道所写的程序的本质和实际，但是可以让程序工作起来。他们以一种撞大运的方式在写程序，某些时候，他们根本就不知道某个错误的原因，就开始稀里糊涂地修改代码。一旦出现问题，他们会用两条路：1）停下来，理解一下程序，找到出错的原因。2）使用散弹枪编程方式开始解决问题。</p>
+<p>测试驱动开发（Test Driven Development）是一种可以用来拯救上百万的撞大运编程的程序员。于是，他们有了一个更为NB的借口：只要我的程序通过测试了，你还有什么话好说？别骂我，测试驱动开发是一个不错的事物，其主要是用来控制撞大运开发所带来的问题。</p>
+<h4><span id="more-2058"></span><br />
+Cargo-Cult 编程</h4>
+<p>关于Cargo Cults 这个词儿来自二战期间的某些太平洋上小岛里的土著人。在战争期间，美国利用这些小岛作为太平洋战场上的补给站。他们在这些小岛上修建自己的飞机跑道以用来运输战争物资。而那些小岛上的土著人从来没有见过飞机，当他们看到飞机的时候，觉得相当的牛，可以为那些白人带来各种各样的物品和食物。当二战结束后，那些土著人仿照着修建了飞机跑道，并用竹子修建了塔台。然后就在那期望着有飞机为他们送来物品和食物。</p>
+<p>Cargo Cult 编程是一种非常流行的编程方法，使用这种方法的程序员会学习其它编程高手的编程方法，虽然他们并不知道为什么高手们要那样做，但是他们觉得那样做可以让程序工作起来。举个例子，当时有大量的程序员在J2EE出现的第一年中过度地使用了EJBs和Entity Beans。</p>
+<h4>刻舟求剑编程</h4>
+<p>刻舟求剑是一个很流行的寓言了。这种风格的编程在程序员的圈子里是非常常见的。比如，有一天，你发现了一个空指会的异常，于是你到了产生空指针异常的地方，简单地放上一个判断： <code>if (p != NULL)。</code></p>
+<p>是的，这样的fix可以让你的程序工作起来，但你并没有真正地解决问题。你只不过是在你的船边记下了剑掉下去的位置，这样做只不过把问题隐藏起来，最终只会让你的程序的行为变得神出鬼没。你应该找到为什么指针会为空的原因，然后再解决这个问题。</p>
+<h4>设计模式驱动型编程</h4>
+<p>正如这种编程的名字所说的，这种编程风格使用大量的设计模式，在你的程序中，四处都是设计模式，你的代码到处都是Facade，Observer ，Strategy，Adapter，等等等等。于是，你的程序要处理的业务逻辑被这些设计模式打乱得无法阅读，最后，也不知道是业务需求重来，还是设计模式重要，总之，实际业务需求的程序逻辑被各种设计模式混乱得不堪入目。</p>
+<h4>侦探型编程</h4>
+<p>在解决一个Bug的时候，侦探型程序员会调查这个Bug的原因。然后，则调查引发这个BUG的原因的原因。再然后，其会分析修正代码后是否会导致其它代码失败的因果关系。再然后然后，他会使用文本搜索查找所有使用这个改动的代码，并继续查找更上一级的调用代码。最后，这个程序员会写下30个不同的情形的测试案例，就算这些测试案例和那个Bug没有什么关系，最最后，这个程序员有了足够多的信心，并且精确地修正了一个拼写错误。</p>
+<p>与此同时，其它一个正常的程序修正了其它5个Bug。</p>
+<h4>屠宰式编程</h4>
+<p>使用这种风格的程序员，对重构代码有着一种难以控制的极端冲动。他们几乎会重构所有经手的代码。就算是在产品在Release的前夜，当他在修正几个拼写错误的bug同时，其会修改10个类，以及重构与这10个类有联系的另20个类，并且修改了代码的build脚本，以及5个部署描述符。</p>
+<p>文章：<a href="http://www.codeinstructions.com/2008/10/styles-of-programming.html" target="_blank">来源</a><br />
+（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5292.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="弱爆程序员的特征值" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5292.html" class="wp_rp_title">弱爆程序员的特征值</a></li><li ><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="代码重构的一个示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_title">代码重构的一个示例</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2058.html">各种流行的编程风格</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2058.html/feed</wfw:commentRss>
+			<slash:comments>172</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>最为奇怪的程序语言的特性</title>
+		<link>https://coolshell.cn/articles/2053.html</link>
+					<comments>https://coolshell.cn/articles/2053.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 21 Jan 2010 00:16:18 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Perl]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2053</guid>
+
+					<description><![CDATA[<p>这些最为奇怪的程序语言的特性，来自stackoverflow.com，原贴在这里。我摘选了一些例子，的确是比较怪异，让我们一个一个来看看。  1、C语言中的数组...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2053.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2053.html">最为奇怪的程序语言的特性</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这些最为奇怪的程序语言的特性，来自stackoverflow.com，原贴在<a href="http://stackoverflow.com/questions/1995113?sort=votes&amp;page=1" target="_blank">这里</a>。我摘选了一些例子，的确是比较怪异，让我们一个一个来看看。 </p>
+<p><strong>1、C语言中的数组</strong> </p>
+<p style="padding-left: 30px;">在C/C++中，a[10] 可以写成 10[a] </p>
+<p style="padding-left: 30px;">&#8220;Hello World&#8221;[i] 也可以写成 i[&#8220;Hello World&#8221;] </p>
+<p>这样的特性是不是很怪异？如果你想知道为什么的话，你可以看看本站的这篇文章——《<a href="https://coolshell.cn/articles/945.html" target="_blank">C语言的谜题</a>》中的第12题。 </p>
+<p><strong>2、在Javascript中</strong> </p>
+<p> &#8216;5&#8217; + 3 的结果是：&#8217;53&#8217;<br />
+ &#8216;5&#8217; &#8211; 3 的结果是：2 </p>
+<p><strong>3、C/C++中的Trigraphs</strong> </p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int main() {
+   cout &lt;&lt; &quot;LOL??!&quot;;
+}</pre>
+<p>上面的这段程序会输出： “LOL|”，这是因为 ??! 被转成了 | ，关于Trigraphs，下面有个表格： </p>
+<p><span id="more-2053"></span></p>
+<table style="width: 237px; height: 184px;">
+<tbody>
+<tr valign="top">
+<td>??=</td>
+<td>#</td>
+</tr>
+<tr valign="top">
+<td>??(</td>
+<td>[</td>
+</tr>
+<tr valign="top">
+<td>??/</td>
+<td>\</td>
+</tr>
+<tr valign="top">
+<td>??)</td>
+<td>]</td>
+</tr>
+<tr valign="top">
+<td>??’</td>
+<td>^</td>
+</tr>
+<tr valign="top">
+<td>??&lt;</td>
+<td>{</td>
+</tr>
+<tr valign="top">
+<td>??!</td>
+<td>|</td>
+</tr>
+<tr valign="top">
+<td>??&gt;</td>
+<td>}</td>
+</tr>
+<tr valign="top">
+<td>??-</td>
+<td>~</td>
+</tr>
+</tbody>
+</table>
+<p>  </p>
+<p><strong>4、JavaScript 的条件表</strong> </p>
+<p>看到下面这个表，不难理解为什么Javascript程序员为什么痛苦了——《<a rel="bookmark" href="https://coolshell.cn/articles/1850.html">Javascript程序员嘴最脏??</a>》 </p>
+<p>[javascript]&#8221;        ==   &#8216;0&#8217;           //false<br />
+0         ==   &#8221;            //true<br />
+0         ==   &#8216;0&#8217;           //true<br />
+false     ==   &#8216;false&#8217;       //false<br />
+false     ==   &#8216;0&#8217;           //true<br />
+false     ==   undefined     //false<br />
+false     ==   null          //false<br />
+null      ==   undefined     //true<br />
+&quot; \t\r\n&quot; ==   0             //true[/javascript] </p>
+<p><strong>5、Java的Integer cache</strong> </p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Integer foo = 1000;
+Integer bar = 1000;
+ 
+foo &lt;= bar; // true
+foo &gt;= bar; // true
+foo == bar; // false
+ 
+//然后，如果你的 foo 和 bar 的值在 127 和 -128 之间（包括）
+//那么，其行为则改变了：
+ 
+Integer foo = 42;
+Integer bar = 42;
+ 
+foo &lt;= bar; // true
+foo &gt;= bar; // true
+foo == bar; // true</pre>
+<p>为什么会这样呢？你需要了解一下Java Interger Cache，下面是相关的程序，注意其中的注释</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">/**
+     * Returns a &lt;tt&gt;Integer&lt;/tt&gt; instance representing the specified
+     * &lt;tt&gt;int&lt;/tt&gt; value.
+     * If a new &lt;tt&gt;Integer&lt;/tt&gt; instance is not required, this method
+     * should generally be used in preference to the constructor
+     * &lt;a href=&quot;mailto:{@link&quot;&gt;{@link&lt;/a&gt; #Integer(int)}, as this method is likely to yield
+     * significantly better space and time performance by caching
+     * frequently requested values.
+     *
+     * @param  i an &lt;code&gt;int&lt;/code&gt; value.
+     * @return a &lt;tt&gt;Integer&lt;/tt&gt; instance representing &lt;tt&gt;i&lt;/tt&gt;.
+     * @since  1.5
+     */
+    public static Integer valueOf(int i) {
+        if(i &gt;= -128 &amp;&amp; i &lt;= IntegerCache.high)
+            return IntegerCache.cache[i + 128];
+        else
+            return new Integer(i);
+    }
+</pre>
+<p><strong>5、Perl的那些奇怪的变量</strong></p>
+<p>[perl]$.<br />
+$_<br />
+$_#<br />
+$$<br />
+$[<br />
+@_[/perl]</p>
+<p>其所有的这些怪异的变量请参看：<a href="http://www.kichwa.com/quik_ref/spec_variables.html">http://www.kichwa.com/quik_ref/spec_variables.html</a> </p>
+<p><strong>6、Java的异常返回</strong></p>
+<p>请看下面这段程序，你觉得其返回true还是false？</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">try {
+    return true;
+} finally {
+    return false;
+}</pre>
+<p>在 javascript 和python下，其行为和Java的是一样的。 </p>
+<p><strong>7、C语言中的Duff device</strong></p>
+<p>下面的这段程序你能看得懂吗？这就是所谓的Duff Device，相当的怪异。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">void duff_memcpy( char* to, char* from, size_t count ) {
+    size_t n = (count+7)/8;
+    switch( count%8 ) {
+    case 0: do{ *to++ = *from++;
+    case 7:     *to++ = *from++;
+    case 6:     *to++ = *from++;
+    case 5:     *to++ = *from++;
+    case 4:     *to++ = *from++;
+    case 3:     *to++ = *from++;
+    case 2:     *to++ = *from++;
+    case 1:     *to++ = *from++;
+            }while(--n&gt;0);
+    }
+} </pre>
+<p><strong>8、PHP中的字符串当函数用</strong></p>
+<p>PHP中的某些用法也是很怪异的</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">$x = &quot;foo&quot;;
+function foo(){ echo &quot;wtf&quot;; }
+$x();</pre>
+<p><strong>9、在C++中，你可以使用空指针调用静态函数</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">class Foo {
+  public:
+    static void bar() {
+      std::cout &lt;&lt; &quot;bar()&quot; &lt;&lt; std::endl;
+    }
+};
+ 
+int main(void) {
+  Foo * foo = NULL;
+  foo-&gt;bar(); //=&gt; WTF!?
+  return 0; // Ok!
+}</pre>
+<p>呵呵。的确是挺怪异的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1850.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language-150x150.jpg" alt="Javascript程序员嘴最脏??" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1850.html" class="wp_rp_title">Javascript程序员嘴最脏??</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="到处都是Unix的胎记" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_title">到处都是Unix的胎记</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2053.html">最为奇怪的程序语言的特性</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2053.html/feed</wfw:commentRss>
+			<slash:comments>39</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>“第六感装置”的惊人潜力</title>
+		<link>https://coolshell.cn/articles/2047.html</link>
+					<comments>https://coolshell.cn/articles/2047.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 09 Jan 2010 04:10:09 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[MIT Media Lab]]></category>
+		<category><![CDATA[Prarnav Mistry]]></category>
+		<category><![CDATA[Sixth Sense]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2047</guid>
+
+					<description><![CDATA[<p>我们总是在于“现实生活”和“电脑的数字生活”中的差异，这两个世界难道不可以合并吗？美国MIT Media Lab（麻省理工学院媒体实验室）的天才学生普拉纳夫- ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2047.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2047.html">“第六感装置”的惊人潜力</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们总是在于“现实生活”和“电脑的数字生活”中的差异，这两个世界难道不可以合并吗？美国MIT Media Lab（麻省理工学院媒体实验室）的天才学生普拉纳夫- (Prarnav Mistry)，发明了一项结合实体世界和虚拟世界的科技，令人惊喜，感叹创造力的惊人。下面是视频。翻译还OK。</p>
+<p align=center><embed src="http://player.youku.com/player.php/sid/35441513/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6346.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/01/481px-Ada_Lovelace_1838-150x150.jpg" alt="程序员因为女孩而美丽！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6346.html" class="wp_rp_title">程序员因为女孩而美丽！</a></li><li ><a href="https://coolshell.cn/articles/2964.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="25个jQuery的编程小抄" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2964.html" class="wp_rp_title">25个jQuery的编程小抄</a></li><li ><a href="https://coolshell.cn/articles/2622.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-150x150.jpg" alt="为什么敏捷方法能在软件开发中行之有效？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2622.html" class="wp_rp_title">为什么敏捷方法能在软件开发中行之有效？</a></li><li ><a href="https://coolshell.cn/articles/4844.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="“另类” 设计模式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4844.html" class="wp_rp_title">“另类” 设计模式</a></li><li ><a href="https://coolshell.cn/articles/3716.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="WordPress是怎么赢的？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3716.html" class="wp_rp_title">WordPress是怎么赢的？</a></li><li ><a href="https://coolshell.cn/articles/873.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="谁说C语言很简单？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/873.html" class="wp_rp_title">谁说C语言很简单？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2047.html">“第六感装置”的惊人潜力</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2047.html/feed</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>PI小数点位数的新纪录</title>
+		<link>https://coolshell.cn/articles/2043.html</link>
+					<comments>https://coolshell.cn/articles/2043.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 08 Jan 2010 00:28:48 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[PI]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2043</guid>
+
+					<description><![CDATA[<p>PI小数点后的位数据个数据的纪录被刷新了，被一台PC机刷新的。新的纪录把PI的小点数后面的位数整到了近2.7万亿位，太BT了。下面的链接是本次经录的通告： ht...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2043.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2043.html">PI小数点位数的新纪录</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>PI小数点后的位数据个数据的纪录被刷新了，被一台PC机刷新的。新的纪录把PI的小点数后面的位数整到了近2.7万亿位，太BT了。下面的链接是本次经录的通告：</p>
+<p style="text-align: center;"><a href="http://bellard.org/pi/pi2700e9/announce.html" target="_blank">http://bellard.org/pi/pi2700e9/announce.html</a></p>
+<p style="text-align: left;">这个通告宣称：</p>
+<ul>
+<li>
+<div style="text-align: left;">PI后的小数点位数被计算到了2,699,999,990,000位。</div>
+</li>
+<li>
+<div style="text-align: left;">为了保存计算结果，一共花了，1137GB的硬盘空间。</div>
+</li>
+<li>
+<div style="text-align: left;">本次计算使用了价值2000欧元左右的PC机，CPU是Core i7 CPU at 2.93 GHz ，内存6GB，5个1.5TB的希捷硬盘。</div>
+</li>
+<li>
+<div style="text-align: left;">操作系统使用的是Linux  64 bit Red Hat Fedora 10 distribution，7.5TB的硬盘被做成了RAID-0阵列，使用了ext4文件系统。</div>
+</li>
+<li>
+<div style="text-align: left;">整个计算时间花了131天（4个半月），其中，103天用于计算PI的二进制结果，13天用于验证二进制结果，花了12天把二进制转成十进制，最后花了3天再验证了转换。</div>
+</li>
+<li>
+<div style="text-align: left;">上一次的记录是<a href="http://www.hpcs.is.tsukuba.ac.jp/~daisuke/pi.html">2.577 万亿小数位</a>，于2009年8月17日创造。其使用了超过百万欧元的超级计算机（Appro Xtreme-X3 Server）。</div>
+</li>
+</ul>
+<p style="text-align: left;">相关的技术细节请看这里：<a href="http://bellard.org/pi/pi2700e9/pipcrecord.pdf">http://bellard.org/pi/pi2700e9/pipcrecord.pdf</a></p>
+<p style="text-align: left;">我想了想，算这个玩意花了多少度电，产生了多少废气，太不环保了。呵呵。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11235.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="一个浮点数跨平台产生的问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11235.html" class="wp_rp_title">一个浮点数跨平台产生的问题</a></li><li ><a href="https://coolshell.cn/articles/2688.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="在Javascript里写Python" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2688.html" class="wp_rp_title">在Javascript里写Python</a></li><li ><a href="https://coolshell.cn/articles/1561.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="Google Maps API用法教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1561.html" class="wp_rp_title">Google Maps API用法教程</a></li><li ><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何管理并设计你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_title">如何管理并设计你的口令</a></li><li ><a href="https://coolshell.cn/articles/4429.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/Question-150x150.jpg" alt="面试题：火车运煤问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4429.html" class="wp_rp_title">面试题：火车运煤问题</a></li><li ><a href="https://coolshell.cn/articles/7126.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="这到底是谁之错？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7126.html" class="wp_rp_title">这到底是谁之错？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2043.html">PI小数点位数的新纪录</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2043.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>CPU的性价比</title>
+		<link>https://coolshell.cn/articles/2039.html</link>
+					<comments>https://coolshell.cn/articles/2039.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 08 Jan 2010 00:09:00 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[AMD]]></category>
+		<category><![CDATA[CPU]]></category>
+		<category><![CDATA[Intel]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2039</guid>
+
+					<description><![CDATA[<p>下面这个网站是关于CPU的性价比的，其中的性能数据来源于cpubenchmark.net，而价格数据来源于：newegg.com。 http://paulisa...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2039.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2039.html">CPU的性价比</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面这个网站是关于CPU的性价比的，其中的性能数据来源于<a href="http://www.cpubenchmark.net/cpu_list.php">cpubenchmark.net</a>，而价格数据来源于：<a href="http://www.newegg.com/Store/Category.aspx?Category=34">newegg.com</a>。</p>
+<p style="text-align: center;"><a href="http://paulisageek.com/compare/cpu/" target="_blank">http://paulisageek.com/compare/cpu/</a></p>
+<p style="text-align: left;">于是，得出了目前性价比最差的是：Intel Xeon X5570 @ 2.93GHz，最好的是：AMD Phenom 9850 Quad-Core，下面是一个性价比表格。</p>
+<p style="text-align: left;"><span id="more-2039"></span></p>
+<p><center></p>
+<table border="0">
+<thead>
+<tr>
+<th id="yui-dt0-th-Name">CPU类型</th>
+<th id="yui-dt0-th-Performance">性能</th>
+<th id="yui-dt0-th-Price">价值</th>
+<th id="yui-dt0-th-PerformancePrice">性价比</th>
+</tr>
+</thead>
+<tbody></tbody>
+<tbody>
+<tr id="yui-rec20">
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103280">AMD Phenom 9850 Quad-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+9850+Quad-Core">2864</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103280">89.99</a></td>
+<td>31.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103706">AMD Athlon II X4 620</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X4+620">3084</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103706">99.00</a></td>
+<td>31.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103726">AMD Athlon II X3 425</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X3+425">2366</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103726">76.00</a></td>
+<td>31.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103772">AMD Athlon 64 X2 Dual Core 6000+</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+64+X2+Dual+Core+6000%2B">1577</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103772">53.99</a></td>
+<td>29.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103704">AMD Athlon II X4 630</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X4+630">3282</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103704">112.99</a></td>
+<td>29.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103279">AMD Athlon 64 X2 Dual Core 5600+</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+64+X2+Dual+Core+5600%2B">1473</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103279">50.99</a></td>
+<td>28.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116265">Intel Celeron E3200 @ 2.40GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+E3200+%40+2.40GHz">1515</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116265">52.99</a></td>
+<td>28.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103724">AMD Athlon II X3 435</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X3+435">2416</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103724">87.00</a></td>
+<td>27.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103295">AMD Phenom 8750 Triple-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+8750+Triple-Core">2000</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103295">72.99</a></td>
+<td>27.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103688">AMD Athlon II X2 240</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X2+240">1603</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103688">58.99</a></td>
+<td>27.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103687">AMD Athlon II X2 245</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X2+245">1679</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103687">62.00</a></td>
+<td>27.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116264">Intel Celeron E3300 @ 2.50GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+E3300+%40+2.50GHz">1668</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116264">62.99</a></td>
+<td>26.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103698">AMD Sempron 140</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Sempron+140">913</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103698">35.99</a></td>
+<td>25.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116072">Pentium Dual-Core E5200 @ 2.50GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Pentium+Dual-Core+E5200+%40+2.50GHz">1631</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116072">64.50</a></td>
+<td>25.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103681">AMD Athlon II X2 250</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+II+X2+250">1663</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103681">67.00</a></td>
+<td>24.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116074">Pentium Dual-Core E5300 @ 2.60GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Pentium+Dual-Core+E5300+%40+2.60GHz">1706</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116074">69.99</a></td>
+<td>24.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116075">Intel Celeron E1500 @ 2.20GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+E1500+%40+2.20GHz">1216</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116075">49.99</a></td>
+<td>24.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103656">AMD Phenom II X4 925</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+925">3377</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103656">140.99</a></td>
+<td>24</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103287">AMD Phenom 9150e Quad-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+9150e+Quad-Core">2148</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103287">89.99</a></td>
+<td>23.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116091">Pentium Dual-Core E6300 @ 2.80GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Pentium+Dual-Core+E6300+%40+2.80GHz">1859</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116091">80.99</a></td>
+<td>23</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103813">AMD Phenom 9750 Quad-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+9750+Quad-Core">2727</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103813">119.00</a></td>
+<td>22.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115207">Intel Core2 Quad Q8300 @ 2.50GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q8300+%40+2.50GHz">3554</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115207">159.99</a></td>
+<td>22.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115055">Intel Core2 Quad Q8200 @ 2.33GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q8200+%40+2.33GHz">3221</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115055">148.99</a></td>
+<td>21.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103650">AMD Phenom II X4 810</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+810">3019</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103650">139.99</a></td>
+<td>21.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103288">AMD Phenom 9650 Quad-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+9650+Quad-Core">2595</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103288">119.99</a></td>
+<td>21.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116093">Pentium Dual-Core E6500 @ 2.93GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Pentium+Dual-Core+E6500+%40+2.93GHz">2042</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116093">94.99</a></td>
+<td>21.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115215">Intel Core i5 750 @ 2.67GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i5+750+%40+2.67GHz">4186</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115215">194.99</a></td>
+<td>21.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115037">Intel Core2 Quad Q8400 @ 2.66GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q8400+%40+2.66GHz">3602</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115037">167.99</a></td>
+<td>21.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103692">AMD Phenom II X4 965</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+965">4200</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103692">195.99</a></td>
+<td>21.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103808">AMD Phenom II X4 955</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+955">3770</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103808">175.99</a></td>
+<td>21.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103644">AMD Phenom II X4 940</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+940">3558</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103644">166.97</a></td>
+<td>21.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819105259">Dual-Core AMD Opteron 1216</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Dual-Core+AMD+Opteron+1216">1169</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819105259">55.99</a></td>
+<td>20.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103293">AMD Phenom 9350e Quad-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+9350e+Quad-Core">2296</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103293">109.99</a></td>
+<td>20.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103716">AMD Athlon 5000 Dual-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+5000+Dual-Core">1376</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103716">65.99</a></td>
+<td>20.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103675">AMD Phenom II X4 945</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+945">3403</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103675">165.00</a></td>
+<td>20.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103709">AMD Phenom 8250e Triple-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+8250e+Triple-Core">1531</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103709">75.99</a></td>
+<td>20.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103269">AMD Phenom 8600B Triple-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+8600B+Triple-Core">1864</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103269">92.99</a></td>
+<td>20.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115214">Intel Core i7 860 @ 2.80GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+860+%40+2.80GHz">5565</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115214">279.99</a></td>
+<td>19.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116076">Pentium Dual-Core E5400 @ 2.70GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Pentium+Dual-Core+E5400+%40+2.70GHz">1754</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116076">89.99</a></td>
+<td>19.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115131">Intel Core2 Quad Q9400 @ 2.66GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q9400+%40+2.66GHz">3678</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115131">189.99</a></td>
+<td>19.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115202">Intel Core i7 920 @ 2.67GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+920+%40+2.67GHz">5452</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115202">288.99</a></td>
+<td>18.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103210">AMD Athlon 64 X2 Dual Core 5200+</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+64+X2+Dual+Core+5200%2B">1374</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103210">73.99</a></td>
+<td>18.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103648">AMD Phenom II X3 710</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X3+710">2201</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103648">119.00</a></td>
+<td>18.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103680">AMD Phenom II X2 550</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X2+550">1834</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103680">99.00</a></td>
+<td>18.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103694">AMD Phenom II X2 545</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X2+545">1722</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103694">93.98</a></td>
+<td>18.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103649">AMD Phenom II X3 720</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X3+720">2525</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103649">140.99</a></td>
+<td>17.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103769">AMD Athlon 64 X2 Dual Core 5400+</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Athlon+64+X2+Dual+Core+5400%2B">1443</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103769">81.99</a></td>
+<td>17.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103189">AMD Sempron LE-1250</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Sempron+LE-1250">550</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103189">31.99</a></td>
+<td>17.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103683">AMD Phenom II X3 705e</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X3+705e">2324</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103683">134.99</a></td>
+<td>17.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819105134">Dual-Core AMD Opteron 1220</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Dual-Core+AMD+Opteron+1220">1443</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819105134">85.99</a></td>
+<td>16.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115041">Intel Core2 Quad Q9550 @ 2.83GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q9550+%40+2.83GHz">4178</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115041">249.99</a></td>
+<td>16.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115060">Intel Core2 Quad Q9505 @ 2.83GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q9505+%40+2.83GHz">3810</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115060">229.99</a></td>
+<td>16.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819105261">Dual-Core AMD Opteron 1218</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Dual-Core+AMD+Opteron+1218">1094</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819105261">65.99</a></td>
+<td>16.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115056">Intel Core2 Duo E7500 @ 2.93GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E7500+%40+2.93GHz">1947</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115056">119.99</a></td>
+<td>16.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116092">Intel Celeron E1600 @ 2.40GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+E1600+%40+2.40GHz">1007</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116092">61.99</a></td>
+<td>16.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115206">Intel Core2 Duo E7400 @ 2.80GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E7400+%40+2.80GHz">1864</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115206">117.99</a></td>
+<td>15.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103682">AMD Phenom II X4 905e</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+II+X4+905e">2789</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103682">184.99</a></td>
+<td>15.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117127">Intel Xeon X3220 @ 2.40GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X3220+%40+2.40GHz">2961</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117127">199.99</a></td>
+<td>14.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117166">Intel Xeon X3360 @ 2.83GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X3360+%40+2.83GHz">4277</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117166">299.99</a></td>
+<td>14.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115059">Intel Core2 Duo E7600 @ 3.06GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E7600+%40+3.06GHz">2010</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115059">144.99</a></td>
+<td>13.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115130">Intel Core2 Quad Q9650 @ 3.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q9650+%40+3.00GHz">4456</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115130">324.99</a></td>
+<td>13.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116039">Intel Celeron 430 @ 1.80GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+430+%40+1.80GHz">530</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819116039">39.99</a></td>
+<td>13.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117173">Intel Xeon X3370 @ 3.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X3370+%40+3.00GHz">4629</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117173">349.99</a></td>
+<td>13.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117155">Intel Xeon X3230 @ 2.66GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X3230+%40+2.66GHz">3755</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117155">289.99</a></td>
+<td>13</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117186">Intel Xeon E5506 @ 2.13GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5506+%40+2.13GHz">3507</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117186">269.99</a></td>
+<td>13</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117151">Intel Xeon E5405 @ 2.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5405+%40+2.00GHz">2993</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117151">229.99</a></td>
+<td>13</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117187">Intel Xeon E5504 @ 2.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5504+%40+2.00GHz">3098</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117187">239.99</a></td>
+<td>12.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117150">Intel Xeon E5410 @ 2.33GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5410+%40+2.33GHz">3750</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117150">289.99</a></td>
+<td>12.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115037">Intel Core2 Duo E8400 @ 3.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E8400+%40+3.00GHz">2164</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115037">167.99</a></td>
+<td>12.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103226">AMD Phenom 9500 Quad-Core</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Phenom+9500+Quad-Core">2250</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103226">175.00</a></td>
+<td>12.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103188">AMD Sempron LE-1300</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Sempron+LE-1300">582</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103188">45.99</a></td>
+<td>12.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117165">Intel Xeon E3110 @ 3.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3110+%40+3.00GHz">2269</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117165">179.99</a></td>
+<td>12.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115036">Intel Core2 Duo E8500 @ 3.16GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E8500+%40+3.16GHz">2308</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115036">189.99</a></td>
+<td>12.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115201">Intel Core i7 940 @ 2.93GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+940+%40+2.93GHz">6116</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115201">499.99</a></td>
+<td>12.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115213">Intel Core i7 870 @ 2.93GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+870+%40+2.93GHz">6184</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115213">539.99</a></td>
+<td>11.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115216">Intel Core i7 960 @ 3.20GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+960+%40+3.20GHz">6530</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115216">589.99</a></td>
+<td>11.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115211">Intel Core i7 950 @ 3.07GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+950+%40+3.07GHz">6299</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115211">569.99</a></td>
+<td>11.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117148">Intel Xeon E5420 @ 2.50GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5420+%40+2.50GHz">3733</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117148">349.99</a></td>
+<td>10.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117185">Intel Xeon E5520 @ 2.27GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5520+%40+2.27GHz">3960</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117185">384.99</a></td>
+<td>10.3</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117145">Intel Xeon E5430 @ 2.66GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5430+%40+2.66GHz">4485</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117145">499.99</a></td>
+<td>9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115054">Intel Core2 Duo E8600 @ 3.33GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E8600+%40+3.33GHz">2469</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115054">279.99</a></td>
+<td>8.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111015">Intel Core i7 720QM @ 1.60GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+720QM+%40+1.60GHz">3353</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111015">379.99</a></td>
+<td>8.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111011">Intel Core2 Quad Q9000 @ 2.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q9000+%40+2.00GHz">2991</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111011">364.99</a></td>
+<td>8.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117188">Intel Xeon E5502 @ 1.87GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5502+%40+1.87GHz">1602</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117188">199.99</a></td>
+<td>8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111013">Intel Core2 Duo P8700 @ 2.53GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+P8700+%40+2.53GHz">1760</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111013">219.99</a></td>
+<td>8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111014">Intel Core2 Duo P8800 @ 2.66GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+P8800+%40+2.66GHz">1923</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111014">249.99</a></td>
+<td>7.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117184">Intel Xeon E5530 @ 2.40GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5530+%40+2.40GHz">4290</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117184">569.99</a></td>
+<td>7.5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111009">Intel Core2 Duo P8600 @ 2.40GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+P8600+%40+2.40GHz">1593</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111009">219.99</a></td>
+<td>7.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115212">Intel Core i7 975 @ 3.33GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i7+975+%40+3.33GHz">6931</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819115212">969.99</a></td>
+<td>7.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111010">Intel Core2 Duo P8400 @ 2.26GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+P8400+%40+2.26GHz">1512</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111010">214.99</a></td>
+<td>7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117211">Intel Xeon W3570 @ 3.20GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+W3570+%40+3.20GHz">7166</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117211">1069.99</a></td>
+<td>6.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117144">Intel Xeon E5440 @ 2.83GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5440+%40+2.83GHz">4589</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117144">739.99</a></td>
+<td>6.2</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103826">AMD Sempron 2200+</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=AMD+Sempron+2200%2B">319</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819103826">51.98</a></td>
+<td>6.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111012">Intel Core2 Duo T9550 @ 2.66GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+T9550+%40+2.66GHz">1898</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111012">319.99</a></td>
+<td>5.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111006">Intel Core2 Duo T9600 @ 2.80GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+T9600+%40+2.80GHz">1987</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111006">339.99</a></td>
+<td>5.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117183">Intel Xeon E5540 @ 2.53GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5540+%40+2.53GHz">4467</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117183">779.99</a></td>
+<td>5.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117214">Intel Xeon W5590 @ 3.33GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+W5590+%40+3.33GHz">8597</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117214">1689.99</a></td>
+<td>5.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111008">Intel Core2 Duo T9400 @ 2.53GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+T9400+%40+2.53GHz">1710</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111008">335.98</a></td>
+<td>5.1</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111317">Intel Core2 Duo T7500 @ 2.20GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+T7500+%40+2.20GHz">1239</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111317">249.99</a></td>
+<td>5</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111007">Intel Core2 Duo P9500 @ 2.53GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+P9500+%40+2.53GHz">1758</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819111007">369.99</a></td>
+<td>4.8</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117140">Intel Xeon X5450 @ 3.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X5450+%40+3.00GHz">4409</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117140">939.99</a></td>
+<td>4.7</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117141">Intel Xeon E5450 @ 3.00GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5450+%40+3.00GHz">4583</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117141">986.99</a></td>
+<td>4.6</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117182">Intel Xeon X5550 @ 2.67GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X5550+%40+2.67GHz">4424</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117182">999.99</a></td>
+<td>4.4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117138">Intel Xeon X5460 @ 3.16GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X5460+%40+3.16GHz">5008</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117138">1249.99</a></td>
+<td>4</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117181">Intel Xeon X5560 @ 2.80GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X5560+%40+2.80GHz">4900</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117181">1249.99</a></td>
+<td>3.9</td>
+</tr>
+<tr>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117179">Intel Xeon W5580 @ 3.20GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+W5580+%40+3.20GHz">6293</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117179">1679.99</a></td>
+<td>3.8</td>
+</tr>
+<tr id="yui-rec101">
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117180">Intel Xeon X5570 @ 2.93GHz</a></td>
+<td><a href="http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X5570+%40+2.93GHz">5390</a></td>
+<td><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117180">1439.99</a></td>
+<td>3.7</td>
+</tr>
+</tbody>
+</table>
+<p></center><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20793.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/cpu_512x512-150x150.png" alt="与程序员相关的CPU缓存知识" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20793.html" class="wp_rp_title">与程序员相关的CPU缓存知识</a></li><li ><a href="https://coolshell.cn/articles/10249.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/image6-150x150.png" alt="7个示例科普CPU Cache" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10249.html" class="wp_rp_title">7个示例科普CPU Cache</a></li><li ><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg" alt="一些非常不错的资料" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_title">一些非常不错的资料</a></li><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1608.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/javascript-150x150.jpg" alt="Javascript的两本书" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1608.html" class="wp_rp_title">Javascript的两本书</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2039.html">CPU的性价比</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2039.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>2010 = 1+2-(3-4-5)*6*7*8-9</title>
+		<link>https://coolshell.cn/articles/2036.html</link>
+					<comments>https://coolshell.cn/articles/2036.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 07 Jan 2010 00:22:13 +0000</pubDate>
+				<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[123456789问题]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2036</guid>
+
+					<description><![CDATA[<p> 这是一个数字游戏，使用123456789，并按照123456789的顺序，使用加减乘除以及括号，进行操作使其结果等于2010（原来的游戏是使其值为100，请看...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2036.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2036.html">2010 = 1+2-(3-4-5)*6*7*8-9</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script> 这是一个数字游戏，使用123456789，并按照123456789的顺序，使用加减乘除以及括号，进行操作使其结果等于2010（原来的游戏是使其值为100，<a href="http://www.cut-the-knot.org/do_you_know/digits.shtml" target="_blank">请看这里</a>），那么会有多少种解法呢？下面是924种解法，其让我想起了“24点游戏”。</p>
+<p>这里，如果让你写一段程序来生成所有的可能，你知道怎么写这段程序吗？</p>
+<h4>使用单个数</h4>
+<p>2010 = 1+2-(3-4-5)*6*7*8-9<br />
+2010 = 1-(2+(3-4-5)*6*7)*8+9<br />
+2010 = 1+2+(3+4*(5+6*7+8))*9<br />
+2010 = 1+2*(3*4*(5+6)-7)*8+9<br />
+2010 = 1*2*3*(4*(5*6+7*8)-9)<br />
+2010 = 1+2+(3+4*(5-6+7*8))*9<br />
+2010 = (1-2-3+4*(5/6+7*8))*9<br />
+2010 = (1+2+3*4)*(5-6+(7+8)*9)<br />
+2010 = 1+2+((3*(4+5)+6)*7-8)*9<br />
+2010 = (1+2+3)*(4*(5*6+7*8)-9)<br />
+2010 = 1+2+3*(4*(5+6)*(7+8)+9)<br />
+2010 = (1*2/3)*((4+5)*6*7*8-9)<br />
+2010 = (1-2-3)*((4+5)/6-7*8*9)<br />
+2010 = (1*2+(3-4*(5/6-7))*8)*9<br />
+2010 = 1*(2+(3-4*(5/6-7))*8)*9<br />
+2010 = (1+2*(3+4))*(5-6+(7+8)*9)</p>
+<p><span id="more-2036"></span></p>
+<h4>使用多位数</h4>
+<p>2010 = 12*34*5-6-7-8-9<br />
+2010 = 12*34*5+6*7-8*9<br />
+2010 = 1+2345*6/7+8-9<br />
+2010 = 12-3*(4+5-678)-9<br />
+2010 = 123*4*5-(6*7+8)*9<br />
+2010 = 1+2-3*(4*5*6-789)<br />
+2010 = 123*4*5+(6-7*8)*9<br />
+2010 = 12*34+(5+6+7)*89<br />
+2010 = 12*3*45+6*(7*8+9)<br />
+2010 = 12+3*(4-5+67+8)*9<br />
+2010 = (12-3)*4*56-7-8+9<br />
+2010 = 12-(3-4*56+7-8)*9<br />
+2010 = (1*2+34)*56-7-8+9<br />
+2010 = 1*(2+34)*56-7-8+9<br />
+2010 = 12*3*45-6*(7-8*9)<br />
+2010 = 1+2*(34*5*6-7)-8-9<br />
+2010 = 1+2-(3-45+6)*7*8-9<br />
+2010 = 1*2*3*(45*6+7*8+9)<br />
+2010 = (1+2)*3*4*56-7-8+9<br />
+2010 = 1*2*3*(45*6-7+8*9)<br />
+2010 = 12-(3/4-5)*6*78+9<br />
+2010 = 1+(2/3)*45*67+8-9<br />
+2010 = 1+23-4*(5/6-7*8)*9<br />
+2010 = (1-2/3+4*56+7-8)*9<br />
+2010 = 1+2-3*(4-5)*(678-9)<br />
+2010 = (1-2)*3*(4-5-678+9)<br />
+2010 = 1+2-3*((4-5)*678+9)<br />
+2010 = (1+2)*(3-4*5+678+9)<br />
+2010 = 1+(2+3)*(456-7*8)+9<br />
+2010 = (12+3-45)*67*(8-9)<br />
+2010 = 1-(23-(45-6)*7)*8+9<br />
+2010 = 12-3*(4+5-(67+8)*9)<br />
+2010 = 12-(3-45*(6+7-8))*9<br />
+2010 = 1*(23-4*56)*(7-8-9)<br />
+2010 = (1*23-4*56)*(7-8-9)<br />
+2010 = (1+23/4)*5*67*8/9<br />
+2010 = 12-3*(4+(5-6)*78)*9<br />
+2010 = (1-23-45)*(6*7-8*9)<br />
+2010 = 1*((2+34)*56-7-8+9)<br />
+2010 = 1*((2+34)*56-7-8)+9<br />
+2010 = 1*((2+34)*56-7)-8+9<br />
+2010 = 12+3*(4*(5-6)+78)*9<br />
+2010 = (1-2-34+5)*67*(8-9)<br />
+2010 = 1+(2+34)*56+7*(8-9)<br />
+2010 = 1+2+((34+5-6)*7-8)*9<br />
+2010 = 1-(2-3-4)*(56*7+8)+9<br />
+2010 = 1+2+(3+4*(56+7-8))*9<br />
+2010 = (1+2*34)*(5*6+7-8)+9<br />
+2010 = (12+3)*4+5*6*(7*8+9)<br />
+2010 = (1+2*34*5-6)*(7+8-9)<br />
+2010 = 1-(2+3-45)*(6*7+8)+9<br />
+2010 = 1-(2+(3-45+6)*7)*8+9<br />
+2010 = (1-2+(3+45)*6)*7-8+9<br />
+2010 = (1+2)*(3*4*56-7+8)-9<br />
+2010 = (1+2+3)*(45*6+7*8+9)<br />
+2010 = 1*2*((3*4-5+6)*78-9)<br />
+2010 = (1+2+3)*(45*6-7+8*9)<br />
+2010 = 1+2-3*(45-6*7*(8+9))<br />
+2010 = (12+3)*(4*5+6*7+8*9)<br />
+2010 = (12+3)*4-5*6*(7-8*9)<br />
+2010 = 1+2*(3*(4+5*67)-8)-9<br />
+2010 = 1+(2+3-45)*(6-7*8)+9<br />
+2010 = (12+3-45)*67/(8-9)<br />
+2010 = 12+3*(4/(5-6)+78)*9<br />
+2010 = 1-(2+3*45/6)*(7-89)<br />
+2010 = (1+2)*34*5*67/(8+9)<br />
+2010 = (1-2-34+5)*67/(8-9)<br />
+2010 = 1+(2+34)*56+7/(8-9)<br />
+2010 = 12+(3/4)*(5*6+7)*8*9<br />
+2010 = (1*2/3-4)*(5+6-78)*9<br />
+2010 = 1*(2/3-4)*(5+6-78)*9<br />
+2010 = 12-(3/4)*(5-6*7)*8*9<br />
+2010 = (1*2/3-4*56)*(7-8)*9<br />
+2010 = 1*(2/3-4*56)*(7-8)*9<br />
+2010 = (1+2)*((3-4)*5+678)-9<br />
+2010 = (1+(2-3)*4)*(5-678)-9<br />
+2010 = (1+2)*(3-4)*(5-678)-9<br />
+2010 = (12+3)*(45-(6-7)*89)<br />
+2010 = 12+3*((4+5)*(67+8)-9)<br />
+2010 = 1-((2+34)*56-7)*(8-9)<br />
+2010 = (1-2+3*45)*(6-(7-8)*9)<br />
+2010 = 12-(3-(4+5+6)*(7+8))*9<br />
+2010 = (12+3)*(4+5+6+7*(8+9))<br />
+2010 = (1+2)*(3+4*(5+6)+7*89)<br />
+2010 = 1+2-(3/(4-5))*(678-9)<br />
+2010 = ((1+2)/3-4)*(5-678)-9<br />
+2010 = 1-(23+(4+5)/6)*(7-89)<br />
+2010 = 1-((2+34)*56-7)/(8-9)<br />
+2010 = (1+2+3/4)*(5+(67-8)*9)<br />
+2010 = 12*(3-4*(5-(6-7/8)*9))<br />
+2010 = 1-(2+(3/4)*5*6)*(7-89)<br />
+2010 = (1+2)*((3-4)*5+(67+8)*9)<br />
+2010 = (1+(2-3)*4)*(5-(67+8)*9)<br />
+2010 = (1+2)*(3-4)*(5-(67+8)*9)<br />
+2010 = (1-(23+4)*5)*(6*(7-8)-9)<br />
+2010 = (12+3)*((4+5)*(6+7)+8+9)<br />
+2010 = (12/3)*((4-5)/6+7*8)*9<br />
+2010 = ((1*2/3-4*56)/(7-8))*9<br />
+2010 = (1*(2/3-4*56)/(7-8))*9<br />
+2010 = ((1+2)/(3-4))*(5-678)-9<br />
+2010 = ((12+3)/4)*(5+(67-8)*9)<br />
+2010 = ((1+2)/3-4)*(5-(67+8)*9)<br />
+2010 = (1-(23+4)*5)*(6/(7-8)-9)<br />
+2010 = ((1+2)/(3-4))*(5-(67+8)*9)</p>
+<h4>使用小数</h4>
+<p>2010 = 1+2+.3*4*5*6*7*8-9<br />
+2010 = 1+2+3*.4*5*6*7*8-9<br />
+2010 = 1+2+3*4*.5*6*7*8-9<br />
+2010 = 1+2+3*4*5*.6*7*8-9<br />
+2010 = 1+2+3*4*5*6*.7*8-9<br />
+2010 = 1+2+3*4*5*6*7*.8-9<br />
+2010 = 1/.2+345*6-7*8-9<br />
+2010 = 1/.2+345*6+7-8*9<br />
+2010 = 1+2*3*4*56/.7+89<br />
+2010 = 12+(34.5*6+7+8)*9<br />
+2010 = 1+234.5*6/.7+8-9<br />
+2010 = (1234+567+8)/.9<br />
+2010 = 1+2345*.6/.7+8-9<br />
+2010 = 12-34*(.5-67+8)+9<br />
+2010 = 12-(3*4-5*6*7.8)*9<br />
+2010 = 12*(3*4-.5+67+89)<br />
+2010 = 1*(2345-67*8)/.9<br />
+2010 = (1*2345-67*8)/.9<br />
+2010 = 12+3*(.4*5-6+78)*9<br />
+2010 = 12+3*(4*.5-6+78)*9<br />
+2010 = 12-(3*4-.5*6*78)*9<br />
+2010 = 12-(3*4-5*.6*78)*9<br />
+2010 = 1-(2-.3*4*5*6*7)*8+9<br />
+2010 = 1-(2-3*.4*5*6*7)*8+9<br />
+2010 = 1-(2-3*4*.5*6*7)*8+9<br />
+2010 = 1-(2-3*4*5*.6*7)*8+9<br />
+2010 = 1-(2-3*4*5*6*.7)*8+9<br />
+2010 = 1+2+3-4*(.5*6-7*8*9)<br />
+2010 = 1+2+3-4*(5*.6-7*8*9)<br />
+2010 = 1*2*3-4*(.5*6-7*8*9)<br />
+2010 = 1*2*3-4*(5*.6-7*8*9)<br />
+2010 = 12*(34*5-.6+7-8.9)<br />
+2010 = .1+23*(45+6*7)+8.9<br />
+2010 = .1+23*(4*5+67)+8.9<br />
+2010 = .1+2345*6/7+.8-.9<br />
+2010 = 12+3*(45/.6+7-8)*9<br />
+2010 = .1+2-3*(4+5-678)+.9<br />
+2010 = 1+2-(3-.4*567+.8)*9<br />
+2010 = 1+2-(3-4*56.7+.8)*9<br />
+2010 = (12/.3-4)*56-7-8+9<br />
+2010 = 1.2+(3+45)*6*7-.8*9<br />
+2010 = 1.2+(3+45)*6*7-8*.9<br />
+2010 = 12*34*5+6/(7-.8*9)<br />
+2010 = 12*34*5+6/(7-8*.9)<br />
+2010 = 12*(34*5-.6+7-8-.9)<br />
+2010 = (1.2+34+5)*(67-8-9)<br />
+2010 = 1+2+3*(4+56/.7)*8-9<br />
+2010 = 12+3*(.4-5+.6+78)*9<br />
+2010 = .1+23*(45+6*7)+8+.9<br />
+2010 = .1+23*(4*5+67)+8+.9<br />
+2010 = 12+3*45*(.6+7+.8*9)<br />
+2010 = 1-(23-4.5+6)*(7-89)<br />
+2010 = 1*2*3*(4/.5+6*7*8-9)<br />
+2010 = 12-(3-4.5*(6*7+8))*9<br />
+2010 = (1+2)*(3-.4*5+678-9)<br />
+2010 = (1+2)*(3-4*.5+678-9)<br />
+2010 = 12*(3.4*56*7/8+.9)<br />
+2010 = 12*(34+(.5-6+7)*89)<br />
+2010 = 1+.2+(3+45)*6*7-.8*9<br />
+2010 = 1+.2+(3+45)*6*7-8*.9<br />
+2010 = 12-(3+4.5*(6-7*8))*9<br />
+2010 = 12+((34+.5)*6+7+8)*9<br />
+2010 = 1+(234+.5)*6/.7+8-9<br />
+2010 = (1+.2+34+5)*(67-8-9)<br />
+2010 = 12+(.3-4)*(5-67*8-9)<br />
+2010 = 12*3*(45+6*7/8)/.9<br />
+2010 = 12-(34+5*(.6-7)*8)*9<br />
+2010 = 12+(34*(.5+6)-7+8)*9<br />
+2010 = 1+(2/.3)*4.5*67+8-9<br />
+2010 = 1+(2/.3)*45*6.7+8-9<br />
+2010 = 1-(23-4-.5+6)*(7-89)<br />
+2010 = 1-(2-3-4)*(56*7+.8+9)<br />
+2010 = 1*2*(34-.5)*(6+7+8+9)<br />
+2010 = (1+23-4)*5*(6+7+8-.9)<br />
+2010 = (1+2*34)*(.5*6*7+8)+9<br />
+2010 = (1+2*34)*(5*.6*7+8)+9<br />
+2010 = (1+2*34)*(5*6*.7+8)+9<br />
+2010 = 12*(3+4)+5*(6*7+.8)*9<br />
+2010 = 12-3*(4-5*(.6+7+8))*9<br />
+2010 = (1-2*34)*.5*6*(7-8-9)<br />
+2010 = (1+2)*34+5*(6-.7)*8*9<br />
+2010 = 12+3*4*(5*(6-.7)-8)*9<br />
+2010 = 12-(.3/.4-5)*6*78+9<br />
+2010 = 12-(3*4-5*6*(7+.8))*9<br />
+2010 = 1*2*(3*4*(.5+6+78)-9)<br />
+2010 = 1-(2-34)*(.5+6+7*8)+9<br />
+2010 = 1-(2+34+5-6)*7*(.8-9)<br />
+2010 = 1-(234+5+6)*(.7-8.9)<br />
+2010 = (1+2+3+4*56)*(.7+8)+9<br />
+2010 = (1*2*3+4*56)*(.7+8)+9<br />
+2010 = 1*(2*3+4*56)*(.7+8)+9<br />
+2010 = (1+(234+5-6-7)*8)/.9<br />
+2010 = (1*2+3)*4*5*(6+7+8-.9)<br />
+2010 = 1.2*(34-.5)*(67-8-9)<br />
+2010 = 1*(2+3)*4*5*(6+7+8-.9)<br />
+2010 = 1-(2+3)*4*(.5-6-7)*8+9<br />
+2010 = (123/.4+5)*6+(7+8)*9<br />
+2010 = (12/3)*(4.5-6+7*8*9)<br />
+2010 = 1*2*(3*(.4*5+6*7*8)-9)<br />
+2010 = 1*2*(3*(4*.5+6*7*8)-9)<br />
+2010 = 1*(2*3-4*(.5*6-7*8*9))<br />
+2010 = 1*(2*3-4*(5*.6-7*8*9))<br />
+2010 = (1+2)*(3-4/.5+678)-9<br />
+2010 = (1-2+3+4)*(.5+6*7*8)-9<br />
+2010 = 1*2*3*(4+(.5+6*7)*8-9)<br />
+2010 = 1/.2+34-5*6*(.7-8)*9<br />
+2010 = ((123+4*5)/.6-7-8)*9<br />
+2010 = 12*(34*5-.6*7+.8+.9)<br />
+2010 = 12*(34*5-6*.7+.8+.9)<br />
+2010 = (1*2/3+4-.5)*67*.8*9<br />
+2010 = 1-(2*3*4+5+6)*7*(.8-9)<br />
+2010 = .1*(2/3+4-.5)*67*8*9<br />
+2010 = 1*(2/3+4-.5)*67*.8*9<br />
+2010 = 1+23-4*(.5/.6-7*8)*9<br />
+2010 = 1+(2-3-4+5*6*7)*(.8+9)<br />
+2010 = 1-2*(3+4*5*(.6-7))*8+9<br />
+2010 = 1+(2-3-4-5*6)*7*(.8-9)<br />
+2010 = (1-.2/.3+4*56+7-8)*9<br />
+2010 = (1+23)*(4+5+67/.8-9)<br />
+2010 = 1-(234+5+6)*(.7-8-.9)<br />
+2010 = 12+((3*4/.5)*6+78)*9<br />
+2010 = 12-3*(.4-5.6*7*(8+9))<br />
+2010 = (1+2.3/.4)*5*67*8/9<br />
+2010 = (1+23/4)*5*6.7*8/.9<br />
+2010 = 12*(3*(4+5-.6)*7-8.9)<br />
+2010 = (1*2-34*(.5-67)*8)/9<br />
+2010 = 1*(2-34*(.5-67)*8)/9<br />
+2010 = (1+2)*(3*45+6*78)/.9<br />
+2010 = 1+(2/.3)*4*(5+67)+89<br />
+2010 = (1/.2)*(3-4*56+7*89)<br />
+2010 = (1-23-4/.5)*67*(8-9)<br />
+2010 = .1+234.5*6/.7+.8-.9<br />
+2010 = (1-2+34/.5)*(6+7+8+9)<br />
+2010 = 1*2*3*(.4-.5+6*7*8-.9)<br />
+2010 = ((12/3)*456-7-8)/.9<br />
+2010 = (1+(234-56/7)*8)/.9<br />
+2010 = (12/3)*(4+.5-6+7*8*9)<br />
+2010 = 12-(3-45*(6*.7+.8))*9<br />
+2010 = (1+23)/.4+5*6*(7*8+9)<br />
+2010 = 1+(2/.3+4*5)*(67+8)+9<br />
+2010 = 1-(2-3*(4+56/.7))*8+9<br />
+2010 = (.1-2*3.4)*5*6*(7-8-9)<br />
+2010 = 1+((2+3)*4/.56)*7*8+9<br />
+2010 = 12*((34-5)*6-.7*8-.9)<br />
+2010 = 12*((34-5)*6-7*.8-.9)<br />
+2010 = 12*((34-5)*6+.7-.8*9)<br />
+2010 = 12*((34-5)*6+.7-8*.9)<br />
+2010 = (12-3+4*5*6*(7+8))/.9<br />
+2010 = 12-3*(.4-56*.7*(8+9))<br />
+2010 = 12*(.3+4*(56-7-.8*9))<br />
+2010 = 12*(.3+4*(56-7-8*.9))<br />
+2010 = (1+23/4)*.5*67*8/.9<br />
+2010 = (1+23/4)*5*67*.8/.9<br />
+2010 = (12-3)*4*(.5/6+7*8)-9<br />
+2010 = 1*(23+4)*(5+6+7*8)/.9<br />
+2010 = (1*23+4)*(5+6+7*8)/.9<br />
+2010 = (1*2+34)*(.5/6+7*8)-9<br />
+2010 = 1*(2+34)*(.5/6+7*8)-9<br />
+2010 = 1+(2/.34+5+6)*7*(8+9)<br />
+2010 = (1-(2+3-4*56-7)*8)/.9<br />
+2010 = 1+2+(3*4/.5)*(6+78)-9<br />
+2010 = 1+(2+34*(5+6*7))/.8+9<br />
+2010 = 12-(3+45*(.6-.7*8))*9<br />
+2010 = 12-(3+45*(.6-7*.8))*9<br />
+2010 = (1+23)/.4-5*6*(7-8*9)<br />
+2010 = (12/3.4)*5*6.7*(8+9)<br />
+2010 = 1-(2-3/.4+5*6)*(7-89)<br />
+2010 = 1-2*3*(4+.5/6)*(7-89)<br />
+2010 = .1+2345*.6/.7+.8-.9<br />
+2010 = 1*2*3*((4/.5)*6*7+8-9)<br />
+2010 = 1+2*((3*4/.5)*6*7-8)+9<br />
+2010 = ((1+2*3*4)*5/.6+7+8)*9<br />
+2010 = 12*(3*(4+5-.6)*7-8-.9)<br />
+2010 = (1+2-(3-4*5/.6)*7+8)*9<br />
+2010 = (1-2+3-4*(.5/6-7)*8)*9<br />
+2010 = (1+2+3)*(4/.5+6*7*8-9)<br />
+2010 = (1-2+3-45*6)*(.7+.8-9)<br />
+2010 = (1/.2)*3*4+5*6*(7*8+9)<br />
+2010 = 1+2-(3-4*(56+.7)+.8)*9<br />
+2010 = (1/2)*3*4*(.5+6*7*8)-9<br />
+2010 = (12+3)*.4*(.5+6*7*8)-9<br />
+2010 = (.1-.2*34)*5*6*(7-8-9)<br />
+2010 = 12+3*(.4+(5+6*.7)*8)*9<br />
+2010 = (1-2)*3-4*(.5/6-7*8)*9<br />
+2010 = (1+(2+3)*4-.5/6+7)*8*9<br />
+2010 = 1+(2+3)*(4/.5+6*7)*8+9<br />
+2010 = 1-(23+.4*5*6)*7*(.8-9)<br />
+2010 = 1-(23+4*.5*6)*7*(.8-9)<br />
+2010 = 1-(23+4*5*.6)*7*(.8-9)<br />
+2010 = (1+2)*3*4*(.5/6+7*8)-9<br />
+2010 = (1-2/3+4-5*6*(.7-8))*9<br />
+2010 = (1*2-3+4*(.5/6+7*8))*9<br />
+2010 = 1*(2-3+4*(.5/6+7*8))*9<br />
+2010 = 1+2-(.3-4)*(.5+67)*8+9<br />
+2010 = .1+(2/3)*45*67+.8-.9<br />
+2010 = (1/.2)*3*(4*5+6*7+8*9)<br />
+2010 = (1/.2)*3*4-5*6*(7-8*9)<br />
+2010 = 1+(2-34-.5*6)*7*(.8-9)<br />
+2010 = 1+(2-34-5*.6)*7*(.8-9)<br />
+2010 = (12/3.4)*.5*67*(8+9)<br />
+2010 = (1-.2+34)*(56.7+.8)+9<br />
+2010 = (.1+.2-3-4)*5*6*(7-8-9)<br />
+2010 = 1-2/.3-4*(.5/6-7*8*9)<br />
+2010 = (1/2-34)*(5-67+8)/.9<br />
+2010 = ((123+.4*5)/.6+7+8)*9<br />
+2010 = ((123+4*.5)/.6+7+8)*9<br />
+2010 = 1-2*(3*4-.5+6)*7*(.8-9)<br />
+2010 = 12*(3-(4-.5)*(6*7-89))<br />
+2010 = (12-3-4)*(5*(.6+78)+9)<br />
+2010 = (1+2/.3-4+.5)*67*.8*9<br />
+2010 = ((1-2)/3+4.5)*67*.8*9<br />
+2010 = 1-(23.4+.5+.6)*(7-89)<br />
+2010 = (.1-2/3+4*56+.7-.8)*9<br />
+2010 = 1-(2+3*4.5/.6)*(7-89)<br />
+2010 = (1*2/(.3+4.5))*67*8*9<br />
+2010 = (12+34+5)*67/(.8+.9)<br />
+2010 = (.12/.34)*5*67*(8+9)<br />
+2010 = (12/.34)*5*.67*(8+9)<br />
+2010 = (1-23-4/.5)*67/(8-9)<br />
+2010 = 12+((34*5+.6+7)/.8)*9<br />
+2010 = .1+.2-(3-4*(567-8))*.9<br />
+2010 = 12-(3-(4+.5)*(6*7+8))*9<br />
+2010 = (1-2)*(34-.5)*6*(7-8-9)<br />
+2010 = ((1-2)*34+.5)*6*(7-8-9)<br />
+2010 = (1+(2+3/4.5)*678)/.9<br />
+2010 = 12*((3+.4)*56*7/8+.9)<br />
+2010 = 1.2-(3-(4-.5-.6)*78)*9<br />
+2010 = 1+(23+(4*5+6)*7)*(.8+9)<br />
+2010 = (12+3)*4*((.5-6)*7+8*9)<br />
+2010 = 1*23*((.4+5)/.6+78)+9<br />
+2010 = (1-(2/3)/4)*.5*67*8*9<br />
+2010 = (1-(2/3)/4)*5*67*.8*9<br />
+2010 = (.1+2.3/4)*5*67*8/.9<br />
+2010 = 1-(2/.3)*(4.5-6*7)*8+9<br />
+2010 = 1+(2-3-4)*(56-7)*(.8-9)<br />
+2010 = 12*((3+.4/56)*7*8-.9)<br />
+2010 = 1+(23-(4-5*6)*7)*(.8+9)<br />
+2010 = ((1*2/.3+4*5)*67/8)*9<br />
+2010 = 12-(3+(4+.5)*(6-7*8))*9<br />
+2010 = (1*(2/.3+4*5)*67/8)*9<br />
+2010 = (1/(.2+3-4/5))*67*8*9<br />
+2010 = 1-(2+.3*45/.6)*(7-89)<br />
+2010 = 1+(2/.3)*(4+5*6.7)*8+9<br />
+2010 = 1*((2*3+4*56)*(.7+8)+9)<br />
+2010 = (1/.2+.34)*5*67/.89<br />
+2010 = 1-(2/.3)*45*(.6-7)+89<br />
+2010 = (1+2+3+45)*67/(.8+.9)<br />
+2010 = (1*2*3+45)*67/(.8+.9)<br />
+2010 = (12+3)*4*5*(6-.7*(8-9))<br />
+2010 = 1*(2*3+45)*67/(.8+.9)<br />
+2010 = 12/.3+4*(.5-6*(7-89))<br />
+2010 = (1-.2+34)*(56+.7+.8)+9<br />
+2010 = 12+(.3/.4)*(5*6+7)*8*9<br />
+2010 = 12+(3/.4)*(5*6+7)*.8*9<br />
+2010 = 12+(3/.4)*(5*6+7)*8*.9<br />
+2010 = 12*3*(45+.6*7/.8)/.9<br />
+2010 = 12*3*(45+6*.7/.8)/.9<br />
+2010 = .1-2+.3-4*(.5+.6-7*8*9)<br />
+2010 = (1.2+.3)*4*(.5+6*7*8)-9<br />
+2010 = (1-2/3-45)*6*(.7+.8-9)<br />
+2010 = (1-.2+34)*(5+6*7/.8)+9<br />
+2010 = 1-2*(3+4)*(.5-6*(7+8+9))<br />
+2010 = 1-(2+3*4)*(.5-6*(7+8+9))<br />
+2010 = 1/2-((3-45)*6+.7)*8-.9<br />
+2010 = (1+2+3)*(4+(.5+6*7)*8-9)<br />
+2010 = 1*2*((3/.4-.5+6)*78-9)<br />
+2010 = 1+(2+(3+4)*5*6-7)*(.8+9)<br />
+2010 = 12-3*(.4-56*7*(.8+.9))<br />
+2010 = (1/(.2-3+4))*.5*67*8*9<br />
+2010 = (1/(.2-3+4))*5*67*.8*9<br />
+2010 = (1*(2/3+4)-.5)*67*.8*9<br />
+2010 = (1*2/(.3+4+.5))*67*8*9<br />
+2010 = ((1/.2)*345+6+78)/.9<br />
+2010 = 1+(2+3)*(4-5-6)*7*(.8-9)<br />
+2010 = 1-(2/.3)*4*(.5*6-78)+9<br />
+2010 = 1-(2/.3)*4*(5*.6-78)+9<br />
+2010 = (1*2+3)*(4+5*(.6+7+8*9))<br />
+2010 = 1*(2+3)*(4+5*(.6+7+8*9))<br />
+2010 = 1+(2+(3+4*5+6)*7)*(.8+9)<br />
+2010 = 1+(2+3)*(4+5*6+7)*(.8+9)<br />
+2010 = 12-(.3/.4)*(5-6*7)*8*9<br />
+2010 = 12-(3/.4)*(5-6*7)*.8*9<br />
+2010 = 12-(3/.4)*(5-6*7)*8*.9<br />
+2010 = 1+(2/.3)*45*(6+.7)+8-9<br />
+2010 = 1+(2/.3)*(4+.5)*67+8-9<br />
+2010 = 1+(2+(3-4+5*6)*7)*(.8+9)<br />
+2010 = ((1+2)/.3)*(45+67+89)<br />
+2010 = 1-(23+.4+.5+.6)*(7-89)<br />
+2010 = 1*2*(.3+4+56)*(7+8)/.9<br />
+2010 = 1+(2+3)*(4-5+6*7)*(.8+9)<br />
+2010 = 1-(2+3*(4+5)+6)*7*(.8-9)<br />
+2010 = 1+(2/.34)*(.5+6*7)*8+9<br />
+2010 = 1+(2/.3)*(4+.5*67)*8+9<br />
+2010 = (1.2/.34)*5*6.7*(8+9)<br />
+2010 = (.1*2/.3-4*56)*(7-8)*9<br />
+2010 = (1*.2/.3-4*56)*(7-8)*9<br />
+2010 = 1*(.2/.3-4*56)*(7-8)*9<br />
+2010 = 1.2+3*(4/.5+.6+.7)*8*9<br />
+2010 = (123/.4)*5+(6*7/.8)*9<br />
+2010 = (1.2/.3)*(4.5-6+7*8*9)<br />
+2010 = 1/(.2-.3)-4*(5-6-7*8*9)<br />
+2010 = (1-.2-3/.4)*5*6*(7-8-9)<br />
+2010 = (1+(2/3+.4*5)*678)/.9<br />
+2010 = (1+(2/3+4*.5)*678)/.9<br />
+2010 = (1/.2-3+4)*(.5+6*7*8)-9<br />
+2010 = (1-2*34)*5*6*(.7-.8-.9)<br />
+2010 = (1+(2/3.4)*5)*(6+7*8*9)<br />
+2010 = 1+2-(3/(.4-.5)-6)*7*8-9<br />
+2010 = ((1+2)/.3)*(45*6-78+9)<br />
+2010 = (1*2*3*4*5+.6)*(7+8)/.9<br />
+2010 = 1*(2*3*4*5+.6)*(7+8)/.9<br />
+2010 = 1+.2-(3-(4-.5-.6)*78)*9<br />
+2010 = (1+234/.5)*6*7/(.8+9)<br />
+2010 = 1-(2/.3)*(4+.5-6*7)*8+9<br />
+2010 = 12*(3.4+(5+6)*(7+8)-.9)<br />
+2010 = (.1*2*3+4*5*6)*(7+8)/.9<br />
+2010 = (1*.2*3+4*5*6)*(7+8)/.9<br />
+2010 = (1*2*.3+4*5*6)*(7+8)/.9<br />
+2010 = 1*(.2*3+4*5*6)*(7+8)/.9<br />
+2010 = 1*(2*.3+4*5*6)*(7+8)/.9<br />
+2010 = (1/.2)*3*(45-(6-7)*89)<br />
+2010 = (1-2-3+4*(.5/.6+7*8))*9<br />
+2010 = (1-.2/3-.4-5)*(6-7*8)*9<br />
+2010 = (12/.34)*.5*6.7*(8+9)<br />
+2010 = (12/3.4)*5*67*(.8+.9)<br />
+2010 = ((1/.2)*3-45)*67*(8-9)<br />
+2010 = (1+(.2+3)*45)*(6+7.8)+9<br />
+2010 = 12*34*5+.6/(.7-.8*.9)<br />
+2010 = (1+.2)*(34-.5)*(67-8-9)<br />
+2010 = (1+2)*(3-4/.5+(67+8)*9)<br />
+2010 = (1+2+3)*(.4-.5+6*7*8-.9)<br />
+2010 = (1-2-3)*(.4+.5+.6-7*8*9)<br />
+2010 = (1+23)*(4-5+6+(7/.8)*9)<br />
+2010 = (1+.2+.3)*4*(.5+6*7*8)-9<br />
+2010 = ((1+23)/4)*(.5+6*7*8)-9<br />
+2010 = ((1-2)/.3)*(4-56-7-8)*9<br />
+2010 = 1*2*3*(.4*.5+6*(7-.8)*9)<br />
+2010 = (1+((2+3)*45-6+7)*8)/.9<br />
+2010 = (1/.2)*((3+4)*56-7+8+9)<br />
+2010 = (1/.2)*((3-4+56)*7+8+9)<br />
+2010 = ((12/.3)*45-6+7+8)/.9<br />
+2010 = (.1*2/.3+4-.5)*67*.8*9<br />
+2010 = (1*.2/.3+4-.5)*67*.8*9<br />
+2010 = (1/.2)*(3+(4-5+6)*78+9)<br />
+2010 = .1*(.2/.3+4-.5)*67*8*9<br />
+2010 = 1*(.2/.3+4-.5)*67*.8*9<br />
+2010 = (1/(2.3-.4+.5))*67*8*9<br />
+2010 = (1+2.3/.4)*5*6.7*8/.9<br />
+2010 = ((1-2)/(3-.4-5))*67*8*9<br />
+2010 = (1-(2-3*(4+5+67))*8)/.9<br />
+2010 = 1*((2+34)*(.5/6+7*8)-9)<br />
+2010 = ((1-2)/.3+45)*6.7*.8*9<br />
+2010 = (1+2.3*4)*5*67/(.8+.9)<br />
+2010 = (1/.2-(3+4)*5)*67*(8-9)<br />
+2010 = (1/.2)*(3-4-5)*67*(8-9)<br />
+2010 = (1+2)*34*5*6.7/(.8+.9)<br />
+2010 = ((1-.2)*34-.5)*67/.89<br />
+2010 = (12+3)*4*5*(6-.7/(8-9))<br />
+2010 = (1+2+3)*((4/.5)*6*7+8-9)<br />
+2010 = 12*(3/.4+(5+6+7)*8/.9)<br />
+2010 = 1+.2+3*(4/.5+.6+.7)*8*9<br />
+2010 = 12*3*(4+(5*6+7)/.8)/.9<br />
+2010 = (12/.3+.4*.5)*(67-8-9)<br />
+2010 = 1+(2/.3)*(4+(5*6+7)*8)+9<br />
+2010 = ((1.2/.3)*456-7-8)/.9<br />
+2010 = (1+(234-5.6/.7)*8)/.9<br />
+2010 = 1+((2+3)*4/.5)*(6*7+8)+9<br />
+2010 = (1.2/.3)*(4+.5-6+7*8*9)<br />
+2010 = (1*2*3/.4)*(5-6+(7+8)*9)<br />
+2010 = (1/.2)*((3-4*5)*6+7*8*9)<br />
+2010 = 12*(34*5-6/(.7+.8+.9))<br />
+2010 = (1/.2)*(3+4+5+6*(7*8+9))<br />
+2010 = (1+(.2+3)*45)*(6+7+.8)+9<br />
+2010 = 1+(2/.3)*(4*(5+6)*7-8)+9<br />
+2010 = 12*3*(4-(5-6*7)/.8)/.9<br />
+2010 = 1+(2/.3)*(4-(5-6*7)*8)+9<br />
+2010 = (1/.2)*(3+(4+5+6*7)*8-9)<br />
+2010 = 1+((2+3)*4*56/.7)/.8+9<br />
+2010 = (1+(23*4/.5+6*7)*8)/.9<br />
+2010 = ((1+2-.3)/.4)*5*67*8/9<br />
+2010 = ((1+2-.3)/4)*5*67*8/.9<br />
+2010 = 1+((2*3/.4)/.5)*67+8-9<br />
+2010 = ((1+2)*3+4*5*6*(7+8))/.9<br />
+2010 = 12-3*(.4-(5+.6)*7*(8+9))<br />
+2010 = (1-2)*(3+4*(.5/6-7*8)*9)<br />
+2010 = (1+23/4)*5*(6+.7)*8/.9<br />
+2010 = (1+(2+.3)/.4)*5*67*8/9<br />
+2010 = (1+2.3/.4)*.5*67*8/.9<br />
+2010 = (1+2.3/.4)*5*67*.8/.9<br />
+2010 = 12*(3+.4+(5+6)*(7+8)-.9)<br />
+2010 = (1+2+(.3/4)*5)*67*8/.9<br />
+2010 = (1+2+(3/4)*.5)*67*8/.9<br />
+2010 = (12/.3-4)*(.5/6+7*8)-9<br />
+2010 = (1*(2-3)+4*(.5/6+7*8))*9<br />
+2010 = 12+3*(.4/(.5-.6)+78)*9<br />
+2010 = 1+(23+4*(.5+6)*7)*(.8+9)<br />
+2010 = .1*(2-34*(.5-67)*8)/.9<br />
+2010 = ((1+2)*(3+4)-.5/6+7)*8*9<br />
+2010 = ((.1-.2)/3+.45)*67*8*9<br />
+2010 = ((1*2/.3)*4*5+6*(7+8))*9<br />
+2010 = 1*((2/.3)*4*5+6*(7+8))*9<br />
+2010 = 1-((2+3)*4/.5)*(6-7*8)+9<br />
+2010 = (1/.2)*3*(4+5+6+7*(8+9))<br />
+2010 = (1+23*.4)*5*67/(.8+.9)<br />
+2010 = 1-(2-3*(.4*5+67))*(.8+9)<br />
+2010 = 1-(2-3*(4*.5+67))*(.8+9)<br />
+2010 = (1+2)*34*.5*67/(.8+.9)<br />
+2010 = (12+3)*4*5*(6-7*(.8-.9))<br />
+2010 = (1/.2)*(3+4+5-6*(7-8*9))<br />
+2010 = (.1-.2/3-4.5)*(6-7*8)*9<br />
+2010 = 1+(2+34)*56+.7/(.8-.9)<br />
+2010 = .1+(234+.5)*6/.7+.8-.9<br />
+2010 = (.1+(23/.4)*5-.6)*7-8+9<br />
+2010 = (1+((2+34.5)*6+7)*8)/.9<br />
+2010 = (1/.2-3-4*(.5/6-7)*8)*9<br />
+2010 = 12+(3/.4)*(5-.6-.7)*8*9<br />
+2010 = 12+(3/.4)*(.5*6+.7)*8*9<br />
+2010 = 12+(3/.4)*(5*.6+.7)*8*9<br />
+2010 = ((12/.3)*45.6-7-8)/.9<br />
+2010 = 12*3*(.4*.5/6+(7-.8)*9)<br />
+2010 = (.1-(2-.3)*4)*5*6*(7-8-9)<br />
+2010 = (1/.2-3-45*6)*(.7+.8-9)<br />
+2010 = (.1-2*(3+.4))*5*6*(7-8-9)<br />
+2010 = (1-2*34)*5*6/(.7-.8-.9)<br />
+2010 = (1+(2+.3/.45)*678)/.9<br />
+2010 = (1+2)/.3+4*5*6*(7+8)/.9<br />
+2010 = (1/(2+.3-.4+.5))*67*8*9<br />
+2010 = (.1+.23/.4)*5*67*8/.9<br />
+2010 = ((1*2/.3)/4)*(56+78)*9<br />
+2010 = 1-(.2-3)*(4-.5+6*7*(8+9))<br />
+2010 = (1-.2+3*(4+5)*67-.8)/.9<br />
+2010 = .1+(2/.3)*4.5*67+.8-.9<br />
+2010 = .1+(2/.3)*45*6.7+.8-.9<br />
+2010 = (1/.2)*(34-5)*(6+7.8)+9<br />
+2010 = ((1+23)*(4+5)*67/.8)/9<br />
+2010 = ((1+23)*(4+5)*67/8)/.9<br />
+2010 = 1-(2+3)*(4+.5*6)*7*(.8-9)<br />
+2010 = 1-(2+3)*(4+5*.6)*7*(.8-9)<br />
+2010 = (12/3.4)*5*(6+.7)*(8+9)<br />
+2010 = (12/(3+.4))*5*6.7*(8+9)<br />
+2010 = ((1/.2)*3-45)*67/(8-9)<br />
+2010 = (1-2.3*(4-56))*(7+8)/.9<br />
+2010 = (12-3)*4*(56-(.7+.8)/9)<br />
+2010 = (1/(.2-3)+4*5*6)*(7.8+9)<br />
+2010 = (1*2+34)*(56-(.7+.8)/9)<br />
+2010 = 1*(2+34)*(56-(.7+.8)/9)<br />
+2010 = (1+(2/.3+4*5)*67.8)/.9<br />
+2010 = (.1/.2)*3*4*(.5+6*7*8)-9<br />
+2010 = (1/.2)*.3*4*(.5+6*7*8)-9<br />
+2010 = (1/.2)*3*.4*(.5+6*7*8)-9<br />
+2010 = (1+(23-.4)*(5+67+8))/.9<br />
+2010 = (.1-(.2-3-45)*6)*7+.8+.9<br />
+2010 = (((1-2)/3)/4+.5)*67*8*9<br />
+2010 = 1*(23*((.4+5)/.6+78)+9)<br />
+2010 = ((1/.2)/(3+4+5))*67*8*9<br />
+2010 = (1-23*(4/5-6))*(7+8)/.9<br />
+2010 = (1-.2/.3+4-5*6*(.7-8))*9<br />
+2010 = ((1/2-34)/.5)*(6*7-8*9)<br />
+2010 = ((1+2)*3-4)*(5*(.6+78)+9)<br />
+2010 = (1-(2-3)*4)*(5*(.6+78)+9)<br />
+2010 = (1/.2-(3+4)*5)*67/(8-9)<br />
+2010 = (1/.2)*(3-4-5)*67/(8-9)<br />
+2010 = (1/.2)*(.34+5)*67/.89<br />
+2010 = (.1-.2/3-4-.5)*(6-7*8)*9<br />
+2010 = (1+(2/3)*(4+5*67)*8)/.9<br />
+2010 = (12/(3+.4))*.5*67*(8+9)<br />
+2010 = (1.2/.34)*5*67*(.8+.9)<br />
+2010 = (12/.34)*5*6.7*(.8+.9)<br />
+2010 = 1-(.2+3.4*(5+67))*(.8-9)<br />
+2010 = (1/.2)*(34-.5)*(6+7+8-9)<br />
+2010 = (.1/2-.3+4)*(5+(67-8)*9)<br />
+2010 = (1+2+.3/.4)*(5+(67-8)*9)<br />
+2010 = (.1+(2+3)*4)*(5+(6+7)*8-9)<br />
+2010 = (1/.2)*(34-5)*(6+7+.8)+9<br />
+2010 = (1+2)*3*4*(56-(.7+.8)/9)<br />
+2010 = (1+(2/.34)*.5)*(6+7*8*9)<br />
+2010 = (1*2/.3)*(4+.5*(67-8))*9<br />
+2010 = (1+((2+34+.5)*6+7)*8)/.9<br />
+2010 = 1-(((.2-34)*5-6)/.7)*8+9<br />
+2010 = 1/(.2-.3)-4*((5-67)*8-9)<br />
+2010 = (.1/.2-34)*(5-67+8)/.9<br />
+2010 = (1+23-4)*(.5+6*(7+8)/.9)<br />
+2010 = 12*(3-4*(5-(6-.7/.8)*9))<br />
+2010 = 1+(2+((3+4)*5-6)*7)*(.8+9)<br />
+2010 = (1-(2-34*(.5+6)-7)*8)/.9<br />
+2010 = 1-((2-(3+4)*5)*6-7)*(.8+9)<br />
+2010 = .1+2+(.3-4*(.5*.6-7*8))*9<br />
+2010 = 1-(2+3*(4+(5+6)*7))*(.8-9)<br />
+2010 = (1/(2-3)+4*(.5/6+7*8))*9<br />
+2010 = ((1+2*34*5-6)/(.7+.8))*9<br />
+2010 = (.1*2-3.4*(.5-67)*8)/.9<br />
+2010 = (1*.2-3.4*(.5-67)*8)/.9<br />
+2010 = 1*(.2-3.4*(.5-67)*8)/.9<br />
+2010 = ((12+3*4)*5+.6)*(7+8)/.9<br />
+2010 = (1+(2*3+4)*5)*67/(.8+.9)<br />
+2010 = 1-(2+(.3/.4)*5*6)*(7-89)<br />
+2010 = 1-(2+(3/.4)*.5*6)*(7-89)<br />
+2010 = 1-(2+(3/.4)*5*.6)*(7-89)<br />
+2010 = (1+2+(.3+4)*5*(6+78))/.9<br />
+2010 = (1+(.2-3)/.4)*5*67*(8-9)<br />
+2010 = (1+2)*(3*4+5)*67/(.8+.9)<br />
+2010 = (.1-.2/.3+4*56+.7-.8)*9<br />
+2010 = (1-(2-3*4)*5)*67/(.8+.9)<br />
+2010 = 1-(2+3*(4+.5)/.6)*(7-89)<br />
+2010 = (12/.34)*.5*67*(.8+.9)<br />
+2010 = (1/(.2-.3)-4*5)*67*(8-9)<br />
+2010 = (1*2/.3)*45*(6-.7*(8-9))<br />
+2010 = 1-(2-3*(4+5*(6+7)))*(.8+9)<br />
+2010 = (1+23)*(.4+.5+67/.8-.9)<br />
+2010 = 1.2+(3*4/.5)*(.6+.7+8)*9<br />
+2010 = 12*((.3-.4+5)*(6*7-8)+.9)<br />
+2010 = 1+((.2+3)/.4)*5*(6*7+8)+9<br />
+2010 = 12*(34-.5)*(6-.7-.8)/.9<br />
+2010 = ((1-2)/.3)*(4/5-67.8)*9<br />
+2010 = (1/(.2-3)+4*5*6)*(7+.8+9)<br />
+2010 = (1*2+(3-4*(.5/.6-7))*8)*9<br />
+2010 = 1*(2+(3-4*(.5/.6-7))*8)*9<br />
+2010 = ((1+2)/.3-4)*(.5+6*7*8)-9<br />
+2010 = (1/(.2/3-.4))*(5-678)-9<br />
+2010 = (1+(2+3/(4+.5))*678)/.9<br />
+2010 = (1-.2/(3-.4)+5*6)*(7*8+9)<br />
+2010 = 12*(.3-4*(5-6*(.7+8-.9)))<br />
+2010 = 1-(2+(3/(.4-.5)-6)*7)*8+9<br />
+2010 = 12*(.3-4*(5*(.6-7)-.8-9))<br />
+2010 = 1*((2/.3)*(4+5*6+.7)-8)*9<br />
+2010 = ((1*2/.3)*(4+5*6+.7)-8)*9<br />
+2010 = ((1-2)/.3)*(45+(6-78)*9)<br />
+2010 = (1*2+3)*4*(.5+6*(7+8)/.9)<br />
+2010 = 1-(2/.3)*(4-5*(.6+7)*8)+9<br />
+2010 = 1*(2+3)*4*(.5+6*(7+8)/.9)<br />
+2010 = 1+2+((3/.4)*(5-.6)*7-8)*9<br />
+2010 = ((1+2+3)*4*5+.6)*(7+8)/.9<br />
+2010 = (1/.2)*3*4*((.5-6)*7+8*9)<br />
+2010 = (.1+(2+.3)/4)*5*67*8/.9<br />
+2010 = (1-(.2/3)/.4)*.5*67*8*9<br />
+2010 = (1-(.2/3)/.4)*5*67*.8*9<br />
+2010 = 12*(.3+4*(5*(6+.7*.8)+9))<br />
+2010 = (.1*2-34*(.5-67)*.8)/.9<br />
+2010 = (1*.2-34*(.5-67)*.8)/.9<br />
+2010 = 1*(.2-34*(.5-67)*.8)/.9<br />
+2010 = 1+((2-3-4*5)/.6)*7*(.8-9)<br />
+2010 = 1-((.2+.3+4)*56-7)*(.8-9)<br />
+2010 = 1-((.2+3)/.4)*5*(6-7*8)+9<br />
+2010 = (1/(.2+3-.4/.5))*67*8*9<br />
+2010 = ((1+.2/3+4)*(.5+6*7)+8)*9<br />
+2010 = 1+(2/.3)*(4+5*(6+.7))*8+9<br />
+2010 = (1/.2)*3*4*5*(6-.7*(8-9))<br />
+2010 = 1+(2-3*(4+5/.6))*7*(.8-9)<br />
+2010 = 1*((23/.4)*5-.6)*7+.8+.9<br />
+2010 = (.1-2)/.3+4*(.5/6+7*8*9)<br />
+2010 = ((.1+.2)/.3-4)*(5-678)-9<br />
+2010 = (1-.2/.3-45)*6*(.7+.8-9)<br />
+2010 = ((1*23/.4)*5-.6)*7+.8+.9<br />
+2010 = .1/.2-((3-45)*6+.7)*8-.9<br />
+2010 = (1+2+3)*(.4*.5+6*(7-.8)*9)<br />
+2010 = .1+.2+(.3+4*5)*(6*(7+8)+9)<br />
+2010 = ((1-2*34)/.5)*(6*(7-8)-9)<br />
+2010 = ((.1/2+3*4+.5)/.6+7)*8*9<br />
+2010 = ((1+2)/.3)*((45-6)*7-8*9)<br />
+2010 = ((1-(23+4)*5)/.6)*(7-8)*9<br />
+2010 = ((1+(23/.4)*5)*6+78)/.9<br />
+2010 = (1.2/.3)*((4-5)/6+7*8)*9<br />
+2010 = 1/.2+(.3+4*5*6)*(7+8)/.9<br />
+2010 = (1*(.2/.3+4)-.5)*67*.8*9<br />
+2010 = (1+(.2/.3)*4+.5)*67*.8*9<br />
+2010 = (1+(2+3)/.4)*(56+78)/.9<br />
+2010 = 1+2*(.3-4*(5*6+.7))*(.8-9)<br />
+2010 = ((1+2)/3+4)*(5*(.6+78)+9)<br />
+2010 = ((.1-2+3*45)/.6+.7+.8)*9<br />
+2010 = (12+3)*((4+5)/.6+7*(8+9))<br />
+2010 = (1.2/.34)*5*(6+.7)*(8+9)<br />
+2010 = ((1+.2)/.34)*5*6.7*(8+9)<br />
+2010 = ((1-2)/.3)*(4+5)*67*(8-9)<br />
+2010 = (1-23*(.4-5.6))*(7+8)/.9<br />
+2010 = (1/.2)*((34/.5)*6-7-8+9)<br />
+2010 = (12/.3)*((4*5+6+7)/.8+9)<br />
+2010 = ((1-2)/.3)*(4-(5+6)*7*8+9)<br />
+2010 = ((1+2)/.3)*(4*(5-6+7)*8+9)<br />
+2010 = 1+.2+(3*4/.5)*(.6+.7+8)*9<br />
+2010 = (12/.3)*(.45-6+(7-.8)*9)<br />
+2010 = ((1+.2)/.3)*(4.5-6+7*8*9)<br />
+2010 = (1*2/.3)*(.4-.5+6*.7*8)*9<br />
+2010 = (.1+.2-3)*(4/.5-678)/.9<br />
+2010 = ((1+2+3)/.4)*(5-6+(7+8)*9)<br />
+2010 = ((.1-.2)/3+4.5)*(6*7+8)*9<br />
+2010 = (1-(2+3*(4-56/.7))*8)/.9<br />
+2010 = (1+(2/(3+.4))*5)*(6+7*8*9)<br />
+2010 = (1*2/.3)*(4+5*(6.7-.8))*9<br />
+2010 = (1/.2)*(3+(4*(5+6)+7)*8-9)<br />
+2010 = (1/.2)*3*((4+5)*(6+7)+8+9)<br />
+2010 = ((1-2)/.3)*(4/.5-67-8)*9<br />
+2010 = ((1-2)/.3)*(4/5-67-.8)*9<br />
+2010 = (1+2)*(3+(4/.5+67)*8)/.9<br />
+2010 = (1+2)*(3+(4/.5)*67/.8)-9<br />
+2010 = (1+2+3*4)*((5/.6)*(7+8)+9)<br />
+2010 = (((1-2)/.3)/4+5)*67*.8*9<br />
+2010 = (((1-2)/3)/.4+5)*67*.8*9<br />
+2010 = (1/.2)*(3+(4*5+6)*(7+8)+9)<br />
+2010 = (1/.2)*(3*(45/.6+7*8)+9)<br />
+2010 = (.1+.2+.3+4*5*6)*(7+8)/.9<br />
+2010 = (1/.2)*(3-(4-5*6)*(7+8)+9)<br />
+2010 = (1+(.2-3)/.4)*5*67/(8-9)<br />
+2010 = 1-(23+(.4+.5)/.6)*(7-89)<br />
+2010 = 1-((2+34)*(.5-6)-7)*(.8+9)<br />
+2010 = (12/.34)*.5*(6+.7)*(8+9)<br />
+2010 = (12/(3+.4))*5*67*(.8+.9)<br />
+2010 = ((.1*2/.3-4*56)/(7-8))*9<br />
+2010 = ((1*.2/.3-4*56)/(7-8))*9<br />
+2010 = (1*(.2/.3-4*56)/(7-8))*9<br />
+2010 = (1/(.2-.3)-4*5)*67/(8-9)<br />
+2010 = (1*2/.3)*45*(6-.7/(8-9))<br />
+2010 = (1+(23-.4)*(.5*6+7)*8)/.9<br />
+2010 = (1+(23-.4)*(5*.6+7)*8)/.9<br />
+2010 = ((.1-2/.3)*4-5)*(6/7-8)*9<br />
+2010 = (1+(2/(.3+.45))*678)/.9<br />
+2010 = ((1+2-.3)/.4)*5*6.7*8/.9<br />
+2010 = (1+2.3/.4)*5*(6+.7)*8/.9<br />
+2010 = (1+(2+.3)/.4)*5*6.7*8/.9<br />
+2010 = (1-23*(.4-5-.6))*(7+8)/.9<br />
+2010 = 1-((23-.4*5)/.6)*7*(.8-9)<br />
+2010 = 1-((23-4*.5)/.6)*7*(.8-9)<br />
+2010 = .1*.2-(.3+.4-5*6)*7*(.8+9)<br />
+2010 = ((1-2)/.3+45)*(6+.7)*.8*9<br />
+2010 = ((.1-.2)/.3+4.5)*67*.8*9<br />
+2010 = (1+(2+.3)*4)*5*67/(.8+.9)<br />
+2010 = 1+(2+(3+4*(.5+6))*7)*(.8+9)<br />
+2010 = (1+2)*34*5*(6+.7)/(.8+.9)<br />
+2010 = (1/.2)*3*4*5*(6-.7/(8-9))<br />
+2010 = (1*2/.3)*45*(6-7*(.8-.9))<br />
+2010 = (1*2/.3)*((4+5)*.6*7*8-.9)<br />
+2010 = (1*2/.3)*((4+5)*6*.7*8-.9)<br />
+2010 = (1*2/.3)*((4+5)*6*7*.8-.9)<br />
+2010 = ((1/.2)*3/4)*(5+(67-8)*9)<br />
+2010 = ((1/2)*3/.4)*(5+(67-8)*9)<br />
+2010 = (((1+.2)/.3)*456-7-8)/.9<br />
+2010 = (1+(234-(5+.6)/.7)*8)/.9<br />
+2010 = ((.1-.2)/3+4+.5)*(6*7+8)*9<br />
+2010 = ((1+.2)/.3)*(4+.5-6+7*8*9)<br />
+2010 = (1-2-3)*((.4+.5)/.6-7*8*9)<br />
+2010 = (.1*2+(.3-45)*6)*(.7+.8-9)<br />
+2010 = (1*.2+(.3-45)*6)*(.7+.8-9)<br />
+2010 = 1*(.2+(.3-45)*6)*(.7+.8-9)<br />
+2010 = ((1-.2)*3/.4)*(.5+6*7*8)-9<br />
+2010 = (1/(.2+.3)+4)*(.5+6*7*8)-9<br />
+2010 = (1*2/.3)*(4+5*(6+.7-.8))*9<br />
+2010 = ((1-2*34)/.5)*(6/(7-8)-9)<br />
+2010 = ((.1/2+3/.4+5)/.6+7)*8*9<br />
+2010 = ((1+2-.3)/.4)*.5*67*8/.9<br />
+2010 = ((1+2-.3)/.4)*5*67*.8/.9<br />
+2010 = 1+((2/.3+.4)*5*6-7)*(.8+9)<br />
+2010 = (1/.2)*((34/.5)*6-7.8)+9<br />
+2010 = (1+(2+.3)/.4)*.5*67*8/.9<br />
+2010 = (1+(2+.3)/.4)*5*67*.8/.9<br />
+2010 = (1+2+(.3/.4)*.5)*67*8/.9<br />
+2010 = (1/(.2-.3+.4))*(5+6+7*8)*9<br />
+2010 = ((1+.2/.3+4)*5*(.6+7)+8)*9<br />
+2010 = 1-(2*3*(4-.5)/.6)*7*(.8-9)<br />
+2010 = ((1-2)/.3)*(4+5)*67/(8-9)<br />
+2010 = (1/.2)*3*4*5*(6-7*(.8-.9))<br />
+2010 = ((.1+(2+3)*4)/.5)*(67-8-9)<br />
+2010 = ((12/.3)*(45+.6)-7-8)/.9<br />
+2010 = (12/.3-4)*(56-(.7+.8)/9)<br />
+2010 = ((1-2*34)/(.5+(6-7)*.8))*9<br />
+2010 = ((1+23)/.4)*((.5-6)*7+8*9)<br />
+2010 = .1*.2+(3+4)*(5*6-.7)*(.8+9)<br />
+2010 = ((1-2+3)/.4)*(5*(.6+78)+9)<br />
+2010 = (1+(23/(.4+5))*6*(.7+8))*9<br />
+2010 = .1+(2/.3)*45*(6+.7)+.8-.9<br />
+2010 = .1+(2/.3)*(4+.5)*67+.8-.9<br />
+2010 = ((1+2)/(.3*4+.5))*67*(8+9)<br />
+2010 = ((1+2)/(3*.4+.5))*67*(8+9)<br />
+2010 = (12/(3+.4))*5*(6+.7)*(8+9)<br />
+2010 = ((12/.3)*45+.6*(7+8))/.9<br />
+2010 = (1-(2+.3)*(4-56))*(7+8)/.9<br />
+2010 = ((1+23)/.4)*5*(6-.7*(8-9))<br />
+2010 = (1/.2)*((34/.5)*6-7-.8)+9<br />
+2010 = ((12+3)/.4)*(56-.7-.8-.9)<br />
+2010 = 1-((.2-3)/.4)*((5*6+7)*8-9)<br />
+2010 = (12*3/.4)*(5+(.6+7+8)/.9)<br />
+2010 = ((1+2)/.3)*(4+5*(6*7-.8)-9)<br />
+2010 = (1+(2/.3+4*5)*(67+.8))/.9<br />
+2010 = 1-((.2-3)/.4)*(5+6*(7*8-9))<br />
+2010 = (1*2/.3)*4*((.5+67)/.8-9)<br />
+2010 = 1+((.2-3)/.4)*((5-6*7)*8+9)<br />
+2010 = (12/.3)*((.4+5+6*7)/.8-9)<br />
+2010 = ((12+3)*4/.5+.6)*(7+8)/.9<br />
+2010 = (1+(2-(3+4)*5*(.6-7))*8)/.9<br />
+2010 = 1+(2+3)*((4/.5)*6-7)*(.8+9)<br />
+2010 = (12/3)*((.4-.5)/.6+7*8)*9<br />
+2010 = ((1/2)/(.3+.4+.5))*67*8*9<br />
+2010 = (1-23*(.4/.5-6))*(7+8)/.9<br />
+2010 = (1/.2)*(3+(4-.5)*(6*7+8*9))<br />
+2010 = ((.1/.2-34)/.5)*(6*7-8*9)<br />
+2010 = ((1-2)*3/.4)*(5*(.6-7*8)+9)<br />
+2010 = (1/.2)*(3+4*(.5+6)*(7+8)+9)<br />
+2010 = (1+(2/.3)*4*(.5+67)+8)/.9<br />
+2010 = (.1-2)*(34-.5)*6/(.7-.89)<br />
+2010 = (1+(2/.3)*(4+5*67)*.8)/.9<br />
+2010 = (12/.34)*5*(6+.7)*(.8+.9)<br />
+2010 = ((1+.2)/.34)*5*67*(.8+.9)<br />
+2010 = (((1+2)/3.4)/.5)*67*(8+9)<br />
+2010 = 1-(.2+(3+.4)*(5+67))*(.8-9)<br />
+2010 = 1*(((23/.4)*5-.6)*7+.8+.9)<br />
+2010 = 1*(((23/.4)*5-.6)*7+.8)+.9<br />
+2010 = ((1/.2+3)/.4)*5*(6+7+8-.9)<br />
+2010 = ((1.2+.3)/.4)*(5+(67-8)*9)<br />
+2010 = (1/(.2+.3)-4*(.5/6-7)*8)*9<br />
+2010 = (1/(.2+.3)-45*6)*(.7+.8-9)<br />
+2010 = (1*2/.3)*(.4+.5*(67-.8))*9<br />
+2010 = (1-((.2-3/.4)*5*6-7)*8)/.9<br />
+2010 = (1-(.2/.3-4)*(.5+67-.8))*9<br />
+2010 = (1/.2+(3/.4)*5*6)*(.7+8)+9<br />
+2010 = (.1*2-(3+.4)*(.5-67)*8)/.9<br />
+2010 = (1*.2-(3+.4)*(.5-67)*8)/.9<br />
+2010 = 1*(.2-(3+.4)*(.5-67)*8)/.9<br />
+2010 = 1-((2/.3)*4+5/.6)*7*(.8-9)<br />
+2010 = 1-(.2-3*(4+5)*(.6+7))*(.8+9)<br />
+2010 = ((12+3)/.4)*(.5+(67-8)*.9)<br />
+2010 = (1/(.2/3-.4))*(5-(67+8)*9)<br />
+2010 = ((1-2)/.3)*(.4/.5-67.8)*9<br />
+2010 = (1+2)*(3+(4/.5)*(67+8))/.9<br />
+2010 = ((1-2*34)/(.5+(.6-7)/8))*9<br />
+2010 = (1+2*(3+4))*((5/.6)*(7+8)+9)<br />
+2010 = ((1+2)/.3)*((4*5-6)*(7+8)-9)<br />
+2010 = .1+((2/.3)*4*5+.6)*(7+8)+.9<br />
+2010 = .1+((2*3/.4)/.5)*67+.8-.9<br />
+2010 = ((12/.3)*(.4+5)*67/.8)/9<br />
+2010 = ((12/.3)*(.4+5)*67/8)/.9<br />
+2010 = (((1-2*34)/.5)/.6)*(7-8)*9<br />
+2010 = ((1+23)/.4)*5*(6-.7/(8-9))<br />
+2010 = ((1*2/.3)/.4)*(5.6+7+.8)*9<br />
+2010 = ((.1+.2)/.3-4)*(5-(67+8)*9)<br />
+2010 = ((1+.2+.3)/.4)*(5+(67-8)*9)<br />
+2010 = (1*2*3/.4)*((5/.6)*(7+8)+9)<br />
+2010 = (((1/.2)/3+4)*5*(.6+7)+8)*9<br />
+2010 = (((1/2)/.3+4)*5*(.6+7)+8)*9<br />
+2010 = ((1+.2)/.3)*((4-5)/6+7*8)*9<br />
+2010 = 1-(((2-.3)/.4)*56+7)*(.8-9)<br />
+2010 = (1/.2)*3*((4+5)/.6+7*(8+9))<br />
+2010 = (1/.2)*((3+.4*5)*(.6+78)+9)<br />
+2010 = (1/.2)*((3+4*.5)*(.6+78)+9)<br />
+2010 = (1+(2/.3)*(.4+5*6.7)*8)/.9<br />
+2010 = ((1+.2)/.34)*5*(6+.7)*(8+9)<br />
+2010 = ((12/.3)*45+6*(.7+.8))/.9<br />
+2010 = ((1+23)/.4)*5*(6-7*(.8-.9))<br />
+2010 = ((12/.3)/.4)*(5+6-.7+.8+9)<br />
+2010 = ((1-2)/.3)*(.4/.5-67-.8)*9<br />
+2010 = (((.1-.2)/3)/.4+.5)*67*8*9<br />
+2010 = (((1-(23+4)*5)/.6)/(7-8))*9<br />
+2010 = 1-(2+(3/.4)*(5-.6))*7*(.8-9)<br />
+2010 = ((1-.2/3+4/.5)/.6)*(7+8)*9<br />
+2010 = (1+(2/.3)*(.4+.5*67)*8)/.9<br />
+2010 = (((1+2)/.34)/.5)*6.7*(8+9)<br />
+2010 = ((1*2/.3)/.4)*(5+.6+7+.8)*9<br />
+2010 = ((12+3)/.4)*(.5+(6.7-.8)*9)<br />
+2010 = ((.1-2/.3)*4-5)*(.6/.7-8)*9<br />
+2010 = ((1+2-.3)/.4)*5*(6+.7)*8/.9<br />
+2010 = (1+(2+.3)/.4)*5*(6+.7)*8/.9<br />
+2010 = (.1/(.2-.3)+4*(.5/6+7*8))*9<br />
+2010 = ((.1/.2)*3/.4)*(5+(67-8)*9)<br />
+2010 = ((1/.2)*.3/.4)*(5+(67-8)*9)<br />
+2010 = (12/.3)*((4*(.5+6)+7)/.8+9)<br />
+2010 = (1+((2/.3)/.4)*5/6)*(7+8)*9<br />
+2010 = ((1/.2-3)/.4)*(5*(.6+78)+9)<br />
+2010 = (((1-2)/.3)*(.4-5*(6+7))+8)*9<br />
+2010 = ((12+3)/.4)*(.5+(6+.7-.8)*9)<br />
+2010 = (12/.3)*((.4+56)*.7/.8+.9)<br />
+2010 = (1.2/.3)*((.4-.5)/.6+7*8)*9<br />
+2010 = (((.1-2)/.3)*(4/.5-6*7)+8)*9<br />
+2010 = ((12+3)/.4)*(.5+6*(.7+8)+.9)<br />
+2010 = ((.1+.2)/.3+4)*(5*(.6+78)+9)<br />
+2010 = ((1/.2)*3/.4)*(56-.7-.8-.9)<br />
+2010 = ((1/.2)/.3)*(45+(.6+7.8)*9)<br />
+2010 = ((12/(.3-.4))/(5/.67-8))*9<br />
+2010 = ((1/.2)*3*4/.5+.6)*(7+8)/.9<br />
+2010 = ((.1/.2)/(.3+.4+.5))*67*8*9<br />
+2010 = ((1/.2)/(.3+.4+.5))*67*.8*9<br />
+2010 = 1-(2/.3)*(.4-(.5+6*7)*(8-.9))<br />
+2010 = (((1+2)/(3+.4))/.5)*67*(8+9)<br />
+2010 = ((1+2+3)/.4)*((5/.6)*(7+8)+9)<br />
+2010 = ((1+2)/.3)*((4/.5+6)*(7+8)-9)<br />
+2010 = ((1+((2/.3)/.4)/.56)*7+8)*9<br />
+2010 = (((1+2)/.34)/.5)*67*(.8+.9)<br />
+2010 = ((((1+2)/.3)/.4)*5/.6+7+8)*9<br />
+2010 = ((1/.2)*3/.4)*(.5+(67-8)*.9)<br />
+2010 = ((1/.2)/(.3-.4))*(5*6-78*.9)<br />
+2010 = ((.1+2)/.3)*(4-(.5/6)/7)*8*9<br />
+2010 = (((1/.2)/.3)*4/.5+6*(7+8))*9<br />
+2010 = (((.1-2)/.3)*(4-5*(.6+7))+8)*9<br />
+2010 = (((.1/.2)/.3+4)*5*(.6+7)+8)*9<br />
+2010 = ((((1-2*34)/.5)/.6)/(7-8))*9<br />
+2010 = (1+(2/.3)*(.4+5*(6+.7))*8)/.9<br />
+2010 = (((1+2)/.34)/.5)*(6+.7)*(8+9)<br />
+2010 = ((1/.2)*3/.4)*(.5+(6.7-.8)*9)<br />
+2010 = (((1+23)/.4)/.5+.6)*(7+8)/.9<br />
+2010 = ((1/.2+3)/.4)*(.5+6*(7+8)/.9)<br />
+2010 = ((1/.2)/.3+(4*5/.6)*(7-.8))*9<br />
+2010 = (((1+2/.3)/.4)/.5)*6*(.7+8)+9<br />
+2010 = ((1/.2)/.3)*(.4+.5+(6-.7+8)*9)<br />
+2010 = ((1/.2)*3/.4)*(.5+(6+.7-.8)*9)<br />
+2010 = ((1+.2)/.3)*((.4-.5)/.6+7*8)*9<br />
+2010 = ((1/.2)*3/.4)*(.5+6*(.7+8)+.9)<br />
+2010 = ((1/(.2+.3))/.4)*(5*(.6+78)+9)<br />
+2010 = ((1/.2)/.3)*((4+5)*(6-.7+8)+.9)<br />
+2010 = ((1/(.2-.3))/(.4-.5))*(6+7+8-.9)</p>
+<p>文章：<a href="http://www.thesamet.com/2010.txt" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li><li ><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="chmod -x chmod的N种解法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_title">chmod -x chmod的N种解法</a></li><li ><a href="https://coolshell.cn/articles/1360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/08/Linux-Stat-150x150.png" alt="谁写了Linux" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1360.html" class="wp_rp_title">谁写了Linux</a></li><li ><a href="https://coolshell.cn/articles/22341.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/covid19-150x150.jpg" alt="感染新冠的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22341.html" class="wp_rp_title">感染新冠的经历</a></li><li ><a href="https://coolshell.cn/articles/294.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="OSGi和Java企业级运算的未来方向" width="150" height="150" /></a><a href="https://coolshell.cn/articles/294.html" class="wp_rp_title">OSGi和Java企业级运算的未来方向</a></li><li ><a href="https://coolshell.cn/articles/511.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="未来五年程序员需要掌握的10项技能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/511.html" class="wp_rp_title">未来五年程序员需要掌握的10项技能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2036.html">2010 = 1+2-(3-4-5)*6*7*8-9</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2036.html/feed</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>程序命名的一些提示</title>
+		<link>https://coolshell.cn/articles/1990.html</link>
+					<comments>https://coolshell.cn/articles/1990.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 06 Jan 2010 00:24:41 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Coding]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1990</guid>
+
+					<description><![CDATA[<p>选择一个正确的名字是编程中最重要的事。以前酷壳向大家推荐过两篇文章《编程命名中的7+1个提示》 和《编程中的命名设计那点事》，今天再向大家推荐一篇。一个正确的命...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1990.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1990.html">程序命名的一些提示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>选择一个正确的名字是编程中最重要的事。以前酷壳向大家推荐过两篇文章《<a rel="bookmark" href="https://coolshell.cn/articles/1038.html">编程命名中的7+1个提示</a>》 和《<a title="编程中的命名设计那点事" href="https://coolshell.cn/articles/990.html">编程中的命名设计那点事</a>》，今天再向大家推荐一篇。一个正确的命名可以让你更容易地理解代码的程序，好的命名可以消除二义性，消除误解，并且说明真实的意图，甚至可以让你有清新的气息以让你更能吸引异性。;-)</p>
+<h3>方法，类和变量</h3>
+<div>正确的名字可以让你的程序顾名思义，下面是一些提示：</div>
+<ul>
+<li><strong>不要使用&#8221;<span style="font-family: 'courier new', monospace;">ProcessData()</span>&#8220;这样的命名</strong><br />
+你如果在你的程序生涯中使用这样的函数名，那么这意味着你将是一个不合格的程序员而会被淘汰或解雇。请<strong>明确实际的功能</strong>。比如：<code>ValidateUserLogin（验证用户登录）</code> 或 <code>EliminateDuplicateRequests（去除重复请求）</code> 或 <code>ComputeAverageAge（计算平均年龄），等等。</code></li>
+<li><strong>让命名来帮你设计程序</strong><br />
+让我们假装有这么一条规则是——“任何的函数是有输入/输出的”，那么，你需要思考的是所有的把input变成ouptut的步骤，然后，你可以选择一个简短的句了来说明你的这段程序，然后，把这个短句再精练一下，最终成为你的函数名，而那个短句则成了你程序的结构。</li>
+</ul>
+<p><span id="more-1990"></span></p>
+<ul>
+<li><strong>命令不应该是模糊的</strong><br />
+如果你有一个类名叫：<code>FilterCriteria</code> ，但实际上其可用于文件过滤，那么这个类应该叫做： <code>FileFilterCriteria ，就算是你真要想要用</code> FilterCriteria，那它也应该是抽象类。</li>
+<li><strong>避免过多的工作</strong><br />
+这只是一个风格上的事情，但还是需要注意一下。在上面，我们使用到了 <code>ValidateUserLogin</code> 和 <code>EliminateDuplicateRequests两个名字，这两个命令看上去需要做很多比较复杂的事。所以，让你的名字变简单一些也有利于你的程序更容易阅读和维护。一个软件本来就是由不同的模块拼成，而一个模块又是由更细小的函数和类拼成。编程中，我们都知道，一个函数的尺寸应该控制在200行以内，一个类的接口应该控制在20个以内。所以，从其名字上我们就不要让一个名字取得太大了。</code></li>
+<li><strong>避免类名以 &#8220;Manager&#8221; 结尾</strong><br />
+这样会让你类变成一个黑盒子，当然，有一些程序员喜欢使用这样的名字让那个类看起来好像更强大一些，但其实这样并不好。一般来说使用Manager这个字眼通常是使用工厂模式，或是一个容器，所以，对于一些最基本的算法或是数据结构的封装，最好是在其名字上体现这一算法或数据结构的名字，如： <code>SortedList</code> 和<code>ConnectionPool 。</code></li>
+<li><strong>为你的枚举类型使用单数名字<br />
+</strong>一个枚举类型会列出所有可能的值，所以，叫<code>animalType</code> 会比 <code>animalTypes 要好。</code></li>
+<li><strong>匈牙利命名应该更多的关注名字的含义而不是类型</strong><br />
+<a rel="nofollow" href="http://en.wikipedia.org/wiki/Hungarian_notation">匈牙利命名</a>是一个以前很流行的命名方法，其给出了一整套的方法告诉你如何标记你的变量的类型，但可惜的是很多程序员过多的关注了变量了类型，而不是变量名的含义。而变量名的含义才是根本。</li>
+<li><strong>不要让名字隐藏了内在</strong><br />
+比如，我们有段代码需要处理用户的输入，把其转成UTF-8码，然后标准化（比如一些协议），最后再处理相应的转义字符。千万不要把这函数命名为<code>Escape()</code> ，因为你需要调用 <code>ToUTF8()</code> 以及<code>NormalizeEntities()</code> 最后才是 <code>Escape()</code> 函数。如果你希望使用一个函数名来做这三件事，那么，你宁可使用一个模糊的名字再加上充分的注释，而不是一个确切的名字。模糊的名字会让别人在阅读时想进去看看，而确切的名字则会让别人在阅读代码时忽略细节（这看起来和第一点有点矛盾，其实也是为了程序的易读）。比如：<code>ProcessUserInput()</code></li>
+<li><strong>一致性, <strong>一致性</strong>, <strong>一致性</strong></strong><br />
+强调文章和代码的一致性，就算是文档写得再详细，我们也要去读代码，所以文档主要是体现思路和反映需求和设计。在程序上，我们的命令应当和文档中的术语保持一致，而程序中的命名也应该是用和文档相同的风格，这样，我们可以少很多理解上的成本。</li>
+<li><strong>不要害怕改名<br />
+</strong>有一些时候，你会觉得某具名字不合适，你需要改动一下。但你马上发现要改这个名字，需要修改很多的程序代码。在这里有一个原则，如果你的这个名字不是以API的方式发布时，那么你就应该不要害怕更改名字，就算是修改的工作量并不小，为了日后的更容易的阅读和维护，这是值得的。但是，如果这是一个API的名字，那我还是建议你不要改了，就算是你觉得这个名字烂得很。因为，当你的程序以API的形式发布后，会有N多的他人的程序依赖于这个名字，这个时候，兼容性和用户比什么都重要。</li>
+</ul>
+<h3>Frameworks 和 Libraries</h3>
+<div>你的用户是一个程序员，他需要使用你的代码进行二次开发。 Namespaces 将会是你重点需要注意的东西。</div>
+<div>
+<ul>
+<li><strong>使用namespaces 而不是类的前缀</strong><br />
+希望你的编程序语言支持namespace，这样，你就可以使用它而不是在类名前面加前缀了。如果你所使用的语言不支持namespace，那么你应该上网看看其它程序员使用什么样的方式来区分自己的代码和别人的代码名字空间。</li>
+<li><strong>使用普通的namespace而不是使用公司名</strong><br />
+使用公司名做namespace并不是一个好的相法，因为公司名很容易变更，比如，公司因为被收购，被控告，合并，重组等原因需要更名。产品的名字同样也会改变。所以，使用一个普通的namespaces会好一些。如STL，ACE等。</li>
+</ul>
+</div>
+<h3>数据库</h3>
+<div>Database Schemas 意为数据模型，所以，其名字应该和其领域是合乎逻辑的，而不是为了编程的方便。</div>
+<ul>
+<li><strong>数据表应使用复数</strong><br />
+别使用单数形式，这是因为在远古的ORM 中需要使用单数的形式来定义类名。而且，一个表中包含了许多行数据，所以也应该是复数的。如，&#8221;<span style="font-family: 'courier new', monospace;">items</span>&#8220;, &#8220;<span style="font-family: 'courier new', monospace;">customers</span>&#8220;, &#8220;<span style="font-family: 'courier new', monospace;">journalEntries</span>&#8221; 等等。,</li>
+<li><strong>为那些包括派生数据或是日常处理的表使用aux_ 和meta_ 前缀</strong><br />
+这些表中的数据都是用来做为临时处理的，所以，你需要一个前缀或是后缀来使他们区别于实际的表。</li>
+<li><strong>为主键加入表名<br />
+</strong>如果你有一张表叫 &#8220;<span style="font-family: 'courier new', monospace;">driverLicenses</span>&#8221; 而ID 列是主键，那么你应该把这个主键命名为&#8221;<span style="font-family: 'courier new', monospace;">driverLicense_id</span>&#8221; 而不是&#8221;id&#8221;。这样做的好处是，当你在连接两个表的时候，你不需要为主键指定表名，如： &#8220;<span style="font-family: 'courier new', monospace;">driverLicense.id</span>&#8221; 或&#8221;<span style="font-family: 'courier new', monospace;">vehicle.id</span>&#8220;，也不需要为其取别名。</li>
+<li><strong>使用后缀来标识类</strong><br />
+这样的例子很多，比如：ISBN 和Dewey Decimal numbers，VIN等等.<br />
+Joe Celko有一篇文章叫 <a rel="nofollow" href="http://www.amazon.com/gp/product/0120887975?ie=UTF8&amp;tag=synesmedia-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0120887975">SQL Programming Style</a>提到了下面这样的风格：<br />
+<span style="font-family: 'courier new', monospace;">_id</span> 主键<br />
+<span style="font-family: 'courier new', monospace;">_nbr</span> 字符串型的数位（有严格的规则，如：车牌号，身份证号，手机号等）<br />
+<span style="font-family: 'courier new', monospace;">_code</span> 标准化编码(如：邮编，ISO 国家编码)<br />
+<span style="font-family: 'courier new', monospace;">_cat</span> 种类名<br />
+<span style="font-family: 'courier new', monospace;">_class</span> 子集<br />
+<span style="font-family: 'courier new', monospace;">_type</span> 稍不正式的类名，比如，驾照中的，&#8221;摩托车&#8221;, &#8220;汽车&#8221;, and &#8220;出租车&#8221; 类型。</li>
+</ul>
+<h3>其它</h3>
+<div>
+<ul>
+<li><strong>对于“物理上”的东西，命名其是什么，而不是做什么</strong><br />
+比如某些物理上的名字，姓名，性别，文件路径，网络链接，文件描述符，下标索引，类的属性，这些都是物理上的东西，所以，其名字应该是标识其是什么，而不是用来做什么。</li>
+<li><strong>对于“逻辑上”的东西，命名其做什么，而不是是什么</strong><br />
+比如某些逻辑上的名字，函数名，数据结构，等。</li>
+<li><strong>避免&#8221;Category&#8221; 问题</strong><br />
+千万别使用&#8221;Category&#8221; 作为你的属性名，因为，你会马上发现，这并不靠谱，因为这就等于什么没有说。与此相类似的还有&#8221;type&#8221; ，&#8221;kind&#8221; ，&#8221;variant&#8221; ，&#8221;classification&#8221; ，&#8221;subcategory&#8221; 等，对于这些名字，没人知道其是什么东西。而应该使用更为明确的分类，如： &#8220;FuelEfficiencyGrade&#8221;, &#8220;PackagingType&#8221;, &#8220;AgeGroup&#8221;, &#8220;Flamability&#8221;, &#8220;AllergenLevel&#8221;, 等等。</li>
+</ul>
+<div>文章：<a href="http://sites.google.com/site/yacoset/Home/naming-tips" target="_blank">来源</a></div>
+</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1990.html">程序命名的一些提示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1990.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>google的免费dns服务器</title>
+		<link>https://coolshell.cn/articles/2015.html</link>
+					<comments>https://coolshell.cn/articles/2015.html#comments</comments>
+		
+		<dc:creator><![CDATA[joe]]></dc:creator>
+		<pubDate>Mon, 28 Dec 2009 11:03:34 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[dns]]></category>
+		<category><![CDATA[Google]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2015</guid>
+
+					<description><![CDATA[<p>google推出了自己的免费dns服务器，以供公众使用。服务器地址是： dns1: 8.8.8.8 dns2: 8.8.4.4 我在我的机器上测试了一下： $ ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2015.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2015.html">google的免费dns服务器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>google推出了自己的免费dns服务器，以供公众使用。服务器地址是：</p>
+<p>dns1: 8.8.8.8</p>
+<p>dns2: 8.8.4.4</p>
+<p>我在我的机器上测试了一下：</p>
+<p><span id="more-2015"></span></p>
+<div>$ host -a g.cn 8.8.8.8</div>
+<div>Trying &#8220;g.cn&#8221;</div>
+<div>Using domain server:</div>
+<div>Name: 8.8.8.8</div>
+<div>Address: 8.8.8.8#53</div>
+<div>Aliases:</div>
+<div>;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 33253</div>
+<div>;; flags: qr rd ra; QUERY: 1, ANSWER: 11, AUTHORITY: 0, ADDITIONAL: 0</div>
+<div>;; QUESTION SECTION:</div>
+<div>;g.cn.				IN	ANY</div>
+<div>;; ANSWER SECTION:</div>
+<div>g.cn.			300	IN	A	72.14.203.160</div>
+<div>g.cn.			259200	IN	NS	ns3.google.com.</div>
+<div>g.cn.			10800	IN	MX	10 google.com.s9b2.psmtp.com.</div>
+<div>g.cn.			259200	IN	NS	ns1.google.cn.</div>
+<div>g.cn.			259200	IN	NS	ns2.google.com.</div>
+<div>g.cn.			86400	IN	SOA	ns1.google.com. dns-admin.google.com. 1402219 21600 3600 1209600 300</div>
+<div>g.cn.			10800	IN	MX	10 google.com.s9b1.psmtp.com.</div>
+<div>g.cn.			10800	IN	MX	10 google.com.s9a2.psmtp.com.</div>
+<div>g.cn.			10800	IN	MX	10 google.com.s9a1.psmtp.com.</div>
+<div>g.cn.			259200	IN	NS	ns1.google.com.</div>
+<div>g.cn.			259200	IN	NS	ns4.google.com.</div>
+<p>Received 325 bytes from <strong><span style="color: #ff0000">8.8.8.8#53 in 217 ms</span></strong></p>
+<div></div>
+<div>
+<div>$ host -a g.cn 8.8.4.4</div>
+<div>Trying &#8220;g.cn&#8221;</div>
+<div>Using domain server:</div>
+<div>Name: 8.8.4.4</div>
+<div>Address: 8.8.4.4#53</div>
+<div>Aliases:</div>
+<div></div>
+<div>;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 40871</div>
+<div>;; flags: qr rd ra; QUERY: 1, ANSWER: 11, AUTHORITY: 0, ADDITIONAL: 0</div>
+<div></div>
+<div>;; QUESTION SECTION:</div>
+<div>;g.cn.<span> </span>IN<span> </span>ANY</div>
+<div></div>
+<div>;; ANSWER SECTION:</div>
+<div>g.cn.<span> </span>227<span> </span>IN<span> </span>A<span> </span>72.14.203.160</div>
+<div>g.cn.<span> </span>259127<span> </span>IN<span> </span>NS<span> </span>ns3.google.com.</div>
+<div>g.cn.<span> </span>10727<span> </span>IN<span> </span>MX<span> </span>10 google.com.s9b2.psmtp.com.</div>
+<div>g.cn.<span> </span>259127<span> </span>IN<span> </span>NS<span> </span>ns1.google.cn.</div>
+<div>g.cn.<span> </span>259127<span> </span>IN<span> </span>NS<span> </span>ns2.google.com.</div>
+<div>g.cn.<span> </span>86327<span> </span>IN<span> </span>SOA<span> </span>ns1.google.com. dns-admin.google.com. 1402219 21600 3600 1209600 300</div>
+<div>g.cn.<span> </span>10727<span> </span>IN<span> </span>MX<span> </span>10 google.com.s9b1.psmtp.com.</div>
+<div>g.cn.<span> </span>10727<span> </span>IN<span> </span>MX<span> </span>10 google.com.s9a2.psmtp.com.</div>
+<div>g.cn.<span> </span>10727<span> </span>IN<span> </span>MX<span> </span>10 google.com.s9a1.psmtp.com.</div>
+<div>g.cn.<span> </span>259127<span> </span>IN<span> </span>NS<span> </span>ns1.google.com.</div>
+<div>g.cn.<span> </span>259127<span> </span>IN<span> </span>NS<span> </span>ns4.google.com.</div>
+<div></div>
+<div>Received 325 bytes from <span style="color: #ff0000"><strong>8.8.4.4#53 in 196 ms</strong></span></div>
+<div><span style="color: #ff0000"><strong><br />
+</strong></span></div>
+</div>
+<div></div>
+<div>好记又免费，爽哉！！ :)</div>
+<div></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2015.html">google的免费dns服务器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2015.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>推荐几个镜像站点</title>
+		<link>https://coolshell.cn/articles/2011.html</link>
+					<comments>https://coolshell.cn/articles/2011.html#comments</comments>
+		
+		<dc:creator><![CDATA[joe]]></dc:creator>
+		<pubDate>Sun, 27 Dec 2009 13:06:26 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[free software]]></category>
+		<category><![CDATA[自由软件]]></category>
+		<category><![CDATA[镜像]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2011</guid>
+
+					<description><![CDATA[<p>搜狐的：http://mirrors.sohu.com 网易的：http://mirrors.163.com 上海交通大学FTP：http://202.38.9...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2011.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2011.html">推荐几个镜像站点</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>搜狐的：<a title="http://mirrors.sohu.com" href="http://mirrors.sohu.com" target="_blank">http://mirrors.sohu.com</a></p>
+<p>网易的：<a title="http://mirrors.163.com" href="http://mirrors.163.com" target="_blank">http://mirrors.163.com</a></p>
+<p>上海交通大学FTP：<a title="http://202.38.97.230/" href="http://202.38.97.230/" target="_blank">http://202.38.97.230</a></p>
+<p>如果你是教育网的用户，上海交通大学FTP访问速度非常的快。</p>
+<p>:)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3161.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="AES加密算法动画演示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3161.html" class="wp_rp_title">AES加密算法动画演示</a></li><li ><a href="https://coolshell.cn/articles/1197.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/GPL-1-150x150.png" alt="GPLv3的在开源社区中的占有量" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1197.html" class="wp_rp_title">GPLv3的在开源社区中的占有量</a></li><li ><a href="https://coolshell.cn/articles/3314.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/Color-Scheme-150x150.jpg" alt="几个在线颜色选择器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3314.html" class="wp_rp_title">几个在线颜色选择器</a></li><li ><a href="https://coolshell.cn/articles/3489.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/01/scr1_m-150x150.png" alt="Linux的cycle日历（你懂的）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3489.html" class="wp_rp_title">Linux的cycle日历（你懂的）</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/1178.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/Internet-150x150.jpg" alt="Internet 技术演变图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1178.html" class="wp_rp_title">Internet 技术演变图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2011.html">推荐几个镜像站点</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2011.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>粉丝眼中的操作系统</title>
+		<link>https://coolshell.cn/articles/1998.html</link>
+					<comments>https://coolshell.cn/articles/1998.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 24 Dec 2009 06:50:46 +0000</pubDate>
+				<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[MacOS]]></category>
+		<category><![CDATA[OS]]></category>
+		<category><![CDATA[Windows]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1998</guid>
+
+					<description><![CDATA[<p>在发布完《程序员眼中的编程语言》一文后，发现网上还有一个关于操作系统的。如下所示。 图片的横轴是三大操作系统。 纵轴是各操作系统的粉丝和信徒。 中间的各个小图片...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1998.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1998.html">粉丝眼中的操作系统</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在发布完《<a rel="bookmark" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a>》一文后，发现网上还有一个关于操作系统的。如下所示。</p>
+<ul>
+<li>图片的横轴是三大操作系统。</li>
+<li>纵轴是各操作系统的粉丝和信徒。</li>
+<li>中间的各个小图片则是，粉丝眼中的操作系统的形象。</li>
+</ul>
+<p>关于操作系统，还有<a href="https://coolshell.cn/articles/1579.html" target="_blank">这一张图</a>也很有意思。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1999" title="粉丝眼中的操作系统" src="https://coolshell.cn/wp-content/uploads/2009/12/operatingsystems-fanboys.jpg" alt="粉丝眼中的操作系统" width="540" height="430" srcset="https://coolshell.cn/wp-content/uploads/2009/12/operatingsystems-fanboys.jpg 540w, https://coolshell.cn/wp-content/uploads/2009/12/operatingsystems-fanboys-300x239.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/12/operatingsystems-fanboys-339x270.jpg 339w" sizes="(max-width: 540px) 100vw, 540px" /></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1579.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/operating-systems-150x150.jpg" alt="一张关于操作系统的图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1579.html" class="wp_rp_title">一张关于操作系统的图</a></li><li ><a href="https://coolshell.cn/articles/105.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/19-windows-3-150x150.gif" alt="操作系统图形界面发展史(1981-2009)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/105.html" class="wp_rp_title">操作系统图形界面发展史(1981-2009)</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="纯文本配置还是注册表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_title">纯文本配置还是注册表</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1998.html">粉丝眼中的操作系统</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1998.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>程序员眼中的编程语言</title>
+		<link>https://coolshell.cn/articles/1992.html</link>
+					<comments>https://coolshell.cn/articles/1992.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 24 Dec 2009 06:31:25 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[programming language]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1992</guid>
+
+					<description><![CDATA[<p>下图是一个搞笑的图片——程序员眼中的编程语言。 图片的横轴是编程语言。 纵轴是各语言的程序员、粉丝、信徒。 中间的各个小图片则是，粉丝眼中的编程语言的形象。 比...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1992.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下图是一个搞笑的图片——程序员眼中的编程语言。</p>
+<ul>
+<li>图片的横轴是编程语言。</li>
+<li>纵轴是各语言的程序员、粉丝、信徒。</li>
+<li>中间的各个小图片则是，粉丝眼中的编程语言的形象。</li>
+</ul>
+<p>比如说，</p>
+<ul>
+<li>第一行第一列，是Java程序员看Java语言的样子，一幢现代化的大厦。</li>
+<li>第一行第二列，是Java程序员看C语言，一个年老过时的骨灰级老头。</li>
+<li>当然，C程序员看Java语言也比较搞，见第二行第一列。呵呵。</li>
+</ul>
+<p>其它的大家自己看吧。还有另外一个关于操作系统的《<a rel="bookmark" href="https://coolshell.cn/articles/1998.html">粉丝眼中的操作系统</a>》</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1994" title="程序员眼中的编程语言" src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys.jpg" alt="程序员眼中的编程语言" width="575" height="420" srcset="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys.jpg 575w, https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-300x219.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-370x270.jpg 370w" sizes="(max-width: 575px) 100vw, 575px" /></p>
+<p> </p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys.jpg"></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/1391.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="编程真难啊" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1391.html" class="wp_rp_title">编程真难啊</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1992.html/feed</wfw:commentRss>
+			<slash:comments>33</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C语言的演变史</title>
+		<link>https://coolshell.cn/articles/1984.html</link>
+					<comments>https://coolshell.cn/articles/1984.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 21 Dec 2009 00:12:10 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1984</guid>
+
+					<description><![CDATA[<p>1972 &#8211; C语言的先驱——B语言，被贝尔实验室开发。B语言是一个很快速的，容易维护的，而且对于从系统到应用开发是很好用的。设计这门语言的整个团队...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1984.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1984.html">C语言的演变史</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>1972 &#8211; C语言的先驱——B语言，被贝尔实验室开发。B语言是一个很快速的，容易维护的，而且对于从系统到应用开发是很好用的。设计这门语言的整个团队被马上解雇了，因为他们干了一件和电话通讯不相干的事情。最后这个项目转给了 Dennis Ritchie。他把这个语言变得不容易理解，很难维护，而且，只能用于系统方面的编程。而且，他还设计了一个指针系统，保让每一个程序都超过500行，并可以使用操作系统的指针。</p>
+<p>1982 – 大家发现有97% 的C程序调用产生了“缓冲区溢出”问题。于是，C 程序员们开始意识到，就算是不必要也必需要初始化变量。然而，强制性的变量初始化这个明智的决定，很难影响了当时已经写成了的97%的C程序，所以结果什么也没有发生。 </p>
+<p>1984 – 操作系统出现了“错误指针”的问题数量开始戏剧性地增涨。 </p>
+<p>1985 – 一系列的让C语言有面向对象能力的解决方法出现了，一个叫“C With Classes”正准备商业化。然而，大家觉得名字“C With Classes”太清楚和容易被理解了，所以，最终的商业版本叫做—— C++。</p>
+<p><span id="more-1984"></span></p>
+<p>1986 – C语言成为最流行的语句，其被很多业界分析师推荐于业务应用。他们向全世界宣称——由C语言写成的应用将可以运行在很多不同的平台上的，是跨平台的。目前看来，这些众多的分析者在当时有可能是因为某种迷幻而导致其大脑被所蛊惑了。</p>
+<p>1988 – 业界的这些分析家们因为“摇头丸”吃完了。所以，在他们的幻觉过去以后，他们注意到，使用C语言来开发业务应用会增加5倍以上的开发时间，并且程序也不具备可移植性。他们开始停止向大众推荐使用C语言来开发业务应用了，只能很少一部服用可卡因的人开始转向推荐大众使用C++语言写业务应用程序，他们说，“那是面向对象的，所以，代码是很容易重用的”。</p>
+<p>1990 – 在这个时候，所有的C编译器都转到了C++编译器上。但是，因为大多数的C++程序员并没有使用C++中那些面向对象的语言特性。也就是说，在实际上来说，那种浮肿的代码结构加上操作系统指针的代码被一种叫面向对象的编译器编译。</p>
+<p>1990 – 在雇佣了一些转向“吸胶毒”的分析师后，Sun决定要创造一种叫Oak的语言，这种语言主要用于电视的机顶盒。因为当时几乎所有的程序员的DNA中都有C语的基因，所以，这个语言向C和C++中大量地借鉴了很多它们的语法和编程思路。然而，机顶盒上没有操作系统，也就不存在指针，所以，他们把指针从这门语言里给去掉了。</p>
+<p>1994 – Sun公司里的某个人意识到为一个机顶盒开发一个语言是多么愚蠢的事情。于是，这个语言更名为Java，并且为其注入了“Internet”的特征，从而让其成为一个真正可以被移植的语言。其市场营销上相当成功，而那时有3%的业内人士开始明白什么是Internet，同时，那些精神不正常的分析师们还在不停地嗑药并向大众鼓吹他们的神话——“跨平台移植性”。</p>
+<p>1995 &#8211; Sun 向业界的分析师们提供了免费蘑菇迷魂汤，导致那些分析师在喝下汤后，马上开始写下“Java是一门未来的可移植的和Ineternet高度可集成的语言”。</p>
+<p>1996 中 – 17,468,972 篇文章出现，描述了Java是怎么一门未来的语言。这也是Java Applet开始进入Web页的时代。</p>
+<p>1996 末– 程序员开始使用Java applet创建他们的Web页面，然后他们开始因为挫折和沮丧开始集体自杀。此时，那些分析师开始增大蘑菇迷魂汤的剂量。</p>
+<p>1997 – 因为接受了产生幻觉分析师的建议，Corel 决定重写他们的应用，包括 WordPerfect，当然，是用Java写的。最终的结果是，这是迄今为止比“打字机”还慢的字处理软件。</p>
+<p>1998 –  在意识到applet已在快速枯萎，Sun又一次的重新配置了Java，这次，他们叫Severlet，这是一个服务器的程序语言。这个设计在抄袭了Microsoft Transaction Server ，并且，他们说服所有人这个设计是他们创造的。</p>
+<p>1999 – 业内那些喝多了的分析师们用一种咆哮的方式向大众介绍了Java 2 Enterprise Edition 。 21,499,512 文章被写出来。但是，实际上并没有人使用，因为J2EE太不成熟，而又太贵了。</p>
+<p>2000 – J2EE 最终还是运转起来了（一点点）。而且，所有的Java卖主们开始准备向其砸钱，与此同时，Microsoft 宣布了.NET，这是一个包括了所有的J2EE功能但没那么贵的产品。实际上来说， Microsoft 决定让Windows的用户免费使用.NET 。 Scott McNealy 很愤怒，其对Microsoft开展了相关的法律诉讼。</p>
+<p>.NET 包括了最新的C家族语言，叫C#，发音是“C-pound”，继承最家族的传统，使用着一个愚蠢的名字。</p>
+<p>2001 – Microsoft 的市场部意识到，在市面上没有人谈论他们的产品，他们找了其中一个程序员一起吃中饭，才发现，他们把C#叫做 “C sharp”。</p>
+<p>2002 – C# 成为 Microsoft .NET的一部分。 C++ 的开发者在 Microsoft 平台上为 “managed code”而欢呼雀跃，也就是说，他们最终得到了一个内存自动管理的功能，这一功能正是1991年的Visual Basic 及1995年的Java所创建的 。</p>
+<p><em>copyright (C) 1996-2006 by Billy S. Hollis, originally posted on dotnetmasters.com 13 January 2006</em></p>
+<p> 文章：<a href="http://dotnetmasters.com/historyofcfamily.htm" target="_blank">来源</a></p>
+<p><em> </em><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/cpp_small-150x150.jpg" alt="C++的坑真的多吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_title">C++的坑真的多吗？</a></li><li ><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" alt="那些曾伴我走过编程之路的软件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_title">那些曾伴我走过编程之路的软件</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1984.html">C语言的演变史</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1984.html/feed</wfw:commentRss>
+			<slash:comments>24</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

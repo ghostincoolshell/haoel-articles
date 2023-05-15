@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 44 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=44" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Tue, 26 May 2009 02:49:39 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>你能做对下面这些JavaScript的题吗？</title>
+		<link>https://coolshell.cn/articles/688.html</link>
+					<comments>https://coolshell.cn/articles/688.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 26 Apr 2009 06:48:51 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=688</guid>
+
+					<description><![CDATA[<p>你能做对下面这些JavaScript的题吗？ 原文 你认为你了解JavaScript? 快速的做一下下面的这些题目。并将下面的每一个表达式的值写出。(答案在问题...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/688.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/688.html">你能做对下面这些JavaScript的题吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>你能做对下面这些JavaScript的题吗？</p>
+<p><a href="http://asserttrue.blogspot.com/2009/04/can-you-pass-this-javascript-test.html">原文</a></p>
+<p>你认为你了解JavaScript? 快速的做一下下面的这些题目。并将下面的每一个表达式的值写出。(答案在问题后面)</p>
+<p>1. ++Math.PI<br />
+2. (0.1 + 0.2) + 0.3 == 0.1 + (0.2 + 0.3)<br />
+3. typeof NaN<br />
+4. typeof typeof undefined<br />
+5. a = {null:null}; typeof a.null;<br />
+6. a = &#8220;5&#8221;; b = &#8220;2&#8221;; c = a * b;<br />
+7. a = &#8220;5&#8221;; b = 2; c = a+++b;<br />
+8. isNaN(1/null)<br />
+9. (16).toString(16)<br />
+10.016 * 2<br />
+11.~null<br />
+12.&#8221;ab c&#8221;.match(/\b\w\b/)</p>
+<p><span id="more-688"></span><br />
+首先，这不是一个入门教程，因此我不会去对每一个答案做单独的解释，如果你觉得你有不理解的地方，我建议你 while (!掌握()) 专研它();</p>
+<p>答案：<br />
+1. 4.141592653589793<br />
+2. false<br />
+3. &#8220;number&#8221;<br />
+4. &#8220;string&#8221;<br />
+5. &#8220;object&#8221;<br />
+6. 10<br />
+7. 7<br />
+8. false<br />
+9. 10<br />
+10. 28<br />
+11. -1<br />
+12. [ &#8220;c&#8221; ]</p>
+<p>我的打分如下(每答对一题一分)：</p>
+<p>5分 &#8211; 7分: 了解javascript<br />
+8分 &#8211; 10分: 专家<br />
+11: 大学士<br />
+12分: 大师</p>
+<p>简要的注释：<br />
+第2题：答案是false，javascript和java非常相似(或则其他使用了IEEE 754浮点数的语言)，这也是为什么在和钱打交道的正式应用程序中一般不使用浮点数四则运算的原因，浮点数的加或乘除外，下面<a href="http://www.macaulay.ac.uk/fearlus/floating-point/">这篇</a>文章有关于浮点数四则运算的一个详细的讨论。</p>
+<p>第6题：在四则运算表达式中使用乘、除或减，如果表达式中包含一个或多个字符型，那么语法解释器会试着首先将字符型转换为数值型，如果算术表达式包含着加号运算，那么所有的运算项都会被转换成字符型。</p>
+<p>第7题：JavaScript中表达式的运算的优先级是从坐到右(类似于Java和C)，因此，在这里将会是一个先a计算值，加上b，然后在a++的次序，而不是a加上++b这样的运算。</p>
+<p>第9题：toString() 可以带一个可选的数字参数。参数值16意味着基于16进制，返回的字符串将会是该数字的16进制表示，在这个例子里面就是10，如果你写.toString(2)那么你将会得到这个数字的2进制表示，等等。</p>
+<p>第10题：016是8进制表示，即8进制的14。虽然是这样，但比较有趣的是，如果有你以&#8221;016&#8243;(字符串形式)去乘上一个数，语法解释器会认为&#8221;016&#8243;是基于10进制的数。</p>
+<p>如果你不能正确的写出这些题目的答案，不要灰心丧气，因为几乎上面的每一个问题都(明显地)含有着蒙蔽人小伎俩，现在让我问面对它。当然，如果你非常正确的回答了上面的所有问题，你也不必太过沾沾自喜，这意味着这你仅仅是一个比任何正常人都奇怪的javascript怪杰而已！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/688.html">你能做对下面这些JavaScript的题吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/688.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>用Python写NCurses UI</title>
+		<link>https://coolshell.cn/articles/677.html</link>
+					<comments>https://coolshell.cn/articles/677.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 26 Apr 2009 02:19:41 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Ncurses]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=677</guid>
+
+					<description><![CDATA[<p>Ncurses是一个能提供基于文本终端窗口功能的动态库. Ncurses可以: 可以使用整个屏幕 创建和管理一个窗口 使用8种不同的彩色 为您的程序提供鼠标支持...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/677.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/677.html">用Python写NCurses UI</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses.jpg"></a>Ncurses是一个能提供基于文本终端窗口功能的动态库. Ncurses可以:</p>
+<ul>
+<li>可以使用整个屏幕</li>
+<li>创建和管理一个窗口</li>
+<li>使用8种不同的彩色</li>
+<li>为您的程序提供鼠标支持</li>
+<li>使用键盘上的功能键</li>
+</ul>
+<p>Ncurses可以在任何遵循ANSI/POSIX标准的Unix/Linux系统上运行，除此之外，它还可以从系统数据库中检测终端的属性,，并且自动进行调整,提供一个不受终端约束的接口。因此,Ncurses可以在不同的系统平台和不同的终端上工作的非常好。</p>
+<p><span id="more-677"></span></p>
+<p>mc工具集就是一个用ncurses写的很好的例子,而且在终端上系统核心配置的界面同样是用ncurses编写的. 下面就是它们的截图：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-678" title="ncurses_example" src="https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example.jpg" alt="ncurses_example" width="526" height="423" srcset="https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example.jpg 526w, https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example-300x241.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example-336x270.jpg 336w" sizes="(max-width: 526px) 100vw, 526px" /></a></p>
+<p>当然，在我们这篇文章中，我们不会教你怎么写NCurses程序，我们只是想告诉你如何用Python来写Ncurses的程序，示例会非常简单，点到为止。</p>
+<p>在此之前，我们先简单的回顾一下如何使用Python的一些简单的语法。</p>
+<p>先看看一个最简单的Python程序：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+print &quot;How easy is this?&quot; 
+
+x = 1
+y = 2
+z = x + y
+
+print &quot;Result of x + y is&quot;, z
+</pre>
+<p>程序很简单，我就不多说，把这个文件存成test.py，然后在命令行下调用python test.py就可以看到输出了。</p>
+<p>下面我们再来看一个Python的函数定义——还是很简单，我也不用多说了。</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+def saystuff(mystring):
+     print &quot;You said:&quot;, mystring 
+
+saystuff(&quot;Bach rules&quot;)
+saystuff(&quot;So does Telemann&quot;)
+</pre>
+<p>好，言归正传，让我们来看一下，如何在Python中使用NCurses，下面是一个小例程：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+import curses 
+
+myscreen = curses.initscr()
+
+myscreen.border(0)
+myscreen.addstr(12, 25, &quot;Python curses in action!&quot;)
+myscreen.refresh()
+myscreen.getch()
+
+curses.endwin()
+</pre>
+<p>注意这个示例中的第一行import curses，表明使用curses库，然后这个示像在屏幕中间输出“Python curses in action!”字样，其中坐标为12, 25，注意，在字符界面下，80 x 25是屏幕大小，其用的是字符，而不是像素。下面是运行后的抓屏：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/python_ncursespy.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-679" title="python_ncursespy" src="https://coolshell.cn/wp-content/uploads/2009/04/python_ncursespy.jpg" alt="python_ncursespy" width="674" height="413" srcset="https://coolshell.cn/wp-content/uploads/2009/04/python_ncursespy.jpg 674w, https://coolshell.cn/wp-content/uploads/2009/04/python_ncursespy-300x183.jpg 300w" sizes="(max-width: 674px) 100vw, 674px" /></a></p>
+<p> 最后，我们再来看一个数字菜单的示例：</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+#!/usr/bin/env python
+
+from os import system
+import curses
+
+def get_param(prompt_string):
+     screen.clear()
+     screen.border(0)
+     screen.addstr(2, 2, prompt_string)
+     screen.refresh()
+     input = screen.getstr(10, 10, 60)
+     return input
+
+def execute_cmd(cmd_string):
+     system(&quot;clear&quot;)
+     a = system(cmd_string)
+     print &quot;&quot;
+     if a == 0:
+          print &quot;Command executed correctly&quot;
+     else:
+          print &quot;Command terminated with error&quot;
+     raw_input(&quot;Press enter&quot;)
+     print &quot;&quot;
+
+x = 0
+
+while x != ord(&#039;4&#039;):
+     screen = curses.initscr()
+
+     screen.clear()
+     screen.border(0)
+     screen.addstr(2, 2, &quot;Please enter a number...&quot;)
+     screen.addstr(4, 4, &quot;1 - Add a user&quot;)
+     screen.addstr(5, 4, &quot;2 - Restart Apache&quot;)
+     screen.addstr(6, 4, &quot;3 - Show disk space&quot;)
+     screen.addstr(7, 4, &quot;4 - Exit&quot;)
+     screen.refresh()
+
+     x = screen.getch()
+
+     if x == ord(&#039;1&#039;):
+          username = get_param(&quot;Enter the username&quot;)
+          homedir = get_param(&quot;Enter the home directory, eg /home/nate&quot;)
+          groups = get_param(&quot;Enter comma-separated groups, eg adm,dialout,cdrom&quot;)
+          shell = get_param(&quot;Enter the shell, eg /bin/bash:&quot;)
+          curses.endwin()
+          execute_cmd(&quot;useradd -d &quot; + homedir + &quot; -g 1000 -G &quot; + groups + &quot; -m -s &quot; + shell + &quot; &quot; + username)
+     if x == ord(&#039;2&#039;):
+          curses.endwin()
+          execute_cmd(&quot;apachectl restart&quot;)
+     if x == ord(&#039;3&#039;):
+          curses.endwin()
+          execute_cmd(&quot;df -h&quot;)
+
+curses.endwin()
+</pre>
+<p>下面是运行时的显示：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-680" title="python_ncurses" src="https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses.jpg" alt="python_ncurses" width="394" height="221" srcset="https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses.jpg 394w, https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses-300x168.jpg 300w" sizes="(max-width: 394px) 100vw, 394px" /></a></p>
+<p>如果你你了解NCurses编程，你可以看看相关的Linux HOW-TO的文章，链接在这里：<a href="http://www.linux.org/docs/ldp/howto/NCURSES-Programming-HOWTO/index.html" target="_blank">Linux Documentation Project&#8217;s NCURSES Programming How To</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/677.html">用Python写NCurses UI</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/677.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python调用C语言函数</title>
+		<link>https://coolshell.cn/articles/671.html</link>
+					<comments>https://coolshell.cn/articles/671.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 25 Apr 2009 17:29:57 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[ctypes]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=671</guid>
+
+					<description><![CDATA[<p>使用Python的ctypes，我们可以直接调用由C直接编译出来的函数。其实就是调用动态链接库中的函数。为什么我们需要这样做呢，因为有些时候，我们可能需要一个性...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/671.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/671.html">Python调用C语言函数</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>使用Python的<a href="http://docs.python.org/library/ctypes.html">ctypes</a>，我们可以直接调用由C直接编译出来的函数。其实就是调用动态链接库中的函数。为什么我们需要这样做呢，因为有些时候，我们可能需要一个性能上比较讲究的算法，有些时候，我们可以在Python中使用已经有了的现成的被封闭在动态链接库中的函数。下面是如何调用的示例。</p>
+<p>首先，我们用一个乘法来表示一个算法功能。下面是C的程序：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int
+multiply(int num1, int num2)
+{
+    return num1 * num2;
+}
+</pre>
+<p><span id="more-671"></span></p>
+<p>如果在Windows下，你可能需要写成下面这个样子：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;windows.h&gt;
+
+
+BOOL APIENTRY
+DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved)
+{
+    return TRUE;
+}
+
+__declspec(dllexport) int
+multiply(int num1, int num2)
+{
+    return num1 * num2;
+}
+</pre>
+<p>然后，自然是把这个C文件编成动态链接库：</p>
+<p>Linux下的编译：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+gcc -c -fPIC libtest.c
+gcc -shared libtest.o -o libtest.so
+</pre>
+<p>Windows下的编译：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+cl -LD libtest.c -libtest.dll
+</pre>
+<p>于是在我们的Python中可以这样使用：<br />
+(其中的libtest.so在Windows下改成libtest.dll即可)</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">
+&gt;&gt;&gt; from ctypes import *
+&gt;&gt;&gt; import os
+&gt;&gt;&gt; libtest = cdll.LoadLibrary(os.getcwd() + &#039;/libtest.so&#039;)
+&gt;&gt;&gt; print libtest.multiply(2, 2)
+4
+</pre>
+<p>注意：上面的Python脚本中需要把动态链接库放到当前目录中。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/671.html">Python调用C语言函数</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/671.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>使用PHP的cURL库</title>
+		<link>https://coolshell.cn/articles/664.html</link>
+					<comments>https://coolshell.cn/articles/664.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 25 Apr 2009 09:12:32 +0000</pubDate>
+				<category><![CDATA[PHP脚本]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[cURL]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=664</guid>
+
+					<description><![CDATA[<p>使用PHP的cURL库可以简单和有效地去抓网页。你只需要运行一个脚本，然后分析一下你所抓取的网页，然后就可以以程序的方式得到你想要的数据了。无论是你想从从一个链...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/664.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/664.html">使用PHP的cURL库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/04/phpinfo_curl.png"></a>使用PHP的cURL库可以简单和有效地去抓网页。你只需要运行一个脚本，然后分析一下你所抓取的网页，然后就可以以程序的方式得到你想要的数据了。无论是你想从从一个链接上取部分数据，或是取一个XML文件并把其导入数据库，那怕就是简单的获取网页内容，cURL 是一个功能强大的PHP库。本文主要讲述如果使用这个PHP库。</p>
+<p><strong> 启用 cURL 设置</strong><br />
+首先，我们得先要确定我们的PHP是否开启了这个库，你可以通过使用php_info()函数来得到这一信息。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">&lt;?php
+    phpinfo();
+?&gt;</pre>
+<p><span id="more-664"></span></p>
+<p> </p>
+<p>如果你可以在网页上看到下面的输出，那么表示cURL库已被开启。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/phpinfo_curl.png"><img decoding="async" loading="lazy" title="phpinfo_curl" src="https://coolshell.cn/wp-content/uploads/2009/04/phpinfo_curl.png" alt="phpinfo_curl" width="498" height="91" /></a></p>
+<p>如果你看到的话，那么你需要设置你的PHP并开启这个库。如果你是在Windows平台下，那么非常简单，你需要改一改你的php.ini文件的设置，找到php_curl.dll，并取消前面的分号注释就行了。如下所示：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+
+//取消下在的注释
+extension=php_curl.dll 
+</pre>
+<p>如果你是在Linux下面，那么，你需要重新编译你的PHP了，编辑时，你需要打开编译参数——在configure命令上加上“&#8211;with-curl” 参数。</p>
+<p><strong>一个小示例</strong><br />
+如果一切就绪，下面是一个小例程：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+&lt;?php
+// 初始化一个 cURL 对象
+$curl = curl_init(); 
+
+// 设置你需要抓取的URL
+curl_setopt($curl, CURLOPT_URL, &#039;https://coolshell.cn&#039;);
+
+// 设置header
+curl_setopt($curl, CURLOPT_HEADER, 1);
+
+// 设置cURL 参数，要求结果保存到字符串中还是输出到屏幕上。
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+// 运行cURL，请求网页
+$data = curl_exec($curl);
+
+// 关闭URL请求
+curl_close($curl);
+
+// 显示获得的数据
+var_dump($data);
+</pre>
+<p> </p>
+<p><strong>如何POST数据</strong></p>
+<p>上面是抓取网页的代码，下面则是向某个网页POST数据。假设我们有一个处理表单的网址<a href="http://www.example.com/sendSMS.php">http://www.example.com/sendSMS.php</a>，其可以接受两个表单域，一个是电话号码，一个是短信内容。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW" data-enlighter-highlight="9,10">
+&lt;?php
+    $phoneNumber = &#039;13912345678&#039;;
+    $message = &#039;This message was generated by curl and php&#039;;
+    $curlPost = &#039;pNUMBER=&#039;  . urlencode($phoneNumber) . &#039;&amp;MESSAGE=&#039; . urlencode($message) . &#039;&amp;SUBMIT=Send&#039;;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, &#039;http://www.example.com/sendSMS.php&#039;);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+    $data = curl_exec();
+    curl_close($ch);
+?&gt;
+</pre>
+<p> 从上面的程序我们可以看到，使用CURLOPT_POST设置HTTP协议的POST方法，而不是GET方法，然后以CURLOPT_POSTFIELDS设置POST的数据。</p>
+<p><strong>关于代理服务器</strong></p>
+<pre>下面是一个如何使用代理服务器的示例。请注意其中高亮的代码，代码很简单，我就不用多说了。</pre>
+<pre data-enlighter-language="php" class="EnlighterJSRAW" data-enlighter-highlight="6,7,8">
+&lt;?php 
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, &#039;http://www.example.com&#039;);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
+    curl_setopt($ch, CURLOPT_PROXY, &#039;fakeproxy.com:1080&#039;);
+    curl_setopt($ch, CURLOPT_PROXYUSERPWD, &#039;user:password&#039;);
+    $data = curl_exec();
+    curl_close($ch);
+?&gt;
+
+</pre>
+<p> <strong>关于SSL和Cookie</strong></p>
+<p>关于SSL也就是HTTPS协议，你只需要把CURLOPT_URL连接中的http://变成https://就可以了。当然，还有一个参数叫CURLOPT_SSL_VERIFYHOST可以设置为验证站点。</p>
+<p>关于Cookie，你需要了解下面三个参数：</p>
+<ul>
+<li>CURLOPT_COOKIE，在当面的会话中设置一个cookie</li>
+<li>CURLOPT_COOKIEJAR，当会话结束的时候保存一个Cookie</li>
+<li>CURLOPT_COOKIEFILE，Cookie的文件。</li>
+</ul>
+<p><strong>HTTP服务器认证</strong></p>
+<p>最后，我们来看一看HTTP服务器认证的情况。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW" data-enlighter-highlight="5,6">
+&lt;?php 
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, &#039;http://www.example.com&#039;);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt(CURLOPT_USERPWD, &#039;[username]:[password]&#039;)
+
+    $data = curl_exec();
+    curl_close($ch);
+?&gt;
+</pre>
+<p>关于其它更多的内容，请大家参看相关的cURL手册吧。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" alt="PHP分页技术的代码和示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_title">PHP分页技术的代码和示例</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="九个PHP很有用的功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_title">九个PHP很有用的功能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/664.html">使用PHP的cURL库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/664.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux 的僵尸(zombie)进程</title>
+		<link>https://coolshell.cn/articles/656.html</link>
+					<comments>https://coolshell.cn/articles/656.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 25 Apr 2009 07:28:42 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[zombie]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=656</guid>
+
+					<description><![CDATA[<p>可能很少有人意识到，在一个进程调用了exit之后，该进程 并非马上就消失掉，而是留下一个称为僵尸进程（Zombie）的数据结构。在Linux进程的5种状态中，僵...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/656.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/656.html">Linux 的僵尸(zombie)进程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>可能很少有人意识到，在一个进程调用了exit之后，该进程 并非马上就消失掉，而是留下一个称为僵尸进程（Zombie）的数据结构。在Linux进程的5种状态中，僵尸进程是非常特殊的一种，它已经放弃了几乎所 有内存空间，没有任何可执行代码，也不能被调度，仅仅在进程列表中保留一个位置，记载该进程的退出状态等信息供其他进程收集，除此之外，僵尸进程不再占有 任何内存空间。</p>
+<p>僵尸进程的来由，要追溯到Unix，Unix的设计者们设计这个东西并非是因为闲来无事想装装酷什么的。上面说到，僵尸进程中保存着很多对程序员和系统管理员非常重要的信息，首先，这个进程是怎么死亡的？是正常退出呢，还是出现了错误，还是被其它进程强迫退出的？也就是说，这个程序的退出码是什么？其次，这个进程占用的总系统CPU时间和总用户CPU时间分别是多少？发生页错误的数目和收到信号的数目。这些信息都被存储在僵尸进程中，试想如果没有僵尸进程，进程执行多长我们并不知道，一旦其退出，所有与之相关的信息都立刻都从系统中清除，而如果此时父进程或系统管理员需要用到，就只好干瞪眼了。</p>
+<p><span id="more-656"></span></p>
+<p>所以，进程退出后，系统会把该进程的状态变成Zombie，然后给上一定的时间等着父进程来收集其退出信息，因为可能父进程正忙于别的事情来不及收集，所以，使用Zombie状态表示进程退出了，正在等待父进程收集信息中。</p>
+<p>Zombie进程不可以用kill命令清楚，因为进程已退出，如果需要清除这样的进程，那么需要清除其父进程，或是等很长的时间后被内核清除。因为Zombie的进程还占着个进程ID号呢，这样的进程如果很多的话，不利于系统的进程调度。</p>
+<p>下面，让我们来看看一个示例：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+/* zombie.c */
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;  main()
+{
+    pid_t pid; 
+    pid=fork();
+    if(pid&lt;0) { /* 如果出错 */ 
+        printf(&quot;error occurred!\n&quot;);
+    }else if(pid==0){ /* 如果是子进程 */ 
+        exit(0);
+    }else{  /* 如果是父进程 */ 
+        sleep(60);  /* 休眠60秒 */ 
+        wait(NULL); /* 收集僵尸进程 */
+    }
+}
+
+</pre>
+<p>编译这个程序：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ cc zombie.c -o zombie</code></p>
+<p>后台运行程序，以使我们能够执行下一条命令</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ ./zombie &amp;
+[1] 1217
+</pre>
+<p>列一下系统内的进程</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW" data-enlighter-highlight="5">
+$ ps -ax
+... ...
+1137   pts/0   S   0:00   -bash
+1217   pts/0   S   0:00   ./zombie
+1218   pts/0   Z   0:00   [zombie]
+1578   pts/0   R   0:00   ps   -ax
+</pre>
+<p>其中的&#8221;Z&#8221;就是僵尸进程的标志，它表示1218号进程现在就是一个僵尸进程。</p>
+<p>收集Zombie进程的信息，并终结这些僵尸进程，需要我们在父进程中使用waitpid调用和wait调用。这两者的作用都是收集僵尸进程留下的信息，同时使这个进程彻底消失。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/656.html">Linux 的僵尸(zombie)进程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/656.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>MySQL: InnoDB 还是 MyISAM?</title>
+		<link>https://coolshell.cn/articles/652.html</link>
+					<comments>https://coolshell.cn/articles/652.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 24 Apr 2009 06:33:09 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[数据库]]></category>
+		<category><![CDATA[Database]]></category>
+		<category><![CDATA[InnoDB]]></category>
+		<category><![CDATA[MyISAM]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=652</guid>
+
+					<description><![CDATA[<p>MyISAM 是MySQL中默认的存储引擎，一般来说不是有太多人关心这个东西。决定使用什么样的存储引擎是一个很tricky的事情，但是还是值我们去研究一下，这里...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/652.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/652.html">MySQL: InnoDB 还是 MyISAM?</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>MyISAM 是MySQL中默认的存储引擎，一般来说不是有太多人关心这个东西。决定使用什么样的存储引擎是一个很tricky的事情，但是还是值我们去研究一下，这里的文章只考虑 MyISAM 和InnoDB这两个，因为这两个是最常见的。</p>
+<p>下面先让我们回答一些问题：</p>
+<ul>
+<li>你的数据库有外键吗？</li>
+<li>你需要事务支持吗？</li>
+<li>你需要全文索引吗？</li>
+<li>你经常使用什么样的查询模式？</li>
+<li>你的数据有多大？</li>
+</ul>
+<p><span id="more-652"></span></p>
+<p>思考上面这些问题可以让你找到合适的方向，但那并不是绝对的。如果你需要事务处理或是外键，那么InnoDB 可能是比较好的方式。如果你需要全文索引，那么通常来说 MyISAM是好的选择，因为这是系统内建的，然而，我们其实并不会经常地去测试两百万行记录。所以，就算是慢一点，我们可以通过使用Sphinx从InnoDB中获得全文索引。</p>
+<p>数据的大小，是一个影响你选择什么样存储引擎的重要因素，大尺寸的数据集趋向于选择InnoDB方式，因为其支持事务处理和故障恢复。数据库的在小决定了故障恢复的时间长短，InnoDB可以利用事务日志进行数据恢复，这会比较快。而MyISAM可能会需要几个小时甚至几天来干这些事，InnoDB只需要几分钟。</p>
+<p>您操作数据库表的习惯可能也会是一个对性能影响很大的因素。比如： COUNT() 在 MyISAM 表中会非常快，而在InnoDB 表下可能会很痛苦。而主键查询则在InnoDB下会相当相当的快，但需要小心的是如果我们的主键太长了也会导致性能问题。大批的inserts 语句在MyISAM下会快一些，但是updates 在InnoDB 下会更快一些——尤其在并发量大的时候。</p>
+<p>所以，到底你检使用哪一个呢？根据经验来看，如果是一些小型的应用或项目，那么MyISAM 也许会更适合。当然，在大型的环境下使用MyISAM 也会有很大成功的时候，但却不总是这样的。如果你正在计划使用一个超大数据量的项目，而且需要事务处理或外键支持，那么你真的应该直接使用InnoDB方式。但需要记住InnoDB 的表需要更多的内存和存储，转换100GB 的MyISAM 表到InnoDB 表可能会让你有非常坏的体验。</p>
+<p style="display: none;"><img decoding="async" loading="lazy" style="display: none; width: 0px; height: 0px; border-style: none;" src="http://blog.inetu.net/wp-content/plugins/wp-spamfree/img/wpsf-img.php" alt="" width="0" height="0" /></p>
+<p style="display: none;">文章：<a href="http://blog.inetu.net/2009/04/mysql-innodb-or-myisam/" target="_blank">来源</a></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1846.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg" alt="MySQL性能优化的最佳20+条经验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1846.html" class="wp_rp_title">MySQL性能优化的最佳20+条经验</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/5826.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="千万别用MongoDB？真的吗？！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5826.html" class="wp_rp_title">千万别用MongoDB？真的吗？！</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/652.html">MySQL: InnoDB 还是 MyISAM?</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/652.html/feed</wfw:commentRss>
+			<slash:comments>95</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>22个不错的CSS技术</title>
+		<link>https://coolshell.cn/articles/648.html</link>
+					<comments>https://coolshell.cn/articles/648.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 23 Apr 2009 16:13:30 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[CSS]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=648</guid>
+
+					<description><![CDATA[<p>我们可以CSS 干很多很多相当不错的事情，你应该知道如何做这些事情。下面列出了一些你必需要知道的用CSS技术，点击链接，你可以看到相关教程。这个技术相当值得你去...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/648.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/648.html">22个不错的CSS技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们可以CSS 干很多很多相当不错的事情，你应该知道如何做这些事情。下面列出了一些你必需要知道的用CSS技术，点击链接，你可以看到相关教程。这个技术相当值得你去学习。</p>
+<h4>1. <a title="css imagepop" href="http://mikecherim.com/experiments/css_map_pop.php" target="_blank"><span style="color: #9e0b0e;">CSS 地图</span></a></h4>
+<p><a href="http://green-beast.com/experiments/css_map_pop.php"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-81" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/image-maps.jpg" alt="image-maps" width="550" height="300" /></span></a><br />
+<span id="more-648"></span></p>
+<h4>2. <a href="http://moneytreesystems.com/css/picpopup.html" target="_blank"><span style="color: #9e0b0e;">Css 缩略图 Pop up</span></a></h4>
+<p><span style="text-decoration: underline;"><a href="http://moneytreesystems.com/css/picpopup.html"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-82" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/image-pops.jpg" alt="image-pops" width="550" height="300" /></span></a></span></p>
+<h4>3. <a href="http://webdesign.about.com/od/examples/l/blopacity.htm" target="_blank"><span style="color: #9e0b0e;">CSS 3 透明示例</span></a></h4>
+<p><a href="http://webdesign.about.com/od/examples/l/blopacity.htm"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-83" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/opacity.jpg" alt="opacity" width="550" height="300" /></span></a></p>
+<h4>4.<a href="http://www.stunicholls.myby.co.uk/" target="_blank"><span style="color: #9e0b0e;"> 漂亮的半透明菜单</span></a></h4>
+<p><a href="http://www.stunicholls.myby.co.uk/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-84" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/css-transparent-menus.jpg" alt="css-transparent-menus" width="550" height="300" /></span></a></p>
+<h4>5. <a href="http://meyerweb.com/eric/css/edge/complexspiral/demo2.html" target="_blank"><span style="color: #9e0b0e;">又一个半透明的菜单</span></a></h4>
+<p><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-85" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/transparent-menu.jpg" alt="transparent-menu" width="550" height="300" /></span></p>
+<h4>6.<a href="http://pooliestudios.com/projects/iconize/" target="_blank"><span style="color: #9e0b0e;"> 带图标的链接 </span></a></h4>
+<p><a href="http://pooliestudios.com/projects/iconize/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-86" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/image-cues.jpg" alt="image-cues" width="550" height="300" /></span></a></p>
+<h4>7. <a href="http://www.cssplay.co.uk/menu/scrollmap" target="_blank"><span style="color: #9e0b0e;">图片滚动</span></a></h4>
+<p><a href="http://www.cssplay.co.uk/menu/solar_map"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-87" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/scrolling-imagemap.jpg" alt="scrolling-imagemap" width="550" height="300" /></span></a></p>
+<h4>8. <a href="http://www.cssplay.co.uk/menu/solar_map" target="_blank"><span style="color: #9e0b0e;">图片地图</span></a></h4>
+<p><a href="http://www.cssplay.co.uk/menu/solar_map"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-88" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/earth-css-image.jpg" alt="earth-css-image" width="550" height="300" /></span></a></p>
+<h4>9.<a href="http://www.picment.com/articles/css/funwithforms/" target="_blank"><span style="color: #9e0b0e;"> CSS 表单背景</span></a></h4>
+<p><a href="http://www.picment.com/articles/css/funwithforms/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-89" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/form.jpg" alt="form" width="550" height="300" /></span></a></p>
+<h4>10.<a href="http://www.digital-web.com/articles/redesigning_ebay_registration/" target="_blank"><span style="color: #9e0b0e;">表单重构设计 </span></a></h4>
+<h4><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-92" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/form-redesign.jpg" alt="form-redesign" width="550" height="300" /></span></h4>
+<h4>11. <a href="http://www.alistapart.com/articles/prettyaccessibleforms" target="_blank"><span style="color: #9e0b0e;">表单风格</span></a></h4>
+<h4><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-93" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/css-techniques0024.gif" alt="css-techniques0024" width="485" height="170" /></span></h4>
+<h4>12. <a href="http://lipidity.com/fancy-form/" target="_blank"><span style="color: #9e0b0e;">表单检查</span></a></h4>
+<p><a href="http://lipidity.com/fancy-form/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-94" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/fancy-check-boxes.gif" alt="fancy-check-boxes" width="550" height="300" /></span></a></p>
+<h4>13. <a href="http://www.badboy.ro/articles/2007-01-30/niceforms/" target="_blank"><span style="color: #9e0b0e;">漂单的表单</span></a></h4>
+<h4><a href="http://www.badboy.ro/articles/2007-01-30/niceforms/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-95" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/personal.gif" alt="personal" width="550" height="300" /></span></a></h4>
+<h4>14. <a href="http://www.cssnewbie.com/css-only-accordion/"><span style="color: #9e0b0e;">CSS 折叠式导航</span></a></h4>
+<p><a href="http://www.cssnewbie.com/css-only-accordion/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-96" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/accordian.gif" alt="accordian" width="550" height="300" /></span></a></p>
+<h4>15. <a href="http://www.icebrrg.com/public/howto.aspx" target="_blank"><span style="color: #9e0b0e;">ice Brrg 在线表单生成器<br />
+</span></a></h4>
+<h4><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-97" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/icebrrg.gif" alt="icebrrg" width="550" height="300" /></span></h4>
+<h4>16. Jot Form (一个在线的表单创建网站)</h4>
+<h4><a href="http://www.jotform.com/"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-98" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/jot-forms.gif" alt="jot-forms" width="550" height="300" /></a></h4>
+<h4>17. <a href="http://wufoo.com/" target="_blank"><span style="color: #9e0b0e;">Wufoo (相当不错的风格)</span></a></h4>
+<h4><a href="http://wufoo.com/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-99" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/wufoo.gif" alt="wufoo" width="550" height="300" /></span></a></h4>
+<h4>18. <a href="http://www.formsite.com/" target="_blank"><span style="color: #9e0b0e;">表单站点生成器</span></a></h4>
+<h4><a href="http://www.formsite.com/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-100" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/formsite.gif" alt="formsite" width="550" height="300" /></span></a></h4>
+<h4>19. <a href="http://www.formlogix.com/" target="_blank"><span style="color: #9e0b0e;">Form logix </span></a></h4>
+<p><a href="http://www.formlogix.com/"><span style="color: #9e0b0e;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-101" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/form-logix.gif" alt="form-logix" width="550" height="300" /></span></a></p>
+<h4>20. <a href="http://www.highdots.com/css-tab-designer/" target="_blank"><span style="color: #9e0b0e;">免费的CSS tab 页设计者</span></a></h4>
+<p>CSS Tab 页设计者是一个独特和容易的软件帮助你设计你的CSS TAB页，完全可视化的设计，不需要任何的CSS或编程的知识。</p>
+<h4><a href="http://www.highdots.com/css-tab-designer/"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-102" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/tabgenerator.gif" alt="tabgenerator" width="550" height="300" /></a></h4>
+<h4>21. Just style</h4>
+<p>JustStyle CSS 编辑器是一个有完整功能的，易用的软件，其可以非常容易的设计CSS风格。</p>
+<p><a href="http://ucware.com/juststyle/index.htm"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-103" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/just-style.gif" alt="just-style" width="550" height="300" /></a></p>
+<h4>22. <a href="http://www.andrewsellick.com/examples/tabslideV2/" target="_blank"><span style="color: #9e0b0e;">滑动式Tab页</span></a></h4>
+<h4><a href="http://www.andrewsellick.com/examples/tabslideV2/"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-104" src="http://www.antsmagazine.com/wp-content/uploads/2009/02/sliding-tab.gif" alt="sliding-tab" width="550" height="300" /></a></h4>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="神奇的CSS形状 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_title">神奇的CSS形状 </a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Web开发中需要了解的东西" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_title">Web开发中需要了解的东西</a></li><li ><a href="https://coolshell.cn/articles/5164.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="CSS图形" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5164.html" class="wp_rp_title">CSS图形</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/648.html">22个不错的CSS技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/648.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Java如何取源文件中文件名和行号</title>
+		<link>https://coolshell.cn/articles/611.html</link>
+					<comments>https://coolshell.cn/articles/611.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Wed, 22 Apr 2009 07:00:49 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=611</guid>
+
+					<description><![CDATA[<p>如何取的Java源代码文件中文件名和行号：） 在C/C++的程序，编译器提供了两个宏来支持取得源文件中的行号和文件名，这两个宏是__FILE__,__LINE_...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/611.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/611.html">Java如何取源文件中文件名和行号</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>如何取的Java源代码文件中文件名和行号：）</p>
+<p>在C/C++的程序，编译器提供了两个宏来支持取得源文件中的行号和文件名，这两个宏是__FILE__,__LINE__</p>
+<p>你可以如下的方法打印行号和文件名</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+
+#include &lt;stdio.h&gt;
+int main()
+{
+ fprintf(stdout,&quot;[%s:%d] Hello World!&quot;,__FILE__,__LINE__);
+ return 0;
+}
+
+</pre>
+<p><span id="more-611"></span><br />
+但是在JAVA下没有这两个宏，那么我们如何来取得文件名和行号，翻阅JDK，我们找到StackTraceElement这个类。这个类可以从Throwable取得，另外也可以从Thread类取得，通过这些我写如下的一个打印行号的测试程序：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+
+public class LineNo {
+ public static int getLineNumber() {
+ return Thread.currentThread().getStackTrace()[2].getLineNumber();
+ }  
+
+ public static String getFileName() {
+ return Thread.currentThread().getStackTrace()[2].getFileName();
+ }
+ public static void main(String args[]) {
+ System.out.println(&quot;[&quot;+getFileName()+&quot;：&quot;+ getLineNumber()+&quot;]&quot;+&quot;Hello World!&quot;);
+ }
+}
+
+</pre>
+<p>留下一个问题，上面程序中的magic数字 2 代表什么含义呢？<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/611.html">Java如何取源文件中文件名和行号</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/611.html/feed</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>早期XML Schema中的open content模型</title>
+		<link>https://coolshell.cn/articles/604.html</link>
+					<comments>https://coolshell.cn/articles/604.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Wed, 22 Apr 2009 05:04:41 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[XML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=604</guid>
+
+					<description><![CDATA[<p>摘要：在看SDO的一些规范文档，可能会出现open content这样的词组，上网查了相关资料，发现这是一种XML Schema的模型，本文就描述了XML Sc...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/604.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/604.html">早期XML Schema中的open content模型</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>摘要</strong>：在看SDO的一些规范文档，可能会出现open content这样的词组，上网查了相关资料，发现这是一种XML Schema的模型，本文就描述了XML Schema的Open Content模型的含义，在最新的XML Schema规范中，好像已经没有Open模型，它的等价物是any模型。</p>
+<p>早期发布的XML Schema规范中支持一种新的element定义，在这个定义中，你可以将XML的Element的内容定义为开放的。下面我们将会介绍一下XML的Open Content 模型。</p>
+<p>在Open Content模型中，如果一个XML的元素在XML Schema中被声明为开放的，那么这个Schema对应的XML文档的实例就可以包含一个没有在Schema中罗列的子元素。例如，一个包含着如下的XML Schema的Schema文件</p>
+<p><span id="more-604"></span></p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+      &lt;element name=&amp;quot;Book&amp;quot;&gt;
+           &lt;type&gt;
+               &lt;element name=&amp;quot;Title&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;Author&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;Date&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;ISBN&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;Publisher&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+           &lt;/type&gt;
+      &lt;/element&gt;</pre>
+<p>这个book element的声明意味着这个Schema的实例XML文件必须包含5个元素 &#8211; Title,Author，Date，ISBN，Pbulish。例如：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+     &lt;Book&gt;
+         &lt;Title&gt;Illusions The Adventures of a Reluctant Messiah&lt;/Title&gt;
+         &lt;Author&gt;Richard Bach&lt;/Author&gt;
+         &lt;Date&gt;1977&lt;/Date&gt;
+         &lt;ISBN&gt;0-440-34319-4&lt;/ISBN&gt;
+         &lt;Publisher&gt;Dell Publishing Co.&lt;/Publisher&gt;
+     &lt;/Book&gt;
+
+</pre>
+<p>假设，在实例XML文件，你希望增加book的另外一个子元素，比如，你希望增加一个到某一个网页的连接：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+     &lt;Book&gt;
+         &lt;Title&gt;Illusions The Adventures of a Reluctant Messiah&lt;/Title&gt;
+         &lt;Author&gt;Richard Bach&lt;/Author&gt;
+         &lt;Date&gt;1977&lt;/Date&gt;
+         &lt;ISBN&gt;0-440-34319-4&lt;/ISBN&gt;
+         &lt;Publisher&gt;Dell Publishing Co.&lt;/Publisher&gt;
+         &lt;AuthorsWebPage xlink:href=&amp;quot;&lt;a href=&amp;quot;http://www.rbach.com&amp;quot;/&amp;quot;&gt;http://www.rbach.com&amp;quot;/&lt;/a&gt;&gt;
+    &lt;/Book&gt;
+
+</pre>
+<p>对于上面这个XML文件，XML Schema分析器将会认为这个XML文件是无效的XML，因为上面的文件的包含了Scheme中没有定义的元素。但是在我们的应用场景中，我们可能会希望XML Schema分析器不要报错，因为，应用程序自己知道如何处理&lt;AuthorsWebPage&gt;这个元素。为了达到这个目的，我们就可以将Book声明为开放的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="语言的数据亲和力" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_title">语言的数据亲和力</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3609.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="那些炒作过度的技术和概念" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3609.html" class="wp_rp_title">那些炒作过度的技术和概念</a></li><li ><a href="https://coolshell.cn/articles/3585.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="SOAP的S是Simple" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3585.html" class="wp_rp_title">SOAP的S是Simple</a></li><li ><a href="https://coolshell.cn/articles/3498.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="信XML，得自信" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3498.html" class="wp_rp_title">信XML，得自信</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/604.html">早期XML Schema中的open content模型</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/604.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Google 三维 JavaScript API 发布</title>
+		<link>https://coolshell.cn/articles/599.html</link>
+					<comments>https://coolshell.cn/articles/599.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 22 Apr 2009 04:01:41 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[O3D]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=599</guid>
+
+					<description><![CDATA[<p>O3D 是一个开源的Web API，其可以创建相当牛X的基于浏览器的可交互式的3D应用。这个API在很有可能会形成以后的Web上的3D图形的标准。下面是这个AP...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/599.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/599.html">Google 三维 JavaScript API 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>O3D 是一个开源的Web API，其可以创建相当牛X的基于浏览器的可交互式的3D应用。这个API在很有可能会形成以后的Web上的3D图形的标准。下面是这个API的主站点： <a href="http://code.google.com/apis/o3d/">http://code.google.com/apis/o3d/</a> 。O3D目前支持Windows, Mac和Linux三种平台。</p>
+<p>下面是一些简单地使用O3D的API的如何创建一个立方体，更详细的内容请访问O3D的网站。</p>
+<p>1）首选我们先创建一个比较原始的立方体。使用<span style="font-family: Courier New;">createCube()</span>方法。</p>
+<p>[javascript]</p>
+<p>function createCube(material) {<br />
+  var cubeShape = g_pack.createObject(&#8216;Shape&#8217;);<br />
+  var cubePrimitive = g_pack.createObject(&#8216;Primitive&#8217;);<br />
+  var streamBank = g_pack.createObject(&#8216;StreamBank&#8217;);</p>
+<p>  cubePrimitive.material = material;<br />
+  cubePrimitive.owner(cubeShape);<br />
+  cubePrimitive.streamBank = streamBank;<br />
+  .<br />
+  .<br />
+  .<br />
+[/javascript]</p>
+<p><span id="more-599"></span><br />
+ 2）然后，我们需要指定一些顶点信息。<br />
+其中，我们利用三角形来构造3D图形。一个立方体有12个三角面，两个构成一个面，然后有8个顶点。<br />
+[javascript]<br />
+  cubePrimitive.primitiveType = g_o3d.Primitive.TRIANGLELIST;<br />
+  cubePrimitive.numberPrimitives = 12; // 12 triangles<br />
+  cubePrimitive.numberVertices = 8;    // 8 vertices in total<br />
+  cubePrimitive.createDrawElement(g_pack, null);   // Create the draw element for this primitive.<br />
+[/javascript]</p>
+<p>3）指定一下8个顶点的坐标。<br />
+[javascript]<br />
+var positionArray = [<br />
+    -0.5, -0.5,  0.5,  // vertex 0<br />
+     0.5, -0.5,  0.5,  // vertex 1<br />
+    -0.5,  0.5,  0.5,  // vertex 2<br />
+     0.5,  0.5,  0.5,  // vertex 3<br />
+    -0.5,  0.5, -0.5,  // vertex 4<br />
+     0.5,  0.5, -0.5,  // vertex 5<br />
+    -0.5, -0.5, -0.5,  // vertex 6<br />
+     0.5, -0.5, -0.5   // vertex 7<br />
+  ];<br />
+[/javascript]</p>
+<p>4）把顶点坐标数组加入Buffer中。<br />
+[javascript]<br />
+// Create buffers containing the vertex data.<br />
+var positionsBuffer = g_pack.createObject(&#8216;VertexBuffer&#8217;);<br />
+var positionsField = positionsBuffer.createField(&#8216;FloatField&#8217;, 3);<br />
+positionsBuffer.set(positionArray);<br />
+[/javascript]</p>
+<p>5）把Buffer放到Stream Bank中。</p>
+<p>[javascript]<br />
+// Associate the positions Buffer with the StreamBank.<br />
+streamBank.setVertexStream(<br />
+  g_o3d.Stream.POSITION, // semantic: This stream stores vertex positions<br />
+  0,                     // semantic index: First (and only) position stream<br />
+  positionsField,        // field: the field this stream uses.<br />
+  0);                    // start_index: How many elements to skip in the field.<br />
+[/javascript] </p>
+<p>6）连接点成为三角面，并把三角面两两一组组成立方面。<br />
+[javascript]<br />
+var indicesArray = [<br />
+      0, 1, 2,  // face 1<br />
+      2, 1, 3,<br />
+      2, 3, 4,  // face 2<br />
+      4, 3, 5,<br />
+      4, 5, 6,  // face 3<br />
+      6, 5, 7,<br />
+      6, 7, 0,  // face 4<br />
+      0, 7, 1,<br />
+      1, 7, 3,  // face 5<br />
+      3, 7, 5,<br />
+      6, 0, 4,  // face 6<br />
+      4, 0, 2<br />
+  ];<br />
+[/javascript]</p>
+<p>完整的源码请参看这里：（打开网页后查看源码）<br />
+<a href="http://o3d.googlecode.com/svn/trunk/samples/hellocube.html" target=_blank>http://o3d.googlecode.com/svn/trunk/samples/hellocube.html</a></p>
+<p>最后，让我们看一看下面YouTube上的视频，你就知道这个东西有多强了。<a href="http://www.youtube.com/watch?v=uofWfXOzX-g" target="_blank">YouTube链接</a>。</p>
+<p><object width="560" height="340" data="http://www.youtube.com/v/uofWfXOzX-g&amp;hl=zh_CN&amp;fs=1" type="application/x-shockwave-flash"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/uofWfXOzX-g&amp;hl=zh_CN&amp;fs=1" /><param name="allowfullscreen" value="true" /></object><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/599.html">Google 三维 JavaScript API 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/599.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Oracle成功收购Sun</title>
+		<link>https://coolshell.cn/articles/595.html</link>
+					<comments>https://coolshell.cn/articles/595.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2009 16:10:48 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[Oracle]]></category>
+		<category><![CDATA[Sun]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=595</guid>
+
+					<description><![CDATA[<p>前段时间还传出IBM要收购Sun的消息，当然，如果IBM收购Sun了，那么IBM真是活雷锋了。呵呵。 今天，Oralce正式宣布成功收购Sun，原文在这里。Or...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/595.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/595.html">Oracle成功收购Sun</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/04/sun-oracle.jpg"><img decoding="async" loading="lazy" class="alignright size-full wp-image-596" title="sun-oracle" src="https://coolshell.cn/wp-content/uploads/2009/04/sun-oracle.jpg" alt="sun-oracle" width="145" height="130" /></a>前段时间还传出IBM要收购Sun的消息，当然，如果IBM收购Sun了，那么<a href="https://coolshell.cn/articles/203.html">IBM真是活雷锋</a>了。呵呵。</p>
+<p>今天，Oralce正式宣布成功收购Sun，原文在<a href="http://news.prnewswire.com/DisplayReleaseContent.aspx?ACCT=104&amp;STORY=/www/story/04-20-2009/0005008591&amp;EDATE=">这里</a>。Oracle以每股9.5美元，总共以74亿美金的天价收购Sun公司，其中，56亿美金付现或购买Sun的债务。现在，Java, Solairs以及MySQL都是Oracle的了。</p>
+<p>Oracle的CEO——Larry Ellison说：“The acquisition of Sun transforms the IT industry, combining best-in-class enterprise software and mission-critical computing systems” 。</p>
+<p>让我们看看这次收购以后还会发生什么样的事情。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1426.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/09/sun_customers_lg-150x150.gif" alt="Oracle的战书！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1426.html" class="wp_rp_title">Oracle的战书！</a></li><li ><a href="https://coolshell.cn/articles/962.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="【原创】SQL栏目树的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/962.html" class="wp_rp_title">【原创】SQL栏目树的代码</a></li><li ><a href="https://coolshell.cn/articles/203.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun-150x150.jpg" alt="IBM收购Sun，这是一种什么样的精神？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/203.html" class="wp_rp_title">IBM收购Sun，这是一种什么样的精神？</a></li><li ><a href="https://coolshell.cn/articles/3311.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="几篇技术文章" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3311.html" class="wp_rp_title">几篇技术文章</a></li><li ><a href="https://coolshell.cn/articles/878.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="一个C的序列化库tpl" width="150" height="150" /></a><a href="https://coolshell.cn/articles/878.html" class="wp_rp_title">一个C的序列化库tpl</a></li><li ><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="神奇的CSS形状 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_title">神奇的CSS形状 </a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/595.html">Oracle成功收购Sun</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/595.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>免费电子书：Ruby Complete</title>
+		<link>https://coolshell.cn/articles/591.html</link>
+					<comments>https://coolshell.cn/articles/591.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2009 15:14:58 +0000</pubDate>
+				<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[ebook]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=591</guid>
+
+					<description><![CDATA[<p>这是一本免费的关于教你如何使用Ruby编程的电子书。作者：Huw Collingbourne， SapphireSteel Software 公司的Techno...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/591.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/591.html">免费电子书：Ruby Complete</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这是一本免费的关于教你如何使用Ruby编程的电子书。作者：Huw Collingbourne， SapphireSteel Software 公司的Technology Directory，他也是一个开发 Visual Studio下的Ruby Steel IDE的程序员。这本书给大家提供非常全面的教程，其涵养了几乎所有主要的Ruby编程的东西。</p>
+<p>每一章的代码都可以被下载。如果你是一个 Ruby In Steel 的用户，那么，你可以在一个单一的Visual Studio solution 中载入这些代码，并可以在集成的 Ruby Console 上运行这些代码，并调试之。</p>
+<p><span id="more-591"></span></p>
+<p>下面这是这本书的一些特性：</p>
+<ul>
+<li>425 页。</li>
+<li>20 章节。</li>
+<li>超过 84,000 个词。</li>
+<li>超过300 个可以运行的示例代码。</li>
+<li>100% 的免费!</li>
+</ul>
+<div class="chapo"><!-- finde_surligneconditionnel--></div>
+<p><!--intro/deck--><img decoding="async" loading="lazy" class="alignnone" title="book-of-ruby-complete" src="http://www.sapphiresteel.com/IMG/png/book-of-ruby-complete.png" alt="" width="685" height="587" /></p>
+<p><a class="spip_in" href="http://www.sapphiresteel.com/IMG/zip/book-of-ruby.zip">下载这本书和其所有的源码</a> (<em>大小2.9MB </em>)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li><li ><a href="https://coolshell.cn/articles/5709.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="API设计：用流畅接口构造内部DSL" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5709.html" class="wp_rp_title">API设计：用流畅接口构造内部DSL</a></li><li ><a href="https://coolshell.cn/articles/5202.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="对象的消息模型" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5202.html" class="wp_rp_title">对象的消息模型</a></li><li ><a href="https://coolshell.cn/articles/4710.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Python 和 PyGame 的一些示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4710.html" class="wp_rp_title">Python 和 PyGame 的一些示例</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/591.html">免费电子书：Ruby Complete</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/591.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>5个不错的Flash的英文教程网</title>
+		<link>https://coolshell.cn/articles/585.html</link>
+					<comments>https://coolshell.cn/articles/585.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2009 04:34:43 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[教程]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=585</guid>
+
+					<description><![CDATA[<p>下面的这5个教程纯属个人观点，另外他们还都是免费的。 MrSunStudios&#8211; 这是一个非常不错的教程网站。里面有大量大量的关于ActionScr...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/585.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/585.html">5个不错的Flash的英文教程网</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面的这5个教程纯属个人观点，另外他们还都是免费的。</p>
+<li><strong><a href="http://mrsunstudios.com/"><span style="color: #006699;">MrSunStudios</span></a></strong>&#8211; 这是一个非常不错的教程网站。里面有大量大量的关于ActionScript，PHP等等的教程。能教会你做很多很实用的东西。</li>
+<li><strong><a href="http://awestyproductions.com/"><span style="color: #006699;">AwestyProductions</span></a></strong>&#8211; 虽然没怎么更新了，但他还是一个很不错的网站，其教你怎么去做一个小游戏。注意，其只是AS2的</li>
+<li><strong><a href="http://kirupa.com/"><span style="color: #006699;">Kirupa</span></a></strong>&#8211; 虽然没有太多的教程，不过这是一个巨大的社区，只要你问问题，你可以很快得得到他们的帮助和答案。当你遇到你无法解决的问题时，这是相当相当的不错的去处。</li>
+<li><strong><a href="http://flashexplained.com/"><span style="color: #006699;">Flash Explained</span></a></strong>&#8211; 超过9页的非常不错的教程。</li>
+<li><strong><a href="http://www.flashmagazine.com/Tutorials/index"><span style="color: #006699;">Flash Magazine</span></a><span class="Apple-style-span" style="font-weight: normal;">&#8211; 并不只是一个杂志，其还有很多教程，那才是这个网站最重要的。</span></strong></li>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3421.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/Liquid-150x150.jpg" alt="流体力学的演示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3421.html" class="wp_rp_title">流体力学的演示</a></li><li ><a href="https://coolshell.cn/articles/3267.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/flash_vs_html5-150x150.jpg" alt="游戏Flash vs HTML5" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3267.html" class="wp_rp_title">游戏Flash vs HTML5</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/2926.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/WTF_HTML51-150x150.jpg" alt="你准备使用 HTML 5 吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2926.html" class="wp_rp_title">你准备使用 HTML 5 吗？</a></li><li ><a href="https://coolshell.cn/articles/2735.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="HTML5 和 Flash 之争" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2735.html" class="wp_rp_title">HTML5 和 Flash 之争</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/585.html">5个不错的Flash的英文教程网</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/585.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>使用Google API做统计图</title>
+		<link>https://coolshell.cn/articles/582.html</link>
+					<comments>https://coolshell.cn/articles/582.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2009 04:09:31 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Chart]]></category>
+		<category><![CDATA[Google]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=582</guid>
+
+					<description><![CDATA[<p>Google提供了一个的统计图的API。你可以通过构造一个URL链接来获得Google提供的统计图方案。 比如：如果我们使用如下链接： &#60;img src=...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/582.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/582.html">使用Google API做统计图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Google提供了一个的统计图的API。你可以通过构造一个URL链接来获得Google提供的统计图方案。</p>
+<p>比如：如果我们使用如下链接：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;img src=&quot;http://chart.apis.google.com/chart?cht=p3&amp;chd=t:60,40&amp;chs=250x100&amp;chl=酷壳|Cocre&quot; alt=&quot;&quot; /&gt;
+</pre>
+<p>我们就可能通过如下的HTML代码显示一个60:40的饼图：<br />
+<img decoding="async" src="http://chart.apis.google.com/chart?cht=p3&amp;chd=t:60,40&amp;chs=250x100&amp;chl=酷壳|Cocre" alt="" /></p>
+<p>Google的这个API支持的统计图风格相当的多。</p>
+<p><span id="more-582"></span></p>
+<p>比如：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;img src=&quot;http://chart.apis.google.com/chart?chs=200x125&amp;cht=ls&amp;chco=0077CC&amp;chd=t:27,25,60,31,25,39,25,31,26,28,80,28,27,31,27,29,26,35,70,25&quot; alt=&quot;Sparkline chart in blue&quot; /&gt;
+</pre>
+<p><img decoding="async" src="http://chart.apis.google.com/chart?chs=200x125&amp;cht=ls&amp;chco=0077CC&amp;chd=t:27,25,60,31,25,39,25,31,26,28,80,28,27,31,27,29,26,35,70,25" alt="Sparkline chart in blue" /></p>
+<p>还甚至支持有世界地图式的统计图：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;img src=&quot;http://chart.apis.google.com/chart?cht=t&amp;chs=440x220&amp;chd=t:0,100,50,32,60,40,43,12,14,54,98,17,70,76,18,29&amp;chco=FFFFFF,FF0000,FFFF00,00FF00&amp;chld=DZEGMGAOBWNGCFKECGCVSNDJTZGHMZZM&amp;chtm=africa&amp;chf=bg,s,EAF7FE&quot; alt=&quot;Map of Africa&quot; /&gt;
+</pre>
+<p><img decoding="async" src="http://chart.apis.google.com/chart?cht=t&amp;chs=440x220&amp;chd=t:0,100,50,32,60,40,43,12,14,54,98,17,70,76,18,29&amp;chco=FFFFFF,FF0000,FFFF00,00FF00&amp;chld=DZEGMGAOBWNGCFKECGCVSNDJTZGHMZZM&amp;chtm=africa&amp;chf=bg,s,EAF7FE" alt="Map of Africa" /></p>
+<p>更多的内容请到<a href="http://code.google.com/apis/chart/">http://code.google.com/apis/chart/</a> 上查看吧。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/582.html">使用Google API做统计图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/582.html/feed</wfw:commentRss>
+			<slash:comments>32</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux设备驱动Hello World程序介绍</title>
+		<link>https://coolshell.cn/articles/566.html</link>
+					<comments>https://coolshell.cn/articles/566.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2009 17:19:52 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Driver]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=566</guid>
+
+					<description><![CDATA[<p>by Valerie Henson 07/05/2007 (译者注：本文的例子是只能在linux的2.6内核下使用的，2.6以上的内核，译者没有做过实验，2.4...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/566.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/566.html">Linux设备驱动Hello World程序介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>by Valerie Henson<br />
+07/05/2007</p>
+<p>(<strong>译者注：本文的例子是只能在linux的2.6内核下使用的，2.6以上的内核，译者没有做过实验，2.4是要修改make文件才能运行</strong>。)</p>
+<p>本文的出处：<a href="http://www.linuxdevcenter.com/pub/a/linux/2007/07/05/devhelloworld-a-simple-introduction-to-device-drivers-under-linux.html?page=1">这里</a></p>
+<p>自古以来，学习一门新编程语言的第一步就是写一个打印“hello world”的程序（可以看<a href="https://coolshell.cn/articles/169.html">《hello world 集中营》</a>这个帖子供罗列了300个“hello world”程序例子）在本文中，我们将用同样的方式学习如何编写一个简单的linux内核模块和设备驱动程序。我将学习到如何在内核模式下以三种不同的方式来打印hello world，这三种方式分别是： printk()，/proc文件，/dev下的设备文件。</p>
+<h4>准备：安装内核模块的编译环境</h4>
+<p>一个内核模块kernel module是一段能被内核动态加载和卸载的内核代码，因为内核模块程序是内核的一个部分，并且和内核紧密的交互，所以内核模块不可能脱离内核编译环境，至少，它需要内核的头文件和用于加载的配置信息。编译内核模块同样需要相关的开发工具，比如说编译器。为了简化，本文只简要讨论如何在Debian、Fedora和其他以.tar.gz形式提供的原版linux内核下进行核模块的编译。在这种情况下，你必须根据你正在运行内核相对应的内核源代码来编译你的内核模块kernel module(当你的内核模块一旦被装载到你内核中时，内核就将执行该模块的代码)</p>
+<p><span id="more-566"></span></p>
+<p>必须要注意内核源代码的位置，权限：内核程序通常在/usr/src/linux目录下，并且属主是root。如今，推荐的方式是将内核程序放在一个非root用户的home目录下。本文中所有命令都运行在非root的用户下，只有在必要的时候，才使用sudo来获得临时的root权限。配置和使用sudo可以man sudo(8) visudo(8) 和sudoers(5)。或者切换到root用户下执行相关的命令。不管什么方式，你都需要root权限才能执行本文中的一些命令。</p>
+<p>在Debian下编译内核模块的准备</p>
+<p>使用如下的命令安装和配置用于在Debian编译内核模块的module-assitant包</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ sudo apt-get install module-assistant
+</pre>
+<p>以此你就可以开始编译内核模块，你可以在<a href="http://kernel-handbook.alioth.debian.org/">《Debian Linux Kernel Handbook》</a>这本书中找到对Debian内核相关任务的更深度的讨论。</p>
+<p>Fedora的kernel-devel包包含了你编译Fedora内核模块的所有必要内核头文件和工具。你可以通过如下命令得到这个包。</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ sudo yum install kernel-devel</code></p>
+<p>有了这个包，你就可以编译你的内核模块kernel modules。关于Fedora编译内核模块的相关文档你可以从<a href="http://docs.fedoraproject.org/release-notes/fc6/en_US/sn-Kernel.html#id2950723">Fedora release notes</a>中找到。</p>
+<p>一般Linux 内核源代码和配置</p>
+<p>(译者注，下面的编译很复杂，如果你的Linux不是上面的系统，你可以使用REHL AS4系统，这个系统的内核就是2.6的内核，并且可以通过安装直接安装内核编译支持环境，从而就省下了如下的步骤。而且下面的步骤比较复杂，建议在虚拟机安装Linux进行实验。)</p>
+<p>如果你选择使用一般的Linux内核源代吗，你必须，配置，编译，安装和重启的你编译内核。这个过程非常复杂，并且本文只会讨论使用一般内核源代码的基本概念。</p>
+<p>linux的著名的内核源代码在http://kernel.org上都可以找到。最近新发布的稳定版本的代码在首页上。下载全版本的源代码，不要下载补丁代码。例如，当前发布稳定版本在url: http://kernel.org/pub/linux/kernel/v2.6/linux-2.6.21.5.tar.bz2上。如果需要更快速的下载，从htpp://kernel.org/mirrors上找到最近的镜像进行下载。最简单获得源代码的方式是以断点续传的方式使用wget。如今的http很少发生中断，但是如果你在下载过程中发生了中断，这个命令将帮助你继续下载剩下的部分。</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ wget -c  http://kernel.org/pub/linux/kernel/v2.6/linux-2.6.21.5.tar.bz2 </code></p>
+<p>解包内核源代码</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ tar xjvf linux-&lt;version&gt;.tar.bz2</code></p>
+<p>现在你的内核源代码位于linux-/目录下。转到这个目录下，并配置它：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cd linux-&lt;version&gt;
+$ make menuconfig</pre>
+<p>一些非常易用的编译目标make targets提供了多种编译安装内核的形式：Debian 包，RPM包，gzip后的tar文件 等等，使用如下命令查看所有可以编译的目标形式</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ make help</code></p>
+<p>一个可以工作在任何linux的目标是：(译者注：REHL AS4上没有tar-pkg这个目标，你可以任选一个rpm编译，编译完后再上层目录可以看到有一个linux-.tar.gz可以使用)</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ make tar-pkg</code></p>
+<p>当编译完成后，可以调用如下命令安装你的内核</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ sudo tar -C / -xvf linux-&lt;version&gt;.tar</code></p>
+<p>在标准位置建立的到内核源代码的链接</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ sudo ln -s &lt;location of top-level source directory&gt; /lib/modules/&#039;uname -r&#039;/build</code></p>
+<p>现在已经内核源代码已经可以用于编译内核模块了，重启你的机器以使得你根据新内核程序编译的内核可以被装载。</p>
+<h4>使用printk()函数打印&#8221;Hello World&#8221;</h4>
+<p>我们的第一个内核模块，我们将以一个在内核中使用函数printk()打印&#8221;Hello world&#8221;的内核模块为开始。printk是内核中的printf函数。printk的输出打印在内核的消息缓存kernel message buffer并拷贝到/var/log/messages(关于拷贝的变化依赖于如何配置syslogd)</p>
+<p>下载<a href="http://www.linuxdevcenter.com/linux/2007/07/05/examples/hello_printk.tar.gz">hello_printk</a> 模块的tar包 并解包：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">$ tar xzvf hello_printk.tar.gz</code></p>
+<p>这个包中包含两个文件:Makefile，里面包含如何创建内核模块的指令和一个包含内核模块源代码的hello_printk.c文件。首先，我们将简要的过一下这个Makefile 文件。</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">obj-m := hello_printk.o</code></p>
+<p>obj-m指出将要编译成的内核模块列表。.o格式文件会自动地有相应的.c文件生成(不需要显示的罗列所有源代码文件)</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+KDIR  := /lib/modules/$(shell uname -r)/build
+</pre>
+<p>KDIR表示是内核源代码的位置。在当前标准情况是链接到包含着正在使用内核对应源代码的目录树位置。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+PWD := $(shell pwd)
+</pre>
+<p>PWD指示了当前工作目录并且是我们自己内核模块的源代码位置</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+default:
+     $(MAKE) -C $(KDIR) M=$(PWD) modules
+</pre>
+<p>default是默认的编译连接目标；即，make将默认执行本条规则编译目标，除非程序员显示的指明编译其他目标。这里的的编译规则的意思是，在包含内核源代码位置的地方进行make,然后之编译$(PWD)(当前)目录下的modules。这里允许我们使用所有定义在内核源代码树下的所有规则来编译我们的内核模块。</p>
+<p>现在我们来看看hello_printk.c这个文件</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include
+	&lt;linux/init.h&gt;
+#include
+	&lt;linux/module.h&gt;
+</pre>
+<p>这里包含了内核提供的所有内核模块都需要的头文件。这个文件中包含了类似module_init()宏的定义，这个宏稍后我们将用到</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static int __init
+hello_init(void){
+    printk(&quot;Hello, world!n&quot;);
+    return 0;
+}
+</pre>
+<p>这是内核模块的初始化函数，这个函数在内核模块初始化被装载的时候调用。__init关键字告诉内核这个代码只会被运行一次，而且是在内核装载的时候。printk()函数这一行将打印一个&#8221;Hello, world&#8221;到内核消息缓存。printk参数的形式在大多数情况和printf(3)一模一样。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+module_init(hello_init); 
+module_init()
+</pre>
+<p>宏告诉内核当内核模块第一次运行时哪一个函数将被运行。任何在内核模块中其他部分都会受到内核模块初始化函数的影响。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static void __exit
+hello_exit(void){
+    printk(&quot;Goodbye, world!n&quot;);
+}
+module_exit(hello_exit);
+</pre>
+<p>同样地，退出函数也只在内核模块被卸载的时候会运行一次，module_exit()宏标示了退出函数。__exit关键字告诉内核这段代码只在内核模块被卸载的时候运行一次。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+MODULE_LICENSE(&quot;GPL&quot;);
+MODULE_AUTHOR(&quot;Valerie Henson val@nmt.edu&quot;);
+MODULE_DESCRIPTION(&quot;Hello, world!&quot; minimal module&quot;);
+MODULE_VERSION(&quot;printk&quot;);
+MODULE_LICENSE()
+</pre>
+<p>宏告诉内核，内核模块代码在什么样的license之下，这将影响主那些符号(函数和变量，等等)可以访问主内核。GPLv2 下的模块(如同本例子中)能访问所有的符号。某些内核模块license将会损害内核开源的特性，这些license指示内核将装载一些非公开或不受信的代码。如果内核模块不使用MODULE_LICENSE()宏，就被假定为非GPLv2的，这会损害内核的开源特性，并且大部分Linux内核开发人员都会忽略来自受损内核的bug报告，因为他们无法访问所有的源代码，这使得调试变得更加困难。剩下的MODULE_*()这些宏以标准格式提供有用的标示该内核模块的信息(译者注：这里意思是，你必须使用GPLv2的license，否则你的驱动程序很有可能得不到Linux社区的开发者的支持 ：）)</p>
+<p>现在，开始编译和运行代码。转到相应的目录下，编译内核模块</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cd hello_printk  
+$ make
+</pre>
+<p>接着，装载内核模块，使用insmod指令，并且通过dmesg来检查打印出的信息，dmesg是打印内核消息缓存的程序。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ sudo insmod ./hello_printk.ko  
+$ dmesg | tail
+</pre>
+<p>你将从dmesg的屏幕输出中看见&#8221;Hello world!&#8221;信息。现在卸载使用rmmod卸载内核模块，并检查退出信息。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ sudo rmmod hello_printk  
+$ dmesg | tail
+</pre>
+<p>到此，你就成功地完成了对内核模块的编译和安装！</p>
+<h4>使用/proc的Hello, World!</h4>
+<p>一种用户程序和内核通讯最简单和流行的方式是通过使用/proc下文件系统进行通讯。/proc是一个伪文件系统，从这里的文件读取的数据是由内核返回的数据，并且写入到这里面的数据将会被内核读取和处理。在使用/proc方式之前，所用用户和内核之间的通讯都不得不使用系统调用来完成。使用系统调用意味着你将在要在查找已经具有你需要的行为方式的系统调用(一般不会出现这种情况)，或者创建一种新的系统调用来满足你的需求(这样就要求对内核全局做修改，并增加系统调用的数量，这是通常是非常不好的做法)，或者使用ioctl这个万能系统调用，这就要求要创建一个新文件类型供ioctl操作(这也是非常复杂而且bug比较多的方式，同样是非常繁琐的)。/proc提供了一个简单的，无需定义的方式在用户空间和内核之间传递数据，这种方式不仅可以满足内核使用，同样也提供足够的自由度给内核模块做他们需要做的事情。</p>
+<p>为了满足我们的要求，我们需要当我们读在/proc下的某一个文件时将会返回一个“Hello world!”。我们将使用/proc/hello_world这个文件。下载并解开<a href="http://www.linuxdevcenter.com/linux/2007/07/05/examples/hello_proc.tar.gz">hello proc</a>这个gzip的tar包后，我们将首先来看一下<a href="http://www.linuxdevcenter.com/linux/2007/07/05/examples/hello_proc.c">hello_proc.c</a>这个文件</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;linux/init.h&gt;
+#include &lt;linux/module.h&gt;
+#include &lt;linux/proc_fs.h&gt;
+</pre>
+<p>这次，我们将增加一个proc_fs头文件，这个头文件包括驱动注册到/proc文件系统的支持。当另外一个进程调用read()时，下一个函数将会被调用。这个函数的实现比一个完整的普通内核驱动的read系统调用实现要简单的多，因为我们仅做了让&#8221;Hello world&#8221;这个字符串缓存被一次读完。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static int
+hello_read_proc(char *buffer, char **start,off_t offset,
+                int size, int *eof, void *data)
+{
+</pre>
+<p>这个函数的参数值得明确的解释一下。buffer是指向内核缓存的指针，我们将把read输出的内容写到这个buffer中。start参数多用更复杂的/proc文件；我们在这里将忽略这个参数；并且我只明确的允许offset这个的值为0。size是指buffer中包含多字节数；我们必须检查这个参数已避免出现内存越界的情况，eof参数一个EOF的简写，用于返回文件是否已经读到结束，而不需要通过调用read返回0来判断文件是否结束。这里我们不讨论依靠更复杂的/proc文件传输数据的方法。这个函数方法体罗列如下：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    char *hello_str = &quot;Hello, world!\n&quot;;
+    int len = strlen(hello_str); /* Don&#039;t include the null byte. */
+    /*     * We only support reading the whole string at once.     */
+    if (size &lt; len)
+        return&lt; -EINVAL;
+    /*     * If file position is non-zero, then assume the string has
+    * been read and indicate there is no more data to be read.
+    */
+    if (offset != 0)
+        return 0;
+    /*     * We know the buffer is big enough to hold the string.     */
+    strcpy(buffer, hello_str);
+    /*     * Signal EOF.     */
+    *eof = 1;
+    return len;
+}
+</pre>
+<p>下面，我们需将内核模块在初始化函数注册在/proc 子系统中。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static int __init
+hello_init(void){
+    /*
+    * Create an entry in /proc named &quot;hello_world&quot; that calls
+    * hello_read_proc() when the file is read.
+    */
+    if (create_proc_read_entry(&quot;hello_world&quot;, 0, 
+                        NULL, hello_read_proc, NULL) == 0) {
+        printk(KERN_ERR
+        &quot;Unable to register &quot;Hello, world!&quot; proc filen&quot;);
+        return -ENOMEM;
+    }
+    return 0;
+}
+module_init(hello_init);
+</pre>
+<p>当内核模块卸载时，需要在/proc移出注册的信息(如果我们不这样做的，当一个进程试图去访问/proc/hello_world，/proc文件系统将会试着执行一个已经不存在的功能，这样将会导致内核崩溃)</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static void __exit
+hello_exit(void){
+    remove_proc_entry(&quot;hello_world&quot;, NULL);
+}
+module_exit(hello_exit);
+MODULE_LICENSE(&quot;GPL&quot;);
+MODULE_AUTHOR(&quot;Valerie Henson val@nmt.edu&quot;);
+MODULE_DESCRIPTION(&quot;&quot;Hello, world!&quot; minimal module&quot;);
+MODULE_VERSION(&quot;proc&quot;);
+</pre>
+<p>下面我们将准备编译和装载模组</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cd hello_proc  
+$ make  
+$ sudo insmod ./hello_proc.ko
+</pre>
+<p>现在，将会有一个称为/proc/hello_world的文件，并且读这个文件的，将会返回一个&#8221;Hello world&#8221;字符串。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cat /proc/hello_world
+Hello, world!
+</pre>
+<p>你可以为为同一个驱动程序创建多个/proc文件，并增加相应写/proc文件的函数，创建包含多个/proc文件的目录，或者更多的其他操作。如果要写比这个更复杂的驱动程序，可以使用seq_file函数集来编写是更安全和容易的。关于这些更多的信息可以看<a href="http://lwn.net/Articles/22355/">《Driver porting: The seq_file interface》</a></p>
+<h4>Hello, World! 使用 /dev/hello_world</h4>
+<p>现在我们将使用在/dev目录下的一个设备文件/dev/hello_world实现&#8221;Hello,world!&#8221; 。追述以前的日子，设备文件是通过MAKEDEV脚本调用mknod命令在/dev目录下产生的一个特定的文件，这个文件和设备是否运行在改机器上无关。到后来设备文件使用了devfs，devfs在设备第一被访问的时候创建/dev文件，这样将会导致很多有趣的加锁问题和多次打开设备文件的检查设备是否存在的重试问题。当前的/dev版本支持被称为udev，因为他将在用户程序空间创建到/dev的符号连接。当内核模块注册设备时，他们将出现在sysfs文件系统中，并mount在/sys下。一个用户空间的程序，udev,注意到/sys下的改变将会根据在/etc/udev/下的一些规则在/dev下创建相关的文件项。</p>
+<p>下载<a href="http://www.linuxdevcenter.com/linux/2007/07/05/examples/hello_dev.tar.gz">hello world</a>内核模块的gzip的tar包，我们将开始先看一下hello_dev.c这个源文件。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;linux/fs.h&gt;
+#include &lt;linux/init.h&gt;
+#include &lt;linux/miscdevice.h&gt;
+#include &lt;linux/module.h&gt;
+#include &lt;asm/uaccess.h&gt;
+</pre>
+<p>正如我们看到的必须的头文件外，创建一个新设备还需要更多的内核头文件支持。fs.sh包含所有文件操作的结构，这些结构将由设备驱动程序来填值，并关联到我们相关的/dev文件。miscdevice.h头文件包含了对通用miscellaneous设备文件注册的支持。 asm/uaccess.h包含了测试我们是否违背访问权限读写用户内存空间的函数。hello_read将在其他进程在/dev/hello调用read()函数被调用的是一个函数。他将输出&#8221;Hello world!&#8221;到由read()传入的缓存。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static ssize_t hello_read(struct file * file, char * buf, size_t count, loff_t *ppos)
+{
+    char *hello_str = &quot;Hello, world!n&quot;;
+    int len = strlen(hello_str); /* Don&#039;t include the null byte. */
+    /*     * We only support reading the whole string at once.     */
+    if (count &lt; len)
+        return -EINVAL;
+    /*
+    * If file position is non-zero, then assume the string has
+    * been read and indicate there is no more data to be read.
+    */
+    if (*ppos != 0)
+        return 0;
+    /*
+    * Besides copying the string to the user provided buffer,
+    * this function also checks that the user has permission to
+    * write to the buffer, that it is mapped, etc.
+    */
+    if (copy_to_user(buf, hello_str, len))
+        return -EINVAL;
+    /*
+    * Tell the user how much data we wrote.
+    */
+    *ppos = len;
+    return len;
+}
+</pre>
+<p>下一步，我们创建一个文件操作结构file operations struct，并用这个结构来定义当文件被访问时执行什么动作。在我们的例子中我们唯一关注的文件操作就是read。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static const struct file_operations hello_fops = {
+    .owner        = THIS_MODULE,
+    .read        = hello_read,
+};
+</pre>
+<p>现在，我们将创建一个结构，这个结构包含有用于在内核注册一个通用miscellaneous驱动程序的信息。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static struct miscdevice hello_dev = {
+    /*
+    * We don&#039;t care what minor number we end up with, so tell the
+    * kernel to just pick one.
+    */
+    MISC_DYNAMIC_MINOR,
+    /*     
+    * Name ourselves /dev/hello.     
+    */
+    &quot;hello&quot;,
+    /*     
+    * What functions to call when a program performs file
+    * operations on the device.
+    */
+    &amp;hello_fops
+};
+</pre>
+<p>在通常情况下，我们在init中注册设备</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static int __init
+hello_init(void){
+    int ret;
+    /*
+    * Create the &quot;hello&quot; device in the /sys/class/misc directory.
+    * Udev will automatically create the /dev/hello device using
+    * the default rules.
+    */
+    ret = misc_register(&amp;hello_dev);
+    if (ret)
+        printk(KERN_ERR
+            &quot;Unable to register &quot;Hello, world!&quot; misc devicen&quot;);
+    return ret;
+}
+module_init(hello_init);
+</pre>
+<p>接下是在卸载时的退出函数</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+static void __exit
+hello_exit(void){
+    misc_deregister(&amp;hello_dev);
+}
+module_exit(hello_exit);
+MODULE_LICENSE(&quot;GPL&quot;);
+MODULE_AUTHOR(&quot;Valerie Henson val@nmt.edu&gt;&quot;);
+MODULE_DESCRIPTION(&quot;&quot;Hello, world!&quot; minimal module&quot;);
+MODULE_VERSION(&quot;dev&quot;);
+</pre>
+<p>编译并加载模块:</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cd hello_dev  
+$ make  
+$ sudo insmod ./hello_dev.ko
+</pre>
+<p>现在我们将有一个称为/dev/hello的设备文件，并且这个设备文件被root访问时将会产生一个&#8221;Hello, world!&#8221;</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ sudo cat /dev/hello
+ Hello, world!
+ </pre>
+<p>但是我们不能使用普通用户访问他:</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cat /dev/hello 
+cat:/dev/hello: Permission denied  
+
+$ ls -l 
+/dev/hello crw-rw---- 1 root root 10, 61 2007-06-20 14:31 /dev/hello
+
+</pre>
+<p>这是有默认的udev规则导致的，这个条规将标明当一个普通设备出现时，他的名字将会是/dev/，并且默认的访问权限是0660(用户和组读写访问，其他用户无法访问)。我们在真实情况中可能会希望创建一个被普通用户访问的设备驱动程序，并且给这个设备起一个相应的连接名。为达到这个目的，我们将编写一条udev规则。</p>
+<p>udev规则必须做两件事情：第一创建一个符号连接，第二修改设备的访问权限。</p>
+<p>下面这条规则可以达到这个目的：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">KERNEL==&quot;hello&quot;, SYMLINK+=&quot;hello_world&quot;, MODE=&quot;0444&quot;</code></p>
+<p>我们将详细的分解这条规则，并解释每一个部分。KERNEL==&#8221;hello&#8221; 标示下面的的规则将作用于/sys中设备名字&#8221;hello&#8221;的设备(==是比较符)。hello 设备是我们通过调用misc_register()并传递了一个包含设备名为&#8221;hello&#8221;的文件操作结构file_operations为参数而达到的。你可以自己通过如下的命令在/sys下查看</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ ls -d /sys/class/misc/hello//sys/class/misc/hello/
+</pre>
+<p>SYMLINK+=&#8221;hello_world&#8221; 的意思是在符号链接列表中增加 (+= 符号的意思着追加)一个hello_world ，这个符号连接在设备出现时创建。在我们场景下，我们知道我们的列表的中的只有这个符号连接，但是其他设备驱动程序可能会存在多个不同的符号连接，因此使用将设备追加入到符号列表中，而不是覆盖列表将会是更好的实践中的做法。</p>
+<p>MODE=&#8221;0444&#8243;的意思是原始的设备的访问权限是0444,这个权限允许用户，组，和其他用户可以访问。</p>
+<p>通常，使用正确的操作符号(==, +=, or =)是非常重要的，否则将会出现不可预知的情况。</p>
+<p>现在我们理解这个规则是怎么工作的，让我们将其安装在/etc/udev目录下。udev规则文件以和System V初始脚本目录命名的同种方式的目录下，/etc/udeve/rules.d这个目录，并以字母/数字的顺序。和System V的初始化脚本一样，/etc/udev/rules.d下的目录通常符号连接到真正的文件，通过使用符号连接名，将使得规则文件已正确的次序得到执行。<br />
+使用如下的命令，拷贝hello.rules文件从/hello_dev目录到/etc/udev目录下，并创建一一个最先被执行的规则文件链接在/etc/udev/rules.d目录下。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ sudo cp hello.rules /etc/udev/  
+$ sudo ln -s ../hello.rules /etc/udev/rules.d/010_hello.rules
+</pre>
+<p>现在我们重新装载驱动程序，并观察新的驱动程序项</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ sudo rmmod hello_dev  
+$ sudo insmod ./hello_dev.ko  
+$ ls -l /dev/hello*  
+cr--r--r-- 1 root root 10, 61 2007-06-19 21:21 /dev/hello  
+lrwxrwxrwx 1 root root      5 2007-06-19 21:21 /dev/hello_world -&gt; hello
+</pre>
+<p>最后，检查你可以使用普通用户访问/dev/hello_world设备.</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cat /dev/hello_world
+Hello, world!  
+
+$ cat /dev/hello
+Hello, world!
+</pre>
+<p>更多编写udev规则的信息可以在Daniel Drake的文章<a href="http://www.reactivated.net/writing_udev_rules.html">Writing udev rules</a>中找到。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/566.html">Linux设备驱动Hello World程序介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/566.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

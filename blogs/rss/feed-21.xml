@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 21 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=21" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Fri, 29 Mar 2019 10:42:27 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>WordPress是怎么赢的？</title>
+		<link>https://coolshell.cn/articles/3716.html</link>
+					<comments>https://coolshell.cn/articles/3716.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 23 Feb 2011 00:25:32 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Automattic]]></category>
+		<category><![CDATA[Movable Type]]></category>
+		<category><![CDATA[Six Apart]]></category>
+		<category><![CDATA[Wordpress]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3716</guid>
+
+					<description><![CDATA[<p>一个以前在Six Apart工作4年的产品经理Byrne Reese发布了一篇文章阐述为什么WordPress成为了赢家。其在文章中比较了WordPress和其...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3716.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3716.html">WordPress是怎么赢的？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一个以前在Six Apart工作4年的产品经理<strong>Byrne Reese</strong>发布了<a href="http://www.majordojo.com/2011/02/how-did-wordpress-win.php" target="_blank">一篇文章</a>阐述为什么WordPress成为了赢家。其在文章中比较了WordPress和其主要竞争对手产品Movable Type。我觉得其中有可取之处，本想全文翻译的，后来觉得文章太长，翻译太花时间，所以，我把文章中的观点总结如下。</p>
+<p>作者例举了如下为什么WordPress会赢的理由：</p>
+<p><strong>一、Movable Type许可证，而WordPress是开源的</strong></p>
+<p>2004年，Movable Type修改了其许可证，这一举动激怒了所有Movable Type的用户，于是大家纷纷转投Wordpress，这是WordPress最终成为赢家最大的原因。就算是Movable Type有着优越的设计，优越的功能，还有优越的技术支持，但是面对的是一个完全免费的产品也没有办法。因为WordPress是开源的，开源就意味着完全免费，而Movable Type一开始也是免费的，但是其许可证策略有着很不确定的因素。（注：2007年Movable Type发布了开源版本）</p>
+<p><strong>二、WordPress很容易安装</strong></p>
+<p>WordPress的安装过程很简单，只需要不到5分钟，比起Movable Type来说，这太受用户和推广商欢迎，你几乎不需要去碰后台的那些Web设置。（注：不仅如此，WordPress的升级和安装插件和风格的用户体验也是非常的不错）这就是为什么大家都喜欢WordPress的原因，就算是其功能比Movable Type少了又少。</p>
+<p><span id="more-3716"></span></p>
+<p><strong>三、WordPress由PHP写成</strong></p>
+<p>作者说到，本来，语言不应该成为原因，绝大多数用户在使用新产品时是不会去自己修改PHP和Perl的源码的。但是好像人们对PHP有着天生的好感。相比起Movable Type的Perl，人们似乎没有像对PHP那样觉得舒服。Perl让人感觉有些害怕。而PHP让更多的人参与进来为WordPress贡献了大量的插件和风格。另外，PHP相对于Perl来说，对于工作的技能要求不高，所以，可以很容易维护。对于技术人员来说，会有更多的人去建议老板使用PHP而不是Perl，而更多的主机空间采用PHP而不是Perl。（我个人以为，这和WordPress的设计关系可能更大，所有的Blog系统，WordPress的可定制化支持得更好一些）</p>
+<p><strong>四、WordPress的社区规模相当的大</strong></p>
+<p>WordPress之所以那么成功，有一个因素要归结于其社区，这个社区创造力实在是很强大。而且，这个社区周边有一个健康的经济商圈——“Premium Theme”，越来越多的人可以从中挣到一些钱，这样也让他们更有动力回报这个社区，这是一个非常健康的良性循环。</p>
+<p><strong>五、WordPress没有人进行强控制</strong></p>
+<p>对于WordPress来说，上述的那些事情都是社区决定的，而不是WordPress内部的人，WordPress没有选择过其许可证和编程语言。</p>
+<p><strong>六、WordPress的狂热崇拜</strong></p>
+<p>在一开始，WordPress并没有把自己定位在超出自己能力的地方，其把自己定位在不是那么优越的地方。低调的策略让WordPress的口碑不错。另一个因素是因为，Six Apart曾对WordPress进行过诽谤，这让Six Apart的诚信受到质疑，因此反而让人们更加地喜欢WordPress。再加上WordPress的谦虚低调，于是人们对WordPress产品产生了感情以及信仰，并开始和WordPress一同作战。是的，Six Apart不是一个竞争对手，而是一个完美的敌人。</p>
+<p><strong>七、Automattic的切换战役</strong></p>
+<p>Automattic是WordPress的运作公司。这是一个并不是很光彩的事情。作者说，有很多忠诚的Movable Type和TypePad用户向他透露到有来自Automattic的员式打电话给他们让他们切换到WordPress上，如果这样的人每人给他一美金，他会相当的富有。Automattic用尽一切办法和手段让用户切换到WordPress上，他们甚至给这些用户免费提供主机服务，还分配一个工程师给用户帮他们迁移系统。而当有用户迁移了，他们则制造一个成功的案例来鼓动别的用户。</p>
+<p><strong>八、Six Apart 收购 Apperceptive</strong></p>
+<p>Six Apart收购Apperceptive并没有错，而且还有很不错的利润增涨。问题是，收购以后，Six Apart从其社区中雇佣了很多很聪明的也有创造性的人到他的公司里。然后这些人加入后，其吞食了本来Six Apart以专业注称的服务。更糟糕的是，这个做法等于削弱了其社区的力量，社区里缺少领袖级的人物，于是只有Six Apart在战斗。</p>
+<p><strong>九、Six Apart 自己的失败</strong></p>
+<p>作者归结为一点：Six Apart严重地阻碍了自己的竞争力，因为其把自己的精力分布在了很多产品上。简而言之一句话——没有专注。如果Six Apart专注地做一个事，比如就做TypePad 或是 Movable Type，那么，今天的情况可能会很不一样。虽然，WordPress还是无可质疑地会成为最流行的Blog，但是他依然会面对着强大的对手，双方需要不停地在创新和技术上比拼。</p>
+<p>最后，作者说，目前这个世界上有WordPress, Drupal, Expression Engine, Movable Type, Simple CMS, TypePad, Twitter, Instagram, Tumblr,或是其它东西。作者让大家扪心自问——“是否WordPress是最好的产品？”作者依然认为 Movable Type 是最好的产品。其今天还是成为了很多商业公司的首选。</p>
+<p>——————————</p>
+<p>我个人觉得Blog的用户群其实对Blog的需求其实并不多，只需要可以发布文章，有评论，可以在边栏上添加一些小饰件，可以改变一下样式，最好自己的文章有人帮着做做推广什么的，基本上就是这个样子。所以，像新浪，搜狐这样提供商其实更好。更多的用户是不会去搭建自己的专有的blog的。所以，能自己搭建自己的blog的这群人，还是以技术人员偏多，而WordPress正好满足了技术人员的胃口。（老实说，WordPress的后台操作对于非技术人员的电脑用户来说还是很不够友好——太复杂，性能上好像也不是很好，插件多是多，但好的插件就那么几个）</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1387.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="十个Web开发文章和教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1387.html" class="wp_rp_title">十个Web开发文章和教程</a></li><li ><a href="https://coolshell.cn/articles/914.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="6个变态的C语言Hello World程序" width="150" height="150" /></a><a href="https://coolshell.cn/articles/914.html" class="wp_rp_title">6个变态的C语言Hello World程序</a></li><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li><li ><a href="https://coolshell.cn/articles/3.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/webicon3-150x150.png" alt="50套Web开发图标" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3.html" class="wp_rp_title">50套Web开发图标</a></li><li ><a href="https://coolshell.cn/articles/294.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="OSGi和Java企业级运算的未来方向" width="150" height="150" /></a><a href="https://coolshell.cn/articles/294.html" class="wp_rp_title">OSGi和Java企业级运算的未来方向</a></li><li ><a href="https://coolshell.cn/articles/1824.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="C语言和sh脚本的杂交代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1824.html" class="wp_rp_title">C语言和sh脚本的杂交代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3716.html">WordPress是怎么赢的？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3716.html/feed</wfw:commentRss>
+			<slash:comments>102</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>你会问问题吗？</title>
+		<link>https://coolshell.cn/articles/3713.html</link>
+					<comments>https://coolshell.cn/articles/3713.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 22 Feb 2011 00:40:49 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Question]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3713</guid>
+
+					<description><![CDATA[<p>在工作和生活中，总是会有很多人问题我很多技术方面的问题。有一些时候，问问题的和答问题的总是会有一些不爽的事情发生。如下面的几种情况： 比如：“我的电脑老是蓝屏，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3713.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3713.html">你会问问题吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在工作和生活中，总是会有很多人问题我很多技术方面的问题。有一些时候，问问题的和答问题的总是会有一些不爽的事情发生。如下面的几种情况：</p>
+<ul>
+<li>比如：“我的电脑老是蓝屏，怎么办？”，通常这样的问题90%以上的回答是：“重装吧”。这让问问题的人感到很沮丧，但你不能不承认那不是答案。而且有时候让人无法解答，比如：“我的makefiel出错了，你帮我看看我的makfile”，我通常会非反问，报了什么错吗？</li>
+<li>另一种情况是，回答问题的人首先先对问问题的人的抱怨，你问的问题就不对，或是，你问的这个问题是什么意思，而导致问问题的人却在不停地解释，结果花了好长时间来讨论问题本身是什么。</li>
+<li>还有一种情况是，问的问题太简单了甚至太白痴了，比如你自己试一试或是读读文档就知道了的问题，或是问这个问题直接表明了你的无知或是懒惰。这种问题会相当影响别人对你的印象。</li>
+<li>第四种情况是，提问者滔滔不绝，扯这扯那，讲了一大堆，听得听累了。最后都不知道你要干什么。</li>
+</ul>
+<p>所以，怎么去问问题，怎么问一个好的问题，是一个很重要的事。你提问的技术直接关系到了你是否能够很快得到你满意的答案。</p>
+<p>这里有一篇文章推荐给大家《<a href="http://www.catb.org/~esr/faqs/smart-questions.html" target="_blank" rel="noopener noreferrer">How To Ask Questions The Smart Way</a>》，中文版在这里《<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way" target="_blank" rel="noopener noreferrer">提问的智慧</a>》，我把其中的几个亮点总结如下：</p>
+<p><span id="more-3713"></span></p>
+<ul>
+<li>提问前先自己尝试查找答案，读读文档、手册，看看有没有相似的问题，看看那些方法能不能帮你解决问题，自己去试一试。如果你是程序员，你应该先学会自己调查一下源代码。（不然，人家回答你的一定是——RTFM &#8211; Read The Fucking Manual）这样的问题很多。我有时候很不愿意回答这样的问题，因为我觉得问问题的人把我当成了他的小跟班了。</li>
+</ul>
+<ul>
+<li>提问的时候，找正确的人或是正确的论坛发问。向陌生人或是不负责的人提问可能会是很危险的。不正确的人，会让你事倍功半。如果你问Linux的人Windows太慢怎么办？他们一定会让你把Windows删了装Linux去的。</li>
+</ul>
+<ul>
+<li>问的问题一定要是很明确的，并且阐述你做了哪些尝试，你一定要简化你的问题，这样可以让你的问题更容易被回答。对于一些问题，最好提供最小化的重现问题的步骤。</li>
+</ul>
+<ul>
+<li>你一定要让问题变得简单易读，这和写代码是一样的。只有简单易读的邮件，人们才会去读，试想看到一封巨大无比的邮件，读邮件的心情都没有了。而且，内容越多，可能越容易让人理解错了。</li>
+</ul>
+<ul>
+<li>你问问题的态度应该是以一种讨论的态度，即不是低三下四，也不是没有底气。只有这样，你和你的问题才能真正被人看得起。要达到这个状态，不想让别人看不起你，你就一定需要自己去做好充足的调查。问题 问得好的话，其实会让人觉得你很有经验的，能想到别人想不到的地方。</li>
+</ul>
+<ul>
+<li>不要过早下结论。比如：“我这边的程序不转了，我觉得是你那边的问题，你什么时候能fix？”，或是“太难调试了，gdb怎么这么烂？！”。当你这么做的时候，你一定要有足够的信息和证据，否则，你就显得很自大。好的问题应该是，“我和你的接口的程序有问题，我输入了这样的合法的参数，但是XX函数却总是返回失败，我们能一起看看吗？”，“我看了一下gdb的文档，发现我在用XXX命令调试YYY的时候，有这样ZZZ的问题，是不是我哪里做错了？”</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/10804.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/x-y.problem-150x150.jpg" alt="X-Y Problem" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10804.html" class="wp_rp_title">X-Y Problem</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3713.html">你会问问题吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3713.html/feed</wfw:commentRss>
+			<slash:comments>39</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>提高编程技能最有效的方法</title>
+		<link>https://coolshell.cn/articles/3698.html</link>
+					<comments>https://coolshell.cn/articles/3698.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 21 Feb 2011 00:31:03 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3698</guid>
+
+					<description><![CDATA[<p>StackExchange.com上有两个贴子（贴子一，贴子二），贴子名叫“What is the single most effective thing yo...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3698.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3698.html">提高编程技能最有效的方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>StackExchange.com上有两个贴子（<a href="http://programmers.stackexchange.com/questions/3089/what-is-the-single-most-effective-thing-you-did-to-improve-your-programming-skill" target="_blank">贴子一</a>，<a href="http://programmers.stackexchange.com/questions/44177/what-is-the-single-most-effective-thing-you-did-to-improve-your-programming-skill" target="_blank">贴子二</a>），贴子名叫“What is the single most effective thing you did to improve your programming skills?” &#8211; 对你的编程技术提高最有效的一件事是什么？回复的人中给了很多很不错的建议，我把他们总结了一下，十条，相信一定会对你有用。（注意：顺序是我自己按我的个人经验排的）</p>
+<ul>
+<li>和比自己聪明的能力比自己强的人工作。学习他们的代码，他们的做事方法，看一看那些人是怎么处理错误的。</li>
+</ul>
+<ul>
+<li>总是倾听别人怎么说，无论那个的资历和职位是什么样的。</li>
+</ul>
+<ul>
+<li>实践，实践，实践，总是不满意于一开始出来的事。</li>
+</ul>
+<ul>
+<li>多问问自己，现在在写什么代码？为什么要这样写成这样？还有没有更好的方法？</li>
+</ul>
+<ul>
+<li>学习多样的技术，多多比较他们，并一定要了解各种技术的优缺点。</li>
+</ul>
+<ul>
+<li>总是问别人问好的问题。</li>
+</ul>
+<ul>
+<li>多回头看看走过的路，做过的事，写过的程序，感觉一下他们有多烂。</li>
+</ul>
+<ul>
+<li>多读读那些大师写的书。</li>
+</ul>
+<ul>
+<li>不要总坐在电脑前编程序，多做做运动，多到户外走走，和非技术人多接触，向他们学习。</li>
+</ul>
+<ul>
+<li>把你的想法说出去，看看别人怎么回应的。从别人的回应中学习。</li>
+</ul>
+<p>除了这些，下面是我个人想给你的建议——</p>
+<p><span id="more-3698"></span><br />
+可能只能算精神，不能算方法。我以前也写过《<a rel="bookmark" href="https://coolshell.cn/articles/2606.html" target="_blank">五个方法成为更好的程序员</a>》，《<a rel="bookmark" href="https://coolshell.cn/articles/2424.html" target="_blank">十条不错的编程观点</a>》，还有《<a rel="bookmark" href="https://coolshell.cn/articles/222.html" target="_blank">优秀程序员的十个习惯</a>》这几篇文章也能给你一些启发。</p>
+<ul>
+<li><span style="font-size: 11pt;"><strong>热情</strong></span>。对编程充满热情。这种热情会导致强烈地专研精神，和努力的精神。<strong>专研精神相当重要，它是畏难情绪的天敌</strong>。</li>
+</ul>
+<ul>
+<li><span style="font-size: 11pt;"><strong>知道</strong></span>。学习技术要“知其道，明其理”，而不仅仅只是了解知识。举例，为什么C++有“初始化例表”而Java却没有？为什么Java的没有多重继承？为会有了TCP还要UDP？对于一个事物，什么是好的，什么是不好的。不但要了解其表面，还要了解其思想。<strong>只有了解原始的初衷和目的，你才能真正“知道”</strong>。</li>
+</ul>
+<ul>
+<li><span style="font-size: 11pt;"><strong>犯错</strong></span>。不犯错误永远没有经验，从自己的错误和别人的错误中学习，只有自己犯了错，才会真正明白。犯错不可怕，可怕的是不会总结只有真正的摸爬滚打过的人才是强人。<strong>技能和经验总是用错误去换来的</strong>。</li>
+</ul>
+<ul>
+<li><span style="font-size: 11pt;"><strong>回顾</strong></span>。要多去回顾过去，看看历史上发生过的事。这样你才能明白事物的发展规律，从面才能了解未来的路。举例：单机 -&gt; Client/Server -&gt; 中间应用层 -&gt; 多层结构 -&gt; 分布式结构。 C -&gt; C++ -&gt; Java，等等，等等。<strong>未来其实就在回顾过去之中</strong>。</li>
+</ul>
+<ul>
+<li><span style="font-size: 11pt;"><strong>质疑</strong></span>。质疑精神很重要。质疑通常会导致不同意见甚至反对意见。也许你会质疑错，也许你会被质疑，但是你的认知也会因为不同的观点而变得完整。有所同有所不同（“同”为同意及相同），<strong>观点因为不同才能迸发出火花，事物也此而发展，世界因为不同而精彩</strong>。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3698.html">提高编程技能最有效的方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3698.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>预发布环境,Tag发布机制和可重复的部署过程</title>
+		<link>https://coolshell.cn/articles/3709.html</link>
+					<comments>https://coolshell.cn/articles/3709.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 20 Feb 2011 07:28:59 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[Tag]]></category>
+		<category><![CDATA[投递]]></category>
+		<category><![CDATA[部署]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3709</guid>
+
+					<description><![CDATA[<p>下面文章由网友吕毅投递，源文是：http://blog.lvscar.info/?p=427 —————————————————————————————————...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3709.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3709.html">预发布环境,Tag发布机制和可重复的部署过程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span style="font-size: 11pt;"><strong>下面文章由网友<a href="http://blog.lvscar.info/" target="_blank">吕毅</a>投递，源文是：<a href="http://blog.lvscar.info/?p=427" target="_blank">http://blog.lvscar.info/?p=427</a></strong></span></p>
+<p>—————————————————————————————————————————————</p>
+<p>周末聚会，无意间聊起建筑行业。自己是搞软件开发的，我们的行业从建筑设计/施工过程中借鉴了大量的概念，隐喻，名词。可以说软件就是现实中伴随整个人类历史发展的“建筑”在虚拟空间中的投影。有个两年前问过其他朋友的问题，这次友人又再次提起，“为什么建筑设计过程中没有普遍性的采用版本控制呢？” 瞎扯了一干各种原因后，我们几乎同时想到一个名字”Joel”，建筑设计行业或许缺乏像<a href="http://www.joelonsoftware.com/">Joel Spolsky</a>一样十数年如一日，把自己丰富的经验和深入的思考转化成一篇篇文章以向新人传授软件开发过程中那些容易被忽略的概念。高傲的黑客们会对CMMI之类的认证抱以鄙夷之情，但对Joel整理出的12条写出更好软件的”最佳实践”，大家甚至把此称为审视其他团队开发过程的<a href="http://www.joelonsoftware.com/articles/fog0000000043.html">“Joel TEST”</a>以推崇</p>
+<p>这12条测试如下:</p>
+<blockquote><p>1. 是否启用版本控制？</p>
+<p>2. 是否可以一步构建?</p>
+<p>3. 是否进行每日构建？</p>
+<p>4. 是否有bug跟踪列表？</p>
+<p>5. 是否在修改bug后，才开始写新代码？</p>
+<p>6. 是否及时更新工作计划？</p>
+<p>7. 是否在开发前编写了大家一致认可的功能文档？</p>
+<p>8. 是否有安静的工作环境？</p>
+<p>9. 是否在使用最好的软件开发工具？</p>
+<p>10.是否有专职测试人员？</p>
+<p>11.是否在面试时以实际编写代码来检查求职者？</p>
+<p>12.是否利用陌生人进行可用性测试？</p></blockquote>
+<p>你所在的团队符合其中的几条呢？  觉得这些条目太一般，软件开发原本就该如此？ Joel Test写于十年前，一个Windows XP，Mac OS X,Ubuntu都还没有面世的年代。 如果你觉得这些条目有些过时了，Google中搜索“Joel  Test”，你可以看到这十年内很多对此进行更新的尝试, 比如这两个页面<a href="http://geekswithblogs.net/btudor/archive/2009/06/16/132842.aspx">“The Joel Test  Update for   2010″</a>,<a href="http://allinthehead.com/retro/228/">“Joel  Test  for  web dev”</a>.</p>
+<p><span id="more-3709"></span></p>
+<p>我的主要工作集中在”Web/Mobile  Web”领域，在”Joel Test”写就的年代，Web技术仅仅是一些用记事本就能写出的Html页面。但到了今天，到了经历过BS浪潮,后端编程语言井喷涌现，Ajax和HTML5变得人人皆知的今天。Web技术已经变成了一个由N种后端技术*N种开发语言/框架*N种前端技术交织起来的复杂体系。Web 程序员们觉得Joel开出的列表仍然有价值,那是因为我们的大部分工作仍然延续着上一代程序员们开创的轨迹；我们仍然在通过程序代码释创造力同时避免BUG的出现;我们仍然得谨慎的在强大,华丽与高效之间做着权衡. 相比客户端,Web技术最大的优势在于部署成本的节省,我们的程序和Joel年代最大的区别也在于此。这一年来新的工作岗位让我学到了很多,部署过程正是其中我觉得最值得和大家分享的部分.</p>
+<p>下面这个列表来自前阵子看到的一篇很好的文章<a href="http://www.kalzumeus.com/2010/12/12/staging-servers-source-control-deploy-workflows-and-other-stuff-nobody-teaches-you/">Staging Servers, Source Control &amp; Deploy Workflows, And Other Stuff Nobody Teaches You</a>,标题中的列出的三项和我的体会高度吻合,下面我会对他们一一做出自己的诠释</p>
+<blockquote><p>1.是否采用了预发布环境</p>
+<p>2.是否以Tag作为发布单位</p>
+<p>3.是否让部署过程是可重复的</p></blockquote>
+<div>
+<h3>是否采用了预发布环境</h3>
+<p>关于测试驱动开发的鼓吹中,”免除对代码修改的恐惧”十分具有诱惑力.我们都不喜欢功能逐渐丰富过程中冷不防出现的各种BUG,这些BUG打乱我们的计划,破坏我们的心情,从而让我们对开发新功能的旅程心存恐惧.TDD的最大魅力也来自于通过测试先行来保证后续的功能扩展相对于预期是可验证的. 不过无论你的WEB开发过程是怎样的,最终的代码和内容还是要通过发布来送达到用户浏览器中,你可以对PK需求,修改BUG,延长加班毫无畏惧,但你不能忽略用户体验.代码一旦部署到正式环境上,对你工作的评判不再是项目组中关心你,体谅你的同事.而是千万对错误零容忍的用户. 在发布前你已经做过周全的测试? 新增的每一项功能已经测试过? 很好.不过是在你的开发环境或某处偏僻的”测试环境”中? 服务器OS不一样,Web Server有差别,缓存服务未启用,APP容器或解释器,数据库版本有差别,没接通第三方API, 这所有的一切都可能会造成发布后,你自己或用户刷新网站后的那声”What The fuck?”, 我想这应该是较之修改BUG,你更不想面对的情景吧.</p>
+<p>总的说来,”预发布环境”就等于没有真实用户访问的生产环境, 除了让用户不能访问到外,尽一切可能让这个环境和生产环境一致.每次正式发布时以这个环境为目标,测试流程完成后.把发布内容从这个环境”平移”到生产环境.</p>
+</div>
+<div>
+<h3>是否以Tag作为发布单位</h3>
+<p>从业几年来,”所在团队把SVN当FTP用”是几乎每次朋友们互相吐槽时都能听到的话题,”SVN的分支合并太难用;需要更密切和团队伙伴共享工作内容…”我们可以很轻松的找到不创建功能分支然后进行合并的理由,事实上这么做可能也有一定的”合理性”.但发布时打个Tag,对你的现有开发流程几乎不会带来负担.你不需要切换到<a href="http://git-scm.com/">Git</a>或<a href="http://mercurial.selenic.com/">Mercury</a>,唯一要做的只是在提交后,发布前运行一行svn copy命令,然后在发布目标上用svn switch命令代替svn update来更新代码.只有一点需要注意,创建Tag的svn copy命令的目标最好是一个新的SVN仓库地址(新Tag路径),而不是本地目录.这么做的理由是当以仓库路径作为svn copy目标时,不会产生文件拷贝,而以本地路径为目标执行时,会发生文件拷贝,如果项目包含很多文件,这个过程会较为漫长.如果想避免本地打tag时的文件拷贝,你可切换到分布式版本控制系统.</p>
+<p>这么做的好处也是明显的,虽然我们已经通过预发布环境规避了大部分发布环境可能引入的问题.但当那”万一”发生时.你能够以最快的速度切换到上一次发布时的状态.通常可以通过”$svn switch [上次发布Tag的SVN路径]“一行命令搞定.</p>
+</div>
+<div>
+<h3>是否让部署过程是可重复的</h3>
+<p>如果你所在的团队对开发和运维工作进行了严格切分,这不会是一个问题.但不是所有项目都会到这个规模,如果你是一个幸福的能变更生产环境的Web程序员,请千万小心,你对生产环境的每次调整/优化,都可能让项目部署过程变得不可重复.随着时间的推移,你会忘记当时的配置项.一旦项目需要扩容,恢复,移交.这过程都可能演变成灾难.</p>
+<p>上面提到那篇文章中,提倡用部署脚本来管理部署过程.这是很好的解决方法,但如果你暂时缺乏系统脚本编程能力.分门别类把每次环境配置过程记录清楚吧,就当这项工作要在你不在场的情况下被别人重复执行.</p>
+</div>
+<p>别人说我们是”码农”,我们要把自己当工程师.<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7657.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/hudsonCI2-150x150.jpg" alt="持续部署，并不简单！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7657.html" class="wp_rp_title">持续部署，并不简单！</a></li><li ><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Mozilla-150x150.jpg" alt="Mozilla的一个BUG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_title">Mozilla的一个BUG</a></li><li ><a href="https://coolshell.cn/articles/9308.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/03/01-1-150x150.png" alt="“作环保的程序员，从不用百度开始”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9308.html" class="wp_rp_title">“作环保的程序员，从不用百度开始”</a></li><li ><a href="https://coolshell.cn/articles/1998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/operatingsystems-fanboys-150x150.jpg" alt="粉丝眼中的操作系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1998.html" class="wp_rp_title">粉丝眼中的操作系统</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li><li ><a href="https://coolshell.cn/articles/909.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="7个免费强大的Ajax文件管理器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/909.html" class="wp_rp_title">7个免费强大的Ajax文件管理器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3709.html">预发布环境,Tag发布机制和可重复的部署过程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3709.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>欢迎攻击酷壳</title>
+		<link>https://coolshell.cn/articles/3686.html</link>
+					<comments>https://coolshell.cn/articles/3686.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 17 Feb 2011 02:03:28 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[CoolShell.cn]]></category>
+		<category><![CDATA[Hack]]></category>
+		<category><![CDATA[攻击]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3686</guid>
+
+					<description><![CDATA[<p>相信大家都发现昨天下午2011年2月16日，下午从2点到6点，酷壳基本打不开。原因是服务器受到了黑客攻击。从互联网上几乎ping不通服务器（丢包率60%以上，p...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3686.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3686.html">欢迎攻击酷壳</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span style="font-size: 11pt;"><span style="color: #800000;">相信大家都发现昨天下午2011年2月16日，下午从2点到6点，酷壳基本打不开。原因是服务器受到了黑客攻击。从互联网上几乎ping不通服务器（丢包率60%以上，ping时延巨大，是平时的10倍以上），我勉强登上服务器查看了系统负载，相当低，于是停止了Apache，发现网络ping马上恢复正常。于是，我启动Apache，再使用iftop查看了一下TCP链接的带宽消耗，发现有那么一两个链接把服务器带宽全部吃完，于是我记录了下IP地址。攻击在下午6点时准停止，就像我们正常下班一样。</span></span></p>
+<p><span style="font-size: 11pt;"><span style="color: #800000;">酷壳受到很多攻击，不过，基本上都是一些注入式的攻击，都是想取得一些权限的攻击。这是第一次受到不以取得权限为目的，而只在以影响酷壳正常运转的攻击。</span></span></p>
+<p><span style="font-size: 11pt;"><span style="color: #800000;">我不竟想到了几个问题：</span></span></p>
+<ol>
+<li><span style="font-size: 11pt;"><span style="color: #800000;">为什么要攻击？这只是一个技术blog，这样的攻击目的是什么？</span></span></li>
+<li><span style="font-size: 11pt;"><span style="color: #800000;">黑客攻击的背后总是有相关的利益冲突的，不会是没有动机的攻击。</span></span></li>
+</ol>
+<p><span style="font-size: 11pt;"><span style="color: #800000;">所以，我一直在想，是什么样的利益冲突导到酷壳被攻击的？这个BLOG得罪了谁呢？我这个小小的个人的BLOG触动了谁的利益呢？任何事情总是有因果关系的，我很不自然地想到了最近我发布的几篇文章……</span></span></p>
+<p><span style="font-size: 11pt;"><span style="color: #800000;">欢迎攻击酷壳！我很乐意看到某些人生气的样子。</span></span></p>
+<p><span style="font-size: 11pt;"><span style="color: #800000;"><span id="more-3686"></span><br />
+</span></span></p>
+<blockquote cite="#commentbody-30044"><p><strong><a href="#comment-30044">陈皓</a> :</strong></p>
+<p>谢谢大家的关心。没关系，攻击就攻击吧，攻击这里没有任何的价值。因为，</p>
+<ul>
+<li>我这里又不挣钱，我个人也没钱，这个网站又没有什么商业运作，我也不图利，所以从这图利是图不到的。</li>
+<li>这里的文章RSS输出到很多地方，如GR，douban，有道，鲜果，抓虾……，就算是这里不能正常运转，也不妨碍大家阅读文章。</li>
+</ul>
+<p>所以，<strong>黑客同学，你即不能从这里获利，也不能阻止大家看文章，更不能左右大家的想法。而且黑客行为是刑事犯罪，你即得不到任何好处，还要背上那么大的风险，何必呢？</strong>（我相信黑客同学既然有智商能够使用黑客技术，那一定有智商搞清楚这个问题）</p></blockquote>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8031.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="InfoQ的ArchSummit大会对我的采访" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8031.html" class="wp_rp_title">InfoQ的ArchSummit大会对我的采访</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/3335.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="Groovy是怎么实现createArray的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3335.html" class="wp_rp_title">Groovy是怎么实现createArray的</a></li><li ><a href="https://coolshell.cn/articles/3480.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/01/OB-LP754_bestjo_D_20110104181820-150x150.jpg" alt="一些有意思的网站和贴子" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3480.html" class="wp_rp_title">一些有意思的网站和贴子</a></li><li ><a href="https://coolshell.cn/articles/2376.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="McAfee误杀svchost.exe" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2376.html" class="wp_rp_title">McAfee误杀svchost.exe</a></li><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3686.html">欢迎攻击酷壳</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3686.html/feed</wfw:commentRss>
+			<slash:comments>67</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Web开发人员速查卡</title>
+		<link>https://coolshell.cn/articles/3684.html</link>
+					<comments>https://coolshell.cn/articles/3684.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 16 Feb 2011 10:59:06 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Apache]]></category>
+		<category><![CDATA[ASP]]></category>
+		<category><![CDATA[Cheat Sheet]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[Flash]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Unicode]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[XML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3684</guid>
+
+					<description><![CDATA[<p>无论你是多牛的程序员，你都无法记住所有的东西。而很多时候，查找某些知识又比较费事。所以，网上有很多Cheat Sheets，翻译成小抄也好 ，速查卡也好，总之就...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3684.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>无论你是多牛的程序员，你都无法记住所有的东西。而很多时候，查找某些知识又比较费事。所以，网上有很多Cheat Sheets，翻译成小抄也好 ，速查卡也好，总之就是帮你节省 时间的。之前给大家介绍过<a rel="bookmark" href="https://coolshell.cn/articles/870.html" target="_blank">Web设计的速查卡</a>、<a rel="bookmark" href="https://coolshell.cn/articles/2964.html" target="_blank">25个jQuery的编程小抄</a>，还有<a rel="bookmark" href="https://coolshell.cn/articles/1566.html" target="_blank">程序员小抄大全</a>，今天转一篇开发人员的速查卡，<a href="http://www.topdesignmag.com/all-the-cheat-sheets-that-a-web-developer-needs/" target="_blank">源文在这里</a>。下面的文章我就不翻译了。</p>
+<h2>HTML Cheat Sheet</h2>
+<p><img decoding="async" loading="lazy" title="1" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/1128.jpg" alt="" width="450" height="127" /></p>
+<ul>
+<li><a href="http://www.html.su/" target="_blank">HTML/XTML in one page</a></li>
+<li><a href="http://refcardz.dzone.com/refcardz/html5-new-standards-web-interactivity" target="_blank">HTML5: The Evolution of Web Standards by James Sugrue</a></li>
+<li><a href="http://www.elizabethcastro.com/html/extras/xhtml_ref.html" target="_blank">(X)HTML Elements and Attributes</a></li>
+<li><a href="http://www.w3.org/QA/2002/04/valid-dtd-list.html" target="_blank">Doctype Declarations (DTDs)</a></li>
+<li><a href="http://www.digitalmediaminute.com/reference/entity/index.php" target="_blank">XHTML Character Entity Reference</a></li>
+<li><a href="http://downloads.gosquared.com/help_sheets/08/HTML-Help-Sheet-02.jpg" target="_blank">GoSquared HTML Help Sheet</a></li>
+</ul>
+<p><span id="more-3684"></span></p>
+<p><strong> </strong></p>
+<h2>CSS Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="2" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/2104.jpg" alt="" width="451" height="112" /></p>
+<ul>
+<li><a href="http://www.css.su/" target="_blank">CSS in one page</a></li>
+<li><a href="http://www.elizabethcastro.com/html/extras/cssref.html" target="_blank">CSS Properties and Values</a></li>
+<li><a href="http://www.blooberry.com/indexdot/css/propindex/all.htm" target="_blank">All CSS Properties Listed Alphabetically</a></li>
+<li><a href="http://www.dustindiaz.com/css-shorthand/" target="_blank">CSS Shorthand Guide</a></li>
+<li><a href="http://www.gosquared.com/liquidicity/archives/1010" target="_blank">GoSquared CSS Help Sheet</a></li>
+</ul>
+<h2>Adobe Flash Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="3" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/312.png" alt="" width="449" height="87" /></p>
+<ul>
+<li><a href="http://michaeldoyle.eu/blog/wp-content/uploads/2009/10/flash-cheat-sheet.pdf" target="_blank">Flash Cheat Sheet</a></li>
+<li><a href="http://edutechwiki.unige.ch/en/Flash_CS3_keyboard_shortcuts" target="_blank">Flash CS3 Keyboard Shortcuts</a></li>
+</ul>
+<p><strong> </strong></p>
+<h2><strong>ASP Cheat Sheets</strong></h2>
+<h2><strong><img decoding="async" loading="lazy" title="4" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/430.jpg" alt="" width="451" height="106" /><br />
+</strong></h2>
+<ul>
+<li><a href="http://refcardz.dzone.com/refcardz/core-aspnet" target="_blank">Core ASP.NET</a></li>
+<li><a href="http://www.newdrp.com/Posters/Development/tabid/67/id/284/Default.aspx" target="_blank">ASP.NET MVC Framework Cheat Sheet</a></li>
+<li><a href="http://www.newdrp.com/Posters/Development/tabid/67/id/286/Default.aspx" target="_blank">ASP.NET MVC View Cheat Sheet</a></li>
+</ul>
+<h2>PHP Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="5" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/55.png" alt="" width="450" height="112" /></p>
+<ul>
+<li><a href="http://www.dreamincode.net/forums/topic/35660-php-quick-reference-cheat-sheet/" target="_blank">PHP Basics Quick Reference Sheet</a></li>
+<li><a href="http://www.digilife.be/quickreferences/QRC/PHP%20Cheat%20Sheet.pdf" target="_blank">PHP Cheat Sheet</a></li>
+<li><a href="http://www.sk89q.com/content/2010/04/phpsec_cheatsheet.pdf" target="_blank">PHP Security Cheat Sheet</a></li>
+<li><a title="PHP Variable and Array Tests (php version 5.1.6) by Barry Hunter" href="http://www.deformedweb.co.uk/php_variable_tests.php" target="_blank">PHP Variable and Array Tests</a></li>
+<li><a href="http://downloads.gosquared.com/help_sheets/08/PHP-Help-Sheet-01.jpg" target="_blank">GoSquared PHP Help Sheet</a></li>
+</ul>
+<h2>MySQL Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="6" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/65.png" alt="" width="450" height="89" /></p>
+<ul>
+<li><a href="http://www.addedbytes.com/cheat-sheets/mysql-cheat-sheet/" target="_blank">MySQL Cheat Sheet by Dave Child</a></li>
+<li><a href="http://www.cheat-sheets.org/saved-copy/MySQL_QuickRef.pdf" target="_blank">MySQL Database Quick Reference</a></li>
+<li><a href="http://www.sqltutorial.org/sql-cheat-sheet.aspx" target="_blank">SQL Statements Cheat Sheet</a></li>
+</ul>
+<h2>JavaScript Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="7" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/75.png" alt="" width="451" height="118" /></p>
+<ul>
+<li><a href="http://www.javascript.su/" target="_blank">JavaScript in one page</a></li>
+<li><a href="http://www.addedbytes.com/cheat-sheets/javascript-cheat-sheet/" target="_blank">JavaScript Cheat Sheet</a></li>
+<li><a href="http://wps.aw.com/wps/media/objects/2234/2287950/javascript_refererence.pdf" target="_blank">Addison-Wesley’s JavaScript Reference Card</a></li>
+</ul>
+<h2>jQuery Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="8" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/85.png" alt="" width="450" height="109" /></p>
+<ul>
+<li><a href="http://colorcharge.com/jquery/" target="_blank">jQuery Cheatsheet</a></li>
+<li><a href="http://woork.blogspot.com/2009/09/jquery-visual-cheat-sheet.html" target="_blank">jQuery 1.3 Visual Cheat Sheet by Antonio Lupetti</a></li>
+<li><a href="http://refcardz.dzone.com/refcardz/jquery-selectors" target="_blank">jQuery Selectors by Bear Bibeault &amp; Yehuda Katz</a></li>
+</ul>
+<h2>Unicode Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="9" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/97.png" alt="" width="450" height="112" /></p>
+<ul>
+<li><a href="http://www.utf.ru/" target="_blank">The Unicode Character Code</a></li>
+<li><a href="http://www.visibone.com/htmlref/char/cer.htm" target="_blank">HTML Characters, Numeric Codes, 0-65535 by Bob Stein</a></li>
+</ul>
+<h2>XML Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="10" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/106.png" alt="" width="450" height="111" /></p>
+<ul>
+<li><a href="http://www.xml.su/" target="_blank">XML in one page</a></li>
+<li><a href="http://www.mulberrytech.com/quickref/XMLquickref.pdf" target="_blank">XML 1.0 Syntax Quick Reference by Mulberry Technologies</a></li>
+</ul>
+<h2>mod_rewrite and .htaccess Cheat Sheets</h2>
+<p><img decoding="async" loading="lazy" title="11" src="http://www.topdesignmag.com/wp-content/uploads/2011/01/1111.png" alt="" width="455" height="95" /></p>
+<ul>
+<li><a href="http://www.addedbytes.com/cheat-sheets/mod_rewrite-cheat-sheet/" target="_blank">mod_rewrite Cheat Sheet by Dave Child</a></li>
+<li><a href="http://www.thejackol.com/htaccess-cheatsheet/" target="_blank">htaccess Cheatsheet</a></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/1949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="Web中的省略号" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1949.html" class="wp_rp_title">Web中的省略号</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3684.html/feed</wfw:commentRss>
+			<slash:comments>22</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>为啥搞电脑的会有这么多空闲时间？</title>
+		<link>https://coolshell.cn/articles/3672.html</link>
+					<comments>https://coolshell.cn/articles/3672.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2011 10:03:11 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3672</guid>
+
+					<description><![CDATA[<p>解释一下： Web程序员—— “正在上传中……” 系统管理员——“正在启动中……” 黑客——“黑客脚本放出去了……” 3D动画制作——“正在渲染中……” 咨询顾...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3672.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3672.html">为啥搞电脑的会有这么多空闲时间？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2011/02/reasons_why_people_who_work_with_computers_seem_to_have_a_lot_of_spare_time.png"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3673" title="reasons_why_people_who_work_with_computers_seem_to_have_a_lot_of_spare_time" src="https://coolshell.cn/wp-content/uploads/2011/02/reasons_why_people_who_work_with_computers_seem_to_have_a_lot_of_spare_time.png" alt="" width="640" height="530" srcset="https://coolshell.cn/wp-content/uploads/2011/02/reasons_why_people_who_work_with_computers_seem_to_have_a_lot_of_spare_time.png 640w, https://coolshell.cn/wp-content/uploads/2011/02/reasons_why_people_who_work_with_computers_seem_to_have_a_lot_of_spare_time-300x248.png 300w, https://coolshell.cn/wp-content/uploads/2011/02/reasons_why_people_who_work_with_computers_seem_to_have_a_lot_of_spare_time-326x270.png 326w" sizes="(max-width: 640px) 100vw, 640px" /></a></p>
+<p>解释一下：</p>
+<p><span id="more-3672"></span></p>
+<ul>
+<li>Web程序员—— “正在上传中……”</li>
+<li>系统管理员——“正在启动中……”</li>
+<li>黑客——“黑客脚本放出去了……”</li>
+<li>3D动画制作——“正在渲染中……”</li>
+<li>咨询顾问——“现在是你的问题了……”</li>
+<li>程序员——“正在编译中……”</li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3672.html">为啥搞电脑的会有这么多空闲时间？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3672.html/feed</wfw:commentRss>
+			<slash:comments>22</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>TDD并不是看上去的那么美</title>
+		<link>https://coolshell.cn/articles/3649.html</link>
+					<comments>https://coolshell.cn/articles/3649.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2011 00:48:16 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[TDD]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3649</guid>
+
+					<description><![CDATA[<p>春节前的一篇那些炒作过度的技术和概念中对敏捷和中国ThoughtWorks的微辞引发了很多争议，也惊动了中国ThoughtWorks公司给我发来了邮件想来找我当...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3649.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3649.html">TDD并不是看上去的那么美</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>春节前的一篇<a title="那些炒作过度的技术和概念" href="https://coolshell.cn/articles/3609.html">那些炒作过度的技术和概念</a>中对敏捷和中国ThoughtWorks的微辞引发了很多争议，也惊动了中国ThoughtWorks公司给我发来了邮件想来找我当面聊聊。对于Agile的Fans们，意料之中地也对我进行了很多质疑和批评。我也回复了许多评论。不过，我的那些回复都是关于中国ThoughtWorks咨询师以及其咨询的方法的。我对Agile方法论中的具体内容评价的不是很多，所以，我想不妨讨论一下Agile方法论中的具体的实践（以前本站也讨论过<a href="https://coolshell.cn/articles/16.html" target="_blank">结对编程的利与弊</a>）。</p>
+<p>那么，这次就说说TDD吧，这是ThoughtWorks中国和Agile的Fans们最喜欢的东西了。我在<a href="https://coolshell.cn/articles/3609.html" target="_blank">原来的那篇文章</a>中，我把TDD从过度炒作的技术剔除了出去，因为我还是觉得TDD有些道理的，不过，回顾我的经验，我也并不是很喜欢TDD。我这篇文章是想告诉大家，<strong>TDD并没有看上去的那么美，而且非常难以掌控，并且，这个方法是有悖论之处的</strong>。</p>
+<h4>TDD简介</h4>
+<p><a href="http://en.wikipedia.org/wiki/Test-driven_development" target="_blank">TDD</a>全称Test Driven Development，是一种软件开发的流程，其由敏捷的“<a href="http://en.wikipedia.org/wiki/Extreme_programming" target="_blank">极限编程</a>”引入。其开发过程是从功能需求的test case开始，先添加一个test case，然后运行所有的test case看看有没有问题，再实现test case所要测试的功能，然后再运行test case，查看是否有case失败，然后重构代码，再重复以上步骤。其理念主要是确保两件事：</p>
+<ul>
+<li>确保所有的需求都能被照顾到。</li>
+<li>在代码不断增加和重构的过程中，可以检查所有的功能是否正确。</li>
+</ul>
+<p>我不否认TDD的一些有用的地方，如果我们以Test Case 开始，那么，我们就可以立刻知道我们的代码运行的情况是什么样的，这样可以让我们更早地得到我们实现思路的反馈，于是我们更会有信心去重构，去重新设计，从而可以让我们的代码更为正确。</p>
+<p>不过，我想提醒的是，<strong>TDD和Unit Test是两码子事儿</strong>。有很多人可能混淆了自动化的Unit Test（如：XUnit系例）和TDD的软件开发过程。另外，可能还会有人向鼓吹“<strong>TDD让你进行自顶向下的设计方式</strong>”，对此，请参阅本站的《<a href="https://coolshell.cn/articles/1654.html" target="_blank">Richard Feynman, 挑战者号, 软件工程</a>》——NASA的挑战者号告诉你自顶向下设计的危险性。</p>
+<h4>TDD的困难之处</h4>
+<p>下面是几个我认为TDD不容易掌控的地方，甚至就有些不可能（如果有某某TDD的Fans或是ThoughtWorks的咨询师和你鼓吹TDD，你可以问问他们下面这些问题）</p>
+<ul>
+<li><strong>测试范围的确定</strong>。TDD开发流程，一般是先写Test Case。Test Case有很多种，有Functional的，有Unit的，有Integration的……，最难的是Test Case要写成什么样的程度呢。<br />
+<span id="more-3649"></span></p>
+<p style="padding-left: 30px;">
+<ul>
+<li style="text-align: left;">如果写的太过High Level，那么，当你的Test Case 失败的时候，你不知道哪里出问题了，你得要花很多精力去debug代码。而我们希望的是其能够告诉我是哪个模块出的问题。只有High Level的Test Case，岂不就是Waterfall中的Test环节?</li>
+<li style="text-align: left;">如果写的太过Low Level，那么，带来的问题是，你需要花两倍的时间来维护你的代码，一份给test case，一份给实现的功能代码。</li>
+<li style="text-align: left;">另外，如果写得太Low Level，根据Agile的迭代开发来说，你的需求是易变的，很多时候，我们的需求都是开发人员自己做的Assumption。所以，你把Test Case 写得越细，将来，一旦需求或Assumption发生变化，你的维护成本也是成级数增加的。</li>
+<li style="text-align: left;">当然，如果我把一个功能或模块实现好了，我当然知道Test 的Scope在哪里，我也知道我的Test Case需要写成什么样的程度。但是，<strong>TDD的悖论就在于，你在实现之前先把Test Case就写出来，所以，你怎么能保证你一开始的Test Case是适合于你后面的代码的</strong>？不要忘了，程序员也是在开发的过程中逐渐了解需求和系统的。如果边实现边调整Test Case，为什么不在实现完后再写Test Case呢？如果是这样的话，那就不是TDD了。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>关注测试而不是设计</strong>。这可能是TDD的一个弊端，就像《<a title="十条不错的编程观点" href="https://coolshell.cn/articles/2424.html">十条不错的编程观点</a>》中所说的一样——“Unit Test won&#8217;t help you write the good code”，在实际的操作过程中，我看到很多程序员为了赶工或是应付工作，<strong>导致其写的代码是为了满足测试的，而忽略了代码质量和实际需求</strong>。有时候，当我们重构代码或是fix bug的时候，甚至导致程序员认为只要所有的Test Case都通过了，代码就是正确的。当然，TDD的粉丝们一定会有下面的辩解：
+<p style="padding-left: 30px;">
+<ul>
+<li>可以通过结对编程来保证代码质量。</li>
+<li>代码一开始就是需要满足功能正确，后面才是重构和调优，而TDD正好让你的重构和优化不会以牺牲功能为代价。</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px;">说的没错，但仅在理论上。操作起来可能会并不会得到期望的结果。1）“结对编程”其并不能保证结对的两个人都不会以满足测试为目的，因为重构或是优化的过程中，一旦程序员看到N多的test cases 都failed了，人是会紧张的，你会不自然地去fix你的代码以让所有的test case都通过。2）另外，我不知道大家怎么编程，我一般的做法是从大局思考一下各种可行的实现方案，对于一些难点需要实际地去编程试试，最后权衡比较，挑选一个最好的方案去实现。而往往着急着去实现某一功能，通常在会导致的是返工，而后面的重构基本上因为前期考虑不足和成为了重写。所以，在实际操作过程中，你会发现，很多时候的重构通常意味着重写，因为那些&#8221;非功能性&#8221;的需求，你不得不re-design。而re-design往往意味着，你要重写很多Low-Level的Test Cases，搞得你只敢写High Level的Test Case。</p>
+<p style="padding-left: 30px;">
+<ul>
+<li><strong>TDD导致大量的Mock和Stub</strong>。相信我，Test Case并不一定是那么容易的。比如，和其它团队或是系统的接口的对接，或是对实现还不是很清楚的模块，等等。于是你需要在你的代码中做很多的Mock和Stub，甚至fake一些函数来做模拟，很明显，你需要作大量的 assumption。于是，你发现管理和维护这些Mock和Stub也成了一种负担，最要命的是，那不是真正的集成测试，你的Test Case中的Mock很可能是错的，你需要重写他们。</li>
+</ul>
+<p style="padding-left: 30px;">也许，你会说，就算是不用TDD，在正常的开发过程中，我们的确需要使用Mock和Stub。没错！的确是这样的，不过，记住，我们是在实现代码后来决定什么地方放一个Mock或Stub，而不是在代码实现前干这个事的。</p>
+<ul>
+<li><strong>Test Case并没有想像中的那么简单</strong>。和Waterfall一样，Waterfall的每一个环节都依赖于前面那个环节的正确性，如果我们没有正确的理解需求，那么对于TDD，Test Case和我们的Code都会的错的。所以，TDD中，Test Case是开发中最重要的环节，Test Case的质量的问题会直接导致软件开发的正确和效率。<strong>而TW的咨询师和Agile的Fans们似乎天生就认为，TDD比Waterfall更能准确地了解需求。如果真是这样，用TDD进行需求分析，后面直接Waterfall就OK了</strong>。</li>
+</ul>
+<p style="padding-left: 30px;">另外，某些Test Case并不一定那么好写，你可能80%的编程时间需要花在某个Test Case的设计和实现上（比如：测试并发），然后，需求一变，你又得重写Test Case。有时候，你会发现写Test Case其实和做实际设计没有差别，你同样要考虑你Test Case的正确性，扩展性，易读性，易维护性，甚至重用性。<strong>如果说我们开发的Test Case是用来保证我们代码实现的正确性，那么，谁又来保证我们的Test Case的正确性呢</strong>？编写Test Case也需要结对或是Code review吗？软件开发有点像长跑，如果把能量花在了前半程，后半程在发力就能难了。</p>
+<p>也许，TDD真是过度炒作的，不过，我还真是见过使用TDD开发的不错的项目，只不过那个项目比较简单了。更多的情况下，我看到的是教条式的生硬的TDD，所以，不奇怪地听到了程序员们的抱怨——“自从用了TDD，工作量更大了”。当然，这也不能怪他们，TDD本来就是很难把控的方法。这里送给软件开发管理者们一句话——“<strong>当你的软件开发出现问题的时候，就像bug-fix一样，首要的事是找到root cause，然后再case by case的解决，千万不要因为有问题就要马上换一种新的开发方法</strong>”。相信我，大多数的问题是人和管理者的问题，不是方法的问题。</p>
+<p>（<strong>全文完，转载请注明作者和出处，请勿用于商业用途</strong>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Bob大叔和Jim Coplien对TDD的论战" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_title">Bob大叔和Jim Coplien对TDD的论战</a></li><li ><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="敏捷水管工" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_title">敏捷水管工</a></li><li ><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="再谈敏捷和ThoughtWorks中国咨询师" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_title">再谈敏捷和ThoughtWorks中国咨询师</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3649.html">TDD并不是看上去的那么美</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3649.html/feed</wfw:commentRss>
+			<slash:comments>102</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>GDB中应该知道的几个调试方法</title>
+		<link>https://coolshell.cn/articles/3643.html</link>
+					<comments>https://coolshell.cn/articles/3643.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 10 Feb 2011 01:34:08 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[GDB]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3643</guid>
+
+					<description><![CDATA[<p>七、八年前写过一篇《用GDB调试程序》，于是，从那以后，很多朋友在MSN上以及给我发邮件询问我关于GDB的问题，一直到今天，还有人在问GDB的相关问题。这么多年...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3643.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3643.html">GDB中应该知道的几个调试方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>七、八年前写过一篇《<a href="http://blog.csdn.net/haoel/archive/2003/07/02/2879.aspx" target="_blank">用GDB调试程序</a>》，于是，从那以后，很多朋友在MSN上以及给我发邮件询问我关于GDB的问题，一直到今天，还有人在问GDB的相关问题。这么多年来，有一些问题是大家反复在问的，一方面，我觉得我以前的文章可能没有说清楚，另一方面，我觉得大家常问的问题正是最有用的，所以，在这里罗列出来。希望大家补充。</p>
+<h4>一、多线程调试</h4>
+<p>多线程调试可能是问得最多的。其实，重要就是下面几个命令：</p>
+<ul>
+<li>info thread 查看当前进程的线程。</li>
+<li>thread &lt;ID&gt; 切换调试的线程为指定ID的线程。</li>
+<li>break file.c:100 thread all  在file.c文件第100行处为所有经过这里的线程设置断点。</li>
+<li>set scheduler-locking off|on|step，这个是问得最多的。在使用step或者continue命令调试当前被调试线程的时候，其他线程也是同时执行的，怎么只让被调试程序执行呢？通过这个命令就可以实现这个需求。
+<ul>
+<li>off 不锁定任何线程，也就是所有线程都执行，这是默认值。</li>
+<li>on 只有当前被调试程序会执行。</li>
+<li>step 在单步的时候，除了next过一个函数的情况(熟悉情况的人可能知道，这其实是一个设置断点然后continue的行为)以外，只有当前线程会执行。</li>
+</ul>
+</li>
+</ul>
+<h4>二、调试宏</h4>
+<p>这个问题超多。在GDB下，我们无法print宏定义，因为宏是预编译的。但是我们还是有办法来调试宏，这个需要GCC的配合。</p>
+<p>在GCC编译程序的时候，加上<strong>-ggdb3</strong>参数，这样，你就可以调试宏了。</p>
+<p>另外，你可以使用下述的GDB的宏调试命令 来查看相关的宏。</p>
+<ul>
+<li>info macro &#8211; 你可以查看这个宏在哪些文件里被引用了，以及宏定义是什么样的。</li>
+<li>macro &#8211; 你可以查看宏展开的样子。</li>
+</ul>
+<p><span id="more-3643"></span></p>
+<h4>三、源文件</h4>
+<p>这个问题问的也是很多的，太多的朋友都说找不到源文件。在这里我想提醒大家做下面的检查：</p>
+<ol>
+<li>编译程序员是否加上了-g参数以包含debug信息。</li>
+<li>路径是否设置正确了。使用GDB的directory命令来设置源文件的目录。</li>
+</ol>
+<p>下面给一个调试/bin/ls的示例（ubuntu下）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">$ apt-get source coreutils
+$ sudo apt-get install coreutils-dbgsym
+$ gdb /bin/ls
+GNU gdb (GDB) 7.1-ubuntu
+(gdb) list main
+1192    ls.c: No such file or directory.
+in ls.c
+(gdb) directory ~/src/coreutils-7.4/src/
+Source directories searched: /home/hchen/src/coreutils-7.4:$cdir:$cwd
+(gdb) list main
+1192        }
+1193    }
+1194
+1195    int
+1196    main (int argc, char **argv)
+1197    {
+1198      int i;
+1199      struct pending *thispend;
+1200      int n_files;
+1201</pre>
+<h4>四、条件断点</h4>
+<p>条件断点是语法是：break  [where] if [condition]，这种断点真是非常管用。尤其是在一个循环或递归中，或是要监视某个变量。注意，这个设置是在GDB中的，只不过每经过那个断点时GDB会帮你检查一下条件是否满足。</p>
+<h4>五、命令行参数</h4>
+<p>有时候，我们需要调试的程序需要有命令行参数，很多朋友都不知道怎么设置调试的程序的命令行参数。其实，有两种方法：</p>
+<ol>
+<li>gdb命令行的 &#8211;args 参数</li>
+<li>gdb环境中 set args命令。</li>
+</ol>
+<h4>六、gdb的变量</h4>
+<p>有时候，在调试程序时，我们不单单只是查看运行时的变量，我们还可以直接设置程序中的变量，以模拟一些很难在测试中出现的情况，比较一些出错，或是switch的分支语句。使用set命令可以修改程序中的变量。</p>
+<p>另外，你知道gdb中也可以有变量吗？就像shell一样，gdb中的变量以$开头，比如你想打印一个数组中的个个元素，你可以这样：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">(gdb) set $i = 0
+
+(gdb) p a[$i++]
+
+...  #然后就一路回车下去了
+
+</pre>
+<p>当然，这里只是给一个示例，表示程序的变量和gdb的变量是可以交互的。</p>
+<h4>七、x命令</h4>
+<p>也许，你很喜欢用p命令。所以，当你不知道变量名的时候，你可能会手足无措，因为p命令总是需要一个变量名的。x命令是用来查看内存的，在gdb中 &#8220;help x&#8221; 你可以查看其帮助。</p>
+<ul>
+<li>x/x 以十六进制输出</li>
+<li>x/d 以十进制输出</li>
+<li>x/c 以单字符输出</li>
+<li>x/i  反汇编 &#8211; 通常，我们会使用 <code>x/10i $ip-20 来查看当前的汇编（$ip是指令寄存器）</code></li>
+<li>x/s 以字符串输出</li>
+</ul>
+<h4>八、command命令</h4>
+<p>有一些朋友问我如何自动化调试。这里向大家介绍command命令，简单的理解一下，其就是把一组gdb的命令打包，有点像字处理软件的“宏”。下面是一个示例：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">(gdb) break func
+Breakpoint 1 at 0x3475678: file test.c, line 12.
+(gdb) command 1
+Type commands for when breakpoint 1 is hit, one per line.
+End with a line saying just &quot;end&quot;.
+&gt;print arg1
+&gt;print arg2
+&gt;print arg3
+&gt;end
+(gdb)</pre>
+<p>当我们的断点到达时，自动执行command中的三个命令，把func的三个参数值打出来。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li><li ><a href="https://coolshell.cn/articles/1502.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="高科技：GDB回溯调试" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1502.html" class="wp_rp_title">高科技：GDB回溯调试</a></li><li ><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="纯文本配置还是注册表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_title">纯文本配置还是注册表</a></li><li ><a href="https://coolshell.cn/articles/2834.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/08/super_mario-150x150.jpg" alt="史上最烂的超级玛丽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2834.html" class="wp_rp_title">史上最烂的超级玛丽</a></li><li ><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" alt="140个Google的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_title">140个Google的面试题</a></li><li ><a href="https://coolshell.cn/articles/2806.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/08/coolshell.programmer-150x150.jpg" alt="程序员版的凡客" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2806.html" class="wp_rp_title">程序员版的凡客</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3643.html">GDB中应该知道的几个调试方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3643.html/feed</wfw:commentRss>
+			<slash:comments>43</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Error handling in Egypt</title>
+		<link>https://coolshell.cn/articles/3630.html</link>
+					<comments>https://coolshell.cn/articles/3630.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 09 Feb 2011 00:45:03 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Egypt]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[错误处理]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3630</guid>
+
+					<description><![CDATA[<p>以前发布过《C语言的错误处理》一文，不过今天想说的是Egypt的“错误处理”。埃及的事闹得挺大的，国外和中文twitter上更是炸了锅。不要以为程序员就只会写程...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3630.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3630.html">Error handling in Egypt</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前发布过《<a href="https://coolshell.cn/articles/551.html" target="_blank">C语言的错误处理</a>》一文，不过今天想说的是Egypt的“错误处理”。埃及的事闹得挺大的，国外和中文twitter上更是炸了锅。不要以为程序员就只会写程序——看看程序员举出来的标语吧。呵呵。</p>
+<figure id="attachment_3631" aria-describedby="caption-attachment-3631" style="width: 600px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2011/02/Error-handling-in-Egypt.jpg"><img decoding="async" loading="lazy" class="size-full wp-image-3631" title="Error handling in Egypt" src="https://coolshell.cn/wp-content/uploads/2011/02/Error-handling-in-Egypt.jpg" alt="" width="600" height="454" srcset="https://coolshell.cn/wp-content/uploads/2011/02/Error-handling-in-Egypt.jpg 600w, https://coolshell.cn/wp-content/uploads/2011/02/Error-handling-in-Egypt-300x227.jpg 300w, https://coolshell.cn/wp-content/uploads/2011/02/Error-handling-in-Egypt-357x270.jpg 357w" sizes="(max-width: 600px) 100vw, 600px" /></a><figcaption id="caption-attachment-3631" class="wp-caption-text">Error handling in Egypt</figcaption></figure>
+<p>当然，作为程序员来说，这段代码显然还需要重构：<br />
+<span id="more-3630"></span></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">try{
+    elections(free,fare);
+} catch(DemocracyNotFoundException){
+    System.err.println(&quot;Time for Mubarak to leave&quot;);
+}</pre>
+<p>也有的程序员说，System.err.println不是处理错误的最好方法，正确的方法应该是：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">try {
+    elections(free,fair);
+} catch (DemocracyNotFoundException e) {
+    throw new MubarakDepartureParty(e);
+}</pre>
+<p>最后，我们希望Egypt不要出现：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">...
+finally {
+    Security.shootProtesters();
+}</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3630.html">Error handling in Egypt</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3630.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>那些炒作过度的技术和概念</title>
+		<link>https://coolshell.cn/articles/3609.html</link>
+					<comments>https://coolshell.cn/articles/3609.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 28 Jan 2011 02:00:52 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[COBRA]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[SOA]]></category>
+		<category><![CDATA[SOAP]]></category>
+		<category><![CDATA[UML]]></category>
+		<category><![CDATA[XML]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3609</guid>
+
+					<description><![CDATA[<p>StackExchange.com上有一个贴子在评论着最近20年来被炒作过度的技术，对于出现的结果，大多数赞同，也有一些不赞同。下面我从前15名挑了10个（Ja...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3609.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3609.html">那些炒作过度的技术和概念</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://stackexchange.com" target="_blank">StackExchange.com</a>上有一个<a href="http://programmers.stackexchange.com/questions/38505/most-overhyped-software-engineering-technologies-and-concepts-of-the-last-20-year" target="_blank">贴子</a>在评论着最近20年来被炒作过度的技术，对于出现的结果，大多数赞同，也有一些不赞同。下面我从前15名挑了10个（Java的WORE我去掉了，TDD我也去掉了，因为我觉得他们应该没有炒作过度，而且都不错），按原贴的顺序罗列如下：（后面的一些评论是我加的，欢迎大家讨论）</p>
+<h4>Top 10 过度炒作的技术和概念</h4>
+<ul>
+<li><strong>Unified Modeling Language (UML)</strong> &#8211; UML是一个程序员交流想法的不错的工具，但是他离程序员真正需要的设计工具还差得很远，比如：设计是否符合需求、架构设计、数据流等等。只有为数不多的程序员使用这个工具交流想法，而没有用在具体工作中。</li>
+</ul>
+<ul>
+<li><strong>Sharepoint </strong>&#8211; 现在N多的公司都在用微软的这个东西做公司内部的Intranet。不过安装和维护起来，代价相当的大。但是其市场做的很成功，不对技术上来说对技术人员来说，相当的蹩脚。Sharepoint的设计没有认真地分析过业务流程，仅仅是一个文档存储地。看上去我们似乎可以做任何的事，但是如果你要用其来管理你的项目和track你的项目问题，你会发现其是无比的难用。</li>
+</ul>
+<ul>
+<li><strong>eXtensible Mark-up Language (XML)</strong> &#8211;  XML嘛，以前说过很多了（<a href="https://coolshell.cn/articles/2504.html" target="_blank">XML1</a>，<a href="https://coolshell.cn/articles/3498.html" target="_blank"> XML2</a>）我们用他来做和程序数据封装，用来做配置文件，用来做网络传输格式。我们的程序处理起XML来，又慢，又不经济，没有工具，几乎无法维护XML文件。XML用来做数据封包真是很不经济，Yaml和JSON那个不比它简单？用XML来做程序配置文件不知道是谁想出来的主意，相当的愚蠢，看看Unix/Linux下的配置文件，简单易读，相当容易维护。真是高科技啊。</li>
+</ul>
+<ul>
+<li><strong>SOAP, XML-RPC, WSDL 的 Web Services</strong> &#8211; 这个东西前几年炒的很凶。所有人都相信，这是程序员的未来。可惜的，其中的复杂和不一致，相当的令人恶心。<a href="https://coolshell.cn/articles/3585.html" target="_blank">SOAP的那个S居然还是Simple</a>！看来，扯上XML的都不会是什么好的东东。不过，个人认为，CORBA比他更恶。</li>
+</ul>
+<p><span id="more-3609"></span></p>
+<ul>
+<li><strong>CORBA </strong>&#8211; 作为一个比其更恶的更过度炒作的COM技术的Linux/Unix下的补充技术，这个技术也好不到哪里去。相当的复杂，从理论上开始就是这样了。这是一个没有经过实践就搞出来的一个东西。然后开始炒作。</li>
+</ul>
+<ul>
+<li><strong>Cloud Computing</strong> &#8211; 这是一个靠炒作出现的东西。这个东西也就是说，我们可以使用不同的调备，比如电脑，平板电脑，手机，移动设备随时随地做想做的事。Google的Chrome笔记本的广告展示了这项技术，但是，把工作结果放在云端的人会有多少呢。更多的人更喜欢的是去使用那些自己可以控制的电脑或平台。Google在这点上做的明显不如Amazon，像Amazon EC2平台，你可以在世界上任何一个角落随时随地的去启动你那台远程的系统。（<strong><span style="color: #800000;"><em>更新（2011/1/29）</em></span></strong>：<span style="color: #808080;">解释一下，关于云计算，在写下这篇文章的时候我本来有点拿不定主意的，后来回顾了一下历史，如COM啊，ActiveX啊，EJB啊，当时感觉都是很强的东西，但是最终也只是被炒作的。云计算，我不知道未来怎么样，从今天来看，这项技术在今天存在炒作的情况——中移动云，阿里云，到处都是云，在云面前，神马都是浮云了。</span>）</li>
+</ul>
+<ul>
+<li><strong>SOA &#8211; Service Oriented Architecture</strong> &#8211; 这是一个没有人真正知道是什么玩意的概念。炒作了很多年，很多人都试图去了解它，但最后的结果是打个哈欠，看别的东西去了。现在没有人提了。中国一些银行在IBM的鼓动下搞了很多所谓的SOA应用，结果是系统很复杂，当然，也再离不开IBM了。</li>
+</ul>
+<ul>
+<li><strong>Software Industrial Process</strong> &#8211; 软件开发中有很多所谓的工业界的流程，用这些流程好像可以控制质量。外包公司和中国的本土公司很喜欢这些东西，比如ISO和CMMi，这些流程不能说不好，也有好的地方，尤其是对那些不会思考只要跟从的Worker来说。这些工业界流程中炒作过度的是，那些所谓的使用这些流程可以预测项目周期，质量控制，以前需求开发和管理等东西。其让流程上升到了一种神学的可预言的地步，同样也上升到了政治的地步。因为，这些流程中都必然会有SQA 的Audit的流程，还有统计和报告的流程，这些统统不是软件开发的流程，但是的确是相当的政治。使用这些工业届标准流程的公司，通常都是一些创造性有问题的公司。</li>
+</ul>
+<ul>
+<li><strong>Agile Software Development &#8211; 敏捷开发</strong>。首先，我承认其中的很多实践相当有效，在理论上也不错，还有很多不错方法的。不过，还是有炒作的成分（<span style="color: #008000;"><strong>下面的言论，我等着被骂</strong></span>）对我来说，在中国，“敏捷开发”的炒作简直就像是一个电视购物，ThoughtWorks中国各种咨询师们软件开发经验其实并不丰富，准确来说，他们有的是咨询经验，而没有具体项目实施经验（有的咨询师甚至都没有写过一行代码就去学教人怎么编程和开发软件了），和他们沟通起来能够感到他们对敏捷很亢奋，而且是唯敏捷主义，就差打出Once Process，One Agile的口号了，他们信仰敏捷流程的已经接近宗教信仰，他们的精神世界很朝鲜。因为，无论你和他们的咨询师谈什么，他们只说敏捷，从来不会分析一下，项目的特性是什么？开发这个项目的人的风格是什么？客户的特性是什么？有没有关心软件的stakeholder们（如：程序员，测试人员，客户，管理人员）是怎么想的？而XP和SCRUM也就成了Push工程师最强大的工具。<strong><span style="color: #800000;">流程这个东西，应该是项目组自发出来的东西，而不是被 灌输，被教条使用的东西。不同的团队、不同的项目、不同的人，不同的风格就是不同的流程，只有去使用适合自己的流程才是最好的流程</span></strong>。<strong>打个比方，足球队中，巴西队玩的是个人艺术足球，德国队玩的是整体和纪律性足球，意大利玩的是防守型足球，但是他们都有夺世界杯冠军的实力，如果你硬要让巴西队去整德国队或是意大利队的风格，那就悲剧了</strong>。很显然，ThoughtWorks很像把全中国的软件公司都整成Agile的，这注定了其在中国是杯具的，也只能争取到那些不知所措的公司和项目，没有合适的项目，也只有靠各种炒作（比如整一些大会，搞一些宣传）。他们总是觉得中国的用户和程序员需要去用时间不停地教育，但是，他们从来没有想想自己的原因 &#8212; 靠教育和灌输是永远赢不了的。<strong>我给他们的个人建议是，不要以为世界就像你所想像的那样，学会尊重程序员和项目还有很多非技术的东西，多听听程序员和客户怎么说，多分析一下项目的特质，从实际情况出发，而不是自己涛涛不绝地<strong>向大家</strong>灌输自己的理论</strong>。</li>
+</ul>
+<ul>
+<li><strong>Object-Oriented Programming (OOP</strong>) &#8211; 不多说了，以前本站说过了，所有的一切都在<a href="https://coolshell.cn/articles/3036.html" target="_blank">面向对象是个骗局</a>一文中。不过有一点我想告诉大家，面向对象的Design Pattern真是被滥用了，Design Pattern教你的是两件事，1）怎么去化繁为简，2）怎么能让对象的耦合性降低。而不是一个公式让你的套，但，更多的程序员则学会了“<a href="https://coolshell.cn/articles/2058.html" target="_blank">流行的设计模式编程</a>”。</li>
+</ul>
+<h4>附：下构面是我拿不定是否是过度炒作的技术</h4>
+<p><strong>Write Once Run Anywhere </strong>&#8211; 这个有点让我不解，不知道为什么会那么靠前。这是Java的口号，我觉得Java在跨平台方面还是成功的，没有过度炒作啊。用虚拟机的确是做到了这一点，对于那些需要有不同的硬件和操作系统平台并不断升级和更换它们的公司来说，这的确是个很不错的解决平台依赖性的方案。我个感觉这个技术并没有炒作过头，至少在Java这边是这样的。与其说这个，还不如说EJB，这才是炒作过度的技术。</p>
+<p>[<span style="color: #000080;">更新 2011/02/13</span>]下面的回复，在我形成这篇文章的时候我没有想过，经ming同学一说，我觉得似乎有些道理。</p>
+<blockquote cite="#commentbody-29425"><p><strong><a rel="nofollow" href="https://coolshell.cn/articles/3609.html/comment-page-1#comment-29425">ming</a> :</strong></p>
+<p>我从一开始就觉得java的“Write Once Run Anywhere”是彻头彻尾的炒作。</p>
+<p>想想，所谓的跨平台无非就是依靠虚拟机、解释器之类的东西实现的，那么，哪个脚本语言不是依靠解释器呢？古老的perl已经跨平台了。当然，跨平台的语言还有很多。但是，只有java炒作这个概念。</p></blockquote>
+<p><strong>Test Driven Design (TDD)</strong> &#8211; 从测试案例开始写程序这可能是很多程序员都不习惯的方法。其实这是一种比较好的编程方法，保证了代码怎么改动都不会break其它没有改动的代码，代码可以在一种持续集成中保证质量。但是，我们需要知道TDD的一些副作用（在<a title="十条不错的编程观点 " href="https://coolshell.cn/articles/2424.html">十条不错的编程观点</a>里也提到过TDD的弊端）：1）TDD可能会让程序员敷衍了事，以为test case 没有错就正确了。2）TDD可能会让你忽略了软件设计和架构以及程序的扩展性和重用性。T<strong>DD只是一种方法，并不是程序的核心</strong>。当然，TDD近几年的炒作也有点过头，已经出现了“TDD是一种Design方法”等“神乎其技”的论调，我对此表示质疑中。</p>
+<p>[更新 2011/02/13] 关于TDD，请参看我另一篇文章《<a rel="bookmark" href="https://coolshell.cn/articles/3649.html" target="_blank">TDD并不是看上去的那么美</a>》</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3609.html">那些炒作过度的技术和概念</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3609.html/feed</wfw:commentRss>
+			<slash:comments>278</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>为什么中国的网页设计那么烂？</title>
+		<link>https://coolshell.cn/articles/3605.html</link>
+					<comments>https://coolshell.cn/articles/3605.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 28 Jan 2011 00:47:14 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Culture]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3605</guid>
+
+					<description><![CDATA[<p>Nick Johnson，一个有12年经验的Web设计师在它的blog里写下了“Why is Chinese Web Design So Bad”，新浪，人人，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3605.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3605.html">为什么中国的网页设计那么烂？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://thinkvitamin.com/author/nickjohnson/" target="_blank">Nick Johnson</a>，一个有12年经验的Web设计师在它的blog里写下了“<a href="http://thinkvitamin.com/design/why-is-chinese-web-design-so-bad/" target="_blank">Why is Chinese Web Design So Bad</a>”，新浪，人人，百度，阿里巴巴，腾讯榜上有名。<strong>其中的观点相当的好，希望所有的中国人都读一下。</strong>我不全文翻译了，只是给大家看一些摘要。（保证不会像《环球时报》一样）</p>
+<p>——————————</p>
+<p>作者2005年的夏天来到中国，他说，他注意到了中国那复杂的文化和西方的有多么的不同。比如，语言，身体特征，政府的执政理念，等等，但是，有一些地方确是差别很少的，比如：幽默的sense，还有对艺术的表现形式的兴趣。很快，因为职业，他发现在中国的网站设计上完全没有引吸到他。于是他开始让身边的中国朋友尽可能多的给他推荐中国的网站，他觉得这个可以对他学习Web Design有帮助。</p>
+<p>当他在评论起新浪，人人，百度，阿里巴巴，腾讯的时候，他说，百度和其它的不同，因为百度悍然地公开抄袭Google的Web Design（blatantly copied their design from Google），而人人则是很明显地抄袭facebook（clearly copied their design from Facebook）。而其它的多数的中国网站看上去有很多很多滑稽可笑的文本，一些网站在滥用图片，一些网站图片又不够。他感到很困扰，这样的网站都能被接受？这么多的东西，网民怎么可能看得过来啊？中国人怎么可能容忍这些。（注：他不知道我们中国人能承受的比这更多）</p>
+<p><span id="more-3605"></span></p>
+<p>他说，更夸张的是，中国的网站上会有很多的动画，弹窗，幻灯片，感觉中国的设计师不是在设计，是在实践，还是实践那些很坏的设计理念，而些东西都是西方的设计师努力努力避免的。作者感到回到了1995年。</p>
+<p>作者说，作为一个傲慢自大的西方人，他的第一反应是——“哦，这是一个发展中国家，简单来说，还不能赶上我们”，当然，这有可能，因为Web Design和艺术表现也有个发展过程的，当<strong>前的中国也许正处于“结构设计”时期</strong>。作者个人认为的另一个可能是，中国的Web设计者们培养环境的问题——<strong>中国的教育培养是说教和影响的方式，而不是持续的自然的艺术的进化</strong>。艺术进化的根是文化培养，但是更应该是自然的，自由地进化。</p>
+<p>作者在说他为什么这么认为的原因时，提到了他花了些时间去了下中国的大学看看这些大学在教什么。他发现，<strong>中国的学生只是去记忆东西而不是真正的理解</strong>。<strong>他们从来不花时间去思考，而只是贪婪地去获取更多的信息</strong>。这和西方的教育完全的不同。（注：在这种教育体系下产生了像人人同抄袭和像新浪一样的满是信息的网页）作者继续说，在西方，他们一般用的都是“启发式”的东西，需要给人一种“啊，这样啊”的瞬间，这叫交互。而中国则不是，他们是先展示数据。中国的网站基本上是数据查询网站，就像把把信息注入到大脑中一样，没有过多的交互。</p>
+<p>另一个中国的文化是——这个民族真是很不直接，不像美国，在中国如果有人一针见血的表达观点是很不舒服的事。和中国人谈话需要拐很多弯。然而，对于西方人来说，模糊的表达才是让人很不舒服的。但是中国人都很接受这样的沟通方式。这也是中国网页设计成这个样子的一个原因。</p>
+<p>——————————————</p>
+<p>我觉得作者的话说的很中肯。然而，作者的这篇博文后面很多回复，你都可以去看看。那些回复中，我看到的是那些“不服输”的中国人（这是不是我们从小那种“争第一”的教育培养出来人呢？）。</p>
+<p>看完以后，我觉得让我思考的已经不是网页设计了，而是我们的教育和文化。</p>
+<p><strong>你呢？是在反思呢，还是准备去作者的 blog上debate呢？</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" alt="我做系统架构的一些原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_title">我做系统架构的一些原则</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17737.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/03/Amazon-Web-Services-Down-150x150.png" alt="AWS 的 S3 故障回顾和思考" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17737.html" class="wp_rp_title">AWS 的 S3 故障回顾和思考</a></li><li ><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" alt="从Gitlab误删除数据库想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_title">从Gitlab误删除数据库想到的</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3605.html">为什么中国的网页设计那么烂？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3605.html/feed</wfw:commentRss>
+			<slash:comments>139</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何“加密”你的email地址</title>
+		<link>https://coolshell.cn/articles/3595.html</link>
+					<comments>https://coolshell.cn/articles/3595.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 27 Jan 2011 05:03:06 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[email]]></category>
+		<category><![CDATA[password]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3595</guid>
+
+					<description><![CDATA[<p>现在在网上要小心，无论是保护好你的用户名和帐号，还是我们的电子邮件地址。在网上有很多爬虫程序专爬我们的电子邮件地址，一量被爬中了，那么你的邮箱里就是一堆又一堆的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3595.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3595.html">如何“加密”你的email地址</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>现在在网上要小心，无论是<a href="https://coolshell.cn/articles/2428.html" target="_blank">保护好你的用户名和帐号</a>，还是我们的电子邮件地址。在网上有很多爬虫程序专爬我们的电子邮件地址，一量被爬中了，那么你的邮箱里就是一堆又一堆的垃圾邮件，就好像我的haoel(at)hotmail.com一样，在7、8年前，每天几千封的垃圾邮件。现在hotmail的垃圾邮件过滤得好一些了，不过也有每天40封左右的垃圾邮件。但是我们在自己的网页上又需要发布自己的email地址。所以我们需要搞乱我们的邮件地址，就像那种非常规的<a href="https://coolshell.cn/articles/933.html" target="_blank">搞乱代码一样</a>。不过，我们还需要能认人读的出来。</p>
+<p>一般来说，在网上现在很普遍的做法是——</p>
+<ul>
+<li>1）用图片，可以用PHP动态生成那个验证码式的。</li>
+<li>2）把@变成at，把点变成dot，如 haoel(at)hotmail(dot)com之类的。</li>
+<li>3）把a变成@，写成haoel@hotm@mail.com</li>
+</ul>
+<p>不过这些还是能被爬到，用图片的方法不利于用户拷贝粘贴。下面介绍几种方法：</p>
+<h4>第一种：使用CSS样式</h4>
+<p><strong>反转字序</strong></p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
+&lt;p&gt;&lt;span&gt;moc.liamtoh@leoah&lt;/span&gt;&lt;/p&gt;</pre>
+<p><span id="more-3595"></span></p>
+<p><strong>加入些不显示的字符串</strong></p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">p span.hide { display:none; }
+&lt;p&gt;foo@bar&lt;span class=&quot;hide&quot;&gt;null&lt;/span&gt;.baz&lt;/p&gt;</pre>
+<h4>第二种：使用Javascript</h4>
+<p>最为简单的方法是：</p>
+<p>[javascript]document.write(&quot;haoel&quot; + &quot;@&quot; + &quot;hotmail&quot; + &quot;.&quot; + &quot;com&quot;);[/javascript]</p>
+<p>或是：</p>
+<p>[javascript]&lt;script type=&quot;text/javascript&quot;&gt;<br />
+&lt;!&#8211;<br />
+	var string1 = &quot;@&quot;;<br />
+	var string2 = &quot;haoel&quot;;<br />
+	var string3 = &quot;hotmail.com&quot;;<br />
+	var string4 = string2 + string1 + string3;<br />
+	document.write(&quot;&lt;a href=&quot; + &quot;mail&quot; + &quot;to:&quot; + string2 + string1 + string3 + &quot;&gt;&quot; + string4 + &quot;&lt;/a&gt;&quot;);<br />
+//&#8211;&gt;<br />
+&lt;/script&gt;[/javascript]</p>
+<p>不过更为强大的是使用ROT13加密，这里有一个<a href="http://rot13.de/" target="_blank">ROT13的在线工具</a>，或是使用PHP的ROT13的函数<a href="http://ch2.php.net/str_rot13" target="_blank">str_rot13</a>。</p>
+<p>[javascript]&lt;script type=”text/javascript”&gt;<br />
+document.write(“&lt;n uers=\&quot;znvygb:unbry@ubgznvy.pbz\&quot;&gt;”.replace(/[a-zA-Z]/g,<br />
+function(c){return String.fromCharCode((c&lt;=”Z”?90:122)&gt;=(c=c.charCodeAt(0)+13)?c:c-26);}));<br />
+&lt;/script&gt;陈皓的电子邮件&lt;/a&gt;[/javascript]</p>
+<p>这些方法还是很有效果的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" alt="CSDN明文口令泄露的启示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_title">CSDN明文口令泄露的启示</a></li><li ><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/passwords-150x150.png" alt="破解你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_title">破解你的口令</a></li><li ><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Twitter的禁用口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_title">Twitter的禁用口令</a></li><li ><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何管理并设计你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_title">如何管理并设计你的口令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3595.html">如何“加密”你的email地址</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3595.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>SOAP的S是Simple</title>
+		<link>https://coolshell.cn/articles/3585.html</link>
+					<comments>https://coolshell.cn/articles/3585.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 27 Jan 2011 00:47:56 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[SOAP]]></category>
+		<category><![CDATA[WDSL]]></category>
+		<category><![CDATA[XML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3585</guid>
+
+					<description><![CDATA[<p>曾经有一个争论，一边是站在SOAP这边的人，另一边则是其它人。 站在SOAP这边人，当他们在争论SOAP和Web Service框架的复杂度时，SOAP这边的人...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3585.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3585.html">SOAP的S是Simple</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>曾经有一个争论，一边是站在SOAP这边的人，另一边则是其它人。 站在SOAP这边人，当他们在争论SOAP和Web Service框架的复杂度时，SOAP这边的人说，在引入那些WS-*东东之前，SOAP的确是简单的，这就是为什么SOAP的第一个字母S就是Simple。</p>
+<p>在2000年的时候，有一个苦恼的程序员，</p>
+<p><strong>程序员</strong>: 不好意思，我的老板这周末去打高尔夫了，现在我不得不要搞一个SOAP的应用，但是我根本不知道什么是SOAP。SOAP专家，你能帮我吗？</p>
+<p><strong>SOAP专家</strong>: 当然可以。首先，我要告诉你，SOAP 就是 Simple Object Access Protocol.</p>
+<p><strong>程序员</strong>: 哦，那么说来，他是简单的罗？</p>
+<p><strong>SOAP专家</strong>: 简单的就像星期天一样，我的朋友。</p>
+<p><strong>程序员</strong>: OK，快跟我说说。</p>
+<p><strong>SOAP专家</strong>: 好，就像他的名字一样，SOAP用为远程对象访问。</p>
+<p><strong>程序员</strong>: 像CORBA一样？</p>
+<p><strong>SOAP专家</strong>: 正是如此，就是像 CORBA，只是更简单。不需要复杂的传输协议，还要设置防火墙，SOAP用的是HTTP。而且我们用的是XML作为传输数据格式而不是二进制。</p>
+<p><span id="more-3585"></span></p>
+<p><strong>程序员</strong>: 听起来很不错哦，告诉我它是怎么工作的？</p>
+<p><strong>SOAP专家</strong>: 没问题。首先，有一个SOAP信封，其相当的简单。就是一个XML文件由head和body组成。在body中进行你的RPC调用。</p>
+<p><strong>程序员</strong>: 哦，这就是所有的RPC的东西？</p>
+<p><strong>SOAP专家</strong>: 确对是的。就像我所说的，你的RPC调用的方法名和其参数都需要写的这个XML文档的body中。方法名是在最外层的tag，每一个嵌套的子tag就是其参数。并且所有参数的类型都可以被指定，请看能规格说明书的第五节。</p>
+<p><strong>程序员</strong>: (阅读第五节) 还好，不算太坏。</p>
+<p><strong>SOAP专家</strong>: 现在，当你的服务开发完后，你需要指定endpoint.</p>
+<p><strong>程序员</strong>: Endpoint?</p>
+<p><strong>SOAP专家</strong>: Endpoint, 就是服务的地址。你需要使用HTTP的 POST 方法把SOAP 信封放到 endpoint的 URL.</p>
+<p><strong>程序员</strong>: 如果我使用HTTP的GET方法什么怎么样？</p>
+<p><strong>SOAP专家</strong>: 不知道，使用GET的行为 undefined.</p>
+<p><strong>程序员</strong>: 哼哼。那么，要是我把我的服务移到别的 endpoint上？我是否可以得到一个301错误？</p>
+<p><strong>SOAP专家</strong>: 不会的，SOAP不会返回HTTP的错误码。</p>
+<p><strong>程序员</strong>: 那么，当你说SOAP使用HTTP，你的意思是说SOAP在HTTP打了个洞？</p>
+<p><strong>SOAP专家</strong>: 哦，别说得那么难听，应该说， SOAP 是一个传输协议。</p>
+<p><strong>程序员</strong>: HTTP 就不是吗？那是应用层的协议啊。总之，SOAP支持了别的什么传输协议？</p>
+<p><strong>SOAP专家</strong>: 官方地来说没有。但是你可以潜在地支持任何的协议。而且有许多的平台支持JMS，FTP还有SMTP。</p>
+<p><strong>程序员</strong>: 有人用那那些协议吗？</p>
+<p><strong>SOAP专家</strong>: 嗯，没有。不过，我想表达的是，你能够。</p>
+<p><strong>程序员</strong>: 好吧。关于 SOAPAction HTTP header，这是用来做什么的？</p>
+<p><strong>SOAP专家</strong>: 老实说，没人真正的知道。</p>
+<p><strong>程序员</strong>: 那么，那些 ‘actor’ 和 ‘mustUnderstand’ 属性，是否有人用呢？</p>
+<p><strong>SOAP专家</strong>: 没有，真的没人用。你就忽略这些东西吧。</p>
+<p><strong>程序员</strong>: 好吧，让我现读一读SOAP的规格说明书。</p>
+<p>(程序员阅读中……)</p>
+<p><strong>程序员</strong>: 好了，我现在几乎可以做个简单的东西了，但是我不能说我喜欢这个远程过程调用RPC的方法以及其序列化对象的方式 。</p>
+<p><strong>SOAP专家</strong>: RPC！对象序列化！你从哪得到的SOAP就是一堆RPC的这种印象？! SOAP是关于基于文档的消息传递啊，我的朋友。</p>
+<p><strong>程序员</strong>: 但是，这是你说的……</p>
+<p><strong>SOAP专家</strong>: 忘了我所说的吧。现在，让我们谈谈消息传递吧。其消息格式遵守XML Schema，我们把之称为新型的文件格式。</p>
+<p><strong>程序员</strong>: XML Schema?</p>
+<p><strong>SOAP专家</strong>: 哦，这是很不错的东西，未来的头等技术，你应该看一下。</p>
+<p><strong>程序员</strong>: (阅读 Schema 规格说明书). 上帝保佑我们！就算是亚历山大帝也搞不定它啊。</p>
+<p><strong>SOAP专家</strong>: 不必太担心。会有专门的工作为你来创建XML Schema。真的，这只不过就是工具上的事。</p>
+<p><strong>程序员</strong>: 工具是怎么做的？</p>
+<p><strong>SOAP专家</strong>: 好吧，他们反映了你的代码，并自动生成Schema。</p>
+<p><strong>程序员</strong>: 反映了我的代码？我以为这只是文档，而不是对象序列化。</p>
+<p><strong>SOAP专家</strong>: 你没听我说吗？这只不是工具上的事。总之，我们不能期望你来手写 XML Schema 和 WSDL。另外，这其实就是一种校正测量。你不需要读的。</p>
+<p><strong>程序员</strong>:  喔喔，等一下，你刚才说的那个单词是什么？ Wizzdle?</p>
+<p><strong>SOAP专家</strong>: 哦，我没有说过吗？WSDL. Web Services Description Language. 它让你指定你的数据类型，参数，操作名，传输绑定，以及endpoint URI，这样，所有的客户程序员就可以访问你的服务了。你应该看看。</p>
+<p><strong>程序员</strong>: (阅读WSDL 规格说明书)。我相信那个写下这个文章的人已经被枪杀了。其内部说明都不一致。而且，其用的是HTTP GET绑定，你不是和我说过， GET 是 undefined吗.</p>
+<p><strong>SOAP专家</strong>: 不必担心那个，没人会用那玩意。总之，工具会帮你生成WSDL，而且在WDSL里会有Schema的。</p>
+<p><strong>程序员</strong>: 但是，不应该用别的方法吗？不应该是先设计好接口然后再是生成代码吗？</p>
+<p><strong>SOAP专家</strong>: 是的，我猜那在原则上听起来是对的。但做起来并不容易，只有很少的SOAP栈支持先开发WSDL。让工具为这个事操心去吧。</p>
+<p><strong>程序员</strong>: 还有一个问题。如果我们传递 XML Schema 的消息，我们在哪里指写操作名？</p>
+<p><strong>SOAP专家</strong>: 好吧，你还记得 SOAPAction HTTP header吗? 绝大多数的人把操作名放在那里。</p>
+<p><strong>程序员</strong>: 大多数人？</p>
+<p><strong>SOAP专家</strong>: 嗯，这种新型并不会被写在所有的地方。</p>
+<p><strong>程序员</strong>: 我注意到你们整个SOAP界有很多的模糊和歧意，有些地方还是错的，并没有标准的规格说明书。实际上， SOAP 和 WSDL 规格说明书只是 W3C 的笔记罢了，连草稿都不是。</p>
+<p><strong>SOAP专家</strong>: 我们还在继续中。</p>
+<p><strong>程序员</strong>: 这个真的能行吗？能承诺吗？</p>
+<p><strong>SOAP专家</strong>: 绝对没有问题。</p>
+<p><strong>程序员</strong>: 好吧，那我去试试。</p>
+<p>(不久以后……)</p>
+<p><strong>程序员</strong>: 事情变得很恶心。我这边的工具生成的WDSL居然不能被我同事的工具使用。还不仅仅是这个，其生成的XML Schemas 无法重用。而且，好像没有工具可以最好的处理SOAPAction header.</p>
+<p><strong>SOAP专家</strong>:  很报歉，兄弟。在光明的那一面，没人用这些文件。为了让传输独立，我们所有人都用包装好的文件。听着是不是很酷：包装好的文件？</p>
+<p><strong>程序员</strong>: 那是什么？</p>
+<p><strong>SOAP专家</strong>: 就像是原来那样，只不过，你整个消息被 包装起来成一个元素，其和操作有一样的名字。现在操作名和消息成了一体了。</p>
+<p><strong>程序员</strong>: 好吧，请问说明书在哪里？</p>
+<p><strong>SOAP专家</strong>: 哦，没有规格说明书。这只是Microsoft自己搞的。不过应该是个很不错的主意，挺不错的。然后，这是一个新玩意。我想你一定会喜欢它的—— Web Services Interoperability Group，简称 WS-I，它就是为了移除 SOAP 和 WSDL 规格说明书中的那些歧义。我知道你有多么喜欢规格说明书。</p>
+<p><strong>程序员</strong>: 所以，换句话说，原来的那些规格说明书太糟糕了，以致于你需要一个标准化的东西来标准化这些标准。上帝啊。好吧，那么，是否这些协调问题被 解决了？</p>
+<p><strong>SOAP专家</strong>: 当然，只要你使用 WS-I 的 SOAP 栈，就可以减少使用80%的 XML Schema，别用任何不同寻常的数据类型，也别期望可以和WebSphere和 Apache Axis一起运行。</p>
+<p><strong>程序员</strong>: 那么，是否包装的文件被在那里被解释了？</p>
+<p><strong>SOAP专家</strong>: 没有，但是你的工具会明白的。绝大多数，总之。</p>
+<p><strong>程序员</strong>: 让我总结一下，SOAP的定义是不变的，SOAP可以是任何东西，但就是简单，它不再意味着对象访问，就算是所有的工具都那样做。</p>
+<p><strong>SOAP专家</strong>: 基本上是对的，但是我们走得比你要远一些。我们不赞成SOAP缩写的含义。</p>
+<p><strong>程序员</strong>: 真的！那么SOAP是什么的缩写？</p>
+<p><strong>SOAP专家</strong>: 什么也不是，就是SOAP.</p>
+<p><strong>程序员</strong>: (无语中……)</p>
+<p><strong>SOAP专家</strong>: 下面让我来告诉你什么是 UDDI。</p>
+<p>（注：我以前还认真地学过SOAP，不过真是学不懂。）</p>
+<p>原文：<a href="http://harmful.cat-v.org/software/xml/soap/simple" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3609.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="那些炒作过度的技术和概念" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3609.html" class="wp_rp_title">那些炒作过度的技术和概念</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="语言的数据亲和力" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_title">语言的数据亲和力</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3498.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="信XML，得自信" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3498.html" class="wp_rp_title">信XML，得自信</a></li><li ><a href="https://coolshell.cn/articles/2504.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="信XML，得永生！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2504.html" class="wp_rp_title">信XML，得永生！</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3585.html">SOAP的S是Simple</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3585.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C语言函数实现的另类方法</title>
+		<link>https://coolshell.cn/articles/3572.html</link>
+					<comments>https://coolshell.cn/articles/3572.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 26 Jan 2011 05:38:20 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3572</guid>
+
+					<description><![CDATA[<p>在前面看过那个BT的Javascript程序后，我们来看一个C语言的，相信大家还记得输出从1到1000的数最后的那个示例，本站还有很多这样的示例，如：变态的he...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3572.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3572.html">C语言函数实现的另类方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在前面看过那个<a href="https://coolshell.cn/articles/3540.html" target="_blank">BT的Javascript程序</a>后，我们来看一个C语言的，相信大家还记得<a title="输出从1到1000的数" href="https://coolshell.cn/articles/3445.html" target="_blank">输出从1到1000的数</a>最后的那个示例，本站还有很多这样的示例，如：<a href="https://coolshell.cn/articles/914.html" target="_blank">变态的hello word</a>，<a href="https://coolshell.cn/articles/2420.html" target="_blank">如何教新手编程</a>，<a href="https://coolshell.cn/articles/1724.html" target="_blank">还有恐怖的C++</a>，在下面这个示例面前，神马都是浮云。</p>
+<p>下面这个示例向你展示了如何写一个swap()函数（把两个值交换），这段代码在我的Linux下的 gcc v4.1.1下可以正确编译通过，连一个Warning都没有，而且可以正确工作。我能说什么？！C语言并不疯狂，疯狂的是程序员。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#include &lt;stdio.h&gt;
+void(*swap)() = (void(*)()) &quot;\x8b\x44\x24\x04\x8b\x5c\x24\x08\x8b\x00\x8b\x1b\x31\xc3\x31\xd8\x31\xc3\x8b\x4c\x24\x04\x89\x01\x8b\x4c\x24\x08\x89\x19\xc3&quot;;
+
+int main(){ // works on GCC 3+4
+        int a = 37, b = 13;
+        swap(&amp;a, &amp;b);
+
+        printf(&quot;%d %d\n&quot;,a,b);
+}</pre>
+<p>其实，这种<strong>用字符串来实现函数的方法</strong>，在原理上是很好理解的。</p>
+<p><span id="more-3572"></span></p>
+<p>字符串就是一段内存空间，把一个字符串指针强转成函数指针，那么这个指针所指向的内容就是各种指令，因此，那堆乱七八糟的东西说白了就是汇编。8086的汇编。你可以使用<span style="font-family: Consolas, Monaco, 'Courier New', Courier, monospace; line-height: 18px; font-size: 12px; white-space: pre;">ndisasm</span>来看看。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW"># ruby -e &quot;print \&quot;\x8b\x44\x24\x04\x8b\x5c\x24\x08\x8b\x00\x8b\x1b\x31\xc3\x31\xd8\x31\xc3\x8b\x4c\x24\x04\x89\x01\x8b\x4c\x24\x08\x89\x19\xc3\&quot;&quot; | ndisasm -u -
+
+00000000  8B442404          mov eax,[esp+0x4]       ; load pointers to two parameters into eax, ebx
+00000004  8B5C2408          mov ebx,[esp+0x8]
+
+00000008  8B00              mov eax,[eax]           ; load values of two parameters from pointers (*eax, *ebx) into eax, ebx
+0000000A  8B1B              mov ebx,[ebx]
+
+0000000C  31C3              xor ebx,eax             ; swap two values (eax, ebx) using xor trick
+0000000E  31D8              xor eax,ebx
+00000010  31C3              xor ebx,eax
+
+00000012  8B4C2404          mov ecx,[esp+0x4]       ; load pointer to param 1 into ecx
+00000016  8901              mov [ecx],eax           ; store swapped value 1 (eax) into param 1 (*ecx)
+
+00000018  8B4C2408          mov ecx,[esp+0x8]       ; load pointer to param 2 into ecx
+0000001C  8919              mov [ecx],ebx           ; store swapped value 2 (ebx) into param 2 (*ecx)
+
+0000001E  C3                ret</pre>
+<p>注意：这段汇编中使用了XOR而不是引入第三个变量来完成了变量值的交换。</p>
+<p>关于XOR的方式，参看下面的示例：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">a = a^b;
+b=a^b;
+a=b^a; </pre>
+<p>或者更为简单的：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">a^=b^=a^=b;</code></p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3572.html">C语言函数实现的另类方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3572.html/feed</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

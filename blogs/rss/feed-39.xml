@@ -1,0 +1,1273 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 39 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=39" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Fri, 21 Sep 2012 02:29:19 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>G1新型垃圾回收器一瞥</title>
+		<link>https://coolshell.cn/articles/1252.html</link>
+					<comments>https://coolshell.cn/articles/1252.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 13 Aug 2009 13:54:26 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[G1]]></category>
+		<category><![CDATA[GC]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1252</guid>
+
+					<description><![CDATA[<p>G1垃圾回收器 “G1垃圾回收”的英文全称是 Garbage-First Garbage Collector （又被称作G1 GC），这是一个新型的垃圾回收器，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1252.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1252.html">G1新型垃圾回收器一瞥</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<h4>G1垃圾回收器</h4>
+<p>“G1垃圾回收”的英文全称是 <em>Garbage-First Garbage Collector</em> （又被称作G1 GC），这是一个新型的垃圾回收器，由JDK 7中的Java HotSpot VM 引入。这个技术曾经在Java SE 6 Update 14版本中出现过一个试验性的，然后 G1 被 HotSpot的 反应快速（low-latency）的 <em>Concurrent Mark-Sweep</em> GC （简称 <em>CMS</em>）长期取代。</p>
+<h4>属性</h4>
+<p>G1 是一个“服务器风格（server-style）”的垃圾回收器，它主要有下面的这些属性：</p>
+<p><span id="more-1252"></span></p>
+<ul>
+<li><strong>并行和并发。</strong> G1 可以从今天最新的硬件中获得并行的能力。它能够使用所有可用的CPU（CPU多核，硬件多线程，等）来加速它的 “stop-the-world” 机制（这个机制简称STW，即，在执行垃圾收集算法时，Java应用程序的其他所有除了垃圾收集帮助器线程之外的线程都被挂起）。</li>
+<li><strong>分代处理。</strong> 就像其它的HotSpot 垃圾回收器，G1 是分代的，也就是说，它在处理新分配的对象（年轻代）和已经生存了一段时间的对象（年老代）时会不同，它会更多地考虑一些新创建的对象实例，因为越新创建的就越有最大的可能性被回收，老对象只是偶尔访问一下。对于大多数的Java应用来说，这个机制可以极大地提高回收效率。</li>
+<li><strong>紧凑内存（碎片整理）。</strong> 不像CMS，G1 会对堆进行内存整理。压缩可以消除潜在的内存碎片的问题，这样程序就可以更长时间的平滑运行。</li>
+<li><strong>预见性的。</strong> G1 比起 CMS 来有更多的预见性。这个主要还是用来消除内存碎片的问题。内存的碎片少了，Stop-the-World的暂停时间也会被减少。</li>
+</ul>
+<h4>描述</h4>
+<p>比起其它的HotSpot 垃圾回收器来说，G1 使用了一种非常不同寻常的方法来管理堆内存的布局。在G1中，在对象新生代和老一代上没有在物理上把他们分隔开来。取而代之的是，它把一个连续的堆内存拆分成了几个相同大小的区域。新产生的对象和老的对象都会被放在一系列可能不会连续的区域中。之所以这样做，就是为了让G1可以更灵活地移动老对象所占用的资源给新的对象。</p>
+<p>G1中的内存收集会发生 “疏散暂停”，当内存从一系例区域开始回收时，这些区域所引用的 <em>collection set</em> 会被疏散到另一些区域中，这样，我们会有一整块的内存来重新被申请。疏散会发生整个程序的暂停，但“疏散”这些内存可以被并行运行，当然，你要有多核或多线程技术来支持。绝大多数的“疏散暂停”会去收集那些可用的比较新的内存区域，因此，这和其它的 HotSpot 垃圾回收器是相同的。偶而才会去查看一下老区域中的内存是否可以回收。</p>
+<p>在 CMS中，其周期性的执行一个 <em>concurrent marking phase</em>。 这个phase中最主要的事情是，识别哪些老的区域中充满了可以回收的对象，因为这是最有效率和最合适的回收。但在G1中，G1不会执行那个所谓的 <em>concurrent sweeping phase</em>， 取而代之的是，去识别那些的最合适的老的区域是在并发的“疏散暂停”中进行的（后面会做介绍）。</p>
+<h4>使用 G1</h4>
+<p>G1 目前仍然还在试验阶段，使用下面两个参数可以打开G1机制：</p>
+<p><code>-XX:+UnlockExperimentalVMOptions -XX:+UseG1GC</code></p>
+<p>下面是设置垃圾回收器的暂停时间：</p>
+<p><code>-XX:MaxGCPauseMillis =50</code> (设置暂停时间为 50ms)</p>
+<p>在G1中，你还可以给垃圾回收器的暂停设置一个时间间隔：</p>
+<p><code>-XX:GCPauseIntervalMillis =200</code> (设置暂停时间间隔 200ms)</p>
+<p>注意，上面的两个参数只是代表目标，回收器并不保证。他们可能在某些情况下工作地很好，也可能在其它情况下不行，所以，垃圾回收器并不总是服从这两个参数设置。</p>
+<p>另外，新生代的内存大小可以被设置，这个参数同样会影响“疏散暂停”的时间：</p>
+<p><code>-XX:+G1YoungGenSize=512m</code> (设置新生代内存为 512兆字节)</p>
+<p>G1 同样可以使用survivor 空间，是的，这就是多少个区域。大小可以由通用的参数所指定(如： <code>-XX:SurvivorRatio=6</code>).</p>
+<p>最后，如果你要发挥G1的所有潜能，你可以尝试设置下面两个参数，它们默认上是关闭的，因为在一些很稀有的情况下，这两个参数会发生race condition（竞争条件）:</p>
+<p><code>-XX:+G1ParallelRSetUpdatingEnabled<br />
+-XX:+G1ParallelRSetScanningEnabled</code></p>
+<p>还有一件事是G1能够报告比其它垃圾回收站更详细的信息，当然，你需要设置下面这个参数：</p>
+<p> <code>-XX:+PrintGCDetails</code></p>
+<p>这个参数会输出很多有用的信息供你查看性能与以 trouble-shooting。如果你想要简单的日志，你可以把这个开关设置到 <code>-verbosegc</code> 。</p>
+<h4>状态</h4>
+<p>G1 开发目前主要关注于解决一些残留的稳定性的问题，以及提高性能，并且去除下面的限制：</p>
+<ul>
+<li>G1 并不完全支持 JVM Tool Interface (JVM TI) 或 Java Management Extensions (JMX)，所以，这些监控和管理工具无法正确地作用于G1。</li>
+<li>G1 不支持增量的永生代collection。如果一个应用在卸载很多的类，因些需要很多的永生代Collection，目前的G1还不支持，不过最终版会支持。</li>
+<li>关于垃圾回收器的暂停时间，G1的表现比起CMS来说是时好时坏。所以，还有很多工作需要让G1的表现更加稳定，绝不能比CMS还差，不然G1还有什么意思呢？</li>
+</ul>
+<h4>相关资源</h4>
+<ul>
+<li>Description of HotSpot GCs: Memory Management in the Java HotSpot Virtual Machine White Paper: <a href="https://coolshell.cn/j2se/reference/whitepapers/memorymanagement_whitepaper.pdf">http://java.sun.com/j2se/reference/whitepapers/memorymanagement_whitepaper.pdf</a></li>
+<li>The original CMS paper: Printezis, T. and Detlefs, D. 2000. A generational mostly-concurrent garbage collector. In <em>Proceedings of the 2nd international Symposium on Memory Management</em> (Minneapolis, Minnesota, United States, October 15 &#8211; 16, 2000). <a href="http://portal.acm.org/citation.cfm?id=362422.362480" target="_blank">http://portal.acm.org/citation.cfm?id=362422.362480</a> (requires access to ACM&#8217;s portal)</li>
+<li>The original G1 paper: Detlefs, D., Flood, C., Heller, S., and Printezis, T. 2004. Garbage-first garbage collection. In Proceedings of the 4th international Symposium on Memory Management (Vancouver, BC, Canada, October 24 &#8211; 25, 2004). <a href="http://portal.acm.org/citation.cfm?id=1029879" target="_blank">http://portal.acm.org/citation.cfm?id=1029879</a> (requires access to ACM&#8217;s portal)</li>
+<li>G1 talk from JavaOne 2008: <a href="http://developers.sun.com/learning/javaoneonline/j1sessn.jsp?sessn=TS-5419&amp;yr=2008">http://developers.sun.com/learning/javaoneonline/j1sessn.jsp?sessn=TS-5419&amp;yr=2008</a></li>
+</ul>
+<p>文章：<a href="http://java.sun.com/javase/technologies/hotspot/gc/g1_intro.jsp" target="_blank">来源</a></p>
+<p><!-- =================== --><!-- END OF MAIN CONTENT --><!-- =================== --><!--stopindex--><!-- BEGIN D7 COMPONENT V.5 --><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1252.html">G1新型垃圾回收器一瞥</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1252.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>IE的CSS相关的BUG</title>
+		<link>https://coolshell.cn/articles/1245.html</link>
+					<comments>https://coolshell.cn/articles/1245.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 12 Aug 2009 10:47:43 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Browser]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[IE]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1245</guid>
+
+					<description><![CDATA[<p>这个网页（http://haslayout.net/css/index）上例举了所有的IE和CSS相关的BUG。如果你在开发网页的时候，你需要看看。 目前，这个...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1245.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1245.html">IE的CSS相关的BUG</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" title="ie-bug" src="../wp-content/uploads/2009/08/ie-bug.jpg" alt="ie-bug" width="172" height="172" />这个网页（<a href="http://haslayout.net/css/index">http://haslayout.net/css/index</a>）上例举了所有的IE和CSS相关的BUG。如果你在开发网页的时候，你需要看看。</p>
+<p>目前，这个网站上包含了 <strong>28 个“普通的Bug”</strong> ， <strong>4 个“布局方面的Bug”</strong> ， <strong>6 个“可以绕开的Bug”</strong> 以及 <strong>1 个“IE崩溃的Bug”</strong>，所有的这些Bug有39个指南和48个解决方法。这个列表目前更新到 <strong>2009年8月11日，19:50:22 </strong></p>
+<p>下面是所有的bug列表，你可以点击每个BUG名的链接查看更详细的说明。</p>
+<h4>普通Bug</h4>
+<p>这部分 <abbr title="Internet Explorer">IE</abbr> 的 bug 是比较普通的无法归到其它种类，或是同时属于多个种类的Bug。</p>
+<p><span id="more-1245"></span></p>
+<table border="0">
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a title="'Hover White Background Ignore Bug' tutorial" href="http://haslayout.net/css/view?tut=Hover-White-Background-Ignore-Bug">Hover White Background Ignore Bug</a></td>
+<td>IE7</td>
+<td>background 不会因为 :hover而改变</td>
+</tr>
+<tr>
+<td><a title="'IE7 Child Selector Comment Bug' tutorial" href="http://haslayout.net/css/view?tut=IE7-Child-Selector-Comment-Bug">IE7 Child Selector Comment Bug</a></td>
+<td>IE7</td>
+<td>一个 selector 包含了一个子的selector，如果后面跟着一个注释，则会被完全忽略。</td>
+</tr>
+<tr>
+<td><a title="'Star HTML Bug' tutorial" href="http://haslayout.net/css/view?tut=Star-HTML-Bug">Star HTML Bug</a></td>
+<td>IE6</td>
+<td>* html selector 在 IE6 中没有被忽略</td>
+</tr>
+<tr>
+<td><a title="'IE6 !important Ignore Bug' tutorial" href="http://haslayout.net/css/view?tut=IE6--important-Ignore-Bug">IE6 !important Ignore Bug</a></td>
+<td>IE6</td>
+<td>!important 关键字会忽略，如果有相同的属性被设置了</td>
+</tr>
+<tr>
+<td><a title="'PNG Image and Background Color Mismatch' tutorial" href="http://haslayout.net/css/view?tut=PNG-Image-and-Background-Color-Mismatch">PNG Image and Background Color Mismatch</a></td>
+<td>IE8 及以下版本</td>
+<td>背景颜色和指定的图片的颜色不一致。而他们本来是一致的。IE认为这是他一个Feature。太可笑了。</td>
+</tr>
+<tr>
+<td><a title="'No Auto Margin Center Pseudo-Bug' tutorial" href="http://haslayout.net/css/view?tut=No-Auto-Margin-Center-Pseudo-Bug">No Auto Margin Center Pseudo-Bug</a></td>
+<td>IE8 及以下版本</td>
+<td>如果把margins 设置成 <code data-enlighter-language="raw" class="EnlighterJSRAW">auto</code> ，IE不会把组件放置在中间的位置。所有的浏览器都会，只有IE不会。</td>
+</tr>
+<tr>
+<td><a title="':first-line !important Rule Ignore Bug' tutorial" href="http://haslayout.net/css/view?tut=-first-line--important-Rule-Ignore-Bug">:first-line !important Rule Ignore Bug</a></td>
+<td>IE8</td>
+<td>如果在伪class  :first-line 内使用!important，那么其所有定义会被忽略。</td>
+</tr>
+<tr>
+<td><a title="':first-letter Ignore Bug' tutorial" href="http://haslayout.net/css/view?tut=-first-letter-Ignore-Bug">:first-letter Ignore Bug</a></td>
+<td>IE6</td>
+<td>整个:first-letter 的属性定义会被除数完全忽略。</td>
+</tr>
+<tr>
+<td><a title="':first-letter !important Rule Ignore Bug' tutorial" href="http://haslayout.net/css/view?tut=-first-letter--important-Rule-Ignore-Bug">:first-letter !important Rule Ignore Bug</a></td>
+<td>IE8</td>
+<td>如果在伪class  :first-letter内使用!important，那么其所有定义会被忽略。</td>
+</tr>
+<tr>
+<td><a title="'Partial Click Bug v2' tutorial" href="http://haslayout.net/css/view?tut=Partial-Click-Bug-v2">Partial Click Bug v2</a></td>
+<td>IE8以</td>
+<td>设置了整个区域是可以点击的，但在IE中只有文本可以点击。</td>
+</tr>
+<tr>
+<td><a title="'Staircase Bug' tutorial" href="http://haslayout.net/css/view?tut=Staircase-Bug">Staircase Bug</a></td>
+<td>below IE8</td>
+<td>浮动的元素排序起来就像一个楼梯。</td>
+</tr>
+<tr>
+<td><a title="'Disappearing List Background Bug' tutorial" href="http://haslayout.net/css/view?tut=Disappearing-List-Background-Bug">Disappearing List Background Bug</a></td>
+<td>IE6</td>
+<td>B &lt;li&gt;, &lt;dt&gt;, &lt;dd&gt; 没有背景。</td>
+</tr>
+<tr>
+<td><a title="'noscript Ghost Bug' tutorial" href="http://haslayout.net/css/view?tut=noscript-Ghost-Bug">noscript Ghost Bug</a></td>
+<td>IE8 and below</td>
+<td>&lt;noscript&gt; 标识中只有 borders/background 才有用。</td>
+</tr>
+<tr>
+<td><a title="'No Transparency Click Bug' tutorial" href="http://haslayout.net/css/view?tut=No-Transparency-Click-Bug">No Transparency Click Bug</a></td>
+<td>IE8 and below</td>
+<td>背景透明的图片在作为链接时，并且其“filter”被设置成了PNG透明，但其背景还是不可点击。</td>
+</tr>
+<tr>
+<td><a title="'List Drop Shift Bug' tutorial" href="http://haslayout.net/css/view?tut=List-Drop-Shift-Bug">List Drop Shift Bug</a></td>
+<td>IE8</td>
+<td>在&lt;li&gt;中的内容被换行了。</td>
+</tr>
+<tr>
+<td><a title="'No Increase on &lt;ol&gt; Numbers Bug' tutorial" href="http://haslayout.net/css/view?tut=No-Increase-on--ol--Numbers-Bug">No Increase on &lt;ol&gt; Numbers Bug</a></td>
+<td>below IE8</td>
+<td>&lt;ol&gt; 中的 &lt;li&gt; 列表序号不会增加。</td>
+</tr>
+<tr>
+<td><a title="'No Bullets on &lt;ul&gt; and &lt;ol&gt; Bug' tutorial" href="http://haslayout.net/css/view?tut=No-Bullets-on--ul--and--ol--Bug">No Bullets on &lt;ul&gt; and &lt;ol&gt; Bug</a></td>
+<td>below IE8</td>
+<td>在&lt;ul&gt; 和 &lt;ol&gt; 中看不到列表序号/数字了。</td>
+</tr>
+<tr>
+<td><a title="'No line-height Vertical Center on Images Bug' tutorial" href="http://haslayout.net/css/view?tut=No-line-height-Vertical-Center-on-Images-Bug">No line-height Vertical Center on Images Bug</a></td>
+<td>IE8以下版</td>
+<td>图片使用line-height 方法不能垂直居中</td>
+</tr>
+<tr>
+<td><a title="'No Background Image Bug' tutorial" href="http://haslayout.net/css/view?tut=No-Background-Image-Bug">No Background Image Bug</a></td>
+<td>IE8及以下版</td>
+<td>在IE中使用background无法定义背景图</td>
+</tr>
+<tr>
+<td><a title="'Custom Cursor Bug' tutorial" href="http://haslayout.net/css/view?tut=Custom-Cursor-Bug">Custom Cursor Bug</a></td>
+<td>IE8及以下版</td>
+<td>自定义鼠标不工作</td>
+</tr>
+<tr>
+<td><a title="'Leaking Background Bug' tutorial" href="http://haslayout.net/css/view?tut=Leaking-Background-Bug">Leaking Background Bug</a></td>
+<td>IE6</td>
+<td>背景从一个元件的内部溢出到外部</td>
+</tr>
+<tr>
+<td><a title="'Expanding Height Bug' tutorial" href="http://haslayout.net/css/view?tut=Expanding-Height-Bug">Expanding Height Bug</a></td>
+<td>IE6</td>
+<td>元件的高度比指定的要长得多。</td>
+</tr>
+<tr>
+<td><a title="'Expanding Width Bug' tutorial" href="http://haslayout.net/css/view?tut=Expanding-Width-Bug">Expanding Width Bug</a></td>
+<td>IE6</td>
+<td>元件的宽度比指定的要长得多。</td>
+</tr>
+<tr>
+<td><a title="'Double Margin Bug' tutorial" href="http://haslayout.net/css/view?tut=Double-Margin-Bug">Double Margin Bug</a></td>
+<td>IE6</td>
+<td>float元件的左和右的空白（margins）被加倍了。</td>
+</tr>
+<tr>
+<td><a title="'Negative Margin Bug' tutorial" href="http://haslayout.net/css/view?tut=Negative-Margin-Bug">Negative Margin Bug</a></td>
+<td>IE8以下版</td>
+<td>如果使用负数来指定页白（margins）里面的元件会被外面的元件所遮挡。</td>
+</tr>
+<tr>
+<td><a title="'Italics Float Bug' tutorial" href="http://haslayout.net/css/view?tut=Italics-Float-Bug">Italics Float Bug</a></td>
+<td>IE6</td>
+<td>float的元件中的字体会被设置成倾斜。</td>
+</tr>
+<tr>
+<td><a title="'3px Gap Bug aka Text Jog Bug' tutorial" href="http://haslayout.net/css/view?tut=3px-Gap-Bug-aka-Text-Jog-Bug">3px Gap Bug aka Text Jog Bug</a></td>
+<td>IE6</td>
+<td>下一个float的元件不是有一个3px的空隙，就是被换行了。</td>
+</tr>
+<tr>
+<td><a title="'Text-Align Bug' tutorial" href="http://haslayout.net/css/view?tut=Text-Align-Bug">Text-Align Bug</a></td>
+<td>IE8以下版</td>
+<td>text-align属性会影响整个元件内的所有内容。</td>
+</tr>
+</tbody>
+</table>
+<h4>布局类 Bug</h4>
+<table border="0">
+<caption>
+</caption>
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a title="'Border Chaos Bug' tutorial" href="http://haslayout.net/css/view?tut=Border-Chaos-Bug">Border Chaos Bug</a></td>
+<td>IE6</td>
+<td>连框显示是混乱的</td>
+</tr>
+<tr>
+<td><a title="'Sub-Hover Bug' tutorial" href="http://haslayout.net/css/view?tut=Sub-Hover-Bug">Sub-Hover Bug</a></td>
+<td>IE6</td>
+<td>一些selectors 如 a:hover foo{} 无法正常工作</td>
+</tr>
+<tr>
+<td><a title="'Partial Click Bug' tutorial" href="http://haslayout.net/css/view?tut=Partial-Click-Bug">Partial Click Bug</a></td>
+<td>IE6</td>
+<td>在定义了display: block的链接中(&lt;a&gt;) 只有文本是可以点的。</td>
+</tr>
+<tr>
+<td><a title="'Disappearing Content Bug' tutorial" href="http://haslayout.net/css/view?tut=Disappearing-Content-Bug">Disappearing Content Bug</a></td>
+<td>IE6</td>
+<td>当我们滚动窗口的时候，或是最大化最小化窗品的时候，有一些内容会重复显示。</td>
+</tr>
+</tbody>
+</table>
+<h4>不支持的功能</h4>
+<table border="0">
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a title="'No Child Selector Support Workaround' tutorial" href="http://haslayout.net/css/view?tut=No-Child-Selector-Support-Workaround">No Child Selector Support Workaround</a></td>
+<td>IE6</td>
+<td>子 selector 无效</td>
+</tr>
+<tr>
+<td><a title="'Max-Height Workaround' tutorial" href="http://haslayout.net/css/view?tut=Max-Height-Workaround">Max-Height Workaround</a></td>
+<td>IE6</td>
+<td>max-height 无效</td>
+</tr>
+<tr>
+<td><a title="'Max-Width Workaround' tutorial" href="http://haslayout.net/css/view?tut=Max-Width-Workaround">Max-Width Workaround</a></td>
+<td>IE6</td>
+<td>max-width 无效</td>
+</tr>
+<tr>
+<td><a title="'Opacity' tutorial" href="http://haslayout.net/css/view?tut=Opacity">Opacity</a></td>
+<td>IE8及以下版</td>
+<td>opacity 属性无效</td>
+</tr>
+<tr>
+<td><a title="'Min-Width Workaround' tutorial" href="http://haslayout.net/css/view?tut=Min-Width-Workaround">Min-Width Workaround</a></td>
+<td>IE6</td>
+<td>min-width 属性无效</td>
+</tr>
+<tr>
+<td><a title="'Min-Height Workaround' tutorial" href="http://haslayout.net/css/view?tut=Min-Height-Workaround">Min-Height Workaround</a></td>
+<td>IE6</td>
+<td>min-height 属性无效</td>
+</tr>
+</tbody>
+</table>
+<h4>程序崩溃 Bug</h4>
+<p>这个BUG可以导致整个 <abbr title="Internet Explorer">IE</abbr> 崩溃。</p>
+<table border="0">
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a title="'Hover Crash Bug' tutorial" href="http://haslayout.net/css/view?tut=Hover-Crash-Bug">Hover Crash Bug</a></td>
+<td>IE6</td>
+<td>当你把鼠标移上 :hover 的链接时，浏览器会崩溃</td>
+</tr>
+</tbody>
+</table>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="神奇的CSS形状 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_title">神奇的CSS形状 </a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1245.html">IE的CSS相关的BUG</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1245.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>23,148,855,308,184,500</title>
+		<link>https://coolshell.cn/articles/1242.html</link>
+					<comments>https://coolshell.cn/articles/1242.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 11 Aug 2009 09:22:10 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[StackOverflow]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1242</guid>
+
+					<description><![CDATA[<p> 上个月VISA信用卡出事了，某个美国人在加油站买了一包香烟，于是他的信用卡里就有了标题那个数字的钱“$23,148,855,308,184,500”，注意这可...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1242.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1242.html">23,148,855,308,184,500</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script> 上个月VISA信用卡出事了，某个美国人在加油站买了一包香烟，于是他的信用卡里就有了标题那个数字的钱“$23,148,855,308,184,500”，注意这可以美刀啊，相当于美国整个国家国债的N倍。</p>
+<p>程序员们开始疯狂了，他们在stackoverflow.com上开始人肉debug这个问题（<a href="http://stackoverflow.com/questions/1133581/is-23-148-855-308-184-500-a-magic-number-or-sheer-chance" target="_blank">贴子</a>）。排名第一的回答（564 votes）说，这个数字转成十六进制是：0x2020 2020 2020 1250，很明显，前面的若干个0X20表示的是空格，也就是说，程序错误地处理了空格。于是本回答后的跟贴把这个回答推举成了本年度最牛的debug——&#8221;best debug of the year&#8221;，后面还有人说这个人应该在NASA工作，继而有人跟贴，应该是VISA而不是NASA……</p>
+<p>当然，也有人有不同的意见……</p>
+<p><span id="more-1242"></span></p>
+<p>排名第二个贴子(仅有排名第一的零头 67 votes)发表了不同的意见，贴主说，VISA报道说当时全球在那个星期内发生了大约13000起这样的事情，而且，全世界在报道相似的事情（<a rel="nofollow" href="http://www.credit.com/news/personal-finance/2009-07-18/customers-see-erroneous-credit-card-charges-of-23-quadrillion.html">报道一</a>，<a href="http://www.1010wins.com/Visa-Accidentally-Bills-New-York-Teen--23-Quadrill/4867372" target="_self">报道二</a>），但所有的报道都是相同的数字——23,148,855,308,184,500。如果前面是空格，那么最后的一个字节是，0x1250怎么可能会是一样的呢？所以，他并不认为空格被解释了，他觉得一定是某个地方出错了，并不像一楼所说的那么简单。</p>
+<p><img decoding="async" src="http://img44.imageshack.us/img44/8681/joshmuszynski.jpg" alt="Josh Muszynski’s Statement" /></p>
+<p><img decoding="async" src="http://img265.imageshack.us/img265/38/jasonbryant.jpg" alt="Jason Bryant’s Statement" /> </p>
+<p><img decoding="async" src="http://img34.imageshack.us/img34/6412/ronseale.jpg" alt="Ron Seale" /></p>
+<p><img decoding="async" src="http://img193.imageshack.us/img193/4076/teenagegirl.jpg" alt="Teenage Girl" /><br />
+<img decoding="async" src="http://www.wasecacountynews.com/files/image/article/full_3335.jpg" alt="Elizabeth Lewis" /></p>
+<p>为什么说这个事呢？主要有两个目的：</p>
+<ul>
+<li>其一、软件总是会有很多Bug要我们去debug，bug的症状并不代表着那就是Bug的原因，但通过Bug的症状推理出Bug的原因，有时候真是很像一个侦探要做的事情，从上面的这个故事中，我们可以看出这样的能力的重要性。要有这样的推理能力，需要有很强的基础知识，以及丰富的经验。</li>
+<li>其二、<a href="http://stackoverflow.com/" target="_blank">StackOverflow.com</a>是一个很不错的类似于“百度知道”但要比其好N倍的与编程相关的站点，相当的不错，你会经常光顾这个站点吗？</li>
+</ul>
+<p>最后，大家可以看看这个贴子后面的一些人的相法，各种说法都有，包括一个灌水的，来轻松一下：</p>
+<p style="padding-left: 30px;">That&#8217;s the exact amount I intend leaving to my children after I&#8217;m dead.</p>
+<p>呵呵。（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/5075.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png" alt="你确信你了解时间吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5075.html" class="wp_rp_title">你确信你了解时间吗？</a></li><li ><a href="https://coolshell.cn/articles/3721.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="Stack Exchange 的架构" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3721.html" class="wp_rp_title">Stack Exchange 的架构</a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/1719.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg" alt="橡皮鸭程序调试法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1719.html" class="wp_rp_title">橡皮鸭程序调试法</a></li><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1242.html">23,148,855,308,184,500</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1242.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>几个有趣的漫画</title>
+		<link>https://coolshell.cn/articles/1234.html</link>
+					<comments>https://coolshell.cn/articles/1234.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 10 Aug 2009 10:44:10 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1234</guid>
+
+					<description><![CDATA[<p>下面的图片告诉你——行销，广告，公关，品牌有什么差别。 市场营销 公共关系(软文) 广告 品牌 那么，Apple，Google和你的公司的差别是什么呢？   最...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1234.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1234.html">几个有趣的漫画</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">下面的图片告诉你——行销，广告，公关，品牌有什么差别。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2009/08/adcompare1.jpg" alt="" width="400" height="262" /><br />
+<strong>市场营销</strong></p>
+<p style="text-align: left;"><span id="more-1234"></span></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2009/08/adcompare2.jpg" alt="" width="400" height="264" /><br />
+<strong>公共关系(软文)</strong></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="adcompare3" src="https://coolshell.cn/wp-content/uploads/2009/08/adcompare3.jpg" alt="" width="400" height="264" /><br />
+<strong>广告</strong></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2009/08/adcompare4.jpg" alt="" width="400" height="280" /><br />
+<strong>品牌</strong></p>
+<p style="text-align: left;">那么，Apple，Google和你的公司的差别是什么呢？</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2009/08/googleproduct.jpg" alt="" width="362" height="700" /></p>
+<p style="text-align: left;"> </p>
+<p style="text-align: left;">最后，让我们来看一个“真人版”的眼神跟着鼠标走的FLASH吧，单击下面的图片访问网站：<a href="http://cubo.cc/" target="_blank">http://cubo.cc/</a></p>
+<p style="text-align: center;"><a href="http://cubo.cc/" target="_blank"><img decoding="async" loading="lazy" class="size-full wp-image-1240 aligncenter" src="https://coolshell.cn/wp-content/uploads/2009/08/flashanimation.jpg" alt="" width="375" height="371" /></a></p>
+<p> </p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/1044.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="高级Unix命令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1044.html" class="wp_rp_title">高级Unix命令</a></li><li ><a href="https://coolshell.cn/articles/399.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/sort-150x150.jpg" alt="一个排序算法比较的网站" width="150" height="150" /></a><a href="https://coolshell.cn/articles/399.html" class="wp_rp_title">一个排序算法比较的网站</a></li><li ><a href="https://coolshell.cn/articles/3540.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="一段Javascript的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3540.html" class="wp_rp_title">一段Javascript的代码</a></li><li ><a href="https://coolshell.cn/articles/336.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="超过100本的linux免费书籍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/336.html" class="wp_rp_title">超过100本的linux免费书籍</a></li><li ><a href="https://coolshell.cn/articles/11629.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="「我只是认真」聊聊工匠情怀" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11629.html" class="wp_rp_title">「我只是认真」聊聊工匠情怀</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1234.html">几个有趣的漫画</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1234.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Javascripts加密库</title>
+		<link>https://coolshell.cn/articles/1231.html</link>
+					<comments>https://coolshell.cn/articles/1231.html#respond</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 10 Aug 2009 10:16:29 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[jCryption]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1231</guid>
+
+					<description><![CDATA[<p>一般说来，使用HTTP协议是不加密的，所有的数据都是以纯文本方式提交的，就算是你提交数据时，也是使用纯文本的方式发送。只有HTTPS协议会有SSL加密数据，但一...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1231.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1231.html">Javascripts加密库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一般说来，使用HTTP协议是不加密的，所有的数据都是以纯文本方式提交的，就算是你提交数据时，也是使用纯文本的方式发送。只有HTTPS协议会有SSL加密数据，但一般来说，HTTPS需要服务器端进行SSL设置，并有些麻烦。而jCryption这个jQuery插件能够加密由Forms提交的POST/GET数据。jCryption使用RSA公钥密码算法加密，另外，该项目还提供一个PHP文件来处理数据的解密。</p>
+<p><a href="http://www.jcryption.org/"><img decoding="async" loading="lazy" title="JCryption" src="http://www.webresourcesdepot.com/wp-content/uploads/image/javascript-encyrption.jpg" alt="" width="480" height="121" /></a></p>
+<p><span id="more-1231"></span></p>
+<p>这个库是一个开源库，也是一个同时使用MIT和GPL协议的项目。</p>
+<p>你需要注意的是，这个库无法取代SSL，使用这个库，你依然可能受到<a href="http://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank">MITM攻击</a><a href="http://www.jcryption.org/"></a>（中间人攻击 Man-in-the-middle-attacks）</p>
+<p>主页：<a href="http://www.jcryption.org/">http://www.jcryption.org/</a><br />
+下载：<a href="http://code.google.com/p/jcryption/downloads/list">http://code.google.com/p/jcryption/downloads/list</a><br />
+示例：<a href="http://www.jcryption.org/demo/">http://www.jcryption.org/demo/</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="深入浅出单实例Singleton设计模式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/265.html" class="wp_rp_title">深入浅出单实例Singleton设计模式</a></li><li ><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" alt="我做系统架构的一些原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_title">我做系统架构的一些原则</a></li><li ><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/figure1-150x150.gif" alt="Unix考古记：一个“遗失”的shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_title">Unix考古记：一个“遗失”的shell</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/5265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt=" C++11 中值得关注的几大变化（详解）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5265.html" class="wp_rp_title"> C++11 中值得关注的几大变化（详解）</a></li><li ><a href="https://coolshell.cn/articles/325.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/overall-150x150.jpg" alt="2009年脚本语言排名" width="150" height="150" /></a><a href="https://coolshell.cn/articles/325.html" class="wp_rp_title">2009年脚本语言排名</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1231.html">Javascripts加密库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1231.html/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>简单实用的Code Review工具</title>
+		<link>https://coolshell.cn/articles/1218.html</link>
+					<comments>https://coolshell.cn/articles/1218.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 04 Aug 2009 09:09:13 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Code Review]]></category>
+		<category><![CDATA[Codestriker]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Groogle]]></category>
+		<category><![CDATA[JCR]]></category>
+		<category><![CDATA[Jupiter]]></category>
+		<category><![CDATA[Review board]]></category>
+		<category><![CDATA[Rietveld]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1218</guid>
+
+					<description><![CDATA[<p>Code Review中文应该译作“代码审查”或是“代码评审”，这是一个流程，当开发人员写好代码后，需要让别人来review一下他的代码，这是一种有效发现BUG...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1218.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1218.html">简单实用的Code Review工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" title="Code Review" src="http://www.review-board.org/media/rbsite/images/logo.png?1238930581" alt="" width="130" height="123" />Code Review中文应该译作“代码审查”或是“代码评审”，这是一个流程，当开发人员写好代码后，需要让别人来review一下他的代码，这是一种有效发现BUG的方法。由此，我们可以审查代码的风格、逻辑、思路……，找出问题，以及改进代码。因为这是代码刚刚出炉的时候，所以，这也是代码重构，代码调整，代码修改的最佳时候。所以，Code Review是编码实现中最最重要的一个环节。</p>
+<p>长时间以来，Code Review需要有一些有效的工具来支持，这样我们就可以更容易，更有效率地来进行代码审查工作。下面是5个开源的代码审查工具，他们可以帮助你更容易地进行这项活动。</p>
+<p><strong>1. <a href="http://www.review-board.org/" target="_blank">Review board</a>:</strong><br />
+<a href="http://www.review-board.org/" target="_blank">Review board</a> 是一个 基于web 的工具，是由 <a href="http://www.djangoproject.com/" target="_blank">django</a> 和<a href="http://www.python.org/" target="_blank">python</a>设计的。 <a href="http://www.review-board.org/" target="_blank">Review board</a> 可以帮助我们追踪待决代码的改动，并可以让Code-Review更为容易和简练。尽管<a href="http://www.review-board.org/" target="_blank">Review board</a> 最初被设计在<a href="http://www.vmware.com/" target="_blank">VMware</a>项目中使用，但现在其足够地通用。当前，其支持这些代码版本管理软件： <a href="http://subversion.tigris.org/" target="_blank">SVN</a>, CVS, <a href="http://www.perforce.com/" target="_blank">Perforce</a>, <a href="http://git-scm.com/" target="_blank">Git</a>, <a href="http://bazaar-vcs.org/" target="_blank">Bazaar</a>, 和<a href="http://www.selenic.com/mercurial/wiki/" target="_blank">Mercurial</a>.</p>
+<p><span id="more-1218"></span></p>
+<p>Yahoo 是<a href="http://www.review-board.org/" target="_blank">review-board</a>的其中一个用户。</p>
+<p style="padding-left: 30px;">“<a href="http://www.review-board.org/" target="_blank">Review board</a> 已经改变了代码评审的方式，其可以强迫高质量的代码标准和风格，并可以成为程序员编程的指导者。每一次，当你访问search.yahoo.com 时，其代码都是使用 <a href="http://www.review-board.org/" target="_blank">Review board</a>工具Review过的。 We’re great fans of your work!” &#8211; Yahoo! Web Search</p>
+<h3><a href="http://www.review-board.org/media/screenshots/2009/02/02/review-requests.png"><img decoding="async" class="aligncenter" src="http://www.review-board.org/media/screenshots/2009/02/02/review-requests_thumb.png" alt="Detailed review requests" /></a></h3>
+<div><a href="http://www.review-board.org/media/screenshots/2009/02/02/diffviewer.png"><img decoding="async" class="aligncenter" src="http://www.review-board.org/media/screenshots/2009/02/02/diffviewer_thumb.png" alt="Powerful diff viewer" /></a></div>
+<p><strong>2. <a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a>:</strong><br />
+<a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 也是一个基于Web的应用，其主要使用 GCI-Perl 脚本支持在线的代码审查。<a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 可以集成于CVS, <a href="http://subversion.tigris.org/" target="_blank">Subversion</a>, <a href="http://www-01.ibm.com/software/awdtools/clearcase/" target="_blank">ClearCase</a>, <a href="http://www.perforce.com/" target="_blank">Perforce</a> 和Visual SourceSafe。并有一些插件可以提供支持其它的源码管理工具。</p>
+<p>David Sitsky 是 <a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 的作者，并也是最活跃的开发人员之一。 Jason Remillard 是另一个活路的开发者，并给这个项目提供了最深远最有意义的贡献。大量的程序员贡献他们的代码给 <a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 项目，导致了这个项目空前的繁荣。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" src="http://codestriker.sourceforge.net/viewtopicdetail.png" alt="http://codestriker.sourceforge.net/viewtopicdetail.png" width="686" height="544" /></p>
+<p><strong>3. <a href="http://groogle.sourceforge.net/" target="_blank">Groogle</a>:</strong><br />
+<a href="http://groogle.sourceforge.net/" target="_blank">Groogle</a> 是一个基于WEB的代码评审工具。 <a href="http://groogle.sourceforge.net/" target="_blank">Groogle</a> 支持和 <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> 集成。它主要提供如下的功能：</p>
+<ul>
+<li>各式各样语言的语法高亮。</li>
+<li>支持整个版本树的比较。</li>
+<li>支持当个文件不同版本的diff功能，并有一个图形的版本树。</li>
+<li>邮件通知所有的Reivew的人当前的状态。</li>
+<li>认证机制。</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter" src="http://sourceforge.net/dbimage.php?id=218190" alt="Screenshot" width="598" height="480" border="1" /></p>
+<p><strong>4. <a href="http://code.google.com/p/rietveld/" target="_blank">Rietveld</a>:</strong><br />
+<a href="http://code.google.com/p/rietveld/" target="_blank">Rietveld</a> 由Guido van Rossum 开发（他是Python的创造者，现在是Google的员工），这个工具是基于Mondrian 工具，作者一开始是为了Google 开发的，并且，它在很多方面和<a href="http://www.review-board.org/" target="_blank">Review board</a> 很像。它也是一个基于Web的应用，并在<a href="http://code.google.com/appengine/" target="_blank">Google App Engine</a> 上。它使用了目前最流行的Web开发框架 <a href="http://www.djangoproject.com/" target="_blank">django</a> 并支持 <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> 。当前，任何一个使用 Google Code 的项目都可以使用 <a href="http://code.google.com/p/rietveld/" target="_blank">Rietveld</a> 并且使用 <a href="http://www.python.org/" target="_blank">python</a> <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> 服务器。当然，它同样支持其它的Subversion服务器。</p>
+<p><span style="position: relative;"><a href="javascript:dyn.onClickNextTbn()"><img decoding="async" id="imgb" class="aligncenter" style="width: 497px; height: 375px;" title="下一张" src="http://info-database.csdn.net/Upload/2008-11-13/Reviewboard.jpg" alt="" /></a></span></p>
+<p><span style="position: relative;"> </span></p>
+<p><strong>5.<a href="http://jcodereview.sourceforge.net/" target="_blank"> JCR</a></strong><br />
+<a href="http://jcodereview.sourceforge.net/" target="_blank">JCR</a> 或者叫做 JCodeReview 也是一个基于WEB界面的最初设计给Reivew Java 语言的一个工具。当然，现在，它可以被用于其它的非Java的代码。</p>
+<p><a href="http://jcodereview.sourceforge.net/" target="_blank">JCR</a> 主要想协助：</p>
+<ul>
+<li><strong>审查者</strong>。所有的代码更改都会被高亮，以及大多数语言的语法高亮。Code extracts 可以显示代码评审意见。如果你正在Review Java的代码，你可以点击代码中的类名来查看相关的类的声明。</li>
+<li><strong>项目所有者</strong>。可以 轻松创建并配置需要Review的项目，并不需要集成任何的软件配置管理系统（SCM）。</li>
+<li><strong>流程信仰者</strong>。 所有的评语都会被记录在数据库中，并且会有状态报告，以及各种各样的统计。</li>
+<li><strong>架构师和开发者</strong>。 这个系统也可以让我们查看属于单个文件的评语，这样有利于我们重构代码。</li>
+</ul>
+<p><a href="http://jcodereview.sourceforge.net/" target="_blank">JCR</a> 主要面对的是大型的项目，或是非常正式的代码评审，从这方面看来，他并不像上面的那些工具。</p>
+<p><img decoding="async" class="aligncenter" style="border: 1px solid black;" src="http://sourceforge.net/projects/jcodereview/screenshots/242251" alt="Screenshot" border="1" /></p>
+<p><strong><a href="http://code.google.com/p/jupiter-eclipse-plugin/" target="_blank">Jupiter</a></strong>：最后我们要提一下<a href="http://code.google.com/p/jupiter-eclipse-plugin/" target="_blank">Jupiter</a>，这是另一个代码review的工具你可以去考虑使用的，它是一个Eclipse IDE 的插件。</p>
+<p>文章：<a href="http://open-tube.com/easy-code-review-tools/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif" alt="一个空格引发的惨剧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_title">一个空格引发的惨剧</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411-150x150.jpg" alt="如何重构“箭头型”代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_title">如何重构“箭头型”代码</a></li><li ><a href="https://coolshell.cn/articles/11432.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/code_review-150x150.jpg" alt="从Code Review 谈如何做技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11432.html" class="wp_rp_title">从Code Review 谈如何做技术</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1218.html">简单实用的Code Review工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1218.html/feed</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程引言补充</title>
+		<link>https://coolshell.cn/articles/1212.html</link>
+					<comments>https://coolshell.cn/articles/1212.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 31 Jul 2009 10:27:55 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1212</guid>
+
+					<description><![CDATA[<p>之前收集过《22条经典的编程引言》，发现还有一些未收录的，下面这些引言也很有意思的，希望你喜欢。 “The first 90% of the code acco...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1212.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1212.html">编程引言补充</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>之前收集过《<a title="22条经典的编程引言 - 1,565 次浏览" href="https://coolshell.cn/articles/808.html">22条经典的编程引言</a>》，发现还有一些未收录的，下面这些引言也很有意思的，希望你喜欢。</p>
+<p>“The first 90% of the code accounts for the first 90% of the development time. The remaining 10% of the code accounts for the other 90% of the development time.” – Tom Cargill <br />
+ “最开始的90%的代码使用了程序员90%的时间，剩下的10%的代码也需要90%的开发时间”——Tom Cargill（这不就是中国谚语——“行百步半九十”）</p>
+<p>　</p>
+<p>“In order to understand recursion, one must first understand recursion.” – Author Unknown <br />
+ “要知道什么是‘递归’，你首先需要知道‘递归’”——无名氏</p>
+<p><span id="more-1212"></span></p>
+<p>　</p>
+<p>“I have always wished for my computer to be as easy to use as my telephone; my wish has come true because I can no longer figure out how to use my telephone.” – Bjarne Stroustrup <br />
+“我总是希望电脑能和电话一样好用，现在我的这个愿望成真了，因为我已经不知道怎么使用我的电话了”– Bjarne Stroustrup</p>
+<p>　</p>
+<p> “There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult.” -C.A.R. Hoare<br />
+“我们有两个方法来进行软件设计：一个是让其足够的简单以至于让BUG无法藏身；另一个就是让其足够的复杂，让人找不到BUG。前者更难一些” — C.A.R. Hoare</p>
+<p>　</p>
+<p>  “If builders built buildings the way programmers wrote programs, then the first woodpecker that came along would destroy civilization.” – Gerald Weinberg<br />
+“如果建筑工人盖房子就像程序员写程序一样，那么只需要一只啄木鸟就可以摧毁人类文明”– Gerald Weinberg</p>
+<p>　</p>
+<p>“Nine people can’t make a baby in a month.” – Fred Brooks <br />
+“九个人不能只用一个月就能生出孩子来”– Fred Brooks （这是对人月计算法的一个讽刺）</p>
+<p> 　</p>
+<p>“Before software can be reusable it first has to be usable.” – Ralph Johnson<br />
+“在软件可被重用前，它必需要可以被用”– Ralph Johnson</p>
+<p> 　</p>
+<p>程序员之歌<br />
+99 little bugs in the code,<br />
+99 bugs in the code,<br />
+fix one bug, compile it again,<br />
+101 little bugs in the code.<br />
+101 little bugs in the code&#8230;.<br />
+(Repeat until BUGS = 0)</p>
+<p>　</p>
+<p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand. <em>&#8211;Martin Fowler<br />
+</em>任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码 — Martin Fowler</p>
+<p>　</p>
+<p><strong>Wirth&#8217;s law:</strong> Software gets slower faster than hardware gets faster. &#8212;<a href="http://en.wikipedia.org/wiki/Niklaus_Wirth" target="_blank"><em>Niklaus Wirth</em></a><br />
+Wirth定律，软件把性能变慢的速度要快于硬件把性期变快的速度。&#8211; Niklaus Wirth</p>
+<p>　</p>
+<p> Better train people and risk they leave &#8211; than do nothing and risk they stay.<br />
+&#8212;<em>Anonymous<br />
+</em>就算是培训的员工会离开，这也好过他们什么也不做却不会离开。——无名氏</p>
+<p>　</p>
+<p>Good judgment comes from experience, and experience comes from bad judgment. &#8212;<a href="http://en.wikipedia.org/wiki/Fred_Brooks">Frederick P. Brooks</a><br />
+“好的判断来自于经验，而经验则来自于坏的判断”</p>
+<p>　</p>
+<p>UNIX is simple. It just takes a genius to understand its simplicity <em>&#8211;Dennis Ritchie<br />
+</em>UNIX 简单的，但只有天才才能知道他的简单 — Dennis Rithie</p>
+<p>　</p>
+<p>Unix was not designed to stop people from doing stupid things, because that would also stop them from doing clever things. 　<em>&#8211;Doug Gwyn<br />
+</em>Unix 并不是设计成——阻止人们做那些愚蠢的事，因为那同样会阻止人们做聪明的事。——Doug Gwyn</p>
+<p>　</p>
+<p>如果你想看更多这样的引言，你可以浏览下面这个网页：<br />
+<a href="http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm">http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11656.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/06/software_development-150x150.png" alt="开发团队的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11656.html" class="wp_rp_title">开发团队的效率</a></li><li ><a href="https://coolshell.cn/articles/3258.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="C++的字符串格式化库" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3258.html" class="wp_rp_title">C++的字符串格式化库</a></li><li ><a href="https://coolshell.cn/articles/3083.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="三个教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3083.html" class="wp_rp_title">三个教程</a></li><li ><a href="https://coolshell.cn/articles/2250.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/03/Teach_Youself_CPP_21days-150x150.jpg" alt="“21天教你学会C++”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2250.html" class="wp_rp_title">“21天教你学会C++”</a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li><li ><a href="https://coolshell.cn/articles/3649.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="TDD并不是看上去的那么美" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3649.html" class="wp_rp_title">TDD并不是看上去的那么美</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1212.html">编程引言补充</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1212.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>面试题：赛马问题</title>
+		<link>https://coolshell.cn/articles/1202.html</link>
+					<comments>https://coolshell.cn/articles/1202.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 30 Jul 2009 14:35:35 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1202</guid>
+
+					<description><![CDATA[<p>据说，这是Google的面试题。面试题目如下： 一共有25匹马，有一个赛场，赛场有5个赛道，就是说最多同时可以有5匹马一起比赛。假设每匹马都跑的很稳定，不用任何...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1202.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1202.html">面试题：赛马问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg"></a>据说，这是Google的面试题。面试题目如下：</p>
+<p style="padding-left: 30px; text-align: left;"><span style="color: #008000;"><strong><a href="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg"><img decoding="async" loading="lazy" class="alignright" title="Question" src="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg" alt="Question" width="158" height="158" /></a>一共有25匹马，有一个赛场，赛场有5个赛道，就是说最多同时可以有5匹马一起比赛。假设每匹马都跑的很稳定，不用任何其他工具，只通过马与马之间的比赛，试问，最少得比多少场才能知道跑得最快的5匹马？（</strong>不能使用撞大运的算法<strong>）</strong></span></p>
+<p>很明显这是一个算法题，网上有很多贴子在讨论这个问题，不过都没有给出一个明确的答案。我想了想，想到下面的一个算法：</p>
+<p style="padding-left: 30px;">1）分成5组A，B，C，D，E，比五场。然后根据每场结果分别给这五组内的五匹马排序（从快到慢）。<br />
+2）每组的头名再赛一场，取走第一名，然后该组第二名顶上。<br />
+3）重复第二步，直到选出前5名。</p>
+<p>这个算法是比较笨的算法，总计需要<strong>赛10次，</strong>这个算法应该是万无一失的。现在的问题的就，如何优化这个算法，想了想，的确是有优化的空间的。也就是说，是可以少于10次的。</p>
+<p><span id="more-1202"></span></p>
+<p>想了一想，上面的那个算法自从第6次开始就使用5个排序数组的头名做“冒泡法”，总是挑一个最优秀的出来，其实，<strong><span style="color: #800000;">在第6次以后除了挑出最优秀的，我们还可以在每次比赛后淘汰一些速度不行的</span></strong>，淘汰的马匹数自然会比选出的更多，所以，一方面在找，另一方面在淘汰，找出前5名的速度应该会更快。</p>
+<p>比如：我们假设比赛完第六场后，我们得到下面的排序：（每组排序是——快马从左到右，各组头名的排序是——快马从上到下）</p>
+<p style="padding-left: 30px;">A组 A1 A2 A3 A4 A5<br />
+B组 B1 B2 B3 B4 B5<br />
+C组 C1 C2 C3 C4 C5<br />
+D组 D1 D2 D3 D4 D5<br />
+E组 E1 E2 E3 E4 E5</p>
+<p>这样，我们不但知道，A1是25匹马里最快的马，而且我们可以淘汰近一半的马，比如E2，E3，E4，E5就可以全部淘汰了，为什么呢，因为比E2快的马有A1,B1,C1,D1,E1这五匹马，所以，E2后面的马是无法进入前五名了；同理，D3和其后面的也进入不了前5；同理，C4，C5，B5都可以淘汰。</p>
+<p>于是，在第六轮后我们可以得知，除了A1外的Top 4必然在下面这些马中：</p>
+<p>A组  A2 A3 A4 A5<br />
+B组 B1 B2 B3 B4 <br />
+C组 C1 C2 C3 <br />
+D组 D1 D2 <br />
+E组 E1</p>
+<p>接下来的过程应该不必我多说了。重复前面的方法，尽可能淘汰无法进前N名的马，于是后面的马就越来越少，你所需要的比赛也会越来越少。</p>
+<p>那么，对于这个题，聪明的你知道最少要比赛几场了吗？</p>
+<p>举一反三，如果有64匹马，8个赛道呢？不失一般性，如果有N匹马，M个赛道呢？N = M*M，那么公式是什么呢？</p>
+<p>期待你的答案！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/4429.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/Question-150x150.jpg" alt="面试题：火车运煤问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4429.html" class="wp_rp_title">面试题：火车运煤问题</a></li><li ><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="又一个有趣的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_title">又一个有趣的面试题</a></li><li ><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1202.html">面试题：赛马问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1202.html/feed</wfw:commentRss>
+			<slash:comments>93</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python也Spring了</title>
+		<link>https://coolshell.cn/articles/1204.html</link>
+					<comments>https://coolshell.cn/articles/1204.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 30 Jul 2009 12:43:12 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Spring]]></category>
+		<category><![CDATA[SpringPython]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1204</guid>
+
+					<description><![CDATA[<p>没想到啊，Python也有Spring的框架了，看看SpringPython项目主页（http://springpython.webfactional.com/...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1204.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1204.html">Python也Spring了</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" src="http://springpython.webfactional.com/reference/html/images/spring_python_white.png" alt="" width="265" height="90" />没想到啊，Python也有Spring的框架了，看看SpringPython项目主页（<a href="http://springpython.webfactional.com/">http://springpython.webfactional.com/</a>）。这个项目的Leader是这样说的：Spring Python是基于Java的Spring框架（Spring Framework）和Spring安全（Spring Security）的一个分支，它以Python语言为目标。Spring提供了许多有用的特征功能，同样地这些特征功能在Python下也应当有效。&#8211; Greg Turnquist</p>
+<p><span id="more-1204"></span></p>
+<p>从这个项目的主页可以看到有下面这些Key features：</p>
+<ul>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/objects.html">反转控制IoC</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/aop.html">面向方面的编程(AOPAspect-oriented Programming)</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/dao.html">数据库访问 (Data Access)</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/transaction.html">事务管理 (Transaction Management)</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/security.html">安全性 (Security)</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/remoting.html">远程分布式 (Remoting)</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/plugins.html">插件/命令行工具 (Plug-ins/command-line tool)</a> </li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/samples.html">演示示例</a> 
+<ul>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/samples.html#samples-petclinic">PetClinic</a> &#8211; 一个怎样使用框架的例子.</li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/samples.html#samples-springwiki">Spring Wiki</a> &#8211; Wikis是存储和管理内容的有效方式!</li>
+<li><a href="https://coolshell.cn/wp-admin/reference/html/samples.html#samples-springbot">Spring Bot</a> &#8211; 使用框架建立管理IRC通道的例子。</li>
+</ul>
+</li>
+</ul>
+<p>看上去好像不错，不过细想一下，是不是有点多余，有点画蛇添足啊？反正我有一种比较怪怪的感觉。不过10年前有人问我搜索引擎怎么样？我当时也觉得那个东西很无聊，呵呵。让我们看看未来这个东西是否真的能够进入企业级的解决方案。不过目前我们的Python社区好像几乎没有什么反应。</p>
+<p>欢迎你留下你的看法。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1204.html">Python也Spring了</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1204.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>GPLv3的在开源社区中的占有量</title>
+		<link>https://coolshell.cn/articles/1197.html</link>
+					<comments>https://coolshell.cn/articles/1197.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 28 Jul 2009 09:46:21 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[GPLv3]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1197</guid>
+
+					<description><![CDATA[<p>2007年7月，GPLv3 发布，当时有164个项目加入，一年后，有大约两千个项目使用GPLv3协议，今天，Google开源programs office ma...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1197.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1197.html">GPLv3的在开源社区中的占有量</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" src="http://www.gnu.org/graphics/heckert_gnu.small.png" alt="" width="145" height="140" />2007年7月，GPLv3 发布，当时有164个项目加入，一年后，有大约两千个项目使用GPLv3协议，今天，Google开源programs office manager <a href="http://sites.google.com/a/dibona.com/dibona-wiki/Home/Biographies-and-Photos">Chris DiBona</a>向大家 <a href="http://twitter.com/dhohndel/status/2800839235">宣布</a> 在Google 开源项目中，使用GPLv3的项目至少有 56,000个。当然，这只是计算了在 <a href="http://code.google.com/">Google Code</a> 中的项目。</p>
+<p>对于今天有 225,000 项目的 Google Code，这四分之一的 GPLv3 也是一个不小的数目了。如果我们假设Sourceforge.net 和 Codehaus 也有和Google Code相似的 GPLv3 比率的话，那么，今天使用 GPLv3 的项目将是一个很大的数量。</p>
+<p><span id="more-1197"></span></p>
+<p>这个数据是有意义的，尤其对于那些还在激活的项目，因为Google Code上的活跃的项目比Sourceforge要高得多，在Sourceforge上，估计只有12%的项目还处理激活状态（剩下的88%都是处理长期没有更新，当然也就一直在使用老版本的协议）。虽然和GPLv2比起，GPLv3还很少，但数量已经很大了。</p>
+<p>以前写过一篇关于GPLv3的文章《<a href="http://blog.csdn.net/haoel/archive/2007/07/17/1696333.aspx">GPLv3：大教堂和集市的新一轮对抗</a>》，有兴趣的读者不妨一读。</p>
+<p>下面是开源license的一个比例（时间：2009年7月），仅供参考：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/07/GPL.png"><img decoding="async" loading="lazy" title="GPL" src="https://coolshell.cn/wp-content/uploads/2009/07/GPL.png" alt="GPL" width="456" height="259" /></a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8460.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/go2-150x150.jpg" alt="Go 语言简介（上）— 语法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8460.html" class="wp_rp_title">Go 语言简介（上）— 语法</a></li><li ><a href="https://coolshell.cn/articles/19395.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" alt="HTTP API 认证授权术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19395.html" class="wp_rp_title">HTTP API 认证授权术</a></li><li ><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" alt="Go编程模式：修饰器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_title">Go编程模式：修饰器</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li><li ><a href="https://coolshell.cn/articles/3161.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="AES加密算法动画演示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3161.html" class="wp_rp_title">AES加密算法动画演示</a></li><li ><a href="https://coolshell.cn/articles/556.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="VI的一些小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/556.html" class="wp_rp_title">VI的一些小技巧</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1197.html">GPLv3的在开源社区中的占有量</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1197.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>JRuby核心成员投奔Engine Yard</title>
+		<link>https://coolshell.cn/articles/1194.html</link>
+					<comments>https://coolshell.cn/articles/1194.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 28 Jul 2009 08:46:36 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[JRuby]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1194</guid>
+
+					<description><![CDATA[<p>新闻来源：Computer World Sun公司的JRuby团队正在离开他们的老东家Sun，投奔Engine Yard公司。他们声称这是因为Oracle并购S...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1194.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1194.html">JRuby核心成员投奔Engine Yard</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>新闻来源：<a href="http://www.computerworld.com/s/article/9135958/Sun_s_JRuby_team_jumps_ship_to_Engine_Yard?taxonomyId=57&amp;pageNumber=1">Computer World</a></p>
+<p><img decoding="async" loading="lazy" class="alignright" src="http://media.xircles.codehaus.org/_projects/jruby/_logos/medium.png" alt="" width="223" height="100" />Sun公司的JRuby团队正在离开他们的老东家Sun，投奔Engine Yard公司。他们声称这是因为Oracle并购Sun后的前途不明朗的原因。Sun的新闻发言人已确定了这一消息的真实性。</p>
+<p>在两年半前，Sun招募了Charles Nutter 和Thomas Enebo，这两人叫“the JRuby Guys”，他们主要实现在Java虚似机上运行Ruby，后来Sun又招了一个叫Nick Sieger的人。今天，这三个核心开发人员会在下周一的时候到新公司上班。他们认为Oracle可能会不支持他们继续在JVM上运行Ruby这个事情，而JRuby又是他们的未来。</p>
+<p><a href="http://www.engineyard.com/">Engine Yard</a>。成立仅两年、总部设在旧金山的Engine Yard，主要业务是为使用开放原始码开发环境Ruby on Rails的开发者处理系统布署和作业等事项。该公司协助开发者透过所谓的云计算，或第三方数据中心，执行应用软件。Engine Yard曾经从New Enterprise Associates和Amazon.com两家公司募得投资1500万美元。该公司正在进行云计算平台上的Rails计划。</p>
+<p><span id="more-1194"></span></p>
+<p>EngineYard公司的市场部副总裁Michael Mullany说，他们这所以招募了他们，是因为他们觉得JRuby的用户数量在增加，而他们公司并没有这方面的专业知识。并且，展示了JRuby在过去一年有40%的增涨态势。这个副总裁还说，JRuby的下一个阶段会是一个专业的开源的JRuby，但技术支持将是收费的。</p>
+<p>Nick Sieger在Sun公司是 <a href="http://kenai.com/">Kenai</a> 项目的leader，他说下一代的JRuby将会允许开发人员以云的方式host他们的应用，就像SourceForge一样。</p>
+<p>JRuby 的第四个核心开发者 Ola Bini，自从去年被ThoughtWorks招募后，还在那里工作。</p>
+<p>Nutter说，JRuby的下一个版本是1.4，会在今年9月份发布，在这个版本，他们会让JRuby成为JVM上的一等公民，并让其成为JVM上最好的语言。当然，也会处理一些和Engine Yard相关的东西。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2631.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="五大基于JVM的脚本语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2631.html" class="wp_rp_title">五大基于JVM的脚本语言</a></li><li ><a href="https://coolshell.cn/articles/5987.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="如何设计“找回用户帐号”功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5987.html" class="wp_rp_title">如何设计“找回用户帐号”功能</a></li><li ><a href="https://coolshell.cn/articles/1178.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/Internet-150x150.jpg" alt="Internet 技术演变图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1178.html" class="wp_rp_title">Internet 技术演变图</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/780.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何知道某网站运行在GAE上" width="150" height="150" /></a><a href="https://coolshell.cn/articles/780.html" class="wp_rp_title">如何知道某网站运行在GAE上</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1194.html">JRuby核心成员投奔Engine Yard</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1194.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一些单元测试的Guideline</title>
+		<link>https://coolshell.cn/articles/1192.html</link>
+					<comments>https://coolshell.cn/articles/1192.html#respond</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 27 Jul 2009 08:24:57 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[CppUnit]]></category>
+		<category><![CDATA[Guideline]]></category>
+		<category><![CDATA[JUnit]]></category>
+		<category><![CDATA[NUnit]]></category>
+		<category><![CDATA[Unit Test]]></category>
+		<category><![CDATA[UT]]></category>
+		<category><![CDATA[xUnit]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1192</guid>
+
+					<description><![CDATA[<p>Jimmy Bogard 曾经写过一篇文章： 《从单元测试中获益》，这这篇文章中给出了下面三条规则： “测试名应该从用户的角度描述是什么和为什么” – 这样一来...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1192.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1192.html">一些单元测试的Guideline</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Jimmy Bogard 曾经写过一篇文章： 《<a href="http://www.lostechies.com/blogs/jimmy_bogard/archive/2008/12/18/getting-value-out-of-your-unit-tests.aspx">从单元测试中获益</a>》，这这篇文章中给出了下面三条规则：</p>
+<ol>
+<li>“<strong>测试名应该从用户的角度描述是什么和为什么</strong>” – 这样一来，程序员可以从名字就可以知道用户需要什么样的软件行为。</li>
+<li>“<strong>测试也是代码，同样也需要我们更多的爱</strong>” – 真实运行在生产环境下的代码不仅仅只是我们需要去关心和花心思的代码。对于单元测试中的代码同样也需要易读易维护，以及可重用的特性。“<em>我非常痛恨那些又长又复杂的测试代码，如果一个测试需要30行的单元测试代码，请把其放在一个方法中。一个长的测试步骤只会激怒程序员。如果你在正式的代码中都没有这么长的代码，那么为什么我们需要在测试代码中容忍这样的情形呢？</em>”</li>
+<li>“<strong>不要只用一种固定的模式或组织风格</strong>”<em> – </em>有些时候，对于一些特殊的测试案例，标准的类设计模式，或一个固有的测试装置可能并不能有效的工作。</li>
+</ol>
+<p><span id="more-1192"></span></p>
+<p><a href="http://tech.groups.yahoo.com/group/testdrivendevelopment/message/31412">Lior Friedman</a> 加上： “第0条 &#8211; 测试应该只测试单元其外部的行为，而不是内部的结构”。或者说，只测试对一个单元的期望，而不是这个单元的构成。</p>
+<p><a href="http://groups.google.com/group/nunit-discuss/msg/56c9d75647731502?hl=en">Ravichandran Jv</a> 也加上了他的条例：</p>
+<ol>
+<li>一个测试一个断言（如果可能）。 </li>
+<li>如果在测试中有“if else” 的语句，请把if和else两个分支拆分成两个测试案例。 </li>
+<li>如果一个测试案例中也有if else 分枝，那么这个测试案例也需要被重构。</li>
+<li>测试案例的命名代表了这种测试的类型。例如：TestMakeReservation() 和TestMakeNoReservation()是不一样的类型。</li>
+</ol>
+<p><a href="http://groups.google.com/group/nunit-discuss/msg/fb335c19a8a44821?hl=en">Charlie Poole</a>，NUnit的作者，重述了“一个测试一个断言”成“一个逻辑断言Logical Assert” – 他说， “有时候，因为我们测试API的表现不足，你需要写多个物理的Assert才能达到一个完整的结果。许多使用NUnit框架API进行单元测试的开发，很不可能只使用一个Assert就完成了一个测试”。</p>
+<p><a href="http://www.bryancook.net/2008/06/test-naming-conventions-guidelines.html">Bryan Cook</a> 也提供了一个不错的可供考虑的列表：</p>
+<ol>
+<li>做到：对Fixture一致地命名</li>
+<li>做到：使用namespace</li>
+<li>做到：测试方法的命名和Setup/TearDown 一致</li>
+<li>考虑：分离你的测试和开发代码</li>
+<li>做到：测试的命令和被测试的功能一致</li>
+<li>考虑：使用&#8221;Cannot&#8221; 前缀命名期望的异常</li>
+</ol>
+<p>Bryan 有超过 <a href="http://www.bryancook.net/2008/06/test-naming-conventions-guidelines.html">一打的建议</a>。</p>
+<p>最后，有些人建议大家读一下 Gerard Meszaros的书： “<a href="http://www.amazon.com/xUnit-Test-Patterns-Refactoring-Addison-Wesley/dp/0131495054/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1248380993&amp;sr=8-1">xUnit Test Patterns: Refactoring Test Code</a>”</p>
+<p>文章：<a href="http://www.infoq.com/news/2009/07/Better-Unit-Tests" target="_blank">链接</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8593.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="如何测试洗牌程序" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8593.html" class="wp_rp_title">如何测试洗牌程序</a></li><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/3437.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/ediff-small-150x150.png" alt="一些杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3437.html" class="wp_rp_title">一些杂项资源</a></li><li ><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg" alt="两本电子书" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_title">两本电子书</a></li><li ><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" alt="PHP分页技术的代码和示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_title">PHP分页技术的代码和示例</a></li><li ><a href="https://coolshell.cn/articles/694.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="Guido认为程序员大多数工作不需要递归" width="150" height="150" /></a><a href="https://coolshell.cn/articles/694.html" class="wp_rp_title">Guido认为程序员大多数工作不需要递归</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1192.html">一些单元测试的Guideline</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1192.html/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何检测浏览器是否支持CSS3</title>
+		<link>https://coolshell.cn/articles/1186.html</link>
+					<comments>https://coolshell.cn/articles/1186.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 24 Jul 2009 07:00:02 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[CSS3]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1186</guid>
+
+					<description><![CDATA[<p>如何检测用户的浏览器是否支持CSS3，我们需要使用HTML，CSS和JavaScript来完成这件事情。下面是步骤。 1）先制作下面的HTML &#60;span...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1186.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1186.html">如何检测浏览器是否支持CSS3</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>如何检测用户的浏览器是否支持CSS3，我们需要使用HTML，CSS和JavaScript来完成这件事情。下面是步骤。</p>
+<p><strong>1）先制作下面的HTML</strong></p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;span id=&quot;check&quot; rel=&quot;Detect&quot;&gt;&lt;/span&gt;
+</pre>
+<p><strong>2）然后书写下面的CSS</strong></p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+#check {
+  display: none;
+  width: 0;
+  height: 0;
+}
+#check[rel^=&quot;D&quot;] {
+  display: block;
+  width: 0;
+  height: 0;
+}
+</pre>
+<p><span id="more-1186"></span><br />
+<strong>3）下面是JavaScripts的检测脚本</strong></p>
+<p>请确保下面的代码放在HTML文件头。</p>
+<p>[javascript]<br />
+&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var obj = document.getElementById(&quot;check&quot;);<br />
+var file=&quot;special.css&quot;;<br />
+if (window.getComputedStyle)<br />
+    var stat = window.getComputedStyle(obj,null).getPropertyValue(&quot;display&quot;);<br />
+else if (obj.currentStyle)<br />
+    var stat = obj.currentStyle.display;<br />
+var css3 = (stat == &quot;block&quot;);<br />
+if (css3) alert(&quot;CSS3 Supported.&quot;);<br />
+else alert(&quot;CSS3 not supported.&quot;);<br />
+&lt;/script&gt;</p>
+<p>[/javascript]</p>
+<p>文章：<a href="http://www.geocities.com/seanmhall2003/css3/detect.html" target="_self">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="神奇的CSS形状 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6913.html" class="wp_rp_title">神奇的CSS形状 </a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Web开发中需要了解的东西" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_title">Web开发中需要了解的东西</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1186.html">如何检测浏览器是否支持CSS3</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1186.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>15个Web在线WYSIWYG编辑器</title>
+		<link>https://coolshell.cn/articles/1183.html</link>
+					<comments>https://coolshell.cn/articles/1183.html#respond</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 24 Jul 2009 06:32:09 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[FCKeditor]]></category>
+		<category><![CDATA[TinyMCE]]></category>
+		<category><![CDATA[WYSIWYG]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1183</guid>
+
+					<description><![CDATA[<p>基于WEB的HTML 编辑器，WYSIWYG所见即所得的编辑器，或是一个富文本的编辑器，是我们在开发WEB应用时接收用户输入时必需要考虑的问题。下面是一些开源的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1183.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1183.html">15个Web在线WYSIWYG编辑器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>基于WEB的HTML 编辑器，WYSIWYG所见即所得的编辑器，或是一个富文本的编辑器，是我们在开发WEB应用时接收用户输入时必需要考虑的问题。下面是一些开源的WEB在线的WYSWIG编辑器。</p>
+<h3>1. <a title="FCKeditor" href="http://www.fckeditor.net/" target="_blank">FCKeditor</a></h3>
+<p>FCKeditor 这些在线编辑器中最著名的一个，其功能相当的强大，很像一个Web的Word软件。它可以方便地和ASP, ASP.NET, PHP, Java, Perl, Phyton 等Web开发语言所集成。并支持皮肤，拼写检查。其还可以配置成一个轻量级的编辑器。而且，它还有很多相当酷的功能。<br />
+<img decoding="async" loading="lazy" title="FCKeditor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/fckeditor.jpg" alt="FCKeditor" width="500" height="161" /></p>
+<p><span id="more-1183"></span></p>
+<h3>2. <a title="NicEdit" href="http://nicedit.com/" target="_blank">NicEdit</a></h3>
+<p>NicEdit 是一个基于Javascript 编辑器，它可以很容易地被集成到任意的网页中。它还可以把网页上任何的element/div 转成可以编辑的标准的控件。<img decoding="async" loading="lazy" title="NicEdit" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/nicedit.jpg" alt="NicEdit" width="500" height="104" /></p>
+<p><span id="more-967"> </span></p>
+<h3>3. <a title="TinyMCE" href="http://tinymce.moxiecode.com/" target="_blank">TinyMCE</a></h3>
+<p>TinyMCE 是另一个很有名的所见即所得的编辑器，其受LGPL license控制。Wordpress的编辑器用的就是TinyMCE的。<br />
+<img decoding="async" loading="lazy" title="TinyMCE" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/tinymce.jpg" alt="TinyMCE" width="500" height="181" /></p>
+<h3>4. <a title="jwysiwyg" href="http://code.google.com/p/jwysiwyg/" target="_blank">jwysiwyg</a></h3>
+<p>jwysiwyg 是一个基于 jQuery 的WYSIWYG 插件，相当小，只有7kb的大小，而且相当的简单易用。但功能不多。<br />
+<img decoding="async" loading="lazy" title="jwysiwyg - jQuery WYSIWYG plugin" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/jwysiwyg.jpg" alt="jwysiwyg - jQuery WYSIWYG plugin" width="500" height="198" /></p>
+<h3>5. <a title="Yahoo! UI Library: Rich Text Editor" href="http://developer.yahoo.com/yui/editor/" target="_blank">Yahoo! UI Library: Rich Text Editor</a></h3>
+<p>这个富文本编辑器是 Yahoo YUI 库中的一部分，用户或以非常简单的扩展它。这对于那些对YUI库很熟悉的人来说是最好的了。<br />
+<img decoding="async" loading="lazy" title="Yahoo! UI Library: Rich Text Editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/yui-rich-text-editor.jpg" alt="Yahoo! UI Library: Rich Text Editor" width="500" height="331" /></p>
+<h3>6. <a title="Xinha" href="http://xinha.webfactional.com/" target="_blank">Xinha</a></h3>
+<p>Xinha 也是一个相当强大的WYSIWYG HTML 编辑器，它可以兼容于所有的浏览器，并被开源社区所支持。<img decoding="async" loading="lazy" title="xinha" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/xinha.jpg" alt="xinha" width="500" height="330" /></p>
+<h3>7. <a title="Openwysiwyg" href="http://www.openwebware.com/" target="_blank">Openwysiwyg</a></h3>
+<p>Openwysiwyg 也是另一个开源的跨浏览器的 WYSIWYG 编辑器，别看他外表长得不怎么样，但他有很多的功能，特别是表格编辑的功能。<br />
+<img decoding="async" loading="lazy" title="openwysiwyg: Free cross browser wysiwyg editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/openwysiwyg.jpg" alt="openwysiwyg: Free cross browser wysiwyg editor" width="500" height="246" /></p>
+<h3>8. <a title="Free Rich Text Editor" href="http://freerichtexteditor.com/" target="_blank">Free Rich Text Editor</a></h3>
+<p>Free Rich Text Editor 是一个超级简单并且是免费的WYSIWYG 编辑器，它非常容易用来实现和管理基于XHTML的文本。<br />
+<img decoding="async" loading="lazy" title="Free Rich Text Editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/free-rich-text-editor.jpg" alt="Free Rich Text Editor" width="500" height="382" /></p>
+<h3>9. <a title="WMD: The Wysiwym Markdown Editor" href="http://wmd-editor.com/" target="_blank">WMD: The Wysiwym Markdown Editor</a></h3>
+<p>WMD 是一个简单和轻量级的编辑器，它主要用于Blog的评论系统或是论坛回贴系统。<br />
+<img decoding="async" loading="lazy" title="WMD: The Wysiwym Markdown Editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/wmd.jpg" alt="WMD: The Wysiwym Markdown Editor" width="500" height="286" /></p>
+<h3>10. <a title="TTW HTML Editor" href="http://koivi.com/WYSIWYG-Editor/" target="_blank">TTW HTML Editor</a></h3>
+<p>TTW HTML Editor 也是一个很简单轻量级的WYSIWYG编辑器，其主要由Javascripts编写，其拼写检查由SpellerPages编写。这是一个很容易被调用的编辑器。</p>
+<p><img decoding="async" loading="lazy" title="TTW HTML Editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/ttw-html-editor.jpg" alt="TTW HTML Editor" width="500" height="313" /></p>
+<h3>11. <a title="Free Text Box" href="http://freetextbox.com/" target="_blank">Free Text Box</a></h3>
+<p>FreeTextBox 也是一个很常用的HTML editor，只不过它只支持ASP.NET。它可以兼容于所有的IE，Mozilla和Firefox。<br />
+<img decoding="async" loading="lazy" title="Free Text Box" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/free-text-box.jpg" alt="Free Text Box" width="500" height="378" /></p>
+<h3>12. <a title="WYMeditor" href="http://www.wymeditor.org/" target="_blank">WYMeditor</a></h3>
+<p>WYMeditor 是一个 XHTML 的编辑器。WYMeditor 可以创建并生成非常完美的XHTML 结构的源码，并完全严格遵守W3C XHTML 规范。<br />
+<img decoding="async" loading="lazy" title="WYMeditor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/wymeditor.jpg" alt="WYMeditor" width="500" height="203" /></p>
+<h3>13. <a title="BlueShoes Wysiwyg Editor" href="http://www.blueshoes.org/en/javascript/editor/" target="_blank">BlueShoes Wysiwyg Editor</a></h3>
+<p>这是一个DHTML 和Javascript 开发的编辑器，它有很多非常酷的功能。例如：用户可以动态的改变编辑器的大小，选取特殊字符，以及选取颜色的功能。<br />
+<img decoding="async" loading="lazy" title="BlueShoes Wysiwyg Editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/blueshoes-wysiwys-editor.jpg" alt="BlueShoes Wysiwyg Editor" width="500" height="350" /></p>
+<h3>14. <a title="markItUp" href="http://markitup.jaysalvat.com/home/" target="_blank">markItUp</a></h3>
+<p>markItUp! 是一个jQuery 的JavaScript 插件。它非常的轻量，可以非常容易的定制。你甚至可以定义你最喜欢的键盘热键，以及添加额外的功能。<br />
+<img decoding="async" loading="lazy" title="markItUp! Universal markup editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/mark-it-up.jpg" alt="markItUp! Universal markup editor" width="500" height="341" /></p>
+<h3>15. <a title="SPAW Editor" href="http://spaweditor.com/en/disp.php/en_products/en_spaw/en_spaw_intro" target="_blank">SPAW Editor</a></h3>
+<p>这个WYSIWYG 编辑器是一个多页的编辑器，浮动式的工具条和很酷的用户接口，目前只有PHP 和.NET 版本。<br />
+<img decoding="async" loading="lazy" title="spaw-editor" src="http://www.webdesignbooth.com/wp-content/uploads/2009/07/spaw-editor.jpg" alt="spaw-editor" width="500" height="418" /></p>
+<p>文章：<a href="http://www.webdesignbooth.com/15-really-useful-web-based-html-editors/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8115.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector-150x150.jpg" alt="GCC 用 C++ 来编译" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8115.html" class="wp_rp_title">GCC 用 C++ 来编译</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/7917.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/0-150x150.jpg" alt="各式各样的验证码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7917.html" class="wp_rp_title">各式各样的验证码</a></li><li ><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" alt="你可能不知道的Shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_title">你可能不知道的Shell</a></li><li ><a href="https://coolshell.cn/articles/12176.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/011-150x150.jpg" alt="C++ 对象的内存布局" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12176.html" class="wp_rp_title">C++ 对象的内存布局</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1183.html">15个Web在线WYSIWYG编辑器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1183.html/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Internet 技术演变图</title>
+		<link>https://coolshell.cn/articles/1178.html</link>
+					<comments>https://coolshell.cn/articles/1178.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 24 Jul 2009 03:51:32 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Internet]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1178</guid>
+
+					<description><![CDATA[<p>点击图片看大图 （转载本站文章请注明作者和出处 酷 壳 &#8211; CoolShell ，请勿用于任何商业用途） 相关文章RFC1 40岁生日某Python...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1178.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1178.html">Internet 技术演变图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>点击图片看大图</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2009/07/Internet.jpg"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1179" title="Internet 技术演变图 (点击看大图)" src="https://coolshell.cn/wp-content/uploads/2009/07/Internet-300x248.jpg" alt="Internet 技术演变图 (点击看大图)" width="300" height="248" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/07/Internet.jpg"></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/373.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="RFC1 40岁生日" width="150" height="150" /></a><a href="https://coolshell.cn/articles/373.html" class="wp_rp_title">RFC1 40岁生日</a></li><li ><a href="https://coolshell.cn/articles/737.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/snake-150x150.jpg" alt="某Python实现的尾部递归" width="150" height="150" /></a><a href="https://coolshell.cn/articles/737.html" class="wp_rp_title">某Python实现的尾部递归</a></li><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/10217.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/Work-Overtime-150x150.jpg" alt="加班与效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10217.html" class="wp_rp_title">加班与效率</a></li><li ><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" alt="我做系统架构的一些原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21672.html" class="wp_rp_title">我做系统架构的一些原则</a></li><li ><a href="https://coolshell.cn/articles/12192.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="C/C++返回内部静态成员的陷阱" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12192.html" class="wp_rp_title">C/C++返回内部静态成员的陷阱</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1178.html">Internet 技术演变图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1178.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

