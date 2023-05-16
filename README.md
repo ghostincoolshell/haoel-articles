@@ -30,6 +30,7 @@ The public articles / tweets / microblogs published by or related to @haoel
 目前已经收集到的数据包括：
 
 - `blogs`: [酷壳](https://coolshell.cn) 的 blog 文章 (by [@zyqzss](https://github.com/zyqzss) and [@kaiix](https://github.com/kaiix))
+  - 可通过 https://ghostincoolshell.github.io/haoel-articles/ 访问使用 GitHub Pages 托管的静态站。
 - `tweets`: [@haoel](https://twitter.com/haoel) 发表的 tweets (by [@yihong0618](https://github.com/yihong0618))
 - `weibo`: [@左耳朵耗子](https://weibo.com/n/%E5%B7%A6%E8%80%B3%E6%9C%B5%E8%80%97%E5%AD%90) 发表的微博 (by [@hongqn](https://github.com/hongqn))
 

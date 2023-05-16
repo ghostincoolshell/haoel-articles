@@ -5,6 +5,11 @@
 ### 新增
 
 - [酷壳](https://coolsheel.cn) 的文章图片。感谢 [@kaiix](https://github.com/kaiix)
+- 通过 Github Page 生成了[静态站](https://ghostincoolshell.github.io/haoel-articles/)。感谢 [@kaiix](https://github.com/kaiix)
+
+### 修复
+
+- 修复了由于文件名中的字符导致在 Windows 下无法 clone 的问题 (#13, by [@kaiix](https://github.com/kaiix) and [@hongqn](https://github.com/hongqn))
 
 ## 2023-05-15
 
