@@ -35,7 +35,11 @@ The public articles / tweets / microblogs published by or related to @haoel
 
 欢迎通过 pull requests 贡献数据，或者通过 issues 讨论获取数据的方法。
 
-@haoel 创立的公司 [MegaEase](https://megaease.com/) 建立了收集纪念文章的仓库 https://github.com/megaease/Remembering-Haoel ，如果你想提交纪念文章，可以提交到这里。
+## 其它纪念项目
+
+- @haoel 创立的公司 [MegaEase](https://megaease.com/) 建立了收集纪念文章的仓库 https://github.com/megaease/Remembering-Haoel ，如果你想提交纪念文章，可以提交到这里。
+
+- [@bnu_chenshuo](https://twitter.com/bnu_chenshuo) 用 GitHub pages 建了一个镜像， http://coolshell.org
 
 ## 数据的版权如何处理
 
