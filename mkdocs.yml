@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: ghostincoolshell
+repo_name: ghostincoolshell/haoel-articles
+repo_url: https://github.com/ghostincoolshell/haoel-articles
+edit_uri: edit/main/docs/
+docs_dir: 'blogs'
+site_dir: 'docs'
+
+theme:
+  name: material
+
+nav:
+- Blog: 'rss2html2markdown/'
+
+plugins:
+  - search
+  - include_dir_to_nav
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.extra
+  - def_list
