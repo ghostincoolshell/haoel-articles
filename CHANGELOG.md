@@ -1,5 +1,11 @@
 # 更新日志
 
+## 2023-05-16
+
+### 新增
+
+- [酷壳](https://coolsheel.cn) 的文章图片。感谢 [@kaiix](https://github.com/kaiix)
+
 ## 2023-05-15
 
 ### 新增
