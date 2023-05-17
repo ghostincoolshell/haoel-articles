@@ -5,3 +5,5 @@
 - `rss2html2markdown`: 从 HTML 转成的 markdown 格式
 
 Contributed by [@zyqzss](https://github.com/zyqzss).
+
+Note: [@chenshuo](https://github.com/chenshuo) 制作了一个几乎完美的酷壳网站镜像（[仓库地址](https://github.com/chenshuo/coolshell)），如果源站已经无法访问，请访问 https://coolshell.org 重温。
