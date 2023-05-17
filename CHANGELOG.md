@@ -1,5 +1,11 @@
 # 更新日志
 
+## 2023-05-17
+
+### 新增
+
+- 在[静态站](https://ghostincoolshell.github.io/haoel-articles/)上增加到酷壳镜像站 https://coolshell.org 的链接。感谢 [@chenshuo](https://github.com/chenshuo)
+
 ## 2023-05-16
 
 ### 新增
