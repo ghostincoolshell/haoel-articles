@@ -6,4 +6,4 @@
 
 Contributed by [@zyqzss](https://github.com/zyqzss).
 
-Note: [@chenshuo](https://github.com/chenshuo) 制作了一个几乎完美的酷壳网站镜像（[仓库地址](https://github.com/chenshuo/coolshell)），如果源站已经无法访问，请访问 https://coolshell.org 重温。
+Note: [@chenshuo](https://github.com/chenshuo) 制作了一个几乎完美的酷壳网站镜像（[仓库地址](https://github.com/chenshuo/coolshell)），如果源站已经无法访问，请访问 [https://coolshell.org](https://coolshell.org) 重温。
