@@ -1,0 +1,104 @@
+<html><body><p>在计算机的世界里，什么最牛？<a href="https://coolshell.cn/?tag=javascript" target="_blank">Javascript</a>？<a href="https://coolshell.cn/articles/914.html" target="_blank">C语言</a>？<a href="https://coolshell.cn/articles/1724.html" target="_blank">C++</a>？<a href="https://coolshell.cn/articles/2086.html" target="_blank">iPad</a>？还是<a href="https://coolshell.cn/articles/1142.html" target="_blank">brainfuck</a>？我个人觉得都不是，这个世界里，XML最NB，这世界到处都充斥着XML，正如在“<a href="https://coolshell.cn/articles/2424.html" target="_blank">十条不错的编程观点</a>”文中所说，我们不用XML我们都不知道怎么编程了。下面，让我们来看一看XML的几个真实的示例，相信你会同意我的观点的。</p>
+<h4>一、如何用XML返回数据库SQL查询结果</h4>
+<pre class="EnlighterJSRAW">&lt;?xml version="1.0" encoding="iso-8859-1" ?&gt;
+&lt;result&gt;
+  &lt;fields&gt;
+    &lt;field&gt;NAME&lt;/field&gt;
+    &lt;field&gt;LAST NAME&lt;/field&gt;
+    &lt;field&gt;MOTHER MAIDEN NAME&lt;/field&gt;
+    &lt;field&gt;BIRTHDATE&lt;/field&gt;
+    ...
+  &lt;/fields&gt;
+  &lt;data&gt;
+    &lt;row&gt;
+      &lt;value&gt;MARLENE&lt;/value&gt;
+      &lt;value&gt;RUTH&lt;/value&gt;
+      &lt;value&gt;DE MARCO&lt;/value&gt;
+      &lt;value&gt;1973-02-24 00:00:00&lt;/value&gt;
+      ...
+    &lt;/row&gt;
+  &lt;/data&gt;
+&lt;/result&gt;</pre>
+<p><span id="more-2504"></span></p>
+<h4>二、如何用XML序列化一个图片</h4>
+<pre class="EnlighterJSRAW">&lt;attachments xmlns = "http://webservices..." &gt;
+  &lt;bytes&gt;37&lt;/bytes&gt;
+  &lt;bytes&gt;80&lt;/bytes&gt;
+  &lt;bytes&gt;68&lt;/bytes&gt;
+  &lt;bytes&gt;70&lt;/bytes&gt;
+  &lt;bytes&gt;45&lt;/bytes&gt;
+  &lt;bytes&gt;49&lt;/bytes&gt;
+  &lt;bytes&gt;46&lt;/bytes&gt;
+  &lt;bytes&gt;52&lt;/bytes&gt;
+  &lt;bytes&gt;10&lt;/bytes&gt;
+  &lt;bytes&gt;37&lt;/bytes&gt;
+  &lt;bytes&gt;-30&lt;/bytes&gt;
+  &lt;bytes&gt;-29&lt;/bytes&gt;
+  &lt;bytes&gt;-49&lt;/bytes&gt;
+  &lt;bytes&gt;-45&lt;/bytes&gt;
+  &lt;bytes&gt;10&lt;/bytes&gt;
+  &lt;bytes&gt;52&lt;/bytes&gt;
+  &lt;bytes&gt;32&lt;/bytes&gt;
+  &lt;bytes&gt;48&lt;/bytes&gt;
+  &lt;bytes&gt;32&lt;/bytes&gt;
+  &lt;bytes&gt;111&lt;/bytes&gt;
+  ...
+  ...
+  ...</pre>
+<h4>三、如何让XML与CSV格式兼容</h4>
+<pre class="EnlighterJSRAW">&lt;?xml version="1.0" encoding="iso8859-1" ?&gt;
+&lt;import tag="1stTEST" type="data" mode="update"&gt;
+&lt;options&gt;
+    &lt;dateformat mmddyyyy="true"/&gt;
+        &lt;notification&gt;
+            &lt;EMail&gt;example@example.com&lt;/EMail&gt;
+        &lt;/notification&gt;
+    &lt;/options&gt;
+    &lt;fields&gt;
+        &lt;field name="name" type="char" mapsto="person.data"/&gt;
+        &lt;field name="officeid" type="char" mapsto="custom.locationid"/&gt;
+        &lt;field name="startyear" type="char" mapsto="person.yearstarted"/&gt;
+        &lt;field name="personelid" type="int" mapsto="person.id"/&gt;
+        &lt;field name="dob" type="date" mapsto="person.dateofbith"/&gt;
+        &lt;field name="sex" type="char" mapsto="person.sex"/&gt;
+        &lt;field name="modified" type="date" mapsto="record.modified"/&gt;
+    &lt;/fields&gt;
+    &lt;csvdata columnheaders="false"&gt;
+&lt;![CDATA[
+"Jack Wade",214,2002,111012,07/04/1975,"M",02/11/2006
+"Sam Davidson",214,1999,104841,10/15/1967,"M",02/10/2006
+"Denise V Law",214,1998,104660,01/21/1971,"F",02/17/2006
+"Lisa Blake",214,1989,100987,08/01/1982,"F",01/21/2006
+"Andrew Match",214,1991,101074,12/25/1980,"M",02/28/2006
+]]&gt;
+    &lt;/csvdata&gt;
+&lt;/import&gt;</pre>
+<h4>四、如何把XML当成数组来用</h4>
+<pre class="EnlighterJSRAW">&lt;rootNode&gt;
+   &lt;numberOfAddresses&gt;110&lt;/numberOfAddresses&gt;
+   &lt;address_1&gt;442 Fake St.&lt;/address_1&gt;
+   &lt;address_2&gt;61 Main St.&lt;/address_2&gt;
+   ...
+   ...
+   ...
+   &lt;address_110&gt;3881 N 4th Ave. #5D&lt;/address_110&gt;
+&lt;/rootNode&gt;</pre>
+<p>相信你一定有比这更牛X的例子，欢迎与我们分享！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9508.html"><img alt="PFIF网上寻人协议" height="150" src="../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9508.html">PFIF网上寻人协议</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4905.html"><img alt="语言的数据亲和力" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3609.html"><img alt="那些炒作过度的技术和概念" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3609.html">那些炒作过度的技术和概念</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3585.html"><img alt="SOAP的S是Simple" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3585.html">SOAP的S是Simple</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3498.html"><img alt="信XML，得自信" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3498.html">信XML，得自信</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2504.html">信XML，得永生！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

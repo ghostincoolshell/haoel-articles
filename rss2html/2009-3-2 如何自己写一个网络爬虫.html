@@ -1,0 +1,130 @@
+<html><body><p><a href="http://en.wikipedia.org/wiki/Web_spider" target="_blank">这里</a>是维基百科对网络爬虫的词条页面。网络爬虫以叫网络蜘蛛，网络机器人，这是一个程序，其会自动的通过网络抓取互联网上的网页，这种技术一般可能用来检查你的站点上所有的链接是否是都是有效的。当然，更为高级的技术是把网页中的相关数据保存下来，可以成为搜索引擎。</p>
+<p>从技相来说，实现抓取网页可能并不是一件很困难的事情，困难的事情是对网页的分析和整理，那是一件需要有轻量智能，需要大量数学计算的程序才能做的事情。下面一个简单的流程：</p>
+<p><span id="more-27"></span></p>
+<p><img alt="" class="alignnone" height="382" src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/WebCrawlerArchitecture.svg/500px-WebCrawlerArchitecture.svg.png" width="500"/></p>
+<p>在这里，我们只是说一下如何写一个网页抓取程序。</p>
+<p>首先我们先看一下，如何使用命令行的方式来找开网页。</p>
+<p style="padding-left: 30px; text-align: left;">telnet somesite.com 80<br/>
+GET /index.html HTTP/1.0<br/>
+按回车两次</p>
+<p style="text-align: left;">使用telnet就是告诉你其实这是一个socket的技术，并且使用HTTP的协议，如GET方法来获得网页，当然，接下来的事你就需要解析HTML文法，甚至还需要解析Javascript，因为现在的网页使用Ajax的越来越多了，而很多网页内容都是通过Ajax技术加载的，因为，只是简单地解析HTML文件在未来会远远不够。当然，在这里，只是展示一个非常简单的抓取，简单到只能做为一个例子，下面这个示例的伪代码：</p>
+<pre>取网页
+for each 链接 in 当前网页所有的链接
+{
+        if(如果本链接是我们想要的 || 这个链接从未访问过)
+        {
+                处理对本链接
+                把本链接设置为已访问
+        }
+}</pre>
+<pre class="ruby">require “rubygems”
+require “mechanize”
+
+class Crawler &lt; WWW::Mechanize
+
+  attr_accessor :callback
+  INDEX = 0
+  DOWNLOAD = 1
+  PASS = 2
+
+  def initialize
+    super
+    init
+    @first = true
+    self.user_agent_alias = “Windows IE 6″
+  end
+
+  def init
+    @visited = []
+  end
+
+  def remember(link)
+    @visited &lt;&lt; link
+  end
+
+  def perform_index(link)
+    self.get(link)
+    if(self.page.class.to_s == “WWW::Mechanize::Page”)
+      links = self.page.links.map {|link| link.href } - @visited
+      links.each do |alink|
+        start(alink)
+      end
+    end
+  end
+
+  def start(link)
+    return if link.nil?
+    if(!@visited.include?(link))
+      action = @callback.call(link)
+      if(@first)
+        @first = false
+        perform_index(link)
+      end
+      case action
+        when INDEX
+          perform_index(link)
+        when DOWNLOAD
+          self.get(link).save_as(File.basename(link))
+        when PASS
+          puts “passing on #{link}”
+      end
+    end
+  end
+
+  def get(site)
+    begin
+      puts “getting #{site}”
+      @visited &lt;&lt; site
+      super(site)
+    rescue
+      puts “error getting #{site}”
+    end
+  end
+end</pre>
+<p>上面的代码就不必多说了，大家可以去试试。下面是如何使用上面的代码：</p>
+<pre class="ruby">require “crawler”
+
+x = Crawler.new
+callback = lambda do |link|
+  if(link =~/\\.(zip|rar|gz|pdf|doc)
+    x.remember(link)
+    return Crawler::PASS
+  elsif(link =~/\\.(jpg|jpeg)/)
+    return Crawler::DOWNLOAD
+  end
+  return Crawler::INDEX;
+end
+
+x.callback = callback
+x.start(”http://somesite.com”)</pre>
+<p>下面是一些和网络爬虫相关的开源网络项目</p>
+<ul>
+<li><a class="external text" href="http://arachnode.net/" rel="nofollow" target="_blank" title="http://arachnode.net"><strong>arachnode.net</strong></a> is a .NET crawler written in C# using SQL 2005 and <a href="http://en.wikipedia.org/wiki/Lucene" target="_blank" title="Lucene">Lucene</a> and is released under the <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License" target="_blank" title="GNU General Public License">GNU General Public License</a>.</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/DataparkSearch" target="_blank" title="DataparkSearch">DataparkSearch</a></strong> is a crawler and search engine released under the <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License" target="_blank" title="GNU General Public License">GNU General Public License</a>.</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/Wget" target="_blank" title="Wget">GNU Wget</a></strong> is a <a class="mw-redirect" href="http://en.wikipedia.org/wiki/Command_line_interface" target="_blank" title="Command line interface">command-line</a>-operated crawler written in <a href="http://en.wikipedia.org/wiki/C_%28programming_language%29" target="_blank" title="C (programming language)">C</a> and released under the <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License" target="_blank" title="GNU General Public License">GPL</a>. It is typically used to mirror Web and FTP sites.</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/Grub_%28search_engine%29" target="_blank" title="Grub (search engine)">GRUB</a></strong> is an open source distributed search crawler that Wikia Search ( <a class="external free" href="http://wikiasearch.com/" rel="nofollow" target="_blank" title="http://wikiasearch.com">http://wikiasearch.com</a> ) uses to crawl the web.</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/Heritrix" target="_blank" title="Heritrix">Heritrix</a></strong> is the <a href="http://en.wikipedia.org/wiki/Internet_Archive" target="_blank" title="Internet Archive">Internet Archive</a>’s archival-quality crawler, designed for archiving periodic snapshots of a large portion of the Web. It was written in <a href="http://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank" title="Java (programming language)">Java</a>.</li>
+<li><strong><a class="mw-redirect" href="http://en.wikipedia.org/wiki/Ht-//dig" target="_blank" title="Ht-//dig">ht://Dig</a></strong> includes a Web crawler in its indexing engine.</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/HTTrack" target="_blank" title="HTTrack">HTTrack</a></strong> uses a Web crawler to create a mirror of a web site for off-line viewing. It is written in <a href="http://en.wikipedia.org/wiki/C_%28programming_language%29" target="_blank" title="C (programming language)">C</a> and released under the <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License" target="_blank" title="GNU General Public License">GPL</a>.</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/ICDL_crawling" target="_blank" title="ICDL crawling">ICDL Crawler</a></strong> is a <a href="http://en.wikipedia.org/wiki/Cross-platform" target="_blank" title="Cross-platform">cross-platform</a> web crawler written in <a href="http://en.wikipedia.org/wiki/C%2B%2B" target="_blank" title="C++">C++</a> and intended to crawl Web sites based on <a href="http://en.wikipedia.org/wiki/Website_Parse_Template" target="_blank" title="Website Parse Template"><br/>
+</a></li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="../wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12225.html"><img alt="DHH 谈混合移动应用开发" height="150" src="../wp-content/uploads/2014/12/1053-DHH-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12225.html">DHH 谈混合移动应用开发</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12206.html"><img alt="HTML6 展望" height="150" src="../wp-content/uploads/2014/12/html6-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12206.html">HTML6 展望</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12136.html"><img alt="Google Inbox如何跨平台重用代码？" height="150" src="../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12136.html">Google Inbox如何跨平台重用代码？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/27.html">如何自己写一个网络爬虫</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

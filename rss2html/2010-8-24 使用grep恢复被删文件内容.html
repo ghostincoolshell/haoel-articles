@@ -1,0 +1,30 @@
+<html><body><p>在Unix/Linux下，最危险的命令恐怕就属rm命令了，每次在root下使用这个命令的时候，我都要盯着命令行看上几分钟才敢把回车敲下去。以前，看到同事在脚本中使用rm命令 —— <code>rm {$App_Dir}/*</code> 。因为脚本没有判断变量$App_Dir是否为空，结果，在一次用root操作的时候，整个操作系统一下就不见了，还好只是开发机。从此，我们大家都再也不敢使用rm命令了。</p>
+<p>这里给大家介绍一个小技巧用来恢复一些被rm了的文件中的数据。我们知道，rm命令其实并不是真正的从物理上删除文件内容，只过不把文件的inode回收了，其实文件内容还在硬盘上。所以，如果你不小删除了什么比较重要的程序配置文件的时候，我们完全可以用grep命令在恢复，下面是一个恢复示例：</p>
+<p><code class="EnlighterJSRAW">grep -a -B 50 -A 60 'some string in the file' /dev/sda1 &gt; results.txt</code></p>
+<p>说明：</p>
+<ul>
+<li>关于grep的-a意为–binary-files=text，也就是把二进制文件当作文本文件。</li>
+<li>-B和-A的选项就是这段字符串之前几行和之后几行。</li>
+<li>/dev/sda1，就是硬盘设备，</li>
+<li>&gt; results.txt，就是把结果重定向到results.txt文件中。</li>
+</ul>
+<p>如果你幸运的话，你就可以看到被恢复的内容了。这正是Unix的简单哲学（详见《<a href="https://coolshell.cn/articles/2324.html" target="_blank">Unix传奇下篇</a>》）——<strong> 所有的设备都是文件</strong>。</p>
+<p>当然，我还是建议你把root用户的rm的命令用alias换成别一个脚本，那个脚本会帮你把删除的文件放到某个地方。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12103.html"><img alt="vfork 挂掉的一个问题" height="150" src="../wp-content/uploads/2014/11/tux-fork-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9104.html"><img alt="sed 简明教程" height="150" src="../wp-content/uploads/2013/02/sed-superman-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9104.html">sed 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="../wp-content/uploads/2013/02/awk-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2822.html">使用grep恢复被删文件内容</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

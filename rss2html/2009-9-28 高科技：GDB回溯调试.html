@@ -1,0 +1,30 @@
+<html><body><p>也许大家知道，GDB 版本7.0 (2009年9月release) 会是第一次开始支持Reversable Debugging （回溯调式技术），这是一种可以让在debug程序时当我们运行单步调试或是运行到断点时，可以以逆向执行程序的一种技术。（这是GNU的<a href="http://www.gnu.org/software/gdb/news/reversible.html" target="_blank">新闻链接</a>）</p>
+<p>下面是GDB7.0版本所支持的回溯调试的命令，其中包括，continue，step，以及调试方向的设置。</p>
+<li><strong>reverse-continue</strong> (‘rc’) — 继续程序运行到断点，但是是逆向运行程序。</li>
+<li><strong>reverse-finish</strong> — 逆向运行程序直到跳出本层函数。</li>
+<li><strong>reverse-next</strong> (‘rn’) — 语句单步向后跟踪程序。</li>
+<li><strong>reverse-nexti</strong> (‘rni’) — 指令单步向后一条指令。</li>
+<li><strong>reverse-step</strong> (‘rs’) — 向后执行一条语句，单步进入。</li>
+<li><strong>reverse-stepi</strong> — 向后执行一条指令，单步进入。</li>
+<li><strong>set exec-direction (forward/reverse)</strong> — 设置程序执行方向，向前或向后。</li>
+<p><span id="more-1502"></span></p>
+<p>在网上查了一下，发现VS2010好像也准备要支持这个东西，微软叫这个东西为“<a href="http://blogs.msdn.com/ianhu/archive/2009/05/13/historical-debugging-in-visual-studio-team-system-2010.aspx" target="_blank">Historical Debugging</a>”。</p>
+<p>这个东西，对于我这个老家伙来说比较新鲜，而且还有点诡异。我有点没跟上这个技术，不知道这个技术主要是用来干什么？对于程序的运行的回滚？这样一来，如果，我某条语句创建了一个线程，或是一个文件，逆向执行回去，莫非它还能把这些程序创建出来的资源回收啦？就算是能回收，要是我的某个程序向网络发了些数据出去，莫非它还能给我再收回来？也许我想得太极端了，不过好像目前对这个技术的原始需求的说明不是很多，所以真不知道这个技术除了很酷，还有什么？也许是我理解错了，希望大家指点一下。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1525.html"><img alt="GDB 7.0 发布" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1525.html">GDB 7.0 发布</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3643.html"><img alt="GDB中应该知道的几个调试方法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3643.html">GDB中应该知道的几个调试方法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1719.html"><img alt="橡皮鸭程序调试法" height="150" src="../wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1719.html">橡皮鸭程序调试法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1379.html"><img alt="如何调试bash脚本" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1379.html">如何调试bash脚本</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1242.html"><img alt="23,148,855,308,184,500" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1242.html">23,148,855,308,184,500</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1502.html">高科技：GDB回溯调试</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

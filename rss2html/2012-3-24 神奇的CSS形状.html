@@ -1,0 +1,47 @@
+<html><body><p>【<span style="color: #cc0000;">感谢 Neo 投递本文 – 微博帐号</span>：<a href="http://weibo.com/gandalfthegrey" target="_blank" title="_锟_">@_锟_</a> 】</p>
+<p style="text-align: left;">在StackOverflow上有这么一个问题，有位同学在<a href="http://css-tricks.com/examples/ShapesOfCSS/">http://css-tricks.com/examples/ShapesOfCSS/ </a> 找到一些使用CSS做的形状，其中一位同学对下面的这个形状充满了疑问。</p>
+<p style="text-align: left;">形状是：</p>
+<p style="text-align: left;"><img alt="" class="size-full wp-image-6914" height="102" src="../wp-content/uploads/2012/03/a.png" width="103"/></p>
+<p style="text-align: left;">代码是：</p>
+<pre class="EnlighterJSRAW">
+#triangle-up {
+width: 0;
+height: 0;
+border-left: 50px solid transparent;
+border-right: 50px solid transparent;
+border-bottom: 100px solid red;
+}
+</pre>
+<p>这位同学就提问啦，为啥这么这么几句就能画出一个三角形呢？<br/>
+于是呢，有高人出现，这个高人图文并茂的解释了这个三角的成因</p>
+<p><span id="more-6913"></span><br/>
+首先呢，我们需要了解HTML标记的Box Model（盒模型），这个例子中呢我们将content，padding都看作content。忽略掉margin。那么一个盒模型就是下图</p>
+<p style="text-align: left;"><img alt="" class="size-full wp-image-6915" height="266" src="../wp-content/uploads/2012/03/b.png" width="340"/></p>
+<p>中间是内容，然后是4条边。每一条边都有宽度。<br/>
+根据上面CSS的定义，没有border-top（顶边）的情形下 ,我们的图形如下：</p>
+<p style="text-align: left;"><img alt="" class="size-full wp-image-6916" height="266" src="../wp-content/uploads/2012/03/c.png" width="340"/></p>
+<p>width设置为0后 ，内容没有了就成为下图：</p>
+<p style="text-align: left;"><img alt="" class="size-full wp-image-6917" height="266" src="../wp-content/uploads/2012/03/d.png" width="340"/></p>
+<p>height也设置为0，只有底边了。</p>
+<p style="text-align: left;"><img alt="" class="size-full wp-image-6918" height="122" src="../wp-content/uploads/2012/03/e.png" width="200"/></p>
+<p>然后两条边都是设置为透明，最后我们就得到了</p>
+<p style="text-align: left;"><img alt="" class="size-full wp-image-6919" height="122" src="../wp-content/uploads/2012/03/f.png" width="200"/></p>
+<p>这个属于奇技淫巧，但是也说明CSS的强大，没有做不到只有想不到。另外<a href="http://css-tricks.com/examples/ShapesOfCSS/">http://css-tricks.com/examples/ShapesOfCSS/ </a>还能找到很多其他的形状，感兴趣的同学可以自己去看。还有酷壳以前的这篇文章《<a href="https://coolshell.cn/articles/5164.html" target="_blank" title="CSS图形">CSS实现的各种形状</a>》<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5164.html"><img alt="CSS图形" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5164.html">CSS图形</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3903.html"><img alt="一些有意思的贴子和工具" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/6913.html">神奇的CSS形状</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

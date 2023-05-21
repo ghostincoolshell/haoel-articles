@@ -1,0 +1,51 @@
+<html><body><p>这篇文章主要来源是StackOverflow上的一个回答——“<a href="http://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests" target="_blank" title="How deep are your unit tests?">How deep are your unit tests?</a>”。一个有13.8K的分的人（<a href="http://stackoverflow.com/users/1116/john-nolan">John Nolan</a>）问了个关于TDD的问题，这个问题并不新鲜，最亮的是这个问题的Best Answer，这个问题是——</p>
+<p style="padding-left: 30px;">“TDD需要花时间写测试，而我们一般多少会写一些代码，而第一个测试是测试我的构造函数有没有把这个类的变量都设置对了，这会不会太过分了？那么，我们写单元测试的这个单元的粒度到底是什么样的？并且，是不是我们的测试测试得多了点？”</p>
+<h4>答案</h4>
+<p>StackOverflow上，这个问题的答案是这样的——</p>
+<p style="padding-left: 30px;">“I get paid for code that works, not for tests, so my philosophy is to test as little as possible to reach a given level of confidence (I suspect this level of confidence is high compared to industry standards, but that could just be hubris). If I don’t typically make a kind of mistake (like setting the wrong variables in a constructor), I don’t test for it. I do tend to make sense of test errors, so I’m extra careful when I have logic with complicated conditionals. When coding on a team, I modify my strategy to carefully test code that we, collectively, tend to get wrong.”</p>
+<p style="padding-left: 30px;"><strong>老板为我的代码付报酬，而不是测试，所以，我对此的价值观是——测试越少越好，少到你对你的代码质量达到了某种自信</strong>（我觉得这种的自信标准应该要高于业内的标准，当然，这种自信也可能是种自大）。如果我的编码生涯中不会犯这种典型的错误（如：在构造函数中设了个错误的值），那我就不会测试它。<strong>我倾向于去对那些有意义的错误做测试，所以，我对一些比较复杂的条件逻辑会异常地小心</strong>。当在一个团队中，我会非常小心的测试那些会让团队容易出错的代码。</p>
+<p>这个回答对TDD似乎有一种否定，<strong>最亮的是这个问题是由<a href="http://en.wikipedia.org/wiki/Kent_Beck" target="_blank">Kent Beck</a>，Kent是XP和TDD的创造者，是敏捷开发实践方法的奠基人</strong>。以致于还有人调侃到——</p>
+<p><span id="more-8209"></span></p>
+<p><img alt="" class="alignright size-full wp-image-8212" height="195" src="../wp-content/uploads/2012/09/fight.jpg" title="fight club" width="342"/></p>
+<p style="padding-left: 30px;">The world does not think that Kent Beck would say this! There are legions of developers dutifully pursuing 100% coverage because they think it is what Kent Beck would do! I have told many that you said, in your XP book, that you don’t always adhere to Test First religiously. But I’m surprised too.</p>
+<p style="padding-left: 30px;">只是要地球人都不会觉得Kent Beck会这么说啊！我们有大堆程序员在忠实的追求着100%的代码测试覆盖率，因为这些程序员觉得Kent Beck也会这么干！我告诉过很多人，你在你的XP的书里说过，你并不总是支持“宗教信仰式的Test First”，但是今天Kent这么说，我还是很惊讶！</p>
+<p>后面还有一些人不同意Kent， 我一下子从这个事中想到了《<a href="http://movie.douban.com/subject/1292000/" target="_blank">fight club</a>》里的那个精神分裂者创建了一个连自己都反对的地下组织。呵呵。</p>
+<p>其实我是非常同意Kent的，怎么合适怎么搞，爱怎么测试就怎么测试，只要自己和团队有信心就可以了。没有必要就一定要写测试，一定要测试先行。</p>
+<h4>其它答案</h4>
+<p>八卦完了，我们还是来认认真真地看看这个问题中其它的其它答案，因为这个问题的也是国人爱问题的问题。</p>
+<p><strong>第二个答案：值得借鉴</strong></p>
+<ul>
+<li>开发过程中，单元测试应该来测试那些可能会出错的地方，或是那些边界情况。</li>
+<li>维护过程中，单元测试应该跟着我们的bug report来走，每一个bug都应该有个UT。于是程序员就会对自己的代码变更有两个自信，一是bug 被 fixed，二是相同的bug不会再次出现。</li>
+</ul>
+<p><strong>第三个答案：给敏捷咨师看的答案</strong></p>
+<p>这个答案在说，我们只注意到了TDD中的T，而忽略了第一个D，就是Driven…… bla bla bla… 又这扯这些空洞的东西了，国内的各种不学无术的敏捷咨询师最好这一口了。</p>
+<p><strong>第四个答案：致那些什么都要测试的人</strong></p>
+<p>如果我们需要测试一个像 <code>int square(int x)</code> 这样的开根函数，我们需要40亿个测试（每个数都要测试）。</p>
+<p>事实上这种情况可能还更糟糕，如果有这样一个方法 <code>void setX(int newX)</code> 不会更改其它的成员变量，如：obj.z, Obj.y，那么，你是不是还要去测试一下别的变量没有被改变？</p>
+<p>我们只可能测试那些有意义的，确实要测试的案例。</p>
+<h4>我的观点</h4>
+<p>我在《<a href="https://coolshell.cn/articles/3649.html" target="_blank" title="TDD并不是看上去的那么美">TDD并没有看上去的那么美</a>》一文中说过我的观点了，我就不再多说了。我还是把下面这些观点列出来，供大家思考和讨论：</p>
+<p style="padding-left: 30px;">1）<strong>我国的教育对我们最大的洗脑不是掩盖事实，而让我们习惯于标准答案，习惯于教条，从而不会思考！敏捷开发中的若干东西似乎都成了软件开发中对某种标准答案的教条，实在是悲哀！</strong></p>
+<p style="padding-left: 30px;">2）<strong>软件开发是一种脑力劳动，是一种知识密集型的工作，就像艺术作品一样，创作过程和成品是没有标准答案的。</strong></p>
+<p style="padding-left: 30px;">3）<strong>软件的质量不是测试出来的，而是设计和维护出来的。就像工匠们在一点一点地雕琢他们的作品一样。</strong></p>
+<p>UT的粒度是多少，这个不重要，重要的是你会不会自己思考你的软件应该怎么做，怎么测试。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5531.html"><img alt="Test-Driven Development？别逗了" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5531.html">Test-Driven Development？别逗了</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5143.html"><img alt="在新浪微博上关于敏捷的一些讨论" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5143.html">在新浪微博上关于敏捷的一些讨论</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4891.html"><img alt="Bob大叔和Jim Coplien对TDD的论战" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4891.html">Bob大叔和Jim Coplien对TDD的论战</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3778.html"><img alt="敏捷水管工" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3778.html">敏捷水管工</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3745.html"><img alt="再谈敏捷和ThoughtWorks中国咨询师" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3745.html">再谈敏捷和ThoughtWorks中国咨询师</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3766.html"><img alt="[转]TDD到底美还是不美？" height="150" src="../wp-content/uploads/2011/02/feedback_cycle-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3766.html">[转]TDD到底美还是不美？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8209.html">“单元测试要做多细？”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

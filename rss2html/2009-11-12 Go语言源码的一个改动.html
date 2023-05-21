@@ -1,0 +1,32 @@
+<html><body><p>2009年11月11日，光棍节，<a href="https://coolshell.cn/articles/1751.html" target="_blank">Google发布了Go语言</a>，马上，就有网友在<a href="http://code.google.com/p/go/" target="_blank">http://code.google.com/p/go/</a>上找到了一个Go语言包文件操作源码/src/pkg/os/file.go文件的一个最新改动。这个改动的作者就是那个大名鼎鼎的Unix之父<a href="http://en.wikiquote.org/wiki/Kenneth_Thompson" target="_blank">Ken Thompson</a>（看看人家，都这么老了，还在写程序，佩服佩服，真是顶级程序员啊——《<a href="https://coolshell.cn/articles/343.html" rel="bookmark" target="_blank">程序员的八个级别</a>》），而这个改动的<a href="http://code.google.com/p/go/source/detail?r=4a3f6bbb5f0c6021279ccb3c23558b3c480d995f" target="_blank">Log Message</a>如下所示（把屏抓下来，以免以后某日被放到墙外或是google.com数据丢失或是Google公司倒闭）</p>
+<p style="text-align: center;"><span style="font-size: large;">Spell it with an “e”<br/>
+</span><br/>
+<img alt="spell it with an e" border="1" class="size-full wp-image-1762" height="344" src="../wp-content/uploads/2009/11/spell_it_with_e.jpg" title="spell it with an e" width="474"/></p>
+<p> </p>
+<p>这是一个很著名的典故，要知道这个典故，你需要知道两件事，一个是Ken Thompson的经典语录，一个是Unix的系统调用。</p>
+<p><span id="more-1761"></span></p>
+<p>关于Ken Thompson的经典语录，你可以在wikipdia上的<a href="http://en.wikiquote.org/wiki/Kenneth_Thompson" target="_blank">Ken Thompson</a>词条中找到，这个事情是这样的。</p>
+<blockquote><p>Ken Thompson was once asked what he would do differently if he were redesigning the UNIX system. His reply: “<strong>I’d spell creat with an e.</strong>” （<span style="color: #008000;">Ken Thompson有一次在被问到——如果他可以重新设计Unix系统，他会做些什么不同的事？而他回答到：“我会把“creat”多拼一个e”</span>）</p></blockquote>
+<p>“I’d spell creat with an e”，也就是说，他会把creat这个单词拼成<strong>creat</strong><span style="color: #ff0000;"><strong>e</strong><span style="color: #000000;">，而不是creat。为什么是creat呢，这需要我们来看一下creat这个系统调用，你可以在Unix或Linux下简单地<a href="http://linux.die.net/man/2/creat" target="_blank">man creat</a>你就可以知道，这个系统调用连带其某些参数，如：<strong>O_CREAT</strong>，都是一个少了“e”的create。（Unix下的有很多东西都是简写，如：usr，gp，ls，mv，ps，满大街的都是缩写）</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">看看这个改动的<a href="http://code.google.com/p/go/source/diff?spec=svn1f0a01c93d305f1ab636c68b67346659c5b957f7&amp;r=4a3f6bbb5f0c6021279ccb3c23558b3c480d995f&amp;format=side&amp;path=/src/pkg/os/file.go&amp;old_path=/src/pkg/os/file.go&amp;old=50a1ee94151635c25ad76816044252af417a45b8" target="_blank">diff</a>——这个diff只有一行，第65行，抓屏如下（理由同上）</span></span></p>
+<p style="text-align: center;"><span style="color: #ff0000;"><span style="color: #000000;"><img alt="spell it with e  diff" class="size-full wp-image-1763" height="79" src="../wp-content/uploads/2009/11/spell_it_with_e_diff.jpg" title="spell it with e  diff" width="487"/></span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">40年后的今天，Ken Thompson参与Go语言设计，于是，他提交了这个改动，也算是圆了他的愿望，从这点看来，Ken Thompson把Go语言看得和Unix一样重啊。难道Go语言也会像Unix一样成为另一个传奇？（Unix传奇 <a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542340.aspx" target="_blank">上篇</a>，<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542353.aspx" target="_blank">下篇</a>）</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">（全文完）</span></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19996.html"><img alt="Unix 50 年：Ken Thompson 的密码" height="150" src="../wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19996.html">Unix 50 年：Ken Thompson 的密码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9410.html"><img alt="Unix考古记：一个“遗失”的shell" height="150" src="../wp-content/uploads/2013/04/figure1-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9410.html">Unix考古记：一个“遗失”的shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7771.html"><img alt="少即是极多" height="150" src="../wp-content/uploads/2012/06/Less-is-More-Box-ShopTab-300x282-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7771.html">少即是极多</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3156.html"><img alt="Go语言的”Issue 9″ Closed!" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3156.html">Go语言的”Issue 9″ Closed!</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2322.html"><img alt="Unix传奇(上篇)" height="150" src="../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2322.html">Unix传奇(上篇)</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1781.html"><img alt="Go语言更名Issue 9？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1781.html">Go语言更名Issue 9？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1761.html">Go语言源码的一个改动</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

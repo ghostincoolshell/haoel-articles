@@ -1,0 +1,66 @@
+<html><body><p>近日，Stack Exchange系统管理员blog上发布了一篇关于<a href="http://blog.serverfault.com/post/stack-exchanges-architecture-in-bullet-points/" target="_blank">Stack Exchange的架构一瞥</a>，其包括了Stack Overflow, Server Fault 和 Super User的 Stack Exchange 网络。注意最后一个关于人员的配置。希望能给大家一些相关的参考。</p>
+<h4>网络流量</h4>
+<ul>
+<li>每月9千5百万个PV</li>
+<li>每秒800 HTTP 请求</li>
+<li>每秒180 DNS 请求</li>
+<li>每秒55Mb 的带宽</li>
+</ul>
+<h4>数据中心</h4>
+<ul>
+<li>1 机柜 位于俄勒冈的 <a href="http://www.peakinternet.com/">Peak Internet</a> (用于<a href="http://chat.stackexchange.com/">chat</a> 和<a href="http://data.stackexchange.com/">Data Explorer</a>)</li>
+<li>2 机框 位于 纽约的 <a href="http://www.peer1.com/">Peer 1</a> ( 用于其它的 Stack Exchange Network)</li>
+</ul>
+<p><span id="more-3721"></span></p>
+<h4>生产服务器</h4>
+<ul>
+<li>12 Web Servers (Windows Server 2008 R2)</li>
+<li>2 Database Servers (Windows Server 2008 R2 and SQL Server 2008 R2)</li>
+<li>2 Load Balancers (Ubuntu Server and HAProxy)</li>
+<li>2 Caching Servers (Redis on CentOS)</li>
+<li>1 Router / Firewall (Ubuntu Server)</li>
+<li>3 DNS Servers (Bind on CentOS)</li>
+</ul>
+<p>(生产服务器不含故障备份和管理服务器)</p>
+<h4>使用了的相关的软件和技术</h4>
+<ul>
+<li><a href="http://www.microsoft.com/net/">C# / .NET</a></li>
+<li><a href="http://www.microsoft.com/windowsserver2008/en/us/default.aspx">Windows Server 2008 R2</a></li>
+<li><a href="http://www.microsoft.com/sqlserver/en/us/default.aspx">SQL Server 2008 R2</a></li>
+<li><a href="http://www.ubuntu.com/server">Ubuntu Server</a></li>
+<li><a href="http://www.centos.org/">CentOS</a></li>
+<li><a href="http://haproxy.1wt.eu/">HAProxy</a> 用于负载均衡</li>
+<li><a href="http://redis.io/">Redis</a> 用于缓存</li>
+<li><a href="http://sourceforge.net/projects/ccnet/">CruiseControl.NET</a> 用于做builds</li>
+<li><a href="http://lucene.apache.org/lucene.net/">Lucene.NET</a> 用于搜索</li>
+<li><a href="http://www.bacula.org/en/">Bacula</a> 用于做备份</li>
+<li><a href="http://www.nagios.org/">Nagios</a> (with n2rrd and drraw plugins) 用于系统监控</li>
+<li><a href="http://www.splunk.com/">Splunk</a> 用于日志</li>
+<li><a href="http://www.red-gate.com/products/dba/sql-monitor/">SQL Monitor from Red Gate</a> 用于监控SQL Server</li>
+<li><a href="http://mercurial.selenic.com/">Mercurial</a> / <a href="http://www.fogcreek.com/kiln/">Kiln</a> 用于源码管理</li>
+<li><a href="http://www.isc.org/software/bind">Bind</a> 用于 DNS</li>
+</ul>
+<h4>程序员和系统管理员</h4>
+<ul>
+<li>14 程序员</li>
+<li>2 系统管理员</li>
+</ul>
+<p><span>（全文完）</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5075.html"><img alt="你确信你了解时间吗？" height="150" src="../wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5075.html">你确信你了解时间吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4939.html"><img alt="Quora使用到的技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4549.html"><img alt="Facebook 的系统架构" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4549.html">Facebook 的系统架构</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2529.html"><img alt="StackOverflow的404错误页" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2529.html">StackOverflow的404错误页</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1242.html"><img alt="23,148,855,308,184,500" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1242.html">23,148,855,308,184,500</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2078.html"><img alt="如何防范密码被破解" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3721.html">Stack Exchange 的架构</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

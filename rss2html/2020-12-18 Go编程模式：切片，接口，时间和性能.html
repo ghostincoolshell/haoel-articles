@@ -1,0 +1,272 @@
+<html><body><p><img alt="" class="alignright size-medium wp-image-21234" height="169" src="../wp-content/uploads/2020/12/go.slices-300x169.png" width="300"/></p>
+<p>在本篇文章中，我会对Go语言编程模式的一些基本技术和要点，这样可以让你更容易掌握Go语言编程。其中，主要包括，数组切片的一些小坑，还有接口编程，以及时间和程序运行性能相关的话题。</p>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第1 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go编程模式：切片，接口，时间和性能</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/21140.html" rel="next" title="Go 编程模式：错误处理">下一篇文章</a> »</span></nav></section>
+<h4>Slice</h4>
+<p>首先，我们先来讨论一下Slice，中文翻译叫“切片”，这个东西在Go语言中不是数组，而是一个结构体，其定义如下：</p>
+<pre class="EnlighterJSRAW">type slice struct {
+    array unsafe.Pointer //指向存放数据的数组指针
+    len   int            //长度有多大
+    cap   int            //容量有多大
+}</pre>
+<p>用图示来看，一个空的slice的表现如下：</p>
+<p><img alt="" class="aligncenter wp-image-21129 size-medium" height="190" src="../wp-content/uploads/2020/12/slice1-300x190.png" width="300"/> 熟悉C/C++的同学一定会知道，在结构体里用数组指针的问题——数据会发生共享！下面我们来看一下slice的一些操作</p>
+<p><span id="more-21128"></span></p>
+<pre class="EnlighterJSRAW">foo = make([]int, 5)
+foo[3] = 42
+foo[4] = 100
+
+bar  := foo[1:4]
+bar[1] = 99</pre>
+<p>对于上面这段代码。</p>
+<ul>
+<li>首先先创建一个foo的slice，其中的长度和容量都是5</li>
+<li>然后开始对foo所指向的数组中的索引为3和4的元素进行赋值</li>
+<li>然后，对foo做切片后赋值给bar，再修改bar[1]</li>
+</ul>
+<p><img alt="" class="aligncenter size-full wp-image-21130" height="362" src="../wp-content/uploads/2020/12/slice2.png" width="818"/></p>
+<p>通过上图我们可以看到，因为foo和bar的内存是共享的，所以，foo和bar的对数组内容的修改都会影响到对方。</p>
+<p>接下来，我们再来看一个数据操作 <code>append()</code> 的示例</p>
+<pre class="EnlighterJSRAW">a := make([]int, 32)
+b := a[1:16]
+a = append(a, 1)
+a[2] = 42</pre>
+<p>上面这段代码中，把 <code>a[1:16]</code> 的切片赋给到了 <code>b</code> ，此时，<code>a</code> 和 <code>b</code> 的内存空间是共享的，然后，对 <code>a</code>做了一个 <code>append()</code>的操作，这个操作会让 <code>a</code> 重新分享内存，导致 <code>a</code> 和 <code>b</code> 不再共享，如下图所示：</p>
+<p><img alt="" class="aligncenter size-large wp-image-21326" height="321" src="../wp-content/uploads/2020/12/go.slices.append-1024x513.png" width="640"/></p>
+<p>从上图我们可以看以看到 <code>append()</code>操作让 <code>a</code> 的容量变成了64，而长度是33。这里，需要重点注意一下——<strong><code>append()</code>这个函数在 <code>cap</code> 不够用的时候就会重新分配内存以扩大容量，而如果够用的时候不不会重新分享内存！</strong></p>
+<p>我们再看来看一个例子：</p>
+<pre class="EnlighterJSRAW">func main() {
+    path := []byte("AAAA/BBBBBBBBB")
+    sepIndex := bytes.IndexByte(path,'/’)
+
+    dir1 := path[:sepIndex]
+    dir2 := path[sepIndex+1:]
+
+    fmt.Println("dir1 =&gt;",string(dir1)) //prints: dir1 =&gt; AAAA
+    fmt.Println("dir2 =&gt;",string(dir2)) //prints: dir2 =&gt; BBBBBBBBB
+
+    dir1 = append(dir1,"suffix"...)
+
+    fmt.Println("dir1 =&gt;",string(dir1)) //prints: dir1 =&gt; AAAAsuffix
+    fmt.Println("dir2 =&gt;",string(dir2)) //prints: dir2 =&gt; uffixBBBB
+}</pre>
+<p>上面这个例子中，<code>dir1</code> 和 <code>dir2</code> 共享内存，虽然 <code>dir1</code> 有一个 <code>append()</code> 操作，但是因为 cap 足够，于是数据扩展到了<code>dir2</code> 的空间。下面是相关的图示（注意上图中 <code>dir1</code> 和 <code>dir2</code> 结构体中的 <code>cap</code> 和 <code>len</code> 的变化）</p>
+<p><img alt="" class="aligncenter size-large wp-image-21328" height="463" src="../wp-content/uploads/2020/12/slice4-1024x740.png" width="640"/></p>
+<p>如果要解决这个问题，我们只需要修改一行代码。</p>
+<pre class="EnlighterJSRAW">dir1 := path[:sepIndex]
+</pre>
+<p>修改为</p>
+<pre class="EnlighterJSRAW">dir1 := path[:sepIndex:sepIndex]
+</pre>
+<p>新的代码使用了 Full Slice Expression，其最后一个参数叫“Limited Capacity”，于是，后续的 <code>append()</code> 操作将会导致重新分配内存。</p>
+<h4>深度比较</h4>
+<p>当我们复杂一个对象时，这个对象可以是内建数据类型，数组，结构体，map……我们在复制结构体的时候，当我们需要比较两个结构体中的数据是否相同时，我们需要使用深度比较，而不是只是简单地做浅度比较。这里需要使用到反射 <code>reflect.DeepEqual()</code> ，下面是几个示例</p>
+<pre class="EnlighterJSRAW">import (
+    "fmt"
+    "reflect"
+)
+
+func main() {
+
+    v1 := data{}
+    v2 := data{}
+    fmt.Println("v1 == v2:",reflect.DeepEqual(v1,v2))
+    //prints: v1 == v2: true
+
+    m1 := map[string]string{"one": "a","two": "b"}
+    m2 := map[string]string{"two": "b", "one": "a"}
+    fmt.Println("m1 == m2:",reflect.DeepEqual(m1, m2))
+    //prints: m1 == m2: true
+
+    s1 := []int{1, 2, 3}
+    s2 := []int{1, 2, 3}
+    fmt.Println("s1 == s2:",reflect.DeepEqual(s1, s2))
+    //prints: s1 == s2: true
+}</pre>
+<h4>接口编程</h4>
+<p>下面，我们来看段代码，其中是两个方法，它们都是要输出一个结构体，其中一个使用一个函数，另一个使用一个“成员函数”。</p>
+<pre class="EnlighterJSRAW">func PrintPerson(p *Person) {
+    fmt.Printf("Name=%s, Sexual=%s, Age=%d\n",
+  p.Name, p.Sexual, p.Age)
+}
+
+func (p *Person) Print() {
+    fmt.Printf("Name=%s, Sexual=%s, Age=%d\n",
+  p.Name, p.Sexual, p.Age)
+}
+
+func main() {
+    var p = Person{
+        Name: "Hao Chen",
+        Sexual: "Male",
+        Age: 44,
+    }
+
+    PrintPerson(&amp;p)
+    p.Print()
+}</pre>
+<p>你更喜欢哪种方式呢？在 Go 语言中，使用“成员函数”的方式叫“Receiver”，这种方式是一种封装，因为 <code>PrintPerson()</code>本来就是和 <code>Person</code>强耦合的，所以，理应放在一起。更重要的是，这种方式可以进行接口编程，对于接口编程来说，也就是一种抽象，主要是用在“多态”，这个技术，在《<a href="https://coolshell.cn/articles/8460.html#%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81" rel="noopener" target="_blank">Go语言简介（上）：接口与多态</a>》中已经讲过。在这里，我想讲另一个Go语言接口的编程模式。</p>
+<p>首先，我们来看一下，有下面这段代码：</p>
+<pre class="EnlighterJSRAW">type Country struct {
+    Name string
+}
+
+type City struct {
+    Name string
+}
+
+type Printable interface {
+    PrintStr()
+}
+func (c Country) PrintStr() {
+    fmt.Println(c.Name)
+}
+func (c City) PrintStr() {
+    fmt.Println(c.Name)
+}
+
+c1 := Country {"China"}
+c2 := City {"Beijing"}
+c1.PrintStr()
+c2.PrintStr()</pre>
+<p>其中，我们可以看到，其使用了一个 <code>Printable</code> 的接口，而 <code>Country</code> 和 <code>City</code> 都实现了接口方法 <code>PrintStr()</code> 而把自己输出。然而，这些代码都是一样的。能不能省掉呢？</p>
+<p>我们可以使用“结构体嵌入”的方式来完成这个事，如下的代码所示，</p>
+<pre class="EnlighterJSRAW">type WithName struct {
+    Name string
+}
+
+type Country struct {
+    WithName
+}
+
+type City struct {
+    WithName
+}
+
+type Printable interface {
+    PrintStr()
+}
+
+func (w WithName) PrintStr() {
+    fmt.Println(w.Name)
+}
+
+c1 := Country {WithName{ "China"}}
+c2 := City { WithName{"Beijing"}}
+c1.PrintStr()
+c2.PrintStr()</pre>
+<p>引入一个叫 <code>WithName</code>的结构体，然而，所带来的问题就是，在初始化的时候，变得有点乱。那么，我们有没有更好的方法？下面是另外一个解。</p>
+<pre class="EnlighterJSRAW">type Country struct {
+    Name string
+}
+
+type City struct {
+    Name string
+}
+
+type Stringable interface {
+    ToString() string
+}
+func (c Country) ToString() string {
+    return "Country = " + c.Name
+}
+func (c City) ToString() string{
+    return "City = " + c.Name
+}
+
+func PrintStr(p Stringable) {
+    fmt.Println(p.ToString())
+}
+
+d1 := Country {"USA"}
+d2 := City{"Los Angeles"}
+PrintStr(d1)
+PrintStr(d2)</pre>
+<p>上面这段代码，我们可以看到——<strong>我们使用了一个叫<code>Stringable</code> 的接口，我们用这个接口把“业务类型” <code>Country</code> 和 <code>City</code> 和“控制逻辑” <code>Print()</code> 给解耦了。</strong>于是，只要实现了<code>Stringable</code> 接口，都可以传给 <code>PrintStr()</code> 来使用。</p>
+<p>这种编程模式在Go 的标准库有很多的示例，最著名的就是 <code>io.Read</code> 和 <code>ioutil.ReadAll</code> 的玩法，其中 <code>io.Read</code> 是一个接口，你需要实现他的一个 <code>Read(p []byte) (n int, err error)</code> 接口方法，只要满足这个规模，就可以被 <code>ioutil.ReadAll</code>这个方法所使用。<strong>这就是面向对象编程方法的黄金法则——“Program to an interface not an implementation”</strong></p>
+<h4>接口完整性检查</h4>
+<p>另外，我们可以看到，Go语言的编程器并没有严格检查一个对象是否实现了某接口所有的接口方法，如下面这个示例：</p>
+<pre class="EnlighterJSRAW">type Shape interface {
+    Sides() int
+    Area() int
+}
+type Square struct {
+    len int
+}
+func (s* Square) Sides() int {
+    return 4
+}
+func main() {
+    s := Square{len: 5}
+    fmt.Printf("%d\n",s.Sides())
+}</pre>
+<p>我们可以看到 <code>Square</code> 并没有实现 <code>Shape</code> 接口的所有方法，程序虽然可以跑通，但是这样编程的方式并不严谨，如果我们需要强制实现接口的所有方法，那么我们应该怎么办呢？</p>
+<p>在Go语言编程圈里有一个比较标准的作法：</p>
+<pre class="EnlighterJSRAW">var _ Shape = (*Square)(nil)</pre>
+<p>声明一个 <code>_</code> 变量（没人用），其会把一个 <code>nil</code> 的空指针，从 <code>Square</code> 转成 <code>Shape</code>，这样，如果没有实现完相关的接口方法，编译器就会报错：</p>
+<blockquote><p>cannot use (*Square)(nil) (type *Square) as type Shape in assignment: *Square does not implement Shape (missing Area method)</p></blockquote>
+<p>这样就做到了个强验证的方法。</p>
+<h4>时间</h4>
+<p>对于时间来说，这应该是编程中比较复杂的问题了，相信我，时间是一种非常复杂的事（比如《<a href="https://coolshell.cn/articles/5075.html" rel="noopener" target="_blank" title="你确信你了解时间吗？">你确信你了解时间吗？</a>》、《<a href="https://coolshell.cn/articles/7804.html" title="关于闰秒">关于闰秒</a>》等文章）。而且，时间有时区、格式、精度等等问题，其复杂度不是一般人能处理的。所以，一定要重用已有的时间处理，而不是自己干。</p>
+<p>在 Go 语言中，你一定要使用 <code>time.Time</code> 和 <code>time.Duration</code> 两个类型：</p>
+<ul>
+<li>在命令行上，<code>flag</code> 通过 <code>time.ParseDuration</code> 支持了 <code>time.Duration</code></li>
+<li>JSon 中的 <code>encoding/json</code> 中也可以把<code>time.Time</code> 编码成 <a href="https://tools.ietf.org/html/rfc3339" rel="noopener" target="_blank">RFC 3339</a> 的格式</li>
+<li>数据库使用的 <code>database/sql</code> 也支持把 <code>DATATIME</code> 或 <code>TIMESTAMP</code> 类型转成 <code>time.Time</code></li>
+<li>YAML你可以使用 <code>gopkg.in/yaml.v2</code> 也支持 <code>time.Time</code> 、<code>time.Duration</code> 和 <a href="https://tools.ietf.org/html/rfc3339" rel="noopener" target="_blank">RFC 3339</a> 格式</li>
+</ul>
+<p>如果你要和第三方交互，实在没有办法，也请使用 <a href="https://tools.ietf.org/html/rfc3339" rel="noopener" target="_blank">RFC 3339</a> 的格式。</p>
+<p>最后，如果你要做全球化跨时区的应用，你一定要把所有服务器和时间全部使用UTC时间。</p>
+<h4>性能提示</h4>
+<p>Go 语言是一个高性能的语言，但并不是说这样我们就不用关心性能了，我们还是需要关心的。下面是一个在编程方面和性能相关的提示。</p>
+<ul>
+<li>如果需要把数字转字符串，使用 <code>strconv.Itoa()</code> 会比 <code>fmt.Sprintf()</code> 要快一倍左右</li>
+<li>尽可能地避免把<code>String</code>转成<code>[]Byte</code> 。这个转换会导致性能下降。</li>
+<li>如果在for-loop里对某个slice 使用 <code>append()</code>请先把 slice的容量很扩充到位，这样可以避免内存重新分享以及系统自动按2的N次方幂进行扩展但又用不到，从而浪费内存。</li>
+<li>使用<code>StringBuffer</code> 或是<code>StringBuild</code> 来拼接字符串，会比使用 <code>+</code> 或 <code>+=</code> 性能高三到四个数量级。</li>
+<li>尽可能的使用并发的 go routine，然后使用 <code>sync.WaitGroup</code> 来同步分片操作</li>
+<li>避免在热代码中进行内存分配，这样会导致gc很忙。尽可能的使用 <code>sync.Pool</code> 来重用对象。</li>
+<li>使用 lock-free的操作，避免使用 mutex，尽可能使用 <code>sync/Atomic</code>包。 （关于无锁编程的相关话题，可参看《<a href="https://coolshell.cn/articles/8239.html" title="无锁队列的实现">无锁队列实现</a>》或《<a href="https://coolshell.cn/articles/9703.html" title="无锁HashMap的原理与实现">无锁Hashmap实现</a>》）</li>
+<li>使用 I/O缓冲，I/O是个非常非常慢的操作，使用 <code>bufio.NewWrite()</code> 和 <code>bufio.NewReader()</code> 可以带来更高的性能。</li>
+<li>对于在for-loop里的固定的正则表达式，一定要使用 <code>regexp.Compile()</code> 编译正则表达式。性能会得升两个数量级。</li>
+<li>如果你需要更高性能的协议，你要考虑使用 <a href="https://github.com/golang/protobuf" rel="noopener" target="_blank">protobuf</a> 或 <a href="https://github.com/tinylib/msgp" rel="noopener" target="_blank">msgp</a> 而不是JSON，因为JSON的序列化和反序列化里使用了反射。</li>
+<li>你在使用map的时候，使用整型的key会比字符串的要快，因为整型比较比字符串比较要快。</li>
+</ul>
+<h4>参考文档</h4>
+<p>还有很多不错的技巧，下面的这些参考文档可以让你写出更好的Go的代码，必读！</p>
+<ul>
+<li><b>Effective</b> <b>Go<br/>
+</b><a href="https://golang.org/doc/effective_go.html">https://golang.org/doc/effective_go.html</a></li>
+<li><b>Uber</b> <b>Go</b> <b>Style<br/>
+</b><a href="https://github.com/uber-go/guide/blob/master/style.md">https://github.com/uber-go/guide/blob/master/style.md</a></li>
+<li><b>50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs<br/>
+</b><a href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/">http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/</a></li>
+<li><b>Go</b> <b>Advice<br/>
+</b><a href="https://github.com/cristaloleg/go-advice">https://github.com/cristaloleg/go-advice</a><b></b></li>
+<li><b>Practical Go Benchmarks<br/>
+</b><a href="https://www.instana.com/blog/practical-golang-benchmarks/">https://www.instana.com/blog/practical-golang-benchmarks/</a><b></b></li>
+<li><b>Benchmarks of Go serialization methods<br/>
+</b><a href="https://github.com/alecthomas/go_serialization_benchmarks">https://github.com/alecthomas/go_serialization_benchmarks</a><b></b></li>
+<li><b>Debugging</b> <b>performance</b> <b>issues</b> <b>in</b> <b>Go</b> <b>programs<br/>
+</b><a href="https://github.com/golang/go/wiki/Performance">https://github.com/golang/go/wiki/Performance</a><b></b></li>
+<li><b>Go</b> <b>code</b> <b>refactoring:</b> <b>the</b> <b>23x</b> <b>performance</b> <b>hunt<br/>
+</b><a href="https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7">https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7</a></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="../wp-content/uploads/2020/12/go.line_.-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="../wp-content/uploads/2020/12/go.generate-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

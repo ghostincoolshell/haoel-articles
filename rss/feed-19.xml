@@ -1,0 +1,2363 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 19 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=19" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Thu, 04 Dec 2014 02:08:43 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>Eclipse开发Android应用程序入门:重装上阵</title>
+		<link>https://coolshell.cn/articles/4334.html</link>
+					<comments>https://coolshell.cn/articles/4334.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Fri, 08 Apr 2011 00:30:09 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Eclipse]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4334</guid>
+
+					<description><![CDATA[<p>翻译:赵锟 原文：http://www.smashingmagazine.com/2011/03/28/get-started-developing-for-a...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4334.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4334.html">Eclipse开发Android应用程序入门:重装上阵</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>翻译:赵锟</strong><br />
+原文：<a href="http://www.smashingmagazine.com/2011/03/28/get-started-developing-for-android-with-eclipse-reloaded/">http://www.smashingmagazine.com/2011/03/28/get-started-developing-for-android-with-eclipse-reloaded/</a></p>
+<p>在我们教程系列的<a href="https://coolshell.cn/articles/4270.html">第一部分</a>中，我们使用Android和Eclipse开发了一个简单的饮茶计时器的应用程序。在第二部分，我们将继续开发这个程序，并给它增加一些其他的额外的功能。在开发的过程中，我们将给你介绍更多重要而强大的Android SDK特性，包括持久化数据存储，Activity和Intent，和共享用户首选项（译者注：类似于windows 的注册表的一种机制）。</p>
+<p>跟着本教程，你需要上一篇教程中的代码，如果你想直接使用代码，你可以使用如下的指令从<a href="http://github.com/cblunt/BrewClock">GitHub</a>上check out出tutorial_par_1标记的代码：</p>
+<p><img decoding="async" loading="lazy" width="793" height="564" src="https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full.jpg" alt="" title="1_starting_point_full"  class="aligncenter size-full wp-image-4362" srcset="https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full.jpg 793w, https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full-300x213.jpg 300w, https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full-768x546.jpg 768w, https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full-380x270.jpg 380w" sizes="(max-width: 793px) 100vw, 793px" /><br />
+[code]<br />
+$ git clone git://github.com/cblunt/BrewClock.git<br />
+$ cd BrewClock<br />
+$ git checkout tutorial_part_1<br />
+[/code]</p>
+<p>在GitHub中检出了代码后，你需要将代码倒入到Eclipse中的项目中：</p>
+<ol>
+<li>运行      Eclipse 选择 <em>File → Import…</em></li>
+<li>在导入窗口, 选择 <em>“Existing Projects into Workspace”</em>并点击<em> “Next.”</em></li>
+<li>在下一屏，点击 <em>“Browse,”</em>选择你从GitHub上clone出的代码目录。</li>
+<li>点击“Finish” 将项目导入到Eclipse中。</li>
+</ol>
+<p><span id="more-4334"></span><br />
+在导入项目到Eclipse之后，你有可能会看到有如下的警告信息：<br />
+[code]<br />
+Android required .class compatibility set to 5.0.<br />
+Please fix project properties.<br />
+[/code]<br />
+如果有这种情况，右键点击“Project Explorer ”中新导入的BrewClock项目，并选择 “Fix Project Properties,” 并重启Eclipse。</p>
+<h3>数据持久化入门</h3>
+<p>当前,BrewClock 让用户为他们泡的茶设置一个定时器。这个非常棒的一个工作，但是如果对于不同的茶使用同一个泡茶时间的结果会怎样呢，是不每种茶都应该有自己的一个泡茶时间呢？如果这样，那岂不是所有的用户都需要记下每一类茶所需要泡的时间！这不是一个很好的用户体验。因此，在这篇教程中，我将新增一个功能来为用户每种不同的茶叶存放一个泡茶时间，并当用户想泡茶的时候，可以从茶叶列表中进行选择。</p>
+<p>为了实现这个目的，我们得利用Android的丰富的数据持久化的API。Android提供了几种方式来存储数据，本文将要覆盖其中的两种方式。第一种，使用SQLite数据库引擎来为我们存储数据。</p>
+<p>SQLite 是一种流行的轻量级SQL数据库引擎，它将数据存在单个文件中。SQLite经常用于桌面或在那些运行不能运行客户端-服务器SQL引擎（例如MySQL或PostgreSQL)的嵌入式的应用上。</p>
+<p>每个安装在Android上的应用都可以保存和使用多个SQLite数据库文件（由数据存储容量决定），这些数据由系统自动地进行管理。应用程序的数据是私有并且不能被其他的应用程序所访问。（数据可以通过ContentProvider(译者注：内容提供者类)类进行共享，但是我们不会在本教程中覆盖关于内容提供者的内容）。当数据应用程序被更新时，数据库文件就进行持久化，当应用程序被删除时，数据库文家就被删除。</p>
+<p>我们在BrewClock应用使用SQLite数据来维护我们的茶叶列表和泡茶所需要的时间。下面是我们我们将使用的数据表的一个总体介绍。</p>
+<p>[code]<br />
++&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-+<br />
+| Table: teas                         |<br />
++&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+<br />
+| Column     | Description            |<br />
++&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+<br />
+| _ID        | integer, autoincrement |<br />
+| name       | text, not null         |<br />
+| brew_time  | integer, not null      |<br />
++&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+<br />
+[/code]</p>
+<p>如果以前你使用过SQL，你应该熟悉这些内容。数据表有三个字段，一个唯一标示（_ID），茶叶名称(name)和泡茶时间(brew_time)字段。我们将使用Android提供给我们的API在应用中建立数据表。系统将负责在正确的位置为我们的创建数据库文件。</p>
+<h4>抽象数据库</h4>
+<p>为了确保数据库的代码容易被维护，我们用一个单独的类TeaData来抽象所有处理数据库创建，插入，和查询的代码。如果你熟悉模型-试图-控制(译者注：MVC)方法的话，这个你也应该熟悉。所有数据库代码与我们的BrewClockActitvity类隔离开来。Actitvity可以初始化一个新的TeaData实例（这个实例将连接数据库）并完成它所需要的工作。以这种方式工作保证了我们可以方便的更改我们所使用的数据库而不用修改其他那些和数据库不相关部分的代码。</p>
+<p>通过菜单File → New → Class.在BrewClock项目中创建一个TeaData的新类。确保TeaData扩展于android.database.sqlite.SQLiteOpenHelper 类，并选中“Constructors from superclass”复选框。<br />
+<img decoding="async" src="https://coolshell.cn/wp-content/uploads/2011/04/2_create_teadata_class1.jpg" alt="" title="1_starting_point_full"  class="aligncenter size-full wp-image-4362" /></p>
+<p>TeaData 类将为你自动地处理SQLite数据库的创建和版本。我们需要增加一些方法来作为其他代码到数据库的接口。</p>
+<p>增加两个常量来存储数据库的名字和版本,增加表名和表中列名。我们使用Android提供的常类BaseColumns._ID来做为表的唯一id列：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/TeaData.java
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.provider.BaseColumns;
+
+public class TeaData extends SQLiteOpenHelper {
+  private static final String DATABASE_NAME = &quot;teas.db&quot;;
+  private static final int DATABASE_VERSION = 1;
+
+  public static final String TABLE_NAME = &quot;teas&quot;;
+
+  public static final String _ID = BaseColumns._ID;
+  public static final String NAME = &quot;name&quot;;
+  public static final String BREW_TIME = &quot;brew_time&quot;;
+
+  // …
+}
+</pre>
+<p>为TeaData增加一个构造方法，以数据库名称合版本号为参数调用其父类的构造方法。Android将会自动地打开数据库（如果数据库不存在就自动创建它）。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/TeaData.java
+public TeaData(Context context) {
+  super(context, DATABASE_NAME, null, DATABASE_VERSION);
+}
+</pre>
+<p>我们需要重载onCreate方法，并执行一个SQL 串执行创建数据库表的操作。Android将会在数据库文件第一次被创建时调用这个方法。</p>
+<p>在启动过程中，Android检查数据库的版本是否我们传入的版本一致。如果版本发生了改变，Android将会调用onUpgrade方法，在这个方法总，你可以编写修改数据库结构的业务逻辑。在本教程中，我们将让Android删除数据库并重建数据库。</p>
+<p>在onCreate和onUpgrade中增加如下的代码:</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/TeaData.java
+@Override
+public void onCreate(SQLiteDatabase db) {
+  // CREATE TABLE teas (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, brew_time INTEGER);
+  String sql =
+    &quot;CREATE TABLE &quot; + TABLE_NAME + &quot; (&quot;
+      + _ID + &quot; INTEGER PRIMARY KEY AUTOINCREMENT, &quot;
+      + NAME + &quot; TEXT NOT NULL, &quot;
+      + BREW_TIME + &quot; INTEGER&quot;
+      + &quot;);&quot;;
+
+  db.execSQL(sql);
+}
+
+@Override
+public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+  db.execSQL(&quot;DROP TABLE IF EXISTS &quot; + TABLE_NAME);
+  onCreate(db);
+}
+
+</pre>
+<p>下一步，我们需要新增代码让我们方便地在数据库中新增茶叶记录。我们新增一个带茶叶名称和泡茶时间的方法来负责插入记录。Android为了尽量避免开发者使用SQL语句，提供了一堆类来处理向数据库中查入记录。首先，我们创建一个ContentValues集合，并将相关的值插入到这个集合中去。</p>
+<p>对于ContentValues集合，我们只要简单地提供一个列名和值来插入就行了。Android负责创建和运行正确的SQL。使用Android的数据类确保了你能写出安全，跨平台的数据库操作代码。</p>
+<p>Add a new method, insert(), to the TeaData class:</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/TeaData.java
+public void insert(String name, int brewTime) {
+  SQLiteDatabase db = getWritableDatabase();
+
+  ContentValues values = new ContentValues();
+  values.put(NAME, name);
+  values.put(BREW_TIME, brewTime);
+
+  db.insertOrThrow(TABLE_NAME, null, values);
+}
+
+</pre>
+<h4>查询数据</h4>
+<p>我们应用程序具有了在数据库中保存数据的能力后，我们同样也需要一种方式将数据取回来。Android提供了游标Cursor接口来完成这件工作。一个游标代表了针对数据库运行一个SQL返回的结果集，游标在这个结果集中维护了一个指针来指向结果集中的一行。这个指针可以向前，向后移动，并返回每一列的值，下面我们用图形来帮助你理解游标:</p>
+<p>SQL 查询: SELECT * from teas LIMIT 3;<br />
+[code]<br />
++&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;+</p>
+<p>|  _ID  |  name       |  brew_time  |</p>
+<p>+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;+</p>
+<p>|    1  |  Earl Grey  |          3  |</p>
+<p>|    2  |  Green      |          1  | &lt;= Cursor</p>
+<p>|    3  |  Assam      |          5  |</p>
+<p>+&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;-+<br />
+[/code]</p>
+<p>在这个例子中，游标指向了结果集中的第二条记录（绿茶）。我们可以通过调用cursor.moveToPrevious()方法，将游标向前移动，让它指向第一行（Earl Grey），或者调用moveToNext向前移动指向Assam。要取到游标所指向记录的茶叶的名称，我们只要调用cursor.getString(1)，1代表我们向提取数据列的下标（注意下标识从0开始的，1代表第二列，依次类推）。</p>
+<p>在了解游标后，我们增加一个创建游标对象并返回数据库中所有的茶叶信息。在TeaData中增加all方法：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/TeaData.java
+public Cursor all(Activity activity) {
+  String[] from = { _ID, NAME, BREW_TIME };
+  String order = NAME;
+
+  SQLiteDatabase db = getReadableDatabase();
+  Cursor cursor = db.query(TABLE_NAME, from, null, null, null, null, order);
+  activity.startManagingCursor(cursor);
+
+  return cursor;
+}
+</pre>
+<p>因为这个方法乍一看有点古怪，所以让我们先来关心一下这个方法的一些细节。我们没有使用SQL的查询语句，而是使用了Android提供的数据库接口方法。</p>
+<p>第一，我们需要告诉Android，我们所关心的列的信息。我们创建了一个字符串数组，数组中存放这TeaData中列的标示信息。我们还设置了我名们期望的结果集按照哪一个列进行排序的列名。</p>
+<p>第二，我们使用getReadalbeDatabase()创建了一个到数据库的只读连接，并调用query方法告诉Android我们希望用query方法运行一个查询。query()方法有很多的参数，Android在内部将这些参数转化为一个查询语句。此外，Android的抽象层保证了即使底层数据储存机制发生了变化，我们的应用程序代码也能正确的工作。</p>
+<p>由于我们只要返回表中的所有记录，所以我们没有在方法中使用到链接join，过滤filter和分组group（例如：在SQL中的WHERE，JOIN，和GROUP BY）。from和order变量告诉查询数据库需要返回那些列和提取数据时按什么列进行排序。我们使用SQLiteDatabase.query()作为和数据库的人机交互接口。</p>
+<p>最后，我们让Activity（在本例中，我们的BrewClockActivity）来管理游标。通常，游标需要人工刷新内容，因此当我们增加一个新茶信息到数据库中时，我们就需要刷新我们的游标。每当我们的应用被挂起和恢复的时候，通过调用startManagingCursor()让Android来帮我们重建结果集。</p>
+<p>在TeaData类中增加count方法:</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/TeaData.java
+  public long count() {
+    SQLiteDatabase db = getReadableDatabase();
+    return DatabaseUtils.queryNumEntries(db, TABLE_NAME);
+  }
+
+</pre>
+<p>保存TeaData类，使用修正没有import 的类(Source → Organize Imports)，在完成我们的数据类后，下一步我们将着手修改我们BrewClock的人机界面。</p>
+<h4>修改BrewClock用户界面，允许进行茶叶选择</h4>
+<p>持久化茶和泡茶的时间的目的是让用能快速的选择他们所钟爱的预设置的茶。为了完成这个功能，我们需要再BrewClock的主界面上增加一个Spinner（类似于桌面上弹出菜单），生成一个来自于TeaData的茶列表。</p>
+<p>和前面的教程一样，我们使用了Eclipse的布局器编辑器在BrewClock的主界面布局XML文件中增加Spinner。在LinearLayout元素下面增加下面这些代码（大约在24行）。如果你打开了可视化的布局编辑器后，你可以点击窗口下面的地&#8221;Code View&#8221;进行切换。</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- /res/layout/main.xml --&gt;
+
+&lt;!-- Tea Selection --&gt;
+&lt;LinearLayout
+  android:orientation=&quot;vertical&quot;
+  android:layout_width=&quot;fill_parent&quot;
+  android:layout_height=&quot;wrap_content&quot;&gt;
+
+  &lt;Spinner
+    android:id=&quot;@+id/tea_spinner&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</pre>
+<p>在BrewClockActivity类里面,增加一个成员变量指向Spinner，通过使用findViewById连接界面上的控件：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+protected Spinner teaSpinner;
+protected TeaData teaData;
+
+// …
+
+public void onCreate(Bundle savedInstanceState) {
+  // …
+  teaData = new TeaData(this);
+  teaSpinner = (Spinner) findViewById(R.id.tea_spinner);
+}
+</pre>
+<p>运行你的程序以确保新的界面正确地生效。你应该在泡茶计数器下看见一个空白的弹出式菜单（或者是Spinner)。如果点击spinner，Android将显示一个弹出式的菜单并为你提供选择列表。在这时，菜单的内容因该是空的，现在让我们来绑定Spinner和我们的茶叶数据库。</p>
+<p><img decoding="async" loading="lazy" width="500" height="356" src="https://coolshell.cn/wp-content/uploads/2011/04/3_blank_spinner.jpg" alt="" title="3_blank_spinner"  class="aligncenter size-full wp-image-4364" srcset="https://coolshell.cn/wp-content/uploads/2011/04/3_blank_spinner.jpg 500w, https://coolshell.cn/wp-content/uploads/2011/04/3_blank_spinner-300x213.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<h4>数据绑定</h4>
+<p>当Android从数据库中查询数据时，它将会返回一个游标Cursor对象。Cursor代表了来自数据库的结果集，并可以移动游标来提取结果中的数据。使用一类Android提供的称为“适配器Adapter”的类，我们很容易将这个结果集绑定到Spinner上。适配器完成了提取数据库结果集中的数据并在界面上显示这些数据等这些复杂而困难工作。</p>
+<p>在我们的TeaData.all()方法中已经可以返回一个带有tea表内容的游标，使用这个游标，我们所需要做的工作就是创建一个SimpleCursor适配器来绑定我们的teaSpinner，Android会负责处理将数据显示在spinner的列表中。</p>
+<p>通过创建一个SimpleCursorAdapter类来连接Spinner与teaData.all()返回的游标：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// com/example/brewclock/BrewClockActivity.java
+
+public void onCreate(Bundle savedInstanceState) {
+  // …
+  Cursor cursor = teaData.all(this);
+
+  SimpleCursorAdapter teaCursorAdapter = new SimpleCursorAdapter(
+    this,
+    android.R.layout.simple_spinner_item,
+    cursor,
+    new String[] { TeaData.NAME },
+    new int[] { android.R.id.text1 }
+  );
+
+  teaSpinner.setAdapter(teaCursorAdapter);
+  teaCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+}
+
+</pre>
+<p>注意，我们使用了Android内建的android.R对象。这个对象提供了你的应用程序中的默认资源，例如视图和布局。在我们的代码中，我们使用了android.R.layout.simple_spinner_item，它是简单的文本标签布局。</p>
+<p>如果你再次运行的应用程序，你将会看到spinner中仍然是空的！虽然我们已经连接了我们的数据库，但是由于数据库中没有任何记录，所以我们任何看到了空列表。</p>
+<p>我们通过在构造方法中增加一些默认记录来让用户可以选择所需要的茶叶，为了避免重复记录，我们只有在数据库中记录为0的情况才增加默认记录。在本教程的代码中，我们使用前面增加的count()来检查数据库中表记录是否为空。</p>
+<p>增加当数据库中表为空的默认记录代码。把这些代码增加从数据库提取茶叶数据的前面（译者注：上一段的代码前）。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// com/example/brewclock/BrewClockActivity.java
+public void onCreate(Bundle savedInstanceState) {
+  // …
+
+  // Add some default tea data! (Adjust to your preference :)
+  if(teaData.count() == 0) {
+    teaData.insert(&quot;Earl Grey&quot;, 3);
+    teaData.insert(&quot;Assam&quot;, 3);
+    teaData.insert(&quot;Jasmine Green&quot;, 1);
+    teaData.insert(&quot;Darjeeling&quot;, 2);
+  }
+
+  // Code from the previous step:
+  Cursor cursor = teaData.all(this);
+
+  // …
+}
+
+</pre>
+<p>现在再次运行你的应用程序。你将会发现茶叶Spinner有了一条选择。点击Spinner让你可以从数据库选择你要的茶叶。</p>
+<p><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2011/04/4_populated_spinner.jpg" alt="" title="4_populated_spinner" width="500" height="356" class="aligncenter size-full wp-image-4365" srcset="https://coolshell.cn/wp-content/uploads/2011/04/4_populated_spinner.jpg 500w, https://coolshell.cn/wp-content/uploads/2011/04/4_populated_spinner-300x213.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p>恭喜你！你已经成功关联了你的界面和代码。这是任何软件开发过程中一个非常重要的方面。正如你所看见的，Android将这一步简化的非常容易，但是功能有是非常的NB。使用游标和适配器，你可以将数据源（丛简单的字符串数组到复杂的数据库查询）绑定到任何类型的视图：spinner或列表，设置是类似iTunes cover-flow gallery!</p>
+<p>虽然现在已经可以开始泡茶了，但是我们工作还远没有结束。当你从Spinner选择了不同的茶，这个选择却不会发生任何作用。我们需要根据用户所选茶叶的种类取更新我们的泡茶时间。</p>
+<h4>读取选中茶叶数据并更新泡茶时间</h4>
+<p>为了能读取用户从数据库中选择茶叶的数据，我们必须增加一个针对此事件的监听器。类似于处理按钮点击事件的OnClickListener监听器一样，我们将实现一个OnItemSelectedListener。当用户从视图中做出一个选择的事件将触发这个监听器，例如从我们的Spinner。</p>
+<p>在BrewClockActivity中增加需要实现的接口OnItemSelectedListener。并增加其响应的处理方法onItemSelected()和onNothingSelected()：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+public class BrewClockActivity extends Activity implements OnClickListener, OnItemSelectedListener {
+  // …
+  public void onItemSelected(AdapterView&lt;?&gt; spinner, View view, int position, long id) {
+    if(spinner == teaSpinner) {
+      // Update the brew time with the selected tea’s brewtime
+      Cursor cursor = (Cursor) spinner.getSelectedItem();
+      setBrewTime(cursor.getInt(2));
+    }
+  }
+
+  public void onNothingSelected(AdapterView&lt;?&gt; adapterView) {
+    // Do nothing
+  }
+}
+
+</pre>
+<p>在这里我们要检查是触发的spinner此事件是不是BrewClock的teaSpinner。如果是，我们将提取代表选中记录的游标对象。这些都是由关联teaData和Spinner的SimpleCursorAdapter来提供我们完成的。Android知道哪个查询产生的Spinner数据，也知道用户选择的哪个数据。Android使用游标来返回数据库的一行记录，也代表了用户所选择的茶叶数据。</p>
+<p>Cursor的getInt()方法带了一个我们想提取的列的下标为参数。在我们的teaData.all()方法中创建游标的时候，我们读取的列是_ID,NAME和BREW_TIME。假设我们在teaSpinner中选择的是Jasmine Tea，那么将返回我们所选数据所对应的数据库记录。</p>
+<p>然后我们再通过传递参数2来选择此记录的第二列的整型值。这个值提供给setBrewTime()方法。这个方法用于更新界面上的泡茶时间。</p>
+<p>最后，我们需要告诉teaSpinner BrewClockActivity正在监听OnItemSelected事件。在BrewClockActivity的onCreate方法中增加下面的代码：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+public void onCreate() {
+  // …
+  teaSpinner.setOnItemSelectedListener(this);
+}
+</pre>
+<p>大功告成！再次运行你的程序，并从Spinner选择不同的茶叶。每次你所选的茶叶它所对应的泡茶时间都回显示对应的界面上。我们余下的代码中已经可以处理从当前时间开始递减计数。所以在有预先设置的茶叶种类下，我们已经可以完成我们所想要的功能。</p>
+<p>你当然可以，回到之前的代码中去增加一些茶叶种类你满足你的口味。但是如果你发布BrewClock程序到Android Market，每当有人向增加新的茶叶数据到数据库中，我就需要去手动的取更新数据中的内容并重新发布它；这样所有的人就必须去更新它，并且所有的人都有一个同样的列表。这听起来非常的不灵活，因此我们还有很多的工作需要完成！</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/5_default_teas.jpg" alt="" title="3_blank_spinner"  class="aligncenter size-full wp-image-4364"/></p>
+<p>如果用户自己有方法新增茶叶种类到数据库里面，将会非常的不错的做法。因此我们将在下一章继续。。。</p>
+<h3>Activity 介绍</h3>
+<p>和你应用程序中每个屏幕关联的代码就是Activity。每次当你从一屏切换到另外一屏，Android就会创建一个新的Activity。在真实世界中，虽然一个应用程序经常由多个屏幕/Activity构成，Andriod却将每个屏幕看作独立的个体。多个Activity工作在一起形成一种关联的体验，这是因为Android让你非常容易地在屏幕/Activity之间传递数据。</p>
+<p>在本节最后，你将为你的应用程序新增一个新的Activity（AddTeaActivity）并将它注册到Android系统中。你还需要从最初的BrewClockActivity传递数据到新的Activity中。</p>
+<p>首先，我们需要给用户一种方式切换到新的Activity上。我们将使用选项菜单来完成之一步。</p>
+<h4>选项菜单</h4>
+<p>当用户他们的设备上的“Menu”按键时，选项菜单以弹出菜单的形式出现。Android负责菜单的自动创建和显示；你只需要告诉Android，菜单显示什么内容和当用户点击菜单时该做什么就行。</p>
+<p>然而,最好不要在代码中硬编码菜单的标题，我们可以使用Android的字符串资源。字符串资源是一个独立的文件，在这个文件中你可以维护所有用于用户阅读的字符串和标签资源，并可以在代码调用它们。这就意味着当你在未来需要修改字符串时，你只要修改这一处地方即可。.</p>
+<p>在project explorer中导航到“res/values”下，你将会看到string.xml文件已经存在。这个是你再创建新项目的时候由Eclipse创建的，这文件存放着在整个应用程序我们将要使用的字符串。</p>
+<p>双击打开<em>strings.xml</em> ,通过窗口底部的选项页切换到XML 视图。</p>
+<p>在&lt;resources&gt;…&lt;/resources&gt; 元素中增加下面的内容:</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+
+&lt;!-- res/values/strings.xml --&gt;
+  &lt;resources&gt;
+    &lt;!-- … --&gt;
+    &lt;string name=&quot;add_tea_label&quot;&gt;Add Tea&lt;/string&gt;
+  &lt;/resources&gt;
+
+
+</pre>
+<p>我们在这里定义了一个字符串，add_tea_label和它关联的文本，我们可以在整个程序代码中通过add_tea_label来使用其关联的文本。如果标签因为某个原因需要修改，我们只需要在这个文件修改这一个地方就能完成整个程序的修改。</p>
+<p>下一步，让我们创建一个新文件完成选项菜单的定义，如果字符串和布局一样，菜单也使用XML来定义。因此我们将在Eclipse中川建一个新的XML文件：</p>
+<p>通过选择File → New → Other, 并选择“Android XML File.”在Eclipse中创建一个新的XML文件。</p>
+<p>选择资源的类型为 “Menu”，保存文件名为main.xml。Eclipse将为你自动的创建一个目录<em>res/menu</em>, 来存放你的菜单文件。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/7_new_menu_xml.jpg"></img></p>
+<p>打开<em>res/menus/main.xml</em> 文件, 通过窗口底部的“main.xml”选项页来切换到XML视图。</p>
+<p>增加菜单项， add_tea。</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- res/values/strings.xml --&gt;
+  &lt;resources&gt;
+    &lt;!-- … --&gt;
+    &lt;string name=&quot;add_tea_label&quot;&gt;Add Tea&lt;/string&gt;
+  &lt;/resources&gt;
+</pre>
+<p>注意android:title 属性被设置为@string/add_tea_label。这告诉Android在我们的strings.xml文件中查找add_tea_label并返回相关联的标签内容。在本列中我们的菜单项的标签时“Add Tea”。</p>
+<p>下一步，我们将告诉我们的Activity，当用户点击设备上的“memu”按键时来显示这个选项菜单。</p>
+<p>返回<em>BrewClockActivity.java</em>代码, 重载onCreateOptionsMenu 方法,这个方法告诉Android 当用户点击“Menu”按键时，装载我们的菜单：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+  MenuInflater inflater = getMenuInflater();
+  inflater.inflate(R.menu.main, menu);
+
+  return true;
+}
+
+</pre>
+<p>当用户点击他设备上的“Menu”按键时，Android将调用onCreateOptionsMenu。在这个方法中，我们创建了一个MenuInflater, 这个对象将从你的应用程序包中装载你的菜单资源。就如同按钮和文本域组成你的应用程序布局一样，main.xml资源也是通过全局对象R来生效的，因此我们将此对象提交给MenuInflater对象。</p>
+<p>为了测试菜单，保存并在模拟器中并运行应用程序。当程序运行起来使，点击“Menu”按键，你将会看到一个弹出式的菜单显示了一个“Add Tea”选项。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/8_add_teas_options_menu.jpg"></img></p>
+<p>如果你点击“Add Tea”选项，Android自动地检测到点击并关闭菜单。在后台，Android将会提醒应用程序选项已经被点击。</p>
+<h4>处理菜单点击</h4>
+<p>当用户点击 “Add Tea” 菜单选项，我们想要显示一个新的Activity以便我们能进入增加新茶叶种类的界面。通过选择File → New → Class来创建一个的Activiy。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/9_new_activity_settings.jpg"></img></p>
+<p>将新类命名为 AddTeaActivity,并确保它继承于android.app.Activity类。这个类也放在com.example.brewclock包中:</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+package com.example.brewclock;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class AddTeaActivity extends Activity {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+  }
+}
+
+</pre>
+<p>上面样例中的空白Activity将不会完成任何工作。但是通过它，我们已经可以完成选项菜单的功能。</p>
+<p>在BrewClockActivity增加一个重载方法onOptionsItemSelected 。当用户点击菜单项时，这个方法被Android调用。 (注意点击的MenuItem为它的接收参数：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+  switch(item.getItemId()) {
+    case R.id.add_tea:
+      Intent intent = new Intent(this, AddTeaActivity.class);
+      startActivity(intent);
+      return true;
+
+    default:
+      return super.onOptionsItemSelected(item);
+  }
+}
+
+
+</pre>
+<p>通过上面的代码，我们告诉Android，当“Add Tea”被点击的时候，我们将要创建一个的Activity；在本教程中，就是AddTeaActivity。然而，不要直接创建这个类的实例，注意我们使用了Intent。Intent有着Android框架的强大特性；他们将Activity绑定在一起来组成应用程序，并允许在他们之间相互传递数据。</p>
+<p>Intent的优点甚至让你的应用程序可以使用用户安装的其他的应用程序。例如，当用户要从图库里面显示一张图片，Android自动地给显一个对话框来让用户选择应用程序来显示图片。任何注册为可以处理图片显示的应用程序都会出现在这个对话框的列表中。</p>
+<p>Intent功能强大而复杂的主体, 因此它值得你从官方的文档<a href="http://developer.android.com/guide/topics/intents/intents-filters.html">official Android SDK documentation</a>中仔细研究。</p>
+<p>让我们运行我们的应用程序，以测试我们的“Add Tea”屏幕。</p>
+<p>运行你的项目，按下Menu按键，并点击 “Add Tea.”。</p>
+<p>不如你预期的，你并没有看到 “Add Tea” Activity，出现在你面前的是一个Android开发者经常看到的对话框：</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/10_crash.jpg"></img></p>
+<p>虽然我们创建了一个Intent并告诉Android启动我们的AddTeaActivity Activity, 由于我们没有将这个Activity注册到Android系统中，我们的应用程序最终还是crash掉了。系统不知道从哪里去找到我们试图运行的Activity（应该还记得Intent可以启动安装在设备上的任何Activity吧）。让我们在应用程序的mainfest文件来注册这些Acitivity。</p>
+<p>打开应用的manifest文件，在Eclipse中的AndroidManifest.xml。通过窗口底部的“AndroidManifest.xml”选项页切换到xml视图</p>
+<p>应用程序的mainfest文件是保存你应用程序全局设置和信息的地方。你将会看见里面已经有一个.BrewClockActivity 的Activity声明，并且这个Activity在程序运行的时候启动。</p>
+<p>在&lt;application&gt;中, 增加一个 &lt;activity&gt; 节点，描述为“Add Tea”的 Activity. 使用我们早先在strings.xml声明的 add_tea_label字符串作为这个Activity的标题：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- AndroidManifest.xml --&gt;
+&lt;application …&gt;
+  …
+  &lt;activity android:name=&quot;.AddTeaActivity&quot; android:label=&quot;@string/add_tea_label&quot; /&gt;
+&lt;/application&gt;
+</pre>
+<p>在你再次运行BrewClock保存这个manifest文件。这一次，当你打开菜单并点击“Add Tea,”时Android将会启动AddTeaActivity。按下back按键返回主屏幕。</p>
+<p>完成了Activity的关联，下一步我们将要开发一个增加新茶的界面！</p>
+<h3>开发茶叶编辑器界面</h3>
+<p>开发一个增加茶叶界面和上一个教程中开发的BrewClock主界面是非常相似的。首先要创建一个布局文件，然后在按照下面的讲解添加适合的XML内容。</p>
+<p>和主界面开发所有不同的是，你可以使用Android最近改进的Eclipse布局编辑器来开界面。创建一个新的XML文件来定义你的布局。从菜单File → New然后选择 “Android XML File,” 选择 “Layout”类型。并将文件命令为<em>add_tea.xml</em>。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/11_new_layout_xml.jpg"></img></p>
+<p>用下面的布局内容替换<em>add_tea.xml</em> 文件的内容：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- res/layouts/add_tea.xml --&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+  xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+  android:layout_width=&quot;fill_parent&quot;
+  android:layout_height=&quot;fill_parent&quot;
+  android:orientation=&quot;vertical&quot;
+  android:padding=&quot;10dip&quot;&gt;
+
+  &lt;TextView
+    android:text=&quot;@string/tea_name_label&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot; /&gt;
+
+  &lt;EditText
+    android:id=&quot;@+id/tea_name&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;/&gt;
+
+  &lt;TextView
+    android:text=&quot;@string/brew_time_label&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;/&gt;
+
+  &lt;SeekBar
+    android:id=&quot;@+id/brew_time_seekbar&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:progress=&quot;2&quot;
+    android:max=&quot;9&quot; /&gt;
+
+  &lt;TextView
+    android:id=&quot;@+id/brew_time_value&quot;
+    android:text=&quot;3 m&quot;
+    android:textSize=&quot;20dip&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:gravity=&quot;center_horizontal&quot; /&gt;
+&lt;/LinearLayout&gt;
+
+</pre>
+<p>为了这个界面上使用的字符串，我们同样也需要在<em>strings.xml</em> 中增加一些新的内容：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- res/values/strings.xml --&gt;
+&lt;resources&gt;
+  &lt;!-- … --&gt;
+  &lt;string name=&quot;tea_name_label&quot;&gt;Tea Name&lt;/string&gt;
+
+  &lt;string name=&quot;brew_time_label&quot;&gt;Brew Time&lt;/string&gt;
+&lt;/resources&gt;
+
+</pre>
+<p>在这个布局中，我们加了一个新的界面控件类型，SeekBar。这个控件可以让用户通过从左向右拖拉一个指示器thumb，非常容易的指定泡茶时间。这个值得范围从0到android:max。</p>
+<p>在这个界面中，我们使用刻度是0到9，意思是从1分钟到10分钟（泡0分钟茶等于是浪费好茶）。第一，我们需要确保AddTeaActivity能正确地加载我们的界面:</p>
+<p>在Activity的onCreate()方法中增加下面的代码用于加载和显示add_tea布局文件：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+public void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.add_tea);
+}
+
+</pre>
+<p>现在通过运行项目来测试你的应用程序，按下“Menu”按键，并点击“Add Tea”菜单。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/12_add_tea_interface.jpg"/></p>
+<p>你将从“Add Tea”屏幕上看到你的新界面。你可以在文本域中输入文字和从左到右拖动SeekBar。但是由于我们没有增加相关代码，这个界面并没有实现什么具体的功能。</p>
+<p>在AddTeaActivity中增加下面这些属性，并关联到我们界面上元素：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+public class AddTeaActivity {
+  // …
+
+  /** Properties **/
+  protected EditText teaName;
+  protected SeekBar brewTimeSeekBar;
+  protected TextView brewTimeLabel;
+
+  // …
+
+</pre>
+<p>下一步,关联属性和你的界面：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+public void onCreate(Bundle savedInstanceState) {
+  // …
+  // Connect interface elements to properties
+  teaName = (EditText) findViewById(R.id.tea_name);
+  brewTimeSeekBar = (SeekBar) findViewById(R.id.brew_time_seekbar);
+  brewTimeLabel = (TextView) findViewById(R.id.brew_time_value);
+}
+
+</pre>
+<p>界面非常的简单，我们只要增加相应SeekBar 改变事件的监听器。当用户从左到右移动SeekBar指示器时，我们的应用程序需要读出新值并更新SeekBar之下泡茶时间标签的内容。我们将使用一个监听器来检测SeekBar何时改变的：</p>
+<p>在AddTeaActivity类声明中增加实现 onSeekBarChangedListener接口，并添加所必要的方法：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+public class AddTeaActivity
+extends Activity
+implements OnSeekBarChangeListener {
+  // …
+
+  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    // TODO Detect change in progress
+  }
+
+  public void onStartTrackingTouch(SeekBar seekBar) {}
+
+  public void onStopTrackingTouch(SeekBar seekBar) {}
+}
+
+</pre>
+<p>我们唯一感兴趣的事件时onProgressChanged，因此我们需要在这个方法内增加代码更新泡茶时间标签的内容为SeekBar选中的值。之前我们说过SeekBar的刻度是0到9，因此我们需要将SeekBar的加1的值来显示给用户才有意义。</p>
+<p>在<em>AddTeaActivity.java</em>代码中增加如下的onProgressChanged()代码：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+  if(seekBar == brewTimeSeekBar) {
+    // Update the brew time label with the chosen value.
+    brewTimeLabel.setText((progress + 1) + &quot; m&quot;);
+  }
+}
+
+</pre>
+<p>在AddTeaActivity的onCreate方法中设置监听器：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+public void onCreate(Bundle savedInstanceState) {
+  // …
+
+  // Setup Listeners
+  brewTimeSeekBar.setOnSeekBarChangeListener(this);
+}
+
+</pre>
+<p>现在运行你的程序，并拖动SeekBar,泡茶时间标签的内容将会同步更新为正确地值：</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/13_seekbar.jpg"></img></p>
+<h4>保存新增茶叶</h4>
+<p>完成了增加茶叶界面之后,剩下的工作就是让用户可以将他们新增的茶叶保存到数据库中.我们将会对界面上输入数据增加一点校验,以避免茶叶名为空的数据被保存到数据库中！</p>
+<p>在编辑器中打开<em>strings.xml</em> 增加一些我们在应用程序将要使用到的新标签。</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- res/values/strings.xml --&gt;
+&lt;string name=&quot;save_tea_label&quot;&gt;Save Tea&lt;/string&gt;
+&lt;string name=&quot;invalid_tea_title&quot;&gt;Tea could not be saved.&lt;/string&gt;
+
+&lt;string name=&quot;invalid_tea_no_name&quot;&gt;Enter a name for your tea.&lt;/string&gt;
+
+
+</pre>
+<p>如同前面的那样，我们需要为AddTeaActivity创建一个新的选项菜单来让用户可以执行保存茶叶的指令：</p>
+<p>在<em>res/menus</em> 目录，通过选择File → New 并选 Other → Android XML 文件来创建一个新的 <em>add_tea.xml</em> XML文件, 记住资源类型为“Menu”。</p>
+<p>增加保存茶叶的菜单项：</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+
+&lt;!-- res/menus/add_tea.xml --&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+  &lt;item android:title=&quot;@string/save_tea_label&quot; android:id=&quot;@+id/save_tea&quot; /&gt;
+&lt;/menu&gt;
+
+
+</pre>
+<p>返回 AddTeaActivity 代码中,类似你在BrewClockActivity中一样，增加重载方法onCreateOptionsMenu 和onOptionsItemSelected。唯一的区别是这次你提供的MenuInflater的资源文件名是<em>add_tea.xml</em> ：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+  MenuInflater inflater = getMenuInflater();
+  inflater.inflate(R.menu.add_tea, menu);
+
+  return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+  switch(item.getItemId()) {
+    case R.id.save_tea:
+      saveTea();
+
+    default:
+      return super.onOptionsItemSelected(item);
+  }
+}
+
+</pre>
+<p>下一步, 增加新方法, saveTea(), 来保存茶叶信息。saveTea 首先从界面上读取茶叶的名称和用户所选的泡茶时间，如果这些输入数据都能通过验证，就将这些数据保存到数据库中：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+public boolean saveTea() {
+  // Read values from the interface
+  String teaNameText = teaName.getText().toString();
+  int brewTimeValue = brewTimeSeekBar.getProgress() + 1;
+
+  // Validate a name has been entered for the tea
+  if(teaNameText.length() &lt; 2) {
+    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+    dialog.setTitle(R.string.invalid_tea_title);
+    dialog.setMessage(R.string.invalid_tea_no_name);
+    dialog.show();
+
+    return false;
+  }
+
+  // The tea is valid, so connect to the tea database and insert the tea
+  TeaData teaData = new TeaData(this);
+  teaData.insert(teaNameText, brewTimeValue);
+  teaData.close();
+
+  return true;
+}
+
+
+</pre>
+<p>大段的代码，让我们过一遍这段代码的逻辑。</p>
+<p>首先，我们从文本框中读取茶叶名称，从SeekBar读取泡茶时间（记着读的时间要加1以保证时间在1到10分钟之内）。下一步，我们验证茶叶名大于等于2个字符（这是非常简单的验证，如果想做更复杂的验证，那么就使用正则表达式吧）。</p>
+<p>如果茶叶名称非法，我们需要让用户知道。我们使用Android提供的工具类，AlertDialog.Biulder类，这个类给我们提供了一个快捷创建和显示模态窗口的方法。在设置完标题和错误信息后，通过调用show方法来显示对话框。这个对话框是模态的modal，因此用户只有按下back按键，这个对话框才会关闭。在这时，我们不想保存任何数据，所以我们的方法返回了false。</p>
+<p>如果茶名称合法，我们通过TeaData类创建一个到茶叶数据库的临时连接。这里又一次的显示出把数据库访问抽象成一个独立文件的好处：你可以从任何地方完成对数据库（译者注：其实应该是对TeaData 类）的访问。</p>
+<p>当调用完teaData.insert() 来增加记录到数据库后，我们不再需要数据库连接，因此在我们返回成功前，我们关闭了连接。</p>
+<p>在模拟器中运行你的程序，按下“Menu”按键，点击屏幕上的“Add Tea”。试图通过在此按下“Menu”和点击屏幕的 “Save Tea.”来保存空茶叶名的茶叶数据。由于是没有茶叶名，一条错误消息将出现在你的面前：</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/14_invalid_tea.jpg"/></p>
+<p>下一步，试着键入你的茶叶名，并选择合适的泡茶时间，再次从菜单选择 “Save Tea” 。这一次，你将不在看到错误的消息。事实上，你什么都看消息不到。</p>
+<h4>改进用户体验</h4>
+<p>这样做不是一个很好的用户体验，用户不能知道他的茶叶是否已经成功地保存了。事实上，用户只有从“Add Tea”界面返回，去茶叶列表中查看这一个办法来检查他的是否成功的被保存。这样的做法不好，让用户知道他们的茶叶数据被成功地保存会是更好的一种方式。在茶叶数据被成功保存后，让我们在屏幕上显示一条成功信息。</p>
+<p>我们要一条被动的非模态化的信息，因此AlertDialog这次就不能满足我们的需求了。下面我们将要使用另外一个Android的非常流行的特性，Toast。</p>
+<p>Toast 在接近屏幕的下方显示一条消息，但是并不会终止用户的操作。Toast经常用于做非重要的的提醒和状态更新。.</p>
+<p>在<em>strings.xml</em> 资源文件中新增一个字符串。注意字符串中的%s。我们在下一步中将保存的茶叶名字结合到这个字符串来显示信息。</p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;!-- res/values/strings.xml --&gt;
+&lt;string name=&quot;save_tea_success&quot;&gt;%s tea has been saved.&lt;/string&gt;
+</pre>
+<p>注意，在onOptionsItemSelected 代码中进行修改，当saveTea返回真时，创建并显示一条弹出式的Toast。第二参数getString()用来连接茶叶名称到Toast信息中。最后，我们需要将茶叶名称清楚，以便用户可以快速增加更多的新茶。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/AddTeaActivity.java
+// …
+switch(item.getItemId()) {
+ case R.id.save_tea:
+   if(saveTea()) {
+     Toast.makeText(this, getString(R.string.save_tea_success, teaName.getText().toString()), Toast.LENGTH_SHORT).show();
+     teaName.setText(&quot;&quot;);
+   }
+// …
+</pre>
+<p>现在，重新运行应用程序，并增加和保存一些新茶叶。你将会看到弹出式的Toast并让你知道你的茶叶信息已经被保存成功。getString()方法用于连接存在XML文件中的String和茶叶名称，并将%s替换成茶叶的名称。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/16_valid_save.jpg"></img></p>
+<p>按下“Back”按键，返回应用程序的主屏幕，点击茶叶spinner。你新增的在数据库中的茶叶已近可以显示在spinner的选项中！</p>
+<h3>用户首选项</h3>
+<p>现在BrewClock已经完成了所有的功能。用户可以增加他们喜爱的茶叶和各自不同的泡茶时间到数据库中，并且他们可以快速的从选择他们并开始泡上一杯新茶。任何新增的茶叶信息都被保存在数据库中，因此，即使你退出你的程序，这些茶叶信息在你下次启动程序时仍然可以从spinner列表中找到。</p>
+<p>当你重启BrewClock的时候，有一件事你必须注意，就是泡茶计数被清为了0。这使得跟踪我们每天喝了多少茶（一条重要的数据）变得困难。作为最后一个练习，让我们将泡茶计数保存在我们设备上。</p>
+<p>我们将不通过增加茶叶数据库的表来完成这个功能，我们将使用Android的“共享首选项Shared Preferences”，一个Android提供给你应用程序用于存储简单数据的数据库（字符串，数字，等等）。例如，优秀的最高分和用户首选项等（译者注：非常类似Windows下的注册表）。</p>
+<p>我们首先在<em>BrewClockActivity.java</em> 中增加一堆常量。这些常量用于存放你的共享首选项的名称。我们将使用键的名称来访问泡茶计数。Android负责保存和持久化我们的共享首选项文件。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+
+// src/com/example/brewclock/BrewClockActivity.java
+
+protected static final String SHARED_PREFS_NAME = &quot;brew_count_preferences&quot;;
+
+protected static final String BREW_COUNT_SHARED_PREF = &quot;brew_count&quot;;
+
+</pre>
+<p>下一步，为了我们能在用户首选项中读写泡茶计数，而不是直接的依赖于代码中的初始值，我们将在代码中做一些修改。在BrewClockActivity 的 onCreate 方法中我们将就该setBrewCount附件的代码：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+public void onCreate() {
+  // … 
+
+  // Set the initial brew values
+  SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE);
+  brewCount = sharedPreferences.getInt(BREW_COUNT_SHARED_PREF, 0);
+  setBrewCount(brewCount);
+
+  // …
+}
+
+</pre>
+<p>这里我们将以使用SharedPreference来获取应用程序的共享首选项的实例，并希望得到brew_count键值的值（通过我们之前定义的BREW_COUNT_SHARED_PREF常量来标示）。如果值能获取，这个值将返回给应用程序，如果没有我们使用getInt的第二参数作为默认值返回（在教程中为0）。</p>
+<p>现在我们取得存储的泡茶计数值，我们需要确保每当泡茶计数更新的时候，这个值能写回到共享首选项中。</p>
+<p>BrewClockActivity的setBrewCount中增加下面的代码：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+// src/com/example/brewclock/BrewClockActivity.java
+ public void setBrewCount(int count) {
+   brewCount = count;
+   brewCountLabel.setText(String.valueOf(brewCount));
+
+   // Update the brewCount and write the value to the shared preferences.
+   SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE).edit();
+   editor.putInt(BREW_COUNT_SHARED_PREF, brewCount);
+   editor.commit();
+ }
+
+
+</pre>
+<p>共享首选项不能直接地保存。我们需要使用Android的SharedPreferences.Editor类。调用SharedPreferences的edit方法，返回一个editor实例，这个实例用来保存我们的首选项值。我们只要调用editor实例的commit方法就可以将值保存到共享首选项中。</p>
+<p>我们应用程序的所有代码都已完成，现在让我们测试一下我们的程序！</p>
+<p>在模拟器中运行应用程序，定一个泡茶时间（这真是一个良好的借口去泡一杯你自己爱喝的茶哦）并退出应用程序，试着运行模拟器上的安装的其他应用程序确保BrewClock被终止。记住，除非这个应用程序已经不在内存中，否则Android不会终止一个Activity。</p>
+<p>当你下一次运行你的应用程序时，你将看见之前的泡茶计数已经被维护了。</p>
+<h3>总结</h3>
+<p>恭喜!你已经完成了这个应用的程序的所有开发工作,并使用了Android　SDK中的数个核心组件。在本教程中，你从中学到了：</p>
+<ul>
+<li>创建一个简单的SQLite数据库，并保存你的数据；</li>
+<li>使用Android的数据库类和编写客户化类抽象数据访问；</li>
+<li>在你的应用程序中增加选项菜单。；</li>
+<li>在你应用程序中创建并注册新Activity并使用Intent将他们绑定成一组界面；</li>
+<li>使用内建的“共享首选项”数据库来保存和提取简单用户数据。</li>
+</ul>
+<p>无论你要开发神马样类型的应用程序，数据存储和持久化是一个重要的主题。从工具程序和业务工具到3-D游戏，几乎每个应用程序都需要使用到Android提供的数据工具类。</p>
+<p><img decoding="async" src=" https://coolshell.cn/wp-content/uploads/2011/04/17_brew_up.jpg"/></p>
+<h4>Activities</h4>
+<p>虽然BrewClock现在在某方面来说已经是个功能完善的应用程序了。但是我们仍然可以在增加一些功能以改进用户体验。例如你可以使用下面的方法来改进你的应用程序：</p>
+<ul>
+<li>在保存茶叶的时候检查是否存在茶叶名称重名；</li>
+<li>增加一个菜单选项以将泡茶统计清0；</li>
+<li>在共享首选项中保存最后所选的泡茶名称和时间以便程序重启时有一个有意义的默认值；</li>
+<li>增加用户从茶叶数据库中删除记录的选项。</li>
+</ul>
+<p>在<a href="http://github.com/cblunt/BrewClock">GitHub库</a> 可以获取到所有的源代码，库中的未来的分支包含着Activitiy的解决方案 你可以通过切换你的本地代码拷贝到tutorial_2分支，下载这个开发教程源代码：<br />
+[code]</p>
+<p>$ git clone git://github.com/cblunt/BrewClock.git</p>
+<p>$ cd BrewClock</p>
+<p>$ git checkout tutorial_2</p>
+<p>[/code]<br />
+我希望你喜欢这个教程，希望这个教程能帮助你设计和开发更棒的Android应用程序。请通过在下面的回复让我知道你的建议和意见，当然我也欢迎你将你建议写在email中并发送给我。</p>
+<p><em>感谢<a href="http://blog.anselmbradford.com/">Anselm</a>的建议和反馈！ </em></p>
+<p><em>（全文完）</em><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/install-150x150.gif" alt="Eclipse开发Android应用程序入门" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4270.html" class="wp_rp_title">Eclipse开发Android应用程序入门</a></li><li ><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg" alt="关于移动端的钓鱼式攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_title">关于移动端的钓鱼式攻击</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="食客还是大厨" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3589.html" class="wp_rp_title">食客还是大厨</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4334.html">Eclipse开发Android应用程序入门:重装上阵</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4334.html/feed</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Eclipse开发Android应用程序入门</title>
+		<link>https://coolshell.cn/articles/4270.html</link>
+					<comments>https://coolshell.cn/articles/4270.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Thu, 07 Apr 2011 08:40:36 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[Eclipse]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4270</guid>
+
+					<description><![CDATA[<p>By Chris Blunt 翻译：赵锟 原文出处：http://www.smashingmagazine.com/2010/10/25/get-started...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4270.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4270.html">Eclipse开发Android应用程序入门</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>By <a title="Posts by Chris Blunt" href="http://www.smashingmagazine.com/author/chris-blunt/">Chris Blunt</a></p>
+<p><strong>翻译：赵锟</strong><br />
+原文出处：<a href="http://www.smashingmagazine.com/2010/10/25/get-started-developing-for-android-with-eclipse/">http://www.smashingmagazine.com/2010/10/25/get-started-developing-for-android-with-eclipse/</a></p>
+<p>如今的移动设备应用程序开发充满着让人振奋的东西。功能强大的硬件支持，平板电脑，多样的软件平台（塞班 OS，iOS，WebOS，Windows Phone 7&#8230;)，移动设备开发者前景充满了机会和挑战。</p>
+<p>当你想要开始开发你的移动设备程序时，如此多的选择可能让你产生困扰。究竟应该选择神马平台？我应该学习神马语言？为你计划的项目选择神马工具？在本教程中，你将学会如何在Google公司的开源移动设备操作系统Android下开发应用程序。</p>
+<h3>为神马选Android</h3>
+<p>Android是一个基于Linux内核的开源平台， 并且被安装在来自于不同厂商的上千种设备中。Android将各种移动设备的硬件如 电子罗盘，摄像头，GPS，方向感应，等等暴露给你的应用程序。<br />
+<span id="more-4270"></span><br />
+Android的免费开发工具可以让你以0成本开始编写你的软件。当你想向世界展示你的应用程序的时候，你可以将你的软件发布到Google的 Android 市场。向Andriod Market 发布程序只一次性的收取注册费用（25元），并且不像苹果的App Store ，对每一次的提交都要做检查，除非你的程序明显地违法，在经过一个快速检查的流程后，才能让你的程序提供给客户下载和购买。</p>
+<p>下面是Android对于开发者的优点：</p>
+<ul>
+<li>Android的SDK可以在Windows,Mac和Linux上运行，因此你不需要为了开发环境支付额外的新硬件投入。（译者注：我曾近在Win7 64x + VMWare上成功的安装Mac Snow leopard + XCode的开发环境，对于爱用盗版的人来说，这点MS优势不是很大啊）</li>
+<li>构建于JAVA上的SDK。如果你熟悉JAVA语言，你就是事半功倍了。（译者注：这个酷壳有篇文章讨论过，大家可以参看：<a href="https://coolshell.cn" target="_blank">https://coolshell.cn</a>）</li>
+<li>你只要在Android Market上发布应用程序，你将有潜在的成千上万的用户。而且你不一定非要把程序发布在Android Market上，你还可以在你的博客上发布。而且有传言，Amazon已近在最近准备搭建他们自己的Android 应用程序商店了。</li>
+<li>除了了技术性的<a href="http://developer.android.com/sdk/index.html">SDK 文档</a>外,还可以找到其他更多的使用者和开发者的资源。</li>
+</ul>
+<p>闲话少说——下面让我们进入正题，开始开发我们的Android应用程序。</p>
+<h3>安装Eclipse和Android SDK</h3>
+<p>Android应用程序的推荐开发环境是带有Android开发包插件(Android Devlopment Toolkit (ADT))的Eclipse。我在这里简要说明一下安装流程。如果你需要更多的细节，Google的<a href="http://developer.android.com/sdk/">开发人员网页</a>中详尽地解释了具体的安装配置过程</p>
+<ul>
+<li>为你的平台下载<a href="http://developer.android.com/">Android      SDK</a>（Windows ， Mac OS X 或者 Linux）。</li>
+<li>在你的硬盘上解压下载文件 (在Linux, 我使用 /opt/local/).</li>
+<li>如果你没有安装Eclipse，下载并安装<a href="http://eclipse.org/downloads/packages/eclipse-ide-java-developers/galileosr2">Eclipse JAVA 集成开发环境</a>包。 用于编程的话,      Google推荐使用Eclipse 3.5 (Galileo).</li>
+<li>运行Eclipse 并选择<em>Help-&gt;Install New      Software</em>.</li>
+<li>在Available Software窗口中点击Add按钮。</li>
+<li>进入 Android Development Tools 的<em>Name</em>输入框, 在Location      输入框输入https://dl-ssl.google.com/android/eclipse/</li>
+<li>检查可用软件中有Developer Tools并点击OK按钮。这将安装Android      Development Tools 和DDMS, Android的调试工具。</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4306" title="install" src="https://coolshell.cn/wp-content/uploads/2011/04/install.gif" alt="" width="500" height="519" /></p>
+<ul>
+<li>点击Next和Finish按钮以完成安装，安装完成后，你需要重启你的Eclipse一次。</li>
+<li>在Eclipse重启后，选择Window-&gt;Preference 后你可以在分类列表中看到Android这一项了。</li>
+<li>现在需要告诉Eclipse，你的Android SDK安装在什么地方。点击Android项后浏览选择你解压后的Android SDK所在的路径。例如/opt/local/android-sdk。</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4303" title="eclipse_android_preferences" src="https://coolshell.cn/wp-content/uploads/2011/04/eclipse_android_preferences.jpg" alt="" width="696" height="649" srcset="https://coolshell.cn/wp-content/uploads/2011/04/eclipse_android_preferences.jpg 696w, https://coolshell.cn/wp-content/uploads/2011/04/eclipse_android_preferences-300x279.jpg 300w" sizes="(max-width: 696px) 100vw, 696px" /></p>
+<ul>
+<li>点击OK按钮，保存信息。</li>
+</ul>
+<h3>选择Android 平台</h3>
+<p>在你开始编写Android应用程序之前，你需要为你需要开发应用程序的Android设备下载SDK平台。每个平台都有可以安装在用户设备上的不同版本的SDK。对于Android1.5或以上版本，有两个可用的平台： <em>Android Open Source Project</em> 和 <em>Google</em>.</p>
+<p><em>Android Open Source Project</em> 平台是开源的，但是不包括Google公司的私有化扩展，比如Google Map。如果不选择使用Google的API，Google的地图功能就不会在你的应用程序中生效。除非你有特别的原因，否则我们推荐你选择Google平台，因为这样你可享受到Google的扩展类库提供的便利。</p>
+<ul>
+<li>选择<em>Window Android SDK and AVD Manager</em>.</li>
+<li>点击左栏中的<em>Available Packages</em> 并选择选择Respository中有效的Android SDK平台。</li>
+<li>你可以选择列表中所需要的平台，或全选下载所有有效的平台。当你选择完毕，单击<em>Install Selected </em>并完成安装。</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4307" title="sdk" src="https://coolshell.cn/wp-content/uploads/2011/04/sdk.jpg" alt="" width="500" height="291" srcset="https://coolshell.cn/wp-content/uploads/2011/04/sdk.jpg 500w, https://coolshell.cn/wp-content/uploads/2011/04/sdk-300x174.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /><br />
+一旦成功的下载所有的平台后，你就可以准备开始开发Android应用程序了。</p>
+<h3>创建一个新的Android项目</h3>
+<p>Eclipse的新建项目向导能为你创建一个新的Android项目，并生成可以开始运行的文件和代码。通过向导生成代码，可以让你马上得到一个Android程序运行的直观映像并为你提供了一个帮助你快速入门的方法：</p>
+<ul>
+<li>选择 <em>File-&gt;New-&gt;Project…</em></li>
+<li>选择<em>Android Project</em></li>
+<li>在<em>New Project</em> 对话框, 键入如下的设置:</li>
+</ul>
+<p>[code]<br />
+Project Name: BrewClock<br />
+Build Target: Google Inc. 1.6 (Api Level 4)<br />
+Application Name: BrewClock<br />
+Package Name: com.example.brewclock<br />
+Create Activity: BrewClockActivity<br />
+Min SDK Version: 4<br />
+[/code]</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4304" title="eclipse_new_project_settings" src="https://coolshell.cn/wp-content/uploads/2011/04/eclipse_new_project_settings.jpg" alt="" width="525" height="1061" srcset="https://coolshell.cn/wp-content/uploads/2011/04/eclipse_new_project_settings.jpg 525w, https://coolshell.cn/wp-content/uploads/2011/04/eclipse_new_project_settings-148x300.jpg 148w, https://coolshell.cn/wp-content/uploads/2011/04/eclipse_new_project_settings-506x1024.jpg 506w" sizes="(max-width: 525px) 100vw, 525px" /></p>
+<p>在点击了完成按钮之后，Eclipse将为你创建一个新的可以运行的Android项目。注意，你通知了Eclipse生成了一个叫做BrewClockActivity的Activity。这个Activity的代码用于运行你的应用程序。生成的代码将在程序运行时非常简单地显示一条“Hello World”消息。</p>
+<h4>包</h4>
+<p>包名是你的应用程序标示。当你开始准备在Android Market上发布你的应用程序的时候，Android用这个标识符精确地记录你的应用程序的更新过程，因此让包名唯一是非常重要的。尽管我们在这里使用了com.example.brewclock这样的名字空间，对于真实的应用程序，你应该选择类似于com.你的公司名.你的应用程序名 这样的包名。</p>
+<h4>SDK 版本</h4>
+<p>Min SDK Version 是你的Android程序所能运行得最早版本号。对于每个新发布的Android，SDK会增加并修改一些方法。通过选择一个版本号，Android（Android Market）会知道你的应用程序能运行在等于或晚于指定版本的设备之上。</p>
+<h3>运行你的应用程序</h3>
+<p>现在让我们开始在Eclipse中运行我们的应用程序。由于是第一次运行，Eclipse将会询问你的项目类型：</p>
+<ul>
+<li>选择<em>Run-&gt;Run</em> 或 按下 <em>Ctrl+F11</em>.</li>
+<li>选择<em>Android Application</em> 并点击 <em>OK </em>按钮.</li>
+</ul>
+<p>Eclipse 将会在一个Android设备上运行一个应用程序。在这个时候，由于你没有任何Android设备，因此在运行时一定会返回一个失败，并且询问你是否要新建一个Android的虚拟设备。（AVD）<br />
+<img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4305" title="eclipse_no_avd" src="https://coolshell.cn/wp-content/uploads/2011/04/eclipse_no_avd.jpg" alt="" width="534" height="172" srcset="https://coolshell.cn/wp-content/uploads/2011/04/eclipse_no_avd.jpg 534w, https://coolshell.cn/wp-content/uploads/2011/04/eclipse_no_avd-300x96.jpg 300w" sizes="(max-width: 534px) 100vw, 534px" /></p>
+<h4>Android 虚拟设备</h4>
+<p>Android 虚拟设备 (AVD) 是一个模拟真实世界中Android设备的模拟器，例如移动电话或平板电脑。你可以在不买任何真实Android设备情况下，使用AVD测试你的应用。</p>
+<p>你可以创建任意多个你喜欢的AVD，每个可以建立在不同版本的Android平台之上。对于你创建的每个Android设备，你可以配置不同的硬件属性，比如是否具有物理键盘，是否支持GPS，摄像头的像素，等等。</p>
+<p>在你开始运行你的应用程序之前，你需要创建你的AVD，来运行指定的SDK平台（Google APIs 1.6）。</p>
+<p>现在让我开始:</p>
+<ul>
+<li>如果还没有开始运行你的应用程序，点击run（或按下 <em>Ctrl+F11</em>）。</li>
+<li>当目标设备弹出警告，点击<em>Yes</em> 以创建新的AVD。</li>
+<li>单击<em>Android SDK and AVD      Manager</em> 对话框内的<em>New</em> 按钮.</li>
+<li>为你的AVD键入如下的设置：</li>
+</ul>
+<p>[code]<br />
+Name: Android_1.6<br />
+Target: Google APIs (Google Inc.) &#8211; API Level 4<br />
+SD Card Size: 16 MiB<br />
+Skin Built In: Default (HVGA)<br />
+[/code]</p>
+<ul>
+<li>单击 <em>Create AVD</em> 让Android为你创建一个新虚拟设备。</li>
+<li>关闭the <em>Android SDK and AVD Manager</em> 对话框.</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4308" title="sdk_manager_new_avd" src="https://coolshell.cn/wp-content/uploads/2011/04/sdk_manager_new_avd.jpg" alt="" width="400" height="574" srcset="https://coolshell.cn/wp-content/uploads/2011/04/sdk_manager_new_avd.jpg 400w, https://coolshell.cn/wp-content/uploads/2011/04/sdk_manager_new_avd-209x300.jpg 209w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<h4>运行代码</h4>
+<p>再次运行你的应用程序（<em>Ctrl+F11</em>）。 Eclipse 将build 你的项目并运行一个新的AVD。记住，AVD模拟了一个完全的Android系统，因此你需要有耐心来等待这个缓慢的启动过程，就如同你重启真实的Android设备一样。一个好的做法是不要关闭你的AVD，直到你完成了你一天的工作。<br />
+当你的模拟器启动后，Eclipse自动地安装并运行你的应用程序。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4301" title="app_running-550-e1287474474253" src="https://coolshell.cn/wp-content/uploads/2011/04/app_running-550-e1287474474253.jpg" alt="" width="499" height="355" srcset="https://coolshell.cn/wp-content/uploads/2011/04/app_running-550-e1287474474253.jpg 499w, https://coolshell.cn/wp-content/uploads/2011/04/app_running-550-e1287474474253-300x213.jpg 300w" sizes="(max-width: 499px) 100vw, 499px" /></p>
+<h3>开发你第一个Android应用</h3>
+<p>生成的代码能良好的运行，但是你真正想要的是开发一个真实的应用程序。为此，我们首先果一个咸蛋的设计流程，并开始创建一个可以让你部署在Android设备上的应用。</p>
+<p>大部分的开发者（包括我自己）都喜欢每天一杯咖啡或茶。在下一节中，你将开发一个简单的泡茶计数器应用程序来记录用户泡了多少杯茶，并为泡每杯茶做一个定时器。</p>
+<p>你可以从<a href="http://github.com/cblunt/brewclock">GitHub</a>下载整个教程的源代码.</p>
+<h4>设计用户界面</h4>
+<p>在开发任何Android应用程序之前的第一步就是设计和开发用户界面。下面是一个我们这个应用程序的用户界面的一个概览。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4302" title="design_sketch" src="https://coolshell.cn/wp-content/uploads/2011/04/design_sketch.jpg" alt="" width="331" height="505" srcset="https://coolshell.cn/wp-content/uploads/2011/04/design_sketch.jpg 331w, https://coolshell.cn/wp-content/uploads/2011/04/design_sketch-196x300.jpg 196w" sizes="(max-width: 331px) 100vw, 331px" /></p>
+<p>用户将能通过+和-按钮设置一个泡茶的定时器。当单击开始按钮，定时器将开始按指定的时间递减。除非用户再次点击按钮以取消计时，否则当定时器为0的时候，累计的泡茶计数brew将增加1。</p>
+<h4>开发用户界面</h4>
+<p>Android 用户界面或布局<em>layouts</em>, 是通过XML文档来描述的，可以在项目的res/layouts目录下找到。在之前运行在模拟器上代码中，我们可以看到由eclipse自动生成的布局代码在res/layouts/main.xml 中。</p>
+<p>Eclipse有一个图形化的布局设计器，通过在屏幕上的拖拽控制来完成布局的设计，然而，我却发现直接写XML并使用图形布局来预览是更容易的方式。</p>
+<p>现在让我们对main.xml做一些工作以达到上图的效果：</p>
+<ul>
+<li>在Eclipse中通过双击PackageExplorer的res/layouts/main.xml 来打开xml。</li>
+<li>点击屏幕下方main.xml 来切换为xml视图。</li>
+</ul>
+<p>将main.xml中内容改为如下的内容：</p>
+<p>[code]<br />
+# /res/layouts/main.xml<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;<br />
+&lt;LinearLayout<br />
+  xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;<br />
+  android:orientation=&quot;vertical&quot;<br />
+  android:layout_width=&quot;fill_parent&quot;<br />
+  android:layout_height=&quot;fill_parent&quot;&gt;<br />
+  &lt;LinearLayout<br />
+    android:orientation=&quot;horizontal&quot;<br />
+    android:layout_width=&quot;fill_parent&quot;<br />
+    android:layout_height=&quot;wrap_content&quot;<br />
+    android:padding=&quot;10dip&quot;&gt;<br />
+    &lt;TextView<br />
+      android:layout_width=&quot;wrap_content&quot;<br />
+      android:layout_height=&quot;wrap_content&quot;<br />
+      android:textSize=&quot;20dip&quot;<br />
+      android:text=&quot;Brews: &quot; /&gt;<br />
+    &lt;TextView<br />
+      android:layout_width=&quot;fill_parent&quot;<br />
+      android:layout_height=&quot;wrap_content&quot;<br />
+      android:text=&quot;None&quot;<br />
+      android:gravity=&quot;right&quot;<br />
+      android:textSize=&quot;20dip&quot;<br />
+      android:id=&quot;@+id/brew_count_label&quot; /&gt;<br />
+  &lt;/LinearLayout&gt;<br />
+  &lt;LinearLayout<br />
+    android:orientation=&quot;horizontal&quot;<br />
+    android:layout_width=&quot;fill_parent&quot;<br />
+    android:layout_height=&quot;wrap_content&quot;<br />
+    android:layout_weight=&quot;1&quot;<br />
+    android:gravity=&quot;center&quot;<br />
+    android:padding=&quot;10dip&quot;&gt;<br />
+    &lt;Button<br />
+      android:id=&quot;@+id/brew_time_down&quot;<br />
+      android:layout_width=&quot;wrap_content&quot;<br />
+      android:layout_height=&quot;wrap_content&quot;<br />
+      android:text=&quot;-&quot;<br />
+      android:textSize=&quot;40dip&quot; /&gt;<br />
+    &lt;TextView<br />
+      android:id=&quot;@+id/brew_time&quot;<br />
+      android:layout_width=&quot;wrap_content&quot;<br />
+      android:layout_height=&quot;wrap_content&quot;<br />
+      android:text=&quot;0:00&quot;<br />
+      android:textSize=&quot;40dip&quot;<br />
+      android:padding=&quot;10dip&quot; /&gt;<br />
+    &lt;Button<br />
+      android:id=&quot;@+id/brew_time_up&quot;<br />
+      android:layout_width=&quot;wrap_content&quot;<br />
+      android:layout_height=&quot;wrap_content&quot;<br />
+      android:text=&quot;+&quot;<br />
+      android:textSize=&quot;40dip&quot; /&gt;<br />
+  &lt;/LinearLayout&gt;<br />
+  &lt;Button<br />
+    android:id=&quot;@+id/brew_start&quot;<br />
+    android:layout_width=&quot;fill_parent&quot;<br />
+    android:layout_height=&quot;wrap_content&quot;<br />
+    android:layout_gravity=&quot;bottom&quot;<br />
+    android:text=&quot;Start&quot; /&gt;<br />
+&lt;/LinearLayout&gt;</p>
+<p>[/code]</p>
+<p>正如你所见的，Android的XML布局文件是繁琐的，但却能让你控制到屏幕的各个元素。</p>
+<p>在Android中最重要的接口元素是布局Layout容器，例如例子中使用的LinearLayout 。这些元素对于用户是不可见的,但是却扮演者例如Buttons 和TextViews这些元素的布局容器。</p>
+<p>Android中有几种不同类型的布局视图layout view，每一种都用于开发不同的布局。如同LinearLayout 和AbsoluteLayout ，TableLayout 可以让你使用更为复杂的基于表格结构的布局。你可以在SDK的API文档的<a href="http://developer.android.com/guide/topics/ui/layout-objects.html">通用布局对象</a>中查找到更多的布局。</p>
+<h4>关联你的布局Layout与代码</h4>
+<p>保存你的布局，在Eclipse中点击<em>Run</em>图标或按下<em>Ctrl+F11</em>重新在模拟器中运行你的程序。你现看到不是之前出现的Hello World消息了，你将看到Android显示了一个新的界面。</p>
+<p>如果点击界面上的任何按钮，他们将期望的显示为高亮，但是不会执行任何操作。现在让我们在布局修改后改进一下我们的源码：</p>
+<p># /src/com/example/brewclock/BrewClockActivity.java</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+...
+import android.widget.Button;
+import android.widget.TextView;
+
+public class BrewClockActivity extends Activity {
+  /** Properties **/
+  protected Button brewAddTime;
+  protected Button brewDecreaseTime;
+  protected Button startBrew;
+  protected TextView brewCountLabel;
+  protected TextView brewTimeLabel;
+
+  ...
+ }
+</pre>
+<p>下一步,我们将修改调用onCreate。当Android启动你的应用程序的时候，Android会首先调用这个方法。 在Eclipse生成的代码中，onCreate把activity的视图设置成R.layout.main。这行代码告诉Android解释我们的布局配置XML文件，并显示它。</p>
+<h4>资源对象</h4>
+<p>在Android中，R是一个自动生成的对象，这是一个特殊的对象，你可以在代码中通过这个对象访问项目中的资源（布局，字符串，菜单，图标，&#8230;） 。每个资源都有一个给定的id。在上面的那个布局文件中，有一些@+id XML 属性。我们将通过这些值来关联布局中的Buttons 与TextViews和我们的代码和：</p>
+<p># /src/com/example/brewclock/BrewClockActivity.java</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+...
+public class BrewClockActivity extends Activity {
+  ...
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+
+    // Connect interface elements to properties
+    brewAddTime = (Button) findViewById(R.id.brew_time_up);
+    brewDecreaseTime = (Button) findViewById(R.id.brew_time_down);
+    startBrew = (Button) findViewById(R.id.brew_start);
+    brewCountLabel = (TextView) findViewById(R.id.brew_count_label);
+    brewTimeLabel = (TextView) findViewById(R.id.brew_time);
+  }
+}
+</pre>
+<h4>监听事件</h4>
+<p>为了检测到用户单击我们的按钮，我们需要实现一个监听器listener。你可能会从其他的事件驱动系统中熟悉监听器或回调函数<em>callbacks</em>。比如Javascript/JQuery事件或Rails的回调函数。</p>
+<p>Android通过Listener接口提供相似的机制，例如OnClickListener，这个接口中定义了那些会被事件触发的方法。当用户点击屏幕的时候，实现OnClickListener 接口将会通知你的应用程序，并告诉他们所按得屏幕按钮。你当然也需要告诉每个button的ClickListener，以便Android知道具体通知到那个监听器：</p>
+<p># /src/com/example/brewclock/BrewClockActivity.java</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+...
+// Be sure not to import
+// `android.content.dialoginterface.OnClickListener`.
+import android.view.View.OnClickListener;
+
+public class BrewClockActivity extends Activity
+  implements OnClickListener {
+  ...
+  public void onCreate(Bundle savedInstanceState) {
+    ...
+    // Setup ClickListeners
+    brewAddTime.setOnClickListener(this);
+    brewDecreaseTime.setOnClickListener(this);
+    startBrew.setOnClickListener(this);
+  }
+  ...
+  public void onClick(View v) {
+    // TODO: Add code to handle button taps
+  }
+}
+</pre>
+<p>下一步，我们将增加每个按钮按下的处理过程。我们将为Activity类增加4个属性，这些属性将用来让用户设置和记录我们泡茶时间，泡茶计数，计时器是否在运行的标志。</p>
+<p># /src/com/example/brewclock/BrewClockActivity.java</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+...
+public class BrewClockActivity extends Activity
+  implements OnClickListener {
+  ...
+  protected int brewTime = 3;
+  protected CountDownTimer brewCountDownTimer;
+  protected int brewCount = 0;
+  protected boolean isBrewing = false;
+  ...
+  public void onClick(View v) {
+    if(v == brewAddTime)
+      setBrewTime(brewTime + 1);
+    else if(v == brewDecreaseTime)
+      setBrewTime(brewTime -1);
+    else if(v == startBrew) {
+      if(isBrewing)
+        stopBrew();
+      else
+        startBrew();
+    }
+  }
+}
+</pre>
+<p>注意我们使用了Android提供的类CountDownTimer 。这让我们非常容易的创建和开始一个简单的递减计数，这个递减计数在递减运行的时候，每当执行一个递减就发出一个通知。你将在下面的startBrew 方法中使用到这个计数器。</p>
+<p>在下面的方法是所有处理逻辑，这些处理逻辑用于处理设置泡茶时间，开始停止计数和维护计数器。我们同样地在onCreate方法中来初始化我们的 brewTime和 brewCount变量。</p>
+<p>将这些代码放入到不同的类中是一种好做法。但是为了简洁，我把我们所有的代码都放到了BrewClockActivity中：</p>
+<p># /src/com/example/brewclock/BrewClockActivity.java</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+...
+public class BrewClockActivity extends Activity
+  implements OnClickListener {
+  ...
+  public void onCreate(Bundle savedInstanceState) {
+    ...
+    // Set the initial brew values
+    setBrewCount(0);
+    setBrewTime(3);
+  }
+
+  /**
+   * Set an absolute value for the number of minutes to brew.
+   * Has no effect if a brew is currently running.
+   * @param minutes The number of minutes to brew.
+   */
+  public void setBrewTime(int minutes) {
+    if(isBrewing)
+      return;
+
+    brewTime = minutes;
+
+    if(brewTime &lt; 1)
+      brewTime = 1;
+
+    brewTimeLabel.setText(String.valueOf(brewTime) + &quot;m&quot;);
+  }
+
+  /**
+   * Set the number of brews that have been made, and update
+   * the interface.
+   * @param count The new number of brews
+   */
+  public void setBrewCount(int count) {
+    brewCount = count;
+    brewCountLabel.setText(String.valueOf(brewCount));
+  }
+
+  /**
+   * Start the brew timer
+   */
+  public void startBrew() {
+    // Create a new CountDownTimer to track the brew time
+    brewCountDownTimer = new CountDownTimer(brewTime * 60 * 1000, 1000) {
+      @Override
+      public void onTick(long millisUntilFinished) {
+        brewTimeLabel.setText(String.valueOf(millisUntilFinished / 1000) + &quot;s&quot;);
+      }
+
+      @Override
+      public void onFinish() {
+        isBrewing = false;
+        setBrewCount(brewCount + 1);
+
+        brewTimeLabel.setText(&quot;Brew Up!&quot;);
+        startBrew.setText(&quot;Start&quot;);
+      }
+    };
+
+    brewCountDownTimer.start();
+    startBrew.setText(&quot;Stop&quot;);
+    isBrewing = true;
+  }
+
+  /**
+   * Stop the brew timer
+   */
+  public void stopBrew() {
+    if(brewCountDownTimer != null)
+      brewCountDownTimer.cancel();
+
+    isBrewing = false;
+    startBrew.setText(&quot;Start&quot;);
+  }
+  ...
+}
+</pre>
+<p>这段代码唯一和Android相关的就是使用setText方法来设置文本的显示文字。在startBrew方法中，我们创建，并开始了一个CountDownTimer来开每秒递减计数直到计数器为0。注意，我们定义了CountDownTimer以内联方式监听onTick 和 onFinish方法。 onTick 方法将每1000毫秒（1秒）执行一次，并递减, 当计数器为0的时候，onFinish方法被调用。</p>
+<h4>避免在你的代码中硬编码</h4>
+<p>为了使教程代码简单，我故意地在程序中将控件的标号直接写到字串中（例如： &#8220;Brew Up!&#8221;, &#8220;Start&#8221;, &#8220;Stop&#8221;） 通常，这不是一个好的做法，因为如果在大型项目中，这样做会使得修改变得麻烦。</p>
+<p>Android 提供了一种简洁的方法让你使用R对象来使字符串和代码分离。R 让你在xml文件（res/values/strings.xml）定义所有你程序中字符串，并让你可以在代码中应用到这些字符串。例如：</p>
+<p># /res/values/strings.xml</p>
+<p>[code]<br />
+&lt;string name=&quot;brew_up_label&quot;&gt;Brew Up!&lt;/string&gt;<br />
+&#8230;<br />
+[/code]</p>
+<p># /res/com/example/brewclock/BrewClockActivity.java</p>
+<p>[code]<br />
+&#8230;<br />
+brewLabel.setText(R.string.brew_up_label);<br />
+&#8230;<br />
+[/code]</p>
+<p>现在，如果你想改变Brew Up! 字样，你只要一次性的修改strings.xml文件就行了。你的应用将生成一堆代码来保证你程序中所有使用到这些字符串的地方都能被生效！</p>
+<h4>运行Brew Clock</h4>
+<p>代码完成之后，现在是试运行程序的时候了。单击<em>Run</em> 或 <em>Ctrl+F11</em> 在模拟器中启动我们的应用. 所有都运行良好，你将会看到你创建的用户界面在准备时间一到就可以喝你所泡的茶了！试着设置不同的时间，并点击<em>Start</em> 观看倒计时。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-4300" title="app_finished-550-e1287474491689" src="https://coolshell.cn/wp-content/uploads/2011/04/app_finished-550-e1287474491689.jpg" alt="" width="499" height="355" srcset="https://coolshell.cn/wp-content/uploads/2011/04/app_finished-550-e1287474491689.jpg 499w, https://coolshell.cn/wp-content/uploads/2011/04/app_finished-550-e1287474491689-300x213.jpg 300w" sizes="(max-width: 499px) 100vw, 499px" /></p>
+<h3>总结</h3>
+<p>在这个关于Android的简单介绍中，你已学会如何安装Android SDK和Eclipse的Android 开发工具插件（ADT）。你也学会如何创建一个模拟设备，并通过这个设备来测试你的应用程序。你还学会了如何开发Android应用程序。上面了那些作为标题的关键概念在以后你自己开发Android应用程序的时候将会经常用到。</p>
+<p>我们希望，这个教程能激发你的开发移动应用程序的欲望，并步入这个令人激动的领域。Android为当前和即将到来的移动设备应用程序开发提供了一条宽广的道路。如果你已经开发你自己的移动应用，请在评论中告诉我们。</p>
+<p><em>(ik), (vf)</em></p>
+<p><em>（全文完）</em><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4334.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full-150x150.jpg" alt="Eclipse开发Android应用程序入门:重装上阵" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4334.html" class="wp_rp_title">Eclipse开发Android应用程序入门:重装上阵</a></li><li ><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg" alt="关于移动端的钓鱼式攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_title">关于移动端的钓鱼式攻击</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="食客还是大厨" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3589.html" class="wp_rp_title">食客还是大厨</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4270.html">Eclipse开发Android应用程序入门</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4270.html/feed</wfw:commentRss>
+			<slash:comments>34</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>程序员的谎谬之言还是至理名言？</title>
+		<link>https://coolshell.cn/articles/4235.html</link>
+					<comments>https://coolshell.cn/articles/4235.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 07 Apr 2011 02:08:59 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4235</guid>
+
+					<description><![CDATA[<p>有朋友（网友never）在酷壳Coolshell.cn的留言版上问我，为什么关注了这很多的东西，我想我可以用下文来回答这位网友，因为我和作者的观点几乎一致。这篇...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4235.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4235.html">程序员的谎谬之言还是至理名言？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>有朋友（网友never）在酷壳Coolshell.cn的<a href="https://coolshell.cn/guestbook#comment-40758" target="_blank">留言版上问我</a>，为什么关注了这很多的东西，我想我可以用下文来回答这位网友，因为我和作者的观点几乎一致。这篇文章由 ALAN SKORKIN写的 “<a href="http://www.skorks.com/2011/02/the-greatest-developer-fallacy-or-the-wisest-words-youll-ever-hear/" target="_blank">The Greatest Developer Fallacy Or The Wisest Words You’ll Ever Hear?</a>” ，我把其全文翻译如下，我很喜欢这篇文章，希望你也喜欢。（翻译的也许不好，欢迎指正）</p>
+<p>—————————————————正文分隔线——————————————————</p>
+<p><img decoding="async" loading="lazy" title="Wisdom" src="http://www.skorks.com/wp-content/uploads/2011/02/wisdom-225x300.jpg" alt="Wisdom" hspace="20" vspace="5" width="262" height="349" align="left" /></p>
+<p>&#8220;<span style="color: #cc0000;"><strong><em>I will learn it when I need it &#8211; </em>我会在我需要的时候再学</strong></span>&#8220;！我听到这句已经很多年了。这对于一个高速变化的软件行业环境来说，这似乎是一个非常实用的态度。 在某些方面这的确很实用主义，不过在其它的方面，我为这句话感到很不爽。这句话变成了整个软件行业的福音，但却没有让我们的软件行业变得更好。其问题在于，<strong>这句话伪装在于其听上去像是一个智慧的有经验的开发者说的，但是人们只是以此为借口而随波逐流</strong>。实在是有太多的东西需要我们去了解，我们也的确需要在工作当中来学习这些东西。但是， “在工作中学习”和“根据遇到的问题捡知识”这两者有着巨大的不同。</p>
+<ul>
+<li>另外，目前整个软件行业越来越需要一堆多面手，也许现在已经是这样了，只是我还没有注意到。当然，我也不喜欢这种情。现在，好像没有人愿意花更多的时间来把某一个东西学好学深学扎实，比如 <a href="http://www.skorks.com/2010/04/on-the-value-of-fundamentals-in-software-development/" target="_blank">计算机科学的基础知识</a>，或是最新的你正在使用的技术，甚至你在最近几年内每天都在使用其编码的程序语言（参考：<a href="http://blog.tmorris.net/java-is-pass-by-value/" target="_blank">Java is passed by value</a>）（<strong>译注：</strong>我在<a title="如何学好C++语言" href="https://coolshell.cn/articles/4119.html" target="_blank">如何学好C++一文</a>的回复中已经看到一些这样的人）。何苦呢？你会在你的学习路途中看到这些东西被更新，被废弃，并可能变得小众化。我和很多不同的人讨论过很多次，但是好像没有人意识到这是一个问题。 “<strong>哥们，做个实用主义的人吧</strong>”。</li>
+</ul>
+<ul>
+<li>与此同时，我们所有的人都在相互地克隆和模仿（<strong>译注：</strong>参看<a title="中国的C2C模式" href="https://coolshell.cn/articles/3820.html" target="_blank">中国的C2C</a>）。你需要一个Java程序员，我是一个Java程序员，你也是一个Java程序员，我的邻居也是一个Java程序员。我们之间有什么差别？其实，基本没有差别。好吧，我有一些jQuery的经历，太好，所以，你知道怎么来做一个折叠式的菜单？当然，我可以Google一下，然后剽窃别人最好的代码给你 :)（<strong>译注：</strong>参看“<a title="十条不错的编程观点" href="https://coolshell.cn/articles/2424.html" target="_blank">十条不错的编程观点</a>”中的&#8221;Googling it&#8221; is okay）。</li>
+</ul>
+<p><span id="more-4235"></span></p>
+<ul>
+<li>与此同时，你需要招聘到真正的专业级的人物（比如，你需要写一个很牛的解析程序来以图形化展示一下后台数据），那么你可能需要准备足够的啤酒和三明治，因为你可很有一段时间找不到这样的人。</li>
+</ul>
+<p>好了，其实，是有一些方法来区分，比如，我有更好的沟通能力，这就是为什么我可以做得更好。这是相当重要的，但是，<strong>如果我们用软能力而不是用技术能力来区分程序员的好坏 &#8211;  是不是有那么点反常和变态</strong>。我们所有人都可以沟通得很好，但是我们的代码乱成一团 :)。该死的，我本不应该说这事，我也有一点全才的样子。当然，我觉得我自己是一个 <a href="http://darrennegraeff.com/the-importance-of-t-shaped-individuals/" target="_blank">T型人才</a>（<strong>译注</strong>：即有深度又有广度），但是如果我们都非常诚实的话，我们会发现更多的人的能力是“横线型”或是“下划线型”的（<strong>译注</strong>：广度型），其中只有很少数的人才是有能力的。而我们的“T型人才”在这些人中就像一个巨大的钟乳石。<strong>你看上去像一个专家，但也许你从没有做过专家</strong>，这就是专才在满是全才的世界中的优势。</p>
+<h4>投资你的未来</h4>
+<p>我不想以说教的方式来告诉你人们应该怎么样来投资自己未来的职业生涯，因为每个人都知道我们应该怎么做。很多人也许认为他们正在投资，他们努力奋斗，写很多的代码，并也做一些阅读，当然，这样坚持下去，也许<a href="http://norvig.com/21-days.html" target="_blank">十年也可以成为一个专家</a>，而成为一个咨深专家可能需要20年（我会不断地说这些观点，总有一天我会把这个事说明白 :) ）。但是，如果真是这样的吧，每一个老家伙都会成为各个方面的专家，当然，事实是不会这样的。也许是因为人们不知道如何发展他们的专长（这是事实），但我私下里却怀疑，<strong>大家缺少的是热情而不是知识</strong>。我所说的这些东西难道不都是这样的原因吗？</p>
+<p>我完全跑题了。“在专业上投资未来”只是这些流行语中的一个，而重点是那句话 &#8211; “<strong><em>I will learn it when I need it &#8211; </em>我会在我需要的时候再学</strong>”。对我老爸来说这样做挺好，迄今为止对我也有效。但是让我们换一个角度看看，比如金融方面，如果我们说：“<strong>我会在我需要钱的时候再去进行投资</strong>”。在这句话上面那个实用主义的光环就不那么漂亮了。</p>
+<h4>你不知道你不知道的</h4>
+<p>我们都有过这样的时候，当我们痛苦地在解决一个问题的时候，有人突然告诉你一个算法或是一个技术，其把这个问题变得又快又简单。是的，有人告诉你一个容易的方法是一件很幸运的事，否则你可能需要花上数天或数周才能找到解决方法，并且事情可能会变得一团糟。你不会因此而被批评，因为你不知道你所不知道的东西。对此，“<strong><em>I will learn it when I need it &#8211; </em>我会在我需要的时候再学</strong>”在这个时候就走不通了。因为，<strong>你不可能学习那些你以为不存在的东西</strong>。Google做了很多的工作来减轻和缓解这样的问题，但并不完美。在一个陌生的环境下面对着一堆陌生的问题，会让你非常非常地痛苦，除非你知道你所面对的是什么（例如：如果你对搜索和约束传播（<em>constraint propagation</em>）有点了解的话，那你就可能 <a href="http://norvig.com/sudoku.html" target="_blank">容易地解决数独问题</a>，否则的话， <a href="http://xprogramming.com/xpmag/OkSudoku" target="_blank">这的确是</a> <a href="http://xprogramming.com/xpmag/SudokuMusings" target="_blank">非常</a> <a href="http://xprogramming.com/xpmag/Sudoku4" target="_blank">难的</a>）。你无法学习一种不知道或是你不知道用在哪里的算法。你也不可能去用一个你以为不存在的技术去解决一个问题。同样，你身边也不可以一直都有一个高人随时在给你指引正确的方向。我敢打赌，<strong>这个世界上有几十亿行代码可以被 几百万行更快，更清楚，更简单的代码所取代，因为无论是谁来写，他都不可能知道他所不知道的东西</strong>。</p>
+<p>我想在这里成为这个观点的反方，如果我们知道我们有哪些东西我们不知道，那么我们就知道我们需要去关注哪些东西。粗浅地尽可能的大范围的知道这些东西，那么，我们就可以在遇到问题的时候明白我们应该去更深地学什么样的知识。但是，这样来做在实际上并不有效，因为，<strong>这些浮云般的知识不会让你记下来</strong>，我们的大脑不是这样工作的。如果我们不去强化或是深度挖掘去消化这些概念， 我们的大脑会很快地 <a href="http://www.skorks.com/2009/09/become-a-better-developer-by-indexing-your-brain/" target="_blank">把这些信息标为不重要并换页出去</a>，这么做无非就是在浪费时间（你回头想一想你那些“填鸭式”的死记硬背的知识，你今天还记得吗？）然而，对于那些你集中精力深度研究过的东西——并伴随着你的兴趣的东西——你会收获到扎实的知识（那是你大脑里实际存下的不会忘的东西）。我的爷爷是一个核物理学家，数十年的在工作中获得这个领域中更深的知识让他今天成为了一个专家，同时也让他成为了一个优秀的数学家，不错的化学家，非常好的地理学家，还是一个合格的生物学家，等等。只需要一些 <a href="http://en.wikipedia.org/wiki/Empirical" target="_blank">观察性的证据</a> 你就知道<strong>广度的知识是深度研究的副产品</strong>。</p>
+<h4>你学得足够快吗？</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="Learn fast" src="http://www.skorks.com/wp-content/uploads/2011/02/learn-fast-300x199.jpg" alt="Learn fast" vspace="5" width="328" height="217" align="middle" /></p>
+<p>有些东西你需要花很长的时间才能学会。我对自己有信心不需跳跃性的就能把一个我从没有见过的ORM框架学会，因为我以前用过相似的东西，它们在概念上是相同的。但是，如果你需要做一个把演讲转成文本的东西呢，这并不简单，因为你没有足够多的背景知识。你可以希望通过Google给你提供一些东西让你Copy/Paste，但这是一个很不好的做法，只有大学里的做研究的研究员干这种烂事。如果是要创建一个网站呢，我们都知道怎么去创建一个网站，但是有多少人会知道如何架构一个每天有一千万用户访问的网站？那么我们需要去学的就是怎么做扩容扩展，<strong>我相信你的用户需要等你一到两个月才能把速度提上去</strong> :)。是的，我太笨了，所有我需要做的就是去招一个专家，然后……嗯……哦等一下，我们的啤酒和三明治都不够了。</p>
+<h4>为什么我应该关心</h4>
+<p><strong>和高手在一起工作真是超爽无比</strong>。你也许以前经历过，他们每说的一件事总是新鲜的，总是有意思的，你能从他们每一行的代码中学到很多小技巧，你几乎可以感觉到你的大脑在不断膨胀:)。你想从高手学习，所以，如果你身边没有高手，那真是太糟糕了。因为每一个人只会去学那些“需要”被学的东西，所以没有人能教给你任何有意思的东西。然而，这些高手也总是想和高手一起工作， 所以，<strong>你需要做的事就是确定能让高手想和你一起工作？</strong>。按需所学也许是一个不错的技能，但其不应该成为程序员的价值观。是的，这是一个巨大的行业你不可能学习所有的东西，所以，你需要有所选择地把其学精，只要你有足够的好奇心去跟从你的兴趣，你会发现最终你会真正掌握很多很多其它的东西。如果你能把你的工作做好，那么其它的超级牛人都会想要和你一起工作，因为他们可以从你这学到东西，而你又可以从他们那里学到东西。这样一来，所有的人都会是成功者。</p>
+<p>Image by <a href="http://www.flickr.com/photos/samueleghilardi/2971657900/" target="_blank">SamueleGhilardi</a> and <a href="http://www.flickr.com/photos/specialkrb/3250756763/">SpecialKRB</a></p>
+<p>—————————————————正文结束分割线——————————————————</p>
+<p>我在这里想说几个我的观点：</p>
+<ol>
+<li>我特别同意作者的，如果你把一个技术搞精搞深，你的知识面自然会很广的。</li>
+<li>面对于各种比较深的东西（比如C++的奇技淫巧），作为一个实用主义者可能很不屑，但是你也会为此而失去开阔眼界的机会。</li>
+<li>为明天做一些技术储备，因为你不知道你所缺的东西。多多阅读，多多交流，最好能把自己的心得写下来强化自己的认识和记忆。</li>
+<li>不要只寄望于在工作中学习，工作没有覆盖的地方你就不学了。真正的高手在工作之余都会花很多时间去自己研究点东西的。</li>
+<li>永远和高手一起工作。如果你面试的公司的面试太简单了，那就不要去，因为简单的面试通常意味着平庸。去那样的公司工作只会让你的学习速度变慢，甚至倒退。</li>
+<li>很多东西在概念上是相通的，在哲学层次上是相通的，这是你需要去追求的学习知识的境界。</li>
+<li>最后echo一下作者的话——“很多时候，你缺少的不是知识而是热情”！</li>
+</ol>
+<p>谢谢大家又花了一点看我的唠叨。呵呵。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4235.html">程序员的谎谬之言还是至理名言？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4235.html/feed</wfw:commentRss>
+			<slash:comments>110</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>JavaMail使用</title>
+		<link>https://coolshell.cn/articles/4261.html</link>
+					<comments>https://coolshell.cn/articles/4261.html#comments</comments>
+		
+		<dc:creator><![CDATA[jjzhx_1211]]></dc:creator>
+		<pubDate>Wed, 06 Apr 2011 15:05:39 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[JavaMail]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4261</guid>
+
+					<description><![CDATA[<p>（本文由网友jjzhx_1211投递，感谢!） 使用JavaMail需要两个包：activation-1.1.jar和mail-1.4.2.jar（当然现在最新...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4261.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4261.html">JavaMail使用</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>（<strong>本文由网友jjzhx_1211投递，感谢!</strong>）</p>
+<p>使用JavaMail需要两个包：activation-1.1.jar和mail-1.4.2.jar（当然现在最新的版本已经不止了），也可以直接包含Java SE 6的j2ee.jar，自带了前面的两个包。我把邮件功能写成了一个服务，发送邮件的数据都通过Map&lt;String, String&gt;类型的参数封装了起来。<strong>代码见文章最后</strong>。</p>
+<h4>Session</h4>
+<p>Session 定义了一个基本的邮件会话，任何工作都是基于这个Session的。Session 对象需要一个 java.util.Properties 对象来得到类似 邮件服务器，用户名，密码这样的信息。Session 的构造函数是私有的，可以通过 getDefaultInstance() 方法来取得一个单一的可以被共享的默认session 如：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Properties props = new Properties();
+Session session = Session.getDefaultInstance(props,null);</pre>
+<p>或者，可以使用 getInstance() 方法来创建一个唯一的 session如：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Properties props = new Properties();
+Session session = Session.getInstance(props,null);</pre>
+<p>在这两种方法中 其中的 null 参数是一个 Authenticator 对象，在这里没有被使用的，所以就是null。在大多数案例中，使用一个共享session 已经做够了。</p>
+<p><span id="more-4261"></span></p>
+<h4>Message</h4>
+<p>一旦你创建了Session对象，那么下面要做的就是创建message来发送。Message是一个抽象类，在大部分应用中你可以使用它的子类javax.mail.internet.MimeMessage 。MimeMessage 是一个理解在不同RFCs中定义的MIME类型以及headers的e-mail message。Message headers 必须使用 US-ASCII 字符集。可以用如下的方法创建一个Message</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">MimeMessage message = new MimeMessage(session);</code></p>
+<p>我们注意到，这里需要用session对象作为构造函数的参数。当然，还有其它的构造函数，比如从用RFC822格式化过的输入流来创建message。</p>
+<p>一旦你得到了 message ,你就可以来设置它的各个部分（parts）。设置内容（content）的基本的机制是使用setContent() 方法。</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">message.setContent(&quot;Email Content. &quot;,&quot;text/plain&quot;);</code></p>
+<p>如果，你能够明确你的使用MimeMessage来创建message 并且只是使用普通的文本（plain text） 那么你也可以使用 setText() 方法，setTest()方法只需要设置具体的内容，它默认的MIME类型是 text/plain</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">message.setText(&quot;Email Content. &quot;);</code></p>
+<p>对于普通文本类型的邮件，有一种机制是首选（ message.setText(&#8220;Email Content. &#8220;)）的设置内容的方法。如果要创建其它类型的message ，比如　HTML类型的message   那么还是需要使用前者　（　message.setContent(&#8220;Email Content. &#8220;,&#8221;text/html&#8221;);　）<br />
+设置主题（subject ），使用setSubject() 方法</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">message.setSubject(&quot; Subject &quot;);</code></p>
+<h4>Address</h4>
+<p>当你已经创建Session 以及 Message，并且已经为message 填充了内容，那么接下来要做的就是给你的邮件添加一个地址（Address）。　就像Message一样，Address也是一个抽象类，我们可以使用它的一个子</p>
+<p>javax.mail.internet.InternetAddress</p>
+<p>创建一个地址非常简单</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">Address address = new InternetAddress(&quot;&lt;a href=&quot;mailto:suixin@asiainfo.com&quot;&gt;suixin@asiainfo.com&lt;/a&gt;&quot;);</code></p>
+<p>如果，你希望在出现邮件地址的地方出现一个名称，那么你只需要再多传递一个参数。</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">Address address = new InternetAddress(&quot;&lt;a href=&quot;mailto:suixin@asiainfo.com&amp;quot;,&amp;quot;Steve&quot;&gt;suixin@asiainfo.com&quot;,&quot;Steve&lt;/a&gt;&quot;);</code></p>
+<p>你需要为 message 的from以及 to 字段创建address对象。为了识别发送者，你需要使用setFrom() 和 setReplyTo() 方法。</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">messge.setFrom(address);</code></p>
+<p>如果你的message 需要显示多个 from 地址，可以使用 addFrom() 方法</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Address address[] = {....};
+message.addFrom(address);</pre>
+<p>为了辨识message 的收件人，你需要使用 setRecipient() 方法。这个方法除了address参数之外，还需要一</p>
+<p>Message.RecipientType 。<br />
+message.addRecipient(type,address);<br />
+Message.RecipientType有几个预先定义好的类型<br />
+Message.RecipientType.TO　　收件人<br />
+Message.RecipientType.CC　　抄送<br />
+Message.RecipientType.BCC　 暗送</p>
+<p>如果你的一封邮件，需要发送给你的老师，并还要给你的几个同学，那么你可以这样</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Address toAddress = new InternetAddress(&quot;&lt;a href=&quot;mailto:teacher@17288.com&quot;&gt;teacher@17288.com&lt;/a&gt;&quot;);
+Address[] ccAddress = {new InternetAddress(&quot;&lt;a href=&quot;mailto:schoolmate1@17288.com&amp;quot;),new&quot;&gt;schoolmate1@17288.com&quot;),new&lt;/a&gt; InternetAddress(&quot;&lt;a href=&quot;mailto:schoolmate2@17288.com&quot;&gt;schoolmate2@17288.com&lt;/a&gt;&quot;)};
+message.addRecipient(Message.RecipientType.To, toAddress);
+message.addRecipient(Message.RecipientType.CC, ccAddress);</pre>
+<p>JavaMail 没有提供电子邮件地址有效性的检测。这些超越了JavaMail API的范围。</p>
+<h4>Authenticator</h4>
+<p>通过Authenticator设置用户名、密码，来访问受保护的资源，这里的资源一般指的是邮件服务器。</p>
+<p>Authenticator也是一个抽象类，你需要自己编写子类已备应用。你需要实现getPasswordAuthentication()方法，并返回一个PasswordAuthentication实例。你必须在 session被创建时， 注册你的 Authenticator。这样，当需要进行认证是，你的Authenticator就可以被得到。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Properties props = new Properties();
+//设置属性
+Authenticator auth = new YourAuthenticator();
+Session session = Session.getDefaultInstance(props, auth);</pre>
+<h4>Transport</h4>
+<p>发送消息最后的一步就是使用Transport类，你可以通过两种方法来进行发送。<br />
+Transport 是一个抽象类，你可以调用它静态的send() 方法来发送</p>
+<p><code data-enlighter-language="java" class="EnlighterJSRAW">Transport.send(message);</code></p>
+<p>或者，你可以为你使用的协议从session中取得一个指定的实例，</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Transport transport = session.getTransport(&quot;smtp&quot;);
+transport.sendMessage(message, message.getAllRecipients());
+transport.close();</pre>
+<h4>Store and Folder</h4>
+<p>这两个类重要用于取得信息。在创建了Session之后，需要连接到一个 Store ，你需要告诉Store你使用的是什么协议。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">// Store store = session.getStore(&quot;imap&quot;);
+Store store = session.getStore(&quot;pop3&quot;);
+store.connect(host, username, password);</pre>
+<p>在连接到一个 Store 后，你可以得到一个 Folder，当然，这个Floder必须是打开的。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">Folder folder = store.getFolder(&quot;INBOX&quot;);
+folder.open(Folder.READ_ONLY);
+Message message[] = folder.getMessages();</pre>
+<p>如果使用POP3那么，INDEX是唯一可用的文件夹。如果使用的是IMAP，你就可以使用其它的文件夹。</p>
+<h4>代码</h4>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public boolean sendEmail(Map&lt;String, String&gt; data) {
+    // 创建Properties 对象
+    Properties props = System.getProperties();
+    props.put(&quot;mail.smtp.host&quot;, Constants.HOST); // 全局变量
+    props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);
+
+    // 创建邮件会话
+    Session session = Session.getDefaultInstance(props,
+    new Authenticator() { // 验账账户
+        @Override
+        public PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(Constants.USERNAME,
+                                              Constants.PASSWORD);
+        }
+    });
+
+    try {
+        // 定义邮件信息
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(Constants.FROM));
+        message.addRecipient(
+            Message.RecipientType.TO,
+            new InternetAddress(
+                // 这里可以添加多个目的用户
+                data.get(Constants.EMAIL_TO)
+            )
+        );
+        // 添加邮件发送时间（不知道体现在哪儿）
+        message.setSentDate(new Date());
+        // 要编码，否则中文会出乱码，貌似这个方法是对数据进行了
+        //(&quot;=?GB2312?B?&quot;+enc.encode(subject.getBytes())+&quot;?=&quot;)形势的包装
+        message.setSubject(MimeUtility.encodeText(data.get(Constants.EMAIL_SUBJECT), &quot;gbk&quot;, &quot;B&quot;));
+
+        MimeMultipart mmp = new MimeMultipart();
+        MimeBodyPart mbp_text = new MimeBodyPart();
+        // &quot;text/plain&quot;是文本型，没有样式，
+        //&quot;text/html&quot;是html样式，可以解析html标签
+        mbp_text.setContent(data.get(Constants.EMAIL_TEXT),
+                            &quot;text/html;charset=gbk&quot;);
+        mmp.addBodyPart(mbp_text); // 加入邮件正文
+
+        // 处理附件，可以添加多个附件
+        if (data.get(Constants.EMAIL_ATTACHMENT) != null) {
+            String[] files = data.get(Constants.EMAIL_ATTACHMENT).split(&quot;,&quot;);
+            if (files.length != 0) {
+                for (String file : files) {
+                    MimeBodyPart mbp_file = new MimeBodyPart();
+                    FileDataSource fds = new FileDataSource(file);
+                    mbp_file.setDataHandler(new DataHandler(fds));
+                    mbp_file.setFileName(MimeUtility.encodeText(fds.getName(), &quot;gbk&quot;, &quot;B&quot;));
+                    mmp.addBodyPart(mbp_file);
+                }
+            }
+        }
+        message.setContent(mmp);
+        // message.setText(data.get(Constants.EMAIL_TEXT));
+
+        // 发送消息
+        // session.getTransport(&quot;smtp&quot;).send(message); //也可以这样创建Transport对象
+        Transport.send(message);
+        return true;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+</pre>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4261.html">JavaMail使用</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4261.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一些有意思的文章和资源</title>
+		<link>https://coolshell.cn/articles/4220.html</link>
+					<comments>https://coolshell.cn/articles/4220.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 06 Apr 2011 00:47:40 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[64bits]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[ebook]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[UI]]></category>
+		<category><![CDATA[UX]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4220</guid>
+
+					<description><![CDATA[<p>又到了向大家介绍一些最近我在网上发现的有价值的东西的时候了。（下面的链接中很多都被墙） 以前向大家介绍过《一些重要的算法》和《算法和数据结构词典》，不过，你知道...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4220.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4220.html">一些有意思的文章和资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>又到了向大家介绍一些最近我在网上发现的有价值的东西的时候了。（下面的链接中很多都被墙）</p>
+<ul>
+<li>以前向大家介绍过《<a title="一些重要的算法" href="https://coolshell.cn/articles/2583.html" target="_blank">一些重要的算法</a>》和《<a title="算法和数据结构词典" href="https://coolshell.cn/articles/1499.html" target="_blank">算法和数据结构词典</a>》，不过，你知道有些什么样比较奇怪的数据结构吗？wikipedia上的这个词条可以让你看看<a href="http://en.wikipedia.org/wiki/List_of_data_structures" target="_blank">各种不同的数据结构</a>。比如：<a rel="nofollow" href="http://en.wikipedia.org/wiki/Skip_list">Skip lists</a>， <a rel="nofollow" href="http://en.wikipedia.org/wiki/Bloom_filter">Bloom filters</a>，或是什么<a rel="nofollow" href="http://en.wikipedia.org/wiki/Dancing_Links">Dancing links</a>。你也许会像一个以“<a title="如何学好C++语言" href="https://coolshell.cn/articles/4119.html" target="_blank">如何学好C++</a>”中的朋友们所说的，不削于这种所谓的“奇技淫巧”，甚至觉得这太根本不实用。其实，这些东西还是有用的，至少对你开阔思路，活动编程思维能力很有意义。</li>
+</ul>
+<ul>
+<li>本站的关于<a href="https://coolshell.cn/tag/%e6%8e%92%e5%ba%8f" target="_blank">排序的文章</a>有很多，对于排序算法来说，其受到要排序的个数和数据的杂乱程度的影响，我们知道比较稳定的排序算法是快速排序和归并排序，归并排序对于大量的数据排序效果是非常好的，尤其是我们可以进行并行的排序。这里有一个并行归并排序的算法的源代码，你可以参考一下 &#8211; “<a href="http://dzmitryhuba.blogspot.com/2010/10/parallel-merge-sort.html" target="_blank">Parallel Merge Sort</a>”。</li>
+</ul>
+<ul>
+<li>说到“奇技淫巧”和算法，这里有一个文章向你展示了C语言中使用位操作可能完成的各种算法，很有意思。请参看 &#8211; “<a href="http://aggregate.ee.engr.uky.edu/MAGIC/" target="_blank">The Aggregate Magic Algorithms</a>”</li>
+</ul>
+<ul>
+<li>这里有篇文章教你如何取得一个<a href="http://www.productivity501.com/harvard-masters-degree/6463/" target="_blank">在线的哈佛大学的硕士学位</a>，文章中说了一些相关的事宜，包括一些收费情况，并且展示了一张文凭。这里有一个网页说明了<a href="http://blog.markwshead.com/911/harvard-online-masters-degree-in-software-engineering/" target="_blank">哈佛软件工程学位</a>（Software Engineering）的所需要学习的科目，比如：Java和分布式计算，分布式/企业级计算，设计模式和Java，通讯协议，高级数据网络，Web开发，计算理论，Perl实践，Unix系统编程……我不知道我们的国家各个大学的硕士在学什么，因为我没有读过硕士，但好像现在的计算机研究生只是导师用来挣钱的免费资源，而且，实在不知道研究生在校研究什么。不管怎么样，从这看来，我们的大学好像并没有教给学生计算机的技术。比如在“<a title="如何学好C语言" href="https://coolshell.cn/articles/4102.html" target="_blank">如何学好C语言</a>”和“<a title="如何学好C++语言" href="https://coolshell.cn/articles/4119.html" target="_blank">如何学好C++语言</a>”中我提到的那些书，那些才是大学里应该学的。我国的教育还真不是一般的落后，不过你不妨试试哈佛的在线学位。</li>
+</ul>
+<p><span id="more-4220"></span></p>
+<ul>
+<li>关于网上的电子书，以前本站介绍过一 个<a title="免费电子书列表" href="https://coolshell.cn/articles/2775.html" target="_blank">免费电子书列表</a>，这里再推荐一个网站，上面有很多很多很不错的计算机科学方面的电子书，当然，都是英文的。<a href="http://www.sciencebooksonline.info/computer-science.html" target="_blank">http://www.sciencebooksonline.info/computer-science.html</a>。我知道你对英文发憷，但是，朋友，你一定要学好英文啊，这不仅仅只是为了学好计算机啊。</li>
+</ul>
+<ul>
+<li>还记得本站的“<a title="64位平台C/C++开发注意事项" href="https://coolshell.cn/articles/3512.html" target="_blank">64位平台开发的注意事项</a>”吗？Intel Software Network上有这样一篇文章其收集了一些在64位平台上经常出现的错的，图文并茂的，相当的不错，强力推荐给大家 &#8211; “<a href="http://software.intel.com/en-us/articles/collection-of-examples-of-64-bit-errors-in-real-programs/" target="_blank">A Collection of Examples of 64-bit Errors in Real Programs</a>”</li>
+</ul>
+<ul>
+<li>你爱好汇编语言吗？如果你是汇编的痴迷者，那么mac.com上的<a href="http://homepage.mac.com/randyhyde/webster.cs.ucr.edu/index.html">这个列表</a>对你很有意义了。里面的相关文章非常不错哦。而这里有一个<a href="http://www.duntemann.com/assembly.html" target="_blank">Step by Step的x86汇编编程教程</a>。</li>
+</ul>
+<ul>
+<li>还记得那篇“UI和UX的差别”吗？呵呵。这里有一个网站，给了你30+条UX用户体验的建议，我觉得非常不错，转给大家<a href="http://uxmyths.com/">http://uxmyths.com/</a></li>
+</ul>
+<ul>
+<li>想在Visual Studio 2010下编写Python吗？那么，向你介绍这个微软官方的插件<a href="http://pytools.codeplex.com/" target="_blank">Python  Tools for Visual Studio</a>。你还可以在VS中调试你的Python代码。挺不错的。</li>
+</ul>
+<ul>
+<li>在VS里开发Python，那么就可以使用Eclipse编写Android程序，这里有一篇教程教你 &#8211; <a href="http://www.smashingmagazine.com/2011/03/28/get-started-developing-for-android-with-eclipse-reloaded/" target="_blank">Get Started Developing For Android With Eclipse, Reloaded</a></li>
+</ul>
+<ul>
+<li>说到了Android，必然要提一提iOS。想学iOS编程吗？这里有一篇教程很不错，如果你是一个什么也不懂的初学者，你不妨看看这篇文章“<a href="http://designthencode.com/scratch/" target="_blank">Build iOS App from Scrach</a>”</li>
+</ul>
+<ul>
+<li>查JDK是不是有点不好查？这里有一个网站可以方便地查找JDK和Android的API &#8211; <a href="http://www.kiwidoc.com/" target="_blank">http://www.kiwidoc.com</a>，我觉得很不错哦。</li>
+</ul>
+<ul>
+<li>不知道你是不是一个怀旧的人，你是否还记得以前用C语言开发Web的时光呢？我记得我97-98年的时候学过用C开发web应用，觉得挺难学的，我还没有完全搞懂，就出现了ASP，PHP……。这两天看到一篇 <a href="http://www.tutorialspoint.com/cplusplus/cpp_web_programming.htm" target="_blank">C++ Web Programming</a>，讲得真是很系统啊，从处理HTTP Header，到处理表单和上传文件。看完后，感觉有点坐着时光机器回到大学时的感觉。呵呵。</li>
+</ul>
+<ul>
+<li>说到Web编程，现在的Web编程和以前很不一样了。你觉得未来的Web编程的技术会是什么样的？NoSQL? 服务器端的Javascript? 各种像Amazon的EC2或S3的云计算平台？更新更强大的开发框架？HTML 5/CSS 3？这里有一篇文章你可以去看看 &#8211; “<a href="http://net.tutsplus.com/articles/general/7-exciting-web-development-trends-for-2011/">7 Exciting Web Development Trends for 2011</a>”.</li>
+</ul>
+<ul>
+<li>无论Web编程到了什么时候，安全问题永远都是你需要注意的。这里有一篇文章“<a href="http://code.google.com/intl/zh-CN/edu/submissions/daswani/index.html" target="_blank">What Every Web Programmer Needs To Know About Security</a>” &#8211;  每一个Web程序员都应该知道的安全问题。</li>
+</ul>
+<ul>
+<li>再推荐两个关于WebGL的游戏演示，一个是3D的比较好玩的有点<a href="http://cycleblob.com/" target="_blank">像贪吃蛇一样的游戏</a>，另一个是<a href="http://nicolas-bonnel.github.com/WARPG/index.html" target="_blank">RPG式的游戏</a>，第三人称视角，看上去很不错。</li>
+</ul>
+<ul>
+<li>这里有20款图标，<a href="http://www.tutorialcadet.com/20-user-interface-icon-sets-for-developers/" target="_blank">http://www.tutorialcadet.com/20-user-interface-icon-sets-for-developers/</a>，也许会对你的UI开发有帮助。wikipedia上也有一些<a href="http://commons.wikimedia.org/wiki/Comparison_of_icon_sets" target="_blank">免费的图标</a>。</li>
+</ul>
+<ul>
+<li>在以前的“<a title="一些有意思的贴子和工具" href="https://coolshell.cn/articles/3480.html" target="_blank">一些资源介绍</a>”的文章中介绍过<a href="http://mikeos.berlios.de/write-your-own-os.html" target="_blank">一篇教程</a>教你用x86的汇编做一个操作系统， 这里又有一篇文章向你展示了一个最最简单的操作系统内核，这个操作系统叫做<a href="http://www.retroprogramming.com/2011/03/itsy-os-simple-preemptive-switcher.html" target="_blank">Itsy-OS Kernel</a>，你可以看看。</li>
+</ul>
+<ul>
+<li>你还记得Google在四月一日愚人节那天搞的那个<a href="http://mail.google.com/mail/help/motion.html" target="_blank">Google Gmail Motion</a>吗？用你的body Language写邮件？呵呵，不过，某人使用微软的Kinect做到了，视频在这里：<a href="http://www.youtube.com/watch?v=Lfso7_i9Ko8" target="_blank">http://www.youtube.com/watch?v=Lfso7_i9Ko8</a>。项目主页在这里：<a href="http://projects.ict.usc.edu/mxr/faast/">http://projects.ict.usc.edu/mxr/faast/</a>。</li>
+<li>不知道你看过电影《创战纪》了吗？我个人觉得电影很一般。不过你想知道里面的一些特效是用什么样的技术怎么做的吗？呵呵，其中的一个程序员写了一篇博文 &#8211; “<a href="http://jtnimoy.net/workviewer.php?q=178" target="_blank">Tron Legacy</a>”，我看到了Unix, C++等。这篇文章很不错。</li>
+</ul>
+<p>好的，就这么多，也欢迎你分享你所看到的和听到的东西。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="二叉树迭代器算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_title">二叉树迭代器算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4220.html">一些有意思的文章和资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4220.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>我有一个Hello World的C++程序编译不过</title>
+		<link>https://coolshell.cn/articles/4170.html</link>
+					<comments>https://coolshell.cn/articles/4170.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 02 Apr 2011 06:33:57 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4170</guid>
+
+					<description><![CDATA[<p>在StackOverflow上有这样一个贴子，楼主说，我有下面这样的一个C++程序，为什么编译不通过啊。其让我想起了以前的这两个帖子《编程真难啊》和《给我一个序...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4170.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4170.html">我有一个Hello World的C++程序编译不过</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在StackOverflow上有这样<a href="http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers" target="_blank">一个贴子</a>，楼主说，我有下面这样的一个C++程序，为什么编译不通过啊。其让我想起了以前的这两个帖子《<a title="编程真难啊" href="https://coolshell.cn/articles/1391.html" target="_blank">编程真难啊</a>》和《<a title="给我一个序列号" href="https://coolshell.cn/articles/1693.html" target="_blank">给我一个序列号</a>》。<strong>仅以此篇文章祝大家假期快乐吧</strong>。</p>
+<figure style="width: 535px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="   " title="hello world 程序" src="http://i.stack.imgur.com/JQXWL.png" alt="hello world 程序" width="535" height="214" /><figcaption class="wp-caption-text">hello world 程序</figcaption></figure>
+<p style="text-align: left;">楼主还给出了相关的编译出错的信息（相信你一看就明白问题在哪里了，你应该还会发出一声“靠”！！！）</p>
+<p>先是用Visual C++ 2010编译</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">c:\dev&gt;cl /nologo helloworld.png
+cl : Command line warning D9024 : unrecognized source file type &#039;helloworld.png&#039;, object file assumed
+helloworld.png : fatal error LNK1107: invalid or corrupt file: cannot read at 0x5172</pre>
+<p>再用G++ 4.5.2编译</p>
+<p><span id="more-4170"></span></p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">c:\dev&gt;g++ helloworld.png
+helloworld.png: file not recognized: File format not recognized
+collect2: ld returned 1 exit status</pre>
+<p>再用clang编译</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">c:\dev&gt;clang++ helloworld.png
+helloworld.png: file not recognized: File format not recognized
+collect2: ld returned 1 exit status
+clang++: error: linker (via gcc) command failed with exit code 1 (use -v to see invocation)</pre>
+<p style="text-align: left;">不过，最强大的，有人居然给出了一个fix，靠！<br />
+（下面的图片是一个4M大的gif动画，演示了整个过程，下载可能需要一定的时间。）</p>
+<figure style="width: 570px" class="wp-caption aligncenter"><a href="http://i.imgur.com/QlGpd.gif"><img decoding="async" loading="lazy" class="  " title="hello world 的解决方案" src="http://i.imgur.com/QlGpd.gif" alt="hello world 的解决方案" width="570" height="252" /></a><figcaption class="wp-caption-text">hello world 的解决方案 （图片有点大4M，请耐心等待下载）</figcaption></figure>
+<p>真是BT啊，呵呵。<strong>仅以此篇文章祝大家假期快乐吧</strong>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4170.html">我有一个Hello World的C++程序编译不过</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4170.html/feed</wfw:commentRss>
+			<slash:comments>36</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>又一个有趣的面试题</title>
+		<link>https://coolshell.cn/articles/4162.html</link>
+					<comments>https://coolshell.cn/articles/4162.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 02 Apr 2011 03:22:03 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4162</guid>
+
+					<description><![CDATA[<p>大家还记得前些天的那个火柴棍式的面试题吗？很有趣吧。下面是我今天在StackExchange上看到的一个有趣的面试题。大家不妨一起来思考一下。问题如下—— 有两...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4162.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4162.html">又一个有趣的面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>大家还记得前些天的那个<a title="“火柴棍式”程序员面试题" href="https://coolshell.cn/articles/3961.html" target="_blank">火柴棍式的面试题</a>吗？很有趣吧。下面是我今天在StackExchange上看到的一个<a href="http://programmers.stackexchange.com/questions/64132/interesting-interview-question" target="_blank">有趣的面试题</a>。大家不妨一起来思考一下。问题如下——</p>
+<p>有两个相同功能代码如下，<strong>请在在A，B，C是什么的情况下，请给出三个原因case 1比case 2快，还有三个原因case 2会比case 1要执行的快。</strong>（不考虑编译器优化）</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+for (i=0; i&lt;N; ++i){
+    A;
+    B;
+    C;
+}</pre>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+for (i=0; i&lt;N; ++i){
+    A;
+}
+for (i=0; i&lt;N; ++i){
+    B;
+}
+for (i=0; i&lt;N; ++i){
+    C;
+}</pre>
+<p>我的第一个反应是——</p>
+<p><span id="more-4162"></span></p>
+<ul>
+<li>case1 要快一些，因为只有一个i++的i&lt;N的操作，而case 2却有三个，这在点上，case 1就比case 2要快。</li>
+<li>case2如果要快的话，有一个原因是，A, B, C其中一个需要去先获得一个资源（比如一个锁），在case1下，每次都要去拿这个资源，而case2下，只需要拿一次然后。但这个可能是不对的，因为我无法想出一个相同的语句块放在case 1中会和放在case 2中有差别。（不过可能比较接近了）</li>
+</ul>
+<p>继续思考：这个题有点像是“<strong>同步和异步</strong>”的问题，case 1是同步，case 2是异步，所以，异步快于同步，也许可以从这个方向出发，写出A, B, C的语句块。</p>
+<p>不过，其要三个原因啊。<strong>各位，你们有想法吗</strong>？</p>
+<p><strong>&#8212;-更新 1&#8212;-</strong></p>
+<p>刚才在twitter上与人讨论，发现又有一种情况，case 2要比case 1要快。比如，A, B, C分别访问是不同的内存块（数组），那么case 1就得在不同的内存块上来回切换寻址，而case2则可以连续地访问内存块。访问连续的内存效率要高。尤其是三块大内存。</p>
+<p><strong>&#8212;-更新 2&#8212;</strong></p>
+<p>正如本贴评论中所说的，CPU的cache也是其中一个因素。大家对底层知识了解的都很不错啊。赞一个。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="C++面试中string类的一种正确写法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_title">C++面试中string类的一种正确写法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4162.html">又一个有趣的面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4162.html/feed</wfw:commentRss>
+			<slash:comments>71</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>WSDL 1.1 中文规范</title>
+		<link>https://coolshell.cn/articles/4131.html</link>
+					<comments>https://coolshell.cn/articles/4131.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Fri, 01 Apr 2011 00:30:21 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[企业应用]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[WSDL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4131</guid>
+
+					<description><![CDATA[<p>WSDL规范目前最新的版本是2.0 ，但是目前大部分还是按1.1的版本进行使用，而且1.1的内容看上去比2.0也简单些，所以我就翻译了这个版本。 作为一种《炒作...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4131.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4131.html">WSDL 1.1 中文规范</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>WSDL规范目前最新的版本是2.0 ，但是目前大部分还是按1.1的版本进行使用，而且1.1的内容看上去比2.0也简单些，所以我就翻译了这个版本。</p>
+<p>作为一种《<a title="那些炒作过度的技术和概念" href="https://coolshell.cn/articles/3609.html">炒作过度的技术和概念</a>》的一类，WEB Service的确是太过重量级，对于小型的应用，还是因该避免去使用xml和SOAP这些技术。但是在企业级的应用，WEB Service已经开始成为了一种常态，所以对其有一定了解或多或少都是有一些好处的。</p>
+<p>当然，通过读规范来学习一门技术的方法，从来都不是一种好的学习方法，规范只是配合你学习的参考。而且WSDL1.1规范中笔误太多，笔者就发现了两处，都一一做了修正。</p>
+<p>原文的地址在：<a href="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</a> ，学习WSDL，需要有一定XML，XML Schema XSD，SOAP的相关知识，请在阅读时特别注意。</p>
+<p>另外WSDL1.1是一个宽泛的规范，所有的语法都以非正式的形式出现，而且为了满足WEB Service 扩展性的需求，也不可能定义出详尽的语法，请在阅读时特别注意。</p>
+<p>我的翻译版本以word形式提供，请要转载的同学们别把酷壳logo去掉的，转载请注明出处。</p>
+<p>由于个人水平有限，翻译难免出现错误。还请读者海涵。</p>
+<p>下载：<a href="https://coolshell.cn/wp-content/uploads/2011/03/WSDL-中文规范1.1.doc">WSDL 中文规范1.1</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1145.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="程序员犯的非技术错误(Top 5)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1145.html" class="wp_rp_title">程序员犯的非技术错误(Top 5)</a></li><li ><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="C++面试中string类的一种正确写法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_title">C++面试中string类的一种正确写法</a></li><li ><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" alt="Go编程模式：修饰器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_title">Go编程模式：修饰器</a></li><li ><a href="https://coolshell.cn/articles/2909.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="一些鲜为人知的编程事实" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2909.html" class="wp_rp_title">一些鲜为人知的编程事实</a></li><li ><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/rank_scatter1-150x150.png" alt="编程语言流行度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_title">编程语言流行度</a></li><li ><a href="https://coolshell.cn/articles/19271.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/04/busy.work_-300x166-1-150x150.jpg" alt="“努力就会成功”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19271.html" class="wp_rp_title">“努力就会成功”</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4131.html">WSDL 1.1 中文规范</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4131.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何学好C++语言</title>
+		<link>https://coolshell.cn/articles/4119.html</link>
+					<comments>https://coolshell.cn/articles/4119.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 30 Mar 2011 00:50:17 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4119</guid>
+
+					<description><![CDATA[<p>昨天写了一篇如何学好C语言，就有人回复问我如何学好C++，所以，我把我个人的一些学习经验写在这里，希望对大家有用。首先，因为如何学好C语言中谈到了算法和系统，所...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4119.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4119.html">如何学好C++语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>昨天写了一篇<a title="如何学好C语言" href="https://coolshell.cn/articles/4102.html" target="_blank">如何学好C语言</a>，就有人回复问我如何学好C++，所以，我把我个人的一些学习经验写在这里，希望对大家有用。首先，因为<a title="如何学好C语言" href="https://coolshell.cn/articles/4102.html" target="_blank">如何学好C语言</a>中谈到了算法和系统，所以这里就只谈C++语言。</p>
+<ul>
+<li><strong>C++是最难的语言</strong>。这个世界上最难的编程语言可能非C++莫属了。你千万不要以为<a title="“21天教你学会C++”" href="https://coolshell.cn/articles/2250.html" target="_blank">几天就可以学好C++</a>，C++的学习曲线是相当BT的，你可以看看<a title="C++ 程序员自信心曲线图" href="https://coolshell.cn/articles/2287.html" target="_blank">这篇文章</a>。C++是一门很自由的语言，自由到了有点<a title="恐怖的C++语言" href="https://coolshell.cn/articles/1724.html" target="_blank">BT和恐怖的地步</a>。我甚至认为C++并不是一门成熟的编程语言，因为太容易犯错了。所以，<strong>你一定要在一开始就要有很小心谨慎的态度，并把C++当成一种难以训服的猛兽来看待</strong>。</li>
+</ul>
+<ul>
+<li><strong>多问“为什么要这样”的问题</strong>。学习C++一定要多问几个“为什么是这样”，“凭什么要这样”的问题。比如：很多人知道C++有拷贝构造函数和初始化列表，但你真的知道为什么要有拷贝构造函数？为什么要有初始化列表吗？为什么要有template，为什么要有RTTI，为什么不是别的呢？难道就是为了让一门语言变得Cool一些吗？完全不是这样的，C++中的任何一个feature都有些实实在在的原因，<strong>你一定要去了解为什么要把C++设计成这样的原因，你才能学好C++</strong>。有空看看《<a href="http://product.china-pub.com/5217" target="_blank">C++演化和设计</a>》一书。</li>
+</ul>
+<p><span id="more-4119"></span></p>
+<ul>
+<li><strong>看书，大量的C++书</strong>。你可以按如下先后顺序阅读（下面这些书，我花了大约4-5年的时间，今天我还在随时温习）
+<ul>
+<li>《<a href="http://product.china-pub.com/28767" target="_blank">C++ Primer</a>》，这本初级读本可能让会你啃得很痛苦，所有的语言的特性和为什么都在里面了，好好读读。当然由C++之父写的《<a href="http://product.china-pub.com/196448" target="_blank">C++程序设计语言</a>》也不错。两本看一本就好了（我看的是前者）。</li>
+<li>了解C++的语法仅仅是万里长征的第一步，你还需要看看《<a href="http://product.china-pub.com/197414" target="_blank">Effective C++</a>》和《<a href="http://product.china-pub.com/197665" target="_blank">More Effective C++</a>》这两本书并不厚，但我从02年就一直看到现在，每次读我都有新的体会，这两本书太经典了。如果你对C语言不熟，这两本书会让你回去补C语言的课。</li>
+<li><a href="http://product.china-pub.com/4801" target="_blank">Think in C++</a>同样是另一本经典之极的书，学c++必读，但是中文版的翻译的很不好，所以还是去读英文版的吧。</li>
+<li>《<a href="http://product.china-pub.com/38130&amp;ref=browse" target="_blank">C++沉思录</a>》同样非常值得一读，这里教的不是编程，而是思考的方法，这是相当珍贵的。</li>
+<li>《<a href="http://product.china-pub.com/33333" target="_blank">Exceptional C++</a>》和《<a href="http://product.china-pub.com/197666" target="_blank">More Exceptional C++</a>》让你看看各种问题的解决方法和一些常见的经典错误。</li>
+<li>《<a href="http://product.china-pub.com/16697" target="_blank">Advanced C++</a>》和《<a href="http://product.china-pub.com/9700" target="_blank">Modern C++</a>》可以让你知道C++各种神奇的用法。</li>
+<li>《<a href="http://product.china-pub.com/9864" target="_blank">泛型编程与STL</a>》是把C++实践到了极致的东西。很强大。STL——神一样的模板库（容器，算法和函数对象），不得不服。</li>
+<li>《<a href="http://www.china-pub.com/3290&amp;ref=browse" target="_blank">深入探索C++对象模型</a>》让你了解编译器下的C++是什么样的，让你了解C++的性能并不差。这个对于C++的程序员太关键了。我以前写过的《<a title="C++ 虚函数表解析" href="https://coolshell.cn/articles/12165.html" target="_blank">C++虚函数表解析</a>》还有《<a title="C++ 对象的内存布局" href="https://coolshell.cn/articles/12176.html" target="_blank">C++对象内存布局</a>》属于这个范畴。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>和Java语言做对比</strong>。我个人以为Java对C++这个并不成熟的语言做了很多调整，规范和限制。所以，对比一下Java和C++，想一想，为什么一些东西在C++中可以做，但在Java中却不行。比如：Java的异常是必需要catch的，不然就会编译不通过。为什么Java不提供操作符重载？为什么Java会引入接口来做多重继承？为什么Java没有像C++那样的I/O字符流？为什么Java不支持指针？为什么Java可以做到垃圾回收？等等。<strong>Java体现着很多面向对象设计的东西，学习Java有助于你学会怎么更好地使用C++来编程</strong>。</li>
+</ul>
+<ul>
+<li><strong>面向对象设计</strong> 。虽然<a title="面向对象是个骗局？！" href="https://coolshell.cn/articles/3036.html" target="_blank">面向对象可能是个骗局</a>。但是我觉得面向对象设计中的一些实践非常的不错，比如，单一原则，依赖倒置原则，等等，都非常地经典。《<a href="http://product.china-pub.com/25961" target="_blank">设计模式</a>》必需一读，《<a href="http://product.china-pub.com/47106" target="_blank">面向对象的分析和设计</a>》可以一读。<strong>但不可以设计模式为中心来编程，而应该是用设计模式来解藕</strong>。</li>
+</ul>
+<ul>
+<li><strong>类库学习</strong>。看看MFC是怎么封装Windows API的，看看ACE是怎么面向对象的，看看boost是怎么玩面向对象的，看看CPPUnit又是怎么设计的。当然，<a title="JDK里的设计模式" href="https://coolshell.cn/articles/3320.html" target="_blank">Java的JDK中有太多的设计模式</a>，可以参考。</li>
+</ul>
+<p>希望没有吓到大家，并欢迎大家补充。</p>
+<p><em><strong>—————更新 2011/03/30 19:20————</strong></em></p>
+<p>更新几个观点：</p>
+<ul>
+<li>1）我不擅长写书评，所以推荐的这些书可能会让你有点看点没有感觉，你可以上豆瓣或是China-pub上看看书评。</li>
+<li>2）C++有很多奇淫技巧，有的很BT，包括虚函数表，也许会有人觉得有点没意思，但我觉得很有意思，一方面可以了解一门语言的实现细节，另一方面可以开阔思路。我从学习这些知识中受益很多。</li>
+<li>3）上述是我的个人的学习历程，我觉得对我很有效，所以是经验之谈。</li>
+<li>4）这类的文章在网上有很多很多，我不是第一个写这样的文章，我也不是写得最好的，我并不希望用长篇大论来谈论什么。只是想给大家了解一下大概的学习样子。毕竟，C++博大精深，任何一篇文章都无法说好。不如就简单一些。</li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4119.html">如何学好C++语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4119.html/feed</wfw:commentRss>
+			<slash:comments>175</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何学好C语言</title>
+		<link>https://coolshell.cn/articles/4102.html</link>
+					<comments>https://coolshell.cn/articles/4102.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 29 Mar 2011 02:25:20 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4102</guid>
+
+					<description><![CDATA[<p>有人在酷壳的留言版上询问下面的问题 keep_walker : 今天晚上我看到这篇文章。 http://programmers.stackexchange.co...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4102.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4102.html">如何学好C语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>有人在酷壳的留言版上询问下面的问题</p>
+<blockquote cite="https://coolshell.cn/guestbook#commentbody-40269"><p><a href="https://coolshell.cn/guestbook#comment-40269">keep_walker</a> <strong>:</strong><br />
+今天晚上我看到这篇文章。<br />
+<a onclick="pageTracker._trackPageview('/outgoing/programmers.stackexchange.com/questions/62502/small-c-projects?referer=http%3A%2F%2Fcoolshell.cn%2F');" rel="nofollow" href="http://programmers.stackexchange.com/questions/62502/small-c-projects">http://programmers.stackexchange.com/questions/62502/small-c-projects</a></p>
+<p>我也遇到了和提问的老外一样的问题。。能给像遇到这样烦恼的程序员一点建议嘛？谢谢！</p></blockquote>
+<p>我相信，这可能是很多朋友的问题，我以前也有这样的感觉，编程编到一定的时候，发现能力到了瓶颈，既不深，也不扎实，半吊子。比如：你长期地使用Java和.NET ，这些有虚拟机的语言对于开发便利是便利，但是对于程序员来说可能并不太好，原因有两个：</p>
+<ol>
+<li>虚拟机屏蔽了操作系统的系统调用，以及很多底层机制。</li>
+<li>大量的封装好的类库也屏蔽了很多实现细节。</li>
+</ol>
+<p>一段时间后，你会发现你知其然，不知所以然。。我以前在CSDN上写过一篇《<strong>Java NIO类库Selector机制解析（<a href="http://blog.csdn.net/haoel/archive/2008/03/27/2224055.aspx" target="_blank">上</a>，<a href="http://blog.csdn.net/haoel/archive/2008/03/27/2224069.aspx" target="_blank">下</a>，<a href="http://blog.csdn.net/haoel/archive/2008/05/04/2379586.aspx" target="_blank">续</a>）</strong>》，在那篇文章中我说提到过（有讥讽的语气）Java的程序员不懂底层实现，所以很难把技术学得更扎实。此时，一部分程序员会不自然地想学学底层的技术，很自然的，C语言就被提了上来。</p>
+<p>下面是我给这位朋友的一些建议：</p>
+<p><span id="more-4102"></span></p>
+<ul>
+<li><strong>鼓励并为你叫好</strong>。我鼓励你想要去学C语言的想法和精神，很多人都觉得C语言好学，其实并不然。（你可以看看《<a rel="nofollow" href="https://coolshell.cn/articles/945.html" target="_blank">C语言的迷题</a>》）现在的这个社会更多地去关注那些时髦的技术，而忽略了这个流行了40+年的C语言。<strong>一门技术如果能够流行40多年，这才是你需要去关注和学习的技术</strong>，而不是那些刚出来的技术（<a title="那些炒作过度的技术和概念" href="https://coolshell.cn/articles/3609.html" target="_blank">过度炒作的技术</a>，<a title="Windows编程革命简史" href="https://coolshell.cn/articles/3008.html" target="_blank">Windows编程史</a>）。这才是踏踏实实的精神。</li>
+</ul>
+<ul>
+<li><strong>不要找借口</strong>。这一条路走下来并不容易，不要给自己找借口。我最不喜欢听到的就是“<strong>很忙，没有时间</strong>”这样的借口。我以前在银行做项目，早9点到晚10点，周一到周六，我一样可以每天抽1个小时来看书和专研，一年下来也能精读5、6本书。我现在的工作项目和招聘任务很紧张，刚生的小孩只有自己和老婆两人带，还需要准备讲课，但是我还是能够找到时间看文章写文章维护酷壳。所以，我可以告诉你，“<strong>时间就像乳沟，只要你肯挤，就一定会有</strong>”。</li>
+</ul>
+<ul>
+<li><strong>学好C语言和系统编程</strong>。我认为，学好编程有四个方面：<strong>语言、算法和数据结构、系统调用和设计</strong>。
+<ul>
+<li><strong>语言</strong>。我可以告诉你C语言有两大主题你要好好学，一个是内存管理，一个是指针！这个世界上90%以上的C/C++出的严重性错误全是和这两个有关。不要看谭浩强的那本书，那本是本烂书。推荐这本书给你《<a href="http://product.china-pub.com/14975&amp;ref=browse" target="_blank">C程序设计语言（第2版·新版）</a><span style="font-size: 13px; line-height: 19px;">》</span></li>
+<li><span style="font-size: 13px; line-height: 19px;"><strong>算法和数据结构</strong>。我认为，用C语言实现算法和数据结构莫过于最爽的事情。推荐你看这本书——<a href="http://product.china-pub.com/192975&amp;ref=browse" target="_blank">算法:C语言实现(第1～4部分)基础知识、数据结构、排序及搜索(原书第3版)</a>，还有那本经典的《<a href="http://product.china-pub.com/31701" target="_blank">算法导论</a>》</span></li>
+<li><span style="font-size: 13px; line-height: 19px;"><a href="http://product.china-pub.com/192975&amp;ref=browse" target="_blank"></a><strong>系统编程</strong>。Windows下推荐两本书——《<a href="http://product.china-pub.com/52880" target="_blank">Windows 程序设计 </a>》和《<a href="http://product.china-pub.com/209058" target="_blank">Windows核心编程</a>》，Unix/Linux下推荐两本书——《<a href="http://product.china-pub.com/30181" target="_blank">Unix高级环境编程</a>》和《<a href="http://product.china-pub.com/196770" target="_blank">Unix网络编程卷1，套接字</a>》《<a href="http://product.china-pub.com/196859" target="_blank">Unix网络编程卷2，进程间通信</a>》尤其是《Unix网络编程》这本书，一通百通，无论Windows还是Unix/Linux，都是一样的。</span></li>
+<li><strong>系统设计</strong>。关于设计方面，我全力推荐《<a href="http://product.china-pub.com/197413" target="_blank">Unix编程艺术</a>》，看完以后，你就明白什么是真正的编程文化了。然后，当你看到Windows的Fans的某些言论时，你就知道什么叫一笑了之了。</li>
+</ul>
+</li>
+</ul>
+<p>如果你能在2-3年内精读完这些书，并全部融会贯通，那么你就明白什么是一览众山小的感觉了！我足足花了5年时间才算是真正全部读完这些书的。最后，祝你好运！努力！</p>
+<p><em><strong>&#8212;&#8212;-更新：2011/03/29 20:00&#8212;&#8212;-</strong></em></p>
+<p>我想，这篇文章主要想告诉大家这么几件事：</p>
+<ul>
+<li>编程编到一定时候，你就需要了解底层系统的机制，否则，知其然不知所以然。</li>
+<li>我没有否定非C的程序员的逻辑，真正的逻辑是——如果你想要了解底层机制，请学习C语言和操作系统。</li>
+<li>40多年的Unix/C影响深远。包括影响了Windows。如果你想一通百通，一定要了解Unix。那是计算机文化真正的根。</li>
+<li>不要肤浅地去思考问题。比如，不要以为一个DBA就不会考虑数据库引擎的内存页面的问题。也不要以为Web程序员就不需要了解后台的服务器和脚本的运行性能以及TCP/IP的问题。</li>
+</ul>
+<p><strong>高手往往都是有很强的系统的基础知识的，表面的东西永远是肤浅的。</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4102.html">如何学好C语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4102.html/feed</wfw:commentRss>
+			<slash:comments>267</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>纯文本配置还是注册表</title>
+		<link>https://coolshell.cn/articles/4077.html</link>
+					<comments>https://coolshell.cn/articles/4077.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 28 Mar 2011 00:42:10 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[Windows]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[InI]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Register]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4077</guid>
+
+					<description><![CDATA[<p>我们知道Unix/Linux下的程序配置文件从来都是纯文本的，你可以自由地修改和查看，他们也没有什么什么XML之类的玩意（参看XML的这两篇文章：一，二），这个...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4077.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4077.html">纯文本配置还是注册表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们知道Unix/Linux下的程序配置文件从来都是纯文本的，你可以自由地修改和查看，他们也没有什么什么XML之类的玩意（参看XML的这两篇文章：<a title="信XML，得永生！" href="https://coolshell.cn/articles/2504.html" target="_blank">一</a>，<a title="信XML，得自信" href="https://coolshell.cn/articles/3498.html" target="_blank">二</a>），这个最重要的Unix文化（参看<a title="Unix传奇(下篇)" href="https://coolshell.cn/articles/2324.html" target="_blank">Unix传奇下篇</a>）40多年来就这么沿续下来了。我很佩服Microsoft的创新能力，一会儿用INI，一会儿用注册表，一会又是用XML，这就是<a title="Windows编程革命简史" href="https://coolshell.cn/articles/3008.html" target="_blank">Windows的编程中那“强大”的创新</a>。在网上又看到有人在争论为什么用注册表而不是纯文本，所以，写下这篇文章。</p>
+<h4>引入注册表所谓的原因</h4>
+<p>首先，让我们来看一下为什么微软觉得要使用注册表而不是ini文件，下面是一些其列出来的ini方面的毛病：</p>
+<ul>
+<li>ini文件不支持Unicode</li>
+<li>ini文件的安全权限不够</li>
+<li>ini文件在多进程下存取会有问题</li>
+<li>如果一个进程锁上了这个文件，另一个进程就无法获得，只能出错。</li>
+<li>ini文件只能包含字符串，无法使用二进制</li>
+<li>解析ini文件相对来说性能比较慢，第一次读写都需要把整个文件读入内存，然后再写回去。</li>
+<li>ini文件最大只有32K</li>
+<li>ini文件的默认目录在Windows系统目录下，只能这个目录只能Windows管理员才能访问</li>
+<li>ini只能包含了两层，对于多层不支持。</li>
+<li>把ini文件放在中央服务器上管理很困难。</li>
+</ul>
+<p>而微软说，注册表可以完美地解决这些问题。居然微软只说到了ini文件，但我觉得不单单是ini，所有的以纯文本方式保存配置文件的方法都会出现上述这样的问题。</p>
+<h4>我的观点</h4>
+<p>那么，当你在看到这些言论时，你是怎么想的？你有没有经过自己的独立思考？还是你觉得注册表完美地解决了所有的一切？下面是我的一些观点：</p>
+<p><span id="more-4077"></span></p>
+<ul>
+<li><span style="color: #800000;">首先，我们要知道没有任何一件事是完美的，凡事必然有好的一面，也有不好的一面。</span></li>
+<li><span style="color: #800000;">其次，当我们在改进一个东西时，不单单要解决其不好的东西，还要把其好的东西给传承下来。</span></li>
+</ul>
+<p>所以，当你看到一些只说好或是只说坏的东西时，这往往意味着“宗教”或“洗脑”，这正是需要你独立思考的时候。</p>
+<h4>纯文本配置文件的好处</h4>
+<p>下面，是我觉得纯文本配置文件的好处（我用Unix下的纯文本配置文件来举例）：</p>
+<ul>
+<li>很容易进行版本管理（配置文件和程序代码一样都需要版本控制）</li>
+<li>很容易移植到别的平台</li>
+<li>很容易自定义文本文件的格式和语法，已也有相关的库支持（ini只支持ANSI字符，只有32K，只支持两级，那是ini的问题，解决这些问题不需要引入注册表）</li>
+<li>可以在配置文本中写注释信息</li>
+<li>你要很容易的使用grep，awk，sed等等以及来和脚本集成。</li>
+<li>你可以很容易地拆分配置文件把其放到conf.d中，这样一来，你就非常灵活
+<ul>
+<li>你就不用整个文件都读入内存，</li>
+<li>你也可以分别设置上不同的存取权限，</li>
+<li>同样可以减小多个进程同时存取的问题</li>
+<li>同样可以引用别的二进制配置的文件</li>
+</ul>
+</li>
+<li>你可以很容易地产生备份或是在不同的配置中来回地切换配置文件以进行调试。</li>
+<li>你可以很容易地使用rsync来向中央服务器同步你的配置文件。或者使用NFS/NIS直接就把配置放在中央服务器上。</li>
+</ul>
+<h4>真正的原因</h4>
+<p>可见，Windows 的注册表并没有把纯文本配置文件的这些好处都带过来，所以，经过这样的独立思考，我们可以知道，微软引入注册表的真正原因是——</p>
+<ul>
+<li>让你的程序不具移植性，让你的软件永远运行在Windows上。</li>
+<li>增加你编程的复杂度和你维护配置文件的复杂度，让你在痛苦之后，苦苦哀求微软再发布下一个“创新”。</li>
+</ul>
+<p>各位程序员——Windows是很危险的，你们还是回火星去吧。</p>
+<p>（<strong>全文完，转载时请注明作者和出处</strong>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/1272.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/08/linux_airline-150x150.jpg" alt="操作系统航空公司" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1272.html" class="wp_rp_title">操作系统航空公司</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4077.html">纯文本配置还是注册表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4077.html/feed</wfw:commentRss>
+			<slash:comments>62</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Fix Bug的五个阶段</title>
+		<link>https://coolshell.cn/articles/4045.html</link>
+					<comments>https://coolshell.cn/articles/4045.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 24 Mar 2011 00:34:43 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4045</guid>
+
+					<description><![CDATA[<p>下面的文章和《各种流行的编程方式》有异曲同工，请你不要理解错了。本文来源，翻译如下： —————————————————— 一个非常严重和困难的bug，能够成就...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4045.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4045.html">Fix Bug的五个阶段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面的文章和《<a title="各种流行的编程风格" href="https://coolshell.cn/articles/2058.html" target="_blank">各种流行的编程方式</a>》有异曲同工，请你不要理解错了。<strong><a title="THE FIVE STAGES OF DEBUGGING" href="http://crankypm.com/2011/03/guest-post-stages-debugging/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed:+TheCrankyProductManager+(The+Cranky+Product+Manager)" target="_blank">本文来源</a></strong>，翻译如下：</p>
+<p>——————————————————</p>
+<p>一个非常严重和困难的bug，能够成就一个饱经沧桑深受压力的有经验的专业程序员的职业生涯。经受这种考验的创伤程度，相当你受到了一次严重的身体伤害，离婚，或是家庭成为的离世。</p>
+<p>研究人员在研究了计算机编程心理学后，得出了一个程序员们在解决一个困难的bug时的心路里程。这些不同的境界，很像为大众所知的<a href="http://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model" target="_blank">Kübler-Ross Stages of Grief</a>（这个模型描述了人对待哀伤与灾难过程中的5个独立阶段（否认，愤怒，耍赖，抑郁，接受）。绝症患者被认为会经历这些阶段），而且原因都很相似。就好像死亡所伴随的悲伤一样，fix一个bug是一个过程其初始化了一个事件，一开始是拒绝相信，其造就了你苦闷的情绪并开始逐步影响你的心智。这种苦闷的情结果会让你纠结要努力忍受，最终会你会找到一个满意的结果。</p>
+<p>了解下面这几个bug-fixing的阶段，会让我们更好的生存下来，并持之以恒，最终带来……关闭我们所有的bug的结果。</p>
+<h2>第一阶段：抵触</h2>
+<p>本阶段的状态: 多疑 Skeptical. 生气 Offended. 易怒 Petulant.</p>
+<p><strong>1. 不理睬</strong></p>
+<p>也许这个bug会安静地离开。</p>
+<p><strong>2. 标记上“不是bug”</strong></p>
+<p>也许这是用户的错，或是本地配置有问题。是的，我确信就是那样，一会就会好的。</p>
+<p><span id="more-4045"></span></p>
+<p><strong>3. 就是一次小故障</strong></p>
+<p>我想这就是一次小故障，很奇怪地发生了一次，它不会再发生的，虽然没有搞清楚是为什么发生了，不过这就好像我们的数据库，网格，浏览器或别的什么打了几个嗝一样。一会就会好的，我确信。</p>
+<p><strong>4. 躲藏.</strong></p>
+<p>我要休几天病假，也许他们会把这个bug转给别人的。</p>
+<p><strong>5. 标记为“修改需求中”</strong></p>
+<p>你看，我是按照需求实现的。如果你们想要改这个行为和UI，就一定要修改需求。也许他们会决定就这样了。</p>
+<p><strong>6. 需要更多的信息</strong></p>
+<p>我不能确定这是一个bug，除非我能在错误日志中看到一条特定的报错信息。</p>
+<p><strong>7. 转给其他人</strong></p>
+<p>我调查这个bug中看到了其它模块中我看不懂的数据，问题很大。我应该把这个bug转给开发那个模块的人。我可以在我的模块中检查一下那个边边角角的情况，但是正确的fix应该是在别人的模块中。反正那个在别的国家，我见不着他。</p>
+<h2>第二阶段：接受</h2>
+<p>本阶段的状态: 认命 Resigned. 被打击 Defeated. 被激怒 Annoyed.</p>
+<p><strong>1. 接受现实</strong></p>
+<p>行了，行了，行了！这是我的bug，我会修正它的。</p>
+<p><strong>2. 把这个bug放到最后</strong></p>
+<p>也许，我可以在我需要fix这个bug之前找到一个新的工作。</p>
+<p><strong>3. 和你的经理讨价还价</strong></p>
+<p>好的，你看，我可以正确地fix这个问题，不过我需要一个月。也就是说，我可以给这个问题贴个创可贴，那不会真正的解决它，但是我们可以避免用户的抱怨，这可以为我们赢得几天的时间。</p>
+<p><strong>4. 为这个bug标记一个无耻的时间</strong></p>
+<p>上帝啊，我希望这时间够了。</p>
+<h2>第三阶段： 投入和沮丧</h2>
+<p>本阶段的状态: 眼花 Giddy. 头晕 Light-headed. 紧张 Nauseous.</p>
+<p><strong>1. 开始调查</strong></p>
+<p>我能搞定它，我能搞定它！只需要小小的调整一下，小小的关注一下，多一点咖啡因，再加上一点时间，我能搞定它。</p>
+<p><strong>2. 迷惘</strong></p>
+<p>Shit. 这太扯了。我居然没有一点进展。这代码真是乱。这样的代码居然能编译和运行，真TMD的神奇，我有机会能搞清楚它什么不正常吗？</p>
+<p><strong>3. 再次躲藏</strong></p>
+<p>你看，很对不起。我不得不要去切除我的阑尾。再一次，是的，既然你提到了它，我的确有两个阑尾。现在我一个也没有了，你高兴了吧？。</p>
+<p><strong>4. 犯贱</strong></p>
+<p>好吧，总之，你到底期望什么？想让我在一个没有高级调试器的环境下改这个BUG。我是什么？千里眼吗？我在我的<a href="http://en.wikipedia.org/wiki/Commodore_64" target="_blank">Commodore 64</a>上一个更好的调试器！</p>
+<p><strong>5. 瞎搞</strong></p>
+<p>看看我试试这么改？Kao，这样不行。要不然这样搞？也不行。那么那样搞呢？Shit，居然变得更糟了。</p>
+<p><strong>6. 绝望</strong></p>
+<p>我不可能fix这个bug了。我是个糟糕的程序员。我太笨了。我在这个满是聪明人的地方干什么？迟早他们会知道我的能力太差，那时我就玩完了，在这也混不下去了。</p>
+<p><strong>7.耻辱</strong></p>
+<p>我的经理问我为什么我用了一个月的时候来fix这个只需要两天就可以解决的bug？老实说，我不知道怎么去读日志信息，我搞坏了我们的编译脚本。现在，我不敢去让别人来帮我，因为这样只会让我显得更愚蠢。</p>
+<p><strong>8. 恐慌！</strong></p>
+<p>这事变得比我相像的要复杂！而我开始觉得复杂的事变得简单……而我觉得简单的事变成需要重定半打的类。为什么我以前在我的经理前拍着胸说我可以搞定这个事？</p>
+<p><strong>9. 通宵工作，远离朋友和家人</strong></p>
+<p>(语无论次的喃喃自语，一阵一阵地大声咒骂)</p>
+<h2>第四个阶段：愚蠢的快感</h2>
+<p>本阶段的状态: 感恩 Grateful. 安心 Relieved. 极端地自我欣赏 Awfully Impressed with Yourself.</p>
+<p><strong>1. 醒悟 </strong></p>
+<p>哦！我终于明白怎么搞定它了……</p>
+<p><strong>2. 写正确的代码</strong></p>
+<p>我真NB，我是编码机器！</p>
+<p><strong>3. 测试</strong></p>
+<p>牛！通过一个测试。真牛！又通过一个测试了。靠！有测试失败了。这是为什么……</p>
+<p><strong>4. 隐藏测试失败</strong></p>
+<p>反正这完全是一个不重要的测试案例。没有人会检查它，这个测试真是毫无意义。</p>
+<p><strong>5. 提交代码</strong></p>
+<p>我太牛了，厨房里有个馅饼可以庆祝一下吗？</p>
+<p><strong>6. 关闭 bug.</strong></p>
+<p>我听说那里有个馅饼可以庆祝一下</p>
+<h2>第五个阶段： 与“完成”肉搏</h2>
+<p>本阶段的状态: 焦燥不安 Twitchy. 神经过敏 Nervous. 迷信 Superstitious.</p>
+<p><strong>1. 有人reopen了这个 Bug</strong></p>
+<p>真的？他们发现了你引入了另一个bug？ Shit &#8211; 那只是一个不重要的案例永远不会发生的。</p>
+<p><strong>2. 修正以前的修正</strong></p>
+<p>是的，我甚至检查了员工的年龄是一个虚数的情况，就是为了防止出错。</p>
+<p><strong>3. 关闭 bug</strong></p>
+<p>是的，贱货，你被关闭了。全部都关了，再也不用心烦了。</p>
+<p><strong>4. 发誓以后再也不干这种事了</strong></p>
+<p><strong>5. 大家都意识到你现在是那个模块的专家了</strong></p>
+<p>哦，不！现在他们又给了我三个那个模块的新bug</p>
+<p>没关系，现在你只需要GOTO 第一个阶段。</p>
+<p>此外，作为一个工作中的程序员，你会永远经历这些烂事，直到你——死亡，退休，或是被升到管理层。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4045.html">Fix Bug的五个阶段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4045.html/feed</wfw:commentRss>
+			<slash:comments>35</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>程序员那些悲催的事儿</title>
+		<link>https://coolshell.cn/articles/3980.html</link>
+					<comments>https://coolshell.cn/articles/3980.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 22 Mar 2011 00:55:30 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3980</guid>
+
+					<description><![CDATA[<p>在StakeOverflow上有这样一个贴子叫“Confessions of your worst WTF moment”（WTF就是What the fuck...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3980.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3980.html">程序员那些悲催的事儿</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在StakeOverflow上有这样一个贴子叫“<a title="Confessions of your worst WTF moment" href="http://stackoverflow.com/questions/63668/confessions-of-your-worst-wtf-moment" target="_blank">Confessions of your worst WTF moment</a>”（WTF就是What the fuck的缩写），挺有意思的，我摘几个小故事过来，希望大家在笑过之后能从中学到什么——<strong>所有的经验都是从错误中来的</strong>（我在其中加了一些点评）</p>
+<blockquote><p>我们公司的软件是给警察局用的，那是一个对用来处理被逮捕的人的系统，此系统还需要收集脸部特征和指纹信息，并且，这个系统和会向FBI的系统提交这些信息。当我们在测试这个系统的时候，我们一般都是用我们自己的指纹，当然，数据库联着的是我们的测试数据库。不过，有一次，在我们测试完后，我们忘了把系统切换回生产库，于是我们的测试数据库就联上了生产环境，于是我们的指纹信息和照片就散布到了其它系统中……清除我们警察局这边的还好办，但是，你需要波士顿警察局警司去法院签字才能从FBI的数据库中清除我们的信息。</p></blockquote>
+<p style="padding-left: 30px;"><strong>点评</strong>：测试环境和生产环境的数据不要混在一起。</p>
+<blockquote><p>有一次，我需要向新系统中导入一堆数据，因为数据量太大，需要5个小时，只能在夜里来干，在系统需要正式使用前2个小时，数据导完了，此时是凌晨4点。随后，我需要删除一些数据，于是我在SQL命令地上输入了“DELETE from important_table; where id=4”。是的，我没有看到哪里还有个分号，天啊。</p></blockquote>
+<p style="padding-left: 30px;"><strong>点评</strong>：这就是加班工作的恶果。另，在delete之前最好先做一次select。</p>
+<blockquote><p>我把我的管理员口令提交到了一个开源软件的源码里。</p></blockquote>
+<p style="padding-left: 30px;"><strong>点评：</strong>1）版本管理器里的东西是删不掉的。2）一些用户和口令要hard code在代码里，所以，不要混用代码使用的权限和管理员的权限，小心管理程序的运行权限，为其注册专门的用户。</p>
+<p><span id="more-3980"></span></p>
+<blockquote><p>我为一个很大的银行开发软件，在我的代码里，我为一段理论上根本不可能执行到的代码加了一个报错信息。有一天，不可思异的事发生了，这条报错信息显示在了该银行的1800个分行的超过10000个终端上——“如果你看到这个信息，说明整个系统被Fuck了，回家吧，祝你过得愉快！”</p></blockquote>
+<p style="padding-left: 30px;"><strong>点评：“</strong>假设是恶魔”，Assume意为Ass &#8211; u &#8211; me，意为——搞砸你和我。对于一些关键东西，永远不要做假设。小心你言语中的——“可能、应该、觉得、不应该”等词语，程序可不认这些东西。</p>
+<blockquote><p>我远程登录到服务器上加几个防火墙规则。第一件我想干的事是在不允许任何人的任何连接，第二件是，为某个端口打开访问权限。不过，我在做完第一件事后就把配置保存了，结果其生效了……</p></blockquote>
+<p style="padding-left: 30px;"><strong>点评</strong>：这样的事经常发生，做远程网络管理的人多少会有那么几次发生这样的错误。在你将你的网络配置生效前，你得想一想，断线了你是否还能登得上去。改配置不要太冲动，生效前检查几次。</p>
+<blockquote><p>我们的代码中有一个模块完美地工作了很多年了，只是代码太乱了。我说服了我的老板，我可以重写这个模块，于是我花了三个星期来重写这个模块。今天 ，我还记得，我的老板站在我的后面看着我，而我在在流着斗大的法汗珠去fix被我重写的“超级漂亮”的那个模块中一个接一个的bug。从那以后，我再也不重写代码了，除非有重大的利益。</p></blockquote>
+<p style="padding-left: 30px;"><strong>点评：</strong>这就所谓的<a title="各种流行的编程风格" href="https://coolshell.cn/articles/2058.html" target="_blank">屠宰式编程</a>。这个案例告诉我们两个道理，1）维护代码要用最最最保守的方法来进行。2）重构代码前要像一个商人一样学会计算利益。当然，<a title="再谈敏捷和ThoughtWorks中国咨询师" href="https://coolshell.cn/articles/3745.html" target="_blank">ThoughtWorks的咨询师</a>一定会告诉你TDD，结对，极限等等方法告诉你如果实践重构。但我想告诉你，一个程序在生产环境里运行好几个年能没有问题是一件很不容易的事，那怕其中的代码再烂，你再看不过去，你都要有一个清醒的头脑明白这几点，<strong>1）软件的运行质量是远远大于代码质量的，2）你的测试案例是远远小于生产环境的，3）软件的完美的质量，是靠长时间的运行、测试和错误堆出来的，而不是某种方法论</strong>。</p>
+<p>————————————————</p>
+<p>相信大家做程序员这一生中也有很多发生在自己身上的悲催的事儿，欢迎分享。我先分享几个我亲身经历过的事。</p>
+<p>一个发生在我的领导身上。</p>
+<blockquote><p>我98年刚参加工作的时候，在某单位网络部门，一次，我们整个部门去给下属单位培训Cisco路由器，结果我们发现带去培训地点的设备少带了集线器HUB，设备连不起来。于是领导很不高兴，质问我们为什么没有带集线器？那几个对领导平时就不满的老员工说办公室里没有集线器了，都借给别的部门了。领导想了想，问我：“陈皓，我记得上次我给过你个集线器”，我说，“好像没有吧，我记不起来了，什么牌的？几口的？”，领导说：“什么牌子想不起来了，不过我记得那个集线器是<strong>一个口</strong>的”。“一个口的？！”，我心里嘀咕着，“真敢说啊”。但我不敢接话了。那几个老员工来劲了——“哪有一个口的HUB啊，一个口的怎么联两台电脑啊？”，领导说：“用两个一个口的不就行了”。领导这话一出，全场一片寂静，无言以对……</p></blockquote>
+<p style="padding-left: 30px;"><strong>后来：</strong>我们所有的组员都离开了我们的这个领导，我们的这个领导今天还在那里工作。我想告诉大家，<strong>很多时候该走的是领导</strong>（包括外企，我上一东家正在裁人，不过我觉得该被裁掉的应该是那些经理）。我们的领导经常出这样或那样的笑话，这让我随时随地地警醒自己——“<strong>不要当一个被人笑话的经理</strong>”，于是，今天我还在努力地学习技术。</p>
+<p>另一个发生在我身上</p>
+<blockquote><p>刚刚接触Linux的时候，还不是很懂，那时的PC还只有奔3，编译公司的程序好慢啊，有时候为了调查一个问题，需要不断地打log，来来回回地编译，很不爽。直到有一天，硬盘不够了，df一下，发现/dev/shm还有空间。于是，把全部程序copy了过去，发现编译起程序超快无比，爽得不行。于是就把工作环境放在/dev/shm下了，连开发都放在这里了。这一天，开发一个功能，改了十来个文件，加班很晚，觉得基本搞定，大喜，回家睡觉。第二天一来，发现/dev/shm下空了，一个文件都没有了，问同事，同事不知，同事还安慰我说，上次他的文件也不知道被 谁删了，于是我大怒，告老板！老板也怒，发邮件到整个公司质问大家谁删了陈皓的程序，无人应答。IT部门答，“昨晚唯一的操作就是重启了linux服务器，什么也没干，不过我们天天备份服务器，可以恢复”，IT部门问我丢的文件在哪个目录下？于是，我reply to all &#8211; “在/dev/shm下……”，哎，人丢大发了……</p></blockquote>
+<p style="padding-left: 30px;"><strong>后来：</strong>我很感谢我以前犯的这个错，从那天以后，我开始立志学好Linux，这个错误让我努力，让我发奋。所以，我想告诉大家——<strong>尤其是刚出道的程序员，你们要多多犯错，要犯错那种丢死人的错，这样你才会知耻而勇</strong>。</p>
+<p>再来一个发生在我同事身上的</p>
+<blockquote><p>01年，我们开发银行系统，在AIX上开发，RICS6000很贵，只能在客户那里开发，开发进度很紧张，慢慢地硬盘就不够用了，系统中有大量的垃圾文件，于是需要清除一些文件，于是有一个同事写了一个脚本，可以自动清除的各种不重要的文件，里面有一条命令大致是这个样子“ rm -rf ${app_log_dir}/*”，意为清除程序运行的日志。为了使用这个脚本，需要在root用户下运行，一开始还不错。直到有一天，某人一运行，整个根就没了。搞得整个团队只能用一周前的备份重写已写好的代码。后来，才发现原因是${app_log_dir}变量为空，于是成了“rm -rf /*”……</p></blockquote>
+<p style="padding-left: 30px;"><strong>后来：</strong>这个事后，我的那个同事，把rm命令改了名，并自己写了一个rm命令，把删除的文件先放到一个临时目录下。而我也因为这个事情，到今天，每次当我在root目录下使用rm时，敲击回车的手都是抖的。（另，rm时永远使用绝对路径）这里，我想告诉大家——<strong>犯错不可怕，可怕的是不会从中总结教训，同一个错犯两次</strong>。</p>
+<p>欢迎分享发生在你身上那些悲催的事。</p>
+<p><strong>（本文请勿用于商业用途，转载时请注明作者和出处）</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3980.html">程序员那些悲催的事儿</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3980.html/feed</wfw:commentRss>
+			<slash:comments>125</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>“火柴棍式”程序员面试题</title>
+		<link>https://coolshell.cn/articles/3961.html</link>
+					<comments>https://coolshell.cn/articles/3961.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 21 Mar 2011 00:28:31 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3961</guid>
+
+					<description><![CDATA[<p>有时候，有些面试题是很是无厘头，这不，又有一个，还记得小时候玩的的“火柴棍游戏”吗，就是移动一根火柴棍改变一个图或字的游戏。程序面试居然也可以这么玩，看看下面这...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3961.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3961.html">“火柴棍式”程序员面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>有时候，有些面试题是很是无厘头，这不，又有一个，还记得小时候玩的的“火柴棍游戏”吗，就是移动一根火柴棍改变一个图或字的游戏。程序面试居然也可以这么玩，看看下面这个火柴棍式的程序面试题吧。</p>
+<p>下面是一个C程序，其想要输出20个减号，不过，粗心的程序员把代码写错了，你需要把下面的代码修改正确，不过，<strong>你只能增加或是修改其中的一个字符</strong>，请你给出三种答案。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int n = 20;
+
+for(int i = 0; i &lt; n; i--){
+    printf(&quot;-&quot;);
+}</pre>
+<p>不要以为这题不是很难，我相信你并不那么容易能找到3种方法。我觉得，如果你能在10分钟内找出这三种方法，说明你真的很聪明，而且反应很快。当然，15分钟内也不赖。不过，你要是30分钟内找不到三种方法，当然，不说明你笨了，最多就是你的反应还不够快。嘿嘿。就当是玩玩吧。</p>
+<p>下面是我的答案：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+//第一种解法：在for循环中给n加一个负号
+for(int i = 0; i &lt; -n; i--)
+
+//第二种解法：把 n 初始化成 -20
+int n = -20;
+
+//第三种解法：把for循环中的 i 初始化成40
+for(int i = 40; i &lt; n; i--)
+</pre>
+<p>不过，我要告诉你，<span style="color: #cc0000;">以上这些答案都不对（我就知道你会偷看答案的）</span>，不过，顺着这些思路走很接近了。呵呵。</p>
+<p>下面是正确答案——</p>
+<p><span id="more-3961"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+//第一种解法：在for循环中给 i 加一个负号
+for(int i = 0; -i &lt; n; i--)
+
+//第二种解法：在for循环中把 i-- 变成 n--
+for(int i = 0; i &lt; n; n--)
+
+//第三种解法：把for循环中的 &lt; 变成 +
+for(int i = 0; i + n; i--)
+</pre>
+<p>其它相关的变种题如下：</p>
+<ul>
+<li>通过修改、增加一个字符，让其输出21个减号</li>
+<li>通过修改、增加一个字符，让其只输出1个减号</li>
+<li>通过修改、增加一个字符，让其不输出减号</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="又一个有趣的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_title">又一个有趣的面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="C++面试中string类的一种正确写法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_title">C++面试中string类的一种正确写法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3961.html">“火柴棍式”程序员面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3961.html/feed</wfw:commentRss>
+			<slash:comments>2728</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>可视化的排序过程</title>
+		<link>https://coolshell.cn/articles/3933.html</link>
+					<comments>https://coolshell.cn/articles/3933.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 18 Mar 2011 00:42:56 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[排序]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3933</guid>
+
+					<description><![CDATA[<p>下面是一个日本程序员制做的一个可视化的排序过程，包括了各种经典的排序算法，你可以调整速度和需要排序的个数。酷壳以前也介绍过几篇相关的文章 一个排序算法比较的网站...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3933.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3933.html">可视化的排序过程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是一个日本程序员制做的一个<a href="http://jsdo.it/norahiko/oxIy/fullscreen" target=_blank>可视化的排序过程</a>，包括了各种经典的排序算法，你可以调整速度和需要排序的个数。酷壳以前也介绍过几篇相关的文章 <a title="一个排序算法比较的网站" rel="bookmark" href="https://coolshell.cn/articles/399.html" target="_blank">一个排序算法比较的网站</a>，<a title="一个显示排序过程的Python脚本" rel="bookmark" href="https://coolshell.cn/articles/536.html" target="_blank">一个显示排序过程的Python脚本</a> 关于各种排序算法的运行复杂度比较，请参看<a href="http://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_of_algorithms" target="_blank">Wikipedia的排序算法比较</a>。</p>
+<p align=center><iframe loading="lazy" src="http://jsrun.it/norahiko/oxIy" width="630" height="320" frameborder="0"><br />
+</iframe></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2583.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些重要的算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2583.html" class="wp_rp_title">一些重要的算法</a></li><li ><a href="https://coolshell.cn/articles/536.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/bubble-150x150.png" alt="一个显示排序过程的Python脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/536.html" class="wp_rp_title">一个显示排序过程的Python脚本</a></li><li ><a href="https://coolshell.cn/articles/399.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/sort-150x150.jpg" alt="一个排序算法比较的网站" width="150" height="150" /></a><a href="https://coolshell.cn/articles/399.html" class="wp_rp_title">一个排序算法比较的网站</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li><li ><a href="https://coolshell.cn/articles/4671.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="可视化的数据结构和算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4671.html" class="wp_rp_title">可视化的数据结构和算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3933.html">可视化的排序过程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3933.html/feed</wfw:commentRss>
+			<slash:comments>54</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

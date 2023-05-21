@@ -1,0 +1,48 @@
+<html><body><p>MelonCard发布了一篇文章——”<a href="http://blog.meloncard.com/post/12175941935/how-one-missing-var-ruined-our-launch" target="_blank">how one missing var ruined our launch</a>“（”少写了一个var毁了我的网站”），这篇文章是说MelonCard用Node.js做后台，因为出了一个小高峰——有50-100人注册，结果整个网站都不响应了，而且还出现了很多奇怪的问题。当他们调查到问题的要源的时候，他们发现下面的代码少写了一个var。</p>
+<p>[javascript]app.all(‘/apps/:user_id/status’, function(req, res, next) {<br/>
+    // …<br/>
+    initial = extractVariables(req.body);<br/>
+});[/javascript]</p>
+<p>为什么inital少写一个var会引发这个问题呢？因为如果你不写var，这个局部的变量会被javascript当成全局变量，而这个变量又是一个函数，所以，当多用户并发的时候，这个本应该在不同用户下互不干扰的变量，成了各个用户共享的东西。试想，用户A的数据被用户B覆盖了，用户A和B的数据还没处理完，结果被新的C给搞乱了，程序的逻辑自然出现了问题。</p>
+<p>在stackoverflow.com上有<a href="http://stackoverflow.com/questions/1470488/difference-between-using-var-and-not-using-var-in-javascript" target="_blank">这么一个贴子说明了“有var”和“无var”</a>的差别：</p>
+<pre class="EnlighterJSRAW">// These are both globals
+var foo = 1;
+bar = 2;
+
+function test()
+{
+    var foo = 1; // Local
+    bar = 2;     // Global
+
+    // Execute an anonymous function
+    (function()
+    {
+        var wibble = 1; // Local
+        foo = 2; // Inherits from scope above (creating a closure)
+        moo = 3; // Global
+    }())
+}</pre>
+<p>上面这个示例告诉我们，如果你不用var，那么这个js引擎会一层一层地向上找父作用域中的变量，如果找到了，就用，如果找不到了，就会帮你定义一个全局的变量。上面这个例子充分说明了这一点。所以，<strong>如果你想在当前的作用域用声明变量，你一定要用var</strong>。这对于一些乱写javascript代码的程序员要注意了。这里再给大家介绍一个工具——</p>
+<p><span id="more-7480"></span></p>
+<p><strong>JSLint( <a href="http://www.jslint.com/">http://www.jslint.com/</a> )</strong>，一个JS代码质量的分析工具，我们把上述stackoverflow的代码copy到JSLint这个在线工具中，我们可以看到下面的报告：</p>
+<p><img alt="" class="aligncenter size-full wp-image-7483" height="184" src="../wp-content/uploads/2012/05/jslint.jpg" title="jslint" width="500"/></p>
+<p>这个报告说明了源码中的那些变量的情况。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="../wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10739.html"><img alt="Lua简明教程" height="150" src="../wp-content/uploads/2013/12/lua-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10739.html">Lua简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10337.html"><img alt="数据即代码：元驱动编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7480.html">Javascript 中的 var</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

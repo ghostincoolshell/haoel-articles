@@ -1,0 +1,53 @@
+<html><body><p>如何检测用户的浏览器是否支持CSS3，我们需要使用HTML，CSS和JavaScript来完成这件事情。下面是步骤。</p>
+<p><strong>1）先制作下面的HTML</strong></p>
+<pre class="EnlighterJSRAW">
+&lt;span id="check" rel="Detect"&gt;&lt;/span&gt;
+</pre>
+<p><strong>2）然后书写下面的CSS</strong></p>
+<pre class="EnlighterJSRAW">
+#check {
+  display: none;
+  width: 0;
+  height: 0;
+}
+#check[rel^="D"] {
+  display: block;
+  width: 0;
+  height: 0;
+}
+</pre>
+<p><span id="more-1186"></span><br/>
+<strong>3）下面是JavaScripts的检测脚本</strong></p>
+<p>请确保下面的代码放在HTML文件头。</p>
+<p>[javascript]<br/>
+&lt;script type="text/javascript"&gt;<br/>
+var obj = document.getElementById("check");<br/>
+var file="special.css";<br/>
+if (window.getComputedStyle)<br/>
+    var stat = window.getComputedStyle(obj,null).getPropertyValue("display");<br/>
+else if (obj.currentStyle)<br/>
+    var stat = obj.currentStyle.display;<br/>
+var css3 = (stat == "block");<br/>
+if (css3) alert("CSS3 Supported.");<br/>
+else alert("CSS3 not supported.");<br/>
+&lt;/script&gt;</p>
+<p>[/javascript]</p>
+<p>文章：<a href="http://www.geocities.com/seanmhall2003/css3/detect.html" target="_self">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3903.html"><img alt="一些有意思的贴子和工具" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6913.html"><img alt="神奇的CSS形状 " height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6913.html">神奇的CSS形状 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1186.html">如何检测浏览器是否支持CSS3</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

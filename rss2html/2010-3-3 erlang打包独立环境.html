@@ -1,0 +1,49 @@
+<html><body><p>最近公司代码需要在非erlang的系统上执行，需要能在独立的环境里运行erlang。研究甚久，于是写下这篇博文。国内用erlang的朋友不多，希望这篇blog能对有需要的朋友起到参考作用。</p>
+<blockquote><p>Application-Vsn/ebin<br/>
+/include<br/>
+/priv<br/>
+/src<br/>
+/Application-Vsn.rel</p></blockquote>
+<p>以上是代码的目录表.</p>
+<blockquote><p>{release, {“nextim”, “2.0”},<br/>
+{erts, “5.7.5”},<br/>
+[{kernel, “2.12.3”},<br/>
+{stdlib, “1.15.3”},<br/>
+{sasl, “2.1.5.3”}]<br/>
+}.</p></blockquote>
+<p>以上是Application-Vsn.rel的内容,[]中是代码本身需要的lib。</p>
+<p><span id="more-2111"></span></p>
+<p>1.执行erl -pa ./ebin . 这一步会生成nextim-2.boot文件</p>
+<blockquote><p>1&gt; systools:make_script(nextim-2″, [local]).<br/>
+ok</p></blockquote>
+<p>2.erl -boot nextim-2 . 这一步会生成nextim-2.tar.gz</p>
+<blockquote><p>systools:make_tar(“nextim-2”).</p></blockquote>
+<p>3.现在建议把tar.gz文件放到独立的路径里 这样不会影响Application-Vsn文件夹 ，然后解压 并进入目录， 复制erlang系统目录里的 erts-5.7.5 到当前目录</p>
+<p>4.建立bin文件夹 复制  <span style="color: #ff0000;"><code>erts-5.7.5/bin/start</code> </span>到 <code><span style="color: #ff0000;">bin/</span> 编辑 <span style="color: #ff0000;">bin/start</span> 改 <span style="color: #ff9900;">ROOTDIR</span>为当前目录的路径</code></p>
+<p>5.复制<span style="color: #ff0000;"><code>erts-5.7.5/bin/run_erl</code></span> <code>和 </code><span style="color: #ff0000;"><code>erts-5.7.2/bin/erl</code></span><code> 到 <span style="color: #ff0000;">bin</span> 并且如同上一步一样修改ROOTDIR.</code></p>
+<p>6.复制 <span style="color: #ff0000;"><code>$ERLDIR/bin/start_sasl.boot</code></span> 到  <span style="color: #ff0000;"><code>bin/start.boot</code></span>.</p>
+<p>7. <span style="color: #ff9900;"><code>echo</code> <code>"5.7.5</code> <code>2.0"</code> <code>&gt;</code> <code>releases/start_erl.data</code>.</span></p>
+<p>6.执行bin文件里的erl</p>
+<blockquote><p>release_handler:create_RELEASES(“$ROOTDIR”, “$ROOTDIR/releases/”, “$ROOTDIR/releases/nextim-2.rel”, []).</p></blockquote>
+<p>7.再把自己的项目文件复制到lib中  然后启动时 -pa参数是 lib文件夹. 完成这一步，就能独立出erlang环境了。</p>
+<p>以上内容 参考自</p>
+<p>http://spawnlink.com/articles/an-introduction-to-releases-with-erlybank/</p>
+<p>http://streamhacker.com/2009/07/02/how-to-create-an-erlang-first-target-system/<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1516.html"><img alt="mochiweb参数化模型Req相关功能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1516.html">mochiweb参数化模型Req相关功能</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1313.html"><img alt="Erlang和Python互通" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1313.html">Erlang和Python互通</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4077.html"><img alt="纯文本配置还是注册表" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4077.html">纯文本配置还是注册表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1846.html"><img alt="MySQL性能优化的最佳20+条经验" height="150" src="../wp-content/uploads/2009/11/unoptimized_explain-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1846.html">MySQL性能优化的最佳20+条经验</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4535.html"><img alt="一些软件设计的原则" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2111.html">erlang打包独立环境</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

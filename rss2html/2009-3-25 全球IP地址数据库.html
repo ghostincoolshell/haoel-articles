@@ -1,0 +1,57 @@
+<html><body><p>下面是一个免费的全球IP地址数据库，包括了国家，城市，地区，和经纬度，以便你可以利用Google Map在地图上标注。这个数据库的精确度可能有60%左右。</p>
+<p><a href="http://www.blogama.org/ipinfodb.sql.bz2"><strong>SQL format</strong></a><br/>
+<cite>更新至 2009年3月11日</cite></p>
+<p><a href="http://www.blogama.org/ipinfodb_csv.zip"><strong>CSV format</strong></a> (多文件)<br/>
+<cite>更新至 2009年3月11日</cite></p>
+<p>下面是怎么使用这个数据库。</p>
+<p><span id="more-244"></span></p>
+<p>首先，所有的IP地址都是按一个整形来存放的，假设一个IP地址为A.B.C.D，那么其计算公式如下所示：</p>
+<p style="padding-left: 30px;">ip = (A*256+B)*256+C</p>
+<p>也就是说，它只计算到网段为：A.B.C.0到A.B.C.255。例如：我们有一个IP地址为：74.125.45.100 (google.com)，那么，</p>
+<p style="padding-left: 30px;">ip = (74*256+125)*256+45 = 4881709</p>
+<p>这样，我们可以方便地使用如下的SQL语句搜索数据：</p>
+<p style="padding-left: 30px;">SELECT * FROM <code class="EnlighterJSRAW">ip_group_city</code><br/>
+WHERE<code class="EnlighterJSRAW">ip_start</code> &lt;= 4881709 ORDER BY ip_start DESC LIMIT 1;</p>
+<p>结果会是如下所示：</p>
+<p style="padding-left: 30px;">ip_start|country_code|region_code|city|zipcode|latitude|longitude<br/>
+4881664|US|CA|Mountain View|94043|37.4192|-122.057</p>
+<p>如果你想在线使用这些数据的话，你可以使用如下所示的网址：</p>
+<p>http://blogama.org/ip_query.php?ip=74.125.45.100&amp;output=xml</p>
+<p>于是，你就会得到如下的XML数据：</p>
+<p style="padding-left: 30px;"><span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">“1.0”</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">“UTF-8”</span><span style="font-weight: bold; color: #000000;">?&gt;</span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Response<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Ip<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>74.125.45.100<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Ip<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Status<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>OK<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Status<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;CountryCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>US<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/CountryCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;CountryName<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>United States<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/CountryName<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;RegionCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>CA<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/RegionCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+ <br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;RegionName<span style="font-weight: bold; color: #000000;">&gt;</span></span><span style="font-weight: bold; color: #000000;">&lt;/RegionName<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;City<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>Mountain View<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/City<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;ZipPostalCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>94043<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/ZipPostalCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Latitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>37.4192<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Latitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Longitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>-122.057<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Longitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br/>
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Response<span style="font-weight: bold; color: #000000;">&gt;</span></span></span></p>
+<p>如果你请求的是：</p>
+<p><a href="http://blogama.org/ip_query.php?ip=74.125.45.100&amp;output=raw">http://blogama.org/ip_query.php?ip=74.125.45.100&amp;output=raw</a></p>
+<p>这样你会得到CSV的格式：</p>
+<p>74.125.45.100,OK,US,United States,CA,,Mountain View,94043,37.4192,-122.057</p>
+<p>文章：<a href="http://blogama.org/node/58" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2631.html"><img alt="五大基于JVM的脚本语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2631.html">五大基于JVM的脚本语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2554.html"><img alt="Eclipse 3.6 （Helios）新特性" height="150" src="../wp-content/uploads/2010/07/Eclipse-3.6-6-150x150.bmp" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2554.html">Eclipse 3.6 （Helios）新特性</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/688.html"><img alt="你能做对下面这些JavaScript的题吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/688.html">你能做对下面这些JavaScript的题吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1023.html"><img alt="Unix 40年：昨天，今天和明天 " height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1023.html">Unix 40年：昨天，今天和明天 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2520.html"><img alt="伦敦地铁实时图" height="150" src="../wp-content/uploads/2010/06/London-Live-Train-Map-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2520.html">伦敦地铁实时图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/244.html">全球IP地址数据库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

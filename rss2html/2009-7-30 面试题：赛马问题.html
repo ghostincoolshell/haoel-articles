@@ -1,0 +1,44 @@
+<html><body><p><a href="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg"></a>据说，这是Google的面试题。面试题目如下：</p>
+<p style="padding-left: 30px; text-align: left;"><span style="color: #008000;"><strong><a href="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg"><img alt="Question" class="alignright" height="158" src="../wp-content/uploads/2009/07/Question.jpg" title="Question" width="158"/></a>一共有25匹马，有一个赛场，赛场有5个赛道，就是说最多同时可以有5匹马一起比赛。假设每匹马都跑的很稳定，不用任何其他工具，只通过马与马之间的比赛，试问，最少得比多少场才能知道跑得最快的5匹马？（</strong>不能使用撞大运的算法<strong>）</strong></span></p>
+<p>很明显这是一个算法题，网上有很多贴子在讨论这个问题，不过都没有给出一个明确的答案。我想了想，想到下面的一个算法：</p>
+<p style="padding-left: 30px;">1）分成5组A，B，C，D，E，比五场。然后根据每场结果分别给这五组内的五匹马排序（从快到慢）。<br/>
+2）每组的头名再赛一场，取走第一名，然后该组第二名顶上。<br/>
+3）重复第二步，直到选出前5名。</p>
+<p>这个算法是比较笨的算法，总计需要<strong>赛10次，</strong>这个算法应该是万无一失的。现在的问题的就，如何优化这个算法，想了想，的确是有优化的空间的。也就是说，是可以少于10次的。</p>
+<p><span id="more-1202"></span></p>
+<p>想了一想，上面的那个算法自从第6次开始就使用5个排序数组的头名做“冒泡法”，总是挑一个最优秀的出来，其实，<strong><span style="color: #800000;">在第6次以后除了挑出最优秀的，我们还可以在每次比赛后淘汰一些速度不行的</span></strong>，淘汰的马匹数自然会比选出的更多，所以，一方面在找，另一方面在淘汰，找出前5名的速度应该会更快。</p>
+<p>比如：我们假设比赛完第六场后，我们得到下面的排序：（每组排序是——快马从左到右，各组头名的排序是——快马从上到下）</p>
+<p style="padding-left: 30px;">A组 A1 A2 A3 A4 A5<br/>
+B组 B1 B2 B3 B4 B5<br/>
+C组 C1 C2 C3 C4 C5<br/>
+D组 D1 D2 D3 D4 D5<br/>
+E组 E1 E2 E3 E4 E5</p>
+<p>这样，我们不但知道，A1是25匹马里最快的马，而且我们可以淘汰近一半的马，比如E2，E3，E4，E5就可以全部淘汰了，为什么呢，因为比E2快的马有A1,B1,C1,D1,E1这五匹马，所以，E2后面的马是无法进入前五名了；同理，D3和其后面的也进入不了前5；同理，C4，C5，B5都可以淘汰。</p>
+<p>于是，在第六轮后我们可以得知，除了A1外的Top 4必然在下面这些马中：</p>
+<p>A组  A2 A3 A4 A5<br/>
+B组 B1 B2 B3 B4 <br/>
+C组 C1 C2 C3 <br/>
+D组 D1 D2 <br/>
+E组 E1</p>
+<p>接下来的过程应该不必我多说了。重复前面的方法，尽可能淘汰无法进前N名的马，于是后面的马就越来越少，你所需要的比赛也会越来越少。</p>
+<p>那么，对于这个题，聪明的你知道最少要比赛几场了吗？</p>
+<p>举一反三，如果有64匹马，8个赛道呢？不失一般性，如果有N匹马，M个赛道呢？N = M*M，那么公式是什么呢？</p>
+<p>期待你的答案！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7965.html"><img alt="一个fork的面试题" height="150" src="../wp-content/uploads/2012/07/fork01jpg-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7965.html">一个fork的面试题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4429.html"><img alt="面试题：火车运煤问题" height="150" src="../wp-content/uploads/2009/07/Question-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4429.html">面试题：火车运煤问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4162.html"><img alt="又一个有趣的面试题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4162.html">又一个有趣的面试题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3961.html"><img alt="“火柴棍式”程序员面试题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3961.html">“火柴棍式”程序员面试题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3738.html"><img alt="打印质数的各种算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3738.html">打印质数的各种算法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3445.html"><img alt="输出从1到1000的数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3445.html">输出从1到1000的数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1202.html">面试题：赛马问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

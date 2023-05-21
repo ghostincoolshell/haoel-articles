@@ -1,0 +1,233 @@
+<html><body><p>下面可能是你不曾用过后十个Linux的命令。相当的有用。</p>
+<p><strong>1）pgrep</strong></p>
+<p>pgrep名字前有个p，我们可以猜到这和进程相关，又是grep，当然这是进程相关的grep命令。不过，这个命令主要是用来列举进程ID的。如：</p>
+<pre class="EnlighterJSRAW">
+$ pgrep -u hchen
+22441
+22444
+</pre>
+<p>这个命令相当于：</p>
+<p><code class="EnlighterJSRAW">ps -ef | egrep '^hchen' | awk '{print $2}'</code></p>
+<p><span id="more-790"></span></p>
+<p><strong>2）pstree</strong></p>
+<p>这个命令可以以树形的方式列出进程。如下所示：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 ~]$ pstree
+init-+-acpid
+     |-auditd-+-python
+     |        `-{auditd}
+     |-automount---4*[{automount}]
+     |-backup.sh---sleep
+     |-dbus-daemon
+     |-events/0
+     |-events/1
+     |-hald---hald-runner---hald-addon-acpi
+     |-httpd---10*[httpd]
+     |-irqbalance
+     |-khelper
+     |-klogd
+     |-ksoftirqd/0
+     |-ksoftirqd/1
+     |-kthread-+-aio/0
+     |         |-aio/1
+     |         |-ata/0
+     |         |-ata/1
+     |         |-ata_aux
+     |         |-cqueue/0
+     |         |-cqueue/1
+     |         |-kacpid
+     |         |-kauditd
+     |         |-kblockd/0
+     |         |-kblockd/1
+     |         |-kedac
+     |         |-khubd
+     |         |-6*[kjournald]
+     |         |-kmirrord
+     |         |-kpsmoused
+     |         |-kseriod
+     |         |-kswapd0
+     |         |-2*[pdflush]
+     |         |-scsi_eh_0
+     |         |-scsi_eh_1
+     |         |-xenbus
+     |         `-xenwatch
+     |-migration/0
+     |-migration/1
+     |-6*[mingetty]
+     |-3*[multilog]
+     |-mysqld_safe---mysqld---9*[{mysqld}]
+     |-smartd
+     |-sshd---sshd---sshd---bash---pstree
+     |-svscanboot---svscan-+-3*[supervise---run]
+     |                     |-supervise---qmail-send-+-qmail-clean
+     |                     |                        |-qmail-lspawn
+     |                     |                        `-qmail-rspawn
+     |                     `-2*[supervise---tcpserver]
+     |-syslogd
+     |-udevd
+     |-watchdog/0
+     |-watchdog/1
+     `-xinetd
+</pre>
+<p> </p>
+<p><strong>3）bc</strong></p>
+<p>这个命令主要是做一个精度比较高的数学运算的。比如开平方根等。下面是一个我们利用bc命令写的一个脚本（文件名：sqrt）</p>
+<pre class="EnlighterJSRAW">
+#!/bin/bash
+if [ $# -ne 1 ]
+then
+    echo 'Usage: sqrt number'
+    exit 1
+else
+    echo -e "sqrt($1)\nquit\n" | bc -q -i
+fi
+</pre>
+<p>于是，我们可以这样使用这个脚本进行平方根运算：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5]$ ./sqrt 36
+6
+[hchen@RHELSVR5]$ ./sqrt 2.0000
+1.4142
+[hchen@RHELSVR5]$ ./sqrt 10.0000
+3.1622
+</pre>
+<p> </p>
+<p><strong>4）split</strong></p>
+<p>如果你有一个很大的文件，你想把其分割成一些小的文件，那么这个命令就是干这件事的了。</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 applebak]# ls -l largefile.tar.gz
+-rw-r--r-- 1 hchen hchen 436774774 04-17 02:00 largefile.tar.gz 
+
+[hchen@RHELSVR5 applebak]# split -b 50m largefile.tar.gz LF_
+
+[hchen@RHELSVR5]# ls -l LF_*
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:34 LF_aa
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:34 LF_ab
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:34 LF_ac
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:34 LF_ad
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:34 LF_ae
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:35 LF_af
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:35 LF_ag
+-rw-r--r-- 1 hchen hchen 52428800 05-10 18:35 LF_ah
+-rw-r--r-- 1 hchen hchen 17344374 05-10 18:35 LF_ai
+</pre>
+<p> </p>
+<p>文件合并只需要使用简单的合并就行了，如：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5]#  cat LF_* &gt;largefile.tar.gz
+</pre>
+<p> </p>
+<p><strong>5）nl</strong></p>
+<p>nl命令其它和cat命令很像，只不过它会打上行号。如下所示：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 include]# nl stdio.h | head -n 10
+     1  /* Define ISO C stdio on top of C++ iostreams.
+     2     Copyright (C) 1991,1994-2004,2005,2006 Free Software Foundation, Inc.
+     3     This file is part of the GNU C Library. 
+
+     4     The GNU C Library is free software; you can redistribute it and/or
+     5     modify it under the terms of the GNU Lesser General Public
+     6     License as published by the Free Software Foundation; either
+     7     version 2.1 of the License, or (at your option) any later version.
+
+     8     The GNU C Library is distributed in the hope that it will be useful,
+</pre>
+<p> </p>
+<p><strong>6）mkfifo</strong></p>
+<p>熟悉Unix的人都应该知道这个是一个创建有名管道的系统调用或命令。平时，我们在命令行上使用竖线“|”把命令串起来是使用无命管道。而我们使用mkfifo则使用的是有名管道。下面是示例：</p>
+<p>下面是创建一个有名管道：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 ~]# mkfifo /tmp/hchenpipe
+
+[hchen@RHELSVR5 ~]# ls -l /tmp
+prw-rw-r-- 1 hchen  hchen  0 05-10 18:58 hchenpipe
+</pre>
+<p>然后，我们在一个shell中运行如下命令，这个命令不会返回，除非有人从这个有名管道中把信息读走。</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 ~]# ls -al &gt; /tmp/hchenpipe
+</pre>
+<p>我们在另一个命令窗口中读取这个管道中的信息：（其会导致上一个命令返回）</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 ~]# head /tmp/hchenpipe
+drwx------ 8 hchen hchen    4096 05-10 18:27 .
+drwxr-xr-x 7 root  root     4096 03-05 00:06 ..
+drwxr-xr-x 3 hchen hchen    4096 03-01 18:13 backup
+-rw------- 1 hchen hchen     721 05-05 22:12 .bash_history
+-rw-r--r-- 1 hchen hchen      24 02-28 22:20 .bash_logout
+-rw-r--r-- 1 hchen hchen     176 02-28 22:20 .bash_profile
+-rw-r--r-- 1 hchen hchen     124 02-28 22:20 .bashrc
+-rw-r--r-- 1 root  root    14002 03-07 00:29 index.htm
+-rw-r--r-- 1 hchen hchen   31465 03-01 23:48 index.php
+</pre>
+<p> </p>
+<p><strong>7）ldd</strong></p>
+<p>这个命令可以知道你的一个可执行文件所使用了动态链接库。如：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 ~]# ldd /usr/bin/java
+        linux-gate.so.1 =&gt;  (0x00cd9000)
+        libgij.so.7rh =&gt; /usr/lib/libgij.so.7rh (0x00ed3000)
+        libgcj.so.7rh =&gt; /usr/lib/libgcj.so.7rh (0x00ed6000)
+        libpthread.so.0 =&gt; /lib/i686/nosegneg/libpthread.so.0 (0x00110000)
+        librt.so.1 =&gt; /lib/i686/nosegneg/librt.so.1 (0x009c8000)
+        libdl.so.2 =&gt; /lib/libdl.so.2 (0x008b5000)
+        libz.so.1 =&gt; /usr/lib/libz.so.1 (0x00bee000)
+        libgcc_s.so.1 =&gt; /lib/libgcc_s.so.1 (0x00aa7000)
+        libc.so.6 =&gt; /lib/i686/nosegneg/libc.so.6 (0x0022f000)
+        libm.so.6 =&gt; /lib/i686/nosegneg/libm.so.6 (0x00127000)
+        /lib/ld-linux.so.2 (0x00214000)
+</pre>
+<p> </p>
+<p><strong>8）col</strong></p>
+<p>这个命令可以让你把man文件转成纯文本文件。如下示例：</p>
+<pre class="EnlighterJSRAW">
+# PAGER=cat
+# man less | col -b &gt; less.txt
+</pre>
+<p> </p>
+<p><strong>9）xmlwf</strong></p>
+<p>这个命令可以让你检查一下一个XML文档是否是所有的tag都是正常的。如：</p>
+<pre class="EnlighterJSRAW">
+[hchen@RHELSVR5 ~]# curl 'https://coolshell.cn/?feed=rss2' &gt; cocre.xml
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 64882    0 64882    0     0  86455      0 --:--:-- --:--:-- --:--:-- 2073k
+[hchen@RHELSVR5 ~]# xmlwf cocre.xml
+[hchen@RHELSVR5 ~]# perl -i -pe 's@&lt;link&gt;@&lt;br&gt;@g' cocre.xml
+[hchen@RHELSVR5 ~]# xmlwf cocre.xml
+cocre.xml:13:23: mismatched tag
+</pre>
+<p> </p>
+<p><strong>10）lsof</strong></p>
+<p>可以列出打开了的文件。</p>
+<pre class="EnlighterJSRAW">
+[root@RHELSVR5 ~]# lsof | grep TCP
+httpd       548    apache    4u     IPv6   14300967    TCP *:http (LISTEN)
+httpd       548    apache    6u     IPv6   14300972    TCP *:https (LISTEN)
+httpd       561    apache    4u     IPv6   14300967    TCP *:http (LISTEN)
+httpd       561    apache    6u     IPv6   14300972    TCP *:https (LISTEN)
+sshd       1764      root    3u     IPv6       4993    TCP *:ssh (LISTEN)
+tcpserver  8965      root    3u     IPv4  153795500    TCP *:pop3 (LISTEN)
+mysqld    10202     mysql   10u     IPv4   73819697    TCP *:mysql (LISTEN)
+sshd      10735      root    3u     IPv6  160731956    TCP 210.51.0.232:ssh-&gt;123.117.239.68:31810 (ESTABLISHED)
+sshd      10767     hchen    3u     IPv6  160731956    TCP 210.51.0.232:ssh-&gt;123.117.239.68:31810 (ESTABLISHED)
+vsftpd    11095      root    3u     IPv4  152157957    TCP *:ftp (LISTEN)
+</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/790.html">十个你可能不曾用过的Linux命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

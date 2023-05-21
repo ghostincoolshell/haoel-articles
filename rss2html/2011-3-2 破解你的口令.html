@@ -1,0 +1,25 @@
+<html><body><p>在网上看到一张口令破解的表格，如下所示（第一列是口令长度，第二列是全小写的口令，第三列是有大写字母的口令，第四列是又加上了数字和其它字符的口令）</p>
+<p><img alt="" class="aligncenter size-full wp-image-3802" height="163" src="../wp-content/uploads/2011/02/passwords.png" title="破解你的口令所需要的时间" width="500"/></p>
+<p>如果你想知道自己的口令花多少时间可以被破确，你可以访问下面这个网站：（<strong><em>更新2011/3/2晚10点15</em></strong>）</p>
+<p style="text-align: center;"><strong><a href="http://howsecureismypassword.net/" target="_blank">http://howsecureismypassword.net/</a></strong></p>
+<p>这里先说一个这里说的口令破解。一般来说用户的口令都是以MD5编码加密放在数据库里的，MD5是不可逆的，所以，当你拿到你一串被MD5后的字串，你可以使用暴力破解——穷举所有的可能口令的MD5字串，然后和数据库里的对比，比对了你就知道口令了。当然，你一定要清楚，在某些审查很严重的地方，互联网内容提供商不一定会把你的口令以MD5加密，甚至就是明文（Plain Text）保存，所以你还需要小心，关于如何设计你的口令，<a href="https://coolshell.cn/articles/2428.html" target="_blank" title="如何设计你的口令">请参看这篇文章</a>。</p>
+<p>从上面这表格我们可以看到，你的口令最好是在8个长度以上，而且一定要有在小写和数字，最好再加上其它字符，这样你的口令被破解的时候最需要463年，这样就比较安全了。当然，如果你的口令使用了一些常用的单词，那就另说了，现在破解口令一般都不会使用暴力破解，都是用一个尝用口令字典表来尝试——比如<a href="https://coolshell.cn/articles/2451.html" target="_blank" title="Twitter的禁用口令">这篇文章所说的字典表</a>。</p>
+<p>但我提醒一下，这张表里中的时间忽略了一个问题，那就是并行，<strong>可以使用多台电脑多个进程并行破解口令</strong>，这样一来，上表中的时间就可大打折扣了。你只需要愿意花2000美刀，你就能够找到一个地方，1秒种计算7亿个口令，因为MD5，SHA这类的算法性能太好了。所以，你可能需要使用新的算法来加密你的口令，这种算法最好加上时间，也就是在算法的计算时间加长。呵呵，慢也有慢的好处。可能你需要考虑一下bcrypt算法，你<a href="https://coolshell.cn/articles/2078.html" target="_blank" title="如何防范密码被破解">可以查看本站的这篇文章</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2078.html"><img alt="如何防范密码被破解" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6193.html"><img alt="CSDN明文口令泄露的启示" height="150" src="../wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6193.html">CSDN明文口令泄露的启示</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5353.html"><img alt="你会做Web上的用户登录功能吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3877.html"><img alt="另类UX让你输入强口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2451.html"><img alt="Twitter的禁用口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2428.html"><img alt="如何管理并设计你的口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3801.html">破解你的口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

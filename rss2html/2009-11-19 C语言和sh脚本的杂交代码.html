@@ -1,0 +1,57 @@
+<html><body><p>在网上看到了一个把 C语言和bash杂并起来的例子，这个示子如下所示。在下面这个例子中，我们把脚本用#if 0这个预编译给起来，这样就不会让其编译到C语言中了。</p>
+<pre class="EnlighterJSRAW">#if 0
+echo "Hello from bash!"
+exit
+#endif
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+int main(int argc, char* argv[]) {
+  puts("Hello from C!");
+  return EXIT_SUCCESS;
+}</pre>
+<p>下面，让我看看如果来使用这样的程序：</p>
+<pre class="EnlighterJSRAW">$ sh test.sh.c
+Hello from bash!
+$ gcc test.sh.c -o test
+$ ./test
+Hello from C!
+</pre>
+<p>你甚至还可以做一个自我编译，并自我运行的源代码。如下所示：</p>
+<p><span id="more-1824"></span></p>
+<pre class="EnlighterJSRAW">#if 0
+file=`mktemp`
+gcc -o $file $0
+$file
+rm $file
+exit
+#endif
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) {
+  puts("Hello from C!");
+  return EXIT_SUCCESS;
+}</pre>
+<p>运行：</p>
+<pre class="EnlighterJSRAW">$ sh test.sh.c
+Hello from C!
+$</pre>
+<p>当然，我并不建议你在真正的开发环境中这样使用，我只不过是在介绍一个比较有趣的用法，仅此而已！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11973.html"><img alt="bash代码注入的安全漏洞" height="150" src="../wp-content/uploads/2014/09/bashbug-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11973.html">bash代码注入的安全漏洞</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1824.html">C语言和sh脚本的杂交代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

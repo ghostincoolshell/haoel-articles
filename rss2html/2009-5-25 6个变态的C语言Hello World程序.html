@@ -1,0 +1,150 @@
+<html><body><p>下面的六个程序片段主要完成这些事情：</p>
+<ol>
+<li>输出Hello, World</li>
+<li>混乱C语言的源代码</li>
+</ol>
+<p>下面的所有程序都可以在GCC下编译通过，只有最后一个需要动用C++的编译器g++才能编程通过。</p>
+<p><strong>hello1.c</strong></p>
+<pre class="EnlighterJSRAW">
+    #define _________ }
+    #define ________ putchar
+    #define _______ main
+    #define _(a) ________(a);
+    #define ______ _______(){
+    #define __ ______ _(0x48)_(0x65)_(0x6C)_(0x6C)
+    #define ___ _(0x6F)_(0x2C)_(0x20)_(0x77)_(0x6F)
+    #define ____ _(0x72)_(0x6C)_(0x64)_(0x21)
+    #define _____ __ ___ ____ _________
+    #include&lt;stdio.h&gt;
+    _____
+</pre>
+<p><span id="more-914"></span></p>
+<p><strong>hello2.c</strong> </p>
+<pre class="EnlighterJSRAW">
+    #include&lt;stdio.h&gt;
+    main(){
+      int x=0,y[14],*z=&amp;y;*(z++)=0x48;*(z++)=y[x++]+0x1D;
+      *(z++)=y[x++]+0x07;*(z++)=y[x++]+0x00;*(z++)=y[x++]+0x03;
+      *(z++)=y[x++]-0x43;*(z++)=y[x++]-0x0C;*(z++)=y[x++]+0x57;
+      *(z++)=y[x++]-0x08;*(z++)=y[x++]+0x03;*(z++)=y[x++]-0x06;
+      *(z++)=y[x++]-0x08;*(z++)=y[x++]-0x43;*(z++)=y[x]-0x21;
+      x=*(--z);while(y[x]!=NULL)putchar(y[x++]);
+    }
+</pre>
+<p><strong>hello3.c</strong></p>
+<pre class="EnlighterJSRAW">
+    #include&lt;stdio.h&gt;
+    #define __(a) goto a;
+    #define ___(a) putchar(a);
+    #define _(a,b) ___(a) __(b);
+    main()
+    { _:__(t)a:_('r',g)b:_('$',p)
+      c:_('l',f)d:_(' ',s)e:_('a',s)
+      f:_('o',q)g:_('l',h)h:_('d',n)
+      i:_('e',w)j:_('e',x)k:_('\n',z)
+      l:_('H',l)m:_('X',i)n:_('!',k)
+      o:_('z',q)p:_('q',b)q:_(',',d)
+      r:_('i',l)s:_('w',v)t:_('H',j)
+      u:_('a',a)v:_('o',a)w:_(')',k)
+      x:_('l',c)y:_('\t',g)z:___(0x0)}
+</pre>
+<p><strong>hello4.c</strong></p>
+<pre class="EnlighterJSRAW">
+    int n[]={0x48,
+    0x65,0x6C,0x6C,
+    0x6F,0x2C,0x20,
+    0x77,0x6F,0x72,
+    0x6C,0x64,0x21,
+    0x0A,0x00},*m=n;
+    main(n){putchar
+    (*m)!='\0'?main
+    (m++):exit(n++);}
+</pre>
+<p><strong>hello5.c</strong></p>
+<pre class="EnlighterJSRAW">
+    main(){int i,n[]={(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;
+    1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))+((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))), (((1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(
+    1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))+ (1
+    &lt;&lt;(1&gt;&gt;1))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))- ((1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1
+    )))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))),(((1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(
+    1&lt;&lt;(1&gt;&gt;1)))-(1&lt;&lt;(1&gt;&gt;1))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1
+    )&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))
+    -((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))),((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1)
+    &lt;&lt;(1&lt;&lt;1)),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;
+    1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-(1&lt;&lt;(1&gt;&gt;1))),(((1&lt;&lt;
+    1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))-(1&lt;&lt;(1&gt;&gt;1))), (((1&lt;&lt;1
+    )&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))- ((1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))+(1&lt;&lt;1)), (((1&lt;&lt;1)&lt;&lt; (
+    1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1)
+    &lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))-((1&lt;&lt;1) &lt;&lt;(1&lt;&lt; (1&gt;&gt;1)))),
+    (((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1))- ((1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;(1&gt;&gt;
+    1)))), (((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1) &lt;&lt;(1&lt;&lt;1))+(1&lt;&lt;(1
+    &gt;&gt;1))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;(
+    1&gt;&gt;1))) + (1&lt;&lt; (1&gt;&gt;1)))}; for(i=(1&gt;&gt;1);i
+    &lt;(((1&lt;&lt;1) &lt;&lt;(1&lt;&lt;1))+((1 &lt;&lt;1)&lt;&lt; (1&lt;&lt;(1&gt;&gt;1
+    ))) + (1&lt;&lt;1)); i++) printf("%c",n[i]); }
+</pre>
+<p><strong>hello6.cpp</strong></p>
+<p>下面的程序只能由C++的编译器编译（比如：g++）</p>
+<pre class="EnlighterJSRAW">
+    #include &lt;stdio.h&gt;
+    #define _(_) putchar(_);
+    int main(void){int i = 0;_(
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++i)_(++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++i)_(++++++++++++++
+    i)_(--++i)_(++++++i)_(------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ----------------i)_(--------
+    ----------------i)_(++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++i)
+    _(----------------i)_(++++++
+    i)_(------------i)_(--------
+    --------i)_(----------------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ------i)_(------------------
+    ----------------------------
+    i)return i;}
+</pre>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/914.html">6个变态的C语言Hello World程序</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

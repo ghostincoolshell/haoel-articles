@@ -1,0 +1,102 @@
+<html><body><p>排序算法好像是程序员学习编程最多的算法，也可能是算法研究者们最喜欢研究的算法了。排序有很多很多的算法，比如，冒泡，插入，选择，堆，快速，归并等等（你可以看看本站以前的那些文章：<a href="https://coolshell.cn/articles/3933.html" target="_blank" title="可视化的排序过程">可视化的排序</a>，<a href="https://coolshell.cn/articles/399.html" target="_blank" title="一个排序算法比较的网站">排序算法比较</a>，<a href="https://coolshell.cn/articles/536.html" target="_blank" title="一个显示排序过程的Python脚本">显示排序过程的python</a>）这里向大家介绍一个“巨NB”的排序算法——Sleep Sort。</p>
+<p>闲言少说，请看下面的代码（用Shell脚本写的）</p>
+<pre class="EnlighterJSRAW">#!/bin/bash
+function f() {
+    sleep "$1"
+    echo "$1"
+}
+while [ -n "$1" ]
+do
+    f "$1" &amp;
+    shift
+done
+wait</pre>
+<p>用法如下：</p>
+<p style="padding-left: 30px;">./sleepsort.bash 5 3 6 3 6 3 1 4 7</p>
+<p>相信你可以会去试一下这个脚本，也相你你试完后你一定会说——“<strong>我擦，真TMD排序了！</strong>”，我还是不要解释这段代码了，过多的解释会不如代码那么直接，而且解释会影响你对这个排序算法的NB性。只想说——<strong>这是正二八经的多线程、多进程排序啊</strong>。我们的<a href="https://coolshell.cn/articles/3933.html" target="_blank" title="可视化的排序过程">Bogo排序</a>也黯然失色啊。</p>
+<p>下面我们需要对这个算法做一些分析——</p>
+<p><span id="more-4883"></span>1）让我们来分析一个这这个程序的算法复杂度，太简单了，不就是O(最大数的秒数)，呵呵。所以，如果出现这样的数列将是恶梦的——2 1 4 3 2 1 99999999</p>
+<p>2）这个排序好是好，但对于负数或浮点数就有bug了。负数的解决方案是，我们可以这样来：x/2+MaxInt/2（时间可能相当长，不过依然工作）。对于浮点数，看看下面的代码.</p>
+<pre class="EnlighterJSRAW">#!/bin/bash
+function f() {
+  sleep $(echo "($2 - 1) + $1 / 10 ^ $2" | bc -l)
+  echo "$1"
+}
+while [ -n "$1" ]
+do
+  f "$1" $(echo -n "$1" | wc -c) &amp;
+  shift
+done
+wait</pre>
+<p>3）我们来看看各种语言版本的实现吧。<br/>
+<strong>Java</strong></p>
+<pre class="EnlighterJSRAW">public class SleepSort {
+    public static void main(String[] args) {
+        int[] ints = {1,4,7,3,8,9,2,6,5};
+        SortThread[] sortThreads = new SortThread[ints.length];
+        for (int i = 0; i &lt; sortThreads.length; i++) {
+            sortThreads[i] = new SortThread(ints[i]);
+        }
+        for (int i = 0; i &lt; sortThreads.length; i++) {
+            sortThreads[i].start();
+        }
+    }
+}
+class SortThread extends Thread{
+    int ms = 0;
+    public SortThread(int ms){
+        this.ms = ms;
+    }
+    public void run(){
+        try {
+            sleep(ms*10+10);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(ms);
+    }
+}</pre>
+<p><strong>Javascript</strong></p>
+<p>[javascript]function sleepsort() {<br/>
+    for (var i = 0, il = arguments.length; i &lt; il; i++) {<br/>
+        (function(args, index) {<br/>
+            setTimeout(function() {<br/>
+                document.body.innerHTML += args[index] + ‘, ‘;<br/>
+            }, args[index]);<br/>
+        }(arguments, i));<br/>
+    }<br/>
+};<br/>
+[/javascript]</p>
+<p><strong>Brainfuck </strong>(关于这门语言，请<a href="https://coolshell.cn/articles/4458.html" target="_blank" title="BT雷人的程序语言（大全）">参看这篇文章</a>)</p>
+<p><code>,&gt;,&gt;++++++++[&lt;------&lt;------&gt;&gt;-]<br/>
+&lt;&lt;[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+,&gt;,&gt;++++++++[&lt;------&lt;------&gt;&gt;-]<br/>
+&lt;&lt;[ ----------[++++++++++&gt;----------]++++++++++<br/>
+&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;&lt;&lt;-]  &gt;&gt;&gt;++++++[&lt;++++++++&gt;-]&lt;.&gt;.&gt;&gt;-]&lt;&lt;&lt;-]<br/>
+,----------[----------------------.,----------]<br/>
+,---&lt;&lt;&lt;+&gt;&gt;&gt;-------[----------------------.,----------]<br/>
+&gt;&gt; ----------[++++++++++&gt;----------]++++++++++<br/>
+&gt;++++++[&lt;++++++++&gt;-]&lt; ----------[++++++++++&gt;----------]++++++++++<br/>
+.&gt;. ----------[++++++++++&gt;----------]++++++++++<br/>
+&gt;++&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;&lt;&lt;-]  &gt;&gt;[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;----------[++++++++++&gt;----------]++++++++++<br/>
+&gt;++,&gt;,&gt;++++++++[&lt;------&lt;------&gt;&gt;-]<br/>
+&lt;&lt;</code></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17225.html"><img alt="Cuckoo Filter：设计与实现" height="150" src="../wp-content/uploads/2015/08/cuckoo-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17225.html">Cuckoo Filter：设计与实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11832.html"><img alt="【活动】解迷题送礼物" height="150" src="../wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10590.html"><img alt="二维码的生成细节和原理" height="150" src="../wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10427.html"><img alt="伙伴分配器的一个极简实现" height="150" src="../wp-content/uploads/2013/10/buddy-memory-allocation-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4883.html">排序算法 Sleep Sort</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

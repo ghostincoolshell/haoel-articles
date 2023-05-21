@@ -1,0 +1,56 @@
+<html><body><p>之前向大家介绍过《<a class="title" href="https://coolshell.cn/articles/399.html" rel="bookmark">一个排序算法比较的网站</a>》，那个网站用动画演示了各种排序算法，并分析了各种排序算法。这里，要向大家推荐一个Python脚本，其可以把排序的过程给显示出来。</p>
+<p>下图是“<strong>冒泡排序</strong>”的一个示例，其中：</p>
+<ol>
+<li>折线表示了各个元素的位置变化。</li>
+<li>折线的深浅表示了元素的大小。越深则越大。</li>
+</ol>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/bubble.png"><img alt="bubble" class="alignnone size-full wp-image-537" height="225" src="../wp-content/uploads/2009/04/bubble.png" title="bubble" width="700"/></a></p>
+<p><span id="more-536"></span></p>
+<p>同样，还有其它一些排序算法的图片：</p>
+<p><strong>堆排序（Heap Sort）</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/heap.png"><img alt="heap" class="alignnone size-full wp-image-539" height="225" src="../wp-content/uploads/2009/04/heap.png" title="heap" width="700"/></a></p>
+<p><strong>选择排序（Selection）</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/selection.png"><img alt="selection" class="alignnone size-full wp-image-542" height="225" src="../wp-content/uploads/2009/04/selection.png" title="selection" width="700"/></a></p>
+<p><strong>快速排序（Quick）</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/quick.png"><img alt="quick" class="alignnone size-full wp-image-541" height="225" src="../wp-content/uploads/2009/04/quick.png" title="quick" width="700"/></a></p>
+<p><strong>Shell排序</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/shell.png"><img alt="shell" class="alignnone size-full wp-image-538" height="225" src="../wp-content/uploads/2009/04/shell.png" title="shell" width="700"/></a></p>
+<p><strong>插入排序（Insertion）</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/listinsertion.png"><img alt="listinsertion" class="alignnone size-full wp-image-540" height="225" src="../wp-content/uploads/2009/04/listinsertion.png" title="listinsertion" width="700"/></a></p>
+<p>你可以使用如下的Python代码来制作这些图片：（需要 <a href="http://cairographics.org/">Cairo</a>图片库支持）</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2009/04/visualise.py"><strong>Python排序脚本</strong></a></p>
+<p>这个脚本<code>参数如下：</code></p>
+<ul>
+<li><code>-a 表示使用什么样的算法，取值为"quick", "heap", "selection", "insertion", "bubble", "shell"。</code></li>
+<li><code>-n 表示要排序的数据个数。</code></li>
+<li><code>-f 表示输入文件。</code></li>
+<li><code>-p 表示文件前缀。</code></li>
+<li><code>-d 表示输出顺序。</code></li>
+<li><code>-x 图片宽度。</code></li>
+<li><code>-y 图片高度。</code></li>
+<li><code>-l 所有线的宽度。</code></li>
+<li><code>-b 边界宽度。</code></li>
+</ul>
+<p><code>使用示例如下：</code></p>
+<p><code></code></p>
+<p style="padding-left: 30px;"><code>./visualise.py -l 6 -x 700 -y 300 -n 15 </code></p>
+<p></p>
+<p>文章：<a href="http://www.hatfulofhollow.com/posts/code/visualisingsorting/index.html" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3933.html"><img alt="可视化的排序过程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3933.html">可视化的排序过程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2583.html"><img alt="一些重要的算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2583.html">一些重要的算法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/399.html"><img alt="一个排序算法比较的网站" height="150" src="../wp-content/uploads/2009/04/sort-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/399.html">一个排序算法比较的网站</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6010.html"><img alt="一些有意思的算法代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6010.html">一些有意思的算法代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4671.html"><img alt="可视化的数据结构和算法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4671.html">可视化的数据结构和算法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/536.html">一个显示排序过程的Python脚本</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

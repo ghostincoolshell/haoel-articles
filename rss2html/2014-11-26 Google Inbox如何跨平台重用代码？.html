@@ -1,0 +1,30 @@
+<html><body><p>原文链接《<a href="http://arstechnica.com/information-technology/2014/11/how-google-inbox-shares-70-of-its-code-across-android-ios-and-the-web" target="_blank">How Google Inbox shares 70% of its code across Android, iOS, and the Web</a>》</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264.jpg"><img alt="inbox2-640x264" class="size-medium wp-image-12137 alignright" height="123" src="../wp-content/uploads/2014/11/inbox2-640x264-300x123.jpg" width="300"/></a></p>
+<p>开发一个移动应用在当下并不是一件容易的事情。如果想要获得最多的用户，你的应用通常需要覆盖 iOS, Android, 和 Web 三大平台。这就意味着同一个应用需要开发三个版本，使用 Objective-C 或者 Swift 开发 iOS 版本，使用 Java 开发 Android 版本，使用 JavaScript/CSS/HTML5 开发 Web 版本。工作量增大的同时也意味着有更多的 bug 需要修复。</p>
+<p>这个问题也是 Google 在开发 Google Inbox 时致力要解决的。在最近发布的这款应用中，Google 使用了一些工具实现了70%的代码跨平台复用。</p>
+<p>Google Inbox 覆盖 iOS, Android, Web 三个平台，它们使用的是同一个后台代码逻辑，只是前端的用户体验和平台相关特性的实现有所不同。Google 自主开发了一套辅助工具将 Android 版本的 Java 代码逻辑编译为 Objective-C (针对 iOS 平台) 和 JavaScript (针对 Web 浏览器)。 Java 到 JavaScript 的编译由 Google Web Toolkit SDK 完成，Java 到 Objective-C 的编译则由 J2ObjC （<a href="j2objc.org">j2objc.org</a>）来完成。</p>
+<p>J2ObjC 是一个开源项目，由 Google 在2013年发布。Google Sheets (Google Docs 中的电子表格部分) 也使用了 J2ObjC，而 Google Inbox 则是目前使用 J2Objc 最多的 Google 项目。</p>
+<p>Google Inbox 复用的代码逻辑包括：对话 (conversations)，提醒 (reminders)，联系人 (contacts)。还有网络相关功能和离线同步。这些代码逻辑的复用节省了大量的时间和成本。</p>
+<p>在产品设计时，Google 将这些可复用功能划分为抽象的逻辑概念，比如：提醒的逻辑放在 “reminder.java” 中，可以被 Android UI 调用。对 iOS 版本而言，J2ObjC 将 “reminder.java” 编译成 Objective-C 代码，再由 iOS UI 调用。</p>
+<p>Google 没有跨平台编译 UI 部分的代码，因为不同平台的UI特性各有不同，盲目统一会导致非常糟糕的用户体验。代码复用只是针对可以共享的后台逻辑，前端的UI实现是完全原生 (native) 的。这与 Xamarin (一个基于 Microsoft C# 的跨平台移动开发工具) 提出的概念类似。</p>
+<p>跨平台代码复用通常会带来一些性能上的问题。Garrick Toubassi，Engineering Director 和 Google Inbox 项目组成员，对此表示： “性能上的影响如果有的话，也可以说是微不足道的。我们做过大量的性能测试。因为没有加入额外的中间层来处理跨平台兼容性，所有代码最后都是平台原生代码。J2ObjC 编译生成的目标代码和 Java 源代码拥有大致相同的对象数量和对象图谱复杂度 (object graph complexity) ”。</p>
+<p>Google 使用的整套方法解决了跨平台移动开发中的一个很重要的问题，同时也推进了安卓先行 (Android-first) 的移动开发策略。</p>
+<p>更多 Google Inbox 文章请猛戳 <a href="http://gmailblog.blogspot.com.au/2014/11/going-under-hood-of-inbox.html">Gmail 官方博客</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12225.html"><img alt="DHH 谈混合移动应用开发" height="150" src="../wp-content/uploads/2014/12/1053-DHH-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12225.html">DHH 谈混合移动应用开发</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17066.html"><img alt="关于移动端的钓鱼式攻击" height="150" src="../wp-content/uploads/2015/04/phishing-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17066.html">关于移动端的钓鱼式攻击</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5815.html"><img alt="来信， 创业 和 移动互联网" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5815.html">来信， 创业 和 移动互联网</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3549.html"><img alt="Android将允许纯C/C++开发应用" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3549.html">Android将允许纯C/C++开发应用</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2608.html"><img alt="Google App Inventor " height="150" src="../wp-content/uploads/2010/07/androidappinventor-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2608.html">Google App Inventor </a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/12136.html">Google Inbox如何跨平台重用代码？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

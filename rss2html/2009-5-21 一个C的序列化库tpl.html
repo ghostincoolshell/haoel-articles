@@ -1,0 +1,61 @@
+<html><body><p>tpl(<a href="http://tpl.sourceforge.net/">http://tpl.sourceforge.net/</a>)是一个开源的小项目，其主要是提供一个可以序列化或反序列化C语言数据的一个API函数库。tpl号称是最有效率的也是最快的，它可以把你内存中的数据存放到文件中，并可以在你需要的时候用文件中反序例化到内存变量中。而且这个函数库没有依赖于别的函数库。</p>
+<p>下面是一个简单的示例（来源于其主页）</p>
+<p>把一个数组（“序号”和“人名”）序例化到文件中。</p>
+<p><span id="more-878"></span></p>
+<pre class="EnlighterJSRAW">
+#include "tpl.h"
+
+int main(int argc, char *argv[]) {
+    tpl_node *tn;
+    int id=0;
+    char *name, *names[] = { "joe", "bob", "cary" };
+
+    tn = tpl_map("A(is)", &amp;id, &amp;name);
+
+    for(name=names[0]; id &lt; 3; name=names[++id]) {
+        tpl_pack(tn,1);
+    }
+
+    tpl_dump(tn, TPL_FILE, "users.tpl");
+    tpl_free(tn);
+}
+</pre>
+<p>把上面那个序列化到文件的“序号”和“人名”反序列化回来。</p>
+<pre class="EnlighterJSRAW">
+#include "tpl.h"
+
+int main(int argc, char *argv[]) {
+    tpl_node *tn;
+    int id;
+    char *name;
+
+    tn = tpl_map("A(is)", &amp;id, &amp;name);
+    tpl_load(tn, TPL_FILE, "users.tpl");
+
+    while ( tpl_unpack(tn,1) &gt; 0 ) {
+        printf("id %d, user %s\n", id, name);
+        free(name);
+    }
+    tpl_free(tn);
+}
+</pre>
+<p>更详细的使用说明请看其文档：<br/>
+<a href="http://tpl.sourceforge.net/userguide.html">http://tpl.sourceforge.net/userguide.html</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/878.html">一个C的序列化库tpl</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,116 @@
+<html><body><p>我们知道，备份文件是一件很重要的事情，我在《<a href="https://coolshell.cn/articles/222.html" rel="bookmark">优秀程序员的十个习惯</a>》一文向大家说明了备份文件应该是程序员最基本的一个习惯。本文主要是向大家介绍一些在备份文件和数据时能用得到的一些示例，当然，这些示例主要是通过一些命令行或是脚本来实现的。这就是用命令行和脚本的优势，你可以实现比较灵活和自动的定制。</p>
+<p>本文中的脚本和示例都是主要是通过zip, tar, ftp, wget和shell脚本来完成。在Linux下，你可以什么也不用安装任何程序，但在Windows下，你需要安装zip 和wget这三个命令（在本文的最后有这三个命令的链接，你可以去下载）</p>
+<h4>几个小脚本</h4>
+<p><strong>1）首先，我们来看一下，如何给某目录打个zip包。</strong></p>
+<p><strong>Windows</strong>:</p>
+<p><code class="EnlighterJSRAW"> zip -r backup.zip "c:\yourfolder"</code></p>
+<p><strong>Linux</strong>: (打包自己的home目录)</p>
+<p><code class="EnlighterJSRAW">tar -czvf ~/backup.tgz --exclude backup.tgz ~/</code></p>
+<p><span id="more-1640"></span><br/>
+<strong>2）接下来，我们再来看一下，创建一个带有时间文件名的压缩包，并上传到远程主机的一个例子。</strong></p>
+<p> <strong>Windows</strong></p>
+<pre class="EnlighterJSRAW">
+  :: cmd 脚本
+  :: 压缩包文件格式`backup-mm-dd-yyyy.zip'
+  :: 注意：%dir% 被引号括起是怕目录名中有空格
+
+  @echo off
+
+  set host=ftp.yourhost.com
+  set user=username
+  set pass=password
+  set file=backup-%date:~4,2%-%date:~7,2%-%date:~10%.zip
+  set dir="yourfolder"
+
+  zip -r %file% %dir%
+
+  &gt;  script.ftp echo open %host%
+  &gt;&gt; script.ftp echo %user%
+  &gt;&gt; script.ftp echo %pass%
+  &gt;&gt; script.ftp echo bin
+  &gt;&gt; script.ftp echo put %file%
+  &gt;&gt; script.ftp echo bye
+
+  ftp.exe -d -s:script.ftp &gt; backup.log
+
+  del script.ftp
+</pre>
+<p><strong>Linux</strong></p>
+<pre class="EnlighterJSRAW">
+  #!/bin/bash
+
+  host="ftp.yoursite.com"
+  user="username"
+  pass="password"
+  file="backup-$(date '+%m-%d-%Y').tgz"
+  dir="$HOME"
+
+  tar -cvzf $file $dir
+
+  ftp -vin &lt;ftp.log
+  open $host
+  user $user $pass
+  bin
+  put $file
+  close
+  bye
+  EOF
+</pre>
+<p><strong>3）最后，我们来看一看，通过wget命令来下载备份好的压缩包。</strong></p>
+<p><strong>Windows</strong></p>
+<pre class="EnlighterJSRAW">
+  :: cmd 脚本
+  :: 注意： '^' 是一个命令的换行符
+
+  set host="ftp://ftp.your.host.com"
+  set user="flintstone"
+  set pass="yabbadabbadoo"
+
+  wget %host% --ftp-user=%user% --ftp-password=%pass% ^ 
+      --mirror --output-file=backup.log --passive-ftp
+</pre>
+<p><strong>Linux</strong></p>
+<pre class="EnlighterJSRAW">
+  #!/bin/sh
+  # 注意 '\' 是命令的换行符
+  
+  host="ftp://ftp.your.host.com"
+  user="username"
+  pass="password"
+
+  wget $host --ftp-user=$user --ftp-password=$pass \
+  --mirror --output-file=backup.log --passive-ftp
+</pre>
+<h4>相关工具</h4>
+<ul>
+<li>Info-Zip: <a href="http://www.info-zip.org/">http://www.info-zip.org/</a></li>
+<li>GNU Tar: <a href="http://www.gnu.org/software/tar/">http://www.gnu.org/software/tar/</a></li>
+<li>GNU Wget: <a href="http://www.gnu.org/software/wget/">http://www.gnu.org/software/wget/</a></li>
+</ul>
+<h4>几点注意</h4>
+<p>上面的那几个命令比较简单，只是表明一些备份的脚本思路。在实际过程当中，基本上也是这样，下面是几点注意。</p>
+<p>1）给备份文件打包压缩这是第一步，你可以选用其它的压缩程序。如bzip。<br/>
+2）文件名上有时间信息比较容易归档。有时候，文件包比较大，还需要对大文件进行分割（一般的压缩软件都支持文件分割）。<br/>
+3）使用wget和ftp可能会有用户名密码泄露的问题，使用ssh拷贝文件会比较好。<br/>
+4）源代码最好还是使用版本控制工具备份（比如Subversion或CVS）<br/>
+5）备份脚本可以放在计划任务（linux是corn）中以实际自动化。<br/>
+6）以上的方法一般说来比较适用于全部备份，而不是增量备份。</p>
+<p>（全文完）<a href="http://topcat.hypermart.net/backup.html" target="_blank"></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3136.html"><img alt="chmod -x chmod的N种解法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3136.html">chmod -x chmod的N种解法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7617.html"><img alt="抄袭，腾讯 和 产品 " height="150" src="../wp-content/uploads/2012/06/i-hate-copycat-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7617.html">抄袭，腾讯 和 产品 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3540.html"><img alt="一段Javascript的代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3540.html">一段Javascript的代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1901.html"><img alt="Visual Studio的Vim插件" height="150" src="../wp-content/uploads/2009/12/viemu-movie-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1901.html">Visual Studio的Vim插件</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/179.html"><img alt="OMG, Windows 7 来自未来" height="150" src="../wp-content/uploads/2009/03/windows_7_created_in_future2-300x179-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/179.html">OMG, Windows 7 来自未来</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2529.html"><img alt="StackOverflow的404错误页" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2529.html">StackOverflow的404错误页</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1640.html">文件备份的几个简单命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

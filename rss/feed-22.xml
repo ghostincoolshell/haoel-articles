@@ -1,0 +1,2193 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 22 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=22" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Sun, 30 Mar 2014 03:41:00 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>一段Javascript的代码</title>
+		<link>https://coolshell.cn/articles/3540.html</link>
+					<comments>https://coolshell.cn/articles/3540.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 26 Jan 2011 00:39:39 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3540</guid>
+
+					<description><![CDATA[<p>我们先看一段Javascript的代码，如下所示：（你能看出来这是干什么的？） [javascript]($=[$=[]][(__=!$+$)[_=-~-~-~...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3540.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3540.html">一段Javascript的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们先看一段Javascript的代码，如下所示：（你能看出来这是干什么的？）</p>
+<p>[javascript]($=[$=[]][(__=!$+$)[_=-~-~-~$]+({}+$)[_/_]+<br />
+($$=($_=!&#8221;+$)[_/_]+$_[+$])])()[__[_/_]+__<br />
+[_+~$]+$_[_]+$$](_/_)[/javascript]</p>
+<p>这段代码来自<a href="http://www.blackhat.com/html/bh-dc-11/bh-dc-11-home.html" target="_blank">BlackHat DC 2011</a>（(黑帽安全大会，全世界最大两个黑客大会之一，另一个是Defcon）中的一个叫<a href="http://www.blackhat.com/html/bh-dc-11/bh-dc-11-speaker_bios.html#Barnett" target="_blank">Ryan Barnett</a>黑客做的<a href="https://docs.google.com/viewer?url=http://www.modsecurity.org/documentation/XSS_Street_Fight-Ryan_Barnett-BlackhatDC-2011.pdf&amp;embedded=true&amp;chrome=true" target="_blank">XSS Street-Fight</a>！的演讲(XSS是Web上比较经典的跨站式攻击，操作起来也有些复杂)，一共69页，基本上都是一些比较枯燥的Javascript，不过这段代码挺有意思的，如果上面这段代码换个样子：</p>
+<p>[javascript]($=[$=[]][(__=!$+$)[_=-~-~-~$]+({}+$)[_/_]+<br />
+($$=($_=!&#8221;+$)[_/_]+$_[+$])])()[__[_/_]+__<br />
+[_+~$]+$_[_]+$$](document.cookie)[/javascript]</p>
+<p>你看到了document.cookie，于是你可能会想到这是偷用户帐号免登录cookie的。是的，就是这样。答案是，这代码等价于alert(document.cookie)，而最上面的那个代码等价于alert(1)——当然，还不仅仅只是alert。看到这里，你可能会想起<a title="6个变态的C语言Hello World程序 " href="https://coolshell.cn/articles/914.html" target="_blank">变态的C语言Hello World程序</a>，以及<a title="如何加密/混乱C源代码" href="https://coolshell.cn/articles/933.html">如何加密/混乱C源代码</a>，是的，这回的这个是Javascript版的，混乱Javascript的会比混乱C的更难懂，因为Javascript的变量类型是可以乱用的。</p>
+<p>好，下面让我们来对这个代码做个解析。</p>
+<p><span id="more-3540"></span>首先，我们先明确一点，在Javascript和C中，混乱后的代码都是要使用一个或多个下划线（_）来当变量名使用的，所以，请把其中的下划线看成变量名。</p>
+<p>其次，这段代码可以分成两个部分，第一个部门其实就是sort()，第二个部分才是alert()</p>
+<p>[javascript title=&#8221;sort()&#8221;]($=[$=[]][(__=!$+$)[_=-~-~-~$]+({}+$)[_/_]+<br />
+($$=($_=!&#8221;+$)[_/_]+$_[+$])])()[/javascript]</p>
+<p>[javascript title=&#8221;alert()&#8221;][__[_/_]+__[_+~$]+$_[_]+$$](_/_)[/javascript]</p>
+<p>我们来看看细节的解释。</p>
+<ul>
+<li>$=[] 是一个空数组</li>
+<li>$=[$=[]] 是一个引用空数组的数组。所以 $ 的解引用就是数字 0。</li>
+<li>__ =  (__ = !$ + $ )   等价于字符串&#8221;false&#8221;</li>
+<li>_ = -~-~-~$    中~是位运算符“非”，~$等于-1，所以-~$ 就是+1，基本上来说，~N就是 -(N+1)，所以这个表达式的值为3。</li>
+<li>因为_ = 3，所以 _/_ = 3/3 = 1</li>
+</ul>
+<p>于是：</p>
+<ul>
+<li>(__ = !$ + $ )[ _ = -~-~-~$]</li>
+<li>(&#8220;false&#8221;)[_]</li>
+<li>(&#8220;false&#8221;)[3]</li>
+<li>&#8220;false&#8221;[3] = s</li>
+</ul>
+<p>而：</p>
+<ul>
+<li>({} + $)[_/_]</li>
+<li>(&#8221; object&#8221;)[_/_]</li>
+<li>(&#8221; object&#8221;)[1]</li>
+<li>&#8221; object&#8221;[1] = o</li>
+</ul>
+<p>再来：</p>
+<ul>
+<li>$ = ( $_ = !&#8221; + $)[_/_]</li>
+<li>$ = ( &#8220;true&#8221;)[1]</li>
+<li>&#8220;true&#8221;[1] = r</li>
+</ul>
+<p>最后：</p>
+<ul>
+<li>$_[+$] = &#8220;true&#8221;[0] = t</li>
+</ul>
+<p>因为</p>
+<p>($$ = ( $_ = !&#8221; + $)[_/_] + $_[+$] ))</p>
+<p>所以我们可以经过下面的推算得出$$的值</p>
+<ul>
+<li>!&#8221; = &#8220;true&#8221;</li>
+<li>$_ = (true)</li>
+<li>$_[1] = r</li>
+<li>$_[0] = t</li>
+<li>$$ = rt</li>
+</ul>
+<p>所以第一部分就成了 sort()，也就是以下的代码</p>
+<p>[javascript]($ = [ $=[]] [&quot;s&quot; + &quot;o&quot;+ &quot;r&quot;+ &quot;t&quot; ] )()[/javascript]</p>
+<p>Sort 接受一个作为函数的参数来运行，从而执行了第二部份。</p>
+<p>[__[_/_]+__[_+~$]+$_[_]+$$](_/_)</p>
+<p>我们知道：</p>
+<ul>
+<li>$ = 0</li>
+<li>_ = 3</li>
+<li>__ = &#8220;false&#8221;</li>
+<li>$! = &#8220;true&#8221;</li>
+<li>$$ = &#8220;rt&#8221;</li>
+</ul>
+<p>[__[_/_]+__[_+~$]+$_[_]+$$](_/_)</p>
+<p>等价于<br />
+[__[1] + __[3 + -1] + $![3] + $$)(1);</p>
+<p>等价于<br />
+[&#8220;false&#8221;[1] + &#8220;false&#8221;[3 + -1 ] + &#8220;true&#8221;[3] + &#8220;rt&#8221;] (1)</p>
+<p>等价于<br />
+[ a + l + e + r + t ](1)</p>
+<p>等价于<br />
+alert(1)</p>
+<p>就是这样！于是这段代码可能绕过你的一些对Javascript的检查。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3540.html">一段Javascript的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3540.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>食客还是大厨</title>
+		<link>https://coolshell.cn/articles/3589.html</link>
+					<comments>https://coolshell.cn/articles/3589.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 25 Jan 2011 00:46:45 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[老婆]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3589</guid>
+
+					<description><![CDATA[<p>（请勿将本文用于商业用途，转载时注明作者和出处） 昨天我在文章《Android将允许纯C/C++开发应用》中发表了一些“很不中听”的观点，在我早晨上班刚打开电脑...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3589.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3589.html">食客还是大厨</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong><strong>（请勿将本文用于商业用途，转载时注明作者和出处）</strong></strong></p>
+<p>昨天我在文章《<a title="Android将允许纯C/C++开发应用" href="https://coolshell.cn/articles/3549.html" target="_blank">Android将允许纯C/C++开发应用</a>》中发表了一些“很不中听”的观点，在我早晨上班刚打开电脑的时候，Gtalk上同学就发来了一条信息“<span style="color: #800080;">android  为啥不用C/C++的原因是，android是开放式系统，为了能够跨平台。如果整回C/C++，那么windows  mobile就是前车之鉴。</span>”，于是和同学展了争论，同学的意思是Java是正确的，在硬件上的表现也将是很出色的，而且准入门槛低，最重要的是跨平台，跨平台是恶梦，而硬件上性能的问题在未来不是问题。iPhone是单一平台，所以不需要考虑跨平台。</p>
+<p>而在我的博文后面上也有许多的讨论，<a href="http://sd.csdn.net/a/20110124/290717.html" target="_blank">在CSDN上</a>也有一些，大家可以去看看。<strong>很多朋友都谈了谈为什么Java要比C++要好的理由，很多很多，大家可以去看看，我觉得挺好的</strong>。不过后来，我更新了一下我的文章，留下了几个让大家思考的问题，我希望大家都看看。</p>
+<p>在这里，我想和大家说说技术之上的东西。</p>
+<p>——————————————正文分割线——————————————</p>
+<p>在绝大多数的评论中，我看到了大家都是站在技术开发者的角度在讨论。我想这和Google的Android犯的是同一个毛病，那就是其注重了“程序员”，而不是“用户”。就像是，Unix是为程序员开发，Java 也是为程序员的跨平台难问题开发，而Windows是为用户开发，iPhone也是为用户开发。也许，我们认为，改进了程序员的开发体验后，能迸发出程序员强大的生产力，进而增加满足用户需求的能力。不过，我想说的是，<strong>这件事的初衷是好的，但事实上程序员是永远不懂用户的</strong>。</p>
+<p><span id="more-3589"></span></p>
+<p>就像大家在讨论Android和Java的关系时，仅在谈跨平台，其实，跨平台关我最终用户屁事，开不开放并我最终用户P事。甚至，手机里装的是Linux还是Android还是Win Phone7还是Symbian，我做为一个用户我统统不关心，什么Java，还是C++，管我球事。作为一个程序员，如果你想不通这个观点的话，那你就去想想，你上饭馆点菜时，你会关心你点的菜是用什么样的锅碗瓢盆来盛，用什么样的燃料来做，什么样的刀来切，长在什么样的地，浇了什么样的肥……如果你还想不通的话，请看下面的例子：</p>
+<p>有一天，Google告诉所有的大厨，从我们发布Android开始，你们做菜就简单了，这是一个跨平台的烧菜系统，以后，作为厨师的你，做菜再也不用关心是用炒锅，蒸锅，煮锅，砂锅，电饭锅，平底锅，也不用关心做的是西餐还是中餐，我们推出的“虚拟锅”将屏蔽这些硬件和技术细节，以后，你面对的只有一口锅。当然，对于这个虚拟锅，你需要使用一种新型的叫Java锅勺。Java锅勺是强大的，容易的。（然而，过了几年后，他们却推出了传统锅勺）对此，一堆大厨，吵啊吵啊的，大家都在争论锅的好坏。</p>
+<p>来饭馆吃饭的食客说，关我屁事，都麻利儿地赶快给我上菜！给我好吃的！（<span style="color: #808080;">到这里，我希望你看懂了，如果你没有看懂的话，就此打住，后面的对你就太深了</span>）</p>
+<p>当然，用户并不单单只是着迷于好吃的，还有好的服务和体验！程序员们管这个叫用户体验。不过，如果餐馆都关注大厨们做菜的体验了，很有可能会怠慢了用户体验。餐馆负责人吆喝着，我们的餐馆是跨平台的，是开放的，就是说，任何都可以在我们这里做吃的买给你。食客们说，什么？什么人都可以在你的餐馆里做菜？你搞错没有啊？！餐馆负责人说，这样我们可以吸引到更好的更优秀的大厨，能做出更优秀的菜，有的菜品还是其它餐馆提供的。食客们说，那可以试试。然后，当食客上桌的时候，他们发现不同的菜居然有不同的服务，而且点菜的流程也不一样，不过大家都号称自己有最好的用户体验和服务。此时，食客们反而犹豫了。而各位大厨在厨房津津乐道着自己的做菜体验，而没有挣到一分钱。餐馆负责人还继续向食们说：我们有四个订餐电话，不同的订餐电话可以订到不同的菜，以后这样的订餐电话会更多。</p>
+<p>这个时候，一家叫iPhone的餐馆出现了，用户体验非常好，服务也很到位，食客们从入座点菜和进餐的过程都非常的流畅和风格统一，都相当的简单。食客们说，你们的这些菜品是怎么来的？iPhone餐厅负责人说，我们厨房对大厨们其实也是开放的，不过，厨房里的硬件和烹饪器具都是固定而不能修改的，而且，他们要想在这里做菜的话，每年得交给我们99美元的审核费用，我们严格他们的做菜工序，并保证用户的体验一致，我们的收入会和这些厨师分成，特别是那些有秘方的厨师将会分得更多。我们就像麦当劳一样，加盟我们的人有很多，不过我们所有店面的风格和用户点餐的过程完全一致，方便而服务优质。当然，我们的收费是高一点，但在我们这里不会出现任何的混乱。对于食客来说，虽然有人抱怨iPhone餐馆的只有一个服务生（单进程），但是，食客对该餐馆的服务表示很放心，体验也没得说，流畅完美简单一致。</p>
+<p><em><span style="color: #800000;"><strong>&#8212;&#8211;更新：2011/01/26&#8212;&#8211;</strong></span></em></p>
+<p>跨不跨平台，开不开放，一点都不关用户的事，那是程序员的事。但用户的体验很关用户的事。<strong>用户的体验包括两方面，一方面是技术所带来的功能体验，另一方面是服务体验</strong>。Android和iPhone的差别是，Android只关注开发人员的体验和功能的体验，并没有服务的体验，而iPhone把功能和服务的体验都打包了。Android选择走什么样的路无所谓，要打赢这场战争，Android一定要学会从技术向服务的过渡，否则，就开发而言，也就是吸引一下程序员和产商罢了，其对用户没有任何吸引力。</p>
+<p>但凡是走这条的，都很有问题（用户和服务跟不上，全部玩完，Linux的前期基本如此）</p>
+<ul>
+<li><strong>产品 -&gt; 开发人员 -&gt; 产商 -&gt; 用户 -&gt; 服务</strong>（???）</li>
+</ul>
+<p>而有些公司选择了这条路 （产品和服务先行，抢占用户市场相当快，比如Windows，IBM）</p>
+<ul>
+<li><strong>产品 + 服务 -&gt; 用户 -&gt; 开发人员 + 运营代理</strong></li>
+</ul>
+<p>我不认为Apple的经验无法复制，而是这样的模式很多很多，<strong>这个世界上有很多IT公司做到最后才发现，只有把产品和服务一同打包，才是用户想要的</strong>。</p>
+<p>——————————————————</p>
+<p>这就是<a href="https://coolshell.cn/articles/3363.html" target="_blank">Apple的简单之道</a>，上述内容素材取材于我和我老婆的对话（我老婆是文科，对编程不懂，她正是我了解最终用户的对象，也是我<a href="https://coolshell.cn/articles/3236.html" target="_blank">锻炼沟通</a>的对象）。下面是相关原始对话：</p>
+<p><strong>我</strong>：问个问题，如果有两家餐馆，你会先那家？</p>
+<ul>
+<li>第一家餐馆是开放的，怎么个开放呢？厨师可能是任何想做菜的人，有做的好的，也有做不好的。餐馆的厨房里的配置也是各式各样的，厨师甚至可以自带设备，反正，什么样的厨房用具都支持。另外，该餐馆有四个订餐电话，不过，不同的订餐电话都不一定都订到菜单上所有的菜，因为这个餐馆不但把厨房给开放出去了，订餐的方式也开放出去了。进餐体验方面，不同的分店有不同的样子。</li>
+</ul>
+<ul>
+<li>第二家餐馆是封闭的，不过他也对外面的厨师开放，并和厨师一同分成。厨师里的用具是餐馆定制好的，厨师要做菜，必需先交100美金的审核费，餐馆派专人审核厨师做的每一道菜，包括工序。每个餐厅的环境非常友好，也很简单，而且能让人感到非常不错的进餐体验，所有的分店都是一样。订餐电话只有一个，可以完成一键订餐。当然，第二家店要贵点。</li>
+</ul>
+<p><strong>老婆</strong>：你说的第一家就是那种像“大食代”的各种小吃拼起来的地儿吧？第二家就是像麦当劳， 必胜客，或是一些正规地像“海底捞”、“江南春”这样的店吧。第一家的店么就是顺便吃吃，要真正吃东西，还是要去第二种店。老公，难得你今天请我吃饭，我看就吃你说的第二种吧。（我晕，又把自己给绕进去了）</p>
+<p>——————————————正文分割线——————————————</p>
+<p>P.S. 有的朋友说我是C/C++出生，就是看不起Java。这样说我太小看我了，我的文章风格从来都是以一种调侃的方式，因为我觉得这样的文章会比那些枯燥的技术文章更有意思。我调侃C++和程序员的文章不比调侃Java要少，我对C++的观点从来都是C++是一门很不成熟的半成品语言！Java则要比它成熟的多得多，不过Java的跨平台和性能上的确是有很多东西可以调侃。</p>
+<p><strong>（请勿将本文用于商业用途，转载时注明作者和出处）</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg" alt="关于移动端的钓鱼式攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_title">关于移动端的钓鱼式攻击</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/5089.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="10个必需的iOS开发工具和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5089.html" class="wp_rp_title">10个必需的iOS开发工具和资源</a></li><li ><a href="https://coolshell.cn/articles/4334.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/1_starting_point_full-150x150.jpg" alt="Eclipse开发Android应用程序入门:重装上阵" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4334.html" class="wp_rp_title">Eclipse开发Android应用程序入门:重装上阵</a></li><li ><a href="https://coolshell.cn/articles/4270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/install-150x150.gif" alt="Eclipse开发Android应用程序入门" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4270.html" class="wp_rp_title">Eclipse开发Android应用程序入门</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3589.html">食客还是大厨</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3589.html/feed</wfw:commentRss>
+			<slash:comments>68</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Android将允许纯C/C++开发应用</title>
+		<link>https://coolshell.cn/articles/3549.html</link>
+					<comments>https://coolshell.cn/articles/3549.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 24 Jan 2011 00:39:50 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[Android]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Google]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3549</guid>
+
+					<description><![CDATA[<p>对于Android，长期以来，我一直有两件事搞不懂， 一个是为什么Android要选用Java。对于嵌入式开发，CPU和内存都很宝贵，居然还使用Java。 一个...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3549.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3549.html">Android将允许纯C/C++开发应用</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>对于Android，长期以来，我一直有两件事搞不懂，</p>
+<ul>
+<li>一个是为什么Android要选用Java。对于嵌入式开发，CPU和内存都很宝贵，居然还使用Java。</li>
+<li>一个是为什么Android的<a href="http://developer.android.com" target="_blank">开发站点</a>要被墙。这只是一个技术网站啊。</li>
+</ul>
+<p>最近，在一个Android<a href="http://android-developers.blogspot.com/2011/01/gingerbread-ndk-awesomeness.html" target="_blank">开发人员的Blog</a>上证实了在NDK r5使用C/C++进行开发。（以前，Android 对C/C++开发的支持仅限于用C/C++开发动态链接库，然后在Java中以JNI的形式来调用）现在，你可以用纯C/C++开发了（参看下面的程序代码）。还有一段<a href="http://developer.android.com/reference/android/app/NativeActivity.html" target="_blank">完整的代码示例在这里</a>（墙，还有XML的manifest，<a href="https://coolshell.cn/articles/3498.html" target="_blank">又见XML</a>）。看来，Google终于明白为什么使用Android的手机（如：Moto, 三星、索爱和HTC）的触摸体验远远不及object C搞出来的iPhone。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">void android_main(struct android_app* state) {
+    // Make sure glue isn&#039;t stripped.
+    app_dummy();
+
+    // loop waiting for stuff to do.
+    while (1) {
+        // Read all pending events.
+        int ident;
+        int events;
+        struct android_poll_source* source;
+
+        // Read events and draw a frame of animation.
+        if ((ident = ALooper_pollAll(0, NULL, &amp;events,
+                (void**)&amp;source)) &gt;= 0) {
+            // Process this event.
+            if (source != NULL) {
+                source-&gt;process(state, source);
+            }
+        }
+        // draw a frame of animation
+        bringTheAwesome();
+    }
+}</pre>
+<p>我个人估计有两个原因为什么Google回头支持C/C++了，</p>
+<ol>
+<li>Google开始觉得自己整的JVM在性能上可以全面超越传统JVM，并接近C/C++，现在发现搞不定了。</li>
+<li>Google发现Java的程序员不像C/C++程序员那样注重程序的性能和效率，开发App太耗CPU和内存。</li>
+</ol>
+<p>于是只好转回支持C/C++。<strong>本来就是用C/C++写出来的Android嘛，居然不能用C/C++而只能用Java，真是太侮辱C/C++了</strong>。最后，只希望Google并不是又整了一个C/C++版的Dalvik虚拟机，不然就真是侮辱到极点了。</p>
+<p><em><span style="color: #800000;">&#8212;&#8212;&#8212; 更新 2011/01/24 &#8212;&#8212;&#8212;&#8212;</span></em></p>
+<p>谢谢大家对这篇文章的评论，挺有意思的，欢迎讨论，我把我的回复更新在下面。不一定对，仅供大家参考。</p>
+<p><span id="more-3549"></span></p>
+<p>Java的学习成本低，开放性好，兼容性也高，我不否认（但请大家也别否认C/C++的效率要比Java要高。而C/C++的程序员在普遍上要比Java程序员更注意性能和效率）。这应该是Andorid的一开始的定位，可见，Google关注的是程序员，而不是用户。现在转回支持C/C++必然有他的原因，如果不是性能上的原因。那么就请大家分析一下别的原因。</p>
+<p>Android本来就是用C/C++写的，要跨平台，首先是Android自己跨平台。就像Linux一样，跨平台的首先是Linux，应用开发人员只需要符合Linux的API就OK了。JVM带来的便利只是无需重新编译（就算是无需重新编译，对于开发人员来说也要去那个平台做测试的，因为不同的平台的JVM同样是不一样的）。在Native平台上编译的成本其实并不高，这个编译过程完全可以在部署的时候自动化。</p>
+<p>有人说，Java的开发成本比C/C++低，但这和语言没有关系，这其实和封装程度有关系。C/C++同样可以封装得很好。而且，C/C++的程序员比JAVA程序来说，天生就对内存和性能要敏感的多。这更有利于在手机这样资源不足的平台上做开发。</p>
+<p>尤其对于像手机这样的时尚终端来说，在用户体验上花的成本要比在开发人员上花成本要大得多的多。我以为，Google 的Android 更多的关注了程序员，而不是用户。而iPhone更多的关注了用户，也让程序员在开发过程上受到了一些牺牲（iPhone的做法是如果程序员的程序要上App Store，先交99美刀的代码审查费，就像申请美国签证一样），但是，iPhone的程序员虽然在开发的方便上有一些牺牲，但是从收入上却得到了保障。最新的消息是苹果已向开发者支付20亿美元 音乐供应商分成达120亿美元。在《<a href="https://coolshell.cn/articles/3363.html" target="_blank">偷了世界的程序员</a>》中对此有充分的论述。</p>
+<p><span style="color: #800000;">最后，请大家思考 几个问题——</span></p>
+<ul>
+<li><span style="color: #800000;">Android支持C/C++是为什么？如果是为了程序效率，那么这又是为什么？</span></li>
+<li><span style="color: #800000;">是开发人员更重要，还是用户更重要？（注意：我说的是“更重要”）</span></li>
+<li><span style="color: #800000;">在当今这种诸如iPhone或Andorid的开发模式下，是完全开放好，还是有适当的封闭好？</span></li>
+<li><span style="color: #800000;">开发和封闭的背后的商业驱动是什么？如何在开放和封闭中权衡用户、开发者、公司和版权商的利益？</span></li>
+</ul>
+<p>苹果公司给出了一个很不错的商业模式。</p>
+<p>（完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3806.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/C_String-150x150.jpg" alt="Google图片搜索下的的C String" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3806.html" class="wp_rp_title">Google图片搜索下的的C String</a></li><li ><a href="https://coolshell.cn/articles/2608.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/androidappinventor-150x150.jpg" alt="Google App Inventor " width="150" height="150" /></a><a href="https://coolshell.cn/articles/2608.html" class="wp_rp_title">Google App Inventor </a></li><li ><a href="https://coolshell.cn/articles/1152.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="关于 Chrome OS 的一些推论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1152.html" class="wp_rp_title">关于 Chrome OS 的一些推论</a></li><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3549.html">Android将允许纯C/C++开发应用</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3549.html/feed</wfw:commentRss>
+			<slash:comments>234</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>HTML5 logo 发布</title>
+		<link>https://coolshell.cn/articles/3561.html</link>
+					<comments>https://coolshell.cn/articles/3561.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 23 Jan 2011 00:47:19 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[W3C]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3561</guid>
+
+					<description><![CDATA[<p>2011年1月19日，W3C发布了HTML5的log，打开W3C的页面，下在的图片印入眼前。我的第一感觉，就像是看到了小时候看的八一电影制片产的电影。这分明是号...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3561.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3561.html">HTML5 logo 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">2011年1月19日，W3C发布了HTML5的log，打开<a href="http://www.w3.org/html/logo/" target="_blank">W3C的页面</a>，下在的图片印入眼前。我的第一感觉，就像是看到了小时候看的八一电影制片产的电影。这分明是号召全世界的无产Web程序员们团结起来，不畏艰难，不怕牺牲，一定要把HTML5的革命事业进行到底！<img decoding="async" loading="lazy" class="aligncenter size-medium wp-image-3569" title="HTML 5 Logo" src="https://coolshell.cn/wp-content/uploads/2011/01/html5-logo-1-300x178.jpg" alt="" width="300" height="178" /></p>
+<p style="text-align: left;">所以，请各位Web程序员不但在你们的HTML5的网页上加上下面的徽章（关于各个徽章的含义，请参看<a href="http://www.elviscai.com/view/html5-logo-released/" target="_blank">这里</a>）</p>
+<p style="text-align: left;"><span id="more-3561"></span></p>
+<p style="text-align: center;"><a title="W3C HTML5 Logo" href="http://www.w3.org/html/logo/" target="_blank"><img decoding="async" loading="lazy" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" src="http://www.w3.org/html/logo/badge/html5-badge-h-connectivity-css3-device-graphics-multimedia-performance-semantics-storage.png" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" width="357" height="64" /></a></p>
+<p style="text-align: left;">更重要的是，在你们的代码里加上这样的注释：</p>
+<p style="text-align: left;">
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;!--
+.... This website is built in HTML5 ....
+...       ..... ......... ....... ......
+..     MM  MM NMMMMM MMM MMM..MM  . ....
+.      MMMMMM...MM ..MMMMMMM..MM. ......
+.      MM77MM...MM . MM.M.MM..MM........
+.      MM  MM   MM   MM.  MM..MMMMM.....
+.             . .   ....................
+. . ================================....
+.   7777777777777777777777777777777+....
+.   7777777777777777IIIIIIIIIIII777.....
+.   7777777777777777I77777I7I777777.....
+.   7777777777777777I777I7I7I777777.....
+. ..777777,,,,,,,,,,.........,7I777.....
+. ..=77777,,,,,,,,,,..   .. .+II777...
+  ...77777,,,,777777777777777II7777.....
+  . .77777,,,,777777IIIIIIIIIIII77? ..
+  ...77777,,,,777777IIIIIIIIIIII77:.....
+  ...77777:,,,,,,,,,        .I7777.
+  ...77777?,,,,,,,,,... ... .II777. ...
+  .. 777777777777777IIII=   .II777.  .
+  .. I77777777777777IIII....~II777.. .
+  ...,77777,,,,77777IIII    III77$   .
+. ....77777,,,,77777IIII    III777
+. ....77777,,,,,,,,,... ... III77,. ...
+. ....77777,,,,,,,,,       .III77.
+  ..  7777777777,,,,...=7IIIII777.. ....
+  ....$7777777777777IIIIIIIIII777    .
+  ....I7777777777777IIIII7I777777.. ....
+  .... .7777777777777777777777$~... ....
+  ...     ...~$777777777$7. ....... ....
+  ...  .  .........+....................
+  ...     ............ .  . .. .  . .. .
+--&gt;
+</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/html6-150x150.jpeg" alt="HTML6 展望" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_title">HTML6 展望</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" alt="那些曾伴我走过编程之路的软件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_title">那些曾伴我走过编程之路的软件</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3561.html">HTML5 logo 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3561.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>64位平台C/C++开发注意事项</title>
+		<link>https://coolshell.cn/articles/3512.html</link>
+					<comments>https://coolshell.cn/articles/3512.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 21 Jan 2011 00:50:49 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[64bits]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3512</guid>
+
+					<description><![CDATA[<p>在http://www.viva64.com/en/l/上例出了28个在64位平台上使用C/C++开发的注意事项，对于进入64位时代的程序员应该去看看这28个事...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3512.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3512.html">64位平台C/C++开发注意事项</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在<a href="http://www.viva64.com/en/l/" target="_blank">http://www.viva64.com/en/l/</a>上例出了28个在64位平台上使用C/C++开发的注意事项，对于进入64位时代的程序员应该去看看这28个事项，这些英文读物对于有C/C++功底的朋友读起来应该并不难，我估计大约20-30分钟可以精读完一篇（或者更快），下面是这28个注意事项的列表。相信对大家一点有帮助。</p>
+<ul>
+<li><a href="http://www.viva64.com/en/l/0001/">Lesson 01</a>. What 64-bit systems are.</li>
+<li><a href="http://www.viva64.com/en/l/0002/">Lesson 02</a>. Support of 32-bit applications.</li>
+<li><a href="http://www.viva64.com/en/l/0003/">Lesson 03</a>. Porting code to 64-bit systems. The pros and cons.</li>
+<li><a href="http://www.viva64.com/en/l/0004/">Lesson 04</a>. Creating the 64-bit configuration.</li>
+<li><a href="http://www.viva64.com/en/l/0005/">Lesson 05</a>. Building a 64-bit application.</li>
+<li><a href="http://www.viva64.com/en/l/0006/">Lesson 06</a>. Errors in 64-bit code.</li>
+<li><a href="http://www.viva64.com/en/l/0007/">Lesson 07</a>. The issues of detecting 64-bit errors.</li>
+<li><a href="http://www.viva64.com/en/l/0008/">Lesson 08</a>. Static analysis for detecting 64-bit errors.</li>
+<li><a href="http://www.viva64.com/en/l/0009/">Lesson 09</a>. Pattern 01. Magic numbers.</li>
+<li><a href="http://www.viva64.com/en/l/0010/">Lesson 10</a>. Pattern 02. Functions with variable number of arguments.</li>
+<li><a href="http://www.viva64.com/en/l/0011/">Lesson 11</a>. Pattern 03. Shift operations.</li>
+<li><a href="http://www.viva64.com/en/l/0012/">Lesson 12</a>. Pattern 04. Virtual functions.</li>
+<li><a href="http://www.viva64.com/en/l/0013/">Lesson 13</a>. Pattern 05. Address arithmetic.</li>
+<li><a href="http://www.viva64.com/en/l/0014/">Lesson 14</a>. Pattern 06. Changing an array&#8217;s type.</li>
+<li><a href="http://www.viva64.com/en/l/0015/">Lesson 15</a>. Pattern 07. Pointer packing.</li>
+<li><a href="http://www.viva64.com/en/l/0016/">Lesson 16</a>. Pattern 08. Memsize-types in unions.</li>
+<li><a href="http://www.viva64.com/en/l/0017/">Lesson 17</a>. Pattern 09. Mixed arithmetic.</li>
+<li><a href="http://www.viva64.com/en/l/0018/">Lesson 18</a>. Pattern 10. Storage of integer values in double.</li>
+<li><a href="http://www.viva64.com/en/l/0019/">Lesson 19</a>. Pattern 11. Serialization and data interchange.</li>
+<li><a href="http://www.viva64.com/en/l/0020/">Lesson 20</a>. Pattern 12. Exceptions.</li>
+<li><a href="http://www.viva64.com/en/l/0021/">Lesson 21</a>. Pattern 13. Data alignment.</li>
+<li><a href="http://www.viva64.com/en/l/0022/">Lesson 22</a>. Pattern 14. Overloaded functions.</li>
+<li><a href="http://www.viva64.com/en/l/0023/">Lesson 23</a>. Pattern 15. Growth of structures&#8217; sizes.</li>
+<li><a href="http://www.viva64.com/en/l/0024/">Lesson 24</a>. Phantom errors.</li>
+<li><a href="http://www.viva64.com/en/l/0025/">Lesson 25</a>. Working with patterns of 64-bit errors in practice.</li>
+<li><a href="http://www.viva64.com/en/l/0026/">Lesson 26</a>. Optimization of 64-bit programs.</li>
+<li><a href="http://www.viva64.com/en/l/0027/">Lesson 27</a>. Peculiarities of creating installers for a 64-bit environment.</li>
+<li><a href="http://www.viva64.com/en/l/0028/">Lesson 28</a>. Estimating the cost of 64-bit migration of C/C++ applications.</li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3512.html">64位平台C/C++开发注意事项</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3512.html/feed</wfw:commentRss>
+			<slash:comments>18</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>JS游戏引擎列表</title>
+		<link>https://coolshell.cn/articles/3516.html</link>
+					<comments>https://coolshell.cn/articles/3516.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 20 Jan 2011 02:43:08 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Game]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3516</guid>
+
+					<description><![CDATA[<p>这里有一个网址收集了关于JS游戏引擎开发库的一个列表，转过来。关于使用JS和HTML5做的一些小游戏，可参见《HTML5 小游戏展示》 游戏引擎 Name La...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3516.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3516.html">JS游戏引擎列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这里有一个<a href="https://gist.github.com/768272" target="_blank">网址</a>收集了关于JS游戏引擎开发库的一个列表，转过来。关于使用JS和HTML5做的一些小游戏，可参见《<a rel="bookmark" href="https://coolshell.cn/articles/2998.html" target="_blank">HTML5 小游戏展示</a>》</p>
+<h4>游戏引擎</h4>
+<table>
+<tbody>
+<tr>
+<th align="left">Name</th>
+<th align="left">Latest Release</th>
+<th align="left">License</th>
+<th align="left">Type</th>
+<th align="left">Notes</th>
+</tr>
+<tr>
+<td align="left"><a href="http://renderengine.com/">The Render Engine</a></td>
+<td align="left">1.5.3</td>
+<td align="left">MIT</td>
+<td align="left"></td>
+<td align="left">跨浏览器; 大规模 API; 开源. <a href="http://renderengine.com/features.php">2</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://gamequery.onaluf.org/">gameQuery</a></td>
+<td align="left">0.5.1</td>
+<td align="left">CC BY-SA 2.5</td>
+<td align="left"></td>
+<td align="left">和 jQuery 一起使用</td>
+</tr>
+<tr>
+<td align="left"><a href="http://game.tyler-dewitt.com/">gTile</a></td>
+<td align="left">0.0.1</td>
+<td align="left"></td>
+<td align="left">Tile based</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.kesiev.com/akihabara/">Akihabara</a></td>
+<td align="left">1.3</td>
+<td align="left">GPL2/MIT</td>
+<td align="left">Classic Repro</td>
+<td align="left">基于JS+HTML5的街机风格的游戏 <a href="https://github.com/kesiev/akihabara">3</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.lukewallin.co.uk/?go=engine">The Javascript 2D Game Engine</a></td>
+<td align="left"></td>
+<td align="left">GPL</td>
+<td align="left"></td>
+<td align="left">注重于重力、物理、碰撞检测方面，使用HTML5 Canvas 和IE的ExplorerCanvas 低CPU消耗. <a href="http://www.lukewallin.co.uk/?go=engine">4</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://gogomakeplay.com/gmp">The GMP Javascript Game Engine</a></td>
+<td align="left">1.7.4 (2010-10-31)</td>
+<td align="left">GPL2/MIT</td>
+<td align="left"></td>
+<td align="left">注重于数度的操作简化，&#8221;easy to learn and use&#8221; <a href="http://gogomakeplay.com/gmp">5</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://craftyjs.com/">Crafty</a></td>
+<td align="left">0.1</td>
+<td align="left">GPL/MIT</td>
+<td align="left"></td>
+<td align="left">轻量级和模块化。 <a href="http://craftyjs.com/">6</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.effectgames.com/effect/">Effect Games</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.propulsionjs.com/">PropulsionJS</a></td>
+<td align="left">1.1</td>
+<td align="left">MIT</td>
+<td align="left"></td>
+<td align="left">使用 HTML5 Canvas. <a href="http://www.propulsionjs.com/">7</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://flax.ie/category/flax-game-engine/">Flax</a></td>
+<td align="left"></td>
+<td align="left">Apache 2.0</td>
+<td align="left"></td>
+<td align="left">还没有released。使用 GWT 和 HTML5。关注于Linux和Mac OS上的Web游戏开发。<a href="http://flax.ie/about/">8</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/giancarlo/j5g3">j5g3</a></td>
+<td align="left"></td>
+<td align="left">GPLv3</td>
+<td align="left"></td>
+<td align="left">还在开发过程中</td>
+</tr>
+<tr>
+<td align="left"><a href="http://sites.google.com/site/cssgameengine/">cssgameengine</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">用于初学者。</td>
+</tr>
+</tbody>
+</table>
+<p><span id="more-3516"></span></p>
+<table>
+<tbody>
+<tr>
+<td align="left"><a href="http://mccormick.cx/projects/jsGameSoup/">jsGameSoup</a></td>
+<td align="left">v74</td>
+<td align="left">LGPLv3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.sean.co.uk/a/webdesign/javascript_gamelib/javascript_gamelib.shtm">Javascript Gamelib</a></td>
+<td align="left">2.10</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.sarien.net/source">Sarien.net interpreter</a></td>
+<td align="left"></td>
+<td align="left">GPL</td>
+<td align="left">2D Adventure</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/jgen/">jGen</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Isometric</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.isogenicengine.com/home/">Isogenic Engine</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Isometric</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://gammajs.org/">GammaJS</a></td>
+<td align="left">1.0</td>
+<td align="left">MIT</td>
+<td align="left">2.5D Platform</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.codeproject.com/KB/scripting/TomsHallsJavascriptGame.aspx">Tom&#8217;s Halls</a></td>
+<td align="left">3.0</td>
+<td align="left"></td>
+<td align="left">Platform</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/lostdecade/diggy">Diggy</a></td>
+<td align="left"></td>
+<td align="left">BSD</td>
+<td align="left"></td>
+<td align="left">基于 DHTML, 正在暂停中</td>
+</tr>
+<tr>
+<td align="left"><a href="http://impactjs.com/">Impact</a></td>
+<td align="left"></td>
+<td align="left">Commercial ($99)</td>
+<td align="left">2D</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://rocketpack.fi/engine/">Rocket Engine</a></td>
+<td align="left"></td>
+<td align="left">Commercial</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.wonderlandblog.com/wonderland/2010/04/aves-an-html-javascript-game-engine.html">Aves</a></td>
+<td align="left"></td>
+<td align="left">Commercial?</td>
+<td align="left"></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/vonkow/Rosewood">Rosewood</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">2D</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/RyanWilliams/cocos2d-javascript">Cocos2D</a></td>
+<td align="left"></td>
+<td align="left">BSD</td>
+<td align="left">2D</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://gamejs.org/">GameJS</a></td>
+<td align="left"></td>
+<td align="left">MIT</td>
+<td align="left">2D</td>
+<td align="left">CommonJs; 可以和 RingoJs server 整合，很像 PyGame; 仅支持Canvas;</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.getxc.org/">xc.js</a></td>
+<td align="left"></td>
+<td align="left">BSD</td>
+<td align="left">2D</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/vegalib/">vegalib</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">LPGL</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://sourceforge.net/projects/clanfx/">ClanFX</a></td>
+<td align="left">0.0.1</td>
+<td align="left"></td>
+<td align="left">Tile based</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://canvex.lazyilluminati.com/">Canvex</a></td>
+<td align="left"></td>
+<td align="left">FPS</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/Osmose/bdge">bdge</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"><a href="https://github.com/Osmose/Sub-C-Adventure">Demo</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/mcgrue/js-verge">js-verge</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">2D</td>
+<td align="left"><a href="http://spriteright.com/">Demo</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/BillyWM/FlixelJS">FlixelJS</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">2D</td>
+<td align="left"><a href="http://billy.wenge-murphy.com/flixel-js/testgame.html">Demo</a> Port of Flixel (Flash) to JS. <a href="http://flixel.org/forums/index.php?topic=2859.0">Announcement thread</a>.</td>
+</tr>
+<tr>
+<td align="left"><a href="http://unity3d.com/">Unity3D</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Commercial (free version too)</td>
+<td align="left">JS backend</td>
+</tr>
+</tbody>
+</table>
+<h4>3D 引擎</h4>
+<p>相比起成熟的游戏引擎来说，这些引擎没有包括诸如AI、声音、游戏逻辑、网络等等功能，不过，你可以使用别的一些JS库来辅助完成这些功能。</p>
+<table>
+<tbody>
+<tr>
+<th align="left">Name</th>
+<th align="left">Latest Release</th>
+<th align="left">License</th>
+<th align="left">Notes</th>
+</tr>
+<tr>
+<td align="left"><a href="http://deanm.github.com/pre3d/">Pre3d</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"><a href="http://www.chromeexperiments.com/detail/monster/">Demo</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/mrdoob/three.js">three.js</a></td>
+<td align="left"></td>
+<td align="left">MIT</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.c3dl.org/">C3DL</a></td>
+<td align="left">2.1 (?)</td>
+<td align="left">MIT</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.ambiera.com/copperlicht/">CopperLicht</a></td>
+<td align="left">1.3.2 (?)</td>
+<td align="left"></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.wxs.ca/js3d/">JS3D</a></td>
+<td align="left">0.1a (2007-02-05)</td>
+<td align="left">GPL</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.flashsandy.org/">Sandy 3D</a></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">由Haxe编辑成 JS</td>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/o3d/">O3D</a></td>
+<td align="left"></td>
+<td>BSD</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.glge.org/">GLGE</a></td>
+<td align="left">0.5.2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://spidergl.org/">SpiderGL</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>碰撞检测</h4>
+<ul>
+<li><a href="http://code.google.com/p/box2dweb/">http://code.google.com/p/box2dweb/</a> &#8211; 由 <a href="http://www.box2d.org/">Box2D</a> 移植成 JS</li>
+</ul>
+<h4>动画</h4>
+<table>
+<tbody>
+<tr>
+<th align="left">Name</th>
+<th align="left">Latest Release</th>
+<th align="left">License</th>
+<th align="left">Notes</th>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/batiste/sprite.js">sprite.js</a></td>
+<td align="left"></td>
+<td align="left"><a href="https://github.com/batiste/sprite.js/blob/master/LICENSE">VIEW</a></td>
+<td align="left">Created with goal of having common JS framework for dsktop and web. <a href="http://www.htmlgoodies.com/daily_news/article.php/417990">1</a></td>
+</tr>
+</tbody>
+</table>
+<h4>声音</h4>
+<ul>
+<li><a href="http://www.schillmania.com/projects/soundmanager2/">SoundManager2</a></li>
+</ul>
+<h4>图形</h4>
+<h3>Canvas</h3>
+<table>
+<tbody>
+<tr>
+<th align="left">Name</th>
+<th align="left">Size (KB)</th>
+<th align="left">License</th>
+<th align="left">IE</th>
+<th align="left">SVG</th>
+<th align="left">Docs</th>
+<th align="left">Notes</th>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/canto-js/">canto.js</a></td>
+<td align="left">56</td>
+<td align="left"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://github.com/kangax/fabric.js/">fabric.js</a></td>
+<td align="left">97</td>
+<td align="left"></td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left"><a href="http://kangax.github.com/fabric.js/test/demo/">Demo</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://github.com/rsandor/gury/blob/master/gury.js">gury.js</a></td>
+<td align="left">10</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">yes</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/cakejs/">CAKE</a></td>
+<td align="left">211</td>
+<td align="left"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://forvar.de/js/mcl/">Mootools Canvas Library (MCL)</a></td>
+<td align="left">8</td>
+<td align="left"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://canvastoolkit.codeplex.com/">HTML5 Canvas Library</a></td>
+<td align="left">12</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/layered-canvas-library/">Layered Canvas Library (LCL)</a></td>
+<td align="left">21</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://github.com/davidbrooks/Artisan">Artisan.js</a></td>
+<td align="left">17</td>
+<td align="left"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://code.google.com/p/canvg/">canvg</a></td>
+<td align="left">78.3</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">yes</td>
+<td align="left">no</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://github.com/F1LT3R/burst">burst</a></td>
+<td align="left">56</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">yes</td>
+<td align="left">没有维护了</td>
+</tr>
+<tr>
+<td align="left"><a href="http://easeljs.com/">easel.js</a></td>
+<td align="left">33</td>
+<td align="left">MIT</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">yes</td>
+<td align="left">尝试像Flash的DisplayList 一样在 Canvas 上创建图形。</td>
+</tr>
+<tr>
+<td align="left"><a href="http://processingjs.org/">processing.js</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="http://github.com/hapticdata/toxiclibsjs">toxiclibsjs</a></td>
+<td align="left"></td>
+<td align="left">LPGL2.1</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">和 processing.js 结合和很好</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/hyperandroid/CAAT/">CAAT</a></td>
+<td align="left"></td>
+<td align="left">MIT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/michael/unveil">Unveil.js</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/biilly/doodle-js">doodle.js</a></td>
+<td align="left"></td>
+<td align="left">BSD</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>注意，文件尺寸比较并不一定准确，因为有些lib并没有压缩过。</p>
+<ul>
+<li><a href="http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html">Stackblur</a> &#8211; 在 Canvas 上实现模糊的效果</li>
+<li><a href="http://www.pixastic.com/">Pixastic</a> &#8211; 简单的图片操作</li>
+<li><a href="http://raphaeljs.com/">Raphaël</a> &#8211; 进行一些矢量图以及一些变化操作，能看<a href="https://coolshell.cn/articles/3107.html" target="_blank">这篇文章</a></li>
+<li><a href="https://github.com/meltingice/CamanJS">CamanJS</a> &#8211; Canvas上的一些滤镜</li>
+<li><a href="https://github.com/millermedeiros/CanvasContext2DWrapper">CanvasContext2DWrapper</a> &#8211; Method chaining for Canvas</li>
+</ul>
+<h3>WebGL</h3>
+<ul>
+<li><a href="https://github.com/onegeek/webglu">WebGLU</a> &#8211; WebGL helpers</li>
+</ul>
+<h3>Color</h3>
+<ul>
+<li><a href="https://github.com/eligrey/color.js">color.js</a> &#8211; 颜色管理工具。 MIT</li>
+</ul>
+<h4>Math</h4>
+<ul>
+<li><a href="http://sylvester.jcoglan.com/">Sylvester</a> &#8211; 数组和矩阵</li>
+</ul>
+<h4>其它</h4>
+<ul>
+<li><a href="http://www.playmycode.com/">PlayMyCode</a> &#8211; 在线游戏社区。使用 Quby (像Ruby) 编译成JavaScript.</li>
+<li><a href="http://www.spheredev.org/">Sphere RPG Engine</a> &#8211; 为 RPG 游戏设计。使用 JavaScript</li>
+<li><a href="http://playtomic.com/">playtomic</a> &#8211; Commercial service providing analytics, leaderboards etc. services for games. Provides HTML5/JS API in addition to AS2/AS3 ones.</li>
+</ul>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3516.html">JS游戏引擎列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3516.html/feed</wfw:commentRss>
+			<slash:comments>88</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Google 需要性爱</title>
+		<link>https://coolshell.cn/articles/3510.html</link>
+					<comments>https://coolshell.cn/articles/3510.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 19 Jan 2011 04:43:00 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Google]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3510</guid>
+
+					<description><![CDATA[<p>看到一篇趣文Google Needs Sex，翻译过来。 Brad DeLong 给我们写了 两篇关于“Google遇到的麻烦”的文章(墙)，这两篇文章基本上是...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3510.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3510.html">Google 需要性爱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>看到一篇趣文<a href="http://krugman.blogs.nytimes.com/2011/01/10/google-needs-sex/" target="_blank">Google Needs Sex</a>，翻译过来。</p>
+<p>Brad DeLong 给我们写了 <a href="http://delong.typepad.com/sdj/2011/01/trouble-in-the-house-of-google.html">两篇关于“Google遇到的麻烦”的文章</a>(墙)，这两篇文章基本上是说， 制造网络欺诈和网络垃圾信息的人会尽其一切努力来和搜索引擎进行博弈，这样一来，其会让搜索到的结果对我们越来越没有帮助（译注：百度的竞价排名成为了制造网络欺诈和网络垃圾信息甚至洗脑的温床）。于是，人们开始去使用其它一些影响地较少的搜索引擎，准确的说，是那些垃圾信息和欺诈信息的东西还不适应于这些搜索引擎。</p>
+<p>这让我想到了Sex。</p>
+<p>如果你查看一下进化论，你就会知道为什么有性繁殖是有进化性的，是有可持续性的，而进化也是需要巨大的成本的。</p>
+<p>为什么自然界不用克隆来繁殖呢？我所理解的最有说服力的答案是—— <a href="http://www.sciencedaily.com/releases/2009/07/090706171542.htm">防御寄生生物</a>。如果每一代的生物体都和上一代完全的一样，寄生生物就总有一天可以破解生物体的防御，就是为什么！如果我们的某个香蕉园里种植着“克隆香焦” ，那么一旦某种病菌传播开来，那么我们整个香蕉园里的全部香蕉将毁于一旦。所以，混杂基因的模式会让寄生生物或病毒更难破坏我们的防御。</p>
+<p>因此，Google的这些欺诈信息和垃圾信息就像是寄生在人体上的寄生体一样，它们已经非常适应Google的搜索引擎。（译注：百度上的寄生体则像是百度自己养的宠物）</p>
+<p>我不知道“搜索引擎的性爱”会是什么样的，但是很明显，Google需要一些。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3510.html">Google 需要性爱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3510.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>信XML，得自信</title>
+		<link>https://coolshell.cn/articles/3498.html</link>
+					<comments>https://coolshell.cn/articles/3498.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 19 Jan 2011 00:49:48 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[XML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3498</guid>
+
+					<description><![CDATA[<p>XML可能是计算有史以来最NB的发明了，以至于我们以没有XML的程序是难登大堂的程序，不用XML，你都不好意思当程序员。于是，我们看到了很多很雷人的用法（《信X...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3498.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3498.html">信XML，得自信</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>XML可能是计算有史以来最NB的发明了，以至于我们以没有XML的程序是难登大堂的程序，不用XML，你都不好意思当程序员。于是，我们看到了<a href="https://coolshell.cn/articles/2504.html" target="_blank">很多很雷人的用法</a>（《信XML，得永生》），当然一些朋友当时并没有看懂，不过我不怪大家，因为我们依然深信使用XML可以让你有强大的Zhuangbility，于是我们有下面这两种相当Geiliable的用法。</p>
+<h4>一、XML中的XML</h4>
+<p>这个例子是某公司的一个SOAP实现——我们的Webservice需要返回一个XML字符串，这怎么办呢？其实很容易，因为——XML是无所不能的，那怕是封装自己。</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;!-- ED: soap envelope omitted for readability --&gt;
+&lt;string xmlns=&quot;urn:Initech.Global.Services&quot;&gt;
+  &amp;lt;CompanyGetConnector&amp;gt;
+    &amp;lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&amp;gt;
+      &amp;lt;xs:element name=&quot;InitechGetConnector&quot;&amp;gt;
+        &amp;lt;xs:complexType&amp;gt;
+          &amp;lt;xs:choice maxOccurs=&quot;unbounded&quot;&amp;gt;
+            &amp;lt;xs:element name=&quot;employees&quot;&amp;gt;
+              &amp;lt;xs:complexType&amp;gt;
+                &amp;lt;xs:sequence&amp;gt;
+                  &amp;lt;xs:element name=&quot;EmployerName&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Employee&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Firstname&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Prefix&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Lastname&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Org._unit&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Function&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;E-mail_work&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Telephone_work&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Mobile_work&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Birthdate&quot; type=&quot;xs:date&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Hired_since__irt._yearsemployed_&quot; type=&quot;xs:date&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                  &amp;lt;xs:element name=&quot;Image&quot; type=&quot;xs:base64Binary&quot; minOccurs=&quot;0&quot;/&amp;gt;
+                &amp;lt;/xs:sequence&amp;gt;
+              &amp;lt;/xs:complexType&amp;gt;
+            &amp;lt;/xs:element&amp;gt;
+          &amp;lt;/xs:choice&amp;gt;
+        &amp;lt;/xs:complexType&amp;gt;
+      &amp;lt;/xs:element&amp;gt;
+    &amp;lt;/xs:schema&amp;gt;
+
+    &amp;lt;employees&amp;gt;
+      &amp;lt;EmployerName&amp;gt;
+        My Client
+      &amp;lt;/EmployerName&amp;gt;
+      &amp;lt;Employee&amp;gt;
+        100001
+      &amp;lt;/Employee&amp;gt;
+    &amp;lt;/employees&amp;gt;
+  &amp;lt;/CompanyGetConnector&amp;gt;
+&lt;/string&gt;
+</pre>
+<p><span id="more-3498"></span></p>
+<h4>二、一切皆为配置</h4>
+<p>没有hard code这是一个优秀程序员在入门时就要学习的，对于Hard Coder的东西最好写在配置文件中，这样修改这些参数就不需要修改代码而需要重新编译了。自从有了XML之后，我们的配置文件就不在使用像ini文件或是Unix下在conf文件那样的易读，我们认为，使用XML作为配置文件的格式是大势所趋，而且，我们要让我们的代码尽量的可以高度的配置，于是我们出现了下面的代码——这是一个强大的尝试，其标志着，我们完全可以以不久的未来用XML来编写一切语言的代码。</p>
+<p>注：下面的代码最强大的应该是XML中的那个SQL。</p>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">&lt;add key=&quot;sqlSource&quot; value=&quot;
+    SELECT TOP REPLACE_NUMBER_OF_ROWS_TO_RETRIEVE
+           History.handle AS ID_FAX_LOG,
+           CASE isnumeric(SUBSTRING (Notes_Doc.Text ,1,8))
+              WHEN 1 then SUBSTRING (Notes_Doc.Text ,1,8)
+              ELSE NULL END AS ID_STAGE,
+           DocumentUsers.UserName AS NM_DOCUMENTUSER_USERNAME,
+           DocumentUsers.UserID AS TXT_DOCUMENTUSER_USERID,
+           DocumentUserGroups.GroupID AS TXT_DOCUMENTUSERGROUP_GROUPID,
+           Documents.UniqueID AS TXT_DOCUMENTS_UNIQUE_ID,
+           History.TRDateTime AS DT_HISTORY_TRANSACTION_DATE,
+           CASE COALESCE(HistoryPrint.handle,0)
+              WHEN 0 THEN
+                 CASE COALESCE(HistoryGeneric.handle,0)
+                    WHEN 0 THEN
+                       CASE COALESCE(HistoryTRX.handle,0)
+                          WHEN 0 THEN &#039;??&#039;
+                          ELSE
+                             CASE (Documents.Flags &amp; 0x10)
+                                WHEN 0 THEN &#039;Send&#039;
+                                ELSE &#039;Recieve&#039;
+                                END
+                          END
+                    ELSE CAST(HistoryGeneric_Short.Data AS varchar(32))
+                    END
+              ELSE &#039;Print&#039;
+              END AS TXT_TRANSACTION_TYPE,
+
+           CASE COALESCE(HistoryPrint.handle,0)
+              WHEN 0 THEN
+                 CASE COALESCE(HistoryGeneric.handle,0)
+                    WHEN 0 THEN
+                       CASE COALESCE(HistoryTRX.handle,0)
+                          WHEN 0 THEN &#039;??&#039;
+                          ELSE
+                             CASE Documents_Term.TermStatStr
+                                WHEN &#039;Success&#039; THEN &#039;Success&#039;
+                                ELSE &#039;Fail&#039;
+                                END
+                          END
+                    ELSE
+                       CASE HistoryGeneric.ErrCode
+                          WHEN 0 THEN &#039;Success&#039;
+                       ELSE &#039;Fail&#039;
+                       END
+                    END
+              ELSE
+                 CASE SUBSTRING(HistoryPrint.Msg,1,7)
+                    WHEN &#039;Success&#039; THEN &#039;Success&#039;
+                    ELSE &#039;Fail&#039;
+                    END
+              END AS TXT_TRANSACTION_STATUS,
+
+           CASE COALESCE(HistoryPrint.handle,0)
+              WHEN 0 THEN
+                 CASE COALESCE(HistoryGeneric.handle,0)
+                    WHEN 0 THEN
+                       CASE COALESCE(HistoryTRX.handle,0)
+                          WHEN 0 THEN &#039;??&#039;
+                          ELSE COALESCE(HistoryTRX_Term.TermStatStr,CONVERT(varchar,Documents.TermStat))
+                          END
+                    ELSE REPLACE(REPLACE(CAST(HistoryGeneric_Detail.Data AS varchar(192)) ,&#039;\t&#039;,&#039;&#039;), &#039;~u&#039;, HistoryGeneric.UserID )
+                    END
+              ELSE HistoryPrint.Msg
+              END AS TXT_TRANSACTION_MESSAGE,
+
+           CASE COALESCE(HistoryPrint.handle,0)
+              WHEN 0 THEN
+                 CASE COALESCE(HistoryGeneric.handle,0)
+                    WHEN 0 THEN
+                       CASE COALESCE(HistoryTRX.handle,0)
+                          WHEN 0 THEN Documents.ElapsedSendTime
+                          ELSE
+                             CASE COALESCE(HistoryTRX.handle,0)
+                                WHEN 0 THEN Documents.ElapsedSendTime
+                                ELSE HistoryTRX.ElapsedTime
+                                END
+                          END
+                    ELSE NULL
+                    END
+              ELSE HistoryPrint.TimeToPrint
+              END AS NBR_TRANSACTION_ELAPSEDTIME,
+
+           CASE COALESCE(HistoryGeneric.handle,0)
+              WHEN 0 THEN
+                 CASE substring(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE
+                               (REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+                                  Documents.Destination,&#039; &#039;,&#039;&#039;),&#039;)&#039;,&#039;&#039;),&#039;(&#039;,&#039;&#039;),
+                                  &#039;-&#039;,&#039;&#039;),&#039;/&#039;,&#039;&#039;),&#039;.&#039;,&#039;&#039;),&#039;*&#039;,&#039;&#039;),&#039;,&#039;,&#039;&#039;),&#039;;&#039;,&#039;&#039;),
+                                  &#039;\&#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;),1,1)
+                    WHEN &#039;1&#039; THEN substring(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+                                            REPLACE(REPLACE(REPLACE( REPLACE(REPLACE(
+                                            REPLACE(Documents.Destination,&#039; &#039;,&#039;&#039;),&#039;)&#039;,
+                                            &#039;&#039;),&#039;(&#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;),&#039;/&#039;,&#039;&#039;),&#039;.&#039;,&#039;&#039;),&#039;*&#039;,&#039;&#039;),
+                                            &#039;,&#039;,&#039;&#039;),&#039;;&#039;,&#039;&#039;),&#039;\&#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;), 2, len(
+                                            REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+                                            REPLACE(REPLACE(REPLACE( REPLACE(REPLACE(
+                                            REPLACE(Documents.Destination,&#039; &#039;,&#039;&#039;),&#039;)&#039;,
+                                            &#039;&#039;),&#039;(&#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;),&#039;/&#039;,&#039;&#039;),&#039;.&#039;,&#039;&#039;),&#039;*&#039;,&#039;&#039;)
+                                            ,&#039;,&#039;,&#039;&#039;),&#039;;&#039;,&#039;&#039;),&#039;\&#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;)) )
+                    ELSE REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+                         REPLACE(REPLACE(REPLACE(Documents.Destination,&#039; &#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;),&#039;)&#039;,
+                         &#039;&#039;),&#039;(&#039;,&#039;&#039;),&#039;/&#039;,&#039;&#039;),&#039;.&#039;,&#039;&#039;),&#039;*&#039;,&#039;&#039;),&#039;,&#039;,&#039;&#039;),&#039;;&#039;,&#039;&#039;),&#039;\&#039;,&#039;&#039;),&#039;-&#039;,&#039;&#039;)
+                    END
+              ELSE HistoryGeneric.UserID
+              END AS TXT_TRANSACTION_DESTINATION,
+
+           CASE (Documents.Flags &amp; 0x8)
+              WHEN 0 THEN &#039;N&#039;
+              ELSE &#039;Y&#039; END AS NBR_DOCUMENTS_DELETED,
+
+           CASE (Documents.Flags &amp; 0x4)
+              WHEN 0 THEN &#039;N&#039;
+              ELSE &#039;Y&#039; END AS NBR_DOCUMENTS_VIEWED,
+
+           /* Fax Destination */
+           Documents.ToName AS TXT_DOCUMENTS_TO_NAME,
+           Documents.ToContactNum AS TXT_DOCUMENTS_TO_CONTACT_NUM,
+           Documents.ToCompany AS TXT_DOCUMENTS_TO_COMPANY,
+           Documents.ToCityState AS TXT_DOCUMENTS_TO_CITY_STATE,
+           Documents.FaxDIDNum AS TXT_DOCUMENTS_FAX_DID_NUM,
+           Documents.FromPhoneNum AS TXT_DOCUMENTS_FROM_PHONE_NUM,
+           Documents.GeneralFaxNum AS TXT_DOCUMENTS_GENERAL_FAX_NUM,
+           HistoryPrint.NetPrintID AS TXT_HISTORYPRINT_NETPRINTID,
+
+           /* Number of pages */
+           DocFiles.NumPages AS NBR_DOCFILES_TOTAL_PAGE_COUNT,
+           HistoryTRX.GoodPageCount AS NBR_HISTORYTRX_GOOD_PAGE_COUNT,
+           HistoryTRX.BadPageCount AS NBR_HISTORYTRX_BAD_PAGE_COUNT,
+           HistoryPrint.PagesPrinted AS NBR_HISTORYPRINT_PAGESPRINTED,
+           HistoryPrint.CopiesPrinted AS NBR_HISTORYPRINT_COPIESPRINTED,
+           /* location of fax image */ DTConfigurations.ServerName AS TXT_DOCFILES_SERVER_NAME,
+           DTConfigurations.ImageDir AS TXT_DOCFILES_IMAGE_DIR,
+           DocFiles.BodyFilename AS TXT_DOCFILES_BODY_FILENAME,
+           Documents.FCSFile AS TXT_DOCFILES_FCS_FILE,
+           REPLACE( DTConfigurations.ImageDir, &#039;D:\Data&#039;, &#039;\\&#039;+ServerName )
+              + &#039;\&#039;+DocFiles.BodyFilename+&#039;*&#039; AS TXT_DOCFILES_PATH_BODY_NAME,
+           REPLACE( DTConfigurations.ImageDir, &#039;D:\Data&#039;, &#039;\\&#039;+ServerName )
+              + &#039;\&#039;+Documents.FCSFile+&#039;*&#039; AS TXT_DOCUMENTS_PATH_FCSFILE,
+           Notes_Doc.Text AS TXT_NOTES_DOC_TEXT,
+           Notes_CCList.Text AS TXT_NOTES_CCLIST_TEXT,
+           DocumentUsers.RouteInfo AS TXT_DOCUMENTUSER_ROUTEINFO,
+           DocumentUsers.RouteType AS NBR_DOCUMENTUSER_ROUTETYPE,
+           DocumentUsers.EmailAddr AS TXT_DOCUMENTUSER_EMAILADDR,
+
+           /* misc Documents data */
+           Documents.CreationTime AS DT_DOCUMENTS_CREATION_TIME,
+           Documents.FRFlags2 AS NBR_DOCUMENTS_FRFLAGS2,
+           Documents.Flags AS NBR_DOCUMENTS_FLAGS,
+           Documents.ErrorCode AS NBR_DOCUMENTS_ERROR_CODE,
+           Documents.TermStat AS NBR_DOCUMENTS_TERMSTAT,
+
+           /* misc HistoryTRX data */
+           HistoryTRX.RemoteID AS TXT_HISTORYTRX_REMOTE_ID,
+           HistoryTRX.RemoteServer AS TXT_HISTORYTRX_REMOTE_SERVER,
+           HistoryTRX.Flags AS NBR_HISTORYTRX_FLAGS,
+           HistoryTRX.TermStat AS NBR_HISTORYTRX_TERMSTAT,
+
+           /* misc HistoryTRX data */
+           HistoryGeneric.ErrCode AS NBR_HISTORYGENERIC_ERRCODE,
+           HistoryGeneric.GenType AS NBR_HISTORYGENERIC_GENTYPE,
+           HistoryGeneric.UserID AS TXT_HISTORYGENERIC_USERID,
+
+           /* Handles */ Documents.handle AS ID_DOCUMENTS_HANDLE,
+           History.handle AS ID_HISTORY_HANDLE,
+           HistoryTRX.handle AS ID_HISTORYTRX_HANDLE,
+           HistoryGeneric.handle AS ID_HISTORYGENERIC_HANDLE,
+           HistoryPrint.handle AS ID_HISTORYPRINT_HANDLE
+
+    FROM Documents
+            INNER JOIN Users DocumentUsers ON Documents.OwnerID = DocumentUsers.handle
+            INNER JOIN History ON Documents.handle = History.Owner
+            LEFT OUTER JOIN DocFiles ON Documents.DocFileDBA = DocFiles.handle
+            LEFT OUTER JOIN Groups DocumentUserGroups ON DocumentUsers.GroupID = DocumentUserGroups.handle
+            LEFT OUTER JOIN HistoryPrint ON HistoryPrint.handle = History.handle
+            LEFT OUTER JOIN HistoryGeneric ON HistoryGeneric.handle = History.handle
+            LEFT OUTER JOIN Notes Notes_Doc ON Notes_Doc.handle = Documents.NoteDBA
+            LEFT OUTER JOIN Notes Notes_CCList ON Notes_CCList.handle = Documents.CCListDBA
+            LEFT OUTER join DTConfigurations ON DTConfigurations.ServerGUID = Documents.ServerGUID
+            LEFT OUTER JOIN Globalization HistoryGeneric_Detail ON
+               HistoryGeneric_Detail.Namespace = &#039;RightFax.SQL.HistoryGeneric&#039;
+               AND SUBSTRING(HistoryGeneric_Detail.LocKey,5,20) = &#039;DetailMsg&#039;
+               AND SUBSTRING(HistoryGeneric_Detail.LocKey,1,3) = CAST(HistoryGeneric.GenType AS varchar)
+               AND HistoryGeneric_Detail.IsoLanguageName = &#039;en-us&#039;
+            LEFT OUTER JOIN Globalization HistoryGeneric_Short ON
+               HistoryGeneric_Short.Namespace = &#039;RightFax.SQL.HistoryGeneric&#039;
+               AND SUBSTRING(HistoryGeneric_Short.LocKey,5, 20) = &#039;ShortMsg&#039;
+               AND SUBSTRING(HistoryGeneric_Short.LocKey,1, 3) = CAST(HistoryGeneric.GenType AS varchar)
+               AND HistoryGeneric_Short.IsoLanguageName = &#039;en-us&#039;
+            LEFT OUTER JOIN HistoryTRX ON HistoryTRX.handle = History.handle
+            LEFT OUTER JOIN (
+               SELECT distinct CONVERT(varchar,G.Data) AS TermStatStr,
+                      T.StatusCode AS TermStatCode,
+                      T.handle AS TermStat
+                 FROM Globalization G
+                         INNER JOIN TermStatToStatusCode T ON
+                            ( G.LocKey = &#039;HistoryTRX.BTHUSTAT&#039;
+                                 + RIGHT(&#039;0000&#039;
+                                 + LTRIM(RTRIM(CONVERT(char(3),T.StatusCode))), 3)
+                              AND G.IsoLanguageName = &#039;en-us&#039;
+                              AND G.LocKey like &#039;HistoryTRX.BTHUSTAT%&#039; )
+                  ) AS HistoryTRX_Term ON HistoryTRX.TermStat = HistoryTRX_Term.TermStat
+            LEFT OUTER JOIN (
+               SELECT distinct CONVERT(varchar,G.Data) AS TermStatStr,
+                      T.StatusCode AS TermStatCode,
+                      T.handle AS TermStat
+                 FROM Globalization G
+                         INNER JOIN TermStatToStatusCode T ON
+                            ( G.LocKey = &#039;HistoryTRX.BTHUSTAT&#039;
+                                 + RIGHT(&#039;0000&#039;
+                                 + LTRIM(RTRIM(CONVERT(char(3),T.StatusCode))), 3)
+                              AND G.IsoLanguageName = &#039;en-us&#039;
+                              AND G.LocKey like &#039;HistoryTRX.BTHUSTAT%&#039; )
+                  ) AS Documents_Term ON Documents.TermStat = Documents_Term.TermStat
+    WHERE
+       NOT (
+          /* The outer join on the HistoryPrint, HistoryGeneric, and HistoryTRX results in
+           * rows that just have null history data. One of the three must have a value. If
+           * all are null, the row is a result of the outer joins and the rows have no useable data so they
+           * filtered out. */
+          HistoryTRX.handle IS NULL
+             AND HistoryGeneric.handle IS NULL
+             AND HistoryPrint.handle IS NULL )
+       AND DocumentUsers.UserName IS NOT NULL
+
+       /* THIS VALUE is inserted into a NON NULL column in the FAX_LOG table. */
+       AND DocumentUsers.UserID IS NOT NULL
+
+       /* THIS VALUE is inserted into a NON NULL column in the FAX_LOG table. */
+       AND Documents.UniqueID IS NOT NULL
+
+       /* THIS VALUE is inserted into a NON NULL column in the FAX_LOG table. */
+       AND History.TRDateTime &gt; &#039;REPLACE_WHERE_CLAUSE_CRITERIA&#039;
+   ORDER BY History.TRDateTime&quot;
+/&gt; </pre>
+<p>来源：<a href="http://thedailywtf.com/Articles/All-In-The-Config.aspx" target="_blank">文章一</a>，<a href="http://thedailywtf.com/Articles/XMLd-XML.aspx" target="_blank">文章二</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="语言的数据亲和力" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_title">语言的数据亲和力</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3609.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="那些炒作过度的技术和概念" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3609.html" class="wp_rp_title">那些炒作过度的技术和概念</a></li><li ><a href="https://coolshell.cn/articles/3585.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="SOAP的S是Simple" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3585.html" class="wp_rp_title">SOAP的S是Simple</a></li><li ><a href="https://coolshell.cn/articles/2504.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="信XML，得永生！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2504.html" class="wp_rp_title">信XML，得永生！</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3498.html">信XML，得自信</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3498.html/feed</wfw:commentRss>
+			<slash:comments>40</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一些有意思的网站和贴子</title>
+		<link>https://coolshell.cn/articles/3480.html</link>
+					<comments>https://coolshell.cn/articles/3480.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 18 Jan 2011 00:53:24 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[AutoTools]]></category>
+		<category><![CDATA[Cheat Sheet]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Kinect]]></category>
+		<category><![CDATA[makefile]]></category>
+		<category><![CDATA[MikeOS]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[TeleHash]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3480</guid>
+
+					<description><![CDATA[<p>各位朋友，又到了介绍各种杂项的时候了，正如以前的这篇和这篇文章一样，本篇文章也给你介绍一些最近出现的一些有趣的东西。希望你能喜欢。 首先是华尔街的一篇报道，20...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3480.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3480.html">一些有意思的网站和贴子</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>各位朋友，又到了介绍各种杂项的时候了，正如以前的<a href="https://coolshell.cn/articles/3013.html" target="_blank">这篇</a>和<a href="https://coolshell.cn/articles/3437.html" target="_blank">这篇</a>文章一样，本篇文章也给你介绍一些最近出现的一些有趣的东西。希望你能喜欢。</p>
+<ul>
+<li>首先是<a href="http://online.wsj.com/article/SB10001424052748704723104576062173458318658.html?mod=WSJ_hps_sections_careerjournal#articleTabs%3Darticle" target="_blank">华尔街的一篇报道</a>，2011年最好和最不好的工作，其引用了<a href="http://careercast.com/" target="_blank">CareerCast.com</a>的数据，其列出了<a href="http://online.wsj.com/public/resources/documents/st_BESTJOBS0104_20110105.html" target="_blank">100个工作种类</a>，并根据薪资、工作环境、工作鸭梨、体力消耗和就业前景做了一个排序。结果<strong>排第一位的是“软件工程师”</strong>，其理由是：高科技产品的需求呈爆炸式增长，以及人们对iPod、平板电脑、和其它科技产品应用软件的喜好，软件工程师被评为最佳职业。软件工程师有弹性工作时间，可以在家办公，而且每个月都有猎头找来。而最差是的则是码头工人。</li>
+</ul>
+<div>
+<div style="text-align: center;"><a href="http://online.wsj.com/public/resources/documents/st_BESTJOBS0104_20110105.html"><img decoding="async" loading="lazy" src="http://si.wsj.net/public/resources/images/OB-LP754_bestjo_D_20110104181820.jpg" border="0" alt="[bestjobspromo]" hspace="0" vspace="0" width="262" height="174" /></a></div>
+</div>
+<ul>
+<li>接下来是一个叫<a href="http://www.theserverside.com/news/thread.tss?track=NL-461&amp;ad=808081&amp;thread_id=61622&amp;asrc=EM_NLN_13145929&amp;uid=2780877" target="_blank">“Java pass by value”的长贴</a>，楼主说有一天在LinkedIn.com上看到了Java Group里有人讨论Java是pass by value的，长达240+贴子。贴子里说，如果你使用Java的原始类型如int, long，就是传值，如果你用object, array，其实传的是一个引用的拷贝，所以，Java是传值的。呵呵，你觉得有道理吗？于是，成就了这个大讨论战。<a href="http://www.reddit.com/r/programming/comments/f1d7r/huge_war_over_whether_java_is_pass_by_reference/" target="_blank">reddit.com上也有N多的回贴</a>。有空可以看看。</li>
+</ul>
+<p><span id="more-3480"></span></p>
+<ul>
+<li>然后是两个网站，不知道你是否还记得我们介绍的那个<a rel="bookmark" href="https://coolshell.cn/articles/2065.html" target="_blank">Windows 3.1的Web网站</a>，用Web来实现一切看来是迟早的问题。下面，让我们来看两个网站：
+<ul>
+<li>第一个是仿MS-DOS的个人网站——<a href="http://stopwilson.com/" target="_blank">http://stopwilson.com/</a></li>
+</ul>
+</li>
+</ul>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2011/01/msdos_website.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3482" title="msdos_website" src="https://coolshell.cn/wp-content/uploads/2011/01/msdos_website.jpg" alt="" width="650" height="446" srcset="https://coolshell.cn/wp-content/uploads/2011/01/msdos_website.jpg 650w, https://coolshell.cn/wp-content/uploads/2011/01/msdos_website-300x205.jpg 300w" sizes="(max-width: 650px) 100vw, 650px" /></a> <a href="https://coolshell.cn/wp-content/uploads/2011/01/Javascript_ipad.jpg"></a></p>
+<ul>
+<li>
+<ul>
+<li>第二个是仿iPad的网站——<a href="http://alexw.me/ipad/" target="_blank">http://alexw.me/ipad/</a></li>
+</ul>
+</li>
+</ul>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="Javascript ipad" src="https://coolshell.cn/wp-content/uploads/2011/01/Javascript_ipad.jpg" alt="" width="506" height="336" /></p>
+<p style="padding-left: 60px;">如果以后的上网设备必然是以移动为主，那么Web开发中的HTML+ Javascript将有可能成为最所有应用都需要去支持的东西。</p>
+<ul>
+<li>说到Web开发，表单提交功能是每个网站都会最到的事情。这里有一篇文章告诉你了如何增强表单的可用性。非常不错，Web程序员可以前往一读：<a href="http://sixrevisions.com/user-interface/10-tips-for-optimizing-web-form-submission-usability/" target="_blank">http://sixrevisions.com/user-interface/10-tips-for-optimizing-web-form-submission-usability/</a></li>
+</ul>
+<div>
+<ul>
+<li>接下来，向大家介绍一个开源项目——TeleHash，其基于<a href="http://en.wikipedia.org/wiki/Kademlia">Kademlia</a>在<a href="http://en.wikipedia.org/wiki/Distributed_hash_table" target="_blank">DHT网络</a>上以P2P的方式用<a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol" target="_blank">UDP协议</a>来发送一些<a href="http://www.json.org/" target="_blank">JSON数据</a>。于是你的应用程序就可以使用这个库来开发你的应用了。其源码在：<a href="https://github.com/quartzjer/TeleHash" target="_blank">https://github.com/quartzjer/TeleHash</a>，它的口号是：JSON + UDP + DHT = Freedom</li>
+</ul>
+</div>
+<ul>
+<li>如果你想使用autotools（autoconf和automake）写Makefile，这里有一个非常不错的教程：<a href="http://www.lrde.epita.fr/~adl/autotools.html" target="_blank">http://www.lrde.epita.fr/~adl/autotools.html</a></li>
+</ul>
+<ul>
+<li>不知道大家知不知道微软xbox 360上的<a href="http://www.xbox.com/en-US/kinect" target="_blank">Kinect</a>？其是XBox的一个硬件插件，有点类似于Wii，不过它的强大之处在于，你只需要用你的肢体动作就可以玩游戏了，不需要手上拿个什么。现在，几乎全世界的程序员都在hack这个东东，有人还用他玩WoW，也是强大。这里有一个教程教你如何通过<a href="http://openkinect.org/" target="_blank">openkinect.org</a>和C#开发点自己的小玩意。</li>
+</ul>
+<ul>
+<li>相试着写一个最简单的操作系统吗？这里有<a href="http://mikeos.berlios.de/write-your-own-os.html" target="_blank">一篇教程</a>教你用x86的汇编做一个操作系统，如果你想走得更远，可以看看<a href="http://mikeos.berlios.de/" target="_blank">MikeOS project</a>。</li>
+</ul>
+<p style="text-align: center;"><a href="http://mikeos.berlios.de/"><img decoding="async" loading="lazy" class="aligncenter" title="MikeOS" src="http://mikeos.berlios.de/images/shot-3.png" alt="" width="504" height="280" /></a></p>
+<ul>
+<li>下面是一个HTML5 Canvas Cheat Sheet（点击看大图），关于更多的Cheat Sheet，你可以看看《<a href="https://coolshell.cn/articles/1566.html" target="_blank">程序员小抄大全</a>》《<a rel="bookmark" href="https://coolshell.cn/articles/2964.html" target="_blank">25个jQuery的编程小抄</a>》</li>
+</ul>
+<figure id="attachment_3492" aria-describedby="caption-attachment-3492" style="width: 300px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2011/01/HTML5_Canvas_Cheat_Sheet.png"><img decoding="async" loading="lazy" class="size-medium wp-image-3492" title="HTML5 Canvas Cheat Sheet" src="https://coolshell.cn/wp-content/uploads/2011/01/HTML5_Canvas_Cheat_Sheet-300x221.png" alt="HTML5 Canvas Cheat Sheet" width="300" height="221" srcset="https://coolshell.cn/wp-content/uploads/2011/01/HTML5_Canvas_Cheat_Sheet-300x221.png 300w, https://coolshell.cn/wp-content/uploads/2011/01/HTML5_Canvas_Cheat_Sheet-1024x757.png 1024w, https://coolshell.cn/wp-content/uploads/2011/01/HTML5_Canvas_Cheat_Sheet.png 1388w" sizes="(max-width: 300px) 100vw, 300px" /></a><figcaption id="caption-attachment-3492" class="wp-caption-text">HTML5 Canvas Cheat Sheet</figcaption></figure>
+<ul>
+<li><a href="http://monodroid.net/" target="_blank">Mono开始支持Android</a>。Mono是一个由Novell公司（先前是Ximian）主持的项目。该项目的目标是创建一系列符合ECMA标准（Ecma-334和Ecma-335）的.NET工具，包括C#编译器和共通語言執行平臺。与微软的.NET Framework不同，Mono项目不仅可以运行于Windows系统上，还可以运行于Linux，FreeBSD，Unix，Mac OS X和Solaris。这个项目叫MonoDroid。</li>
+</ul>
+<p style="text-align: center;"><a href="http://monodroid.net/"><img decoding="async" loading="lazy" class="alignnone" title="http://monodroid.net/" src="http://tirania.org/images/mono-android.png" alt="" width="188" height="300" /></a></p>
+<p style="text-align: center;">&nbsp;</p>
+<ul>
+<li>最后来一个给力的教程吧，这是一个关于教你如何制作一个<a href="http://daid.mine.nu/instructabliss/?url=http://www.instructables.com/id/Led-Cube-8x8x8/" target="_blank">3D的LED显示的教程</a>，相当的详细，甚至教你如何上ebay采购相关的电子元件和设备，还有如何编程，有兴趣的朋友可以一读。</li>
+</ul>
+<p style="text-align: center;"><a href="http://daid.mine.nu/instructabliss/?url=http://www.instructables.com/id/Led-Cube-8x8x8/"><img decoding="async" loading="lazy" src="http://www.instructables.com/image/FUXO1RWGICYBAOS/Led-Cube-8x8x8.jpg" alt="Led Cube 8x8x8" width="500" height="375" /></a></p>
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: left;">这回就这么多，希望你喜欢。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3480.html">一些有意思的网站和贴子</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3480.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux的cycle日历（你懂的）</title>
+		<link>https://coolshell.cn/articles/3489.html</link>
+					<comments>https://coolshell.cn/articles/3489.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 17 Jan 2011 00:42:09 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Cycle]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[Woman]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3489</guid>
+
+					<description><![CDATA[<p>这是一个开源项目：http://cycle.sourceforge.net/，其是用python写的。在项目的主页上说，这是一个给妇女用的日历程序，叫cycle...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3489.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3489.html">Linux的cycle日历（你懂的）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这是一个开源项目：<a href="http://cycle.sourceforge.net/" target="_blank">http://cycle.sourceforge.net/</a>，其是用python写的。在项目的主页上说，这是一个给妇女用的日历程序，叫cycle，周期，给妇女的，我不多说了，你懂的。下面是一些介绍（请大家注意学习相关的英文单词）</p>
+<p>当然，这个小程序不单单只是查看妇女的“周期”（menstruation），其还提供了以下的功能：</p>
+<ul>
+<li>第一次的周期 &#8211; 在日历上显示为粉色。menstruation周期长度由用户输入的六次周期取平均值确定。</li>
+<li>排卵期（Ovulation day）- 在日历上显示为亮绿色，</li>
+<li>受精期 （Fertile period）- 在日历上显示为绿色</li>
+<li>安全期（Safe Sex）</li>
+<li>预产期（Date of birth）</li>
+<li>还允许你记一些notes &#8211; 医生建议你服用一些荷尔蒙避孕药（hormonal contraceptive）</li>
+</ul>
+<p>下面是屏幕截图 ——</p>
+<p style="text-align: center;"><a href="http://cycle.sourceforge.net/scr1.png"><img decoding="async" loading="lazy" src="http://cycle.sourceforge.net/scr1_m.png" border="0" alt="Screenshoot" width="250" height="165" /></a></p>
+<p style="text-align: left;">注意以下的免责条款：</p>
+<ul>
+<li>本程序并不能成为一种避孕的方法。</li>
+<li>本程序也不能阻止各种性传染病，如：AIDS</li>
+<li>本程序更不能取代你的妇科医生。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3489.html">Linux的cycle日历（你懂的）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3489.html/feed</wfw:commentRss>
+			<slash:comments>35</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>图解SQL的Join</title>
+		<link>https://coolshell.cn/articles/3463.html</link>
+					<comments>https://coolshell.cn/articles/3463.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 11 Jan 2011 00:44:09 +0000</pubDate>
+				<category><![CDATA[数据库]]></category>
+		<category><![CDATA[Join]]></category>
+		<category><![CDATA[SQL]]></category>
+		<category><![CDATA[Venn diagrams]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3463</guid>
+
+					<description><![CDATA[<p>对于SQL的Join，在学习起来可能是比较乱的。我们知道，SQL的Join语法有很多inner的，有outer的，有left的，有时候，对于Select出来的结...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3463.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3463.html">图解SQL的Join</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>对于SQL的Join，在学习起来可能是比较乱的。我们知道，<a href="http://en.wikipedia.org/wiki/Join_(SQL)" target="_blank">SQL的Join语法</a>有很多inner的，有outer的，有left的，有时候，对于Select出来的结果集是什么样子有点不是很清楚。Coding Horror上有<a href="http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html" target="_blank">一篇文章</a>（实在不清楚为什么Coding Horror也被墙）通过 文氏图 <a href="http://en.wikipedia.org/wiki/Venn_diagram" target="_blank">Venn diagrams</a> 解释了SQL的Join。我觉得清楚易懂，转过来。</p>
+<p>假设我们有两张表。</p>
+<ul>
+<li><strong>Table A</strong> 是左边的表。</li>
+<li><strong>Table B</strong> 是右边的表。</li>
+</ul>
+<p>其各有四条记录，其中有两条记录是相同的，如下所示：</p>
+<pre>id name       id  name
+-- ----       --  ----
+1  <span style="color: red;">Pirate</span>     1   Rutabaga
+2  Monkey     2   <span style="color: red;">Pirate</span>
+3  <span style="color: red;">Ninja</span>      3   Darth Vader
+4  Spaghetti  4   <span style="color: red;">Ninja</span></pre>
+<p>下面让我们来看看不同的Join会产生什么样的结果。</p>
+<p><span id="more-3463"></span></p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+<strong>INNER JOIN</strong> TableB
+ON TableA.name = TableB.name
+
+id  name       id   name
+--  ----       --   ----
+1   Pirate     2    Pirate
+3   Ninja      4    Ninja</pre>
+<p><strong>Inner join</strong><br />
+产生的结果集中，是A和B的交集。</td>
+<td><img decoding="async" style="border: 0px initial initial;" alt="Venn diagram of SQL inner join" src="https://coolshell.cn/wp-content/uploads/2011/01/Inner_Join.png" border="0" /></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+<strong>FULL OUTER JOIN</strong> TableB
+ON TableA.name = TableB.name
+
+id    name       id    name
+--    ----       --    ----
+1     Pirate     2     Pirate
+2     Monkey     <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+3     Ninja      4     Ninja
+4     Spaghetti  <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       1     Rutabaga
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       3     Darth Vader</pre>
+<p><strong>Full outer join</strong> 产生A和B的并集。但是需要注意的是，对于没有匹配的记录，则会以null做为值。</td>
+<td><img decoding="async" loading="lazy" style="border: 0px initial initial;" alt="Venn diagram of SQL cartesian join" src="https://coolshell.cn/wp-content/uploads/2011/01/Full_Outer_Join.png" width="300" height="197" border="0" /></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+<strong>LEFT OUTER JOIN</strong> TableB
+ON TableA.name = TableB.name
+
+id  name       id    name
+--  ----       --    ----
+1   Pirate     2     Pirate
+2   Monkey     <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+3   Ninja      4     Ninja
+4   Spaghetti  <span style="color: gray;">null</span>  <span style="color: gray;">null</span></pre>
+<p><strong>Left outer join</strong> 产生表A的完全集，而B表中匹配的则有值，没有匹配的则以null值取代。</td>
+<td><img decoding="async" style="border: 0px initial initial;" alt="Venn diagram of SQL left join" src="https://coolshell.cn/wp-content/uploads/2011/01/Left_Outer_Join.png" border="0" /></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
+<strong>WHERE TableB.id IS null</strong> 
+
+id  name       id     name
+--  ----       --     ----
+2   Monkey     <span style="color: gray;">null</span>   <span style="color: gray;">null</span>
+4   Spaghetti  <span style="color: gray;">null</span>   <span style="color: gray;">null</span></pre>
+<p>产生在A表中有而在B表中没有的集合。</td>
+<td><img decoding="async" style="border: 0px initial initial;" alt="join-left-outer.png" src="https://coolshell.cn/wp-content/uploads/2011/01/Left_Out_Join_2.png" border="0" /></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+FULL OUTER JOIN TableB
+ON TableA.name = TableB.name
+<strong>WHERE TableA.id IS null
+OR TableB.id IS null
+</strong>
+id    name       id    name
+--    ----       --    ----
+2     Monkey     <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+4     Spaghetti  <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       1     Rutabaga
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       3     Darth Vader</pre>
+<p>产生A表和B表都没有出现的数据集。</td>
+<td><img decoding="async" style="border: 0px initial initial;" alt="join-outer.png" src="https://coolshell.cn/wp-content/uploads/2011/01/Full_Outer_Join_2.png" border="0" /></td>
+</tr>
+</tbody>
+</table>
+<p>还需要注册的是我们还有一个是“交差集” <strong>cross join</strong>, 这种Join没有办法用文式图表示，因为其就是把表A和表B的数据进行一个N*M的组合，即笛卡尔积。表达式如下：</p>
+<pre>SELECT * FROM TableA
+<strong>CROSS JOIN</strong> TableB</pre>
+<p>这个笛卡尔乘积会产生 4 x 4 = 16 条记录，一般来说，我们很少用到这个语法。但是我们得小心，如果不是使用嵌套的select语句，一般系统都会产生笛卡尔乘积然再做过滤。这是对于性能来说是非常危险的，尤其是表很大的时候。</p>
+<p><em><strong>更新:2014年3月30日</strong></em></p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-11371" alt="" src="https://coolshell.cn/wp-content/uploads/2011/01/SQL-Join.jpg" width="600" height="472" srcset="https://coolshell.cn/wp-content/uploads/2011/01/SQL-Join.jpg 600w, https://coolshell.cn/wp-content/uploads/2011/01/SQL-Join-300x236.jpg 300w" sizes="(max-width: 600px) 100vw, 600px" /></p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="6个有用的MySQL语句" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_title">6个有用的MySQL语句</a></li><li ><a href="https://coolshell.cn/articles/1957.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="Web程序的最佳测试数据" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1957.html" class="wp_rp_title">Web程序的最佳测试数据</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3463.html">图解SQL的Join</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3463.html/feed</wfw:commentRss>
+			<slash:comments>184</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Sony PS3 Root Key 被破解</title>
+		<link>https://coolshell.cn/articles/3453.html</link>
+					<comments>https://coolshell.cn/articles/3453.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 10 Jan 2011 01:02:28 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[FreeBSD]]></category>
+		<category><![CDATA[GeoHot]]></category>
+		<category><![CDATA[PS3]]></category>
+		<category><![CDATA[Sony]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3453</guid>
+
+					<description><![CDATA[<p>著名的黑客George &#8220;GeoHot&#8221; Hotz（其也帮助破解了iPhone）宣称破解了Sony P3的root key（也称fron...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3453.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3453.html">Sony PS3 Root Key 被破解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>著名的黑客George &#8220;GeoHot&#8221; Hotz（其也帮助破解了iPhone）宣称破解了Sony P3的root key（也称front door key），并将这个key公布于 <a href="http://www.geohot.com/" target="_blank">http://www.geohot.com/</a> （墙）。不但发布了root key，还做了一个hello world。Youtube上也有一个相关的视频：<a href="http://www.youtube.com/watch?v=UkLSXsCKDkg" target="_blank">http://www.youtube.com/watch?v=UkLSXsCKDkg</a></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">erk: C0 CE FE 84 C2 27 F7 5B D0 7A 7E B8 46 50 9F 93 B2 38 E7 70 DA CB 9F F4 A3 88 F8 12 48 2B E2 1B
+riv: 47 EE 74 54 E4 77 4C C9 B8 96 0C 7B 59 F4 C1 4D
+pub: C2 D4 AA F3 19 35 50 19 AF 99 D4 4E 2B 58 CA 29 25 2C 89 12 3D 11 D6 21 8F 40 B1 38 CA B2 9B 71 01 F3 AE B7 2A 97 50 19
+ R: 80 6E 07 8F A1 52 97 90 CE 1A AE 02 BA DD 6F AA A6 AF 74 17
+ n: E1 3A 7E BC 3A CC EB 1C B5 6C C8 60 FC AB DB 6A 04 8C 55 E1
+ K: BA 90 55 91 68 61 B9 77 ED CB ED 92 00 50 92 F6 6C 7A 3D 8D
+ Da: C5 B2 BF A1 A4 13 DD 16 F2 6D 31 C0 F2 ED 47 20 DC FB 06 70</pre>
+<p>之所以叫“front door key”，其是相对于“back door” 而言，传统的破解一般是通过软件的某个 bug或是后门来破解。而这次的PS3走的是前门，这就是说——这已经不是破解了，这是完全意义上的PS3正版了。</p>
+<p>为什么呢。这和PS3的开发有关。其很像Symbian 的Sign，也就是说，游戏开发商要想让他们的游戏在PS3上发布，其需要把游戏通过法律流程交给Sony，然后被Sign上一个key，就可以成为正式的发行版并可在所有用户的PS3上运行了。所以，这个key是PS3到今天没有盗版游戏的关键。不过随着这个key被找到，这意味着任何人都可以在PS3上发布软件了。</p>
+<p>最要命的是，这个Key和PS3的硬件绑定，也就是说，<strong>如果Sony要阻止这个事的话，无法通过升级firmware完成，必需更换硬件！！</strong></p>
+<p><strong><span id="more-3453"></span><br />
+</strong></p>
+<p>目前，SONY正式对PS3的Root Key被公布导致可以进行自制系统开发的问题<a href="http://www.next-gen.biz/news/sony-responds-to-ps3-hacks" target="_blank">进行回应</a>。SONY表示目前正在进行相关调查，问题会通过网络更新进行解决，具体情况涉及信息安全问题不便透露。</p>
+<p>不过之前黑客集团表示除非Sony出新硬件否则无法修正这一情况，Sony应该会接受这一事实。</p>
+<p>而最新的<a href="http://www.ps3-hacks.com/2011/01/04/ps3-custom-firmware-creator-released-permanently-add-install-pkgs-to-the-xmb/" target="_blank">PS3 Custom Firmware Creator</a>应该是把PS3送上断头台了。而且已经证实，3.55的玩友可以安装3.55的CFW自制系统，安裝之后可以正常运行正版游戏，可以通过选项菜单中多出的pkg安裝功能，安裝u盘里通过电脑下载的游戏更新补丁或是游戏的试玩版。<strong>现在的PS3就像一个PC机，等待着各种不受Sony控制的软件的到来……</strong></p>
+<p>（另：Freebsd<a href="http://lists.freebsd.org/pipermail/freebsd-current/2011-January/022104.html">宣布</a>支持索尼的游戏机PS3，支持的型号是索尼Playstation 3 Fat版，固件版本号&lt; 3.21 （最新的固件版本是<a href="http://us.playstation.com/support/systemupdates/ps3/index.htm">3.55版</a>），必须能网络启动。不过，因为黑客已经破译了root key，并允许创作自制固件，因此未来Freebsd或能支持所有版本的PS3。）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1857.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="C 语言整型谜题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1857.html" class="wp_rp_title">C 语言整型谜题</a></li><li ><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" alt="Go编程模式 ： 泛型编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_title">Go编程模式 ： 泛型编程</a></li><li ><a href="https://coolshell.cn/articles/2043.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="PI小数点位数的新纪录" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2043.html" class="wp_rp_title">PI小数点位数的新纪录</a></li><li ><a href="https://coolshell.cn/articles/1432.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="编译vim解决中文支持" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1432.html" class="wp_rp_title">编译vim解决中文支持</a></li><li ><a href="https://coolshell.cn/articles/85.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/gldt92-150x150.png" alt="Linux Distribution Timeline" width="150" height="150" /></a><a href="https://coolshell.cn/articles/85.html" class="wp_rp_title">Linux Distribution Timeline</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3453.html">Sony PS3 Root Key 被破解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3453.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>输出从1到1000的数</title>
+		<link>https://coolshell.cn/articles/3445.html</link>
+					<comments>https://coolshell.cn/articles/3445.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 07 Jan 2011 00:55:32 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3445</guid>
+
+					<description><![CDATA[<p>有这样一个面试题——请把从1到1000的数打印出来，但你不能使用任何的循环语句或是条件语句。更不能写1000个printf或是cout。用C/C++语言。 我相...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3445.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3445.html">输出从1到1000的数</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>有这样一个面试题——<strong>请把从1到1000的数打印出来，但你不能使用任何的循环语句或是条件语句。更不能写1000个printf或是cout</strong>。<strong>用C/C++语言</strong>。</p>
+<p>我相信，大多数人一开始你可能想到的是递归算法：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void f(int n){
+    printf(&quot;%d\n&quot;,n);
+    (1000-n) ? f(n+1) : exit(0) ;
+}
+int main(){
+    f(1);
+}
+</pre>
+<p>当然，题目中说了不能使用条件语句，所以，上面那种解法的不符合题意的，因为还是变向地使用了条件表达式。不过，我们可以用别的方法来让这个递归终止，比如：</p>
+<p>除以零，当程序crash，呵呵。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">void f(int n){
+    printf(&quot;%d\n&quot;,n);
+    n/(1000-n);
+    f(n+1);
+}</pre>
+<p>还有这样退出递归的：</p>
+<p><span id="more-3445"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void yesprint(int i);
+void noprint(int i);
+
+typedef void(*fnPtr)(int);
+fnPtr dispatch[] = { yesprint, noprint };
+
+void yesprint(int i) {
+    printf(&quot;%d\n&quot;, i);
+    dispatch[i / 1000](i + 1);
+}
+
+void noprint(int i) { /* do nothing. */ }
+
+int main() {
+      yesprint(1);
+}
+</pre>
+<p>还有下面这些各种各样的解法：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#include&lt;stdio.h&gt;
+
+/* prints number  i */
+void print1(int i) {
+    printf(&quot;%d\n&quot;,i);
+}
+
+/* prints 10 numbers starting from i */
+void print10(int i) {
+    print1(i);
+    print1(i+1);
+    print1(i+2);
+    print1(i+3);
+    print1(i+4);
+    print1(i+5);
+    print1(i+6);
+    print1(i+7);
+    print1(i+8);
+    print1(i+9);
+}
+
+/* prints 100 numbers starting from i */
+void print100(int i) {
+    print10(i);
+    print10(i+10);
+    print10(i+20);
+    print10(i+30);
+    print10(i+40);
+    print10(i+50);
+    print10(i+60);
+    print10(i+70);
+    print10(i+80);
+    print10(i+90);
+}
+
+/* prints 1000 numbers starting from i */
+void print1000(int i) {
+    print100(i);
+    print100(i+100);
+    print100(i+200);
+    print100(i+300);
+    print100(i+400);
+    print100(i+500);
+    print100(i+600);
+    print100(i+700);
+    print100(i+800);
+    print100(i+900);
+}
+
+int main() {
+        print1000(1);
+        return 0;
+}</pre>
+<p>不过，print用得多了一些。我们可以用宏嘛。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">#include&lt;stdio.h&gt;
+#define Out(i)       printf(&quot;%d\n&quot;, i++);
+#define REP(N)       N N N N N N N N N N
+#define Out1000(i)   REP(REP(REP(Out(i))));
+void main()
+{
+    int i = 1;
+    Out1000(i);
+}</pre>
+<p>不过，我们应该使用C++的一些特性，比如：</p>
+<p>使用构造函数</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+class Printer
+{
+public:
+    Printer() { static unsigned i=1; cout &lt;&lt; i++ &lt;&lt; endl;; }
+
+};
+
+int main()
+{
+    Printer p[1000];
+}
+</pre>
+<p>或是更为NB的Template：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">template&lt;int N&gt;
+struct NumberGeneration{
+    static void out(std::ostream&amp; os)
+    {
+        NumberGeneration&lt;N-1&gt;::out(os);
+        os &lt;&lt; N &lt;&lt; std::endl;
+    }
+};
+
+template&lt;&gt;
+struct NumberGeneration&lt;1&gt;{
+    static void out(std::ostream&amp; os)
+    {
+        os &lt;&lt; 1 &lt;&lt; std::endl;
+    }
+};
+
+int main(){
+    NumberGeneration&lt;1000&gt;::out(std::cout);
+}</pre>
+<p>最后来个BT一点的：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void main(int j) {
+    printf(&quot;%d\n&quot;, j);
+    (main + (exit - main)*(j/1000))(j+1);
+}
+</pre>
+<p>本文来自: <a href="http://stackoverflow.com/q/4568645/89806" target="_blank">http://stackoverflow.com/q/4568645/89806</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="又一个有趣的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_title">又一个有趣的面试题</a></li><li ><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="C++面试中string类的一种正确写法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10478.html" class="wp_rp_title">C++面试中string类的一种正确写法</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3445.html">输出从1到1000的数</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3445.html/feed</wfw:commentRss>
+			<slash:comments>70</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一些杂项资源</title>
+		<link>https://coolshell.cn/articles/3437.html</link>
+					<comments>https://coolshell.cn/articles/3437.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 31 Dec 2010 05:00:00 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[Emacs]]></category>
+		<category><![CDATA[ExtJS]]></category>
+		<category><![CDATA[Hibernate]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Movie]]></category>
+		<category><![CDATA[Spring]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3437</guid>
+
+					<description><![CDATA[<p>以前给大家介绍过一些非常有意思的杂项资源，今天再给大家介绍一些。（虽然没有上次的多，也算是一个新年礼物吧） 首先，如果你想在你的web页上做一个小提示，你不妨到...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3437.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3437.html">一些杂项资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前给大家介绍过<a href="https://coolshell.cn/articles/3013.html" target="_blank">一些非常有意思的杂项资源</a>，今天再给大家介绍一些。（虽然没有上次的多，也算是一个新年礼物吧）</p>
+<ul>
+<li>首先，如果你想在你的web页上做一个小提示，你不妨到<a href="http://projects.nickstakenburg.com/tipped" target="_blank">http://projects.nickstakenburg.com/tipped</a>上看看，各种各样的提示风格，很不错。而且兼容于四大主流浏览器——Chrome, Firefox, IE, Safari。</li>
+</ul>
+<ul>
+<li>如果你想让Java变成一个动态语言，你可以试试这个开源项目：<a href="http://code.google.com/p/ductilej/" target="_blank">http://code.google.com/p/ductilej/</a></li>
+</ul>
+<ul>
+<li>如果你想把你的Windows蓝屏改成红屏或是绿屏，你可以看看这篇教程：<a href="http://blogs.technet.com/b/markrussinovich/archive/2010/12/14/3374820.aspx" target="_blank">http://blogs.technet.com/b/markrussinovich/archive/2010/12/14/3374820.aspx</a>，还是挺Cool的。</li>
+</ul>
+<p style="text-align: center;"><a href="http://blogs.technet.com/cfs-file.ashx/__key/CommunityServer-Blogs-Components-WeblogFiles/00-00-00-52-36-metablogapi/4745.image_5F00_thumb47_5F00_0847D56E.png"><img decoding="async" loading="lazy" title="image_thumb47" src="http://blogs.technet.com/cfs-file.ashx/__key/CommunityServer-Blogs-Components-WeblogFiles/00-00-00-52-36-metablogapi/7462.image_5F00_thumb47_5F00_thumb_5F00_5577CEF9.png" border="0" alt="image_thumb47" width="550" height="413" /></a></p>
+<p><span id="more-3437"></span></p>
+<ul>
+<li>如果你想使用HTML5+Javascript做一个游戏，就像制作<a href="https://coolshell.cn/articles/2998.html" target="_blank">这些HTML5的小游戏</a>一样，你不妨考虑使用一下这个游戏框架：<a href="http://www.propulsionjs.com/" target="_blank">http://www.propulsionjs.com/</a></li>
+</ul>
+<ul>
+<li>如果你想学习Emacs，而又不害怕这样的学习曲线，那么，这里有一篇相当不错的教程供你参考：<a href="http://textmate2.com/" target="_blank">http://textmate2.com/</a></li>
+</ul>
+<p style="text-align: center;"><a href="http://textmate2.com/" target="_blank"><img decoding="async" src="http://www.gnu.org/software/emacs/tour/images/ediff-small.png" alt="Ediff mode screenshot" /></a></p>
+<p style="text-align: center;">
+<ul>
+<li>如果你对2010年的好莱坞电影票房和排行情况想有一个整体的了解的话，这里有一个很不错的图示：<a href="http://www.xach.com/moviecharts/2010.html" target="_blank">http://www.xach.com/moviecharts/2010.html</a>，阿凡达，艾丽斯梦游仙梦，钢铁侠，史端克，幕色，盗梦空间，玩具总动员，哈里波特……可能还有很多你没有看过的电影，你可以上<a href="http://www.kickasstorrents.com/" target="_blank">http://www.kickasstorrents.com/</a>上下载看看。</li>
+</ul>
+<ul>
+<li>如果你像我一样，对“Agile Development”在中国似“电视购物”般的的宣传和神化有一些异见的话，或者你对这个方法论起级信仰，认为他就像“共产主义”，“真主”，“耶稣”，“佛陀”一样可以普世的话，你不妨看一下下面这些文章：（注意，他们大多被墙）
+<ul>
+<li><a href="https://gist.github.com/710960" target="_blank">What Killed Waterfall could Kill Agile</a>.</li>
+<li><a href="https://groups.google.com/forum/#!msg/guerrilla-capacity-planning/HR69ubukn_Q/xNgiiMeq0BkJ" target="_blank">Google Groups上的一个讨论</a></li>
+<li><a href="http://david.ing.name/2010/12/24/agile-plumbers/" target="_blank">Agile 水管工</a></li>
+<li><a href="http://mempko.wordpress.com/2010/12/30/look-like-a-capitalist-live-like-a-communist/" target="_blank">看上去是资本主义，用起来是共产主义，打起架来是法西斯，做起爱来是无政府主义</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>最后让我向你介绍一下2010年度top 10的关于 Spring, ExtJS和Hibernate的相关文章（同意，注意撞墙）
+<ul>
+<li><a href="http://loianegroner.com/2010/01/tutorial-getting-started-with-spring-security/" target="_blank">Tutorial: Getting Started with Spring Security</a></li>
+<li><a href="http://loianegroner.com/2010/03/extjs-and-spring-mvc-framework-crud-datagrid-example/" target="_blank">ExtJS and Spring MVC Framework: CRUD DataGrid Example</a></li>
+<li><a href="http://loianegroner.com/2010/03/ajax-file-upload-with-extjs-and-spring-framework/" target="_blank">Ajax File Upload with ExtJS and Spring Framework</a></li>
+<li><a href="http://loianegroner.com/2010/02/integrating-spring-security-with-extjs-login-page/" target="_blank">Integrating Spring Security with ExtJS Login Page</a></li>
+<li><a href="http://loianegroner.com/2010/02/spring-mvc-and-ajax-with-json/" target="_blank">Spring MVC and AJAX with JSON</a></li>
+<li><a href="http://loianegroner.com/2010/02/extjs-how-to-export-datagrid-to-excel/" target="_blank">ExtJS: How to Export DataGrid to Excel</a></li>
+<li><a href="http://loianegroner.com/2010/09/extjs-spring-mvc-3-and-hibernate-3-5-crud-datagrid-example/" target="_blank">ExtJS, Spring MVC 3 and Hibernate 3.5: CRUD DataGrid Example</a></li>
+<li><a href="http://loianegroner.com/2010/01/spring-security-login-and-logout-form-jsp/" target="_blank">Spring Security: Login and Logout Form JSP</a></li>
+<li><a href="http://loianegroner.com/2010/01/how-to-display-an-imagelink-inside-an-ext-js-gridpanels-cell/" target="_blank">How to Display an Image/Link Inside an Ext JS GridPanel’s Cell</a></li>
+<li><a href="http://loianegroner.com/2010/01/ext-window-panel-show-or-hide/" target="_blank">Ext.Window Panel: Show or Hide?</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>祝大家新年快乐！！</strong></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/5709.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="API设计：用流畅接口构造内部DSL" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5709.html" class="wp_rp_title">API设计：用流畅接口构造内部DSL</a></li><li ><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" alt="那些曾伴我走过编程之路的软件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_title">那些曾伴我走过编程之路的软件</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3437.html">一些杂项资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3437.html/feed</wfw:commentRss>
+			<slash:comments>22</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>6个有用的MySQL语句</title>
+		<link>https://coolshell.cn/articles/3433.html</link>
+					<comments>https://coolshell.cn/articles/3433.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 31 Dec 2010 00:29:35 +0000</pubDate>
+				<category><![CDATA[数据库]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[SQL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3433</guid>
+
+					<description><![CDATA[<p>以前本站给大家介绍过《MySQL性能优化的最佳20+条经验》，今天给大家介绍六条比较有用的MySQL的SQL语句，可能很多人都通过PHP来实现这些功能。 1. ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3433.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站给大家介绍过《<a rel="bookmark" href="https://coolshell.cn/articles/1846.html" target="_blank">MySQL性能优化的最佳20+条经验</a>》，今天给大家介绍六条比较有用的MySQL的SQL语句，可能很多人都通过PHP来实现这些功能。</p>
+<h4>1. 计算年数</h4>
+<p>你想通过生日来计算这个人有几岁了。</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+
+SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), &#039;%Y&#039;) + 0;
+</pre>
+<h4>2. 两个时间的差</h4>
+<p>取得两个 datetime 值的差。假设 dt1 和 dt2 是 datetime 类型，其格式为 ‘yyyy-mm-dd hh:mm:ss’，那么它们之间所差的秒数为：</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+
+UNIX_TIMESTAMP( dt2 ) - UNIX_TIMESTAMP( dt1 )
+</pre>
+<p>除以60就是所差的分钟数，除以3600就是所差的小时数，再除以24就是所差的天数。</p>
+<h4>3. 显示某一列出现过N次的值</h4>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+
+SELECT id
+FROM tbl
+GROUP BY id
+HAVING COUNT(*) = N;
+</pre>
+<p><span id="more-3433"></span></p>
+<h4>4. 计算两个日子间的工作日</h4>
+<p>所谓工作日就是除出周六周日和节假日。</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+
+SELECT COUNT(*)
+FROM calendar
+WHERE d BETWEEN Start AND Stop
+  AND DAYOFWEEK(d) NOT IN(1,7)
+  AND holiday=0;
+</pre>
+<h4>5. 查找表中的主键</h4>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+
+SELECT k.column_name
+FROM information_schema.table_constraints t
+JOIN information_schema.key_column_usage k
+USING (constraint_name,table_schema,table_name)
+WHERE t.constraint_type=&#039;PRIMARY KEY&#039;
+  AND t.table_schema=&#039;db&#039;
+  AND t.table_name=tbl&#039;
+</pre>
+<h4>6. 查看你的数库有多大</h4>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+
+SELECT
+  table_schema AS &#039;Db Name&#039;,
+  Round( Sum( data_length + index_length ) / 1024 / 1024, 3 ) AS &#039;Db Size (MB)&#039;,
+  Round( Sum( data_free ) / 1024 / 1024, 3 ) AS &#039;Free Space (MB)&#039;
+FROM information_schema.tables
+GROUP BY table_schema ;
+</pre>
+<p>希望对你有帮助。</p>
+<p>文章：<a href="http://www.codeforest.net/6-useful-mysql-queries" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/925.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="如何比较两个数据表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/925.html" class="wp_rp_title">如何比较两个数据表</a></li><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3433.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

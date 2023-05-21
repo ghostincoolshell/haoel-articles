@@ -1,0 +1,83 @@
+<html><body><p>算法面试可能是微软搞出来的面试方法，现在很多公司都在效仿，而且我们的程序员也乐于解算法题，我个人以为，这是应试教育的毒瘤！我在《<a href="https://coolshell.cn/articles/4506.html" title="再谈“我是怎么招聘程序员的”（上）">再谈“我是怎么招程序员”</a>》中比较保守地说过，“<strong>问难的算法题并没有错，错的很多面试官只是在肤浅甚至错误地理解着面试算法题的目的</strong>。”，今天，我想加强一下这个观点——<strong>我反对纯算法题面试</strong>！（注意，我说的是纯算法题）</p>
+<figure class="wp-caption alignright" id="attachment_8140" style="width: 250px;"><a href="http://en.wikipedia.org/wiki/Sheldon_Cooper"><img alt="" class="size-full wp-image-8140" height="333" src="../wp-content/uploads/2012/08/250px-Sheldon_Cooper.jpg" title="Sheldon_Cooper" width="250"/></a><figcaption class="wp-caption-text" id="caption-attachment-8140">图片源Wikipedia（点击图片查看词条）</figcaption></figure>
+<p>我再次引用我以前的一个观点——</p>
+<p style="padding-left: 30px;">能解算法题并不意味着这个人就有能力就能在工作中解决问题，你可以想想，小学奥数题可能比这些题更难，但并不意味着那些奥数能手就能解决实际问题。</p>
+<p>好了，让我们来看一个示例（这个示例是昨天在<a href="http://weibo.com/1401880315/yy9pvgNi2" target="_blank">微博上的一个讨论</a>），这个题是——“<strong>找出无序数组中第2大的数</strong>”，几乎所有的人都用了O(n)的算法，我相信对于我们这些应试教育出来的人来说，不用排序用O(n)算法是很正常的事，连我都不由自主地认为O(n)算法是这个题的标准答案。<strong>我们太习惯于标准答案了，这是我国教育最悲哀的地方</strong>。（广义的洗脑就是让你的意识依赖于某个标准答案，然后通过给你标准答案让你不会思考而控制你）</p>
+<h4>功能性需求分析</h4>
+<p>试想，如果我们在实际工作中得到这样一个题 我们会怎么做？我一定会分析这个需求，因为我害怕需求未来会改变，今天你叫我找一个第2大的数，明天你找我找一个第4大的数，后天叫我找一个第100大的数，我不搞死了。需求变化是很正常的事。分析完这个需求后，我会很自然地去写找第K大数的算法——难度一下子就增大了。</p>
+<p><span id="more-8138"></span></p>
+<p>很多人会以为找第K大的需求是一种“过早扩展”的思路，不是这样的，我相信我们在实际编码中写过太多这样的程序了，你一定不会设计出这样的函数接口—— Find2ndMaxNum(int* array, int len)，就好像你不会设计出 DestroyBaghdad(); 这样的接口，而是设计一个DestoryCity( City&amp; ); 的接口，而把Baghdad当成参数传进去！所以，你应该是声明一个叫FindKthMaxNum(int* array, int len, int kth)，把2当成参数传进去。<strong>这是最基本的编程方法，用数学的话来说，叫代数</strong>！最简单的需求分析方法就是把需求翻译成函数名，然后看看是这个接口不是很二？！</p>
+<p>（注：不要纠结于FindMaxNum()或FindMinNum()，因为这两个函数名的业务意义很清楚了，不像Find2ndMaxNum()那么二）</p>
+<h4>非功能性需求分析</h4>
+<p>性能之类的东西从来都是非功能性需求，对于算法题，我们太喜欢研究算法题的空间和时间复杂度了。我们希望做到空间和时间双丰收，这是算法学术界的风格。所以，<strong>习惯于标准答案的我们已经失去思考的能力，只会机械地思考算法之内的性能，而忽略了算法之外的性能</strong>。</p>
+<p>如果题目是——“从无序数组中找到第K个最大的数”，那么，我们一定会去思考用O(n)的线性算法找出第K个数。事实上，也有线性算法——STL中可以用nth_element求得类似的第n大的数，其利用快速排序的思想，从数组S中随机找出一个元素X，把数组分为两部分Sa和Sb。Sa中的元素大于等于X，Sb中元素小于X。这时有两种情况：1）Sa中元素的个数小于k，则Sb中的第k-|Sa|个元素即为第k大数；2） Sa中元素的个数大于等于k，则返回Sa中的第k大数。时间复杂度近似为O(n)。</p>
+<p>搞学术的nuts们到了这一步一定会欢呼胜利！但是他们哪里能想得到性能的需求分析也是来源自业务的！</p>
+<p><strong>我们一说性能，基本上是个人都会问，请求量有多大？如果我们的FindKthMaxNum()的请求量是m次，那么你的这个每次都要O(n)复杂度的算法得到的效果就是O(n*m)，这一点，是书呆子式的学院派人永远想不到的。</strong>因为应试教育让我们不会从实际思考了。</p>
+<h4>工程式的解法</h4>
+<p>根据上面的需求分析，有软件工程经验的人的解法通常会这样：</p>
+<p style="padding-left: 30px;">1）把数组排序，从大到小。</p>
+<p style="padding-left: 30px;">2）于是你要第k大的数，就直接访问 array[k]。</p>
+<p>排序只需要一次，O(n*log(n))，然后，接下来的m次对FindKthMaxNum()的调用全是O(1)的，整体复杂度反而成了线性的。</p>
+<p>其实，上述的还不是工程式的最好的解法，因为，在业务中，那数组中的数据可能会是会变化的，所以，如果是用数组排序的话，有数据的改动会让我重新排序，这个太耗性能了，如果实际情况中会有很多的插入或删除操作，那么可以考虑使用B+树。</p>
+<p>工程式的解法有以下特点：</p>
+<p style="padding-left: 30px;">1）很方便扩展，因为数据排好序了，你还可以方便地支持各种需求，如从第k1大到k2大的数据（那些学院派写出来的代码在拿到这个需求时又开始挠头苦想了）</p>
+<p style="padding-left: 30px;">2）规整的数据会简化整体的算法复杂度，从而整体性能会更好。（公欲善其事，必先利其器）</p>
+<p style="padding-left: 30px;">3）代码变得清晰，易懂，易维护！（学院派的和STL一样的近似O(n)复杂度的算法没人敢动）</p>
+<h4>争论</h4>
+<p>你可能会和我有以下争论，</p>
+<ul>
+<li><strong>如果程序员做这个算法题用排序的方式，他一定不会像你想那么多</strong>。是的，你说得对。但是我想说，很多时候，我们直觉地思考，恰恰是正确的路。因为“排序”这个思路符合人类大脑处理问题的方式，而使用学院派的方式是反大脑直觉的。反大脑直觉的，通常意味着晦涩难懂，维护成本上升。</li>
+</ul>
+<ul>
+<li><strong>就是一道面试题，我就是想测试一下你的算法技能，这也扯太多了</strong>。没问题，不过，我们要清楚我们是在招什么人？是一个只会写算法的人，还是一个会做软件的人？这个只有你自己最清楚。</li>
+</ul>
+<ul>
+<li><strong>这个算法题太容易诱导到学院派的思路了</strong>。是的这道“找出第K大的数”，其实可以变换为更为业务一点的题目——“<strong>我要和别的商户竞价，我想排在所有竞争对手报价的第K名，请写一个程序，我输入K，和一个商品名，系统告诉我应该订多少价？</strong>（商家的所有商品的报价在一数组中）”——业务分析，整体性能，算法，数据结构，增加需求让应聘者重构，这一个问题就全考了。</li>
+</ul>
+<ul>
+<li><strong><span style="color: #ff0000;">你是不是在说算法不重要，不用学？</span></strong>千万别这样理解我，搞得好像如果面试不面，我就可以不学。<strong>算法很重要，算法题能锻炼我们的思维，而且也有很多实际用处</strong>。我这篇文章不是让大家不要去学算法，这是完全错误的，我是让大家带着业务问题去使用算法。问你业务问题，一样会问到算法题上来。</li>
+</ul>
+<h4>小结</h4>
+<p>看过这上面的分析，我相信你明白我为什么反对纯算法面试题了。原因就是<strong>纯算法的面试题根本不能反应一个程序的综合素质</strong>！</p>
+<p>那么，在面试中，我们应该要考量程序员的那些综合素质呢？我以为有下面这些东西：</p>
+<ol>
+<li>会不会做需求分析？怎么理解问题的？</li>
+<li>解决问题的思路是什么？想法如何？</li>
+<li>会不会对基础的算法和数据结构灵活运用？</li>
+</ol>
+<p>另外，我们知道，对于软件开发来说，在工程上，难是的下面是这些挑战：</p>
+<ul>
+<li>软件的维护成本远远大于软件的开发成本。</li>
+<li>软件的质量变得越来越重要，所以，测试工作也变得越来越重要。</li>
+<li>软件的需求总是在变的，软件的需求总是一点一点往上加的。</li>
+<li>程序中大量的代码都是在处理一些错误的或是不正常的流程。</li>
+</ul>
+<p>所以，对于编程能力上，我们应该主要考量程序员的如下能力：</p>
+<ol>
+<li>设计是否满足对需求的理解，并可以应对可能出现的需求变化。</li>
+<li>程序是否易读，易维护？</li>
+<li>重构代码的能力如何？</li>
+<li>会不会测试自己写好的程序？</li>
+</ol>
+<p>所以，这段时间，我越来越倾向于问应聘者一些有业务意义的题，而且应增加或更改需求来看程序员的重构代码的能力，写完程序后，让应聘者设计测试案例。</p>
+<p>比如：解析加减乘除表达式，字符串转数字，洗牌程序，口令生成器，通过ip地址找地点，英汉词典双向检索……</p>
+<p><strong>总之，我反对纯算法面试题！</strong></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8790.html"><img alt="程序算法与人生选择" height="150" src="../wp-content/uploads/2012/12/choice-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8790.html">程序算法与人生选择</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4976.html"><img alt="给程序员新手的一些建议" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4976.html">给程序员新手的一些建议</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4506.html"><img alt="再谈“我是怎么招聘程序员的”（上）" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4506.html">再谈“我是怎么招聘程序员的”（上）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4490.html"><img alt="再谈“我是怎么招聘程序员的”（下）" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4490.html">再谈“我是怎么招聘程序员的”（下）</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3345.html"><img alt="140个Google的面试题" height="150" src="../wp-content/uploads/2010/12/googlequestion-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3345.html">140个Google的面试题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8138.html">为什么我反对纯算法面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,146 @@
+<html><body><p><strong><span style="color: #cc0000;">[ ———— 感谢</span> <a href="http://www.cnblogs.com/weidagang2046/" target="_blank">Todd 同学</a> <span style="color: #cc0000;">投递本文，<a href="http://www.cnblogs.com/weidagang2046/archive/2011/08/14/2138059.html" target="_blank">原文链接</a> ———— ]</span></strong></p>
+<h4><strong>C++对象模型</strong></h4>
+<p>话题从下面这段C++程序说起，你认为它可以顺利执行吗？</p>
+<pre class="EnlighterJSRAW">//C++
+class A {
+    public:
+        void Hello(const std::string&amp; name) {
+           std::cout &lt;&lt; "hello " &lt;&lt; name;
+         }
+};
+int main(int argc, char** argv)
+{
+    A* pa = NULL; //!!
+    pa-&gt;Hello("world");
+    return 0;
+}</pre>
+<p>试试的确可以顺利运行输出hello world，奇怪吗？其实并不奇怪，根据C++对象模型，类的非虚方法并不会存在于对象内存布局中，实际上编译器是把Hello方法转化成了类似这样的全局函数：</p>
+<pre class="EnlighterJSRAW">void A_Hello_xxx(A * const this, const std::string&amp; name) {
+    std::cout &lt;&lt; “hello “ &lt;&lt; name;
+}</pre>
+<p>对象指针其实是作为第一个参数被隐式传递的，pa-&gt;Hello(“world”)实际上是调用的A_Hello_xxx(pa, “world”)，而恰好A_Hello_xxx内部没有使用pa，所以这段代码得以顺利运行。</p>
+<h4><strong>对象的消息模型</strong></h4>
+<p>如果是研究C++对象模型，上面的讨论可以到此为止，不过这里我想从另一个层面来继续探讨这个问题。OOP的先驱人物Alan Kay在总结Smalltalk的OO特征时强调：</p>
+<p><span id="more-5202"></span></p>
+<blockquote><p>Smalltalk is not only NOT its syntax or the class library, it is not even about classes. I’m sorry that I long ago coined the term “objects” for this topic because it gets many people to focus on the lesser idea. The big idea is “messaging”.</p></blockquote>
+<p>也就是说相比类和对象的概念来讲，他认为对象交互的消息模型是OOP更为本质的特征，因为消息关注的是对象间的接口和交互，在构建大的系统的时候重要的不是对象/模块的内部状态，而是它们的交互。根据消息模型，牛.吃(草) 的语义是发送一条消息给“牛”，消息的类型是“吃”，消息的内容是“草”。如果按照严格的消息模型，那么上面那段C++代码应解释为向一个NULL对象发送Hello消息，这显然是不应该顺利执行的。类似的代码如果是在Java或C#中则会抛出空引用异常，所以Java和C#的设计更符合消息模型。</p>
+<p>不过，Java和C#中也并非完全符合消息模型，来看一个经典的封装问题：</p>
+<pre class="EnlighterJSRAW">//C#
+
+public class Account {
+    private int _amount;
+
+    public void Transfer(Account acc, int delta) {
+        acc._amount += delta;
+        this._amount -= delta;
+    }
+    …
+}</pre>
+<p>上面定义了一个Account类，问题在于为什么在这个类的Transfer方法中可以直接访问另一个对象acc的私有成员_amount呢？这是不是有破坏封装的嫌疑呢？这个问题经典的答案是：并不破坏封装，封装是划分了基于类的静态的代码边界，使得类的private代码修改不影响外界，而不是对于动态对象的保护。这个解释当然是合理的，不过正如上面C++代码的解释属于C++对象模型范畴，这个解释则属于基于类的静态类型OOP语言的范畴。消息模型强调了对象内部状态的保护，只能通过消息改变其状态，而对象内部是否真的具有_amout这样一个私有成员对其他任何对象（即使同类对象）都是未知的。</p>
+<p>如果要严格遵守消息模型实现对象内部状态的保护应该怎么做呢？我们来看一个例子，定义一个集合类，包括：1.集合对象的构造函数；2.In方法：判断元素是否存在；3.Join方法：对两个集合做交集；4.Union方法：对两个集合做并集。下面是一种Javascript实现：</p>
+<pre class="EnlighterJSRAW">//Javascript
+
+//集合类Set的构造函数
+function Set() {
+    var _elements = arguments;
+    //In方法：判断元素e是否在集合中
+    this.In = function(e) {
+        for (var i = 0; i &lt; _elements.length; ++i) {
+            if (_elements[i] == e) return true;
+        }
+        return false;
+    };
+}
+
+//Join方法：对两个集合求交集
+Set.prototype.Join = function(s2) {
+    var s1 = this;
+    var s = new Set();
+    s.In = function(e) { return s1.In(e) &amp;&amp; s2.In(e); }
+    return s;
+};
+
+//Union方法：对两个集合求并集
+Set.prototype.Union = function(s2) {
+    var s1 = this;
+    var s = new Set();
+    s.In = function(e) { return s1.In(e) || s2.In(e); }
+    return s;
+};
+
+var s1 = new Set(1, 2, 3, 4, 5);
+var s2 = new Set(2, 3, 4, 5, 6);
+var s3 = new Set(3, 4, 5, 6, 7);
+assert(false == s1.Join(s2).Join(s3).In(2));
+assert(true == s1.Join(s2).Uion(s3).In(7));</pre>
+<p>如果是在静态类型OOP语言中，要实现集合类的Join或Union，我们多半会像上面Account的例子一样直接对s2内部的_elements进行操作，而上面这段Javascript定义的Set关于对象s2的访问完全是符合消息模型的基于接口的访问。要实现消息模型Javascript的prototype机制并非必须的，真正的关键在于函数式的高级函数和闭包特性。从这个例子我们也可以体会到函数式的优点不仅在于无副作用，函数的可组合性也是函数式编程强大的原因。</p>
+<h4><strong>Method Missing</strong></h4>
+<p>接下来我们还要进行深度历险，让我们思考一下如果发送一条对象不能识别的消息会怎样？这种情况在C++、Java、C#等静态类型语言中会得到一个方法未定义的编译错误，如果是在Javascript中则会产生运行时异常。比如，s1.count()会产生一个运行时异常：Object #&lt;Set&gt; has no method ‘count’。</p>
+<p>在静态类型语言这个问题很少受到重视，但在动态类型语言中却大有文章，来看下面的例子：<br/>
+//Ruby</p>
+<pre class="EnlighterJSRAW">
+builder = Builder::XmlMarkup.new
+xml = builder.books {|b|
+    b.book :isbn =&gt; "14134" do
+        b.title "Revelation Space"
+        b.author "Alastair Reynolds"
+    end
+    b.book :isbn =&gt; "53534" do
+        b.title "Accelerando"
+        b.author "Charles Stross"
+    end
+}</pre>
+<p>上面这段很DSL的Ruby代码创建了这样一个XML文件对象：</p>
+<pre class="EnlighterJSRAW">
+
+&lt;books&gt;
+    &lt;book isbn="14134"&gt;
+        &lt;title&gt;Revelation Space&lt;/title&gt;
+        &lt;author&gt;Alastair Reynolds&lt;/author&gt;
+    &lt;/book&gt;
+    &lt;book isbn="53534"&gt;
+        &lt;title&gt;Accelerando&lt;/title&gt;
+        &lt;author&gt;Charles Stross&lt;/author&gt;
+    &lt;/book&gt;
+&lt;/books&gt;
+
+</pre>
+<p>builder.books, b.book, b.title都是对象方法调用，由于XML的元素名是任意的，所以不可能事先定义这些方法，类似的代码如果是在Javascript中就是no method异常。那为什么上面的Ruby代码可以正确执行呢？其实只要理解了消息模型就很容易想明白，只需要定义一个通用的消息处理方法，所有未明确定义的消息都交给它来处理就行了，这就是所谓的Method Missing模式：</p>
+<pre class="EnlighterJSRAW">
+class Foo
+    def method_missing(method, *args, &amp;block)
+        …
+    end
+end
+</pre>
+<p>Method Missing除了对实现DSL很重要外，还可用于产生更好地调试和错误信息，把参数嵌入到方法名中等场合。目前，Ruby、Python、Groovy几种语言对Method Missing都有很好的支持，甚至在C# 4.0中也可以利用动态特性实现。</p>
+<h4>总结</h4>
+<p>本文主要介绍了对象的消息模型的特征，并比较了C++对象模型，Java、C#等基于类的静态类型语言中的对象模型与严格消息模型的差异，最后探讨了Method Missing相关话题。</p>
+<h4>参考</h4>
+<ul>
+<li><a href="http://book.douban.com/subject/1484262/" target="_blank">Inside the C++ Object Model</a></li>
+<li><a href="http://book.douban.com/subject/4031906/" target="_blank">冒号课堂 – 编程范式与OOP思想</a></li>
+<li><a href="http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented" target="_blank">Alan Kays Definition Of Object Oriented</a></li>
+<li><a href="http://fitzgeraldnick.com/weblog/39/" target="_blank">OOP The Good Parts: Message Passing, Duck Typing, Object Composition, and not Inheritance</a></li>
+<li><a href="http://olabini.com/blog/2010/04/patterns-of-method-missing/">Patterns of Method Missing</a></li>
+<li><a href="http://haacked.com/archive/2009/08/26/method-missing-csharp-4.aspx">Fun With Method Missing and C# 4</a></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10337.html"><img alt="数据即代码：元驱动编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10739.html"><img alt="Lua简明教程" height="150" src="../wp-content/uploads/2013/12/lua-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10739.html">Lua简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6731.html"><img alt="理解Javascript的闭包" height="150" src="../wp-content/uploads/2012/03/closure-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6731.html">理解Javascript的闭包</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6668.html"><img alt="再谈javascript面向对象编程 " height="150" src="../wp-content/uploads/2012/02/joo_1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6668.html">再谈javascript面向对象编程 </a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5202.html">对象的消息模型</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

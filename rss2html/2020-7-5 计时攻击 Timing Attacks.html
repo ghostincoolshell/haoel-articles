@@ -1,0 +1,203 @@
+<html><body><p><img alt="" class="alignright wp-image-21015" height="240" src="../wp-content/uploads/2020/06/time-bomb-300x300.png" width="240"/>本文来自读者“程序猿石头”的投稿文章《<a href="http://mp.weixin.qq.com/s?__biz=MzI3OTUzMzcwNw==&amp;mid=100002290&amp;idx=1&amp;sn=8829db16a065f485b257fba0c691d94f&amp;chksm=6b4708165c30810096133f36523c8c781ce5333d851c31905d6cc49dd9b756a3f08141fbc9e8#rd" rel="noopener noreferrer" target="_blank">这 10 行比较字符串相等的代码给我整懵了，不信你也来看看</a>》，原文写的很好，但不够直接了当，信息密度不够高，所以我对原文进行大量的删减、裁剪、改写和添加，主要删除了一些没有信息的段落，主要加入了如何实施计时攻击相关的其它内容，让这篇文章中的知识更系统一些，并且还指出了其它的一些问题。所以，我把标题也改成了《计时攻击 Timing Attacks》。</p>
+<h4>另类的字符串比较</h4>
+<p>在 Java 的 Play Framework 里有<a href="https://github.com/playframework/play1/blob/b01eb02eb8df2e94cac2793c028dd9c4c5a57b31/framework/src/play/mvc/CookieDataCodec.java#L82" rel="noopener noreferrer" target="_blank">一段代码</a>用来验证cookie(session)中的数据是否合法（包含签名的验证）的代码，如下所示：</p>
+<pre class="EnlighterJSRAW">boolean safeEqual(String a, String b) {
+   if (a.length() != b.length()) {
+       return false;
+   }
+   int equal = 0;
+   for (int i = 0; i &lt; a.length(); i++) {
+       equal |= a.charAt(i) ^ b.charAt(i);
+   }
+   return equal == 0;
+}</pre>
+<p>相信刚看到这段源码的人会感觉挺奇怪的，这个函数的功能是比较两个字符串是否相等，如果要判断两个字符串是否相等，正常人的写法应该是下面这个样子的（来自JDK8 的 <code>String.equals()</code>-有删减）：</p>
+<p><span id="more-21003"></span></p>
+<pre class="EnlighterJSRAW">public boolean equals(Object anObject) {
+    String anotherString = (String)anObject;
+    int n = value.length;
+    if (n == anotherString.value.length) {
+        char v1[] = value;
+        char v2[] = anotherString.value;
+        int i = 0;
+        while (n-- != 0) {
+            if (v1[i] != v2[i]) // &lt;- 遇到第一个不一样的字符时退出
+                return false;
+            i++;
+        }
+        return true;
+    }
+    return false;
+}</pre>
+<p>我们可以看到，在比较两个字符串是否相等的正常写法是：</p>
+<ol>
+<li>先看一下两个字符串长度是否相等，如果不等直接返回 false。</li>
+<li>如果长度相等，则依次判断每个字符是否相等，如果不等则返回 false。</li>
+<li>如果全部相等，则返回 true。一旦遇到不一样的字符时，直接返回false。</li>
+</ol>
+<p>然而，Play Framework里的代码却不是这样的，尤其是上述的第2点，用到了异或，熟悉位操作的你很容易就能看懂，通过异或操作 <code>1^1=0</code> , <code>1^0=1</code>, <code>0^0=0</code>，来比较每一位，如果每一位都相等的话，两个字符串肯定相等，最后存储累计异或值的变量 <code>equal</code>必定为 0（因为相同的字符必然为偶数），否则为 1。</p>
+<p>但是，这种异或的方式不是遇到第一个不一样的字符就返回 false 了，而是要做全量比较，这种比较完全没有效率，这是为什么呢？原因是为了安全。</p>
+<h4>计时攻击(Timing Attack)</h4>
+<p>计时攻击（<a href="https://en.wikipedia.org/wiki/Timing_attack" rel="noopener noreferrer" target="_blank">Wikipedia</a>）是<a href="https://en.wikipedia.org/wiki/Side-channel_attack" rel="noopener noreferrer" target="_blank">旁道攻击</a>(或称”侧信道攻击”， Side Channel Attack， 简称SCA) 的一种，<b>旁通道攻击</b>是指基于从计算机系统的实现中获得的信息的任何攻击 ，而不是基于实现的算法本身的弱点（例如，密码分析和软件错误）。时间信息，功耗，电磁泄漏甚至声音可以提供额外的信息来源，可以加以利用。在很多物理隔绝的环境中（黑盒），往往也能出奇制胜，这类新型攻击的有效性远高于传统的密码分析的数学方法。（注：企图通过社会工程学欺骗或强迫具有合法访问权限的人来破坏密码系统通常不被视为旁道攻击）</p>
+<p>计时攻击是最常用的攻击方法。那么，正常的字符串比较是怎么被黑客进行时间攻击的呢？</p>
+<p>我们知道，正常的字符串比较，一旦遇到每一个不同的字符就返回失败了，所以，理论上来说，前面只有2个字符相同字符串比较的耗时，要比前面有10个字符相同的比较要短。你会说，这能相差多少呢？可能几微秒吧。但是，我们可以放大这个事。比如，在Web应用时，记录每个请求的返回所需请求时间（一般是毫秒级），如果我们重复50次，我们可以查看平均时间或是p50的时间，以了解哪个字符返回的时间比较长，如果某个我们要尝试的字符串的时间比较长，我们就可以确定地得出这个这字符串的前面一段必然是正确的。（当然，你会说网络请求的燥音太多了，在毫秒级的请求上完全没办判断，这个需要用到统计学来降噪，后面会给出方法）</p>
+<p>这个事情，可以用来做HMAC的攻击，所谓HMAC，你可以参看本站的《<a href="https://coolshell.cn/articles/19395.html" rel="noopener noreferrer" target="_blank" title="HTTP API 认证授权术">HTTP API 认证授权术</a>》文章了解更多的细节。简单来说，HMAC，就是客户端向服务端发来一个字符串和其签名字符串（HMAC），然后，服务端的程序用一个私钥来对客户端发来的字符串进行签名得到签名字符串，然后再比较这个签名字符串（所谓签名，也就是使用MD5或SHA这样的哈希算法进行编码，是不可逆的）</p>
+<p>写成伪代码大概是这个样子：</p>
+<pre class="EnlighterJSRAW">bool verify(message, digest) {
+    my_digest = HMAC(key, message);
+    return my_digest.equals(digest) ;
+}</pre>
+<p>于是，攻击者在不知道签名算法和私钥的情况下，但是知道API的调用接口时，就可以通过一边穷举签名，一边统计调用时间的方式来非常有效率的破解签名。在这篇文章《<a href="http://www.eggie5.com/45-hmac-timing-attacks" rel="noopener noreferrer" target="_blank">HMAC Timing Attacks</a>》中记录了整个攻击的过程。文章中记载：</p>
+<p>如果一个签名有40个长度，如：<code>f5acdffbf0bb39b2cdf59ccc19625015b33f55fe</code> 攻击者，从 <code>0000000000000000000000000000000000000000</code> 开始穷举，下面是穷举第一个字符（从<code>0</code>到<code>f</code>因为这是HMAC算法的取值范围）的时间统计。</p>
+<pre>0 0.005450913
+1 0.005829198
+2 0.004905407
+3 0.005286876
+4 0.005597611
+5 0.004814430
+6 0.004969118
+7 0.005335884
+8 0.004433182
+9 0.004440246
+a 0.004860263
+b 0.004561121
+c 0.004463188
+d 0.004406799
+e 0.004978907
+f 0.004887240
+</pre>
+<p>可以看到，第一次测试通过的计时结果（以秒为单位），而值“ f”与样品的其余部分之间没有较大的变化量，所有结果看起来都非常接近。换句话说，有很多噪声掩盖了信号。因此，有必要进行多个采样（对测试进行缩放）并使用统计工具从噪声中滤除信号。为了将信号与噪声分开，我们必须按任意常数对测试进行缩放。通过实验，作者发现500是一个很好的数字。换句话说：运行测试500次，并记录500个试验中每个试验的结果。然后，通过人的肉眼观察可以可能看到 f 的调用明显比别的要长，但是这种方法很难自动化。</p>
+<p>所以，作者给了另一个统计算法，这个算法向服务器分别从 0 到 f 发出16个请求，并记录每个请求的响应时间，并将它们排序为1-16，其中1是最长（最慢）的请求，而16是最短（最快的请求），分别记录 0 – f 的名次，然后重复上述的过程 500 次。如下所示（仅显示25个样本，字符“ 0”首先被排名7、1、3，然后再次排名3……）：</p>
+<pre>{
+"0"=&gt;[7, 1, 3, 3, 15, 5, 4, 9, 15, 10, 13, 2, 14, 9, 4, 14, 7, 9, 15, 2, 14, 9, 14, 6, 11...],
+"1"=&gt;[13, 4, 7, 11, 0, 4, 0, 2, 14, 11, 6, 7, 2, 2, 14, 11, 8, 10, 5, 13, 11, 7, 4, 9, 3...],
+"2"=&gt;[14, 5, 15, 5, 1, 0, 3, 1, 9, 12, 4, 4, 1, 1, 8, 6, 9, 4, 9, 5, 8, 3, 12, 8, 5...],
+"3"=&gt;[15, 2, 9, 7, 2, 1, 14, 11, 7, 8, 8, 1, 4, 7, 12, 15, 13, 0, 4, 1, 7, 0, 3, 0, 0...],
+"4"=&gt;[12, 10, 14, 15, 8, 9, 10, 12, 10, 4, 1, 13, 15, 15, 3, 1, 6, 8, 2, 6, 15, 4, 0, 3, 2...],
+"5"=&gt;[5, 13, 13, 12, 7, 8, 13, 14, 3, 13, 2, 12, 7, 14, 2, 10, 12, 5, 8, 0, 4, 10, 5, 10, 12...]
+"6"=&gt;[0, 15, 11, 13, 5, 15, 8, 8, 4, 7, 12, 9, 10, 11, 11, 7, 0, 6, 0, 9, 2, 6, 15, 13, 14...]
+"7"=&gt;[1, 9, 0, 10, 6, 6, 2, 4, 12, 9, 5, 10, 5, 10, 7, 2, 4, 14, 6, 7, 13, 11, 6, 12, 4...],
+"8"=&gt;[4, 0, 2, 1, 9, 11, 12, 13, 11, 14, 0, 15, 9, 0, 0, 13, 11, 13, 1, 8, 6, 5, 11, 15, 7...],
+"9"=&gt;[11, 11, 10, 4, 13, 7, 6, 3, 2, 2, 14, 5, 3, 3, 15, 9, 14, 7, 10, 3, 0, 14, 1, 5, 15...],
+"a"=&gt;[8, 3, 6, 14, 10, 2, 7, 5, 1, 3, 3, 0, 0, 6, 10, 12, 15, 12, 12, 15, 9, 13, 13, 11, 9...],
+"b"=&gt;[9, 12, 5, 8, 3, 3, 5, 15, 0, 6, 11, 11, 12, 8, 1, 3, 1, 11, 11, 14, 5, 1, 2, 1, 6...],
+"c"=&gt;[6, 7, 8, 2, 12, 10, 9, 10, 6, 1, 10, 8, 6, 4, 6, 4, 3, 2, 7, 11, 1, 8, 7, 2, 13...],
+"d"=&gt;[2, 14, 4, 0, 14, 12, 11, 0, 8, 0, 15, 3, 8, 12, 5, 0, 10, 1, 3, 4, 12, 12, 8, 14, 8...],
+"e"=&gt;[10, 8, 12, 6, 11, 13, 1, 6, 13, 5, 7, 14, 11, 5, 9, 5, 2, 15, 14, 10, 10, 2, 10, 4, 1...],
+"f"=&gt;[3, 6, 1, 9, 4, 14, 15, 7, 5, 15, 9, 6, 13, 13, 13, 8, 5, 3, 13, 12, 3, 15, 9, 7, 10...]
+}</pre>
+<p>然后将每个字符的500个排名进行平均，得出以下示例输出：</p>
+<pre>"f", 5.302
+"0", 7.17
+"6", 7.396
+"3", 7.472
+"5", 7.562
+"a", 7.602
+"2", 7.608
+"8", 7.626
+"9", 7.688
+"b", 7.698
+"1", 7.704
+"e", 7.812
+"4", 7.82
+"d", 7.826
+"7", 7.854
+"c", 7.86</pre>
+<p>于是，<code>f</code> 就这样脱颖而出了。然后，再对剩余的39个字符重复此算法。</p>
+<p><strong>这是一种统计技术，可让我们从噪声中滤出真实的信号</strong>。因此，总共需要调用：16 * 500 * 40 = 320,000个请求，而蛮力穷举需要花费16 ^ 40个请求。</p>
+<p>另外，学术界的这篇论文就宣称用这种计时攻击的方法破解了 OpenSSL 0.9.7 的RSA加密算法了。这篇 <a href="http://crypto.stanford.edu/~dabo/papers/ssl-timing.pdf" rel="noopener noreferrer" target="_blank">Remote Timing Attacks are Practical （PDF）</a>论文中指出（我大致翻译下摘要，感兴趣的同学可以通过链接去看原文）：</p>
+<blockquote><p>计时攻击往往用于攻击一些性能较弱的计算设备，例如一些智能卡。我们通过实验发现，也能用于攻击普通的软件系统。本文通过实验证明，通过这种计时攻击方式能够攻破一个基于 OpenSSL 的 web 服务器的私钥。结果证明计时攻击用于进行网络攻击在实践中可行的，因此各大安全系统需要抵御这种风险。</p></blockquote>
+<p>参考资料：</p>
+<ul>
+<li>
+<section><a href="http://www.cs.sjsu.edu/faculty/stamp/students/article.html">Timing Attacks on RSA: Revealing Your Secrets through the Fourth Dimension</a></section>
+</li>
+<li>
+<section><a href="http://crypto.stanford.edu/~dabo/papers/ssl-timing.pdf">Remote Timing Attacks are Practical</a></section>
+</li>
+</ul>
+<h4>各语言的对应函数</h4>
+<p>下面，我们来看看各个语言对计时攻击的对应函数</p>
+<p><strong>PHP</strong>: <a href="https://wiki.php.net/rfc/timing_attack" rel="noopener noreferrer" target="_blank">https://wiki.php.net/rfc/timing_attack</a></p>
+<pre class="EnlighterJSRAW">bool hash_equals ( string $known_string , string $user_string )
+
+boolean password_verify ( string $password , string $hash )</pre>
+<p><strong>Java</strong>:  Java 在1.6时是有问题的，其在 1.6.0._17(6u17)才Fix了这个问题（<a href="http://hg.openjdk.java.net/jdk6/jdk6/jdk/rev/562da0baf70b" rel="noopener noreferrer" target="_blank">相关的fix patch</a>），下面是 <a href="https://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/file/1832c29655eb/src/share/classes/java/security/MessageDigest.java#l442" rel="noopener noreferrer" target="_blank">JDK8源码</a> – <code>MessageDigest.isEqual()</code></p>
+<pre class="EnlighterJSRAW">public static boolean MessageDigest.isEqual(byte[] digesta, byte[] digestb) {
+    if (digesta == digestb) return true;
+    if (digesta == null || digestb == null) {
+        return false;
+    }
+    if (digesta.length != digestb.length) {
+        return false;
+    }
+
+    int result = 0;
+    // time-constant comparison
+    for (int i = 0; i &lt; digesta.length; i++) {
+        result |= digesta[i] ^ digestb[i];
+    }
+    return result == 0;
+}</pre>
+<p><strong>C/C++</strong>：没有在常用的库中找到相关的函数，还是自己写吧。</p>
+<pre class="EnlighterJSRAW">int util_cmp_const(const void * a, const void *b, const size_t size) 
+{
+  const unsigned char *_a = (const unsigned char *) a;
+  const unsigned char *_b = (const unsigned char *) b;
+  unsigned char result = 0;
+  size_t i;
+
+  for (i = 0; i &lt; size; i++) {
+    result |= _a[i] ^ _b[i];
+  }
+
+  return result; /* returns 0 if equal, nonzero otherwise */
+}</pre>
+<p><strong>Python</strong> – 2.7.7+使用 <code>hmac.compare_digest(a, b)</code>，否则，使用如下的Django的代码</p>
+<pre class="EnlighterJSRAW">#Taken from Django Source Code
+
+def constant_time_compare(val1, val2):
+    """
+    Returns True if the two strings are equal, False otherwise.
+
+    The time taken is independent of the number of characters that match.
+
+    For the sake of simplicity, this function executes in constant time only
+    when the two strings have the same length. It short-circuits when they
+    have different lengths.
+    """
+    if len(val1) != len(val2):
+        return False
+    result = 0
+    for x, y in zip(val1, val2):
+        result |= ord(x) ^ ord(y)
+    return result == 0</pre>
+<p><strong>Go</strong>  – 使用 <code>crypto/subtle</code> 代码包</p>
+<pre class="EnlighterJSRAW">func ConstantTimeByteEq(x, y uint8) int
+func ConstantTimeCompare(x, y []byte) int
+func ConstantTimeCopy(v int, x, y []byte)
+func ConstantTimeEq(x, y int32) int
+func ConstantTimeLessOrEq(x, y int) int
+func ConstantTimeSelect(v, x, y int) int</pre>
+<h4>One More Thing</h4>
+<p>在文章结束前，再提一个事。</p>
+<p>上面的所有的代码都还有一个问题——他们都要判断字符串的长度是否一致，如果不一致就返回了，所以，通过时间攻击是可以知道字符串的长度的。比如：你的密码长度。理论上来说，字符串的长度也应该属于“隐私数据”（当然，对于签名则不是）。</p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21708.html"><img alt="网络数字身份认证术" height="150" src="../wp-content/uploads/2022/01/iStock-1175502114-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21672.html"><img alt="我做系统架构的一些原则" height="150" src="../wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21672.html">我做系统架构的一些原则</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19395.html"><img alt="HTTP API 认证授权术" height="150" src="../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19395.html">HTTP API 认证授权术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/936.html"><img alt="最完美的Linux桌面软件" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/936.html">最完美的Linux桌面软件</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1007.html"><img alt="优质代码的十诫" height="150" src="../wp-content/uploads/2009/06/10commandements-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1007.html">优质代码的十诫</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3453.html"><img alt="Sony PS3 Root Key 被破解" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3453.html">Sony PS3 Root Key 被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21003.html">计时攻击 Timing Attacks</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

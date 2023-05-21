@@ -1,0 +1,56 @@
+<html><body><p><strong>摘要</strong>：在看SDO的一些规范文档，可能会出现open content这样的词组，上网查了相关资料，发现这是一种XML Schema的模型，本文就描述了XML Schema的Open Content模型的含义，在最新的XML Schema规范中，好像已经没有Open模型，它的等价物是any模型。</p>
+<p>早期发布的XML Schema规范中支持一种新的element定义，在这个定义中，你可以将XML的Element的内容定义为开放的。下面我们将会介绍一下XML的Open Content 模型。</p>
+<p>在Open Content模型中，如果一个XML的元素在XML Schema中被声明为开放的，那么这个Schema对应的XML文档的实例就可以包含一个没有在Schema中罗列的子元素。例如，一个包含着如下的XML Schema的Schema文件</p>
+<p><span id="more-604"></span></p>
+<pre class="EnlighterJSRAW">
+      &lt;element name=&amp;quot;Book&amp;quot;&gt;
+           &lt;type&gt;
+               &lt;element name=&amp;quot;Title&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;Author&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;Date&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;ISBN&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+               &lt;element name=&amp;quot;Publisher&amp;quot; type=&amp;quot;string&amp;quot;/&gt;
+           &lt;/type&gt;
+      &lt;/element&gt;</pre>
+<p>这个book element的声明意味着这个Schema的实例XML文件必须包含5个元素 – Title,Author，Date，ISBN，Pbulish。例如：</p>
+<pre class="EnlighterJSRAW">
+     &lt;Book&gt;
+         &lt;Title&gt;Illusions The Adventures of a Reluctant Messiah&lt;/Title&gt;
+         &lt;Author&gt;Richard Bach&lt;/Author&gt;
+         &lt;Date&gt;1977&lt;/Date&gt;
+         &lt;ISBN&gt;0-440-34319-4&lt;/ISBN&gt;
+         &lt;Publisher&gt;Dell Publishing Co.&lt;/Publisher&gt;
+     &lt;/Book&gt;
+
+</pre>
+<p>假设，在实例XML文件，你希望增加book的另外一个子元素，比如，你希望增加一个到某一个网页的连接：</p>
+<pre class="EnlighterJSRAW">
+     &lt;Book&gt;
+         &lt;Title&gt;Illusions The Adventures of a Reluctant Messiah&lt;/Title&gt;
+         &lt;Author&gt;Richard Bach&lt;/Author&gt;
+         &lt;Date&gt;1977&lt;/Date&gt;
+         &lt;ISBN&gt;0-440-34319-4&lt;/ISBN&gt;
+         &lt;Publisher&gt;Dell Publishing Co.&lt;/Publisher&gt;
+         &lt;AuthorsWebPage xlink:href=&amp;quot;&lt;a href=&amp;quot;http://www.rbach.com&amp;quot;/&amp;quot;&gt;http://www.rbach.com&amp;quot;/&lt;/a&gt;&gt;
+    &lt;/Book&gt;
+
+</pre>
+<p>对于上面这个XML文件，XML Schema分析器将会认为这个XML文件是无效的XML，因为上面的文件的包含了Scheme中没有定义的元素。但是在我们的应用场景中，我们可能会希望XML Schema分析器不要报错，因为，应用程序自己知道如何处理&lt;AuthorsWebPage&gt;这个元素。为了达到这个目的，我们就可以将Book声明为开放的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9508.html"><img alt="PFIF网上寻人协议" height="150" src="../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9508.html">PFIF网上寻人协议</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4905.html"><img alt="语言的数据亲和力" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3609.html"><img alt="那些炒作过度的技术和概念" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3609.html">那些炒作过度的技术和概念</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3585.html"><img alt="SOAP的S是Simple" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3585.html">SOAP的S是Simple</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3498.html"><img alt="信XML，得自信" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3498.html">信XML，得自信</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/604.html">早期XML Schema中的open content模型</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

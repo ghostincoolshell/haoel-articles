@@ -1,0 +1,263 @@
+<html><body><p>PHP v5.3马上就要release了，这里让我们看看他有一些什么样的新特性。</p>
+<p><strong>1）_callStatic() magic 方法</strong></p>
+<pre class="EnlighterJSRAW">class Foo
+{
+    public static function __callStatic( $name, $args )
+    {
+        echo "Called method $name statically";
+    } 
+
+    public function __call( $name, $args )
+    {
+        echo "Called method $name";
+    }
+}</pre>
+<p><span id="more-11"></span></p>
+<pre class="EnlighterJSRAW">Foo::dog();       // outputs "Called method dog statically"
+$foo = new Foo;
+$foo-&amp;gt;dog();      // outputs "Called method dog"</pre>
+<p><strong>2）<span class="atitle"><code>动态调用函数</code></span></strong></p>
+<pre class="EnlighterJSRAW">class Dog
+{
+    public function bark()
+    {
+        echo "Woof!";
+    }
+&lt;span style="color: #333399;"&gt;} 
+
+$class = "Dog"
+$action = "bark";
+$x = new $class(); // instantiates the class "Dog"
+$x-&amp;gt;$action();     // outputs "Woof!" &lt;/span&gt;</pre>
+<p><strong><span class="atitle">3) 标准</span></strong><strong><span class="atitle">PHP</span></strong><strong><span class="atitle">库（SPL）</span></strong></p>
+<p><span class="atitle">加了了少数几个容器类，</span><span class="atitle">比如，栈（</span>SplStack<span class="atitle">）和固定数组（SplFixedArray）</span></p>
+<pre class="EnlighterJSRAW">$stack = new SplStack(); 
+
+// push a few new items on the stack
+$stack-&amp;gt;push("a");
+$stack-&amp;gt;push("b");
+$stack-&amp;gt;push("c"); 
+
+// see how many items are on the stack
+echo count($stack); // returns 3 
+
+// iterate over the items in the stack
+foreach ( $stack as $item )
+    echo "[$item],";
+// the above outputs: [c][/c]
+
+ [/c],[b],[a]  // pop an item off the stack echo $stack-&amp;gt;pop(); // returns "c"   // now see how many items are on the stack echo count($stack); // returns 2</pre>
+<p><strong><span class="atitle">4) </span><span class="atitle">Closures 功能</span></strong></p>
+<p><span class="atitle">关于</span>Closures<span class="atitle">，这是一个把函数定义成变量的玩意。让我们看几个例子：</span></p>
+<p><span class="atitle">示例一：</span></p>
+<pre class="EnlighterJSRAW">$string = "Hello World!";
+$closure = function() use ($string) { echo $string; };
+
+$closure();</pre>
+<p><strong>Output:</strong><br/>
+Hello World!<br/>
+示例二 使用引用的变量</p>
+<pre class="EnlighterJSRAW">$x = 1
+$closure = function() use (&amp;amp;$x) { ++$x; }
+
+echo $x . "\\n";
+$closure();
+echo $x . "\\n";
+$closure();
+echo $x . "\\n";</pre>
+<p><strong>Output</strong>:<br/>
+1<br/>
+2<br/>
+3<br/>
+示例三，返回值</p>
+<pre class="EnlighterJSRAW">function getAppender($baseString)
+{
+      return function($appendString) use ($baseString)
+  { return $baseString .$appendString; };
+}</pre>
+<p>示例四，Reflection</p>
+<pre class="EnlighterJSRAW">class Counter
+{
+      private $x;
+
+      public function __construct()
+      {
+           $this-&amp;gt;x = 0;
+      }
+
+      public function increment()
+      {
+           $this-&amp;gt;x++;
+      }
+
+      public function currentValue()
+      {
+           echo $this-&amp;gt;x . "\\n";
+      }
+}
+$class = new ReflectionClass("Counter");
+$method = $class-&amp;gt;getMethod("currentValue");
+$closure = $method-&amp;gt;getClosure()
+$closure();
+$class-&amp;gt;increment();
+$closure();</pre>
+<p><strong>Output</strong>:<br/>
+0<br/>
+1<br/>
+示例五，Reflection API</p>
+<pre class="EnlighterJSRAW">$closure = function ($x, $y = 1) {};
+$m = new ReflectionMethod($closure);
+Reflection::export ($m);
+&lt;strong&gt;Output&lt;/strong&gt;:
+Method [  public method __invoke ] {
+  - Parameters [2] {
+    Parameter #0 [  $x ]
+    Parameter #1 [  $y ]
+  }
+}</pre>
+<p>示例六，Uses Case</p>
+<pre class="EnlighterJSRAW">$logdb = function ($string) { Logger::log("debug","database",$string);};
+$db = mysqli_connect("server","user","pass");
+$logdb("Connected to database");
+$db-&amp;gt;query("insert into parts (part, description) values
+ ("Hammer","Pounds nails");
+$logdb("Insert Hammer into to parts table");
+$db-&amp;gt;query("insert into parts (part, description) values
+       ("Drill","Puts holes in wood");
+$logdb("Insert Drill into to parts table");
+$db-&amp;gt;query("insert into parts (part, description) values
+ ("Saw","Cuts wood");
+$logdb("Insert Saw into to parts table");</pre>
+<p>更为详细的文章，请参考这里，<a href="http://www.ibm.com/developerworks/opensource/library/os-php-5.3new2/index.html" target="_blank">链接</a>。</p>
+<p><strong><span class="atitle">5) </span><span class="atitle">使用namespace</span></strong></p>
+<p><span class="atitle">新版的PHP会开始支持C++式的namespace，请参看示例：</span></p>
+<p><span class="atitle">示例一</span></p>
+<pre class="EnlighterJSRAW">/* Foo.php */
+&amp;lt;?php
+namespace Foo;
+function bar()
+{
+    echo "calling bar....";
+}
+?&amp;gt; 
+
+/* File1.php */
+&amp;lt;?php
+include "./Foo.php";
+Foo/bar(); // outputs "calling bar....";
+?&amp;gt; 
+
+/* File2.php */
+&amp;lt;?php
+include "./Foo.php";
+use Foo as ns;
+ns/bar(); // outputs "calling bar....";
+?&amp;gt; 
+
+/* File3.php */
+&amp;lt;?php
+include "./Foo.php";
+use Foo;
+bar(); // outputs "calling bar....";
+?&amp;gt;
+&lt;!--p include "./Foo.php"; use Foo; bar(); // outputs "calling bar....";--&gt;</pre>
+<p>示例二，多重namespace</p>
+<pre class="EnlighterJSRAW">&lt;!--p namespace Foo; class Test {}  namespace Bar; class Test {}  $a = new Foo\\Test; $b = new Bar\\Test;  var_dump($a, $b);--&gt; &amp;lt;?php
+namespace Foo;
+class Test {} 
+
+namespace Bar;
+class Test {} 
+
+$a = new Foo\\Test;
+$b = new Bar\\Test; 
+
+var_dump($a, $b); 
+
+Output:
+object(Foo\\Test)#1 (0) {
+}
+object(Bar\\Test)#2 (0) {
+}
+&lt;strong&gt;Output:&lt;/strong&gt;
+object(Foo\\Test)#1 (0) { }
+object(Bar\\Test)#2 (0) { }</pre>
+<p>示例三，不同文件中的namespace</p>
+<pre class="EnlighterJSRAW">/*定义*/
+/* global.php */
+&amp;lt;?php
+function hello()
+{
+    echo "hello from the global scope!";
+}
+?&amp;gt; 
+
+/* Foo.php */
+&amp;lt;?php
+namespace Foo;
+function hello()
+{
+    echo "hello from the Foo namespace!";
+}
+?&amp;gt; 
+
+/* Foo_Bar.php */
+&amp;lt;?php
+namespace Foo/Bar;
+function hello()
+{
+    echo "hello from the Foo/Bar namespace!";
+}
+?&amp;gt;
+&lt;!--p namespace Foo/Bar; function hello() {     echo "hello from the Foo/Bar namespace!"; }--&gt;
+
+/*使用 */
+&lt;!--p include "./global.php"; include "./Foo.php"; include "./Foo_Bar.php"; use Foo;  hello();         // outputs "hello from the Foo namespace!" Bar\\hello();   // outputs "hello from the Foo/Bar namespace!" \\hello();       // outputs "hello from the global scope!"--&gt;&amp;lt;?php
+include "./global.php";
+include "./Foo.php";
+include "./Foo_Bar.php";
+
+use Foo; 
+
+hello();         // outputs "hello from the Foo namespace!"
+Bar\\hello();   // outputs "hello from the Foo/Bar namespace!"
+\\hello();       // outputs "hello from the global scope!"
+?&amp;gt;</pre>
+<p>更为详细的文章，请参考这里，<a href="http://www.ibm.com/developerworks/opensource/library/os-php-5.3new3/index.html" target="_blank">链接</a>。</p>
+<p><strong>6)开始支持Achieve包</strong></p>
+<p>正像JAR一样，PHP也要开始支持自己的Achieve包了，叫作，Phar。PHP提供了一整套函数来帮助开发人员创建和使用Phar，正如下面的示例所示：</p>
+<p style="padding-left: 30px;"><strong>创建</strong>：</p>
+<pre class="EnlighterJSRAW">$p = new Phar("/path/to/my.phar",
+ CURRENT_AS_FILEINFO | KEY_AS_FILENAME, "my.phar");
+$p-&amp;gt;startBuffering();</pre>
+<p style="padding-left: 30px;"><strong>创建文件存根</strong>（stub）</p>
+<p><code class="EnlighterJSRAW">$p-&amp;gt;setStub("&lt;!--p Phar::mapPhar();  include "phar://myphar.phar/index.php"; __HALT_COMPILER();--&gt;");</code></p>
+<p style="padding-left: 30px;"><strong>加入文件</strong>：</p>
+<pre class="EnlighterJSRAW">$p["file.txt"] = "This is a text file";
+$p["index.php"] = file_get_contents("index.php");
+$p["big.txt"] = "This is a big text file";
+$p["big.txt"]-&amp;gt;setCompressedBZIP2();
+//加入某目录下所有的文件
+$p-&amp;gt;buildFromDirectory("/path/to/files","./\\.php$/");</pre>
+<p style="padding-left: 30px;"><strong>使用Phar</strong></p>
+<pre class="EnlighterJSRAW">include "myphar.phar";
+include "phar://myphar.phar/file.php";</pre>
+<p>更为详细的文章，请参考这里，<a href="http://www.ibm.com/developerworks/opensource/library/os-php-5.3new4/index.html" target="_blank">链接</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5160.html"><img alt="PHP分页技术的代码和示例" height="150" src="../wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5160.html">PHP分页技术的代码和示例</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2394.html"><img alt="九个PHP很有用的功能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2394.html">九个PHP很有用的功能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11.html">PHP v5.3的新鲜玩意</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

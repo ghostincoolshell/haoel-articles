@@ -1,0 +1,26 @@
+<html><body><p>这里有一个POC（Proof of Concept）可以通过你Web浏览器后面的路由器XSS攻击得到一个准确的GPS坐标。注意：路由器和Web浏览器以及IP地址并不包含任和地理信息。其方法是使用了一个Google未公开的API。大约方法如下：</p>
+<ol>
+<li>访问一个网页，这个网页隐藏了一个基于你WiFi路由器的XSS（ 参见： <a href="http://samy.pl/vzwfios/" target="_blank">XSS  Verizon FiOS router</a>）</li>
+<li>通过这个XSS 可以获得路由器的MAC 地址。</li>
+<li>然后通过 Google Location Services我们可以把这个MAC地址映射到GPS坐标。Googel的这个服务是基于HTTP的服务。这并不是一个Google正式发布的API，而是通过 <a href="http://www.mozilla.com/en-US/firefox/geolocation/" target="_blank">Firefox’s Location-Aware Browsing</a> 发现的。</li>
+</ol>
+<p>演示地点在这里：<a href="http://samy.pl/mapxss/" target="_blank">http://samy.pl/mapxss/</a></p>
+<p>我试了一下，无论无线和有线都可以准确定位我的位置。很强大，你也试试看。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22398.html"><img alt="我看ChatGPT: 为啥谷歌掉了千亿美金" height="150" src="../wp-content/uploads/2023/02/chatgpt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12136.html"><img alt="Google Inbox如何跨平台重用代码？" height="150" src="../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12136.html">Google Inbox如何跨平台重用代码？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9508.html"><img alt="PFIF网上寻人协议" height="150" src="../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9508.html">PFIF网上寻人协议</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5815.html"><img alt="来信， 创业 和 移动互联网" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5815.html">来信， 创业 和 移动互联网</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3089.html">Google未公开API：转MAC地址为经纬度</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

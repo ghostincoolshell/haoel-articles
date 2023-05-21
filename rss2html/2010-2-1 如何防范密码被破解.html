@@ -1,0 +1,27 @@
+<html><body><p>你会用什么样的算法来为你的用户保存密码？如果你还在用明码的话，那么一旦你的网站被hack了，那么你所有的用户口令都会被泄露了，这意味着，你的系统或是网站就此完蛋了。所以，我们需要通过一些不可逆的算法来保存用户的密码。比如：MD5, SHA1, SHA256, SHA512, SHA-3,等Hash算法。这些算法都是不可逆的。系统在验证用户的口令时，需要把Hash加密过后的口令与后面存放口令的数据库中的口令做比较，如果一致才算验证通过。</p>
+<p>但你觉得这些算法好吗？我说的是：MD5, SHA1, SHA256, SHA512, SHA-3。如果你使用的是MD5算法来加密你的口令，如果你的口令长度只有小写字母再加上数字，假设口令的长度是6位，那么在目前一台比较新一点的PC机上，穷举所有的口令只需要40秒钟。而据我们了解，几乎有90%以上的用户只用小写字母和数字来组织其口令。对于6位长度的密码只需要最多40秒就可以破解了，这可能会吓到你。</p>
+<p>如果你愿意花2000美金和一周的时间来构建一个<a href="http://www.nvidia.com/object/cuda_home.html" target="_blank">CUDA</a>，那么，你可以在你组建的这个集群中使用进行密码穷举运算，其速度是，<a href="http://www.win.tue.nl/cccc/sha-1-challenge.html" target="_blank">1秒钟可以计算7亿个口令</a>。对于目前实际当中使用的比较复杂的口令，其破解率也可以高达每秒一个。当然，这里说的算法是MD5，SHA之类的算法。</p>
+<p>那么，对于这样的一种情况来说，我们怎么办？我们还是有办法的。</p>
+<p><span id="more-2078"></span></p>
+<p>我们知道MD5，SHA的算法速度太快了。所以，我们需要一个“慢一点”的加密算法。呵呵。bcrypt是这样的一个算法，因为它很慢，对于计算机来说，其慢得有点BT了，但却慢得刚刚好！对于验证用户口令来说是不慢的，对于穷举用户口令来说，其会让那些计算机变得如同蜗牛一样。</p>
+<p>因为bcrypt采用了一系列各种不同的Blowfish加密算法，并引入了一个work factor，这个工作因子可以让你决定这个算法的代价有多大。因为这些，这个算法不会因为计算机CPU处理速度变快了，而导致算法的时间会缩短了。因为，你可以增加work factor来把其性能降下来。呵呵。</p>
+<p>那么，bcrypt到底有多慢？如果和MD5一起来比较的话，如果使用值为12的work factor的话，如果加密“cool”的话，bcrypt需要0.3秒，而MD5只需要一微秒（百万分之一秒）。也就是说，前面我们说的那个只需要40秒就可以穷举完所有的可能的MD5编码的口令的算法，在使用bcrypt下，需要12年。</p>
+<p>这就是bcrypt给你带来的选择，<strong>你可以一个安全的口令和一个快速的加密算法，或是一个不怎么安全的口令和一个性能不好的加密算法</strong>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3801.html"><img alt="破解你的口令" height="150" src="../wp-content/uploads/2011/02/passwords-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3801.html">破解你的口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6193.html"><img alt="CSDN明文口令泄露的启示" height="150" src="../wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6193.html">CSDN明文口令泄露的启示</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5353.html"><img alt="你会做Web上的用户登录功能吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3877.html"><img alt="另类UX让你输入强口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2451.html"><img alt="Twitter的禁用口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2428.html"><img alt="如何管理并设计你的口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2078.html">如何防范密码被破解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,1472 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 47 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=47" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Thu, 01 Jan 2015 05:20:53 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>2009年脚本语言排名</title>
+		<link>https://coolshell.cn/articles/325.html</link>
+					<comments>https://coolshell.cn/articles/325.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 01 Apr 2009 09:25:03 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Python]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=325</guid>
+
+					<description><![CDATA[<p>EDC（Evan Data Corporation）发布了一份脚本语言的调查报告，这个调查报告调查了500个以上的开发者和IT专家，在这份调查表中，PHP, R...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/325.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/325.html">2009年脚本语言排名</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/ease.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/extensibility.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/maintainability.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/availability.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/performance.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/quality.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/security.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg"></a>EDC（Evan Data Corporation）发布了一份脚本语言的调查报告，这个调查报告调查了500个以上的开发者和IT专家，在这份调查表中，PHP, Ruby和Python成为了前三强。这个调查总共调查了这些脚本语言：Actionscript, Flex, Javascript, Microsoft F#, Microsoft Powershell, Perl, PHP, Python, Ruby, VB Script。主要评估以下这些方面：</p>
+<li>易用性。Ease of Use <a href="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-330" title="overall" src="https://coolshell.cn/wp-content/uploads/2009/04/overall-300x185.jpg" alt="overall" width="300" height="185" srcset="https://coolshell.cn/wp-content/uploads/2009/04/overall-300x185.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/04/overall-438x270.jpg 438w, https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg 707w" sizes="(max-width: 300px) 100vw, 300px" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg"></a></li>
+<li>异常处理。Exception handling</li>
+<li>扩展性。Extensibility</li>
+<li>可维护性和易读性。Maintainability / Readability</li>
+<li>跨平台。Cross-platform portability</li>
+<li>社区。Community</li>
+<li>实用性。Availability of tools</li>
+<li>质量。Quality of tools</li>
+<li>性能。Performance</li>
+<li>内存管理。Memory management</li>
+<li>客户端脚本。Client side scripting</li>
+<li>安全性。Security</li>
+<p><span id="more-325"></span></p>
+<p>下面是一些关于这份调查表的图示：（关于整个报告，大家可以到这里下载：<a href="http://www.evansdata.com/reports/viewRelease_download.php?reportID=18">http://www.evansdata.com/reports/viewRelease_download.php?reportID=18</a>）</p>
+<p>对于综合性的排名，报告中说到“<strong>排名向前的都是一些开源的语言，因为开源所发发展得非常快也很不错。而排名靠后的则是一些私有的，收费的语言</strong>”</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg"><img decoding="async" loading="lazy" title="overall" src="https://coolshell.cn/wp-content/uploads/2009/04/overall.jpg" alt="overall" width="707" height="436" /></a></p>
+<p> 下面是各个评估方面的排名。（我只从报告中抽取了几个方面）</p>
+<p><strong>易用性</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/ease.jpg"><img decoding="async" loading="lazy" title="ease" src="https://coolshell.cn/wp-content/uploads/2009/04/ease.jpg" alt="ease" width="740" height="354" /></a></p>
+<p><strong>扩展性</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/extensibility.jpg"><img decoding="async" loading="lazy" title="extensibility" src="https://coolshell.cn/wp-content/uploads/2009/04/extensibility.jpg" alt="extensibility" width="832" height="387" /></a></p>
+<p> </p>
+<p><strong>可维护性/易读性</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/maintainability.jpg"><img decoding="async" loading="lazy" title="maintainability" src="https://coolshell.cn/wp-content/uploads/2009/04/maintainability.jpg" alt="maintainability" width="840" height="377" /></a></p>
+<p><strong>实用性</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/availability.jpg"><img decoding="async" loading="lazy" title="availability" src="https://coolshell.cn/wp-content/uploads/2009/04/availability.jpg" alt="availability" width="861" height="384" /></a></p>
+<p><strong>性能</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/performance.jpg"><img decoding="async" loading="lazy" title="performance" src="https://coolshell.cn/wp-content/uploads/2009/04/performance.jpg" alt="performance" width="841" height="379" /></a></p>
+<p> </p>
+<p><strong>质量</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/quality.jpg"><img decoding="async" loading="lazy" title="quality" src="https://coolshell.cn/wp-content/uploads/2009/04/quality.jpg" alt="quality" width="864" height="388" /></a></p>
+<p> </p>
+<p><strong>安全</strong></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/security.jpg"><img decoding="async" loading="lazy" title="security" src="https://coolshell.cn/wp-content/uploads/2009/04/security.jpg" alt="security" width="885" height="399" /></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="到处都是Unix的胎记" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_title">到处都是Unix的胎记</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/325.html">2009年脚本语言排名</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/325.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux的“宕机”图片</title>
+		<link>https://coolshell.cn/articles/313.html</link>
+					<comments>https://coolshell.cn/articles/313.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 01 Apr 2009 06:00:39 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=313</guid>
+
+					<description><![CDATA[<p>下面是几个Linux的“宕机”的图片，原文在：http://www.miguelcarrasco.net/miguelcarrasco/2006/10/linu...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/313.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/313.html">Linux的“宕机”图片</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_2.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_3.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_4.jpg"></a>下面是几个Linux的“宕机”的图片，原文在：<a href="http://www.miguelcarrasco.net/miguelcarrasco/2006/10/linux_crash_top.html">http://www.miguelcarrasco.net/miguelcarrasco/2006/10/linux_crash_top.html</a></p>
+<p>这里，我并不想以讹传讹，因为有一些并不是真正的Crash，可能只是重启，而另一些图片根本看不清楚是否是Linux，不过，如果不是在重启，的确不应该出现这些操作系统的信息。不算怎么样，我们就姑且相信这些图片都是Linux的不是吧。Linux也会Crash这点毋庸置疑，不过，在看到这些画面的同时，同样也能让人看到Linux的应用之广泛。</p>
+<p>下面这是一个运行着Linux的PC，看上去他死的很古怪，好像是中了病毒。</p>
+<p> <a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_1.jpg"><img decoding="async" loading="lazy" title="linux_crash_1" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_1.jpg" alt="linux_crash_1" width="640" height="480" /></a></p>
+<p><span id="more-313"></span></p>
+<p>接下来的是一飞机上的Linux，我看当然可以在下面的图片中看到左上角那个很经典的小企鹅。这架飞机是空客330。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_2.jpg"><img decoding="async" loading="lazy" title="linux_crash_2" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_2.jpg" alt="linux_crash_2" width="640" height="480" /></a></p>
+<p> </p>
+<p>下面这个Crash的截屏可能并不是真正的Crash（似乎这个屏幕并没有完全死翘翘，只不过是收到了一个11的信号，然后整个Console就死掉了）</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_3.jpg"><img decoding="async" loading="lazy" title="linux_crash_3" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_3.jpg" alt="linux_crash_3" width="640" height="480" /></a></p>
+<p> </p>
+<p>又是一个飞机上的linux 截屏，虽然用手机拍的照片很模糊，不过，我们还是能看到那只小企鹅。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_4.jpg"><img decoding="async" loading="lazy" title="linux_crash_4" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_4.jpg" alt="linux_crash_4" width="640" height="477" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_63_2.jpg"><img decoding="async" loading="lazy" title="linux_crash_63_2" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_63_2.jpg" alt="linux_crash_63_2" width="640" height="477" /></a></p>
+<p>接下来的这个图片是火车和地铁上的显示屏，可能是linux的吧。是否Crash不确定，不过，的确没有正常工作。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_train_52_2.jpg"><img decoding="async" loading="lazy" title="linux_crash_train_52_2" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_train_52_2.jpg" alt="linux_crash_train_52_2" width="640" height="477" /></a></p>
+<p>下面是地铁上的播放显示器。（应该是播放广告和到站信息的显示屏）</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_82_2.jpg"><img decoding="async" loading="lazy" title="linux_crash_82_2" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_82_2.jpg" alt="linux_crash_82_2" width="640" height="424" /></a></p>
+<p>下面是一个掌上游戏机，是否crash不可而知，不过的确不应该出现linux的启动信息。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_bonus_22_2.jpg"><img decoding="async" loading="lazy" title="linux_bonus_22_2" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_bonus_22_2.jpg" alt="linux_bonus_22_2" width="640" height="477" /></a></p>
+<p>电话机，看似这个电话很强大，还有键盘。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_132_1.jpg"><img decoding="async" loading="lazy" title="linux_crash_132_1" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_132_1.jpg" alt="linux_crash_132_1" width="640" height="480" /></a></p>
+<p>下面这个是买炸薯条的快餐店，看了一下左右的，应该是报价的显示屏吧。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_102_2.jpg"><img decoding="async" loading="lazy" title="linux_crash_102_2" src="https://coolshell.cn/wp-content/uploads/2009/04/linux_crash_102_2.jpg" alt="linux_crash_102_2" width="640" height="426" /></a></p>
+<p>文章：<a href="http://www.miguelcarrasco.net/miguelcarrasco/2006/10/linux_crash_top.html" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/313.html">Linux的“宕机”图片</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/313.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>十个最好的PDF生成库</title>
+		<link>https://coolshell.cn/articles/309.html</link>
+					<comments>https://coolshell.cn/articles/309.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 31 Mar 2009 16:00:23 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[PDF]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=309</guid>
+
+					<description><![CDATA[<p>1）FPDF http://www.fpdf.org/。这是一个纯PHP的库，它没有使用PDFlib。完全免费。没有任何license的限制。  2）iText...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/309.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/309.html">十个最好的PDF生成库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<h2>1）FPDF</h2>
+<p><a href="http://www.fpdf.org/">http://www.fpdf.org/</a>。这是一个纯PHP的库，它没有使用PDFlib。完全免费。没有任何license的限制。</p>
+<p><a rel="nofollow" href="http://www.fpdf.org/"><img decoding="async" src="http://www.ajaxline.com/files/logo.gif" alt="" /></a></p>
+<h2><a rel="nofollow" href="http://www.fpdf.org/"></a> 2）iText</h2>
+<p><a href="http://www.lowagie.com/iText/">http://www.lowagie.com/iText/</a>。 这是一个基于Java的库。iText#则是一个基于.NET的库。使用MPL/LGPL的license。</p>
+<p><a rel="nofollow" href="http://www.lowagie.com/iText/"><img decoding="async" src="http://www.ajaxline.com/files/ilogo.gif" alt="" /></a> </p>
+<p><span id="more-309"></span></p>
+<h2>3）AlivePDF</h2>
+<p><a href="http://www.alivepdf.org/">http://www.alivepdf.org/</a>。这是基于ActionScripts 3的PDF文件生成库。MIT license。</p>
+<p><a rel="nofollow" href="http://www.alivepdf.org/"><img decoding="async" src="http://www.ajaxline.com/files/alive.png" alt="" /></a> </p>
+<h2>4）Prawn</h2>
+<p><a href="http://prawn.majesticseacreature.com/">http://prawn.majesticseacreature.com/</a>。这是一个Ruby的PDF文件生成的库。</p>
+<p><a rel="nofollow" href="http://prawn.majesticseacreature.com/"><img decoding="async" loading="lazy" src="http://www.ajaxline.com/files/prawn_logo.png" alt="" width="146" height="147" /></a> </p>
+<h2>5） TCPDF</h2>
+<p><a href="http://www.tcpdf.org/">http://www.tcpdf.org/</a>。这又是一个PHP的PDF文件生成库。LGPL license。</p>
+<p><a rel="nofollow" href="http://www.tcpdf.org/"><img decoding="async" src="http://www.ajaxline.com/files/tcpdf.png" alt="" /></a>  </p>
+<h2>6）PDFSharp</h2>
+<p><a href="http://pdfsharp.com/PDFsharp/">http://pdfsharp.com/PDFsharp/</a>。基于.NET。</p>
+<p><a rel="nofollow" href="http://pdfsharp.com/PDFsharp/"><img decoding="async" src="http://www.ajaxline.com/files/PDFsharp.gif" alt="" /></a> </p>
+<h2>7）libHaru</h2>
+<p><a href="http://libharu.org/wiki/Main_Page">http://libharu.org/wiki/Main_Page</a>。这是一个跨平台C++的开源的PDF文件生成的库。ZLIB/LIBPNG License</p>
+<p><a rel="nofollow" href="http://libharu.org/wiki/Main_Page"><img decoding="async" src="http://www.ajaxline.com/files/haru.png" alt="" /></a> </p>
+<h2>8）Apache FOP</h2>
+<p><a href="http://xmlgraphics.apache.org/fop/">http://xmlgraphics.apache.org/fop/</a>。Java语言，输入支持PDF, PS, PCL, AFP, XML (树形表示), Print, AWT 和PNG格式。</p>
+<p><a rel="nofollow" href="http://xmlgraphics.apache.org/fop/"><img decoding="async" src="http://www.ajaxline.com/files/fop.jpg" alt="" /></a> </p>
+<h2>9）PDF  Clown</h2>
+<p><a href="http://www.stefanochizzolini.it/en/projects/clown/">http://www.stefanochizzolini.it/en/projects/clown/</a>。这是一个基于Java和.NET的开源项目。需要Java 1.5+和C# 2.0。</p>
+<p><a rel="nofollow" href="http://www.stefanochizzolini.it/en/projects/clown/"><img decoding="async" src="http://www.ajaxline.com/files/pdfClown.png" alt="" /></a> </p>
+<h2>10）Reportlab Toolkit</h2>
+<p><a href="http://www.reportlab.org/rl_toolkit.html">http://www.reportlab.org/rl_toolkit.html</a>。这是一个基于python的库，包含PDF和XML等解析。</p>
+<p>文章：<a href="http://www.ajaxline.com/10-best-libraries-for-generating-pdf">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/424.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="PDF电子书搜索引擎" width="150" height="150" /></a><a href="https://coolshell.cn/articles/424.html" class="wp_rp_title">PDF电子书搜索引擎</a></li><li ><a href="https://coolshell.cn/articles/1032.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="Unix 40年：Unix年鉴" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1032.html" class="wp_rp_title">Unix 40年：Unix年鉴</a></li><li ><a href="https://coolshell.cn/articles/1626.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="ldd 的一个安全问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1626.html" class="wp_rp_title">ldd 的一个安全问题</a></li><li ><a href="https://coolshell.cn/articles/1619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/Linus_windows_7-150x150.jpg" alt="Windows 7 的新粉丝 Linus Torvalds" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1619.html" class="wp_rp_title">Windows 7 的新粉丝 Linus Torvalds</a></li><li ><a href="https://coolshell.cn/articles/2109.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="Python处理encoding的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2109.html" class="wp_rp_title">Python处理encoding的小技巧</a></li><li ><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Drop-Down-Menu-Scripts-5-150x150.jpg" alt="30+ Web下拉菜单" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_title">30+ Web下拉菜单</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/309.html">十个最好的PDF生成库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/309.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>OSGi和Java企业级运算的未来方向</title>
+		<link>https://coolshell.cn/articles/294.html</link>
+					<comments>https://coolshell.cn/articles/294.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 29 Mar 2009 07:50:47 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[OSGi]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=294</guid>
+
+					<description><![CDATA[<p>摘要： OSGi也是译者最近才接触到的技术，但是在OSGi的发展中，它越来越收到了来自行业的关注。作为OSGi的动态部署，译者认为此项规范对于企业应用应该是非常...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/294.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/294.html">OSGi和Java企业级运算的未来方向</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>摘要</strong>： OSGi也是译者最近才接触到的技术，但是在OSGi的发展中，它越来越收到了来自行业的关注。作为OSGi的动态部署，译者认为此项规范对于企业应用应该是非常有帮助的。特别在银行的信息化建设中将会起到很重要的作用，因为国内大多的银行业都在强调7*24小时系统，但是其业务发展又非常迅速，常常有新需求，新变更。如果每一次上线变更都将重启系统的话，对银行的服务质量和形象将会造成较大的影响。 此文只是讲述了OSGi在Java企业运算中的新动向，并没有具体的介绍OSGi的规范。关于OSGi规范的文档可以从jcp上下载</p>
+<p>原文出处：<a href="http://itknowledgeexchange.techtarget.com/soa-talk/osgi-and-future-directions-for-enterprise-java/" target="_self">这里</a><br />
+<strong></strong></p>
+<p><strong>OSGi和Java企业级运算的未来方向</strong></p>
+<p>by Eric Newcomer</p>
+<p>无论JCP是否完全的迷失了它的方向，它都不同程度受到来自外部活动的影响。Spring框架和Hibernate影响了EJB3，而且JPA也是一个好的例子。另外日渐感觉到的影响来自于对OSGi规范的采用和其实现，特别是实现了OSGi的开源的Eclipse Equinox，Apache Felix和Knoplerfish框架</p>
+<p><span id="more-294"></span></p>
+<p>OSGi规范为Java定义动态模组元信息系统和在其交互模组中的面向服务的编程模型。这个规范定义了一个为服务查找的注册表，还定义了一组通用功能集合，例如安全，生命周期管理，日志等。OSGi的框架如今已经被Eclipse基金采用，许多的主要Java厂商采用这个规范来开发中间件产品，同时OSGi也被很多开源项目组采用，包括用来开发应用服务器，企业服务总线，和集成开发环境。</p>
+<p>作为在商业产品和开源项目中广泛被使用的的核心平台，OSGi联盟开始接收到来自更复杂的的对企业应用的支持需求。在1999年,OSGi规范最初是JSR-8，主要的目的是用于家庭自助网关(home automation gateways)。自从那时起，OSGi技术就被在各种个样自助，移动电话，和家庭娱乐的嵌入应用程序所使用。2006年的8月份，OSGi联盟，接收许多关注于OSGi企业版本的建议并举行一个关于讨论成立一个OSGi企业专家组(EEG）可能性的会议。</p>
+<p>自从2007年1月第一次会议一来，OSGi企业专家组EEG用了两年时间编写了致力于使OSGi更好支持企业级Java应用的需求细节和设计细节。这个工作的成果是：在2009年年中，将会对OSGi规范有一个主要的更新(两个的草案版本已经发布)，这个修改主要包括扩展了核心框架服务和定义现有存在企业Java技术与OSGi框架的接口以满足业务应用需求的案例。主要的特性包括被称为蓝图服务(Blueprint Service)Spring框架组件模型到OSGi服务模型的映射和分布计算协议到OSGi服务模型的映射, JavaEE映射的关键部分是Web apps,JDBC,JPA,JMX,JTA,JNDI,和JAAS。</p>
+<p>软件行业已经接受并支持OSGi带来的模组化的好处，下一个改进将会是通过适配已经用于企业运算的Java技术接口，进而对企业级Java应用的支撑。这个目标将帮助OSGi的开发人员更容易的以标准的方式创建企业服务务应用程序。</p>
+<p>Eric Newcomer是分布计算的专家和独立咨询师，Newcomer是OSGi企业专家组的主席，之前他是IONA技术公司的CTO.他在<a href="http://modualrit.blogspot.com/" target="_blank"> blog on OSGi</a>发布了很多的OSGi的文章<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/294.html">OSGi和Java企业级运算的未来方向</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/294.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>雷人的程序注释</title>
+		<link>https://coolshell.cn/articles/290.html</link>
+					<comments>https://coolshell.cn/articles/290.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 26 Mar 2009 16:58:43 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[注释]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=290</guid>
+
+					<description><![CDATA[<p>使用Google code search可以搜索到一些比较有趣的代码注释，呵呵。下面的这些程序注释有搞笑的，也有粗口，看来写程序本来也不是一件很枯燥的事，关键看...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/290.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/290.html">雷人的程序注释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment1.gif"></a></p>
+<p>使用<a href="http://www.google.com/codesearch"><span style="color: #0066cc;">Google code search</span></a>可以搜索到一些比较有趣的代码注释，呵呵。下面的这些程序注释有搞笑的，也有粗口，看来写程序本来也不是一件很枯燥的事，关键看你的心态如何了。读到这些注释的时候，只能想到一个词，那就是“疯狂的程序员”，哈哈。Have a Fun  ;-)</p>
+<p>写个程序时不忘表达自己的感情，以免以后忘了。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment15.gif"><img decoding="async" loading="lazy" title="fcomment15" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment15.gif" alt="fcomment15" width="664" height="89" /></a></p>
+<p><span id="more-290"></span></p>
+<p>呵呵，看来自己也不是很自信。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment1.gif"><img decoding="async" loading="lazy" title="fcomment1" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment1.gif" alt="fcomment1" width="685" height="90" /></a></p>
+<p>到处都是dragon啊。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment2.gif"><img decoding="async" loading="lazy" title="fcomment2" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment2.gif" alt="fcomment2" width="613" height="91" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment3.gif"><img decoding="async" loading="lazy" title="fcomment3" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment3.gif" alt="fcomment3" width="652" height="92" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment4.gif"><img decoding="async" loading="lazy" title="fcomment4" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment4.gif" alt="fcomment4" width="653" height="74" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment5.gif"><img decoding="async" loading="lazy" title="fcomment5" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment5.gif" alt="fcomment5" width="464" height="76" /></a></p>
+<p> 又是一个愤怒的注释</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment6.gif"><img decoding="async" loading="lazy" title="fcomment6" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment6.gif" alt="fcomment6" width="694" height="77" /></a></p>
+<p>嗯，我早就告诉过他们……</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment7.gif"><img decoding="async" loading="lazy" title="fcomment7" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment7.gif" alt="fcomment7" width="694" height="89" /></a></p>
+<p>粗口也上了……</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment8.gif"><img decoding="async" loading="lazy" title="fcomment8" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment8.gif" alt="fcomment8" width="501" height="89" /></a></p>
+<p>嗯，下面的程序与请别看了……</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment9.gif"><img decoding="async" loading="lazy" title="fcomment9" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment9.gif" alt="fcomment9" width="549" height="74" /></a></p>
+<p>真是疯狂啊，难道程序员的注释也有枪手或五毛？</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment10.gif"><img decoding="async" loading="lazy" title="fcomment10" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment10.gif" alt="fcomment10" width="468" height="74" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment11.gif"><img decoding="async" loading="lazy" title="fcomment11" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment11.gif" alt="fcomment11" width="567" height="77" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment12.gif"><img decoding="async" loading="lazy" title="fcomment12" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment12.gif" alt="fcomment12" width="565" height="90" /></a><a href="https://coolshell.cn/wp-content/uploads/2009/03/fcomment13.gif"><img decoding="async" loading="lazy" title="fcomment13" src="https://coolshell.cn/wp-content/uploads/2009/03/fcomment13.gif" alt="fcomment13" width="625" height="89" /></a></p>
+<p> 希望你喜欢哦。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2746.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="五种应该避免的代码注释" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2746.html" class="wp_rp_title">五种应该避免的代码注释</a></li><li ><a href="https://coolshell.cn/articles/7459.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/coada2-1-150x150.png" alt="Huffman 编码压缩算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7459.html" class="wp_rp_title">Huffman 编码压缩算法</a></li><li ><a href="https://coolshell.cn/articles/664.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="使用PHP的cURL库" width="150" height="150" /></a><a href="https://coolshell.cn/articles/664.html" class="wp_rp_title">使用PHP的cURL库</a></li><li ><a href="https://coolshell.cn/articles/2990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Time-Allocation-while-Programming-150x150.png" alt="编程时间分配图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2990.html" class="wp_rp_title">编程时间分配图</a></li><li ><a href="https://coolshell.cn/articles/1174.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/4.jpg" alt="程序员惯用的解释(Top 25)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1174.html" class="wp_rp_title">程序员惯用的解释(Top 25)</a></li><li ><a href="https://coolshell.cn/articles/1202.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/07/Question-150x150.jpg" alt="面试题：赛马问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1202.html" class="wp_rp_title">面试题：赛马问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/290.html">雷人的程序注释</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/290.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>深入浅出单实例Singleton设计模式</title>
+		<link>https://coolshell.cn/articles/265.html</link>
+					<comments>https://coolshell.cn/articles/265.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 26 Mar 2009 08:04:43 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Singleton]]></category>
+		<category><![CDATA[设计模式]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=265</guid>
+
+					<description><![CDATA[<p>单实例Singleton设计模式可能是被讨论和使用的最广泛的一个设计模式了，这可能也是面试中问得最多的一个设计模式了。这个设计模式主要目的是想在整个系统中只能出...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/265.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/265.html">深入浅出单实例Singleton设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>单实例Singleton设计模式可能是被讨论和使用的最广泛的一个设计模式了，这可能也是面试中问得最多的一个设计模式了。这个设计模式主要目的是想在整个系统中只能出现一个类的实例。这样做当然是有必然的，比如你的软件的全局配置信息，或者是一个Factory，或是一个主控类，等等。你希望这个类在整个系统中只能出现一个实例。当然，作为一个技术负责人的你，你当然有权利通过使用非技术的手段来达到你的目的。比如：你在团队内部明文规定，“XX类只能有一个全局实例，如果某人使用两次以上，那么该人将被处于2000元的罚款！”（呵呵），你当然有权这么做。但是如果你的设计的是东西是一个类库，或是一个需要提供给用户使用的API，恐怕你的这项规定将会失效。因为，你无权要求别人会那么做。所以，这就是为什么，我们希望通过使用技术的手段来达成这样一个目的的原因。</p>
+<p>本文会带着你深入整个Singleton的世界，当然，我会放弃使用C++语言而改用Java语言，因为使用Java这个语言可能更容易让我说明一些事情。</p>
+<h4><span id="more-265"></span><br />
+<strong>Singleton的教学版本</strong></h4>
+<p>这里，我将直接给出一个Singleton的简单实现，因为我相信你已经有这方面的一些基础了。我们姑且把这个版本叫做1.0版</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">// version 1.0
+public class Singleton {
+    private static Singleton singleton = null;
+    private Singleton() {  }
+    public static Singleton getInstance() {
+        if (singleton== null) {
+            singleton= new Singleton();
+        }
+        return singleton;
+    }
+}</pre>
+<p>在上面的实例中，我想说明下面几个Singleton的特点：（下面这些东西可能是尽人皆知的，没有什么新鲜的）</p>
+<ol>
+<li>私有（private）的构造函数，表明这个类是不可能形成实例了。这主要是怕这个类会有多个实例。</li>
+<li>即然这个类是不可能形成实例，那么，我们需要一个静态的方式让其形成实例：getInstance()。注意这个方法是在new自己，因为其可以访问私有的构造函数，所以他是可以保证实例被创建出来的。</li>
+<li>在getInstance()中，先做判断是否已形成实例，如果已形成则直接返回，否则创建实例。</li>
+<li>所形成的实例保存在自己类中的私有成员中。</li>
+<li>我们取实例时，只需要使用Singleton.getInstance()就行了。</li>
+</ol>
+<p>当然，如果你觉得知道了上面这些事情后就学成了，那得给你当头棒喝一下了，事情远远没有那么简单。</p>
+<h4><strong>Singleton的实际版本</strong></h4>
+<p>上面的这个程序存在比较严重的问题，因为是全局性的实例，所以，在多线程情况下，所有的全局共享的东西都会变得非常的危险，这个也一样，在多线程情况下，如果多个线程同时调用getInstance()的话，那么，可能会有多个进程同时通过 (singleton== null)的条件检查，于是，多个实例就创建出来，并且很可能造成内存泄露问题。嗯，熟悉多线程的你一定会说——“我们需要线程互斥或同步”，没错，我们需要这个事情，于是我们的Singleton升级成1.1版，如下所示：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW" data-enlighter-highlight="8,10">// version 1.1
+public class Singleton
+{
+    private static Singleton singleton = null;
+    private Singleton() {  }
+    public static Singleton getInstance() {
+        if (singleton== null) {
+            synchronized (Singleton.class) {
+                singleton= new Singleton();
+            }
+        }
+        return singleton;
+    }
+}</pre>
+<p>嗯，使用了Java的synchronized方法，看起来不错哦。应该没有问题了吧？！错！这还是有问题！为什么呢？前面已经说过，如果有多个线程同时通过(singleton== null)的条件检查（因为他们并行运行），虽然我们的synchronized方法会帮助我们同步所有的线程，让我们并行线程变成串行的一个一个去new，那不还是一样的吗？同样会出现很多实例。嗯，确实如此！看来，还得把那个判断(singleton== null)条件也同步起来。于是，我们的Singleton再次升级成1.2版本，如下所示：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW" data-enlighter-highlight="7,11">// version 1.2
+public class Singleton
+{
+    private static Singleton singleton = null;
+    private Singleton()  {  }
+    public static Singleton getInstance()  {
+        synchronized (Singleton.class) {
+            if (singleton== null) {
+		singleton= new Singleton();
+            }
+         }
+        return singleton;
+    }
+}</pre>
+<p>不错不错，看似很不错了。在多线程下应该没有什么问题了，不是吗？的确是这样的，1.2版的Singleton在多线程下的确没有问题了，因为我们同步了所有的线程。只不过嘛……，什么？！还不行？！是的，还是有点小问题，我们本来只是想让new这个操作并行就可以了，现在，只要是进入getInstance()的线程都得同步啊，注意，创建对象的动作只有一次，后面的动作全是读取那个成员变量，这些读取的动作不需要线程同步啊。这样的作法感觉非常极端啊，为了一个初始化的创建动作，居然让我们达上了所有的读操作，严重影响后续的性能啊！</p>
+<p>还得改！嗯，看来，在线程同步前还得加一个(singleton== null)的条件判断，如果对象已经创建了，那么就不需要线程的同步了。OK，下面是1.3版的Singleton。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW" data-enlighter-highlight="7,9">// version 1.3
+public class Singleton
+{
+    private static Singleton singleton = null;
+    private Singleton()  {    }
+    public static Singleton getInstance() {
+        if (singleton== null)  {
+            synchronized (Singleton.class) {
+                if (singleton== null)  {
+                    singleton= new Singleton();
+                }
+            }
+        }
+        return singleton;
+    }
+}</pre>
+<p>感觉代码开始变得有点罗嗦和复杂了，不过，这可能是最不错的一个版本了，这个版本又叫“双重检查”Double-Check。下面是说明：</p>
+<ol>
+<li>第一个条件是说，如果实例创建了，那就不需要同步了，直接返回就好了。</li>
+<li>不然，我们就开始同步线程。</li>
+<li>第二个条件是说，如果被同步的线程中，有一个线程创建了对象，那么别的线程就不用再创建了。</li>
+</ol>
+<p>相当不错啊，干得非常漂亮！请大家为我们的1.3版起立鼓掌！</p>
+<p>但是，如果你认为这个版本大攻告成，你就错了。</p>
+<p>主要在于<strong>singleton <code>= new Singleton()</code></strong>这句，这并非是一个原子操作，事实上在 JVM 中这句话大概做了下面 3 件事情。</p>
+<ol>
+<li>给 singleton 分配内存</li>
+<li>调用 Singleton 的构造函数来初始化成员变量，形成实例</li>
+<li>将singleton对象指向分配的内存空间（执行完这步 singleton才是非 null 了）</li>
+</ol>
+<p>但是在 JVM 的即时编译器中存在指令重排序的优化。也就是说上面的第二步和第三步的顺序是不能保证的，最终的执行顺序可能是 1-2-3 也可能是 1-3-2。如果是后者，则在 3 执行完毕、2 未执行之前，被线程二抢占了，这时 instance 已经是非 null 了（但却没有初始化），所以线程二会直接返回 instance，然后使用，然后顺理成章地报错。</p>
+<p>对此，我们只需要把singleton声明成 volatile 就可以了。下面是1.4版：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW" data-enlighter-highlight="4">// version 1.4
+public class Singleton
+{
+    private volatile static Singleton singleton = null;
+    private Singleton()  {    }
+    public static Singleton getInstance()   {
+        if (singleton== null)  {
+            synchronized (Singleton.class) {
+                if (singleton== null)  {
+                    singleton= new Singleton();
+                }
+            }
+        }
+        return singleton;
+    }
+}</pre>
+<p>使用 volatile 有两个功用：</p>
+<p>1）这个变量不会在多个线程中存在复本，直接从内存读取。</p>
+<p>2）这个关键字会禁止指令重排序优化。也就是说，在 volatile 变量的赋值操作后面会有一个内存屏障（生成的汇编代码上），读操作不会被重排序到内存屏障之前。</p>
+<p>但是，这个事情仅在Java 1.5版后有用，1.5版之前用这个变量也有问题，因为老版本的Java的内存模型是有缺陷的。</p>
+<h4><strong>Singleton 的简化版本</strong></h4>
+<p>上面的玩法实在是太复杂了，一点也不优雅，下面是一种更为优雅的方式：</p>
+<p>这种方法非常简单，因为单例的实例被声明成 static 和 final 变量了，在第一次加载类到内存中时就会初始化，所以创建实例本身是线程安全的。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW" data-enlighter-highlight="4">// version 1.5
+public class Singleton
+{
+    private volatile static Singleton singleton = new Singleton();
+    private Singleton()  {    }
+    public static Singleton getInstance()   {
+        return singleton;
+    }
+}</pre>
+<p>但是，这种玩法的最大问题是——当这个类被加载的时候，new Singleton() 这句话就会被执行，就算是getInstance()没有被调用，类也被初始化了。</p>
+<p>于是，<strong>这个可能会与我们想要的行为不一样，比如，我的类的构造函数中，有一些事可能需要依赖于别的类干的一些事（比如某个配置文件，或是某个被其它类创建的资源），我们希望他能在我第一次getInstance()时才被真正的创建。这样，我们可以控制真正的类创建的时刻，而不是把类的创建委托给了类装载器</strong>。</p>
+<p>好吧，我们还得绕一下：</p>
+<p>下面的这个1.6版是老版《Effective Java》中推荐的方式。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW" data-enlighter-highlight="4">// version 1.6
+public class Singleton {
+    private static class SingletonHolder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
+    private Singleton (){}
+    public static final Singleton getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+}</pre>
+<p>上面这种方式，仍然使用JVM本身机制保证了线程安全问题；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，因此它只有在getInstance()被调用时才会真正创建；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。</p>
+<h4><strong>Singleton 优雅</strong>版本</h4>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public enum Singleton{
+   INSTANCE;
+}</pre>
+<p>居然用枚举！！看上去好牛逼，通过EasySingleton.INSTANCE来访问，这比调用getInstance()方法简单多了。</p>
+<p>默认枚举实例的创建是线程安全的，所以不需要担心线程安全的问题。但是在枚举中的其他任何方法的线程安全由程序员自己负责。还有防止上面的通过反射机制调用私用构造器。</p>
+<p><strong>这个版本基本上消除了绝大多数的问题。代码也非常简单，实在无法不用。这也是新版的《Effective Java》中推荐的模式。</strong></p>
+<h4><strong>Singleton的其它问题</strong></h4>
+<p>怎么？还有问题？！当然还有，请记住下面这条规则——“<strong>无论你的代码写得有多好，其只能在特定的范围内工作，超出这个范围就要出Bug了</strong>”，这是“陈式第一定理”，呵呵。你能想一想还有什么情况会让这个我们上面的代码出问题吗？</p>
+<p>在C++下，我不是很好举例，但是在Java的环境下，嘿嘿，还是让我们来看看下面的一些反例和一些别的事情的讨论（<strong>当然，有些反例可能属于钻牛角尖，可能有点学院派，不过也不排除其实际可能性，就算是提个醒吧</strong>）：</p>
+<p><strong>其一、Class Loader</strong>。不知道你对Java的Class Loader熟悉吗？“类装载器”？！C++可没有这个东西啊。这是Java动态性的核心。顾名思义，类装载器是用来把类(class)装载进JVM的。JVM规范定义了两种类型的类装载器：启动内装载器(bootstrap)和用户自定义装载器(user-defined class loader)。 在一个JVM中可能存在多个ClassLoader，每个ClassLoader拥有自己的NameSpace。一个ClassLoader只能拥有一个class对象类型的实例，但是不同的ClassLoader可能拥有相同的class对象实例，这时可能产生致命的问题。如ClassLoaderA，装载了类A的类型实例A1，而ClassLoaderB，也装载了类A的对象实例A2。逻辑上讲A1=A2，但是由于A1和A2来自于不同的ClassLoader，它们实际上是完全不同的，如果A中定义了一个静态变量c，则c在不同的ClassLoader中的值是不同的。</p>
+<p>于是，如果咱们的Singleton 1.3版本如果面对着多个Class Loader会怎么样？呵呵，多个实例同样会被多个Class Loader创建出来，当然，这个有点牵强，不过他确实存在。难道我们还要整出个1.4版吗？可是，我们怎么可能在我的Singleton类中操作Class Loader啊？是的，你根本不可能。在这种情况下，你能做的只有是——“保证多个Class Loader不会装载同一个Singleton”。</p>
+<p><strong>其二、序例化。</strong>如果我们的这个Singleton类是一个关于我们程序配置信息的类。我们需要它有序列化的功能，那么，当反序列化的时候，我们将无法控制别人不多次反序列化。不过，我们可以利用一下Serializable接口的readResolve()方法，比如：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public class Singleton implements Serializable
+{
+    ......
+    ......
+    protected Object readResolve()
+    {
+        return getInstance();
+    }
+}</pre>
+<p><strong>其三、多个Java虚拟机。</strong>如果我们的程序运行在多个Java的虚拟机中。什么？多个虚拟机？这是一种什么样的情况啊。嗯，这种情况是有点极端，不过还是可能出现，比如EJB或RMI之流的东西。要在这种环境下避免多实例，看来只能通过良好的设计或非技术来解决了。</p>
+<p><strong>其四，volatile变量。</strong>关于volatile这个关键字所声明的变量可以被看作是一种 “程度较轻的同步synchronized”；与 synchronized 块相比，volatile 变量所需的编码较少，并且运行时开销也较少，但是它所能实现的功能也仅是synchronized的一部分。当然，如前面所述，我们需要的Singleton只是在创建的时候线程同步，而后面的读取则不需要同步。所以，volatile变量并不能帮助我们即能解决问题，又有好的性能。而且，这种变量只能在JDK 1.5+版后才能使用。</p>
+<p><strong>其五、关于继承。</strong>是的，继承于Singleton后的子类也有可能造成多实例的问题。不过，因为我们早把Singleton的构造函数声明成了私有的，所以也就杜绝了继承这种事情。</p>
+<p><strong>其六，关于代码重用。</strong>也话我们的系统中有很多个类需要用到这个模式，如果我们在每一个类都中有这样的代码，那么就显得有点傻了。那么，我们是否可以使用一种方法，把这具模式抽象出去？在C++下这是很容易的，因为有模板和友元，还支持栈上分配内存，所以比较容易一些（程序如下所示），Java下可能比较复杂一些，聪明的你知道怎么做吗？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">template class Singleton
+{
+    public:
+        static T&amp; Instance()
+        {
+            static T theSingleInstance; //假设T有一个protected默认构造函数
+            return theSingleInstance;
+        }
+};
+
+class OnlyOne : public Singleton
+{
+    friend class Singleton;
+    int example_data;
+
+    public:
+        int GetExampleData() const {return example_data;}
+    protected:
+        OnlyOne(): example_data(42) {}   // 默认构造函数
+        OnlyOne(OnlyOne&amp;) {}
+};
+
+int main( )
+{
+    cout &lt;&lt; OnlyOne::Instance().GetExampleData() &lt;&lt; endl;
+	return 0;
+}
+</pre>
+<p>&nbsp;</p>
+<p class="MsoNormal" style="margin: 0in 0in 0pt;"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: Times New Roman;">(</span></strong><strong style="mso-bidi-font-weight: normal;"><span lang="ZH-CN" style="font-family: 宋体; mso-ascii-font-family: 'Times New Roman'; mso-hansi-font-family: 'Times New Roman';">转载时请注明作者和出处。未经许可，请勿用于商业用途</span><span style="font-family: Times New Roman;">)</span></strong></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/265.html">深入浅出单实例Singleton设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/265.html/feed</wfw:commentRss>
+			<slash:comments>53</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>基于JVM的语言正在开始流行</title>
+		<link>https://coolshell.cn/articles/247.html</link>
+					<comments>https://coolshell.cn/articles/247.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Thu, 26 Mar 2009 02:41:59 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[动态语言]]></category>
+		<category><![CDATA[脚本语言]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=247</guid>
+
+					<description><![CDATA[<p>总结： 这是 Reuven Lerner在去年写的一篇博文，文章主要介绍了一些新兴的基于JVM的脚本语言。结合本文可以对Bruce的博文《C++和JAVA传统中...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/247.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/247.html">基于JVM的语言正在开始流行</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>总结：</strong></p>
+<p>这是 <a class="uname" href="https://coolshell.cn/member/reuven">Reuven Lerner</a>在去年写的一篇博文，文章主要介绍了一些新兴的基于JVM的脚本语言。结合本文可以对Bruce的博文《<a href="https://coolshell.cn/articles/209.html" target="_blank">C++和JAVA传统中积极的一面</a>》有一个很好的理解。译者认为：语言始终都是一门工具，软件设计最重要的东西是来自于设计者的创造性，但是随着Java语言的出现，他的半动态的特性，ClassLoader，反射，动态代理，都是提高开发者创造性的前提，正是因为这些特性，才会出现新的的编程模式和范式——反转控制和依赖注入，面向方面的编程(AOP)。试想如果Java不提供ClassLoader，反射，动态代理机制的API，如何能实现依赖查找和依赖注入和动态AOP? 你能用C++来反转控制，依赖查找吗，能对容器中的组件做进行生命周期管理吗？为了说明程序员创造性和语言的这个关系，我引用<a href="http://hinchcliffe.org/" target="_self">Dion Hinchcliffe</a>博文中的一张图来说明：</p>
+<p> <img decoding="async" loading="lazy" class="size-full wp-image-248 alignnone" title="程序员创造性和性能的关系" src="https://coolshell.cn/wp-content/uploads/2009/03/weblanguagecomparison1.png" alt="程序员创造性和性能的关系" width="400" height="326" srcset="https://coolshell.cn/wp-content/uploads/2009/03/weblanguagecomparison1.png 400w, https://coolshell.cn/wp-content/uploads/2009/03/weblanguagecomparison1-300x245.png 300w, https://coolshell.cn/wp-content/uploads/2009/03/weblanguagecomparison1-331x270.png 331w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<p>原文：<a href="http://ostatic.com/blog/jvm-based-languages-grow-in-popularity">http://ostatic.com/blog/jvm-based-languages-grow-in-popularity</a><br />
+<strong>基于JVM的语言正在开始流行</strong></p>
+<p>当Sun Microsystems公司在1995年第一次揭开Java的面纱的时候，就是非常难被定义的。这是因为JAVA是由多个部分构成：首先，它当然是一个面向对象语言。同时JAVA也是一个定义标准的语言(或多个标准，包括移动设备，标准，和企业三个版本)。最后，Java是一个虚拟机(&#8220;JVM&#8221;)，一个Java程序能够执行的软件环境。如果你有一个JVM，虽然这个JVM只能用来运行Java的程序——但是，JVM能在运行在你能想到的每一个平台之上，这使得Java成为一个具有高移植性的语言。</p>
+<p><span id="more-247"></span></p>
+<p>在Java世界的一个令人着迷的趋势就是：在最近的几年里使用JVM来运行非Java的程序在程增长的趋势。毕竟，如果创造了一门新的语言，你就必须在特定的平台上实现它。如果你想你的语言能在不同的平台上移植，那么你就需要为每一个平台实现一个版本。但是，相比而言，如果你将语言实现在JVM上，那么你就能让你的语言运行在任何系统的JVM上，这就意味着几乎所有平台都可以运行。</p>
+<p>于是现在就有了许多的基于JVM的新增语言。其中4个最流行的是发布在开源许可证之下的。考虑到如今Java也是开发源码了，这意味着你可以使用一个全开源体系，并且这个体系是可以移植的。因为这些语言都在JVM之上实现的，所以你就可以同时访问Java的标准库。这意味着如果有一个第三方的的Java库，而且你精于Python，那么你就可以使用Jython在你的源代码中访问这些Java库。</p>
+<p>早期的基于JVM的脚本语言，就我所知，是Jython,之前被称为JPython。Jython，从名字你就可以猜到，是一个基于JVM的Python语言实现。Jython完全兼容Python2.2的标准版本(这个标准版本的Python也被称为CPython)，这意味着Jython将会没有Python的一些新特性。最近发布的Jython版本是2007年月发布的，但是Sun雇佣了两位早期Jython非常知名的开发者，并且现在Jython可以运行Django应用程序框架，因此验证其兼容Python的能力</p>
+<p>Sun公司同时资助了JRuby的开发，一个基于JVM的Ruby版本。Jython是Python唯一的两个实现的其中之一，对比而言，JRuby则是众多Ruby语言实现的其中之一。然而,JRuby被广泛的认为是一个非常重要的版本。特别是因为他的效率，和高度兼容标准C的Ruby版本实现。JRuby同样可以运行Ruby on Rails框架(<strong>译者注：构建在Ruby之上的WEB应用框架</strong>)，此外还能运行其他众多的功能。</p>
+<p>Jython和JRuby都是从其他已存在的语言中移植到JVM中来的。而全新的基于JVM的脚本语言是Groovy和Scala。这两门语言现在都越来越流行，不同的是，Groovy是动态脚本语言，而是Scala是静态语言。使用Groovy最著名的应用是Groovy on Grails项目，一个用Groovy写成，运行在JVM之上的WEB应用框架(和Ruby on Rails很相似)。Grails找到通向商业应用程序的道路，最著名的就是LinkedIn,使用Linkedin，开发人员发现他们能比直接使用Java更快速和容易的开发程序。相比而言，Scala，而是强类型是语言，Steve Yegge最近的一次访谈中曾经谈到、静态语言和动态语言的争论，因为这个他还受到了很多的批评（<strong>译者注：关于Steve Yegge的这篇关于动态语言和静态语言之争可以查看</strong><a href="http://steve-yegge.blogspot.com/2008/05/dynamic-languages-strike-back.html " target="_self"><strong>这里</strong></a>,<strong>Steve Yegge是一个动态语言的支持者</strong>）<br />
+Java已经被公认为是非常成功而流行的语言。现在，Java也同时也被认为是非常流行的平台，这四类语言仅仅是在不远的将来通过JVM来实现的新兴语言的开始<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/247.html">基于JVM的语言正在开始流行</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/247.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>全球IP地址数据库</title>
+		<link>https://coolshell.cn/articles/244.html</link>
+					<comments>https://coolshell.cn/articles/244.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 25 Mar 2009 09:59:52 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[IP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=244</guid>
+
+					<description><![CDATA[<p>下面是一个免费的全球IP地址数据库，包括了国家，城市，地区，和经纬度，以便你可以利用Google Map在地图上标注。这个数据库的精确度可能有60%左右。 SQ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/244.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/244.html">全球IP地址数据库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是一个免费的全球IP地址数据库，包括了国家，城市，地区，和经纬度，以便你可以利用Google Map在地图上标注。这个数据库的精确度可能有60%左右。</p>
+<p><a href="http://www.blogama.org/ipinfodb.sql.bz2"><strong>SQL format</strong></a><br />
+<cite>更新至 2009年3月11日</cite></p>
+<p><a href="http://www.blogama.org/ipinfodb_csv.zip"><strong>CSV format</strong></a> (多文件)<br />
+<cite>更新至 2009年3月11日</cite></p>
+<p>下面是怎么使用这个数据库。</p>
+<p><span id="more-244"></span></p>
+<p>首先，所有的IP地址都是按一个整形来存放的，假设一个IP地址为A.B.C.D，那么其计算公式如下所示：</p>
+<p style="padding-left: 30px;">ip = (A*256+B)*256+C</p>
+<p>也就是说，它只计算到网段为：A.B.C.0到A.B.C.255。例如：我们有一个IP地址为：74.125.45.100 (google.com)，那么，</p>
+<p style="padding-left: 30px;">ip = (74*256+125)*256+45 = 4881709</p>
+<p>这样，我们可以方便地使用如下的SQL语句搜索数据：</p>
+<p style="padding-left: 30px;">SELECT * FROM <code data-enlighter-language="raw" class="EnlighterJSRAW">ip_group_city</code><br />
+WHERE<code data-enlighter-language="raw" class="EnlighterJSRAW">ip_start</code> &lt;= 4881709 ORDER BY ip_start DESC LIMIT 1;</p>
+<p>结果会是如下所示：</p>
+<p style="padding-left: 30px;">ip_start|country_code|region_code|city|zipcode|latitude|longitude<br />
+4881664|US|CA|Mountain View|94043|37.4192|-122.057</p>
+<p>如果你想在线使用这些数据的话，你可以使用如下所示的网址：</p>
+<p>http://blogama.org/ip_query.php?ip=74.125.45.100&#038;output=xml</p>
+<p>于是，你就会得到如下的XML数据：</p>
+<p style="padding-left: 30px;"><span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&#8220;1.0&#8221;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&#8220;UTF-8&#8221;</span><span style="font-weight: bold; color: #000000;">?&gt;</span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Response<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Ip<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>74.125.45.100<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Ip<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Status<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>OK<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Status<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;CountryCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>US<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/CountryCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;CountryName<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>United States<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/CountryName<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;RegionCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>CA<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/RegionCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+ <br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;RegionName<span style="font-weight: bold; color: #000000;">&gt;</span></span><span style="font-weight: bold; color: #000000;">&lt;/RegionName<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;City<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>Mountain View<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/City<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;ZipPostalCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>94043<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/ZipPostalCode<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Latitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>37.4192<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Latitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;Longitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span>-122.057<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Longitude<span style="font-weight: bold; color: #000000;">&gt;</span></span></span><br />
+<span style="color: #009900;"><span style="font-weight: bold; color: #000000;">&lt;/Response<span style="font-weight: bold; color: #000000;">&gt;</span></span></span></p>
+<p>如果你请求的是：</p>
+<p><a href="http://blogama.org/ip_query.php?ip=74.125.45.100&amp;output=raw">http://blogama.org/ip_query.php?ip=74.125.45.100&amp;output=raw</a></p>
+<p>这样你会得到CSV的格式：</p>
+<p>74.125.45.100,OK,US,United States,CA,,Mountain View,94043,37.4192,-122.057</p>
+<p>文章：<a href="http://blogama.org/node/58" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2631.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="五大基于JVM的脚本语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2631.html" class="wp_rp_title">五大基于JVM的脚本语言</a></li><li ><a href="https://coolshell.cn/articles/2554.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/Eclipse-3.6-6-150x150.bmp" alt="Eclipse 3.6 （Helios）新特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2554.html" class="wp_rp_title">Eclipse 3.6 （Helios）新特性</a></li><li ><a href="https://coolshell.cn/articles/688.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="你能做对下面这些JavaScript的题吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/688.html" class="wp_rp_title">你能做对下面这些JavaScript的题吗？</a></li><li ><a href="https://coolshell.cn/articles/1023.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Unix 40年：昨天，今天和明天 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/1023.html" class="wp_rp_title">Unix 40年：昨天，今天和明天 </a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/2520.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/06/London-Live-Train-Map-150x150.jpg" alt="伦敦地铁实时图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2520.html" class="wp_rp_title">伦敦地铁实时图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/244.html">全球IP地址数据库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/244.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>非常不错的编程技术教程</title>
+		<link>https://coolshell.cn/articles/240.html</link>
+					<comments>https://coolshell.cn/articles/240.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 25 Mar 2009 05:52:48 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[教程]]></category>
+		<category><![CDATA[编程]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=240</guid>
+
+					<description><![CDATA[<p>下面是一些非常不错的编程教程，当然，全是英文版的。不过因为是新手教程，所以非常容易阅读，可以在学习技术的同时加强一下自己的英语阅读能力。 如果你是一个新手，建议...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/240.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/240.html">非常不错的编程技术教程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是一些非常不错的编程教程，当然，全是英文版的。不过因为是新手教程，所以非常容易阅读，可以在学习技术的同时加强一下自己的英语阅读能力。</p>
+<p>如果你是一个新手，建议你把本页设为你的收藏夹。<br />
+<strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">C</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://devcentral.iftech.com/learning/tutorials/c-cpp/c/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to C Programming </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.abarnett.demon.co.uk/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C Optimization Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.actcom.co.il/~choo/lupg/tutorials/c-on-unix/c-on-unix.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Compiling C and C++ Programs on UNIX Systems</span><span style="font-size: 10pt; font-family: Verdana, sans-serif;"><span style="color: #667b04;"> </span></span><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">&#8211; gcc/g++ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.actcom.co.il/~choo/lupg/tutorials/libraries/unix-c-librarieshtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Building and Using Static and Shared C Libraries </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cm.cf.ac.uk/Dave/C/CE.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Programming in C: UNIX System Calls and Subroutines Using C </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.eskimo.com/~scs/C-faq/top.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.eskimo.com/~scs/cclass/cclass.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C Programming Class Notes </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gustavo.net/programming/c__tutorials.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">ANSI C for Programmers on UNIX Systems </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/0672310686/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself C in 24 Hours </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/0672310694/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself C in 21 Days (4th Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue24/rogers.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Standard C Library for Linux &#8211; Part 1: file functions </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue31/rogers1.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Standard C Library for Linux &#8211; Part 2: character input/output </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue32/rogers.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Standard C Library for Linux &#8211; Part 3: formatted input/output </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue38/rogers.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Standard C Library for Linux &#8211; Part 4: Character Handling </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue39/rogers.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Standard C Library for Linux &#8211; Part 5: Miscellaneous Functions </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.lysator.liu.se/c/bwk-tutor.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Programming in C: A Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.redhat.com/devnet/whitepapers/intro_dev/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">An Introduction to C Development on Linux </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.strath.ac.uk/CC/Courses/CCourse/CCourse.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C Programming Course </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.swcp.com/~dodrill/cdoc/clist.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C Language Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.syclus.com/cscene/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CScene: An Online Magazine for C and C++ Programming </span></a><br />
+<span id="more-240"></span><br />
+<strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">C++</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://computers.iwz.com/prog/cpp/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://devcentral.iftech.com/learning/tutorials/c-cpp/cpp/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Understanding C++: An Accelerated Introduction </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://devcentral.iftech.com/learning/tutorials/c-cpp/sst/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">An Introduction to C++ Class Hierarchies </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://egcs.cygnus.com/onlinedocs/g++FAQ_toc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">G++ FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://uu-gna.mit.edu:8001/uu-gn/atext/cc/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to Object-Oriented Programming Using C++ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.actcom.co.il/~choo/lupg/tutorials/c-on-unix/c-on-unix.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Compiling C and C++ Programs on UNIX Systems &#8211; gcc/g++ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cerfnet.com/~mpcline/c++-faq-lite/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ FAQ Lite </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.wustl.edu/~schmidt/C++/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Programming Language Tutorials </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.flipcode.com/tutorials/tut_cppdepend.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Reducing Dependencies in C++ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.flipcode.com/tutorials/tut_exceptions.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Exception Handling </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.flipcode.com/tutorials/tut_strings01.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Part 1: Unicode </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.flipcode.com/tutorials/tut_strings02.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Part 2: A Complete String Class </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informatik.uni-frankfurt.de/~fp/Tcl/tcl-c++/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Making C++ Loadable Modules Work </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/0672310708/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself C++ in 21 Days (2nd Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.mozilla.org/hacking/portable-cpp.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Portability Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.ses.com/~clarke/cpptips.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Tips </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.swcp.com/~dodrill/cppdoc/cpplist.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Language Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.syclus.com/cscene/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CScene: An Online Magazine for C and C++ Programming </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.trumphurst.com/cpplibs1.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">C++ Libraries FAQ </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">CGI</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.acm.vt.edu/~scott/cgi.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI Programming Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cgi101.com/class/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI Programming 101 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1562763970/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI Manual of Style </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575210878/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI Developer&#8217;s Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575211513/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI Programming Unleashed </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575211963/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself CGI Programming with Perl 5 in a Week (2nd Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.speakeasy.org/~cgires/cgi-tips.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI/Perl Tips, Tricks and Hints </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.speakeasy.org/~cgires/cgi-tour.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Tour of HTML Forms and CGI Scripts </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.speakeasy.org/~cgires/readdat/aindex.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Reading CGI Data: URL-Encoding and the CGI Protocol </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.webthing.com/tutorials/cgifaq.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CGI Programming FAQ </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">CORBA</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.cerfnet.com/~mpcline/corba-faq/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CORBA FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.indiana.edu/hyplan/kksiazek/tuto.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Brief Tutorial on CORBA </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.wustl.edu/~schmidt/CORBA-docs/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CORBA 2.0 Specification </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.wustl.edu/~schmidt/tutorials-corba.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CORBA Tutorials </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/0672312085/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself CORBA in 14 Days </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue48/2336.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Linux Network Programming, Part 3 &#8211; CORBA: The Software Bus </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue61/3201.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CORBA Program Development, Part 1 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue62/3213.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CORBA Program Development, Part 2 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue63/3214.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CORBA Program Development, Part 3 </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">CSS</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://richinstyle.com/guides/css2.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CSS2 Tutorial </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">CVS</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://cellworks.washington.edu/pub/docs/cvs/tutorial/cvs_tutorial_toc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">CVS Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.csc.calpoly.edu/~dbutler/tutorials/winter96/cvs/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Concurrent Version System Tutorial </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">DHTML</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.stars.com/Authoring/DHTML/Intro/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to Dynamic HTML </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Emacs</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://heather.cs.ucdavis.edu/~matloff/UnixAndC/Editors/Emacs.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Emacs: The Software Engineer&#8217;s <code data-enlighter-language="swiss" class="EnlighterJSRAW"></code> Army Knife&#8221; </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.geek-girl.com/emacs/faq/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Emacs FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gnu.org/manual/elisp-manual-20-2.5/elisp.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GNU Emacs Lisp Reference Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gnu.org/manual/emacs-lisp-intro/emacs-lisp-intro.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Programming in Emacs Lisp </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gprep.pvt.k12.md.us/technology/emacs_lesson/emacs_toc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GNU Emacs Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.lib.uchicago.edu/keith/tcl-course/emacs-tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Tutorial Introduction to Emacs </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue26/marsden.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">EMACSulation: Internet-ready! </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue27/marsden.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">EMACSulation: Ediff &#8211; An Emacs interface to diff and patch </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue29/marsden.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">EMACSulation: Emacs as a Server </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue31/marsden.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">EMACSulation: Customizing Emacs </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue35/anderson.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Basic Emacs </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue39/marsden.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">EMACSulation: Templating Mechanisms </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxgazette.com/issue47/pedersen.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Emacs Macros and the Power-Macros Package </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue59/2178.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Polyglot Emacs 20.4 </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Expect</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.linuxgazette.com/issue48/fisher.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Advanced Programming in Expect: A Bulletproof Interface </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue54/3065.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Automating Tasks with Expect </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue68/3357.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">What Can you Expect?&#8211;A Data Collection Project Using Linux </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Fortran</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="ftp://ftp.star.le.ac.uk/pub/fortran/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Professional Programmer&#8217;s Guide to Fortran 77 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://csep1.phy.ornl.gov/pl/pl.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fortran 90 and Computational Science </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://metalab.unc.edu/pub/languages/fortran/unfp.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">User Notes on Fortran Programming </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://noether.vassar.edu/~myers/Fortran.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fortran Programming for Physics and Astronomy </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.astro.unibas.ch/F90Tutorial/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Fortran 90 Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.delorie.com/gnu/docs/g77/g77_1.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Using GNU Fortran </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.hpctec.mcc.ac.uk/hpctec/courses/Fortran90/F90course.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fortran 90: A Course for Fortran 77 Programmers </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.nsc.liu.se/f77to90.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fortran 90 for the Fortran 77 Programmer </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.stanford.edu/class/sccm001/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to Fortran </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">GIMP</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://empyrean.lib.ndsu.nodak.edu/~nem/gimp/tuts/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GIMP Tutorial Index </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://imagic.weizmann.ac.il/~dov/gimp/perl-tut.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Tutorial for Perl GIMP Users </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://imagic.weizmann.ac.il/~dov/gimp/scheme-tut.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Scheme Tutorial for GIMP Users </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://jgo.local.net/GimpGuide/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GIMP Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://manual.gimp.org/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The GIMP User Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/July2000/article113.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Pseudo 3-D with GIMP </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/March1998/article9.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Graphical Photocomposition with GIMP </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/May1998/article10.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Creating Text with the GIMP </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/November1999/article112.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Creating Fire Effects with the GIMP </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/articles/article28.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Creating and Editing Animations with GIMP </span></a><br />
+<a href="http://www.linuxgazette.com/issue51/mauerer.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GIMP-Perl: GIMP Scripting for the Rest of Us </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.oberlin.edu/~kturner/gimp/doc/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Writing a GIMP Plugin </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.rru.com/~meo/gimp/Tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GIMP: The RRU Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.rru.com/~meo/gimp/faq-user.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GIMP User FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.soulfry.com/script-fu/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Script-Fu Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue43/2388.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Quick Start Guide to the GIMP, Part 1 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue44/2530.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Quick Start Guide to the GIMP, Part 2 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue45/2531.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Quick Start Guide to the GIMP, Part 3 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue46/2532.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Quick Start Guide to the GIMP, Part 4 </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">GNOME</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://developer.gnome.org/doc/tutorials/gnome-libs/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Application Programming Using the GNOME Libraries </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-4.ibm.com/software/developer/library/gnome-programming/indexhtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Part 1: Everything You Need to Get Started </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-4.ibm.com/software/developer/library/gnome2/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Part 2: Building a Sample Genealogy Program </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-4.ibm.com/software/developer/library/gnome3/?dwzone=linux" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Part 3: Adding File Saving and Loading Using libxml </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-4.ibm.com/software/developer/library/gnome4/index.html?dwzone=linux" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Creating GTK+ Widgets with GOB: An Easier Way to Derive New GTK+ Widgets </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-4.ibm.com/software/developer/library/gnome5/index.html?dwzone=linux" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Handling Multipel Documents: Using the GnomeMDI Framework </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-4.ibm.com/software/developer/library/gnomenclature/index.html?dwzone=linux" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Livening Things Up: Graphics Made Easy Using the GNOME Canvas </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/July2000/article160.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Developing Gnome Applications with Python &#8211; Part 1 </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">GTK</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://developer.gnome.org/doc/API/gdk/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GDK Reference Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.gnome.org/doc/API/glib/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GLib Reference Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.gnome.org/doc/API/gtk/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GTK+ Reference Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gtk.org/docs/gtk_toc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The GIMP Toolkit </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gtk.org/faq/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GTK+ FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gtk.org/tutorial/gtk_tut.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GTK V1.2 Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.gtk.org/~otaylor/gtk/tutorial/drawing_tut.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Drawing and Event Handling in GTK </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue47/2465.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">An Introduction to the GIMP Tool Kit </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Gnuplot</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/constraints.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Constrained Dynamics </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/continuators.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Continuum Dynamics </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/diffyq.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Differential Equation Basics </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/energons.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Energy Functions and Stiffness </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/particles.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Particle System Dynamics </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/pbm.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">An Introduction to Physically Based Modeling </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/rigid1.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Rigid Body Dynamics I </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-cgi.cs.cmu.edu/afs/cs.cmu.edu/user/baraff/www/pbm/rigid2.pdf" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Rigid Body Dynamics II </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cc.gatech.edu/scivis/tutorial/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Scientific Visualization Tutorials </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.eng.hawaii.edu/Tutor/Gnuplot/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Gnuplot &#8211; An Interactive Plotting Program </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.webreference.com/dev/gifanim/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GIF Animation Tutorial </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">HTML</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.charm.net/~lejeune/tables.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">HTML Table Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/0789708124/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">HTML by Example </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1562764969/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">How to Use HTML 3.2 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.kasparius.com/nonflash/tutorial/tut1.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Creating a Client-Side Image Map </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.ncsa.uiuc.edu/General/Training/AdvHTML/course.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Advanced HTML: How to Create Complex Multimedia Documents for the Web </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.ncsa.uiuc.edu/General/Training/HTMLIntro/Intro.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The ABCs of HTML </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.sharkysoft.com/tutorials/frames/contents.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sharky&#8217;s Netscape Frames Tutorial </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">ILU</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="ftp://ftp.parc.xerox.com/pub/ilu/2.0b1/manual-html/manual_toc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">ILU Reference Manual </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="ftp://ftp.parc.xerox.com/pub/ilu/misc/tutc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Using ILU with ANSI C: A Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="ftp://ftp.parc.xerox.com/pub/ilu/misc/tutjava.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Using ILU with Java: A Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="ftp://ftp.parc.xerox.com/pub/ilu/misc/tutpython.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Using ILU with Python: A Tutorial </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">IP-Masquerading</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.linux-mag.com/1999-05/bestdefense_01.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">ipchains: Packet Filtering for Linux 2.2 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linux-mag.com/1999-08/guru_01.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Setting Up IP Masquerade </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/May2000/article151.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Setting Up IP-Masquerading </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxplanet.com/linuxplanet/tutorials/1241/1/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Ipchains: Easy Links to the Net </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxplanet.com/linuxplanet/tutorials/2100/1/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Linux Networking Using Ipchains </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">IPC</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://winter.cs.umn.edu/~bentlem/aunix/advipc/ipc.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Advanced 4.4BSD Interpprocess Communication Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.actcom.co.il/~choo/lupg/tutorials/multi-process/multi-process.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">UNIX Multi-Process Programming and IPC </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Java</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://developer.java.sun.com/developer/onlineTraining/Beans/EJBTutorial/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Enterprise JavaBeans Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Beans/JBShortCourse/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JavaBeans Short Course </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Beans/JBeansAPI/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to the JavaBeans API </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Database/JDBCShortCourse/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JDBC Short Course </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Programming/BasicJava1/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Essentials of the Java Programming Language, Part 1 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Programming/BasicJava2/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Essentials of the Java Programming Language, Part 2 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Programming/JDCBook/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Writing Advanced Applications for the Java Platform </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Security/Fundamentals/abstract.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fundamentals of Java Security </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/Servlets/Fundamentals/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fundamentals of Java Servlets </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/collections/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to the Collections Framework </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/corb/a" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to CORBA </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.java.sun.com/developer/onlineTraining/rmi/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Fundamentals of RMI </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://home.att.net/~baldwin.r.g/scoop/tocadv.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Advanced </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://home.att.net/~baldwin.r.g/scoop/tocint.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introductory </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://home.att.net/~baldwin.r.g/scoop/tocmed.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Intermediate </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/docs/books/jls/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Language Specification </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/docs/books/tutorial/servlets/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Tutorial: Servlet Trail </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/docs/books/vmspec/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Virtual Machine Specification (2nd Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/docs/glossary.print.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Glossary of Java and Related Terms </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/docs/white/langenv/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Java Language Environment </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/products/jlf/dg/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Look and Feel Design Guidelines </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://java.sun.com/products/servlet/articles/tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Story of a Servlet: An Instant Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://javaboutique.internet.com/articles/ITJ/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to Java </span></a><br />
+<a href="http://javaboutique.internet.com/tutorials/Java2D/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java2D: An Introduction and Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://jserv.java.sun.com/products/java-server/documentation/webserver11/servlets/servlet_tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Servlet Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://metalab.unc.edu/javafaq/javafaq.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">comp.lang.java FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://metalab.unc.edu/javafaq/javatutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Brewing Java: A Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://users.neca.com/vmis/java.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Shlurrrppp &#8230; Java: The First User-Friendly Tutorial on Java </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://web2.java.sun.com/docs/books/tutorial/uiswing/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Swing Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.apl.jhu.edu/~hall/jav/aSwing-Tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Swing: A Quick Tutorial for AWT Programmers </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.bruceeckel.com/TIJ2/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Thinking in Java </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.ccs.neu.edu/home/kenb/com3337/rmi_tut.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java RMI Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.wisc.edu/~solomon/cs537/java-tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java for C++ Programmers </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.execpc.com/~gopalan/jav/ajava_tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Advanced Jav/aJ2EE Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/078970935X/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Hacking Java: The Java Professional&#8217;s Resource Kit </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/0789714663/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JFC Unleashed </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/157521069X/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Developer&#8217;s Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575211297/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Developer&#8217;s Reference </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575211831/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself Java in 21 Days (Professional Reference Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575211971/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Unleashed (2nd Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575212986/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java 1.1 Unleashed (3rd Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.intergate.bc.c/apersonal/iago/javatut/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Game Programming Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.io.com/~maus/JavaNetworkingFAQ.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Networking FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.javasoft.com/docs/books/tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Tutorial: A Practical Guide for Programmers </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.javaworld.com/javaworld/jw-12-1996/jw-12-sockets.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sockets Programming in Java </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/articles/article34.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Programming with Java &#8211; Part I </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.linuxfocus.org/English/articles/article8.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Programming with Java &#8211; Part II </span></a><br />
+<a href="http://www.linuxgazette.com/issue45/gibbs/Linux_java.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Setting Up a Java Development Environment for Linux </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.sofcom.com.au/jav/a" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Understanding Java </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue55/2570.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Beginner&#8217;s Guide to JDK </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue61/2673.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">GUI Development in Java </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www2.linuxjournal.com/lj-issues/issue66/3119.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Java Servlets: An introduction to writing and running Java servlets on Linux </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">JavaScript</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://andyjava.simplenet.com/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introductory JavaScript Tutorials </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/docs/manuals/communicator/jsguide4/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JavaScript Authoring Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/docs/manuals/js/client/jsguide/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Client-Side JavaScript 1.3 Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/docs/manuals/js/client/jsref/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Client-Side JavaScript 1.3 Reference </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/docs/manuals/js/core/jsguide/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Core JavaScript 1.4 Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/docs/manuals/js/core/jsref/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Core JavaScript 1.4 Reference </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/docs/manuals/ssjs/1_4/contents.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Server-Side JavaScript 1.4 Guide </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://developer.netscape.com/support/faqs/champions/javascript.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JavaScript FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://home.att.net/~baldwin.r.g/scoop/tocjscript1.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JavaScript Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://rampages.onramp.net/~jnardo/javascript/zen.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Way of JavaScript </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://rummelplatz.uni-mannheim.de/~skoch/js/tutorial.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Voodoo&#8217;s Introduction to JavaScript </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://wdvl.com/Authoring/JavaScript/Tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JavaScript Tutorial for Programmers </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://wsabstract.com/javatutors/primer1.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">JavaScript Primer </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.echoecho.com/javascript.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">EchoEcho JavaScript Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.informit.com/product/1575211955/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Sams Teach Yourself JavaScript 1.1 in a Week (2nd Ed.) </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Lisp</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://ringer.cs.utsa.edu/research/AI/cltl/common-lisp-tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Common Lisp Hints </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.cmu.edu/Web/Groups/AI/html/cltl/cltl2.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Common Lisp the Language (2nd Ed.) </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cs.cmu.edu/Web/Groups/AI/html/faqs/lang/lisp/top.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Lisp FAQ </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.cse.cuhk.edu.hk/~csc4510/lisp/html/lisp.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Lisp Programming Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.eecs.tulane.edu/www/Villamil/lisp/lisp1.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Lisp Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.nyu.edu/pages/linguistics/nlcp/lisp.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">LISP Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.xanalys.com/software_tools/reference/HyperSpec/FrontMatter/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Common Lisp HyperSpec </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">MIDI</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www.borg.com/~jglatt/tutr/miditutr.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Basic MIDI Tutorials </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.harmony-central.com/MIDI/Doc/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Tutorial on MIDI and Music Synthesis </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">ML</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://cs.wwc.edu/Environment/SML-Tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">ML Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.dcs.ed.ac.uk/home/stg/NOTES/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Programming in Standard ML &#8217;97 </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.dcs.napier.ac.uk/course-notes/sml/manual.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">A Gentle Introduction to ML </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.dina.dk/~sestoft/manual/manual.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Moscow ML Owner&#8217;s Manual </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">MPI</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://www-erl.mit.edu/cagc/mpi/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">An MPI Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-unix.mcs.anl.gov/mpi/tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Tutorial on MPI </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-unix.mcs.anl.gov/mpi/tutorial/mpibasics/index.htm" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">MPI: Portable Parallel Programming for Scientific Computing </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www-unix.mcs.anl.gov/mpi/tutorial/perf/index.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Tuning MPI Applications for Peak Performance </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.epm.ornl.gov/~walker/mpi/SLIDES/mpi-tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">MPI: From Fundamentals to Applications </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.mpi.nd.edu/mpi_tutorials/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">MPI Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.netlib.org/utk/papers/mpi-book/mpi-book.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">MPI: The Complete Reference </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.scs.leeds.ac.uk/cpde/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Introduction to Parallel Programming Using MPI </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.tc.cornell.edu/Edu/Talks/MPI/Basic/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Basics of MPI Programming </span></a></p>
+<p><strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Matlab</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<span style="font-family: 'Times New Roman';"><a href="http://www.engin.umich.edu/group/ctm/basic/basic.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Matlab Basics Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.math.ufl.edu/help/matlab-tutorial/" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Matlab Summary and Tutorial </span></a><span style="text-decoration: underline;"><span style="color: blue;"><br />
+</span></span><a href="http://www.mathworks.com/access/helpdesk/help/fulldocset.shtml" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">Matlab &#8211; Official Online Manuals in PDF </span></a><br />
+</span><br />
+<strong><span style="font-size: 18pt; font-family: Verdana, sans-serif;">Misc</span></strong><span style="font-size: 10pt; font-family: Verdana, sans-serif;"> </span><br />
+<a href="http://bigfoot.eecs.umich.edu/~soar/tutorial.html" target="_blank"><span style="font-size: 10pt; color: #23238e; font-family: Verdana, sans-serif;">The Soar 8 Tutorial Home Page </span></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/585.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="5个不错的Flash的英文教程网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/585.html" class="wp_rp_title">5个不错的Flash的英文教程网</a></li><li ><a href="https://coolshell.cn/articles/355.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/screenshot-linuxdevicedrivers-150x150.png" alt="20本最好的Linux免费书籍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/355.html" class="wp_rp_title">20本最好的Linux免费书籍</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/870.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/05/07-01_cs3_keyboard_shortcuts-150x150.png" alt="Web设计的速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/870.html" class="wp_rp_title">Web设计的速查卡</a></li><li ><a href="https://coolshell.cn/articles/1751.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="Go 语言：Google 的新编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1751.html" class="wp_rp_title">Go 语言：Google 的新编程语言</a></li><li ><a href="https://coolshell.cn/articles/595.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Oracle成功收购Sun" width="150" height="150" /></a><a href="https://coolshell.cn/articles/595.html" class="wp_rp_title">Oracle成功收购Sun</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/240.html">非常不错的编程技术教程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/240.html/feed</wfw:commentRss>
+			<slash:comments>19</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++和JAVA传统中积极的一面</title>
+		<link>https://coolshell.cn/articles/209.html</link>
+					<comments>https://coolshell.cn/articles/209.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 22 Mar 2009 13:29:39 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=209</guid>
+
+					<description><![CDATA[<p>译者注： 本文翻译自Bruce Eckel（《Thinking in C++》&#38; 《Thinking in Java》作者）的博文，该博文于2009年0...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/209.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/209.html">C++和JAVA传统中积极的一面</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong><a href="https://coolshell.cn/wp-content/uploads/2009/03/bruceeckel.jpg"><img decoding="async" loading="lazy" class="alignright size-full wp-image-232" title="bruceeckel" src="https://coolshell.cn/wp-content/uploads/2009/03/bruceeckel.jpg" alt="bruceeckel" width="95" height="130" /></a>译者注</strong>：</p>
+<p>本文翻译自Bruce Eckel（《Thinking in C++》&amp; 《Thinking in Java》作者）的博文，该博文于2009年03月14日发表于：</p>
+<p style="padding-left: 30px;"><a href="http://www.artima.com/weblogs/viewpost.jsp?thread=252441">http://www.artima.com/weblogs/viewpost.jsp?thread=252441</a></p>
+<p>本文的发表引起了互联网上热烈的讨论，关于讨论大家可以到<a href="http://www.artima.com/forums/flat.jsp?forum=106&amp;thread=252441" target="_blank">这里</a>围观。</p>
+<p>下面是原文。原名《<strong>The Positive Legacy of C++ and Java</strong>》</p>
+<p><strong>摘要：</strong></p>
+<p>在最近的讨论中，有些人断定C++并不是一个设计完美的语言。在我在C++标准委员那8年里，我目睹所有关于C++的决议的诞生。我希望本文有助于帮读者理解C++和JAVA的设计选择，从而可以让大家更全面的来看待他们。<br />
+<span id="more-209"></span></p>
+<p>有人说，我很少再使用C++。当我使用C++时，我只是为了测试一下陈旧的代码，或者写一个和性能密切相关的程序，通常这个程序非常小，并且通过其他的语言来调用。(我喜欢的做法是，用Python快速开发一个程序，用profile辅助程序对其进行性能优化，如果需要的话，通过Python的ctypes调用C++写的程序来改善性能)。</p>
+<p>因为我曾经是C++标准委员会的一员，我目睹了这些决议的产生。这些C++决议都是在经过超级深思熟虑的考虑之后在做出，他们远比大多数Java的决议更为谨慎小心。</p>
+<p>然而，就像有些人准确地指出那样，C++是复杂而难于使用的，并且充满了各种个样容易让人忘记的古怪的规则。当我在写书的时候，我只能从规范中找到这些规则的说明，而不是自己能记住这些规则。</p>
+<p>为了让人们理解C++这门语言如何即难用、复杂，同时还要有良好的设计，你必须记住一条C++中最主要的设计原则——兼容C语言。这是Stroupstru最正确的决定，这样做将会出现一条让大量的C程序员通向C++程序的捷径：这条捷径允许C程序员不需要做任何修改就可以在C++下编译程序。然而，这也成为了C++语言巨大的约束，它给C++带来了强大的力量，同时也给C++带来了无尽的痛楚。正是因为这个约束导致了C++如此的成功，并且也如此的复杂。</p>
+<p>这些C++古怪的条约使那些没有完全了解C++的Java的设计者们犯了傻。例如，他们认为程序员能用好操作符重载将会是非常困难的一件事。但是操作符重载在C++中却是必须的，因为在C++中有栈分配，同时又有堆上的分配，你只有通过重载好操作符来处理好不同类型的内存分配，并保证不会产生内存泄漏，的确是难！但对Java来说，因为Java只有单一的一种内存分配机制（<span style="color: #800080;"><strong>译者注：</strong>Java基本上是采用堆分配</span>）和垃圾回收机制，这样操作符重载在Java中就变得多余（正如C#的操作符重载，和更早之前的Python操作重载，但是Python出现的要比Java早）。但是多年以来，来自Java的团队就一致认为“操作符重载太过复杂”。这一决议或其他的一些Java决议，明显说明了很多Java的设计者在做出决议的时候没有做足自己的工作，这也是为什么我有了一个藐视由Gosling和他的Java团队所做决议的名声。</p>
+<p>同样还有太多太多的例子，基本类型“因为性能原因被引入”。真正的原因是为了坚持“所有都是对象”，并且同时为底层具有效率要求的程序提供一个后门（同时这也使得一些热点技术执行起来更有效率）。噢，但是事实是，你没有办法直接使用浮点处理器来进行超越函数的计算（<span style="color: #800080;"><strong>译者注：</strong></span><a href="http://en.wikipedia.org/wiki/Transcendental_function" target="_blank"><span style="color: #800080;">Transcendental Functions </span></a><span style="color: #800080;">，一种微积分的函数</span>），而只能使用软件来计算，但原本这类函数就可以使用浮点计算处理器来计算的。我尽我所能将类似这样的问题罗列出来，但是我听到的结果却总是那些无用的回答“这就是Java的方式”。</p>
+<p>当我写下泛型是个如何糟糕的设计时，我得到了同样的回应，“我们必须兼容之前的（糟糕的）Java的决议”。最后越来越多的人们获得了足够关于泛型是多难用的经验——的确，C++的泛型更强大，一致性更好（尤其现在当编译器的错误信息越来越清晰后，泛型也比以前更好使用），因为Java泛型设计很差，很难，所以人们又开始回到认真对待具现化而不是泛型，当然，这对语言是有帮助的，因为具现化这个东西并不会消弱太多的语言设计，也不会因为这些自我限制而导致语言缺陷。</p>
+<p>那个Java的问题列表在这些沉闷的回应面前只能显得单调乏味。那么，是不是这样就意味着Java是失败的语言设计呢？绝对不是，Java将主流程序员带入到了一个垃圾收集器、虚拟机、一致的错误处理模型的世界(如果你不使用异常处理，这类异常可能是非常有用的异常，正如我在《Think in Java 》4ed中演示的那样)。伴随着它设计上种种缺陷，Java把我们带领到了一个更高的层次，在这个层次上我们正在准备着迎接更为高级别的语言。</p>
+<p>另一个观点，人们一直认为C++是语言中的先驱，许多人也认为Java是语言的先驱。但是因为虚拟机，Java使得自己更容易被别的语言替代。现在任何人都有可能快速创建一门新的语言，并且和Java具有一样的效率；而以前，要得到一个正确的，有效率的编译器花去了开发一门新语言的大部分时间。</p>
+<p>现在，我们正在见证这一切的发生——不管是更高级的静态语言，例如Scala，或者说是动态语言（<span style="color: #800080;"><strong>译者注</strong>：Dynamic Language，如Python或Ruby</span>），不管是新的还是移植的，例如Groovy ，JRuby和Jython。这就是未来的趋势，并且其过度将会非常的平滑，因为你可以在已有的Java代码中使用这些新语言，如果有需要，你甚至可以重写Java中产生有性能瓶颈的地方。</p>
+<p>正如C++会消亡一样，Java自生有可能消亡，或着被用于特殊环境之下（或仅仅是为了支持以前遗留的代码，因为Java并不像C++那样会被用于硬件编程）。但是Java 真正的亮点，也是意料之外的收获，就是如果当Java已经到了自身没法在进化的地步时，Java已经为其替代者创建一条平滑之路。所有未来的语言都将从这里学到：要么为自己创建一种可以不断重构(进化)(正如Python和Ruby做的那样)的文化，要么就让其竞争者发展壮大。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/cpp_small-150x150.jpg" alt="C++的坑真的多吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7992.html" class="wp_rp_title">C++的坑真的多吗？</a></li><li ><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" alt="那些曾伴我走过编程之路的软件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_title">那些曾伴我走过编程之路的软件</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/209.html">C++和JAVA传统中积极的一面</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/209.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>优秀程序员的十个习惯</title>
+		<link>https://coolshell.cn/articles/222.html</link>
+					<comments>https://coolshell.cn/articles/222.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 22 Mar 2009 03:34:08 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=222</guid>
+
+					<description><![CDATA[<p>在这个世界上，有数百万的人热衷于软件开发，他们有很多名字，如：软件工程师（Software Engineer），程序员（Programmer），编码人（Code...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/222.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/222.html">优秀程序员的十个习惯</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" class="alignright" src="https://coolshell.cn/wp-content/uploads/2009/03/icon_gear.png" alt="" />在这个世界上，有数百万的人热衷于软件开发，他们有很多名字，如：软件工程师（Software Engineer），程序员（Programmer），编码人（Coder），开发人员（Developer）。经过一段时间后，这些人也许能够成为一个优秀的编码人员，他们会非常熟悉如何用计算机语言来完成自己的工作。但是，如果你要成为一个优秀的程序员，你还可以需要有几件事你需要注意，如果你能让下面十个条目成为你的习惯，那么你才能真正算得上是优秀程序员。</p>
+<p>1. <strong>学无止境</strong>。就算是你有了10年以上的程序员经历，你也得要使劲地学习，因为你在计算机这个充满一创造力的领域，每天都会有很多很多的新事物出现。你需要跟上时代的步伐。你需要去了解新的程序语言，以及了解正在发展中的程序语言，以及一些编程框架。还需要去阅读一些业内的新闻，并到一些热门的社区去参与在线的讨论，这样你才能明白和了解整个软件开发的趋势。在国内，一些著名的社区例如：CSDN，ITPUB，CHINAUINX等等，在国外，建议你经常上一上digg.com去看看各种BLOG的聚合。</p>
+<p><span id="more-222"></span></p>
+<p>2. <strong>掌握多种语言</strong>。程序语言总是有其最适合的领域。当你面对需要解决的问题时，你需要找到一个最适合的语言来解决这些问题。比如，如果你需要性能，可能C/C++是首选，如果你需要跨平台，可能Java是首选，如果你要写一个Web上的开发程序，那么PHP，ASP，Ajax，JSP可能会是你的选择，如果你要处理一些文本并和别的应用交互，可能Perl, Python会是最好的。所以，花一些时间去探索一下其它你并熟悉的程序语言，能让你的眼界变宽，因为你被武装得更好，你思考问题也就更为全面，这对于自己和项目都会有好的帮助。</p>
+<p>3. <strong>理性面对不同的操作系统或技术</strong>。程序员们总是有自己心目中无可比拟的技术和操作系统，有的人喜欢Ubuntu，有的人喜欢Debian，还有的人喜欢Windows，以及FreeBSD，MacOSX或Solaris等等。看看我的BLOG(<a href="http://blog.csdn.net/haoel">http://blog.csdn.net/haoel</a>)中的那篇《<a href="http://blog.csdn.net/haoel/archive/2007/03/19/1533720.aspx" target="_blank">其实Unix很简单</a>》后的回复你就知道程序员们在维护起自己的忠爱时的那份执着了。只有一部分优秀的程序员明白不同操作系统的优势和长处和短处，这样，在系统选型的时候，才能做到真正的客观和公正，而不会让情绪影响到自己。同样，语言也是一样，有太多的程序员总是喜欢纠缠于语言的对比，如：Java和Perl。哪个刚刚出道的程序员没有争论去类似的话题呢？比如VC++和Delphi等等。争论这些东西只能表明自己的肤浅和浮燥。优秀的程序并不会执着于这些，而是能够理性的分析和理心地面对，从而才能客观地做出正确的选择。</p>
+<p>4. <strong>别把自己框在单一的开发环境中。</strong> 再一次，正如上面所述，每个程序员都有自己忠爱的工具和技术，有的喜欢老的（比如我就喜欢Vi编辑程序），而有的喜欢新的比如gedit或是Emacs等。有的喜欢使用像VC++一样的图形界面的调试器，而我更喜欢GDB命令行方面的调式器。等等等等。程序员在使用什么样的工具上的争论还少吗？到处都是啊。使用什么样的工具本来无所谓，只要你能更好更快地达到你的目的。但是有一点是优秀程序员都应该了解的——那就是应该去尝试一下别的工作环境。没有比较，你永远不知道谁好谁不好，你也永远不知道你所不知道的。</p>
+<p>5. <strong>使用版本管理工具管理你的代码。</strong>千万不要告诉我你不知道源码的版本管理，如果你的团队开发的源代码并没有版本管理系统，那么我要告诉你，你的软件开发还处于石器时代。赶快使用一个版式本管理工具吧。CVS 是一个看上去平淡无奇的版本工具，但它是被使用最广的版本管理系统，Subversion 是CVS的一个升级版，其正在开始接管CVS的领地。Git 又是一个不同的版本管理工具。还有Visual SourceSafe等。使用什么样的版本管理工具依赖于你的团队的大小和地理分布，你也许正在使用最有效率或最没有效率的工具来管理你的源代码。但一个优秀的程序员总是会使用一款源码版本管理工具来管理自己的代码。如果你要我推荐一个，我推荐你使用开源的Subversion。</p>
+<p>6. <strong>是一个优秀的团队成员。</strong> 除非你喜欢独奏，除非你是孤胆英雄。但我想告诉你，今天，可能没有一个成熟的软件是你一个人能做的到的，你可能是你团队中最牛的大拿，但这并不意味着你就是好的团队成员。你的能力只有放到一个团队中才能施展开来。你在和你的团队成员交流中有礼貌吗？你是否经常和他们沟通，并且大家都喜欢和你在一起讨论问题？想一想一个足球队吧，你是这个队中好的成员吗？当别人看到你在场上的跑动时，当别人看到你的传球和接球和抢断时，你的团员成员能因为你的动作受到鼓舞吗？</p>
+<p>7. <strong>把你的工作变成文档。</strong> 这一条目当然包括了在代码中写注释，但那还仅仅不够，你还需要做得更多。有良好的注释风格的代码是一个文档的基础，他能够让你和你的团队容易的明白你的意图和想法。写下文档，并不仅仅是怕我们忘了当时的想法，而且还是一种团队的离线交流的方法，更是一种知识传递的方法。记录下你所知道的一切会是一个好的习惯。因为，我相信你不希望别人总是在你最忙的时候来打断你问问题，或是你在休假的时候接到公司的电话来询问你问题。而你自己如果老是守着自己的东西，其结果只可能是让你自己长时间地深陷在这块东西内，而你就更本不可以去做更多的事情。包括向上的晋升。你可能以为“教会徒弟能饿死师父”，但我告诉你，你的保守会让你失去更多更好的东西，请你相信我，我绝不是在这里耸人听闻。</p>
+<p>8. <strong>注意备份和安全。</strong> 可能你觉得这是一个“废话”，你已明白了备份的重要性。但是，我还是要在这里提出，丢失东西是我们人生中的一部份，你总是会丢东西，这点你永远无法避免。比如：你的笔记本电脑被人偷了，你的硬盘损坏了，你的电脑中病毒了，你的系统被人入侵了，甚至整个大楼被烧了，等等，等等。所以，做好备份工作是非常非常重要的事情，硬盘是不可信的，所以定期的刻录光盘或是磁带可能会是一个好的方法，网络也是不可信的，所以小心病毒和黑客，不但使用软件方面的安全策略，你更需要一个健全的管理制度。此外，尽量的让你的数据放在不同的地方，并做好定期（每日，每周，每月）的备份策略。</p>
+<p>9. <strong>设计要足够灵活。</strong> 可能你的需求只会要求你实现一个死的东西，但是，你作为一个优秀的程序，你应该随时在思考这个死的东西是否可以有灵活的一面，比如把一些参数变成可以配置的，把一些公用的东西形成你的函数库以便以后重用，是否提供插件方面的功能？你的模块是否要以像积木一样随意组合？如果要有修改的话，你的设计是否能够马上应付？当然，灵活的设计可能并不是要你去重新发明轮子，你应该尽可能是使用标准化的东西。所谓灵话的设计就是要让让考虑更多需求之外的东西，把需求中这一类的问题都考虑到，而不是只处理需求中所说的那一特定的东西。比如说，需要需要的屏幕分辨率是800&#215;600，那么你的设计能否灵活于其他的分辨率？程序设计总是需要我们去处理不同的环境，以及未来的趋势。我们需要用动态的眼光去思考问题，而不是刻舟求剑。也许有一天，你今天写的程序就要移植到别的环境中去，那个时候你就能真正明白什么是灵活的设计了。</p>
+<p>10. <strong>不要搬起石头砸自己的脚。</strong>程序员总是有一种不好的习惯，那就是总是想赶快地完成自己手上的工作。但情况却往往事已愿违。越是想做得快，就越是容易出问题，越是想做得快，就越是容易遗漏问题，最终，程序改过来改过去，按下葫芦起了瓢，最后花费的时间和精力反而更多。欲速而不达。优秀程序员的习惯是前面多花一些时间多作一些调查，试验一下不同的解决方案，如果时间允许，一个好的习惯是，每4个小时的编程，需要一个小时的休息，然后又是4个小时的编码。当然，这因人而异，但其目的就是让你时常回头看看，让你想一想这样三个问题：1）是否这么做是对的？2）是否这么做考虑到了所有的情况？3）是否有更好的方法？想好了再说，时常回头看看走过的路，时常总结一下过去事，会对你有很大的帮助。</p>
+<p>以上是十条优秀程序员的习惯或行为规范，希望其可以对你有所帮助。</p>
+<p>本文来源于网上phil的BLOG，但我在写作过程中使用了自己的语言和方法重新描述了一下这十条，所以，我希望你在转载的时候能够注明作者和出处以表示对我的尊重。谢谢！</p>
+<p>文章：<a href="http://codepad.classhelper.org/top-ten-habits-of-successful-programmers/223/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/222.html">优秀程序员的十个习惯</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/222.html/feed</wfw:commentRss>
+			<slash:comments>76</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一位离开Google的设计师离职感言的读后感</title>
+		<link>https://coolshell.cn/articles/208.html</link>
+					<comments>https://coolshell.cn/articles/208.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Sat, 21 Mar 2009 13:47:05 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=208</guid>
+
+					<description><![CDATA[<p>Douglas Bowman, 一位Google的设计师，3月20日离开了Google。他在自己的博客上留了一篇感言</p>
+The post <a href="https://coolshell.cn/articles/208.html">一位离开Google的设计师离职感言的读后感</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Douglas Bowman, 一位Google的设计师，3月20日离开了Google。他在自己的<a href="http://stopdesign.com/">博客</a>上留了一篇<a href="http://stopdesign.com/archive/2006/05/27/going-to-google.html">感言</a></p>
+<p>很多人感兴趣Google是否是技术人员的天堂，也感兴趣Google有多少数据，更多人想撬开Google的创新引擎看看这个日渐庞大的企业如何能够保持特立独行的作风。本文不是关于这些，而是一个设计师的对Google的理解。</p>
+<p>摘要：</p>
+<blockquote><p>当一个公司里没有一个透彻理解“设计的原则和元素”的领军人物时，很快这个公司就会在作出设计决定上感到枯竭。（原文：Without a person at (or near) the helm who thoroughly understands the <a href="http://en.wikipedia.org/wiki/Design_principles_and_elements">principles and elements of Design</a>, a company eventually runs out of reasons for design decisions.）</p></blockquote>
+<blockquote><p>我感激Google工作的机会，学习很多，很好的食物&#8230;但我不会想念那被数据随意斩杀的设计理念。（原文：I’m thankful for the opportunity I had to work at Google. I learned more than I thought I would. I’ll miss the free food. I’ll miss the occasional massage. I’ll miss the authors, politicians, and celebrities that come to speak or perform. I’ll miss early chances to play with cool toys before they’re released to the public. Most of all, I’ll miss working with the incredibly smart and talented people I got to know there. But I won’t miss a design philosophy that lives or dies strictly by the sword of data.）</p></blockquote>
+<p><span id="more-208"></span></p>
+<p>这个不得不让我们对于如何做出好的设计有些思考，尤其是我们多大程度上应该依赖数据，尤其是对数据的解释。正如剑桥大学的一篇关于<a href="http://www.admin.cam.ac.uk/news/dp/2009031701">统计数据研讨会新闻报道</a>中说道：</p>
+<blockquote><p>统计数据是重要的，能够帮助我们做出日常判断甚至是预测将来提供依据，但是统计数据也是非常无聊的，而且容易被别有用心的人歪曲。（原文：Statistics are essential, from helping us to make choices in our day to day lives to predicting what might happen in the future, but often they are boring and can be manipulated to serve a particular purpose.）</p></blockquote>
+<p>这也同时让我们想到了《<a href="https://coolshell.cn/articles/76.html">怎样做一个Program Manager</a>》 中所引述的，其实很多时候，需求和决定来自看似非常繁杂和近似混乱的沟通。</p>
+<p>综合这些，以及我们对一般（非互联网）产品的设计的理解，我们仍然有理由相信，（互联网）的产品需要来自经验的直觉指导大胆而创新的改变；而此经验的获得和对数据快速反应的能力，来自一种叫做 strategic thinking 的能力。对于strategic thinking, 坦率的说是因为词汇匮乏，也更像是一种 quality without a name。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/753.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="不要拯救那些职场上的“无可救药”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/753.html" class="wp_rp_title">不要拯救那些职场上的“无可救药”</a></li><li ><a href="https://coolshell.cn/articles/21164.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" alt="Go编程模式：Map-Reduce" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21164.html" class="wp_rp_title">Go编程模式：Map-Reduce</a></li><li ><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/affc-image1-150x150.png" alt="微软用新浪来当反面教材" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_title">微软用新浪来当反面教材</a></li><li ><a href="https://coolshell.cn/articles/11021.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/02/Github-Security-150x150.png" alt="从“黑掉Github”学Web安全开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11021.html" class="wp_rp_title">从“黑掉Github”学Web安全开发</a></li><li ><a href="https://coolshell.cn/articles/2990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Time-Allocation-while-Programming-150x150.png" alt="编程时间分配图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2990.html" class="wp_rp_title">编程时间分配图</a></li><li ><a href="https://coolshell.cn/articles/19464.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/06/competition-360x200-1-150x150.png" alt="如何超过大多数人" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19464.html" class="wp_rp_title">如何超过大多数人</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/208.html">一位离开Google的设计师离职感言的读后感</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/208.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>IBM收购Sun，这是一种什么样的精神？</title>
+		<link>https://coolshell.cn/articles/203.html</link>
+					<comments>https://coolshell.cn/articles/203.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 18 Mar 2009 16:10:42 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[IBM]]></category>
+		<category><![CDATA[Sun]]></category>
+		<category><![CDATA[评论]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=203</guid>
+
+					<description><![CDATA[<p>《华尔街日报》3月18日报导有消息说IBM要以65亿美金收购Sun（原文），虽然消息未经证实，但已引起轩然大波。据Business Joural报道，周二，Su...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/203.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/203.html">IBM收购Sun，这是一种什么样的精神？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun.jpg"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-205" title="OFRIN-IBM-SUN-MICROSYSTEMS-20090318" src="https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun-203x300.jpg" alt="OFRIN-IBM-SUN-MICROSYSTEMS-20090318" width="203" height="300" srcset="https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun-203x300.jpg 203w, https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun-183x270.jpg 183w, https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun.jpg 305w" sizes="(max-width: 203px) 100vw, 203px" /></a>《华尔街日报》3月18日报导有消息说IBM要以65亿美金收购Sun（<a href="http://online.wsj.com/article/SB123735970806267921.html" target="_blank">原文</a>），虽然消息未经证实，但已引起轩然大波。据<a href="http://sanjose.bizjournals.com/sanjose/stories/2009/03/16/daily38.html" target="_blank">Business Joural</a>报道，周二，Sun的股票一下子涨了68%，从之前$4.97一下涨到了$8.36，但IBM的股价下跌4%到了$89.46。</p>
+<p>而网上的博主们都在狂写评论文章了。有持支持态度的，这篇<a href="http://www.electronista.com/articles/09/03/18/ibm.may.buy.sun/" target="_blank">博文</a>表明IBM和Sun都是喜欢开源（Linux 和OpenSolaris）以及跨平台的（Linux和Java）的，所以他们的合并可能更好的对抗微软和intel的x86平台，应该太有作为。还有这篇<a href="http://blog.internetnews.com/skerner/2009/03/ibm-sun-acquisition-good-for-u.html" target="_blank">博文</a>则对比了HP收购Compaq(DEC)的案例，说明这样的合并可能更为容易和HP对抗。</p>
+<p>当然，也有不认可以文章，比如ZNet上的这篇<a href="http://blogs.zdnet.com/Gardner/?p=2857" target="_blank">文章</a>，作者觉得这根本就不可能，因为IBM和Sun有太多的重合了，很多方面都有存在很强的竞争，IBM要买来一点用都没有，要芯片技术吗？要操作系统吗？要数据库吗？要Java吗？更不可能。文中说，如果IBM想把Sun干掉，那么用65亿美金就太贵了，在这个寒冬，应该不用这种价格，除非这则新闻另有别的用意……</p>
+<p>不过，最有意思的评论是<a href="http://www.thevarguy.com/2009/03/18/ibm-targeting-sun-for-takeover-linux-mysql-potential-winners/" target="_blank"><strong>这篇</strong></a>，简直是太精彩了，我忍不住想把之翻译在这里：</p>
+<p><span id="more-203"></span></p>
+<p>——————————————————————————</p>
+<p>有报道说IBM准备使用至少65亿美金收购Sun Microsystems公司。如果这个交易发生的话，那么，难道这意味着 Solaris, SPARC, MySQL 和其它技术的会和IBM的核心产品重迭在一起？是否HP也会给Sun打个电话然后再给个价格呢？本人在此对于这个潜在的收购案给出四个预言。当然，Linux肯定是主宰了整个谈判。</p>
+<p>基本上来说，本人并不是一个大型IT公司并购的Fans，因为你只要查看一下历史上的股票估价，你就会发现绝大多数的并购并不能像实际所说的那样。 (比如: Novell/WordPerfect, AT&amp;T/NCR,  AOL/Time Warner, Symantec/Veritas 等等).</p>
+<p>当然，本人要给IBM收购Sun的这种行为竖个大拇哥以示表扬。为什么？<a href="http://www.thevarguy.com/2009/01/30/is-sun-microsystems-the-new-novell/" target="_blank">因为我们的Sun目前正生活在炼狱中</a>，但是它却不可小视，因为这个公司有关很很的排列整齐的开源项目 (<a href="http://mysql.com/" target="_blank">MySQL</a>, <a href="http://www.thevarguy.com/2008/11/10/sun-open-storage-appliances-meet-the-open-source-channel/" target="_blank">open source storage</a> 等) ，但是如果与 Sun的过时的生意(SPARC, Solaris, 等)比起来，这些只能为Sun带来硬币级利润的开源项目只能算个屁了。</p>
+<p>如果IBM真的收购了Sun，那么下面是我的四个预言：</p>
+<ol>
+<li><strong>长期停止Sun的基于RISC的 SPARC处理器。</strong> IBM 本来就有了基于 RISC 技术的处理器( <a href="http://en.wikipedia.org/wiki/IBM_POWER" target="_blank">POWER</a> 产品线)。让我们公正诚实地来看待这个问题，这些大的公司正在四周布满Intel服务器的环境下巩固他们的过气的RISC数据中心。我们不得不说，IBM的确干了一件相当出色的事情来长期地支援那些过气的硬件，而真实的研发 会出现一些POWER/SPARC 的结合变种以面对高端定位。</li>
+<li><strong> Sun Solaris 必然会被混合到 IBM AIX中。</strong> 这个世界有太多的Unix了，IBM找到了一个很有创意的方法取代于继续支持两个Unix，那就是把Solais和AIX所有的功能特性合并到一起。然后和HP-UX竞争，但最终可能的结果也许为成为Linux。这里，我希望大家不要在OpenSolris这里纠缠争论，因为本人强烈地怀疑IBM会把OpenSolaris直接做成Linux的另一选择。</li>
+<li><strong>MySQL 是个大赢家。</strong>今天MySQL在东家Sun这里一看多了。MySQL在这些并购中的声望可以继续增涨，但是MySQL的职员可能会因此离开，而且MySQL内讧也会或多或少打击到开源数据。但有了强大的IBM Global Services 和 Big Blue 的销售渠道，MySQL 只会更加繁荣和兴旺。而且和DB2的联姻，IBM获得了一个强有力的组合拳（one-two punch） ，Oracle 和Microsoft SQL Server自然要被挨打。</li>
+<li><strong>Linux。</strong>这是这个游戏中最大最大的赢家。不但可以在IBM自主的技术蓝图中和Sun的硬件和软件联合起来，而且可以向Linux的数据中心进军，甚至Linux的桌面系统可以加快速度。相信我，绝对没错的。</li>
+</ol>
+<p>不但如此，IBM 收购Sun 还绝对说明了三件事： 1）合并了技术，2）合并了员工，3）控制了Sun的客户基础。</p>
+<p>Sun 用户不应该会恐慌，因为IBM拥有如此之强的实力会继续提供那些过气了的产品。实际上，Sun的用户只会在“如果IBM不收购Sun”时才会感到恐慌……</p>
+<p>好了，让我用一个思考性的问题来结束这个文章吧——到底是谁泄露IBM收购Sun的这个价格？为什么要泄露？难道是有人想要把HP也拉进来坐地起价？ 嘿嘿&#8230;<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1426.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/09/sun_customers_lg-150x150.gif" alt="Oracle的战书！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1426.html" class="wp_rp_title">Oracle的战书！</a></li><li ><a href="https://coolshell.cn/articles/595.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Oracle成功收购Sun" width="150" height="150" /></a><a href="https://coolshell.cn/articles/595.html" class="wp_rp_title">Oracle成功收购Sun</a></li><li ><a href="https://coolshell.cn/articles/1038.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="编程命名中的7+1个提示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1038.html" class="wp_rp_title">编程命名中的7+1个提示</a></li><li ><a href="https://coolshell.cn/articles/2155.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="别只谈系统备份，谈谈怎样恢复系统吧！" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2155.html" class="wp_rp_title">别只谈系统备份，谈谈怎样恢复系统吧！</a></li><li ><a href="https://coolshell.cn/articles/968.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/06/visual_web_developer-150x150.jpg" alt="18个Web开发的IDE" width="150" height="150" /></a><a href="https://coolshell.cn/articles/968.html" class="wp_rp_title">18个Web开发的IDE</a></li><li ><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" alt="你可能不知道的Shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_title">你可能不知道的Shell</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/203.html">IBM收购Sun，这是一种什么样的精神？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/203.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>20 你应该知道的PHP库</title>
+		<link>https://coolshell.cn/articles/200.html</link>
+					<comments>https://coolshell.cn/articles/200.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 18 Mar 2009 13:01:08 +0000</pubDate>
+				<category><![CDATA[PHP脚本]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=200</guid>
+
+					<description><![CDATA[<p>下面是一些非常有用的PHP类库，相信一定可以为你的WEB开发提供更好和更为快速的方法。 图表库 下面的类库可以让你很简的创建复杂的图表和图片。当然，它们需要GD...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/200.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/200.html">20 你应该知道的PHP库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p class="entry">下面是一些非常有用的PHP类库，相信一定可以为你的WEB开发提供更好和更为快速的方法。</p>
+<h3 class="entry">图表库<a href="https://coolshell.cn/wp-content/uploads/2009/03/021151lephpant-e_png.jpg"><img decoding="async" loading="lazy" class="alignright size-full wp-image-201" title="021151lephpant-e_png" src="https://coolshell.cn/wp-content/uploads/2009/03/021151lephpant-e_png.jpg" alt="021151lephpant-e_png" width="200" height="128" /></a></h3>
+<p class="entry">下面的类库可以让你很简的创建复杂的图表和图片。当然，它们需要GD库的支持。</p>
+<div class="entry">
+<ol>
+<li><a title="pChart" href="http://pchart.sourceforge.net/" target="_blank">pChart</a> &#8211; 一个可以创建统计图的库。</li>
+<li><a title="Libchart" href="http://naku.dohcrew.com/libchart/pages/introduction/" target="_blank">Libchart</a> &#8211; 这也是一个简单的统计图库。</li>
+<li><a title="JpGraph" href="http://www.aditus.nu/jpgraph/" target="_blank">JpGraph</a> &#8211; 一个面向对象的图片创建类。</li>
+<li><a title="Open Flash Chart" href="http://teethgrinder.co.uk/open-flash-chart/" target="_blank">Open Flash Chart</a> &#8211; 这是一个基于Flash的统计图。</li>
+</ol>
+</div>
+<p> <span id="more-200"></span></p>
+<h3>RSS 解析</h3>
+<p>解释RSS并是一件很单调的事情，不过幸好你有下面的类库可以帮助你方便地读取RSS的Feed。</p>
+<ol>
+<li><a title="MagpieRSS" href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> &#8211; 开源的PHP版RSS解析器，据说功能强大，未验证。</li>
+<li><a title="SimplePie" href="http://simplepie.org/" target="_blank">SimplePie</a> &#8211; 这是一个非常快速，而且易用的RSS和Atom 解析库。</li>
+</ol>
+<h3>缩略图生成</h3>
+<ol>
+<li><a title=" phpThumb" href="http://phpthumb.sourceforge.net/" target="_blank">phpThumb</a> &#8211; 功能很强大，如何强大还是自己去体会吧。</li>
+</ol>
+<h3>支付</h3>
+<p>你的网站需要处理支付方面的事情？需要一个和支付网关的程序？下面这个程序可以帮到你。</p>
+<ol>
+<li><a title="PHP Payment Library" href="http://www.phpfour.com/blog/2009/02/php-payment-gateway-library-for-paypal-authorizenet-and-2checkout/" target="_blank">PHP Payment Library</a> &#8211; 支持Paypal, Authorize.net 和2Checkout (2CO)</li>
+</ol>
+<h3>OpenID</h3>
+<ol>
+<li><a title="PHP-OpenID" href="http://www.openidenabled.com/php-openid/" target="_blank">PHP-OpenID</a> &#8211; 支持OpenID的一个PHP库。OpenID是帮助你使用相同的用户名和口令登录不同的网站的一种解决方案。如果你对OpenID不熟悉的话，你可以到这里看看：<a href="http://openid.net.cn/">http://openid.net.cn/</a></li>
+</ol>
+<h3>数据为抽象/对象关系映射ORM</h3>
+<ol>
+<li><a title="ADOdb" href="http://adodb.sourceforge.net/" target="_blank">ADOdb</a> &#8211; 数据库抽象</li>
+<li><a title="Doctrine" href="http://www.doctrine-project.org/" target="_blank">Doctrine</a> &#8211; 对象关系映射Object relational mapper (ORM) ，需要 PHP 5.2.3+ 版本，一个非常强大的database abstraction layer (DBAL).</li>
+<li><a title="Propel" href="http://propel.phpdb.org/trac/" target="_blank">Propel</a> &#8211; 对象关系映射框架- PHP5</li>
+<li><a title="Outlet" href="http://www.outlet-orm.org/site/" target="_blank">Outlet</a> &#8211; 也是关于对象关系映射的一个工具。</li>
+</ol>
+<p>注：对象关系映射（Object Relational Mapping，简称ORM）是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。 简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。本质上就是将数据从一种形式转换到另外一种形式。 这也同时暗示者额外的执行开销；然而，如果ORM作为一种中间件实现，则会有很多机会做优化，而这些在手写的持久层并不存在。 更重要的是用于控制转换的元数据需要提供和管理；但是同样，这些花费要比维护手写的方案要少；而且就算是遵守ODMG规范的对象数据库依然需要类级别的元数据。</p>
+<h3>PDF 生成器</h3>
+<ol>
+<li><a title="FPDF" href="http://www.fpdf.org/" target="_blank">FPDF</a> &#8211; 这量一个可以让你生成PDF的纯PHP类库。</li>
+</ol>
+<h3>Excel 相关</h3>
+<p>你的站点需要生成Excel？没有问题，下面这两个类库可以让你轻松做到这一点。</p>
+<div id="psum">
+<ol>
+<li><a title="php-excel" href="http://code.google.com/p/php-excel/" target="_blank">php-excel</a> &#8211; 这是一个非常简单的Excel文件生成类。</li>
+<li><a title="PHP Excel Reader" href="http://code.google.com/p/php-excel-reader/" target="_blank">PHP Excel Reader</a> &#8211; 可以解析并读取XLS文件中的数据。</li>
+</ol>
+</div>
+<h3 id="psum">E-Mail 相关</h3>
+<p>不喜欢PHP的mail函数？觉得不够强大？下面的PHP邮件相关的库绝对不会让你失望。</p>
+<div>
+<ol>
+<li><a title="Swift Mailer" href="http://swiftmailer.org/" target="_blank">Swift Mailer</a> &#8211; 免费的超多功能的PHP邮件库。</li>
+<li><a title="PHPMailer" href="http://phpmailer.codeworxtech.com/" target="_blank">PHPMailer </a>&#8211; 超强大的邮件发送类。</li>
+</ol>
+<h3>单元测试</h3>
+<p>如果你在使用测试驱动的方法开发你的程序，下面的类库和框架绝你能帮助你的开发。</p></div>
+<ol>
+<li><a title="SimpleTest" href="http://www.simpletest.org/" target="_blank">SimpleTest</a> &#8211; 一个PHP的单元测试和网页测试的框架。</li>
+<li><a title="PHPUnit" href="http://www.phpunit.de/" target="_blank">PHPUnit</a> &#8211; 来自xUnit 家族，提供一个框架可以让你方便地进行单元测试的案例开发。并可非常容易地分析其测试结果。</li>
+</ol>
+<p>文章：<a href="http://komunitasweb.com/2009/03/20-great-php-library-you-need-to-know/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" alt="PHP分页技术的代码和示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_title">PHP分页技术的代码和示例</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="九个PHP很有用的功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_title">九个PHP很有用的功能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/200.html">20 你应该知道的PHP库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/200.html/feed</wfw:commentRss>
+			<slash:comments>59</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux 相关的资源站makelinux.net</title>
+		<link>https://coolshell.cn/articles/194.html</link>
+					<comments>https://coolshell.cn/articles/194.html#respond</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 16 Mar 2009 14:51:47 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=194</guid>
+
+					<description><![CDATA[<p>关于Linux相关的资源大家可以到http://www.makelinux.net/访问相关的文章，很不错的一个和linux内核相关的资源网站，当然，你可能因为...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/194.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/194.html">Linux 相关的资源站makelinux.net</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/03/makelinux.jpg"><img decoding="async" loading="lazy" class="alignright size-full wp-image-195" title="makelinux" src="https://coolshell.cn/wp-content/uploads/2009/03/makelinux.jpg" alt="makelinux" width="209" height="108" /></a>关于Linux相关的资源大家可以到<a href="http://www.makelinux.net/">http://www.makelinux.net/</a>访问相关的文章，很不错的一个和linux内核相关的资源网站，当然，你可能因为种种原因不能访问这个网上的一些资源，那么你可能需要使用代理服务器或是一个叫Tor的软件，关于后者，请参看这篇文章<a href="https://coolshell.cn/articles/25.html">《如何上网觅无踪</a>》</p>
+<p>下面是makelinux上的资源列表，都非常不错。</p>
+<p><span id="more-194"></span></p>
+<p><span style="display: none;"><strong>Resources on the site<br />
+</strong>• <a href="http://www.makelinux.net/system" target="_blank"><span style="color: #0000ff;">Interactive map of GNU/Linux OS and FOSS</span></a><br />
+• <a href="http://www.makelinux.net/home" target="_blank"><span style="color: #0000ff;">&#8220;GNU/Linux is my home&#8221;</span></a> &#8211; map of GNU/Linux system<br />
+• <a href="http://www.makelinux.net/kernel_map" target="_blank"><span style="color: #810081;">Interactive map of Linux kernel</span></a><br />
+• <a href="http://www.makelinux.net/inside" target="_blank"><span style="color: #810081;">Linux inside</span></a><br />
+• <a href="http://www.makelinux.net/reference" target="_blank"><span style="color: #810081;">Linux Technology Reference</span></a> (<a href="http://www.makelinux.net/reference.d/linksframe.shtml?w=full" target="_blank"><span style="color: #0000ff;">single page view</span></a>)<br />
+• <a href="http://www.makelinux.net/kernel/diagram" target="_blank"><span style="color: #810081;">Linux kernel diagram</span></a><br />
+• <a href="http://www.makelinux.net/ldd3/" target="_blank"><span style="color: #810081;">Linux Device Drivers, 3rd Edition</span></a><br />
+• <a href="http://www.makelinux.net/alp" target="_blank"><span style="color: #810081;">Advanced Linux Programming</span></a><br />
+• <a href="http://www.makelinux.net/make3" target="_blank"><span style="color: #0000ff;">Managing Projects with GNU make</span></a><br />
+• <a href="http://www.makelinux.net/books/1000%20Hacker%20Tutorials%202008" target="_blank"><span style="color: #810081;">1000 Hacker Tutorials 2008</span></a><br />
+• <a href="http://www.makelinux.net/books/intro-linux" target="_blank"><span style="color: #0000ff;">Introduction to Linux</span></a><br />
+• <a href="http://www.makelinux.net/books/Bash-Beginners-Guide" target="_blank"><span style="color: #0000ff;">Bash Guide for Beginners</span></a><br />
+• <a href="http://www.makelinux.net/books/abs-guide" target="_blank"><span style="color: #0000ff;">Advanced Bash-Scripting Guide</span></a><br />
+• <a href="http://www.makelinux.net/books/GNU-Linux-Tools-Summary" target="_blank"><span style="color: #0000ff;">GNU/Linux Command-Line Tools Summary</span></a><br />
+• <a href="http://www.makelinux.net/books/Linux-Filesystem-Hierarchy" target="_blank"><span style="color: #0000ff;">Linux Filesystem Hierarchy</span></a><br />
+• <a href="http://www.makelinux.net/books/lkmpg" target="_blank"><span style="color: #810081;">The Linux Kernel Module Programming Guide</span></a><br />
+• <a href="http://www.makelinux.net/books/sag" target="_blank"><span style="color: #810081;">The Linux System Administrator\&#8217;s Guide</span></a><br />
+• <a href="http://www.makelinux.net/books/nag2" target="_blank"><span style="color: #810081;">Linux Network Administrators Guide</span></a><br />
+• <a href="http://www.makelinux.net/books/autobook-1.5/autobook.html" target="_blank"><span style="color: #0000ff;">Autobook: GNU Autoconf, Automake, and Libtool</span></a> <a href="http://sources.redhat.com/autobook/download.html" target="_blank"><span style="color: #0000ff;">src</span></a><br />
+<strong>Linux related products<br />
+</strong>• <a href="http://www.makelinux.net/kernel_map_poster" target="_blank"><span style="color: #0000ff;">Linux kernel poster</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=136&amp;affiliate_banner_id=50" target="_blank"><span style="color: #0000ff;">Linux Quick Guide</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=142&amp;affiliate_banner_id=48" target="_blank"><span style="color: #0000ff;">Unix like Operating Systems Map</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=134&amp;affiliate_banner_id=49" target="_blank"><span style="color: #0000ff;">Unix Quick Guide</span></a><br />
+<strong>Other products<br />
+</strong>• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=124&amp;affiliate_banner_id=43" target="_blank"><span style="color: #0000ff;">Computer Operating System Map</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=118&amp;affiliate_banner_id=42" target="_blank"><span style="color: #0000ff;">Wi-Fi Quick Guide</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=68&amp;affiliate_banner_id=15" target="_blank"><span style="color: #0000ff;">Wireless Communication Technology Map</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=120&amp;affiliate_banner_id=41" target="_blank"><span style="color: #0000ff;">VOIP Quick Guide</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=69&amp;affiliate_banner_id=14" target="_blank"><span style="color: #0000ff;">Network Protocol Map</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=65&amp;affiliate_banner_id=13" target="_blank"><span style="color: #0000ff;">TCP/IP Quick Guide</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=70&amp;affiliate_banner_id=12" target="_blank"><span style="color: #0000ff;">Network Security Map</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=63&amp;affiliate_banner_id=11" target="_blank"><span style="color: #0000ff;">Network Protocols Handbook</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=113&amp;affiliate_banner_id=9" target="_blank"><span style="color: #0000ff;">Network Management Architecture and Technology Map</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=79&amp;affiliate_banner_id=7" target="_blank"><span style="color: #0000ff;">Network Dictionary</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=133&amp;affiliate_banner_id=56" target="_blank"><span style="color: #0000ff;">IPv6 Deployment Guide</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=67&amp;affiliate_banner_id=5" target="_blank"><span style="color: #0000ff;">Ethernet Quick Guide</span></a><br />
+• <a href="http://www.javvin.com/product_info.php?ref=41&amp;products_id=77&amp;affiliate_banner_id=44" target="_blank"><span style="color: #0000ff;">3G Wireless Tech Quick Guide</span></a><br />
+<strong>Other</strong>:<br />
+• <a href="http://www.makelinux.net/biotech" target="_blank"><span style="color: #0000ff;">Business proposal to production of ointment for treatment skin diseases</span></a><br />
+</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/194.html">Linux 相关的资源站makelinux.net</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/194.html/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

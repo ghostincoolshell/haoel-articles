@@ -1,0 +1,2187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 11 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=11" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Mon, 06 Jul 2020 10:11:27 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>无锁队列的实现</title>
+		<link>https://coolshell.cn/articles/8239.html</link>
+					<comments>https://coolshell.cn/articles/8239.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 07 Sep 2012 00:26:55 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Performance]]></category>
+		<category><![CDATA[Queue]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8239</guid>
+
+					<description><![CDATA[<p>————注：本文于2019年11月4日更新———— 关于无锁队列的实现，网上有很多文章，虽然本文可能和那些文章有所重复，但是我还是想以我自己的方式把这些文章中的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8239.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8239.html">无锁队列的实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: center;"><strong><em>————注：本文于2019年11月4日更新————</em></strong></p>
+<p>关于无锁队列的实现，网上有很多文章，虽然本文可能和那些文章有所重复，但是我还是想以我自己的方式把这些文章中的重要的知识点串起来和大家讲一讲这个技术。下面开始正文。</p>
+<h4>关于CAS等原子操作</h4>
+<p><img decoding="async" loading="lazy" class="alignright size-full wp-image-8245" title="lock free bicycle" src="https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle.jpg" alt="" width="350" height="261" srcset="https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle.jpg 350w, https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle-300x224.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" />在开始说无锁队列之前，我们需要知道一个很重要的技术就是CAS操作——Compare &amp; Set，或是 Compare &amp; Swap，<strong>现在几乎所有的CPU指令都支持CAS的原子操作，X86下对应的是 <span style="color: #ff0000;">CMPXCHG </span>汇编指令。</strong>有了这个原子操作，我们就可以用其来实现各种无锁（lock free）的数据结构。</p>
+<p>这个操作用C语言来描述就是下面这个样子：（代码来自<a href="http://en.wikipedia.org/wiki/Compare-and-swap" target="_blank" rel="noopener noreferrer">Wikipedia的Compare And Swap</a>词条）意思就是说，看一看内存<code>*reg</code>里的值是不是<code>oldval</code>，如果是的话，则对其赋值<code>newval</code>。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">
+int compare_and_swap (int* reg, int oldval, int newval)
+{
+  int old_reg_val = *reg;
+  if (old_reg_val == oldval) {
+     *reg = newval;
+  }
+  return old_reg_val;
+}
+</pre>
+<p>我们可以看到，<code>old_reg_val</code> 总是返回，于是，我们可以在 <code>compare_and_swap</code> 操作之后对其进行测试，以查看它是否与 <code>oldval</code>相匹配，因为它可能有所不同，这意味着另一个并发线程已成功地竞争到 <code>compare_and_swap</code> 并成功将 <code>reg</code> 值从 <code>oldval</code> 更改为别的值了。</p>
+<p>这个操作可以变种为返回bool值的形式（返回 bool值的好处在于，可以调用者知道有没有更新成功）：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">bool compare_and_swap (int *addr, int oldval, int newval)
+{
+  if ( *addr != oldval ) {
+      return false;
+  }
+  *addr = newval;
+  return true;
+}</pre>
+<p>与CAS相似的还有下面的原子操作：（这些东西大家自己看Wikipedia，也没什么复杂的）</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Fetch-and-add" target="_blank" rel="noopener noreferrer">Fetch And Add</a>，一般用来对变量做 +1 的原子操作</li>
+<li><a title="Test-and-set" href="http://en.wikipedia.org/wiki/Test-and-set">Test-and-set</a>，写值到某个内存位置并传回其旧值。汇编指令BST</li>
+<li><a title="Test and Test-and-set" href="http://en.wikipedia.org/wiki/Test_and_Test-and-set">Test and Test-and-set</a>，用来低低Test-and-Set的资源争夺情况</li>
+</ul>
+<p><strong>注：</strong>在实际的C/C++程序中，CAS的各种实现版本如下：</p>
+<p><span id="more-8239"></span></p>
+<p><strong>1）GCC的CAS</strong></p>
+<p style="padding-left: 30px;">GCC4.1+版本中支持CAS的原子操作（完整的原子操作可参看<a href="http://gcc.gnu.org/onlinedocs/gcc-4.1.1/gcc/Atomic-Builtins.html" target="_blank" rel="noopener noreferrer"> GCC Atomic Builtins</a>）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">bool __sync_bool_compare_and_swap (type *ptr, type oldval type newval, ...)
+type __sync_val_compare_and_swap (type *ptr, type oldval type newval, ...)</pre>
+<p><strong>2）Windows的CAS</strong></p>
+<p style="padding-left: 30px;">在Windows下，你可以使用下面的Windows API来完成CAS：（完整的Windows原子操作可参看MSDN的<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms686360(v=vs.85).aspx#interlocked_functions" target="_blank" rel="noopener noreferrer">InterLocked Functions</a>）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c"> InterlockedCompareExchange ( __inout LONG volatile *Target,
+                                 __in LONG Exchange,
+                                 __in LONG Comperand);</pre>
+<p><strong>3) C++11中的CAS</strong></p>
+<p style="padding-left: 30px;">C++11中的STL中的atomic类的函数可以让你跨平台。（完整的C++11的原子操作可参看 <a href="http://en.cppreference.com/w/cpp/atomic" target="_blank" rel="noopener noreferrer">Atomic Operation Library</a>）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">template&lt; class T &gt;
+bool atomic_compare_exchange_weak( std::atomic* obj,
+                                   T* expected, T desired );
+template&lt; class T &gt;
+bool atomic_compare_exchange_weak( volatile std::atomic* obj,
+                                   T* expected, T desired );
+</pre>
+<h4>无锁队列的链表实现</h4>
+<p>下面的代码主要参考于两篇论文：</p>
+<ul>
+<li>John D. Valois 1994年10月在拉斯维加斯的并行和分布系统系统国际大会上的一篇论文——《<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.8674&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener noreferrer">Implementing Lock-Free Queues</a>》</li>
+<li>美国纽约罗切斯特大学 Maged M. Michael 和 Michael L. Scott 在1996年3月发表的一篇论文 《<a href="https://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf" target="_blank" rel="noopener noreferrer">Simple, Fast, and Practical Non-Blocking and Blocking ConcurrentQueue Algorithms</a>》</li>
+</ul>
+<p>（注：下面的代码并不完全与这篇论文相同）</p>
+<p>初始化一个队列的代码很简，初始化一个dummy结点（注：在链表操作中，使用一个dummy结点，可以少掉很多边界条件的判断），如下所示：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">
+InitQueue(Q)
+{
+    node = new node()
+    node-&gt;next = NULL;
+    Q-&gt;head = Q-&gt;tail = node;
+}
+</pre>
+<p>我们先来看一下进队列用CAS实现的方式，基本上来说就是链表的两步操作：</p>
+<ol>
+<li>第一步，把tail指针的next指向要加入的结点。 <code>tail-&gt;next = p;</code></li>
+<li>第二步，把tail指针移到队尾。 <code>tail = p;</code></li>
+</ol>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">
+EnQueue(Q, data) //进队列
+{
+    //准备新加入的结点数据
+    n = new node();
+    n-&gt;value = data;
+    n-&gt;next = NULL;
+
+    do {
+        p = Q-&gt;tail; //取链表尾指针的快照
+    } while( CAS(p-&gt;next, NULL, n) != TRUE); 
+    //while条件注释：如果没有把结点链在尾指针上，再试
+
+    CAS(Q-&gt;tail, p, n); //置尾结点 tail = n;
+}</pre>
+<p>我们可以看到，程序中的那个 do-while 的 Retry-Loop 中的 CAS 操作：如果 <code>p-&gt;next</code> 是 <code>NULL</code>，那么，把新结点 <code>n</code> 加到队尾。如果不成功，则重新再来一次！</p>
+<p>就是说，很有可能我在准备在队列尾加入结点时，别的线程已经加成功了，于是tail指针就变了，于是我的CAS返回了false，于是程序再试，直到试成功为止。这个很像我们的抢电话热线的不停重播的情况。</p>
+<p>但是你会看到，为什么我们的“置尾结点”的操作（第13行）不判断是否成功，因为：</p>
+<ol>
+<li>如果有一个线程T1，它的while中的CAS如果成功的话，那么其它所有的 随后线程的CAS都会失败，然后就会再循环，</li>
+<li>此时，如果T1 线程还没有更新tail指针，其它的线程继续失败，因为<code>tail-&gt;next</code>不是NULL了。</li>
+<li>直到T1线程更新完 <code>tail</code> 指针，于是其它的线程中的某个线程就可以得到新的 <code>tail</code> 指针，继续往下走了。</li>
+<li>所以，只要线程能从 while 循环中退出来，意味着，它已经“独占”了，<code>tail</code> 指针必然可以被更新。</li>
+</ol>
+<p>这里有一个潜在的问题——<strong>如果T1线程在用CAS更新tail指针的之前，线程停掉或是挂掉了，那么其它线程就进入死循环了</strong>。下面是改良版的EnQueue()</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-highlight="10,11">EnQueue(Q, data) //进队列改良版 v1
+{
+    n = new node();
+    n-&gt;value = data;
+    n-&gt;next = NULL;
+
+    p = Q-&gt;tail;
+    oldp = p
+    do {
+        while (p-&gt;next != NULL)
+            p = p-&gt;next;
+    } while( CAS(p.next, NULL, n) != TRUE); //如果没有把结点链在尾上，再试
+
+    CAS(Q-&gt;tail, oldp, n); //置尾结点
+}</pre>
+<p>我们让每个线程，自己fetch 指针 <code>p</code> 到链表尾。但是这样的fetch会很影响性能。而且，如果一个线程不断的EnQueue，会导致所有的其它线程都去 fetch 他们的 <code>p</code> 指针到队尾，能不能不要所有的线程都干同一个事？这样可以节省整体的时间？</p>
+<p>比如：直接 fetch <code>Q-&gt;tail</code> 到队尾？因为，所有的线程都共享着 Q-&gt;tail，所以，一旦有人动了它后，相当于其它的线程也跟着动了，于是，我们的代码可以改进成如下的实现：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">
+EnQueue(Q, data) //进队列改良版 v2 
+{
+    n = new node();
+    n-&gt;value = data;
+    n-&gt;next = NULL;
+
+    while(TRUE) {
+        //先取一下尾指针和尾指针的next
+        tail = Q-&gt;tail;
+        next = tail-&gt;next;
+
+        //如果尾指针已经被移动了，则重新开始
+        if ( tail != Q-&gt;tail ) continue;
+
+        //如果尾指针的 next 不为NULL，则 fetch 全局尾指针到next
+        if ( next != NULL ) {
+            CAS(Q-&gt;tail, tail, next);
+            continue;
+        }
+
+        //如果加入结点成功，则退出
+        if ( CAS(tail-&gt;next, next, n) == TRUE ) break;
+    }
+    CAS(Q-&gt;tail, tail, n); //置尾结点
+}
+</pre>
+<p>上述的代码还是很清楚的，相信你一定能看懂，而且，这也是 Java 中的 <code>ConcurrentLinkedQueue</code> 的实现逻辑，当然，我上面的这个版本比 Java 的好一点，因为没有 if 嵌套，嘿嘿。</p>
+<p>好了，我们解决了EnQueue，我们再来看看DeQueue的代码：（很简单，我就不解释了）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">
+DeQueue(Q) //出队列
+{
+    do{
+        p = Q-&gt;head;
+        if (p-&gt;next == NULL){
+            return ERR_EMPTY_QUEUE;
+        }
+    while( CAS(Q-&gt;head, p, p-&gt;next) != TRUE );
+    return p-&gt;next-&gt;value;
+}</pre>
+<p><strong>我们可以看到，DeQueue的代码操作的是 <code>head-&gt;next</code>，而不是 <code>head</code> 本身。这样考虑是因为一个边界条件，我们需要一个dummy的头指针来解决链表中如果只有一个元素，<code>head</code> 和 <code>tail</code> 都指向同一个结点的问题，这样 <code>EnQueue</code> 和 <code>DeQueue</code> 要互相排斥了</strong>。</p>
+<p>但是，如果 <code>head</code> 和 <code>tail</code> 都指向同一个结点，这意味着队列为空，应该返回 <code>ERR_EMPTY_QUEUE</code>，但是，在判断 <code>p-&gt;next == NULL</code> 时，另外一个EnQueue操作做了一半，此时的 p-&gt;next 不为 NULL了，但是 tail 指针还差最后一步，没有更新到新加的结点，这个时候就会出现，在 EnQueue 并没有完成的时候， DeQueue 已经把新增加的结点给取走了，此时，队列为空，但是，head 与 tail 并没有指向同一个结点。如下所示：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-20047" src="https://coolshell.cn/wp-content/uploads/2012/09/lock.free_.queue_-224x300.png" alt="" width="400" height="537" srcset="https://coolshell.cn/wp-content/uploads/2012/09/lock.free_.queue_-224x300.png 224w, https://coolshell.cn/wp-content/uploads/2012/09/lock.free_.queue_-201x270.png 201w, https://coolshell.cn/wp-content/uploads/2012/09/lock.free_.queue_.png 706w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<p>虽然，EnQueue的函数会把 tail 指针置对，但是，这种情况可能还是会导致一些并发问题，所以，严谨来说，我们需要避免这种情况。于是，我们需要加入更多的判断条件，还确保这个问题。下面是相关的改进代码：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">
+DeQueue(Q) //出队列，改进版
+{
+    while(TRUE) {
+        //取出头指针，尾指针，和第一个元素的指针
+        head = Q-&gt;head;
+        tail = Q-&gt;tail;
+        next = head-&gt;next;
+
+        // Q-&gt;head 指针已移动，重新取 head指针
+        if ( head != Q-&gt;head ) continue;
+        
+        // 如果是空队列
+        if ( head == tail &amp;&amp; next == NULL ) {
+            return ERR_EMPTY_QUEUE;
+        }
+        
+        //如果 tail 指针落后了
+        if ( head == tail &amp;&amp; next == NULL ) {
+            CAS(Q-&gt;tail, tail, next);
+            continue;
+        }
+
+        //移动 head 指针成功后，取出数据
+        if ( CAS( Q-&gt;head, head, next) == TRUE){
+            value = next-&gt;value;
+            break;
+        }
+    }
+    free(head); //释放老的dummy结点
+    return value;
+}</pre>
+<p>上面这段代码的逻辑和 Java 的 <code>ConcurrentLinkedQueue</code> 的 <code>poll</code> 方法很一致了。也是《<a href="https://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf" target="_blank" rel="noopener noreferrer">Simple, Fast, and Practical Non-Blocking and Blocking ConcurrentQueue Algorithms</a>》这篇论文中的实现。</p>
+<h4>CAS的ABA问题</h4>
+<p>所谓ABA（<a href="http://en.wikipedia.org/wiki/ABA_problem" target="_blank" rel="noopener noreferrer">见维基百科的ABA词条</a>），问题基本是这个样子：</p>
+<ol>
+<li>进程P1在共享变量中读到值为A</li>
+<li>P1被抢占了，进程P2执行</li>
+<li>P2把共享变量里的值从A改成了B，再改回到A，此时被P1抢占。</li>
+<li>P1回来看到共享变量里的值没有被改变，于是继续执行。</li>
+</ol>
+<p>虽然P1以为变量值没有改变，继续执行了，但是这个会引发一些潜在的问题。<strong>ABA问题最容易发生在lock free 的算法中的，CAS首当其冲，因为CAS判断的是指针的值。很明显，值是很容易又变成原样的。</strong></p>
+<p>比如上述的DeQueue()函数，因为我们要让head和tail分开，所以我们引入了一个dummy指针给head，当我们做CAS的之前，如果head的那块内存被回收并被重用了，而重用的内存又被EnQueue()进来了，这会有很大的问题。（<strong>内存管理中重用内存基本上是一种很常见的行为</strong>）</p>
+<p>这个例子你可能没有看懂，维基百科上给了一个活生生的例子——</p>
+<blockquote><p>你拿着一个装满钱的手提箱在飞机场，此时过来了一个火辣性感的美女，然后她很暖昧地挑逗着你，并趁你不注意的时候，把用一个一模一样的手提箱和你那装满钱的箱子调了个包，然后就离开了，你看到你的手提箱还在那，于是就提着手提箱去赶飞机去了。</p></blockquote>
+<p>这就是ABA的问题。</p>
+<h4>解决ABA的问题</h4>
+<p>维基百科上给了一个解——使用double-CAS（双保险的CAS），例如，在32位系统上，我们要检查64位的内容</p>
+<p style="padding-left: 30px;">1）一次用CAS检查双倍长度的值，前半部是值，后半部分是一个计数器。</p>
+<p style="padding-left: 30px;">2）只有这两个都一样，才算通过检查，要吧赋新的值。并把计数器累加1。</p>
+<p>这样一来，ABA发生时，虽然值一样，但是计数器就不一样（但是在32位的系统上，这个计数器会溢出回来又从1开始的，这还是会有ABA的问题）</p>
+<p>当然，我们这个队列的问题就是不想让那个内存重用，这样明确的业务问题比较好解决，论文《<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.8674&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener noreferrer">Implementing Lock-Free Queues</a>》给出一这么一个方法——<strong>使用结点内存引用计数refcnt</strong>！（论文《<a href="https://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf" target="_blank" rel="noopener noreferrer">Simple, Fast, and Practical Non-Blocking and Blocking ConcurrentQueue Algorithms</a>》中的实现方法也基本上是一样的，用到的是增加一个计数，可以理解为版本号）</p>
+<p>）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-highlight="9,14">SafeRead(q)
+{
+    loop:
+        p = q-&gt;next;
+        if (p == NULL){
+            return p;
+        }
+
+        Fetch&amp;Add(p-&gt;refcnt, 1);
+
+        if (p == q-&gt;next){
+            return p;
+        }else{
+            Release(p);
+        }
+    goto loop;
+}</pre>
+<p>其中的 Fetch&amp;Add和Release分是是加引用计数和减引用计数，都是原子操作，这样就可以阻止内存被回收了。</p>
+<h4>用数组实现无锁队列</h4>
+<p>本实现来自论文《<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.8674&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener noreferrer">Implementing Lock-Free Queues</a>》</p>
+<p>使用数组来实现队列是很常见的方法，因为没有内存的分部和释放，一切都会变得简单，实现的思路如下：</p>
+<p style="padding-left: 30px;">1）数组队列应该是一个ring buffer形式的数组（环形数组）</p>
+<p style="padding-left: 30px;">2）数组的元素应该有三个可能的值：HEAD，TAIL，EMPTY（当然，还有实际的数据）</p>
+<p style="padding-left: 30px;">3）数组一开始全部初始化成EMPTY，有两个相邻的元素要初始化成HEAD和TAIL，这代表空队列。</p>
+<p style="padding-left: 30px;">4）EnQueue操作。假设数据x要入队列，定位TAIL的位置，使用double-CAS方法把(TAIL, EMPTY) 更新成 (x, TAIL)。需要注意，如果找不到(TAIL, EMPTY)，则说明队列满了。</p>
+<p style="padding-left: 30px;">5）DeQueue操作。定位HEAD的位置，把(HEAD, x)更新成(EMPTY, HEAD)，并把x返回。同样需要注意，如果x是TAIL，则说明队列为空。</p>
+<p>算法的一个关键是——如何定位HEAD或TAIL？</p>
+<p style="padding-left: 30px;">1）我们可以声明两个计数器，一个用来计数EnQueue的次数，一个用来计数DeQueue的次数。</p>
+<p style="padding-left: 30px;">2）这两个计算器使用使用Fetch&amp;ADD来进行原子累加，在EnQueue或DeQueue完成的时候累加就好了。</p>
+<p style="padding-left: 30px;">3）累加后求个模什么的就可以知道TAIL和HEAD的位置了。</p>
+<p>如下图所示：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8240" title="Lock-Free Queue(Array)" src="https://coolshell.cn/wp-content/uploads/2012/09/lock-free-array.jpg" alt="" width="477" height="215" srcset="https://coolshell.cn/wp-content/uploads/2012/09/lock-free-array.jpg 477w, https://coolshell.cn/wp-content/uploads/2012/09/lock-free-array-300x135.jpg 300w" sizes="(max-width: 477px) 100vw, 477px" /></p>
+<h4 style="text-align: left;"> 小结</h4>
+<p style="text-align: left;">以上基本上就是所有的无锁队列的技术细节，这些技术都可以用在其它的无锁数据结构上。</p>
+<p style="text-align: left; padding-left: 30px;">1）无锁队列主要是通过CAS、FAA这些原子操作，和Retry-Loop实现。</p>
+<p style="text-align: left; padding-left: 30px;">2）对于Retry-Loop，我个人感觉其实和锁什么什么两样。只是这种“锁”的粒度变小了，主要是“锁”HEAD和TAIL这两个关键资源。而不是整个数据结构。</p>
+<p style="text-align: left;">还有一些和Lock Free的文章你可以去看看：</p>
+<ul>
+<li>Code Project 上的雄文 《<a href="http://www.codeproject.com/Articles/153898/Yet-another-implementation-of-a-lock-free-circular" target="_blank" rel="noopener noreferrer">Yet another implementation of a lock-free circular array queue</a>》</li>
+<li>Herb Sutter的《<a href="http://www.drdobbs.com/parallel/writing-lock-free-code-a-corrected-queue/210604448?pgno=1" target="_blank" rel="noopener noreferrer">Writing Lock-Free Code: A Corrected Queue</a>》&#8211; 用C++11的std::atomic模板。</li>
+<li>IBM developerWorks的《<a href="http://www.ibm.com/developerworks/cn/aix/library/au-multithreaded_structures2/index.html" target="_blank" rel="noopener noreferrer">设计不使用互斥锁的并发数据结构</a>》</li>
+</ul>
+<div>【<strong>注：我配了一张look-free的自行车，寓意为——如果不用专门的车锁，那么自行得自己锁自己！</strong>】</div>
+<p style="text-align: left;"> （全文完）</p>
+<p><audio style="display: none;" controls="controls"></audio></p>
+<p><audio style="display: none;" controls="controls"></audio></p>
+<p><audio style="display: none;" controls="controls"></audio><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/10975.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一个“蝇量级” C 语言协程库" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10975.html" class="wp_rp_title">一个“蝇量级” C 语言协程库</a></li><li ><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="二叉树迭代器算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9886.html" class="wp_rp_title">二叉树迭代器算法</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/6548.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/WhyCPP.01-150x150.jpg" alt="Why C++ ? 王者归来" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6548.html" class="wp_rp_title">Why C++ ? 王者归来</a></li><li ><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8239.html">无锁队列的实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8239.html/feed</wfw:commentRss>
+			<slash:comments>241</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>“单元测试要做多细？”</title>
+		<link>https://coolshell.cn/articles/8209.html</link>
+					<comments>https://coolshell.cn/articles/8209.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 03 Sep 2012 00:13:31 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[TDD]]></category>
+		<category><![CDATA[Unit Test]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8209</guid>
+
+					<description><![CDATA[<p>这篇文章主要来源是StackOverflow上的一个回答——“How deep are your unit tests?”。一个有13.8K的分的人（John ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8209.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8209.html">“单元测试要做多细？”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这篇文章主要来源是StackOverflow上的一个回答——“<a title="How deep are your unit tests?" href="http://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests" target="_blank">How deep are your unit tests?</a>”。一个有13.8K的分的人（<a href="http://stackoverflow.com/users/1116/john-nolan">John Nolan</a>）问了个关于TDD的问题，这个问题并不新鲜，最亮的是这个问题的Best Answer，这个问题是——</p>
+<p style="padding-left: 30px;">“TDD需要花时间写测试，而我们一般多少会写一些代码，而第一个测试是测试我的构造函数有没有把这个类的变量都设置对了，这会不会太过分了？那么，我们写单元测试的这个单元的粒度到底是什么样的？并且，是不是我们的测试测试得多了点？”</p>
+<h4>答案</h4>
+<p>StackOverflow上，这个问题的答案是这样的——</p>
+<p style="padding-left: 30px;">“I get paid for code that works, not for tests, so my philosophy is to test as little as possible to reach a given level of confidence (I suspect this level of confidence is high compared to industry standards, but that could just be hubris). If I don&#8217;t typically make a kind of mistake (like setting the wrong variables in a constructor), I don&#8217;t test for it. I do tend to make sense of test errors, so I&#8217;m extra careful when I have logic with complicated conditionals. When coding on a team, I modify my strategy to carefully test code that we, collectively, tend to get wrong.”</p>
+<p style="padding-left: 30px;"><strong>老板为我的代码付报酬，而不是测试，所以，我对此的价值观是——测试越少越好，少到你对你的代码质量达到了某种自信</strong>（我觉得这种的自信标准应该要高于业内的标准，当然，这种自信也可能是种自大）。如果我的编码生涯中不会犯这种典型的错误（如：在构造函数中设了个错误的值），那我就不会测试它。<strong>我倾向于去对那些有意义的错误做测试，所以，我对一些比较复杂的条件逻辑会异常地小心</strong>。当在一个团队中，我会非常小心的测试那些会让团队容易出错的代码。</p>
+<p>这个回答对TDD似乎有一种否定，<strong>最亮的是这个问题是由<a href="http://en.wikipedia.org/wiki/Kent_Beck" target="_blank">Kent Beck</a>，Kent是XP和TDD的创造者，是敏捷开发实践方法的奠基人</strong>。以致于还有人调侃到——</p>
+<p><span id="more-8209"></span></p>
+<p><img decoding="async" loading="lazy" class="alignright size-full wp-image-8212" title="fight club" src="https://coolshell.cn/wp-content/uploads/2012/09/fight.jpg" alt="" width="342" height="195" srcset="https://coolshell.cn/wp-content/uploads/2012/09/fight.jpg 342w, https://coolshell.cn/wp-content/uploads/2012/09/fight-300x171.jpg 300w" sizes="(max-width: 342px) 100vw, 342px" /></p>
+<p style="padding-left: 30px;">The world does not think that Kent Beck would say this! There are legions of developers dutifully pursuing 100% coverage because they think it is what Kent Beck would do! I have told many that you said, in your XP book, that you don&#8217;t always adhere to Test First religiously. But I&#8217;m surprised too.</p>
+<p style="padding-left: 30px;">只是要地球人都不会觉得Kent Beck会这么说啊！我们有大堆程序员在忠实的追求着100%的代码测试覆盖率，因为这些程序员觉得Kent Beck也会这么干！我告诉过很多人，你在你的XP的书里说过，你并不总是支持“宗教信仰式的Test First”，但是今天Kent这么说，我还是很惊讶！</p>
+<p>后面还有一些人不同意Kent， 我一下子从这个事中想到了《<a href="http://movie.douban.com/subject/1292000/" target="_blank">fight club</a>》里的那个精神分裂者创建了一个连自己都反对的地下组织。呵呵。</p>
+<p>其实我是非常同意Kent的，怎么合适怎么搞，爱怎么测试就怎么测试，只要自己和团队有信心就可以了。没有必要就一定要写测试，一定要测试先行。</p>
+<h4>其它答案</h4>
+<p>八卦完了，我们还是来认认真真地看看这个问题中其它的其它答案，因为这个问题的也是国人爱问题的问题。</p>
+<p><strong>第二个答案：值得借鉴</strong></p>
+<ul>
+<li>开发过程中，单元测试应该来测试那些可能会出错的地方，或是那些边界情况。</li>
+<li>维护过程中，单元测试应该跟着我们的bug report来走，每一个bug都应该有个UT。于是程序员就会对自己的代码变更有两个自信，一是bug 被 fixed，二是相同的bug不会再次出现。</li>
+</ul>
+<p><strong>第三个答案：给敏捷咨师看的答案</strong></p>
+<p>这个答案在说，我们只注意到了TDD中的T，而忽略了第一个D，就是Driven…… bla bla bla&#8230; 又这扯这些空洞的东西了，国内的各种不学无术的敏捷咨询师最好这一口了。</p>
+<p><strong>第四个答案：致那些什么都要测试的人</strong></p>
+<p>如果我们需要测试一个像 <code>int square(int x)</code> 这样的开根函数，我们需要40亿个测试（每个数都要测试）。</p>
+<p>事实上这种情况可能还更糟糕，如果有这样一个方法 <code>void setX(int newX)</code> 不会更改其它的成员变量，如：obj.z, Obj.y，那么，你是不是还要去测试一下别的变量没有被改变？</p>
+<p>我们只可能测试那些有意义的，确实要测试的案例。</p>
+<h4>我的观点</h4>
+<p>我在《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html" target="_blank">TDD并没有看上去的那么美</a>》一文中说过我的观点了，我就不再多说了。我还是把下面这些观点列出来，供大家思考和讨论：</p>
+<p style="padding-left: 30px;">1）<strong>我国的教育对我们最大的洗脑不是掩盖事实，而让我们习惯于标准答案，习惯于教条，从而不会思考！敏捷开发中的若干东西似乎都成了软件开发中对某种标准答案的教条，实在是悲哀！</strong></p>
+<p style="padding-left: 30px;">2）<strong>软件开发是一种脑力劳动，是一种知识密集型的工作，就像艺术作品一样，创作过程和成品是没有标准答案的。</strong></p>
+<p style="padding-left: 30px;">3）<strong>软件的质量不是测试出来的，而是设计和维护出来的。就像工匠们在一点一点地雕琢他们的作品一样。</strong></p>
+<p>UT的粒度是多少，这个不重要，重要的是你会不会自己思考你的软件应该怎么做，怎么测试。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Bob大叔和Jim Coplien对TDD的论战" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_title">Bob大叔和Jim Coplien对TDD的论战</a></li><li ><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="敏捷水管工" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_title">敏捷水管工</a></li><li ><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="再谈敏捷和ThoughtWorks中国咨询师" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_title">再谈敏捷和ThoughtWorks中国咨询师</a></li><li ><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/feedback_cycle-150x150.jpg" alt="[转]TDD到底美还是不美？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_title">[转]TDD到底美还是不美？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8209.html">“单元测试要做多细？”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8209.html/feed</wfw:commentRss>
+			<slash:comments>101</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一次Ajax查错的经历</title>
+		<link>https://coolshell.cn/articles/8170.html</link>
+					<comments>https://coolshell.cn/articles/8170.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 27 Aug 2012 06:56:59 +0000</pubDate>
+				<category><![CDATA[Ajax开发]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[AJAX]]></category>
+		<category><![CDATA[IE]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8170</guid>
+
+					<description><![CDATA[<p>先说故事，再说想法吧。 我有一朋友做网站，用jQuery的Ajax方法从后端载入一段HTML代码然后动态插入到网页的Div元件中。这个东西太普遍了。jQuery...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8170.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8170.html">一次Ajax查错的经历</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>先说故事，再说想法吧。</p>
+<p>我有一朋友做网站，用jQuery的Ajax方法从后端载入一段HTML代码然后动态插入到网页的Div元件中。这个东西太普遍了。jQuery强大的load方法可以完成这个事情。朋友的代码是这么写的：</p>
+<p>[javascript]var tab = jQuery(&quot;#dynamic_tab&quot;);<br />
+var url = &quot;/list_ajax/&quot;;<br />
+tab.load(url);[/javascript]</p>
+<p>简单到不能再简单了。在Chrome，Firefox，Safari下运行一点问题也没有，只有IE不行，不管是IE7，IE8，还是IE9。问题的症壮是，使用IE访问那个Ajax的链接，没有问题，但是在jQuery的Ajax方法返回了“undefined”的respons对象。没有任何报错！</p>
+<p>怎么搞也搞不定，只好Google了一下——“<a href="https://www.google.com/#hl=zh-CN&amp;newwindow=1&amp;site=&amp;source=hp&amp;q=jQuery+load+IE&amp;btnK=Google+%E6%90%9C%E7%B4%A2&amp;oq=jQuery+load+IE" target="_blank">jQuery load IE</a>”，一看，很多人都在问这个问题。于是开始了<a title="各种流行的编程风格" href="https://coolshell.cn/articles/2058.html" target="_blank">散弹枪编程方式</a>。</p>
+<p>排在第一的就是StackOverflow被浏览了33K次的这个问题：<a href="http://stackoverflow.com/questions/1061525/jquerys-load-not-working-in-ie-but-fine-in-firefox-chrome-and-safari" target="_blank">jQuery&#8217;s .load() not working in IE &#8211; but fine in Firefox, Chrome and Safari</a>，答案没有被打勾（不靠谱），StackOverflow还有很多人问相似的问题，不过都没有答案。不管三七二十一，先试了一下，散弹枪嘛。试了半天都没有用。</p>
+<p>然后上Google查，又看到有人说的IE缓存的问题，什么，要把cache设置成false，或是用下面的方法来解决：</p>
+<p>[javascript]var tab = jQuery(&quot;#dynamic_tab&quot;);<br />
+var fuckie = Math.random();<br />
+var url = &quot;/list_ajax/&quot;+&quot;?fuckie=&quot;+fuckie;<br />
+tab.load(url);[/javascript]</p>
+<p>反正还是一样，统统不Work，几乎所有的都试了，都不Work。搞了一天的朋友恼怒道：“Microsoft应该快点倒闭吧，产品太烂了”。IE的确是太烂了。</p>
+<p><span id="more-8170"></span></p>
+<p>于是我用IE9的网页调试器可以看到点了Ajax的链接后，<strong>IE对网站有http的Ajax请求，也可以看到请求返回了，但是就是不显示在我的页面上——jQuery的Ajax的responseText为undefined!</strong></p>
+<p>对于我这个老家伙，对jQuery也不熟，我只得开始调试jQuery的代码，想看看里面干了什么，报了什么错？调了一个小时，基本上把jQuery的Ajax的封装看懂了七七八八了，但是还是没找到为什么有问题。</p>
+<p>于是，我只得架起原生态的Ajax，看看IE的那个Ajax的ActiveX的对象干了什么事？写了下面的代码（当年写Ajax就是这么写的，所以也不费劲，况且网上还有例程可以抄）：</p>
+<p>[javascript]<br />
+function InitAjax()<br />
+{<br />
+    var ajax=false;<br />
+    try {<br />
+        ajax = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);<br />
+    } catch (e) {<br />
+        try {<br />
+            ajax = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br />
+        } catch (E) {<br />
+            ajax = false;<br />
+        }<br />
+    }<br />
+    if (!ajax &amp;&amp; typeof XMLHttpRequest!=&#8217;undefined&#8217;) {<br />
+        ajax = new XMLHttpRequest();<br />
+    }<br />
+    return ajax;<br />
+}</p>
+<p>var ajax = InitAjax();<br />
+ajax.open(&quot;GET&quot;, url, true);<br />
+ajax.onreadystatechange = function() {<br />
+    if (ajax.readyState == 4 &amp;&amp; ajax.status == 200) {<br />
+        var show = document.getElementById(&quot;HaoChenDIV&quot;).value;<br />
+        show.innerHTML = ajax.responseText;<br />
+    }<br />
+}<br />
+ajax.send(null);<br />
+[/javascript]</p>
+<p>一运行，还是不行，没见IE报什么错，不过，可以确定这不是jQuery的问题了，估计还是我们自己程序的问题。不过此时的程序太好调试了，调试中，在IE9下调式发现原生的IE的Ajax对象在onreadystatechange函数里，其responseText是下面这个样子：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8171" title="ajax error in ie" src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error.jpg" alt="" width="601" height="153" srcset="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error.jpg 601w, https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-300x76.jpg 300w" sizes="(max-width: 601px) 100vw, 601px" /></p>
+<p>什么是“<strong>系统错误: -1072896658</strong>”？上<a href="https://www.google.com/#hl=zh-CN&amp;newwindow=1&amp;q=ajax+%22%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF:+-1072896658%22&amp;oq=ajax+%22%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF:+-1072896658%22" target="_blank">google一查</a>，一堆页面，基本上是说乱码了，也就是ajax的后端程序返回的网页编码不认识吧。需要在返回的http header里加上 charset=utf-8。</p>
+<p>于是，修改后端的Ajax的程序，明确指定了返回的HTTP Header中的charset，于是IE下就工作正常了，再切回jQuery的load代码，一切正常了（后端的程序本来是utf-8的编码格式，但是不骨明确在HTTP Header中指定，但是只有IE不会自动检测）。</p>
+<p>这个问题的原因就是因为我们没有按照规范去写网页。所以，举一反三，HTML的规范还有哪些，太多了，记也记不住。但也许你会知道<strong>有一个叫 <a href="http://validator.w3.org" target="_blank">http://validator.w3.org</a> 的网站可以帮你校验你网页中的很多不规范的东西</strong>。这个工具会报很多很多错，很多都有点吹毛求疵，不过，可以让你看看（注：今天的coolshell装了很多插件，也被我调过一些东西，所以出错很多，我还记得以前没有插件没有我定制化的样式的时候，Wordpress一个错都不报）。</p>
+<h4>后记</h4>
+<p>我把这个问题和过程分享出来，主要有这么几个目的，并抛出几个问题，大家可以思考一下：</p>
+<p style="padding-left: 30px;">1）这个问题网上有很多人都在报，但是基本上找不到答案（包括StackOverflow），所以，我分享出来，填补一下空白。</p>
+<p style="padding-left: 30px;">2）我相信我们的程序员天天都在经历这样的事，我不知道大家在遇到这样的事情会怎么做？也许大多数人都在网上查各种解决方案，然后一个一个的试，直到试对了——散弹枪式的编程，呵呵。当然，大多数答案都是可能找到的。但<strong>当我们找到答案了后，我们还会深入去了解这个问题的具体原因并举一反三地去思考一其周边的东西吗</strong>？</p>
+<p style="padding-left: 30px;">3）另外，在今天这样N多框架，N多lib，N多开源的年代下，<strong>不知道大家有没有失去了从零开始自己写代码的能力？</strong>比如上面的这个问题，不知道有多少人还会自己写原生态的Ajax？不过，我还是建议大家能在使用各种框架的时候，明白那些最基础的知识，求甚解，知其然知其所以然，真的很重要。</p>
+<p>我是从那个“吃糠的年代”过来的程序员，那时的程序员什么都要自己干，很辛苦，今天我和很多人说我以前的那些经历，会被笑话，但是我从这些什么都自己的干的年代过的经历，让我受益很多。我把我的想法分享给大家，希望对大家有用。</p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8170.html">一次Ajax查错的经历</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8170.html/feed</wfw:commentRss>
+			<slash:comments>93</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>为什么我反对纯算法面试题</title>
+		<link>https://coolshell.cn/articles/8138.html</link>
+					<comments>https://coolshell.cn/articles/8138.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 22 Aug 2012 00:20:18 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8138</guid>
+
+					<description><![CDATA[<p>算法面试可能是微软搞出来的面试方法，现在很多公司都在效仿，而且我们的程序员也乐于解算法题，我个人以为，这是应试教育的毒瘤！我在《再谈“我是怎么招程序员”》中比较...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8138.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8138.html">为什么我反对纯算法面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>算法面试可能是微软搞出来的面试方法，现在很多公司都在效仿，而且我们的程序员也乐于解算法题，我个人以为，这是应试教育的毒瘤！我在《<a title="再谈“我是怎么招聘程序员的”（上）" href="https://coolshell.cn/articles/4506.html">再谈“我是怎么招程序员”</a>》中比较保守地说过，“<strong>问难的算法题并没有错，错的很多面试官只是在肤浅甚至错误地理解着面试算法题的目的</strong>。”，今天，我想加强一下这个观点——<strong>我反对纯算法题面试</strong>！（注意，我说的是纯算法题）</p>
+<figure id="attachment_8140" aria-describedby="caption-attachment-8140" style="width: 250px" class="wp-caption alignright"><a href="http://en.wikipedia.org/wiki/Sheldon_Cooper"><img decoding="async" loading="lazy" class="size-full wp-image-8140" title="Sheldon_Cooper" src="https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper.jpg" alt="" width="250" height="333" srcset="https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper.jpg 250w, https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper-225x300.jpg 225w, https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper-203x270.jpg 203w" sizes="(max-width: 250px) 100vw, 250px" /></a><figcaption id="caption-attachment-8140" class="wp-caption-text">图片源Wikipedia（点击图片查看词条）</figcaption></figure>
+<p>我再次引用我以前的一个观点——</p>
+<p style="padding-left: 30px;">能解算法题并不意味着这个人就有能力就能在工作中解决问题，你可以想想，小学奥数题可能比这些题更难，但并不意味着那些奥数能手就能解决实际问题。</p>
+<p>好了，让我们来看一个示例（这个示例是昨天在<a href="http://weibo.com/1401880315/yy9pvgNi2" target="_blank">微博上的一个讨论</a>），这个题是——“<strong>找出无序数组中第2大的数</strong>”，几乎所有的人都用了O(n)的算法，我相信对于我们这些应试教育出来的人来说，不用排序用O(n)算法是很正常的事，连我都不由自主地认为O(n)算法是这个题的标准答案。<strong>我们太习惯于标准答案了，这是我国教育最悲哀的地方</strong>。（广义的洗脑就是让你的意识依赖于某个标准答案，然后通过给你标准答案让你不会思考而控制你）</p>
+<h4>功能性需求分析</h4>
+<p>试想，如果我们在实际工作中得到这样一个题 我们会怎么做？我一定会分析这个需求，因为我害怕需求未来会改变，今天你叫我找一个第2大的数，明天你找我找一个第4大的数，后天叫我找一个第100大的数，我不搞死了。需求变化是很正常的事。分析完这个需求后，我会很自然地去写找第K大数的算法——难度一下子就增大了。</p>
+<p><span id="more-8138"></span></p>
+<p>很多人会以为找第K大的需求是一种“过早扩展”的思路，不是这样的，我相信我们在实际编码中写过太多这样的程序了，你一定不会设计出这样的函数接口—— Find2ndMaxNum(int* array, int len)，就好像你不会设计出 DestroyBaghdad(); 这样的接口，而是设计一个DestoryCity( City&amp; ); 的接口，而把Baghdad当成参数传进去！所以，你应该是声明一个叫FindKthMaxNum(int* array, int len, int kth)，把2当成参数传进去。<strong>这是最基本的编程方法，用数学的话来说，叫代数</strong>！最简单的需求分析方法就是把需求翻译成函数名，然后看看是这个接口不是很二？！</p>
+<p>（注：不要纠结于FindMaxNum()或FindMinNum()，因为这两个函数名的业务意义很清楚了，不像Find2ndMaxNum()那么二）</p>
+<h4>非功能性需求分析</h4>
+<p>性能之类的东西从来都是非功能性需求，对于算法题，我们太喜欢研究算法题的空间和时间复杂度了。我们希望做到空间和时间双丰收，这是算法学术界的风格。所以，<strong>习惯于标准答案的我们已经失去思考的能力，只会机械地思考算法之内的性能，而忽略了算法之外的性能</strong>。</p>
+<p>如果题目是——“从无序数组中找到第K个最大的数”，那么，我们一定会去思考用O(n)的线性算法找出第K个数。事实上，也有线性算法——STL中可以用nth_element求得类似的第n大的数，其利用快速排序的思想，从数组S中随机找出一个元素X，把数组分为两部分Sa和Sb。Sa中的元素大于等于X，Sb中元素小于X。这时有两种情况：1）Sa中元素的个数小于k，则Sb中的第k-|Sa|个元素即为第k大数；2） Sa中元素的个数大于等于k，则返回Sa中的第k大数。时间复杂度近似为O(n)。</p>
+<p>搞学术的nuts们到了这一步一定会欢呼胜利！但是他们哪里能想得到性能的需求分析也是来源自业务的！</p>
+<p><strong>我们一说性能，基本上是个人都会问，请求量有多大？如果我们的FindKthMaxNum()的请求量是m次，那么你的这个每次都要O(n)复杂度的算法得到的效果就是O(n*m)，这一点，是书呆子式的学院派人永远想不到的。</strong>因为应试教育让我们不会从实际思考了。</p>
+<h4>工程式的解法</h4>
+<p>根据上面的需求分析，有软件工程经验的人的解法通常会这样：</p>
+<p style="padding-left: 30px;">1）把数组排序，从大到小。</p>
+<p style="padding-left: 30px;">2）于是你要第k大的数，就直接访问 array[k]。</p>
+<p>排序只需要一次，O(n*log(n))，然后，接下来的m次对FindKthMaxNum()的调用全是O(1)的，整体复杂度反而成了线性的。</p>
+<p>其实，上述的还不是工程式的最好的解法，因为，在业务中，那数组中的数据可能会是会变化的，所以，如果是用数组排序的话，有数据的改动会让我重新排序，这个太耗性能了，如果实际情况中会有很多的插入或删除操作，那么可以考虑使用B+树。</p>
+<p>工程式的解法有以下特点：</p>
+<p style="padding-left: 30px;">1）很方便扩展，因为数据排好序了，你还可以方便地支持各种需求，如从第k1大到k2大的数据（那些学院派写出来的代码在拿到这个需求时又开始挠头苦想了）</p>
+<p style="padding-left: 30px;">2）规整的数据会简化整体的算法复杂度，从而整体性能会更好。（公欲善其事，必先利其器）</p>
+<p style="padding-left: 30px;">3）代码变得清晰，易懂，易维护！（学院派的和STL一样的近似O(n)复杂度的算法没人敢动）</p>
+<h4>争论</h4>
+<p>你可能会和我有以下争论，</p>
+<ul>
+<li><strong>如果程序员做这个算法题用排序的方式，他一定不会像你想那么多</strong>。是的，你说得对。但是我想说，很多时候，我们直觉地思考，恰恰是正确的路。因为“排序”这个思路符合人类大脑处理问题的方式，而使用学院派的方式是反大脑直觉的。反大脑直觉的，通常意味着晦涩难懂，维护成本上升。</li>
+</ul>
+<ul>
+<li><strong>就是一道面试题，我就是想测试一下你的算法技能，这也扯太多了</strong>。没问题，不过，我们要清楚我们是在招什么人？是一个只会写算法的人，还是一个会做软件的人？这个只有你自己最清楚。</li>
+</ul>
+<ul>
+<li><strong>这个算法题太容易诱导到学院派的思路了</strong>。是的这道“找出第K大的数”，其实可以变换为更为业务一点的题目——“<strong>我要和别的商户竞价，我想排在所有竞争对手报价的第K名，请写一个程序，我输入K，和一个商品名，系统告诉我应该订多少价？</strong>（商家的所有商品的报价在一数组中）”——业务分析，整体性能，算法，数据结构，增加需求让应聘者重构，这一个问题就全考了。</li>
+</ul>
+<ul>
+<li><strong><span style="color: #ff0000;">你是不是在说算法不重要，不用学？</span></strong>千万别这样理解我，搞得好像如果面试不面，我就可以不学。<strong>算法很重要，算法题能锻炼我们的思维，而且也有很多实际用处</strong>。我这篇文章不是让大家不要去学算法，这是完全错误的，我是让大家带着业务问题去使用算法。问你业务问题，一样会问到算法题上来。</li>
+</ul>
+<h4>小结</h4>
+<p>看过这上面的分析，我相信你明白我为什么反对纯算法面试题了。原因就是<strong>纯算法的面试题根本不能反应一个程序的综合素质</strong>！</p>
+<p>那么，在面试中，我们应该要考量程序员的那些综合素质呢？我以为有下面这些东西：</p>
+<ol>
+<li>会不会做需求分析？怎么理解问题的？</li>
+<li>解决问题的思路是什么？想法如何？</li>
+<li>会不会对基础的算法和数据结构灵活运用？</li>
+</ol>
+<p>另外，我们知道，对于软件开发来说，在工程上，难是的下面是这些挑战：</p>
+<ul>
+<li>软件的维护成本远远大于软件的开发成本。</li>
+<li>软件的质量变得越来越重要，所以，测试工作也变得越来越重要。</li>
+<li>软件的需求总是在变的，软件的需求总是一点一点往上加的。</li>
+<li>程序中大量的代码都是在处理一些错误的或是不正常的流程。</li>
+</ul>
+<p>所以，对于编程能力上，我们应该主要考量程序员的如下能力：</p>
+<ol>
+<li>设计是否满足对需求的理解，并可以应对可能出现的需求变化。</li>
+<li>程序是否易读，易维护？</li>
+<li>重构代码的能力如何？</li>
+<li>会不会测试自己写好的程序？</li>
+</ol>
+<p>所以，这段时间，我越来越倾向于问应聘者一些有业务意义的题，而且应增加或更改需求来看程序员的重构代码的能力，写完程序后，让应聘者设计测试案例。</p>
+<p>比如：解析加减乘除表达式，字符串转数字，洗牌程序，口令生成器，通过ip地址找地点，英汉词典双向检索……</p>
+<p><strong>总之，我反对纯算法面试题！</strong></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/8790.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/choice-150x150.jpg" alt="程序算法与人生选择" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8790.html" class="wp_rp_title">程序算法与人生选择</a></li><li ><a href="https://coolshell.cn/articles/4976.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="给程序员新手的一些建议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4976.html" class="wp_rp_title">给程序员新手的一些建议</a></li><li ><a href="https://coolshell.cn/articles/4506.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="再谈“我是怎么招聘程序员的”（上）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4506.html" class="wp_rp_title">再谈“我是怎么招聘程序员的”（上）</a></li><li ><a href="https://coolshell.cn/articles/4490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="再谈“我是怎么招聘程序员的”（下）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4490.html" class="wp_rp_title">再谈“我是怎么招聘程序员的”（下）</a></li><li ><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" alt="140个Google的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_title">140个Google的面试题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8138.html">为什么我反对纯算法面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8138.html/feed</wfw:commentRss>
+			<slash:comments>181</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>GCC 用 C++ 来编译</title>
+		<link>https://coolshell.cn/articles/8115.html</link>
+					<comments>https://coolshell.cn/articles/8115.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 20 Aug 2012 00:40:04 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[bootstrapping]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Compiler]]></category>
+		<category><![CDATA[GNU]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8115</guid>
+
+					<description><![CDATA[<p>GCC在2012年8月15日的时候，merge了一个patch &#8211; Merge from cxx-conversion branch，这意味着，以后...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8115.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8115.html">GCC 用 C++ 来编译</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>GCC在2012年8月15日的时候，merge了一个patch &#8211; <a href="http://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=2b15d2ba7eb3a25dfb15a7300f4ee7a141ee8539" target="_blank">Merge from cxx-conversion branch</a>，这意味着，以后在GCC的编译只能用C++的编译器了，也意味着，gcc的实现代码开始转向C++了。</p>
+<p>你可能会有两个问题，</p>
+<ul>
+<li>一个问题是为什么GCC要转成C++的实现？</li>
+</ul>
+<ul>
+<li>没有C++的编译器，我怎么编译C++编译器的代码？这不是“鸡生蛋还是蛋生鸡”的问题么？</li>
+</ul>
+<p>那，我们来看一看吧。</p>
+<h4>为什么要用C++</h4>
+<p>在<a href="http://gcc.gnu.org/wiki/cxx-conversion" target="_blank">GNU的C++ Conversion文档</a>中，我们可以在Background中看到这样的描述：</p>
+<blockquote><p>Whether we use C or C++, we need to try to ensure that interfaces are easy to understand, that the code is reasonably modular, that the internal documentation corresponds to the code, that it is possible for new developers to write new passes and to fix bugs. Those are the important issues for us to consider. The C++ features which are not present in C &#8212; features which are well documented in many books and many web sites &#8212; are not an important issue.</p></blockquote>
+<p>这句话的意思可以理解为，今天GCC在用C语言的实现已经有点hold不住了，因为，开发人员觉得，不管我们用C或C++，都需要努力确保接口是容易理解的，这样我们的代码是想当理性地被模块化的，这样内部文档和代码一致，这样可以更好地组织代码，这样有利于新人了fix-bug。而C++正好可以让他们更好的完成这些东西。</p>
+<p>GNU还给出了下面这些理由：</p>
+<p><span id="more-8115"></span></p>
+<ul>
+<li>C++ 是一种标准化的，大众的，流行的语言。</li>
+<li>C++ 是C90的超集。</li>
+<li>C++作为C的扩展和C在性能上一样好。</li>
+<li>C++ 在一些有意义的案例上支持更干净的代码。</li>
+<li>C++ 让你更容易去写一个更干净的接口。</li>
+<li>C++ 永远不会让你的代码变得更丑。</li>
+<li>C++ 不是万灵药，他是C的一个改进。</li>
+</ul>
+<p>然后，给了一个PDF <a href="http://airs.com/ian/cxx-slides.pdf">http://airs.com/ian/cxx-slides.pdf</a>，这是Google 的<a href="http://airs.com/ian/" target="_blank"> Ian Lance Taylor</a>的的一个PPT，这个文档可以让大家更好地理解我在《<a title="C++的坑真的多吗？" href="https://coolshell.cn/articles/7992.html" target="_blank">C++的坑多吗？</a>》一文中那些观点。<strong>我都不知道我要说多少遍C++的封装，继承和多态比C语言在代码组织上要好得多得多</strong>。大家还是自己看一下代码吧：</p>
+<p><strong><span style="color: #800000;">数据结构的操作</span> —— </strong>你写的一定不会有STL好</p>
+<p style="padding-left: 30px;"><strong><a href="https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector.jpg"><img decoding="async" loading="lazy" class="size-full wp-image-8119 alignnone" title="VEC vs vector" src="https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector.jpg" alt="" width="542" height="343" srcset="https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector.jpg 542w, https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector-300x190.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector-427x270.jpg 427w" sizes="(max-width: 542px) 100vw, 542px" /></a></strong></p>
+<p><span style="color: #800000;"><strong>结构套结构还是继承？</strong></span></p>
+<p style="padding-left: 30px;"><a href="https://coolshell.cn/wp-content/uploads/2012/08/tree-structure.jpg"><img decoding="async" loading="lazy" class=" wp-image-8118 alignnone" title="tree-structure" src="https://coolshell.cn/wp-content/uploads/2012/08/tree-structure.jpg" alt="" width="629" height="550" srcset="https://coolshell.cn/wp-content/uploads/2012/08/tree-structure.jpg 699w, https://coolshell.cn/wp-content/uploads/2012/08/tree-structure-300x262.jpg 300w" sizes="(max-width: 629px) 100vw, 629px" /></a></p>
+<p><span style="color: #800000;"><strong>函数指针还是多态？</strong></span></p>
+<div style="padding-left: 30px;"><a href="https://coolshell.cn/wp-content/uploads/2012/08/TARGET-vs-Target.jpg"><img decoding="async" loading="lazy" class=" wp-image-8117 alignnone" title="TARGET vs Target" src="https://coolshell.cn/wp-content/uploads/2012/08/TARGET-vs-Target.jpg" alt="" width="391" height="470" srcset="https://coolshell.cn/wp-content/uploads/2012/08/TARGET-vs-Target.jpg 489w, https://coolshell.cn/wp-content/uploads/2012/08/TARGET-vs-Target-249x300.jpg 249w" sizes="(max-width: 391px) 100vw, 391px" /></a></div>
+<p><span style="color: #800000;"><strong>垃圾回收 还是 智能指针？</strong></span></p>
+<div style="padding-left: 30px;"><a href="https://coolshell.cn/wp-content/uploads/2012/08/GC-vs-Smart-Pointer.jpg"><img decoding="async" loading="lazy" class="wp-image-8116 alignnone" title="GC vs Smart Pointer" src="https://coolshell.cn/wp-content/uploads/2012/08/GC-vs-Smart-Pointer.jpg" alt="" width="473" height="337" srcset="https://coolshell.cn/wp-content/uploads/2012/08/GC-vs-Smart-Pointer.jpg 676w, https://coolshell.cn/wp-content/uploads/2012/08/GC-vs-Smart-Pointer-300x213.jpg 300w" sizes="(max-width: 473px) 100vw, 473px" /></a></div>
+<p><span style="color: #800000;"><strong>Why not C++? </strong></span></p>
+<ul>
+<li><strong>C++慢吗</strong>？某些特性会慢，但是有时C++更快，你可以只用你喜欢的C++特性。</li>
+<li><strong>C++复杂吗？</strong>它只不过是另一种编程语言，他可以让你对程序员维护更简单。</li>
+<li><strong>FSF不喜欢C++！</strong>因为FSF（自由软件基金会）这些人不写代码。</li>
+</ul>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/08/Why-not-C++.jpg"><img decoding="async" loading="lazy" class="aligncenter  wp-image-8120" title="Why not C++" src="https://coolshell.cn/wp-content/uploads/2012/08/Why-not-C++.jpg" alt="" width="478" height="418" srcset="https://coolshell.cn/wp-content/uploads/2012/08/Why-not-C++.jpg 683w, https://coolshell.cn/wp-content/uploads/2012/08/Why-not-C++-300x262.jpg 300w" sizes="(max-width: 478px) 100vw, 478px" /></a></p>
+<div></div>
+<h4>Bootstrapping</h4>
+<p>最后，我想来介绍一下<a href="http://en.wikipedia.org/wiki/Bootstrapping_%28compilers%29" target="_blank">Bootstrapping</a>。 所谓Bootstrapping，就是用自己这个语言写编译器来编译自己，也就是说如果你要编译gcc，你需要用一个c的编译器来编译之，这个就是bootstrapped process，自举过程。包括 <a title="BASIC" href="http://en.wikipedia.org/wiki/BASIC">BASIC</a>, <a title="Algol" href="http://en.wikipedia.org/wiki/Algol">Algol</a>, <a title="C (programming language)" href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>, <a title="C++" href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a>, <a title="Pascal programming language" href="http://en.wikipedia.org/wiki/Pascal_programming_language">Pascal</a>, <a title="PL/I" href="http://en.wikipedia.org/wiki/PL/I">PL/I</a>, <a title="Factor programming language" href="http://en.wikipedia.org/wiki/Factor_programming_language">Factor</a>, <a title="Haskell (programming language)" href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>, <a title="Modula-2" href="http://en.wikipedia.org/wiki/Modula-2">Modula-2</a>, <a title="Oberon programming language" href="http://en.wikipedia.org/wiki/Oberon_programming_language">Oberon</a>, <a title="OCaml" href="http://en.wikipedia.org/wiki/OCaml">OCaml</a>,<a title="Common Lisp" href="http://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, <a title="Scheme (programming language)" href="http://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>, <a title="Java (programming language)" href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>, <a title="Python (programming language)" href="http://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>, <a title="Scala (programming language)" href="http://en.wikipedia.org/wiki/Scala_(programming_language)">Scala</a> 等语言都这么干。</p>
+<p>这样干的好处主要是，自己可以测试自己，编译器的改善和语言的改善相辅相成。</p>
+<p>但是，这是一个“鸡生蛋，还是蛋生鸡”的问题，如果你需要用X语言来写一个X语言编译器的语言，你可以这样干：</p>
+<ul>
+<li>用Y语言来实现X的语言解释器或编译器。 <a title="Niklaus Wirth" href="http://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a> 说 <a title="Pascal programming language" href="http://en.wikipedia.org/wiki/Pascal_programming_language">Pascal</a> 的第一个编译器是由 <a title="Fortran" href="http://en.wikipedia.org/wiki/Fortran">Fortran</a> 写的。</li>
+<li>已存在用Y语言写的X语言的编译器或解释器。<a title="Scheme (programming language)" href="http://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a> 就是这么干的。</li>
+<li>已经有一个编译器来编译一个早期版本的X语言，然后就可以用早期版本的X语言来编译新版本的X语言了。<a title="Java (programming language)" href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>，<a title="Haskell (programming language)" href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>, 和最初版的 <a title="Free Pascal" href="http://en.wikipedia.org/wiki/Free_Pascal">Free Pascal</a> 就是这么干的。</li>
+<li>X在某平台上的编译器已经存在，可以使用交叉编译技术来编译另一个平台上X语言，C语言就是这么干的。</li>
+<li>用X语言写一个编译器，然后手动编译之（不需要特别优化），（注：手动编译估计就是手动翻译成机器汇编代码），然后再运行这个手动编译的编译器来编译这个编译器的源码，并优化之。<a title="Donald Knuth" href="http://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> 在他的 <a title="WEB" href="http://en.wikipedia.org/wiki/WEB">WEB</a> <a title="Literate programming" href="http://en.wikipedia.org/wiki/Literate_programming">literate programming</a> 系统里用到了这个方法。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8115.html">GCC 用 C++ 来编译</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8115.html/feed</wfw:commentRss>
+			<slash:comments>41</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>K Nearest Neighbor 算法</title>
+		<link>https://coolshell.cn/articles/8052.html</link>
+					<comments>https://coolshell.cn/articles/8052.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 17 Aug 2012 00:15:30 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[Data Mining]]></category>
+		<category><![CDATA[KNN]]></category>
+		<category><![CDATA[Max Heap]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8052</guid>
+
+					<description><![CDATA[<p>K Nearest Neighbor算法又叫KNN算法，这个算法是机器学习里面一个比较经典的算法， 总体来说KNN算法是相对比较容易理解的算法。其中的K表示最接...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8052.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8052.html">K Nearest Neighbor 算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>K Nearest Neighbor算法又叫KNN算法，这个算法是机器学习里面一个比较经典的算法， 总体来说KNN算法是相对比较容易理解的算法。其中的K表示最接近自己的K个数据样本。KNN算法和<a title="K-Means 算法" href="https://coolshell.cn/articles/7779.html" target="_blank">K-Means算法</a>不同的是，K-Means算法用来聚类，用来判断哪些东西是一个比较相近的类型，而KNN算法是用来做归类的，也就是说，有一个样本空间里的样本分成很几个类型，然后，给定一个待分类的数据，通过计算接近自己最近的K个样本来判断这个待分类数据属于哪个分类。<strong>你可以简单的理解为由那离自己最近的K个点来投票决定待分类数据归为哪一类</strong>。</p>
+<p style="text-align: left;">Wikipedia上的<a href="http://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm" target="_blank">KNN词条</a>中有一个比较经典的图如下：</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="size-full wp-image-8053 aligncenter" title="KNN Classification" src="https://coolshell.cn/wp-content/uploads/2012/08/220px-KnnClassification.svg_.png" alt="" width="220" height="199" /></p>
+<p style="text-align: left;">从上图中我们可以看到，图中的有两个类型的样本数据，一类是蓝色的正方形，另一类是红色的三角形。而那个绿色的圆形是我们待分类的数据。</p>
+<ul>
+<li>如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形。</li>
+</ul>
+<ul>
+<li>如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形。</li>
+</ul>
+<p>我们可以看到，机器学习的本质——<strong>是基于一种数据统计的方法</strong>！那么，这个算法有什么用呢？我们来看几个示例。</p>
+<p><span id="more-8052"></span></p>
+<h4>产品质量判断</h4>
+<p>假设我们需要判断纸巾的品质好坏，纸巾的品质好坏可以抽像出两个向量，一个是“酸腐蚀的时间”，一个是“能承受的压强”。如果我们的样本空间如下：（所谓样本空间，又叫Training Data，也就是用于机器学习的数据）</p>
+<table style="margin: auto;" border="1" cellspacing="3" cellpadding="3">
+<tbody>
+<tr>
+<td valign="top" width="33%">
+<p align="center"><strong>向量X1</strong></p>
+<p align="center"><strong>耐酸时间（秒）</strong></p>
+</td>
+<td valign="top" width="33%">
+<p align="center"><strong>向量X2</strong></p>
+<p align="center"><strong>圧强(公斤/平方米)</strong></p>
+</td>
+<td valign="top" width="33%">
+<p align="center"><strong>品质Y</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="33%">
+<p align="center">7</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">7</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">坏</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="33%">
+<p align="center">7</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">4</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">坏</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="33%">
+<p align="center">3</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">4</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">好</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="33%">
+<p align="center">1</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">4</p>
+</td>
+<td valign="top" width="33%">
+<p align="center">好</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>那么，如果 X1 = 3 和 X2 = 7， 这个毛巾的品质是什么呢？这里就可以用到KNN算法来判断了。</p>
+<p>假设K=3，K应该是一个奇数，这样可以保证不会有平票，下面是我们计算（3，7）到所有点的距离。（关于那些距离公式，可以参看<a title="K-Means 算法" href="https://coolshell.cn/articles/7779.html" target="_blank">K-Means算法中的距离公式</a>）</p>
+<table style="margin: auto;" border="1" cellspacing="3" cellpadding="3">
+<tbody>
+<tr>
+<td valign="top" width="25%">
+<p align="center"><strong>向量X1</strong></p>
+<p align="center"><strong>耐酸时间（秒）</strong></p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong>向量X2</strong></p>
+<p align="center"><strong>圧强(公斤/平方米)</strong></p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong>计算到 (3, 7)的距离</strong></p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong>向量Y</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="25%">
+<p align="center">7</p>
+</td>
+<td valign="top" width="25%">
+<p align="center">7</p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_Numerical-example_clip_image004.gif" alt="" width="144" height="24" /></strong></p>
+</td>
+<td style="text-align: center;" valign="top" width="25%"> 坏</td>
+</tr>
+<tr>
+<td valign="top" width="25%">
+<p align="center">7</p>
+</td>
+<td valign="top" width="25%">
+<p align="center">4</p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_Numerical-example_clip_image006.gif" alt="" width="145" height="24" /></strong></p>
+</td>
+<td style="text-align: center;" valign="top" width="25%"> N/A</td>
+</tr>
+<tr>
+<td valign="top" width="25%">
+<p align="center">3</p>
+</td>
+<td valign="top" width="25%">
+<p align="center">4</p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_Numerical-example_clip_image008.gif" alt="" width="136" height="24" /></strong></p>
+</td>
+<td style="text-align: center;" valign="top" width="25%"> 好</td>
+</tr>
+<tr>
+<td valign="top" width="25%">
+<p align="center">1</p>
+</td>
+<td valign="top" width="25%">
+<p align="center">4</p>
+</td>
+<td valign="top" width="25%">
+<p align="center"><strong><img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_Numerical-example_clip_image010.gif" alt="" width="140" height="24" /></strong></p>
+</td>
+<td style="text-align: center;" valign="top" width="25%"> 好</td>
+</tr>
+</tbody>
+</table>
+<p>所以，最后的投票，好的有2票，坏的有1票，最终需要测试的（3，7）是合格品。（当然，你还可以使用权重——可以把距离值做为权重，越近的权重越大，这样可能会更准确一些）</p>
+<p><strong>注：<a href="http://people.revoledu.com/kardi/tutorial/KNN/KNN_Numerical-example.html" target="_blank">示例来自这里</a>，<a href="https://coolshell.cn/wp-content/uploads/2012/08/K-NearestNeighbors.xls">K-NearestNeighbors Excel表格下载</a></strong></p>
+<h4>预测</h4>
+<p>假设我们有下面一组数据，假设X是流逝的秒数，Y值是随时间变换的一个数值（你可以想像是股票值）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="KNN_TimeSeries_clip_image004" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image004.jpg" alt="" width="191" height="187" /></p>
+<p>那么，当时间是6.5秒的时候，Y值会是多少呢？我们可以用KNN算法来预测之。</p>
+<p>这里，让我们假设K=2，于是我们可以计算所有X点到6.5的距离，如：X=5.1，距离是 | 6.5 – 5.1 | = 1.4， X = 1.2 那么距离是 | 6.5 – 1.2 | = 5.3 。于是我们得到下面的表：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="KNN_TimeSeries_clip_image006" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image006.jpg" alt="" width="312" height="120" /></p>
+<p>注意，上图中因为K=2，所以得到X=4 和 X =5.1的点最近，得到的Y的值分别为27和8，在这种情况下，我们可以简单的使用平均值来计算：<img decoding="async" loading="lazy" title="KNN_TimeSeries_clip_image008" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image008.gif" alt="" width="87" height="41" /></p>
+<p>于是，最终预测的数值为：17.5</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8072" title="KNN_TimeSeries_clip_image010" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image010.jpg" alt="" width="402" height="305" srcset="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image010.jpg 402w, https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image010-300x227.jpg 300w" sizes="(max-width: 402px) 100vw, 402px" /></p>
+<p><strong>注：<a href="http://people.revoledu.com/kardi/tutorial/KNN/KNN_TimeSeries.htm" target="_blank">示例来自这里</a>，<a href="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries.xls">KNN_TimeSeries Excel表格下载</a></strong></p>
+<h4>插值，平滑曲线</h4>
+<p>KNN算法还可以用来做平滑曲线用，这个用法比较另类。假如我们的样本数据如下（和上面的一样）：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="KNN_TimeSeries_clip_image012" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image012.jpg" alt="" width="335" height="35" /></p>
+<p>要平滑这些点，我们需要在其中插入一些值，比如我们用步长为0.1开始插值，从0到6开始，计算到所有X点的距离（绝对值），下图给出了从0到0.5 的数据：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8074" title="KNN_TimeSeries_clip_image014" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image014.jpg" alt="" width="334" height="152" srcset="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image014.jpg 334w, https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image014-300x136.jpg 300w" sizes="(max-width: 334px) 100vw, 334px" /></p>
+<p>下图给出了从2.5到3.5插入的11个值，然后计算他们到各个X的距离，假值K=4，那么我们就用最近4个X的Y值，然后求平均值，得到下面的表：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="KNN_TimeSeries_clip_image016" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image016.jpg" alt="" width="576" height="206" /></p>
+<p>于是可以从0.0, 0.1, 0.2, 0.3 &#8230;. 1.1, 1.2, 1.3&#8230;..3.1, 3.2&#8230;..5.8, 5.9, 6.0 一个大表，跟据K的取值不同，得到下面的图：</p>
+<table style="border: 0px; margin: auto;">
+<tbody>
+<tr>
+<td><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8080" title="KNN_TimeSeries_clip_image026" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image026.jpg" alt="" width="262" height="246" /></td>
+<td><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8079" title="KNN_TimeSeries_clip_image024" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image024.jpg" alt="" width="270" height="249" /></td>
+</tr>
+<tr>
+<td><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8078" title="KNN_TimeSeries_clip_image022" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image022.jpg" alt="" width="262" height="244" /></td>
+<td><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8077" title="KNN_TimeSeries_clip_image020" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image020.jpg" alt="" width="251" height="234" /></td>
+</tr>
+<tr>
+<td><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-8076" title="KNN_TimeSeries_clip_image018" src="https://coolshell.cn/wp-content/uploads/2012/08/KNN_TimeSeries_clip_image018.jpg" alt="" width="246" height="228" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：<a href="http://people.revoledu.com/kardi/tutorial/KNN/KNN_TimeSeries.htm" target="_blank">示例来自这里</a>，<a href="https://coolshell.cn/wp-content/uploads/2012/08/KNN_Smoothing.xls">KNN_Smoothing Excel表格下载</a></strong></p>
+<h4>后记</h4>
+<p>最后，我想再多说两个事，</p>
+<p>1） 一个是机器学习，算法基本上都比较简单，最难的是数学建模，把那些业务中的特性抽象成向量的过程，另一个是选取适合模型的数据样本。这两个事都不是简单的事。算法反而是比较简单的事。</p>
+<p>2）对于KNN算法中找到离自己最近的K个点，是一个很经典的算法面试题，需要使用到的数据结构是“<a href="http://en.wikipedia.org/wiki/Binary_heap" target="_blank">最大堆——Max Heap</a>”，一种二叉树。你可以看看相关的算法。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7779.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/K-Means-150x150.gif" alt="K-Means 算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7779.html" class="wp_rp_title">K-Means 算法</a></li><li ><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/cuckoo-150x150.jpg" alt="Cuckoo Filter：设计与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17225.html" class="wp_rp_title">Cuckoo Filter：设计与实现</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li><li ><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/QR-Code-Overview-150x150.jpeg" alt="二维码的生成细节和原理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10590.html" class="wp_rp_title">二维码的生成细节和原理</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8052.html">K Nearest Neighbor 算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8052.html/feed</wfw:commentRss>
+			<slash:comments>51</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>对技术的态度</title>
+		<link>https://coolshell.cn/articles/8088.html</link>
+					<comments>https://coolshell.cn/articles/8088.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 16 Aug 2012 15:50:25 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8088</guid>
+
+					<description><![CDATA[<p>最近人品爆发，图灵社区，InfoQ，51CTO相继对我做了采访，前两天我把InfoQ对我的采访张贴了出来，今天，图灵社区和51CTO对我的采访发布了（图灵的访谈...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8088.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8088.html">对技术的态度</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近人品爆发，图灵社区，InfoQ，51CTO相继对我做了采访，前两天我把<a title="InfoQ的ArchSummit大会对我的采访" href="https://coolshell.cn/articles/8031.html" target="_blank">InfoQ对我的采访张贴了出来</a>，今天，图灵社区和51CTO对我的采访发布了（<a title="图灵访谈之三十二：我的精神家园——陈皓（@左耳朵耗子）专访" href="http://www.ituring.com.cn/article/9174" target="_blank">图灵的访谈</a> ，<a title="专访陈皓：有关带队、沟通、成长与变化" href="http://developer.51cto.com/art/201208/353256.htm" target="_blank">51CTO的访谈</a>），我是一个有技术焦虑症的人，我的经历比较特殊，对大家来说可能也没有什么意思，这两个采都有一些重叠的部分，不过有些观点我想再加强一些，并放在这里和大家一起分享一下。</p>
+<h4>对于日新月异的新技术，你是什么态度？</h4>
+<p>遇到新技术我会去了解，但不会把很大的精力放在这些技术（如：NoSQL，Node.js，等）。这些技术尚不成熟，只需要跟得住就可以了。技术十年以上可能是一个门槛。有人说技术更新换代很快，我一点儿都不觉得是这样想。虽然有不成熟的技术不断地涌出，但是成熟的技术，比如Unix，40多年，C，40多年，C++，30多年，TCP/IP，20多年，Java也有将近20年了……，所以，如果你着眼成熟的技术，其实并不多。</p>
+<p>我的观点是——<strong>要了解技术就一定需要了解整个计算机的技术历史发展和进化路线。</strong>（这个观点，我在《<a title="程序员技术练级攻略" href="https://coolshell.cn/articles/4990.html" target="_blank">程序员练级攻略</a>》和《<a title="C++的坑真的多吗？" href="https://coolshell.cn/articles/7992.html" target="_blank">C++的坑多吗？</a>》中提到过多次了。）因为，<strong>你要朝着球运动的轨迹去，而不是朝着球的位置去，要知道球的运动轨迹，你就需要知道它历史上是怎么跑的</strong>。</p>
+<p>如果要捋一个技术的脉络，70年代Unix的出现，是软件发展方面的一个里程碑，那个时期的C语言，也是语言方面的里程碑。（当时）所有的项目都在Unix/C上，全世界人都在用这两样东西写软件。Linux跟随的是Unix, Windows下的开发也是 C/C++。这时候出现的C++很自然就被大家接受了，企业级的系统很自然就会迁移到这上面，C++虽然接过了C的接力棒，但是它的问题是它没有一个企业方面的架构，而且太随意了，否则也不会有今天的Java。C++和C非常接近，它只不过是C的一个扩展，长年没有一个企业架构的框架。而Java在被发明后，被IBM把企业架构这部分的需求接了过来，J2EE的出现让C/C++捉襟见肘了，在语言进化上，还有Python/Ruby，后面还有了.NET，但可惜的是这只局限在Windows平台上。这些就是企业级软件方面语言层面就是C -&gt; C++ -&gt; Java这条主干，操作系统是Unix -&gt; Linux/Windows这条主干，软件开发中需要了解的网络知识就是Ethernet -&gt; IP -&gt; TCP/UDP 这条主干。另外一条脉络就是互联网方面的（HTML/CSS/JS/LAMP…）。我是一个有技术忧虑症的人，这几条软件开发的主线一定不能放弃。</p>
+<p>另外，从架构上来说，我们可以看到，</p>
+<p><span id="more-8088"></span></p>
+<ul>
+<li>从单机的年代，到C/S架构（界面，业务逻辑，数据SQL都在Client上，只有数据库服库在S上）</li>
+<li>再到B/S结构（用浏览器来充当Client，但是传统的ASP/PHP/JSP/Perl/CGI这样的编程也都把界面，业务逻辑，和SQL都放在一起），但是B/S已经把这些东西放到了Web Server上，</li>
+<li>再到后来的中间件，把业务逻辑再抽出一层，放到一个叫App Server上，经典的三层结构。</li>
+<li>然后再到分布式结构，业务层分布式，数据层分布式。</li>
+<li>再到今天的云架构——全部移到服务器。</li>
+</ul>
+<div>我们可以看到技术的变迁都一直再把东西往后端移，前端只剩一个浏览器或是一个手机。通过这个你可以看到整个技术发展的趋势。所以，如果你了解了这些变迁，了解了这些变迁过程“不断填坑”的过程，你将会对技术有很强的把握。</div>
+<p>另外，我听到有很多人说，一些技术不适用，一些技术太学院派，但对我来说，无论是应用还是学术，我都会看，知识不愁多。何必搞应用的和搞学术的分开阵营，都是知识，学就好了。</p>
+<p>技术的发展要根植于历史，而不是未来。不要和我描述这个技术的未来会多么美好（InfoQ 的 ArchSummit大会上有一个微软来的人把Node.js说得跟仙女一样，然后给了一个Hello World），我承认你用一些新的技术可以实现很多花哨的东西。但是，我认为技术都是承前的，只有承前的才会常青。所以说“某某（技术）要火”这样的话是没有意义的，等它火了、应用多了，规模大了，再说。有些人说：“不学C/C++也是没有问题的”，我对此的回应是：<strong>如果连技术主干都可以不学的话，还有什么其他的好学呢？这些是计算机发展的根、脉络、祖师爷，这样的东西怎么可以不学呢？</strong></p>
+<p><strong></strong>另外，我们要去了解整个计算机文化，我觉得计算机文化源起于Unix/C这条线上（注意，我说的是文化不是技术）。我也写过很多与Unix文化相关的文章，大家可以看看我写的“<a title="Unix传奇(上篇)" href="https://coolshell.cn/articles/2322.html" target="_blank">Unix传奇</a>（<a title="Unix传奇(下篇)" href="https://coolshell.cn/articles/2324.html" target="_blank">尤其是下篇</a>）”。</p>
+<h4>可是在应用环境中，对新技术的需求是很高的，你觉得在教育领域计算机科学的侧重应该是什么样的？</h4>
+<p>学校教的大部分都是知识密集型的技术，但是社会上的企业大部分都是劳动密集型的。什么是劳动密集型的企业呢？麦当劳炸薯条就是劳动密集型的工作，用不到学校教授的那些知识。如果有一天你不炸薯条了，而要去做更大更专业的东西，学校里的知识就会派上用场。有人说一个语言、一个技术，能解决问题能用就行了，我不这样认为。<strong>我觉得你应该至少要知道这些演变和进化的过程。而如果你要解决一些业务和技术难题，就需要抓住某种技术很深入地学习，当成艺术一样来学习。</strong></p>
+<p>我在“<a title="软件开发的“三重门”" href="https://coolshell.cn/articles/6526.html" target="_blank">软件开发‘三重门’</a>”里说过，第一重门是业务功能，在这重门里，的确是会编程就可以了；第二重门是业务性能，在这一重门里，技术的基础就很管用了，比如：操作系统的文件管理，进程调度，内存管理，网络的七层模型，TCP/<del>UCP</del>UDP的协议，语言用法、编译和类库的实现，数据结构，算法等等就非常关键了；第三重门是业务智能，在这一重门里，你会发现很多东西都很学院派了，比如，搜索算法，推荐算法，预测，统计，机器学习，图像识别，分布式架构和算法，等等，你需要读很多计算机学院派的论文。</p>
+<p>总之，这主要看你职业生涯的背景了，如果你整天被当作劳动力来使用，你用到的技术就比较浅，比较实用，但是如果你做一些知识密集型的工作，你就需要用心来搞搞研究，就会发现你需要理论上的知识。比如说，我之前做过的跨国库存调配，需要知道最短路径的算法，而我现在在亚马逊做的库存预测系统，数据挖掘的那些东西都需要很强的数学建模、算法、数据挖掘的功底。</p>
+<p>我觉得真正的高手都来自知识密集型的学院派。他们更强的是，可以把那些理论的基础知识应用到现在的业务上来。但很可惜，<strong>我们国内今天的教育并没有很好地把那些学院派的理论知识和现实的业务问题很好地接合起来。</strong>比如说一些哈希表或二叉树的数据结构，如果我们的学校在讲述这些知识的时候能够接合实际的业务问题，效果会非常不错，如：设计一个IP地址和地理位置的查询系统，设计一个分布式的NoSQL的数据库，或是设计一个地理位置的检索应用等等。在学习操作系统的时候，如果老师可以带学生做一个手机或嵌入式操作系统，或是研究一下Unix System V或是Linux的源码的话，会更有意思。在学习网络知识的时候，能带学生重点学一下以太网和TCP/IP的特性，并调优，如果能做一个网络上的pub/sub的消息系统或是做一个像Nginx一样的web server，那会更好。如果在学图形学的过程中能带领学生实践一个作图工具或是一个游戏引擎，那会更有意思。</p>
+<p>总之，我们的教育和现实脱节太严重了，教的东西无论是在技术还是在实践上都严重落后和脱节，没有通过实际的业务或技术问题来教学生那些理论知识，这是一个失败。</p>
+<h4><strong>那么，现在做一个软件开发者是否更加困难了？</strong></h4>
+<p>我觉得倒不是。做一个软件开发者更简单了。因为现在互联网很发达，你可以找到很多共享的知识——相对于我那个时候。第一，知识你容易查到，然后社区很多，文章、分享的人也越来越多。我们那个时候没有的。上网一查，什么都没有。都得去自己琢磨，自己去调查。所以我觉得相比我们那个时候更容易了。第二，工具变多了。现在的工具比那个时候好用多了。我们那个时候就是一天到晚在vi里面，连个自动提示都没有，连个版本库管理都没有。不光工具变多，框架也多了，各种各样的编程框架。我们那时候都是生写。写JavaScript，生写，连个jQuery都没有。没有这些辅助性的、让你提高生产力的东西。J2EE那时候也没有。而且整个（开发环境）都很不成熟。一个服务器的最高配置就1GB的情况下，一个WebSphere起来就占了900多MB——这还能跑什么应用？所以只能去用最基础的系统。所以我觉得现在，无论是环境，还是开发的过程，都更规范了。以前我做开发的时候就是，什么都不懂就上了，瞎搞，没有什么开发规范，没有人理你，反正你搞得好就搞好，搞不好就搞不好了，全靠自己，包括做测试维护等等。我觉得现在的软件开发就很好，你一上去，就有好的工具，有好的知识库，有好的社区，有好的开发框架，还有好的流程，方法，甚至还有人帮你做测试，还有人告诉你应该怎么做。幸福得很。现在好多人还说这个不好那个不好，开发难什么的。其实容易多了。</p>
+<p>但是，有个东西我觉得是现在的软件开发者比我们那时候变得更难的。就是，你享福了以后，人就变懒，变娇气了。对很多东西的抱怨就开始多了。我们那个时候哪有什么好抱怨的？没啥好抱怨的，有活就干，有东西学就赶快学。现在呢，学个什么东西还挑挑拣拣的，抱怨这个语言太扯，那个IDE不好，这个框架太差，版本管理工具太扯，等等。<strong>这就好像以前我没东西吃，只有个糠吃，要是有面包有馒头，我就觉得非常非常好了。现在是，好吃的东西多了我们还学会挑食了，这也不好用，那也不好用</strong>。</p>
+<p>根本就不是技术变难了，环境变差了，是程序员变娇气了。所以软件开发变难，归根结底还是程序员们自己变娇气了。</p>
+<h4>你如何在进度压力下，享受技术带来的快乐？</h4>
+<p>中国人中庸的思想，入世和出世，每天的工作就是入世。举个例子，我十年前在上海的时候，给交通银行做项目的时候，每周休息一天，早九点到晚十点，每天工作12个小时，这样的工作持续了一整年，没有节假日，项目上的技术也没什么意思。当时我晚上十点回到住处，还想学一些C++/Java和Unix/Windows的技术，于是就看书到晚上11:30，每天如此，一年下来学到很多东西，时间没有荒废，心里就很开心。<strong>我觉得当时是快乐的，因为有成长的感觉是快乐的。</strong></p>
+<p>现在的我，工作、写博客、养孩子，事情其实更多。我早上7:30起床，会浏览一下国外的新闻，hacker news, tech church, reddit, highavailability之类的站点，9点上班。晚上6、7点钟下班，开始带孩子。十点钟孩子睡了觉，我会开始重新细读一下这一天都发生了些什么事情。这个时间也有可能会用来看书。学习的过程（我）是不喜欢被打断的，所以从十点到十二点，家人都睡了，这正是我连续学习的好时间。可能从晚上11:30开始，我会做点笔记或者写博客。我现在对酷壳文章的质量要求比较高一些，所以大概积累一个星期的时间才可以生成一篇文章。每天我大概都在一两点钟才会睡觉。没办法，我有技术焦虑症。但是觉得这样的生活很充实，也很踏实。</p>
+<p>另外，任何一门技术玩深了，都是很有意思的。有些人形成了一个价值取向，“我只做什么，绝不做什么”。前段时间有一个刚来亚马逊的工程师，他原来做的是数据挖掘推荐系统，原来的公司重组要让他做前端，他不肯就离职了，他说他不想做前端。我觉得，前端后端都是编程，Javascript是编程，C++也是编程。<strong>编程不在于你用什么语言去coding，而是你组织程序、设计软件的能力，只要你上升到脑力劳动上来，用什么都一样，技术无贵贱。</strong>你可以不喜欢那个技术，但是还是要了解了解，也没有必要完全不用，完全抛弃。Javascript啊——只要能被Javascript实现的，未来总有一天会被Javascript所取代。</p>
+<p>回到问题，怎么才能享受到快乐呢？</p>
+<ul>
+<li>第一，入世和出世要分开，不要让世俗的东西打扰到你的内心世界，你的情绪不应该为别人所控，也不应该被世俗所污染，活得真实，活得真实你才会快乐。</li>
+</ul>
+<ul>
+<li>第二，就是要有热情，有了热情，你的心情就会很好，加班都可以是快乐的，想一想我们整个通宵用来打游戏的时光，虽然很累，但是你也很开心，这都是因为有了热情的缘故。</li>
+</ul>
+<p>总之一句话——<strong>如果你没有兴趣，什么都是借口，如果你有兴趣了，什么都是好玩的</strong>。</p>
+<h4></h4>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8088.html">对技术的态度</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8088.html/feed</wfw:commentRss>
+			<slash:comments>132</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>InfoQ的ArchSummit大会对我的采访</title>
+		<link>https://coolshell.cn/articles/8031.html</link>
+					<comments>https://coolshell.cn/articles/8031.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 12 Aug 2012 08:02:28 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Blog]]></category>
+		<category><![CDATA[CoolShell.cn]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=8031</guid>
+
+					<description><![CDATA[<p>偷个懒，做个更新，今天下午InfoQ的ArchSummit对我的一些采访。我整理了一下，算做是我个人写酷壳的一些想法和总结。不过问我的这些问题并不尖锐，呵呵，不...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/8031.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/8031.html">InfoQ的ArchSummit大会对我的采访</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p>偷个懒，做个更新，今天下午InfoQ的ArchSummit对我的一些采访。我整理了一下，算做是我个人写酷壳的一些想法和总结。不过问我的这些问题并不尖锐，呵呵，不像<a href="http://weibo.com/stonemama" target="_blank">@图灵谢工</a> 问我的问题：“你的价值观太过理想，根本不现实，你站在道德的高点拷问社会，是不是想炒作自己？”。</p>
+<p><strong>1) 作为酷壳的博主，请您大概介绍下酷壳是什么时候开始的，初衷是什么 ？</strong></p>
+<p>我写blog是从2002年开始（那时还没有blog这个词），当时对我来说，没有自己的电脑，上网很不方便，而我有写学习笔记的习惯，读书和工作中学到的一些东西需要保存在某个地方，我希望这个地方可以让我在任何地方都可以调出来看看（因为我当时的工作出差太多），正好当时的CSDN有个“专家专栏”的功能，也就是后来出现的blog。</p>
+<p>后来Blog出现后，CSDN把自己的“专家专栏”全部迁移到了blog.csdn.net上，07-08年这段时间，CSDN的blog基本上是不能使用，性能差得不能再差，每天宕机，上传图片，贴代码，都非常不好用。也许，这就是使用.NET/Windows平台的问题（开个玩笑）。</p>
+<p>我是从2009年3月开始创建酷壳的，创建的初衷如下：</p>
+<ul>
+<li>我需要一个更稳定，更方便的地方，我的博客的风格不会被大众的风格所掩盖的地方。</li>
+<li>我的从事新闻的老婆很不待见<a href="http://blog.csdn.net/haoel" target="_blank">我在CSDN的博客</a>，她觉得太技术，书呆子。</li>
+<li>我正好看到了煎蛋这个国外娱乐新闻文摘的blog，而我正好每天会有2个小时阅读国外社区的东西。</li>
+</ul>
+<p>基于上述三个原因，我自己花了4500元/年租了个主机，建了酷壳。所以，这也是你一开始看到酷壳基本上是娱乐性比较强的博客，我收集一些比较有意思的程序员中发生的事情，也收集一各式各样的程序员圈子里的各处观点。</p>
+<p>我当时的想法是，一些特别技术的东西，我会和CSDN同步，而一些轻松的话题，我会放在酷壳。我当时的初衷就是想说明程序员并不是一个木纳、书呆子、不食人间烟火、巨无趣的一个群体，程序员圈子里同样也有很多有趣的东西。所以，你可以看到11年初以前的东西我有很多网络恶搞式乱调侃的语言。</p>
+<p><span id="more-8031"></span></p>
+<p>但到了2011年初让我开始让我有些转变，主要是读者越来越多，而且，有一些人已经把酷壳当成了一个提升自己能力和、开阔眼界、甚至需要指导的地方，我的压力就这样来了，这种压力让我开始不能太娱乐，因为有一些人是很认真地在看酷壳的文章，在期待能从酷壳获得有价值的东西……</p>
+<p><strong>2）技术人员的个人博客不胜其数，但真正可以吸引人眼球的并不多，能谈谈成功运营一个个人博客的精髓是什么？</strong></p>
+<p>哪有什么运营，完全是顺其自然，误打误撞。</p>
+<p>是的，技术人员的博客太多了，酷壳并不是技术最好的，也不是资讯最好的。淘宝的很多技术团队的博客都很不错，还有阮一峰的博客，还有各种各样的如CSDN，博客园，51CTO，ZDNET这样的社区。所以，我需要做点不一样的，而且我觉得还有一些这些社区和博客都还没有涉及的地方。</p>
+<p>对于社区最大的问题就是，他们就像我们学校里的学生一样，喜欢大量地收获聚集文章和知识，填鸭式的网站，网站的编辑不懂技术。对于一些技术博客的问题并不是他们不懂技术，而是太过技术，只有技术，少了一些程序员的文化，观点和视野。</p>
+<p>程序员是一个圈子，一个小社会，这个圈子里并不只有技术和知识，还有很多很多的东西，例如：程序员们都说自己比较辛苦，都说自己没有得到足够的尊重，还有一些如敏捷，流程，产品等地方程序员的观点没有得到表达，还有一些程序员这个社区内比较特有的东西，比如：编程语言之争，这本是一个很好的话题，是程序员圈子里的文化，但是每次讨论都是骂来骂去的，需要有人去引导程序员，带领他们用正确的价值观去看待和思考这些东西。</p>
+<p>这就是酷壳和其它博客和社区不一样的地方，我关注的并不只有技术，还有程序员的文化和想法，并且输出一些或偏执或鲜明或个人或激进的价值观，无论怎么样，你认同也好，不认同也可以，你可以看到酷壳和我还有酷壳里的讨论都是真实的。</p>
+<p><strong>3）根据你博客的自我介绍，想从纯底层技术方向转型为业务技术方向，让你产生这种想法的最大原因是什么？</strong></p>
+<p>纯底层做得太多了，有些书呆子了，与人打交道有问题了，而且觉得地底有点不识人间烟火了，我想知道用户是怎么用我们的产品的，我想知道用户是怎么想的，整天在那调网络性能，调系统性能，搞多线程，搞内存漏洞，整天在矿道里打洞， 想出来见见天日。呵呵。</p>
+<p>但这并不代码我觉得业务和用户要比技术有用得多，也并不是说技术无用论。</p>
+<p>我觉得这就好像一颗大树，这些底层的技术，可以让你站得非常非常稳，可以让你抵御洪灾和暴风，但是如果你想伸长得更高更广，你还是需要地面上的枝叶。我觉得我的底层知识够深入了，我需要了解业务知识和用户，因为我不但想站得稳，扎得深，我也想伸得高。</p>
+<p><strong>4）酷壳产出文章是怎么样的频率？每篇博文 ，你大概需要多少时间？</strong></p>
+<p>我每天都有阅读的习惯，尤其是阅读网文，每天两个小时，而且我是一个爱思考的人，思考的对不对不一定，但是我很喜欢去思考。现在又上了微博和一些朋友互动，也会引发我的一些思考，所以，文章就是在阅读、交流和思考中产生的。</p>
+<p>2011年初以前，平均每周3篇，有时候一周有10篇，现在基本上每周一篇。以前的文章花不了太多时间 ，因为比较娱乐，现在的文章很花时间，比如《程序员练级攻略》花了我四周的时间 ，《性能调优攻略》花了我三周多的时间，基本上来说，现在的文章至少也要花我1-2天的时间。我想把文章的数量降下来，这样，我可以思考得更好更透彻一些，这样文章里的营养更多一些。</p>
+<p><strong>5）是不是可以给年轻的朋友，或是风刚从事软件开发工作的朋友，一些职业发展的建议？</strong></p>
+<p>主要是下面几点：</p>
+<ul>
+<li>不要追新技术，应该多看看那些经历了很长时间的常青的技术。</li>
+</ul>
+<ul>
+<li>多研究一下历史，和技术的演进，这样你才能知道技术的未来。今天的很多东西都在过去有身影，如：今天的移动端和云端架构和以前的Unix和终端的关系，还有管道，和Unix设计的哲学也在今天Service Interface式的设计中有得到传承，等等。</li>
+</ul>
+<ul>
+<li>我可以急功近利以解决问题和追赶技术潮流，但是，如果你需要成为一个领域的专家，你需要非常非常注重基础。速成编程的方式只能让你成为劳动力，而不能成为工匠或技术和知识的驾驭者。</li>
+</ul>
+<ul>
+<li>不要被产商的文化所主导了，多看看社区的文化，尤其是Unix/C的文化，这是计算机文化的根（参看我写过的《<a title="Unix传奇(上篇)" href="https://coolshell.cn/articles/2322.html" target="_blank">Unix传奇</a>》）</li>
+</ul>
+<ul>
+<li>注重基础，广度是深度是副产品。</li>
+</ul>
+<p><strong>6）以你过往的经历，你是如何看待“架构师”这个角色的？他的义务是如何分配的？</strong></p>
+<p>架构就是Design一个部分，就是软件设计的一块，软件设计最重要的有两点：</p>
+<ul>
+<li>业务功能性需求分析和非功能性需求分析，</li>
+<li>技术基础的深刻认识，需要有非常丰富的经验。</li>
+</ul>
+<p>试问一下，程序员做软件不需要设计吗？做设计不需要设计架构吗？很自然的，今天的工程师，程序员已经在做架构设计上的事了。所以，我觉得架构设计这个工作本就是程序员（或者说是高级程序员）工作的一部分。</p>
+<p>但是，我个人认为架构师在某些情况下也还是需要的，但其应该是对业务和技术都很熟悉的人，并且偏技术，也要写代码的人。在一些公司，上下一盘棋，的确需要对总体架构设计，并保证这个框架能够被各个工程团队贯彻实现的那么一个团队，但他们应该更多地深入到一线工程团队的。</p>
+<p>所以，我觉得架构师就是一个高级程序员，而不是一个拍脑袋，关说不练的人。</p>
+<p>这点，看看Linux的架构师团队就知道了，一样的需要写代码，fix-bug，一样地需要了解各个公司对linux提出的各种各样的需求。</p>
+<p><strong>7）现阶段酷壳的文章，都是你一个人写的吗？是否有其他同仁加入写作？</strong></p>
+<p>并不都是我一个人写的，我希望酷壳是大家一起来写的，事实上也有一些人写，只是不多。只是我个人的色彩过重了一些，我的个性压制了众性。</p>
+<p>（不过，我真的无法自证都是我写的，我有没有团队，呵呵，管它有没有团队，是不是人代写，重要的是那些文章的内容是否对大家有帮助，或是对社区有贡献。；））</p>
+<p><strong>8）你对酷壳未来的构想是什么？还是一个技术交流的平台吗？</strong></p>
+<p>对于酷壳来说，其文化和价值观比较重一些，短期内，还是以我个人色彩为主一些，虽然我希望这是一个大家都能来分享的地方。前段时间我有个想法想做一个“程序员疫苗站”，就像我们一出生时接种的各种疫苗可以让我们抵抗各种病毒一样，这个网站可以让程序员接种一些犯低级错误的疫苗，从而对这些低级错误有抵抗。我还没有想得特别清楚，不过方向基本上是这个方面的。</p>
+<p>（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8031.html">InfoQ的ArchSummit大会对我的采访</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/8031.html/feed</wfw:commentRss>
+			<slash:comments>66</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++的坑真的多吗？</title>
+		<link>https://coolshell.cn/articles/7992.html</link>
+					<comments>https://coolshell.cn/articles/7992.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 06 Aug 2012 00:12:05 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7992</guid>
+
+					<description><![CDATA[<p>先说明一下，我不希望本文变成语言争论贴。希望下面的文章能让我们客观理性地了解C++这个语言。（另，我觉得技术争论不要停留在非黑即白的二元价值观上，这样争论无非就...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7992.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7992.html">C++的坑真的多吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>先说明一下，我不希望本文变成语言争论贴。希望下面的文章能让我们客观理性地了解C++这个语言。（另，我觉得技术争论不要停留在非黑即白的二元价值观上，这样争论无非就是比谁的嗓门大，比哪一方的观点强，毫无价值。我们应该多看看技术是怎么演进的，怎么取舍的。）</p>
+<h4>事由</h4>
+<p><img decoding="async" loading="lazy" class="alignright size-full wp-image-8014" title="C Plus Plus" src="https://coolshell.cn/wp-content/uploads/2012/08/cpp_small.jpg" alt="" width="300" height="240" />周五的时候，我在我的微博上发了一个贴说了一下一个网友给我发来的C++程序的规范和内存管理写的不是很好（后来我删除了，因为当事人要求），我并非批判，只是想说明其实程序员是需要一些“疫苗”的，并以此想开一个“程序员疫苗的网站”，结果，@简悦云风同学<a href="http://weibo.com/2388714105/yvqWKkcGV">直接回复到</a>：“<strong>不要用 C++ 直接用 C , 就没那么多坑了。</strong>”就把这个事带入了语言之争。</p>
+<p>我又<a href="http://weibo.com/1401880315/yvrMMsCuT" target="_blank">发了一条微博</a>：</p>
+<p style="padding-left: 30px;"><a title="左耳朵耗子" href="http://weibo.com/1401880315/profile">@左耳朵耗子</a> <a href="http://verified.weibo.com/verify" target="_blank"><img decoding="async" title="新浪个人认证 " src="http://img.t.sinajs.cn/t4/style/images/common/transparent.gif" alt="新浪个人认证 " /></a>： <span style="color: #800080;">说C++比C的坑更多的人我可以理解，但理性地思考一下。C语言的坑也不少啊，如果说C语言有90个坑，那么C++就是100个坑（另，<strong>我看很多人都把C语言上的坑也归到了C++上来</strong>），但是C++你得到的东西更多，封装，多态，继承扩展，泛型编程，智能指针，……，你得到了500%东西，但却只多了10%的坑，多值啊</span>。</p>
+<p>结果引来了更多的回复（只节选了一些言论）：</p>
+<ul>
+<li>@淘宝褚霸<a href="http://weibo.com/1915508822/yvshunX41">也在微博里说</a>：“<span style="color: #800080;">自从5年前果断扔掉C++，改用了ansi c后，我的生活质量大大提升，没有各种坑坑我。</span>”</li>
+</ul>
+<ul>
+<li>@Laruence<a href="http://weibo.com/1170999921/yvsgisAgB" target="_blank">在其微博里</a>说: “<span style="color: #800080;">我确实用不到, C语言灵活运用struct, 可以很好的满足这些需求.//@左耳朵耗子: 封装，继承，多态，模板，智能指针，这也用不到？这也学院派？//@Laruence: 问题是, 这些东西我都用不到&#8230; C语言是工程师搞的, C++是学院派搞的</span>”</li>
+</ul>
+<p><strong>那么，C++的坑真的多么？我还请大家理性地思考一下</strong>。</p>
+<p><span id="more-7992"></span></p>
+<div>
+<h4>C++真的比C差吗？</h4>
+<p>我们先来看一个图——《<a href="https://coolshell.cn/articles/1850.html" target="_blank">各种程序员的嘴脏的对比</a>》，从这个图上看，C程序员比C++的程序员在注释中使用fuck的字眼多一倍。这说明了什么？<strong>我个人觉得这说明C程序员没有C++程序员淡定</strong>。</p>
+</div>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="Google Code 中程序语言出现 fuck 一词的比率" src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language.jpg" alt="Google Code 中程序语言出现 fuck 一词的比率" width="543" height="303" /></p>
+<p>不要太纠结上图，只是轻松一下，我没那么无聊，让我们来看点真正的论据。</p>
+<p>相信用过C++的程序员知道，C++的很多特性主要就是解决C语言中的各种不完美和缺陷：（注：<strong>C89、C99中许多的改进正是从C++中所引进的</strong>）</p>
+<ul>
+<li>用namespace解决了很C函数重名的问题。</li>
+</ul>
+<ul>
+<li>用const/inline/template代替了宏，解决了C语言中宏的各种坑。</li>
+</ul>
+<ul>
+<li>用const的类型解决了很多C语言中变量值莫名改变的问题。</li>
+</ul>
+<ul>
+<li>用引用代替指针，解决了C语言中指针的各种坑。这个在Java里得到彻底地体现。</li>
+</ul>
+<ul>
+<li>用强类型检查和四种转型，解决了C语言中乱转型的各种坑。</li>
+</ul>
+<ul>
+<li>用封装（构造，析构，拷贝构造，赋值重载）解决了C语言中各种复制一个结构体（struct）或是一个数据结构（link, hashtable, list, array等）中浅拷贝的内存问题的各种坑。</li>
+</ul>
+<ul>
+<li>用封装让你可以在成员变量加入getter/setter，而不会像C一样只有文件级的封装。</li>
+</ul>
+<ul>
+<li>用函数重载、函数默认参数，解决了C中扩展一个函数搞出来像func2()之类的ugly的东西。</li>
+</ul>
+<ul>
+<li>用继承多态和RTTI解决了C中乱转struct指针和使用函数指针的诸多让代码ugly的问题。</li>
+</ul>
+<ul>
+<li>用RAII，智能指针的方式，解决了C语言中因为出现需要释放资源的那些非常ugly的代码的问题。</li>
+</ul>
+<ul>
+<li>用OO和GP解决各种C语言中用函数指针，对指针乱转型，及一大砣if-else搞出来的ugly的泛型。</li>
+</ul>
+<ul>
+<li>用STL解决了C语言中算法和数据结构的N多种坑。</li>
+</ul>
+<div>（注意：上面我没有提重载运算符和异常，前者写出来的代码并不易读和易维护（参看《<a title="恐怖的C++语言" href="https://coolshell.cn/articles/1724.html" target="_blank">恐怖的C++语言</a>》后面的那个示例），坑也多，后者并不成熟（相对于Java的异常），但是我们需要知道try-catch这种方式比传统的不断地判断函数返回值和errno形成的大量的if-else在代码可读性上要好很多）</div>
+<p>上述的这些东西填了不知有多少的C语言编程和维护的坑。<strong>少用指针，多用引用，试试autoptr，用用封装，继承，多态和函数重载…… 你面对的坑只会比C少，不会多。</strong></p>
+<h4>C++的坑有多少？</h4>
+<p>C++的坑真的不多，如果你能花两到三周的时候读一下《<a href="http://book.douban.com/subject/1231590/" target="_blank">Effecitve C++</a>》里的那50多个条款，你就知道C++里的坑并不多，而且，有很多条款告诉我们C++是怎么解决C的坑的。然后，你可以读读《<a href="http://book.douban.com/subject/1967356/" target="_blank">Exceptional C++</a>》和《<a href="http://book.douban.com/subject/1244943/" target="_blank">More Exceptional C++</a>》，你可以了解一下C++各种问题的解决方法和一些常见的经典错误。</p>
+<p>当然，C++在解决了很多C语的坑的同时，也因为OO和泛型又引入了一些坑。消一些，加一些，我个人感觉上总体上只比C多10%左右吧。但是你有了开发速度更快，代码更易读，更易维护的500%的利益。</p>
+<p>另外，不可否认的是，C++中的代码出了错误，有时候很难搞，而且似乎用C++的人会觉得C++更容易出错？我觉得主要是下面几个原因：</p>
+<ul>
+<li><strong>C和C++都没学好，大多数人用C++写C，所以，C的坑和C++的坑合并了。</strong></li>
+</ul>
+<ul>
+<li><strong><strong>C++太灵活了，想怎么搞就怎么搞，所以，各种不经意地滥用和乱搞。</strong></strong></li>
+</ul>
+<p>另外，C++的编译对标准C++的实现各异，支持地也千差万别，所以会有一些比较奇怪的问题，但是如果你一般用用C++的封装，继承，多态，以及namespace，const, refernece,  inline, templete, overloap, autoptr，还有一些OO 模式，并不会出现奇怪的问题。</p>
+<p>而对于STL中的各种坑，我觉得是程序员们还对GP（泛型编程）理解得还不够，STL是泛型编程的顶级实践！属于是大师级的作品，一般人很难理解。必需承认STL写出来的代码和编译错误的确相当复杂晦涩，太难懂了。这也是C++的一个诟病。</p>
+<p>这和<a href="https://coolshell.cn/articles/1724.html" target="_blank">Linus说的一样</a> —— “<strong>C++是一门很恐怖的语言，而比它更恐怖的是<span style="color: #cc0000;">很多不合格的程序员</span>在使用着它</strong>”。注意我飘红了“<span style="color: #cc0000;"><strong>很多不合格的程序员</strong></span>”！</p>
+<p>我觉得C++并不适合初级程序员使用，C++只适合高级程序员使用（参看《<a title="“21天教你学会C++”" href="https://coolshell.cn/articles/2250.html" target="_blank">21天学好C++</a>》和《<a title="C++ 程序员自信心曲线图" href="https://coolshell.cn/articles/2287.html" target="_blank">C++学习自信心曲线</a>》），正如《<a title="Why C++ ? 王者归来" href="https://coolshell.cn/articles/6548.html" target="_blank">Why C++</a>》中说的，C++适合那些对开发维护效率和系统性能同时关注的高级程序员使用。</p>
+<p><strong>这就好像飞机一样，开飞机很难，开飞机要注意的东西太多太多，对驾驶员的要求很高，但你不能说飞机这个工具很烂，开飞机的坑太多。</strong>（注：我这里并不是说C++是飞机，C是汽车，C++和C的差距，比飞机到汽车的差距少太多太多，这里主要是类比，我们对待C++语言的心态！）</p>
+<h4>C++的初衷</h4>
+<p>理解C++设计的最佳读本是《<a href="http://book.douban.com/subject/1096216/" target="_blank">C++演化和设计</a>》，在这本书中Stroustrup说了些事：</p>
+<p style="padding-left: 30px;">1）Stroustrup对C是非常欣赏，<strong>实际上早期C++许多的工作是对于C的强化和净化</strong>，并把完全兼容C作为强制性要求。C89、C99中许多的改进正是从C++中所引进。可见，Stroustrup对C语言的贡献非常之大。<strong>今天不管你对C++怎么看，C++的确扩展和进化了C，对C造成了深远的影响</strong>。</p>
+<p style="padding-left: 30px;">2）Stroustrup对于C的抱怨主要来源于两个方面——在C++兼容C的过程中遇到了不少设计实现上的麻烦；以及守旧的K&amp;R C程序员对Stroustrup的批评。<strong>很多人说C++的恶梦就是要去兼容于C，这并不无道理（</strong>Java就干的比C++彻底得多<strong>）</strong>，但这并不是Stroustrup考虑的，Stroustrup一边在使尽浑身解数来兼容C，另一方面在拼命地优化C。</p>
+<p style="padding-left: 30px;">3）Stroustrup在书中直接说，C++最大的竞争对手正是C，他的目的就是——<strong>C能做到的，C++也必须做到，而且要做的更好</strong>。大家觉得是不是做到了？有多少做到了，有多少还没有做到？</p>
+<p style="padding-left: 30px;">4）对于同时关注的运行效率和开发效率的程序员，Stroustrup多次强调C++的目标是——“<strong>在保证效率与C语言相当的情况下，加强程序的组织性；能保证同样功能的程序，C++更短小</strong>”，<strong>这正是<span style="color: #ff0000;">浅封装</span>的核心思想</strong>。而不是过渡设计的OO。（参看：<a title="面向对象是个骗局？！" href="https://coolshell.cn/articles/3036.html" target="_blank">面向对象是个骗局</a>）</p>
+<p style="padding-left: 30px;">5）这本书中举了很多例子来回应那些批评C++有运行性能问题的人。C++在其第二个版本中，引入了虚函数机制，这是C++效率最大的瓶颈了，但我个人认为虚函数就是多了一次加法运算，但让我们的代码能有更好的组织，极大增加了程序的阅读和降底了维护成本。（注：Lippman的《<a href="http://book.douban.com/subject/1091086/" target="_blank">深入探索C++对象模型</a>》也说明了C++不比C的程序在运行性能低。Bruce的《<a href="http://book.douban.com/subject/1057170/" target="_blank">Think in C++</a>》也说C++和C的性能相差只有5%）</p>
+<p style="padding-left: 30px;">6）这本书中还讲了一些C++的痛苦的取舍，印象最深的就是多重继承，提出，拿掉，再被提出，反复很多次，大家在得与失中不断地辩论和取舍。这个过程让我最大的收获是——a) <strong>对于任何一种设计都有好有坏，都只能偏重一方</strong>，b) <strong>完全否定式的批评是不好的心态，好的心态应该是建设性地批评</strong>。</p>
+<h4>我对C++的感情</h4>
+<p>我先说说我学C++的经历。</p>
+<p>我毕业时，是直接从C跳过C++学Java的，但是<strong>学Java的时候，不知道为什么Java要设计成这样，只好回头看C++，结果学C++的时候又有很多不懂，又只得回头看C</strong>，<strong>最后发现，C -&gt; C++ -&gt; Java的过程，就是C++填C的坑，Java填C++的坑的过程</strong>。</p>
+<p>注，下面这些东西可以看到Java在填C/C++坑：</p>
+<ul>
+<li>Java彻底废弃了指针（指针这个东西，绝对让这个社会有几百亿的损失），使用引用。</li>
+<li>Java用GC解决了C++的各种内存问题的诟病，当然也带来了GC的问题，不过功大于过。</li>
+<li>Java对异常的支持比C++更严格，让编程更方便了。</li>
+<li>Java没有像C++那样的template/macro/函数对象/操作符重载，泛型太晦涩，用OO更容易一些。</li>
+<li>Java改进了C++的构造、析构、拷贝构造、赋值。</li>
+<li>Java对完全抛弃了C/C++这种面向过程的编程方式，并废弃了多重继承，更OO（如：用接口来代替多重继承）</li>
+<li>Java比较彻底地解决了C/C++自称多年的跨平台技术。</li>
+<li>Java的反射机制把这个语言提升了一个高度，在这个上面可以构建各种高级用法。</li>
+<li>C/C++没有一些比较好的类库，比如UI，线程 ，I/O，字符串处理等。（C++0x补充了一些）</li>
+<li>等等……</li>
+</ul>
+<p>当然时代还在前进，这个演变的过程还在C#和Go上体现着。不过我学习了C -&gt; C++  -&gt; Java这个填坑演进的过程，让我明白了很多东西：</p>
+<ul>
+<li>我明白了OO是怎么一回事，重要的是明白了OO的封装，继承，和多态是怎么实现的。（参看我以前写过的《<a title="C++ 虚函数表解析" href="https://coolshell.cn/articles/12165.html" target="_blank">C++虚函数表解析</a>》和《<a title="C++ 对象的内存布局" href="https://coolshell.cn/articles/12176.html" target="_blank">C++对象内存布局</a>》）</li>
+<li>我明白了STL的泛型编程和Java的各种花哨的技术是怎么一回事，以及那些很花哨的编程方法和技术。</li>
+<li>我明白了C，C++，Java的各中坑，这就好像玩火一样，我知道怎么玩火不会烧身了。</li>
+</ul>
+<p><span style="color: #cc0000;"><strong>我从这个学习过程中得到的最大的收获不是语言本身，而是各式各样的编程技术和方法，和技术的演进的过程，这比语言本身更重要</strong>！</span>（<strong>在这个角度上学习，你看到的不是一个又一个的坑，你看到的是——各式各样让你可以爬得更高的梯子</strong>）</p>
+<p>我对C++的感情有三个过程：先是喜欢地要死，然后是恨地要死，现在的又爱又恨，爱的是这个语言，恨的是很多不合格的人在滥用和凌辱它。</p>
+<h4>C++的未来</h4>
+<p>C++语言发展大概可以分为三个阶段（<a href="http://zh.wikipedia.org/wiki/C%2B%2B" target="_blank">摘自Wikipedia</a>）：</p>
+<ul>
+<li>第一阶段从80年代到1995年。这一阶段C++语言基本上是传统类型上的面向对象语言，并且凭借著接近C语言的效率，在工业界使用的开发语言中占据了相当大份额；</li>
+<li>第二阶段从1995年到2000年，这一阶段由于标准模板库（STL）和后来的Boost等程式库的出现，泛型程式设计在C++中占据了越来越多的比重性。当然，同时由于Java、C#等语言的出现和硬件价格的大规模下降，C++受到了一定的冲击；</li>
+<li>第三阶段从2000年至今，由于以Loki、MPL等程式库为代表的产生式编程和模板元编程的出现，C++出现了发展历史上又一个新的高峰，这些新技术的出现以及和原有技术的融合，使C++已经成为当今主流程式设计语言中最复杂的一员。</li>
+</ul>
+<p>在《<a title="Why C++ ? 王者归来" href="https://coolshell.cn/articles/6548.html" target="_blank">Why C++? 王者归来</a>》中说了 ，性能主要就是要省电，省电就是省钱，在数据中心还不明显，在手机上就更明显了，这就是为什么Android 支持C++的原因。所以，在NB的电池或是能源出现之前，<strong>如果你需要注重程序的运行性能和开发效率，并更关注程序的运性能，那么，应该首选 C++</strong>。这就是iOS开发也支持C++的原因。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/02/WhyCPP.04.jpg" alt="" width="567" height="318" /></p>
+<p>今天的C++11中不但有更多更不错的东西，而且，还填了更多原来C++的坑。（参看：<a href="http://zh.wikipedia.org/wiki/C%2B%2B11" target="_blank">C++11 Wiki</a>，<a title="C++11 中值得关注的几大变化（详解）" href="https://coolshell.cn/articles/5265.html" target="_blank">C++ 11的主要特性</a>）</p>
+<p style="text-align: center;"> <img decoding="async" loading="lazy" title="" src="https://coolshell.cn/wp-content/uploads/2012/02/WhyCPP.11.jpg" alt="" width="567" height="319" /></p>
+<h4><strong>总结</strong></h4>
+<ul>
+<li><strong>C++并不完美，但学C++必然让你受益无穷。</strong></li>
+</ul>
+<ul>
+<li><strong>是那些不合格的、想对编程速成的程序员让C++变得坑多。</strong></li>
+</ul>
+<p>最后，非常感谢能和“<strong>@简悦云风</strong>”，“<strong>@淘宝诸霸</strong>”，“<strong>@Laruence</strong>”一起讨论这个问题！无论你们的观点怎么样，我都和你们“在一起”，嘿嘿嘿……</p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" alt="那些曾伴我走过编程之路的软件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5576.html" class="wp_rp_title">那些曾伴我走过编程之路的软件</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="语言的数据亲和力" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4905.html" class="wp_rp_title">语言的数据亲和力</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7992.html">C++的坑真的多吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7992.html/feed</wfw:commentRss>
+			<slash:comments>236</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个fork的面试题</title>
+		<link>https://coolshell.cn/articles/7965.html</link>
+					<comments>https://coolshell.cn/articles/7965.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 01 Aug 2012 00:20:46 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[fork]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7965</guid>
+
+					<description><![CDATA[<p>前两天有人问了个关于Unix的fork()系统调用的面试题，这个题正好是我大约十年前找工作时某公司问我的一个题，我觉得比较有趣，写篇文章与大家分享一下。这个题是...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7965.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7965.html">一个fork的面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>前两天有人问了个关于Unix的fork()系统调用的面试题，这个题正好是我大约十年前找工作时某公司问我的一个题，我觉得比较有趣，写篇文章与大家分享一下。这个题是这样的：</p>
+<p><strong>题目：请问下面的程序一共输出多少个“-”？</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(void)
+{
+   int i;
+   for(i=0; i&lt;2; i++){
+      fork();
+      printf(&quot;-&quot;);
+   }
+
+   wait(NULL);
+   wait(NULL);
+
+   return 0;
+}
+</pre>
+<p>如果你对fork()的机制比较熟悉的话，这个题并不难，输出应该是6个“-”，但是，实际上这个程序会很tricky地输出8个“-”。</p>
+<p>要讲清这个题，我们首先需要知道fork()系统调用的特性，</p>
+<p><span id="more-7965"></span></p>
+<ul>
+<li>fork()系统调用是Unix下以自身进程创建子进程的系统调用，一次调用，两次返回，如果返回是0，则是子进程，如果返回值&gt;0，则是父进程（返回值是子进程的pid），这是众为周知的。</li>
+</ul>
+<ul>
+<li>还有一个很重要的东西是，在fork()的调用处，整个父进程空间会原模原样地复制到子进程中，包括指令，变量值，程序调用栈，环境变量，缓冲区，等等。</li>
+</ul>
+<p>所以，上面的那个程序为什么会输入8个“-”，这是因为printf(&#8220;-&#8220;);语句有buffer，所以，对于上述程序，printf(&#8220;-&#8220;);把“-”放到了缓存中，并没有真正的输出（参看《<a title="C语言的谜题" href="https://coolshell.cn/articles/945.html" target="_blank">C语言的迷题</a>》中的第一题），<strong>在fork的时候，缓存被复制到了子进程空间</strong>，所以，就多了两个，就成了8个，而不是6个。</p>
+<p>另外，多说一下，我们知道，Unix下的设备有“<a href="http://en.wikipedia.org/wiki/Device_file#Block_devices" target="_blank">块设备</a>”和“<a href="http://en.wikipedia.org/wiki/Device_file#Character_devices" target="_blank">字符设备</a>”的概念，所谓块设备，就是以一块一块的数据存取的设备，字符设备是一次存取一个字符的设备。磁盘、内存都是块设备，字符设备如键盘和串口。<strong>块设备一般都有缓存，而字符设备一般都没有缓存</strong>。</p>
+<p>对于上面的问题，我们如果修改一下上面的printf的那条语句为：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">printf(&quot;-\n&quot;);</code></p>
+<p>或是</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW"> printf(&quot;-&quot;);
+fflush(stdout);</pre>
+<p>就没有问题了（就是6个“-”了），因为程序遇到“\n”，或是EOF，或是缓中区满，或是文件描述符关闭，或是主动flush，或是程序退出，就会把数据刷出缓冲区。需要注意的是，标准输出是行缓冲，所以遇到“\n”的时候会刷出缓冲区，但对于磁盘这个块设备来说，“\n”并不会引起缓冲区刷出的动作，那是全缓冲，你可以使用setvbuf来设置缓冲区大小，或是用fflush刷缓存。</p>
+<p>我估计有些朋友可能对于fork()还不是很了解，那么我们把上面的程序改成下面这样：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+int main(void)
+{
+   int i;
+   for(i=0; i&lt;2; i++){
+      fork();
+      //注意：下面的printf有“\n”
+      printf(&quot;ppid=%d, pid=%d, i=%d \n&quot;, getppid(), getpid(), i);
+   }
+   sleep(10); //让进程停留十秒，这样我们可以用pstree查看一下进程树
+   return 0;
+}
+</pre>
+<p>于是，上面这段程序会输出下面的结果，（注：编译出的可执行的程序名为fork）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">ppid=8858, pid=8518, i=0
+ppid=8858, pid=8518, i=1
+ppid=8518, pid=8519, i=0
+ppid=8518, pid=8519, i=1
+ppid=8518, pid=8520, i=1
+ppid=8519, pid=8521, i=1
+
+$ pstree -p | grep fork
+|-bash(8858)-+-fork(8518)-+-fork(8519)---fork(8521)
+|            |            `-fork(8520)</pre>
+<p>面对这样的图你可能还是看不懂，没事，我好事做到底，画个图给你看看：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7968" title="fork 程序调用图" src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg.jpg" alt="" width="620" height="407" srcset="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg.jpg 620w, https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-300x197.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-411x270.jpg 411w" sizes="(max-width: 620px) 100vw, 620px" /></p>
+<p>注意：上图中的我用了几个色彩，相同颜色的是同一个进程。于是，我们的pstree的图示就可以成为下面这个样子：（下图中的颜色与上图对应）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7969" title="fork进程树" src="https://coolshell.cn/wp-content/uploads/2012/07/fork02.jpg" alt="" width="437" height="97" srcset="https://coolshell.cn/wp-content/uploads/2012/07/fork02.jpg 437w, https://coolshell.cn/wp-content/uploads/2012/07/fork02-300x66.jpg 300w" sizes="(max-width: 437px) 100vw, 437px" /></p>
+<p>这样，对于printf(&#8220;-&#8220;);这个语句，我们就可以很清楚的知道，哪个子进程复制了父进程标准输出缓中区里的的内容，而导致了多次输出了。（如下图所示，就是我阴影并双边框了那两个子进程）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7970" title="fork程序执行图" src="https://coolshell.cn/wp-content/uploads/2012/07/fork03.jpg" alt="" width="626" height="415" srcset="https://coolshell.cn/wp-content/uploads/2012/07/fork03.jpg 626w, https://coolshell.cn/wp-content/uploads/2012/07/fork03-300x198.jpg 300w" sizes="(max-width: 626px) 100vw, 626px" /></p>
+<p>现在你明白了吧。（另，对于图中的我本人拙劣的配色，请见谅!）</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="又一个有趣的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_title">又一个有趣的面试题</a></li><li ><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li><li ><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="到处都是Unix的胎记" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_title">到处都是Unix的胎记</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7965.html">一个fork的面试题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7965.html/feed</wfw:commentRss>
+			<slash:comments>223</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>各式各样的验证码</title>
+		<link>https://coolshell.cn/articles/7917.html</link>
+					<comments>https://coolshell.cn/articles/7917.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 19 Jul 2012 00:32:09 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Captcha]]></category>
+		<category><![CDATA[Web]]></category>
+		<category><![CDATA[验证码]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7917</guid>
+
+					<description><![CDATA[<p>还记得以前那篇《超强验证码》？其实这个世界变态的验证码还有很多，下面是一个列表向像展示了各种稀奇古怪的验证码。不过本文并不单单只是收集这验证码，前面的比较恶搞，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7917.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7917.html">各式各样的验证码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>还记得以前那篇《<a title="超强的验证码" href="https://coolshell.cn/articles/3277.html" target="_blank">超强验证码</a>》？其实这个世界变态的验证码还有很多，下面是一个列表向像展示了各种稀奇古怪的验证码。不过本文并不单单只是收集这验证码，前面的比较恶搞，后面的会向你展示什么是有accessibility验证码。</p>
+<h4>完全看不清楚的</h4>
+<p>这是人类的字符吗？</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7920" src="https://coolshell.cn/wp-content/uploads/2012/07/0.jpg" alt="" width="543" height="358" srcset="https://coolshell.cn/wp-content/uploads/2012/07/0.jpg 543w, https://coolshell.cn/wp-content/uploads/2012/07/0-300x198.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/07/0-410x270.jpg 410w" sizes="(max-width: 543px) 100vw, 543px" /></p>
+<p style="text-align: left;">图案中的字母是什么？</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/7.jpg" alt="" width="409" height="472" /></p>
+<p><span id="more-7917"></span></p>
+<p>这也够奇葩的了。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/4.jpg" alt="" width="454" height="438" /></p>
+<h4 style="text-align: left;">看得清但令人抓狂的</h4>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/07/2.jpg"><img decoding="async" loading="lazy" class="aligncenter" title="2" src="https://coolshell.cn/wp-content/uploads/2012/07/2.jpg" alt="" width="480" height="322" /></a><img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/3.jpg" alt="" width="510" height="302" /></p>
+<h4><a href="https://coolshell.cn/wp-content/uploads/2012/07/1.jpg"><br />
+</a> <a href="https://coolshell.cn/wp-content/uploads/2012/07/2.jpg"><br />
+</a>数学公式的</h4>
+<p>如果你填对了，你是人类吗？</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/07/4.jpg"><br />
+<img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/5.jpg" alt="" width="469" height="273" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/07/7.jpg"><br />
+</a> <img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7928" src="https://coolshell.cn/wp-content/uploads/2012/07/8.jpg" alt="" width="526" height="293" srcset="https://coolshell.cn/wp-content/uploads/2012/07/8.jpg 526w, https://coolshell.cn/wp-content/uploads/2012/07/8-300x167.jpg 300w" sizes="(max-width: 526px) 100vw, 526px" /></p>
+<h4 style="text-align: left;">智力题</h4>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/1.jpg" alt="" width="511" height="440" /></p>
+<p><img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/worstcaptchaever.jpg" alt="" width="552" height="283" /></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/07/9.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7929" src="https://coolshell.cn/wp-content/uploads/2012/07/9.jpg" alt="" width="444" height="257" srcset="https://coolshell.cn/wp-content/uploads/2012/07/9.jpg 444w, https://coolshell.cn/wp-content/uploads/2012/07/9-300x173.jpg 300w" sizes="(max-width: 444px) 100vw, 444px" /></a></p>
+<h4>你的审美水平正常吗？</h4>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter" src="https://coolshell.cn/wp-content/uploads/2012/07/6.jpg" alt="" width="596" height="474" /></p>
+<h4>你懂盲文吗？</h4>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/07/a438_c13.jpg"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7930" title="a438_c13" src="https://coolshell.cn/wp-content/uploads/2012/07/a438_c13.jpg" alt="" width="346" height="60" srcset="https://coolshell.cn/wp-content/uploads/2012/07/a438_c13.jpg 346w, https://coolshell.cn/wp-content/uploads/2012/07/a438_c13-300x52.jpg 300w" sizes="(max-width: 346px) 100vw, 346px" /></a></p>
+<h4>ASCII图片式</h4>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="filter_8cd6a950-a3ba-42a1-ac47-6d4c8276e6e5" src="https://coolshell.cn/wp-content/uploads/2012/07/filter_8cd6a950-a3ba-42a1-ac47-6d4c8276e6e5.jpg" alt="" width="452" height="548" /></p>
+<h4 style="text-align: left;"></h4>
+<h4></h4>
+<h4>怎么验证一个人是否成年</h4>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/07/filter_8cd6a950-a3ba-42a1-ac47-6d4c8276e6e5.jpg"><br />
+</a> <img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7933" title="main-qimg-33024dad8ca5f5b9c37e3894d60ac8a1" src="https://coolshell.cn/wp-content/uploads/2012/07/main-qimg-33024dad8ca5f5b9c37e3894d60ac8a1.jpg" alt="" width="640" height="366" srcset="https://coolshell.cn/wp-content/uploads/2012/07/main-qimg-33024dad8ca5f5b9c37e3894d60ac8a1.jpg 640w, https://coolshell.cn/wp-content/uploads/2012/07/main-qimg-33024dad8ca5f5b9c37e3894d60ac8a1-300x171.jpg 300w" sizes="(max-width: 640px) 100vw, 640px" /></p>
+<h4>3D验证码</h4>
+<p>通个这个脚本自动生成的：<a href="http://ocr-research.org.ua/tb/getimage.php5" target="_blank">http://ocr-research.org.ua/tb/getimage.php5</a></p>
+<p><a href="http://ocr-research.org.ua/tb/getimage.php5"><img decoding="async" class="aligncenter" title="http://ocr-research.org.ua/tb/getimage.php5" src="http://ocr-research.org.ua/tb/getimage.php5" alt="http://ocr-research.org.ua/tb/getimage.php5" /></a></p>
+<h4></h4>
+<h4>reCaptcha</h4>
+<p>相信大家都知道reCAPTCHA下了一盘很大的棋，它让你在输验证码的时候还帮着还原书籍中那些很难被OCR识别的单词。其有两组验证码，一组是可以被电脑识别的，另一组是不能被电脑识别的（也就是让人来帮电脑识别的），如果你第一组答对了，就会被 认为是人工操作，于是你回答的第二组就会成为人肉OCR。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7947" title="reCAPTCHA" src="https://coolshell.cn/wp-content/uploads/2012/07/reCAPTCHA.png" alt="" width="255" height="101" /></p>
+<p>它最近又将增加一项新功能：显示Google地图上的街景地址和名称。这样从地图上的街景中提取街道地址和名称以及交通标志等数据，以完善Google地图上的信息。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-7948" title="recaptcha-map" src="https://coolshell.cn/wp-content/uploads/2012/07/recaptcha-map.jpg" alt="" width="488" height="237" srcset="https://coolshell.cn/wp-content/uploads/2012/07/recaptcha-map.jpg 1017w, https://coolshell.cn/wp-content/uploads/2012/07/recaptcha-map-300x145.jpg 300w" sizes="(max-width: 488px) 100vw, 488px" /></p>
+<h4>Facebook的人脸识别验证码</h4>
+<p>你觉得有创意吗?</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="facebook" src="https://coolshell.cn/wp-content/uploads/2012/07/facebook.jpg" alt="" width="574" height="356" /></p>
+<h4><a href="http://research.microsoft.com/en-us/um/redmond/projects/asirra/" target="_blank">微软的ASIRRA</a></h4>
+<p style="text-align: center;"><a href="http://research.microsoft.com/en-us/um/redmond/projects/asirra/"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7935" title="ASIRRA   Microsoft Research" src="https://coolshell.cn/wp-content/uploads/2012/07/ASIRRA-Microsoft-Research.png" alt="" width="501" height="210" srcset="https://coolshell.cn/wp-content/uploads/2012/07/ASIRRA-Microsoft-Research.png 501w, https://coolshell.cn/wp-content/uploads/2012/07/ASIRRA-Microsoft-Research-300x125.png 300w" sizes="(max-width: 501px) 100vw, 501px" /></a></p>
+<h4><a href="http://accessibiliteweb.com/stuff/captcha-slider.html" target="_blank">DISTCHA</a></h4>
+<p>通过像iPhone/iPad开启时滑动的样式来验证。</p>
+<p style="text-align: center;"><a href="http://accessibiliteweb.com/stuff/captcha-slider.html"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7936" title="DISTCHA  - an accessible CAPTCHA slider   v0.2" src="https://coolshell.cn/wp-content/uploads/2012/07/DISTCHA-an-accessible-CAPTCHA-slider-v0.2.png" alt="" width="521" height="271" srcset="https://coolshell.cn/wp-content/uploads/2012/07/DISTCHA-an-accessible-CAPTCHA-slider-v0.2.png 521w, https://coolshell.cn/wp-content/uploads/2012/07/DISTCHA-an-accessible-CAPTCHA-slider-v0.2-300x156.png 300w" sizes="(max-width: 521px) 100vw, 521px" /></a></p>
+<h4><a title="MotionCAPTCHA jQuery plugin" href="http://josscrowcroft.com/projects/motioncaptcha-jquery-plugin/" target="_blank">MotionCAPTCHA</a></h4>
+<p>用鼠标来画个画。</p>
+<p><a href="http://josscrowcroft.com/projects/motioncaptcha-jquery-plugin/"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7937" title="MotionCAPTCHA - Joss Crowcroft" src="https://coolshell.cn/wp-content/uploads/2012/07/MotionCAPTCHA-Joss-Crowcroft.png" alt="" width="422" height="305" srcset="https://coolshell.cn/wp-content/uploads/2012/07/MotionCAPTCHA-Joss-Crowcroft.png 422w, https://coolshell.cn/wp-content/uploads/2012/07/MotionCAPTCHA-Joss-Crowcroft-300x216.png 300w" sizes="(max-width: 422px) 100vw, 422px" /></a></p>
+<h4><a href="http://sitehelp.com.au/demos/dragcaptcha.php" target="_blank">siteHelp的DragCapCha</a></h4>
+<p>为下面的字母排个序吧</p>
+<p><a href="http://sitehelp.com.au/demos/dragcaptcha.php"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7938" title="Site Help - DragCaptcha" src="https://coolshell.cn/wp-content/uploads/2012/07/Site-Help-DragCaptcha.png" alt="" width="590" height="186" srcset="https://coolshell.cn/wp-content/uploads/2012/07/Site-Help-DragCaptcha.png 590w, https://coolshell.cn/wp-content/uploads/2012/07/Site-Help-DragCaptcha-300x94.png 300w" sizes="(max-width: 590px) 100vw, 590px" /></a></p>
+<h4>jQuery 验证码插件</h4>
+<h5><a href="http://serie3.info/s3capcha/demonstration.php" target="_blank">jQuery s3Capcha 插件</a></h5>
+<p><a href="http://serie3.info/s3capcha/demonstration.php"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7939" title="s3Capcha jQuery plugin" src="https://coolshell.cn/wp-content/uploads/2012/07/s3Capcha-jQuery-plugin.png" alt="" width="346" height="163" srcset="https://coolshell.cn/wp-content/uploads/2012/07/s3Capcha-jQuery-plugin.png 346w, https://coolshell.cn/wp-content/uploads/2012/07/s3Capcha-jQuery-plugin-300x141.png 300w" sizes="(max-width: 346px) 100vw, 346px" /></a></p>
+<h5><a href="http://www.webdesignbeach.com/beachbar/ajax-fancy-captcha-jquery-plugin" target="_blank">Ajax Fancy Captcha</a></h5>
+<p>和上面那个不一样，这个需要拖动</p>
+<p><a href="http://www.webdesignbeach.com/beachbar/ajax-fancy-captcha-jquery-plugin"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7940" title="Ajax Fancy Captcha   jQuery plugin" src="https://coolshell.cn/wp-content/uploads/2012/07/Ajax-Fancy-Captcha-jQuery-plugin.png" alt="" width="342" height="132" srcset="https://coolshell.cn/wp-content/uploads/2012/07/Ajax-Fancy-Captcha-jQuery-plugin.png 342w, https://coolshell.cn/wp-content/uploads/2012/07/Ajax-Fancy-Captcha-jQuery-plugin-300x115.png 300w" sizes="(max-width: 342px) 100vw, 342px" /></a></p>
+<h5><a href="http://www.wozia.pt/blog/wcaptcha-a-better-captcha-alternative-jquery-captcha-plugin/" target="_blank">wCaptcha</a></h5>
+<p>和上面的很相似。</p>
+<p><a href="http://www.wozia.pt/blog/wcaptcha-a-better-captcha-alternative-jquery-captcha-plugin/"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7943" title="wcaptcha" src="https://coolshell.cn/wp-content/uploads/2012/07/wcaptcha-1.png" alt="" width="332" height="127" srcset="https://coolshell.cn/wp-content/uploads/2012/07/wcaptcha-1.png 332w, https://coolshell.cn/wp-content/uploads/2012/07/wcaptcha-1-300x114.png 300w" sizes="(max-width: 332px) 100vw, 332px" /></a></p>
+<h4><a href="http://www.picatcha.com/captcha/" target="_blank">Picatcha</a></h4>
+<p>挑出所有的计算器</p>
+<p><a href="http://www.picatcha.com/captcha/"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7941" title="PICATCHA" src="https://coolshell.cn/wp-content/uploads/2012/07/PICATCHA.png" alt="" width="366" height="307" srcset="https://coolshell.cn/wp-content/uploads/2012/07/PICATCHA.png 366w, https://coolshell.cn/wp-content/uploads/2012/07/PICATCHA-300x251.png 300w" sizes="(max-width: 366px) 100vw, 366px" /></a></p>
+<h4><a href="http://yocaptcha.com/" target="_blank">yoCaptcha</a></h4>
+<p>广告式的验证码</p>
+<p><a href="http://yocaptcha.com/"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7942" title="yoCaptcha" src="https://coolshell.cn/wp-content/uploads/2012/07/yoCaptcha.png" alt="" width="346" height="239" srcset="https://coolshell.cn/wp-content/uploads/2012/07/yoCaptcha.png 346w, https://coolshell.cn/wp-content/uploads/2012/07/yoCaptcha-300x207.png 300w" sizes="(max-width: 346px) 100vw, 346px" /></a></p>
+<h4>W3C的建议</h4>
+<p>W3C的这篇文章（<a href="http://www.w3.org/TR/turingtest/">http://www.w3.org/TR/turingtest/</a>）表达了传统的验证码图片的Inaccessibility的问题，而且一些验证码都很容易被破解。如：</p>
+<ul>
+<li><a href="http://www.brains-n-brawn.com/default.aspx?vDir=aicaptcha">aiCaptcha: Using AI to beat CAPTCHA and post comment spam</a></li>
+<li><a href="http://www.cs.berkeley.edu/~mori/gimpy/gimpy.html">Breaking CAPTCHAs Without Using OCR</a></li>
+<li><a href="http://sam.zoy.org/pwntcha/">PWNtcha &#8211; CAPTCHA decoder</a></li>
+</ul>
+<p>W3C也给了一些解决方案：</p>
+<ul>
+<li>一些逻辑题或是智力题。</li>
+<li>声音输出，为了照顾残疾人。 <a href="http://news.com.com/2100-1032-1022814.html">Spam-bot tests flunk the blind</a></li>
+<li>限制帐号的操作次数。</li>
+<li>使用现有的Spam检测机制。如：酷壳（Coolshell.cn）的评论没有验证码，垃圾评论完全靠<a href="http://akismet.com/" target="_blank">Akismet</a> 插件过滤。</li>
+</ul>
+<p>建议你移步去看看这篇文章。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3277.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="超强的验证码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3277.html" class="wp_rp_title">超强的验证码</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/html6-150x150.jpeg" alt="HTML6 展望" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_title">HTML6 展望</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7917.html">各式各样的验证码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7917.html/feed</wfw:commentRss>
+			<slash:comments>64</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>代码执行的效率</title>
+		<link>https://coolshell.cn/articles/7886.html</link>
+					<comments>https://coolshell.cn/articles/7886.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 13 Jul 2012 00:18:32 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Compiler]]></category>
+		<category><![CDATA[Performance]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7886</guid>
+
+					<description><![CDATA[<p>在《性能调优攻略》里，我说过，要调优性需要找到程序中的Hotspot，也就是被调用最多的地方，这种地方，只要你能优化一点点，你的性能就会有质的提高。在这里我给大...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7886.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7886.html">代码执行的效率</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在《<a title="性能调优攻略" href="https://coolshell.cn/articles/7490.html" target="_blank">性能调优攻略</a>》里，我说过，要调优性需要找到程序中的Hotspot，也就是被调用最多的地方，这种地方，只要你能优化一点点，你的性能就会有质的提高。在这里我给大家举三个关于代码执行效率的例子（它们都来自于网上）</p>
+<h4><strong>第一个例子</strong></h4>
+<p><strong> PHP中Getter和Setter的效率</strong>（<a href="http://www.reddit.com/r/programming/comments/wdsgn/today_i_learned_that_creating_getters_setters_in/" target="_blank">来源reddit</a>）</p>
+<p>这个例子比较简单，你可以跳过。</p>
+<p>考虑下面的PHP代码：我们可看到，使用Getter/Setter的方式，性能要比直接读写成员变量要差一倍以上。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">&lt;?php
+	//dog_naive.php
+
+	class dog {
+		public $name = &quot;&quot;;
+		public function setName($name) {
+			$this-&amp;gt;name = $name;
+		}
+		public function getName() {
+			return $this-&amp;gt;name;
+		}
+	}
+
+	$rover = new dog();
+        //通过Getter/Setter方式
+	for ($x=0; $x&lt;10; $x++) {
+		$t = microtime(true);
+		for ($i=0; $i&lt;1000000; $i++) {
+			$rover-&gt;setName(&quot;rover&quot;);
+			$n = $rover-&gt;getName();
+		}
+		echo microtime(true) - $t;
+		echo &quot;\n&quot;;
+	}
+        //直接存取变量方式
+        for ($x=0; $x&lt;10; $x++) {
+		$t = microtime(true);
+		for($i=0; $i&lt;1000000; $i++) {
+			$rover-&gt;name = &quot;rover&quot;;
+			$n = $rover-&gt;name;
+		}
+		echo microtime(true) - $t;
+		echo &quot;\n&quot;;
+	}
+?&gt;</pre>
+<p>这个并没有什么稀，因为有函数调用的开销，函数调用需要压栈出栈，需要传值，有时还要需要中断，要干的事太多了。所以，代码多了，效率自然就慢了。所有的语言都这个德行，这就是为什么C++要引入inline的原因。而且Java在打开优化的时候也可以优化之。但是对于动态语言来说，这个事就变得有点困难了。</p>
+<p><span id="more-7886"></span></p>
+<p>你可能会以为使用下面的代码（Magic Function）会好一些，但实际其性能更差。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">class dog {
+	private $_name = &quot;&quot;;
+	function __set($property,$value) {
+		if($property == &#039;name&#039;) $this-&gt;_name = $value;
+	}
+	function __get($property) {
+		if($property == &#039;name&#039;) return $this-&gt;_name;
+	}
+}</pre>
+<p>动态语言的效率从来都是一个问题，如果你需要PHP有更好的性能，你可能需要使用<a href="https://github.com/facebook/hiphop-php" target="_blank">FaceBook的HipHop</a>来把PHP编译成C语言。</p>
+<h4><strong>第二个例子</strong></h4>
+<p><strong>为什么Python程序在函数内执行得更快？</strong>（<a href="http://stackoverflow.com/questions/11241523/why-does-python-code-run-faster-in-a-function" target="_blank">来源StackOverflow</a>）</p>
+<p>考虑下面的代码，一个在函数体内，一个是全局的代码。</p>
+<p>函数内的代码执行效率为 1.8s</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">def main():
+    for i in xrange(10**8):
+        pass
+main()</pre>
+<p>函数体外的代码执行效率为 4.5s</p>
+<pre data-enlighter-language="python" class="EnlighterJSRAW">for i in xrange(10**8):
+    pass</pre>
+<p>不用太纠结时间，只是一个示例，我们可以看到效率查得很多。为什么会这样呢？我们使用 <a href="http://docs.python.org/library/dis.html" target="_blank"><code>dis</code> module</a> 反汇编函数体内的bytecode 代码，使用 <a href="http://docs.python.org/library/functions.html#compile" target="_blank"><code>compile</code> builtin</a> 反汇编全局bytecode，我们可以看到下面的反汇编（注意我高亮的地方）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW" data-enlighter-highlight="2">
+13 FOR_ITER                 6 (to 22)
+16 STORE_FAST               1 (i)
+19 JUMP_ABSOLUTE           13</pre>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW" data-enlighter-highlight="2">
+13 FOR_ITER                 6 (to 22)
+16 STORE_NAME               1 (i)
+19 JUMP_ABSOLUTE           13</pre>
+<p>我们可以看到，差别就是 <a href="http://docs.python.org/library/dis.html#opcode-STORE_FAST" target="_blank"><code>STORE_FAST</code></a> 和 <code><a href="http://docs.python.org/library/dis.html#opcode-STORE_NAME" target="_blank">STORE_NAME</a>，前者比后者快很多。所以，在全局代码中，变量i成了一个全局变量，而函数中的i是放在本地变量表中，所以在全局变量表中查找变量就慢很多。如果你在main函数中声明global i 那么效率也就下来了。</code>原因是，本地变量是存在一个数组中（直到），用一个整型常量去访问，而全局变量存在一个dictionary中，查询很慢。</p>
+<p><code>（注：在</code>C/C++中，这个不是一个问题）</p>
+<h4><strong>第三个例子</strong></h4>
+<p><strong> 为什么排好序的数据在遍历时会更快？</strong>（<a href="http://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-an-unsorted-array" target="_blank">来源StackOverflow</a>）</p>
+<p>参看如下C/C++的代码：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW" data-enlighter-highlight="4"> for (unsigned i = 0; i &lt; 100000; ++i) {
+   // primary loop
+    for (unsigned j = 0; j &lt; arraySize; ++j) {
+        if (data[j] &gt;= 128)
+            sum += data[j];
+    }
+}</pre>
+<p>如果你的data数组是排好序的，那么性能是1.93s，如果没有排序，性能为11.54秒。差5倍多。无论是C/C++/Java，或是别的什么语言都基本上一样。</p>
+<p>这个问题的原因是——<strong> <a href="http://en.wikipedia.org/wiki/Branch_predictor">branch prediction</a> （分支预判）</strong>伟大的stackoverflow给了一个非常不错的解释。</p>
+<p>考虑我们一个铁路分叉，当我们的列车来的时候， 扳道员知道分个分叉通往哪，但不知道这个列车要去哪儿，司机知道要去哪，但是不知道走哪条分叉。所以，我们需要让列车停下来，然后司机和扳道员沟通一下。这样的性能太差了。</p>
+<p>所以，我们可以优化一下，那就是猜，我们至少有50%的概率猜对，如果猜对了，火车行驶性能巨高，猜错了，就得让火车退回来。如果我猜对的概率高，那么，我们的性能就会高，否则老是猜错了，性能就很差。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7893" title="muxnt" src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt.jpg" alt="" width="440" height="330" srcset="https://coolshell.cn/wp-content/uploads/2012/07/muxnt.jpg 440w, https://coolshell.cn/wp-content/uploads/2012/07/muxnt-300x225.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/07/muxnt-360x270.jpg 360w" sizes="(max-width: 440px) 100vw, 440px" /></p>
+<p style="text-align: center;">Image by Mecanismo, from Wikimedia Commons:<a href="http://commons.wikimedia.org/wiki/File:Entroncamento_do_Transpraia.JPG">http://commons.wikimedia.org/wiki/File:Entroncamento_do_Transpraia.JPG</a></p>
+<p>我们的if-else 就像这个铁路分叉一样，下面红箭头所指的就是搬道器。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7892" title="pyfwC" src="https://coolshell.cn/wp-content/uploads/2012/07/pyfwC.png" alt="" width="567" height="91" srcset="https://coolshell.cn/wp-content/uploads/2012/07/pyfwC.png 567w, https://coolshell.cn/wp-content/uploads/2012/07/pyfwC-300x48.png 300w" sizes="(max-width: 567px) 100vw, 567px" /></p>
+<p>那么，我们的搬道器是怎么预判的呢？就是使用过去的历史数据，如果历史数据有90%以上的走左边，那么就走左边。所以，我们排好序的数据就更容易猜得对。</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">T = 走分支（条件表达式为true）
+N = 不走分支(条件表达式为false)
+
+data[] = 0, 1, 2, 3, 4, ... 126, 127, 128, 129, 130, ... 250, 251, 252, ...
+branch = N  N  N  N  N  ...   N    N    T    T    T  ...   T    T    T  ...
+
+= NNNNNNNNNNNN ... NNNNNNNTTTTTTTTT ... TTTTTTTTTT  (easy to predict)</pre>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">data[] = 226, 185, 125, 158, 198, 144, 217, 79, 202, 118,  14, 150, 177, 182, 133, ...
+branch =   T,   T,   N,   T,   T,   T,   T,  N,   T,   N,   N,   T,   T,   T,   N  ...
+
+= TTNTTTTNTNNTTTN ...   (completely random - hard to predict)</pre>
+<p>从上面我们可以看到，排好序的数据更容易预测分支。</p>
+<p>对此，那我们怎么办？我们需要在这种循环中除去if-else语句。比如：</p>
+<p>我们把条件语句：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">if (data[j] &gt;= 128)
+sum += data[j];
+</pre>
+<p>变成：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">int t = (data[j] - 128) &gt;&gt; 31;
+sum += ~t &amp; data[j];</pre>
+<p>“没有分叉”的性能基本上和“排好序有分支”一个样，无论是C/C++，还是Java。</p>
+<blockquote><p><strong>注：</strong>在GCC下，如果你使用 <code>-O3</code> or <code>-ftree-vectorize</code> 编译参数，GCC会帮你优化分叉语句为无分叉语句。VC++2010没有这个功能。</p></blockquote>
+<p><strong>最后，推荐大家一个网站——<a href="https://developers.google.com/speed/" target="_blank">Google Speed</a>，网站上的有一些教程告诉你<a href="https://developers.google.com/speed/articles/" target="_blank">如何写出更快的Web程序</a>。</strong></p>
+<p><strong></strong>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="到处都是Unix的胎记" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1532.html" class="wp_rp_title">到处都是Unix的胎记</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="类型的本质和函数式实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10169.html" class="wp_rp_title">类型的本质和函数式实现</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7886.html">代码执行的效率</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7886.html/feed</wfw:commentRss>
+			<slash:comments>70</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>28个Unix/Linux的命令行神器</title>
+		<link>https://coolshell.cn/articles/7829.html</link>
+					<comments>https://coolshell.cn/articles/7829.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 11 Jul 2012 00:10:11 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[CLI]]></category>
+		<category><![CDATA[Game]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Performance]]></category>
+		<category><![CDATA[rsync]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7829</guid>
+
+					<description><![CDATA[<p>下面是Kristóf Kovács收集的28个Unix/Linux下的28个命令行下的工具（原文链接），有一些是大家熟悉的，有一些是非常有用的，有一些是不为人知...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7829.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是<a href="http://kkovacs.eu/" target="_blank">Kristóf Kovács</a>收集的28个Unix/Linux下的28个命令行下的工具（<a href="http://kkovacs.eu/cool-but-obscure-unix-tools" target="_blank">原文链接</a>），有一些是大家熟悉的，有一些是非常有用的，有一些是不为人知的。这些工具都非常不错，希望每个人都知道。本篇文章还在<a href="http://news.ycombinator.com/item?id=2567186" target="_blank">Hacker News上被讨论</a>，你可以过去看看。我以作者的原文中加入了官网链接和一些说明。</p>
+<div class="alpha grid_6">
+<h4>dstat &amp; sar</h4>
+<p>iostat, vmstat, ifstat 三合一的工具，用来查看系统性能（我在《<a title="性能调优攻略" href="https://coolshell.cn/articles/7490.html" target="_blank">性能调优攻略</a>》中提到过那三个xxstat工具）。</p>
+<p>官方网站：<a href="http://dag.wieers.com/rpm/packages/dstat/" target="_blank">http://dag.wieers.com/rpm/packages/dstat/</a></p>
+<p>你可以这样使用：</p>
+<p><code data-enlighter-language="shell" class="EnlighterJSRAW">alias dstat=&#039;dstat -cdlmnpsy&#039;</code></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot.png" alt="dstat screenshot" width="400" height="326" /></p>
+<h4 class="caption_text">slurm</h4>
+</div>
+<p>查看网络流量的一个工具</p>
+<p>官方网站：<em>  <a href="https://computing.llnl.gov/linux/slurm/" target="_blank">Simple Linux Utility for Resource Management</a></em></p>
+<p><span id="more-7829"></span></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/slurm_screenshot.png" alt="slurm screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>vim &amp; emacs</h4>
+<p>真正程序员的代码编辑器。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/vim_screenshot.png" alt="vim screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>screen, dtach, tmux, byobu</h4>
+<p>你是不是经常需要 SSH 或者 telent 远程登录到 Linux 服务器？你是不是经常为一些长时间运行的任务而头疼，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。</p>
+<p><a href="http://www.gnu.org/software/screen/" target="_blank"><strong>Screen</strong></a>是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。Screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。请参看IBM DeveloperWorks的这篇文章《<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/" target="_blank">使用 screen 管理你的远程会话</a>》</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/gnu_screen_screenshot.png" alt="gnu screen screenshot" width="400" height="326" /></p>
+<p><a href="http://dtach.sourceforge.net/" target="_blank"><strong>dtach</strong> </a>是用来模拟screen的detach的功能的小工具，其可以让你随意地attach到各种会话上 。下图为dtach+dvtm的样子。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7861" title="dtach+dvtm" src="https://coolshell.cn/wp-content/uploads/2012/07/dtach+dvtm.png" alt="" width="500" height="477" srcset="https://coolshell.cn/wp-content/uploads/2012/07/dtach+dvtm.png 500w, https://coolshell.cn/wp-content/uploads/2012/07/dtach+dvtm-300x286.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p><strong><a title="http://tmux.sourceforge.net/" href="http://tmux.sourceforge.net/" rel="nofollow">tmux</a></strong>是一个优秀的终端复用软件，类似<a title="http://www.gnu.org/software/screen/" href="http://www.gnu.org/software/screen/" rel="nofollow">GNU Screen</a>，但来自于OpenBSD，采用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机；当然其功能远不止于此。与screen相比的优点：可以横向和纵向分割窗口，且窗格可以自由移动和调整大小。可在多个缓冲区进行复制和粘贴，支持跨窗口搜索；非正常断线后不需重新detach；……  有人说——<strong>与tmux相比，screen简直弱爆了</strong>。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7860" title="tmux" src="https://coolshell.cn/wp-content/uploads/2012/07/tmux3.png" alt="" width="650" height="404" srcset="https://coolshell.cn/wp-content/uploads/2012/07/tmux3.png 650w, https://coolshell.cn/wp-content/uploads/2012/07/tmux3-300x186.png 300w" sizes="(max-width: 650px) 100vw, 650px" /></p>
+<div class="align_right">
+<p><a href="https://launchpad.net/byobu/" target="_blank"><strong>byobu</strong></a>是Ubuntu开发的，在Screen的基础上进行包装，使其更加易用的一个工具。最新的Byobu，已经是基于Tmux作为后端了。可通过“byobu-tmux”这个命令行前端来接受各种与tmux一模一样的参数来控制它。Byobu的细节做的非常好，效果图如下：<img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7864" title="byobu-tmux" src="https://coolshell.cn/wp-content/uploads/2012/07/byobu-tmux.jpg" alt="" width="650" height="406" srcset="https://coolshell.cn/wp-content/uploads/2012/07/byobu-tmux.jpg 650w, https://coolshell.cn/wp-content/uploads/2012/07/byobu-tmux-300x187.jpg 300w" sizes="(max-width: 650px) 100vw, 650px" /></p>
+<p class="caption_text">
+</div>
+<h4>multitail</h4>
+<p>MultiTail是个用来实现同时监控多个文档、类似tail命令的功能的软件。他和tail的区别就是他会在控制台中打开多个窗口，这样使同时监控多个日志文档成为可能。他还可以看log文件的统计，合并log文件，过滤log文件，分屏，……。</p>
+<p>官网：<a href="http://www.vanheusden.com/multitail/">http://www.vanheusden.com/multitail/</a></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/multitail_screenshot.png" alt="multitail screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>tpp</h4>
+<p>终端下的PPT，要是在某某大会上用这个演示PPT，就太TMD的Geek了。</p>
+<p>官网：<a href="http://www.ngolde.de/tpp.html">http://www.ngolde.de/tpp.html</a></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/tpp_screenshot.png" alt="tpp screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>xargs &amp; parallel</h4>
+<p>Executes tasks from input (even multithread).</p>
+<p>xargs 是一个比较古老的命令，有简单的并行功能，这个不说了。<span>对于</span><a href="http://www.gnu.org/software/parallel/"><span>GNU parallel</span></a><span> ( </span><a href="http://savannah.gnu.org/projects/parallel"><span>online manpage</span></a><span><span> )来说，它不仅能够处理本机上多执行绪，还能分散至远端电脑协助处理。</span><span>而使用GNU parallel前，要先确定本机有安装GNU parallel / ssh / rsync，远端电脑也要安装ssh。</span></span></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/xargs_screenshot.png" alt="xargs screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>duplicity &amp; rsyncrypto</h4>
+<p><a href="http://duplicity.nongnu.org/" target="_blank">Duplicity</a>是使用rsync算法加密的高效率备份软件，Duplicity支持目录加密生产和格式上传到远程或本地文件服务器。</p>
+<p><a href="http://rsyncrypto.lingnu.com/index.php/Home_Page" target="_blank">rsyncrypto</a> 就是 rsync + encryption。对于rsync的算法可参看酷壳的<a title="rsync 的核心算法" href="https://coolshell.cn/articles/7425.html" target="_blank">rsync核心算法</a>。</p>
+<p>Encrypting backup tools.</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/duplicity_screenshot.png" alt="duplicity screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>nethack &amp; slash&#8217;em</h4>
+<p><a href="http://www.nethack.org/" target="_blank">NetHack</a>（<a href="http://zh.wikipedia.org/zh/NetHack" target="_blank">Wiki</a>），20年历史的古老电脑游戏。没有声音，没有漂亮的界面，不过这个游戏真的很有意思。网上有个家伙说：<strong>如果你一生只做一件事情，那么玩NetHack</strong>。这句话很惹眼，但也让人觉得这个游戏很复杂不容易上手。其实，这个游戏很虽然很复杂，却容易上手。虽然玩通关很难，但上手很容易。NetHack上有许多复杂的规则，&#8221;the DevTeam thinks of everything&#8221;（开发团队想到了所有的事情)。各种各样的怪物，各种各样的武器&#8230;.，有许多spoilers文件来说明其规则。除了每次开始随机生成的地图，每次玩游戏，你也都会碰到奇怪的事情: 因为喝了一种药水，变成了机器人;因为踢坏了商店的门被要求高价赔偿;你的狗为你偷来了商店的东西&#8230;.. 这有点象人生，你不能完全了解这个世界，但你仍然可以选择自己的面对方式。</p>
+<p>网上有许多文章所这是最好的电脑游戏或最好的电脑游戏之一。也许是因为它开放的源代码让人赞赏，古老的历史让人宽容，复杂的规则让人敬畏。虽然它不是当前流行的游戏，但它比任何一个当前流行的游戏都更有可能再经受20年的考验。</p>
+<p><a href="http://www.slashem.org" target="_blank">Slash&#8217;EM</a> 也是一个基于NetHack的经典游戏。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/nethack_screenshot.png" alt="nethack screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>lftp</h4>
+<p>利用<a href="http://lftp.yar.ru/" target="_blank">lftp</a>命令行ftp工具进行网站数据的增量备份，镜像，就像使用rsync一样。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/lftp_screenshot.png" alt="lftp screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>ack</h4>
+<p><a href="http://betterthangrep.com/"><span>ack</span></a><span>是一个perl脚本，是grep的一个可选替换品。其可以对匹配字符有高亮显示。是为程序员专门设计的，默认递归搜索，省提供多种文件类型供选。</span></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/ack_screenshot.png" alt="ack screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>calcurse &amp; remind + wyrd</h4>
+<p><a href="http://calcurse.org/" target="_blank">calcurse</a>是一个命令行下的日历和日程软件。<a href="http://www.roaringpenguin.com/products/remind" target="_blank">remind</a> + <a href="http://pessimization.com/software/wyrd/" target="_blank">wyrd</a>也很类似。关于日历，我不得不提一个<a title="Linux的cycle日历（你懂的）" href="https://coolshell.cn/articles/3489.html" target="_blank">Linux的Cycle日历</a>，也是一个神器，呵呵。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/calcurse_screenshot.png" alt="calcurse screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>newsbeuter &amp; rsstail</h4>
+<p><a href="http://newsbeuter.org/" target="_blank">newsbeuter </a>和 <a href="http://www.vanheusden.com/rsstail/" target="_blank">rsstail</a> 是命令行下RSS的阅读工具。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/newsbeuter_screenshot.png" alt="newsbeuter screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>powertop</h4>
+<p><a title="做个环保主义的程序员" href="https://coolshell.cn/articles/7186.html" target="_blank">做个环保的程序员</a>，看看自己的电脑里哪些程序费电。<a href="https://01.org/powertop/" target="_blank">PowerTOP</a> 是一个让 Intel 平台的笔记本电脑节省电源的 Linux 工具。此工具由 Intel 公司发布。它可以帮助用户找出那些耗电量大的程序，通过修复或者关闭那些应用程序或进程，从而为用户节省电源。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/powertop_screenshot.png" alt="powertop screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+</div>
+<div class="omega grid_6">
+<h4>htop &amp; iotop</h4>
+<p><a href="http://htop.sourceforge.net/" target="_blank">htop</a> 和 <a href="http://guichaz.free.fr/iotop/" target="_blank">iotop</a>  用来查看进程，内存和IO负载。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/htop_screenshot.png" alt="htop screenshot" width="400" height="326" /></p>
+</div>
+<h4>ttyrec &amp; ipbt</h4>
+<p><a href="http://0xcc.net/ttyrec/index.html.en" target="_blank">ttyrec</a> 是一个 tty 控制台录制程序，其所录制的数据文件可以使用与之配套的 ttyplay 播放。不管是你在 tty 中的各种操作，还是在 tty 中耳熟能详的软件，都可进行录制。</p>
+<p><a href="http://www.chiark.greenend.org.uk/~sgtatham/ipbt/" target="_blank">ipbt</a> 是一个用来回放 ttyrec 所录制的控制台输入过程的工具。</p>
+<p>与此类似的还有<a href="http://shelr.tv/" target="_blank">Shelr</a> 和 <a href="http://sourceforge.net/projects/termrec/" target="_blank">termrec </a></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/ipbt_screenshot.png" alt="ipbt screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>rsync</h4>
+<p>通过SSH进行文件同步的经典工具（<a title="rsync 的核心算法" href="https://coolshell.cn/articles/7425.html" target="_blank">核心算法</a>）</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/rsync_screenshot.png" alt="rsync screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>mtr</h4>
+<p><a href="http://www.bitwizard.nl/mtr/" target="_blank">MTR</a> &#8211; traceroute 2.0，其是把 traceroute 和 ping 集成在一块的一个小工具 用于诊断网络。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/mtr_screenshot.png" alt="mtr screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>socat &amp; netpipes</h4>
+<p><a href="http://www.dest-unreach.org/socat/" target="_blank">socat</a>是一个多功能的网络工具，名字来由是” Socket CAT”，可以看作是netcat的N倍加强版。</p>
+<p><a href="http://web.purplefrog.com/~thoth/netpipes/" target="_blank">netpipes</a> 和socat一样，主要是用来在命令行来进行socket操作的命令，这样你就可以在Shell脚本下行进socket网络通讯了。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/socat_screenshot.png" alt="socat screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>iftop &amp; iptraf</h4>
+<p><a href="http://www.ex-parrot.com/~pdw/iftop/" target="_blank">iftop</a>和<a href="http://iptraf.seul.org/" target="_blank">iptraf</a>可以用来查看当前网络链接的一些流量情况。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/iftop_screenshot.png" alt="iftop screenshot" width="400" height="326" /></p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7867" title="iptraf-tcpudp" src="https://coolshell.cn/wp-content/uploads/2012/07/iptraf-tcpudp.gif" alt="" width="562" height="354" srcset="https://coolshell.cn/wp-content/uploads/2012/07/iptraf-tcpudp.gif 562w, https://coolshell.cn/wp-content/uploads/2012/07/iptraf-tcpudp-300x188.gif 300w" sizes="(max-width: 562px) 100vw, 562px" /></p>
+<p class="caption_text">
+</div>
+<h4>siege &amp; tsung</h4>
+<p><a href="http://www.joedog.org/siege-home/" target="_blank">Siege</a>是一个压力测试和评测工具，设计用于WEB开发这评估应用在压力下的承受能力：可以根据配置对一个WEB站点进行多用户的并发访问，记录每个用户所有请求过程的相应时间，并在一定数量的并发访问下重复进行。</p>
+<p><a href="http://tsung.erlang-projects.org/" target="_blank">Tsung</a> 是一个压力测试工具，可以测试包括HTTP, WebDAV, PostgreSQL, MySQL, LDAP, and XMPP/Jabber等服务器。针对 HTTP 测试，Tsung 支持 HTTP 1.0/1.1 ，包含一个代理模式的会话记录、支持 GET、POST 和 PUT 以及 DELETE 方法，支持 Cookie 和基本的 WWW 认证，同时还支持 SSL。</p>
+<p>参看：<a title="十个免费的Web压力测试工具" href="https://coolshell.cn/articles/2589.html" target="_blank">十个免费的Web压力测试工具</a></p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/siege_screenshot.png" alt="siege screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>ledger</h4>
+<p><a href="http://ledger-cli.org/" target="_blank">ledger</a> 一个命令行下记帐的小工具。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/ledger_screenshot.png" alt="ledger screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>taskwarrior</h4>
+<p><a href="http://taskwarrior.org/projects/show/taskwarrior" target="_blank">TaskWarrior</a> 是一个基于命令行的 TODO 列表管理工具。主要功能包括：标签、彩色表格输出、报表和图形、大量的命令、底层API、多用户文件锁等功能。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/taskwarrior_screenshot.png" alt="taskwarrior screenshot" width="400" height="326" /></p>
+<p>下图是TaskWarrior 2.0的界面：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7868" title="TaskWarrior2.0" src="https://coolshell.cn/wp-content/uploads/2012/07/TaskWarrior2.0.png" alt="" width="395" height="480" srcset="https://coolshell.cn/wp-content/uploads/2012/07/TaskWarrior2.0.png 395w, https://coolshell.cn/wp-content/uploads/2012/07/TaskWarrior2.0-246x300.png 246w" sizes="(max-width: 395px) 100vw, 395px" /></p>
+<p class="caption_text">
+</div>
+<h4>curl</h4>
+<p><a href="http://curl.haxx.se/" target="_blank">cURL</a>是一个利用URL语法在命令行下工作的文件传输工具，1997年首次发行。它支持文件上传和下载，所以是综合传输工具，但按传统，习惯称cURL为下载工具。cURL还包含了用于程序开发的libcurl。cURL支援的通訊協定有FTP、FTPS、HTTP、HTTPS、TFTP、SFTP、Gopher、SCP、Telnet、DICT、FILE、LDAP、LDAPS、IMAP、POP3、SMTP和RTSP。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/curl_screenshot.png" alt="curl screenshot" width="400" height="326" /></p>
+<p class="caption_text">
+</div>
+<h4>rtorrent &amp; aria2</h4>
+<p><a href="http://libtorrent.rakshasa.no/" target="_blank">rTorrent</a> 是一个非常简洁、优秀、非常轻量的BT客户端. 它使用了 ncurses 库以 C++ 编写, 因此它完全基于文本并在终端中运行. 将 rTorrent 用在安装有 GNU Screen 和 Secure Shell 的低端系统上作为远程的 BT 客户端是非常理想的。</p>
+<p><a href="http://aria2.sourceforge.net/">aria2</a> 是 Linux 下一个不错的高速下载工具。由于它具有分段下载引擎，所以支持从多个地址或者从一个地址的多个连接来下载同一个文件。这样自然就大大加快了文件的下载速度。aria2 也具有断点续传功能，这使你随时能够恢复已经中断的文件下载。除了支持一般的 http(s) 和 ftp 协议外，aria2 还支持 BitTorrent 协议。这意味着，你也可以使用 aria2 来下载 torrent 文件。</p>
+<div class="align_right">
+<p class="caption_text"> <img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/rtorrent_screenshot.png" alt="rtorrent screenshot" width="400" height="326" /></p>
+</div>
+<h4>ttytter &amp; earthquake</h4>
+<p><a href="http://www.floodgap.com/software/ttytter" target="_blank">TTYtter</a> 是一个Perl写的命令行上发Twitter的工具，可以进行所有其他平台客户端能进行的事情，当然，支持中文。脚本控、CLI控、终端控、Perl控的最愛。</p>
+<p><a href="https://github.com/jugyo/earthquake" target="_blank">Earthquake</a>也是一个命令行上的Twitter客户端。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/ttytter_screenshot.png" alt="ttytter screenshot" width="400" height="326" /></p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7870" title="earthquake" src="https://coolshell.cn/wp-content/uploads/2012/07/earthquake.jpg" alt="" width="550" height="314" srcset="https://coolshell.cn/wp-content/uploads/2012/07/earthquake.jpg 550w, https://coolshell.cn/wp-content/uploads/2012/07/earthquake-300x171.jpg 300w" sizes="(max-width: 550px) 100vw, 550px" /></p>
+<p class="caption_text">
+</div>
+<h4>vifm &amp; ranger</h4>
+<p><a href="http://vifm.sourceforge.net/" target="_blank">Vifm</a> 基于ncurses的文件管理器，DOS风格，用键盘操作。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/vifm_screenshot.png" alt="vifm screenshot" width="400" height="326" /></p>
+<p><a href="http://savannah.nongnu.org/projects/ranger" target="_blank">Ranger</a>用 Python 完成，默认为使用 Vim 风格的按键绑定，比如 hjkl（上下左右），dd（剪切），yy（复制）等等。功能很全，扩展/可配置性也非常不错。类似MacOS X下Finder（文件管理器）的多列文件管理方式。支持多标签页。实时预览文本文件和目录。</p>
+<div class="align_right">
+<p class="caption_text"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7871" title="ranger" src="https://coolshell.cn/wp-content/uploads/2012/07/ranger.png" alt="" width="668" height="340" srcset="https://coolshell.cn/wp-content/uploads/2012/07/ranger.png 668w, https://coolshell.cn/wp-content/uploads/2012/07/ranger-300x152.png 300w" sizes="(max-width: 668px) 100vw, 668px" /></p>
+</div>
+<h4>cowsay &amp; sl</h4>
+<p><a href="http://www.nog.net/~tony/warez/cowsay.shtml" target="_blank">cowsay </a> 不说了，如下所示，哈哈哈。还有xcowsay，你可以自己搜一搜。</p>
+<div class="align_right">
+<p><img decoding="async" loading="lazy" class="aligncenter" title="" src="https://coolshell.cn/wp-content/uploads/2012/07/cowsay_screenshot.png" alt="cowsay screenshot" width="400" height="326" /></p>
+<p class="caption_text"> sl是什么？ls？，呵呵，你会经常把ls 打成sl吗？如果是的话，这个东西可以让你娱乐一下，你会看到一辆火车呼啸而过~~，相当拉风。你可以使用sudo apt-get install sl 安装。</p>
+<p class="caption_text"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7872" title="sl" src="https://coolshell.cn/wp-content/uploads/2012/07/sl.jpg" alt="" width="500" height="254" srcset="https://coolshell.cn/wp-content/uploads/2012/07/sl.jpg 500w, https://coolshell.cn/wp-content/uploads/2012/07/sl-300x152.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p class="caption_text">最后，再介绍一个命令中linuxlogo，你可以使用 sudo apt-get install linuxlogo来安装，然后，就可以使用linuxlogo -L<br />
+来看一下各种Linux的logo了</p>
+<p class="caption_text"><img decoding="async" loading="lazy" class="aligncenter" title="linuxlogo" src="https://coolshell.cn/wp-content/uploads/2012/07/linuxlogo.jpg" alt="" width="450" height="371" /></p>
+<p class="caption_text">（全文完）</p>
+</div>
+</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" alt="sed 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_title">sed 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7829.html/feed</wfw:commentRss>
+			<slash:comments>120</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>少即是极多</title>
+		<link>https://coolshell.cn/articles/7771.html</link>
+					<comments>https://coolshell.cn/articles/7771.html#comments</comments>
+		
+		<dc:creator><![CDATA[Tim Shen]]></dc:creator>
+		<pubDate>Thu, 05 Jul 2012 00:12:25 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Go]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7771</guid>
+
+					<description><![CDATA[<p>【感谢网友 @innocentim (Twitter) 投稿】 这是一篇翻译练习。力图保留原意。若有不准确处，求速速指出。猛击此处（墙）看原文。作者为Rob P...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7771.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7771.html">少即是极多</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>【<span style="color: #cc0000;"><strong>感谢网友 <a href="https://twitter.com/#!/innocentim" target="_blank">@innocentim</a></strong> (Twitter)<strong> 投稿</strong></span>】</p>
+<p>这是一篇翻译练习。力图保留原意。若有不准确处，求速速指出。<a href="http://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html" target="_blank">猛击此处</a>（墙）看原文。作者为Rob Pike，贝尔实验室来的大牛，现在就职于Google。他主导了Go语言的创建工作。下面是正文——</p>
+<p style="text-align: center; font-size: 9pt;"><span style="color: #999999;">——————————————正文分隔线——————————————</span></p>
+<p><img decoding="async" loading="lazy" class="alignright size-full wp-image-7818" title="Less is More" src="https://coolshell.cn/wp-content/uploads/2012/06/Less-is-More-Box-ShopTab-300x282.jpg" alt="" width="300" height="282" srcset="https://coolshell.cn/wp-content/uploads/2012/06/Less-is-More-Box-ShopTab-300x282.jpg 300w, https://coolshell.cn/wp-content/uploads/2012/06/Less-is-More-Box-ShopTab-300x282-287x270.jpg 287w" sizes="(max-width: 300px) 100vw, 300px" />这是我在2012年6月的Go SF上演讲的文本。</p>
+<p>这是一个个人演讲。 我承认，虽然面前的团队让Go诞生并延续，但是我的观点并不代表任何其他Go语言小组成员的意见。 我也想感谢Go SF的组织者提供这个和你们交流的机会。</p>
+<p>几星期前我被问起:“你在推出Go的过程中遇到的最大的惊奇是什么？&#8221;我立即意识到了答案: 虽然我们希望C++程序员意识到Go是个较好的选择，但是令人意外的是，大多数Go程序员来自Python和Ruby这样的动态语言，而很少有来自C++的。</p>
+<p>我们——Ken，Robert和我——是C++程序员(译者: Ken也用C++？)，当时在为解决我们所写的这类软件产生的问题设计一个新的语言。 这似乎有点自相矛盾，因为别的C++程序员根本不关心这些问题，更不会去设计一个语言。</p>
+<p>我今天想说的是关于那些激发我们创造Go的事情，和为什么它本不应令我们如此惊讶。 我保证这些内容更多与Go相关而不是C++，所以即使你不很了解C++你也能跟得上。</p>
+<p>回答可以这样归结: 你认为&#8221;少即是多&#8221;呢，还是&#8221;少就是少&#8221;？</p>
+<p>这里有个比喻，将以真实故事的形式给出。 贝尔实验室中心原来发放3位数号码: 物理研究是111，计算科学研究是127，如此这般。 1980年代早期，一个便笺飞过来说&#8221;鉴于你们对研究的理解有所加深，将为你们的号码多加上一位，以便更好地体现你们的工作&#8221;。 所以我们中心的号码变成了1127。 Ron Hardin半当真地开玩笑说如果我们真的理解我们的世界更好一点的话，我们将丢掉一位数字，将127变成27。 当然主管没听到这个笑话(这也不是我们希望的)，但是我想这里面有点值得思考的东西。 少即是多。 你理解得越好，你将变得越简洁。</p>
+<p><span id="more-7771"></span></p>
+<p>先记住这句话。</p>
+<p>回到2007年9月，我在做一个庞大的Google C++项目的细微但核心的部分。 开发必须交互进行，但是我这部分在我们的Google编译集群上要编译45分钟。 同时，有个消息传过来说一群在C++社区的Google员工将开一场讲座，介绍即将到来的C++0x(现在称为C++11)。</p>
+<p>在那场持续一小时的讲座中，我们听说了诸如计划中的35个新特性的说法——事实上还有更多，但是那场讲座只说有35个。 有些特性当然是细微的，但是讲座中谈到的至少是足够重要的。 提到的特性中，有些十分微妙并难以理解，比如右值引用(rvalue references); 有些特别符合C++范儿，比如可变参数模板(variadic templates); 还有些十分疯狂，比如用户定义的字面量(user-defined literals)。</p>
+<p>那时候我问了自己一个问题: C++社区真的觉得C++错在没有足够多的特性么？ 显然，从Ron Hardin的笑话的角度看，简化语言将比添加新特性取得更好的效果。 当然，对C++来说这很不靠谱，但是先记住这点。</p>
+<p>在这场讲座的几个月之前我做了一场讲座(你可以通过<a href="http://video.google.com/videoplay？docid=810232012617965344" target="_blank">YouTube</a>看到)，讲的是一个我1980年代做的一个玩具并发编程语言。 这个语言叫<a href="ftp://cs.bell-labs.com/cm/cs/who/rsc/thread/newsqueak.pdf" target="_blank">Newsqueak</a>，而且显然地，它成为了Go的前身。</p>
+<p>在我在Google工作的过程中，我发现我丢掉了Newsqueak中的一些点子。 现在我将重新思考它们，所以我才做了那场讲座。 我相信它们会让服务器端编程变得更容易，而且Google能真正从中获益。</p>
+<p>我真的尝试将这些点子加入到C++中，可惜失败了。 我实在难以将一组并发操作融入到C++的控制流程中去——当真融进去的话，它们将变得十分丑陋，从而难以看到优越性。 另外，C++将它变得十分臃肿(虽然我从来没真正发现C++苗条过)。 所以我放弃了这个想法。</p>
+<p>但是C++0x的讲座使我再次思考。 一件事十分困扰我——我相信也困扰着Ken和Robert——C++的新内存模型居然新增了原子类型。 为这个不堪重负的类型系统加上这么个细致精巧到极致类型机制十分的不靠谱，不是么？ 将语言和今日的硬件绑在一起似乎有点目光短浅并且不明智，因为硬件过几年就有大变。</p>
+<p>那场C++0x讲座结束之后，我们回到办公室。 我开始了另一个编译(译者笑)，转过转过我的椅子，面对Robert，然后开始问一些尖锐的问题。 在编译完成之前，我们拉拢了Ken，并决定做些什么。 我们再也不想写C++了，并且我们——尤其是我——在写Google代码时，想让并发拿来就用。 同时我们也想解决&#8221;大系统编程&#8221;的问题，容后细说。</p>
+<p>我们在白板上写下一组我们需要的东西——迫切需要的那种。 我们规划出大体的轮廓，忽略了语法细节和语义。</p>
+<p>我仍然有一条碉堡了的那周的邮件线索。 这是一些摘录:</p>
+<blockquote><p><strong>Robert</strong>: 起点: C，修补一些显而易见的瑕疵，去除繁杂的东西。 新增一些特性。</p>
+<p><strong>Rob</strong>: 命名为&#8217;go&#8217;。 你可以为这个名字编造各种理由，但是它确实拥有很多好的特性。 它短小，易于打出。 工具么: goc，gol，goa。 如果有个交互式调试器/解释器，可以直接叫&#8217;go&#8217;。 代码后缀是。go。</p>
+<p><strong>Robert</strong>: 空接口: interface {}。 将被所有接口实现(译者: 原文如此)，并且可以取代void*。</p></blockquote>
+<p>我们并没有立即全部设计出来。 比如我们花了一年多才设计出了数组(array)和切片(slice)。 不过相当一部分重要的设计在最初的几天中浮现。</p>
+<p>注意到Robert说C是起点，并非C++。 对于这点我不是很确定，不过我相信他说的是C，因为Ken在场(译者笑)。 但是最后我们并没有从C开始，这倒是真的。 我们从最初的草稿开始，仅仅从其它语言中借鉴琐碎的东西，比如运算符，各种括号和一些常见的关键字。(当然我们也借鉴了我们所知道的语言中的思想。)不管怎么说，我们破而后立，从头做起，以此来响应C++。 我们并非想做一个更好的C++，甚至不是一个更好的C。 它仅仅是一个对我们所关心的软件来说更好的语言。</p>
+<p>最后，我们得到了既不同于C也不同于C++的东西，甚至比许多人意识到的还要不同。 我列了一个对于C和C++的Go的重要的简化的列表:</p>
+<ul>
+<li>常规的语法(不需要一个符号表来辅助解析)</li>
+<li>GC机制(仅仅是GC)</li>
+<li>没有头文件</li>
+<li>显式依赖关系</li>
+<li>没有循环依赖</li>
+<li>数字常量仅仅是数字(译者: 没有类型)</li>
+<li>int和int32不是同种类型</li>
+<li>字母大小写将确定可见性</li>
+<li>任何类型都可以有方法(没有类)</li>
+<li>没有子类型继承(没有子类)</li>
+<li>包级别的初始化和良好定义的初始化顺序</li>
+<li>同一个包的文件一起编译</li>
+<li>包级别的全局定义可以以任意顺序进行</li>
+<li>没有算术类型转换(常量可以弥补)</li>
+<li>接口是隐式实现的(没有&#8221;implements&#8221;声明)</li>
+<li>嵌入的结构体(没有类型提升和子类)</li>
+<li>方法像函数一样定义(不必定义在特殊的地方)</li>
+<li>方法就是函数</li>
+<li>接口就是方法(没有数据)</li>
+<li>方法仅仅靠名字匹配(不是靠类型)</li>
+<li>没有构造函数和析构函数</li>
+<li>后置增量/减量运算符仅仅是语句，而不是表达式</li>
+<li>没有前置增量/减量运算符</li>
+<li>赋值号是语句，不是表达式</li>
+<li>表达式求值顺序在赋值和函数调用时确定(没有所谓的&#8221;sequence point&#8221;)</li>
+<li>没有指针算术</li>
+<li>内存总是初始化为0</li>
+<li>对本地变量取地址是合法的</li>
+<li>方法中没有叫this的指针</li>
+<li>分段式栈</li>
+<li>没有常量或其它类型的注记</li>
+<li>没有模板</li>
+<li>没有异常</li>
+<li>内建字符串，切片和映射(map)</li>
+<li>数组边界检查</li>
+</ul>
+<p>并且，我相信通过这一系列的简化，Go将比C或C++更具有表现力。 少即是多。</p>
+<p>但是我们没法一下子把所有部分都做出来。 我们需要构建最基础的部分，比如说类型系统的表示，能良好应用于实际的语法，和一些无法形容的但能让库更容易相互操作的东西。</p>
+<p>我们同样增加了C或C++中没有的东西，比如切片和映射，组合字面量(？)，文件顶层的表达式(这虽是件大事，但是几乎不为人知)，反射机制，GC等等。 自然，还有并发。</p>
+<p>一个显眼的缺少的东西是类型的继承。 请允许我粗暴地对待它一分钟。</p>
+<p>早先构建Go的时候有人跟我说，他无法想象用一门没有泛型的语言工作。 正如我在别处说明的那样，我觉得这是个很诡异的言论。</p>
+<p>公平起见，他用自己的话说可能是他真的很喜欢C++中STL的那些容器。 以辩论为目的的话，我们来正面看看他的言论。</p>
+<p>他说的意味着: 他发现写一个容器，比如以int为元素类型的链表，或字符串映射是一种不能忍的重负。 我发现这是个很诡异的言论，因为我几乎没把时间花在那些个问题上，即使我在用没有泛型的语言。</p>
+<p>但是，更重要的是，他说的那些表示<em>类型系统</em>将会解除这种负担。 <em>类型系统</em>。 不是多态函数，或语言级原语，或其它类型的辅助手段(helpers)，而仅仅是<em>类型系统</em>。</p>
+<p>这就是粘住我的那个细节。</p>
+<p>从C++或Java来Go的程序员怀念和类型系统在一起的日子，特别是带继承和子类的那部分。 也许我在类型系统方面是粗暴了些，但是我绝不觉得那套玩意非常具有表现力。</p>
+<p>我已故的朋友Alain Fournier一次告诉我说他认为学术工作的最底层是分类学。 然后信不信由你，类型继承正是分类学。 你必须决定哪个萝卜扔哪个坑里，每个类型的父类型，A是否继承B或者B是否继承A。 一个可排序的数组是一个带有sort方法的数组呢，还是一个长得像数组的排序器呢？ 如果你觉得类型系统能解决所有设计上的问题，你必须做出这个无意义的选择。</p>
+<p>我相信对编程来说那是个荒诞的思路。 真正的重点不在于事物之间的继承关系，而在于它们能提供些什么。</p>
+<p>因此，接口这个概念进入了Go。 但是它们都是主要部分——真正的Go之道——的一部分。</p>
+<p>如果C++和Java注重类型继承和类型系统的分类学，那末Go就注重组合。</p>
+<p>Doug Mcilroy，Unix管道的最终发明人，在1964年(!)写道:</p>
+<blockquote><p>我们应该有一些机制能将程序耦合(串)起来，像花园软管那样——当我们需要另一种方式传送数据时，拧紧另外一段即可。 I/O也可以这么做。</p></blockquote>
+<p>这也是Go所提倡的道路。 Go吸收这个观点，然后把它推进得十分远。 这是一门关于(功能上的)组合和(调用上的)耦合的语言。</p>
+<p>一个显然的例子是接口是组合各部分的途径。 关键是，那些部分是什么并不重要，如果某类型实现了M方法我就可以把这个方法填到接口里去。</p>
+<p>另一个重要的例子是如何让并发性提供给我们不同的独立计算部分的组合。</p>
+<p>并且还有一种不同寻常(但十分简单)的类型组合形式: 嵌入。</p>
+<p>————————————————————————</p>
+<p>我想提一个和之前不太相关的Go设计: Go被设计为大型团队用来写大型程序的语言。</p>
+<p>这里有个概念是&#8221;大型编程&#8221;，并且不知何故C++和Java主宰了这个领域。 我相信这只是因为其历史巧合，或者是工业上的巧合。 但是被广泛接纳的观点是他们和面向对象设计有关。</p>
+<p>我压根不相信这点。 大型软件需要确定的方法，但是更重要的是它需要强依赖性管理，干净的接口抽象和优越的文档工具。 C++没一点做得好的(虽然Java明显要好很多)。</p>
+<p>我们还不知道Go语言能做到何种程度，因为现在还没有足够的软件是用Go写的。 但是我非常有信心于Go将会成为一个优越的大型编程语言。 时间会说明一切的。</p>
+<p>————————————————————————</p>
+<p>现在，回到我们演讲开始提的那个问题:</p>
+<p>为什么Go，作为从头被设计为符合C++使用者习惯的语言，没有吸引很多C++程序员？</p>
+<p>严肃点说，我觉得是因为Go和C++在哲学方面有着巨大的不同。</p>
+<p>C++是将所有东西提到你指尖上(译者: 即多范式)。 我在C++11的FAQ上找到了这段引用:</p>
+<blockquote><p>C++能优雅地，灵活地，零损耗地(相比于手工操纵代码)表达抽象的能力大幅提升了。</p></blockquote>
+<p>Go并非这种&#8221;围绕式&#8221;的。 你并不需要所有的东西都内建好。 你不需要对每个执行细节进行精细的控制。 比如，你不需要RAII，但你拥有一个垃圾回收器，也意味着你不需要执行释放内存的操作。</p>
+<p>你得到的是一组非常强有力但易于理解，易于用来构建积木的功能，这些积木可以用来组合出一个你需要的问题的解法。 这并不意味着它能像别的一些语言创造的解法一样快速，复杂，或带来思想上的激励，但是它总能保证易于书写，易于阅读，易于理解，易于维护，而且可能更安全。</p>
+<p>从另一个角度说，这当然算作过度简化:</p>
+<p>Python和Ruby程序员转到Go，因为他们不需要牺牲表达能力，却获得了性能的提升，并且能好好玩并发系统了。</p>
+<p>C++程序员<em>并没有</em>转到Go是因为他们好不容易获得了对程序的精细控制，并且不想牺牲它们的任何一部分。 对他们而言，写软件不仅包括把事情做完，而且包括用特定的方式完成。</p>
+<p>关键是，在将来，Go的成功将会颠覆他们的世界观。</p>
+<p>并且从一开始我们就应该意识到这点。 对于C++11的新特性很兴奋的人们并不关心一个拥有如此少特性的语言。 即使最后他提供了如此多。</p>
+<p>谢谢。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/programmer-150x150.png" alt="程序员技术练级攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4990.html" class="wp_rp_title">程序员技术练级攻略</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/1761.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg" alt="Go语言源码的一个改动" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1761.html" class="wp_rp_title">Go语言源码的一个改动</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7771.html">少即是极多</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7771.html/feed</wfw:commentRss>
+			<slash:comments>50</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>关于闰秒</title>
+		<link>https://coolshell.cn/articles/7804.html</link>
+					<comments>https://coolshell.cn/articles/7804.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 30 Jun 2012 09:16:34 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[leap time]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[timestamp]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=7804</guid>
+
+					<description><![CDATA[<p>2012年6月30日，也就今天晚上，时间会多出现一秒，也就是我们所说的闰秒。我不知道大家对闰秒的了解有多少，所以写下这篇文章。 背景知识 闰秒是在在UTC（中文...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/7804.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/7804.html">关于闰秒</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>2012年6月30日，也就今天晚上，时间会多出现一秒，也就是我们所说的闰秒。我不知道大家对闰秒的了解有多少，所以写下这篇文章。</p>
+<h4>背景知识</h4>
+<p>闰秒是在在<a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time" target="_blank">UTC</a>（中文“世界标准时间”或“世界协调时间<strong>”</strong>／英文“<strong>C</strong>oordinated <strong>U</strong>niversal <strong>T</strong>ime”／法文“<strong>T</strong>emps <strong>U</strong>niversel <strong>C</strong>ordonné”）是基于<a href="http://en.wikipedia.org/wiki/Atomic_clock" target="_blank">Atomic Clock</a>（原子时钟）的一种时间，向太阳时（<a title="Mean solar day" href="http://en.wikipedia.org/wiki/Mean_solar_day">Solar Time </a>）对齐的一种方法，因为太阳时是根据地球公转来计算的。所以，1972年制定的UTC为了确保其时间相对于UTC的时间误差不能超过0.9秒，因此在过一段时间后需要加一秒。下图是有UTC以来闰秒的调整表（来自<a href="http://zh.wikipedia.org/wiki/%E9%97%B0%E7%A7%92" target="_blank">Wikipedia闰秒的中文词条</a>）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-7805" title="闰秒" src="https://coolshell.cn/wp-content/uploads/2012/06/闰秒.png" alt="" width="433" height="383" srcset="https://coolshell.cn/wp-content/uploads/2012/06/闰秒.png 433w, https://coolshell.cn/wp-content/uploads/2012/06/闰秒-300x265.png 300w, https://coolshell.cn/wp-content/uploads/2012/06/闰秒-305x270.png 305w" sizes="(max-width: 433px) 100vw, 433px" /></p>
+<p><span id="more-7804"></span></p>
+<p>从上表中我们可以看到，从1972年到现在，在这四十年里已经进行过25次的闰秒调整。闰秒是在每年6月或12月的最后一天的最后一分钟进行跳秒或不跳秒。是否加入闰秒由位于巴黎的国际地球自转和参考坐标系统服务（IERS &#8211; <a title="International Earth Rotation and Reference Systems Service" href="http://en.wikipedia.org/wiki/International_Earth_Rotation_and_Reference_Systems_Service">International Earth Rotation and Reference Systems Service</a>）决定。如果决定加入闰秒，那么这一秒是被加在第二天的00:00:00前的，也就是说，时间会出现23:59:60的情况，然后才是第二天的00:00:00。如果是负闰秒的话，23:59:58的下一秒就直接跳到第二天的00:00:00了。<strong>现在，所有闰秒都是正闰秒</strong>。</p>
+<h4>计算机处理闰秒</h4>
+<p>那么，对于我们的电脑系统来说，怎么处理这个闰秒呢？一般来说，我们需要为我们的电脑系统配置UTC时钟，并通过NTP (<a title="Network time protocol" href="http://en.wikipedia.org/wiki/Network_time_protocol">Network time protocol</a>)来进行时间同步，NTP服务器会一级一级地下发闰秒事件通知直到最边缘的NTP服务器，然后NTP服务器就会把闰秒通知发给客户端的操作系统，由操作系统来处理闰秒通知。</p>
+<p>虽然闰秒调整对普通民众的日常生活不会产生影响。不过，<strong>这个问题将影响部分开启ntp服务的Linux操作系统——会导致Linux内核Crash！</strong>Linux kernel是在2.6.18-164.e15之后的版本中解决了这个问题。<span style="color: #cc0000;">换句话说，Linux kernel低于<strong>2.6.18-164</strong>的Linux系统，无论是什么公司的Linux都将受到影响</span>。（今晚过后大家可以查看一下你的Linux系统日志，看看闰秒有没有发生）</p>
+<p>可以参看下面的bug描述：</p>
+<ul>
+<li><a href="https://lkml.org/lkml/2009/1/2/373" target="_blank">LKML: Chris Adams: Re: Bug: Status/Summary of slashdot leap-second crash on new years 2008-2009</a></li>
+<li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=479765" target="_blank">Bug 479765 &#8211; Leap second message can hang the kernel</a></li>
+</ul>
+<p>那么，我们的操作系统是怎么处理正闰秒通知的？通常来说有三种实现：</p>
+<ol>
+<li>后退一秒。</li>
+<li>停止一秒。</li>
+<li>真正的增加一秒。</li>
+</ol>
+<p>懂编程的人一眼就能看出来，前两种方式是以一种Workaround或Hack的方式解决这个问题。第一种方式会导致一些基于timestamp的消息通知乱序了，而第二种会导致出现两个一模一样的timestamp。最后一种不会出现timestamp的问题。对了，你还记得以前那篇《<a href="https://coolshell.cn/articles/5075.html" rel="bookmark">你确信你了解时间吗？</a>》的文章吗？</p>
+<p>最后，说说Windows，Windows  Time Service不支持闰秒通知，所以，当闰秒发生的时候，你的Windows上的时间会比实际时间快一秒钟，这需要等下一次的时钟同步才会完成修正。你可以查看这篇文章：<a href="http://support.microsoft.com/kb/909614/en-us">http://support.microsoft.com/kb/909614/en-us</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7804.html">关于闰秒</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/7804.html/feed</wfw:commentRss>
+			<slash:comments>35</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

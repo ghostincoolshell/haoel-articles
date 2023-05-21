@@ -1,0 +1,129 @@
+<html><body><p>本文来自“<a href="http://www.elpauer.org/?p=971" target="_blank">The most stupid C bug ever</a>”，很有意思，分享给大家。我相信这样的bug，就算你是高手你也会犯的。你来看看作者犯的这个Bug吧。。</p>
+<p>首先，作者想用一段程序来创建一个文件，如果有文件名的话，就创建真正的文件，如果没有的话，就调用?<a href="http://linux.die.net/man/3/tmpfile">tmpfile()</a>?创建临时文件。他这段程序就是HTTP下载的C程序。code==200就是HTTP的返回码。</p>
+<pre class="EnlighterJSRAW">
+else if (code == 200) {     // Downloading whole file
+    /* Write new file (plus allow reading once we finish) */
+    g = fname ? fopen(fname, "w+") : tmpfile();
+}</pre>
+<p>但是这个程序，只能在Unix/Linux下工作，因为 Microsoft 的?<a href="http://msdn.microsoft.com/en-us/library/x8x7sakw.aspx">tmpfile()的实现</a>?居然选择了 C:\ 作为临时文件的存放目录，这对于那些没有管理员权限的人来说就出大问题了，在Windows 7下，就算你有管理员权限也会有问题。所以，上面的程序在Windows平台下需要用不同的方式来处理，不能直接使用Windows的tmpfile()函数。</p>
+<p>于是作者就先把这个问题记下来，在注释中写下了FIXME：</p>
+<pre class="EnlighterJSRAW">
+else if (code == 200) {     // Downloading whole file
+    /* Write new file (plus allow reading once we finish) */
+
+    // FIXME Win32 native version fails here because
+    //   Microsoft's version of tmpfile() creates the file in C:\
+    g = fname ? fopen(fname, "w+") : tmpfile();
+}</pre>
+<p>然后，作者觉得需要写一个跨平台的编译：</p>
+<pre class="EnlighterJSRAW">FILE * tmpfile ( void ) {
+#ifndef _WIN32
+    return tmpfile();
+#else
+    //code for Windows;
+#endif
+}</pre>
+<p>然后，作者觉得这样实现很不好，会发现名字冲突，因为这样一来这个函数太难看了。于是他重构了一下他的代码——写一个自己实现的tmpfile() – w32_tmpfile，然后，在Windows 下用宏定义来重命名这个函数为tmpfile()。（陈皓注：这种用法是比较标准的跨平台代码的写法）</p>
+<p><span id="more-5388"></span></p>
+<pre class="EnlighterJSRAW">#ifdef _WIN32
+  #define tmpfile w32_tmpfile
+#endif
+
+FILE * w32_tmpfile ( void ) {
+    //code for Windows;
+}</pre>
+<p>搞定！编译程序，运行。靠！居然没有调用到我的w32_tmpfile()，什么问题？调试，单步跟踪，果然没有调用到！难道是问号表达式有问题？改成if – else 语句，好了！</p>
+<pre class="EnlighterJSRAW">if(NULL != fname) {
+    g = fopen(fname, "w+");
+} else {
+    g = tmpfile();
+}</pre>
+<p>问号表达式不应该有问题吧，难道我们的宏对问号表达式不起作用，这难道是编译器的预编译的一个bug？作者怀疑到。</p>
+<p>现在我们把所有的代码连在一起看，并比较一下：</p>
+<p><strong>能正常工作的代码</strong></p>
+<pre class="EnlighterJSRAW">#ifdef _WIN32
+#  define tmpfile w32_tmpfile
+#endif
+
+FILE * w32_tmpfile ( void ) {
+    code for Windows;
+}
+
+else if (code == 200) {     // Downloading whole file
+    /* Write new file (plus allow reading once we finish) */
+    // FIXME Win32 native version fails here because
+    //     Microsoft's version of tmpfile() creates the file in C:\
+    //g = fname ? fopen(fname, "w+") : tmpfile();
+    if(NULL != fname) {
+        g = fopen(fname, "w+");
+    } else {
+        g = tmpfile();
+    }
+}</pre>
+<p><strong>不能正常工作的代码</strong></p>
+<pre class="EnlighterJSRAW">#ifdef _WIN32
+#  define tmpfile w32_tmpfile
+#endif
+
+FILE * w32_tmpfile ( void ) {
+    code for Windows;
+}
+
+else if (code == 200) {     // Downloading whole file
+    /* Write new file (plus allow reading once we finish) */
+    // FIXME Win32 native version fails here because
+    //    Microsoft's version of tmpfile() creates the file in C:\
+    g = fname ? fopen(fname, "w+") : tmpfile();
+}</pre>
+<p>也许你在一开始就看到了这个bug，但是作者没有。所有的问题都出在注释上：</p>
+<pre class="EnlighterJSRAW">
+/* Write new file (plus allow reading once we finish) */
+// FIXME Win32 native version fails here because
+//     Microsoft's version of tmpfile() creates the file in C:\
+</pre>
+<p><strong>你看到了最后那个C:\吗？在C中，“\” 代表此行没有结束，于是，后面的代码也成了注释。这就是这个bug的真正原因</strong>！</p>
+<p>而之所以改成if-else能工作的原因是因为作者注释了老的问号表达式的代码，所以，那段能工作的代码成了：</p>
+<pre class="EnlighterJSRAW">
+/* Write new file (plus allow reading once we finish) */
+// FIXME Win32 native version fails here because Microsoft's version of tmpfile() creates the file in C:    //g = fname ? fopen(fname, "w+") : tmpfile();
+if(NULL != fname) {
+    g = fopen(fname, "w+");
+} else {
+    g = tmpfile();
+}</pre>
+<p>我相信，当作者找到这个问题的原因后，一定会骂一句“妈的”！我也相信，这个bug花费了作者很多时间！</p>
+<p>最后，我也share一个我以前犯的一个错。</p>
+<p>我有一个小函数，需要传入一个int* pInt的类型，然后我需要在我的代码里 把这个int* pInt作除数。于是我的代码成了下面的这个样子：</p>
+<blockquote><p>float result = num/*pInt;<br/>
+….</p>
+<p>/*  some comments */</p>
+<p>-x&lt;10 ? f(result):f(-result);</p></blockquote>
+<p>因为我在我当时用vi编写代码，所以没有语法高亮，而我的程序都编译通过了，但是却出现了很奇怪的事。我也不知道，用gdb调式的时候，发现有些语句直接就过了。这个问题让我花了很多时间，最后发现问题原来是没有空格导致的，TNND，下面我用代码高亮的插件来显示上面的代码，</p>
+<pre class="EnlighterJSRAW">float result = num/*pInt;
+....
+
+/*  some comments */
+
+-x&lt;10 ? f(result):f(-result); </pre>
+<p>Holly Shit!  我的代码成了：</p>
+<p><code class="EnlighterJSRAW">float result = num-x&lt;10 ? f(result):f(-result);</code></p>
+<p>妈的！我的这个错误在愚蠢程度上和上面那个作者出的错误有一拼。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9543.html"><img alt="“C++的数组不支持多态”？" height="150" src="../wp-content/uploads/2013/04/weibo-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9543.html">“C++的数组不支持多态”？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5388.html">C语言中史上最愚蠢的Bug</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

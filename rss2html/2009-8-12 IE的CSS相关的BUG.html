@@ -1,0 +1,270 @@
+<html><body><p><img alt="ie-bug" class="alignright" height="172" src="../wp-content/uploads/2009/08/ie-bug.jpg" title="ie-bug" width="172"/>这个网页（<a href="http://haslayout.net/css/index">http://haslayout.net/css/index</a>）上例举了所有的IE和CSS相关的BUG。如果你在开发网页的时候，你需要看看。</p>
+<p>目前，这个网站上包含了 <strong>28 个“普通的Bug”</strong> ， <strong>4 个“布局方面的Bug”</strong> ， <strong>6 个“可以绕开的Bug”</strong> 以及 <strong>1 个“IE崩溃的Bug”</strong>，所有的这些Bug有39个指南和48个解决方法。这个列表目前更新到 <strong>2009年8月11日，19:50:22 </strong></p>
+<p>下面是所有的bug列表，你可以点击每个BUG名的链接查看更详细的说明。</p>
+<h4>普通Bug</h4>
+<p>这部分 <abbr title="Internet Explorer">IE</abbr> 的 bug 是比较普通的无法归到其它种类，或是同时属于多个种类的Bug。</p>
+<p><span id="more-1245"></span></p>
+<table border="0">
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Hover-White-Background-Ignore-Bug" title="'Hover White Background Ignore Bug' tutorial">Hover White Background Ignore Bug</a></td>
+<td>IE7</td>
+<td>background 不会因为 :hover而改变</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=IE7-Child-Selector-Comment-Bug" title="'IE7 Child Selector Comment Bug' tutorial">IE7 Child Selector Comment Bug</a></td>
+<td>IE7</td>
+<td>一个 selector 包含了一个子的selector，如果后面跟着一个注释，则会被完全忽略。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Star-HTML-Bug" title="'Star HTML Bug' tutorial">Star HTML Bug</a></td>
+<td>IE6</td>
+<td>* html selector 在 IE6 中没有被忽略</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=IE6--important-Ignore-Bug" title="'IE6 !important Ignore Bug' tutorial">IE6 !important Ignore Bug</a></td>
+<td>IE6</td>
+<td>!important 关键字会忽略，如果有相同的属性被设置了</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=PNG-Image-and-Background-Color-Mismatch" title="'PNG Image and Background Color Mismatch' tutorial">PNG Image and Background Color Mismatch</a></td>
+<td>IE8 及以下版本</td>
+<td>背景颜色和指定的图片的颜色不一致。而他们本来是一致的。IE认为这是他一个Feature。太可笑了。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-Auto-Margin-Center-Pseudo-Bug" title="'No Auto Margin Center Pseudo-Bug' tutorial">No Auto Margin Center Pseudo-Bug</a></td>
+<td>IE8 及以下版本</td>
+<td>如果把margins 设置成 <code class="EnlighterJSRAW">auto</code> ，IE不会把组件放置在中间的位置。所有的浏览器都会，只有IE不会。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=-first-line--important-Rule-Ignore-Bug" title="':first-line !important Rule Ignore Bug' tutorial">:first-line !important Rule Ignore Bug</a></td>
+<td>IE8</td>
+<td>如果在伪class  :first-line 内使用!important，那么其所有定义会被忽略。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=-first-letter-Ignore-Bug" title="':first-letter Ignore Bug' tutorial">:first-letter Ignore Bug</a></td>
+<td>IE6</td>
+<td>整个:first-letter 的属性定义会被除数完全忽略。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=-first-letter--important-Rule-Ignore-Bug" title="':first-letter !important Rule Ignore Bug' tutorial">:first-letter !important Rule Ignore Bug</a></td>
+<td>IE8</td>
+<td>如果在伪class  :first-letter内使用!important，那么其所有定义会被忽略。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Partial-Click-Bug-v2" title="'Partial Click Bug v2' tutorial">Partial Click Bug v2</a></td>
+<td>IE8以</td>
+<td>设置了整个区域是可以点击的，但在IE中只有文本可以点击。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Staircase-Bug" title="'Staircase Bug' tutorial">Staircase Bug</a></td>
+<td>below IE8</td>
+<td>浮动的元素排序起来就像一个楼梯。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Disappearing-List-Background-Bug" title="'Disappearing List Background Bug' tutorial">Disappearing List Background Bug</a></td>
+<td>IE6</td>
+<td>B &lt;li&gt;, &lt;dt&gt;, &lt;dd&gt; 没有背景。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=noscript-Ghost-Bug" title="'noscript Ghost Bug' tutorial">noscript Ghost Bug</a></td>
+<td>IE8 and below</td>
+<td>&lt;noscript&gt; 标识中只有 borders/background 才有用。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-Transparency-Click-Bug" title="'No Transparency Click Bug' tutorial">No Transparency Click Bug</a></td>
+<td>IE8 and below</td>
+<td>背景透明的图片在作为链接时，并且其“filter”被设置成了PNG透明，但其背景还是不可点击。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=List-Drop-Shift-Bug" title="'List Drop Shift Bug' tutorial">List Drop Shift Bug</a></td>
+<td>IE8</td>
+<td>在&lt;li&gt;中的内容被换行了。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-Increase-on--ol--Numbers-Bug" title="'No Increase on &lt;ol&gt; Numbers Bug' tutorial">No Increase on &lt;ol&gt; Numbers Bug</a></td>
+<td>below IE8</td>
+<td>&lt;ol&gt; 中的 &lt;li&gt; 列表序号不会增加。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-Bullets-on--ul--and--ol--Bug" title="'No Bullets on &lt;ul&gt; and &lt;ol&gt; Bug' tutorial">No Bullets on &lt;ul&gt; and &lt;ol&gt; Bug</a></td>
+<td>below IE8</td>
+<td>在&lt;ul&gt; 和 &lt;ol&gt; 中看不到列表序号/数字了。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-line-height-Vertical-Center-on-Images-Bug" title="'No line-height Vertical Center on Images Bug' tutorial">No line-height Vertical Center on Images Bug</a></td>
+<td>IE8以下版</td>
+<td>图片使用line-height 方法不能垂直居中</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-Background-Image-Bug" title="'No Background Image Bug' tutorial">No Background Image Bug</a></td>
+<td>IE8及以下版</td>
+<td>在IE中使用background无法定义背景图</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Custom-Cursor-Bug" title="'Custom Cursor Bug' tutorial">Custom Cursor Bug</a></td>
+<td>IE8及以下版</td>
+<td>自定义鼠标不工作</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Leaking-Background-Bug" title="'Leaking Background Bug' tutorial">Leaking Background Bug</a></td>
+<td>IE6</td>
+<td>背景从一个元件的内部溢出到外部</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Expanding-Height-Bug" title="'Expanding Height Bug' tutorial">Expanding Height Bug</a></td>
+<td>IE6</td>
+<td>元件的高度比指定的要长得多。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Expanding-Width-Bug" title="'Expanding Width Bug' tutorial">Expanding Width Bug</a></td>
+<td>IE6</td>
+<td>元件的宽度比指定的要长得多。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Double-Margin-Bug" title="'Double Margin Bug' tutorial">Double Margin Bug</a></td>
+<td>IE6</td>
+<td>float元件的左和右的空白（margins）被加倍了。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Negative-Margin-Bug" title="'Negative Margin Bug' tutorial">Negative Margin Bug</a></td>
+<td>IE8以下版</td>
+<td>如果使用负数来指定页白（margins）里面的元件会被外面的元件所遮挡。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Italics-Float-Bug" title="'Italics Float Bug' tutorial">Italics Float Bug</a></td>
+<td>IE6</td>
+<td>float的元件中的字体会被设置成倾斜。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=3px-Gap-Bug-aka-Text-Jog-Bug" title="'3px Gap Bug aka Text Jog Bug' tutorial">3px Gap Bug aka Text Jog Bug</a></td>
+<td>IE6</td>
+<td>下一个float的元件不是有一个3px的空隙，就是被换行了。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Text-Align-Bug" title="'Text-Align Bug' tutorial">Text-Align Bug</a></td>
+<td>IE8以下版</td>
+<td>text-align属性会影响整个元件内的所有内容。</td>
+</tr>
+</tbody>
+</table>
+<h4>布局类 Bug</h4>
+<table border="0">
+<caption>
+</caption>
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Border-Chaos-Bug" title="'Border Chaos Bug' tutorial">Border Chaos Bug</a></td>
+<td>IE6</td>
+<td>连框显示是混乱的</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Sub-Hover-Bug" title="'Sub-Hover Bug' tutorial">Sub-Hover Bug</a></td>
+<td>IE6</td>
+<td>一些selectors 如 a:hover foo{} 无法正常工作</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Partial-Click-Bug" title="'Partial Click Bug' tutorial">Partial Click Bug</a></td>
+<td>IE6</td>
+<td>在定义了display: block的链接中(&lt;a&gt;) 只有文本是可以点的。</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Disappearing-Content-Bug" title="'Disappearing Content Bug' tutorial">Disappearing Content Bug</a></td>
+<td>IE6</td>
+<td>当我们滚动窗口的时候，或是最大化最小化窗品的时候，有一些内容会重复显示。</td>
+</tr>
+</tbody>
+</table>
+<h4>不支持的功能</h4>
+<table border="0">
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=No-Child-Selector-Support-Workaround" title="'No Child Selector Support Workaround' tutorial">No Child Selector Support Workaround</a></td>
+<td>IE6</td>
+<td>子 selector 无效</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Max-Height-Workaround" title="'Max-Height Workaround' tutorial">Max-Height Workaround</a></td>
+<td>IE6</td>
+<td>max-height 无效</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Max-Width-Workaround" title="'Max-Width Workaround' tutorial">Max-Width Workaround</a></td>
+<td>IE6</td>
+<td>max-width 无效</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Opacity" title="'Opacity' tutorial">Opacity</a></td>
+<td>IE8及以下版</td>
+<td>opacity 属性无效</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Min-Width-Workaround" title="'Min-Width Workaround' tutorial">Min-Width Workaround</a></td>
+<td>IE6</td>
+<td>min-width 属性无效</td>
+</tr>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Min-Height-Workaround" title="'Min-Height Workaround' tutorial">Min-Height Workaround</a></td>
+<td>IE6</td>
+<td>min-height 属性无效</td>
+</tr>
+</tbody>
+</table>
+<h4>程序崩溃 Bug</h4>
+<p>这个BUG可以导致整个 <abbr title="Internet Explorer">IE</abbr> 崩溃。</p>
+<table border="0">
+<thead>
+<tr>
+<th>名称</th>
+<th>IE的版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://haslayout.net/css/view?tut=Hover-Crash-Bug" title="'Hover Crash Bug' tutorial">Hover Crash Bug</a></td>
+<td>IE6</td>
+<td>当你把鼠标移上 :hover 的链接时，浏览器会崩溃</td>
+</tr>
+</tbody>
+</table>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3013.html"><img alt="一些非常有意思的杂项资源" height="150" src="../wp-content/uploads/2010/09/biolab-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3013.html">一些非常有意思的杂项资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8170.html"><img alt="一次Ajax查错的经历" height="150" src="../wp-content/uploads/2012/08/ajax_error-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8170.html">一次Ajax查错的经历</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7186.html"><img alt="做个环保主义的程序员" height="150" src="../wp-content/uploads/2012/04/Green-Computing-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7186.html">做个环保主义的程序员</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6913.html"><img alt="神奇的CSS形状 " height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6913.html">神奇的CSS形状 </a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1245.html">IE的CSS相关的BUG</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

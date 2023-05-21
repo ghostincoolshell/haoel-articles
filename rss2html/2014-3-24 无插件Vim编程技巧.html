@@ -1,0 +1,183 @@
+<html><body><p><img alt="" class="alignright wp-image-11338" height="244" src="../wp-content/uploads/2014/03/success_vim.jpg" width="222"/>相信大家看过《<a href="https://coolshell.cn/articles/5426.html" target="_blank" title="简明 Vim 练级攻略">简明Vim教程</a>》也玩了《<a href="https://coolshell.cn/articles/7166.html" target="_blank" title="游戏：VIM大冒险">Vim大冒险</a>》的游戏了，相信大家对Vim都有一个好的入门了。我在这里把我日常用Vim编程的一些技巧列出来给大家看看，希望对大家有用，另外，也是一个抛砖引玉的过程，也希望大家把你们的技巧跟贴一下，我会更新到这篇文章中。另外，这篇文章里的这些技巧全都是vim原生态的，不需要你安装什么插件。<strong>我的Vim的版本是7.2</strong>。</p>
+<h4>浏览代码</h4>
+<p><span style="line-height: 1.5em;">首先，我们先从浏览代码开始。有时候，我们需要看多个文件，所以，传统的做法是，我们开多个tty终端，每个tty里用Vim打开一个文件，然后来回切换。这很没有什么效率。我们希望在一个Vim里打开多个文件，甚至浏览程序目录。</span></p>
+<p>浏览目录的命令很简单：（你也可以直接vim一个目录）</p>
+<blockquote><p><strong>:E</strong></p></blockquote>
+<p>注意，是大写。于是，你会看到下面这样的界面：</p>
+<p><span id="more-11312"></span></p>
+<p><img alt="" class="aligncenter size-full wp-image-11314" height="387" src="../wp-content/uploads/2014/03/Explorer.png" width="643"/></p>
+<p style="text-align: left;">这个界面中，<strong>你可以用 j, k 键上下移动，然后回车，进入一个目录，或是找开一个文件</strong>。你可以看到上面有一堆命令：</p>
+<ul>
+<li>【 – 】 到上级目录</li>
+<li>【D】删除文件（大写）</li>
+<li>【R】改文件名（大写）</li>
+<li>【s】对文件排序（小写）</li>
+<li>【x】执行文件</li>
+</ul>
+<p>当然，打开的文件会把现有已打开的文件给冲掉——也就是说你只看到了一个文件。</p>
+<p>如果你要改变当前浏览的目录，或是查看当前浏览的目录，你可以使用和shell一样的命令：</p>
+<blockquote><p><strong>:cd &lt;dir&gt; – 改变当前目录</strong></p>
+<p><strong>:pwd  – 查看当前目录</strong></p></blockquote>
+<h4>缓冲区</h4>
+<p>其实，你用:E 浏览打开的文件都没有被关闭，这些文件都在缓冲区中。你可以用下面的命令来查看缓冲区：</p>
+<blockquote><p><strong>:ls</strong></p></blockquote>
+<p>于是，在你的Vim下，你会看到如下界面：</p>
+<p><img alt="" class="aligncenter size-full wp-image-11315" height="174" src="../wp-content/uploads/2014/03/buffer_ls.png" width="572"/></p>
+<p>你可以看到Vim打开了四个文件，编号是4，5，6，7，如果你要切换打开的文件，这个时候，你不要按回车（按了也没事，只不过按了就看不到:ls输出的buffer列表了），你可以使用下面的命令切换文件（buffer后面的4表示切到4号文件也就是src/http/ngx_http.c）：</p>
+<blockquote><p><strong>:buffer 4</strong></p></blockquote>
+<p>或是：</p>
+<blockquote><p><strong>:buffer src/http/ngx_http.c</strong></p></blockquote>
+<p>注意，</p>
+<ul>
+<li>你可以像在Shell中输入命令按Tab键补全一样补全Vim的命令。</li>
+<li>也可以用像gdb一样用最前面的几个字符，只要没有冲突。如：buff</li>
+</ul>
+<p>你还可以动用如下命令，快速切换：</p>
+<blockquote><p>:bnext      缩写 :bn<br/>
+:bprevious   缩写 :bp<br/>
+:blast  缩写 :bl<br/>
+:bfirst 缩写 :bf</p></blockquote>
+<p><span style="line-height: 1.5em;">上图中，我们还可以看到5有一个%a，这表示当前文件，相关的标记如下：</span></p>
+<p style="padding-left: 30px;">– （非活动的缓冲区）<br/>
+a （当前被激活缓冲区）<br/>
+h （隐藏的缓冲区）<br/>
+% （当前的缓冲区）<br/>
+# （交换缓冲区）<br/>
+= （只读缓冲区）<br/>
++ （已经更改的缓冲区）</p>
+<h4>窗口分屏浏览</h4>
+<p>相信你在《<a href="https://coolshell.cn/articles/1679.html" target="_blank" title="Vim的分屏功能">Vim的窗口分屏</a>》一文中，你已经知道了怎么拆分窗口了。其实，我更多的不是用拆分窗口的命令，而是用浏览文件的命令来分隔窗口。如：</p>
+<p>把当前窗口上下分屏，并在下面进行目录浏览：</p>
+<blockquote><p><strong>:He   全称为 :Hexplore  （在下边分屏浏览目录）</strong></p></blockquote>
+<p>如果你要在上面，你就在 :He后面加个 !，</p>
+<blockquote><p><strong>:He!  （在上分屏浏览目录）</strong></p></blockquote>
+<p>如果你要左右分屏的话，你可以这样：</p>
+<blockquote><p><strong>:Ve 全称为 :Vexplore （在左边分屏间浏览目录，要在右边则是 :Ve!）</strong></p></blockquote>
+<p>下图是分别用:He 和 :Ve搞出来的同时看三个文件：</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11316" height="411" src="../wp-content/uploads/2014/03/WindowsExplorer.png" width="725"/></p>
+<p style="text-align: left;">在分屏间的跳转和切换在《<a href="https://coolshell.cn/articles/1679.html" target="_blank" title="Vim的分屏功能">Vim的窗口分屏</a>》一文中提过了：<strong>先按Ctrl + W，然后按方向键：h j k l</strong></p>
+<h4 style="text-align: left;">分屏同步移动</h4>
+<p>要让两个分屏中的文件同步移动，很简单，你需要到需要同步移动的两个屏中都输入如下命令（相当于使用“铁锁连环”）：</p>
+<blockquote><p><strong>:set scb</strong></p></blockquote>
+<p>如果你需要解开，那么就输入下面的命令：</p>
+<blockquote><p><strong>:set scb!</strong></p></blockquote>
+<p>注：set scb 是 set scrollbind 的简写。</p>
+<h4>Tab页浏览目录</h4>
+<p>分屏可能会让你不爽，你可能更喜欢像Chrome这样的分页式的浏览，那么你可以用下面的命令：</p>
+<blockquote><p><strong>:Te  全称是 :Texplorer</strong></p></blockquote>
+<p>下图中，你可以看到我用Te命令打开了三页，就在顶端我们可以可以看到有三页，其中第一页Tab上的数字3表示那一页有3个文件。</p>
+<p><img alt="" class="aligncenter size-full wp-image-11317" height="236" src="../wp-content/uploads/2014/03/TabExplorer.png" width="679"/></p>
+<p>我们要在多个Tabe页中切换，在normal模式下，你可以使用下面三个按键（注意没有冒号）：</p>
+<blockquote><p><strong>gt   – 到下一个页</strong></p>
+<p><strong>gT  – 到前一个页</strong></p>
+<p><strong>{i} gt   – i是数字，到指定页，比如：5 gt 就是到第5页</strong></p></blockquote>
+<p>你可以以使用 【:tabm {n}】来切换Tab页。</p>
+<p>gvim应该是：Ctrl+PgDn 和 Ctrl+PgUp 来在各个页中切换。</p>
+<p>如果你想看看你现在打开的窗口和Tab的情况，你可以使用下面的命令：</p>
+<blockquote><p><strong>:tabs</strong></p></blockquote>
+<p>于是你可以看到：</p>
+<p><img alt="" class="aligncenter size-full wp-image-11318" height="175" src="../wp-content/uploads/2014/03/Tab01.png" width="392"/></p>
+<p>使用如下命令可以关闭tab：（当然，我更喜欢使用传统的:q, :wq来关闭）</p>
+<blockquote><p><strong>:tabclose [i]</strong> – 如果后面指定了数字，那就关闭指定页，如果没有就关闭当前页</p></blockquote>
+<p>最后提一下，如果你在Shell命令行下，你可以使用 vim 的 -p 参数来用Tab页的方式打开多个文件，比如：</p>
+<blockquote><p><strong>vim -p cool.cpp shell.cpp haoel.cpp<br/>
+vim -p *.cpp</strong></p></blockquote>
+<p><strong>注：如果你想把buffer中的文件全转成tab的话，你可以使用下面的命令</strong></p>
+<blockquote><p><strong>:bufdo tab split</strong></p></blockquote>
+<h4>保存会话</h4>
+<p>如果你用Tab或Window打开了好些文件的文件，还设置了各种滚屏同步，或是行号……，那么，你可以用下面的命令来保存会话：（你有兴趣你可以看看你的 mysession.vim文件内容，也就是一个批处理文件）</p>
+<blockquote><p><strong>:mksession ~/.mysession.vim</strong></p></blockquote>
+<p>如果文件重复，vim默认会报错，如果你想强行写入的话，你可以在mksession后加! ：</p>
+<blockquote><p><strong>:mksession! ~/.mysession.vim</strong></p></blockquote>
+<p>于是下次，你可以这样打开这个会话：</p>
+<blockquote><p><strong>vim -S ~/.mysession.vim</strong></p></blockquote>
+<p>保存完会话后，你也没有必要一个一个Tab/Windows的去Close。你可以简单地使用：</p>
+<blockquote><p><strong>:qa   – 退出全部 </strong></p>
+<p><strong>:wqa  -保存全部并退出全部</strong></p></blockquote>
+<h4>Quickfix</h4>
+<p>假如我们有一个hello.cpp文件和一个makefile，于是我们可以直接在vim下输入 :make ， 于是就可以make这个hello.cpp文件，如果出错了，我们需要按回车返回，这个时候，我们可以使用下面的命令来把出错显到在vim的分屏中：</p>
+<blockquote><p><strong>:cw</strong></p></blockquote>
+<p>于是，就会出现下面右边的那个样子：（是不是看上去和我一样很帅？）</p>
+<p><img alt="" class="aligncenter size-full wp-image-11321" height="385" src="../wp-content/uploads/2014/03/quickfix.png" width="705"/></p>
+<p>上图中左边是我的makefile，右边是我的错误百出的源代码，右边下面是quickfix窗屏。你可以看到quickfix窗屏指向的第一个错误已经定位到我们相就错误的文件行上了。</p>
+<p>你可以使用像浏览文件那样用j, k在quckfix窗屏中上下移动到相应的错误上然后按回车，然后就可以在上面的窗屏里定位到相应的源文件的代码行。但是，如果是这样的话， 你要定位下一条错误还得用Ctrl +W 回到quickfix屏中来然后重复来过。</p>
+<p>你可以使用下面的命令而不用回到quickfix中来：</p>
+<blockquote><p><strong>:cp 跳到上一个错误</strong></p>
+<p><strong>:cn 跳到下一个错误</strong></p>
+<p><strong>:cl 列出所有错误</strong></p>
+<p><strong>:cc 显示错误详细信息</strong></p></blockquote>
+<p>下面我们来看另一个quickfix的功能。</p>
+<p>如果你用过vim的cscope插件，你就知道cscope可以用来查找相当的代码，但cscope需要事先生成一个数据库，对一些简单的查找，其实，我们用vim的grep命令就可以了，不需要专门为之生成数据库。vim的grep命令和shell的几乎一样。</p>
+<p>我们来看个例子：</p>
+<p>比如我们正在浏览nginx的代码，这时，我想看看哪里用到了nginx的NGX_HTTP_VAR_INDEXED宏。于是，我可以在vim里输入如下的命令：</p>
+<blockquote><p><strong>:grep -r –include=”*.[ch]” NGX_HTTP_VAR_INDEXED src/</strong></p></blockquote>
+<p>上面这个命令意思是递归查询src目录下所有的.c和.h文件，其中包括NGX_HTTP_VAR_INDEXED宏。然后，你就会看到vim到shell里去执行并找到了相关的文件，按回车返回vim后，别忘了用 【:cw 】把grep的输出取回来，于是我们就有下面的样子：</p>
+<p><img alt="" class="aligncenter size-full wp-image-11323" height="386" src="../wp-content/uploads/2014/03/quickfix_grep.png" width="704"/></p>
+<p>然后同上面一样，你可以用 j，k 键移动quickfix里的光标到相应的行，然后按回车定位文件，或是使用【:cn】或【:cp】来移动到定位。（这样，你会把多个文件打开到缓冲区，别忘了【:ls】来查看缓冲区）</p>
+<p>你看，到这里，一个小小的IDE就这样产生了，而且，<strong>最帅的时，我们连一点插件都没有装，也没有在.vimrc文件中配置过什么</strong>。</p>
+<h4>关键字补全</h4>
+<p>我们还是坚持不用任何插件。我们来看看是怎么个自动补全的。</p>
+<p>在insert模式下，我们可以按如下快捷键：</p>
+<blockquote><p>【<strong>Ctrl +N</strong>】  – 当你按下这它时，你会发现Vim就开始搜索你这个目录下的代码，搜索完成了就会出现一个下拉列表（居然是粉紫色的，真是丑死了）</p></blockquote>
+<p>下图是我输入了ngx_http_然后按ctrl+n出现的样子，它已经帮我补全了一个，但是我不想要这个。然后，在Vim的下方我们可以看到状态变成了“关键字补全”，然后后面有^N^P的提示，意思就是告诉你还有一个Ctrl+P.</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11325" height="304" src="../wp-content/uploads/2014/03/auto_complete_ctrl_n.png" width="635"/></p>
+<blockquote><p>【<strong>Ctrl + P</strong>】 – 接下来你可以按这个键，于是回到原点，然后你可以按上下光标键来选择相应的Word。</p></blockquote>
+<p>对于上面那个例子，我们按下了Ctrl+P后出现下面的这个样子。我们可以看到，光标回到了一开始我输入的位置，然后你可以干两件事，一个是继续输入（这可以帮助过滤关键词），另一个是用“光标键”上移或下移来选择下拉列表中的关键字，选好后回车，就补全了。</p>
+<p><img alt="" class="aligncenter size-full wp-image-11326" height="337" src="../wp-content/uploads/2014/03/auto_complete_ctrl_p.png" width="707"/></p>
+<p>与此类似的，还有更多的补齐，都在Ctrl +X下面：</p>
+<ul>
+<li>Ctrl + X 和 Ctrl + D 宏定义补齐</li>
+<li>Ctrl + X 和 Ctrl + ] 是Tag 补齐</li>
+<li>Ctrl + X 和 Ctrl + F 是文件名 补齐</li>
+<li>Ctrl + X 和 Ctrl + I 也是关键词补齐，但是关键后会有个文件名，告诉你这个关键词在哪个文件中</li>
+<li>Ctrl + X 和 Ctrl +V 是表达式补齐</li>
+<li>Ctrl + X 和 Ctrl +L 这可以对整个行补齐，变态吧。</li>
+</ul>
+<h4>其它技巧</h4>
+<h5>字符相关</h5>
+<p style="padding-left: 30px;">【guu 】 – 把一行的文字变成全小写。或是【Vu】</p>
+<p style="padding-left: 30px;">【gUU】 – 把一行的文件变成全大写。或是【VU】</p>
+<p style="padding-left: 30px;">按【v】键进入选择模式，然后移动光标选择你要的文本，按【u】转小写，按【U】转大写</p>
+<p style="padding-left: 30px;">【ga】 –  查看光标处字符的ascii码</p>
+<p style="padding-left: 30px;">【g8】 – 查看光标处字符的utf-8编码</p>
+<p style="padding-left: 30px;">【gf】  – 打开光标处所指的文件 （这个命令在打到#include头文件时挺好用的，当然，仅限于有路径的）</p>
+<p style="padding-left: 30px;">【*】或【#】在当前文件中搜索当前光标的单词</p>
+<h5>缩进相关</h5>
+<p style="padding-left: 30px;">【&gt;&gt;】向右给它进当前行 【&lt;&lt;】向左缩进当前行</p>
+<p style="padding-left: 30px;">【=】  – 缩进当前行 （和上面不一样的是，它会对齐缩进）</p>
+<p style="padding-left: 30px;">【=%】 – 把光标位置移到语句块的括号上，然后按=%，缩进整个语句块（%是括号匹配）</p>
+<p style="padding-left: 30px;">【G=gg】 或是 【gg=G】  – 缩进整个文件（G是到文件结尾，gg是到文件开头）</p>
+<h5>复制粘贴相关</h5>
+<p style="padding-left: 30px;">按【v】 键进入选择模式，然后按h,j,k,l移动光标，选择文本，然后按 【y】 进行复制，按 【p】 进行粘贴。</p>
+<p style="padding-left: 30px;">【dd】剪切一行（前面加个数字可以剪切n行），【p】粘贴</p>
+<p style="padding-left: 30px;">【yy】复制一行（前面加个数字可以复制n行），【p】粘贴</p>
+<h5>光标移动相关</h5>
+<p style="padding-left: 30px;">【Ctrl + O】向后回退你的光标移动</p>
+<p style="padding-left: 30px;">【Ctrl + I 】向前追赶你的光标移动</p>
+<p style="padding-left: 30px;">这两个快捷键很有用，可以在Tab页和Windows中向前和向后trace你的光标键，这也方便你跳转光标。</p>
+<h5>读取Shell命令相关</h5>
+<p style="padding-left: 30px;">【:r!date】 插入日期</p>
+<p style="padding-left: 30px;">上面这个命令，:r 是:read的缩写，!是表明要运行一个shell命令，意思是我要把shell命令的输出读到vim里来。</p>
+<h4>vim的终级插件</h4>
+<p style="padding-left: 30px;">CentOS下：yum erase emacs</p>
+<p style="padding-left: 30px;">Ubuntu下：apt-get remove emacs</p>
+<p>对了，以前本站也有一篇小短文《<a href="https://coolshell.cn/articles/894.html" target="_blank">如何在vim中得到你最喜爱的IDE特性</a>》你也可以看看。</p>
+<p>（:wq）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/5426.html"><img alt="简明 Vim 练级攻略" height="150" src="../wp-content/uploads/2011/09/rectangular-blocks-150x150.gif" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/5426.html">简明 Vim 练级攻略</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/7166.html"><img alt="游戏：VIM大冒险" height="150" src="../wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/7166.html">游戏：VIM大冒险</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/5479.html"><img alt="给程序员的VIM速查卡" height="150" src="../wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/5479.html">给程序员的VIM速查卡</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/1679.html"><img alt="Vim的分屏功能" height="150" src="../wp-content/uploads/2009/11/vimwindows-150x150.png" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/1679.html">Vim的分屏功能</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/894.html"><img alt="将vim变得简单:如何在vim中得到你最喜爱的IDE特性" height="150" src="../wp-content/uploads/2009/05/vimtxt_gvim_ars-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/894.html">将vim变得简单:如何在vim中得到你最喜爱的IDE特性</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/1651.html"><img alt="VIM有趣的命令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/1651.html">VIM有趣的命令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11312.html">无插件Vim编程技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

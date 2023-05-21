@@ -1,0 +1,97 @@
+<html><body><p>本文由网友whl供稿，特此感谢！<br/>
+/**<br/>
+  * Desc: 取栏目树 ,过滤用户权限和无效栏目<br/>
+  * Author: WHL<br/>
+  * Date: 2009-05-31 15:17<br/>
+  */<br/>
+<span id="more-962"></span><br/>
+ <br/>
+/** 1. 取某用户有权限（np_cms_column_security表有记录且t.action_1 = ‘1’）的栏目的树 **/</p>
+<pre class="EnlighterJSRAW">create or replace view V_NP_CTREE_BS as
+select B.* from (
+select A.*, lag(A.column_id) over(partition by A.column_id order by 0 ) RK
+  from (select /*+choose */
+         t.*
+          from np_cms_column t
+         where t.is_active = '1'
+        connect by prior t.column_id = t.parent_id
+         start with t.column_id in (select t.column_id
+                                      from np_cms_column_security t
+                                     where t.subject_id = 'mazj'
+                                          /*这里添加角色过滤*/
+                                       and t.action_1 = '1'))A) B
+ where not exists
+ (select 0
+          from (select distinct d.column_id
+                  from np_cms_column d
+                connect by prior d.column_id = d.parent_id
+                 start with d.column_id in
+                    (select t.column_id
+                       from np_cms_column_security t
+                      where t.subject_id = 'mazj'
+                           /* 这里添加角色过滤*/
+                        and t.action_1 = '0'
+                           /* 排除有权限树下的非授权ID,既 Action_1=0的*/
+                        and exists
+                      (select 0
+                               from (select distinct d.column_id
+                                       from np_cms_column d
+                                     connect by prior d.column_id =
+                                                 d.parent_id
+                                      start with d.column_id in
+                                                 (select t.column_id
+                                                    from np_cms_column_security t
+                                                   where t.subject_id =
+                                                         'mazj'
+                                                        /*这里添加角色过滤*/
+                                                     and t.action_1 = '1')) C1
+                              where C1.column_id = t.column_id))
+                        and d.is_active = '1') C
+         where C.column_id = B.column_id and B.RK is null) and B.RK is null
+union all
+select c.*, 0 RK from np_cms_column c where c.parent_id = 0;
+</pre>
+<p>————————————————————————<br/>
+/** 2.得到栏目的虚拟父亲ID（考虑到把断层的节点接起来）**/</p>
+<pre class="EnlighterJSRAW">create or replace view V_NP_CTREE_PA as
+select B.*,
+       (case B.column_id
+         when 1 then 0 else nvl(B.father, 1) end) VFA
+  from (select v.*,
+               (select vv.column_id
+                  from V_NP_CTREE_BS vv
+                 where vv.column_id = v.parent_id) FATHER
+          from V_NP_CTREE_BS v) B;
+</pre>
+<p>————————————————————————<br/>
+/** 3. 取出门户需要的栏目树 **/</p>
+<pre class="EnlighterJSRAW">--create or replace view V_NP_CTREE_RS as
+select
+ D.*, LPAD(' ', 2 * level - 1) || SYS_CONNECT_BY_PATH(D.COLUMN_NAME, '/') &amp;quot;Path&amp;quot;
+  from (select c.*
+          from V_NP_CTREE_PA c
+         order by c.VFA, c.disorder desc, c.column_id desc) D
+connect by prior D.column_id = D.VFA
+ start with D.column_id = 1;
+ 
+</pre>
+<p>————————————————————————<br/>
+（<strong>本文版权由whl所，转载时请注明作者和出处</strong>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7270.html"><img alt="NoSQL 数据建模技术" height="150" src="../wp-content/uploads/2012/05/overview2-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="../wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3463.html"><img alt="图解SQL的Join" height="150" src="../wp-content/uploads/2011/01/Inner_Join-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3463.html">图解SQL的Join</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3433.html"><img alt="6个有用的MySQL语句" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/962.html">【原创】SQL栏目树的代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

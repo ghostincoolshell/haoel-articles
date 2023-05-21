@@ -1,0 +1,58 @@
+<html><body><p><img alt="" class="alignright" height="123" src="http://www.review-board.org/media/rbsite/images/logo.png?1238930581" title="Code Review" width="130"/>Code Review中文应该译作“代码审查”或是“代码评审”，这是一个流程，当开发人员写好代码后，需要让别人来review一下他的代码，这是一种有效发现BUG的方法。由此，我们可以审查代码的风格、逻辑、思路……，找出问题，以及改进代码。因为这是代码刚刚出炉的时候，所以，这也是代码重构，代码调整，代码修改的最佳时候。所以，Code Review是编码实现中最最重要的一个环节。</p>
+<p>长时间以来，Code Review需要有一些有效的工具来支持，这样我们就可以更容易，更有效率地来进行代码审查工作。下面是5个开源的代码审查工具，他们可以帮助你更容易地进行这项活动。</p>
+<p><strong>1. <a href="http://www.review-board.org/" target="_blank">Review board</a>:</strong><br/>
+<a href="http://www.review-board.org/" target="_blank">Review board</a> 是一个 基于web 的工具，是由 <a href="http://www.djangoproject.com/" target="_blank">django</a> 和<a href="http://www.python.org/" target="_blank">python</a>设计的。 <a href="http://www.review-board.org/" target="_blank">Review board</a> 可以帮助我们追踪待决代码的改动，并可以让Code-Review更为容易和简练。尽管<a href="http://www.review-board.org/" target="_blank">Review board</a> 最初被设计在<a href="http://www.vmware.com/" target="_blank">VMware</a>项目中使用，但现在其足够地通用。当前，其支持这些代码版本管理软件： <a href="http://subversion.tigris.org/" target="_blank">SVN</a>, CVS, <a href="http://www.perforce.com/" target="_blank">Perforce</a>, <a href="http://git-scm.com/" target="_blank">Git</a>, <a href="http://bazaar-vcs.org/" target="_blank">Bazaar</a>, 和<a href="http://www.selenic.com/mercurial/wiki/" target="_blank">Mercurial</a>.</p>
+<p><span id="more-1218"></span></p>
+<p>Yahoo 是<a href="http://www.review-board.org/" target="_blank">review-board</a>的其中一个用户。</p>
+<p style="padding-left: 30px;">“<a href="http://www.review-board.org/" target="_blank">Review board</a> 已经改变了代码评审的方式，其可以强迫高质量的代码标准和风格，并可以成为程序员编程的指导者。每一次，当你访问search.yahoo.com 时，其代码都是使用 <a href="http://www.review-board.org/" target="_blank">Review board</a>工具Review过的。 We’re great fans of your work!” – Yahoo! Web Search</p>
+<h3><a href="http://www.review-board.org/media/screenshots/2009/02/02/review-requests.png"><img alt="Detailed review requests" class="aligncenter" src="http://www.review-board.org/media/screenshots/2009/02/02/review-requests_thumb.png"/></a></h3>
+<div><a href="http://www.review-board.org/media/screenshots/2009/02/02/diffviewer.png"><img alt="Powerful diff viewer" class="aligncenter" src="http://www.review-board.org/media/screenshots/2009/02/02/diffviewer_thumb.png"/></a></div>
+<p><strong>2. <a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a>:</strong><br/>
+<a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 也是一个基于Web的应用，其主要使用 GCI-Perl 脚本支持在线的代码审查。<a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 可以集成于CVS, <a href="http://subversion.tigris.org/" target="_blank">Subversion</a>, <a href="http://www-01.ibm.com/software/awdtools/clearcase/" target="_blank">ClearCase</a>, <a href="http://www.perforce.com/" target="_blank">Perforce</a> 和Visual SourceSafe。并有一些插件可以提供支持其它的源码管理工具。</p>
+<p>David Sitsky 是 <a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 的作者，并也是最活跃的开发人员之一。 Jason Remillard 是另一个活路的开发者，并给这个项目提供了最深远最有意义的贡献。大量的程序员贡献他们的代码给 <a href="http://codestriker.sourceforge.net/" target="_blank">Codestriker</a> 项目，导致了这个项目空前的繁荣。</p>
+<p><img alt="http://codestriker.sourceforge.net/viewtopicdetail.png" class="aligncenter" height="544" src="http://codestriker.sourceforge.net/viewtopicdetail.png" width="686"/></p>
+<p><strong>3. <a href="http://groogle.sourceforge.net/" target="_blank">Groogle</a>:</strong><br/>
+<a href="http://groogle.sourceforge.net/" target="_blank">Groogle</a> 是一个基于WEB的代码评审工具。 <a href="http://groogle.sourceforge.net/" target="_blank">Groogle</a> 支持和 <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> 集成。它主要提供如下的功能：</p>
+<ul>
+<li>各式各样语言的语法高亮。</li>
+<li>支持整个版本树的比较。</li>
+<li>支持当个文件不同版本的diff功能，并有一个图形的版本树。</li>
+<li>邮件通知所有的Reivew的人当前的状态。</li>
+<li>认证机制。</li>
+</ul>
+<p><img alt="Screenshot" border="1" class="aligncenter" height="480" src="http://sourceforge.net/dbimage.php?id=218190" width="598"/></p>
+<p><strong>4. <a href="http://code.google.com/p/rietveld/" target="_blank">Rietveld</a>:</strong><br/>
+<a href="http://code.google.com/p/rietveld/" target="_blank">Rietveld</a> 由Guido van Rossum 开发（他是Python的创造者，现在是Google的员工），这个工具是基于Mondrian 工具，作者一开始是为了Google 开发的，并且，它在很多方面和<a href="http://www.review-board.org/" target="_blank">Review board</a> 很像。它也是一个基于Web的应用，并在<a href="http://code.google.com/appengine/" target="_blank">Google App Engine</a> 上。它使用了目前最流行的Web开发框架 <a href="http://www.djangoproject.com/" target="_blank">django</a> 并支持 <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> 。当前，任何一个使用 Google Code 的项目都可以使用 <a href="http://code.google.com/p/rietveld/" target="_blank">Rietveld</a> 并且使用 <a href="http://www.python.org/" target="_blank">python</a> <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> 服务器。当然，它同样支持其它的Subversion服务器。</p>
+<p><span><a href=""><img alt="" class="aligncenter" id="imgb" src="http://info-database.csdn.net/Upload/2008-11-13/Reviewboard.jpg" style="width: 497px; height: 375px;" title="下一张"/></a></span></p>
+<p><span> </span></p>
+<p><strong>5.<a href="http://jcodereview.sourceforge.net/" target="_blank"> JCR</a></strong><br/>
+<a href="http://jcodereview.sourceforge.net/" target="_blank">JCR</a> 或者叫做 JCodeReview 也是一个基于WEB界面的最初设计给Reivew Java 语言的一个工具。当然，现在，它可以被用于其它的非Java的代码。</p>
+<p><a href="http://jcodereview.sourceforge.net/" target="_blank">JCR</a> 主要想协助：</p>
+<ul>
+<li><strong>审查者</strong>。所有的代码更改都会被高亮，以及大多数语言的语法高亮。Code extracts 可以显示代码评审意见。如果你正在Review Java的代码，你可以点击代码中的类名来查看相关的类的声明。</li>
+<li><strong>项目所有者</strong>。可以 轻松创建并配置需要Review的项目，并不需要集成任何的软件配置管理系统（SCM）。</li>
+<li><strong>流程信仰者</strong>。 所有的评语都会被记录在数据库中，并且会有状态报告，以及各种各样的统计。</li>
+<li><strong>架构师和开发者</strong>。 这个系统也可以让我们查看属于单个文件的评语，这样有利于我们重构代码。</li>
+</ul>
+<p><a href="http://jcodereview.sourceforge.net/" target="_blank">JCR</a> 主要面对的是大型的项目，或是非常正式的代码评审，从这方面看来，他并不像上面的那些工具。</p>
+<p><img alt="Screenshot" border="1" class="aligncenter" src="http://sourceforge.net/projects/jcodereview/screenshots/242251" style="border: 1px solid black;"/></p>
+<p><strong><a href="http://code.google.com/p/jupiter-eclipse-plugin/" target="_blank">Jupiter</a></strong>：最后我们要提一下<a href="http://code.google.com/p/jupiter-eclipse-plugin/" target="_blank">Jupiter</a>，这是另一个代码review的工具你可以去考虑使用的，它是一个Eclipse IDE 的插件。</p>
+<p>文章：<a href="http://open-tube.com/easy-code-review-tools/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4875.html"><img alt="一个空格引发的惨剧" height="150" src="../wp-content/uploads/2011/06/20110620115951113-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4875.html">一个空格引发的惨剧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17757.html"><img alt="如何重构“箭头型”代码" height="150" src="../wp-content/uploads/2017/04/IMG_7411-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17757.html">如何重构“箭头型”代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11432.html"><img alt="从Code Review 谈如何做技术" height="150" src="../wp-content/uploads/2014/04/code_review-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11432.html">从Code Review 谈如何做技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1218.html">简单实用的Code Review工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

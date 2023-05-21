@@ -1,0 +1,98 @@
+<html><body><p>下面的文章和《<a href="https://coolshell.cn/articles/2058.html" target="_blank" title="各种流行的编程风格">各种流行的编程方式</a>》有异曲同工，请你不要理解错了。<strong><a href="http://crankypm.com/2011/03/guest-post-stages-debugging/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed:+TheCrankyProductManager+(The+Cranky+Product+Manager)" target="_blank" title="THE FIVE STAGES OF DEBUGGING">本文来源</a></strong>，翻译如下：</p>
+<p>——————————————————</p>
+<p>一个非常严重和困难的bug，能够成就一个饱经沧桑深受压力的有经验的专业程序员的职业生涯。经受这种考验的创伤程度，相当你受到了一次严重的身体伤害，离婚，或是家庭成为的离世。</p>
+<p>研究人员在研究了计算机编程心理学后，得出了一个程序员们在解决一个困难的bug时的心路里程。这些不同的境界，很像为大众所知的<a href="http://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model" target="_blank">Kübler-Ross Stages of Grief</a>（这个模型描述了人对待哀伤与灾难过程中的5个独立阶段（否认，愤怒，耍赖，抑郁，接受）。绝症患者被认为会经历这些阶段），而且原因都很相似。就好像死亡所伴随的悲伤一样，fix一个bug是一个过程其初始化了一个事件，一开始是拒绝相信，其造就了你苦闷的情绪并开始逐步影响你的心智。这种苦闷的情结果会让你纠结要努力忍受，最终会你会找到一个满意的结果。</p>
+<p>了解下面这几个bug-fixing的阶段，会让我们更好的生存下来，并持之以恒，最终带来……关闭我们所有的bug的结果。</p>
+<h2>第一阶段：抵触</h2>
+<p>本阶段的状态: 多疑 Skeptical. 生气 Offended. 易怒 Petulant.</p>
+<p><strong>1. 不理睬</strong></p>
+<p>也许这个bug会安静地离开。</p>
+<p><strong>2. 标记上“不是bug”</strong></p>
+<p>也许这是用户的错，或是本地配置有问题。是的，我确信就是那样，一会就会好的。</p>
+<p><span id="more-4045"></span></p>
+<p><strong>3. 就是一次小故障</strong></p>
+<p>我想这就是一次小故障，很奇怪地发生了一次，它不会再发生的，虽然没有搞清楚是为什么发生了，不过这就好像我们的数据库，网格，浏览器或别的什么打了几个嗝一样。一会就会好的，我确信。</p>
+<p><strong>4. 躲藏.</strong></p>
+<p>我要休几天病假，也许他们会把这个bug转给别人的。</p>
+<p><strong>5. 标记为“修改需求中”</strong></p>
+<p>你看，我是按照需求实现的。如果你们想要改这个行为和UI，就一定要修改需求。也许他们会决定就这样了。</p>
+<p><strong>6. 需要更多的信息</strong></p>
+<p>我不能确定这是一个bug，除非我能在错误日志中看到一条特定的报错信息。</p>
+<p><strong>7. 转给其他人</strong></p>
+<p>我调查这个bug中看到了其它模块中我看不懂的数据，问题很大。我应该把这个bug转给开发那个模块的人。我可以在我的模块中检查一下那个边边角角的情况，但是正确的fix应该是在别人的模块中。反正那个在别的国家，我见不着他。</p>
+<h2>第二阶段：接受</h2>
+<p>本阶段的状态: 认命 Resigned. 被打击 Defeated. 被激怒 Annoyed.</p>
+<p><strong>1. 接受现实</strong></p>
+<p>行了，行了，行了！这是我的bug，我会修正它的。</p>
+<p><strong>2. 把这个bug放到最后</strong></p>
+<p>也许，我可以在我需要fix这个bug之前找到一个新的工作。</p>
+<p><strong>3. 和你的经理讨价还价</strong></p>
+<p>好的，你看，我可以正确地fix这个问题，不过我需要一个月。也就是说，我可以给这个问题贴个创可贴，那不会真正的解决它，但是我们可以避免用户的抱怨，这可以为我们赢得几天的时间。</p>
+<p><strong>4. 为这个bug标记一个无耻的时间</strong></p>
+<p>上帝啊，我希望这时间够了。</p>
+<h2>第三阶段： 投入和沮丧</h2>
+<p>本阶段的状态: 眼花 Giddy. 头晕 Light-headed. 紧张 Nauseous.</p>
+<p><strong>1. 开始调查</strong></p>
+<p>我能搞定它，我能搞定它！只需要小小的调整一下，小小的关注一下，多一点咖啡因，再加上一点时间，我能搞定它。</p>
+<p><strong>2. 迷惘</strong></p>
+<p>Shit. 这太扯了。我居然没有一点进展。这代码真是乱。这样的代码居然能编译和运行，真TMD的神奇，我有机会能搞清楚它什么不正常吗？</p>
+<p><strong>3. 再次躲藏</strong></p>
+<p>你看，很对不起。我不得不要去切除我的阑尾。再一次，是的，既然你提到了它，我的确有两个阑尾。现在我一个也没有了，你高兴了吧？。</p>
+<p><strong>4. 犯贱</strong></p>
+<p>好吧，总之，你到底期望什么？想让我在一个没有高级调试器的环境下改这个BUG。我是什么？千里眼吗？我在我的<a href="http://en.wikipedia.org/wiki/Commodore_64" target="_blank">Commodore 64</a>上一个更好的调试器！</p>
+<p><strong>5. 瞎搞</strong></p>
+<p>看看我试试这么改？Kao，这样不行。要不然这样搞？也不行。那么那样搞呢？Shit，居然变得更糟了。</p>
+<p><strong>6. 绝望</strong></p>
+<p>我不可能fix这个bug了。我是个糟糕的程序员。我太笨了。我在这个满是聪明人的地方干什么？迟早他们会知道我的能力太差，那时我就玩完了，在这也混不下去了。</p>
+<p><strong>7.耻辱</strong></p>
+<p>我的经理问我为什么我用了一个月的时候来fix这个只需要两天就可以解决的bug？老实说，我不知道怎么去读日志信息，我搞坏了我们的编译脚本。现在，我不敢去让别人来帮我，因为这样只会让我显得更愚蠢。</p>
+<p><strong>8. 恐慌！</strong></p>
+<p>这事变得比我相像的要复杂！而我开始觉得复杂的事变得简单……而我觉得简单的事变成需要重定半打的类。为什么我以前在我的经理前拍着胸说我可以搞定这个事？</p>
+<p><strong>9. 通宵工作，远离朋友和家人</strong></p>
+<p>(语无论次的喃喃自语，一阵一阵地大声咒骂)</p>
+<h2>第四个阶段：愚蠢的快感</h2>
+<p>本阶段的状态: 感恩 Grateful. 安心 Relieved. 极端地自我欣赏 Awfully Impressed with Yourself.</p>
+<p><strong>1. 醒悟 </strong></p>
+<p>哦！我终于明白怎么搞定它了……</p>
+<p><strong>2. 写正确的代码</strong></p>
+<p>我真NB，我是编码机器！</p>
+<p><strong>3. 测试</strong></p>
+<p>牛！通过一个测试。真牛！又通过一个测试了。靠！有测试失败了。这是为什么……</p>
+<p><strong>4. 隐藏测试失败</strong></p>
+<p>反正这完全是一个不重要的测试案例。没有人会检查它，这个测试真是毫无意义。</p>
+<p><strong>5. 提交代码</strong></p>
+<p>我太牛了，厨房里有个馅饼可以庆祝一下吗？</p>
+<p><strong>6. 关闭 bug.</strong></p>
+<p>我听说那里有个馅饼可以庆祝一下</p>
+<h2>第五个阶段： 与“完成”肉搏</h2>
+<p>本阶段的状态: 焦燥不安 Twitchy. 神经过敏 Nervous. 迷信 Superstitious.</p>
+<p><strong>1. 有人reopen了这个 Bug</strong></p>
+<p>真的？他们发现了你引入了另一个bug？ Shit – 那只是一个不重要的案例永远不会发生的。</p>
+<p><strong>2. 修正以前的修正</strong></p>
+<p>是的，我甚至检查了员工的年龄是一个虚数的情况，就是为了防止出错。</p>
+<p><strong>3. 关闭 bug</strong></p>
+<p>是的，贱货，你被关闭了。全部都关了，再也不用心烦了。</p>
+<p><strong>4. 发誓以后再也不干这种事了</strong></p>
+<p><strong>5. 大家都意识到你现在是那个模块的专家了</strong></p>
+<p>哦，不！现在他们又给了我三个那个模块的新bug</p>
+<p>没关系，现在你只需要GOTO 第一个阶段。</p>
+<p>此外，作为一个工作中的程序员，你会永远经历这些烂事，直到你——死亡，退休，或是被升到管理层。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="../wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20765.html"><img alt="MegaEase的远程工作文化" height="150" src="../wp-content/uploads/2020/01/remote-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20765.html">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4045.html">Fix Bug的五个阶段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

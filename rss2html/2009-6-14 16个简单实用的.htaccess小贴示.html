@@ -1,0 +1,104 @@
+<html><body><p>.htaccess 文件 (Hypertext Access file) 是Apache Web服务器的一个非常强大的配置文件，对于这个文件，Apache有一堆参数可以让你配置出几乎随心所欲的功能。.htaccess 配置文件坚持了Unix的一个文化——使用一个ASCII 的纯文本文件来配置你的网站的访问策略。</p>
+<p>这篇文章包括了16个非常有用的小技巧。另外，因为.htaccess 是一个相当强大的配置文件，所以，一个轻微的语法错误会造成你整个网站的故障，所以，在你修改或是替换原有的文件时，一定要备份旧的文件，以便出现问题的时候可以方便的恢复。</p>
+<p><strong>1. 使用.htaccess 创建自定义的出错页面。</strong>对于Linux Apache来说这是一项极其简单的事情。使用下面的.htaccess语法你可以轻松的完成这一功能。（把.htaccess放在你的网站根目录下）</p>
+<p><span style="COLOR: #ff6600;">ErrorDocument 401 /error/401.php<br/>
+ErrorDocument 403 /error/403.php<br/>
+ErrorDocument 404 /error/404.php<br/>
+ErrorDocument 500 /error/500.php</span></p>
+<p><span style="COLOR: #ff6600;"><span id="more-1035"></span></span></p>
+<p><strong>2. 设置网站的时区</strong></p>
+<p><span style="COLOR: #ff6600;">SetEnv TZ America/Houston</span></p>
+<p><strong>3. 阻止IP列表</strong><br/>
+有些时候，你需要以IP地址的方式阻止一些访问。无论是对于一个IP地址还是一个网段，这都是一件非常简单的事情，如下所示：</p>
+<p><span style="COLOR: #ff6600;">allow from all<br/>
+deny from 145.186.14.122<br/>
+deny from 124.15</span></p>
+<p>Apache对于被拒绝的IP会返回403错误。</p>
+<p><strong>4. 把一些老的链接转到新的链接上——搜索引擎优化SEO </strong></p>
+<p><span style="COLOR: #ff6600;">Redirect 301 /d/file.html </span><a href="http://www.htaccesselite.com/r/file.html"><span style="COLOR: #ff6600;">http://www.htaccesselite.com/r/file.html</span></a></p>
+<p><strong>5. 为服务器管理员设置电子邮件。</strong></p>
+<p><span style="COLOR: #ff6600;">ServerSignature EMail<br/>
+SetEnv SERVER_ADMIN </span><a href="mailto:default@domain.com"><span style="COLOR: #ff6600;">default@domain.com</span></a></p>
+<p><strong>6. 使用.htaccess 访止盗链。</strong>如果你网站上的一个图片被别的N多的网站引用了，那么，这很有可能会导致你服务器的性能下降，使用下面的代码可以保护某些热门的链接不被过多的引用。</p>
+<p><span style="COLOR: #ff6600;">Options +FollowSymlinks<br/>
+# Protect Hotlinking<br/>
+RewriteEngine On<br/>
+RewriteCond %{HTTP_REFERER} !^$<br/>
+RewriteCond %{HTTP_REFERER} !^http://(</span><a href="http://www.%29/?domainname.com/"><span style="COLOR: #ff6600;">www.)?domainname.com/</span></a><span style="COLOR: #ff6600;"> [nc]<br/>
+RewriteRule .*.(gif|jpg|png)$ </span><a href="http://domainname.com/img/hotlink_f_o.png"><span style="COLOR: #ff6600;">http://domainname.com/img/hotlink_f_o.png</span></a><span style="COLOR: #ff6600;"> [nc]</span></p>
+<p><strong>7. 阻止 User Agent 的所有请求</strong></p>
+<p><span style="COLOR: #ff6600;">## .htaccess Code :: BEGIN<br/>
+## Block Bad Bots by user-Agent<br/>
+SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]<br/>
+SetEnvIfNoCase user-Agent ^Java.* [NC,OR]<br/>
+SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]<br/>
+SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]<br/>
+SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]<br/>
+SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]<br/>
+SetEnvIfNoCase user-Agent ^Zeus [NC]</span></p>
+<p><span style="COLOR: #ff6600;">Order Allow,Deny<br/>
+Allow from all<br/>
+Deny from env=bad_bot</span></p>
+<p><span style="COLOR: #ff6600;">## .htaccess Code :: END</span></p>
+<p><strong>8. 把某些特殊的IP地址的请求重定向到别的站点</strong></p>
+<p><span style="COLOR: #ff6600;">ErrorDocument 403 </span><a href="http://www.youdomain.com/"><span style="COLOR: #ff6600;">http://www.youdomain.com</span></a><br/>
+<span style="COLOR: #ff6600;">Order deny,allow<br/>
+Deny from all<br/>
+Allow from 124.34.48.165<br/>
+Allow from 102.54.68.123</span></p>
+<p><strong>9. 直接找开文件而不是下载</strong> – 通常，我们打开网上文件的时候总是会出现一个对话框问我们是下载还是直接打开，使用下面的设置就不会出现这个问题了，直接打开。</p>
+<p><span style="COLOR: #ff6600;">AddType application/octet-stream .pdf<br/>
+AddType application/octet-stream .zip<br/>
+AddType application/octet-stream .mov</span></p>
+<p><strong>10. 修改文件类型</strong> – 下面的示例可以让任何的文件都成为PHP那么被服务器解释。比如：myphp, cgi，phtml等。</p>
+<p><span style="COLOR: #ff6600;">ForceType application/x-httpd-php<br/>
+SetHandler application/x-httpd-php</span></p>
+<p><strong>11. 阻止存取.htaccess 文件</strong></p>
+<p><span style="COLOR: #ff6600;"># secure htaccess file</span></p>
+<p><span style="COLOR: #ff6600;"> order allow,deny<br/>
+ deny from all</span><br/>
+<strong>12. 保护服务器上的文件被存取</strong></p>
+<p><span style="COLOR: #ff6600;"># prevent access of a certain file</span><span style="COLOR: #ff6600;"> order allow,deny<br/>
+ deny from all</span><br/>
+<strong>13. 阻止目录浏览</strong></p>
+<p><span style="COLOR: #ff6600;"># disable directory browsing<br/>
+Options All -Indexes</span></p>
+<p><strong>14. 设置默认主页</strong></p>
+<p><span style="COLOR: #ff6600;"># serve alternate default index page<br/>
+DirectoryIndex about.html</span></p>
+<p><strong>15. 口令认证</strong> – 你可以创建一个文件用于认证。下面是一个示例：</p>
+<p><span style="COLOR: #ff6600;"># to protect a file</span></p>
+<p><span style="COLOR: #ff6600;">AuthType Basic<br/>
+AuthName “Prompt”<br/>
+AuthUserFile /home/path/.htpasswd<br/>
+Require valid-user</span></p>
+<p><span style="COLOR: #ff6600;"># password-protect a directory<br/>
+resides<br/>
+AuthType basic<br/>
+AuthName “This directory is protected”<br/>
+AuthUserFile /home/path/.htpasswd<br/>
+AuthGroupFile /dev/null<br/>
+Require valid-user</span></p>
+<p><strong>16. 把老的域名转像新的域名</strong></p>
+<p><span style="COLOR: #ff6600;"># redirect from old domain to new domain<br/>
+RewriteEngine On<br/>
+RewriteRule ^(.*)$ </span><a href="http://www.yourdomain.com/$1"><span style="COLOR: #ff6600;">http://www.yourdomain.com/$1</span></a><span style="COLOR: #ff6600;"> [R=301,L]</span></p>
+<p><span style="color: #000000;">文章：<a href="http://rafeekphp.wordpress.com/2009/06/06/16-great-htaccess-tricks-and-hacks/" target="_blank">来源</a></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8387.html"><img alt="Bret Victor – Learnable Programming" height="150" src="../wp-content/uploads/2012/10/Learnable_Programming-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8387.html">Bret Victor – Learnable Programming</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9749.html"><img alt="Javascript 装载和执行" height="150" src="../wp-content/uploads/2013/06/javascript-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9749.html">Javascript 装载和执行</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3709.html"><img alt="预发布环境,Tag发布机制和可重复的部署过程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3709.html">预发布环境,Tag发布机制和可重复的部署过程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1035.html">16个简单实用的.htaccess小贴示</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

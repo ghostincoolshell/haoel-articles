@@ -1,0 +1,50 @@
+<html><body><p>如何取的Java源代码文件中文件名和行号：）</p>
+<p>在C/C++的程序，编译器提供了两个宏来支持取得源文件中的行号和文件名，这两个宏是__FILE__,__LINE__</p>
+<p>你可以如下的方法打印行号和文件名</p>
+<pre class="EnlighterJSRAW">
+
+#include &lt;stdio.h&gt;
+int main()
+{
+ fprintf(stdout,"[%s:%d] Hello World!",__FILE__,__LINE__);
+ return 0;
+}
+
+</pre>
+<p><span id="more-611"></span><br/>
+但是在JAVA下没有这两个宏，那么我们如何来取得文件名和行号，翻阅JDK，我们找到StackTraceElement这个类。这个类可以从Throwable取得，另外也可以从Thread类取得，通过这些我写如下的一个打印行号的测试程序：</p>
+<pre class="EnlighterJSRAW">
+
+public class LineNo {
+ public static int getLineNumber() {
+ return Thread.currentThread().getStackTrace()[2].getLineNumber();
+ }  
+
+ public static String getFileName() {
+ return Thread.currentThread().getStackTrace()[2].getFileName();
+ }
+ public static void main(String args[]) {
+ System.out.println("["+getFileName()+"："+ getLineNumber()+"]"+"Hello World!");
+ }
+}
+
+</pre>
+<p>留下一个问题，上面程序中的magic数字 2 代表什么含义呢？<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="../wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/611.html">Java如何取源文件中文件名和行号</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

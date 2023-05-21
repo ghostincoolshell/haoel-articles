@@ -1,0 +1,1988 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 29 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=29" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Thu, 06 Mar 2014 14:22:41 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>把Flash转成Javascript/HTML5</title>
+		<link>https://coolshell.cn/articles/2497.html</link>
+					<comments>https://coolshell.cn/articles/2497.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 03 Jun 2010 00:29:18 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[SmokeScreen]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2497</guid>
+
+					<description><![CDATA[<p>SmokeScreen是这样一个开源软件，它可以把Flash的swf文件转成Javascript/HTML5，它的口号是：Flash without plugi...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2497.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2497.html">把Flash转成Javascript/HTML5</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-full wp-image-2502" src="https://coolshell.cn/wp-content/uploads/2010/06/splash-html5-flash.jpg" alt="" width="300" height="145" /><a href="http://smokescreen.us/" target="_blank">SmokeScreen</a>是这样一个开源软件，它可以把Flash的swf文件转成Javascript/HTML5，它的口号是：Flash without plugin。为什么要这样做呢？它说主要是因主Apple的iPhone/iPod/iPad不支持flash，而且看似Steve Jobs也不愿意在以后支持flash。所以，他们搞了这样一个玩意。目前，这个开源软件还在开发阶段，在其主页上，你可以看到一些<a href="http://smokescreen.us/demo/" target="_blank">Demo</a>，在Chrome上看上去很不错，虽然还有一些小问题，不过已经很不错了。</p>
+<p>HTML5几乎颠覆了原来的HTML，其可以让你用HTML不单单只是做网页布局，而且还让你可以开发更强的东西，比如：<a href="http://dev.w3.org/html5/websockets/" target="_blank">WebSockets</a>，使用这项技术，已经有人在搞Web版的Quake 2了（<a href="http://code.google.com/p/quake2-gwt-port/" target="_blank">http://code.google.com/p/quake2-gwt-port/</a>），还有<a href="https://coolshell.cn/articles/599.html" target="_blank">Google的3D Javascript API</a>，所以，把swf完美地转成Javscript/HTML5可能也只是一个时间问题。</p>
+<p>虽然，HTML5还在<a href="http://dev.w3.org/html5/spec/Overview.html" target="_blank">draft阶段</a>，而且很多东西都和flash重复了。所以，加上iPhone的推波助澜，发生这样的事情也不奇怪，不知道adobe会怎么想？也许adobe目前对其AIR或是Actionscript还抱有希望，虽然有这样<a href="http://infoworld.com/d/developer-world/html5-vs-flash-the-case-flash-721" target="_blank">一篇文章</a>力挺Flash，但未来真的不好说，adobe会使用HTML5/Javascript来作为其flash的引擎吗？如果不这样的话，我相信总有一天，会有人开发出HTML5/Javascript的IDE。而且，有理由相信，一旦在未来所有的浏览全面支持HTML5，那么我们可以想像，这个世界可能几乎所有的桌面应用都会被Web所取代，这个进程可能会越来越快。让我们拭目以待。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3516.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="JS游戏引擎列表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3516.html" class="wp_rp_title">JS游戏引擎列表</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2497.html">把Flash转成Javascript/HTML5</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2497.html/feed</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>WTF Javascript</title>
+		<link>https://coolshell.cn/articles/2492.html</link>
+					<comments>https://coolshell.cn/articles/2492.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 02 Jun 2010 01:51:49 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[wtfjs.com]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2492</guid>
+
+					<description><![CDATA[<p>请先看一下下面的这段Javascript程序以及其结果。 [javascript] 1 + + 1              // =&#62; 2 1 + &#...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2492.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2492.html">WTF Javascript</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>请先看一下下面的这段Javascript程序以及其结果。</p>
+<p>[javascript]<br />
+1 + + 1              // =&gt; 2<br />
+1 + &#8211; + 1            // =&gt; 0<br />
+1 + &#8211; + &#8211; + 1        // =&gt; 2<br />
+1 + &#8211; + &#8211; + &#8211; + 1    // =&gt; 0<br />
+1 + &#8211; + + + &#8211; + 1    // =&gt; 2<br />
+1 + / + + + / + 1    // =&gt; 1/ + + + /1<br />
+[/javascript]</p>
+<p>提示一下，1++1等价于1 + (+1)，也就是1加上一个正数1，如果你能搞懂其它的表达式的话，请看看下面的这段程序，你能说出其结果吗？</p>
+<p>[javascript]<br />
+1 + / + / + / + 1    // =&gt; ?<br />
+[/javascript]</p>
+<p>如果不知道的话，你可以到这个<a href="http://mir.aculo.us/2010/05/28/valid-javascript-or-not/" target="_blank">网页上去讨论讨论</a>。当然，如果你不懂也没有什么关系，因为Javascript本身就是一个很怪异的语言，再加上浏览器的种种不是，所以，<a href="https://coolshell.cn/articles/1850.html" target="_blank">Javascript程序员也是很郁闷的</a>。在以前的“<a rel="bookmark" href="https://coolshell.cn/articles/2053.html" target="_blank">最为奇怪的程序语言的特性</a>”中也说过一些。Javascript最怪异的特性导致了<a href="http://wtfjs.com/">wtfjs.com</a>这样的一个网站，还有一个<a href="http://github.com/brianleroux/wtfjs" target="_blank">WTF JS的开源站点</a>。呵呵。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2492.html">WTF Javascript</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2492.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>四个流行的Java连接池</title>
+		<link>https://coolshell.cn/articles/2483.html</link>
+					<comments>https://coolshell.cn/articles/2483.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 02 Jun 2010 01:31:12 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[BoneCP]]></category>
+		<category><![CDATA[C3P0]]></category>
+		<category><![CDATA[DBCP]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Proxool]]></category>
+		<category><![CDATA[连接池]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2483</guid>
+
+					<description><![CDATA[<p>C3P0是一个开放源代码的JDBC连接池，它在lib目录中与Hibernate一起发布,包括了实现jdbc3和jdbc2扩展规范说明的Connection 和S...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2483.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2483.html">四个流行的Java连接池</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong><img decoding="async" loading="lazy" class="alignright" src="http://www.qqread.com/ArtImage/20091118/tu82_1.jpg" alt="" width="210" height="235" />C3P0</strong>是一个开放源代码的JDBC连接池，它在lib目录中与Hibernate一起发布,包括了实现jdbc3和jdbc2扩展规范说明的Connection 和Statement 池的DataSources 对象。（主页：<a href="http://sourceforge.net/projects/c3p0/" target="_blank">http://sourceforge.net/projects/c3p0/</a>）</p>
+<p><strong>BoneCP </strong>是一个开源的快速的 JDBC 连接池。BoneCP很小，只有四十几K（运行时需要<a href="http://logging.apache.org/log4j/1.2/index.html" target="_blank">log4j</a>和<a href="http://code.google.com/p/google-collections/" target="_blank">Google Collections</a>的支持，这二者加起来就不小了），而相比之下 <a href="http://sourceforge.net/projects/c3p0/" target="_blank">C3P0</a> 要六百多K。另外个人觉得 BoneCP 有个缺点是，JDBC驱动的加载是在连接池之外的，这样在一些应用服务器的配置上就不够灵活。当然，体积小并不是 BoneCP 优秀的原因，BoneCP 到底有什么突出的地方呢，请看看<a href="http://jolbox.com/benchmarks.html" target="_blank">性能测试报告</a>。（主页：<a href="http://jolbox.com/" target="_blank">http://jolbox.com/</a>）</p>
+<p><strong>DBCP</strong> （<strong>D</strong>ata<strong>b</strong>ase <strong>C</strong>onnection <strong>P</strong>ool）是一个依赖Jakarta commons-pool对象池机制的数据库连接池，Tomcat的数据源使用的就是DBCP。目前 DBCP 有两个版本分别是 1.3 和 1.4。1.3 版本对应的是 JDK 1.4-1.5 和 JDBC 3，而1.4 版本对应 JDK 1.6 和 JDBC 4。因此在选择版本的时候要看看你用的是什么 JDK 版本了，功能上倒是没有什么区别。（主页：<a href="http://commons.apache.org/dbcp/" target="_blank">http://commons.apache.org/dbcp/</a>）</p>
+<p><strong>Proxool</strong>是一个Java SQL Driver驱动程序，提供了对你选择的其它类型的驱动程序的连接池封装。可以非常简单的移植到现存的代码中。完全可配置。快速，成熟，健壮。可以透明地为你现存的JDBC驱动程序增加连接池功能。（主页：<a href="http://proxool.sourceforge.net/" target="_blank">http://proxool.sourceforge.net/</a>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2483.html">四个流行的Java连接池</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2483.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>说服他人的5种技巧 &#8211; Guy Kawasaki</title>
+		<link>https://coolshell.cn/articles/2460.html</link>
+					<comments>https://coolshell.cn/articles/2460.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Sun, 23 May 2010 00:20:17 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Guy Kawasaki]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2460</guid>
+
+					<description><![CDATA[<p>硅谷传奇创业者+精神领袖 Guy Kawasaki最近写了一篇新文章总结了以下5种说服他人的技巧。希望对大家对付老外有帮助。摘要如下： 先给予，后索取 (Be ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2460.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2460.html">说服他人的5种技巧 – Guy Kawasaki</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>硅谷传奇创业者+精神领袖 Guy Kawasaki最近写了一篇新文章总结了以下5种说服他人的技巧。希望对大家对付老外有帮助。摘要如下：<img decoding="async" loading="lazy" class="alignleft" title="little gift" src="https://www.openforum.com/media/db4cb6ac-3e35-48cc-87cb-19fe7b299c5c_detail.jpg" alt="" width="322" height="241" /></p>
+<ol>
+<li><strong>先给予，后索取 </strong>(Be the first to give )。研究表明，我们容易被给我们帮过忙的人说服：有些服务员给我们结账的时候带来口香糖，我们一般给他们的小费多些。工作中我们更倾向于给帮助过我们的人更多支持&#8230;</li>
+<li><strong>不要给对方太多选择 </strong>(don&#8217;t offer too many choices)：不论是给用户选择，还是给员工的奖励机制，太多的选择经常会给人带来挫折感&#8230;</li>
+<li><strong>不要以自我为中心辩护</strong>(argue against self-interest)。在说服别人的过程中，信任是最关键的。有时候在大力鼓吹之前承认自己方面的一些小不足可以提高信任感&#8230;</li>
+<li><strong>失去比得到更有说服力</strong> (losses are more persuasive than gains)。告诉对方如果不接受你的意见或者不买的你的产品会失去什么，要比只是说明他们会得到什么要更能说服人&#8230;</li>
+<li><strong>让对方觉得自己已经取得了一定进步</strong> (make people feel as if they&#8217;ve already made progress toward a goal)。例如以下两种推销洗车会员卡服务的方法，方法2的顾客保持率是方法1的两倍。
+<ol>
+<li>洗八次赠一次</li>
+<li>洗十次车赠一次，第一次算免费赠送</li>
+</ol>
+</li>
+</ol>
+<p>原文<a href="http://www.openforum.com/idea-hub/topics/the-world/article/5-ways-to-be-persuasive-guy-kawasaki">link</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="恢复Ext3下被删除的文件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1265.html" class="wp_rp_title">恢复Ext3下被删除的文件</a></li><li ><a href="https://coolshell.cn/articles/4235.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/wisdom-225x300-150x150.jpg" alt="程序员的谎谬之言还是至理名言？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4235.html" class="wp_rp_title">程序员的谎谬之言还是至理名言？</a></li><li ><a href="https://coolshell.cn/articles/19464.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/06/competition-360x200-1-150x150.png" alt="如何超过大多数人" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19464.html" class="wp_rp_title">如何超过大多数人</a></li><li ><a href="https://coolshell.cn/articles/1310.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/08/codepad2-150x150.jpg" alt="在线代码编译服务Codepad.org" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1310.html" class="wp_rp_title">在线代码编译服务Codepad.org</a></li><li ><a href="https://coolshell.cn/articles/1092.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="Top 200的全球开发者BLOG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1092.html" class="wp_rp_title">Top 200的全球开发者BLOG</a></li><li ><a href="https://coolshell.cn/articles/1035.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="16个简单实用的.htaccess小贴示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1035.html" class="wp_rp_title">16个简单实用的.htaccess小贴示</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2460.html">说服他人的5种技巧 – Guy Kawasaki</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2460.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>（麻省理工免费课程）C语言内存管理和C++面向对象编程</title>
+		<link>https://coolshell.cn/articles/2474.html</link>
+					<comments>https://coolshell.cn/articles/2474.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Sun, 23 May 2010 00:15:05 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Course]]></category>
+		<category><![CDATA[MIT]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2474</guid>
+
+					<description><![CDATA[<p>此课程有全部讲义和习题。 课程描述实在得令人发指。翻译如下： 您是否由于自己的Python程序比同僚们的C程序慢而垂头丧气？你是否想不用JAVA实现面向对象？加...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2474.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2474.html">（麻省理工免费课程）C语言内存管理和C++面向对象编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>此课程有全部<a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-088-introduction-to-c-memory-management-and-c-object-oriented-programming-january-iap-2010/lecture-notes" target="_blank">讲义</a>和<a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-088-introduction-to-c-memory-management-and-c-object-oriented-programming-january-iap-2010/assignments" target="_blank">习题</a>。</p>
+<p>课程描述实在得令人发指。翻译如下：</p>
+<blockquote><p>您是否由于自己的Python程序比同僚们的C程序慢而垂头丧气？你是否想不用JAVA实现面向对象？加入我们，学习C和C++吧！我们带您从简单的C程序入手，深入C语言的内存管理，简介C++里的面向对象，深入C++面向对象的高级功能以及STL。我们还教您一些以后面试用得着的技巧和知识。</p>
+<p>原文：</p>
+<p>Ever hang your head in shame after your Python program wasn&#8217;t as fast as your friend&#8217;s C program? Ever wish you could use objects without having to use Java? Join us for this fun introduction to C and C++! We will take you through a tour that will start with writing simple C programs, go deep into the caves of C memory manipulation, resurface with an introduction to using C++ classes, dive deeper into advanced C++ class use and the C++ Standard Template Libraries. We&#8217;ll wrap up by teaching you some tricks of the trade that you may need for tech interviews.</p></blockquote>
+<p>麻省理工开放课程里有很多计算机科学的宝贝。不仅有一流的教程，还有习题和答案。适合英语不错的程序员平时充电。</p>
+<p><a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-088-introduction-to-c-memory-management-and-c-object-oriented-programming-january-iap-2010/index.htm#features" target="_blank">课程地址</a>（英文）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3723.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="（麻省理工免费课程）计算机科学和编程导论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3723.html" class="wp_rp_title">（麻省理工免费课程）计算机科学和编程导论</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2474.html">（麻省理工免费课程）C语言内存管理和C++面向对象编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2474.html/feed</wfw:commentRss>
+			<slash:comments>135</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Google吃豆游戏Logo的源码</title>
+		<link>https://coolshell.cn/articles/2466.html</link>
+					<comments>https://coolshell.cn/articles/2466.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 22 May 2010 15:42:10 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Game]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Logo]]></category>
+		<category><![CDATA[PacMan]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2466</guid>
+
+					<description><![CDATA[<p>这两天，Google的logo换成了那个经典的吃豆游戏，很强大，也引发了大众的热议。如果你想要其源代码的话，你可以到这里下载：http://github.com...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2466.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2466.html">Google吃豆游戏Logo的源码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这两天，Google的logo换成了那个经典的吃豆游戏，很强大，也引发了大众的热议。如果你想要其源代码的话，你可以到这里下载：<span style="font-family: Consolas, Monaco, 'Courier New', Courier, monospace; line-height: 18px; font-size: 14px; white-space: pre;"><a href="http://github.com/macek/google_pacman" target="_blank"><strong>http://github.com/macek/google_pacman</strong></a></span>。而在线演示在这里：<span style="font-family: Consolas, Monaco, 'Courier New', Courier, monospace; line-height: 18px; font-size: 12px; white-space: pre;"><a href="http://macek.github.com/google_pacman/">http://macek.github.com/google_pacman/</a>。</span></p>
+<figure id="attachment_2467" aria-describedby="caption-attachment-2467" style="width: 554px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="size-full wp-image-2467" title="Google 吃豆游戏 Logo" src="https://coolshell.cn/wp-content/uploads/2010/05/google_pacman.jpg" alt="Google 吃豆游戏 Logo" width="554" height="186" srcset="https://coolshell.cn/wp-content/uploads/2010/05/google_pacman.jpg 554w, https://coolshell.cn/wp-content/uploads/2010/05/google_pacman-300x101.jpg 300w" sizes="(max-width: 554px) 100vw, 554px" /><figcaption id="caption-attachment-2467" class="wp-caption-text">Google 吃豆游戏 Logo</figcaption></figure>
+<p>需要注意的是，那个源程序在你的本机是不会有声音的，因为这跟flash的设置有关系，如果你需要有游戏声音，你还需要有以下的设置：</p>
+<pre>  1. 打开 Adobe Flash Control Panel:
+     <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html" target="_blank">http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html</a>
+  2. 点击 <code data-enlighter-language="raw" class="EnlighterJSRAW">Edit Locations</code>
+  3. 点击 <code data-enlighter-language="raw" class="EnlighterJSRAW">Add Location</code>
+  4. 浏览你的 <code data-enlighter-language="raw" class="EnlighterJSRAW">google_pacman</code> 目录
+  5. 点击 <code data-enlighter-language="raw" class="EnlighterJSRAW">Add</code></pre>
+<p>需要注意的是，这个源程序并不是Google官方发布的，只不过是某些好事者的网友发布的，不知道在日后的<a href="http://www.google.com/logos/index.html" target="_blank">Google的Logo归档</a>中是否会见到这个Logo。顺便说一下，根据 <a href="http://googleblog.blogspot.com/2010/05/celebrating-pac-mans-30th-birthday.html" target="_blank">Google官方BLOG</a>，这个程序是由 Marcin Wichary 和 Ryan Germick做的。真是又应了那句话——“如果一个应用能被Javascript实现，那么其最终会被Javascript实现”。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2466.html">Google吃豆游戏Logo的源码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2466.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Twitter的禁用口令</title>
+		<link>https://coolshell.cn/articles/2451.html</link>
+					<comments>https://coolshell.cn/articles/2451.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 20 May 2010 00:58:44 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[password]]></category>
+		<category><![CDATA[口令]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2451</guid>
+
+					<description><![CDATA[<p>打开Twitter的注册页面，https://twitter.com/signup，查看一下源码，你会看到一个很长的禁用口令列表（见本文最下面），其中的某些口令...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2451.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>打开Twitter的注册页面，<a href="https://twitter.com/signup" target="_blank">https://twitter.com/signup</a>，查看一下源码，你会看到一个很长的禁用口令列表（见本文最下面），其中的某些口令的确很雷人。你可以参看本站的《<a title="如何管理并设计你的口令" href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a>》来设计和管理你的口令。其中的某些口令需要向你解释一下：</p>
+<ul>
+<li><strong>ncc1701</strong> 这是星际迷航中的战舰号。</li>
+<li><strong>thx1138</strong> 这是乔治卢卡斯的第一个电影，1971年，其学生时代的作品。</li>
+<li><strong>qazwsx</strong> 这是键盘的布局顺序键。</li>
+<li><strong>666666</strong> 这是6个6</li>
+<li><strong>7777777</strong> 这是7个7</li>
+<li><strong>ou812</strong> 这是1988范 海伦Van Halen 专辑</li>
+<li><strong>8675309</strong> 这是 1982 Tommy Tutone song歌中提到的数字。这首歌导致人们开始播打电话867- 5309 寻找 “Jenny”</li>
+</ul>
+<p>经过统计，9个人里就有1个人会使用下面这个列表中的一个口令，而50个人就会有1个人使用top 20里的一个口令。你可能会问，top20是怎么来的？而twitter这个列表又是哪里来的？请看下面的表格。这是top 500最烂的口令列表。其来源是<a href="http://www.whatsmypass.com/the-top-500-worst-passwords-of-all-time" target="_blank">这里</a>。</p>
+<p><span id="more-2451"></span></p>
+<table>
+<tbody>
+<tr>
+<td>NO</td>
+<td>Top 1-100</td>
+<td>Top 101–200</td>
+<td>Top 201–300</td>
+<td>Top 301–400</td>
+<td>Top 401–500</td>
+</tr>
+<tr>
+<td>1</td>
+<td>123456</td>
+<td>porsche</td>
+<td>firebird</td>
+<td>prince</td>
+<td>rosebud</td>
+</tr>
+<tr>
+<td>2</td>
+<td>password</td>
+<td>guitar</td>
+<td>butter</td>
+<td>beach</td>
+<td>jaguar</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12345678</td>
+<td>chelsea</td>
+<td>united</td>
+<td>amateur</td>
+<td>great</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1234</td>
+<td>black</td>
+<td>turtle</td>
+<td>7777777</td>
+<td>cool</td>
+</tr>
+<tr>
+<td>5</td>
+<td>pussy</td>
+<td>diamond</td>
+<td>steelers</td>
+<td>muffin</td>
+<td>cooper</td>
+</tr>
+<tr>
+<td>6</td>
+<td>12345</td>
+<td>nascar</td>
+<td>tiffany</td>
+<td>redsox</td>
+<td>1313</td>
+</tr>
+<tr>
+<td>7</td>
+<td>dragon</td>
+<td>jackson</td>
+<td>zxcvbn</td>
+<td>star</td>
+<td>scorpio</td>
+</tr>
+<tr>
+<td>8</td>
+<td>qwerty</td>
+<td>cameron</td>
+<td>tomcat</td>
+<td>testing</td>
+<td>mountain</td>
+</tr>
+<tr>
+<td>9</td>
+<td>696969</td>
+<td>654321</td>
+<td>golf</td>
+<td>shannon</td>
+<td>madison</td>
+</tr>
+<tr>
+<td>10</td>
+<td>mustang</td>
+<td>computer</td>
+<td>bond007</td>
+<td>murphy</td>
+<td>987654</td>
+</tr>
+<tr>
+<td>11</td>
+<td>letmein</td>
+<td>amanda</td>
+<td>bear</td>
+<td>frank</td>
+<td>brazil</td>
+</tr>
+<tr>
+<td>12</td>
+<td>baseball</td>
+<td>wizard</td>
+<td>tiger</td>
+<td>hannah</td>
+<td>lauren</td>
+</tr>
+<tr>
+<td>13</td>
+<td>master</td>
+<td>xxxxxxxx</td>
+<td>doctor</td>
+<td>dave</td>
+<td>japan</td>
+</tr>
+<tr>
+<td>14</td>
+<td>michael</td>
+<td>money</td>
+<td>gateway</td>
+<td>eagle1</td>
+<td>naked</td>
+</tr>
+<tr>
+<td>15</td>
+<td>football</td>
+<td>phoenix</td>
+<td>gators</td>
+<td>11111</td>
+<td>squirt</td>
+</tr>
+<tr>
+<td>16</td>
+<td>shadow</td>
+<td>mickey</td>
+<td>angel</td>
+<td>mother</td>
+<td>stars</td>
+</tr>
+<tr>
+<td>17</td>
+<td>monkey</td>
+<td>bailey</td>
+<td>junior</td>
+<td>nathan</td>
+<td>apple</td>
+</tr>
+<tr>
+<td>18</td>
+<td>abc123</td>
+<td>knight</td>
+<td>thx1138</td>
+<td>raiders</td>
+<td>alexis</td>
+</tr>
+<tr>
+<td>19</td>
+<td>pass</td>
+<td>iceman</td>
+<td>porno</td>
+<td>steve</td>
+<td>aaaa</td>
+</tr>
+<tr>
+<td>20</td>
+<td>fuckme</td>
+<td>tigers</td>
+<td>badboy</td>
+<td>forever</td>
+<td>bonnie</td>
+</tr>
+<tr>
+<td>21</td>
+<td>6969</td>
+<td>purple</td>
+<td>debbie</td>
+<td>angela</td>
+<td>peaches</td>
+</tr>
+<tr>
+<td>22</td>
+<td>jordan</td>
+<td>andrea</td>
+<td>spider</td>
+<td>viper</td>
+<td>jasmine</td>
+</tr>
+<tr>
+<td>23</td>
+<td>harley</td>
+<td>horny</td>
+<td>melissa</td>
+<td>ou812</td>
+<td>kevin</td>
+</tr>
+<tr>
+<td>24</td>
+<td>ranger</td>
+<td>dakota</td>
+<td>booger</td>
+<td>jake</td>
+<td>matt</td>
+</tr>
+<tr>
+<td>25</td>
+<td>iwantu</td>
+<td>aaaaaa</td>
+<td>1212</td>
+<td>lovers</td>
+<td>qwertyui</td>
+</tr>
+<tr>
+<td>26</td>
+<td>jennifer</td>
+<td>player</td>
+<td>flyers</td>
+<td>suckit</td>
+<td>danielle</td>
+</tr>
+<tr>
+<td>27</td>
+<td>hunter</td>
+<td>sunshine</td>
+<td>fish</td>
+<td>gregory</td>
+<td>beaver</td>
+</tr>
+<tr>
+<td>28</td>
+<td>fuck</td>
+<td>morgan</td>
+<td>porn</td>
+<td>buddy</td>
+<td>4321</td>
+</tr>
+<tr>
+<td>29</td>
+<td>2000</td>
+<td>starwars</td>
+<td>matrix</td>
+<td>whatever</td>
+<td>4128</td>
+</tr>
+<tr>
+<td>30</td>
+<td>test</td>
+<td>boomer</td>
+<td>teens</td>
+<td>young</td>
+<td>runner</td>
+</tr>
+<tr>
+<td>31</td>
+<td>batman</td>
+<td>cowboys</td>
+<td>scooby</td>
+<td>nicholas</td>
+<td>swimming</td>
+</tr>
+<tr>
+<td>32</td>
+<td>trustno1</td>
+<td>edward</td>
+<td>jason</td>
+<td>lucky</td>
+<td>dolphin</td>
+</tr>
+<tr>
+<td>33</td>
+<td>thomas</td>
+<td>charles</td>
+<td>walter</td>
+<td>helpme</td>
+<td>gordon</td>
+</tr>
+<tr>
+<td>34</td>
+<td>tigger</td>
+<td>girls</td>
+<td>cumshot</td>
+<td>jackie</td>
+<td>casper</td>
+</tr>
+<tr>
+<td>35</td>
+<td>robert</td>
+<td>booboo</td>
+<td>boston</td>
+<td>monica</td>
+<td>stupid</td>
+</tr>
+<tr>
+<td>36</td>
+<td>access</td>
+<td>coffee</td>
+<td>braves</td>
+<td>midnight</td>
+<td>shit</td>
+</tr>
+<tr>
+<td>37</td>
+<td>love</td>
+<td>xxxxxx</td>
+<td>yankee</td>
+<td>college</td>
+<td>saturn</td>
+</tr>
+<tr>
+<td>38</td>
+<td>buster</td>
+<td>bulldog</td>
+<td>lover</td>
+<td>baby</td>
+<td>gemini</td>
+</tr>
+<tr>
+<td>39</td>
+<td>1234567</td>
+<td>ncc1701</td>
+<td>barney</td>
+<td>cunt</td>
+<td>apples</td>
+</tr>
+<tr>
+<td>40</td>
+<td>soccer</td>
+<td>rabbit</td>
+<td>victor</td>
+<td>brian</td>
+<td>august</td>
+</tr>
+<tr>
+<td>41</td>
+<td>hockey</td>
+<td>peanut</td>
+<td>tucker</td>
+<td>mark</td>
+<td>3333</td>
+</tr>
+<tr>
+<td>42</td>
+<td>killer</td>
+<td>john</td>
+<td>princess</td>
+<td>startrek</td>
+<td>canada</td>
+</tr>
+<tr>
+<td>43</td>
+<td>george</td>
+<td>johnny</td>
+<td>mercedes</td>
+<td>sierra</td>
+<td>blazer</td>
+</tr>
+<tr>
+<td>44</td>
+<td>sexy</td>
+<td>gandalf</td>
+<td>5150</td>
+<td>leather</td>
+<td>cumming</td>
+</tr>
+<tr>
+<td>45</td>
+<td>andrew</td>
+<td>spanky</td>
+<td>doggie</td>
+<td>232323</td>
+<td>hunting</td>
+</tr>
+<tr>
+<td>46</td>
+<td>charlie</td>
+<td>winter</td>
+<td>zzzzzz</td>
+<td>4444</td>
+<td>kitty</td>
+</tr>
+<tr>
+<td>47</td>
+<td>superman</td>
+<td>brandy</td>
+<td>gunner</td>
+<td>beavis</td>
+<td>rainbow</td>
+</tr>
+<tr>
+<td>48</td>
+<td>asshole</td>
+<td>compaq</td>
+<td>horney</td>
+<td>bigcock</td>
+<td>112233</td>
+</tr>
+<tr>
+<td>49</td>
+<td>fuckyou</td>
+<td>carlos</td>
+<td>bubba</td>
+<td>happy</td>
+<td>arthur</td>
+</tr>
+<tr>
+<td>50</td>
+<td>dallas</td>
+<td>tennis</td>
+<td>2112</td>
+<td>sophie</td>
+<td>cream</td>
+</tr>
+<tr>
+<td>51</td>
+<td>jessica</td>
+<td>james</td>
+<td>fred</td>
+<td>ladies</td>
+<td>calvin</td>
+</tr>
+<tr>
+<td>52</td>
+<td>panties</td>
+<td>mike</td>
+<td>johnson</td>
+<td>naughty</td>
+<td>shaved</td>
+</tr>
+<tr>
+<td>53</td>
+<td>pepper</td>
+<td>brandon</td>
+<td>xxxxx</td>
+<td>giants</td>
+<td>surfer</td>
+</tr>
+<tr>
+<td>54</td>
+<td>1111</td>
+<td>fender</td>
+<td>tits</td>
+<td>booty</td>
+<td>samson</td>
+</tr>
+<tr>
+<td>55</td>
+<td>austin</td>
+<td>anthony</td>
+<td>member</td>
+<td>blonde</td>
+<td>kelly</td>
+</tr>
+<tr>
+<td>56</td>
+<td>william</td>
+<td>blowme</td>
+<td>boobs</td>
+<td>fucked</td>
+<td>paul</td>
+</tr>
+<tr>
+<td>57</td>
+<td>daniel</td>
+<td>ferrari</td>
+<td>donald</td>
+<td>golden</td>
+<td>mine</td>
+</tr>
+<tr>
+<td>58</td>
+<td>golfer</td>
+<td>cookie</td>
+<td>bigdaddy</td>
+<td>0</td>
+<td>king</td>
+</tr>
+<tr>
+<td>59</td>
+<td>summer</td>
+<td>chicken</td>
+<td>bronco</td>
+<td>fire</td>
+<td>racing</td>
+</tr>
+<tr>
+<td>60</td>
+<td>heather</td>
+<td>maverick</td>
+<td>penis</td>
+<td>sandra</td>
+<td>5555</td>
+</tr>
+<tr>
+<td>61</td>
+<td>hammer</td>
+<td>chicago</td>
+<td>voyager</td>
+<td>pookie</td>
+<td>eagle</td>
+</tr>
+<tr>
+<td>62</td>
+<td>yankees</td>
+<td>joseph</td>
+<td>rangers</td>
+<td>packers</td>
+<td>hentai</td>
+</tr>
+<tr>
+<td>63</td>
+<td>joshua</td>
+<td>diablo</td>
+<td>birdie</td>
+<td>einstein</td>
+<td>newyork</td>
+</tr>
+<tr>
+<td>64</td>
+<td>maggie</td>
+<td>sexsex</td>
+<td>trouble</td>
+<td>dolphins</td>
+<td>little</td>
+</tr>
+<tr>
+<td>65</td>
+<td>biteme</td>
+<td>hardcore</td>
+<td>white</td>
+<td>0</td>
+<td>redwings</td>
+</tr>
+<tr>
+<td>66</td>
+<td>enter</td>
+<td>666666</td>
+<td>topgun</td>
+<td>chevy</td>
+<td>smith</td>
+</tr>
+<tr>
+<td>67</td>
+<td>ashley</td>
+<td>willie</td>
+<td>bigtits</td>
+<td>winston</td>
+<td>sticky</td>
+</tr>
+<tr>
+<td>68</td>
+<td>thunder</td>
+<td>welcome</td>
+<td>bitches</td>
+<td>warrior</td>
+<td>cocacola</td>
+</tr>
+<tr>
+<td>69</td>
+<td>cowboy</td>
+<td>chris</td>
+<td>green</td>
+<td>sammy</td>
+<td>animal</td>
+</tr>
+<tr>
+<td>70</td>
+<td>silver</td>
+<td>panther</td>
+<td>super</td>
+<td>slut</td>
+<td>broncos</td>
+</tr>
+<tr>
+<td>71</td>
+<td>richard</td>
+<td>yamaha</td>
+<td>qazwsx</td>
+<td>8675309</td>
+<td>private</td>
+</tr>
+<tr>
+<td>72</td>
+<td>fucker</td>
+<td>justin</td>
+<td>magic</td>
+<td>zxcvbnm</td>
+<td>skippy</td>
+</tr>
+<tr>
+<td>73</td>
+<td>orange</td>
+<td>banana</td>
+<td>lakers</td>
+<td>nipples</td>
+<td>marvin</td>
+</tr>
+<tr>
+<td>74</td>
+<td>merlin</td>
+<td>driver</td>
+<td>rachel</td>
+<td>power</td>
+<td>blondes</td>
+</tr>
+<tr>
+<td>75</td>
+<td>michelle</td>
+<td>marine</td>
+<td>slayer</td>
+<td>victoria</td>
+<td>enjoy</td>
+</tr>
+<tr>
+<td>76</td>
+<td>corvette</td>
+<td>angels</td>
+<td>scott</td>
+<td>asdfgh</td>
+<td>girl</td>
+</tr>
+<tr>
+<td>77</td>
+<td>bigdog</td>
+<td>fishing</td>
+<td>2222</td>
+<td>vagina</td>
+<td>apollo</td>
+</tr>
+<tr>
+<td>78</td>
+<td>cheese</td>
+<td>david</td>
+<td>asdf</td>
+<td>toyota</td>
+<td>parker</td>
+</tr>
+<tr>
+<td>79</td>
+<td>matthew</td>
+<td>maddog</td>
+<td>video</td>
+<td>travis</td>
+<td>qwert</td>
+</tr>
+<tr>
+<td>80</td>
+<td>121212</td>
+<td>hooters</td>
+<td>london</td>
+<td>hotdog</td>
+<td>time</td>
+</tr>
+<tr>
+<td>81</td>
+<td>patrick</td>
+<td>wilson</td>
+<td>7777</td>
+<td>paris</td>
+<td>sydney</td>
+</tr>
+<tr>
+<td>82</td>
+<td>martin</td>
+<td>butthead</td>
+<td>marlboro</td>
+<td>rock</td>
+<td>women</td>
+</tr>
+<tr>
+<td>83</td>
+<td>freedom</td>
+<td>dennis</td>
+<td>srinivas</td>
+<td>xxxx</td>
+<td>voodoo</td>
+</tr>
+<tr>
+<td>84</td>
+<td>ginger</td>
+<td>fucking</td>
+<td>internet</td>
+<td>extreme</td>
+<td>magnum</td>
+</tr>
+<tr>
+<td>85</td>
+<td>blowjob</td>
+<td>captain</td>
+<td>action</td>
+<td>redskins</td>
+<td>juice</td>
+</tr>
+<tr>
+<td>86</td>
+<td>nicole</td>
+<td>bigdick</td>
+<td>carter</td>
+<td>erotic</td>
+<td>abgrtyu</td>
+</tr>
+<tr>
+<td>87</td>
+<td>sparky</td>
+<td>chester</td>
+<td>jasper</td>
+<td>dirty</td>
+<td>777777</td>
+</tr>
+<tr>
+<td>88</td>
+<td>yellow</td>
+<td>smokey</td>
+<td>monster</td>
+<td>ford</td>
+<td>dreams</td>
+</tr>
+<tr>
+<td>89</td>
+<td>camaro</td>
+<td>xavier</td>
+<td>teresa</td>
+<td>freddy</td>
+<td>maxwell</td>
+</tr>
+<tr>
+<td>90</td>
+<td>secret</td>
+<td>steven</td>
+<td>jeremy</td>
+<td>arsenal</td>
+<td>music</td>
+</tr>
+<tr>
+<td>91</td>
+<td>dick</td>
+<td>viking</td>
+<td>11111111</td>
+<td>access14</td>
+<td>rush2112</td>
+</tr>
+<tr>
+<td>92</td>
+<td>falcon</td>
+<td>snoopy</td>
+<td>bill</td>
+<td>wolf</td>
+<td>russia</td>
+</tr>
+<tr>
+<td>93</td>
+<td>taylor</td>
+<td>blue</td>
+<td>crystal</td>
+<td>nipple</td>
+<td>scorpion</td>
+</tr>
+<tr>
+<td>94</td>
+<td>111111</td>
+<td>eagles</td>
+<td>peter</td>
+<td>iloveyou</td>
+<td>rebecca</td>
+</tr>
+<tr>
+<td>95</td>
+<td>131313</td>
+<td>winner</td>
+<td>pussies</td>
+<td>alex</td>
+<td>tester</td>
+</tr>
+<tr>
+<td>96</td>
+<td>123123</td>
+<td>samantha</td>
+<td>cock</td>
+<td>florida</td>
+<td>mistress</td>
+</tr>
+<tr>
+<td>97</td>
+<td>bitch</td>
+<td>house</td>
+<td>beer</td>
+<td>eric</td>
+<td>phantom</td>
+</tr>
+<tr>
+<td>98</td>
+<td>hello</td>
+<td>miller</td>
+<td>rocket</td>
+<td>legend</td>
+<td>billy</td>
+</tr>
+<tr>
+<td>99</td>
+<td>scooter</td>
+<td>flower</td>
+<td>theman</td>
+<td>movie</td>
+<td>6666</td>
+</tr>
+<tr>
+<td>100</td>
+<td>please</td>
+<td>jack</td>
+<td>oliver</td>
+<td>success</td>
+<td>albert</td>
+</tr>
+</tbody>
+</table>
+<p>打开twitter注册页看到的禁用口令</p>
+<p>//&lt;![CDATA[ twttr.BANNED_PASSWORDS = [&#8220;000000&#8221;, &#8220;111111&#8221;, &#8220;11111111&#8221;, &#8220;112233&#8221;, &#8220;121212&#8221;, &#8220;123123&#8221;, &#8220;123456&#8221;, &#8220;1234567&#8221;, &#8220;12345678&#8221;, &#8220;123456789&#8221;, &#8220;131313&#8221;, &#8220;232323&#8221;, &#8220;654321&#8221;, &#8220;666666&#8221;, &#8220;696969&#8221;, &#8220;777777&#8221;, &#8220;7777777&#8221;, &#8220;8675309&#8221;, &#8220;987654&#8221;, &#8220;aaaaaa&#8221;, &#8220;abc123&#8221;, &#8220;abc123&#8221;, &#8220;abcdef&#8221;, &#8220;abgrtyu&#8221;, &#8220;access&#8221;, &#8220;access14&#8221;, &#8220;action&#8221;, &#8220;albert&#8221;, &#8220;alberto&#8221;, &#8220;alexis&#8221;, &#8220;alejandra&#8221;, &#8220;alejandro&#8221;, &#8220;amanda&#8221;, &#8220;amateur&#8221;, &#8220;america&#8221;, &#8220;andrea&#8221;, &#8220;andrew&#8221;, &#8220;angela&#8221;, &#8220;angels&#8221;, &#8220;animal&#8221;, &#8220;anthony&#8221;, &#8220;apollo&#8221;, &#8220;apples&#8221;, &#8220;arsenal&#8221;, &#8220;arthur&#8221;, &#8220;asdfgh&#8221;, &#8220;asdfgh&#8221;, &#8220;ashley&#8221;, &#8220;asshole&#8221;, &#8220;august&#8221;, &#8220;austin&#8221;, &#8220;badboy&#8221;, &#8220;bailey&#8221;, &#8220;banana&#8221;, &#8220;barney&#8221;, &#8220;baseball&#8221;, &#8220;batman&#8221;, &#8220;beatriz&#8221;, &#8220;beaver&#8221;, &#8220;beavis&#8221;, &#8220;bigcock&#8221;, &#8220;bigdaddy&#8221;, &#8220;bigdick&#8221;, &#8220;bigdog&#8221;, &#8220;bigtits&#8221;, &#8220;birdie&#8221;, &#8220;bitches&#8221;, &#8220;biteme&#8221;, &#8220;blazer&#8221;, &#8220;blonde&#8221;, &#8220;blondes&#8221;, &#8220;blowjob&#8221;, &#8220;blowme&#8221;, &#8220;bond007&#8221;, &#8220;bonita&#8221;, &#8220;bonnie&#8221;, &#8220;booboo&#8221;, &#8220;booger&#8221;, &#8220;boomer&#8221;, &#8220;boston&#8221;, &#8220;brandon&#8221;, &#8220;brandy&#8221;, &#8220;braves&#8221;, &#8220;brazil&#8221;, &#8220;bronco&#8221;, &#8220;broncos&#8221;, &#8220;bulldog&#8221;, &#8220;buster&#8221;, &#8220;butter&#8221;, &#8220;butthead&#8221;, &#8220;calvin&#8221;, &#8220;camaro&#8221;, &#8220;cameron&#8221;, &#8220;canada&#8221;, &#8220;captain&#8221;, &#8220;carlos&#8221;, &#8220;carter&#8221;, &#8220;casper&#8221;, &#8220;charles&#8221;, &#8220;charlie&#8221;, &#8220;cheese&#8221;, &#8220;chelsea&#8221;, &#8220;chester&#8221;, &#8220;chicago&#8221;, &#8220;chicken&#8221;, &#8220;cocacola&#8221;, &#8220;coffee&#8221;, &#8220;college&#8221;, &#8220;compaq&#8221;, &#8220;computer&#8221;, &#8220;cookie&#8221;, &#8220;cooper&#8221;, &#8220;corvette&#8221;, &#8220;cowboy&#8221;, &#8220;cowboys&#8221;, &#8220;crystal&#8221;, &#8220;cumming&#8221;, &#8220;cumshot&#8221;, &#8220;dakota&#8221;, &#8220;dallas&#8221;, &#8220;daniel&#8221;, &#8220;danielle&#8221;, &#8220;debbie&#8221;, &#8220;dennis&#8221;, &#8220;diablo&#8221;, &#8220;diamond&#8221;, &#8220;doctor&#8221;, &#8220;doggie&#8221;, &#8220;dolphin&#8221;, &#8220;dolphins&#8221;, &#8220;donald&#8221;, &#8220;dragon&#8221;, &#8220;dreams&#8221;, &#8220;driver&#8221;, &#8220;eagle1&#8221;, &#8220;eagles&#8221;, &#8220;edward&#8221;, &#8220;einstein&#8221;, &#8220;erotic&#8221;, &#8220;estrella&#8221;, &#8220;extreme&#8221;, &#8220;falcon&#8221;, &#8220;fender&#8221;, &#8220;ferrari&#8221;, &#8220;firebird&#8221;, &#8220;fishing&#8221;, &#8220;florida&#8221;, &#8220;flower&#8221;, &#8220;flyers&#8221;, &#8220;football&#8221;, &#8220;forever&#8221;, &#8220;freddy&#8221;, &#8220;freedom&#8221;, &#8220;fucked&#8221;, &#8220;fucker&#8221;, &#8220;fucking&#8221;, &#8220;fuckme&#8221;, &#8220;fuckyou&#8221;, &#8220;gandalf&#8221;, &#8220;gateway&#8221;, &#8220;gators&#8221;, &#8220;gemini&#8221;, &#8220;george&#8221;, &#8220;giants&#8221;, &#8220;ginger&#8221;, &#8220;golden&#8221;, &#8220;golfer&#8221;, &#8220;gordon&#8221;, &#8220;gregory&#8221;, &#8220;guitar&#8221;, &#8220;gunner&#8221;, &#8220;hammer&#8221;, &#8220;hannah&#8221;, &#8220;hardcore&#8221;, &#8220;harley&#8221;, &#8220;heather&#8221;, &#8220;helpme&#8221;, &#8220;hentai&#8221;, &#8220;hockey&#8221;, &#8220;hooters&#8221;, &#8220;horney&#8221;, &#8220;hotdog&#8221;, &#8220;hunter&#8221;, &#8220;hunting&#8221;, &#8220;iceman&#8221;, &#8220;iloveyou&#8221;, &#8220;internet&#8221;, &#8220;iwantu&#8221;, &#8220;jackie&#8221;, &#8220;jackson&#8221;, &#8220;jaguar&#8221;, &#8220;jasmine&#8221;, &#8220;jasper&#8221;, &#8220;jennifer&#8221;, &#8220;jeremy&#8221;, &#8220;jessica&#8221;, &#8220;johnny&#8221;, &#8220;johnson&#8221;, &#8220;jordan&#8221;, &#8220;joseph&#8221;, &#8220;joshua&#8221;, &#8220;junior&#8221;, &#8220;justin&#8221;, &#8220;killer&#8221;, &#8220;knight&#8221;, &#8220;ladies&#8221;, &#8220;lakers&#8221;, &#8220;lauren&#8221;, &#8220;leather&#8221;, &#8220;legend&#8221;, &#8220;letmein&#8221;, &#8220;letmein&#8221;, &#8220;little&#8221;, &#8220;london&#8221;, &#8220;lovers&#8221;, &#8220;maddog&#8221;, &#8220;madison&#8221;, &#8220;maggie&#8221;, &#8220;magnum&#8221;, &#8220;marine&#8221;, &#8220;mariposa&#8221;, &#8220;marlboro&#8221;, &#8220;martin&#8221;, &#8220;marvin&#8221;, &#8220;master&#8221;, &#8220;matrix&#8221;, &#8220;matthew&#8221;, &#8220;maverick&#8221;, &#8220;maxwell&#8221;, &#8220;melissa&#8221;, &#8220;member&#8221;, &#8220;mercedes&#8221;, &#8220;merlin&#8221;, &#8220;michael&#8221;, &#8220;michelle&#8221;, &#8220;mickey&#8221;, &#8220;midnight&#8221;, &#8220;miller&#8221;, &#8220;mistress&#8221;, &#8220;monica&#8221;, &#8220;monkey&#8221;, &#8220;monkey&#8221;, &#8220;monster&#8221;, &#8220;morgan&#8221;, &#8220;mother&#8221;, &#8220;mountain&#8221;, &#8220;muffin&#8221;, &#8220;murphy&#8221;, &#8220;mustang&#8221;, &#8220;naked&#8221;, &#8220;nascar&#8221;, &#8220;nathan&#8221;, &#8220;naughty&#8221;, &#8220;ncc1701&#8221;, &#8220;newyork&#8221;, &#8220;nicholas&#8221;, &#8220;nicole&#8221;, &#8220;nipple&#8221;, &#8220;nipples&#8221;, &#8220;oliver&#8221;, &#8220;orange&#8221;, &#8220;packers&#8221;, &#8220;panther&#8221;, &#8220;panties&#8221;, &#8220;parker&#8221;, &#8220;password&#8221;, &#8220;password&#8221;, &#8220;password1&#8221;, &#8220;password12&#8221;, &#8220;password123&#8221;, &#8220;patrick&#8221;, &#8220;peaches&#8221;, &#8220;peanut&#8221;, &#8220;pepper&#8221;, &#8220;phantom&#8221;, &#8220;phoenix&#8221;, &#8220;player&#8221;, &#8220;please&#8221;, &#8220;pookie&#8221;, &#8220;porsche&#8221;, &#8220;prince&#8221;, &#8220;princess&#8221;, &#8220;private&#8221;, &#8220;purple&#8221;, &#8220;pussies&#8221;, &#8220;qazwsx&#8221;, &#8220;qwerty&#8221;, &#8220;qwertyui&#8221;, &#8220;rabbit&#8221;, &#8220;rachel&#8221;, &#8220;racing&#8221;, &#8220;raiders&#8221;, &#8220;rainbow&#8221;, &#8220;ranger&#8221;, &#8220;rangers&#8221;, &#8220;rebecca&#8221;, &#8220;redskins&#8221;, &#8220;redsox&#8221;, &#8220;redwings&#8221;, &#8220;richard&#8221;, &#8220;robert&#8221;, &#8220;roberto&#8221;, &#8220;rocket&#8221;, &#8220;rosebud&#8221;, &#8220;runner&#8221;, &#8220;rush2112&#8221;, &#8220;russia&#8221;, &#8220;samantha&#8221;, &#8220;sammy&#8221;, &#8220;samson&#8221;, &#8220;sandra&#8221;, &#8220;saturn&#8221;, &#8220;scooby&#8221;, &#8220;scooter&#8221;, &#8220;scorpio&#8221;, &#8220;scorpion&#8221;, &#8220;sebastian&#8221;, &#8220;secret&#8221;, &#8220;sexsex&#8221;, &#8220;shadow&#8221;, &#8220;shannon&#8221;, &#8220;shaved&#8221;, &#8220;sierra&#8221;, &#8220;silver&#8221;, &#8220;skippy&#8221;, &#8220;slayer&#8221;, &#8220;smokey&#8221;, &#8220;snoopy&#8221;, &#8220;soccer&#8221;, &#8220;sophie&#8221;, &#8220;spanky&#8221;, &#8220;sparky&#8221;, &#8220;spider&#8221;, &#8220;squirt&#8221;, &#8220;srinivas&#8221;, &#8220;startrek&#8221;, &#8220;starwars&#8221;, &#8220;steelers&#8221;, &#8220;steven&#8221;, &#8220;sticky&#8221;, &#8220;stupid&#8221;, &#8220;success&#8221;, &#8220;suckit&#8221;, &#8220;summer&#8221;, &#8220;sunshine&#8221;, &#8220;superman&#8221;, &#8220;surfer&#8221;, &#8220;swimming&#8221;, &#8220;sydney&#8221;, &#8220;tequiero&#8221;, &#8220;taylor&#8221;, &#8220;tennis&#8221;, &#8220;teresa&#8221;, &#8220;tester&#8221;, &#8220;testing&#8221;, &#8220;theman&#8221;, &#8220;thomas&#8221;, &#8220;thunder&#8221;, &#8220;thx1138&#8221;, &#8220;tiffany&#8221;, &#8220;tigers&#8221;, &#8220;tigger&#8221;, &#8220;tomcat&#8221;, &#8220;topgun&#8221;, &#8220;toyota&#8221;, &#8220;travis&#8221;, &#8220;trouble&#8221;, &#8220;trustno1&#8221;, &#8220;tucker&#8221;, &#8220;turtle&#8221;, &#8220;twitter&#8221;, &#8220;united&#8221;, &#8220;vagina&#8221;, &#8220;victor&#8221;, &#8220;victoria&#8221;, &#8220;viking&#8221;, &#8220;voodoo&#8221;, &#8220;voyager&#8221;, &#8220;walter&#8221;, &#8220;warrior&#8221;, &#8220;welcome&#8221;, &#8220;whatever&#8221;, &#8220;william&#8221;, &#8220;willie&#8221;, &#8220;wilson&#8221;, &#8220;winner&#8221;, &#8220;winston&#8221;, &#8220;winter&#8221;, &#8220;wizard&#8221;, &#8220;xavier&#8221;, &#8220;xxxxxx&#8221;, &#8220;xxxxxxxx&#8221;, &#8220;yamaha&#8221;, &#8220;yankee&#8221;, &#8220;yankees&#8221;, &#8220;yellow&#8221;, &#8220;zxcvbn&#8221;, &#8220;zxcvbnm&#8221;, &#8220;zzzzzz&#8221;];<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" alt="CSDN明文口令泄露的启示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_title">CSDN明文口令泄露的启示</a></li><li ><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/passwords-150x150.png" alt="破解你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_title">破解你的口令</a></li><li ><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何管理并设计你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_title">如何管理并设计你的口令</a></li><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2451.html/feed</wfw:commentRss>
+			<slash:comments>35</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>黑客的价值观</title>
+		<link>https://coolshell.cn/articles/2439.html</link>
+					<comments>https://coolshell.cn/articles/2439.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 19 May 2010 00:50:50 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[hacker]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2439</guid>
+
+					<description><![CDATA[<p>黑客，可能在大家的眼里是那些入侵别人计算机搞破坏的人，其实并不是那样的。如果你这样认为了，只能说明你对计算机文化并不了解，真正的黑客是一种自由的象征，他们挑战权...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2439.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2439.html">黑客的价值观</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>黑客，可能在大家的眼里是那些入侵别人计算机搞破坏的人，其实并不是那样的。如果你这样认为了，只能说明你对计算机文化并不了解，真正的黑客是一种自由的象征，他们挑战权威，追求自由，并和很多非人类的行为作斗争。如果你想了解黑客文化，你一定要去看看我写的《Unix传奇，<a href="https://coolshell.cn/articles/2322.html" target="_blank">上篇</a>，<a href="https://coolshell.cn/articles/2324.html" target="_blank">下篇</a>》。你会对正宗的计算机文化以及黑客文化有所了解的。而那些只懂得入侵别人计算机搞破坏活动的“黑客”只能称为是街头的小混混，他们根本就不配称黑客。</p>
+<p>下面有四篇关于“Hacker&#8217;s Code”文章，我觉得相当的不错，可以让你明白什么是黑客的行为规范，道德准则，以及黑客的历史使命，希望能对你有启发。但是翻译水平有限，所以我请<strong><a href="https://coolshell.cn/?author=3" target="_blank">Mailper</a><span style="font-weight: normal;">同学帮忙翻译了一下，但还是觉得原文更为传神，尤其是原文中的押韵，双意以及朗朗上口，所以，下面提供了中英文对照。如果有翻译得不好的还请大家指正。</span></strong></p>
+<p><strong><span style="font-weight: normal;"> </span></strong></p>
+<h1 style="text-align: center;">The Hacker&#8217;s Code</h1>
+<p style="text-align: center;"><a href="http://muq.org/~cynbe/hackers-code.html" target="_blank">http://muq.org/~cynbe/hackers-code.htm</a>l</p>
+<p><em>&#8220;A hacker of the Old Code.&#8221;</em></p>
+<ul>
+<li>Hackers come and go, but a great hack is forever.<br />
+黑客们来来往往，但是只有黑客的壮举是永存的</li>
+</ul>
+<ul>
+<li>Public goods belong to the public.<strong>*</strong><br />
+公众的东西是属于大众的</li>
+</ul>
+<ul>
+<li>Software hoarding is evil.<br />
+Software does the greatest good given to the greatest number.<br />
+圈养软件是邪恶的，最好的软件是有最多人使用的</li>
+</ul>
+<p><span id="more-2439"></span></p>
+<ul>
+<li>Don&#8217;t be evil.<br />
+不作恶</li>
+</ul>
+<ul>
+<li>Sourceless software sucks.<br />
+不公开源码的软件是令人厌恶的</li>
+</ul>
+<ul>
+<li>People have rights.<br />
+Organizations live on sufferance.<br />
+每个人都是有权利的，而组织是建立在互相的容忍上的</li>
+</ul>
+<ul>
+<li>Governments are organizations.<br />
+政府也是组织</li>
+</ul>
+<ul>
+<li>If it is wrong when citizens do it,<br />
+it is wrong when governments do it.<br />
+对与错的标准，对于公民和政府是同样适用的。(不能“只许州官放火不许百姓点灯”)</li>
+</ul>
+<ul>
+<li>Information wants to be free.<br />
+Information <em>deserves</em> to be free.<br />
+信息需要自由（免费），信息也应该是是自由（免费）的</li>
+</ul>
+<ul>
+<li>Being legal doesn&#8217;t make it right.Being illegal doesn&#8217;t make it wrong.<br />
+合法的不一定是正确的，不合法不一定就是错误的</li>
+</ul>
+<ul>
+<li>Subverting tyranny is the highest duty.<br />
+推翻专制是黑客的最高天职</li>
+</ul>
+<ul>
+<li>Trust your technolust!<br />
+相信你的“技术贪欲”</li>
+</ul>
+<p><span>* <strong>Definition</strong>:<em> A good is <strong>public</strong> if the marginal  production cost is lower than the marginal billing cost.<br />
+<strong><span style="font-style: normal;">定义</span></strong>： </em>一个好的公众事物仅当其边际产值小于其边际广告值。（<span style="font-size: 13px;">关于<em> marginal production</em>是一个经济学术语，我不是很懂，大家可以参考<a href="http://hi.baidu.com/loftyambition/blog/item/90c586df69909f1b6227980b.html" target="_blank">这篇文章</a>）</span></span></p>
+<p><span><span style="font-size: 13px;"> </span></span></p>
+<p><span><span style="font-size: 13px;"> </span></span></p>
+<h1 style="text-align: center;"><strong>The Hacker&#8217;s Code of Ethics</strong></h1>
+<p style="text-align: center;"><a href="http://courses.cs.vt.edu/cs3604/lib/WorldCodes/Hackers.Code.html" target="_blank">http://courses.cs.vt.edu/cs3604/lib/WorldCodes/Hackers.Code.html</a></p>
+<p>Levy (1984) suggests that there is a &#8220;code of ethics&#8221; for hacking which, though not pasted on the walls, is in the air:</p>
+<p>列维认为黑客有一种准则，这种准则不是墙上贴着的，而是像空气一样无处不在的。</p>
+<ul>
+<li>Access to Computers &#8211; and anything which might teach you something about the way the world works &#8211; should be unlimited and total. Always yield to the Hands-On Imperative!<br />
+计算机的使用（就像任何教会你去了解这个世界的东西一样）应该是无限和无所不包的。真理来自实际动手操作。</li>
+</ul>
+<ul>
+<li>All information should be free.<br />
+所有的信息都应该是自由的（免费和不加限制的）</li>
+</ul>
+<ul>
+<li>Mistrust Authority &#8211; Promote Decentralization.<br />
+不要相信权威，推崇分权和群众的智慧</li>
+</ul>
+<ul>
+<li>Hackers should be judged by their hacking, not bogus criteria such as degrees, age, race, or position.<br />
+英雄（黑客）不问出处，更不会去计较世俗的标准：学历，年龄，种族和职位高低。</li>
+</ul>
+<ul>
+<li>You can create art and beauty on a computer.<br />
+黑客可以在计算机上创造艺术和美。</li>
+</ul>
+<ul>
+<li>Computers can change your life for the better.<br />
+计算机可以提升你的生命。</li>
+</ul>
+<p><strong>Reference:</strong></p>
+<p>Levy, Steven. 1984. Hackers: Heroes of the Computer Revolution, Anchor Press/Doubleday, Garden City, NY, 458 pp.</p>
+<p>史蒂芬.列维 1984  黑客：计算机革命的英豪们， Achor Press&#8230; 第458页</p>
+<h1 style="text-align: center;"><span style="color: green;">DRAFT</span> The Hacker&#8217;s Code <span style="color: green;">DRAFT</span></h1>
+<p style="text-align: center;"><a href="http://www.petascale.org/code/code.html" target="_blank"><span style="font-weight: normal;">http://www.petascale.org/code/code.html</span></a></p>
+<p>Preamble: We, the people of the electronic universe, in order to establish a  society of knowledge and skills, do hereby proclaim the following.</p>
+<p>导言：我们，数字领域的主宰者，为了建一个知识和技术的社区，我们发出下面的声明。</p>
+<p>Hackers are diverse, from all cultures and backgrounds. Every hacker is  unique, yet we all share some characteristics. While not every hacker follows  this Code, many believe it is a fair description of our shared traditions, goals  and values.</p>
+<p>黑客是各式各样的，无论是从文化还是背景。每个黑客都是唯一的，然后，我们是有一些相同的特质的。也许并不是所有的黑客都会跟从下面的准则，但大多数黑客都相信这是一个公正的惯例，目标和价值观。</p>
+<ul>
+<li>Hackers share and are willing to teach their knowledge<br />
+黑客共享并愿意传播他们的知识。</li>
+</ul>
+<ul>
+<li>Hackers are skilled. Many are self-taught, or learn by interacting with  other hackers.<br />
+黑客都是老手。他们中很多人要么是自学，要么是与别的黑客相互共世而成长的。</li>
+</ul>
+<ul>
+<li>Hackers seek knowledge. This knowledge may come from unauthorized or unusual  sources, and is often hidden.<br />
+黑客查找知识。那些知识可能是多一些未授权或是不寻常的通常都是被隐藏起来的地方来的。</li>
+</ul>
+<ul>
+<li>Hackers are tinkerers. They like to understand how things work, and want to  make their own improvements or modifications.<br />
+黑客都是些好管闲事的人。他们总是喜欢对事物刨根问底，而且总是要为改善那些事情加上自己的想法。</li>
+</ul>
+<ul>
+<li>Hackers often disagree with authority, including parents, employers, social  customs and laws. They often seek to circumvent authority they disagree with.<br />
+黑客通常都在挑战权威，包括家长，同事，用户以及法律。他们总是挑战那些他们并不认可以权威。</li>
+</ul>
+<ul>
+<li>Hackers disagree with each other. Different hackers have different values,  and come from all backgrounds. This means that what one hacker is opposed to  might be embraced by another.<br />
+黑客也是互不信任的。不同的黑客有不同的价值取向，而且也有相同的背景。也就是说，某个黑客被反对了，但也会被别的黑客所拥护。</li>
+</ul>
+<ul>
+<li>Hackers are persistent, and are willing to devote hours, days and years to  pursuing their individual passions.<br />
+黑客是永不放弃的。他们愿意全身心地把他们的热情投入到每一个小时，每一天，每一年中。</li>
+</ul>
+<ul>
+<li>This Code is not to prescribe how hackers act. Instead, it is to help us to  recognize our own diversity and identify.<br />
+准则并不是说明黑客是什么样的，而说让我们明白我们的不同性和一致性。</li>
+</ul>
+<ul>
+<li>Every hacker must make his or her own decisions about what is right or  wrong, and some might do things they believe are illegal, amoral or anti-social  to achieve higher goals.<br />
+每一个黑客必需自己为对和错作决定，有一些事可能是不合法，不道德的，甚至反社会的，但却可以让他们攀上自己价值观的高峰。</li>
+</ul>
+<ul>
+<li>Hackers&#8217; motivations are their own, and there is no reason for all hackers  to agree.<br />
+黑客的动机是他们自己的，而且无需任何理由获得其它的同意。</li>
+</ul>
+<ul>
+<li>Hackers have a shared identify, however, and many shared interests.<br />
+黑客一般会有共同的认识，然而，许多黑客却是拥有共同的利益。</li>
+</ul>
+<ul>
+<li>By reading this Code, hackers can recognize themselves and each other, and  understand better the group they are a part of. This will be beneficial to all  hackers.<br />
+了解了这些准则，黑客们能够赏识自己或相互赏识，并相当明白他们是这个团体的一部分。这会让所有的黑客受益。</li>
+</ul>
+<h1 style="text-align: center;">The Conscience of a Hacker</h1>
+<p style="text-align: center;"><a href="http://www.phrack.org/issues.html?issue=7&amp;id=3&amp;mode=html">http://www.phrack.org/issues.html?issue=7&amp;id=3&amp;mode=html</a></p>
+<p>##=========================================</p>
+<p>\/\The Conscience of a Hacker/\/</p>
+<p>by</p>
+<p>+++The Mentor+++</p>
+<p>笔名：导师</p>
+<p>Written on January 8, 1986</p>
+<p>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</p>
+<p>Another one got caught today, it&#8217;s all over the papers.  &#8220;Teenager Arrested in Computer Crime Scandal&#8221;, &#8220;Hacker Arrested after Bank Tampering&#8221;&#8230; Damn kids.  They&#8217;re all alike.</p>
+<p>今天有一个被捕的消息受到媒体热议。“某少年由于计算机犯罪被捕”，“入侵银行的黑客被捕”&#8230;一帮臭小子，他们都一样。</p>
+<p>But did you, in your three-piece psychology and 1950&#8217;s technobrain, ever take a look behind the eyes of the hacker?  Did you ever wonder what made him tick, what forces shaped him, what may have molded him?</p>
+<p>但是你们是帮老朽只知道老套的心理学和50年代的技术。你们有没有想想黑客究竟在想什么？你们有没有想想他们为什么这么做，什么造就了他们，什么塑造了这帮黑客？</p>
+<p>I am a hacker, enter my world&#8230;</p>
+<p>我是名黑客，请走进我的世界&#8230;</p>
+<p>Mine is a world that begins with school&#8230; I&#8217;m smarter than most of the other kids, this crap they teach us bores me&#8230;</p>
+<p>我的世界是从学校开始的&#8230;我是学校里最聪明的孩子，学校教我的垃圾让我厌倦。</p>
+<p>Damn underachiever.  They&#8217;re all alike.</p>
+<p>都他妈的水货，这帮子成绩不好的都一样烂。</p>
+<p>I&#8217;m in junior high or high school.  I&#8217;ve listened to teachers explain for the fifteenth time how to reduce a fraction.  I understand it.  &#8220;No, Ms. Smith, I didn&#8217;t show my work.  I did it in my head&#8230;&#8221;</p>
+<p>我初中高中时候就是如此了。白痴老师一个分式化简要解释15次。这些我全懂。所以我说”不用了，XX老师，我不用写这些步骤，我可以心算&#8230;&#8221;</p>
+<p>Damn kid.  Probably copied it.  They&#8217;re all alike.</p>
+<p>一帮傻同学，估计都只知道抄写老师的板书，一棒子二百五。</p>
+<p>I made a discovery today.  I found a computer.  Wait a second, this is cool.  It does what I want it to.  If it makes a mistake, it&#8217;s because I screwed it up.  Not because it doesn&#8217;t like me&#8230;</p>
+<p>今天我发现新大陆了。我遇到了一台计算机。真是太酷了，计算机完全按照我的指令执行。如果计算机犯了错，是因为我没搞对。而不是因为它不喜欢我&#8230;</p>
+<p>Or feels threatened by me&#8230;</p>
+<p>也不是觉得我成绩太好到威胁它了，也不是因为我是个自是聪明自以为是，而且不对我教条主义</p>
+<p>Or thinks I&#8217;m a smart ass&#8230;</p>
+<p>Or doesn&#8217;t like teaching and shouldn&#8217;t be here&#8230;</p>
+<p>Damn kid.  All he does is play games.  They&#8217;re all alike.</p>
+<p>而我的一帮傻逼同学，都他妈只知道玩。</p>
+<p>And then it happened&#8230; a door opened to a world&#8230; rushing through the phone line like heroin through an addict&#8217;s veins, an electronic pulse is sent out, a refuge from the day-to-day incompetencies is sought&#8230; a board is found.</p>
+<p>突然，与计算机相处为我打开了一扇通往另一个世界的门。一股电脉冲从电话线传送出去，就好像海洛因冲过毒瘾者的血脉，我可以逃离那帮子傻逼，一个新大陆！</p>
+<p>&#8220;This is it&#8230; this is where I belong&#8230;&#8221;</p>
+<p>是的！计算机是我的归属。</p>
+<p>I know everyone here&#8230; even if I&#8217;ve never met them, never talked to them, may never hear from them again&#8230; I know you all&#8230;</p>
+<p>在这个世界里，我认识这里的每一个人&#8230;虽然我并没有跟他们见面，没跟他们交谈，也许以后也不会再提到他们的消息。但是他们对我是那么的熟悉。</p>
+<p>Damn kid.  Tying up the phone line again.  They&#8217;re all alike&#8230;</p>
+<p>一棒子傻逼，大概他们又把我的电话线打结了。</p>
+<p>You bet your ass we&#8217;re all alike&#8230; we&#8217;ve been spoon-fed baby food at school when we hungered for steak&#8230; the bits of meat that you did let slip through were pre-chewed and tasteless.  We&#8217;ve been dominated by sadists, or ignored by the apathetic.  The few that had something to teach found us willing pupils, but those few are like drops of water in the desert.</p>
+<p>是的，我们黑客都差不多&#8230;我们智力高度成熟，我们想啃牛排的时候只有被喂婴儿食物。好不容易有点肉吃，也是被嚼烂了的。我们被虐待狂欺负，被冷漠者漠视。偶尔有好人理解我们其实是最好学的学生，但是这种人少得跟沙漠中的水滴一样。</p>
+<p>This is our world now&#8230; the world of the electron and the switch, the beauty of the baud.  We make use of a service already existing without paying for what could be dirt-cheap if it wasn&#8217;t run by profiteering gluttons, and you call us criminals.  We explore&#8230; and you call us criminals.  We seek after knowledge&#8230; and you call us criminals.  We exist without skin color, without nationality, without religious bias&#8230; and you call us criminals.</p>
+<p>You build atomic bombs, you wage wars, you murder, cheat, and lie to us and try to make us believe it&#8217;s for our own good, yet we&#8217;re the criminals.</p>
+<p>我们这些黑客长大了&#8230;这个世界充满着电子，开关，和美丽的波特（信号传输单位）。我们并不是在犯罪，我们只是在免费使用服务，这些服务要不是因为那些敛财狂本可以是非常廉价的。我们在探索&#8230;可你们说我们是在犯罪。我们是在寻求知识&#8230;可你们说我们是在犯罪。我们黑客无处不在，不分肤色，没有国界，没有宗教偏见&#8230;可你们说我们是在犯罪。你们这些伪君子制造了原子弹，发动战争，某战争，不忠，并且对我们说谎；你们居然说你们的行径是为我们好，而我们黑客是犯罪分子。</p>
+<p>Yes, I am a criminal.  My crime is that of curiosity.  My crime is that of judging people by what they say and think, not what they look like. My crime is that of outsmarting you, something that you will never forgive me for.</p>
+<p>好吧，我是犯罪分子。我所犯的最是好奇心。我的罪过是基于一个人的言行评判一个人，而不是他的长相。我的罪过是我比你聪明，而你大概永远不会原谅我比你聪明。</p>
+<p>I am a hacker, and this is my manifesto.  You may stop this individual, but you can&#8217;t stop us all&#8230; after all, we&#8217;re all alike.</p>
+<p>我是一名黑客，以上是我的宣言。你可以制止一个个体，但是你阻止不了我们全部&#8230;因为，我们黑客都一样。</p>
+<p>+++The Mentor+++</p>
+<p>署名：导师</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2439.html">黑客的价值观</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2439.html/feed</wfw:commentRss>
+			<slash:comments>30</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>碰触，合作和团队绩效</title>
+		<link>https://coolshell.cn/articles/2440.html</link>
+					<comments>https://coolshell.cn/articles/2440.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Wed, 19 May 2010 00:40:39 +0000</pubDate>
+				<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[team work]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2440</guid>
+
+					<description><![CDATA[<p>公司有时候会举行团队建设活动，让大家出去跋山涉水，一起做有肢体接触游戏（例如用废报纸和胶布搭建一个能把所有人容下的遮阳棚）。这其中是有道理的。 今日读到一篇加州...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2440.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2440.html">碰触，合作和团队绩效</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>公司有时候会举行团队建设活动，让大家出去跋山涉水，一起做有肢体接触游戏（例如用废报纸和胶布搭建一个能把所有人容下的遮阳棚）。这其中是有道理的。</p>
+<p>今日读到一篇加州伯克利大学的文章 <a href="http://ist-socrates.berkeley.edu/~keltner/publications/kraus.huang.keltner.2010.pdf">touch, cooperation, and performance</a>, 用科学的研究方法解释了为什么NBA球员们为什么要“high five（击掌）”，并用统计方法论证了碰触行为可以导致更好的比赛成绩。其实想想，其实人们握手，鼓励式地拍肩膀，引导别人进门的时候好客地推别人的背，道理都是一样。身体接触（符合社交礼仪范围的）是建立信任的一种微妙行为。这些大多不会写在领导力的书里。</p>
+<p>猴子之间互相捉虱子梳理毛发不是为了营养，而是增进群体的凝聚力。人类口头上的语言的第一功能不是为了表达知识，而是为了促进社会联系，其内容并不需要都是重要信息。这就是为什么我们一天之内说话内容的80%其实都是扯淡，八卦和闲聊。</p>
+<p>（注意：职场上有社交礼仪，此方法需要适度）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/562.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/13-09_menu_menu-150x150.jpg" alt="30种时尚的CSS网站导航条" width="150" height="150" /></a><a href="https://coolshell.cn/articles/562.html" class="wp_rp_title">30种时尚的CSS网站导航条</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/3288.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/scmhistory-150x150.png" alt="版本管理器的发展史" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3288.html" class="wp_rp_title">版本管理器的发展史</a></li><li ><a href="https://coolshell.cn/articles/2109.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="Python处理encoding的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2109.html" class="wp_rp_title">Python处理encoding的小技巧</a></li><li ><a href="https://coolshell.cn/articles/21.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/dp_book-150x150.jpg" alt="101个设计模式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21.html" class="wp_rp_title">101个设计模式</a></li><li ><a href="https://coolshell.cn/articles/7126.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="这到底是谁之错？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7126.html" class="wp_rp_title">这到底是谁之错？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2440.html">碰触，合作和团队绩效</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2440.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何管理并设计你的口令</title>
+		<link>https://coolshell.cn/articles/2428.html</link>
+					<comments>https://coolshell.cn/articles/2428.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 18 May 2010 00:42:41 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[password]]></category>
+		<category><![CDATA[口令]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2428</guid>
+
+					<description><![CDATA[<p>在互联网上，需要我们输入用户名口令的地方实在是太多了，多得都让人记不过来了，N个电子邮件帐号，QQ， MSN，校内，开心，facebook，Blog，各种论坛，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2428.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在互联网上，需要我们输入用户名口令的地方实在是太多了，多得都让人记不过来了，N个电子邮件帐号，QQ， MSN，校内，开心，facebook，Blog，各种论坛，网银，淘宝，电子相册……，太多了，想想看，你要用多少用户名口令，相信很多人可能会这样做，用几乎一样的口令和用户名来申请所有的这些帐号，我估计这是大多数人的做法。当然，这样一来，你就需要保管好你的用户名和口令了，因为只要被破解了，就相当于你所有的帐号被破解了，这是多数恐怖的一件事情啊。你可能觉得别人破解你的口令很难，但我告诉你也许会非常容易，因为，如果你只使用一样的用户名和口令的话，也许某天，你注册了一个不知名的小网站，可能会意味着你所有的用户名和口令都被人获取了，要小心啊。</p>
+<p>对我来说，我通常会有几组组帐号和密码，</p>
+<ul>
+<li>一个帐号/密码是用于一些大的可以依赖的站点，如：MSN，gmail，linkedin，facebook，hotmail等，因为我相信这些站点应该可以足够信任不会出卖用户信息，也有足够的能力不会让用户信息和口令外泄。</li>
+<li>一个帐号/密码用于一些国内的一些大的网站，如：QQ，开心，CSDN，Sina，网易，Blog，同学录等，因为这些站点必竟还受到国家的监管，以及其内部不良员工可能会倒卖我的信息，指不定什么时候我的用户信息就会外泄。</li>
+<li>一个帐号/密码用于我的一些经济活动，如网银，淘宝，支付宝什么的。</li>
+<li>最后一个帐号/密码用于登录那些必需要注册的破站点，一个最简单的用户名口令。</li>
+</ul>
+<p>真烦啊。在这样的一个社会里，忘记密码绝对是一件最普通不过的事情了。就算是我这样的分组归类，同样需要超强的记忆力。不知道你会不会把你的密码写在某处呢？是啊，我也是想写啊，但那岂不是相当的危险，不丢则已，一丢就全丢了。</p>
+<p>今天，在国外的某论坛里看到了这样的一个设计方法，好像很不错，分享给大家。</p>
+<p><span id="more-2428"></span></p>
+<p>1）首先，先找一句你喜欢的话（你一辈子都记得的话），当然，只有你记得的，无论中英文，然后取各个单词或字的英文、拼音、五笔头一个字母。比如：<strong>I</strong> <strong>L</strong>ike <strong>L</strong>ong <strong>C</strong>omplicated <strong>P</strong>asswords, <strong>T</strong>hey <strong>C</strong>onfuse <strong>P</strong>eople，取头一个字母则成为了：<strong>illcptcp</strong>。中文的——“信春哥得永生”的五笔的第一个字母是：<strong>wdstyt</strong>。这个东西只有你自己知道，就算是别人看到明码，也很难马上记下来，是吧。</p>
+<p>2）加上一些数字吧，比如你的生日，学号，电话，纪念日等。比如世界末日：2012年的12月21日(我们只取12月21日)。把这些数字加在断句的地方，于是得到这样的口令：<strong>illcp12tcp21 </strong>或是 <strong>wds12tyt21</strong>。</p>
+<p>3）我们把第二步得到的口令叫基本口令。然后你可以在其前后(或是中间)加上站点的简称（用大写）。如：</p>
+<ul>
+<li>gmail：<strong>GM</strong><strong>illcp12tcp21</strong></li>
+<li>CSDN：<strong>CS</strong><strong>wds12tyt21DN</strong></li>
+<li>MSN<strong><span style="font-weight: normal;">：</span><strong>illcp12tcp21MSN</strong></strong></li>
+<li><strong><span style="font-weight: normal;">QQ：</span><strong>Q<strong>wds12tyt21Q</strong></strong></strong></li>
+</ul>
+<p>4）改良。你可以在上述的第2）步，在输入数字时按着Shift键，于是，你可以得到更BT的口令：<strong>illcp!@tcp@! </strong>，或是在第3)步聚的前缀和后缀间加上特殊字符，如：&amp;, ＃，^等等。</p>
+<p>相信这样的规则会让你的口令即不重复，又好记，而且又足够复杂。不然，你真的要去下载一个软件来记你的口令了。</p>
+<p>大家不妨也说说你的口令的设计或管理方法。</p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" alt="CSDN明文口令泄露的启示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_title">CSDN明文口令泄露的启示</a></li><li ><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/passwords-150x150.png" alt="破解你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_title">破解你的口令</a></li><li ><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Twitter的禁用口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_title">Twitter的禁用口令</a></li><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2428.html/feed</wfw:commentRss>
+			<slash:comments>141</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>十条不错的编程观点</title>
+		<link>https://coolshell.cn/articles/2424.html</link>
+					<comments>https://coolshell.cn/articles/2424.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 14 May 2010 00:50:24 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2424</guid>
+
+					<description><![CDATA[<p>在Stack Overflow上有这样的一个贴子《What’s your most controversial programming opinion?》，翻译...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2424.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2424.html">十条不错的编程观点</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在<a href="http://stackoverflow.com/" target="_blank">Stack Overflow</a>上有这样的一个贴子《<a href="http://stackoverflow.com/questions/406760/whats-your-most-controversial-programming-opinion" target="_blank">What’s  your most controversial programming opinion?</a>》，翻译成中文就是“<span style="color: #333333;">你认为最有争议的编程观点是什么？</span>”，不过，在400多个主回贴，以及千把个子回贴中，好像并不是很有争议，而是令人相当的茅塞顿开，下面罗列一些，并通过我自己的经历和理解发挥了一些，希望对你有帮助。</p>
+<p><strong>1） The only &#8220;best practice&#8221; you should be using all the time is &#8220;Use Your  Brain&#8221;.</strong></p>
+<p>唯一的“Best Practice”并不是使用各种各样被前人总结过的各种设计方法、模式，框架，那些著名的方法、模式、框架只代码赞同他们的人多，并不代表他们适合你，你应该更多的去使用你的大脑，独立地思考那些方法、模式、框架出现的原因和其背后的想法和思想，那才是“best practice”。事实上来说，那些所谓的“Best Practice”只不过是限制那些<a href="https://coolshell.cn/articles/1081.html" target="_blank">糟糕的程序员们</a>的破坏力。</p>
+<p><strong>2）Programmers who don&#8217;t code in their spare time for fun will never  become as good as those that do.</strong></p>
+<p>如果你对编程没有感到一种快乐，没有在你空闲的时候去以一种的娱乐方式去生活，无论是编程，还是运动，还是去旅游，那么你只不过是在应付你的工作，无时无刻不扎在程序堆中，这样下来，就算是你是一个非常聪明，非常有才华的人，你也不会成为一个优秀的编程员，要么只会平平凡凡，要么只会整天扎在技术中成为书呆子。当然，这个观点是有争议，热情和能力的差距也是很大的。不过我们可以从中汲取其正面的观点。</p>
+<p><strong>3）M</strong><strong>ost comments in code are in fact a pernicious form of code  duplication.</strong></p>
+<p>注释应该是注释Why，而不是How和What，参看《<a rel="bookmark" href="https://coolshell.cn/articles/340.html" target="_blank">惹恼程序员的十件事</a>》，代码告诉你How，而注释应该告诉你Why。但大多数的程序并不知道什么是好的注释，那些注释其实和code是重复的，毫无意义。</p>
+<p><span id="more-2424"></span></p>
+<p><strong>4）XML is highly overrated</strong></p>
+<p>XML可能被高估了。XML对于Web上的应用是不错的，但是我们把其用到了各种地方，好像没有XML，我们都不会编程了。</p>
+<p><strong>5）Not all programmers are created equal</strong></p>
+<p>这是那些junior经理或是流程爱犯的错，他们总是认为，DeveloperA == DeveloperB，只要他们的title一样，他们以为他们的能力、工作速度、解决问题的方法，掌握的技能等等都是一样的。呵呵。更扯的是，在某些时候，就算是最差的程序员，他们也会认为其比别人强十倍，这就是现代的SB管理。</p>
+<p><strong>6）&#8221;Googling it&#8221; is okay!</strong></p>
+<p>Google只会给你知识，并不会教给你技能。那里只有“鱼”，没有“渔”，过度的使用Google，只会让你越来越离不开他，你越来越去要去立马告诉你答案，而你越来越不会自己去思考，自己去探索，去专研。如果KFC快餐是垃圾食品对我们的身体没有好处，那么使用Google也一种快餐文化对我们的智力发展大大的没有好处。</p>
+<p><strong>7）</strong><strong>If you only know one language, no matter how well you know it, you&#8217;re not a  great programmer.</strong></p>
+<p>如果你只懂一种语言，准确的说，如果你只懂一类语类，如：Java和C#，PHP和Perl，那么，你将会被局限起来，只有了解了各种各样的语言，了解了不同语言的不同方法 ，你才会有比较，只有了比较，你才会明白各种语言的长处和短处，才会让你有更为成熟的观点，而且不整天和别的程序在网上斗嘴争论是Windows好还是Unix好，是C好还是C++好，有这点工夫能干好多事了。世界因为不同而精彩，只知道事物的一面是有害的。</p>
+<p><strong>8）Your job is to put yourself out of work.</strong></p>
+<p>你的工作不是保守，那种教会徒弟，饿死师父的想法，不但是相当短浅的，而且还是相当脑残的。因为，在计算机世界里，你掌握的老技术越多，你就越没用，因为技术更新的太快。你对工作越保守，这个工作就越来越离不开你，你就越不越不能抽身去学新的东西，你也就越来越OUT了。记住：If you can&#8217;t be replaced then you can&#8217;t be promoted!</p>
+<p><strong>9）<strong>Design patterns are hurting good design more than they&#8217;re helping  it.</strong></strong></p>
+<p>很多程序员把设计模式奉为天神，他们过度的追求设计模式以至都都忘了需求是什么，结果整个系统设计被设计模式搞得乱七八糟，我们叫这种编程为“<a href="https://coolshell.cn/articles/2058.html" target="_blank">设计模式驱动编程</a>”，正如第一点所说，如果你不懂得用自己的大脑思考的话，知其然，不知所以然的话，那么你不但得不到其好处，反而受其所累。</p>
+<p><strong>10）</strong><strong>Unit Testing won&#8217;t help you write good code</strong></p>
+<p>准确地说，我们可以认为这是Test-Driven开发，其实，这种开发就是先写unit test case，这样的开发方式的主要目的是，为了防止你不会因为一个改动而引入Bug，但这并不会让你能写出更好的代码。这只会让你写出不会出错的代码。同第一点，这样的方法，只不过是防止<a href="https://coolshell.cn/articles/1081.html" target="_blank">糟糕的程序员</a>，而并不是让程序员或代码质量更有长进。反而，通过Unit Test会为程序员的为自己代码做辩解的一种托辞。</p>
+<p>最后，顺便说一下，以前去那个敏捷的公司面试，发现那个公司的某些技术人员中毒不浅，具体表现在上述的1）9）10）观点上。</p>
+<p><strong>（转载本文请注明作者和出处，请勿用于商业用途）</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2424.html">十条不错的编程观点</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2424.html/feed</wfw:commentRss>
+			<slash:comments>89</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>老手是这样教新手编程的</title>
+		<link>https://coolshell.cn/articles/2420.html</link>
+					<comments>https://coolshell.cn/articles/2420.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 13 May 2010 00:43:19 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2420</guid>
+
+					<description><![CDATA[<p>comp.lang.c全球最大的C语言新闻组，其Google的链接是：http://groups.google.com/group/comp.lang.c/ 可...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2420.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2420.html">老手是这样教新手编程的</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>comp.lang.c全球最大的C语言新闻组，其Google的链接是：<a href="http://groups.google.com/group/comp.lang.c/" target="_blank">http://groups.google.com/group/comp.lang.c/</a> 可惜被GFW了。在comp.lang.c新闻组，有一个日本网友发了个<a href="http://groups.google.com/group/comp.lang.c/browse_thread/thread/9f3faa6af28577f2/e105e5d339edec01?hide_quotes=no" target="_blank">贴子</a>，说他正在学习一个在线的C语言课程，要完成一个作业，用程序输出如下的结果，而他的老师在美国，因为时差问题，他无法和他联系，所以只有上这里来寻求帮助。</p>
+<pre style="text-align: left;font-family: 'Consolas','Courier New', Courier, monospace;">    *
+   ***
+  *****
+ *******
+*********
+*********
+ *******
+  *****
+   ***
+    *</pre>
+<p>很明显，在comp.lang.c上发这种贴子是一定会被拍的很惨的，这样的事，以前在SUN的论坛上也发生过，<a href="https://coolshell.cn/articles/1391.html" target="_blank">详情请看这里</a>。还有一个去软件<a href="https://coolshell.cn/articles/1693.html" target="_blank">官网上要一个盗版序列号</a>的。果不然后，我看到了这样的一个<a href="http://groups.google.com/group/comp.lang.c/msg/e105e5d339edec01" target="_blank">回贴</a>。提供这样的一段代码：</p>
+<p><span id="more-2420"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#define      M 002354l
+#define     A   000644l
+#define    G     000132l
+#define     I   000322l
+#define      C 000374l
+#define                a ;
+#define               b for
+#define              c    ++
+#define             d       %
+#define            e       int
+#define           f           ,
+#define          g             -
+#define         h             011
+#define        i                 =
+#define       j                   {
+#define      k                     )
+#define     l                    &#039;\n&#039;
+#define    m                      main
+#define    n                         &lt;
+#define     o                       }
+#define      p                     &gt;
+#define       q                  &amp;&amp;
+#define        r                 (
+#define         s              ||
+#define          t             ?
+#define           u     putchar
+#define            v      void
+#define             w     &#039;*&#039;
+#define              x     :
+#define               y &#039; &#039;
+#define                _ /
+#define           C_O_O_L return
+                   e u r e k a
+                         e
+                        m r
+                       v k j
+                      j j j j
+                     j j j j j
+                    j j j j j j
+                   j j j j j j j
+                  j e z a b r z i
+                 M _ A _ G _ I _ C
+                a z n G a u r z d h
+               + z _ h p M _ A q z d
+              h + z _ h n M _ G q z _
+             h n z d h + M _ I q z _ h
+            p z d h g M _ C t w x y k f
+           z d h g h + 1 s u r l k f z c
+          k a u r l k a j j j j j j j j j
+         j j C_O_O_L M _ A _ G _ I _ C a o
+        o o o o o o o o o o o o o o o o o o
+                      o o o o
+                      o o o o
+                      o o o o
+                      o o o o
+</pre>
+<p>这段程序是可以编译通过的，没有任何问题，而且还是可以得到正确的结果的。关于这样的程序，你可以参考本站的这篇文章《<a title="6个变态的C语言Hello World程序" href="https://coolshell.cn/articles/914.html" target="_blank">6个变态的C语言Hello World程序</a>》，而另一篇文章教你<a href="https://coolshell.cn/articles/933.html">如何搞乱你的C代码</a>。呵呵。当然，你并不需要把在你的VC或是GCC下编译这段代码，现在什么都有在线了，编译器当然也在线了，这里是一篇关于<a href="https://coolshell.cn/articles/1310.html" target="_blank">在线编译器的文章</a>，甚至一个<a href="https://coolshell.cn/articles/1883.html" target="_blank">在线的IDE</a>（连这个网站的CTO都在本站<a href="https://coolshell.cn/articles/1883.html#comment-2234" target="_blank">留言</a>了），上去编译一下你就可以看到<a href="http://codepad.org/Rh6icaWU" target="_blank">结果</a>了。</p>
+<p>最后，不恶搞了，在comp.lang.c的这个贴子中看到了很多不错的“如何教新手编程”的观点，下面罗列一些：</p>
+<p>1）你把你自认为最好程序贴出来，我会帮你看的，但我是不会帮你写的。</p>
+<p>2）要解决这个问题，你需要先观察输出，然后找到其规律，算法总是去描述一些有规律的事情。关于你的这个程序，很明显，你可以分成两个部分，一个正三角，一个倒三角，每一行的星号都是连续的奇数，1，3，5，7，9，而前面的空格又是顺序的自然数：4，3，2，1，你看这样的规律用程序来干不是正合适吗？</p>
+<p>从这两个例子，我们可以看到，老手应该如何去教新手，那就是，a）让其独立思考，b）步步为营的引导，c）教一种方法而不是直接给答案。希望与大家共勉。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2420.html">老手是这样教新手编程的</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2420.html/feed</wfw:commentRss>
+			<slash:comments>46</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>HTML 安全列表</title>
+		<link>https://coolshell.cn/articles/2416.html</link>
+					<comments>https://coolshell.cn/articles/2416.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 12 May 2010 00:57:38 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2416</guid>
+
+					<description><![CDATA[<p>下面这个网站罗列了，几乎所有的关于HTML 5 在各种主流浏览器上的安全问题，这些安全问题很有可能将会是黑客攻击你的网上的敲门砖，他们几乎都和Javascrip...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2416.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2416.html">HTML 安全列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面这个网站罗列了，几乎所有的关于HTML 5 在各种主流浏览器上的安全问题，这些安全问题很有可能将会是黑客攻击你的网上的敲门砖，他们几乎都和Javascript都有关系，你就要好好注意了。</p>
+<p style="text-align: center;"><a href="http://heideri.ch/jso/" target="_blank"><strong>http://heideri.ch/jso/</strong></a></p>
+<p style="text-align: left;">下面罗列几个：</p>
+<p style="text-align: left;"><strong>1）&lt;table background=&#8221;javascript:alert(1)&#8221;&gt;</strong></p>
+<p style="text-align: left;">IE6，7，8，9，和Opera 8.x, 9.x, 10.x 都支持这样的语法。</p>
+<p style="text-align: left;"><strong>2）&lt;meta charset=&#8221;mac-farsi&#8221;&gt;¼script¾alert(1)¼/script¾</strong></p>
+<p style="text-align: left;">这个问题会存在于所有的Firefox版本中，可以让用户进行XSS（跨站脚本）攻击</p>
+<p style="text-align: left;"><strong>3）&lt;script&gt;&amp;amp;#x61;l&amp;amp;#x65;rt&amp;amp;#40;1)&lt;/script&gt;</strong></p>
+<p style="text-align: left;">在&lt;script&gt;和&lt;style&gt;的TAG间，根据标据，其可以使用这样的字符来运行脚本。这在所有版本的Firefox, Opera, 和 Chrome中都会有问题。</p>
+<p style="text-align: left;"><span id="more-2416"></span></p>
+<p style="text-align: left;"><strong>4）({set/**/$($){_/**/setter=$,_=1}}).$=alert</strong></p>
+<p style="text-align: left;">上面这个是Firefox的一个<a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Objects#Defining_Getters_and_Setters" target="_blank">语法</a>，也会产生XSS攻击。</p>
+<p style="text-align: left;"><strong>5）&lt;div style=&#8221;font-family:foo}x=expression(write(1));&#8221;&gt;XXX&lt;/div&gt;</strong></p>
+<p style="text-align: left;">自从IE5.5后，直到IE9，IE就可以支持上面这样的语法。</p>
+<p style="text-align: left;"><strong>6）src中是可以运行脚本的，如：</strong></p>
+<p style="text-align: left; padding-left: 30px;">&lt;embed src=&#8221;javascript:alert(1)&#8221;&gt;<br />
+&lt;img src=&#8221;javascript:alert(1)&#8221;&gt;<br />
+&lt;image src=&#8221;javascript:alert(1)&#8221;&gt;<br />
+&lt;script src=&#8221;javascript:alert(1)&#8221;&gt;</p>
+<p style="text-align: left;">又一个XSS攻击，几乎所有的浏览器都支持这样的方式，如：Firefox全部版本，Chrome 4.x/5.x，Opera 8.x/9.x/10.0，IE 6.0/7.0和Safari 3.x/4.x</p>
+<p style="text-align: left;">
+<p style="text-align: left;">还有很多，大家自己去看吧，这个网站经常更新的。总体感觉下来，IE和Firefox的安全问题都在伯仲之间，Safari貌似是问题最少的。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/21708.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-150x150.png" alt="网络数字身份认证术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21708.html" class="wp_rp_title">网络数字身份认证术</a></li><li ><a href="https://coolshell.cn/articles/19395.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" alt="HTTP API 认证授权术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19395.html" class="wp_rp_title">HTTP API 认证授权术</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17607.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/MongoDB-150x150.jpg" alt="从 MongoDB “赎金事件” 看安全问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17607.html" class="wp_rp_title">从 MongoDB “赎金事件” 看安全问题</a></li><li ><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg" alt="关于移动端的钓鱼式攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_title">关于移动端的钓鱼式攻击</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2416.html">HTML 安全列表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2416.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>写HTML和CSS的新方法</title>
+		<link>https://coolshell.cn/articles/2406.html</link>
+					<comments>https://coolshell.cn/articles/2406.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 11 May 2010 00:18:19 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Zen]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2406</guid>
+
+					<description><![CDATA[<p>Zen Coding 一个用来简化编写 HTML，XML， XSL （或是其它一些诸如此类格式的编辑器）。其主要是用一种缩写方式的语法来书写大量重复和无味的HT...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2406.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2406.html">写HTML和CSS的新方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<div id="_mcePaste"><strong><a href="http://code.google.com/p/zen-coding/" target="_blank">Zen Coding</a></strong> 一个用来简化编写 HTML，XML， XSL （或是其它一些诸如此类格式的编辑器）。其主要是用一种缩写方式的语法来书写大量重复和无味的HTML，很像CSS语法。下面是一个例子：</div>
+<pre>div#page&gt;div.logo+ul#navigation&gt;li*5&gt;a</pre>
+<div>展开后会成为下面这个样子：</div>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+&lt;div id=&quot;page&quot;&gt;
+        &lt;div&gt;&lt;/div&gt;
+        &lt;ul id=&quot;navigation&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+<div id="_mcePaste">可以看出来，#代表ID，&gt;代表下一层。</div>
+<div><span id="more-2406"></span></div>
+<div>如果你写下：</div>
+<pre>select&gt;option#item-$*3</pre>
+<div>那么将会得到：</div>
+<pre data-enlighter-language="html" class="EnlighterJSRAW">
+
+&lt;select&gt;
+	&lt;option id=&quot;item-1&quot;&gt;&lt;/option&gt;
+	&lt;option id=&quot;item-2&quot;&gt;&lt;/option&gt;
+	&lt;option id=&quot;item-3&quot;&gt;&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+<div>看上去很不错吧。目前，其支持如下的编辑器：</div>
+<div>
+<p><span style="font-family: arial, sans-serif; line-height: normal;"> </span></p>
+<ul>
+<li><a style="color: #0000cc;" href="http://code.google.com/p/zen-coding/wiki/AptanaHowToEn">AptanaHowToEn</a></li>
+<li><strong>TextMate</strong> (Mac). Available in two flavors: basic snippets (Zen HTML and Zen CSS) and full-featured plugin (ZenCoding for TextMate). <sub>Bundles &gt; Zen Coding menu item</sub></li>
+<li><strong>Coda</strong> (Mac) — <a style="color: #0000cc;" rel="nofollow" href="http://github.com/sergeche/tea-for-coda/downloads">external download</a>, via <a style="color: #0000cc;" rel="nofollow" href="http://onecrayon.com/tea/">TEA for Coda</a>. <sub>Plug-ins &gt; TEA for Coda &gt; Zen Coding menu item</sub></li>
+<li><strong>Espresso</strong> (Mac) — <a style="color: #0000cc;" rel="nofollow" href="http://github.com/sergeche/tea-for-espresso/downloads">external download</a>, via <a style="color: #0000cc;" rel="nofollow" href="http://onecrayon.com/tea/">TEA for Espresso</a>. Zen Coding is bundled with Espresso by default, but you should upgrade ZC to latest version. <sub>Actions &gt; HTML menu item</sub></li>
+<li><strong>Komodo Edit/IDE</strong> (crossplatform) — <a style="color: #0000cc;" rel="nofollow" href="http://community.activestate.com/xpi/zen-coding">external download</a>. <sub>Tools &gt; Zen Coding menu item</sub></li>
+<li><strong>Notepad++</strong> (Windows). <sub>Zen Coding menu item</sub></li>
+<li><strong>PSPad</strong> (Windows). <sub>Scripts &gt; Zen Coding menu item</sub></li>
+<li><strong><tt style="font-size: 13px;">&lt;textarea&gt;</tt></strong> (browser-based). See <a style="color: #0000cc;" rel="nofollow" href="http://zen-coding.ru/textarea/">online demo</a>.</li>
+<li><strong>editArea</strong> (browser-based). See <a style="color: #0000cc;" rel="nofollow" href="http://zen-coding.ru/demo/">online demo</a>.</li>
+</ul>
+</div>
+<p>还有下面这些第三方的插件：</p>
+<ul>
+<li><strong>Dreamweaver</strong> (Windows, Mac)</li>
+<li><strong>Sublime Text</strong> (Windows)</li>
+<li><strong>UltraEdit</strong> (Windows)</li>
+<li><strong>TopStyle</strong> (Windows)</li>
+<li><strong>GEdit</strong> (crossplatform) — <a rel="nofollow" href="http://github.com/fmarcia/zen-coding-gedit">Franck Marcia&#8217;s plugin</a>, <a rel="nofollow" href="http://github.com/mikecrittenden/zen-coding-gedit">Mike Crittenden&#8217;s plugin</a></li>
+<li><strong>BBEdit/TextWrangler</strong> (Mac) — <a rel="nofollow" href="http://www.angelwatt.com/coding/zen-coding_bbedit.php">external download</a></li>
+<li><strong>Visual Studio</strong> (Windows) — <a rel="nofollow" href="http://zencoding.codeplex.com/">external download</a></li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3063.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="40个很不错的CSS技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3063.html" class="wp_rp_title">40个很不错的CSS技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2406.html">写HTML和CSS的新方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2406.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>新手该学哪门编程语言</title>
+		<link>https://coolshell.cn/articles/2402.html</link>
+					<comments>https://coolshell.cn/articles/2402.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 10 May 2010 00:46:42 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2402</guid>
+
+					<description><![CDATA[<p>在某个论坛上看到有人在问——“Which programming language should I learn first？”，看到了下面的这个回答，有点意思...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2402.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2402.html">新手该学哪门编程语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在某个论坛上看到有人在问——“Which programming language should I learn first？”，看到了下面的这个回答，有点意思。</p>
+<blockquote><p>Depends.</p>
+<ul>
+<li>To program in an expressive and powerful language: <strong>Python</strong></li>
+<li>To get a website up quickly: <strong>PHP</strong></li>
+<li>To mingle with programmers who call themselves “rockstars”: <strong>Ruby</strong>.</li>
+<li>To really learn to program: <strong>C</strong>.</li>
+<li>To achieve enlightenment: <strong>Scheme</strong>.</li>
+<li>To feel depressed: <strong>SQL</strong></li>
+<li>To drop a chromosome: <strong>Microsoft Visual Basic</strong></li>
+<li>To get a guaranteed, mediocre, but well paying job writing financial applications in a cubicle under fluorescent lights: <strong>Java</strong>.</li>
+<li>To do the same thing with certifications and letters after your name: <strong>C#</strong></li>
+<li>To achieve a magical sense of childlike wonder that you have a hard time differentiating from megalomania: <strong>Objective C</strong></li>
+</ul>
+<p>I could go on… but I’m not feeling hateful enough today.</p></blockquote>
+<p>翻译如下：</p>
+<p><span id="more-2402"></span></p>
+<blockquote><p>看你的需要了。</p>
+<ul>
+<li>如果你想找一门表达力和功能都很强的语言：Python</li>
+<li>如果你想更快速地开发WEB程序：PHP</li>
+<li>如果你想和那些“摇滚明星”的程序员为伍：Ruby</li>
+<li>如果你想学真正的编程：C</li>
+<li>如果你想顿入空门的话：Scheme</li>
+<li>如果你想压抑的话：SQL</li>
+<li>如果你想基因突变成为非人类的话：Microsoft Visual Basic</li>
+<li>如果你想要得到一个有保证的，但普普通通的，收入还不错的，在一间小卧室的荧光灯下写一些金融应用的工作：Java</li>
+<li>如果你想在你的名字后放上一些认证和证书：C#</li>
+<li>如果你想得到一些很难在自大狂和孩子气中区分的那种魔幻般的感觉：Objective C</li>
+</ul>
+<p>我还可以再写去，因为今天我还没有足够的愤怒。</p></blockquote>
+<p>跟着这个思路，我也补充几条吧，</p>
+<ul>
+<li>如果你想寻找在被虐中被大众称道的感觉：C++</li>
+<li>如果你想整天都在说Fxxk的脏话：JavaScript (<a rel="bookmark" href="https://coolshell.cn/articles/1850.html" target="_blank">哪种程序员嘴最脏</a>)</li>
+<li>如果你想成为无所不能的BS一切的神：汇编</li>
+<li>如果你想成为一个像春哥或犀利哥一样真正的男人：Brainfuck （<a rel="bookmark" href="https://coolshell.cn/articles/1142.html" target="_blank">BT雷人的程序语言</a>）</li>
+</ul>
+<p>呵呵，欢迎留下你的回答！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2402.html">新手该学哪门编程语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2402.html/feed</wfw:commentRss>
+			<slash:comments>33</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

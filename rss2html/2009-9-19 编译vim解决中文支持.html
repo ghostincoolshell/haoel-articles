@@ -1,0 +1,36 @@
+<html><body><p>最近开始抛弃Ubuntu折腾CentOS 5.3(注：无意挑起OS之争)，每当换一个OS，第一个配置的就是VIM。</p>
+<p>介于以前在MacOSX的编译经验，直接三部曲</p>
+<blockquote><p><span style="color: #ff0000;">./configue &amp;&amp; sudo make &amp;&amp; sudo make install</span></p></blockquote>
+<p>解决的问题。  但在CentOS之后发现无论如何都不支持中文。</p>
+<p>通过文档的翻阅和google的搜索，发现了问题出现在编译上。vim支持中文需要2个基本feature：multi_byte和iconv。</p>
+<p><span id="more-1432"></span></p>
+<p>在vim中输入 :version  发现这2个feature都是  – multi_byte 和 – iconv。看来编译的时候参数没有配置对。</p>
+<p>于是重新执行以下代码</p>
+<blockquote><p>./configure –prefix=/usr –with-features=huge<br/>
+sudo make<br/>
+sudo make install</p></blockquote>
+<p>问题就解决了。</p>
+<p>另外vim配置文件从第一行(我是unicode的统一论者)，加上</p>
+<blockquote><p>set enc=utf-8<br/>
+set tenc=utf-8<br/>
+set fenc=utf-8<br/>
+set fencs=utf-8,usc-bom</p></blockquote>
+<p>其实整个问题都很简单。 但是我发现搜索引擎里的资料 不是通过直观的关键字搜出来的。 所以这里做下一个记录，希望对以后的朋友有所帮助。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11312.html"><img alt="无插件Vim编程技巧" height="150" src="../wp-content/uploads/2014/03/success_vim-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11312.html">无插件Vim编程技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7829.html"><img alt="28个Unix/Linux的命令行神器" height="150" src="../wp-content/uploads/2012/07/dstat_screenshot-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7166.html"><img alt="游戏：VIM大冒险" height="150" src="../wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7166.html">游戏：VIM大冒险</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5479.html"><img alt="给程序员的VIM速查卡" height="150" src="../wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5479.html">给程序员的VIM速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1432.html">编译vim解决中文支持</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

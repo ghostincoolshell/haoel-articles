@@ -1,0 +1,42 @@
+<html><body><p>在Web开发中，对于一种情况很常见。那就是，文本太长，而放置文本的容器不够长，而我们又不想让文本换行，所以，我们想使用省略号来解决这个问题。但是，在今天HTML的标准中并没有相关的标识或属性让你可以简单地完成这个事。但是我们可以使用CSS样式表来完成这个事，在IE，Safari，Chrome，Opera中都可以。但在Firefox中却不行，但我们可以使用jQuery来解决Firefox不兼容的问题。下面是相关的代码示例。</p>
+<p><strong>使用CSS设置省略号</strong></p>
+<pre class="EnlighterJSRAW">
+overflow: hidden;
+text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+white-space: nowrap;
+width: 100%;
+</pre>
+<p><span id="more-1949"></span></p>
+<ul>
+<li><strong>overflow</strong> 属性是必需的，并且属性要是hidden。</li>
+<li><strong>white-space: nowrap</strong> 也是必需的。如果文本可以自动换行，就算是不可见，也不会有省略号的。因为文本换行了，所以没有超过容器的尺寸，所以也就不会有省略号了。</li>
+<li> <strong>width </strong>属性仅在需要支持IE6时设置。 设置成100%仅是为了解决IE6的不兼容问题。（关于IE中的那些不兼容问题，你可以参看本站的《<a href="https://coolshell.cn/articles/1817.html" rel="bookmark">9个最常见IE的Bug及其fix</a>》）</li>
+<li><strong>text-overflow: ellipsis</strong> 就是设置省略号了。目前还不是HTML的标准规范。其是由IE引入的，可以在IE6+，Safari 3.2+和Chrome上工作。</li>
+<li><strong>-o-text-overflow: ellipsis</strong> 是 Opera 支持的。可以在 Opera 9.0+使用。</li>
+</ul>
+<p><strong>使用jQuery设置省略号</strong></p>
+<p>正如前面所说过的，Firefox并不支持CSS中的那些省略号设置，因为那并不是标准的HTML规范。所以，我们需要使用jQuery的Javascript来干这个事。你可以下载由Devon Govett写的<a href="http://devongovett.wordpress.com/2009/04/06/text-overflow-ellipsis-for-firefox-via-jquery/">jQuery 省略号插件</a>，于是，你可以简单的把”ellipsis”赋给某些元件或是CSS定义，如下所示：</p>
+<p>[javascript]$(document).ready(function() {<br/>
+    $(‘.ellipsis’).ellipsis();<br/>
+}[/javascript]</p>
+<p>或是</p>
+<p>[javascript]$("span").ellipsis();[/javascript]<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3903.html"><img alt="一些有意思的贴子和工具" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3013.html"><img alt="一些非常有意思的杂项资源" height="150" src="../wp-content/uploads/2010/09/biolab-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3013.html">一些非常有意思的杂项资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1949.html">Web中的省略号</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

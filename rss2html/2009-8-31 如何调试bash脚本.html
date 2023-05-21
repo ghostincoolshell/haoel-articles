@@ -1,0 +1,104 @@
+<html><body><p><a href="http://en.wikipedia.org/wiki/Bash"><img alt="如何调试Bash脚本" class="alignright" height="120" src="../wp-content/uploads/2009/08/bash.jpg" title="如何调试Bash脚本" width="120"/>Bash</a> 是Linux操作系统的默认Shell脚本。Shell是用来处理操作系统和用户交互的一个程序。Shell的脚本可以帮助用户自动化地和操作系统进行交互。你也可以理解为一种脚本式的编程。即然有编程，那么，程序的编译器，解释器，调试器就必不可少了，Bash也一样，但在调试方面可能会有一些和编程语言不一样的东西和技术，所以，下面这篇文章主要是说明调试bash脚本的各种技术。</p>
+<h4 id="Tracing_script_execution">跟踪脚本的执行</h4>
+<p>你可以让bash打印出你脚本执行的过程中的所有语句。这很简单，只需要使用bash的-x选项就可以做到，下面让我们来看一下。</p>
+<p><span id="more-1379"></span></p>
+<p>下面的这段脚本，先是输出一个问候语句，然后输出当前的时间：</p>
+<pre class="EnlighterJSRAW">
+#!/bin/bash
+echo "Hello $USER,"
+echo "Today is $(date +'%Y-%m-%d')"
+</pre>
+<p>下面让我们使用-x选项来运行这段脚本：</p>
+<pre class="EnlighterJSRAW">
+$ bash -x example_script.sh
++ echo 'Hello chenhao,'
+Hello chenhao,
+++ date +%Y-%m-%d
++ echo 'Today is 2009-08-31'
+Today is 2009-08-31
+</pre>
+<p>这时，我们可以看到，bash在运行前打印出了每一行命令。而且每行前面的+号表明了嵌套。这样的输出可以让你看到命令执行的顺序并可以让你知道整个脚本的行为。<br/>
+<strong>在跟踪里输出行号</strong></p>
+<p>在一个很大的脚本中，你会看到很多很多的执行跟踪的输出，阅读起来非常费劲，所以，你可以在每一行前加上文件的行号，这会非常有用。要做到这样，你只需要设置下面的环境变量：</p>
+<pre class="EnlighterJSRAW"> 
+export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
+</pre>
+<p>让我们看看设置上了PS4这个环境变量后会是什么样的输出。</p>
+<p> </p>
+<pre class="EnlighterJSRAW">
+$ bash -x example_script.sh
++example_script.sh:2:: echo 'Hello chenhao,'
+Hello chenhao,
+++example_script.sh:3:: date +%Y-%m-%d
++example_script.sh:3:: echo 'Today is 2009-08-31'
+Today is 2009-08-31
+</pre>
+<p> <br/>
+<strong>调试部份的脚本</strong></p>
+<p>有些时候，你并不想调试整个脚本，你只要调试其中的一部份，那么，你可以在你想要调试的脚本之前，调用“set -x”，结束的时候调用“set +x”就可以了。如下面的脚本所示：</p>
+<p> </p>
+<pre class="EnlighterJSRAW">
+#!/bin/bash
+echo "Hello $USER,"
+set -x
+echo "Today is $(date %Y-%m-%d)"
+set +x
+</pre>
+<p> </p>
+<p>让我们看看运行起来是啥样？</p>
+<p> </p>
+<pre class="EnlighterJSRAW">
+$ ./example_script.sh
+Hello chenhao,
+++example_script.sh:4:: date +%Y-%m-%d
++example_script.sh:4:: echo 'Today is 2009-08-31'
+Today is 2009-08-31
++example_script.sh:5:: set +x
+</pre>
+<p> </p>
+<p>注意：我们在运行脚本的时候，不需要使用<span>bash -x了。</span></p>
+<p><span> </span></p>
+<h4 id="Logging">日志输出</h4>
+<p>跟踪日志有时候太多了，多得都受不了，而且，输出的内容很难阅读。一般来说，我们很多时候只关心于条件表达式，变量值，或是函数调用，或是循环等。。在这种情况下，log一些感兴趣的特定的信息，可能会更好。</p>
+<p>使用log前，我们先写一个函数：</p>
+<pre class="EnlighterJSRAW">
+_log() {
+    if [ "$_DEBUG" == "true" ]; then
+        echo 1&gt;&amp;2 "$@"
+    fi
+}
+</pre>
+<p> </p>
+<p>于是，你就可以在你的脚本中如下使用：</p>
+<pre class="EnlighterJSRAW"> 
+_log "Copying files..."
+cp src/* dst/
+</pre>
+<p> <br/>
+我们可以看到，上面那个_log函数，需要检查一个<span>_DEBUG</span> 变量，只有这个变量是真，才会真正开发输出日志。这样，你就只需要控制这个开关，而不需要删除你的debug信息。</p>
+<p> </p>
+<pre class="EnlighterJSRAW"> 
+$ _DEBUG=true ./example_script.sh
+</pre>
+<p> </p>
+<h4 id="Using_the_Bash_debugger">使用Bash专用调试器</h4>
+<p>如果你在写一个相当复杂的脚本，并且，你需要一个完整的像调试别的语言一样的调试器，那么你可以试着用用这个开源软件—— <a href="http://bashdb.sourceforge.net/">bashdb</a>， 一个Bash的专用调试器。这个调试器很强大，你想得到的功能，他都有，比如，设置断点，单步跟踪，跳出函数，等等。它的用户接口很想GDB，这是他的<a href="http://bashdb.sourceforge.net/bashdb.html">文档</a> 。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8619.html"><img alt="你可能不知道的Shell" height="150" src="../wp-content/uploads/2012/11/shell.01-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8619.html">你可能不知道的Shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2987.html"><img alt="用脚本实现哄宝宝睡觉(Demo)" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2987.html">用脚本实现哄宝宝睡觉(Demo)</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1539.html"><img alt="用脚本实现哄小孩睡觉" height="150" src="../wp-content/uploads/2009/10/baby_linux-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1539.html">用脚本实现哄小孩睡觉</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1379.html">如何调试bash脚本</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

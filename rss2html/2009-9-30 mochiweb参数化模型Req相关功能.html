@@ -1,0 +1,55 @@
+<html><body><p>本文的笔记讲述如何从client请求中获取各种参数,如method, request path, headers, cookie等。</p>
+<p>Mochiweb是Erlang实现的一个开源Web服务器，它设计的一个亮点就是他本身的Http请求的参数化模型。因此我们可以用OO的方式来理解它的相关用法。<br/>
+它的实现在mochiweb_request模块.在mochiweb中,每个client请求其构造一个 Req 对象(注：这个“对象“只是便于理解的提法), Req 可以理解成 mochiweb_request 的一个参数化或实例化.<br/>
+<span id="more-1516"></span></p>
+<p>1.<span style="color: #339966;"><strong>Req:get(method)</strong></span><strong> </strong>-&gt; ‘OPTIONS’ | ‘GET’ | ‘HEAD’ | ‘POST’ | ‘PUT’ | ‘DELETE’ | ‘TRACE’.<br/>
+获取Http请求的方式.</p>
+<p>2.<span style="color: #339966;"><strong>Req:get(raw_path)</strong> </span>-&gt; String().<br/>
+获取raw_path.比如 http://www.nextim.cn/session/login?username=test#p,那/session/login?username=test#p就是这个raw_path.</p>
+<p>3.<span style="color: #339966;"><strong>Req:get(path)</strong></span><strong> </strong>-&gt; String().<br/>
+获取path.比如 http://www.nextim.cn/session/login?username=test#p,那/session/login就是这个raw_path.</p>
+<p>4.<span style="color: #339966;"><strong>Req:parse_qs()</strong></span> -&gt; [{strng(), string()}].<br/>
+获取get参数.比如 http://www.nextim.cn/session/login?username=test#p,则返回[{“username”,”test”}].</p>
+<p>5.<span style="color: #339966;"><strong>Req:parse_post()</strong></span> -&gt; [{strng(), string()}].<br/>
+确保post数据类型为: application/x-www-form-urlencoded, 否则不要调用(其内部会调用Req:recv_body),返回值类似Req:parse_qs().</p>
+<p>6.<span style="color: #339966;"><strong>Req:get(peer)</strong></span><strong> </strong>-&gt; string().<br/>
+返回值为client的ip</p>
+<p>7.<span style="color: #339966;"><strong>Req:get_header_value(Key)</strong></span> -&gt; undefined | string().<br/>
+获取某个header,比如Key为”User-Agent”时，返回”Mozila…….”</p>
+<p>8.<span style="color: #339966;"><strong>Req:get_primary_header_value(Key) </strong></span>-&gt; undefined | string().<br/>
+获取http headers中某个key对应的主值(value以分号分割).<br/>
+举例: 假设 Content-Type 为 application/x-www-form-urlencoded; charset=utf8,则<br/>
+Req:get_header_value(“content-type”) 返回 application/x-www-form-urlencoded</p>
+<p>9.<span style="color: #339966;"><strong>Req:get(headers)</strong> </span>-&gt; dict().<br/>
+获取所有headers<br/>
+说明: 返回结果为stdlib/dict 数据结构,可以通过mochiweb_headers模块进行操作.<br/>
+举例: 下面代码显示请求中所有headers:<br/>
+Headers = Req:get(headers),<br/>
+lists:foreach(fun(Key, Value) -&gt;<br/>
+io:format(“~p : ~p ~n”, [Key, Value])<br/>
+end,<br/>
+mochiweb_headers:to_list(Headers)).</p>
+<p>10.<span style="color: #339966;"><strong>Req:parse_cookie()</strong></span> -&gt; [{string(), string()}].<br/>
+解析Cookie</p>
+<p>11.<strong><span style="color: #339966;">R</span></strong><span style="color: #339966;"><strong><span style="color: #339966;">eq:get_cookie_value(Key)</span></strong></span><strong><span style="color: #339966;"> </span></strong>-&gt; string().<br/>
+类似<span style="color: #ffcc00;">Req:get_header_value(Key)</span></p>
+<div><span style="font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif;"><span>最近搜了下，发现用mochiweb的挺多的。但自己用的时候发现来不少疑难。以上文档皆由litaocheng总结提供。感谢所带来的帮助。希望这个对国内使用mochiweb的朋友们带来帮助。</span></span></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2111.html"><img alt="erlang打包独立环境" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2111.html">erlang打包独立环境</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1313.html"><img alt="Erlang和Python互通" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1313.html">Erlang和Python互通</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1579.html"><img alt="一张关于操作系统的图" height="150" src="../wp-content/uploads/2009/10/operating-systems-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1579.html">一张关于操作系统的图</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9104.html"><img alt="sed 简明教程" height="150" src="../wp-content/uploads/2013/02/sed-superman-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9104.html">sed 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2913.html"><img alt="消费者的消费观" height="150" src="../wp-content/uploads/2010/09/1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2913.html">消费者的消费观</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1516.html">mochiweb参数化模型Req相关功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,79 @@
+<html><body><p><strong>来源</strong>：<a href="http://www.quora.com/What-is-Facebooks-architecture" target="_blank" title="What is Facebook's Architecture?">http://www.quora.com/What-is-Facebooks-architecture</a> （由<a href="http://www.quora.com/Micha%C3%ABl-Figui%C3%A8re">Micha?l Figuière</a>回答）</p>
+<p>根据我现有的阅读和谈话，我所理解的今天Facebook的架构如下：</p>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>Web 前端是由 PHP 写的。Facebook 的 <a href="http://developers.facebook.com/blog/post/358" target="_blank">HipHop </a>[1] 会把PHP转成 C++ 并用 g++编译，这样就可以为模板和Web逻贺业务层提供高的性能。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>业务逻辑以Service的形式存在，其使用<a href="http://thrift.apache.org/" target="_blank">Thrift </a>[2]。这些Service根据需求的不同由PHP，C++或Java实现（也可以用到了其它的一些语言……）</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>用Java写的Services没有用到任何一个企业级的应用服务器，但用到了Facebook自己的定制的应用服务器。看上去好像是重新发明轮子，但是这些Services只被暴露给Thrift使用（绝大所数是这样），Tomcat太重量级了，即使是Jetty也可能太过了点，其附加值对Facebook所需要的没有意义。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>持久化由MySQL, <a href="http://memcached.org/" target="_blank">Memcached </a>[3], Facebook 的 <a href="http://cassandra.apache.org/" target="_blank">Cassandra </a>[4], Hadoop 的 <a href="http://hbase.apache.org/" target="_blank">HBase </a>[5] 完成。Memcached 使用了MySQL的内存Cache。Facebook 工程师承认他们的Cassandra 使用正在减少，因为他们更喜欢HBase，因为它的更简单的一致性模型，以到其MapReduce能力。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>离线处理使用Hadoop 和 Hive。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>日志，点击，feeds数据使用<a href="https://github.com/facebook/scribe" target="_blank">Scribe </a>[6]，把其聚合并存在 HDFS，其使用<a href="http://hadoopblog.blogspot.com/2009/06/hdfs-scribe-integration.html" target="_blank">Scribe-HDFS </a>[7]，因而允许使用MapReduce进行扩展分析。</li>
+</ul>
+<p><span id="more-4549"></span></p>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li><a href="http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919" target="_blank">BigPipe </a>[8] 是他们的定制技术，用来加速页面显示。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li><a href="http://www.varnish-cache.org/" target="_blank">Varnish Cache</a> [9]用作HTTP代理。他们用这个的原因是<a href="http://www.varnish-software.com/customers/facebook" target="_blank">高速和有效率</a>。 [10].</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>用来搞定用户<a href="http://www.facebook.com/note.php?note_id=76191543919" target="_blank">上传的十亿张照片的存储</a>，其由Haystack处理，Facebook自己开发了一个Ad-Hoc存储方案，其主要做了一些低层优化和“仅追加”写技术 [11].</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>Facebook Messages 使用了自己的架构，其明显地构建在了一个动态集群的基础架构上。业务逻辑和持久化被封装在一个所谓的’Cell’。每个‘Cell’都处理一部分用户，新的‘Cell’可以因为访问热度被添加[12]。 持久化归档使用HBase [13]。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>Facebook Messages 的搜索引擎由存储在HBase中的一个倒置索引的构建。 [14]</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>Facebook 搜索引擎实现细节据我所知目前是未知状态。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>Typeahead 搜索使用了一个定制的存储和检索逻辑。 [15]</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px;">
+<li>Chat 基于一个Epoll 服务器，这个服务器由Erlang 开发，由Thrift存取 [16]</li>
+</ul>
+<p>关于那些供给给上述组件的资源，下面是一些信息和数量，但是有一些是未知的：</p>
+<ul>
+<li>Facebook估计有超过60,000 台服务器[16]。他们最新的数据中心在俄勒冈州的Prineville，其基于完全自定设计的硬件[17] 那是最近才公开的 <a href="http://opencompute.org" target="_blank">Open Compute 项目</a>[18]。</li>
+</ul>
+<ul>
+<li>300 TB 的数据存在 Memcached 中处理 [19]</li>
+</ul>
+<ul>
+<li>他们的Hadoop 和 Hive 集群由3000 服务器组成，每台服务器有8个核，32GB的内存，12TB的硬盘，全部有2万4千个CPU的核，96TB内存和36PB的硬盘。 [20]</li>
+</ul>
+<ul>
+<li>每天有1000亿的点击量，500亿张照片， 3 万亿个对象被 Cache，每天130TB的日志（<a href="http://www.facebook.com/note.php?note_id=409881258919" target="_blank">2010年7月的数据</a>） [21]</li>
+</ul>
+<p><strong>参考引用</strong></p>
+<p>[1] <em style="margin: 0px; padding: 0px;">HipHop for PHP</em>: <a href="http://developers.facebook.com/blog/post/358">http://developers.facebook.com/blog/post/358</a><br style="margin: 0px; padding: 0px;"/>[2] <em style="margin: 0px; padding: 0px;">Thrift</em>: <a href="http://thrift.apache.org/">http://thrift.apache.org/</a><br style="margin: 0px; padding: 0px;"/>[3] <em style="margin: 0px; padding: 0px;">Memcached</em>: <a href="http://memcached.org/">http://memcached.org/</a><br style="margin: 0px; padding: 0px;"/>[4] <em style="margin: 0px; padding: 0px;">Cassandra</em>: <a href="http://cassandra.apache.org/">http://cassandra.apache.org/</a><br style="margin: 0px; padding: 0px;"/>[5] <em style="margin: 0px; padding: 0px;">HBase</em>: <a href="http://hbase.apache.org/">http://hbase.apache.org/</a><br style="margin: 0px; padding: 0px;"/>[6] <em style="margin: 0px; padding: 0px;">Scribe</em>: <a href="https://github.com/facebook/scribe">https://github.com/facebook/scribe</a><br style="margin: 0px; padding: 0px;"/>[7] <em style="margin: 0px; padding: 0px;">Scribe-HDFS</em>: <a href="http://hadoopblog.blogspot.com/2009/06/hdfs-scribe-integration.html">http://hadoopblog.blogspot.com/2009/06/hdfs-scribe-integration.html</a><br style="margin: 0px; padding: 0px;"/>[8] <em style="margin: 0px; padding: 0px;">BigPipe</em>: <a href="http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919">http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919</a><br style="margin: 0px; padding: 0px;"/>[9] <em style="margin: 0px; padding: 0px;">Varnish Cache</em>: <a href="http://www.varnish-cache.org/">http://www.varnish-cache.org/</a><br style="margin: 0px; padding: 0px;"/>[10] <em style="margin: 0px; padding: 0px;">Facebook goes for Varnish</em>: <a href="http://www.varnish-software.com/customers/facebook">http://www.varnish-software.com/customers/facebook</a><br style="margin: 0px; padding: 0px;"/>[11] <em style="margin: 0px; padding: 0px;">Needle in a haystack</em>: efficient storage of billions of photos: <a href="http://www.facebook.com/note.php?note_id=76191543919">http://www.facebook.com/note.php?note_id=76191543919</a><br style="margin: 0px; padding: 0px;"/>[12] <em style="margin: 0px; padding: 0px;">Scaling the Messages Application Back End</em>: <a href="http://www.facebook.com/note.php?note_id=10150148835363920">http://www.facebook.com/note.php?note_id=10150148835363920</a><br style="margin: 0px; padding: 0px;"/>[13] <em style="margin: 0px; padding: 0px;">The Underlying Technology of Messages</em>: <a href="https://www.facebook.com/note.php?note_id=454991608919">https://www.facebook.com/note.php?note_id=454991608919</a><br style="margin: 0px; padding: 0px;"/>[14] <em style="margin: 0px; padding: 0px;">The Underlying Technology of Messages Tech Talk</em>: <a href="http://www.facebook.com/video/video.php?v=690851516105">http://www.facebook.com/video/video.php?v=690851516105</a><br style="margin: 0px; padding: 0px;"/>[15] <em style="margin: 0px; padding: 0px;">Facebook’s typeahead search architecture</em>: <a href="http://www.facebook.com/video/video.php?v=432864835468">http://www.facebook.com/video/video.php?v=432864835468</a><br style="margin: 0px; padding: 0px;"/>[16] <em style="margin: 0px; padding: 0px;">Facebook Chat</em>: <a href="http://www.facebook.com/note.php?note_id=14218138919">http://www.facebook.com/note.php?note_id=14218138919</a><br style="margin: 0px; padding: 0px;"/>[17] <em style="margin: 0px; padding: 0px;">Who has the most Web Servers?</em>: <a href="http://www.datacenterknowledge.com/archives/2009/05/14/whos-got-the-most-web-servers/">http://www.datacenterknowledge.com/archives/2009/05/14/whos-got-the-most-web-servers/</a><br style="margin: 0px; padding: 0px;"/>[18] B<em style="margin: 0px; padding: 0px;">uilding Efficient Data Centers with the Open Compute Project</em>: <a href="http://www.facebook.com/note.php?note_id=10150144039563920">http://www.facebook.com/note.php?note_id=10150144039563920</a><br style="margin: 0px; padding: 0px;"/>[19] <em style="margin: 0px; padding: 0px;">Open Compute Project</em>: <a href="http://opencompute.org/">http://opencompute.org/</a><br style="margin: 0px; padding: 0px;"/>[20] <em style="margin: 0px; padding: 0px;">Facebook’s architecture presentation at Devoxx 2010</em>: <a href="http://www.devoxx.com">http://www.devoxx.com</a><br style="margin: 0px; padding: 0px;"/>[21] <em style="margin: 0px; padding: 0px;">Scaling Facebook to 500 millions users and beyond</em>: <a href="http://www.facebook.com/note.php?note_id=409881258919">http://www.facebook.com/note.php?note_id=409881258919</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4939.html"><img alt="Quora使用到的技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18140.html"><img alt="关于Facebook 的 React 专利许可证" height="150" src="../wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18140.html">关于Facebook 的 React 专利许可证</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7448.html"><img alt="扎克伯格的一封信：关于Facebook IPO" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7448.html">扎克伯格的一封信：关于Facebook IPO</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3721.html"><img alt="Stack Exchange 的架构" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3721.html">Stack Exchange 的架构</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3396.html"><img alt="Facebook全球关系网" height="150" src="../wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3396.html">Facebook全球关系网</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/562.html"><img alt="30种时尚的CSS网站导航条" height="150" src="../wp-content/uploads/2009/04/13-09_menu_menu-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/562.html">30种时尚的CSS网站导航条</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4549.html">Facebook 的系统架构</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

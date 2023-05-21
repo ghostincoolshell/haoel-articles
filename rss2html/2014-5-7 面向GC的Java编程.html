@@ -1,0 +1,153 @@
+<html><body><p><strong>（感谢网友 <a href="http://weibo.com/tbmujian" target="_blank">@Hesey小纯纯</a> 投稿  <a href="http://blog.hesey.net/" target="_blank">博客</a> |　<a href="http://blog.hesey.net/2014/05/gc-oriented-java-programming.html" target="_blank">原文链接</a>）</strong></p>
+<p>Java程序员在编码过程中通常不需要考虑内存问题，JVM经过高度优化的GC机制大部分情况下都能够很好地处理堆(Heap)的清理问题。以至于许多Java程序员认为，我只需要关心何时创建对象，而回收对象，就交给GC来做吧！甚至有人说，如果在编程过程中频繁考虑内存问题，是一种退化，这些事情应该交给编译器，交给虚拟机来解决。</p>
+<p>这话其实也没有太大问题，的确，大部分场景下关心内存、GC的问题，显得有点“杞人忧天”了，高老爷说过：</p>
+<p style="padding-left: 30px;">过早优化是万恶之源。</p>
+<p>但另一方面，<strong>什么才是“过早优化”？</strong></p>
+<p style="padding-left: 30px;">If we could do things right for the first time, why not?</p>
+<p>事实上<strong>JVM的内存模型</strong>( <a href="http://www.cs.umd.edu/~pugh/java/memoryModel/" target="_blank">JMM</a> )理应是Java程序员的基础知识，处理过几次JVM线上内存问题之后就会很明显感受到，很多系统问题，都是内存问题。</p>
+<p>对JVM内存结构感兴趣的同学可以看下 <a href="http://blog.hesey.net/2011/04/introduction-to-java-virtual-machine.html" target="_blank">浅析Java虚拟机结构与机制</a> 这篇文章，本文就不再赘述了，本文也并不关注具体的GC算法，相关的文章汗牛充栋，随时可查。</p>
+<p>另外，不要指望GC优化的这些技巧，可以对应用性能有成倍的提高，特别是对I/O密集型的应用，或是实际落在YoungGC上的优化，可能效果只是帮你减少那么一点YoungGC的频率。</p>
+<p>但我认为，<strong>优秀程序员的价值，不在于其所掌握的几招屠龙之术，而是在细节中见真著</strong>，就像前面说的，<strong>如果我们可以一次把事情做对，并且做好，在允许的范围内尽可能追求卓越，为什么不去做呢？</strong><span id="more-11541"></span></p>
+<h4>一、GC分代的基本假设</h4>
+<p>大部分GC算法，都将堆内存做分代(Generation)处理，但是为什么要分代呢，又为什么不叫内存分区、分段，而要用面向时间、年龄的“代”来表示不同的内存区域？</p>
+<p>GC分代的<strong>基本假设</strong>是：</p>
+<p style="padding-left: 30px;"><strong>绝大部分对象的生命周期都非常短暂，存活时间短。</strong></p>
+<p>而这些短命的对象，恰恰是GC算法需要首先关注的。所以在大部分的GC中，YoungGC（也称作MinorGC）占了绝大部分，对于负载不高的应用，可能跑了数个月都不会发生FullGC。</p>
+<p>基于这个前提，在编码过程中，我们应该<strong>尽可能地缩短对象的生命周期</strong>。在过去，分配对象是一个比较重的操作，所以有些程序员会尽可能地减少new对象的次数，尝试减小堆的分配开销，减少内存碎片。</p>
+<p>但是，短命对象的创建在JVM中比我们想象的性能更好，所以，不要吝啬new关键字，大胆地去new吧。</p>
+<p>当然前提是不做无谓的创建，对象创建的速率越高，那么GC也会越快被触发。</p>
+<p>结论：</p>
+<ul>
+<li>分配小对象的开销分享小，不要吝啬去创建。</li>
+<li>GC最喜欢这种小而短命的对象。</li>
+<li>让对象的生命周期尽可能短，例如在方法体内创建，使其能尽快地在YoungGC中被回收，不会晋升(romote)到年老代(Old Generation)。</li>
+</ul>
+<h4>二、对象分配的优化</h4>
+<p>基于大部分对象都是小而短命，并且不存在多线程的数据竞争。这些小对象的分配，会优先在线程私有的<strong> TLAB</strong> 中分配，TLAB中创建的对象，不存在锁甚至是CAS的开销。</p>
+<p>TLAB占用的空间在Eden Generation。</p>
+<p>当对象比较大，TLAB的空间不足以放下，而JVM又认为当前线程占用的TLAB剩余空间还足够时，就会直接在Eden Generation上分配，此时是存在并发竞争的，所以会有CAS的开销，但也还好。</p>
+<p>当对象大到Eden Generation放不下时，JVM只能尝试去Old Generation分配，这种情况需要尽可能避免，因为一旦在Old Generation分配，这个对象就只能被Old Generation的GC或是FullGC回收了。</p>
+<h4>三、不可变对象的好处</h4>
+<p>GC算法在扫描存活对象时通常需要从ROOT节点开始，扫描所有存活对象的引用，构建出对象图。</p>
+<p>不可变对象对GC的优化，主要体现在Old Generation中。</p>
+<p>可以想象一下，如果存在Old Generation的对象引用了Young Generation的对象，那么在每次YoungGC的过程中，就必须考虑到这种情况。</p>
+<p>Hotspot JVM为了提高YoungGC的性能，避免每次YoungGC都扫描Old Generation中的对象引用，采用了 <strong>卡表(Card Table) </strong>的方式。</p>
+<p>简单来说，当Old Generation中的对象发生对Young Generation中的对象产生新的引用关系或释放引用时，都会在卡表中响应的标记上标记为脏(dirty)，而YoungGC时，只需要扫描这些dirty的项就可以了。</p>
+<p>可变对象对其它对象的引用关系可能会频繁变化，并且有可能在运行过程中持有越来越多的引用，特别是容器。这些都会导致对应的卡表项被频繁标记为dirty。</p>
+<p>而不可变对象的引用关系非常稳定，在扫描卡表时就不会扫到它们对应的项了。</p>
+<p>注意，这里的不可变对象，不是指仅仅自身引用不可变的final对象，而是真正的<strong><span style="color: #ff0000;">Immutable Objects</span></strong>。</p>
+<h4>四、引用置为null的传说</h4>
+<p>早期的很多Java资料中都会提到在方法体中将一个变量置为null能够优化GC的性能，类似下面的代码：</p>
+<pre class="EnlighterJSRAW">List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+// some code
+list = null; // help GC
+</pre>
+<p>事实上这种做法对GC的帮助微乎其微，有时候反而会导致代码混乱。</p>
+<p>我记得几年前 @rednaxelafx 在HLL VM小组中详细论述过这个问题，原帖我没找到，结论基本就是：</p>
+<ul>
+<li>在一个非常大的方法体内，对一个较大的对象，将其引用置为null，某种程度上可以帮助GC。</li>
+<li>大部分情况下，这种行为都没有任何好处。</li>
+</ul>
+<p>所以，还是早点放弃这种“优化”方式吧。</p>
+<p>GC比我们想象的更聪明。</p>
+<h4>五、手动档的GC</h4>
+<p>在很多Java资料上都有下面两个奇技淫巧：</p>
+<ul>
+<li>通过<strong>Thread.yield()</strong>让出CPU资源给其它线程。</li>
+<li>通过<strong>System.gc()</strong>触发GC。</li>
+</ul>
+<p>事实上JVM从不保证这两件事，而System.gc()在JVM启动参数中如果允许显式GC，则会<strong>触发FullGC</strong>，对于响应敏感的应用来说，几乎等同于自杀。</p>
+<p>So，让我们牢记两点：</p>
+<ul>
+<li>Never use Thread.yield()。</li>
+<li>Never use System.gc()。除非你真的需要回收Native Memory。</li>
+</ul>
+<p>第二点有个Native Memory的例外，如果你在以下场景：</p>
+<ul>
+<li>使用了NIO或者NIO框架（Mina/Netty）</li>
+<li>使用了DirectByteBuffer分配字节缓冲区</li>
+<li>使用了MappedByteBuffer做内存映射</li>
+</ul>
+<p>由于<strong>Native Memory只能通过FullGC（或是CMS GC）回收</strong>，所以除非你非常清楚这时真的有必要，否则不要轻易调用System.gc()，且行且珍惜。</p>
+<p>另外为了防止某些框架中的System.gc调用（例如NIO框架、Java RMI），建议在启动参数中加上-XX:+DisableExplicitGC来禁用显式GC。</p>
+<p>这个参数有个巨大的坑，如果你禁用了System.gc()，那么上面的3种场景下的内存就无法回收，可能造成OOM，如果你使用了CMS GC，那么可以用这个参数替代：-XX:+ExplicitGCInvokesConcurrent。</p>
+<p>关于System.gc()，可以参考 @bluedavy 的几篇文章：</p>
+<ul>
+<li><a href="http://hellojava.info/?p=56" target="_blank">CMS GC会不会回收Direct ByteBuffer的内存</a></li>
+<li><a href="http://hellojava.info/?p=323" target="_blank">说说在Java启动参数上我犯的错</a></li>
+<li><a href="http://hellojava.info/?p=319" target="_blank">java.lang.OutOfMemoryError:Map failed</a></li>
+</ul>
+<p> </p>
+<h4>六、指定容器初始化大小</h4>
+<p>Java容器的一个特点就是可以动态扩展，所以通常我们都不会去考虑初始大小的设置，不够了反正会自动扩容呗。</p>
+<p>但是扩容不意味着没有代价，甚至是很高的代价。</p>
+<p>例如一些基于数组的数据结构，例如StringBuilder、StringBuffer、ArrayList、HashMap等等，在扩容的时候都需要做ArrayCopy，对于不断增长的结构来说，经过若干次扩容，会存在大量无用的老数组，而回收这些数组的压力，全都会加在GC身上。</p>
+<p>这些容器的构造函数中通常都有一个可以指定大小的参数，如果对于某些大小可以预估的容器，建议加上这个参数。</p>
+<p>可是因为容器的扩容并不是等到容器满了才扩容，而是有一定的比例，例如HashMap的扩容阈值和负载因子(loadFactor)相关。</p>
+<p>Google Guava框架对于容器的初始容量提供了非常便捷的工具方法，例如：</p>
+<p>[code lang=”java”]Lists.newArrayListWithCapacity(initialArraySize);</p>
+<p>Lists.newArrayListWithExpectedSize(estimatedSize);</p>
+<p>Sets.newHashSetWithExpectedSize(expectedSize);</p>
+<p>Maps.newHashMapWithExpectedSize(expectedSize);<br/>
+[/code]</p>
+<p>这样我们只要传入预估的大小即可，容量的计算就交给Guava来做吧。</p>
+<p><strong>反例</strong>：如果采用默认无参构造函数，创建一个ArrayList，不断增加元素直到OOM，那么在此过程中会导致：</p>
+<ul>
+<li>多次数组扩容，重新分配更大空间的数组</li>
+<li>多次数组拷贝</li>
+<li>内存碎片</li>
+</ul>
+<h4>七、对象池</h4>
+<p>为了减少对象分配开销，提高性能，可能有人会采取对象池的方式来缓存对象集合，作为复用的手段。</p>
+<p>但是对象池中的对象由于在运行期长期存活，大部分会晋升到Old Generation，因此无法通过YoungGC回收。</p>
+<p>并且通常……没有什么效果。</p>
+<p>对于对象本身：</p>
+<ul>
+<li>如果对象很小，那么分配的开销本来就小，对象池只会增加代码复杂度。</li>
+<li>如果对象比较大，那么晋升到Old Generation后，对GC的压力就更大了。</li>
+</ul>
+<p>从线程安全的角度考虑，通常池都是会被并发访问的，那么你就需要处理好同步的问题，这又是一个大坑，并且<strong>同步带来的开销，未必比你重新创建一个对象小</strong>。</p>
+<p>对于对象池，唯一合适的场景就是<strong>当池中的每个对象的创建开销很大</strong>时，缓存复用才有意义，例如每次new都会创建一个连接，或是依赖一次RPC。</p>
+<p>比如说：</p>
+<ul>
+<li>线程池</li>
+<li>数据库连接池</li>
+<li>TCP连接池</li>
+</ul>
+<p>即使你真的需要实现一个对象池，也请使用成熟的开源框架，例如Apache Commons Pool。</p>
+<p>另外，使用JDK的ThreadPoolExecutor作为线程池，不要重复造轮子，除非当你看过AQS的源码后认为你可以写得比Doug Lea更好。</p>
+<h4>八、对象作用域</h4>
+<p>尽可能缩小对象的作用域，即生命周期。</p>
+<ul>
+<li>如果可以在方法内声明的局部变量，就不要声明为实例变量。</li>
+<li>除非你的对象是单例的或不变的，否则尽可能少地声明static变量。</li>
+</ul>
+<h4>九、各类引用</h4>
+<p>java.lang.ref.Reference有几个子类，用于处理和GC相关的引用。JVM的引用类型简单来说有几种：</p>
+<ul>
+<li>Strong Reference，最常见的引用</li>
+<li>Weak Reference，当没有指向它的强引用时会被GC回收</li>
+<li>Soft Reference，只当临近OOM时才会被GC回收</li>
+<li>Phantom Reference，主要用于识别对象被GC的时机，通常用于做一些清理工作</li>
+</ul>
+<p>当你需要实现一个缓存时，可以考虑优先使用WeakHashMap，而不是HashMap，当然，更好的选择是使用框架，例如Guava Cache。</p>
+<p>最后，再次提醒，以上的这些未必可以对代码有多少性能上的提升，但是熟悉这些方法，是为了帮助我们写出更卓越的代码，和GC更好地合作。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2631.html"><img alt="五大基于JVM的脚本语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2631.html">五大基于JVM的脚本语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1252.html"><img alt="G1新型垃圾回收器一瞥" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1252.html">G1新型垃圾回收器一瞥</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

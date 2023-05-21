@@ -1,0 +1,288 @@
+<html><body><p>在过去的一年中，在线地图的发展是相当巨大，我们可以看到在线地图的极有价值的信息和其能力。这其中，最有名气的自然是Google Maps。. Google Maps由一个相当强大的开发引擎并也有一个很大的社区提示支持。</p>
+<p>Google 允许各种web masters 通过Google Maps API来增加或自定义他们站点特定的地图，你可能从这里取得<a href="http://code.google.com/intl/en/apis/maps/signup.html" target="_blank" title="Get a Google Maps API Key">Google API key </a>。一个地图 API key只对一个“目录”或域有效。key绑定了你的域名，你要在网站上放地图，需要有对应的key，否则拒绝读取地图数据，在本地测试可以不用key。当然，你可以申请多个API key。</p>
+<h4>创建一个简单的地图</h4>
+<p>在你的站点上引入Google Maps 是一件很简单的事情，你只需要加入：</p>
+<p><span id="more-1561"></span></p>
+<ul>
+<li>引入Google的JavaScript 文件</li>
+<li>设置JavaScript 一些参数</li>
+<li>一个你需要显示地图的HTML layer</li>
+</ul>
+<p><strong>Google的Javascript文件引入</strong>:</p>
+<pre class="EnlighterJSRAW">
+&lt;script
+    charset="UTF-8"
+    src=http://maps.google.com/maps?file=api&amp;v=2&amp;hl=en&amp;oe=utf-8&amp;key=API_KEY
+    type="text/javascript"&gt;
+&lt;/script&gt;
+</pre>
+<p><em><strong>注意</strong>：</em> 我们可以改变语言，比如说，把“<strong>hl=en</strong>” 改成中文“<strong>hl=zh-CN</strong>” 。我们还得要把“<strong>API_KEY</strong>” 改成我们向Google申请来的那个。</p>
+<p><strong>说明</strong>: 使用 UTF-8 编码会更好些。</p>
+<p><strong>设置地图参数</strong>:</p>
+<p>这是你可定制有个性化的Google Maps的地方。我们可以增加一些参数来改变地图的样式。例如，我们可以设置地图的载入和显示的坐标。下面是相关的代码：</p>
+<pre class="EnlighterJSRAW">]function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(37.97918, 23.71665), 13);
+        map.setUIToDefault();
+    }
+}</pre>
+<p>请注意上面高亮的那一条语句，第一个是纬度坐标和第二个是经度坐标，“13” 表示地图缩放的程度，这个值可以取1 到17。</p>
+<p>要知道所在地点的纬度和经度，你可以使用<a href="http://www.satsig.net/maps/lat-long-finder.htm" target="_blank" title="Tool to get the coordinates of a location">这个工具</a>，这个工具很容易使用，只需要把地图移到你想要的区域，然后，把鼠标放在中心就可以了。</p>
+<h4>地图标记</h4>
+<p>你可以在地图上放上一个标记来标出一个特定的位置，下面是一个示例代码。</p>
+<pre class="EnlighterJSRAW">var point = new GLatLng(37.97110, 23.72601);
+map.addOverlay(new GMarker(point));</pre>
+<p>于是，我们整个代码看起来是下面这个样子：</p>
+<pre class="EnlighterJSRAW">function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(37.97918, 23.71665), 13);
+        var point = new GLatLng(37.97110, 23.72601);
+        map.addOverlay(new GMarker(point));
+        map.setUIToDefault();
+    }
+}</pre>
+<p>上面的示例把我们的地图的中心放在了希腊雅典，标记了雅典卫城。</p>
+<p><strong>气球提示</strong></p>
+<p>气球提示一个很不错的界面，他可以用于放置一些小提示或或是一些信息。例如，下面的代码将放置一个在雅典卫城山上放一个气球提示来显示一些信息：</p>
+<pre class="EnlighterJSRAW">function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(37.97110, 23.72601), 13);
+        var html = "Parthenon 帕台农神庙, 地址: Acropolis Hill";
+        map.openInfoWindow(map.getCenter(),
+        document.createTextNode(html));
+        map.setUIToDefault();
+    }
+}</pre>
+<h4>活动标记</h4>
+<p>我们可以合并一些标记和气球提示来创建一个活动标记，这样一来，我们可以达到这样的效果——当用户点击某个标记的时候才会显示提示。代码如下所示：</p>
+<pre class="EnlighterJSRAW">function initialize() {
+    if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(37.97918, 23.71665), 13);
+        var baseIcon = new GIcon(G_DEFAULT_ICON);
+        baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        baseIcon.iconSize = new GSize(20, 34);
+        baseIcon.shadowSize = new GSize(37, 34);
+        baseIcon.iconAnchor = new GPoint(9, 34);
+        baseIcon.infoWindowAnchor = new GPoint(9, 2);
+
+        function createMarker(point, index) {
+            var redIcon = new GIcon(baseIcon);
+            redIcon.image = "http://www.google.com/mapfiles/marker.png";
+            markerOptions = { icon:redIcon };
+            var marker = new GMarker(point, markerOptions);
+            GEvent.addListener(marker, "click", function() {
+                marker.openInfoWindowHtml("Parthenon, Address: Acropolis Hill");
+            });
+            return marker;
+        }
+
+        var latlng = new GLatLng(37.97110, 23.72601);
+        map.addOverlay(createMarker(latlng));
+    }
+}</pre>
+<p>让我来梳理一下上面的代码。下面的部分是在标记下增加一个阴影：</p>
+<pre class="EnlighterJSRAW">var baseIcon = new GIcon(G_DEFAULT_ICON);
+baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+baseIcon.iconSize = new GSize(20, 34);
+baseIcon.shadowSize = new GSize(37, 34);
+baseIcon.iconAnchor = new GPoint(9, 34);
+baseIcon.infoWindowAnchor = new GPoint(9, 2);</pre>
+<p>标记的Action是在这里设置的：</p>
+<pre class="EnlighterJSRAW">function createMarker(point, index) {
+    var redIcon = new GIcon(baseIcon);
+    redIcon.image = "http://www.google.com/mapfiles/marker.png";
+    markerOptions = { icon:redIcon };
+    var marker = new GMarker(point, markerOptions);
+    GEvent.addListener(marker, "click", function() {
+        marker.openInfoWindowHtml("Parthenon, Address: Acropolis Hill");
+    });
+    return marker;
+}</pre>
+<p>这里是我们的标记的坐标：</p>
+<pre class="EnlighterJSRAW">var latlng = new GLatLng(37.97110, 23.72601);
+map.addOverlay(createMarker(latlng));</pre>
+<h3>载入地图</h3>
+<p>我们可以通过两种方法载入地图。我们可以让地图在整网页载入时载入（通过使用body的load事件），也可以把载入过程赋给其它事件。下面的两个方法是我们需要注意的：</p>
+<ul>
+<li><strong>initialize()</strong> 载入地图</li>
+<li><strong>GUnload()</strong> 卸载地图以释放内存</li>
+</ul>
+<p>我们当然还需要使用HTML的DIV标签来指定一个ID，这样才能被JavaScript使用，在我们的示例中，我们使用“map_canvas”。我们也能使用CSS来渲染这个DIV层。</p>
+<h3>定制地图</h3>
+<p>你可以使用自定义的标记和阴影。有两个工具可以帮助你创建这些图标—— <a href="http://gmaps-utility-library.googlecode.com/svn/trunk/mapiconmaker/1.1/examples/markericonoptions-wizard.html" target="_blank" title="Custom Marker Icons">地图标记</a> 和<a href="http://www.cycloloco.com/shadowmaker/" target="_blank" title="Custom Shadows for Maps"> 阴影</a>。你也可以使用HTML和CSS来定义气球提示。</p>
+<h4>加入多个标记并分组</h4>
+<p>我们可以标记多个地点，并可以把它们根据我们的需要分组。这样一来，我们可以通过不同的标记图标来显示地点的不同属性，比如：酒店，车站等。要做到这样，我们只需要使用一个XML文件，一个简单的XML文件如下所示：</p>
+<pre class="EnlighterJSRAW">
+&lt;markers&gt;
+&lt;marker
+    name="标题"
+    label="这是一个标签"
+    desc="气球提示的描述"
+    lat="37.97167" lng="23.72581"
+    type="标签的种类，如 Bridge"
+    address="地址信息"
+    icona="图标"
+/&gt;
+&lt;/markers&gt;
+</pre>
+<p>你可以在这个XML文件中加入多个地点信息。有一件事你需要小心的是，当出现一一些特定字符时（比如单引号，双引号，<a href="mailto:“#@$">“#@$</a>&lt;&gt;”等），你需要使用HTML的转义。</p>
+<p>使用这XML的脚本如下：</p>
+<p><code class="EnlighterJSRAW">&lt;script src="http://gmaps-utility-library.googlecode.com/svn/trunk/labeledmarker/release/src/labeledmarker.js" type="text/javascript"&gt;&lt;/script&gt;</code></p>
+<p>当然，你需要设置一些参数：</p>
+<pre class="EnlighterJSRAW">var iconRed = new GIcon();
+iconRed.image = '../img/marker-red.png';
+iconRed.shadow = '';
+iconRed.iconSize = new GSize(32, 32);
+iconRed.shadowSize = new GSize(22, 20);
+iconRed.iconAnchor = new GPoint(16, 16);
+iconRed.infoWindowAnchor = new GPoint(5, 1);
+var customIcons = [];
+
+customIcons["ancient"] = iconRed;
+var markerGroups = { "ancient": []};</pre>
+<p>上面，我们给customIcons 的“ancient”属性设置成了iconRed ，于是我们应该在我们的XML文件中使用类型(ancient) ，如果我们把这个XML文件命名为： markers.xml，那么，我们的代码如下：</p>
+<pre class="EnlighterJSRAW">
+GDownloadUrl("markers.xml", function(data) { //We tell Google Maps to load our file
+        var xml = GXml.parse(data);
+        var markers = xml.documentElement.getElementsByTagName("marker"); //and read markers
+        for (var i = 0; i &lt; markers.length; i++) {
+            var name = markers[i].getAttribute("name"); //From here down we assign variables.
+            var label = markers[i].getAttribute("label");
+            var desc = markers[i].getAttribute("desc");
+            var address = markers[i].getAttribute("address");
+            var type = markers[i].getAttribute("type");
+            var icona = markers[i].getAttribute("icona");
+            var point = new GlatLng(parseFloat(markers[i].getAttribute("lat")), //and we set the lat-long
+            parseFloat(markers[i].getAttribute("lng")));
+            var marker = createMarker(point, name, label, desc, address, type, icona);
+            map.addOverlay(marker);
+        }
+    });
+}
+}
+
+function createMarker(point, name, label, desc, address, type, icona) {
+    var marker = new LabeledMarker(point, {icon: customIcons[type], labelText: label, labelOffset: new GSize(-6, -8)})
+};
+</pre>
+<p>要分组标记，你需要下面的代码：</p>
+<pre class="EnlighterJSRAW">
+    markerGroups[type].push(marker);
+    var html = "&lt;img src=" + icona + " height=150 border=0 /&gt;&lt;br&gt;&lt;br&gt;&lt;span&gt;&lt;b&gt;"+ name + "&lt;/b&gt;&lt;br/&gt;" +
+            desc + "&lt;br/&gt;&lt;b&gt;Address:&lt;/b&gt; " + address + "&lt;br/&gt;&lt;br/&gt;&lt;span&gt;";
+    GEvent.addListener(marker, 'click', function() {
+        marker.openInfoWindowHtml(html);
+    });
+    return marker;
+}
+</pre>
+<p>要使用不同的图标，你可以使用相同的方法。</p>
+<pre class="EnlighterJSRAW">var iconRed = new GIcon();
+iconRed.image = '../img/marker-red.png';
+iconRed.shadow = '';
+iconRed.iconSize = new GSize(32, 32);
+iconRed.shadowSize = new GSize(22, 20);
+iconRed.iconAnchor = new GPoint(16, 16);
+iconRed.infoWindowAnchor = new GPoint(5, 1);
+
+var iconGreen = new GIcon();
+iconGreen.image = '../img/marker-green.png';
+iconGreen.shadow = '';
+iconGreen.iconSize = new GSize(32, 32);
+iconGreen.shadowSize = new GSize(22, 20);
+iconGreen.iconAnchor = new GPoint(16, 16);
+iconGreen.infoWindowAnchor = new GPoint(5, 1);
+
+var iconBrown = new GIcon();
+iconBrown.image = '../img/marker-brown.png';
+iconBrown.shadow = '';
+iconBrown.iconSize = new GSize(32, 32);
+iconBrown.shadowSize = new GSize(22, 20);
+iconBrown.iconAnchor = new GPoint(16, 16);
+iconBrown.infoWindowAnchor = new GPoint(5, 1);
+
+var customIcons = [];
+
+customIcons["hotel"] = iconRed;
+customIcons["bridge"] = iconGreen;
+customIcons["hill"] = iconBrown;
+var markerGroups = { "hotel": [], "bridge": [], "hill": []};</pre>
+<p>所以，如果我们在XML 文件中设置了不同的种类，如：hotel，bridge 和 hill，我们也应该需要不同的颜色和图标。</p>
+<h4>过滤显示标记</h4>
+<p>我们还可以让我们的标记更友好一些。我们可以让用户决定是否显示标记，这样的话，地图上的标记就不会太多，也会根据用户的需求来显示相当的标记。我们可以使用几个按钮，复选框，或是链接来完成这个事情。要做到这个事，你需要在“<em>map.addMapType(G_SATELLITE_3D_MAP); </em>”后面加入下面的代码：</p>
+<pre class="EnlighterJSRAW">document.getElementById("hotelCheckbox").checked = true;
+document.getElementById("bridgeCheckbox").checked = true;
+document.getElementById("hillCheckbox").checked = true;
+document.getElementById("labelsCheckbox").checked = true;
+</pre>
+<p>然后再加入下面的这些 JavaScript 的代码：</p>
+<pre class="EnlighterJSRAW">
+function toggleGroup(type) {
+    for (var i = 0; i &lt; markerGroups[type].length; i++) {
+        var marker = markerGroups[type][i];
+        if (marker.isHidden()) {
+            marker.show();
+        } else {
+            marker.hide();
+        }
+    }
+}
+
+function toggleLabels() {
+    var showLabels = document.getElementById("labelsCheckbox").checked;
+    for (groupName in markerGroups) {
+        for (var i = 0; i &lt; markerGroups[groupName].length; i++) {
+            var marker = markerGroups[groupName][i];
+            marker.setLabelVisibility(showLabels);
+        }
+    }
+}
+
+function hideAll() {
+    var boxes = document.getElementsByName("mark");
+    for(var i = 0; i &lt; boxes.length; i++) {
+        if(boxes[i].checked) {
+            boxes[i].checked = false;
+            switchLayer(false, layers[i].obj);
+            chosen.push(i);
+        }
+    }
+}
+
+function checkChecked() {
+    var boxes = document.getElementsByName("mark");
+    for(var i = 0; i &lt; boxes.length; i++) {
+        if(boxes[i].checked) return true;
+    }
+    return false;
+}</pre>
+<p>最后一件事是加如几个checkbox ：</p>
+<pre class="EnlighterJSRAW">
+&lt;input type="hidden" id="labelsCheckbox" onclick="toggleLabels()" checked=”checked” /&gt;
+&lt;label for=”hotelCheckbox”&gt;Hotels&lt;/label&gt;&lt;input type="checkbox" id="hotelCheckbox" onclick="toggleGroup('hotel')" checked=”checked” /&gt;
+&lt;label for=”bridgeCheckbox”&gt;Bridges&lt;/label&gt;&lt;input type="checkbox" id="bridgeCheckbox" onclick="toggleGroup('bridge')" checked=”checked” /&gt;
+</pre>
+<p>我们 Google Maps 就绪了，这篇文章讲述了Google Map API中你应该知道的。希望这篇文章对你有帮助。</p>
+<p>文章：<a href="http://jeez.eu/2009/10/09/google-maps-from-a-to-z/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22398.html"><img alt="我看ChatGPT: 为啥谷歌掉了千亿美金" height="150" src="../wp-content/uploads/2023/02/chatgpt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12136.html"><img alt="Google Inbox如何跨平台重用代码？" height="150" src="../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12136.html">Google Inbox如何跨平台重用代码？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9508.html"><img alt="PFIF网上寻人协议" height="150" src="../wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9508.html">PFIF网上寻人协议</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5815.html"><img alt="来信， 创业 和 移动互联网" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5815.html">来信， 创业 和 移动互联网</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5701.html"><img alt="SteveY对Amazon和Google平台的吐槽" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5701.html">SteveY对Amazon和Google平台的吐槽</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1561.html">Google Maps API用法教程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

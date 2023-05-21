@@ -1,0 +1,369 @@
+<html><body><p><img alt="9个最常见IE的Bug及其fix" class="alignright" height="132" src="http://nettuts.s3.amazonaws.com/494_ie/images/200x200.jpg" width="138"/></p>
+<p>Internet Explorer – Web程序员的毒药。在IE上开发时间中有超过60%的时间是花在和IE的bug进行搏斗，让你的开发生产率严重下降。下面是一个教程，告诉你9个IE上最常见的BUG以及如何解决它们。</p>
+<h4>1. 居中布局</h4>
+<p>创建一个CSS定义把一个元素放到中间的位置，可能是每一个Web开发人员都会做的事情。最简单的做法是为你的元素增加一个<em>margin: auto;</em> ，然而 IE 6.0 会出现很多奇怪的行为。让我们来看一个例子。</p>
+<pre class="EnlighterJSRAW">
+#container{
+	border: solid 1px #000;
+	background: #777;
+	width: 400px;
+	height: 160px;
+	margin: 30px 0 0 30px;
+}
+
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 100px;
+	margin: 30px auto;
+
+}
+</pre>
+<p>下面是我们所期望的输出：</p>
+<p><span id="more-1817"></span></p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/1-1.png"/></div>
+<p>但IE却给我们这样的输出：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/1-2.png"/></div>
+<p>这应该是IE 6对margin的 <em>auto</em> 并没有正确的设置。但幸运的是，这是很容易被修正的。</p>
+<p><strong>解决方法</strong></p>
+<p>最简单的方法是在父元件中使用 <em>text-align: center</em> 属性，而在元件中使用 <em>text-align: left</em> 。</p>
+<pre class="EnlighterJSRAW">
+#container{
+	border: solid 1px #000;
+	background: #777;
+	width: 400px;
+	height: 160px;
+	margin: 30px 0 0 30px;
+	text-align: center;
+}
+
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 100px;
+	margin: 30px 0;
+    	text-align: left;
+
+}
+</pre>
+<h4>2. 楼梯式的效果</h4>
+<p>几乎所有的Web开发者都会使用list来创建导航条。下面是你可能会用到的代码：</p>
+<pre class="EnlighterJSRAW">
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+</pre>
+<p> </p>
+<pre class="EnlighterJSRAW">
+ul {
+    list-style: none;
+}
+
+ul li a {
+   	display: block;
+   	width: 130px;
+	height: 30px;
+   	text-align: center;
+   	color: #fff;
+   	float: left;
+	background: #95CFEF;
+	border: solid 1px #36F;
+	margin: 30px 5px;
+}
+</pre>
+<p>一个符合标准的浏览器会是下面这样：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/2-1.png"/></div>
+<p>但IE却是这样的：</p>
+<p><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/2-2.png"/></p>
+<p>下面是两个解决方法</p>
+<p><b>解决方法一</b></p>
+<p>设置li元件的float属性。</p>
+<pre class="EnlighterJSRAW">
+ul li {
+	float: left;
+}
+</pre>
+<p><strong>解决方法二</strong></p>
+<p>设置 <em>display: inline</em> 属性。</p>
+<pre class="EnlighterJSRAW">
+ul li {
+	display: inline
+}
+</pre>
+<h4>3. float元件的两倍空白</h4>
+<p>请看下面的代码：</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	width: 300px;
+	height: 100px;
+	float: left;
+	margin: 30px 0 0 30px;
+	border: solid 1px #36F;
+}
+</pre>
+<p>期望的结果是：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/3-1.png"/></div>
+<p>IE的结果是：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/3-2.png"/></div>
+<p><strong>解决方案</strong></p>
+<p>和上面那个BUG的解决方案一样，设置 <em>display: inline</em> 属性可以解决问题。</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	width: 300px;
+	height: 100px;
+	float: left;
+	margin: 30px 0 0 30px;
+	border: solid 1px #36F;
+   	display: inline;
+}
+</pre>
+<h4>4. 无法设置微型高度</h4>
+<p>我们发现在IE中使用 <em>height: XXpx</em> 这样的属性无法设置比较小的高度。下面是个例子（注意高度是2px）：</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 2px;
+	margin: 30px 0;
+}
+</pre>
+<p>期望结果： 2px的元件加1px的边框.</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/4-1.png"/></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/4-2.png"/></div>
+<p><strong>解决方案一</strong></p>
+<p>这个BUG的产生原因很简单，IE不允许元件的高度小于字体的高度，所以，下面的fix是设置上字体大小。</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 2px;
+	margin: 30px 0;
+    	font-size: 0;
+}
+</pre>
+<p><strong>解决方案二</strong></p>
+<p>但是最佳的解决方法是使用 <em>overflow: hidden</em> 。</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 2px;
+	margin: 30px 0;
+    	overflow: hidden
+}
+</pre>
+<h4>5. 跨出边界</h4>
+<p>这个BUG是很难看的。当父元件中使用了 <em>overflow</em> 的 <em>auto</em> 属性，并且在其里放入相关元件。你会看来里面的元件会跨出来。下面是一个示例：</p>
+<pre class="EnlighterJSRAW">
+&lt;div id="element"&gt;&lt;div id="anotherelement"&gt;&lt;/div&gt;&lt;/div&gt;
+</pre>
+<p> </p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 150px;
+	margin: 30px 0;
+	overflow: auto;
+}
+
+#anotherelement{
+	background: #555;
+	width: 150px;
+	height: 175px;
+	position: relative;
+	margin: 30px;
+}
+</pre>
+<p>期望的结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/5-1.png"/></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/5-2.png"/></div>
+<p><strong>解决方法</strong></p>
+<p>设置 position: relative;属性</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 300px;
+	height: 150px;
+	margin: 30px 0;
+	overflow: auto;
+    	position: relative;
+}
+</pre>
+<h4>6. Fixing the Broken Box Model</h4>
+<p>Internet Explorer曲解了“盒子模子”可能是最不可原谅的事情了。IE 6 这个半标准的浏览器回避了这个事情，但这个问题还是会因为IE运行在“怪异模式”下出现。</p>
+<p>两个Div元件。一个是有fix的，一个是没有的。而他们不同的高和宽加上padding的总合却是不一样的。下图的上方是被修正的，下方则没有。</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/6.png"/></div>
+<p><strong>解决方法</strong></p>
+<p>我相信这个事情即不需要解释也不需要演示，这应该是大多数人都明白的。下面是一个很相当怪异的解决方案</p>
+<pre class="EnlighterJSRAW">
+#element{
+	width: 400px;
+    	height: 150px;
+	padding: 50px;
+}
+</pre>
+<p>上面的定义也就是说：</p>
+<pre class="EnlighterJSRAW">
+#element {
+    width: 400px;
+    height: 150px;
+   \height: 250px;
+   \width: 500px
+}
+</pre>
+<p>是的，你要原来的长和宽上加上了padding。但这个fix只会作用于IE了的“怪异模式”，所以你不需要担心在IE6的正常模式下会有问题。</p>
+<h4>7. 设置min-height和min-width</h4>
+<p>IE忽略了min-height。</p>
+<p><strong>解决方法一</strong></p>
+<p>这个fix由 <a href="http://www.dustindiaz.com/min-height-fast-hack/">Dustin Diaz</a>提供。其利用了 <em>!important</em> 下面是代码片段：</p>
+<pre class="EnlighterJSRAW">
+#element {
+  min-height:150px;
+  height:auto !important;
+  height:150px;
+}
+</pre>
+<p><strong>解决方法二</strong></p>
+<pre class="EnlighterJSRAW">
+#element {
+    min-height: 150px;
+    height: 150px;
+}
+
+html&gt;body #element {
+	height: auto;
+}
+</pre>
+<h4>8. Float 布局错误行为 Misbehaving</h4>
+<p>使用无table的布局最重要的就是使用CSS的float元件。在很多情况下，IE6处理起来好像在摸索阶段，有些时候，你会发现很多奇怪的行为。比如在其中有一些文本的时候。</p>
+<p>来看一下下面这个示例：</p>
+<pre class="EnlighterJSRAW">
+&lt;div id="container"&gt;
+	&lt;div id="element"&gt;http://net.tutsplus.com/&lt;/div&gt;
+	&lt;div id="anotherelement"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p> </p>
+<pre class="EnlighterJSRAW">
+#element, #anotherelement{
+	background: #95CFEF;
+	border: solid 1px #36F;
+	width: 100px;
+	height: 150px;
+	margin: 30px;
+	padding: 10px;
+	float: left;
+}
+
+#container{
+	background: #C2DFEF;
+	border: solid 1px #36F;
+	width: 365px;
+	margin: 30px;
+	padding: 5px;
+	overflow: auto;
+}
+</pre>
+<p>期望结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/8-1.png"/></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/8-2.png"/></div>
+<p>你可以看到其中的不同了</p>
+<p><strong>解决方法</strong></p>
+<p>要解决这个问题没有什么好的方法。只有一个方法，那就是使用 <em>overflow: hidden</em> 。</p>
+<pre class="EnlighterJSRAW">
+#element{
+	background: #C2DFEF;
+	border: solid 1px #36F;
+	width: 365px;
+	margin: 30px;
+	padding: 5px;
+	overflow: hidden;
+}
+</pre>
+<h4>9. 在list项目门的空行</h4>
+<p>先看下面的例子</p>
+<pre class="EnlighterJSRAW">
+&lt;ul&gt;
+ &lt;li&gt;&lt;a href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#"&gt;Link 2&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#"&gt;Link 3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p> </p>
+<pre class="EnlighterJSRAW">
+ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+li a {
+	background: #95CFEF;
+	display: block;
+}
+</pre>
+<p>期望结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/9-1.png"/></div>
+<p>IE的结果：</p>
+<div class="tutorial_image"><img alt="Tutorial Image" border="0" src="http://nettuts.s3.amazonaws.com/494_ie/images/9-2.png"/></div>
+<p>Fortunately, there are a plethora of fixes you could try.</p>
+<p><strong>解决方法一</strong></p>
+<p>定义height来解决</p>
+<pre class="EnlighterJSRAW">
+li a {
+	background: #95CFEF;
+	display: block;
+    	height: 200px;
+}
+</pre>
+<p><strong>解决方法二</strong></p>
+<pre class="EnlighterJSRAW">
+li a {
+	background: #95CFEF;
+	float: left;
+    	clear: left;
+}
+</pre>
+<p><strong>解决方法三</strong></p>
+<p>为 <em>li</em> 加上<em>display: inline</em>。</p>
+<pre class="EnlighterJSRAW">
+li {
+	display: inline;
+}
+</pre>
+<h4>结论</h4>
+<p>调界面是一件很难的事，调一个CSS的HTML界面是一件更难的事，在IE下调一个CSS的HTML界面是难上加难的事。</p>
+<p>文章：<a href="http://net.tutsplus.com/tutorials/html-css-techniques/9-most-common-ie-bugs-and-how-to-fix-them/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3903.html"><img alt="一些有意思的贴子和工具" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3063.html"><img alt="40个很不错的CSS技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3063.html">40个很不错的CSS技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1817.html">9个最常见IE的Bug及其fix</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

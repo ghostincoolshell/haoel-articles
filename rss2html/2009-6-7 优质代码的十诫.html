@@ -1,0 +1,61 @@
+<html><body><p></p>
+<h2>1.- DRY: Don’t repeat yourself.</h2>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/06/10commandements.jpg"><img alt="10commandements" class="alignright size-medium wp-image-1008" height="300" src="../wp-content/uploads/2009/06/10commandements-223x300.jpg" title="10commandements" width="223"/></a>DRY 是一个最简单的法则，也是最容易被理解的。但它也可能是最难被应用的（因为要做到这样，我们需要在泛型设计上做相当的努力，这并不是一件容易的事）。它意味着，当我们在两个或多个地方的时候发现一些相似的代码的时候，我们需要把他们的共性抽象出来形一个唯一的新方法，并且改变现有的地方的代码让他们以一些合适的参数调用这个新的方法。</p>
+<p><a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank">DRY</a> 这一法则可能是编程届中最通用的法则了，目前为止，应该没有哪个程序员对这一法则存有异议。但是，我们却能发现，一些程序在编写单元测试（unit testing）时忘记了这一法则：让我们相像一下，当你改变一个类的若干接口，如果你没有使用DRY，那么，那些通过调用一系例类的接口的unit test的程序，都需要被手动的更改。比如：如果你的unit test的诸多test cases中没有使用一个标准共有的构造类的方法，而是每个test case自己去构造类的实例，那么，当类的构造函数被改变时，你需要修改多少个test cases啊。这就是不使用DRY法则所带来的恶果。</p>
+<p><span id="more-1007"></span></p>
+<h2>2.- 短小的方法.</h2>
+<p>至少，我们有下面三个不错的理由要求程序员们写下短小的方法。</p>
+<ol>
+<li>代码会变得更容易阅读。</li>
+<li>代码会变得更容易重用（短方法可以减少代码间的耦合程度）</li>
+<li>代码会变得更容易测试。</li>
+</ol>
+<h2>3.- 良好的命名规范</h2>
+<p>使用不错的统一的命名规范可以让你的程序变得更容易阅读和维护，当一个类，一个函数，一个变量的名字达到了那种可以“望文生义”的境界话，我们就可以少一些文档，少一些沟通。文章《<a href="https://coolshell.cn/articles/990.html"><span style="color: #2970a6;">编程中的命名设计那点事 </span></a>》可以给你一些提示。</p>
+<h2>4.- 赋予每个类正确的职责</h2>
+<p>一个类，一个职责，这类规则可以参考一下类的<a href="http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod" target="_blank"><strong>S</strong>OLID </a>法则。但我们这里强调的不是一种单一的职责，而是一个正确的职责。如果你有一个类叫Customer，我们就不应该让这个类有sales 的方法，我们只能让这个类有和Customer有最直接关系的方法。</p>
+<h2>5.- 把代码组织起来</h2>
+<p>把代码组织起来有两具层次。</p>
+<ul>
+<li><strong>物理层组织</strong>：无论你使用什么样的目录，包(package)或名字空间(namespace)等的结构，你需要把你的类用一种标准的方法组织起来，这样可以方便查找。这是一种物理性质的代码组织。</li>
+<li><strong>逻辑层组织</strong>： 所谓逻辑层，主要是说，我们如果把两个不同功能的类或方法通过某种规范联系和组织起来。这里主要关注的是程序模块间的接口。这就是我们经常见到的程序模块的架构。</li>
+</ul>
+<h2>6.- 创建大量的单元测试</h2>
+<p>单元测试是最接近BUG的地方，也是修改BUG成本最低的地方，同样也是决定整个软件质量好坏的成败的地方。所以，只要有可能，你就应该写更多的，更好的单元测试案例，这样当你未来有相应代码改变的时候，你可以很简单知道你代码的改变是否影响了其它单元。</p>
+<h2>7.- 经常重构你的代码</h2>
+<p>软件开发是一种持续的发现的过程，从而让你的代码可以跟上最新的实际需求的变化。所以，我们要经常重构自己的代码来跟上这样的变化。当然，重构是有风险的，并不是所有的重构都是成功的，也不是我们随时都可以重构代码。下面是两个重构代码的先要条件，以避免让你引入更多的BUG，或是把本来就烂的代码变得更烂。</p>
+<ol>
+<li>有大量的单元测试来测试。正如前面所说，重构需要用大量的单元测试来做保障和测试。</li>
+<li>每次重构都不要大，用点点滴滴的小的重构来代替那种大型的重构。有太多的时候，当我们一开始计划重构2000行代码，而在3个小时后，我们就放弃这个计划并把代码恢复到原始的版本。所以，我们推荐的是，重构最好是从点点滴滴积累起来的。</li>
+</ol>
+<h2>8.- 程序注释是邪恶的</h2>
+<p>这一条一定是充满争议的，大多数程序员都认为程序注释是非常好的，是的，没错，程序注释在理论上是非常不错的。但是，在实际过程序当中，程序员们写出来的注释却是很糟糕的（程序员的表达能力很有问题），从而导致了程序注释成为了一切邪恶的化身，也导致了我们在阅读程序的时，大多数时候，我们都不读注释而直接读代码。所以，在这里，我们并不是鼓励不写注释，而是——如果你的注释写得不够好的话，那么，你还不如把更重要的时间花在重构一下你的代码，让你的代码更加易读，更加清楚，这比会比注释更好。</p>
+<h2>9.- 注重接口，而不是实现</h2>
+<p>这是一个最经典的规则了。接口注重的是——“What”是抽象，实现注重的是——“How”是细节。接口相当于一种合同契约，而实际的细节相当于对这种合同契约的一种运作和实现。运作是可以很灵活的，而合同契约则需要是相对需要稳定和不变的。如果，一个接口没有设计好而需要经常性的变化的话，那我们可以试想一下，这代来的后果，这绝对会是一件成本很大的事情。所以，在软件开发和调设中，接口是重中之重，而不是实现。然而我们的程序员总是注重于实现细节，所以他们局部的代码写的非常不错，但软件整体却设计得相对较差。这点需要我们多多注意。</p>
+<h2>10.- 代码审查机制</h2>
+<p>所有人都会出错，一个人出错的概率是很大的，两个人出错的概率就会小一些，人多一些，出错的概率就会越来越小。因为，人多了，就能够从不同的角度看待一个事情，虽然这样可能导致无效率的争论，但比起软件产品release后出现问题的维护成本，这点成本算是相当值得的。所以，这就是我们需要让不同的人来reivew代码，代码审查机制不但是一种发现问题的最有效的机制，同时也是一种可以知识共享的机制。当然，对于Code Review来说，下面有几个基本原则：</p>
+<ul>
+<li>审查者的能力一定要大于或等于代码作者的能力，不然，代码审查就成了一种对新手的training。</li>
+<li>而且，为了让审查者真正负责起来，而不是在敷衍审查工作，我们需要让审查者对审查过的代码负主要责任，而不是代码的作者。 </li>
+<li>另外，好的代码审查应该不是当代码完成的时候，而是在代码编写的过程中，不断地迭代代码审查。好的实践的，无论代码是否完成，代码审核需要几天一次地不断地进行。</li>
+</ul>
+<p>（<strong>我以我个人的语言叙述本文，并加入了我个人的经历，所以，请你在转载时请注意作者和出处，并且，请勿用于商业用途</strong>）</p>
+<p>文章：<a href="http://makinggoodsoftware.com/2009/06/04/10-commandments-for-creating-good-code/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8990.html"><img alt="Linus：利用二级指针删除单向链表" height="150" src="../wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8990.html">Linus：利用二级指针删除单向链表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8745.html"><img alt="如此理解面向对象编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8745.html">如此理解面向对象编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5201.html"><img alt="重构代码的7个阶段" height="150" src="../wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5201.html">重构代码的7个阶段</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1007.html">优质代码的十诫</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

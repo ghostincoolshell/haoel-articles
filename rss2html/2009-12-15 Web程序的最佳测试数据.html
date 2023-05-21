@@ -1,0 +1,58 @@
+<html><body><p></p>
+<p style="text-align: left;">这里有一篇Matthias写的<a href="http://united-coders.com/matthias-reuter/the-art-of-escaping" title="The art of escaping">关于转义字符文章-“The art of escaping”</a>，这篇文章告诉你有一些比较特殊的字符需要你去认真的处理，不然，你的网站程序轻则出错，重则被人黑了。这些物殊的字符是[<code>&lt;"@%'&amp;_\?/:;,&gt;কী €</code>] ，你可以使用这个字符串到任意一个可以输入的Web程序上去做测试。</p>
+<p>下面这个表格告诉你为什么这些字符很特殊。这个列表不会是完整的，而且也永远不会完整。<br/>
+</p><center>
+<table border="0">
+<thead>
+<tr>
+<th>相关领域</th>
+<th>转义字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.w3.org/" title="W3C">HTML</a></td>
+<td>&lt; , &gt; , &amp;</td>
+</tr>
+<tr>
+<td><a href="http://json.org/" title="JSON-Resource">JSON</a></td>
+<td>“</td>
+</tr>
+<tr>
+<td><a href="http://dev.mysql.com/doc/refman/5.0/en/string-syntax.html" title="mysql character">SQL</a> in mySql</td>
+<td>字符串 “, ‘, 通配符 %, _</td>
+</tr>
+<tr>
+<td><a href="http://www.faqs.org/rfcs/rfc1738.html" title="rfc 1738 for urls">rfc 1738</a> for URL-parameter</td>
+<td>;, /, ?, :, “, @, =, &amp; 空格</td>
+</tr>
+</tbody>
+</table>
+<p></p></center><br/>
+把这些转义字符放在一起，然后再整些 utf-8 的一些特殊字符。这些utf-8的字符你可以参看本站的<a href="https://coolshell.cn/articles/1331.html" rel="bookmark">Unicode字符预览表</a>一文，并从中获取。另外，你还可以使用下面的这些工具来对你的程序进行调试或检查：
+<ul>
+<li>一个高级Web调试插件： <a href="https://addons.mozilla.org/de/firefox/addon/1843" title="firebug plugin">firebug</a></li>
+<li>标准的请求/响应插件： <a href="https://addons.mozilla.org/de/firefox/addon/3829">Live HTTP headers</a></li>
+<li>一些抓包程序： <a href="https://addons.mozilla.org/en-US/firefox/addon/6647">HTTPfox</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/966">tamper data</a></li>
+<li>IE的开发者可以试试这个：<a href="http://www.fiddler2.com/fiddler2/">Fiddler.com</a></li>
+</ul>
+<p>如果上面的工具都不能帮助你的话，你可能需要打调试日志，或是使用一个透明的代理服务器：如： <a href="http://www.charlesproxy.com/">Charles Web Debugging Proxy</a> （Windows）</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21649.html"><img alt="源代码特洛伊木马攻击" height="150" src="../wp-content/uploads/2021/11/il_340x270_pggv-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21649.html">源代码特洛伊木马攻击</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12206.html"><img alt="HTML6 展望" height="150" src="../wp-content/uploads/2014/12/html6-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12206.html">HTML6 展望</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1957.html">Web程序的最佳测试数据</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,36 @@
+<html><body><p>以前本站发布过<a href="https://coolshell.cn/articles/3100.html" rel="bookmark">编程语言进化</a>，<a href="https://coolshell.cn/articles/3097.html" rel="bookmark">Windows的达尔文进化图</a>，今天在网上看到版本管理器的进化图，转过来，源文链接如下：</p>
+<p><a href="http://codicesoftware.blogspot.com/2010/11/version-control-timeline.html" target="_blank">http://codicesoftware.blogspot.com/2010/11/version-control-timeline.html</a> (墙)</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/11/scmhistory.png"><img alt="" class="aligncenter size-full wp-image-3289" height="410" src="../wp-content/uploads/2010/11/scmhistory.png" title="版本管理器的演化图" width="640"/></a></p>
+<p>这张图上分成了四个时期：</p>
+<p><span id="more-3288"></span></p>
+<p><strong>史前时期</strong>：1982年的RCS。现在你可能还能在Unix的发布包中找到它。</p>
+<p><strong>古典时期</strong>：1990年的CVS（经典的SCM管理器，可惜不能track目录和文件名的改变，今天这个东西已经过时了），1985年的PVCS，1992年的clearcase（价格贵，功能复杂，当然，今天也有很多公司在用），微软的VSS（Welcome to Hell），90年代中期的Perforce(P4，这个工具今天都还在被广泛地使用，尤其是那些中等大小却有着大量开发团队的公司，现在是Google内部最大的代码管理器)。</p>
+<p><strong>中世纪时期</strong>：SVN（Linus很不喜欢SVN，2006年引入了Git），AccuRev(强力支持branch和merge，其扮演了一个很重要角色帮助社区脱离clearcase和CVS)，</p>
+<p><strong>文艺复兴时期</strong>：BitKeeper——Sun的内部管理工具，Linux的内核代码2002年也用这个工具，其实，很多开源工程都在用这个工具，2005年这个工具的东家BitMover对大家对BitKeeper逆向工程很不满，于是停止支持开源，于是出现了Git。</p>
+<p>Git的第一个版本是Linux之父Linus Torvalds亲手操刀设计和实现的（据说只用了一个周末），Linus不仅仅给出一个原始设计（简单的、干净的、天才的），同时，他也用自己那独一无二的风格催生了这个项目（请参看： <a href="http://codicesoftware.blogspot.com/2007/05/linus-torvalds-on-git-and-scm.html" target="_blank">http://codicesoftware.blogspot.com/2007/05/linus-torvalds-on-git-and-scm.htm</a>l 还是被墙）。</p>
+<p>在Linus介绍Git的著名的演讲中，他强烈地批评（好吧，应该算是侮辱）了CVS，SVN，和Perforce：“Subversion是史上最毫无意义的项目，从项目开始就是这样了”，“如果你喜欢CVS，那么你现在应该在某个精神病研究中心或是别的地方”，“别在用Preforce了，它是十分糟糕和可悲的，这绝对绝对是真的”。无论是反对还是喜欢，Linus的确是改变了历史——中世纪已经过去了，现在的世界由分布式系统主宰，以及消除branch和merge的恐惧。</p>
+<p>Git 基于 DAG 结构 (Directed Acyclic Graph)，其运行起来相当的快。在Git发布后的来年，世界上所有的大型的开源项目全部从Subversion迁移到了Git上，<a href="http://www.github.com/" target="_blank">www.github.com</a>真是很大，这可能是这具星球上最强大最牛最酷的SCM系统了。Git可能并不是最简单的，但它一定会是未来十年的主流。（有空读读这本书——<a href="http://peepcode.com/products/git-internals-pdf" target="_blank">Git Internals</a>）</p>
+<p>Mercurial (Hg) 第一次出现在2005年4月，也是因为BitKeeper不免费了。Hg可以和Git在一起使用，见：<a href="http://mercurial.selenic.com/wiki/HgGit" target="_blank">http://mercurial.selenic.com/wiki/HgGit</a>。但是Hg和Git在设计上不一样，他们对提交/变更的概念是一样的，只不过Git用tree来实现，而Hg则是用扁平的文件和目录来实现（revlog），设计细节可参看：<a href="http://mercurial.selenic.com/wiki/Design">http://mercurial.selenic.com/wiki/Design</a>和 <a href="http://mercurial.selenic.com/wiki/DeveloperInfo">http://mercurial.selenic.com/wiki/DeveloperInfo</a>。</p>
+<p>Darcs (Darcs Advanced Revision Control System)是另一个让你摆脱Subversion和CVS的工具，2002年开始，今年是2.5版。它的优势是性能，以及他与众不同的历史版本管理——管理patches而不是snapshot（提交/修改），当然，这样一来，历史改变看上去很不好懂。</p>
+<p>Bazaar (bzr) 是另一个开源的 DVCS，它试图给SCM的世界里带来一些新的东西。其由Canonical开发（Ubuntu的那个公司），在2008年成为GNU。</p>
+<p>Plastic在2006年出现，强力地支持branch和merge，其还提供了强大的图示，包括3D的版本树，Plastic主要是为了让中等开发团队使用，介于大型的团队（ClearCase）和小型的团队（Subversion）之间。</p>
+<p>Team Foundation Server (TFS)，微软的新一代SCM工具，主要是为了VSS的失败负责，但是他还不是版本管理上还是很强，只不过，他集成了一大堆各种各样的工具，比如：issue tracking，test management等。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7755.html"><img alt="Git显示漂亮日志的小技巧" height="150" src="../wp-content/uploads/2012/06/git.log_.01-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7755.html">Git显示漂亮日志的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/93.html"><img alt="版本控制Subversion相关资源" height="150" src="../wp-content/uploads/2009/03/tortoisesvn-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/93.html">版本控制Subversion相关资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2363.html"><img alt="MSDN中的两个命名" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2363.html">MSDN中的两个命名</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7126.html"><img alt="这到底是谁之错？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7126.html">这到底是谁之错？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2704.html"><img alt="检查素数的正则表达式" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2704.html">检查素数的正则表达式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/428.html"><img alt="程序员需要具备的基本技能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/428.html">程序员需要具备的基本技能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3288.html">版本管理器的发展史</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,46 @@
+<html><body><p><img alt="" class="alignright size-full wp-image-3305" height="175" src="../wp-content/uploads/2010/11/jeff.jpg" title="Jeff Dean" width="135"/>Google 公司的 <a href="http://research.google.com/people/jeff/" target="_blank"><strong>Jeff Dean</strong></a> 在Stanford大学做了一个非常 <a href="http://stanford-online.stanford.edu/courses/ee380/101110-ee380-300.asx" target="_blank"><strong>精彩的演讲</strong></a>（视频未墙）。我觉得我们每一个人都应该去看一看这个视频，当然，没有字幕，需要不错的听力，当然，我不可能全部翻译出来，因为我也不是完全能听懂，下面是一些相关的Notes，供你参夸，并欢迎牛人指证。</p>
+<ul>
+<li>比较了从1999年到2010年十年来的搜索量的变化。搜索量增加了 1000 倍，而搜索速度快了5 倍。1999年，一个网页的更新最多需要一个月到两个月，而今天，只需要几秒钟，足足加快了5w倍。</li>
+<li>一开始，这些大量的查询产生了大约30GB的I/O量。2004年，他们考虑过全部重写infrastructure。</li>
+<li>讨论了一些关于变量长度字节对齐的东西。</li>
+<li>今天的MapReduce 有400万个作业，处理将近1000PB的数据，130PB的中间数据，还有45PB的输出数据。（1PB =1024TB）关于 MapReduce （Google云计算的精髓） 的一些统计，见下图：</li>
+<li><img alt="" class="aligncenter size-full wp-image-3302" height="426" src="../wp-content/uploads/2010/11/mapreducestats.jpg" title="Mapreduce Stats" width="575"/></li>
+</ul>
+<p><span id="more-3301"></span></p>
+<ul>
+<li>现在Jeff正在做一个叫Spanner的项目，这是一个跨多个数据中心的项目。在后来的Q&amp;A中，Jeff解释了现在的数据基本上都在各个数据中心中，数据在不同数据中心间的交换几乎不可能。所以，他们需要提供一些手动的方式或是一些工作或任务来达到数据共享。这其中还需要有一些策略配置，共同的namespace，事务处理，数据一致性等等工作。</li>
+</ul>
+<ul>
+<li>最后一个段落应该是最精彩的，Jeff讲了很多很有意思的东西，绝对让你受用一生：
+<ul>
+<li>一个大型的系统需要分解成N多的小services.（这和Amazon的很相似，一个页面的调用可能要经过几百个后台的services）</li>
+<li>代码的性能将会是想当的重要。Jeff给了一张叫“Numbers Everyone Should Know” 的slide，如下所示，我觉得太经典了，其中的东西，如果你看过我的那篇“<a href="https://coolshell.cn/articles/3236.html" target="_blank"><strong>给老婆普及计算机知识</strong></a>”，我想我不需要多解释了。（注：1 ns = 十亿分之一秒）</li>
+<li><img alt="" class="aligncenter size-full wp-image-3303" height="425" src="../wp-content/uploads/2010/11/numberseveryoneshouldknow.png" title="每一个程序员都应该知道的数字" width="570"/></li>
+<li>把相同的东西抽出来去建立一个系统，而不是把所有的事情交给所有的人。他说： “最后的那个功能可能会导致你怎么个系统超出了原有的复杂度”。</li>
+<li>不要无限制地设计可扩展性。5倍到50倍的扩展性设计足够了。如果你要达到100倍的，那应该是re-arch了。</li>
+<li>Jeff很喜欢有中心主结点的架构体系，他并不喜欢分布式系统。当然，中心主结点主要是用来做控制的，而不是做数据或是计算服务的。</li>
+<li>J在一些小机器上运行多个小服务，而不在一个大机器上运行一个mongo作业。越小的单元就越容易处理，修复，负载均衡和扩展。（化繁为简）</li>
+<li>…… ……</li>
+</ul>
+</li>
+</ul>
+<p>这是一个非常不错的演讲，很让人开阔眼界。</p>
+<p>最后，我想说说英文，很多程序员都很不喜欢英文，哎……怎么说呢？如果你今天对英文还很害怕的话，这只能怪我们的教育制度的失败。但如果你以此为借口的话，那只能怪你自己了。没有英文的能力，你的技术和认知仅限于中文圈中，而中文圈中基本上都是产商的文化。有人说，“功夫网”让我们的internet成为了局域网，而我想说，让我们成为局域网的不是那个墙，而是我们自己的世界观和英文能力。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22398.html"><img alt="我看ChatGPT: 为啥谷歌掉了千亿美金" height="150" src="../wp-content/uploads/2023/02/chatgpt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22242.html"><img alt="ETCD的内存问题" height="150" src="../wp-content/uploads/2022/05/etcd-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22242.html">ETCD的内存问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17381.html"><img alt="性能测试应该怎么做？" height="150" src="../wp-content/uploads/2016/07/PerfTest-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3301.html">Jeff Dean的Stanford演讲</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

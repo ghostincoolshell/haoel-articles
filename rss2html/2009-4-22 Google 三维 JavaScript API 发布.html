@@ -1,0 +1,92 @@
+<html><body><p>O3D 是一个开源的Web API，其可以创建相当牛X的基于浏览器的可交互式的3D应用。这个API在很有可能会形成以后的Web上的3D图形的标准。下面是这个API的主站点： <a href="http://code.google.com/apis/o3d/">http://code.google.com/apis/o3d/</a> 。O3D目前支持Windows, Mac和Linux三种平台。</p>
+<p>下面是一些简单地使用O3D的API的如何创建一个立方体，更详细的内容请访问O3D的网站。</p>
+<p>1）首选我们先创建一个比较原始的立方体。使用<span style="font-family: Courier New;">createCube()</span>方法。</p>
+<p>[javascript]</p>
+<p>function createCube(material) {<br/>
+  var cubeShape = g_pack.createObject(‘Shape’);<br/>
+  var cubePrimitive = g_pack.createObject(‘Primitive’);<br/>
+  var streamBank = g_pack.createObject(‘StreamBank’);</p>
+<p>  cubePrimitive.material = material;<br/>
+  cubePrimitive.owner(cubeShape);<br/>
+  cubePrimitive.streamBank = streamBank;<br/>
+  .<br/>
+  .<br/>
+  .<br/>
+[/javascript]</p>
+<p><span id="more-599"></span><br/>
+ 2）然后，我们需要指定一些顶点信息。<br/>
+其中，我们利用三角形来构造3D图形。一个立方体有12个三角面，两个构成一个面，然后有8个顶点。<br/>
+[javascript]<br/>
+  cubePrimitive.primitiveType = g_o3d.Primitive.TRIANGLELIST;<br/>
+  cubePrimitive.numberPrimitives = 12; // 12 triangles<br/>
+  cubePrimitive.numberVertices = 8;    // 8 vertices in total<br/>
+  cubePrimitive.createDrawElement(g_pack, null);   // Create the draw element for this primitive.<br/>
+[/javascript]</p>
+<p>3）指定一下8个顶点的坐标。<br/>
+[javascript]<br/>
+var positionArray = [<br/>
+    -0.5, -0.5,  0.5,  // vertex 0<br/>
+     0.5, -0.5,  0.5,  // vertex 1<br/>
+    -0.5,  0.5,  0.5,  // vertex 2<br/>
+     0.5,  0.5,  0.5,  // vertex 3<br/>
+    -0.5,  0.5, -0.5,  // vertex 4<br/>
+     0.5,  0.5, -0.5,  // vertex 5<br/>
+    -0.5, -0.5, -0.5,  // vertex 6<br/>
+     0.5, -0.5, -0.5   // vertex 7<br/>
+  ];<br/>
+[/javascript]</p>
+<p>4）把顶点坐标数组加入Buffer中。<br/>
+[javascript]<br/>
+// Create buffers containing the vertex data.<br/>
+var positionsBuffer = g_pack.createObject(‘VertexBuffer’);<br/>
+var positionsField = positionsBuffer.createField(‘FloatField’, 3);<br/>
+positionsBuffer.set(positionArray);<br/>
+[/javascript]</p>
+<p>5）把Buffer放到Stream Bank中。</p>
+<p>[javascript]<br/>
+// Associate the positions Buffer with the StreamBank.<br/>
+streamBank.setVertexStream(<br/>
+  g_o3d.Stream.POSITION, // semantic: This stream stores vertex positions<br/>
+  0,                     // semantic index: First (and only) position stream<br/>
+  positionsField,        // field: the field this stream uses.<br/>
+  0);                    // start_index: How many elements to skip in the field.<br/>
+[/javascript] </p>
+<p>6）连接点成为三角面，并把三角面两两一组组成立方面。<br/>
+[javascript]<br/>
+var indicesArray = [<br/>
+      0, 1, 2,  // face 1<br/>
+      2, 1, 3,<br/>
+      2, 3, 4,  // face 2<br/>
+      4, 3, 5,<br/>
+      4, 5, 6,  // face 3<br/>
+      6, 5, 7,<br/>
+      6, 7, 0,  // face 4<br/>
+      0, 7, 1,<br/>
+      1, 7, 3,  // face 5<br/>
+      3, 7, 5,<br/>
+      6, 0, 4,  // face 6<br/>
+      4, 0, 2<br/>
+  ];<br/>
+[/javascript]</p>
+<p>完整的源码请参看这里：（打开网页后查看源码）<br/>
+<a href="http://o3d.googlecode.com/svn/trunk/samples/hellocube.html" target="_blank">http://o3d.googlecode.com/svn/trunk/samples/hellocube.html</a></p>
+<p>最后，让我们看一看下面YouTube上的视频，你就知道这个东西有多强了。<a href="http://www.youtube.com/watch?v=uofWfXOzX-g" target="_blank">YouTube链接</a>。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22398.html"><img alt="我看ChatGPT: 为啥谷歌掉了千亿美金" height="150" src="../wp-content/uploads/2023/02/chatgpt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17524.html"><img alt="如何读懂并写出装逼的函数式代码" height="150" src="../wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17524.html">如何读懂并写出装逼的函数式代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12136.html"><img alt="Google Inbox如何跨平台重用代码？" height="150" src="../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12136.html">Google Inbox如何跨平台重用代码？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="../wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/599.html">Google 三维 JavaScript API 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

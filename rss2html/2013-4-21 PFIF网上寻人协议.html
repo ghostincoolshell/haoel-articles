@@ -1,0 +1,42 @@
+<html><body><p>本文的主要内容来自Wikipedia(<a href="http://en.wikipedia.org/wiki/People_Finder_Interchange_Format" target="_blank">http://en.wikipedia.org/wiki/People_Finder_Interchange_Format</a>)</p>
+<p>PFIF全称People Finder Interchange Format，是一个应用广泛的数据开源的标准协议，这个协议主要是设计用来在不同的政府、救援组织、或是其它的一些灾难中生存者和其亲人联系的网站间进行数据交换的一种协议。</p>
+<p><img alt="" class="aligncenter" height="249" src="../wp-content/uploads/2013/04/Google-Person-Finder.png" width="492"/></p>
+<p>这个协议基于XML，信息中包括人的身份标识，还有人目前的位置和状态等一些信息。PFIF可以通过Atom和RSS feed出去。PFIF可以允许不同的寻人站点进行数据交换和合并。每一条记录都有一个唯一的标识，这个标识说明了这是由哪个域名创建的。这样，当A站点获得B点的某个人的数据时，在A站点可以对这个人的增加的信息可以转到其它站点上再被增加相关的信息，因为有一个唯一的ID，所以信息可以在不同的站点上被附加。</p>
+<p>从wikipedia上看，说起PFIF这个事，得回到2001年的911事件，那时人们一共使用了超过25个不同的在线论坛和网上寻人站来查找相关的亲人和朋友（注：寻人网站英文叫：Survivor Registry，生还者登记网站）。其中一个最大的网站是由伯克利大学的学生Ka-Ping Yee 和 Miriam Walker 开发运行在Millennium计算集群上的safe.millennium.berkeley.edu网站。那时，为了减少各种网站间的混乱，伯克利的寻人网站开始从其它几个比较大的寻人站点收集相关的数据，并人肉整合到一起。</p>
+<p><span id="more-9508"></span></p>
+<p>2005年，在<a href="http://en.wikipedia.org/wiki/Hurricane_Katrina" title="Hurricane Katrina">卡特里娜飓风</a> 灾难的时候，有数据百万人迁移。于是相关的寻人网站又出现了，而且比911的还要多。于是有很多的志愿者开发了一个叫 <a href="http://en.wikipedia.org/wiki/Katrina_PeopleFinder_Project" title="Katrina PeopleFinder Project">Katrina PeopleFinder Project（卡特里娜寻人项目）</a> 他们人肉地收集不同站点的数据，并统一格式放到一个由Salesfore.com提供一个数据库中。这个项目的组织者David Geilhufe 呼吁一个技术标准以便这些寻人网站间的数据可以自动地整合共享在一起。于是之前伯克利的那个 <a href="http://zesty.ca/" target="_blank">Ka-Ping Yee</a> 开始和志愿者 Kieran Lal，Jonathan Plax 和 <a href="http://en.wikipedia.org/wiki/CiviCRM" title="CiviCRM">CiviCRM</a> 团队一同工作，于是开始了草拟了第一版的PFIF协议，其于2005年9月4日发布，1.1版于第二天发布，其中修改了一些错误。随后，Salesfore.com的数据库开始支持这一标准，然后，Yahoo!和Google的寻人网站也加入这一协议。</p>
+<p>接下来， <a href="http://en.wikipedia.org/wiki/2010_Haiti_earthquake" title="2010 Haiti earthquake">2010年的海地地震</a> 时，Google发布了自己的 <a href="http://en.wikipedia.org/wiki/Google_Person_Finder" title="Google Person Finder">Google Person Finder</a>，其基于PFIF协议和CNN，纽约时报，以及美国国家医学图书馆和其它的一些寻人网站进行数据交换。然而，PFIF1.1是基于美国的社会标准搞的，并不适用于海地。于是2010年1月26日，PFIF1.2发布，其增加了几个字段用于标记生还者的国家和国际区号，还有性别，年纪，生日，状态，还有相同人的关联。</p>
+<p>PFIF 1.3 于2011年3月发布，其主要解决了个人隐私问题，其加入了一个字段指明该信息的一个有效时间，过期的数据会被删除。PFIF1.3同时移除了英式的first-name和last-name，取而代之的是full-name。</p>
+<p>PFIF 1.4 于2012年5月发布，其加入了一个字段用于链接这个人在互联网上的个人资源链接，这样可以用于合并相同的人（比如：指向同一个微博网址），还支持了多个照片。</p>
+<p style="text-align: center;"><strong>PFIF1.4的Spec链接：<a href="http://zesty.ca/pfif/1.4/" target="_blank">http://zesty.ca/pfif/1.4/ </a></strong></p>
+<p>如下的网站有软件实现了PFIF：</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Google_Person_Finder" title="Google Person Finder">Google Person Finder</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Sahana_FOSS_Disaster_Management_System" title="Sahana FOSS Disaster Management System">Sahana Eden</a></li>
+<li><a href="http://pl.nlm.nih.gov/index.php" rel="nofollow">National Library of Medicine People Locator</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Ushahidi#Ushahidi" title="Ushahidi">Ushahidi</a></li>
+<li><a href="http://code.google.com/p/pfifnet/" rel="nofollow">PFIF .NET Library</a></li>
+<li><a href="http://erislabs.net/ianb/projects/pfif/" rel="nofollow">XML::PFIF Perl module</a></li>
+</ul>
+<p>本次四川地震，谷歌率先发布了他人寻人网站：<a href="https://google.org/personfinder/2013-sichuan-earthquake" target="_blank">https://google.org/personfinder/2013-sichuan-earthquake</a>。接下来，国内的百度，360，搜索，一淘，CSDN，高德……都发布了自己的寻人网站，微博上，大家都在说这些企业不应该搞这么多这样的网站，这样只会造成混乱。而且大家都在呼吁大家一起运作一个网站，共享数据，共享信息。晚上，我在微博上看到了这个PFIF协议，于是写下这篇文章。</p>
+<p>关于Google 的寻人的数据可以通过Google PersonFinder API 下载和上传，这里是其API页面：</p>
+<p style="text-align: center;"><strong><a href="http://code.google.com/p/googlepersonfinder/wiki/DataAPI" target="_blank">http://code.google.com/p/googlepersonfinder/wiki/DataAPI</a></strong></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22398.html"><img alt="我看ChatGPT: 为啥谷歌掉了千亿美金" height="150" src="../wp-content/uploads/2023/02/chatgpt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22398.html">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12136.html"><img alt="Google Inbox如何跨平台重用代码？" height="150" src="../wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12136.html">Google Inbox如何跨平台重用代码？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5815.html"><img alt="来信， 创业 和 移动互联网" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5815.html">来信， 创业 和 移动互联网</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5701.html"><img alt="SteveY对Amazon和Google平台的吐槽" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5701.html">SteveY对Amazon和Google平台的吐槽</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4905.html"><img alt="语言的数据亲和力" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9508.html">PFIF网上寻人协议</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

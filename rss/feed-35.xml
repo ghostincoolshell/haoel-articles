@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 35 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=35" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Fri, 21 Mar 2014 02:58:37 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>程序语言性能比拼</title>
+		<link>https://coolshell.cn/articles/1788.html</link>
+					<comments>https://coolshell.cn/articles/1788.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 16 Nov 2009 00:20:17 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[benchmark]]></category>
+		<category><![CDATA[GNU C]]></category>
+		<category><![CDATA[Go]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1788</guid>
+
+					<description><![CDATA[<p>  下面这个网页，你可以比较各种程序语言的性能： http://shootout.alioth.debian.org/u64/index.php 这个页面，安装...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1788.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1788.html">程序语言性能比拼</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg"></a> <a href="https://coolshell.cn/wp-content/uploads/2009/11/measurements_table.jpg"></a> 下面这个网页，你可以比较各种程序语言的性能：</p>
+<p style="text-align: center;"><a href="http://shootout.alioth.debian.org/u64/index.php">http://shootout.alioth.debian.org/u64/index.php</a></p>
+<p style="text-align: left;">这个页面，安装的是x64 Ubuntu，CPU是Intel® Q6600® 单核。这个网页支持的语言很多，什么C，C++，Java，python，PHP，Erlang，C#，Ruby，……，还有最新的G0语言。</p>
+<p style="text-align: left;">在主页上，你可以选择一个语言。比如，我们选择Google的Go语言——Go 6g8g，然后，点击Show按钮，于是，你会看到下面这个界面：</p>
+<p style="TEXT-ALIGN: center"><a href="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg"><img decoding="async" loading="lazy" title="go vs gnuc" src="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg" alt="go vs gnuc" width="525" height="404" /></a> <a href="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/11/govsgnuc.jpg"></a></p>
+<p style="text-align: left;">在这个界面上方，你可以选择两种语言，我们选择的是，上面的是Go 6g8g，而下面是的GNU C，于是下面的图表，是这两个语言各种参数和算法的比较图表。</p>
+<p style="text-align: left;"><span id="more-1788"></span></p>
+<p style="text-align: left;">在这个图表中，其实就是“Go的性能” 除以 “C的性能”，所以，</p>
+<ul>
+<li>
+<div style="text-align: left;">如果柱状图是大于1的（也就是基线以上的）则说明Go的性能不如C。</div>
+</li>
+<li>
+<div style="text-align: left;">如果柱状图小于1的（也就是基线以下的），说明Go的性能超过了C。</div>
+</li>
+</ul>
+<p style="text-align: left;">再往下，是用来做比较的算法的图表，如下所示。在这个表中，我们可以看到很多算法，单击语言的链接，你就可以看到具体的实现源代码了。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/11/measurements_table.jpg"></a></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2009/11/measurements_table.jpg"><img decoding="async" loading="lazy" title="measurements table" src="https://coolshell.cn/wp-content/uploads/2009/11/measurements_table.jpg" alt="measurements table" width="495" height="290" /></a></p>
+<p style="text-align: left;"> （全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22242.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png" alt="ETCD的内存问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22242.html" class="wp_rp_title">ETCD的内存问题</a></li><li ><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" alt="Go编程模式 ： 泛型编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_title">Go编程模式 ： 泛型编程</a></li><li ><a href="https://coolshell.cn/articles/21263.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.k8s-150x150.png" alt="Go 编程模式：k8s Visitor 模式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21263.html" class="wp_rp_title">Go 编程模式：k8s Visitor 模式</a></li><li ><a href="https://coolshell.cn/articles/21228.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.line_.-150x150.png" alt="Go编程模式：Pipeline" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21228.html" class="wp_rp_title">Go编程模式：Pipeline</a></li><li ><a href="https://coolshell.cn/articles/21214.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.pair_-150x150.png" alt="Go编程模式：委托和反转控制" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21214.html" class="wp_rp_title">Go编程模式：委托和反转控制</a></li><li ><a href="https://coolshell.cn/articles/21179.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/12/go.generate-150x150.png" alt="Go 编程模式：Go Generation" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21179.html" class="wp_rp_title">Go 编程模式：Go Generation</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1788.html">程序语言性能比拼</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1788.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Go语言更名Issue 9？</title>
+		<link>https://coolshell.cn/articles/1781.html</link>
+					<comments>https://coolshell.cn/articles/1781.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 13 Nov 2009 05:37:11 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Go]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Issue 9]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1781</guid>
+
+					<description><![CDATA[<p>Go语言出了一个Issue，这个Issue的链接在这里：http://code.google.com/p/go/issues/detail?id=9 ，这个Is...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1781.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1781.html">Go语言更名Issue 9？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>Go语言出了一个Issue，这个Issue的链接在这里：<a href="http://code.google.com/p/go/issues/detail?id=9">http://code.google.com/p/go/issues/detail?id=9</a> ，这个Issue的编号是9描述是：</p>
+<blockquote><p><span>I have already used the name for *MY* programming language</span></p></blockquote>
+<p>意思是，已经有人使用了这go作为其语言的命名了。报告者叫fmccabe，他说到：</p>
+<blockquote><p><span>我已经从事于我的一个编程语言，而且都10年了。并且都有很多论文发表了。我非常感激你们Google如果把这个名字修改一下，因为我是不会修改我的语言的名字的！</span></p></blockquote>
+<p><span>于是，开始了回贴：</span></p>
+<ul>
+<li>1楼跟贴说，“给个链接看看”</li>
+<li>fmccabe在2楼说：“我出版了本书在lulu.com上”。</li>
+<li>3楼的说，“是的，你的语言叫“Go!”，你的书在：<a href="http://www.lulu.com/content/paperback-book/lets-go/641689">http://www.lulu.com/content/paperback-book/lets-go/641689</a>”</li>
+<li>4楼说：“三楼你是对的，LZ的语言是‘Let&#8217;s Go!’或‘Go!’，Google的叫‘go’，根本就不同啊。”</li>
+<li>LZ不同意在5楼说：“是的，我的语言叫Go!，书名叫：Let&#8217;s Go!。而这里的问题不是Google的go是否会有名，而是公平性。”</li>
+</ul>
+<p><span>好事者从来都不少，后面的贴子可想而知了。众多网友纷纷支持LZ，让Google改名。</span></p>
+<ul>
+<li><span>11楼让LZ找个便宜的律师，还说Google的钱袋很深的。</span></li>
+<li><span>14楼的DailyFinance.com的一个MS记者的人也找上了。</span></li>
+<li><span>17楼建议Google改名Goo 或Foo</span></li>
+</ul>
+<p><span>于是，再往后的回贴，众网友们开始纷纷帮Google的go语言改名：<br />
+<span id="more-1781"></span></span></p>
+<ul>
+<li>25楼说，Goo也被用了。</li>
+<li>28楼说，应该叫GOOP = Google Object Oriented Programming</li>
+<li>29楼说，叫ogle</li>
+<li>30楼说，叫Goat</li>
+<li>31楼说，JAgo: Just Another go （42楼说，Jago也被用了）</li>
+<li>36楼说，go2。并说明，C++也使用了C的名字，用++做了后缀。所以，可以go2</li>
+<li>40楼说，为什么不叫Golang?Erlang &#8211; &#8220;Ericsson Language&#8221;和Golang &#8211; &#8220;Google Language&#8221;，多配啊。</li>
+<li>50楼说，干脆叫“Do”得了。</li>
+<li>53楼说，叫gone也可以啊。</li>
+<li>69楼说，大家别吵了，这是go的第9个issue，叫Issue 9最好。</li>
+</ul>
+<p>后面的网友们纷纷支持Issue 9，<strong>Issue 9</strong>的呼声最高。截止本文发表，大约有710个跟贴，在<a href="http://www.reddit.com/r/programming/comments/a351z/oohhhh_snap_i_have_already_used_the_name_go_for/" target="_blank">reddit.com</a>上也在580多个。网友的力量就是大啊。</p>
+<p>星期五了，耗子祝大家周末快乐！<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3156.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Go语言的&#8221;Issue 9&#8243; Closed!" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3156.html" class="wp_rp_title">Go语言的&#8221;Issue 9&#8243; Closed!</a></li><li ><a href="https://coolshell.cn/articles/1761.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg" alt="Go语言源码的一个改动" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1761.html" class="wp_rp_title">Go语言源码的一个改动</a></li><li ><a href="https://coolshell.cn/articles/1751.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="Go 语言：Google 的新编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1751.html" class="wp_rp_title">Go 语言：Google 的新编程语言</a></li><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/22242.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png" alt="ETCD的内存问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22242.html" class="wp_rp_title">ETCD的内存问题</a></li><li ><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" alt="Go编程模式 ： 泛型编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_title">Go编程模式 ： 泛型编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1781.html">Go语言更名Issue 9？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1781.html/feed</wfw:commentRss>
+			<slash:comments>37</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Go语言源码的一个改动</title>
+		<link>https://coolshell.cn/articles/1761.html</link>
+					<comments>https://coolshell.cn/articles/1761.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 12 Nov 2009 00:31:25 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Go]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Ken Thompson]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1761</guid>
+
+					<description><![CDATA[<p>2009年11月11日，光棍节，Google发布了Go语言，马上，就有网友在http://code.google.com/p/go/上找到了一个Go语言包文件操...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1761.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1761.html">Go语言源码的一个改动</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>2009年11月11日，光棍节，<a href="https://coolshell.cn/articles/1751.html" target="_blank">Google发布了Go语言</a>，马上，就有网友在<a href="http://code.google.com/p/go/" target="_blank">http://code.google.com/p/go/</a>上找到了一个Go语言包文件操作源码/src/pkg/os/file.go文件的一个最新改动。这个改动的作者就是那个大名鼎鼎的Unix之父<a href="http://en.wikiquote.org/wiki/Kenneth_Thompson" target="_blank">Ken Thompson</a>（看看人家，都这么老了，还在写程序，佩服佩服，真是顶级程序员啊——《<a rel="bookmark" href="https://coolshell.cn/articles/343.html" target="_blank">程序员的八个级别</a>》），而这个改动的<a href="http://code.google.com/p/go/source/detail?r=4a3f6bbb5f0c6021279ccb3c23558b3c480d995f" target=_blank>Log Message</a>如下所示（把屏抓下来，以免以后某日被放到墙外或是google.com数据丢失或是Google公司倒闭）</p>
+<p style="text-align: center;"><span style="font-size: large;">Spell it with an &#8220;e&#8221;<br />
+</span><br />
+<img decoding="async" loading="lazy" class="size-full wp-image-1762" title="spell it with an e" src="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e.jpg" border="1" alt="spell it with an e" width="474" height="344" srcset="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e.jpg 474w, https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-300x218.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-372x270.jpg 372w" sizes="(max-width: 474px) 100vw, 474px" /></p>
+<p> </p>
+<p>这是一个很著名的典故，要知道这个典故，你需要知道两件事，一个是Ken Thompson的经典语录，一个是Unix的系统调用。</p>
+<p><span id="more-1761"></span></p>
+<p>关于Ken Thompson的经典语录，你可以在wikipdia上的<a href="http://en.wikiquote.org/wiki/Kenneth_Thompson" target="_blank">Ken Thompson</a>词条中找到，这个事情是这样的。</p>
+<blockquote><p>Ken Thompson was once asked what he would do differently if he were redesigning the UNIX system. His reply: &#8220;<strong>I&#8217;d spell creat with an e.</strong>&#8221; （<span style="color: #008000;">Ken Thompson有一次在被问到——如果他可以重新设计Unix系统，他会做些什么不同的事？而他回答到：“我会把“creat”多拼一个e”</span>）</p></blockquote>
+<p>&#8220;I&#8217;d spell creat with an e&#8221;，也就是说，他会把creat这个单词拼成<strong>creat</strong><span style="color: #ff0000;"><strong>e</strong><span style="color: #000000;">，而不是creat。为什么是creat呢，这需要我们来看一下creat这个系统调用，你可以在Unix或Linux下简单地<a href="http://linux.die.net/man/2/creat" target="_blank">man creat</a>你就可以知道，这个系统调用连带其某些参数，如：<strong>O_CREAT</strong>，都是一个少了“e”的create。（Unix下的有很多东西都是简写，如：usr，gp，ls，mv，ps，满大街的都是缩写）</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">看看这个改动的<a href="http://code.google.com/p/go/source/diff?spec=svn1f0a01c93d305f1ab636c68b67346659c5b957f7&#038;r=4a3f6bbb5f0c6021279ccb3c23558b3c480d995f&#038;format=side&#038;path=/src/pkg/os/file.go&#038;old_path=/src/pkg/os/file.go&#038;old=50a1ee94151635c25ad76816044252af417a45b8" target="_blank">diff</a>——这个diff只有一行，第65行，抓屏如下（理由同上）</span></span></p>
+<p style="text-align: center;"><span style="color: #ff0000;"><span style="color: #000000;"><img decoding="async" loading="lazy" class="size-full wp-image-1763" title="spell it with e  diff" src="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e_diff.jpg" alt="spell it with e  diff" width="487" height="79" srcset="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e_diff.jpg 487w, https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e_diff-300x48.jpg 300w" sizes="(max-width: 487px) 100vw, 487px" /></span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">40年后的今天，Ken Thompson参与Go语言设计，于是，他提交了这个改动，也算是圆了他的愿望，从这点看来，Ken Thompson把Go语言看得和Unix一样重啊。难道Go语言也会像Unix一样成为另一个传奇？（Unix传奇 <a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542340.aspx" target="_blank">上篇</a>，<a href="http://blog.csdn.net/haoel/archive/2007/03/27/1542353.aspx" target="_blank">下篇</a>）</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">（全文完）</span></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/figure1-150x150.gif" alt="Unix考古记：一个“遗失”的shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_title">Unix考古记：一个“遗失”的shell</a></li><li ><a href="https://coolshell.cn/articles/7771.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/Less-is-More-Box-ShopTab-300x282-150x150.jpg" alt="少即是极多" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7771.html" class="wp_rp_title">少即是极多</a></li><li ><a href="https://coolshell.cn/articles/3156.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Go语言的&#8221;Issue 9&#8243; Closed!" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3156.html" class="wp_rp_title">Go语言的&#8221;Issue 9&#8243; Closed!</a></li><li ><a href="https://coolshell.cn/articles/2322.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" alt="Unix传奇(上篇)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2322.html" class="wp_rp_title">Unix传奇(上篇)</a></li><li ><a href="https://coolshell.cn/articles/1781.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="Go语言更名Issue 9？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1781.html" class="wp_rp_title">Go语言更名Issue 9？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1761.html">Go语言源码的一个改动</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1761.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Go 语言：Google 的新编程语言</title>
+		<link>https://coolshell.cn/articles/1751.html</link>
+					<comments>https://coolshell.cn/articles/1751.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Wed, 11 Nov 2009 10:01:20 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Go]]></category>
+		<category><![CDATA[Google]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1751</guid>
+
+					<description><![CDATA[<p>Google 今天发布了自制的编程语言，叫做Go，官方网站如下： http://golang.org/ 主要参与者名单繁星满天： Ken Thompson (U...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1751.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1751.html">Go 语言：Google 的新编程语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span style="color: #ff0000;">Go</span>ogle 今天发布了自制的编程语言，叫做Go，官方网站如下：</p>
+<ul>
+<li><a href="http://golang.org/">http://golang.org/</a></li>
+</ul>
+<p>主要参与者名单繁星满天：</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> (Unix之父之一&#8230;好拗口)</li>
+<li><a href="http://research.google.com/people/r/">Rob Pike</a> (Unix团队成员, 著书《 <em><a style="text-decoration: none; color: #002bb8; background-image: none; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: initial initial; background-repeat: initial initial;" title="The Practice of Programming" href="http://en.wikipedia.org/wiki/The_Practice_of_Programming">The Practice of Programming</a></em> 》and《 <em><a style="text-decoration: none; color: #002bb8; background-image: none; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: initial initial; background-repeat: initial initial;" title="The Unix Programming Environment (book)" href="http://en.wikipedia.org/wiki/The_Unix_Programming_Environment_(book)">The Unix Programming Environment</a></em>》)</li>
+<li>等等</li>
+</ul>
+<p>Logo图标 (一只 <span style="color: #ff0000;">Go</span>pher, 金花鼠，作者 <a style="color: #3333cc;" href="http://reneefrench.blogspot.com/" target="_blank">Renée French</a>)<br />
+<img decoding="async" loading="lazy" title="logo-153x55" src="https://coolshell.cn/wp-content/uploads/2009/11/logo-153x55.png" alt="logo-153x55" width="153" height="55" /></p>
+<p>为什么Google要做自己的编程语言呢？</p>
+<ul>
+<li>快，安全，处理并发 （其余的<a href="http://golang.org/doc/go_talk-20091030.pdf">讲义在此</a>）</li>
+</ul>
+<p>似乎Google内部官方编程语言之战在即&#8230; C, C++, Java, Python, JavaScript, and now <a href="http://golang.org/">Go</a> and <a href="http://www.zimbu.org/">Zimbu</a>(by VIM 的作者)</p>
+<p><a href="http://v.youku.com/v_show/id_XMTMxMzIwMTQ4.html">Go programming language Tech Talk</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3156.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Go语言的&#8221;Issue 9&#8243; Closed!" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3156.html" class="wp_rp_title">Go语言的&#8221;Issue 9&#8243; Closed!</a></li><li ><a href="https://coolshell.cn/articles/1781.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="Go语言更名Issue 9？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1781.html" class="wp_rp_title">Go语言更名Issue 9？</a></li><li ><a href="https://coolshell.cn/articles/1761.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg" alt="Go语言源码的一个改动" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1761.html" class="wp_rp_title">Go语言源码的一个改动</a></li><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/22242.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/05/etcd-150x150.png" alt="ETCD的内存问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22242.html" class="wp_rp_title">ETCD的内存问题</a></li><li ><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/09/go-generics-150x150.png" alt="Go编程模式 ： 泛型编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21615.html" class="wp_rp_title">Go编程模式 ： 泛型编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1751.html">Go 语言：Google 的新编程语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1751.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>恐怖的C++语言</title>
+		<link>https://coolshell.cn/articles/1724.html</link>
+					<comments>https://coolshell.cn/articles/1724.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 11 Nov 2009 04:06:25 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1724</guid>
+
+					<description><![CDATA[<p>Linus曾经(2007年9月)在新闻组gmane.comp.version-control.git里和一个微软的工程师（Dmitry Kakurin）争执过用...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1724.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1724.html">恐怖的C++语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/11/cpp.jpg"><img decoding="async" loading="lazy" class="alignright size-medium wp-image-1740" title="我爱C++" src="https://coolshell.cn/wp-content/uploads/2009/11/cpp-300x216.jpg" alt="我爱C++" width="200" height="144" /></a> Linus曾经(2007年9月)在新闻组<a href="http://news.gmane.org/gmane.comp.version-control.git" target="_top">gmane.comp.version-control.git</a>里和一个微软的工程师（Dmitry Kakurin）争执过用C还是用C++，当时的那个微软的工程师主要是在做Git的Windows版，但他却发现Git的源码居然是C语言写的，而不是C++，于是他（Dmitry Kakurin）在Linux社区里发贴表示对Linux的不满，语言很直接：</p>
+<blockquote>
+<p style="padding-left: 30px;">Pure C as opposed to C++. No idea why. Please don&#8217;t talk about portability, it&#8217;s BS. （<span style="color: #008000;">纯C写的，而不是C++，不知道为什么，请别告诉我是为了移植性，这完全是胡扯</span>。）</p>
+</blockquote>
+<p>Linux之父Linus Torvalds马上跟贴，在贴子中，Linus言辞很直接，直接表明C++是一个很恐怖的语言，他在<a href="http://thread.gmane.org/gmane.comp.version-control.git/57643/focus=57918" target="_blank"><strong>贴子</strong></a>中说：</p>
+<blockquote>
+<p style="padding-left: 30px;"><strong>*YOU*</strong> are full of bullshit. C++ is a horrible language. It&#8217;s made more horrible by the fact that a lot of substandard programmers use it. （<span style="color: #008000;">你才是完全在胡扯。C++是一门很恐怖的语言，而比它更恐怖的是很多不合格的程序员在使用着它</span>）</p>
+</blockquote>
+<p>Linus的这个观点我是比较同意的，我个人也在几年前的《<a href="http://blog.csdn.net/haoel/archive/2004/06/23/24058.aspx" target="_blank">STL String类的写时才拷贝</a>》以及以后的一些文章中表达过C++的确并不是一个很成熟的语言，这种观点一直都围绕着我。这是因为它的学习成本实在是太高了，编译器和类背着你做了很多你不知道的事，而且，C++非常容易地出错和发生很多意想不到的问题。</p>
+<p>当然，这篇文章并不是要继续声讨C++，也不是回顾以前的某个事件。我们这里只谈技术。昨天，我在网上看到一个邪恶的C++的示例，在这里给大家share一下，让大家看看C++这种编程语言的恐怖和邪恶的一面。下面的这个例子，比那个“#define  private  public”还更加邪恶。</p>
+<p><span id="more-1724"></span></p>
+<p>请看下面这段代码，你能告诉我它会输出什么吗？（注意main函数中高亮的那一行）</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW" data-enlighter-highlight="28">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+typedef int UINT4;
+using namespace std;
+class Hack
+{
+};
+
+Hack&amp; operator&lt; (Hack &amp;a , Hack &amp;b)
+{
+    std::cerr &lt;&lt; &quot;小于操作符\n&quot;;
+    return a;
+}
+
+Hack&amp; operator&gt; (Hack &amp;a, Hack &amp;b)
+{
+    std::cerr &lt;&lt;  &quot;大于操作符\n&quot;;
+    return a;
+}
+
+int main(int argc, char ** argv)
+{
+    Hack vector;
+    Hack UINT4;
+    Hack foo;
+
+    vector&lt;UINT4&gt; foo;
+
+return(0);
+}</pre>
+<p style="text-align: left;"><img decoding="async" loading="lazy" class="alignleft" title="不是吧" src="https://coolshell.cn/wp-content/uploads/2009/11/bushiba-150x150.jpg" alt="不是吧" width="98" height="96" />是的，上面这段代码如果只看main函数中的那句“vector&lt;UINT4&gt; foo”，你会觉得很眼熟，然而，事情并非那么简单，我们可以看到vector, UINT4和foo都是Hack类的实例，这就是邪恶的开始，那两个尖括号&lt; &gt;则成了两个运算符，大于和小于，这两个运算符却又被重载了。其实，真正的语句是：</p>
+<p><code data-enlighter-language="c" class="EnlighterJSRAW">vector.operator&lt;(UNIT4).operator&gt;(foo);</code></p>
+<p>所以，所有的一切都符合我们的C++的规范和语法，自然程序也能被顺利编译通过（至少，在我的G++上是没有问题的）。而整个程序的运行结果自然是：</p>
+<pre data-enlighter-language="bash" class="EnlighterJSRAW">$ ./horror
+小于操作符
+大于操作符</pre>
+<p>是的，如果你通晓C++的一切的一切，你自然不会对这段程序感到惊奇。这样的事情在C/C++的世界中并不少见，要搞乱C/C++的代码并不是一件难事，花样多得数不胜数，只要看看《<a title="6个变态的C语言Hello World程序 - 4,749 次浏览" href="https://coolshell.cn/articles/914.html">6个变态的C语言Hello World程序</a>》你就知道了，而且，还有一个简单的教程《<a title="如何加密/混乱C源代码 - 2,420 次浏览" href="https://coolshell.cn/articles/933.html">如何加密/混乱C源代码</a>》告诉你一些简单的做法。</p>
+<p>那么，如果你有一天在读程序中看到“vector&lt;UINT4&gt; foo”，你会觉得那只是一个幻觉吗？</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1724.html">恐怖的C++语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1724.html/feed</wfw:commentRss>
+			<slash:comments>102</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Firefox插件WebMail Notifier</title>
+		<link>https://coolshell.cn/articles/1714.html</link>
+					<comments>https://coolshell.cn/articles/1714.html#comments</comments>
+		
+		<dc:creator><![CDATA[joe]]></dc:creator>
+		<pubDate>Wed, 11 Nov 2009 03:36:20 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Firefox]]></category>
+		<category><![CDATA[WebMail Notifier]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1714</guid>
+
+					<description><![CDATA[<p>当你的邮箱有新邮件时，WebMail Notifier此插件会自动提醒你。 支持：gmail, yahoo, hotmail, daum, naver, emp...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1714.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1714.html">Firefox插件WebMail Notifier</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>当你的邮箱有新邮件时，WebMail Notifier此插件会自动提醒你。</p>
+<p>支持：gmail, yahoo, hotmail, daum, naver, empas, nate等。</p>
+<div id="addon-summary-wrapper">
+<table border="0" summary="附加组件信息">
+<tbody>
+<tr>
+<td rowspan="8"> <img decoding="async" src="https://addons.mozilla.org/en-US/firefox/images/t/15233/1184587092" alt="" /></td>
+</tr>
+<tr>
+<th>版本</th>
+<td>1.5.3</td>
+</tr>
+<tr>
+<th>兼容版本</th>
+<td>Firefox: 1.5 – 3.7a1pre</td>
+</tr>
+<tr>
+<th>已更新</th>
+<td><span title="2009 年 10 月  8 日 08:16">2009 年 10 月 8 日 </span></td>
+</tr>
+<tr>
+<th>开发者</th>
+<td><a href="https://addons.mozilla.org/zh-CN/firefox/user/104093" target=_blank>Byungwook Kang</a></td>
+</tr>
+<tr>
+<th>主页</th>
+<td><strong><a href="http://webmailnotifier.mozdev.org/" target=_blank>http://webmailnotifier.mozdev.org/</a> </strong></td>
+</tr>
+<tr>
+<th>评分</th>
+<td><span title="评分 4 超过了 5 星">评分 4 超过了 5 星 </span><a href="https://addons.mozilla.org/zh-CN/firefox/addon/4490#reviews" target=_blank><strong>728</strong> 条意见 </a></td>
+</tr>
+<tr>
+<th>下载次数</th>
+<td><strong>3,239,874 </strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>查看：<a href="https://addons.mozilla.org/zh-CN/firefox/addon/4490" target="_blank">https://addons.mozilla.org/zh-CN/firefox/addon/4490</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/Mozilla-150x150.jpg" alt="Mozilla的一个BUG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2936.html" class="wp_rp_title">Mozilla的一个BUG</a></li><li ><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="浏览器正则表达式检查插件" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2667.html" class="wp_rp_title">浏览器正则表达式检查插件</a></li><li ><a href="https://coolshell.cn/articles/2069.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/01/browser_history-150x150.jpg" alt="一个浏览器市场占有量的图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2069.html" class="wp_rp_title">一个浏览器市场占有量的图</a></li><li ><a href="https://coolshell.cn/articles/732.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="Glassfish ESB 的教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/732.html" class="wp_rp_title">Glassfish ESB 的教程</a></li><li ><a href="https://coolshell.cn/articles/294.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="OSGi和Java企业级运算的未来方向" width="150" height="150" /></a><a href="https://coolshell.cn/articles/294.html" class="wp_rp_title">OSGi和Java企业级运算的未来方向</a></li><li ><a href="https://coolshell.cn/articles/8239.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/lock_free_bicycle-150x150.jpg" alt="无锁队列的实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8239.html" class="wp_rp_title">无锁队列的实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1714.html">Firefox插件WebMail Notifier</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1714.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>橡皮鸭程序调试法</title>
+		<link>https://coolshell.cn/articles/1719.html</link>
+					<comments>https://coolshell.cn/articles/1719.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 10 Nov 2009 10:00:06 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[Code Review]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[Rubber Duck]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1719</guid>
+
+					<description><![CDATA[<p>下面，让我来为你介绍一个程序调试大法——“橡皮鸭程序调试法”，这个方法在调试界是很出众的，实施起来相当方便和简易，几乎可以随时随地地实验，几乎不需要借助任何的软...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1719.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1719.html">橡皮鸭程序调试法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="size-thumbnail wp-image-1721 alignright" title="Rubber Duck Debugging" src="https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg" alt="Rubber Duck Debugging" width="150" height="150" srcset="https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg 150w, https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-200x200.jpg 200w" sizes="(max-width: 150px) 100vw, 150px" />下面，让我来为你介绍一个程序调试大法——“橡皮鸭程序调试法”，这个方法在调试界是很出众的，实施起来相当方便和简易，几乎可以随时随地地实验，几乎不需要借助任何的软件和硬件的支持，你甚至可以把你的程序打印出来，在纸面上进行调试。</p>
+<p>那么，为什么这个方法要叫做橡皮鸭呢？因为橡皮鸭子是西方人在泡澡时最喜欢玩的一个小玩具，所以，这个东西应该家家户户都必备的。因为，这个方法由西方人发明，所以，就被取名为“橡皮鸭”了。</p>
+<p>好了，话不多说，下面是整个调试方法的流程。</p>
+<ol>
+<li>找一个橡皮鸭子。你可以去借，去偷，去抢，去买，自己制作……反正你要搞到一个橡皮鸭子。</li>
+<li>把这个橡皮鸭子放在你跟前。标准做法是放在你的桌子上，电脑显示器边，或是键盘边，反正是你的跟前，面朝你。</li>
+<li>然后，打开你的源代码。不管是电脑里的还是打印出来的。</li>
+<li>对着那只橡皮鸭子，把你写下的所有代码，一行一行地，精心地，向这只橡皮鸭子解释清楚。记住，这是解释，你需要解释出你的想法，思路，观点。不然，那只能算是表述，而不是解释。</li>
+<li>当你在向这只始终保持沉默的橡皮鸭子解释的过程中，你会发现你的想法，观点，或思路和实际的代码相偏离了，于是你也就找到了代码中的bug。</li>
+<li>找到了BUG，一定要记得感谢一下那个橡皮鸭子哦。</li>
+</ol>
+<p>什么？你觉得这个方法太“愚蠢”，太“弱智”了？是的，看上去，会这样做的人脑子好像是有点毛病。不过，我要告诉你的是，这个方法的确有效。<strong>因为，这就是“Code Review”的雏形</strong>！下面让我来给你解释一下。</p>
+<p><span id="more-1719"></span></p>
+<blockquote><p>Once a problem is described in sufficient detail, its solution is obvious.</p></blockquote>
+<p>上面这句话的意思是</p>
+<blockquote><p>一旦一个问题被充分地描述了他的细节，那么解决方法也是显而易见的。</p></blockquote>
+<p>我相信在座的各位都有过这样的经历，当你死活都找不到问题的原因的时候，当你寻求他人的帮助时，对别人解释整个你的想法和意图或是问题背景的时候，你自己都没有解释完，就已经找到问题的原因了。这样的经历，相信大家一定有过。这就是这个方法的意义所在。</p>
+<p>所以，“橡皮鸭”只是一个形式，其主要目的是要你把自己写的代码做“自查”，也就是自己解释给自己听。当然，为了不让你像个“精神分裂”的程序员，引入“橡皮鸭”是很有必要的（虽然这样还是有点精神病，但比起精神分裂来说算是好的了，嘻嘻）。所以，真实的本质是Code Review。关于代码评审，大家可以看一下我的这篇文章《<a rel="bookmark" href="https://coolshell.cn/articles/1302.html">Code Review中的几个提示</a>》，你会明白其中更多的东西的。</p>
+<p>最后，我想和大家说一下道具“橡皮鸭”。是的，在我们的身边，你不一定能找得“橡皮鸭”，但你可以找到你你的同事，你的朋友，来做这个“橡皮鸭”，当然，他们并不一定有“橡皮鸭”好使，因为你的那些同事或朋友一定会在你解释的时候，随意地发表意见和看法，相当的令人annoying。《<a rel="bookmark" href="https://coolshell.cn/articles/1302.html">Code Review中的几个提示</a>》和《<a rel="bookmark" href="https://coolshell.cn/articles/16.html">结对编程的利与弊</a>》也谈到了一些，供你借鉴。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411-150x150.jpg" alt="如何重构“箭头型”代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_title">如何重构“箭头型”代码</a></li><li ><a href="https://coolshell.cn/articles/11432.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/code_review-150x150.jpg" alt="从Code Review 谈如何做技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11432.html" class="wp_rp_title">从Code Review 谈如何做技术</a></li><li ><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/20110620115951113-150x150.gif" alt="一个空格引发的惨剧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4875.html" class="wp_rp_title">一个空格引发的惨剧</a></li><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li><li ><a href="https://coolshell.cn/articles/1502.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="高科技：GDB回溯调试" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1502.html" class="wp_rp_title">高科技：GDB回溯调试</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1719.html">橡皮鸭程序调试法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1719.html/feed</wfw:commentRss>
+			<slash:comments>26</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>别的程序员是怎么读你的简历的</title>
+		<link>https://coolshell.cn/articles/1695.html</link>
+					<comments>https://coolshell.cn/articles/1695.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 09 Nov 2009 02:22:23 +0000</pubDate>
+				<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[简历]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1695</guid>
+
+					<description><![CDATA[<p>下面这个图片来源国外，是一个关于程序员面试时的简历，被人事部门和程序员本身评审的角度不同的图片。当然，这是一个从国外面试的视角制作的图片，不过，可以看出，其中很...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1695.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1695.html">别的程序员是怎么读你的简历的</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="https://coolshell.cn/wp-content/uploads/2009/11/resume_comic.png"></a>下面这个图片来源国外，是一个关于程序员面试时的简历，被人事部门和程序员本身评审的角度不同的图片。当然，这是一个从国外面试的视角制作的图片，不过，可以看出，其中很多东西都是和国内是相同的。让我们通过这个图片也来了解一下自身吧。</p>
+<p align="center"><a href="https://coolshell.cn/wp-content/uploads/2009/11/resume_comic.png" target="_blank"><img decoding="async" loading="lazy" title="程序员怎样阅读简历" src="https://coolshell.cn/wp-content/uploads/2009/11/resume_comic-552x1024.png" alt="程序员怎样阅读简历（点击看大图）" width="552" height="1024" /></a></p>
+<p>下面是我对其做的翻译，翻译水平有限，请大家指正。</p>
+<p><span id="more-1695"></span></p>
+<h4>人事部门是这样阅读简历的</h4>
+<ul>
+<li>（+15分）如果简历中说到了和工作职位相符的技能超过5次以上。</li>
+<li>（+8分）如果简历中说到了和工作职位相符的技能3次到5次。</li>
+<li>（+4分）如果简历中说到了和工作职位相符的技能1次到2次。</li>
+<li>（+4分）Cover Letter（“求职信”或“自荐信”）提到了招聘人员。</li>
+<li>（+2分）简历中有Cover Letter（求职信）。</li>
+<li>（-10分）没有提到和职位描述相关的技能。</li>
+<li>（-15分）没有受过大专教育。</li>
+</ul>
+<h4>程序员是这样阅读简历的</h4>
+<ul>
+<li>（+15分）曾经因为好玩而写过操作系统或编译器。</li>
+<li>（+12分）简历被LaTeX编译过。</li>
+<li>（+11分）为开源软件贡献过代码。</li>
+<li>（+9分）上学的时候曾经写过操作系统或编译器。</li>
+<li>（+8分）有一个BLOG分享技术知识。</li>
+<li>（+8分）编程/机器人/工程俱乐部主席。</li>
+<li>（+7分）编程/机器人/工程竞赛参与者。</li>
+<li>（+7分）在Google和Microsoft实习过。</li>
+<li>（+6分）使用动态语言（Python/Perl/Ruby）写过非试验性的程序。</li>
+<li>（+5分）知道3种或多于3种的编程语言。</li>
+<li>（+5分）之前的工作和目前的职位有很相似的经验。</li>
+<li>（+4分）有过实习经验。</li>
+<li>（+4分）自己创过业开过公司。</li>
+<li>（+4分）有一个通过Rail, PHP或ASP.NET的个人主页。</li>
+<li>（+3分）有一个自己域名的邮件地址。</li>
+<li>（+3分）改过一些由动态语言（Python/Perl/Ruby）写的程序。</li>
+<li>（+2分）有一个个人主页。</li>
+<li>（+1分）高学历，学习成绩优秀，等。</li>
+<li>（+0分）有奖学金。</li>
+<li>（+0分）在快餐店工作过。</li>
+<li>（-0.5分）Fackbook上有一张看上去喝醉了的照片。</li>
+<li>（-1分）有博士头衔。</li>
+<li>（-2分）有一个一般的求职信。</li>
+<li>（-2分）在简历中说自己懂Word/Excel。</li>
+<li>（-2分）在简历中有拼写和语法错误。</li>
+<li>（-3分）简历的字体太小。</li>
+<li>（-4分）所有的编程经验只是在学校中。</li>
+<li>（-4分）只知道一门编程语言。</li>
+<li>（-6分）简历有三页以上。</li>
+<li>（-6分）简历中有一些无关的东西。</li>
+<li>（-7分）得到过一些课程的认证。</li>
+<li>（-8分）相关专业课程很低的成绩。</li>
+<li>（-10分）在技能中，把Visual Basic列在第一的位置。</li>
+<li>（-12分）在Facebook中，有过光膀子的照片。</li>
+<li>（-15分）简历中的缩进同时使用了空格和Tab键。</li>
+</ul>
+<p>我个人觉得其中的很多东西真是说出了程序员的那种特性。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1695.html">别的程序员是怎么读你的简历的</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1695.html/feed</wfw:commentRss>
+			<slash:comments>105</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>给我一个序列号</title>
+		<link>https://coolshell.cn/articles/1693.html</link>
+					<comments>https://coolshell.cn/articles/1693.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 09 Nov 2009 00:01:04 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[序列号]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1693</guid>
+
+					<description><![CDATA[<p>下面这个链接是CodeSmith官网网站论坛上的一个贴子。http://community.codesmithtools.com/forums/p/10000/...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1693.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1693.html">给我一个序列号</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面这个链接是CodeSmith官网网站论坛上的一个贴子。<a href="http://community.codesmithtools.com/forums/p/10000/37140.aspx">http://community.codesmithtools.com/forums/p/10000/37140.aspx</a>。在这个贴子里，某位大哥问CodeSmith要一个序列号，一个叫Blake Niemyjski的人，可能是CodeSmith这家公司的客服人说回答到，如果要序列号，需要找他们的销售人员。</p>
+<p>而这位老哥却说，“我要的是一个被破解的序列号，我手上有很多CodeSmith 5.0版的序列号，都可以使用，而你们把软件升级到了5.1，那些序列号都无法使用了”。客服人员无奈下，只得给出了下面的序列号：</p>
+<p style="text-align: center;"><strong>CS50P-0NLY4-1D10T-W0ULD-TRYT0-45KU5-TH15Q</strong></p>
+<p>当然，这个序列号并不行，而老哥没有发现这序列号中的端倪，继续问，后面，很多“热心网友”们都来帮忙，给了一些如下的序列号：</p>
+<p style="text-align: center;">BL4K3-WH47K-1ND0F-700LI-57H1S-1DI07-4NYWY<br />
+W3LLH-4S7H3-P3NNY-DR0PP-3D4UY-37U45-5WIP3<br />
+UKINT-RYTH1-51FUH-AVAVR-Y5MAL-P3N1S<br />
+1FUH4-VN0P3-N1STH-1S1S8-3TT3R-JU57K-1DD3N</p>
+<p>呵呵，你看出这些序列号其中的含义了吗？呵呵。下面是翻译：</p>
+<p><span id="more-1693"></span></p>
+<p>CS50P-0NLY4-1D10T-W0ULD-TRYT0-45KU5-TH15Q<br />
+CS5.0 Pro, Only an idiot would try to ask us this q （q的意思是question）</p>
+<p>BL4K3-WH47K-1ND0F-700LI-57H1S-1DI07-4NYWY<br />
+Blake, What kind of tool is this idiot anyway? （Blake就是那个客服）</p>
+<p>W3LLH-4S7H3-P3NNY-DR0PP-3D4UY-37U45-5WIP3<br />
+Well has the penny dropped for you yet? U asswipe.</p>
+<p>UKINT-RYTH1-51FUH-AVAVR-Y5MAL-P3N1S<br />
+You can try this if you have a very small penis.</p>
+<p>1FUH4-VN0P3-N1STH-1S1S8-3TT3R-JU57K-1DD3N<br />
+If you have no penis this is better just kidding.</p>
+<p>上面的这些英文我就不翻译了，大家就算是看个乐吧。关于这样的恶搞，还有很多，大家可以看看《<a title="编程真难啊 - 3,812 次浏览" href="https://coolshell.cn/articles/1391.html">编程真难啊</a>》，还有《<a rel="bookmark" href="https://coolshell.cn/articles/1619.html">Windows 7 的新粉丝 Linus Torvalds</a>》<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2593.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Web版的VNC" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2593.html" class="wp_rp_title">Web版的VNC</a></li><li ><a href="https://coolshell.cn/articles/8489.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/google-go-language-150x150.jpg" alt="Go 语言简介（下）— 特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8489.html" class="wp_rp_title">Go 语言简介（下）— 特性</a></li><li ><a href="https://coolshell.cn/articles/394.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="十大史上最恶心的操作系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/394.html" class="wp_rp_title">十大史上最恶心的操作系统</a></li><li ><a href="https://coolshell.cn/articles/5164.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" alt="CSS图形" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5164.html" class="wp_rp_title">CSS图形</a></li><li ><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg" alt="关于Facebook 的 React 专利许可证" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_title">关于Facebook 的 React 专利许可证</a></li><li ><a href="https://coolshell.cn/articles/1579.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/operating-systems-150x150.jpg" alt="一张关于操作系统的图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1579.html" class="wp_rp_title">一张关于操作系统的图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1693.html">给我一个序列号</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1693.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>把ASCII图转成图片</title>
+		<link>https://coolshell.cn/articles/1684.html</link>
+					<comments>https://coolshell.cn/articles/1684.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 07 Nov 2009 16:20:03 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[ditaa]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1684</guid>
+
+					<description><![CDATA[<p>我们都知道有很多软件帮我们把图片转成ASCII码图，这里这个工具是帮我们把ASCII图转成漂亮的图片。这个开源的软件是一个用Java写成的一个命令行的工具。对于...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1684.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1684.html">把ASCII图转成图片</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">我们都知道有很多软件帮我们把图片转成ASCII码图，这里这个工具是帮我们把ASCII图转成漂亮的图片。这个开源的软件是一个用Java写成的一个命令行的工具。对于这个工具的目的，我个人以为如下：</p>
+<ul style="text-align: left;">
+<li>其一，可以把别人的ASCII图转成图片，于是更好看一些。</li>
+<li>其二，你可以使用ASCII码画图，而不需要使用图片编辑器。</li>
+<li>其三，因为是命令行，所以，你完全可以以脚本或程序的方法来作图了。</li>
+</ul>
+<p style="text-align: left;">这个工具软件叫ditaa，其网址是：<a href="http://ditaa.sourceforge.net/">http://ditaa.sourceforge.net/</a>。</p>
+<p style="text-align: center;"><img decoding="async" src="http://ditaa.sourceforge.net/images/logo.png" alt="" /><img decoding="async" src="http://ditaa.sourceforge.net/images/arrow_hor.png" alt="" /></p>
+<p style="text-align: left;">这个小工具支持一些语法定义，可以帮你更好地产生图片，如下所示：</p>
+<p style="text-align: left;"><span id="more-1684"></span></p>
+<p style="text-align: left;"><strong>圆角矩形</strong></p>
+<table style="text-align: left;" border="0" cellspacing="15">
+<tbody>
+<tr>
+<td align="center">
+<pre>/--+
+|  |
++--/</pre>
+</td>
+<td align="center"><img decoding="async" src="http://ditaa.sourceforge.net/images/round_corner.png" alt="round corner demo" /></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">
+<p style="text-align: left;"><strong>定义颜色</strong></p>
+<table style="text-align: left;" border="0" cellspacing="15">
+<tbody>
+<tr>
+<td>
+<pre>Color codes
+/-------------+-------------\
+|cRED RED     |cBLU BLU     |
++-------------+-------------+
+|cGRE GRE     |cPNK PNK     |
++-------------+-------------+
+|cBLK BLK     |cYEL YEL     |
+\-------------+-------------/</pre>
+</td>
+<td align="center"><img decoding="async" src="http://ditaa.sourceforge.net/images/color_codes.png" alt="color code" /></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">
+<p style="text-align: center;">
+<p style="text-align: center;">
+<p style="text-align: left;"><strong>一些图示</strong></p>
+<table style="text-align: left;" border="0" cellspacing="5">
+<tbody>
+<tr>
+<th>名字</th>
+<th>ASCII</th>
+<th>图版</th>
+<th>注释</th>
+</tr>
+<tr>
+<td valign="top">文档</td>
+<td align="center">
+<pre>+-----+
+|{d}  |
+|     |
+|     |
++-----+</pre>
+</td>
+<td><img decoding="async" src="http://ditaa.sourceforge.net/images/document.png" alt="" /></td>
+<td valign="top">表示文件</td>
+</tr>
+<tr>
+<td valign="top">存储</td>
+<td align="center">
+<pre>+-----+
+|{s}  |
+|     |
+|     |
++-----+</pre>
+</td>
+<td><img decoding="async" src="http://ditaa.sourceforge.net/images/storage.png" alt="" /></td>
+<td valign="top">表示数据库或磁盘</td>
+</tr>
+<tr>
+<td valign="top">输入<br />
+输出</td>
+<td align="center">
+<pre>+-----+
+|{io} |
+|     |
+|     |
++-----+</pre>
+</td>
+<td><img decoding="async" src="http://ditaa.sourceforge.net/images/io.png" alt="" /></td>
+<td valign="top">输入/输出标志。</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">
+<p style="text-align: center;">
+<p style="text-align: center;">
+<p style="text-align: left;"><strong>线条设置</strong></p>
+<table style="text-align: left;" border="0" cellspacing="15">
+<tbody>
+<tr>
+<td>
+<pre>----+  /----\  +----+
+    :  |    |  :    |
+    |  |    |  |{s} |
+    v  \-=--+  +----+</pre>
+</td>
+<td align="center"><img decoding="async" src="http://ditaa.sourceforge.net/images/dashed_demo.png" alt="" /></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">
+<p style="text-align: center;">
+<p style="text-align: center;">
+<p style="text-align: left;">
+<p style="text-align: left;"><strong>线上的链接点</strong></p>
+<table style="text-align: left;" border="0" cellspacing="15">
+<tbody>
+<tr>
+<td>
+<pre>*----*
+|    |      /--*
+*    *      |
+|    |  -*--+
+*----*</pre>
+</td>
+<td align="center"><img decoding="async" src="http://ditaa.sourceforge.net/images/point_marker.png" alt="point marker demo" /></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left;">
+<p style="text-align: left;">
+<p style="text-align: center;">
+<p style="text-align: left;"><strong>文本</strong></p>
+<table style="text-align: lef;" border="0" cellspacing="15">
+<tbody>
+<tr>
+<td>
+<pre>/-----------------\
+| Things to do    |
+| cGRE            |
+| o Cut the grass |
+| o Buy jam       |
+| o Fix car       |
+| o Make website  |
+\-----------------/</pre>
+</td>
+<td align="center"><img decoding="async" src="http://ditaa.sourceforge.net/images/bullet.png" alt="bullet point demo" /></td>
+</tr>
+</tbody>
+</table>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li><li ><a href="https://coolshell.cn/articles/290.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="雷人的程序注释" width="150" height="150" /></a><a href="https://coolshell.cn/articles/290.html" class="wp_rp_title">雷人的程序注释</a></li><li ><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="九个PHP很有用的功能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2394.html" class="wp_rp_title">九个PHP很有用的功能</a></li><li ><a href="https://coolshell.cn/articles/2520.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/06/London-Live-Train-Map-150x150.jpg" alt="伦敦地铁实时图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2520.html" class="wp_rp_title">伦敦地铁实时图</a></li><li ><a href="https://coolshell.cn/articles/1245.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="IE的CSS相关的BUG" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1245.html" class="wp_rp_title">IE的CSS相关的BUG</a></li><li ><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/538efefbgw1eiz9cvx78fj20rm0fmdi8-150x150.jpg" alt="【活动】解迷题送礼物" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11832.html" class="wp_rp_title">【活动】解迷题送礼物</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1684.html">把ASCII图转成图片</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1684.html/feed</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Vim的分屏功能</title>
+		<link>https://coolshell.cn/articles/1679.html</link>
+					<comments>https://coolshell.cn/articles/1679.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 07 Nov 2009 03:39:53 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1679</guid>
+
+					<description><![CDATA[<p>本篇文章主要教你如何使用 Vim 分屏功能。   分屏启动Vim 使用大写的O参数来垂直分屏。 vim -On file1 file2 ... 使用小写的o参数...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1679.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1679.html">Vim的分屏功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>本篇文章主要教你如何使用 <a href="http://www.vim.org/">Vim</a> 分屏功能。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" style="display: inline;" title="vim-windows" alt="vim-windows" src="https://coolshell.cn/wp-content/uploads/2009/11/vimwindows.png" width="550" height="391" /></p>
+<p><span id="more-2645"> <img decoding="async" title="更多..." alt="" src="https://coolshell.cn/wp-includes/js/tinymce/plugins/wordpress/img/trans.gif" /><span id="more-1679"></span></span></p>
+<h4>分屏启动Vim</h4>
+<ol>
+<li>使用大写的O参数来垂直分屏。
+<pre><code>vim -On file1 file2 ...</code></pre>
+</li>
+<li>使用小写的o参数来水平分屏。
+<pre><code>vim -on file1 file2 ...</code></pre>
+</li>
+</ol>
+<p><strong>注释:</strong> n是数字，表示分成几个屏。</p>
+<h4>关闭分屏</h4>
+<ol>
+<li>关闭当前窗口。
+<pre><code>Ctrl+W c</code></pre>
+</li>
+<li>关闭当前窗口，如果只剩最后一个了，则退出Vim。
+<pre><code>Ctrl+W q</code></pre>
+</li>
+</ol>
+<h4>分屏</h4>
+<ol>
+<li>上下分割当前打开的文件。
+<pre><code>Ctrl+W s</code></pre>
+</li>
+<li>上下分割，并打开一个新的文件。
+<pre><code>:sp filename</code></pre>
+</li>
+<li>左右分割当前打开的文件。
+<pre><code>Ctrl+W v</code></pre>
+</li>
+<li>左右分割，并打开一个新的文件。
+<pre>:vsp filename</pre>
+</li>
+</ol>
+<h4>移动光标</h4>
+<p>Vi中的光标键是h, j, k, l，要在各个屏间切换，只需要先按一下Ctrl+W</p>
+<ol>
+<li>把光标移到<strong>右边</strong>的屏。
+<pre><code>Ctrl+W l</code></pre>
+</li>
+<li>把光标移到<strong>左边</strong>的屏中。
+<pre><code>Ctrl+W h</code></pre>
+</li>
+<li>把光标移到<strong>上边</strong>的屏中。
+<pre><code>Ctrl+W k</code></pre>
+</li>
+<li>把光标移到<strong>下边</strong>的屏中。
+<pre><code>Ctrl+W j</code></pre>
+</li>
+<li>把光标移到<strong>下一个</strong>的屏中。.
+<pre>Ctrl+W w</pre>
+</li>
+</ol>
+<h4>移动分屏</h4>
+<p>这个功能还是使用了Vim的光标键，只不过都是大写。当然了，如果你的分屏很乱很复杂的话，这个功能可能会出现一些非常奇怪的症状。</p>
+<ol>
+<li>向右移动。
+<pre><code>Ctrl+W L</code></pre>
+</li>
+<li>向左移动
+<pre><code>Ctrl+W H</code></pre>
+</li>
+<li>向上移动
+<pre><code>Ctrl+W K</code></pre>
+</li>
+<li>向下移动
+<pre><code>Ctrl+W J</code></pre>
+</li>
+</ol>
+<h4>屏幕尺寸</h4>
+<p>下面是改变尺寸的一些操作，主要是高度，对于宽度你可以使用[Ctrl+W &lt;]或是[Ctrl+W &gt;]，但这可能需要最新的版本才支持。</p>
+<ol>
+<li>让所有的屏都有一样的高度。
+<pre><code>Ctrl+W =</code></pre>
+</li>
+<li>增加高度。
+<pre><code>Ctrl+W +</code></pre>
+</li>
+<li>减少高度。
+<pre><code>Ctrl+W -</code></pre>
+</li>
+</ol>
+<p><code>也许还有其它我不知道的，欢迎你补充。</code></p>
+<p><code>（全文完）</code><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" alt="游戏：VIM大冒险" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_title">游戏：VIM大冒险</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" alt="给程序员的VIM速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_title">给程序员的VIM速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1679.html">Vim的分屏功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1679.html/feed</wfw:commentRss>
+			<slash:comments>147</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>13个不错的Javascript和CSS的菜单</title>
+		<link>https://coolshell.cn/articles/1660.html</link>
+					<comments>https://coolshell.cn/articles/1660.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2009 11:23:04 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Menu]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1660</guid>
+
+					<description><![CDATA[<p>以前发布过两篇文章——“30种时尚的CSS网站导航条”和“20个优秀的Javascript导航技术”，今天向大家介绍一下，13个不错的Javascript和CS...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1660.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1660.html">13个不错的Javascript和CSS的菜单</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前发布过两篇文章——“<a rel="bookmark" href="https://coolshell.cn/articles/562.html">30种时尚的CSS网站导航条</a>”和“<a rel="bookmark" href="https://coolshell.cn/articles/918.html">20个优秀的Javascript导航技术</a>”，今天向大家介绍一下，13个不错的Javascript和CSS的菜单。</p>
+<p>1) <a href="http://www.andrewsellick.com/35/sexy-sliding-javascript-side-bar-menu-using-mootools">性感的滑动型菜单</a> </p>
+<p><a href="http://www.andrewsellick.com/35/sexy-sliding-javascript-side-bar-menu-using-mootools"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/4996deb5bbd70cc8d71bc51ec8954385.gif" alt="Sexy-menu - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.andrewsellick.com/examples/sliding-side-bar/" target="_blank">Mootols Version</a><br />
+演示：<a title="Demo" href="http://www.andrewsellick.com/examples/sliding-side-bar-scriptaculous/" target="_blank">Script.aculo.usVersion</a></p>
+<p> </p>
+<p><span id="more-1660"></span></p>
+<hr class="dotted" />2) <a href="http://labs.activespotlight.net/jQuery/menu_demo.html">FastFind 菜单</a> 右键菜单，还可以被拖来拖去。使用 <em>jQuery</em> 。</p>
+<p><a href="http://labs.activespotlight.net/jQuery/menu_demo.html"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/2c3645511db61a6d2c008aacf5d1b5d3.gif" alt="Fastfind - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://labs.activespotlight.net/jQuery/menu_demo.html" target="_blank">FastFind Menu</a></p>
+<p> </p>
+<hr class="dotted" />3) <a href="http://2210media.com/dock_menu/">Webber 2.0 Dock 菜单</a></p>
+<p><a href="http://2210media.com/dock_menu/"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/b959949728d1df1f380f68fdd30a345a.gif" alt="Dockmenu - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://2210media.com/dock_menu/" target="_blank">Webber 2.0 Dock Menu</a></p>
+<p> </p>
+<hr class="dotted" />4) <a href="http://www.phatfusion.net/">Phatfusion- 图片菜单</a> 使用了onClick 事件来 open 和 close 菜单项。</p>
+<p><a href="http://www.phatfusion.net/imagemenu/index.htm"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/7c8a1d7b798d4a2d919eb83a792b71f0.jpg" alt="Phatfusion - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.phatfusion.net/imagemenu/index.htm" target="_blank">Phatfusion- Image Menu</a><br />
+演示： <a title="Demo" href="http://www.artviper.de/ImageMenu/" target="_blank">Mootools version with XML parser</a></p>
+<p> </p>
+<hr class="dotted" />5) <a href="http://extjs.com/deploy/dev/examples/tree/reorder.html">可拖动的树形菜单</a></p>
+<p> <a href="http://extjs.com/deploy/dev/examples/tree/reorder.html"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/a999b2c5c2b62e523654a43d8f2d379b.gif" alt="Tree - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://extjs.com/deploy/dev/examples/tree/reorder.html" target="_blank">Drag and Drop ordering in a TreePanel</a></p>
+<p> </p>
+<hr class="dotted" />6) <a href="http://www.thinkvitamin.com/">自定义的菜单事件</a></p>
+<p><a href="http://www.thinkvitamin.com/misc/yui-demos/demo-10.html"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/f049f6dba56c3ff488dcf9d0dba9181a.gif" alt="Custom - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.thinkvitamin.com/misc/yui-demos/demo-10.html" target="_blank">Custom Menu Events | ThinkVitamin.com</a></p>
+<p> </p>
+<hr class="dotted" />7) <a href="http://yura.thinkweb2.com/scripting/contextMenu/">右键菜单 </a></p>
+<p><a href="http://yura.thinkweb2.com/scripting/contextMenu/"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/d593bc2e237bc06e6f28e7ccf999eb2b.jpg" alt="Custom - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://yura.thinkweb2.com/scripting/contextMenu/" target="_blank">Context Menu Functionality</a><br />
+演示：<a title="demo" href="http://utils.softr.net/contextmenoo-menu-contextual-con-mootools/" target="_blank">Another Context Menu</a></p>
+<p> </p>
+<hr class="dotted" />8 ) <a href="http://gmarwaha.com/blog/?p=7">LavaLamp jQuery 滑动菜单 </a></p>
+<p><a href="http://gmarwaha.com/blog/?p=7"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/670a6412233b77ecbccf70047b6d75ac.gif" alt="Lavalamp - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://gmarwaha.com/blog/?p=7" target="_blank">LavaLamp jQuery Sliding Menu</a><br />
+演示： <a title="Demo" href="http://devthought.com/cssjavascript-true-power-fancy-menu/" target="_blank">Mootools Fancy Menu</a></p>
+<p> </p>
+<hr class="dotted" />9 ) <a href="http://www.dynamicdrive.com/dynamicindex1/slashdot.htm">折叠式菜单</a></p>
+<p><a href="http://www.dynamicdrive.com/dynamicindex1/slashdot.htm"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/62922536936df5e7c844afa1e86cb606.gif" alt="9 - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.dynamicdrive.com/dynamicindex1/slashdot.htm" target="_blank">Slashdot Menu</a></p>
+<p> </p>
+<hr class="dotted" />10 ) <a href="http://www.artviper.eu/mootoolsmenu/" target="new">Mootools层叠式菜单</a></p>
+<p><a href="http://www.artviper.eu/mootoolsmenu/" target="new"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/ef8e08b0a9bf0ff831ac0b5078d74115.jpg" alt="10 - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.artviper.eu/mootoolsmenu/" target="new">Mootools menu with Accordeon and Effects</a></p>
+<p> </p>
+<hr class="dotted" />11 ) <a href="http://www.ndesign-studio.com/blog/mac/css-dock-menu" target="new">CSS Dock 菜单</a> 模仿Mac 电脑界面。 </p>
+<p><a href="http://www.ndesign-studio.com/blog/mac/css-dock-menu" target="new"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/c995589668f5cafebb326f51458507fd.gif" alt="11 - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.ndesign-studio.com/blog/mac/css-dock-menu" target="new">CSS Dock Menu</a></p>
+<p> </p>
+<hr class="dotted" />12 ) <a href="http://www.getintothis.com/pub/projects/rb_menu/" target="new">jQuery 插件：滑动式菜单</a></p>
+<p><a href="http://www.getintothis.com/pub/projects/rb_menu/" target="new"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/e89c0f8090dfdf15f02ca59ca26790d1.gif" alt="12 - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.getintothis.com/pub/projects/rb_menu/" target="new">jQuery Plugin: Sliding Menu</a></p>
+<p> </p>
+<hr class="dotted" />13 ) <a href="http://www.456bereastreet.com/archive/200705/accessible_expanding_and_collapsing_menu/" target="new">折叠式菜单</a></p>
+<p><a href="http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/" target="new"><img decoding="async" src="http://9tricks.com/wp-content/uploads/HLIC/0a9da228f5264becdc2aac4296776f35.gif" alt="13 - 13不错的Javascript CSS菜单" /></a></p>
+<p>演示： <a title="Demo" href="http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/" target="new">Accessible expanding and collapsing menu</a></p>
+<p>文章：<a href="http://9tricks.com/web-dev/13-awesome-javascript-css-menus/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Drop-Down-Menu-Scripts-5-150x150.jpg" alt="30+ Web下拉菜单" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_title">30+ Web下拉菜单</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Web开发中需要了解的东西" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6043.html" class="wp_rp_title">Web开发中需要了解的东西</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1660.html">13个不错的Javascript和CSS的菜单</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1660.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>VIM有趣的命令</title>
+		<link>https://coolshell.cn/articles/1651.html</link>
+					<comments>https://coolshell.cn/articles/1651.html#comments</comments>
+		
+		<dc:creator><![CDATA[joe]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2009 11:05:22 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1651</guid>
+
+					<description><![CDATA[<p>前几天逛豆瓣，发现了VIM一个有趣的小技巧。 在VIM中输入:h!试试看会发现什么。 再输入:h 42呢？又会有什么发现？ （转载本站文章请注明作者和出处 酷 ...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1651.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1651.html">VIM有趣的命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>前几天逛豆瓣，发现了VIM一个有趣的小技巧。</p>
+<p>在VIM中输入:h!试试看会发现什么。</p>
+<p>再输入:h 42呢？又会有什么发现？<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" alt="游戏：VIM大冒险" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_title">游戏：VIM大冒险</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" alt="给程序员的VIM速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_title">给程序员的VIM速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1651.html">VIM有趣的命令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1651.html/feed</wfw:commentRss>
+			<slash:comments>19</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Richard Feynman, 挑战者号, 软件工程</title>
+		<link>https://coolshell.cn/articles/1654.html</link>
+					<comments>https://coolshell.cn/articles/1654.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2009 08:49:30 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Richard Feynman]]></category>
+		<category><![CDATA[挑战者号]]></category>
+		<category><![CDATA[软件开发]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1654</guid>
+
+					<description><![CDATA[<p>源文：链接  （本文主要根据挑战者号的问题，以及Richard Feynman那对NASA严厉的批评报告，批评了不适当的“自顶向下”的设计方法，并总结了一下软件...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1654.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1654.html">Richard Feynman, 挑战者号, 软件工程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="TEXT-ALIGN: left">源文：<a href="http://duartes.org/gustavo/blog/post/richard-feynman-challenger-disaster-software-engineering" target="_blank">链接</a>  （本文主要根据挑战者号的问题，以及Richard Feynman那对NASA严厉的批评报告，批评了不适当的“自顶向下”的设计方法，并总结了一下软件工程和其它工程的相通的一些观点。翻译水平有限，欢迎指正）</p>
+<p align="center"><img decoding="async" loading="lazy" src="http://static.duartes.org/img/blogPosts/250px-ChallengerCrew.jpg" alt="Challenger Crew" width="250" height="200" /></p>
+<p>佛罗里达州，美国东部时间1986年1月28日上午11时39分，<a href="http://zh.wikipedia.org/wiki/%E6%8C%91%E6%88%98%E8%80%85%E5%8F%B7%E8%88%AA%E5%A4%A9%E9%A3%9E%E6%9C%BA%E7%81%BE%E9%9A%BE">挑战者号航天飞机</a> 执行为期6天的<a href="http://en.wikipedia.org/wiki/STS-51-L">STS-51-L 任务</a>，在发射后，其右侧固体火箭助推器（SRB &#8211; <a href="http://en.wikipedia.org/wiki/Space_Shuttle_Solid_Rocket_Booster">Solid Rocket Booster</a>）的O型环密封圈（用于连接两节助推器）失效，泄漏出来的热汽达到了5000华氏度，直接蒸发了O型密封圈，并灼烧了毗邻的外部燃料舱，在几秒钟内，外部燃料舱出现结构连接失效，空气的动力迅速分解了航天飞机。在而航天飞机上升72秒以后，助推器脱落，导致航天发飞向侧面滑出。几乎在引航员 Michael J. Smith 发出&#8221;Uh oh&#8221; 的同时，整个航天飞机完全解体，片刻，航天飞机内部发生爆炸，所有7名宇航员罹难。 那时的我还只是一个小孩，我从电视下方滚动的新闻条目知道了这一惨剧。</p>
+<p>在那个时候，火箭助推器工程师曾经警告过这个O型环可能存在问题，但可惜的是，NASA的管理层忽略了这个问题。<img decoding="async" loading="lazy" style="MARGIN: 6px" src="http://static.duartes.org/img/blogPosts/ChallengerExplosion.jpg" alt="Challenger Explosion" width="300" height="191" align="right" />美国总统里根委派<a href="http://en.wikipedia.org/wiki/Rogers_Commission" target="_blank">罗杰斯委员会</a>对事故进行了调查，调查成员包括著名的物理学家Richard Feynman。其不羁的态度和直来直去的方法和罗杰斯委员会的风格形成了鲜明的反差。主席罗杰斯，一个政客，评论Feynman是一个“真正的痛苦”。最后，在委员会提交的报告中，Feynman反判的观点几乎被清除了出去。并且，Feynman曾被主席威胁过要把他的名字从报告中完全除掉，但最终，他们还是同意在报告中加一个附录，但只是个人观点—— <a href="http://www.ralentz.com/old/space/feynman-report.html">Appendix F &#8211; Personal Observations on Reliability of Shuttle</a>。</p>
+<p><span id="more-1654"></span></p>
+<p>这是一个好的报告，因为，这是一个富有才华的报告。其深深地洞察了在实现一些高可靠性的系统时的工程学中的一些很自然性的东西。是的，在这里，我并没有放上“软件工程” 的字样，只是工程。但Feynman的结论却非常和我们的软件开发有着不可分割的关系。这是最基本的东西，无论是软件工程，还是别的工程学。下面，让我们来看看，Feynman是怎么说的：</p>
+<blockquote><p>航天飞机主引擎的建造方式是<a href="http://en.wikipedia.org/wiki/Top-down"><strong>自顶向下</strong></a>(top down)，我们可以这样说。整个引擎被设计把所有的事情放在一起，而那些相关的细节上的东西在设计当时还并不是很成熟的。所以，<strong>当其中的小零件（轴承，涡轮片，散热管，等等）出现问题时</strong>，<strong>我们需要花费昂贵的代价才能找到事故的原因，也很难作出修改</strong>。要避免问题发生，需要频繁的维护和置换重要的零部件。修理很多时候不会解决真正的原因。</p></blockquote>
+<p>可见，软件开发中也一样，Bug在整个过程中存在的时间越长， <a href="http://stevemcconnell.com/ieeesoftware/eic17.htm">我们就越难解决这个问题</a>。很显然，自顶向下的方法，因为在设计的时候并不熟悉实际问题，所以，Bug从设计的时候就出现了。然而，我们需要明白，需求和设计的不同之处。需求需要对产品一种清楚和良好的定义，设计则是解决如何达到需求的方法。Feynman 在这里并没有反对 <a href="http://www.joelonsoftware.com/articles/fog0000000036.html">功能规格说明书</a>，他只是反对自顶向下的设计方法，比如： <a href="http://martinfowler.com/bliki/UmlAsBlueprint.html">UML 就是蓝图</a> 的鼓吹者。再来看看他的言论：</p>
+<blockquote><p>航天飞机主引擎是一个非常不同寻常的机器，它和以前所有的引擎都不一样。这完全超出了以前引擎制的工程经验。所以，不奇怪的，许多不同的流程和难点都会在工程中出现。<strong>然而，很不幸地，这是通过自顶向下设计，所以，那些流程和问题是很难被发现被修正的</strong>。设计要求的引擎寿命可以完成55次点火任务（相当于27,000秒的操作，也就是说，第次点火需要500秒），但事实上这并没有完成。而引擎现在则<strong>需要频繁维护，并需要经常更换重要的部件</strong>，比如：涡轮泵，轴承，金属片，等等。</p></blockquote>
+<p align="center"><img decoding="async" loading="lazy" style="MARGIN: 4px" src="http://static.duartes.org/img/blogPosts/feynman.jpg" alt="Richard Feynman" hspace="hspace" vspace="vspace" width="200" height="248" /></p>
+<p>“不合适的自顶向下的设计方式，导致了问题很难去发现和修正，最终没有完成设计需求，频繁性地维护”这些描述方式，听起来是不是似曾相识？我们每天在做的软件工程和这个不一样吗？Feynman 详细说明了为什么“自顶向下”的设计会让发现和解决这些问题成为那么的难和痛苦的一件事：</p>
+<blockquote><p>很多这些已被解决的问题在一开始设计时都是设计的难点。很自然地，没有人可以确定那些所有的已发现问题都能会出现，而其中一些，<strong>我们并没有根据正确的原因在正确的地方解决这些问题</strong>。</p></blockquote>
+<p>无论这是Linux内核，或是航天飞机引擎，这些设计时的基本的问题都是相通的。而“自顶向下”是其中荒唐的一个，因为，自顶向下，过度的注重了需求而忽略了现实，而那些下面非常细节的知识绝对是非常需要的，并不是所有的东西都可以抽象成出来。在他说起航空电子系统时（一个NASA的另一个部门）：</p>
+<blockquote><p>该软件是采用了从底向上的方法被小心地做了检查。<strong>首先，每一行代码都被检查过，然后，代码段和模块和一些详细的功能被验证过</strong>。而检查范围在一步一步地被扩大，直到新的改变被组合进来最终成为一个完整的系统。这个过程最终的完整的输出成为了最终的产品，成为了新的release。这个部门完全以一种中立的态度，<strong>把软件作为一个敌对方</strong>，不停地测试，校验，就像自己就是这个软件的用户一样。</p></blockquote>
+<p>是的，这就是1986年Feynman告诉大家的——Unit Test（单元测试），今天，Unit Test成为了软件开发活动中最最重要的一个环节（也许你以为是Coding）。并不单单只是Unit Test，“步步为营的增量式”和“以敌对的态度”，都是值得我们所学习的。我们经常听到有人在抱怨软件道，因为软件工程还太年轻了，还有很多知识我们还没有得到，所以总是那么多问题。这完全是胡说！我们痛苦是因为，我们 <a href="http://www.stevemcconnell.com/cc.htm">总是忽略</a> 早就确定了的， <a href="http://www.joelonsoftware.com/articles/fog0000000043.html">早为人所熟知</a>， <a href="http://www.stevemcconnell.com/rd.htm">以经历和实践去证明一切的方法</a>。 当然，在这方面，我们的管理层也需要负责，尤其是那些紊乱的时间进度，错误的激励机制，低档次的招聘，和一些让士气受挫的制度，等等。“管理”和“工程”间的紧张关系最终成为了糟糕的管理。Feynman在他的报告中也谈到了这点，下面其中的一小段话：</p>
+<blockquote><p>总而言之，计算机软件检查系统和<strong>最负责的态度</strong>。是的，那里并没有那种自欺欺人而不顾固体燃料助推器的标准。但可以肯定的是，有关管理部门<strong>最新的建议，建议取消此类复杂而昂贵的不必要的测试</strong>。</p></blockquote>
+<p>这只是其中的一个小段。我把其挑出来是因为其一针见血地指出了观点，比如“最负责的态度”，以及“逐步的自欺欺人”。我建议你读一读<a href="http://www.ralentz.com/old/space/feynman-report.html">报告全文</a>， 可以让你得到很多真相。关于软件工程，下面是几个主要观点：</p>
+<ul>
+<li>工程仅当在和其管理有好的关系的时候才能好。</li>
+<li>大型的从上从前端的设计是愚蠢的。</li>
+<li>软件工程和其它传统的工程学是一样的。</li>
+<li>可靠的系统由几近残酷的测试，增量式的自底向上的工程，以及高负责的态度来共同保证。</li>
+</ul>
+<p>这篇报告中，还有很多不错的观点，如果你感受到了，欢迎你告诉我。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2681.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="Kent Beck 谈单元测试和持续部署" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2681.html" class="wp_rp_title">Kent Beck 谈单元测试和持续部署</a></li><li ><a href="https://coolshell.cn/articles/2539.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="参透软件开发的本质 &#8211; Uncle Bob Martin 推荐的经典书籍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2539.html" class="wp_rp_title">参透软件开发的本质 &#8211; Uncle Bob Martin 推荐的经典书籍</a></li><li ><a href="https://coolshell.cn/articles/76.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/09meeting-thumbnail-150x150.jpg" alt="怎样做一个 Program Manager" width="150" height="150" /></a><a href="https://coolshell.cn/articles/76.html" class="wp_rp_title">怎样做一个 Program Manager</a></li><li ><a href="https://coolshell.cn/articles/404.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="4月14日，微软补丁日" width="150" height="150" /></a><a href="https://coolshell.cn/articles/404.html" class="wp_rp_title">4月14日，微软补丁日</a></li><li ><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Intel-Recommended-Books-for-Developers-150x150.jpg" alt="一些非常不错的资料" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3192.html" class="wp_rp_title">一些非常不错的资料</a></li><li ><a href="https://coolshell.cn/articles/1817.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/200x200-150x150.jpg" alt="9个最常见IE的Bug及其fix" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1817.html" class="wp_rp_title">9个最常见IE的Bug及其fix</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1654.html">Richard Feynman, 挑战者号, 软件工程</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1654.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>装完Ubuntu 9.10后要干的事</title>
+		<link>https://coolshell.cn/articles/1644.html</link>
+					<comments>https://coolshell.cn/articles/1644.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 30 Oct 2009 11:10:47 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Karmic Koala]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1644</guid>
+
+					<description><![CDATA[<p>Ubuntu 9.10刚刚release，就有人在网上发表了贴子告诉大家在装完这个操作系统后，还需要去安装的一些开源免费软件，相当丰富。不过，这个贴子的链接被G...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1644.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1644.html">装完Ubuntu 9.10后要干的事</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright" title="Ubuntu 9.10" src="http://lunduke.com/wp-content/uploads/2009/05/ubuntu-logo1-300x274.jpg" alt="" width="160" height="147" />Ubuntu 9.10刚刚release，就有人在网上发表了贴子告诉大家在装完这个操作系统后，还需要去安装的一些开源免费软件，相当丰富。不过，这个贴子的链接被GFW干掉了，所以，你需要使用Tor的支持，或是使用Google Reader才能查看<a href="http://blog.thesilentnumber.me/2009/09/top-things-to-do-after-installing.html" target="_blank">源文</a>（<a href="http://feeds.feedburner.com/TheSilentNumber" target="_blank">RSS链接</a>）。而这个贴子非常长，所以我无法作全文翻译，不过这个贴子的内容具有很强的指导意义，所以我在这里为大家总结一下该文所提到的那些诸多的东西。（关于那些如何翻墙的事情怎么做我就不多说了，网上有很多相关的文章，你自己搜索一下就可以找到）</p>
+<h4>基本工作</h4>
+<p>1）第一件事自然是下载那些Ubuntu的镜像站点表，以及更新操作系统的一些补丁。“系统”-&gt;“管理”-&gt; “更新管理器”。</p>
+<p>2）第二件事是设置文件目录共享。就是在文件夹上点右键，在菜单中选“属性”，然后在对话框中选“共享”，那个对话框整得跟XP几乎一模一样。当然，这需要samba的支持。（sudo apt-get install samba）</p>
+<p>3）接下来是设置时间同步。通过NTP（Network Time Protocol）同步你的时间。通过点击“系统”-&gt;“管理”-&gt; “时间/日期”，然后选择“Keep synchronized with Internet servers”（和Internet服务器同步），于是你需要安装NTP协议。（sudo apt-get install ntp）</p>
+<p><span id="more-1644"></span></p>
+<h4>　</h4>
+<h4>受限软件</h4>
+<p>1）DVD方面有一些受限的东西，所以，你可能需要安装libdvdcss，但首先你要安装libdvdread4。</p>
+<p style="PADDING-LEFT: 30px">sudo apt-get install libdvdread4<br />
+sudo /usr/share/doc/libdvdread4/install-css.sh</p>
+<p>2）ubuntu-restricted-extras包中，包括了一堆Ubuntu不能合法使用的东西。比如：unrar，也就是解rar文件的程序，微软的Truetype字体，Sun JRE，还有一些受限代码，还有Adobe Flash Player，等等。这并不代表你不能安装，你可以通过“应用程序”-&gt;“Ubuntu软件中心”中安装。（sudo apt-get install ubuntu-restricted-extras）</p>
+<p>　</p>
+<h4>界面相关</h4>
+<p>1）<strong>GNOME Shell</strong>。关于这个无以言表的东西，你是无法拒绝的。（sudo apt-get install gnome-shell）</p>
+<p>2）<strong>高级桌面效果</strong>。这就是所谓的3D桌面了，效果相当的炫。通过<em>System -&gt; Preferences -&gt; Appearance</em>来设置。在对话框中，选Extra。然后你就自己玩吧。使用Simple CompizConfig Settings Manager更容易一些。（sudo apt-get install simple-ccsm）</p>
+<p>3）<strong>Basic Compositing</strong>。你是一个有图形界面狂燥症的人吗？如果的是话，你一定需要这个功能了（当然，硬件也得跟上）。按Alt+F2，然后运行gconf-editor，浏览Apps -》 metacity -&gt; general，然后，勾选compositing_manager……</p>
+<p>4）<strong>Extra样式</strong>。这就啥也不说了，太多的效果了了，多得都没法说。（sudo apt-get install arc-colors community-themes gdm-themes gnome-backgrounds gnome-colors gnome-themes gnome-themes-extras gnome-themes-more metacity-themes shiki-colors zgegblog-themes）</p>
+<p>5）<strong>Electric Sheep 屏保</strong>。这个屏保很炫啊。(sudo apt-get install electricsheep)</p>
+<p>　</p>
+<h4>桌面相关</h4>
+<p>1）<strong>Application Launcher</strong>。一个相当漂亮的程序启动器（sudo apt-get install gnome-do）</p>
+<p>2）<strong>Universal Applets</strong>。许多的桌面小程序。（sudo apt-get install universal-applets）APT Line: APT line: deb http://download.opensuse.org/repositories/home:/some-guy:/screenlets/xUbuntu_9.04/ ./</p>
+<p>3）<strong>剪贴板管理器</strong>。方便你的拷贝粘贴操作。（sudo apt-get install parcellite）</p>
+<p>　</p>
+<h4>音频/视频编辑器</h4>
+<p>1）<strong>视频编辑器PiTiVi</strong>。功能相当强大。（sudo apt-get install pitivi）</p>
+<p>2）<strong>视频捕捉Instanbul</strong>。（sudo apt-get install istanbul）</p>
+<p>3）<strong>音频录制编辑器Jokosher</strong>。一个强大的非线性多音轨的录音和编辑器。（sudo apt-get install jokosher）</p>
+<p>4）<strong>摄像头Cheese</strong>。基于GStreamer的一个摄像头程序（sudo apt-get install cheese）</p>
+<p>　</p>
+<h4>多媒体Playback</h4>
+<p>1）<strong>多媒体中心Moovida</strong>。原名是Elisa。一个很不错的家庭影院程序。（sudo apt-get install moovida）</p>
+<p>2）<strong>视频Feed软件Miro</strong>。原名是Democracy Player。（sudo apt-get install miro）</p>
+<p>3）<strong>媒体播放器Banshee</strong>。（sudo apt-get install banshee）</p>
+<p>　</p>
+<h4>网页浏览器</h4>
+<p>Firefox 3.5就不多说了。</p>
+<p>1）<strong>Google Chrome</strong>。（sudo apt-get install chromium-browser）</p>
+<p>2）<strong>Epiphany</strong>。GNOME的集成浏览器。（sudo apt-get install epiphany-browser）</p>
+<p>　</p>
+<h4>游戏</h4>
+<p>1）<strong>PlayDeb</strong>。<a href="http://blog.thesilentnumber.me/2009/07/playdebnet-beta-2-launches.html">PlayDeb</a>是一个游戏库。通过PlayDeb.net安装游戏是相当简单和方便的。你可以把其加到你的源里<a href="http://archive.getdeb.net/install_deb/playdeb_0.3-1~getdeb1_all.deb">playdeb package</a>。（wget -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -）</p>
+<p>2）<strong>Yo Frankie!</strong>。这个大名鼎鼎的游戏我就不介绍了。（sudo apt-get install yofrankie）</p>
+<p>3）<strong>Nexuiz</strong>。第一人称视角射击类的游戏。（sudo apt-get install nexuiz）</p>
+<p>　</p>
+<h4>图片和发行物</h4>
+<p>1）<strong>图片管理器Solang</strong>。F-Spot做得并不令人满意，你可以试试这个最新的管理器。（sudo apt-get install solang）</p>
+<p>2）<strong>向量图Inkscape</strong>。SVG文件格式，很像Illustrator, CorelDraw。（sudo apt-get install inkscape）</p>
+<p>3）<strong>3D图片Blender</strong>。相当不错的一个3D图创建器。<a href="http://en.wikipedia.org/wiki/Blender_Foundation#Open_Movie_Project">Open Movie Project</a>的一部分。（sudo apt-get install blender）</p>
+<p>4）发<strong>行物编辑器Scribus</strong>。你可以用这个软件来制作一些报纸，小册子，卡片，海报，封面等发行物。（sudo apt-get install scribus）</p>
+<p>　</p>
+<h4>文件分享</h4>
+<p>1）<strong>P2P软件Gnunet</strong>。一个MP3的P2P分享软件（sudo apt-get install gnunet-gtk）</p>
+<p>2）<strong>直连DC++。</strong>最好的方式就是直接。DC++是这其中最好的。（sudo apt-get install linuxdcpp）</p>
+<p>3）<strong>Usenet &#8211; LottaNZB</strong>。虽然不是名费的，但Usenet下载是奇快无比。LottaNZB是其中一个client。（sudo apt-get install lottanzb）</p>
+<p>4）<strong>BT下载Deluge</strong>。功能齐全的BT客户端。（sudo apt-get install deluge）</p>
+<p>　</p>
+<h4>时间管理</h4>
+<p>1）<strong>Alarm Clock</strong>。一个日历提醒程序。（sudo apt-get install alarm-clock）</p>
+<p>2）<strong>时间跟踪Hamster</strong>。这个小程序可以统计你操作不同程序的时间。（sudo apt-get install hamster-applet）</p>
+<p>　</p>
+<h4>沟通软件</h4>
+<p>1）<strong>即时聊天Empathy</strong>。</p>
+<p>2）<strong>微博写作器Gwibber</strong>。可以用于Twitter, Identi.ca, Jaiku, Facebook, Digg等等。（sudo apt-get install gwibber）</p>
+<p>3）<strong>QQ 和 Skype</strong>。这是我加上的，你可以在QQ的网上下载Linux版，很不错。还有Skype。</p>
+<p>　</p>
+<h4>安全和隐私</h4>
+<p>1）<strong>On-The-Fly 加密</strong>。<a href="http://sd4l.sourceforge.net/">http://sd4l.sourceforge.net/</a></p>
+<p>2）<strong>VPN访问</strong>。sudo apt-get install network-manager-pptp</p>
+<p>3）<strong>Onion Routing</strong>。这个软件中最著名的就是我在文章前提到过的Tor，那个可以绕过GFW的软件。（sudo apt-get install tor tor-geoipdb）</p>
+<p>4）<strong>防火墙</strong>。sudo apt-get install gufw</p>
+<p>5）<strong>杀毒软件ClamAV</strong>。sudo apt-get install clamtk</p>
+<p>　</p>
+<h4>系统工具</h4>
+<p>1）<strong>LiveUSB Creator</strong>。想用USB启动你的电脑吗？用UNetbootin这个工具吧。（sudo apt-get install unetbootin）</p>
+<p>2）<strong>备份工具Back In Time</strong>。sudo apt-get install backintime-gnome</p>
+<p>3）<strong>磁盘分区工具</strong>。GNOME Partition Editor可以帮你管理你的USB，IPOD或其它可写存储（sudo apt-get install gparted）</p>
+<p>4）<strong>虚拟机VirtualBox</strong>。这个开源的虚拟机，还不错。sudo apt-get install virtualbox-3.0</p>
+<p> </p>
+<p>好了，基本上就是这些，我要说，没有图片的支持，看来这篇文章不怎么的。呵呵。不过希望你喜欢。也希望你给我们推荐你所喜欢的Ubuntu工具。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4826.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/GNUTotalSplit-150x150.png" alt="GNU/Linux下有多少是GNU的？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4826.html" class="wp_rp_title">GNU/Linux下有多少是GNU的？</a></li><li ><a href="https://coolshell.cn/articles/2352.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="telnet的一个Bug" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2352.html" class="wp_rp_title">telnet的一个Bug</a></li><li ><a href="https://coolshell.cn/articles/1097.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Ksplice Uptrack — Ubuntu更新不用重启" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1097.html" class="wp_rp_title">Ksplice Uptrack — Ubuntu更新不用重启</a></li><li ><a href="https://coolshell.cn/articles/501.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Ubuntu的并行启动" width="150" height="150" /></a><a href="https://coolshell.cn/articles/501.html" class="wp_rp_title">Ubuntu的并行启动</a></li><li ><a href="https://coolshell.cn/articles/424.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="PDF电子书搜索引擎" width="150" height="150" /></a><a href="https://coolshell.cn/articles/424.html" class="wp_rp_title">PDF电子书搜索引擎</a></li><li ><a href="https://coolshell.cn/articles/2271.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/03/emacs_color_theme-150x150.jpg" alt="Emacs配色在线生成器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2271.html" class="wp_rp_title">Emacs配色在线生成器</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1644.html">装完Ubuntu 9.10后要干的事</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1644.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,35 @@
+<html><body><p>如果你不是订阅本站的用户，你很肯能可能是通过搜索引擎的魔力来到本文的。</p>
+<p>微软的软件产品咱们暂且不谈，他们生产的键盘鼠标确实很不错。例如，经典的 microsoft natural ergonomic keyboard 4000 （见图）。著名Google工程师博主Matt Cutts用的就是这个（<a href="http://www.mattcutts.com/blog/30-days-no-microsoft-software/">参考链接</a>）。</p>
+<p>可是每个入手该键盘的geek都会觉得，这个弱智的设计师把zoom键放在中间干嘛，应该用来当上下滚轮嘛。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/keyboard.jpg"><img alt="" class="alignnone size-full wp-image-2098" height="262" src="../wp-content/uploads/2010/02/keyboard.jpg" title="keyboard" width="464"/></a></p>
+<p>无独有偶，该问题已经被先辈们解决，笔者只搜到了<a href="http://paininthetech.com/2006/04/29/hack-the-microsoft-natural-4000-keyboard">英文文章</a></p>
+<p>为了让中文读者方便找到并使用，暂且将关键步骤翻译如下：</p>
+<ol>
+<li>下载微软键盘驱动 <a href="http://www.microsoft.com/hardware/download/download.aspx?category=MK">http://www.microsoft.com/hardware/download/download.aspx?category=MK</a></li>
+<li>找到command.xml文件，应该是在 C:\Program Files\Microsoft IntelliType Pro\</li>
+<li>编辑command.xml文件（建议之前备份），替换<strong>所有</strong> <span style="color: #0000ff;">&lt;C319 Type=”6″ Activator=”ZoomIn” /&gt;</span> 为<span style="color: #0000ff;">&lt;C319 Type=”6″ Activator=”<span style="color: #ff0000;">ScrollUp</span>” /&gt;</span><strong>,  所有</strong><span style="color: #0000ff;"> &lt;C320 Type=”6″ Activator=”ZoomOut” /&gt; </span>替换为<strong> <span style="color: #0000ff;"><span style="font-weight: normal;">&lt;C320 Type=”6″ Activator=”<span style="color: #ff0000;">ScrollDown</span>” /&gt;</span></span> </strong>用Notepad或者记事本可以实现，应该是10个左右。</li>
+<li>重启电脑（貌似这一步不能省）</li>
+</ol>
+<p>图例：修改前</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/before.png"><img alt="" height="94" src="../wp-content/uploads/2010/02/before.png" title="before" width="508"/></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/before.png"></a>图例：修改后</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/02/after.png"><img alt="" class="alignnone size-full wp-image-2101" height="79" src="../wp-content/uploads/2010/02/after.png" title="after" width="556"/></a></p>
+<p>这样你就可以用Zoom来替代鼠标滚轮了。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/378.html"><img alt="笔记本电脑的发展史" height="150" src="../wp-content/uploads/2009/04/osborne1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/378.html">笔记本电脑的发展史</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1826.html"><img alt="几个有趣的404错误页面" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1826.html">几个有趣的404错误页面</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7270.html"><img alt="NoSQL 数据建模技术" height="150" src="../wp-content/uploads/2012/05/overview2-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6994.html"><img alt="我们需要专职的QA吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6994.html">我们需要专职的QA吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3572.html"><img alt="C语言函数实现的另类方法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3572.html">C语言函数实现的另类方法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9156.html"><img alt="《Rework》摘录及感想" height="150" src="../wp-content/uploads/2013/03/rework-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9156.html">《Rework》摘录及感想</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2097.html">如何修改微软人体工学键盘的Zoom键</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

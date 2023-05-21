@@ -1,0 +1,143 @@
+<html><body><p><img alt="Web Toolbox" class="alignright wp-image-8771" height="196" src="../wp-content/uploads/2012/12/webtoolbox.jpg" width="318"/>本文出自<a href="http://ivanzuzak.info/" target="_blank">Ivan Zuzak</a> 的《<a href="http://ivanzuzak.info/2012/11/18/the-web-engineers-online-toolbox.html" target="_blank">The Web engineer’s online toolbox</a>》，作者给了一个各种可以用来进行开发、测试、调试以及文档编排的在线工具集。（注：我发现CSDN上已经有了这篇文章《<a href="http://www.csdn.net/article/2012-11-19/2811992" target="_blank">Web工程师必备的18款工具</a>》，但可惜的是这篇文章并不全（原文后来被更新到了33个工具），而且其中并没有包括原文评论中出现的所有工具，所以，我一并补全了更出来，一共40多个工具）</p>
+<h4><strong>Web工程师在线工具箱</strong></h4>
+<ul>
+<li><a href="http://requestb.in/" target="_blank"><strong>RequestBin</strong></a><strong>：</strong>允许你创建一个URL，利用这款工具进行收集请求，然后通过个性化方式进行检查。</li>
+</ul>
+<ul>
+<li><a href="http://hurl.it/" target="_blank"><strong>Hurl</strong></a><strong>：</strong>发出HTTP请求，输入URL，设置标题，查看响应，最后分享给其他人。类似的工具有：<a href="http://resttesttest.com/" target="_blank">REST test test</a>, <a href="https://apigee.com/console/others" target="_blank">Apigee console</a>.。</li>
+</ul>
+<ul>
+<li><a href="http://httpbin.org/" target="_blank"><strong>Httpbin</strong></a><strong>：</strong>HTTP请求&amp;响应服务，涵盖所有的HTTP方案（例如不同的HTTP verbs、状态代码和重定向）。类似工具：<a href="http://ivanzuzak.info/urlecho/">UrlEcho</a>。</li>
+</ul>
+<ul>
+<li><a href="http://redbot.org/" target="_blank"><strong>REDbot</strong></a><strong>：</strong>这是一个机器人工具，帮助用户检查HTTP资源，可查看它的操作情况，指出常见的问题并提出改进。类似工具：<a href="http://zamez.org/httplint">HTTP lint</a>。</li>
+</ul>
+<ul>
+<li><a href="http://webgun.io/" target="_blank"><strong>WebGun</strong></a><strong>：</strong>用于创建webhooks模板的API。类似工具：<a href="https://github.com/izuzak/urlreq">UrlReq</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="https://www.webscript.io/">Webscript</a> </strong> 自选一个url，填一段Lua代码，就能对访问做各种respond，还可以主动运行任务，cron job等等…</li>
+</ul>
+<p><span id="more-8767"></span></p>
+<ul>
+<li><strong><a href="http://www.clickhooks.com/">ClickHooks</a> </strong>这是一个短网址服务， 当用户访问了你的这个短网址跳转链接，服务器会通过HTTP POST的方式回调你的一个URL。这也是一种WebHooks方式。（陈皓注：所谓WebHooks，你可以理解为一种trigger，或是一种handler，比如当你你提交了代码，会调用某个URL链接以POST的方式告诉那个网站你提交了代码（如：发一个twitter 之类的，或是通知某个bug tracker系统））</li>
+</ul>
+<ul>
+<li><strong><a href="http://mailhooks2.appspot.com/">MailHooks</a> </strong>让你可以通过HTTP POST方法收电子邮件（又叫WebHooks），你可以为你的一个邮件地址创建N多的hooks，当一个邮件收到了，可以把这个邮件以POST的方式发到你的某个URL上去。</li>
+</ul>
+<ul>
+<li><strong><a href="http://a.quil.la/">Quilla</a> </strong>提供一个人们可以找到你的短网站服务，在那里，当人们提交到你的短网址上的请求会给你发邮件。好像是一种HTTP到SMTP的代理服务。</li>
+</ul>
+<ul>
+<li><a href="http://apify.heroku.com/resources" target="_blank"><strong>Apify</strong></a><strong>：</strong>公开锁定在HTML文档没有任何API数据集。APIfy从结构标记中提取数据，并将其转换为JSON APIs。</li>
+</ul>
+<ul>
+<li><a href="http://validator.w3.org/unicorn/" target="_blank"><strong>Unicorn</strong></a><strong>：</strong>W3C统一的验证程序，可在各种流行的HTML和CSS验证器中执行各种检查。类似工具：<a href="http://lint.brihten.com/html/">HTML lint</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="http://jsonlint.com/">JSONLint</a> </strong>JSON 格式验证程序</li>
+</ul>
+<ul>
+<li><a href="http://validator.w3.org/feed/" target="_blank"><strong>Feed validator</strong></a><strong>：</strong>支持W3C验证，为RSS和ATOM提供阅读源。</li>
+</ul>
+<ul>
+<li><a href="http://validator.w3.org/checklink" target="_blank"><strong>Link checker</strong></a><strong>：</strong>从网站中提取链接（递归）并确保没有链接被定义为两次（重复定义），所有的链接被引用并警告HTTP重新定向。</li>
+</ul>
+<ul>
+<li><a href="http://www.host-tracker.com/" target="_blank"><strong>Host tracker</strong></a><strong>：</strong>通过分布式ping/跟踪检查、定期监测、邮件/SMS /IM通知和统计进行网站检测性服务。类似工具有：<a href="http://www.downforeveryoneorjustme.com/">Down for everyone or just me</a>, <a href="http://tools.pingdom.com/ping/">Pimgdom ping service</a></li>
+</ul>
+<ul>
+<li><strong><a href="http://www.viewdns.info/">ViewDNS</a> </strong>一组 DNS 和网络工具，如：反向IP解析，DNS记录查询或traceroute之类的。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.necrohost.com/">Necrohost</a>  </strong>一个URL列表来模拟不同网络链接的问题，如：响应慢，无法解析DNS，或是404什么的。</li>
+</ul>
+<ul>
+<li><strong><a href="https://code.google.com/p/mirrorrr/">Mirrorrr</a>  </strong>一个可以用来镜像某网页的应用（经常被国人用来搞Web 代理来翻墙）。</li>
+</ul>
+<ul>
+<li><strong><a href="http://certlogik.com/ssl-checker/">SSL Checker</a>  </strong>测试SSL认证</li>
+</ul>
+<ul>
+<li><strong><a href="http://certlogik.com/decoder/">CSR/Cert decoder</a>  </strong>对你的CSR和SSL认证decode检查。</li>
+</ul>
+<ul>
+<li><strong><a href="http://loadzen.com/">Loadzen</a>  </strong>Web压力测试工具（注：以前酷壳介绍过《<a href="https://coolshell.cn/articles/2589.html" target="_blank">十个Web压力测试工具</a>》）</li>
+</ul>
+<ul>
+<li><a href="http://tools.pingdom.com/fpt/" target="_blank"><strong>Pingdom Full page test</strong></a><strong>：</strong>允许用户测试网页记载时间、分析、监控，发现瓶颈并导出HAR格式的结果。类似工具：<a href="http://www.webpagetest.org/">Web page test</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="https://developers.google.com/speed/pagespeed/insights">Google PageSpeed Insights</a> </strong>Analyzes the content of a web page, then generates suggestions to make that page faster.</li>
+</ul>
+<ul>
+<li><a href="http://www.softwareishard.com/har/viewer/" target="_blank"><strong>HAR viewer</strong></a><strong>：</strong>通过 HTTP 追踪工具创建可视化的HTTP Archive (HAR)日志文件。</li>
+</ul>
+<ul>
+<li><a href="http://www.corsproxy.com/" target="_blank"><strong>CORS proxy</strong></a><strong>：</strong>通常会由于相同的域而被阻止，而这款工具在网站上允许JavaScript代码访问其他域上的资源，</li>
+</ul>
+<ul>
+<li><a href="https://browserling.com/" target="_blank"><strong>Browserling</strong></a><strong>：</strong>支持使用所有主要浏览器以及各种版本进行交互式跨浏览器测试。</li>
+</ul>
+<ul>
+<li><a href="http://www.websocket.org/echo.html" target="_blank"><strong>WebSocket Echo Test</strong></a><strong>:</strong> 从浏览器定向到WebSocket echo服务器进行WebSocket连接测试。</li>
+</ul>
+<ul>
+<li><a href="http://developer.yahoo.com/yql/" target="_blank"><strong>YQL</strong></a><strong>：</strong>极富表现力类似于SQL的语言，允许您查询、筛选和联接数据跨Web服务。</li>
+</ul>
+<ul>
+<li><strong><a href="http://webshell.io/">Webshell</a> </strong>使用命令行脚本的方式来调用一些Web API。</li>
+</ul>
+<ul>
+<li><a href="http://pipes.yahoo.com/pipes/" target="_blank"><strong>Yahoo Pipes</strong></a><strong>：</strong>一个图形化的用户界面，用于创建数据混搭，生成聚合Web源，Web页面和其他服务。</li>
+</ul>
+<ul>
+<li><a href="http://apiary.io/" target="_blank"><strong>Apiary</strong></a><strong>：</strong>语言和工具用于生成REST API文档及进行交互式督查。类似工具：<a href="http://swagger.wordnik.com/">Swagger</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="http://jsfiddle.net/">JSFiddle</a>  </strong>一个在线的代码编辑可以让你编译一些HTML, CSS 和 JavaScript的东西，并演示之。相似工具: <a href="http://jsbin.com/">JSBin</a></li>
+</ul>
+<ul>
+<li><a href="https://developers.google.com/feed/v1/jsondevguide">Google Feed API</a> 你可以使用这个API来查询有RSS Feed的网站 (<a href="http://ajax.googleapis.com/ajax/services/feed/lookup?v=1.0&amp;q=http://ivanzuzak.info/">example</a>)，或是搜索有RSS Feed(<a href="https://ajax.googleapis.com/ajax/services/feed/find?v=1.0&amp;q=ivan%20zuzak">example</a>) ，或是把JSON变成一个JSON返回 (<a href="https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&amp;q=http://ivanzuzak.info/atom.xml">example</a>)</li>
+</ul>
+<h4>未在列表的工具</h4>
+<ul>
+<li><a href="http://www.fiddler2.com/fiddler2/">Fiddler</a> — 可能是最强大最好用的Web调试工具之一，它能记录所有客户端和服务器的http和https请求，允许你监视，设置断点，甚至修改输入输出数据. 使用Fiddler无论对开发还是测试来说，都有很大的帮助。.</li>
+</ul>
+<ul>
+<li><a href="http://grids.heroku.com/">960 grid system generator</a> 和 <a href="http://meyerweb.com/eric/tools/css/reset/">CSS reset</a> — 两个关注于Web站点设计的工具。</li>
+</ul>
+<ul>
+<li><a href="http://www.nuvolabase.com/site/index.html">NuvolaBase</a> — 一个可以共享个人私有数据的解决方案。正如作者所说，这不是一个开发工具。</li>
+</ul>
+<ul>
+<li><a href="https://openexchangerates.org/">Open exchange rates</a> — 一个和汇率货币相关的JSON式的API。这样的API你可以到 <a href="http://www.programmableweb.com/">Programmable Web</a> 上查找。</li>
+</ul>
+<ul>
+<li><a href="https://workflowy.com/">Workflowy</a>, <a href="http://www.lastcalc.com/">LastCalc</a>, <a href="http://codepad.org/">Codepad</a>, <a href="http://www.mailinator.com/">Mailinator</a> and <a href="http://10minutemail.com/">10MinuteMail</a>, <a href="https://onetimesecret.com/">One time secret</a> and <a href="http://copypastecharacter.com/">CopyPasteCharacter</a> — 这些App似乎和Web开发没什么关系。</li>
+</ul>
+<ul>
+<li><a href="https://browsershots.org/">Browsershots</a> — 一个用来测试网页在不同平台下的工具。（参看）</li>
+</ul>
+<ul>
+<li><a href="http://scriptular.com/">Scriptular</a> and <a href="http://rubular.com/">Rubular</a> — 正则表达式工具，这样的工具太多了，如： <a href="http://refiddle.com/">ReFiddle</a>, <a href="http://regexpal.com/">Regex pal</a> and <a href="http://www.txt2re.com/">Txt2Re</a>。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="../wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2589.html"><img alt="十个免费的Web压力测试工具" height="150" src="../wp-content/uploads/2010/07/get_more_web_traffic-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2589.html">十个免费的Web压力测试工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19840.html"><img alt="HTTP的前世今生" height="150" src="../wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19840.html">HTTP的前世今生</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17381.html"><img alt="性能测试应该怎么做？" height="150" src="../wp-content/uploads/2016/07/PerfTest-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8767.html">Web工程师的工具箱</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

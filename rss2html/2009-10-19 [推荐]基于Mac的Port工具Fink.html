@@ -1,0 +1,47 @@
+<html><body><p>看到标题，读者朋友们肯定第一时间想到的MacPort 。</p>
+<p>恩，那是一款非常棒的工具。 不过我更愿意推荐各位使用另外一款工具 Fink(http://www.finkproject.org/).</p>
+<blockquote><p>Fink 项目希望把 Unix 上各种<a href="http://www.opensource.org/">开放源码</a>软件带到 <a href="http://www.opensource.apple.com/">Darwin</a> 和 <a href="http://www.apple.com/macosx/">Mac OS X</a> 平台上。 我们通过修改 Unix 软件使得它可以在 Mac OS X 上编译和运行（“移植”）,并提供一个方便的分发系统使得每个人都可以下载和使用它。 Fink 使用 <a href="http://www.debian.org/">Debian</a> 中的象 dpkg 和 apt-get 等工具来提供强大的二进制软件包管理。 你可以随意选择是下载预编译好的二进制安装包或从源代码自己构建一切。</p></blockquote>
+<p>关于 Fink的安装 ，大部分用户可参见http://www.finkproject.org/download/index.php?phpLang=zh。<br/>
+不过后面我主要想介绍我的安装方式，因为我的Mac 版本是10.6 64bit.所以还是有些差别。也许上述普通方法有效，但是我并未尝试。</p>
+<p>安装步骤如下（感谢 <a href="http://sage.ucsc.edu/~wgscott/xtal/wiki/index.php/64-bit_Fink_for_10.6">http://sage.ucsc.edu/~wgscott/xtal/wiki/index.php/64-bit_Fink_for_10.6</a>）</p>
+<p><span id="more-1592"></span></p>
+<pre class="EnlighterJSRAW">
+cvs -d:pserver:anonymous@fink.cvs.sourceforge.net:/cvsroot/fink login
+ #just hit return when prompted for password
+cvs -z3 -d:pserver:anonymous@fink.cvs.sourceforge.net:/cvsroot/fink co -P fink
+cd fink
+./bootstrap /sw
+</pre>
+<p>以上最后一步可能会花80%的时间，因为它会执行下载及编译这些很核心的工作。</p>
+<p>完成之后编辑 <span style="font-family: monospace, 'Times New Roman', 'Bitstream Charter', Times, serif; line-height: 24px; font-size: 17px; color: #99cc00;">/<span style="color: #fffbc6;"><span style="color: #99cc00;">sw/etc/fink.conf </span><span style="color: #000000; font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; line-height: 19px; font-size: 13px;">第4行为：</span></span></span></p>
+<p><span style="color: #ff6600; font-size: large;"><span style="line-height: 24px;"><span style="font-size: 12px;"><strong><span style="color: #3366ff;">Trees: local/main stable/main stable/crypto unstable/main unstable/crypto</span></strong></span></span></span></p>
+<p>接下来就可以使用fink了。 fink的启动 我加了如下代码</p>
+<pre class="EnlighterJSRAW">source /sw/bin/init.sh
+fink selfupdate-cvs
+fink -y update-all
+fink scanpackages
+</pre>
+<p>我建议 再执行一条</p>
+<p><code class="EnlighterJSRAW">echo "source /sw/bin/init.sh"  &gt;&gt; ~/.bash_profile</code></p>
+<p>这样新开终端进程的时候 就不用重新初始化fint了,完成以上步骤，就能使用fink了。</p>
+<p>我之所以抛弃了macport 是因为他目前出现的和新版10.6的冲突问题，导致系统gcc库环境出现错误，而macport又与系统架构上不兼容 ，导致Port不能用 gcc 也不能用，而我又准备拿光盘重装developer环境的时候，光驱坏了 DVD盘一律不能读 :shame goodness…!<br/>
+fink的出现完全让我避开了以上问题，或许上述问题的出现有我个人原因。 但是fink有很重要的一点，就是它的源很快。他会自动推荐最适合我们的镜像。如果我们要随时更换fink的配置， 可以执行 <span style="color: #3366ff;">fink configure.</span></p>
+<p>我相信读到这里，会有不少习惯Port的朋友使用 Fink， Just do it, Fink和MacPort 同时存在并不是什么坏事，虽然我已经把MacPort彻底删了。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2719.html"><img alt="苹果开发工具Xcode 4 第二预览版" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2719.html">苹果开发工具Xcode 4 第二预览版</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1272.html"><img alt="操作系统航空公司" height="150" src="../wp-content/uploads/2009/08/linux_airline-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1272.html">操作系统航空公司</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/559.html"><img alt="菜鸟学PHP之Smarty入门" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/559.html">菜鸟学PHP之Smarty入门</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3433.html"><img alt="6个有用的MySQL语句" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3254.html"><img alt="一个人脸识别的Javascript" height="150" src="../wp-content/uploads/2010/11/jpDEK-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3254.html">一个人脸识别的Javascript</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4261.html"><img alt="JavaMail使用" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4261.html">JavaMail使用</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1592.html">[推荐]基于Mac的Port工具Fink</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

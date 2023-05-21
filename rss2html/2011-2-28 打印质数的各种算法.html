@@ -1,0 +1,136 @@
+<html><body><p>打印质数的算法应该是学习计算机编程的一个经典的问题，在这里想给大家展示一些方法，相信这些方法会对你的编程有一定的启发作用。请你注意几点，</p>
+<ul>
+<li>实际应用和教学应用有很大的差别。</li>
+<li>最后的那个使用编译时而不是运行时的方法大家可以重点看看。</li>
+</ul>
+<h4>教科书的示例</h4>
+<p>首先，先给一个教科书的示例。下面这个示例应该是教科书（至少是我上大学时的教科学）中算法复杂度最好的例子了。其想法很简单，先写一个判断是否是质数的函数isPrime()，然后从1到n分别调用isPrime()函数来检查。检查是否是质数的算法是核心，其简单的使用从2到n的开根的数作为除数。这样的算法复杂度几乎是O(n*log(n))，看上去不错，但其实很不经济。</p>
+<pre class="EnlighterJSRAW">
+#include &lt;iostream&gt;
+using namespace std;
+
+bool isPrime(int nr)
+{
+    for (int d = 2; (d * d) &lt; (nr + 1); ++d){
+        if (!(nr % d)){
+            return false;
+        }
+     }
+    return true;
+}
+
+int main (int argc, char * const argv[])
+{
+    for (int i = 0; i &lt; 50; ++i){
+        if (isPrime(i)){
+            cout &lt;&lt; i &lt;&lt; endl;
+        }
+    }
+}
+</pre>
+<h4><span id="more-3738"></span>较好的算法</h4>
+<p>我们知道，我们的算法如果写成线性算法，也就是O(n)，已经算是不错了，但是最好的是O(Log(n))的算法，这是一个对数级的算法，著名的二分取中（Binary Search）正是O(Log(n))的算法。<strong>通常来说，O(Log(n))的算法都是以排除法做为手段的</strong>。所以，找质数的算法完全可以采用排除法的方式。如下所示，这种算法的复杂度是<em>O</em><em>(n(log(logn)))。</em></p>
+<p><strong>示例：打印30以内的质数</strong></p>
+<p>一、初始化如下列表。</p>
+<pre> 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30</pre>
+<p>二、把第一个数（2）取出来，去掉所有可以被2整除的数。</p>
+<pre> 2  3     5     7     9    11    13    15    17    19    21    23    25    27    29</pre>
+<p>三、取第二个数（3），去掉所有可以被 3整除的数。</p>
+<pre> 2  3     5     7          11    13          17    19          23    25          29</pre>
+<p>四、取第三个数（5），因为4已经被去除了，再去掉所有可以被5整除的数。</p>
+<pre> 2  3     5     7          11    13          17    19          23                29</pre>
+<p>接下来的数是7，但是7的平方是49，其大于了30，所以我们可以停止计算了。剩下的数就是所有的质数了。</p>
+<h4>实际应用的算法</h4>
+<p>实际应用中，我们通常不会使用上述的两种算法，因为那是理论学院派的算法。实际中的算法是，我把质数事先就计算好，放在一个文件中，然后在程序启动时（注意是在启动时读这个文件，而不是运行时每调用一次就读一次文件），读取这个文件，然后打印出来就可以了。如果需要查找的化，二分查找或是hash表查找将会获得巨大的性能提升。当然，这样的方法对于空间来说比前面两个都要消耗得大，但是你可以有O(log(n))或是O(1)的时间复杂度。</p>
+<p>所以，我想在这里提醒大家——<strong>实际和理论的的方法很不一样的</strong>，千万不要读书读成书呆子。在游戏编程的世界里，大量的数据都不是运行计算的，而都是写在文件中的。比如，一个火焰效果，一个人物跑动的动作，都是事先写在文件中的。</p>
+<h4>使用编译时而不是运行时</h4>
+<p>下面这个例子（本例参考于<a href="http://www.intermediaware.com/blog/846/hack-of-the-day-fast-prime-numbers" target="_blank">这里</a>）你需要注意了，这是一个高级用法，使用模式来在编译时计算质数，而不是运行时。这种技术使用了C++编译器对模板的特化时的处理来生成自己相要的结果。这种方法在技术上是相当Cool的，但并不一定实用，这里只是想像大家展示这种用法。这是C++的最骨灰级的用法了。</p>
+<p>请看下面的两个模板类，第一个模板以递归的方式检查是否是质数，第二个方法是递归的退出条件（当N=1时），对于模板的重载，请参看相关的C++书籍。</p>
+<pre class="EnlighterJSRAW">
+template&lt;int N, int D = N - 1&gt;
+struct isPrime {
+    enum {
+        result = (N % D) &amp;&amp; isPrime&lt;N, D-1&gt;::result
+    };
+};
+
+template&lt;int N&gt;
+struct isPrime&lt;N, 1&gt; {
+    enum {
+        result = true
+    };
+};
+</pre>
+<p>于是，通过这个模板，我们可以使用下面的代码来检查是否是质数：</p>
+<pre class="EnlighterJSRAW">
+if (isPrime&lt;3&gt;::result)
+    cout &lt;&lt; "Guess what: 3 is a prime!";
+</pre>
+<p>下一步，我们需要打出一个区间内的质数，所以，我们需要继续设计我们的print模板。</p>
+<pre class="EnlighterJSRAW">
+template&lt;int N, bool ISPRIME&gt;
+struct printIfPrime {
+    static inline void print() {}
+};
+
+template &lt;int N&gt;
+struct printIfPrime&lt;N, true&gt; {
+    static inline void print() {
+        std::cout &lt;&lt; N &lt;&lt; endl;
+    }
+};
+</pre>
+<p>从上面的代码中，我们可以看到，我们的第一个实际是什么也没做，而第二个有输出，注意第二个的模板参数中有一个true，其意味着那个质数的判断。于是我们就可以给出下面的代码来尝试着打印出一段区间内的质数：（<strong>请不要编译！！</strong>因为那会让编译器进入无限循环中，原因是printPrimes会不停地调用自己永不停止）</p>
+<pre class="EnlighterJSRAW">
+template&lt;int N, int MAX&gt;
+struct printPrimes {
+    static inline void print()
+    {
+        printIfPrime&lt;N, isPrime&lt;N&gt;::result&gt;::print();
+        printPrimes&lt;N + 1, MAX&gt;::print();
+    }
+};
+</pre>
+<p>为了避免这个问题，你需要再加一个模板类，如下所示。这样当N变成MAX的时候，递归就结束了。</p>
+<pre class="EnlighterJSRAW">
+template&lt;int N&gt;
+struct printPrimes&lt;N, N&gt; {
+    static inline void print() {
+        printIfPrime&lt;N, isPrime&lt;N&gt;::result&gt;::print();
+    }
+};
+</pre>
+<p>最后，让我们来看看最终的调用：</p>
+<pre class="EnlighterJSRAW">
+int main (int argc, char * const argv[])
+{
+    printPrimes&lt;2, 40&gt;::print();
+    return 0;
+}
+</pre>
+<p>这个方法很NB，但是有两个问题：</p>
+<ul>
+<li>比较耗编译时间。</li>
+<li>不能在运行时输入MAX的值。</li>
+</ul>
+<p>不过，相信这种玩法会启动你很多的编程思路。</p>
+<p>当然，还有以前说过的那个——《<span style="font-weight: bold;"><a href="https://coolshell.cn/articles/2704.html" rel="bookmark" target="_blank" title="检查素数的正则表达式">检查素数的正则表达式</a></span>》</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/7965.html"><img alt="一个fork的面试题" height="150" src="../wp-content/uploads/2012/07/fork01jpg-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/7965.html">一个fork的面试题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/1857.html"><img alt="C 语言整型谜题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/1857.html">C 语言整型谜题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/6010.html"><img alt="一些有意思的算法代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/6010.html">一些有意思的算法代码</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/3961.html"><img alt="“火柴棍式”程序员面试题" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/3961.html">“火柴棍式”程序员面试题</a></li><li><a class="wp_rp_thumbnail" href="http://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="http://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3738.html">打印质数的各种算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

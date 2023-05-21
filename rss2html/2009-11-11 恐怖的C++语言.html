@@ -1,0 +1,70 @@
+<html><body><p><a href="https://coolshell.cn/wp-content/uploads/2009/11/cpp.jpg"><img alt="我爱C++" class="alignright size-medium wp-image-1740" height="144" src="../wp-content/uploads/2009/11/cpp-300x216.jpg" title="我爱C++" width="200"/></a> Linus曾经(2007年9月)在新闻组<a href="http://news.gmane.org/gmane.comp.version-control.git" target="_top">gmane.comp.version-control.git</a>里和一个微软的工程师（Dmitry Kakurin）争执过用C还是用C++，当时的那个微软的工程师主要是在做Git的Windows版，但他却发现Git的源码居然是C语言写的，而不是C++，于是他（Dmitry Kakurin）在Linux社区里发贴表示对Linux的不满，语言很直接：</p>
+<blockquote>
+<p style="padding-left: 30px;">Pure C as opposed to C++. No idea why. Please don’t talk about portability, it’s BS. （<span style="color: #008000;">纯C写的，而不是C++，不知道为什么，请别告诉我是为了移植性，这完全是胡扯</span>。）</p>
+</blockquote>
+<p>Linux之父Linus Torvalds马上跟贴，在贴子中，Linus言辞很直接，直接表明C++是一个很恐怖的语言，他在<a href="http://thread.gmane.org/gmane.comp.version-control.git/57643/focus=57918" target="_blank"><strong>贴子</strong></a>中说：</p>
+<blockquote>
+<p style="padding-left: 30px;"><strong>*YOU*</strong> are full of bullshit. C++ is a horrible language. It’s made more horrible by the fact that a lot of substandard programmers use it. （<span style="color: #008000;">你才是完全在胡扯。C++是一门很恐怖的语言，而比它更恐怖的是很多不合格的程序员在使用着它</span>）</p>
+</blockquote>
+<p>Linus的这个观点我是比较同意的，我个人也在几年前的《<a href="http://blog.csdn.net/haoel/archive/2004/06/23/24058.aspx" target="_blank">STL String类的写时才拷贝</a>》以及以后的一些文章中表达过C++的确并不是一个很成熟的语言，这种观点一直都围绕着我。这是因为它的学习成本实在是太高了，编译器和类背着你做了很多你不知道的事，而且，C++非常容易地出错和发生很多意想不到的问题。</p>
+<p>当然，这篇文章并不是要继续声讨C++，也不是回顾以前的某个事件。我们这里只谈技术。昨天，我在网上看到一个邪恶的C++的示例，在这里给大家share一下，让大家看看C++这种编程语言的恐怖和邪恶的一面。下面的这个例子，比那个“#define  private  public”还更加邪恶。</p>
+<p><span id="more-1724"></span></p>
+<p>请看下面这段代码，你能告诉我它会输出什么吗？（注意main函数中高亮的那一行）</p>
+<pre class="EnlighterJSRAW">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+typedef int UINT4;
+using namespace std;
+class Hack
+{
+};
+
+Hack&amp; operator&lt; (Hack &amp;a , Hack &amp;b)
+{
+    std::cerr &lt;&lt; "小于操作符\n";
+    return a;
+}
+
+Hack&amp; operator&gt; (Hack &amp;a, Hack &amp;b)
+{
+    std::cerr &lt;&lt;  "大于操作符\n";
+    return a;
+}
+
+int main(int argc, char ** argv)
+{
+    Hack vector;
+    Hack UINT4;
+    Hack foo;
+
+    vector&lt;UINT4&gt; foo;
+
+return(0);
+}</pre>
+<p style="text-align: left;"><img alt="不是吧" class="alignleft" height="96" src="../wp-content/uploads/2009/11/bushiba-150x150.jpg" title="不是吧" width="98"/>是的，上面这段代码如果只看main函数中的那句“vector&lt;UINT4&gt; foo”，你会觉得很眼熟，然而，事情并非那么简单，我们可以看到vector, UINT4和foo都是Hack类的实例，这就是邪恶的开始，那两个尖括号&lt; &gt;则成了两个运算符，大于和小于，这两个运算符却又被重载了。其实，真正的语句是：</p>
+<p><code class="EnlighterJSRAW">vector.operator&lt;(UNIT4).operator&gt;(foo);</code></p>
+<p>所以，所有的一切都符合我们的C++的规范和语法，自然程序也能被顺利编译通过（至少，在我的G++上是没有问题的）。而整个程序的运行结果自然是：</p>
+<pre class="EnlighterJSRAW">$ ./horror
+小于操作符
+大于操作符</pre>
+<p>是的，如果你通晓C++的一切的一切，你自然不会对这段程序感到惊奇。这样的事情在C/C++的世界中并不少见，要搞乱C/C++的代码并不是一件难事，花样多得数不胜数，只要看看《<a href="https://coolshell.cn/articles/914.html" title="6个变态的C语言Hello World程序 - 4,749 次浏览">6个变态的C语言Hello World程序</a>》你就知道了，而且，还有一个简单的教程《<a href="https://coolshell.cn/articles/933.html" title="如何加密/混乱C源代码 - 2,420 次浏览">如何加密/混乱C源代码</a>》告诉你一些简单的做法。</p>
+<p>那么，如果你有一天在读程序中看到“vector&lt;UINT4&gt; foo”，你会觉得那只是一个幻觉吗？</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1724.html">恐怖的C++语言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

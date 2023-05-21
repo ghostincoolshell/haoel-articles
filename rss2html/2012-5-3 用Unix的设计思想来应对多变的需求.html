@@ -1,0 +1,42 @@
+<html><body><p>之前，@<a href="http://weibo.com/hfcc?source=webim" target="_blank" title="风枫峰">风枫峰</a> 在“<a href="https://coolshell.cn/articles/7126.html" target="_blank" title="这到底是谁之错？">这是谁的错？</a>”中说过开发团队对需求来者不拒，而@<a href="http://weibo.com/weidagang" target="_blank" title="weidagang">weidagang</a> 也在“<a href="https://coolshell.cn/articles/6950.html" target="_blank" title="需求变化与IoC">需求变更和IoC</a>”中说过用IoC来最大程度地解决需求变更。今天我也想从Unix设计思想的角度来说说什么是好的软件设计，什么样的设计可以把需求变更对开发的影响降低。（<strong>注意</strong>：这并不能解决用户或是PM的无理需求，面对无理需求，需要仔细分析需求，而用技术的手段无法搞定这个事，但是可以减轻需求变更带来的痛苦） 我曾经在<a href="https://coolshell.cn/articles/2324.html" target="_blank">《Unix传奇》的下篇</a>中写过一些Unix的设计哲学和思想（这里重点推荐大家看一下《<em><a href="http://product.china-pub.com/197413" target="_blank">The Art of Unix Programming</a></em>》，我推荐过多次了），以前也发过一篇《<a href="https://coolshell.cn/articles/4535.html" target="_blank" title="一些软件设计的原则">一些软件设计的原则</a>》，不过，这些东西都太多了，记不住。其实，这么多年来，我的经验告诉我，<strong>无论是Unix设计，还是面向对象设计，还是别的什么如SOA，ECB，消息，事件，MVC，网络七层模型，数据库设计，等等，他们都在干三件事——<span style="color: #cc0000;">解耦，解耦，还是解耦</span>！</strong>所谓解耦，就是让软件的模块和模块间尽量少地依赖起来。</p>
+<p style="text-align: center;"><img alt="" class="aligncenter" height="173" src="../wp-content/uploads/2012/05/Bannière-Unix-linux.jpg" title="Unix" width="448"/></p>
+<h4>现实当中的例子</h4>
+<p>让我先举几个现实生活中的例子：</p>
+<p style="padding-left: 30px;">1、现实社会中，制造灯具的工厂完全不关心制造灯泡的工厂，制造灯泡的工厂完全不关心制造灯具的工厂，但是，灯泡和灯饰可以很完美地组合成用户所喜欢的样子（这和@<a href="http://weibo.com/weidagang" target="_blank" title="weidagang">weidagang</a> 在“<a href="https://coolshell.cn/articles/6950.html" target="_blank" title="需求变化与IoC">需求变更和IoC</a>”说到的那个PC的例子相仿）。他们是怎么做到的？</p>
+<p style="padding-left: 30px;">2、互联网上，做网站的人完全不用关心用户在用什么样的操作系统，什么样的客户端浏览器（当然事实上，浏览器的不标准让网站那边很头痛，这里只是举个例），反过来，上网的人也不关心做网站的人在用什么的技术开发网站。但是大家在完全不关心对方的情况下，可以很正常地协同工作在一起。为什么？</p>
+<p><span id="more-7236"></span> 这样的例子太多了。为什么可以做成这样呢？因为大家依赖的是一个接口，灯具和灯泡并不互相依赖，他们依赖的是一个接口，做网站的人和浏览网站的人依赖的还是接口——HTTP协议。这就是面向对象的核心思想——依赖于接口而不是实现，这就是解耦。<strong>当你看过这两个例子以后，我希望你以后设计的软件至少不能比我们现实社会中的这些方法要差</strong>。不然，你就是在让社会倒退了，呵呵。 你会说，这和Unix，和应对需求变化有什么关系？好让我们再来看一下Unix的设计。</p>
+<h4>Unix设计的例子</h4>
+<p>下面是几个Unix下的例子：</p>
+<p style="padding-left: 30px;">1、Unix下，所有的硬件都可以通过文件的方式存取。其统统在/dev下。于是，软件和硬件的耦合被解开了，操作系统只需要把硬件统统变成文件，而程序只需要使用三个东西，一个是fd，一个是read()，一个是write()，就可以来操作任意的硬件了，这就是抽象，简单到不行。</p>
+<p style="padding-left: 30px;">2、Unix下，所有的命令都可以用管道串起来（管道绝对是个伟大的发明），这样，所有的命令间的交互全部解耦到只依赖于STD_IN, STD_OUT设备上。最酷的是，用户可以使用管道任意地拼装那些命令，以完成各式各样的功能。管道这个设计思想可以映射为今天的Web Service，你可以任意地拼装各种Web Service。</p>
+<p>看到这里，你会发现，这还是解耦，本质上来说，也是一种依赖倒置——OOD的精髓。但是，Unix还不仅仅是这些。我们再来看几个例子：</p>
+<p style="padding-left: 30px;">1、Unix下，软件都是绿色地安装。在iOS上更明显——各个程序间基本上互不干扰，这个程序产生的垃圾文件不会影响到另一个程序。你删掉一个程序不会让另一个程序不举，各是各的空间。你可以删除这些程序，只要把内核心留着，系统照样可以启动。</p>
+<p style="padding-left: 30px;">2、Unix下，你可以通过设置一些环境变量，让多种环境同时存在，比如：某个LAMP用的是Apache 2.0, Mysql 4.0, PHP 4.0，某个LAMP用的是Apache 2.2, Mysql 5.0，PHP5.3，你不但可以方便地在系统中切换这两个环境，你甚至还可以同时启动他们。</p>
+<p style="padding-left: 30px;">3、Unix下，你可以随意地替换你想要的程序。比如，你不喜欢bash，你可以替换成ksh/csh等，你不喜欢awk ，你可以替换成 gawk ，所有的东西都像零件一样，你不喜欢什么，你就可以替换什么。</p>
+<p>这三个例子告诉了我们——<strong>当你把你的软件设计地耦合度非常地低时，你可以随意地组合，随意地安排你的系统</strong>。相当的灵活，灵活到Windows到今天都学不会。</p>
+<h4>应对需求变化</h4>
+<p>看到这里，你可能明白我想说的是什么了，你可能开始觉得怎么样的系统设计会更有效了。如果你还记得《<a href="https://coolshell.cn/articles/5701.html" target="_blank" title="SteveY对Amazon和Google平台的长篇大论">Steve Y 对平台的长篇大论</a>》，你就会知道我想说什么了。是的，我想说的就是，<strong>当你真正了解了Unix的设计思想后，你会觉得今天的很多东西都是对Unix设计思想的一种传承或是变种</strong>。这种东西就是：</p>
+<p style="padding-left: 30px;">1）<strong>解耦，解耦，解耦</strong>。尽量地让你的模块不要在实现上耦合，而是耦合某个规范，某个标准。</p>
+<p style="padding-left: 30px;">2）<strong>KISS，KISS，KISS</strong>。要做到高度解耦，你的模块就一定要很简单，当然不是说简单到只有几行代码，而是简单到只干一件事，并把这件事干到极致。然后通过某个标准拼装起来。</p>
+<p style="padding-left: 30px;">3）<strong>拼装，拼装，拼装。</strong>我想不起来是谁说的了，这句话是这样的，当我想用一个模块的时候，我直接调用就好了，没有必要像C或Java一样，还要编译。是的，拼装需要一个框架，需要一种标准协议，然后让所有的系统都耦合在这种规范上，各自独立运行，就像一个机器上的各个部件一样，当我觉得这个部件不爽，换了就是了。（例如，当我们在尝试不同的算法的时候）</p>
+<p>想想建材和家俱市场，无论用户过来想装修什么，我都可以满足用户的不同需求，只要你是和家装相关，我基本上都能满足你，不是吗？无论你怎么变，只要不变态，我基本上都可以满足你。这就是解耦，拼装带来的好处。 你可能会说我说得太简单了，另一方面，你可能觉得有一些系统这样做没必要，我承认，不过，你可以有选择的或多或少地试试。（其实，我相信你已经在不自觉得或多或少地使用这种方式开发软件了） （全文完）</p>
+<div></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8961.html"><img alt="从面向对象的设计模式看软件设计" height="150" src="../wp-content/uploads/2013/01/kiss-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8961.html">从面向对象的设计模式看软件设计</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9949.html"><img alt="IoC/DIP其实是一种管理思想" height="150" src="../wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9949.html">IoC/DIP其实是一种管理思想</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6950.html"><img alt="需求变化与IoC" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6950.html">需求变化与IoC</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4535.html"><img alt="一些软件设计的原则" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21672.html"><img alt="我做系统架构的一些原则" height="150" src="../wp-content/uploads/2021/12/bachelor-mechanical-eng-icon@72x-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21672.html">我做系统架构的一些原则</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7236.html">用Unix的设计思想来应对多变的需求</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

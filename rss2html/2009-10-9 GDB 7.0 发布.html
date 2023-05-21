@@ -1,0 +1,59 @@
+<html><body><p><a href="http://www.gnu.org/software/gdb/mascot/"><img alt="" class="alignright" height="125" src="http://www.gnu.org/software/gdb/images/archer.jpg" title="GDB: The GNU Project Debugger 吉祥物" width="200"/></a>2009年10月06日，GDB7.0正式发布，新的版本你可以在<a href="http://www.gnu.org/software/gdb/download/" target="_blank">这里下载</a>。本次版本，不但有大家所关注的《GDB<a href="https://coolshell.cn/articles/1502.html" target="_blank">回溯调试技术</a>》，同样还有其它大量的新特性，和对新平台的支持。</p>
+<p>新版的GDB7.0支持如下新的平台或配置：</p>
+<ul>
+<li>x86/x86_64 Darwin</li>
+<li>x86_64 MinGW</li>
+<li>Lattice Mico32</li>
+<li>x86/x86_64 DICOS</li>
+<li>S+core 3</li>
+<li>The remote stub now supports x86 Windows CE</li>
+</ul>
+<p>其主要的新加入的功能有：（看上去相当地高科技啊，很多术语都不知道怎么翻译，请注意后面的相关解释）</p>
+<ul>
+<li>Python 脚本调试</li>
+<li>回溯调试，调式过程记录并重演。</li>
+<li>不间隔调试。 Non-stop debugging</li>
+<li>并行调试。 Multi-architecture debugging</li>
+<li>多进程调试。Multi-inferior, multi-process debugging</li>
+</ul>
+<p><span id="more-1525"></span></p>
+<blockquote><p><strong>注释：</strong></p>
+<ul>
+<li>Non-stop 的意思是，当我们在调试一个进程中的某一个或某一些线程时，可以让没有被调试的线程继续运行不停止。</li>
+<li>Multi-architecture在字面上理解是多层架构，但应该是关于并行方面的（请大家指正），比如MIPS或SPARC等并行编程方面的。</li>
+<li>Multi-inferior的意思是，你可以同时调试多个不同的进程。在某些情况下，这会更容易帮助我们了解程序的内部执行情况。</li>
+</ul>
+</blockquote>
+<p>当然，本版本也包括了下面的一些改进和补丁：</p>
+<p style="PADDING-LEFT: 30px; TEXT-ALIGN: left;">* GDB 为JIT 提供了一个编译接口<br/>
+* Tracepoints 可以加上条件<br/>
+* 支持多字节和宽字符<br/>
+* 为”disassemble”新增加/r 和/m 参数<br/>
+* 对共享库的自动获取<br/>
+* 支持内联函数<br/>
+* 新的远程协议包<br/>
+* GDB 开始可以读取压缩调试片段<br/>
+* 在Tru64平台下支持线程切换<br/>
+* 支持Ada 任务切换<br/>
+* gdbserver的新功能 ——GDB remote stub<br/>
+* 一个新的命令，当有系统调用发生时可以停止正在运行的程序</p>
+<p style="TEXT-ALIGN: left;">(全文完)</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1502.html"><img alt="高科技：GDB回溯调试" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1502.html">高科技：GDB回溯调试</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3643.html"><img alt="GDB中应该知道的几个调试方法" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3643.html">GDB中应该知道的几个调试方法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1719.html"><img alt="橡皮鸭程序调试法" height="150" src="../wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1719.html">橡皮鸭程序调试法</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1379.html"><img alt="如何调试bash脚本" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1379.html">如何调试bash脚本</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1242.html"><img alt="23,148,855,308,184,500" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1242.html">23,148,855,308,184,500</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1525.html">GDB 7.0 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

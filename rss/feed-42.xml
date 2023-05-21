@@ -1,0 +1,2711 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 42 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=42" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Tue, 06 Dec 2011 02:49:01 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>如何加密/混乱C源代码</title>
+		<link>https://coolshell.cn/articles/933.html</link>
+					<comments>https://coolshell.cn/articles/933.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 30 May 2009 07:30:05 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=933</guid>
+
+					<description><![CDATA[<p>之前发表了《6个变态的C语言Hello World程序》[酷壳链接] [CSDN链接]，主要是是像大家展示了一些C语言的变态玩法。也向大家展示了一下程序是可以写...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/933.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/933.html">如何加密/混乱C源代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>之前发表了《<strong>6个变态的C语言Hello World程序</strong>》[<a href="https://coolshell.cn/articles/914.html" target="_blank">酷壳链接</a>] [<a href="http://blog.csdn.net/haoel/archive/2009/05/26/4217565.aspx" target="_blank">CSDN链接</a>]，主要是是像大家展示了一些C语言的变态玩法。也向大家展示了一下程序是可以写得让人看不懂的，在那篇文章中，可以看到很多人的留言，很多人都觉得很好玩，是的，那本来是用来<span style="color: #000000;">供朋友们“消遣作乐”，供娱乐娱东而已，不必太过认真。</span></p>
+<p>不过，通过这种极端的写法，大家可以看到源代码都可以写得那么复杂难懂的。大家也许在赞叹之余一笑了之，而我则希望，大家能够在娱乐以后认真思考一下，你不要以为咱们自己不会把代码搞得那么复杂，只不过没有像那6个Hello World一样那么极端，不过，说句老实话，<strong>咱们每个程序都有把清晰的程序搞得一团混乱的潜能，只不过程度不一样罢了，我并不是在这里危言耸听，大家好自为之</strong>。</p>
+<p>下面是一个Step by Step的教程，教你如何把一个清晰的代码变得复杂难懂的。当然，这只是一个“简明教程”了。还是那句话——“<span style="color: #800000;">本文仅供朋友们“消遣作乐”，如果你要觉得有意思的话，顶个贴。如果你觉得没什么意思的话，一笑了之。仅供娱乐而已，不必太过认真。</span>”</p>
+<p><span id="more-933"></span></p>
+<h4>开始程序</h4>
+<p>下面是一个找出素数的程序：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void primes(int cap)
+{
+    int i, j, composite;
+
+    for(i = 2; i &lt; cap; ++i) {
+        composite = 0;
+        for(j = 2; j * j &lt; i; ++j) {
+            composite += !(i % j);
+        }
+        if(!composite){
+            printf(&quot;%dt&quot;, i);
+        }
+    }
+}
+
+int main()
+{
+    primes(100);
+}
+</pre>
+<p>下面我们来看看如何把上面这段代码搞得复杂难懂。</p>
+<h4>第一步、把for变成while</h4>
+<p>通常来说，for循坏要以while循坏简单一些，上面的程序有二重for循环，我们不但要把其变成while循环，而且还要把二重循环的变成一重的循环，然后使用大量的if-else语句来判断。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void primes(int cap)
+{
+    int i, j, composite, t = 0;
+
+    while(t &lt; cap * cap) {
+        i = t / cap;
+        j = t++ % cap;
+        if(i &lt;= 1);
+        else if(!j)
+            composite = j;
+        else if(j == i &amp;&amp; !composite)
+            printf(&quot;%dt&quot;,i);
+        else if(j &gt; 1 &amp;&amp; j &lt; i)
+            composite += !(i % j);
+    }
+}
+
+int main()
+{
+    primes(100);
+}
+</pre>
+<h4>第二步，把循坏变成递归</h4>
+<p>递归在某些时候是可以把代码变得简单，但大多数的情况下是把代码变得复杂，而且很没有效率。下面是把上面的while循环变成了递归。变成了递归后，函数的参数都变成3个了。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void primes(int cap, int t, int composite)
+{
+    int i,j;
+    i = t / cap;
+    j = t % cap;
+    if(i &lt;= 1)
+        primes(cap,t+1,composite);
+    else if(!j)
+        primes(cap,t+1,j);
+    else if(j == i &amp;&amp; !composite)
+        (printf(&quot;%dt&quot;,i), primes(cap,t+1,composite));
+    else if(j &gt; 1 &amp;&amp; j &lt; i)
+        primes(cap,t+1, composite + !(i % j));
+    else if(t &lt; cap * cap)
+        primes(cap,t+1,composite);
+}
+
+int main()
+{
+    primes(100,0,0);
+}
+</pre>
+<h4>第三步，弄乱代码结构/使用没有含义的变量名</h4>
+<p>关于如何弄乱代码结构，其中一个小技巧是，使用“？”表达式代替if-else语句。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void primes(int m, int t, int c)
+{
+    int i,j;
+    i = t / m;
+    j = t % m;
+    (i &lt;= 1) ? primes(m,t+1,c) : (!j) ? primes(m,t+1,j) : (j == i &amp;&amp; !c) ?
+    (printf(&quot;%dt&quot;,i), primes(m,t+1,c)) : (j &gt; 1 &amp;&amp; j &lt; i) ?
+    primes(m,t+1,c + !(i % j)) : (t &lt; m * m) ? primes(m,t+1,c) : 0;
+}
+
+int main()
+{
+    primes(100,0,0);
+}
+</pre>
+<h4>第四步，取消临时变量</h4>
+<p>临时变量一般用来保存反复使用的一个表达式的值。使用大量重复的表达式来取消这些临时变量的也可以让代码复杂起来。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void primes(int m, int t, int c)
+{
+  ((t / m) &lt;= 1) ? primes(m,t+1,c) : !(t % m) ? primes(m,t+1, t % m) :
+  ((t % m)==(t / m) &amp;&amp; !c) ? (printf(&quot;%dt&quot;,(t / m)), primes(m,t+1,c)) :
+  ((t % m)&gt; 1 &amp;&amp; (t % m) &lt; (t / m)) ? primes(m,t+1,c + !((t / m) % (t % m))) :
+  (t &lt; m * m) ? primes(m,t+1,c) : 0;
+}
+
+int main()
+{
+    primes(100,0,0);
+}
+</pre>
+<h4>第五步，继续弄乱变量名</h4>
+<p>我们知道，下划线是合法的变量名，所以，我们不妨用__，___，____来代替m，t，c。函数名也可以使用下划线来代替。让我们来看看求素数的函数能变成什么。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void _(int __, int ___, int ____)
+{
+    ((___ / __) &lt;= 1) ? _(__,___+1,____) : !(___ % __) ? _(__,___+1,___ % __) :
+    ((___ % __)==(___ / __) &amp;&amp; !____) ? (printf(&quot;%dt&quot;,(___ / __)),
+    _(__,___+1,____)) : ((___ % __) &gt; 1 &amp;&amp; (___ % __) &lt; (___ / __)) ?
+    _(__,___+1,____ + !((___ / __) % (___ % __))) : (___ &lt; __ * __) ?
+    _(__,___+1,____) : 0;
+}
+
+int main()
+{
+    _(100,0,0);
+}
+</pre>
+<h4>第六步，移除常量</h4>
+<p>在上面的程序中，还有一些常量，你可以通过增加一个宏定义，或是增加一个函数的形参来取代这一常量。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+void _(int __, int ___, int ____, int _____)
+{
+    ((___ / __) &lt;= _____) ? _(__,___+_____,____,_____) : !(___ % __) ? _(__,___+_____,___ % __, _____) :
+    ((___ % __)==(___ / __) &amp;&amp; !____) ? (printf(&quot;%dt&quot;,(___ / __)),
+    _(__,___+_____,____,_____)) : ((___ % __) &gt; _____ &amp;&amp; (___ % __) &lt; (___ / __)) ?
+    _(__,___+_____,____,_____ + !((___ / __) % (___ % __))) : (___ &lt; __ * __) ?
+    _(__,___+_____,____,_____) : 0;
+}
+
+int main() {
+    _(100,0,0,1);
+}
+</pre>
+<p>程序到这里应该差不多了。还是那句话——“<strong>每一个程序员都有把源代码弄复杂的潜质</strong>”，大家好自为之。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/933.html">如何加密/混乱C源代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/933.html/feed</wfw:commentRss>
+			<slash:comments>98</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何比较两个数据表</title>
+		<link>https://coolshell.cn/articles/925.html</link>
+					<comments>https://coolshell.cn/articles/925.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 27 May 2009 15:02:14 +0000</pubDate>
+				<category><![CDATA[数据库]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[PostgreSQL]]></category>
+		<category><![CDATA[SQL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=925</guid>
+
+					<description><![CDATA[<p>有些时候，我们可能想要比较一下两个数据表，以找到其中不同的数据。比如，在进行数据移植的时候，或是在合并数据的时候，或是在比对验证数据的时候。当然比较两个表，需要...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/925.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/925.html">如何比较两个数据表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>有些时候，我们可能想要比较一下两个数据表，以找到其中不同的数据。比如，在进行数据移植的时候，或是在合并数据的时候，或是在比对验证数据的时候。当然比较两个表，需要这两个表结构是一样的。</p>
+<p>我们先假设一下有如下表结构：</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+CREATE TABLE jajal
+(
+    user_id integer NOT NULL,
+    first_name character varying(255),
+    last_name character varying(255),
+    grade character(1),
+    CONSTRAINT jajal_pkey PRIMARY KEY (user_id)
+)
+</pre>
+<p><span id="more-925"></span><br />
+然后，我们有两张表——jajal和jajal_copy，其内容如下：</p>
+<h4> jajal</h4>
+<table id="wptable-7" class="wptable rowstyle-alt" border="0" cellspacing="1">
+<thead>
+<tr>
+<th class="sortable" style="width: 30px;" align="center">user_id</th>
+<th class="sortable" style="width: 30px;" align="center">first_name</th>
+<th class="sortable" style="width: 30px;" align="center">last_name</th>
+<th class="sortable" style="width: 30px;" align="center">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 30px;" align="center">1</td>
+<td style="width: 30px;" align="center">Some</td>
+<td style="width: 30px;" align="center">Dude</td>
+<td style="width: 30px;" align="center">A</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">2</td>
+<td style="width: 30px;" align="center">Other</td>
+<td style="width: 30px;" align="center">Guy</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">3</td>
+<td style="width: 30px;" align="center">You are</td>
+<td style="width: 30px;" align="center">Welcome</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">4</td>
+<td style="width: 30px;" align="center">What</td>
+<td style="width: 30px;" align="center">Other</td>
+<td style="width: 30px;" align="center">A</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">5</td>
+<td style="width: 30px;" align="center">INeed</td>
+<td style="width: 30px;" align="center">You</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">6</td>
+<td style="width: 30px;" align="center">Mixed</td>
+<td style="width: 30px;" align="center">Nuts</td>
+<td style="width: 30px;" align="center">Z</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">7</td>
+<td style="width: 30px;" align="center">Kirk</td>
+<td style="width: 30px;" align="center">Land</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">8</td>
+<td style="width: 30px;" align="center">Bit</td>
+<td style="width: 30px;" align="center">Shooter</td>
+<td style="width: 30px;" align="center">A</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">9</td>
+<td style="width: 30px;" align="center">Sun</td>
+<td style="width: 30px;" align="center">Microsystem</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">10</td>
+<td style="width: 30px;" align="center">Extra</td>
+<td style="width: 30px;" align="center">Fancy</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+</tbody>
+</table>
+<h4>jajal_copy</h4>
+<table id="wptable-8" class="wptable rowstyle-alt" border="0" cellspacing="1">
+<thead>
+<tr>
+<th class="sortable" style="width: 30px;" align="center">user_id</th>
+<th class="sortable" style="width: 30px;" align="center">first_name</th>
+<th class="sortable" style="width: 30px;" align="center">last_name</th>
+<th class="sortable" style="width: 30px;" align="center">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 30px;" align="center">1</td>
+<td style="width: 30px;" align="center">Some</td>
+<td style="width: 30px;" align="center">Dude</td>
+<td style="width: 30px;" align="center">A</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">2</td>
+<td style="width: 30px;" align="center">Other</td>
+<td style="width: 30px;" align="center">Guy</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">3</td>
+<td style="width: 30px;" align="center">You are</td>
+<td style="width: 30px;" align="center">Welcome</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">4</td>
+<td style="width: 30px;" align="center">What</td>
+<td style="width: 30px;" align="center">Other</td>
+<td style="width: 30px;" align="center">A</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">5</td>
+<td style="width: 30px;" align="center">INeed</td>
+<td style="width: 30px;" align="center">You</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">6</td>
+<td style="width: 30px;" align="center">Mixed</td>
+<td style="width: 30px;" align="center">Nuts</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">7</td>
+<td style="width: 30px;" align="center">Kirk</td>
+<td style="width: 30px;" align="center">Land</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">8</td>
+<td style="width: 30px;" align="center">Bit</td>
+<td style="width: 30px;" align="center">Shooter</td>
+<td style="width: 30px;" align="center">A</td>
+</tr>
+<tr>
+<td style="width: 30px;" align="center">9</td>
+<td style="width: 30px;" align="center">Sun</td>
+<td style="width: 30px;" align="center">Microsystem</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">10</td>
+<td style="width: 30px;" align="center">Extra</td>
+<td style="width: 30px;" align="center">Fancy</td>
+<td style="width: 30px;" align="center">B</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>要比较这两张表的数据，找出不一样的数据行。我们可以使用<a href="http://en.wikipedia.org/wiki/Join_(SQL)#Outer_joins"><span style="color: #967001;">outer join</span></a> 技术。我给outer join做了一个链接，是Wikipedia的，如果你对这个技术不是很清楚，还请你行看看其技术细节。</p>
+<p>下面是具体的SQL语句：</p>
+<h4><span style="text-decoration: underline;">使用FULL OUTER JOIN</span></h4>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+SELECT
+     *
+FROM
+     jajal j
+     FULL OUTER JOIN jajal_copy jc ON jc.first_name = j.first_name
+     AND jc.last_name = j.last_name
+     AND jc.grade = j.grade
+     AND jc.user_id = j.user_id
+WHERE
+     j.user_id IS NULL
+     OR jc.user_id IS NULL
+</pre>
+<p>运行结果如下：</p>
+<table id="wptable-9" class="wptable rowstyle-alt" border="0" cellspacing="1">
+<thead>
+<tr>
+<th class="sortable" style="width: 30px;" align="center">user_id</th>
+<th class="sortable" style="width: 30px;" align="center">first_name</th>
+<th class="sortable" style="width: 30px;" align="center">last_name</th>
+<th class="sortable" style="width: 30px;" align="center">grade</th>
+<th class="sortable" style="width: 30px;" align="center">user_id</th>
+<th class="sortable" style="width: 30px;" align="center">first_name</th>
+<th class="sortable" style="width: 30px;" align="center">last_name</th>
+<th class="sortable" style="width: 30px;" align="center">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">6</td>
+<td style="width: 30px;" align="center">Mixed</td>
+<td style="width: 30px;" align="center">Nuts</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">6</td>
+<td style="width: 30px;" align="center">Mixed</td>
+<td style="width: 30px;" align="center">Nuts</td>
+<td style="width: 30px;" align="center">Z</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+<td style="width: 30px;" align="center">[NULL]</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h4><span style="text-decoration: underline;">使用NATURAL FULL OUTER JOIN</span></h4>
+<p>关于<a href="http://en.wikipedia.org/wiki/Join_(SQL)#Natural_join"><span style="color: #967001;">natural join</span></a>，你可以看看Wikipedia是怎么说的。</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+SELECT
+       *
+FROM
+       jajal j
+       NATURAL FULL OUTER JOIN jajal_copy jc
+WHERE
+       j.user_id IS NULL
+       OR jc.user_id IS NULL
+</pre>
+<p>运行结果如下：</p>
+<table id="wptable-10" class="wptable rowstyle-alt" border="0" cellspacing="1">
+<thead>
+<tr>
+<th class="sortable" style="width: 30px;" align="center">user_id</th>
+<th class="sortable" style="width: 30px;" align="center">first_name</th>
+<th class="sortable" style="width: 30px;" align="center">last_name</th>
+<th class="sortable" style="width: 30px;" align="center">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 30px;" align="center">6</td>
+<td style="width: 30px;" align="center">Mixed</td>
+<td style="width: 30px;" align="center">Nuts</td>
+<td style="width: 30px;" align="center">C</td>
+</tr>
+<tr class="alt">
+<td style="width: 30px;" align="center">6</td>
+<td style="width: 30px;" align="center">Mixed</td>
+<td style="width: 30px;" align="center">Nuts</td>
+<td style="width: 30px;" align="center">Z</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h4><span style="text-decoration: underline;">MySQL SQL 代码</span></h4>
+<pre>MySQL 并不支持 FULL OUTER JOIN，但是我们可以使用LEFT JOIN 和 RIGHT JOIN 来实现这一功能。如下所示。</pre>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+SELECT
+*
+FROM
+jajal j
+LEFT JOIN jajal_copy jc ON jc.first_name = j.first_name
+AND jc.last_name = j.last_name
+AND jc.grade = j.grade
+AND jc.user_id = j.user_id
+WHERE
+jc.user_id IS NULL
+UNION ALL
+SELECT
+*
+FROM
+jajal j
+RIGHT JOIN jajal_copy jc ON jc.first_name = j.first_name
+AND jc.last_name = j.last_name
+AND jc.grade = j.grade
+AND jc.user_id = j.user_id
+WHERE
+j.user_id IS NULL
+</pre>
+<p>或者你更喜欢NATURAL JOIN 版本</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+SELECT
+*
+FROM
+jajal j
+NATURAL LEFT JOIN jajal_copy jc
+WHERE
+jc.user_id IS NULL
+UNION ALL
+SELECT
+*
+FROM
+jajal j
+NATURAL RIGHT JOIN jajal_copy jc
+WHERE
+j.user_id IS NULL
+</pre>
+<p>当然，如果你需要一个MySQL的存储过程的话，下面是一个示例：</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+DELIMITER $$
+
+CREATE PROCEDURE `db_schema`.`tablediff`
+    (schema_name VARCHAR(64), table1 VARCHAR(64), table2 VARCHAR(64))
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE sql_statement TEXT DEFAULT &#039;&#039;;
+    DECLARE sql_statement_where TEXT DEFAULT &#039;&#039;;
+    DECLARE sql_statement_pk TEXT DEFAULT &#039;&#039;;
+    DECLARE col_name VARCHAR(64);
+    DECLARE col_name_cur CURSOR FOR
+        SELECT
+            COLUMN_NAME
+        FROM
+            information_schema.COLUMNS
+        WHERE
+            TABLE_SCHEMA = schema_name
+            AND TABLE_NAME = table1
+    ;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN col_name_cur;
+    traverse_columns: LOOP
+        FETCH col_name_cur INTO col_name;
+
+        IF done THEN
+            CLOSE col_name_cur;
+            LEAVE traverse_columns;
+        END IF;
+
+        SET sql_statement_where = CONCAT(sql_statement_where,
+            &#039; AND a.&#039;, col_name, &#039; = b.&#039;, col_name);
+        SET sql_statement_pk = CONCAT(sql_statement_pk,
+            &#039;AND b.&#039;, col_name, &#039; IS NULL&#039;);
+    END LOOP;
+
+    SELECT
+        COLUMN_NAME INTO col_name
+    FROM
+        information_schema.KEY_COLUMN_USAGE
+    WHERE
+        CONSTRAINT_SCHEMA = schema_name
+        AND CONSTRAINT_NAME = &#039;PRIMARY&#039;
+        AND TABLE_NAME = table1
+    LIMIT 1
+    ;
+    IF col_name IS NOT NULL THEN
+        SET sql_statement_pk = CONCAT(&#039;AND b.&#039;, col_name, &#039; IS NULL&#039;);
+    END IF;
+
+    SET sql_statement = CONCAT(&#039;SELECT * FROM &#039;, schema_name, &#039;.&#039;, table1, &#039; a LEFT JOIN &#039;, schema_name, &#039;.&#039;, table2, &#039; b ON TRUE&#039;);
+    SET sql_statement = CONCAT(sql_statement, sql_statement_where, &#039; WHERE TRUE &#039;, sql_statement_pk);
+    SET sql_statement = CONCAT(sql_statement, &#039; UNION ALL SELECT * FROM &#039;, schema_name, &#039;.&#039;, table1, &#039; b RIGHT JOIN &#039;, schema_name, &#039;.&#039;, table2, &#039; a ON TRUE&#039;);
+    SET sql_statement = CONCAT(sql_statement, sql_statement_where, &#039; WHERE TRUE &#039;, sql_statement_pk);
+
+    SET @s = sql_statement;
+    PREPARE stmt1 FROM @s;
+    EXECUTE stmt1;
+    DEALLOCATE PREPARE stmt1;
+
+END$$
+DELIMITER ;
+</pre>
+<p> </p>
+<p> </p>
+<h4><span style="text-decoration: underline;">PostgreSQL 下的SQL语句</span></h4>
+<p>下面是PostgreSQL的一个存储过程：</p>
+<pre data-enlighter-language="sql" class="EnlighterJSRAW">
+CREATE OR REPLACE FUNCTION tablediff (
+    IN schema_name VARCHAR(64),
+    IN table1 VARCHAR(64),
+    IN table2 VARCHAR(64)
+) RETURNS BIGINT AS
+$BODY$
+DECLARE
+    the_result BIGINT DEFAULT 0;
+    sql_statement TEXT DEFAULT &#039;&#039;;
+    sql_statement_where TEXT DEFAULT &#039;&#039;;
+    sql_statement_pk TEXT DEFAULT &#039;&#039;;
+    col_name VARCHAR(64);
+    col_name_cur CURSOR FOR
+        SELECT
+            column_name
+        FROM
+            information_schema.columns
+        WHERE
+            table_catalog = schema_name
+            AND table_schema = &#039;public&#039;
+            AND table_name = table1
+    ;
+BEGIN
+    OPEN col_name_cur;
+
+    LOOP
+        FETCH col_name_cur INTO col_name;
+        IF NOT FOUND THEN
+            EXIT;
+        END IF;
+
+        sql_statement_where := sql_statement_where || &#039; AND a.&#039; || col_name || &#039; = b.&#039; || col_name;
+    END LOOP;
+
+    SELECT
+        column_name INTO col_name
+    FROM
+        information_schema.table_constraints tc
+        JOIN information_schema.constraint_column_usage ccu ON
+            ccu.constraint_name = tc.constraint_name
+    WHERE
+        tc.table_catalog = schema_name
+        AND tc.table_schema = &#039;public&#039;
+        AND tc.table_name = table1
+    LIMIT 1
+    ;
+
+    IF col_name IS NOT NULL THEN
+        sql_statement_pk := &#039; a.&#039; || col_name || &#039; IS NULL&#039;;
+        sql_statement_pk := sql_statement_pk || &#039; OR b.&#039; || col_name || &#039; IS NULL&#039;;
+    END IF;
+
+    sql_statement := &#039;SELECT COUNT(*) FROM &#039; || schema_name || &#039;.public.&#039; || table1 || &#039; a FULL OUTER JOIN &#039; || schema_name || &#039;.public.&#039; || table2 || &#039; b ON TRUE&#039;;
+    sql_statement := sql_statement || sql_statement_where || &#039; WHERE &#039; || sql_statement_pk;
+
+    EXECUTE sql_statement INTO the_result;
+
+    RETURN the_result;
+END;$BODY$
+LANGUAGE &#039;plpgsql&#039; STABLE;
+</pre>
+<p> </p>
+<p>文章：<a href="http://www.microshell.com/database/sql/comparing-data-from-2-database-tables/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="6个有用的MySQL语句" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3433.html" class="wp_rp_title">6个有用的MySQL语句</a></li><li ><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/12/200906020837401710-150x150.jpg" alt="程序员疫苗：代码注入" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8711.html" class="wp_rp_title">程序员疫苗：代码注入</a></li><li ><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/overview2-1-150x150.png" alt="NoSQL 数据建模技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7270.html" class="wp_rp_title">NoSQL 数据建模技术</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/925.html">如何比较两个数据表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/925.html/feed</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>20个优秀的Javascript导航技术</title>
+		<link>https://coolshell.cn/articles/918.html</link>
+					<comments>https://coolshell.cn/articles/918.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 26 May 2009 03:33:01 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=918</guid>
+
+					<description><![CDATA[<p>以前向大家介绍过 《30种时尚的CSS网站导航条》。这里，我们将向大家介绍一下使用Javascript设计的WEB页面的导航条。 因为Javascript可以处...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/918.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/918.html">20个优秀的Javascript导航技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前向大家介绍过 《<a href="https://coolshell.cn/articles/562.html" target="_blank">30种时尚的CSS网站导航条</a>》。这里，我们将向大家介绍一下使用Javascript设计的WEB页面的导航条。</p>
+<p>因为Javascript可以处理和用户的交互，所以使用Javascript会有更好的用户体验。在这篇文章里，你可以看到一些<strong>令人恐怖和独一无二的Javascript制作的导航条</strong>。</p>
+<h3>1. <a href="http://greengeckodesign.com/projects/menumatic.aspx" target="_blank">MenuMatic</a></h3>
+<p>这个示例主要是展示了一个排序的纵向或横向的下拉式菜单导航条。</p>
+<p><a href="http://greengeckodesign.com/projects/menumatic/examples/vertical/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-02_menu_matic.jpg" alt="menumatic" width="500" height="282" /></a></p>
+<p><a href="http://greengeckodesign.com/projects/menumatic/examples/vertical/">演示页面</a></p>
+<p><span id="more-918"></span></p>
+<h3>2. <a href="http://www.shopdev.co.uk/blog/animated-menus-using-jquery/">JQuery制作的动画按钮菜单</a></h3>
+<p>当鼠标经过的时候，按钮会有下压的感觉。</p>
+<p><a href="http://www.shopdev.co.uk/blog/menuDemo.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-07_animated_menu.jpg" alt="Animated Menu using jQuery" width="500" height="151" /></a></p>
+<p><a href="http://www.shopdev.co.uk/blog/menuDemo.html">演示页面</a></p>
+<h3>3. <a href="http://www.gayadesign.com/diy/jquery-convertion-garagedoor-effect-using-javascript/" target="blank">jQuery 卷帘门特效导航条</a></h3>
+<p><a href="http://www.gayadesign.com/about/" target="_blank">Gaya Kessler</a> 设计了这样一种卷帘门式导航条，相当的酷。</p>
+<p><a href="http://www.gayadesign.com/scripts/jquerygaragedoor/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-01_garage_door.jpg" alt="Garagedoor Effect using jQuery" width="500" height="109" /></a></p>
+<p><a href="http://www.gayadesign.com/scripts/jquerygaragedoor/" target="_blank">演示页面</a></p>
+<h3>4. <a href="http://sonicradish.com/labs/jGlideMenu/current/?src=ASL_LAB" target="_blank">JGlide 菜单</a></h3>
+<p>一个独特的平面式菜单，整个菜单可以被随意拖动。</p>
+<p><a href="http://sonicradish.com/labs/jGlideMenu/current/static_demo.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-18_jglide.jpg" alt="JGlide Menu" width="500" height="200" /></a></p>
+<p><a href="http://sonicradish.com/labs/jGlideMenu/current/static_demo.html" target="_blank">演示页面</a></p>
+<h3>5. <a href="http://hv-designs.co.uk/2009/02/17/sliding-jquery-menu/" target="_blank">jQuery 纵向滑动式菜单</a></h3>
+<p><a href="http://hv-designs.co.uk/" target="_blank">HVDesigns</a> 设计这个下拉式滑动式菜单。</p>
+<p><a href="http://www.hv-designs.co.uk/tutorials/sliding_menu/sliding_menu.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-03_verticle_sliding.jpg" alt="Sliding jQuery Menu" width="500" height="192" /></a></p>
+<p><a href="http://www.hv-designs.co.uk/tutorials/sliding_menu/sliding_menu.html" target="_blank">演示页面</a></p>
+<h3>6. <a href="http://www.mattweltman.com/sliding_tabs.html">Perspective Tabs</a></h3>
+<p>这个技术很酷了，有点类似于iPhone，通过鼠标可以滚动导航条。</p>
+<p><a href="http://www.mattweltman.com/sliding_tabs.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-13_mootools_tabs.jpg" alt="Perspective Tabs" width="500" height="298" /></a></p>
+<p><a href="http://www.mattweltman.com/sliding_tabs.html">演示页面</a></p>
+<h3>7. <a href="http://woork.blogspot.com/2008/01/simple-css-vertical-menu-digg-like.html">Digg.com式的下拉菜单</a></h3>
+<p>这个digg.com式的下拉菜单只使用了非常小的Javascript代码。</p>
+<p><a href="http://woork.blogspot.com/2008/01/simple-css-vertical-menu-digg-like.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-09_digg_like_menu.jpg" alt="Vertical Digg-like Menu" width="500" height="149" /></a></p>
+<h3>8. <a href="http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers/">LavaLamp</a></h3>
+<p>当鼠标经过的时候，菜单项上会有一个小阴影尾随着。以前，这样的技术基本上通过Flash完成的。</p>
+<p><a href="http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-14_mootools_fancy_menu.jpg" alt="LavaLamp" width="500" height="96" /></a></p>
+<h3>9. <a href="http://marcgrabanski.com/pages/code/fisheye-menu" target="_blank">鱼眼菜单</a></h3>
+<p>鼠标经过的时候，图标会变得大起来。这个技术相当不错。</p>
+<p><a href="http://marcgrabanski.com/pages/code/fisheye-menu"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-17_fisheye.jpg" alt="Fisheye Menu" width="500" height="163" /></a></p>
+<h3>10. <a href="http://www.dezinerfolio.com/2007/07/19/simple-javascript-accordions/" target="_blank">简单的JavaScript折叠式菜单</a></h3>
+<p>相当不错的一相折叠式菜单。</p>
+<p><a href="http://www.dezinerfolio.com/wp-content/uploads/accordemo/01.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-04_javascript_accordian.jpg" alt="Simple JavaScript Accordions" width="500" height="247" /></a></p>
+<p><a href="http://www.dezinerfolio.com/wp-content/uploads/accordemo/01.html" target="_blank">演示页面</a></p>
+<h3>11. <a href="http://www.leigeber.com/2008/05/sliding-javascript-menu-highlight-1kb/">高亮滑动式菜单</a></h3>
+<p>这个特效和第8个很类似。</p>
+<p><a href="http://www.leigeber.com/2008/05/sliding-javascript-menu-highlight-1kb/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-08_highlight_menu.jpg" alt="Sliding JavaScript Menu Highlight" width="500" height="107" /></a></p>
+<h3>12. <a href="http://css-tricks.com/learning-jquery-fading-menu-replacing-content/" target="_blank">高亮式菜单</a></h3>
+<p>鼠标经过的时候，菜单项会高亮起来。而没有鼠标的经过的时候，其是暗淡的。</p>
+<p><a href="http://css-tricks.com/examples/MenuFader/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-05_fading_menu.jpg" alt="Fading Menu - Replacing Content" width="500" height="129" /></a></p>
+<p><span style="text-decoration: underline;"><span style="color: #0000ff;"> <a href="http://css-tricks.com/examples/MenuFader/" target="_blank">演示页面</a></span></span></p>
+<h3>13. <a href="http://javascript-array.com/scripts/simple_drop_down_menu/" target="_blank">简单的多级下拉菜单</a></h3>
+<p>这是一个教程，教你怎么做这个菜单。</p>
+<p><a href="http://javascript-array.com/scripts/simple_drop_down_menu/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-06_multil_level_drop_down.jpg" alt="Simple Multi-level Drop-Down Menu" width="500" height="167" /></a></p>
+<h3>14. <a href="http://snook.ca/archives/javascript/jquery-bg-image-animations/" target="_blank">jQuery 制作的背景图动画菜单</a></h3>
+<p><a href="http://snook.ca/technical/jquery-bg/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-12_background_position.jpg" alt="Using jQuery for Background Image Animations" width="500" height="150" /></a></p>
+<p><span style="text-decoration: underline;"><span style="color: #0000ff;"> <a href="http://snook.ca/technical/jquery-bg/">演示页面</a></span></span></p>
+<h3>15. <a href="http://www.chromasynthetic.com/blog/mootools-demo-redux/57/">Mootools Redux</a></h3>
+<p>使用MooTools 制作的一个“鱼眼”式的导航条。</p>
+<p><a href="http://www.chromasynthetic.com/blog/uploads/mootools_nav_example.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-10_mootools_demo.jpg" alt="Mootools Redux" width="500" height="144" /></a></p>
+<p><span style="text-decoration: underline;"><span style="color: #0000ff;"> <a href="http://www.chromasynthetic.com/blog/uploads/mootools_nav_example.html" target="_blank">演示页面</a></span></span></p>
+<h3>16. <a href="http://berndmatzner.de/jquery/hoveraccordion/">折叠式边栏菜单</a></h3>
+<p><a href="http://berndmatzner.de/jquery/hoveraccordion/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-11_hover_accordion.jpg" alt="Using jQuery for Background Image Animations" width="500" height="200" /></a></p>
+<h3>17. <a href="http://tools.uvumi.com/dropdown.html">UvumiTools 式的下拉菜单</a></h3>
+<p>另一个基于MooTools 制作的下拉菜单。</p>
+<p><a href="http://tools.uvumi.com/dropdown.html"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-15_uvumitools%20_menu.jpg" alt="UvumiTools Dropdown Menu" width="500" height="152" /></a></p>
+<h3>18. <a href="http://stilbuero.de/jquery/tabs_3/" target="_blank">jQuery UI Tabs</a></h3>
+<p>使用jQuery制作的Tab页.</p>
+<p><a href="http://stilbuero.de/jquery/tabs_3/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-16_jquery_ui_tabs.jpg" alt="jQuery UI Tabs" width="500" height="115" /></a></p>
+<p><span style="text-decoration: underline;"><span style="color: #0000ff;"> <a href="http://stilbuero.de/jquery/tabs_3/" target="_blank">演示页面</a></span></span></p>
+<h3>19. <a href="http://yura.thinkweb2.com/scripting/contextMenu/" target="_blank">右键菜单Proto.Menu </a></h3>
+<p>使用Prototype 框架制作的右键菜单。</p>
+<p><a href="http://yura.thinkweb2.com/scripting/contextMenu/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-19_right_click.jpg" alt="Proto.Menu: Right Click Menu" width="500" height="175" /></a></p>
+<h3>20. <a href="http://www.456bereastreet.com/archive/200705/accessible_expanding_and_collapsing_menu/" target="_blank">展开/收起式菜单</a></h3>
+<p>一个支持两层的有点类似于树形的菜单。</p>
+<p><a href="http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/"><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2009/04/29-20_exp_col_menu.jpg" alt="Accessible Expanding and Collapsing menu" width="500" height="213" /></a></p>
+<p><a href="http://www.456bereastreet.com/lab/accessible-expanding-collapsing-menu/" target="_blank">演示页面</a></p>
+<p>文章：<a href="http://sixrevisions.com/javascript/20-excellent-javascript-navigation-techniques-and-examples/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/918.html">20个优秀的Javascript导航技术</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/918.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>6个变态的C语言Hello World程序</title>
+		<link>https://coolshell.cn/articles/914.html</link>
+					<comments>https://coolshell.cn/articles/914.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 25 May 2009 11:21:24 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=914</guid>
+
+					<description><![CDATA[<p>下面的六个程序片段主要完成这些事情： 输出Hello, World 混乱C语言的源代码 下面的所有程序都可以在GCC下编译通过，只有最后一个需要动用C++的编译...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/914.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/914.html">6个变态的C语言Hello World程序</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面的六个程序片段主要完成这些事情：</p>
+<ol>
+<li>输出Hello, World</li>
+<li>混乱C语言的源代码</li>
+</ol>
+<p>下面的所有程序都可以在GCC下编译通过，只有最后一个需要动用C++的编译器g++才能编程通过。</p>
+<p><strong>hello1.c</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    #define _________ }
+    #define ________ putchar
+    #define _______ main
+    #define _(a) ________(a);
+    #define ______ _______(){
+    #define __ ______ _(0x48)_(0x65)_(0x6C)_(0x6C)
+    #define ___ _(0x6F)_(0x2C)_(0x20)_(0x77)_(0x6F)
+    #define ____ _(0x72)_(0x6C)_(0x64)_(0x21)
+    #define _____ __ ___ ____ _________
+    #include&lt;stdio.h&gt;
+    _____
+</pre>
+<p><span id="more-914"></span></p>
+<p><strong>hello2.c</strong> </p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    #include&lt;stdio.h&gt;
+    main(){
+      int x=0,y[14],*z=&amp;y;*(z++)=0x48;*(z++)=y[x++]+0x1D;
+      *(z++)=y[x++]+0x07;*(z++)=y[x++]+0x00;*(z++)=y[x++]+0x03;
+      *(z++)=y[x++]-0x43;*(z++)=y[x++]-0x0C;*(z++)=y[x++]+0x57;
+      *(z++)=y[x++]-0x08;*(z++)=y[x++]+0x03;*(z++)=y[x++]-0x06;
+      *(z++)=y[x++]-0x08;*(z++)=y[x++]-0x43;*(z++)=y[x]-0x21;
+      x=*(--z);while(y[x]!=NULL)putchar(y[x++]);
+    }
+</pre>
+<p><strong>hello3.c</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    #include&lt;stdio.h&gt;
+    #define __(a) goto a;
+    #define ___(a) putchar(a);
+    #define _(a,b) ___(a) __(b);
+    main()
+    { _:__(t)a:_(&#039;r&#039;,g)b:_(&#039;$&#039;,p)
+      c:_(&#039;l&#039;,f)d:_(&#039; &#039;,s)e:_(&#039;a&#039;,s)
+      f:_(&#039;o&#039;,q)g:_(&#039;l&#039;,h)h:_(&#039;d&#039;,n)
+      i:_(&#039;e&#039;,w)j:_(&#039;e&#039;,x)k:_(&#039;\n&#039;,z)
+      l:_(&#039;H&#039;,l)m:_(&#039;X&#039;,i)n:_(&#039;!&#039;,k)
+      o:_(&#039;z&#039;,q)p:_(&#039;q&#039;,b)q:_(&#039;,&#039;,d)
+      r:_(&#039;i&#039;,l)s:_(&#039;w&#039;,v)t:_(&#039;H&#039;,j)
+      u:_(&#039;a&#039;,a)v:_(&#039;o&#039;,a)w:_(&#039;)&#039;,k)
+      x:_(&#039;l&#039;,c)y:_(&#039;\t&#039;,g)z:___(0x0)}
+</pre>
+<p><strong>hello4.c</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    int n[]={0x48,
+    0x65,0x6C,0x6C,
+    0x6F,0x2C,0x20,
+    0x77,0x6F,0x72,
+    0x6C,0x64,0x21,
+    0x0A,0x00},*m=n;
+    main(n){putchar
+    (*m)!=&#039;\0&#039;?main
+    (m++):exit(n++);}
+</pre>
+<p><strong>hello5.c</strong></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    main(){int i,n[]={(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;
+    1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))+((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))), (((1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(
+    1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))+ (1
+    &lt;&lt;(1&gt;&gt;1))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))- ((1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1
+    )))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))),(((1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(
+    1&lt;&lt;(1&gt;&gt;1)))-(1&lt;&lt;(1&gt;&gt;1))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1
+    )&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))
+    -((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))),((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1)
+    &lt;&lt;(1&lt;&lt;1)),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;
+    1))-((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-(1&lt;&lt;(1&gt;&gt;1))),(((1&lt;&lt;
+    1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))-(1&lt;&lt;(1&gt;&gt;1))), (((1&lt;&lt;1
+    )&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))- ((1&lt;&lt;1)&lt;&lt; (1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))+(1&lt;&lt;1)), (((1&lt;&lt;1)&lt;&lt; (
+    1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1))-((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1)
+    &lt;&lt;(1&lt;&lt;(1&gt;&gt;1)))-((1&lt;&lt;1) &lt;&lt;(1&lt;&lt; (1&gt;&gt;1)))),
+    (((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt; (1&lt;&lt;1))- ((1
+    &lt;&lt;1)&lt;&lt;(1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;(1&gt;&gt;
+    1)))), (((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1) &lt;&lt;(1&lt;&lt;1))+(1&lt;&lt;(1
+    &gt;&gt;1))),(((1&lt;&lt;1)&lt;&lt;(1&lt;&lt;1))+((1&lt;&lt;1)&lt;&lt; (1&lt;&lt;(
+    1&gt;&gt;1))) + (1&lt;&lt; (1&gt;&gt;1)))}; for(i=(1&gt;&gt;1);i
+    &lt;(((1&lt;&lt;1) &lt;&lt;(1&lt;&lt;1))+((1 &lt;&lt;1)&lt;&lt; (1&lt;&lt;(1&gt;&gt;1
+    ))) + (1&lt;&lt;1)); i++) printf(&quot;%c&quot;,n[i]); }
+</pre>
+<p><strong>hello6.cpp</strong></p>
+<p>下面的程序只能由C++的编译器编译（比如：g++）</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+    #include &lt;stdio.h&gt;
+    #define _(_) putchar(_);
+    int main(void){int i = 0;_(
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++i)_(++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++i)_(++++++++++++++
+    i)_(--++i)_(++++++i)_(------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ----------------i)_(--------
+    ----------------i)_(++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++++
+    ++++++++++++++++++++++++++i)
+    _(----------------i)_(++++++
+    i)_(------------i)_(--------
+    --------i)_(----------------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ----------------------------
+    ------i)_(------------------
+    ----------------------------
+    i)return i;}
+</pre>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/914.html">6个变态的C语言Hello World程序</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/914.html/feed</wfw:commentRss>
+			<slash:comments>175</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>7个免费强大的Ajax文件管理器</title>
+		<link>https://coolshell.cn/articles/909.html</link>
+					<comments>https://coolshell.cn/articles/909.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 24 May 2009 12:46:56 +0000</pubDate>
+				<category><![CDATA[Ajax开发]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[AJAX]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=909</guid>
+
+					<description><![CDATA[<p>如果你正在开发一个WEB应用，需要一个不错的强大的文件管理器，并且可以简单的定制，那么，下面的这七个免费开源的文件管理器你一会喜欢的。这些文件管理器都很强大，他...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/909.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/909.html">7个免费强大的Ajax文件管理器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>如果你正在开发一个WEB应用，需要一个不错的强大的文件管理器，并且可以简单的定制，那么，下面的这七个免费开源的文件管理器你一会喜欢的。这些文件管理器都很强大，他们全部都支持PHP，Javascript和Ajax，有几个还支持别的WEB开发语言。这些管理理可以让你完成目录文件浏览，搜索，上传/下载，编辑，拷贝，移动，删除等等文件操作功能。</p>
+<h3 class="title">1. <a href="http://www.ajaxplorer.info/">AjaXplorer</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager4.jpg" alt="Ajax File Manager" /></p>
+<p>AjaXplorer 是一个免费的 Ajax 文件管理器，其很容易安装。而且它的布局很丰富，可以用于多种应用，比如：文件管理，文件共享，图片库，代码库等等。不过它只支持(4 呀 5) ，不支持数据库。</p>
+<p><span id="more-909"></span></p>
+<ul>
+<li>改名/拷贝/移动/删除/下载文件或目录。</li>
+<li>以进度条的方式上传多个文件 (需要Flash 支持，不支持https)</li>
+<li>创建目录和空文件。</li>
+<li>编辑纯文本文件和代码 (js, php, html, java, sql, perl)，支持语法高亮。</li>
+<li>查看图片，有缩略图功能。</li>
+<li>可以在线地播放MP3文件。</li>
+<li>在线地查看Flash videos (FLV) 文件。</li>
+<li>可以在线地浏览或解压ZIP 文件。</li>
+</ul>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>下载</strong>：<a href="http://www.ajaxplorer.info/download/">http://www.ajaxplorer.info/download/</a></li>
+<li><strong>演示</strong>：<a href="http://www.ajaxplorer.info/demo/">http://www.ajaxplorer.info/demo/</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://www.ajaxplorer.info/demo/" target="_blank"></a><a class="livedownload" href="http://www.ajaxplorer.info/download/" target="_blank"></a></div>
+<h3 class="title">2. <a href="http://filenice.com/">fileNice</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager1.jpg" alt="Ajax File Manager" /></p>
+<p>fileNice 是一个免费的PHP文件浏览器。</p>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>主页：</strong><a href="http://filenice.com/">http://filenice.com/</a></li>
+<li><strong>演示：</strong><a href="http://filenice.com/demo/">http://filenice.com/demo/</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://filenice.com/demo/" target="_blank"></a><a class="livedownload" href="http://filenice.com/" target="_blank"></a></div>
+<h3 class="title">3. <a href="http://www.solitude.dk/filethingie/">File Thingie</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager2.jpg" alt="Ajax File Manager" /></p>
+<p>File Thingie 是一个小型的文件管理器。由PHP写成。他主要的目的是提示一个WEB界面的文件管理器（如果你不能使用或是不会使用FTP）。通过File Thingie你可以完成下面这些事：</p>
+<ul>
+<li>安装简单— 只有一个文件</li>
+<li>多文件上传</li>
+<li>多用户和用户组</li>
+<li>创建子目录</li>
+<li>改名，移动，删除，拷贝文件和目录</li>
+<li>搜索文件或目录名</li>
+<li>通过黑/白名单进行文件级的存取控制</li>
+<li>编辑纯文本文件</li>
+<li>在线Unzip 文件</li>
+<li>非常容易地进行CSS界面定制</li>
+<li>支持多国语言</li>
+</ul>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>教程：</strong><a href="http://www.solitude.dk/filethingie/tour">http://www.solitude.dk/filethingie/tour</a></li>
+<li><strong>下载：</strong><a href="http://www.solitude.dk/filethingie/download">http://www.solitude.dk/filethingie/download</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://www.solitude.dk/filethingie/tour" target="_blank"></a><a class="livedownload" href="http://www.solitude.dk/filethingie/download" target="_blank"></a></div>
+<h3 class="title">4. <a href="http://og5.net/christoph/article/MooTools_based_FileManager">MooTools based FileManager</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager3.jpg" alt="Ajax File Manager" /></p>
+<p>MooTools based File-Manager 提供了预览，上传和修改文件和目录的功能。其主要功能如下：</p>
+<ul>
+<li>浏览文件和目录</li>
+<li>改名，删除，移动（拖放）,拷贝（Ctrl+拖放）和下载</li>
+<li>查看文件细节和预览图片文件，文本文件，压缩文件和音频文件。</li>
+<li>非常不错的UI设计 </li>
+<li>通过FancyUpload 上传文件</li>
+<li>提供在上传时自动缩放图片尺寸的选项</li>
+</ul>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>演示：</strong><a href="http://og5.net/christoph/Scripts/FileManager/Demos/">http://og5.net/christoph/Scripts/FileManager/Demos/</a></li>
+<li><strong>下载：</strong><a href="http://og5.net/christoph/article/MooTools_based_FileManager">http://og5.net/christoph/article/MooTools_based_FileManager</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://og5.net/christoph/Scripts/FileManager/Demos/" target="_blank"></a><a class="livedownload" href="http://og5.net/christoph/article/MooTools_based_FileManager" target="_blank"></a></div>
+<h3 class="title">5. <a href="http://ecosmear.com/relay/">Relay</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager5.jpg" alt="Ajax File Manager" /></p>
+<p>Relay 是一个极牛的Ajax 文件管理器。在上传和下载文件它做得相当出色。下面是它的一些功能：</p>
+<ul>
+<li>可以随意拖放文件和目录</li>
+<li>动态地载入文件目录结构 </li>
+<li>上传文件进度条 </li>
+<li>缩略图预览（包括PDF文件） </li>
+<li>多用户和帐号</li>
+</ul>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>演示：</strong><a href="http://ecosmear.com/relay/demo/">http://ecosmear.com/relay/demo/</a></li>
+<li> <strong>主页：</strong><a href="http://ecosmear.com/relay/">http://ecosmear.com/relay/</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://ecosmear.com/relay/demo/" target="_blank"></a><a class="livedownload" href="http://ecosmear.com/relay/" target="_blank"></a></div>
+<h3 class="title">6. <a href="http://kfm.verens.com/">Kae’s File Manager</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager8.jpg" alt="Ajax File Manager" /></p>
+<p>KFM 是一个在线的文件管理器，它可以单独使用或是以一个插件的方式给一些编辑器使用。比如这些编辑器：FCKeditor 或TinyMCE。KFM 是一个开源的免费的项目，下面是它的一些特性：</p>
+<ul>
+<li>鼠标拖放功能</li>
+<li>图标显示，列表显示</li>
+<li>支持插件</li>
+<li>图片操作，幻灯片播放</li>
+<li>简单的安装和升级</li>
+<li>文本编辑时语法高亮</li>
+<li>搜索引擎</li>
+<li>标签</li>
+<li>多语言</li>
+<li>mp3 和视频播放插件</li>
+</ul>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>演示：</strong><a href="http://kfm.verens.com/demo/1.3.1/?lang=en">http://kfm.verens.com/demo/1.3.1/?lang=en</a></li>
+<li><strong>主页：</strong><a href="http://kfm.verens.com/">http://kfm.verens.com/</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://kfm.verens.com/demo/1.3.1/?lang=en" target="_blank"></a><a class="livedownload" href="http://kfm.verens.com/" target="_blank"></a></div>
+<h3 class="title">7. <a href="http://extplorer.sourceforge.net/">eXtplorer</a></h3>
+<p class="img"><img decoding="async" src="http://devsnippets.com/img/file-manager7.jpg" alt="Ajax File Manager" /></p>
+<p>eXtplorer 特性如下：</p>
+<ul>
+<li>文件目录浏览</li>
+<li>编辑，复制，移动，删除文件</li>
+<li>搜索，上传和下载文件</li>
+<li>创建和释放压缩文件</li>
+<li>创建文件和目录</li>
+<li>更改文件和目录权限</li>
+<li>其它更多更多的内容</li>
+</ul>
+<p><strong>链接：</strong></p>
+<ul>
+<li><strong>主页：</strong> <a href="http://extplorer.sourceforge.net/">http://extplorer.sourceforge.net/</a></li>
+</ul>
+<p> </p>
+<div id="livedownload"><a class="livedemo" href="http://extplorer.sourceforge.net/extplorer.png" target="_blank"></a>文章：<a href="http://devsnippets.com/article/ajax/7-free-powerful-file-managers.html" target="_blank">来源</a></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9749.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/javascript-150x150.jpg" alt="Javascript 装载和执行" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9749.html" class="wp_rp_title">Javascript 装载和执行</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/2593.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Web版的VNC" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2593.html" class="wp_rp_title">Web版的VNC</a></li><li ><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="最为奇怪的程序语言的特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_title">最为奇怪的程序语言的特性</a></li><li ><a href="https://coolshell.cn/articles/1850.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/programming_language-150x150.jpg" alt="Javascript程序员嘴最脏??" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1850.html" class="wp_rp_title">Javascript程序员嘴最脏??</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/909.html">7个免费强大的Ajax文件管理器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/909.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>将vim变得简单:如何在vim中得到你最喜爱的IDE特性</title>
+		<link>https://coolshell.cn/articles/894.html</link>
+					<comments>https://coolshell.cn/articles/894.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sat, 23 May 2009 08:32:05 +0000</pubDate>
+				<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[vi]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=894</guid>
+
+					<description><![CDATA[<p>原文出处:这里 摘要： 开源的vim文本编辑器提供许多灵活而强大的功能，但是vim自身是很难被配置使用的，在本教材中，我们将向你显示通过几个简单的方式使得你的v...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/894.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/894.html">将vim变得简单:如何在vim中得到你最喜爱的IDE特性</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>原文出处:<a href="http://arstechnica.com/open-source/guides/2009/05/vim-made-easy-how-to-get-your-favorite-ide-features-in-vim.ars">这里</a></p>
+<p><strong>摘要：</strong><br />
+开源的vim文本编辑器提供许多灵活而强大的功能，但是vim自身是很难被配置使用的，在本教材中，我们将向你显示通过几个简单的方式使得你的vim具有集成开发环境IDE的行为</p>
+<p>vim是很多程序员和系统管理员最爱的文本编辑器，虽然他提供了很多优秀而灵活的功能，但是对于新手来说他依然是难于上手的。从传统集成开发环境转到vim的开发人员通常会开在发方式的转变中发现迷失了自己。</p>
+<p>我经常收到来自于读者的邮件，他们希望能找到一种方式使得vim变得对开发者更友好。一个常见的抱怨是vim并不是自身就带有IDE的特性，并且如何来通过配置能得到等价IDE功能也不是很清晰。而揭开vim真正神奇的秘密就是利用强大的vim插件系统和对vim自身功能的改善和增强的第三方脚本。在阅你读本文之前，我已经整理好了一个vim的有用tips和插件列表，这些列表中的内容将会使那些用惯IDE功能的人们在vim上感到宾至如归的感觉。</p>
+<p><span id="more-894"></span></p>
+<p>虽然vim主要是设计给基于字符方式的文本编辑器，并且它有可能是这类编辑器中最高效的工具，但是现在在vim上也存在一些更适合新手使用的基于图形的外壳。不像运行在终端窗口上的vim，你可以尝试使用一下gvim,一个基于GUI的vim版本。gvim拥有可配置的的菜单和工具条，因此可以通过鼠标直接访问到vim的编程上的最本质的特性。gvim可以让你使用操作系统自带的文件对话框，并允许你通过鼠标点击拖拉编辑面板的能力。gvim有windows和linux的版本，等价的Mac OS X的版本是MacVim，MacVim提供了Mac机的本地Cocoa用户接口，包括菜单集成的功能。<br />
+<a rel="attachment wp-att-896" href="https://coolshell.cn/?attachment_id=896"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-896" title="vimtxt_gvim_ars" src="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_gvim_ars.jpg" alt="vimtxt_gvim_ars" width="708" height="648" srcset="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_gvim_ars.jpg 708w, https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_gvim_ars-300x275.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_gvim_ars-295x270.jpg 295w" sizes="(max-width: 708px) 100vw, 708px" /></a></p>
+<p>我听到来自vim用户最经常被抱怨的功能是vim的编辑区列表非常麻烦，并且没有一种简单的方式可以明了的看到什么文件是打开的。在vim上有几个插件可以解决这个问题，并提供了一个额外的编辑区列表用于方便在打开文件中切换。我最喜欢的一个插件是<a href="http://www.vim.org/scripts/script.php?script_id=159">MiniBufExplorer</a>，它将列表显示在窗口的头上。当MiniBufExplorer被激活时，你可以通过tab键来在列表的这些项中循环，然后通过回车键或双击鼠标来选择在编辑区显示和你要处理的文件。<br />
+<a rel="attachment wp-att-898" href="https://coolshell.cn/?attachment_id=898"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-898" title="vimtxt_vim_minibufexplorer_ars" src="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_minibufexplorer_ars.jpg" alt="vimtxt_vim_minibufexplorer_ars" width="478" height="393" srcset="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_minibufexplorer_ars.jpg 478w, https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_minibufexplorer_ars-300x246.jpg 300w" sizes="(max-width: 478px) 100vw, 478px" /></a></p>
+<p>许多的IDE工具都有用于显示你程序项目结构和允许你通过鼠标在特定的类和方法间跳转的代码导航区。你可以通过使用流行的<a href="http://vim-taglist.sourceforge.net/installation.html">Tag List 插件</a>来得到这个特性。这个插件需要<a href="http://ctags.sourceforge.net/">Exuberant Ctags</a>实用工具，这个工具用于分析你的代码。TagList可以通过命令:Tlist来激活，并将你的类和方法显示在激活的区域，当你打开其他的文件或切换到其他打开文件时，新的类或方法会被加到代码导航区。在gvim中你可以通过单击方法名跳到对应方法定义。如果要使用键盘，那么通过光标键上下移光标到你希望的方法处，单击回车即可达到目标。</p>
+<p><a rel="attachment wp-att-895" href="https://coolshell.cn/?attachment_id=895"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-895" title="vimtxt_vim_taglist_ars" src="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_taglist_ars.jpg" alt="vimtxt_vim_taglist_ars" width="720" height="854" srcset="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_taglist_ars.jpg 720w, https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_taglist_ars-252x300.jpg 252w" sizes="(max-width: 720px) 100vw, 720px" /></a></p>
+<p>自动文本完成(<strong>译者注</strong>：就是eclipse，visual studio中常见的输入前几个字符后面的内容通过列表显示的功能)是另外一种在IDE工具中常用特性，并且很多用户都希望在vim中有这些特性。这个特性已经在vim7中通过<a href="http://vim.wikia.com/wiki/Omni_completion">Omnicompletion system</a>被引入进来。它是可编程，这就意味着你可以通过定制，使的这个功能能在各种个样的编程语言中使用，在vim中甚至存在对动态语言python或ruby生效的自动文本完成功能。现在，自动文本完成的配置已经变成了vim包中的一个部分，所以现在你可以什么都不做就能让这个功能生效。要调出自动完成菜单(列表)，你需要敲下ctrl+x和ctrl+o键，接着你可以用ctrl+n和ctrl+p在可能完成列表中进行上下选择，当你移动到一个选项，vim将为你在另外一个Scratch区域显示带方法说明和属性的上下文帮助信息。<br />
+<a rel="attachment wp-att-897" href="https://coolshell.cn/?attachment_id=897"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-897" title="vimtxt_vim_completion_ars" src="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_completion_ars.jpg" alt="vimtxt_vim_completion_ars" width="708" height="850" srcset="https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_completion_ars.jpg 708w, https://coolshell.cn/wp-content/uploads/2009/05/vimtxt_vim_completion_ars-249x300.jpg 249w" sizes="(max-width: 708px) 100vw, 708px" /></a></p>
+<p>你可以多种方式来改善你的vim体验，<a href="http://vim.wikia.com/wiki/Main_Page">vim维基vim wiki</a>和<a href="http://www.vim.org/scripts/index.php">脚本库script repository</a>为你提供了可用于增强功能的第三方增强扩展集合。这些插件实现sinppet system，outlining tools，项目管理工具，和大量的其他的特性。同时还有大量的脚本实现了对某些特定编程语言和框架的增强。例如有一个<a href="http://www.vim.org/scripts/script.php?script_id=1567">非常流行的脚本</a>，这个脚本将会改善你Ruby的语法高亮，并且为你Ruby on Rail的部署提供了非常方便的导航特性</p>
+<p>同时也有一些<a href="http://cream.sourceforge.net/">面向新手的脚本集合</a>，这个集合使得vim的行为变得更像一个带有简单菜单和快捷键的传统的文本编辑器。如果你对vim那些神秘键盘命名感到不舒服的话，你可以选择这个作为你使用vim的开始。</p>
+<p>vim的多样性使得它满足不同的用户使用。对于那些没有时间，能力，和爱好去通过自己去建立一个完美vim配置的人来说，无数的第三方脚本和插件为你提供了一种简单的方式，通过这种方式你可以付出很少的努力就能得到你想要的功能和特性。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" alt="游戏：VIM大冒险" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_title">游戏：VIM大冒险</a></li><li ><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg" alt="主流文本编辑器学习曲线" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_title">主流文本编辑器学习曲线</a></li><li ><a href="https://coolshell.cn/articles/3083.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="三个教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3083.html" class="wp_rp_title">三个教程</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/894.html">将vim变得简单:如何在vim中得到你最喜爱的IDE特性</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/894.html/feed</wfw:commentRss>
+			<slash:comments>39</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>20非常有用的Java程序片段</title>
+		<link>https://coolshell.cn/articles/889.html</link>
+					<comments>https://coolshell.cn/articles/889.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 23 May 2009 07:09:36 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=889</guid>
+
+					<description><![CDATA[<p>下面是20个非常有用的Java程序片段，希望能对你有用。 1. 字符串有整型的相互转换   String a = String.valueOf(2);   //...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/889.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/889.html">20非常有用的Java程序片段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是20个非常有用的Java程序片段，希望能对你有用。</p>
+<p><strong>1. 字符串有整型的相互转换</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+String a = String.valueOf(2);   //integer to numeric string  
+int i = Integer.parseInt(a); //numeric string to an int 
+
+</pre>
+<p><span id="more-889"></span><br />
+<strong>2. 向文件末尾添加内容</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+BufferedWriter out = null;  
+try {  
+    out = new BufferedWriter(new FileWriter(”filename”, true));  
+    out.write(”aString”);  
+} catch (IOException e) {  
+    // error processing code  
+} finally {  
+    if (out != null) {  
+        out.close();  
+    }  
+} 
+</pre>
+<p><strong>3. 得到当前方法的名字</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+String methodName = Thread.currentThread().getStackTrace()[1].getMethodName(); 
+</pre>
+<p><strong>4. 转字符串到日期</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+java.util.Date = java.text.DateFormat.getDateInstance().parse(date String); 
+</pre>
+<p>或者是：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+SimpleDateFormat format = new SimpleDateFormat( &quot;dd.MM.yyyy&quot; );  
+Date date = format.parse( myString ); 
+</pre>
+<p><strong>5. 使用JDBC链接Oracle</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+public class OracleJdbcTest  
+{  
+    String driverClass = &quot;oracle.jdbc.driver.OracleDriver&quot;;  
+ 
+    Connection con;  
+ 
+    public void init(FileInputStream fs) throws ClassNotFoundException, SQLException, FileNotFoundException, IOException  
+    {  
+        Properties props = new Properties();  
+        props.load(fs);  
+        String url = props.getProperty(&quot;db.url&quot;);  
+        String userName = props.getProperty(&quot;db.user&quot;);  
+        String password = props.getProperty(&quot;db.password&quot;);  
+        Class.forName(driverClass);  
+ 
+        con=DriverManager.getConnection(url, userName, password);  
+    }  
+ 
+    public void fetch() throws SQLException, IOException  
+    {  
+        PreparedStatement ps = con.prepareStatement(&quot;select SYSDATE from dual&quot;);  
+        ResultSet rs = ps.executeQuery();  
+ 
+        while (rs.next())  
+        {  
+            // do the thing you do  
+        }  
+        rs.close();  
+        ps.close();  
+    }  
+ 
+    public static void main(String[] args)  
+    {  
+        OracleJdbcTest test = new OracleJdbcTest();  
+        test.init();  
+        test.fetch();  
+    }  
+} 
+</pre>
+<p><strong>6. 把 Java util.Date 转成 sql.Date</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+java.util.Date utilDate = new java.util.Date();  
+java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); 
+</pre>
+<p><strong>7. 使用NIO进行快速的文件拷贝</strong><br />
+ </p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+public static void fileCopy( File in, File out )  
+            throws IOException  
+    {  
+        FileChannel inChannel = new FileInputStream( in ).getChannel();  
+        FileChannel outChannel = new FileOutputStream( out ).getChannel();  
+        try 
+        {  
+//          inChannel.transferTo(0, inChannel.size(), outChannel);      // original -- apparently has trouble copying large files on Windows  
+ 
+            // magic number for Windows, 64Mb - 32Kb)  
+            int maxCount = (64 * 1024 * 1024) - (32 * 1024);  
+            long size = inChannel.size();  
+            long position = 0;  
+            while ( position &lt; size )  
+            {  
+               position += inChannel.transferTo( position, maxCount, outChannel );  
+            }  
+        }  
+        finally 
+        {  
+            if ( inChannel != null )  
+            {  
+               inChannel.close();  
+            }  
+            if ( outChannel != null )  
+            {  
+                outChannel.close();  
+            }  
+        }  
+    } 
+</pre>
+<p><strong>8. 创建图片的缩略图</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+private void createThumbnail(String filename, int thumbWidth, int thumbHeight, int quality, String outFilename)  
+        throws InterruptedException, FileNotFoundException, IOException  
+    {  
+        // load image from filename  
+        Image image = Toolkit.getDefaultToolkit().getImage(filename);  
+        MediaTracker mediaTracker = new MediaTracker(new Container());  
+        mediaTracker.addImage(image, 0);  
+        mediaTracker.waitForID(0);  
+        // use this to test for errors at this point: System.out.println(mediaTracker.isErrorAny());  
+ 
+        // determine thumbnail size from WIDTH and HEIGHT  
+        double thumbRatio = (double)thumbWidth / (double)thumbHeight;  
+        int imageWidth = image.getWidth(null);  
+        int imageHeight = image.getHeight(null);  
+        double imageRatio = (double)imageWidth / (double)imageHeight;  
+        if (thumbRatio &lt; imageRatio) {  
+            thumbHeight = (int)(thumbWidth / imageRatio);  
+        } else {  
+            thumbWidth = (int)(thumbHeight * imageRatio);  
+        }  
+ 
+        // draw original image to thumbnail image object and  
+        // scale it to the new size on-the-fly  
+        BufferedImage thumbImage = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_INT_RGB);  
+        Graphics2D graphics2D = thumbImage.createGraphics();  
+        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);  
+        graphics2D.drawImage(image, 0, 0, thumbWidth, thumbHeight, null);  
+ 
+        // save thumbnail image to outFilename  
+        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outFilename));  
+        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);  
+        JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(thumbImage);  
+        quality = Math.max(0, Math.min(quality, 100));  
+        param.setQuality((float)quality / 100.0f, false);  
+        encoder.setJPEGEncodeParam(param);  
+        encoder.encode(thumbImage);  
+        out.close();  
+    } 
+</pre>
+<p><strong>9. 创建 JSON 格式的数据</strong></p>
+<p>请先阅读<a href="http://viralpatel.net/blogs/2009/02/creating-parsing-json-data-with-java-servlet-struts-jsp-json.html"><span style="color: #366799;">这篇文章</span></a> 了解一些细节，<br />
+并下面这个JAR 文件：<a href="http://viralpatel.net/blogs/download/json/json-rpc-1.0.jar"><span style="color: #366799;">json-rpc-1.0.jar (75 kb)</span></a></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+import org.json.JSONObject;  
+...  
+...  
+JSONObject json = new JSONObject();  
+json.put(&quot;city&quot;, &quot;Mumbai&quot;);  
+json.put(&quot;country&quot;, &quot;India&quot;);  
+...  
+String output = json.toString();  
+... 
+</pre>
+<p><strong>10. 使用iText JAR生成PDF</strong></p>
+<p>阅读这篇<a href="http://viralpatel.net/blogs/2009/04/generate-pdf-file-in-java-using-itext-jar.html"><span style="color: #366799;">文章</span></a> 了解更多细节</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+import java.io.File;  
+import java.io.FileOutputStream;  
+import java.io.OutputStream;  
+import java.util.Date;  
+ 
+import com.lowagie.text.Document;  
+import com.lowagie.text.Paragraph;  
+import com.lowagie.text.pdf.PdfWriter;  
+ 
+public class GeneratePDF {  
+ 
+    public static void main(String[] args) {  
+        try {  
+            OutputStream file = new FileOutputStream(new File(&quot;C:\\Test.pdf&quot;));  
+ 
+            Document document = new Document();  
+            PdfWriter.getInstance(document, file);  
+            document.open();  
+            document.add(new Paragraph(&quot;Hello Kiran&quot;));  
+            document.add(new Paragraph(new Date().toString()));  
+ 
+            document.close();  
+            file.close();  
+ 
+        } catch (Exception e) {  
+ 
+            e.printStackTrace();  
+        }  
+    }  
+} 
+</pre>
+<p><strong>11. HTTP 代理设置</strong></p>
+<p>阅读这篇 <a href="http://viralpatel.net/blogs/2009/04/http-proxy-setting-java-setting-proxy-java.html"><span style="color: #366799;">文章</span></a> 了解更多细节。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+System.getProperties().put(&quot;http.proxyHost&quot;, &quot;someProxyURL&quot;);  
+System.getProperties().put(&quot;http.proxyPort&quot;, &quot;someProxyPort&quot;);  
+System.getProperties().put(&quot;http.proxyUser&quot;, &quot;someUserName&quot;);  
+System.getProperties().put(&quot;http.proxyPassword&quot;, &quot;somePassword&quot;); 
+</pre>
+<p><strong>12. 单实例Singleton 示例</strong></p>
+<p>请先阅读这篇<a href="http://viralpatel.net/blogs/2009/01/java-singleton-design-pattern-tutorial-example-singleton-j2ee-design-pattern.html"><span style="color: #366799;">文章</span></a> 了解更多信息</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+public class SimpleSingleton {  
+    private static SimpleSingleton singleInstance =  new SimpleSingleton();  
+ 
+    //Marking default constructor private  
+    //to avoid direct instantiation.  
+    private SimpleSingleton() {  
+    }  
+ 
+    //Get instance for class SimpleSingleton  
+    public static SimpleSingleton getInstance() {  
+ 
+        return singleInstance;  
+    }  
+} 
+</pre>
+<p>另一种实现</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+public enum SimpleSingleton {  
+    INSTANCE;  
+    public void doSomething() {  
+    }  
+}  
+ 
+//Call the method from Singleton:  
+SimpleSingleton.INSTANCE.doSomething(); 
+</pre>
+<p><strong>13. 抓屏程序</strong></p>
+<p>阅读这篇<a href="http://viralpatel.net/blogs/2009/01/how-to-take-screen-shots-in-java-taking-screenshots-java.html"><span style="color: #366799;">文章</span></a> 获得更多信息。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+import java.awt.Dimension;  
+import java.awt.Rectangle;  
+import java.awt.Robot;  
+import java.awt.Toolkit;  
+import java.awt.image.BufferedImage;  
+import javax.imageio.ImageIO;  
+import java.io.File;  
+ 
+...  
+ 
+public void captureScreen(String fileName) throws Exception {  
+ 
+   Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  
+   Rectangle screenRectangle = new Rectangle(screenSize);  
+   Robot robot = new Robot();  
+   BufferedImage image = robot.createScreenCapture(screenRectangle);  
+   ImageIO.write(image, &quot;png&quot;, new File(fileName));  
+ 
+}  
+... 
+</pre>
+<p> </p>
+<p> </p>
+<p><strong>14. 列出文件和目录</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+File dir = new File(&quot;directoryName&quot;);  
+  String[] children = dir.list();  
+  if (children == null) {  
+      // Either dir does not exist or is not a directory  
+  } else {  
+      for (int i=0; i &lt; children.length; i++) {  
+          // Get filename of file or directory  
+          String filename = children[i];  
+      }  
+  }  
+ 
+  // It is also possible to filter the list of returned files.  
+  // This example does not return any files that start with `.&#039;.  
+  FilenameFilter filter = new FilenameFilter() {  
+      public boolean accept(File dir, String name) {  
+          return !name.startsWith(&quot;.&quot;);  
+      }  
+  };  
+  children = dir.list(filter);  
+ 
+  // The list of files can also be retrieved as File objects  
+  File[] files = dir.listFiles();  
+ 
+  // This filter only returns directories  
+  FileFilter fileFilter = new FileFilter() {  
+      public boolean accept(File file) {  
+          return file.isDirectory();  
+      }  
+  };  
+  files = dir.listFiles(fileFilter); 
+</pre>
+<p><strong>15. 创建ZIP和JAR文件<br />
+</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+import java.util.zip.*;  
+import java.io.*;  
+ 
+public class ZipIt {  
+    public static void main(String args[]) throws IOException {  
+        if (args.length &lt; 2) {  
+            System.err.println(&quot;usage: java ZipIt Zip.zip file1 file2 file3&quot;);  
+            System.exit(-1);  
+        }  
+        File zipFile = new File(args[0]);  
+        if (zipFile.exists()) {  
+            System.err.println(&quot;Zip file already exists, please try another&quot;);  
+            System.exit(-2);  
+        }  
+        FileOutputStream fos = new FileOutputStream(zipFile);  
+        ZipOutputStream zos = new ZipOutputStream(fos);  
+        int bytesRead;  
+        byte[] buffer = new byte[1024];  
+        CRC32 crc = new CRC32();  
+        for (int i=1, n=args.length; i &lt; n; i++) {  
+            String name = args[i];  
+            File file = new File(name);  
+            if (!file.exists()) {  
+                System.err.println(&quot;Skipping: &quot; + name);  
+                continue;  
+            }  
+            BufferedInputStream bis = new BufferedInputStream(  
+                new FileInputStream(file));  
+            crc.reset();  
+            while ((bytesRead = bis.read(buffer)) != -1) {  
+                crc.update(buffer, 0, bytesRead);  
+            }  
+            bis.close();  
+            // Reset to beginning of input stream  
+            bis = new BufferedInputStream(  
+                new FileInputStream(file));  
+            ZipEntry entry = new ZipEntry(name);  
+            entry.setMethod(ZipEntry.STORED);  
+            entry.setCompressedSize(file.length());  
+            entry.setSize(file.length());  
+            entry.setCrc(crc.getValue());  
+            zos.putNextEntry(entry);  
+            while ((bytesRead = bis.read(buffer)) != -1) {  
+                zos.write(buffer, 0, bytesRead);  
+            }  
+            bis.close();  
+        }  
+        zos.close();  
+    }  
+} 
+</pre>
+<p><strong>16. 解析/读取XML 文件</strong></p>
+<p>XML文件<br />
+ </p>
+<pre data-enlighter-language="xml" class="EnlighterJSRAW">
+&lt;?xml version=&quot;1.0&quot;?&gt; 
+&lt;students&gt; 
+    &lt;student&gt; 
+        &lt;name&gt;John&lt;/name&gt; 
+        &lt;grade&gt;B&lt;/grade&gt; 
+        &lt;age&gt;12&lt;/age&gt; 
+    &lt;/student&gt; 
+    &lt;student&gt; 
+        &lt;name&gt;Mary&lt;/name&gt; 
+        &lt;grade&gt;A&lt;/grade&gt; 
+        &lt;age&gt;11&lt;/age&gt; 
+    &lt;/student&gt; 
+    &lt;student&gt; 
+        &lt;name&gt;Simon&lt;/name&gt; 
+        &lt;grade&gt;A&lt;/grade&gt; 
+        &lt;age&gt;18&lt;/age&gt; 
+    &lt;/student&gt; 
+&lt;/students&gt; 
+</pre>
+<p>Java代码</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+package net.viralpatel.java.xmlparser;  
+ 
+import java.io.File;  
+import javax.xml.parsers.DocumentBuilder;  
+import javax.xml.parsers.DocumentBuilderFactory;  
+ 
+import org.w3c.dom.Document;  
+import org.w3c.dom.Element;  
+import org.w3c.dom.Node;  
+import org.w3c.dom.NodeList;  
+ 
+public class XMLParser {  
+ 
+    public void getAllUserNames(String fileName) {  
+        try {  
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
+            DocumentBuilder db = dbf.newDocumentBuilder();  
+            File file = new File(fileName);  
+            if (file.exists()) {  
+                Document doc = db.parse(file);  
+                Element docEle = doc.getDocumentElement();  
+ 
+                // Print root element of the document  
+                System.out.println(&quot;Root element of the document: &quot; 
+                        + docEle.getNodeName());  
+ 
+                NodeList studentList = docEle.getElementsByTagName(&quot;student&quot;);  
+ 
+                // Print total student elements in document  
+                System.out  
+                        .println(&quot;Total students: &quot; + studentList.getLength());  
+ 
+                if (studentList != null &amp;&amp; studentList.getLength() &gt; 0) {  
+                    for (int i = 0; i &lt; studentList.getLength(); i++) {  
+ 
+                        Node node = studentList.item(i);  
+ 
+                        if (node.getNodeType() == Node.ELEMENT_NODE) {  
+ 
+                            System.out  
+                                    .println(&quot;=====================&quot;);  
+ 
+                            Element e = (Element) node;  
+                            NodeList nodeList = e.getElementsByTagName(&quot;name&quot;);  
+                            System.out.println(&quot;Name: &quot; 
+                                    + nodeList.item(0).getChildNodes().item(0)  
+                                            .getNodeValue());  
+ 
+                            nodeList = e.getElementsByTagName(&quot;grade&quot;);  
+                            System.out.println(&quot;Grade: &quot; 
+                                    + nodeList.item(0).getChildNodes().item(0)  
+                                            .getNodeValue());  
+ 
+                            nodeList = e.getElementsByTagName(&quot;age&quot;);  
+                            System.out.println(&quot;Age: &quot; 
+                                    + nodeList.item(0).getChildNodes().item(0)  
+                                            .getNodeValue());  
+                        }  
+                    }  
+                } else {  
+                    System.exit(1);  
+                }  
+            }  
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }  
+    }  
+    public static void main(String[] args) {  
+ 
+        XMLParser parser = new XMLParser();  
+        parser.getAllUserNames(&quot;c:\\test.xml&quot;);  
+    }  
+} 
+</pre>
+<p><strong>17. 把 Array 转换成 Map </strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+import java.util.Map;  
+import org.apache.commons.lang.ArrayUtils;  
+ 
+public class Main {  
+ 
+  public static void main(String[] args) {  
+    String[][] countries = { { &quot;United States&quot;, &quot;New York&quot; }, { &quot;United Kingdom&quot;, &quot;London&quot; },  
+        { &quot;Netherland&quot;, &quot;Amsterdam&quot; }, { &quot;Japan&quot;, &quot;Tokyo&quot; }, { &quot;France&quot;, &quot;Paris&quot; } };  
+ 
+    Map countryCapitals = ArrayUtils.toMap(countries);  
+ 
+    System.out.println(&quot;Capital of Japan is &quot; + countryCapitals.get(&quot;Japan&quot;));  
+    System.out.println(&quot;Capital of France is &quot; + countryCapitals.get(&quot;France&quot;));  
+  }  
+} 
+</pre>
+<p><strong>18. 发送邮件</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+import javax.mail.*;  
+import javax.mail.internet.*;  
+import java.util.*;  
+ 
+public void postMail( String recipients[ ], String subject, String message , String from) throws MessagingException  
+{  
+    boolean debug = false;  
+ 
+     //Set the host smtp address  
+     Properties props = new Properties();  
+     props.put(&quot;mail.smtp.host&quot;, &quot;smtp.example.com&quot;);  
+ 
+    // create some properties and get the default Session  
+    Session session = Session.getDefaultInstance(props, null);  
+    session.setDebug(debug);  
+ 
+    // create a message  
+    Message msg = new MimeMessage(session);  
+ 
+    // set the from and to address  
+    InternetAddress addressFrom = new InternetAddress(from);  
+    msg.setFrom(addressFrom);  
+ 
+    InternetAddress[] addressTo = new InternetAddress[recipients.length];  
+    for (int i = 0; i &lt; recipients.length; i++)  
+    {  
+        addressTo[i] = new InternetAddress(recipients[i]);  
+    }  
+    msg.setRecipients(Message.RecipientType.TO, addressTo);  
+ 
+    // Optional : You can also set your custom headers in the Email if you Want  
+    msg.addHeader(&quot;MyHeaderName&quot;, &quot;myHeaderValue&quot;);  
+ 
+    // Setting the Subject and Content Type  
+    msg.setSubject(subject);  
+    msg.setContent(message, &quot;text/plain&quot;);  
+    Transport.send(msg);  
+} 
+</pre>
+<p><strong>19. 发送代数据的HTTP 请求</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+import java.io.BufferedReader;  
+import java.io.InputStreamReader;  
+import java.net.URL;  
+ 
+public class Main {  
+    public static void main(String[] args)  {  
+        try {  
+            URL my_url = new URL(&quot;https://coolshell.cn/&quot;);  
+            BufferedReader br = new BufferedReader(new InputStreamReader(my_url.openStream()));  
+            String strTemp = &quot;&quot;;  
+            while(null != (strTemp = br.readLine())){  
+            System.out.println(strTemp);  
+        }  
+        } catch (Exception ex) {  
+            ex.printStackTrace();  
+        }  
+    }  
+}
+</pre>
+<p><strong>20. 改变数组的大小</strong></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW"> 
+/** 
+* Reallocates an array with a new size, and copies the contents 
+* of the old array to the new array. 
+* @param oldArray  the old array, to be reallocated. 
+* @param newSize   the new array size. 
+* @return          A new array with the same contents. 
+*/ 
+private static Object resizeArray (Object oldArray, int newSize) {  
+   int oldSize = java.lang.reflect.Array.getLength(oldArray);  
+   Class elementType = oldArray.getClass().getComponentType();  
+   Object newArray = java.lang.reflect.Array.newInstance(  
+         elementType,newSize);  
+   int preserveLength = Math.min(oldSize,newSize);  
+   if (preserveLength &gt; 0)  
+      System.arraycopy (oldArray,0,newArray,0,preserveLength);  
+   return newArray;  
+}  
+ 
+// Test routine for resizeArray().  
+public static void main (String[] args) {  
+   int[] a = {1,2,3};  
+   a = (int[])resizeArray(a,5);  
+   a[3] = 4;  
+   a[4] = 5;  
+   for (int i=0; i&lt;a.length; i++)  
+      System.out.println (a[i]);  
+}
+</pre>
+<p><strong>(全文完)</strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="面向GC的Java编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11541.html" class="wp_rp_title">面向GC的Java编程</a></li><li ><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="从LongAdder看更高效的无锁实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11454.html" class="wp_rp_title">从LongAdder看更高效的无锁实现</a></li><li ><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/cow-copy-150x150.jpg" alt="Java中的CopyOnWrite容器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11175.html" class="wp_rp_title">Java中的CopyOnWrite容器</a></li><li ><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/图1-3-150x150.jpg" alt="无锁HashMap的原理与实现" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9703.html" class="wp_rp_title">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/889.html">20非常有用的Java程序片段</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/889.html/feed</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>几个有意思的漫画</title>
+		<link>https://coolshell.cn/articles/880.html</link>
+					<comments>https://coolshell.cn/articles/880.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 21 May 2009 15:07:47 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=880</guid>
+
+					<description><![CDATA[<p>软件Bug和软件Feature的差别 注释：有时候bug和feature的差别就是bug长得难看了一些。   一个理解流程图的指南 什么叫极限编程 注释，对话翻...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/880.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/880.html">几个有意思的漫画</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<h4>软件Bug和软件Feature的差别</h4>
+<p>注释：有时候bug和feature的差别就是bug长得难看了一些。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/05/bug-feature.jpg"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-882" title="bug-feature" src="https://coolshell.cn/wp-content/uploads/2009/05/bug-feature-300x225.jpg" alt="bug-feature" width="300" height="225" srcset="https://coolshell.cn/wp-content/uploads/2009/05/bug-feature-300x225.jpg 300w, https://coolshell.cn/wp-content/uploads/2009/05/bug-feature-768x576.jpg 768w, https://coolshell.cn/wp-content/uploads/2009/05/bug-feature-360x270.jpg 360w, https://coolshell.cn/wp-content/uploads/2009/05/bug-feature.jpg 800w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p><span id="more-880"></span></p>
+<p> </p>
+<h4>一个理解流程图的指南</h4>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/05/flow_charts.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-884" title="flow_charts" src="https://coolshell.cn/wp-content/uploads/2009/05/flow_charts.png" alt="flow_charts" width="740" height="534" srcset="https://coolshell.cn/wp-content/uploads/2009/05/flow_charts.png 740w, https://coolshell.cn/wp-content/uploads/2009/05/flow_charts-300x216.png 300w" sizes="(max-width: 740px) 100vw, 740px" /></a></p>
+<h4>什么叫极限编程</h4>
+<p>注释，对话翻译——</p>
+<p>1）程序员：我不能在第一个版本给你所有的的功能。<br />
+2）程序员：并且，每个功能需要有一个所谓的“用户案例（User Story）”<br />
+3）用户：好吧，我告诉你一个“用户案例”——我要所有的功能，不然我就毁了你的生活。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/05/extreme-programming.gif"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-883" title="extreme-programming" src="https://coolshell.cn/wp-content/uploads/2009/05/extreme-programming.gif" alt="extreme-programming" width="600" height="212" srcset="https://coolshell.cn/wp-content/uploads/2009/05/extreme-programming.gif 600w, https://coolshell.cn/wp-content/uploads/2009/05/extreme-programming-300x106.gif 300w" sizes="(max-width: 600px) 100vw, 600px" /></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/05/bug-feature.jpg"></a><a href="https://coolshell.cn/wp-content/uploads/2009/05/bug-feature.jpg"></a></p>
+<h4>如何衡量好的代码</h4>
+<p>注释：下图中用“代码审核”流程中的每分钟出现“脏话”的个数来衡量代码的质量。（WTF is stand for “What the F**K”）</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/05/measurement-of-code-quality.jpg"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-881" title="measurement-of-code-quality" src="https://coolshell.cn/wp-content/uploads/2009/05/measurement-of-code-quality.jpg" alt="measurement-of-code-quality" width="500" height="471" srcset="https://coolshell.cn/wp-content/uploads/2009/05/measurement-of-code-quality.jpg 500w, https://coolshell.cn/wp-content/uploads/2009/05/measurement-of-code-quality-300x282.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg" alt="主流文本编辑器学习曲线" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_title">主流文本编辑器学习曲线</a></li><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li><li ><a href="https://coolshell.cn/articles/7048.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/11_154056_1-300x225-1-150x150.jpg" alt="挑战无处不在" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7048.html" class="wp_rp_title">挑战无处不在</a></li><li ><a href="https://coolshell.cn/articles/6668.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/joo_1-150x150.png" alt="再谈javascript面向对象编程 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6668.html" class="wp_rp_title">再谈javascript面向对象编程 </a></li><li ><a href="https://coolshell.cn/articles/3100.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/language-evolution-150x150.jpg" alt="编程语言进化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3100.html" class="wp_rp_title">编程语言进化</a></li><li ><a href="https://coolshell.cn/articles/3549.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="Android将允许纯C/C++开发应用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3549.html" class="wp_rp_title">Android将允许纯C/C++开发应用</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/880.html">几个有意思的漫画</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/880.html/feed</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个C的序列化库tpl</title>
+		<link>https://coolshell.cn/articles/878.html</link>
+					<comments>https://coolshell.cn/articles/878.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 21 May 2009 14:54:21 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[tpl]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=878</guid>
+
+					<description><![CDATA[<p>tpl(http://tpl.sourceforge.net/)是一个开源的小项目，其主要是提供一个可以序列化或反序列化C语言数据的一个API函数库。tpl号称...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/878.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/878.html">一个C的序列化库tpl</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>tpl(<a href="http://tpl.sourceforge.net/">http://tpl.sourceforge.net/</a>)是一个开源的小项目，其主要是提供一个可以序列化或反序列化C语言数据的一个API函数库。tpl号称是最有效率的也是最快的，它可以把你内存中的数据存放到文件中，并可以在你需要的时候用文件中反序例化到内存变量中。而且这个函数库没有依赖于别的函数库。</p>
+<p>下面是一个简单的示例（来源于其主页）</p>
+<p>把一个数组（“序号”和“人名”）序例化到文件中。</p>
+<p><span id="more-878"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &quot;tpl.h&quot;
+
+int main(int argc, char *argv[]) {
+    tpl_node *tn;
+    int id=0;
+    char *name, *names[] = { &quot;joe&quot;, &quot;bob&quot;, &quot;cary&quot; };
+
+    tn = tpl_map(&quot;A(is)&quot;, &amp;id, &amp;name);
+
+    for(name=names[0]; id &lt; 3; name=names[++id]) {
+        tpl_pack(tn,1);
+    }
+
+    tpl_dump(tn, TPL_FILE, &quot;users.tpl&quot;);
+    tpl_free(tn);
+}
+</pre>
+<p>把上面那个序列化到文件的“序号”和“人名”反序列化回来。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &quot;tpl.h&quot;
+
+int main(int argc, char *argv[]) {
+    tpl_node *tn;
+    int id;
+    char *name;
+
+    tn = tpl_map(&quot;A(is)&quot;, &amp;id, &amp;name);
+    tpl_load(tn, TPL_FILE, &quot;users.tpl&quot;);
+
+    while ( tpl_unpack(tn,1) &gt; 0 ) {
+        printf(&quot;id %d, user %s\n&quot;, id, name);
+        free(name);
+    }
+    tpl_free(tn);
+}
+</pre>
+<p>更详细的使用说明请看其文档：<br />
+<a href="http://tpl.sourceforge.net/userguide.html">http://tpl.sourceforge.net/userguide.html</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/878.html">一个C的序列化库tpl</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/878.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>谁说C语言很简单？</title>
+		<link>https://coolshell.cn/articles/873.html</link>
+					<comments>https://coolshell.cn/articles/873.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 19 May 2009 14:10:25 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=873</guid>
+
+					<description><![CDATA[<p>前两天，Neo写了一篇《语言的歧义》其使用C语言讨论了一些语言的歧义。大家应该也顺便了解了一下C语言中的很多不可思异的东西，可能也是你从未注意到的东西。 是的，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/873.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/873.html">谁说C语言很简单？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p class="li-enumerate">前两天，Neo写了一篇《<a href="https://coolshell.cn/articles/830.html">语言的歧义</a>》其使用C语言讨论了一些语言的歧义。大家应该也顺便了解了一下C语言中的很多不可思异的东西，可能也是你从未注意到的东西。</p>
+<p class="li-enumerate">是的，C语言并不简单，让我们来看看下面这些示例：</p>
+<ol class="enumerate" type="1">
+<li class="li-enumerate"><strong>为什么下面的代码会返回0？(这题应该很简单吧)<br />
+</strong></p>
+<pre class="verbatim"><span style="color: #0000ff;">  int x;
+  return x == (1 &amp;&amp; x);
+</span></pre>
+<p>本题主要是关于C/C++中变量初始化的问题。</li>
+<p><span id="more-873"></span></p>
+<li class="li-enumerate"><strong>为什么下面的代码会返回0而不是-1？</strong>
+<pre class="verbatim"><span style="color: #0000ff;"> return ((1 - sizeof(int)) &gt;&gt; 32);
+</span></pre>
+<p>答案：<tt>sizeof</tt> 是一个unsigned的类型，所以……</li>
+<li class="li-enumerate"><strong>代码作用域是一件很诡异的事，下面这个函数返回值是什么？<br />
+</strong></p>
+<pre class="verbatim"><span style="color: #0000ff;">int x = 5;
+int f() {
+  int x = 3;
+  {
+    extern int x;
+    return x;
+  }
+}
+</span></pre>
+<p>答案：5</li>
+<li class="li-enumerate"><strong>函数和函数指针可以相互转换。下面的语句哪些是合法的？<br />
+</strong></p>
+<pre class="verbatim"><span style="color: #0000ff;">int (*pf)(void);
+int f(void)
+{
+
+   pf = &amp;f; <span style="color: #008000;">// 没问题</span>
+   pf = ***f; <span style="color: #008000;">// 取址？</span>
+   pf(); <span style="color: #008000;">// 函数指针可以调用？
+</span>   (****pf)();  <span style="color: #008000;">// 这又是什么？</span>
+   (***************f)(); <span style="color: #008000;">// 这个够变态了吧？</span>
+}
+</span></pre>
+<p>答案：全部合法。</li>
+<li class="li-enumerate"><strong>初始化可能是ISO C中最难的部分了。无论是MSVC 还是GCC 都没有完全实现。GCC 可能更接近标准。在下面的代码中，<tt>i.nested.y</tt> 和<tt>i.nested.z的最终值是什么？</tt></strong>
+<pre class="verbatim"><span style="color: #0000ff;">struct {
+   int x;
+   struct {
+       int y, z;
+   } nested;
+} i = { .nested.y = 5, 6, .x = 1, 2 };
+</span></pre>
+<p>答案：2和6</li>
+<li class="li-enumerate"><strong>下面这个示例是C语言的痛，main函数返回值是什么？</strong>
+<pre class="verbatim"><span style="color: #0000ff;">typedef struct
+{
+  char *key;
+  char *value;
+} T1;
+
+typedef struct
+{
+  long type;
+  char *value;
+} T3;
+
+T1 a[] =
+{
+  {
+    "",
+    ((char *)&amp;((T3) {1, (char *) 1}))
+  }
+};
+int main() {
+   T3 *pt3 = (T3*)a[0].value;
+   return pt3-&gt;value;
+}
+</span></pre>
+<p>答案：1（你知道为什么吗？）</li>
+<li class="li-enumerate"><strong>下面这个例就更变态了。在GCC的文档中，这个语法是合法的，但是不知道为什么GCC并没有实现。下面的代码返回 2.</strong>
+<pre class="verbatim"><span style="color: #0000ff;"> return ((int []){1,2,3,4})[1];
+</span></pre>
+<p> </li>
+<li class="li-enumerate"><strong>在下面的这个示例中，有一个“bar” 函数及其函数指针 “pbar” 的两个拷贝(static 类型一般作用于语句块或文件域).</strong>
+<pre class="verbatim"><span style="color: #0000ff;">  int foo() {
+     static bar();
+     static (*pbar)() = bar;
+
+  }
+
+  static bar() {
+    return 1;
+  }
+
+  static (*pbar)() = 0;
+</span></pre>
+<p> </li>
+<li class="li-enumerate"><strong>下面的这个函数返回值是什么？取决于编译器是先处理unsigned long转型，还是负号。</strong>
+<pre class="verbatim"><span style="color: #0000ff;">  unsigned long foo() {
+    return (unsigned long) - 1 / 8;
+  }
+</span></pre>
+<p>如果是： <tt>((unsigned long) - 1) / 8，那将是一个很大的数。<br />
+</tt><tt>如果是：</tt> <tt>(unsigned long) (- 1 / 8 )</tt>, 那将是 0</li>
+</ol>
+<p class="li-enumerate">是的，这样使用C语言可能很奇怪，不过我们可以从另一方面了解C语言的很多我们不常注意的特性。C语言其实并不容易。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/873.html">谁说C语言很简单？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/873.html/feed</wfw:commentRss>
+			<slash:comments>40</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Web设计的速查卡</title>
+		<link>https://coolshell.cn/articles/870.html</link>
+					<comments>https://coolshell.cn/articles/870.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 19 May 2009 13:43:19 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[XHTML]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=870</guid>
+
+					<description><![CDATA[<p>速查卡不仅仅可能帮助我们记住一些重要的东西，而且可以放在手边，当我们需要的时候，可以很快地查找。 在本篇文章中，你可以看到28个相当不错的关于Web设计的速查卡...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/870.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/870.html">Web设计的速查卡</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>速查卡不仅仅可能帮助我们记住一些重要的东西，而且可以放在手边，当我们需要的时候，可以很快地查找。</p>
+<p>在本篇文章中，你可以看到28个相当不错的关于Web设计的速查卡，它们分别是关于：<strong>Photoshop, Dreamweaver, 颜色, 排版,</strong>和<strong> 其它Web设计相关的。</strong>他们都是一页纸，可以方便你很快地打印出来。</p>
+<h3>Photoshop</h3>
+<h4><a title="Trevor Morris Photographics - Adobe Photoshop Keyboard Shortcuts" href="http://morris-photographics.com/photoshop/shortcuts/#pscs3">Photoshop CS3 快捷键速查卡</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-01_cs3_keyboard_shortcuts.png" alt="Photoshop CS3 Keyboard Shortcuts Cheat Sheet - screen shot." width="550" height="250" /><span class="figure-caption">Downloads: <a title="PDF Download - For Windows" href="http://morris-photographics.com/photoshop/shortcuts/downloads/PSCS3_Keyboard_Shortcuts_PC.pdf">PDF (Windows)</a>, <a title="PDF Download - for Mac" href="http://morris-photographics.com/photoshop/shortcuts/downloads/PSCS3_Keyboard_Shortcuts_Mac.pdf">PDF (Mac)</a></span></p>
+<p><span class="figure-caption"><span id="more-870"></span></span></p>
+<p> </p>
+<h4><a title="Adobe - Keys for using the Layers palette" href="http://livedocs.adobe.com/en_US/Photoshop/10.0/help.html?content=WS7D245964-27B4-403e-82D5-DDD1CB19A82B.html">关于调色板的一些热键</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-02_keys_for_using_layers.png" alt="Keys for using the Layers palette - screen shot." width="550" height="250" /></p>
+<h4><a href="http://simplephotoshop.com/photoshop_tools/index.htm">Photoshop 工具栏速查</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-03_photoshop_toolbox_reference.png" alt="Photoshop Toolbox Reference - screen shot" width="550" height="250" /></p>
+<h4><a title="CreativeIQ - Staging: Photoshop Lasso Tool Cheatsheet." href="http://www.creativetechs.com/iq-staging/photoshop_lasso_tool_cheatshee.html">Photoshop 套索工具速查</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-04_lasso_tool_cheatsheet.png" alt="Photoshop Lasso Tool Cheatsheet - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a title="PDF Download - Photoshop Lasso Tool Cheatsheet" href="http://creativetechs.com/tips/tip_resources/cheatsheets/Photoshop-Lasso-Cheatsheet.pdf">PDF</a></span></p>
+<h4><a title="CreativeTechs - Photoshop Brush Tool Cheatsheet" href="http://www.creativetechs.com/iq/photoshop_brush_tool_cheatsheet.html">Photoshop 笔刷工作速查</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-05_brush_tool_cheatsheet.png" alt="Photoshop Brush Tool Cheatsheet - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a title="PDF Download - Photoshop Brush Tool Cheatsheet" href="http://creativetechs.com/tips/tip_resources/cheatsheets/Photoshop-Brush-Cheatsheet.pdf">PDF</a></span></p>
+<h3> </h3>
+<h3>颜色</h3>
+<h4><a title="Added Bytes - RGB Hex Colour Chart" href="http://www.addedbytes.com/cheat-sheets/colour-chart/">RGB 十六进制表</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-06_rgb_color_codes.png" alt="RGB Hex Colour Chart - Screen shot." width="550" height="250" /><span class="figure-caption">Downloads: <a title="PDF Download" href="http://www.addedbytes.com/download/rgb-hex-cheat-sheet-v1/pdf/">PDF</a>, <a title="PNG Download" href="http://www.addedbytes.com/download/rgb-hex-cheat-sheet-v1/png/">PNG</a></span></p>
+<h4><a href="http://www.veign.com/downloads/guides/qrg0006.pdf">颜色速查</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-07_veign_color_reference_guide.png" alt="Color Reference Guide - screen shot." width="550" height="250" /></p>
+<h4><a title="Visibone - Web Designer's Color Reference Hexagon Mouse Pad" href="http://www.visibone.com/color/hexagon3x.html">Web设计颜色</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-08_hexagon_moust.png" alt="Web Designer Color Reference Hexagon Mouse Pad - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a title="GIF Download - Hexagon_800.gif" href="http://www.visibone.com/color/hexagon_800.gif">GIF</a></span></p>
+<h4><a title="Page Tutor - 216 color chart" href="http://www.pagetutor.com/common/bgcolors216.html">Web 安全颜色表</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-09_web_safe_color_chart.png" alt="Web Safe Color Chart - screen shot." width="550" height="250" /></p>
+<h4><a href="http://www.funky-chickens.com/hex.html">十六进制颜色表</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-10_funky_chicken.png" alt="Hexidecimal Color Chart - screen shot." width="550" height="250" /></p>
+<h4><a href="http://www.cookwood.com/html4_4e/examples/appendices/colorcharthex.html"> 浏览器颜色表</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-11_the_browser_safe_colors.png" alt="The Browser Safe Colors - screen shot." width="550" height="250" /></p>
+<h3> </h3>
+<h3>排版</h3>
+<h4><a title="Visibone - VisiBone Font Card" href="http://www.visibone.com/font/">VisiBone Font Card</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-12_font_chart.png" alt="VisiBone Font Card - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a href="http://www.visibone.com/font/fcht_874.gif">GIF</a></span></p>
+<h4><a href="http://www.ampsoft.net/webdesign-l/WindowsMacFonts.html">常用字体表 </a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-13_windows_font.png" alt="Common fonts to all versions of Windows &amp; Mac equivalents - screen shot." width="550" height="250" /></p>
+<h4><a title="PDF Download - Mixing Typefaces" href="http://www.as8.it/handouts/mixing-typefaces_U&amp;lc1992.pdf">混合字体</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-14_mixing_typefaces.png" alt="Free Fonts Cheat Sheet - screen shot." width="550" height="250" /></p>
+<h3>单元/尺寸</h3>
+<h4><a title="Reed Design - Approximate Conversion from Points to Pixels" href="http://www.reeddesign.co.uk/test/points-pixels.html">Points 和Pixels近似转换表</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-15_approximate_conversion.png" alt="Approximate Conversion from Points to Pixels - screen shot." width="550" height="250" /></p>
+<h4><a title="Design215 - megapixels comparison and maximum print size charts" href="http://www.design215.com/toolbox/megapixels.php">Megapixels 表</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-16_megapixels_chart.png" alt="Megapixels Chart - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a title="GIF Download - Megapixels Chart" href="http://www.design215.com/toolbox/images/megapixels.gif">GIF</a></span></p>
+<h3>CSS/CSS 框架</h3>
+<h4><a title="The Montoya Herald - Blueprint CSS Cheat Sheet" href="http://www.christianmontoya.com/2007/11/12/blueprint-css-cheat-sheet/">Blueprint CSS 速查卡</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-17_blueprint_css.png" alt="Blueprint CSS Cheat Sheet - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a title="PDF Download - Blueprint CSS Cheat Sheet" href="http://www.digitart.net/blueprintcss/bluebrintcss.pdf">PDF</a></span></p>
+<h4><a title="YUI Library - CSS Reset, Base, Fonts, and Grids" href="http://yuiblog.com/assets/pdf/cheatsheets/css.pdf">YUI Library: CSS Reset, Base, Fonts, and Grids</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-18_yui_library.png" alt="YUI Library: CSS Reset, Base, Fonts, and Grids - screen shot." width="550" height="250" /></p>
+<h4><a href="http://www.eddiewelker.com/wp-content/uploads/2007/09/csscheatsheet.pdf">CSS 速查卡</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-19_css_shorthand_cheat_sheet.png" alt="CSS Shorthand Cheat Sheet - screen shot." width="550" height="250" /></p>
+<h4><a title="Apple Dashboard Widgets - CSS Cheat Sheet" href="http://www.apple.com/downloads/dashboard/developer/csscheatsheet.html">Apple’s CSS 速查卡</a> (Mac Dashboard Widget)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-20_apple_css_cheat_sheet.jpg" alt="Apple's CSS Cheat Sheet Widget - screen shot." width="550" height="250" /></p>
+<h3>HTML/XHTML</h3>
+<h4><a href="http://home.uchicago.edu/~gan/file/html.pdf">HTML &amp; XHTML 标识速查</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-21_html_xhtml_quick_ref.png" alt="HTML &amp; XHTML Tag Quick Reference - screen shot." width="550" height="250" /></p>
+<h4><a href="http://www.html.su/entities.html">HTML/XHTML 特殊字符表</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-22_xhtml_character_entitites.png" alt="HTML/XHTML Character Entities - screen shot." width="550" height="250" /></p>
+<h4><a href="http://www.digitalmediaminute.com/reference/entity/index.php">XHTML 特殊字符</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-23_html_xhtml_character.png" alt="XHTML Character Entity Reference - screen shot." width="550" height="250" /></p>
+<h3>Dreamweaver</h3>
+<h4><a href="http://www.uwsp.edu/it/ApplicationSupport/appSuppDocsImages/referenceGuides/dreamweaver-quick-reference-cs3.pdf">Dreamweaver 快速索引</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-24_dreamweaver_quick_reference.png" alt="Dreamweaver Quick Reference Guide - screen shot." width="550" height="250" /></p>
+<h4><a href="http://daviddiskin.com/documents/Dreamweaver%20CS3%20for%20Mac.pdf">Dreamweaver CS3 for Mac Quick Reference Card</a> (PDF)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-25_dreamweaver_cs3_mac.png" alt="Dreamweaver CS3 for Mac Quick Reference Card - screen shot." width="550" height="250" /></p>
+<h3>Illustrator</h3>
+<h4><a href="http://www.nobledesktop.com/shortcuts-illustratorcs2-mac.html">Adobe Illustrator CS2 热键– MAC</a></h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-26_illustrator.png" alt="Adobe Illustrator CS2 Keyboard Shortcuts – MAC - screen shot." width="550" height="250" /><span class="figure-caption">Download: <a href="http://www.nobledesktop.com/download/shortcut_guides/illustrator_cs2_shortcuts_mac.pdf">PDF</a></span></p>
+<h3>Browsers</h3>
+<h4><a href="http://centricle.com/ref/css/filters/?highlight_columns=true">浏览器兼容性表</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-27_browser_rules.png" alt="Will the browser apply the rule(s)? - screen shot." width="550" height="250" /></p>
+<h4><a href="http://www.quirksmode.org/dom/compatibility.html#t00">W3C DOM 兼容性表</a> (HTML)</h4>
+<p><img decoding="async" loading="lazy" src="http://images.sixrevisions.com/2008/09/07-28_w3c_dom_compatibility.png" alt="W3C DOM Compatibility Tables - screen shot." width="550" height="250" /></p>
+<p>文章：<a href="http://sixrevisions.com/resources/cheat_sheets_for_web_designers/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="一些有意思的贴子和工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3903.html" class="wp_rp_title">一些有意思的贴子和工具</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/3063.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="40个很不错的CSS技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3063.html" class="wp_rp_title">40个很不错的CSS技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/870.html">Web设计的速查卡</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/870.html/feed</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>语言的歧义</title>
+		<link>https://coolshell.cn/articles/830.html</link>
+					<comments>https://coolshell.cn/articles/830.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 17 May 2009 07:57:59 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=830</guid>
+
+					<description><![CDATA[<p>语言是人与人相互沟通的途径，而计算机语言则是人和计算机沟通的途径。就算是任何再完美的自然语言都会有歧义，但是又是什么让人和计算计算机间产生了歧义呢？ 下面这篇文...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/830.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/830.html">语言的歧义</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>语言是人与人相互沟通的途径，而计算机语言则是人和计算机沟通的途径。就算是任何再完美的自然语言都会有歧义，但是又是什么让人和计算计算机间产生了歧义呢？<br />
+下面这篇文章来自Gowri Kumar的<a href="http://www.gowrikumar.com/c/index.html">Puzzle C</a>一文。我做了一些整理，挑选了其中的一些问题，并在之后配上相应的答案(这些答案是我加的，如果需要原版的答案可以直接和本文作者Gowri Kumar联系，作者的联系方式可以从<a href="http://www.gowrikumar.com/contact.html">这里</a>得到)。</p>
+<h3>puzzle 1</h3>
+<p>此段程序的作者希望输出数组中的所有元素，但是他却没有得到他想要的结果，是什么让程序员和计算机产生歧义？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#define TOTAL_ELEMENTS (sizeof(array) / sizeof(array[0]))
+int array[] = {23,34,12,17,204,99,16};
+int main()
+{
+    int d;
+
+    for(d=-1;d &lt;= (TOTAL_ELEMENTS-2);d++)
+        printf(&quot;%d\n&quot;,array[d+1]);
+
+    return 0;
+}
+</pre>
+<p><span id="more-830"></span></p>
+<p><strong>解答：</strong><br />
+运行上面的程序，结果是什么都没有输出，导致这个结果的原因是sizeof的返回值是一个unsinged int，为此在比较int d 和TOTAL_ELEMENTS两个值都被转换成了unsigned int来进行比较，这样就导致-1被转换成一个非常大的值，以至于for循环不满足条件。因此，如果程序员不能理解sizeof操作符返回的是一个unsigned int的话，就会产生类似如上的人机歧义。</p>
+<h3>puzzle 2</h3>
+<p>看上去非常完美的程序，是什么导致了编程程序不通过？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+
+void OS_Solaris_print()
+{
+    printf(&quot;Solaris - Sun Microsystems\n&quot;);
+}
+
+void OS_Windows_print()
+{
+    printf(&quot;Windows - Microsoft\n&quot;);
+}
+
+void OS_HP-UX_print()
+{
+    printf(&quot;HP-UX - Hewlett Packard\n&quot;);
+}
+
+int main()
+{
+    int num;
+    printf(&quot;Enter the number (1-3):\n&quot;);
+    scanf(&quot;%d&quot;,&amp;num);
+
+    switch(num)
+    {
+        case 1:
+            OS_Solaris_print();
+            break;
+        case 2:
+            OS_Windows_print();
+            break;
+        case 3:
+            OS_HP-UX_print();
+            break;
+        default:
+            printf(&quot;Hmm! only 1-3 :-)\n&quot;);
+        break;
+    }
+    return 0;
+}
+</pre>
+<p><strong>解答：</strong><br />
+程序员要以计算机的语言进行思考，不上上面那段程序导致的结果不止是歧义这么简单，而直接的结果是，导致计算机&#8221;听不懂&#8221;你在说什么。导致计算机听不懂的原因是HP-UX中的&#8217;-&#8216;是减号？还是其他什么？</p>
+<h3>puzzle 3</h3>
+<p>下面这段程序会输出什么，为什么？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+enum {false,true};
+
+int main()
+{
+    int i=1;
+    do
+    {
+        printf(&quot;%d\n&quot;,i);
+        i++;
+
+        if(i &lt; 15)
+            continue;
+    }while(false);
+
+    return 0;
+}
+</pre>
+<p><strong>解答：</strong><br />
+1到14？不对，结果是1，因为continue的含义是不执行循环体之后语义，而直接到循环点。明显while(false)不属于循环体。导致这段程序的歧义就是：程序员没有完全理解计算机语言中continue的含义。</p>
+<h3>puzzle 4</h3>
+<p>下面这段程序的输出结果是：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+#define f(a,b) a##b
+#define g(a)   #a
+#define h(a) g(a)
+
+int main()
+{
+        printf(&quot;%s\n&quot;, h(f(1,2)));
+        printf(&quot;%s\n&quot;, g(f(1,2)));
+        return 0;
+}
+</pre>
+<p>当然，你首先要了解##和#的用法，如果不懂的话，本题你可以直接跳过。<br />
+<strong>解答：</strong><br />
+看到这段程序你可能会认为，这两个printf输出的同一个结果，可是答案却非如此，本题的输出是12和f(1,2)，为什么会这样呢？因为这是宏，宏的解开不象函数执行，由里带外。</p>
+<h3>puzzle 5</h3>
+<p>下面这段程序的输出是什么</p>
+<blockquote><p>#include &lt;stdio.h&gt;<br />
+int main()<br />
+{<br />
+int a=10;<br />
+switch(a)<br />
+{<br />
+case &#8216;1&#8217;:<br />
+printf(&#8220;ONE\n&#8221;);<br />
+break;<br />
+case &#8216;2&#8217;:<br />
+printf(&#8220;TWO\n&#8221;);<br />
+break;<br />
+defau1t:<br />
+printf(&#8220;NONE\n&#8221;);<br />
+｝<br />
+return 0;<br />
+}</p></blockquote>
+<p><strong>解答：</strong><br />
+本题我故意将语法敏感插件去掉，为了就是能得到更好的效果，这道题又是什么让歧义再次发生，如果不仔细你可能永远都找不到答案，如果真到的到了那个时候，你是否会因为对default语义的怀疑，而不敢再使用default？本题的歧义点就是default，看好了是defau1t而不是default，不是关键字！为什么计算能&#8221;听懂&#8221;这样的defau1t，算然它听懂了，但它的理解却是标号&#8221;defau1t&#8221;</p>
+<h3>puzzle 6</h3>
+<p>下面这段程序的输出什么？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    float f=0.0f;
+    int i;
+
+    for(i=0;i&lt;10;i++)
+        f = f + 0.1f;
+
+    if(f == 1.0f)
+        printf(&quot;f is 1.0 \n&quot;);
+    else
+        printf(&quot;f is NOT 1.0 \n&quot;);
+
+    return 0;
+}
+</pre>
+<p><strong>解答：</strong><br />
+你是否似曾相识？不错这个问题在酷壳之前的博文《<a href="https://coolshell.cn/articles/688.html">你能做对下面这些JavaScript的题吗？</a>》中曾今提到过，不要让两个浮点数相比较。所以本题的答案是&#8221;f is NOT 1.0&#8243;，如果你真想比较两个浮点数时，你应该按一定精度来比较，比如你一定要在本题中做比较那么你应该这么做if( (f &#8211; 1.0f)&lt;0.1 )</p>
+<h3>puzzle 7</h3>
+<p>下面两个函数是否具有相同的原型？</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+int foobar(void);
+int foobar();
+</pre>
+<p>下面这两段程序将会帮你找到上题的答案<br />
+程序1</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;stdio.h&gt;
+void foobar1(void)
+{
+    printf(&quot;In foobar1\n&quot;);
+}
+
+void foobar2()
+{
+    printf(&quot;In foobar2\n&quot;);
+}
+
+int main()
+{
+    char ch = &#039;a&#039;;
+
+    foobar1();
+    foobar2(33, ch);
+
+     return 0;
+}
+</pre>
+<p>程序2</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &quot;stdio.h&quot;
+void foobar1(void)
+{
+    printf(&quot;In foobar1\n&quot;);
+}
+
+void foobar2()
+{
+    printf(&quot;In foobar2\n&quot;);
+}
+
+int main()
+{
+    char ch = &#039;a&#039;;
+
+    foobar1(33,ch);
+    foobar2();
+
+    return 0;
+}
+</pre>
+<p><strong>解答</strong><br />
+程序片段一，没有问题，程序片段二编译报错，这两个程序告诉我们，foobar1(void)和foobar2()是有不同原型的的。我们可以在《ISO/IEC 9899》的C语言规范找到下面两段关于函数声明的描述</p>
+<blockquote><p>10.The special case of an unnamed parameter of type void as the only item in the list specifies that the function has no parameters</p></blockquote>
+<blockquote><p>14.An identifier list declares only the identifiers of the parameters of the function. An empty list in a function declarator that is part of a definition of that function specifies that the function has no parameters. The empty list in a function declarator that is not part of a definition of that function specifies that no information about the number or types of the parameters is supplied.124)</p></blockquote>
+<p>上面两段话的意思就是：foobar1(void)是没有参数，而foobar1()等于forbar1(&#8230;)等于参数类型未知。</p>
+<p><strong>总结</strong><br />
+看到这些C语言的题目，不禁让我想起了巴别塔，计算机语言作为如此严谨的语言都有可能带来如此多的歧义，更何况自然语言，更何况相互不通的自然语言。要杜绝歧义，我们就必须清晰的了解计算机语言每一个指令的语义。就如同人类，人类要和平就要相互了解各自的文化。愿世界上人们清晰了解别人的语言的语义，愿世界不再因为文化的不同而战争，原世界和平。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/830.html">语言的歧义</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/830.html/feed</wfw:commentRss>
+			<slash:comments>52</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux磁盘使用命令du的改进</title>
+		<link>https://coolshell.cn/articles/822.html</link>
+					<comments>https://coolshell.cn/articles/822.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 15 May 2009 08:41:29 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[du]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=822</guid>
+
+					<description><![CDATA[<p>我们知道，在Linux下，如果你想知道当前目录下，每个文件或子目录的尺寸，你可以使用du命令来完成这一动作。如： $ du -sh * 这个命令可以以K，M，G...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/822.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/822.html">Linux磁盘使用命令du的改进</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们知道，在Linux下，如果你想知道当前目录下，每个文件或子目录的尺寸，你可以使用du命令来完成这一动作。如：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$  du -sh *
+</pre>
+<p>这个命令可以以K，M，G的方式显示每个文件和子目录的大小。我们把这种方式叫做，human-readable，也就是可以让人读的方式，如下所示：</p>
+<pre>8.4G Desktop
+2.6G Documents
+12K keys
+12M Pictures
+536K scripts</pre>
+<p><span id="more-822"></span><br />
+但是，很可惜的是，我们的du并没有提供相关的排序功能，所以，如果在human-readable下，也就是-h参数下，我们很难使用sort命令来排序。因为那变成了字符串排序，小数点，数字的位数，还有单位K，M，G都会让排序变得混乱。那么，我们如何才能即有human-readble这种功能，还能有排序呢。我们得借用一些脚本语言来处理了。</p>
+<p>下面是使用了Perl来达到这一功能：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+du -sk * | sort -n |       #以 K 字节的方式排序
+perl -ne &#039;                 #使用Perl来处理 K M 和 G 单位
+  ($s,$f)=split(m{\t});    #把 尺寸/文件名 分开
+  for (qw(K M G)) {        #以尺寸单位循环
+     if($s&lt;1024) {         #如果 尺寸&lt;1024 那么就输出
+       printf(&quot;%.1f&quot;,$s);  #显示文件尺寸
+       print &quot;$_\t$f&quot;;     #显示文件名
+       last                #换行
+     };
+     $s=$s/1024            #除1024然后进入下一个尺寸单位
+  }
+&#039;
+</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/822.html">Linux磁盘使用命令du的改进</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/822.html/feed</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>22条经典的编程引言</title>
+		<link>https://coolshell.cn/articles/808.html</link>
+					<comments>https://coolshell.cn/articles/808.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 15 May 2009 04:25:49 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=808</guid>
+
+					<description><![CDATA[<p>下面的这些经典的引言来自英文，也许有些我翻译的是不很好，所以，我提供了中英对照，如果有问题，请大家指正。   过早的优化是万恶之源。Premature opti...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/808.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/808.html">22条经典的编程引言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">下面的这些经典的引言来自英文，也许有些我翻译的是不很好，所以，我提供了中英对照，如果有问题，请大家指正。</p>
+<p style="text-align: left;"> </p>
+<p style="text-align: left;">过早的优化是万恶之源。Premature optimization is the root of all evil!<br />
+<em>&#8211; Donald Knuth</em></p>
+<p style="text-align: left;"> </p>
+<p style="text-align: left;">在水里行走和以一个需求规格进行软件开发，有一点是相同的，那就是如果水或需求都被冻住不了，那么行走和软件开发都会变得容易。Walking on water and developing software from a specification are easy if both are frozen<br />
+<em>&#8211; Edward V Berard</em></p>
+<p style="text-align: left;"><em></em></p>
+<p style="text-align: left;"><em></em></p>
+<p style="text-align: left;"> </p>
+<p style="text-align: left;">Hofstadter 定理：“一件事情总是会花费比你预期更多的时间，就算是你已经考虑过本条<em>Hofstadter </em>定理”。It always takes longer than you expect, even when you take into account Hofstadter’s Law.<br />
+<em>&#8211; Hofstadter’s Law</em></p>
+<p><span id="more-808"></span></p>
+<p> </p>
+<p>有些遇到问题的人总是会说“我知道，我会使用正则表达式”，那么，你现在有两个问题了。（意思是：你本想用正则表达式来解决你已有问题，但实际上你又引入了“正则表达式”的一个新问题）Some people, when confronted with a problem, think “I know, I’ll use regular expressions.” Now they have two problems<br />
+<em>&#8211; Jamie Zawinski</em></p>
+<p><em></em></p>
+<p> </p>
+<p>调试程序的难度是写代码的两倍。因此，只要你的代码写的尽可能的清楚，那么你在调试代码时就不需要那么地有技巧。Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.<br />
+<em>&#8211; Brian Kernighan</em></p>
+<p style="text-align: left;"> </p>
+<p>用代码行来衡量开发进度，无异于用重量来衡量制造飞机的进度。Measuring programming progress by lines of code is like measuring aircraft building progress by weight.<br />
+<em>&#8211; Bill Gates</em></p>
+<p style="text-align: left;"> </p>
+<p>PHP被一些不合格的业余人员造就成了一个小恶魔；而Perl则是被一些熟练的但不正当的专业人员造就成了一个超级大恶魔。PHP is a minor evil perpetrated and created by incompetent amateurs, whereas Perl is a great and insidious evil, perpetrated by skilled but perverted professionals.<br />
+<em>&#8211; Jon Ribbens</em></p>
+<p style="text-align: left;"> </p>
+<p>在两个场合我被问到：“请你告诉我，如果你给机器输入了错误的数字，那么，是否还能得到正确的答案？”我并不能正确领会这类想法。（注意，本引言的作者姓Babbage，这个名字和神父同名，意思是，作者在反问提问的人，你是问我还是向神父祈祷？）On two occasions I have been asked, ‘Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?’ I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.”<br />
+<em>&#8211; Charles Babbage</em></p>
+<p style="text-align: left;"> </p>
+<p>在编程的时候，我们一定要想像一下，以后维护我们自己的代码的那个人会成为一个有暴力倾向的疯子，并且，他还知道我们住在哪里？Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.<br />
+<em>&#8211; Rick Osborne</em></p>
+<p style="text-align: left;"> </p>
+<p>现代的编程是“程序员努力建一个更大更傻的程序”和“世界正在尝试创造更多更傻的人”之间的一种竞赛，目前为止，后者是赢家。Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.<br />
+<em>&#8211; Rich Cook</em></p>
+<p style="text-align: left;"> </p>
+<p>我才不关于我的代码是否能在你的机器上工作！我们不会给你提供机器。I don’t care if it works on your machine! We are not shipping your machine!<br />
+<em>&#8211; Ovidiu Platon</em></p>
+<p style="text-align: left;"> </p>
+<p>我总是希望我的电脑能够像电话一样容易使用；我的这个希望正在变成现实，因为我现在已经不知道怎么去使用我的电话了。I have always wished for my computer to be as easy to use as my telephone; my wish has come true because I can no longer figure out how to use my telephone.<br />
+<em>&#8211; Bjarne Stroustrup</em></p>
+<p style="text-align: left;"> </p>
+<p>计算机是一种在人类历史上所有发明中，可以让你比以前更快地犯更多的错误的发明，同样，其也包括了“手枪”和“龙舌兰酒”这两种发明的缺陷。A computer lets you make more mistakes faster than any other invention in human history, with the possible exceptions of handguns and tequila.<br />
+<em>&#8211; Mitch Ratcliffe</em></p>
+<p style="text-align: left;"> </p>
+<p>如果调试程序是一种标准的可以铲除BUG的流程，那么，编程就是把他们放进来的流程。If debugging is the process of removing software bugs, then programming must be the process of putting them in.<br />
+<em>&#8211; E. W. Dijkstra</em></p>
+<p style="text-align: left;"> </p>
+<p>教一群被BASIC先入为主的学生，什么是好的编程风格简直是一件不可能的事。对于一些有潜力的程序员，他们所受到的智力上的伤害远远超过了重建他们的信心。It is practically impossible to teach good programming style to students that have had prior exposure to BASIC. As potential programmers, they are mentally mutilated beyond hope of regeneration.<br />
+<em>&#8211; E. W. Dijkstra</em></p>
+<p style="text-align: left;"> </p>
+<p>理论上来说，理论和实际是一样的。但实际上来说，他们则不是。In theory, theory and practice are the same. In practice, they’re not.<br />
+<em>&#8211; Unknown</em></p>
+<p style="text-align: left;"> </p>
+<p>只有两个事情是无穷尽的：宇宙和人类的愚蠢。当然，我现在还不能确定宇宙是无穷尽的。Two things are infinite: the universe and human stupidity; and I’m not sure about the universe.<br />
+<em>&#8211; Albert Einstein</em></p>
+<p style="text-align: left;"> </p>
+<p>Perl这种语言就好像是被RSA加密算法加密过的一样。Perl &#8211; The only language that looks the same before and after RSA encryption.<br />
+<em>&#8211; Keith Bostic</em></p>
+<p style="text-align: left;"> </p>
+<p>我爱“最终期限”，我喜欢“嗖嗖嗖”的声音就像他们在飞一样。I love deadlines. I like the whooshing sound they make as they fly by.<br />
+<em>&#8211; Douglas Adams</em></p>
+<p style="text-align: left;"> </p>
+<p>说Java好的是因为它跨平台就像好像说肛交好是因为其可以适用于一切性别。Saying that Java is good because it works on all platforms is like saying anal sex is good because it works on all genders<br />
+<em>&#8211; Unknown</em></p>
+<p style="text-align: left;"> </p>
+<p>XML就像是一种强暴——如果它不能解决你的问题，那只能说明你没有用好它。XML is like violence &#8211; if it doesn’t solve your problems, you are not using enough of it.<br />
+<em>&#8211; Unknown</em></p>
+<p style="text-align: left;"> </p>
+<p>爱因期坦说，自然界中的一切一定会有一个简单的解释，因为上帝并不是反复无常和独裁的。当然，不会有什么信仰能程序员像爱因期坦那样感到舒服。Einstein argued that there must be simplified explanations of nature, because God is not capricious or arbitrary. No such faith comforts the software engineer.<br />
+<em>&#8211; Fred Brooks</em></p>
+<p style="text-align: left;">文章：<a href="http://www.storm-consultancy.com/blog/other/classic-programming-quotes/" target="_blank">来源</a></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/27.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/500px-WebCrawlerArchitecture.svg_-150x150.png" alt="如何自己写一个网络爬虫" width="150" height="150" /></a><a href="https://coolshell.cn/articles/27.html" class="wp_rp_title">如何自己写一个网络爬虫</a></li><li ><a href="https://coolshell.cn/articles/2365.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="两个C++的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2365.html" class="wp_rp_title">两个C++的资源</a></li><li ><a href="https://coolshell.cn/articles/240.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="非常不错的编程技术教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/240.html" class="wp_rp_title">非常不错的编程技术教程</a></li><li ><a href="https://coolshell.cn/articles/1654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/250px-ChallengerCrew-150x150.jpg" alt="Richard Feynman, 挑战者号, 软件工程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1654.html" class="wp_rp_title">Richard Feynman, 挑战者号, 软件工程</a></li><li ><a href="https://coolshell.cn/articles/1086.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="22个开源的PHP框架" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1086.html" class="wp_rp_title">22个开源的PHP框架</a></li><li ><a href="https://coolshell.cn/articles/290.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="雷人的程序注释" width="150" height="150" /></a><a href="https://coolshell.cn/articles/290.html" class="wp_rp_title">雷人的程序注释</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/808.html">22条经典的编程引言</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/808.html/feed</wfw:commentRss>
+			<slash:comments>34</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>关于C++构造函数的FAQ</title>
+		<link>https://coolshell.cn/articles/804.html</link>
+					<comments>https://coolshell.cn/articles/804.html#respond</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 13 May 2009 14:38:36 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[FAQ]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=804</guid>
+
+					<description><![CDATA[<p>下面是一些关于C++构造函数的FAQ。你能回答得出来吗？你可以点链接查看答案，不过是英文版的。他们来自于C++ FAQ Lite。当然，也有中文版的，只可惜中文...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/804.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/804.html">关于C++构造函数的FAQ</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是一些关于C++构造函数的FAQ。你能回答得出来吗？你可以点链接查看答案，不过是英文版的。他们来自于<a title="C++ FAQ Lite" href="http://www.parashift.com/c++-faq-lite/index.html"><em>C++ FAQ Lite</em></a>。当然，也有中文版的，只可惜中文版的太老了，只更新到了2001年。在<a title="C++ FAQ Lite" href="http://www.parashift.com/c++-faq-lite/index.html"><em>C++ FAQ Lite</em></a>上还有很多关于其它部分的FAQ，大家可以去看看。</p>
+<p><a title="[1] What's the deal with constructors?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.1">[1] 构造函数是用来干什么的？</a></p>
+<p><a title="[2] Is there any difference between List x; and List x();?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.2">[2] <tt>List x;</tt> 和 <tt>List x();有什么不同</tt>?</a></p>
+<p><a title="[3] Can one constructor of a class call another constructor of the same class to initialize the this object?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.3">[3] 是否一个类的构造函数可以调用另一个构造函数来初始化自己？</a></p>
+<p><a title="[4] Is the default constructor for Fred always Fred::Fred()?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.4">[4] 是否Fred类的默认的函数函数就一定是<tt>Fred::Fred()？</tt></a></p>
+<p><a title="[5] Which constructor gets called when I create an array of Fred objects?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.5">[5] 如果要创建一个<tt>Fred</tt> 对像数组，什么样的构数函数会被调用?</a></p>
+<p><a title="[6] Should my constructors use &quot;initialization lists&quot; or &quot;assignment&quot;?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.6">[6] 构造函数初始化成员变量时，用 &#8220;初始化列表&#8221; 还是 “赋值”？</a></p>
+<p><span id="more-804"></span></p>
+<p><a title="[7] Should you use the this pointer in the constructor?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.7">[7] 在构造函数中用<tt>this</tt> 指针是否有问题？</a></p>
+<p><a title="[8] What is the &quot;Named Constructor Idiom&quot;?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.8">[8]什么是“名字构造函数”（Named Constructor Idiom）？</a></p>
+<p><a title="[9] Does return-by-value mean extra copies and extra overhead?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.9">[9] “值返回”意味着额外的拷贝吗？</a></p>
+<p><a title="[10] Why can't I initialize my static member data in my constructor's initialization list?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.10">[10] 为什么我们不能在构造函数初始化列表中初始化一个 <tt>static</tt> 成员变量？</a></p>
+<p><a title="[11] Why are classes with static data members getting linker errors?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.11">[11] 为什么一个有 <tt>static</tt> 成员变量的类会有链接错误？</a></p>
+<p><a title="[12] What's the &quot;static initialization order fiasco&quot;?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.12">[12] 什么是“<tt>static</tt> initialization order fiasco”？</a></p>
+<p><a title="[13] How do I prevent the &quot;static initialization order fiasco&quot;?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.13">[13] 我该如果避免 “<tt>static</tt> initialization order fiasco”?</a></p>
+<p><a title="[14] Why doesn't the construct-on-first-use idiom use a static object instead of a static pointer?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.14">[14] 为什么 construct-on-first-use 什么静态变量而不是指针？</a></p>
+<p><a title="[15] How do I prevent the &quot;static initialization order fiasco&quot; for my static data members?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.15">[15] 怎么才能避免静态成员中的“<tt>static</tt> initialization order fiasco” ？</a></p>
+<p><a title="[16] Do I need to worry about the &quot;static initialization order fiasco&quot; for variables of built-in/intrinsic types?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.16">[16] 我是否要为内建类型的“<tt>static</tt> initialization order fiasco”而担心？</a></p>
+<p><a title="[17] How can I handle a constructor that fails?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.17">[17] 如果构造函数出错了怎么办？</a></p>
+<p><a title="[18] What is the &quot;Named Parameter Idiom&quot;?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.18">[18] 什么是“命名参数惯用法”（Named Parameter Idiom）？</a></p>
+<p><a title="[19] Why am I getting an error after declaring a Foo object via Foo x(Bar())?" href="http://www.parashift.com/c++-faq-lite/ctors.html#faq-10.19">[19] 为什么我通过<tt>Foo x(Bar())</tt>声明一个<tt>Foo</tt> 对象会得到一个错误？</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/804.html">关于C++构造函数的FAQ</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/804.html/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

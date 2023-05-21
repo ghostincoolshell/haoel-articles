@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 37 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=37" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Fri, 30 Dec 2011 01:39:11 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>GDB 7.0 发布</title>
+		<link>https://coolshell.cn/articles/1525.html</link>
+					<comments>https://coolshell.cn/articles/1525.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 09 Oct 2009 08:39:16 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[GDB]]></category>
+		<category><![CDATA[Reversable Debugging]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1525</guid>
+
+					<description><![CDATA[<p>2009年10月06日，GDB7.0正式发布，新的版本你可以在这里下载。本次版本，不但有大家所关注的《GDB回溯调试技术》，同样还有其它大量的新特性，和对新平台...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1525.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1525.html">GDB 7.0 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://www.gnu.org/software/gdb/mascot/"><img decoding="async" loading="lazy" class="alignright" title="GDB: The GNU Project Debugger 吉祥物" src="http://www.gnu.org/software/gdb/images/archer.jpg" alt="" width="200" height="125" /></a>2009年10月06日，GDB7.0正式发布，新的版本你可以在<a href="http://www.gnu.org/software/gdb/download/" target="_blank">这里下载</a>。本次版本，不但有大家所关注的《GDB<a href="https://coolshell.cn/articles/1502.html" target="_blank">回溯调试技术</a>》，同样还有其它大量的新特性，和对新平台的支持。</p>
+<p>新版的GDB7.0支持如下新的平台或配置：</p>
+<ul>
+<li>x86/x86_64 Darwin</li>
+<li>x86_64 MinGW</li>
+<li>Lattice Mico32</li>
+<li>x86/x86_64 DICOS</li>
+<li>S+core 3</li>
+<li>The remote stub now supports x86 Windows CE</li>
+</ul>
+<p>其主要的新加入的功能有：（看上去相当地高科技啊，很多术语都不知道怎么翻译，请注意后面的相关解释）</p>
+<ul>
+<li>Python 脚本调试</li>
+<li>回溯调试，调式过程记录并重演。</li>
+<li>不间隔调试。 Non-stop debugging</li>
+<li>并行调试。 Multi-architecture debugging</li>
+<li>多进程调试。Multi-inferior, multi-process debugging</li>
+</ul>
+<p><span id="more-1525"></span></p>
+<blockquote><p><strong>注释：</strong></p>
+<ul>
+<li>Non-stop 的意思是，当我们在调试一个进程中的某一个或某一些线程时，可以让没有被调试的线程继续运行不停止。</li>
+<li>Multi-architecture在字面上理解是多层架构，但应该是关于并行方面的（请大家指正），比如MIPS或SPARC等并行编程方面的。</li>
+<li>Multi-inferior的意思是，你可以同时调试多个不同的进程。在某些情况下，这会更容易帮助我们了解程序的内部执行情况。</li>
+</ul>
+</blockquote>
+<p>当然，本版本也包括了下面的一些改进和补丁：</p>
+<p style="PADDING-LEFT: 30px; TEXT-ALIGN: left">* GDB 为JIT 提供了一个编译接口<br />
+* Tracepoints 可以加上条件<br />
+* 支持多字节和宽字符<br />
+* 为&#8221;disassemble&#8221;新增加/r 和/m 参数<br />
+* 对共享库的自动获取<br />
+* 支持内联函数<br />
+* 新的远程协议包<br />
+* GDB 开始可以读取压缩调试片段<br />
+* 在Tru64平台下支持线程切换<br />
+* 支持Ada 任务切换<br />
+* gdbserver的新功能 ——GDB remote stub<br />
+* 一个新的命令，当有系统调用发生时可以停止正在运行的程序</p>
+<p style="TEXT-ALIGN: left">(全文完)</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1502.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="高科技：GDB回溯调试" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1502.html" class="wp_rp_title">高科技：GDB回溯调试</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/3643.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="GDB中应该知道的几个调试方法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3643.html" class="wp_rp_title">GDB中应该知道的几个调试方法</a></li><li ><a href="https://coolshell.cn/articles/1719.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg" alt="橡皮鸭程序调试法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1719.html" class="wp_rp_title">橡皮鸭程序调试法</a></li><li ><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何调试bash脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_title">如何调试bash脚本</a></li><li ><a href="https://coolshell.cn/articles/1242.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="23,148,855,308,184,500" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1242.html" class="wp_rp_title">23,148,855,308,184,500</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1525.html">GDB 7.0 发布</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1525.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>mochiweb参数化模型Req相关功能</title>
+		<link>https://coolshell.cn/articles/1516.html</link>
+					<comments>https://coolshell.cn/articles/1516.html#comments</comments>
+		
+		<dc:creator><![CDATA[free.wang]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2009 12:00:34 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Erlang]]></category>
+		<category><![CDATA[Mochiweb]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1516</guid>
+
+					<description><![CDATA[<p>本文的笔记讲述如何从client请求中获取各种参数,如method, request path, headers, cookie等。 Mochiweb是Erla...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1516.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1516.html">mochiweb参数化模型Req相关功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>本文的笔记讲述如何从client请求中获取各种参数,如method, request path, headers, cookie等。</p>
+<p>Mochiweb是Erlang实现的一个开源Web服务器，它设计的一个亮点就是他本身的Http请求的参数化模型。因此我们可以用OO的方式来理解它的相关用法。<br />
+它的实现在mochiweb_request模块.在mochiweb中,每个client请求其构造一个 Req 对象(注：这个“对象“只是便于理解的提法), Req 可以理解成 mochiweb_request 的一个参数化或实例化.<br />
+<span id="more-1516"></span></p>
+<p>1.<span style="color: #339966"><strong>Req:get(method)</strong></span><strong> </strong>-&gt; &#8216;OPTIONS&#8217; | &#8216;GET&#8217; | &#8216;HEAD&#8217; | &#8216;POST&#8217; | &#8216;PUT&#8217; | &#8216;DELETE&#8217; | &#8216;TRACE&#8217;.<br />
+获取Http请求的方式.</p>
+<p>2.<span style="color: #339966"><strong>Req:get(raw_path)</strong> </span>-&gt; String().<br />
+获取raw_path.比如 http://www.nextim.cn/session/login?username=test#p,那/session/login?username=test#p就是这个raw_path.</p>
+<p>3.<span style="color: #339966"><strong>Req:get(path)</strong></span><strong> </strong>-&gt; String().<br />
+获取path.比如 http://www.nextim.cn/session/login?username=test#p,那/session/login就是这个raw_path.</p>
+<p>4.<span style="color: #339966"><strong>Req:parse_qs()</strong></span> -&gt; [{strng(), string()}].<br />
+获取get参数.比如 http://www.nextim.cn/session/login?username=test#p,则返回[{&#8220;username&#8221;,&#8221;test&#8221;}].</p>
+<p>5.<span style="color: #339966"><strong>Req:parse_post()</strong></span> -&gt; [{strng(), string()}].<br />
+确保post数据类型为: application/x-www-form-urlencoded, 否则不要调用(其内部会调用Req:recv_body),返回值类似Req:parse_qs().</p>
+<p>6.<span style="color: #339966"><strong>Req:get(peer)</strong></span><strong> </strong>-&gt; string().<br />
+返回值为client的ip</p>
+<p>7.<span style="color: #339966"><strong>Req:get_header_value(Key)</strong></span> -&gt; undefined | string().<br />
+获取某个header,比如Key为&#8221;User-Agent&#8221;时，返回&#8221;Mozila&#8230;&#8230;.&#8221;</p>
+<p>8.<span style="color: #339966"><strong>Req:get_primary_header_value(Key) </strong></span>-&gt; undefined | string().<br />
+获取http headers中某个key对应的主值(value以分号分割).<br />
+举例: 假设 Content-Type 为 application/x-www-form-urlencoded; charset=utf8,则<br />
+Req:get_header_value(&#8220;content-type&#8221;) 返回 application/x-www-form-urlencoded</p>
+<p>9.<span style="color: #339966"><strong>Req:get(headers)</strong> </span>-&gt; dict().<br />
+获取所有headers<br />
+说明: 返回结果为stdlib/dict 数据结构,可以通过mochiweb_headers模块进行操作.<br />
+举例: 下面代码显示请求中所有headers:<br />
+Headers = Req:get(headers),<br />
+lists:foreach(fun(Key, Value) -&gt;<br />
+io:format(&#8220;~p : ~p ~n&#8221;, [Key, Value])<br />
+end,<br />
+mochiweb_headers:to_list(Headers)).</p>
+<p>10.<span style="color: #339966"><strong>Req:parse_cookie()</strong></span> -&gt; [{string(), string()}].<br />
+解析Cookie</p>
+<p>11.<strong><span style="color: #339966">R</span></strong><span style="color: #339966"><strong><span style="color: #339966">eq:get_cookie_value(Key)</span></strong></span><strong><span style="color: #339966"> </span></strong>-&gt; string().<br />
+类似<span style="color: #ffcc00">Req:get_header_value(Key)</span></p>
+<div><span style="font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif"><span>最近搜了下，发现用mochiweb的挺多的。但自己用的时候发现来不少疑难。以上文档皆由litaocheng总结提供。感谢所带来的帮助。希望这个对国内使用mochiweb的朋友们带来帮助。</span></span></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2111.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="erlang打包独立环境" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2111.html" class="wp_rp_title">erlang打包独立环境</a></li><li ><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" alt="编程语言汽车" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1839.html" class="wp_rp_title">编程语言汽车</a></li><li ><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Erlang和Python互通" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_title">Erlang和Python互通</a></li><li ><a href="https://coolshell.cn/articles/1579.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/operating-systems-150x150.jpg" alt="一张关于操作系统的图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1579.html" class="wp_rp_title">一张关于操作系统的图</a></li><li ><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" alt="sed 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_title">sed 简明教程</a></li><li ><a href="https://coolshell.cn/articles/2913.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/1-150x150.png" alt="消费者的消费观" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2913.html" class="wp_rp_title">消费者的消费观</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1516.html">mochiweb参数化模型Req相关功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1516.html/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>高科技：GDB回溯调试</title>
+		<link>https://coolshell.cn/articles/1502.html</link>
+					<comments>https://coolshell.cn/articles/1502.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2009 09:14:08 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Debug]]></category>
+		<category><![CDATA[GDB]]></category>
+		<category><![CDATA[Reversable Debugging]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1502</guid>
+
+					<description><![CDATA[<p>也许大家知道，GDB 版本7.0 (2009年9月release) 会是第一次开始支持Reversable Debugging （回溯调式技术），这是一种可以让...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1502.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1502.html">高科技：GDB回溯调试</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>也许大家知道，GDB 版本7.0 (2009年9月release) 会是第一次开始支持Reversable Debugging （回溯调式技术），这是一种可以让在debug程序时当我们运行单步调试或是运行到断点时，可以以逆向执行程序的一种技术。（这是GNU的<a href="http://www.gnu.org/software/gdb/news/reversible.html" target="_blank">新闻链接</a>）</p>
+<p>下面是GDB7.0版本所支持的回溯调试的命令，其中包括，continue，step，以及调试方向的设置。</p>
+<li><strong>reverse-continue</strong> (&#8216;rc&#8217;) &#8212; 继续程序运行到断点，但是是逆向运行程序。</li>
+<li><strong>reverse-finish</strong> &#8212; 逆向运行程序直到跳出本层函数。</li>
+<li><strong>reverse-next</strong> (&#8216;rn&#8217;) &#8212; 语句单步向后跟踪程序。</li>
+<li><strong>reverse-nexti</strong> (&#8216;rni&#8217;) &#8212; 指令单步向后一条指令。</li>
+<li><strong>reverse-step</strong> (&#8216;rs&#8217;) &#8212; 向后执行一条语句，单步进入。</li>
+<li><strong>reverse-stepi</strong> &#8212; 向后执行一条指令，单步进入。</li>
+<li><strong>set exec-direction (forward/reverse)</strong> &#8212; 设置程序执行方向，向前或向后。</li>
+<p><span id="more-1502"></span></p>
+<p>在网上查了一下，发现VS2010好像也准备要支持这个东西，微软叫这个东西为“<a href="http://blogs.msdn.com/ianhu/archive/2009/05/13/historical-debugging-in-visual-studio-team-system-2010.aspx" target="_blank">Historical Debugging</a>”。</p>
+<p>这个东西，对于我这个老家伙来说比较新鲜，而且还有点诡异。我有点没跟上这个技术，不知道这个技术主要是用来干什么？对于程序的运行的回滚？这样一来，如果，我某条语句创建了一个线程，或是一个文件，逆向执行回去，莫非它还能把这些程序创建出来的资源回收啦？就算是能回收，要是我的某个程序向网络发了些数据出去，莫非它还能给我再收回来？也许我想得太极端了，不过好像目前对这个技术的原始需求的说明不是很多，所以真不知道这个技术除了很酷，还有什么？也许是我理解错了，希望大家指点一下。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/3643.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/1.jpg" alt="GDB中应该知道的几个调试方法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3643.html" class="wp_rp_title">GDB中应该知道的几个调试方法</a></li><li ><a href="https://coolshell.cn/articles/1719.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/11/Rubber-Duck-150x150.jpg" alt="橡皮鸭程序调试法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1719.html" class="wp_rp_title">橡皮鸭程序调试法</a></li><li ><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何调试bash脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1379.html" class="wp_rp_title">如何调试bash脚本</a></li><li ><a href="https://coolshell.cn/articles/1242.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="23,148,855,308,184,500" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1242.html" class="wp_rp_title">23,148,855,308,184,500</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1502.html">高科技：GDB回溯调试</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1502.html/feed</wfw:commentRss>
+			<slash:comments>17</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>算法和数据结构词典</title>
+		<link>https://coolshell.cn/articles/1499.html</link>
+					<comments>https://coolshell.cn/articles/1499.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2009 03:33:35 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[数据结构]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1499</guid>
+
+					<description><![CDATA[<p>我们知道，在编程的世界里，主要就是两个事，用一定的算法去处理一定的数据。算法可以理解为业务逻辑流程，而数据自然一定是按某种结构来存放，这就是数据结构。我们知道，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1499.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1499.html">算法和数据结构词典</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我们知道，在编程的世界里，主要就是两个事，用一定的算法去处理一定的数据。算法可以理解为业务逻辑流程，而数据自然一定是按某种结构来存放，这就是数据结构。我们知道，数据结构的修改一定会导致算法的修改，我们也知道，数据结构直接关系到了整个程序的繁简性，高效性。而算法则是关系到数据处理的时间、空间性能，以及日后的扩展和维护。这两个东西是计算机科班出生的人或是需要学习编程的人必需要注意的两件头等大事。</p>
+<p>下面这个网站，由 <a href="http://www.itl.nist.gov/div897/">Software and Systems Division</a>, <a href="http://www.itl.nist.gov/">Information Technology Laboratory</a> 创建。</p>
+<p style="text-align: center;"><a href="http://www.itl.nist.gov/div897/sqg/dads/terms.html" target="_blank"><strong></strong></a><strong><a href="http://xlinux.nist.gov/dads/" target="_blank">http://xlinux.nist.gov/dads/</a></strong><strong> </strong></p>
+<p style="text-align: center;"><img decoding="async" title="更多..." src="https://coolshell.cn/wp-includes/js/tinymce/plugins/wordpress/img/trans.gif" alt="" /></p>
+<p style="text-align: left;"><span id="more-1499"></span></p>
+<p>这是一个关于算法，算法技术，数据结构，系统架构等相关问题的一个词典。其中，算法包括了一些常见的算法，比如： <a href="http://xlinux.nist.gov/dads/HTML/ackermann.html" target="_blank">Ackermann&#8217;s function</a> ，一些算法问题包括了 <a href="http://xlinux.nist.gov/dads/HTML/travelingSalesman.html" target="_blank">traveling salesman</a>（销售员出差问题） and <a href="http://xlinux.nist.gov/dads/HTML/byzantine.html" target="_blank">Byzantine generals</a>（拜占庭将军问题），还有一些关于这些问题，算法的 <a href="http://xlinux.nist.gov/dads/termsImpl.html" target="_blank">实现链表</a> 以及更多的信息。而索引页包括 <a href="http://xlinux.nist.gov/dads/termsArea.html" target="_blank">领域索引</a> 和 <a href="http://xlinux.nist.gov/dads/termsType.html" target="_blank">类型索引</a>.</p>
+<p>希望这个网站对有你用。当然，这个网站是英文的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li><li ><a href="https://coolshell.cn/articles/4671.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" alt="可视化的数据结构和算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4671.html" class="wp_rp_title">可视化的数据结构和算法</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3933.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="可视化的排序过程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3933.html" class="wp_rp_title">可视化的排序过程</a></li><li ><a href="https://coolshell.cn/articles/2724.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/07/aboutprogramming04.eng_-150x150.jpg" alt="计算机编程简史图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2724.html" class="wp_rp_title">计算机编程简史图</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1499.html">算法和数据结构词典</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1499.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>TCP网络关闭的状态变换时序图</title>
+		<link>https://coolshell.cn/articles/1484.html</link>
+					<comments>https://coolshell.cn/articles/1484.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sun, 27 Sep 2009 08:11:19 +0000</pubDate>
+				<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[TCP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1484</guid>
+
+					<description><![CDATA[<p>TCP共有11个网路状态，其中涉及到关闭的状态有5个。 在我们编写网络相关程序的时候，这5个状态经常出现。因为这5个状态相互关联，相互纠缠，而且状态变化触发都是...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1484.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1484.html">TCP网络关闭的状态变换时序图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>TCP共有11个网路状态，其中涉及到关闭的状态有5个。</p>
+<p>在我们编写网络相关程序的时候，这5个状态经常出现。因为这5个状态相互关联，相互纠缠，而且状态变化触发都是由应用触发，但是又涉及操作系统和网络，所以正确的理解TCP 在关闭时网络状态变化情况，为我们诊断网络中各种问题，快速定位故障有着非常重要的作用和意义。</p>
+<p style="text-align: left;">下是是根据W.Richard Stevens的《TCP/IP详解》一书的TCP状态转换图。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter  wp-image-6310" title="tcp 状态转换图" src="https://coolshell.cn/wp-content/uploads/2009/09/tcp1.jpg" alt="" width="585" height="826" /></p>
+<p style="text-align: left;"><span id="more-1484"></span></p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter  wp-image-6309" title="tcp 状态转换图 （注释）" src="https://coolshell.cn/wp-content/uploads/2009/09/tcp2.jpg" alt="" width="727" height="746" /> <img decoding="async" loading="lazy" class="aligncenter size-full wp-image-6308" title="tcp 连接建立关闭图" src="https://coolshell.cn/wp-content/uploads/2009/09/tcp3.jpg" alt="" width="469" height="529" srcset="https://coolshell.cn/wp-content/uploads/2009/09/tcp3.jpg 469w, https://coolshell.cn/wp-content/uploads/2009/09/tcp3-265x300.jpg 265w" sizes="(max-width: 469px) 100vw, 469px" /> <img decoding="async" loading="lazy" class="aligncenter  wp-image-6307" title="tcp 连接建图" src="https://coolshell.cn/wp-content/uploads/2009/09/tcp3.jpg" alt="" width="469" height="529" /> <img decoding="async" loading="lazy" class="aligncenter  wp-image-6306" title="tcp 连接关闭图" src="https://coolshell.cn/wp-content/uploads/2009/09/tcp5.jpg" alt="" width="631" height="239" /></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22263.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/07/wall_clock-300x167-1-150x150.jpeg" alt="从一次经历谈 TIME_WAIT 的那些事" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22263.html" class="wp_rp_title">从一次经历谈 TIME_WAIT 的那些事</a></li><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/11609.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/05/xin_2001040422167711230318-150x150.jpg" alt="TCP 的那些事儿（下）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11609.html" class="wp_rp_title">TCP 的那些事儿（下）</a></li><li ><a href="https://coolshell.cn/articles/11564.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/05/tin-can-phone-150x150.jpg" alt="TCP 的那些事儿（上）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11564.html" class="wp_rp_title">TCP 的那些事儿（上）</a></li><li ><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/06/Alan-Cox-150x150.jpg" alt="Alan Cox：单向链表中prev指针的妙用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9859.html" class="wp_rp_title">Alan Cox：单向链表中prev指针的妙用</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1484.html">TCP网络关闭的状态变换时序图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1484.html/feed</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>非常简单的Python HTTP服务</title>
+		<link>https://coolshell.cn/articles/1480.html</link>
+					<comments>https://coolshell.cn/articles/1480.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sun, 27 Sep 2009 03:34:10 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1480</guid>
+
+					<description><![CDATA[<p>如果你急需一个简单的Web Server，但你又不想去下载并安装那些复杂的HTTP服务程序，比如：Apache，ISS等。那么， Python 可能帮助你。使用...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1480.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1480.html">非常简单的Python HTTP服务</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>如果你急需一个简单的Web Server，但你又不想去下载并安装那些复杂的HTTP服务程序，比如：Apache，ISS等。那么， <a href="http://www.python.org/">Python</a> 可能帮助你。使用Python可以完成一个简单的内建 HTTP 服务器。于是，你可以把你的目录和文件都以HTTP的方式展示出来。佻只需要干一件事情，那就是安装一个Python。</p>
+<p>实际上来说，这是一个可以用来共享文件的非常有用的方式。实现一个微型的HTTP服务程序来说是很简单的事情，在Python下，只需要一个命令行。下面是这个命令行：（假设我们需要共享我们的目录 <tt><span>/home/haoel</span></tt> 而IP地址是192.168.1.1）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ cd /home/haoel
+$ python -m SimpleHTTPServer
+</pre>
+<p><span id="more-1480"></span></p>
+<p>这就行了，而我们的HTTP服务在8000号端口上侦听。你会得到下面的信息：</p>
+<pre>Serving HTTP on 0.0.0.0 port 8000 ...</pre>
+<p>你可以打开你的浏览器（IE或Firefox），然后输入下面的URL：</p>
+<pre>http://192.168.1.1:8000</pre>
+<p>如果你的目录下有一个叫 index.html 的文件名的文件，那么这个文件就会成为一个默认页，如果没有这个文件，那么，目录列表就会显示出来。</p>
+<p>如果你想改变端口号，你可以使用如下的命令：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+$ python -m SimpleHTTPServer 8080
+</pre>
+<p>如果你只想让这个HTTP服务器服务于本地环境，那么，你需要定制一下你的Python的程序，下面是一个示例：</p>
+<p>[py]<br />
+import sys<br />
+import BaseHTTPServer<br />
+from SimpleHTTPServer import SimpleHTTPRequestHandler<br />
+HandlerClass = SimpleHTTPRequestHandler<br />
+ServerClass  = BaseHTTPServer.HTTPServer<br />
+Protocol     = &quot;HTTP/1.0&quot;</p>
+<p>if sys.argv[1:]:<br />
+    port = int(sys.argv[1])<br />
+else:<br />
+    port = 8000<br />
+server_address = (&#8216;127.0.0.1&#8217;, port)</p>
+<p>HandlerClass.protocol_version = Protocol<br />
+httpd = ServerClass(server_address, HandlerClass)</p>
+<p>sa = httpd.socket.getsockname()<br />
+print &quot;Serving HTTP on&quot;, sa[0], &quot;port&quot;, sa[1], &quot;&#8230;&quot;<br />
+httpd.serve_forever()<br />
+[/py]</p>
+<p>注意：所有的这些东西都可以在 Windows 或 <a href="http://www.cygwin.com/">Cygwin</a> 下工作。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1480.html">非常简单的Python HTTP服务</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1480.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>CentOS上php的问题及Selinux安全设置</title>
+		<link>https://coolshell.cn/articles/1462.html</link>
+					<comments>https://coolshell.cn/articles/1462.html#comments</comments>
+		
+		<dc:creator><![CDATA[free.wang]]></dc:creator>
+		<pubDate>Sat, 26 Sep 2009 01:00:54 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[CentOS]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[SELinux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1462</guid>
+
+					<description><![CDATA[<p>最近有位站长在用我们WebIM客户端的时候，无法登录我们的WebIM服务器，十分惊讶。 在我们的用户里尚属首例，其实更惊讶的是我的CentOS也遇到了同样的问题...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1462.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1462.html">CentOS上php的问题及Selinux安全设置</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近有位站长在用我们WebIM客户端的时候，无法登录我们的WebIM服务器，十分惊讶。 在我们的用户里尚属首例，其实更惊讶的是我的CentOS也遇到了同样的问题。然后分析了这位站长的HttpResponse , Shamee :( 一样的OS.</p>
+<p>搜了一下，发现的解决方法都是在代码上。 我想可能关键词有错误，因为我坚信我的问题肯定不在代码上，应该是来自OS本身的限制。于是重新debug了一下代码，报错 permission (13) connection。然后直接在洋人的邮件列表里搜了一下。</p>
+<p>问题确定了 是SeLinux(<span style="color: #ff6600"><em>http://zh.wikipedia.org/wiki/SELinux</em></span>)安全策略的限制。</p>
+<p><span id="more-1462"></span></p>
+<p>这下问题明了了,执行 <span style="color: #ff0000">/usr/sbin/setenforce 0</span>就能迅速关闭SELINUX，或者<span style="color: #ff0000">vi /etc/selinux/config</span> 把<span style="color: #ff0000">enforcing</span>改成<span style="color: #ff0000">permissive </span>然后<span style="color: #ff0000">reboot</span>.</p>
+<p>但是我想了一下，就算安全级别为B1的Linux被攻击的可能小，但是总会有面对这种问题的时候，况且这种解决访问本身并不优雅。</p>
+<p>于是想了下 把Apache脱离SeLinux是一个最恰当的办法，于是执行</p>
+<p><code data-enlighter-language="bash" class="EnlighterJSRAW">sudo  setsebool -P httpd_disable_trans 1 &amp;&amp; sudo   /etc/init.d/httpd restart</code></p>
+<p>这样就能保证在SeLinux的光环下,Web服务器行为不受控制。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/cache-150x150.png" alt="缓存更新的套路" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17416.html" class="wp_rp_title">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1462.html">CentOS上php的问题及Selinux安全设置</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1462.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>微软在从Google赢取搜索引擎市场份额</title>
+		<link>https://coolshell.cn/articles/1457.html</link>
+					<comments>https://coolshell.cn/articles/1457.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Tue, 22 Sep 2009 15:01:50 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[Microsoft]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1457</guid>
+
+					<description><![CDATA[<p>7月到8月，微软市场份额从8.9%到了9.3%;  Google掉了1.7% Bing显然让Google有些紧张，不仅Bing在界面上赢得了一部分消费者的好评，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1457.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1457.html">微软在从Google赢取搜索引擎市场份额</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>7月到8月，微软市场份额从8.9%到了9.3%;  Google掉了1.7%</p>
+<p>Bing显然让Google有些紧张，不仅Bing在界面上赢得了一部分消费者的好评，而且其在某些垂直领域的深度整合使得Bing的盈利能力具有了相当竞争力。相信Google在幕后紧锣密鼓的测试新界面和新搜索功能的同时，也在严阵以待地部署销售团队（如果经济萧条好转，旅游和健康将会是最先复苏的领域，也是Bing目前占有优势的战场）</p>
+<p>拭目以待吧！</p>
+<p>原文地址：<a style="color: #3333cc;" href="http://news.bbc.co.uk/2/hi/technology/8268356.stm" target="_blank">http://news.bbc.co.uk/2/hi/technology/8268356.stm</a><br />
+<span id="more-1457"></span></p>
+<h1 style="margin-top: 5px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 2.4em; font-weight: bolder; padding: 0px;">Microsoft increases search share</h1>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;"><strong>Microsoft&#8217;s Bing search engine is making inroads into Google&#8217;s dominance of the search market according to data from US net measurement firm ComScore.</strong></p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;"><span style="color: #ff0000;">Its latest figures show Microsoft&#8217;s share of the search market has grown from 8.9% in July to 9.3% in August.</span></p>
+<p>The news saw Microsoft&#8217;s shares rise while Google&#8217;s dipped slightly.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">Microsoft&#8217;s modest 9.3% share of the US search market is small but is a significant increase for a new entrant, say analysts.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">The Bing search engine was launched by Microsoft in June 2009 and was followed in July by a search tie-up with rival Yahoo.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">Google is still far and away the search leader, with 65% of the US market.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;"><strong>Tiny ripple</strong></p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">Microsoft&#8217;s modest 9.3% share of the US search market is small but is a significant increase for a new entrant say analysts.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">The fact Google is losing any market share to Microsoft could indicate that it is no longer the immediate choice for everyone, thinks search expert John Batelle.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">&#8220;I think the service is starting to gain footholds with users who see it as a regular alternative to Google,&#8221; he wrote in his blog.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">He is a fan of Bing&#8217;s newly-released visual search interface.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">&#8220;I think it augurs some serious new &#8211; and useful &#8211; approaches to sifting through massive amounts of related data,&#8221; he said.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">In the UK, Bing has also made small inroads into Google&#8217;s market share.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;"><span style="color: #ff0000;">In August the number of searches on Bing increased by 5%, while Google searches were down 1.7%, according to UK online measurement firm Nielsen.</span></p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">&#8220;It is a very tiny ripple but reflects that Microsoft has done a lot of marketing around it and that people are curious about anything new that is launched,&#8221; said Alex Burmaster, communications director at Nielsen.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">Google is already working on an update to its current search engine.</p>
+<p style="padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; outline-width: 0px; outline-style: initial; outline-color: initial; font-size: 13px; margin: 0px;">Nicknamed &#8220;Caffeine&#8221; the new version is still in the testing phase and will replace the current engine once tests are complete.</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1457.html">微软在从Google赢取搜索引擎市场份额</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1457.html/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++的std::string的“读时也拷贝”技术！</title>
+		<link>https://coolshell.cn/articles/1443.html</link>
+					<comments>https://coolshell.cn/articles/1443.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Sat, 19 Sep 2009 13:19:33 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1443</guid>
+
+					<description><![CDATA[<p>C++的std::string的读时也拷贝技术！ 嘿嘿，你没有看错，我也没有写错，是读时也拷贝技术。什么?我的错，你之前听说写过时才拷贝，嗯，不错的确有这门技术...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1443.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1443.html">C++的std::string的“读时也拷贝”技术！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>C++的std::string的读时也拷贝技术！</p>
+<p>嘿嘿，你没有看错，我也没有写错，是读时也拷贝技术。什么?我的错，你之前听说写过时才拷贝，嗯，不错的确有这门技术，英文是Copy On Write，简写就是COW,非常&#8217;牛&#8217;！那么我们就来看看这个&#8217;牛&#8217;技术的效果吧。</p>
+<p>我们先编写一段程序<br />
+<span id="more-1443"></span></p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;sys/time.h&gt;
+
+static long getcurrenttick()
+{
+    long tick ;
+    struct timeval time_val;
+    gettimeofday(&amp;time_val , NULL);
+    tick = time_val.tv_sec * 1000 + time_val.tv_usec / 1000 ;
+    return tick;
+}
+
+
+int main( )
+{
+    string the_base(1024 * 1024 * 10, &#039;x&#039;);
+    long begin =  getcurrenttick();
+    for( int i = 0 ;i&lt; 100 ;++i ) {
+       string the_copy = the_base ;
+    }
+    fprintf(stdout,&quot;耗时[%d] \n&quot;,getcurrenttick() - begin );
+}
+</pre>
+<p>嗯，一个非常大的字符串，有10M字节的x，并且执行了100此拷贝。编译执行它，非常快，在我的虚拟机甚至不要1个毫秒。</p>
+<p>现在我们来对这个string加点料！</p>
+<pre class="brush:c; highlight:6">
+int main(void) {
+    string the_base(1024 * 1024 * 10, 'x');
+    long begin =  getcurrenttick();
+    for (int i = 0; i < 100; i++) {
+        string the_copy = the_base;
+        the_copy[0] = 'y';
+    }
+    fprintf(stdout,"耗时[%d] \n",getcurrenttick() - begin );
+}
+</pre>
+<p>现在我们再编译并执行这断程序，居然需要4~5秒！哇！非常美妙的写时才拷贝技术，性能和功能的完美统一。</p>
+<p>我们再来看看另外一种情况！</p>
+<pre class="brush:c">
+string original = "hello";
+char & ref = original[0];
+string clone = original;
+ref = 'y';
+</pre>
+<p>我们生成了一个string，并保留了它首字符的引用，然后复制这个string，修改string中的首字符。因为写操作只是直接的修改了内存中的指定位置，这个string就根本不能感知到有写发生，如果写时才拷贝是不成熟的，那么我们将同时会修改original和clone两个string。那岂不是灾难性的结果？幸好上述问题不会发生。clone的值肯定是没有被修改的。看来COW就是非常的牛！</p>
+<p>以上都证明了我们的COW技术非常牛！</p>
+<p>有太阳就有黑暗，这句说是不是有点耳熟？</p>
+<pre class="brush:c; highlight:3">
+int main(void) {
+    string the_base(1024 * 1024 * 10, 'x');
+    fprintf(stdout,"the_base's first char is [%c]\n",the_base[0] );
+    long begin =  getcurrenttick();
+    for (int i = 0; i < 100; i++) {
+        string the_copy = the_base;
+    }
+    fprintf(stdout,"耗时[%d] \n",getcurrenttick() - begin );
+}
+</pre>
+<p>啊，居然也是4~5秒！你可能在想，我只是做了一个读，没有写嘛，这到底是怎么回事？难道还有读时也拷贝的技术！。</p>
+<p>不错，为了避免了你通过[]操作符获取string内部指针而直接修改字符串的内容，在你使用了the_base[0]后，这个字符串的写时才拷贝技术就失效了。</p>
+<p>C++标准的确就是这样的，C++标准认为，当你通过迭代器或[]获取到string的内部地址的时候，string并不知道你将是要读还是要写。这是它无法确定，为此，当你获取到内部引用后，为了避免不能捕获你的写操作，它在此时废止了写时才拷贝技术！</p>
+<p>这样看来我们在使用COW的时候，一定要注意，如果你不需要对string的内部进行修改，那你就千万不要使用通过[]操作符和迭代器去获取字符串的内部地址引用，如果你一定要这么做，那么你就必须要付出代价。当然，string还提供了一些使迭代器和引用失效的方法。比如说push_back，等， 你在使用[]之后再使用迭代器之后，引用就有可能失效了。那么你又回到了COW的世界！比如下面的一个例子</p>
+<pre class="brush:c; highlight:7">
+int main( )
+{
+    struct timeval time_val;
+    string the_base(1024 * 1024 * 10, 'x');
+    long begin = 0 ;
+    fprintf(stdout,"the_base's first char is [%c]\n",the_base[0] );
+    the_base.push_back('y');
+    begin = getcurrenttick();
+    for( int i = 0 ;i< 100 ;++i ) {
+        string the_copy = the_base ;
+    }
+    fprintf(stdout,"耗时[%d] \n",getcurrenttick() - begin );
+}
+</pre>
+<p>一切又恢复了正常！如果对[]返回引用进行了操作又会发生情况呢，有兴趣的朋友可以试试！结果非常令人惊讶。</p>
+<p>另外：上述例子是在linux环境下编译的，使用STL是GNU的STL。windows上我用的是vs2003，但是非常明显vs2003一点都不支持COW。</p>
+<p>这篇文章出自<a href="http://ridiculousfish.com/blog/archives/2009/09/17/i-didnt-order-that-so-why-is-it-on-my-bill-episode-2/" target=_blank>http://ridiculousfish.com/blog/archives/2009/09/17/i-didnt-order-that-so-why-is-it-on-my-bill-episode-2/</a> 这里，我使用了它的例子。但是我重新自己组织了内容。</p>
+<p>编写这篇文章的同时，我还参考了耗子的<a href="http://blog.csdn.net/haoel/archive/2004/06/23/24058.aspx">《标准C＋＋类string的Copy-On-Write技术》</a>一文<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 - CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1443.html">C++的std::string的“读时也拷贝”技术！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1443.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>WebTTY！太酷了！</title>
+		<link>https://coolshell.cn/articles/1441.html</link>
+					<comments>https://coolshell.cn/articles/1441.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 19 Sep 2009 02:56:09 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[WebTTY]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1441</guid>
+
+					<description><![CDATA[<p>这真是一件很Cool的事，在Web上操作Linux，请访问下面这个链接： http://19.testape.com/webtty_page.php 于是你会看...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1441.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1441.html">WebTTY！太酷了！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这真是一件很Cool的事，在Web上操作Linux，请访问下面这个链接：</p>
+<p style="TEXT-ALIGN: center"><a href="http://19.testape.com/webtty_page.php" target="_blank">http://19.testape.com/webtty_page.php</a></p>
+<p>于是你会看到页面中间的红色，一个小操作系统启动了，红色的最下方是一个bash-2.05b#</p>
+<p>试着输入一下命令吧。</p>
+<p>bash-2.05b# uname -a<br />
+Linux (none) 2.6.18 #2 Mon Dec 29 19:47:06 UTC 2008 i686 GNU/Linux</p>
+<p>命令支持的不多，好像只是一个单机版的虚拟机，一但你打开网页时就起动一个。当然，也不排除其完全是假的，因为太简单了，一切都可以fake出来。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/Google-Person-Finder-150x150.png" alt="PFIF网上寻人协议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9508.html" class="wp_rp_title">PFIF网上寻人协议</a></li><li ><a href="https://coolshell.cn/articles/2424.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" alt="十条不错的编程观点" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2424.html" class="wp_rp_title">十条不错的编程观点</a></li><li ><a href="https://coolshell.cn/articles/3480.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/01/OB-LP754_bestjo_D_20110104181820-150x150.jpg" alt="一些有意思的网站和贴子" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3480.html" class="wp_rp_title">一些有意思的网站和贴子</a></li><li ><a href="https://coolshell.cn/articles/17381.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/07/PerfTest-150x150.png" alt="性能测试应该怎么做？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17381.html" class="wp_rp_title">性能测试应该怎么做？</a></li><li ><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="Erlang和Python互通" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1313.html" class="wp_rp_title">Erlang和Python互通</a></li><li ><a href="https://coolshell.cn/articles/4131.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="WSDL 1.1 中文规范" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4131.html" class="wp_rp_title">WSDL 1.1 中文规范</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1441.html">WebTTY！太酷了！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1441.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Alice梦游UNIX仙境</title>
+		<link>https://coolshell.cn/articles/1439.html</link>
+					<comments>https://coolshell.cn/articles/1439.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Sat, 19 Sep 2009 02:33:00 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1439</guid>
+
+					<description><![CDATA[<p>本文来源：http://www.pma.caltech.edu/Publications/alice.in.unix.land.html （这是一篇1989年的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1439.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1439.html">Alice梦游UNIX仙境</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>本文来源：<a href="http://www.pma.caltech.edu/Publications/alice.in.unix.land.html">http://www.pma.caltech.edu/Publications/alice.in.unix.land.html</a><br />
+（这是一篇1989年的文章）</p>
+<p>Alice 正在在她的显示器上读着一些信息，她开会怀疑所有的事情并不是应该的那样。“程序太大了，而无法适应内存”，她读到。</p>
+<p>“一个很奇怪的事情”，她说，“我所做的也就是在启动我的字处理程序会运行了14个TSR（terminate-and-stay-resident 常驻程序）。所有这些程序需要使用4M的内存，我希望我能使用超过640K以上的内存”。</p>
+<p>就在那个时候，一个小的白色的顾问（一个非常白的顾问）跑过了房间。“哦，我的外套和领带”，他说到，“我要迟到了。并且是每小时150元。”Alice本想对他说点什么，他却跳到了Alice的显示器里并到在操作系统后面消失了。</p>
+<p><span id="more-1439"></span></p>
+<p>Alice 从来没有见过有人可以跳到显示器里，并且肯定不是通过操作系统干。但是，曾有人告诉他，DOS这个操作系统是非常肤浅的。于是，她没有怎么犹豫，Alice也跳了进去。</p>
+<p>Alice发现她自己在一个明亮的走廊里。她不知道要做什么，她开始向前走，走过了一个拐角后，她发现她的前面有两个小胖子，他们互相搂着对对方的脖子。一个人的领口上绣着“POS”，另一个则是“NEG”。</p>
+<p>“我知道”，Alice说，“你俩是晶体管”。</p>
+<p>“是的”，Positive回答到。</p>
+<p>“你们能帮我吗？”Alice问道。</p>
+<p>“不能”，Negative回答。</p>
+<p>“我在找一个白色的顾问”，Alice指着她走过来的方向，“他走的是这条路吗？”Alice继续问道。</p>
+<p>“不是”，Negative回答到。</p>
+<p>Alice又指了另一条路。</p>
+<p>“是的”，Postive回答到。</p>
+<p>很快，Alice来到了一个很大的棕色的桌前。那个顾问就在那里，名字叫Mad Hacker，并且有一些Alice并不知道的生物围在桌边。在角落里，有一个睡鼠在那熟睡。在桌子上放着一个大的标牌 ，上面写着“UNIX Conference”</p>
+<p>每一个人除了那只睡鼠都有一个纸杯，纸杯里应该是奶油蛋羹的样子。“错误的佐料”，他们所有人都这么说，并把杯子传递给他们右手边的人，并且优雅地从他们的左边接过杯子。Alice 看着他们重复着这个仪式三到四次后，她也坐到了他们中间。</p>
+<p>马上，一个很大的癞蛤蟆跳到了他的大腿上，并看着她就好像希望得到Alice的宠爱。“Grep”，它叫到。</p>
+<p>“别介意”，Mad Hacker解释道，“他只是想查找一些字符串”。</p>
+<p>“Nroff？” 蛤蟆问到。</p>
+<p>Mad Hacker 给了Alice一个有看似有奶油蛋羹杯子以及一把勺子。“这里”，他问到，“你对这个有什么想法？”</p>
+<p>“看起来很可爱”，Alice说，“非常甜”。她边说边尝了一勺。“讨厌！”他叫到，“真糟糕，这是什么啊？！”</p>
+<p>“哦，这只不过是Unix的另一个图形界面”，Hacker回答道。</p>
+<p>Alice 指着角落里的那只睡鼠说：“他是谁？”</p>
+<p>“那也是一个操作系统”，Hacker解释道，“我们几乎放弃了去把他唤醒过来”。</p>
+<p>就在这个时候，坐在睡鼠旁边的一个很大的蓝色的大象站了起来。“女士们，先生们”，他很傲慢地说到，“作为在这里的一个最大的生物，我感到我们必需开明地来看一下&#8230;&#8230;”</p>
+<p>一个在桌子另一边的年轻的“工作麻雀”愤努地站了起来。大象注意这事，并改变了他的演讲，“&#8230;&#8230;什么是我们下一步的行动”。</p>
+<p>有一半的生物鞠躬至敬，而另一半的生物偷偷窃笑。这个时候，睡鼠醒过来了，要和这个大象合并。没人有一丁点的惊讶。</p>
+<p>“我们需要什么”，一只Sun熊宣称，他用他的长甜头舔了舔那个奶油蛋羹说道，“我们需要的是一个像Macintosh那样的调料”。</p>
+<p>突然，那个白色顾问红着脸跳了起来，“不，不，不！”他尖叫着，“没有人会150元一小时的费用给Macintosh！”</p>
+<p>“Awk”，青蛙说道。</p>
+<p>“用户”，Sun熊解释到，“用户们希望的是那种简单到不需要学习的用户接口”。</p>
+<p>“用户？”Hacker叫到“用户？！你说的是那些秘书，会计，建筑师，以及体力劳动者！”</p>
+<p>“喔”Sun熊说到，“我得做点什么得让他们把系统切换到UNIX”。</p>
+<p>“你们是否觉得，”一个正在桌子上打洞的啄木鸟说，“我们一同使用Unix这个名字会是一个问题？我的意思是，这样想的并不只有我一个人。”</p>
+<p>“也许我们应该试试别的名字”，工作麻雀说，“比如：Brut或Rambo”。</p>
+<p>“Penix” 一只企鹅说到。</p>
+<p>&#8220;mount&#8221;，蛤蟆说，“spawn”。</p>
+<p>Alice 拍了一下蛤蟆。“nice?” 蛤蟆问到。</p>
+<p>“但是”，啄木鸟又建议到，“ShrinkWap的问题怎么办？”</p>
+<p>突然，每一个人都跳了起来，而且都变得活跃起来，挥动着他们的双手大叫着，但只一会，他们又全都坐下来。</p>
+<p>“现在这个问题解决了”，啄木鸟说，“让我们回到调料的问题上来吧”。</p>
+<p>于是，桌子边的每个人又采样了一个新的奶油蛋羹，继续说到“错误的调料”，然后把杯子传给右边的人，并从左边的人接过杯子。</p>
+<p>完全地被搞糊涂了，Alice起身离开了，她正在正在离开的过程中，她听到了身后传来了一个熟悉的声音。</p>
+<p>“rem”，它说，“edlin”</p>
+<p>Alice 转过身去，看到了那只蛤蟆，她微笑着。“你总是说着这些古怪发音的单词”，她说，“但至少我知道他们是什么意思”。</p>
+<p>“chkdsk”， 蛤蟆说到。</p>
+<p>&#8212;&#8211;By Lincoln Spector TEXAS COMPUTER CURRENTS SEPTEMBER 1989<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/figure1-150x150.gif" alt="Unix考古记：一个“遗失”的shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9410.html" class="wp_rp_title">Unix考古记：一个“遗失”的shell</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1439.html">Alice梦游UNIX仙境</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1439.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编译vim解决中文支持</title>
+		<link>https://coolshell.cn/articles/1432.html</link>
+					<comments>https://coolshell.cn/articles/1432.html#comments</comments>
+		
+		<dc:creator><![CDATA[free.wang]]></dc:creator>
+		<pubDate>Sat, 19 Sep 2009 00:47:04 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[vim]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1432</guid>
+
+					<description><![CDATA[<p>最近开始抛弃Ubuntu折腾CentOS 5.3(注：无意挑起OS之争)，每当换一个OS，第一个配置的就是VIM。 介于以前在MacOSX的编译经验，直接三部曲...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1432.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1432.html">编译vim解决中文支持</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近开始抛弃Ubuntu折腾CentOS 5.3(注：无意挑起OS之争)，每当换一个OS，第一个配置的就是VIM。</p>
+<p>介于以前在MacOSX的编译经验，直接三部曲</p>
+<blockquote><p><span style="color: #ff0000">./configue &amp;&amp; sudo make &amp;&amp; sudo make install</span></p></blockquote>
+<p>解决的问题。  但在CentOS之后发现无论如何都不支持中文。</p>
+<p>通过文档的翻阅和google的搜索，发现了问题出现在编译上。vim支持中文需要2个基本feature：multi_byte和iconv。</p>
+<p><span id="more-1432"></span></p>
+<p>在vim中输入 :version  发现这2个feature都是  &#8211; multi_byte 和 &#8211; iconv。看来编译的时候参数没有配置对。</p>
+<p>于是重新执行以下代码</p>
+<blockquote><p>./configure &#8211;prefix=/usr &#8211;with-features=huge<br />
+sudo make<br />
+sudo make install</p></blockquote>
+<p>问题就解决了。</p>
+<p>另外vim配置文件从第一行(我是unicode的统一论者)，加上</p>
+<blockquote><p>set enc=utf-8<br />
+set tenc=utf-8<br />
+set fenc=utf-8<br />
+set fencs=utf-8,usc-bom</p></blockquote>
+<p>其实整个问题都很简单。 但是我发现搜索引擎里的资料 不是通过直观的关键字搜出来的。 所以这里做下一个记录，希望对以后的朋友有所帮助。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/success_vim-150x150.jpg" alt="无插件Vim编程技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11312.html" class="wp_rp_title">无插件Vim编程技巧</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/dstat_screenshot-150x150.png" alt="28个Unix/Linux的命令行神器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7829.html" class="wp_rp_title">28个Unix/Linux的命令行神器</a></li><li ><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" alt="游戏：VIM大冒险" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7166.html" class="wp_rp_title">游戏：VIM大冒险</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" alt="给程序员的VIM速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5479.html" class="wp_rp_title">给程序员的VIM速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1432.html">编译vim解决中文支持</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1432.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Oracle的战书！</title>
+		<link>https://coolshell.cn/articles/1426.html</link>
+					<comments>https://coolshell.cn/articles/1426.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Fri, 11 Sep 2009 08:24:47 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[IBM]]></category>
+		<category><![CDATA[Oracle]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1426</guid>
+
+					<description><![CDATA[<p>http://www.oracle.com/features/suncustomers.html （转载本站文章请注明作者和出处 酷 壳 &#8211; Coo...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1426.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1426.html">Oracle的战书！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: center;"><a href="http://www.oracle.com/features/suncustomers.html">http://www.oracle.com/features/suncustomers.html</a><img decoding="async" loading="lazy" title="sun customers" src="https://coolshell.cn/wp-content/uploads/2009/09/sun_customers_lg.gif" alt="sun customers" width="370" height="552" /></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/962.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="【原创】SQL栏目树的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/962.html" class="wp_rp_title">【原创】SQL栏目树的代码</a></li><li ><a href="https://coolshell.cn/articles/595.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Oracle成功收购Sun" width="150" height="150" /></a><a href="https://coolshell.cn/articles/595.html" class="wp_rp_title">Oracle成功收购Sun</a></li><li ><a href="https://coolshell.cn/articles/203.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/ibm-potentially-buying-sun-150x150.jpg" alt="IBM收购Sun，这是一种什么样的精神？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/203.html" class="wp_rp_title">IBM收购Sun，这是一种什么样的精神？</a></li><li ><a href="https://coolshell.cn/articles/786.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="用TCC可以干些什么？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/786.html" class="wp_rp_title">用TCC可以干些什么？</a></li><li ><a href="https://coolshell.cn/articles/1145.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="程序员犯的非技术错误(Top 5)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1145.html" class="wp_rp_title">程序员犯的非技术错误(Top 5)</a></li><li ><a href="https://coolshell.cn/articles/3512.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="64位平台C/C++开发注意事项" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3512.html" class="wp_rp_title">64位平台C/C++开发注意事项</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1426.html">Oracle的战书！</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1426.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>8个实用而有趣Bash命令提示行</title>
+		<link>https://coolshell.cn/articles/1399.html</link>
+					<comments>https://coolshell.cn/articles/1399.html#comments</comments>
+		
+		<dc:creator><![CDATA[Neo]]></dc:creator>
+		<pubDate>Mon, 07 Sep 2009 09:44:22 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Bash]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1399</guid>
+
+					<description><![CDATA[<p>很多人都对过命令行提示的重要性不屑一顾，甚至是一点都不关心。但是我却一点都不这么认为，一个好的命令行提示可以改变你使用命令的方式。为此，我在internet上找...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1399.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1399.html">8个实用而有趣Bash命令提示行</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">很多人都对过命令行提示的重要性不屑一顾，甚至是一点都不关心。但是我却一点都不这么认为，一个好的命令行提示可以改变你使用命令的方式。为此，我在internet上找到一些非常实用，优秀，并有趣的bash的命令行提示。下面我将我最喜欢使用的一些命令行提示罗列如下。</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">注意  &#8211;  要使用下面这些提示，你可以拷贝粘贴这些以&#8221;PS1&#8243;打头的内容到你的终端上，为了使你的改变永久生效，还要将这些内容粘贴到你使用用户的~/.bashrc文件中去。</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"><span id="more-1399"></span></p>
+<h3>1. 在成功执行的命令上增加一个笑脸符号</h3>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">这个命令提示行可能是这个命令行提示列表中最有趣的一个，但是它也依然有使用的价值。这个提示的想法是基于当你命令被成功执行，你将会得到一个笑脸作为你的命令行提示，一旦的命令执行失败，命令行提示将会换成一个哭脸。</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">例子：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px; text-align: center;"><img decoding="async" class="aligncenter" src="http://images.maketecheasier.com/2009/08/bashprompts-happyface.jpg" alt="bashprompts-happyface" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">代码：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">PS1=&#8221;\<code data-enlighter-language="raw" class="EnlighterJSRAW">if [ \$? = 0 ]; then echo \[\e[33m\]^_^\[\e[0m\]; else echo \[\e[31m\]O_O\[\e[0m\]; fi\</code>[\u@\h:\w]\\$ &#8220;</p>
+<h3><strong>2.更改失败命令的颜色</strong></h3>
+<p><span style="color: #000000;">下面这个命令行提示是我最喜欢的命令行之一。和上一个相似，这个命令行提示的颜色会在你最后一个命令运行失败后改变，而且这个命令行长路径会缩短输入命令的空间，这个命令提示还包含了bash 每个历史命令的命令号，以方便重新提取运行。</span></p>
+<p><span style="color: #000000;">例子：</span></p>
+<p style="text-align: center;"><span style="color: #000000;"><img decoding="async" class="aligncenter" src="http://images.maketecheasier.com/2009/08/bashprompts-hurring.jpg" alt="bashprompts-hurring" /></span></p>
+<p><span style="color: #000000;">代码：</span></p>
+<p><span style="color: #000000;">PS1=&#8221;\[\033[0;33m\][\!]\<code data-enlighter-language="raw" class="EnlighterJSRAW">if [[ \$? = &quot;0&quot; ]]; then echo &quot;\\[\\033[32m\\]&quot;; else echo &quot;\\[\\033[31m\\]&quot;; fi\</code>[\u.\h: \<code data-enlighter-language="pwd" class="EnlighterJSRAW">if [[ </code>|wc -c|tr -d &#8221; &#8220;<code data-enlighter-language="raw" class="EnlighterJSRAW"> &gt; 18 ]]; then echo &quot;\\W&quot;; else echo &quot;\\w&quot;; fi\</code>]\$\[\033[0m\] &#8220;; echo -ne &#8220;\033]0;<code data-enlighter-language="raw" class="EnlighterJSRAW">hostname -s</code>:<code data-enlighter-language="raw" class="EnlighterJSRAW">pwd</code>\007&#8243;&#8216;</span></p>
+<h3 style="padding-top: 10px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; font-size: 18px; font-weight: 700; color: #333333; margin: 0px;">3. 多行提示</h3>
+<p>如果你是喜欢命令行提示中包含完整信息的那一类人，那么下边就有一个适合于你的命令行提示。这个命令行提示信息中包含日期/时间，全路径，用户，主机，活动终端，甚至包含文件数和占用空间等。</p>
+<p>例子：</p>
+<p style="TEXT-ALIGN: center"><br style="padding: 0px; margin: 0px;" /><img decoding="async" loading="lazy" class="aligncenter" style="margin-top: 0px; margin-right: auto; margin-bottom: 0px; margin-left: auto; display: block; padding: 0px; border: thin solid #999999;" src="http://images.maketecheasier.com/2009/08/bashprompts-informant.jpg" alt="bashprompts-informant" width="392" height="162" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">代码：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">PROMPT_COMMAND=&#8217;PS1=&#8221;\n\[\033[35m\]\$(/bin/date)\n\[\033[32m\]\w\n\[\033[1;31m\]\u@\h: \[\033[1;34m\]\$(/usr/bin/tty | /bin/sed -e &#8216;s:/dev/::&#8217;): \[\033[1;36m\]\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed &#8216;s: ::g&#8217;) files \[\033[1;33m\]\$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed &#8216;s/total //&#8217;)b\[\033[0m\] -&gt; \[\033[0m\]&#8221;&#8216;</p>
+<p><span style="font-family: 'Lucida Grande'; line-height: normal;"> </span></p>
+<h3 style="padding-top: 10px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; font-size: 18px; font-weight: 700; color: #333333; margin: 0px;">4. 多颜色提示</h3>
+<p>这个命令行提示除了使用了不同颜色来区别不同信息外，它并没有很特别的地方。就像你看到的那样，它提供了时间，用户名，主机名，当前目录。相当少的信息，但是非常地实用。</p>
+<p>例子：</p>
+<p style="TEXT-ALIGN: center; PADDING-BOTTOM: 2px; LINE-HEIGHT: 20px; MARGIN: 0px 0px 10px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 2px"><img decoding="async" loading="lazy" class="size-full wp-image-6808  aligncenter" style="margin-top: 0px; margin-right: auto; margin-bottom: 0px; margin-left: auto; display: block; padding: 0px; border: thin solid #999999;" src="http://images.maketecheasier.com/2009/08/bashprompts-4.jpg" alt="bashprompts-4" width="333" height="69" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"><span style="line-height: 20px;">代码：</span></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"><span style="line-height: 20px;">PS1=&#8221;\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ &#8220;</span></p>
+<p><span style="font-family: 'Lucida Grande'; line-height: normal;"> </span></p>
+<h3 style="padding-top: 10px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px; font-size: 18px; font-weight: 700; color: #333333; margin: 0px;">5.显示完整路径</h3>
+<p>这是一个良好，简洁，最小的2行提示(加上顶上的空行)。在第一行你能得到一个全路径信息，在第二行是一个用户名。如果你对每个命令提示行的空行不爽的话，你只要移走第一个\n就OK了</p>
+<p>例子：</p>
+<p style="TEXT-ALIGN: center"><img decoding="async" loading="lazy" class="size-full wp-image-6818    aligncenter" style="margin-top: 0px; margin-right: auto; margin-bottom: 0px; margin-left: auto; display: block; padding: 0px; border: thin solid #999999;" src="http://images.maketecheasier.com/2009/08/bashprompts-5.jpg" alt="bashprompts-5" width="231" height="126" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">代码：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"><span style="line-height: 20px;">PS1=&#8221;[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u\[\033[1;33m\]-&gt; \[\033[0m\]&#8221;</span></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"><span style="line-height: 20px;"> </span></p>
+<h3>6. 显示后台运行任务数</h3>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">这是另外的一个两行提示，但是这个两行提示具有更多的之前我们没有的信息。第一行是显示通常的user@host和全路径等信息。在第二行我们可以得到命令执行历史序号和一个后台运行任务个数信息。</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">例子：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"> </p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px; text-align: center;"><img decoding="async" src="http://images.maketecheasier.com/2009/08/bashprompts-61.jpg" alt="bashprompts-6" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">代码：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">PS1=&#8217;\[\e[1;32m\]\u@\H:\[\e[m\] \[\e[1;37m\]\w\[\e[m\]\n\[\e[1;33m\]hist:\! \[\e[0;33m\] \[\e[1;31m\]jobs:\j \$\[\e[m\] &#8216;</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"> </p>
+<h3>7. 显示路径信息</h3>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">这是一个非常眩的设计。我们可以从这个命令行提示信息的第一行中获取到用户/主机，运行任务数，和时间日期等信息。在第二行我们可以得到当前目录的文件数和他们占用的磁盘空间。</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">例子：</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;"> </p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px; text-align: center;"><img decoding="async" class="aligncenter" src="http://images.maketecheasier.com/2009/08/bashprompts-7.jpg" alt="bashprompts-7" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">代码:</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">PS1=&#8221;\n\[\e[30;1m\]\[\016\]l\[\017\](\[\e[34;1m\]\u@\h\[\e[30;1m\])-(\[\e[34;1m\]\j\[\e[30;1m\])-(\[\e[34;1m\]\@ \d\[\e[30;1m\])-&gt;\[\e[30;1m\]\n\[\016\]m\[\017\]-(\[\[\e[32;1m\]\w\[\e[30;1m\])-(\[\e[32;1m\]\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed &#8216;s: ::g&#8217;) files, \$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed &#8216;s/total //&#8217;)b\[\e[30;1m\])&#8211;&gt; \[\e[0m\]&#8221;</p>
+<h3>8. My Prompt</h3>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">最后这个命令提示行是我个人最喜欢的使用的命令提示行。它是#7的一个修改，这个命令提示行只包含我最希望知道的信息，因此节省了它的占用空间。我偏爱两行风格，因为这样不仅可以让我看到全路径信息，而且不影响我命令输入的可视空间。</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">例子:</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px; text-align: center;"><img decoding="async" class="aligncenter" src="http://images.maketecheasier.com/2009/08/bashprompts-8.jpg" alt="bashprompts-8" /></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">代码:</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">PS1=&#8221;\n\[\e[32;1m\](\[\e[37;1m\]\u\[\e[32;1m\])-(\[\e[37;1m\]jobs:\j\[\e[32;1m\])-(\[\e[37;1m\]\w\[\e[32;1m\])\n(\[\[\e[37;1m\]! \!\[\e[32;1m\])-&gt; \[\e[0m\]&#8221;</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding-top: 2px; padding-right: 0px; padding-bottom: 2px; padding-left: 0px; line-height: 20px;">如果你愿意共享你的命令提示行，请在将这些命令提示代码加在下面的评论中。</p>
+<div id="_mcePaste" style="position: absolute; overflow-x: hidden; overflow-y: hidden; width: 1px; height: 1px; top: 765px; left: -10000px;">
+<p>PS1=&#8221;\n\[\033[35m\]\$(/bin/date)\n\[\033[32m\]\w\n\[\033[1;31m\]\u@\h: \[\033[1;34m\]\$(/usr/bin/tty | /bin/sed</p>
+<p>-e &#8216;s:/dev/::&#8217;): \[\033[1;36m\]\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed &#8216;s: ::g&#8217;) files \[\033[1;33m\]\$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed &#8216;s/total //&#8217;)b\[\033[0m\] -&gt; \[\033[0m\]&#8221;</p>
+</div>
+<p><a title="原文出处" href="http://maketecheasier.com/8-useful-and-interesting-bash-prompts/2009/09/04" target="_blank"> 出处</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg" alt="bash代码注入的安全漏洞" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_title">bash代码注入的安全漏洞</a></li><li ><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" alt="应该知道的Linux技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8883.html" class="wp_rp_title">应该知道的Linux技巧</a></li><li ><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/11/shell.01-150x150.png" alt="你可能不知道的Shell" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8619.html" class="wp_rp_title">你可能不知道的Shell</a></li><li ><a href="https://coolshell.cn/articles/2987.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="用脚本实现哄宝宝睡觉(Demo)" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2987.html" class="wp_rp_title">用脚本实现哄宝宝睡觉(Demo)</a></li><li ><a href="https://coolshell.cn/articles/1824.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="C语言和sh脚本的杂交代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1824.html" class="wp_rp_title">C语言和sh脚本的杂交代码</a></li><li ><a href="https://coolshell.cn/articles/1574.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="bash 函数级重定向" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1574.html" class="wp_rp_title">bash 函数级重定向</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1399.html">8个实用而有趣Bash命令提示行</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1399.html/feed</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>编程真难啊</title>
+		<link>https://coolshell.cn/articles/1391.html</link>
+					<comments>https://coolshell.cn/articles/1391.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 03 Sep 2009 14:24:57 +0000</pubDate>
+				<category><![CDATA[Java语言]]></category>
+		<category><![CDATA[PHP脚本]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=1391</guid>
+
+					<description><![CDATA[<p>上周，在Sun的Java论坛上出现了一个这样的帖子，这个贴子的链接如下： http://forums.sun.com/thread.jspa?threadID=...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/1391.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/1391.html">编程真难啊</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>上周，在Sun的Java论坛上出现了一个这样的帖子，这个贴子的链接如下：<br />
+<a href="http://forums.sun.com/thread.jspa?threadID=5404590&amp;start=0&amp;tstart=0" target="_blank">http://forums.sun.com/thread.jspa?threadID=5404590&amp;start=0&amp;tstart=0</a></p>
+<p>LZ的贴子翻译如下：</p>
+<blockquote><p>大家好，我是一个Java的新手，我有一个简单的问题：请问我怎么才能反转一个整数的符号啊。比如把-12转成+12。是的，毫无疑问这是个简单的问题，但我弄了一整天我也找不到什么好的方法。非常感谢如果你能告诉我Java有什么方法可以做到这个事，或者告诉我一个正确的方向——比如使用一些数学库或是二进制方法什么的。谢谢！</p></blockquote>
+<p>这个贴子的沙发给出了答案：</p>
+<p><span id="more-1391"></span></p>
+<p style="PADDING-LEFT: 30px">n = -n;</p>
+<p>LZ在四楼回复到：</p>
+<blockquote><p>我知道是个很简单的事，可我没有想到居然这么简单，我觉得你可能是对的。谢谢你。</p></blockquote>
+<p>过了一会，又回复到：</p>
+<blockquote><p>不开玩笑地说，我试了，真的没有问题耶！</p></blockquote>
+<p>看到这样的贴子，就能想到国内论坛上很多这样的“问弱智问题的贴子”，结果可能都会是比较惨！是的，国外的互联网文化和国内差不多，都是恶搞的人多于热心的人，呵呵。<strong>不过，国外的网民们有一点是好的，再恶搞也是就事搞事，不会有侮辱人的语言，这点真是值国内的人学习</strong>。</p>
+<p>这本是一个平淡无奇的贴子，不过回复中那些恶搞的“解决方案”太强大了，在这里例举一下吧。</p>
+<p>贴子的板凳给出了这样的答案（这是恶搞的开始）</p>
+<p> </p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+int x = numberToInvertSign;
+boolean pos = x &gt; 0;
+for(int i = 0; i &lt; 2*Math.abs(x); i++){
+    if(pos){
+        numberToInvertSign--;
+    }
+    else{
+        numberToInvertSign++;
+    }
+}
+</pre>
+<p>然后，有人说，n = -n 可以是可以，但不够晦涩，于是一个晦涩的解决方案出现了：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+int n = ....;
+ n = (0xffffffff ^ n) + 1;
+</pre>
+<p>然后，又出现了一些看似简单，其实是比较晦涩的方案</p>
+<p><code><code data-enlighter-language="java" class="EnlighterJSRAW">n = ~n + 1; </code></p>
+<p> </p>
+<p></code><code><code><code data-enlighter-language="java" class="EnlighterJSRAW">n = ~--n; </code></p>
+<p> </p>
+<p></code></code><code><code>继续，有才的人从来就不少：</code></code></p>
+<p><code><code></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">
+n^= 0xffffffff;
+int m;
+for (m= 1; m != 0 &amp;&amp; ((n&amp;m) != 0); m&lt;&lt;= 1);
+n|= m;
+if (m == 0) n= m;
+else for (m &gt;&gt;= 1; m != 0; n^= m, m&gt;&gt;=1);
+</pre>
+<p> </p>
+<p></code></code><code><code>呵呵，开始越来越强大了，我以前也向大家介绍过《<a rel="bookmark" href="https://coolshell.cn/articles/933.html">如何加密/弄乱C源代码</a>》的文章，和这些恶搞的人可能有点相似吧。上面这个例子一出，大家都在讨论上面例子中的for循环语句，呵呵，很费解啊。</code></code></p>
+<p><code><code>然后，后面几个就开始乱来了：</code></code></p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public int invert(int i) {
+  return i - (i + i);
+}</pre>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">switch (i)
+{
+  case 1: return -1;
+  case 2: return -2;
+  case 3: return -3;
+  // ... etc, you get the proper pattern
+}</pre>
+<p>不过事情还没有结束，看看下面这个吧，OMG。</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">int absoluteValue(int num)
+{
+ int max = 0;
+ for(int i = 0; true; ++i)
+ {
+  max = i &gt; max ? i : max;
+  if(i == num)
+  {
+   if(i &gt;= max)
+    return i;
+   return -i;
+  }
+ }
+}</pre>
+<p> 还有用字符串的解决方案：</p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public int invert(int n) {
+    String nStr = String.valueOf(n);
+ 
+    if (nStr.startsWith(&quot;-&quot;)) {
+        nStr = nStr.replace(&quot;-&quot;, &quot;&quot;);
+    } else {
+        nStr = &quot;-&quot; + nStr;
+    }
+ 
+    return Integer.parseInt(nStr);
+}</pre>
+<p>别忘了面象对象，有最新Java支持的模板库： </p>
+<pre data-enlighter-language="java" class="EnlighterJSRAW">public interface Negatable&lt;T extends Number&gt; {
+  T value();
+  T negate();
+}
+ 
+ 
+ 
+public abstract class NegatableInteger implements Negatable&lt;Integer&gt; {
+  private final int value;
+ 
+  protected NegatableInteger(int value) {
+    this.value = value;
+  }
+ 
+  public static NegatableInteger createNegatableInteger(int value) {
+    if (value &gt; 0) {
+      return new NegatablePositiveInteger(value);
+    }
+    else if (value == Integer.MIN_VALUE) {
+      throw new IllegalArgumentException(&quot;cannot negate &quot; + value);
+    }
+    else if (value &lt; 0) {
+      return new NegatableNegativeInteger(value);
+    }
+    else {
+      return new NegatableZeroInteger(value);
+    }
+  }
+ 
+  public Integer value() {
+    return value;
+  }
+ 
+  public Integer negate() {
+    String negatedString = negateValueAsString ();
+    Integer negatedInteger = Integer.parseInt(negatedString);
+    return negatedInteger;
+  }
+ 
+  protected abstract String negateValueAsString ();
+}
+ 
+ 
+ 
+public class NegatablePositiveInteger extends NegatableInteger {
+  public NegatablePositiveInteger(int value) {
+    super(value);
+  }
+ 
+  protected String negateValueAsString () {
+    String valueAsString = String.valueOf (value());
+    return &quot;-&quot; + valueAsString;
+  }
+}
+ 
+ 
+ 
+public class NegatableNegativeInteger extends NegatableInteger {
+  public NegatableNegativeInteger (int value) {
+    super(value);
+  }
+ 
+  protected String negateValueAsString () {
+    String valueAsString = String.valueOf (value());
+    return valueAsString.substring(1);
+  }
+}
+ 
+ 
+ 
+public class NegatableZeroInteger extends NegatableInteger {
+  public NegatableZeroInteger (int value) {
+    super(value);
+  }
+ 
+  protected String negateValueAsString () {
+    return String.valueOf (value());
+  }
+}</pre>
+<p> </p>
+<p>这个贴子基本上就是两页，好像不算太严重，如果你这样想的话，你就大错特错了。这个贴子被人转到了reddit.com，于是一发不可收拾，在上面的回贴达到了490多条。链接如下：</p>
+<p><a href="http://www.reddit.com/r/programming/comments/9egb6/programming_is_hard/" target="_blank">http://www.reddit.com/r/programming/comments/9egb6/programming_is_hard/</a></p>
+<p>有人说，要用try catch；有人说要使用XML配置文件……，程序员们在追逐更为变态和疯狂的东西，并从中找到快乐，呵呵。</p>
+<p>看完后，正如reddit.com所说——“<strong>编程好难啊</strong>”！</p>
+<p>无独有偶，这并不是第一次，也不会是最后一次，让我们看看在PHP的官网上发生的类似的一幕——讨论PHP的abs取绝对值函数的函数说明文档中的回复：</p>
+<p><a href="http://us.php.net/manual/en/function.abs.php#58508" target="_blank">http://us.php.net/manual/en/function.abs.php#58508</a></p>
+<p>又是一个长贴，还带着很多性能分析，真的很好很强大！</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="如何写出无法维护的代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4758.html" class="wp_rp_title">如何写出无法维护的代码</a></li><li ><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/language-fanboys-150x150.jpg" alt="程序员眼中的编程语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1992.html" class="wp_rp_title">程序员眼中的编程语言</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1391.html">编程真难啊</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/1391.html/feed</wfw:commentRss>
+			<slash:comments>104</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

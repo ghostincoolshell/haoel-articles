@@ -1,0 +1,50 @@
+<html><body><p><a href="https://coolshell.cn/wp-content/uploads/2009/08/photo_gimp.png"></a><a href="https://coolshell.cn/wp-content/uploads/2009/08/photo_gimp.png"></a>想一想，如果你要把一个图片的尺寸改小一点，你会怎么办？当然，我一定会启动一个图形编辑软件，然后，打开图片文件，从菜单上选择相关的工具选项，更改大小，然后保存文件。就算是在Linux下，我可能也是这么干的，比如Ubuntu下也是这样，如下图：</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2009/08/photo_gimp.png"><img alt="photo_gimp" class="aligncenter" height="300" src="../wp-content/uploads/2009/08/photo_gimp-290x300.png" title="photo_gimp" width="290"/></a><a href="https://coolshell.cn/wp-content/uploads/2009/08/photo_gimp.png"></a></p>
+<p>但其实，如果你用命令行来更改图片大小的话，一条语句就可以搞定了。如：</p>
+<pre style="padding-left: 30px; text-align: left;"><strong>convert -resize 300 profile.jpg profile_small.jpg</strong></pre>
+<p>当然，如果你要使用这样的命令，你需要安装<a href="http://www.imagemagick.org/script/index.php">Imagemagick</a>，你可通过apt-get install imagemagick来安装一下。</p>
+<p><span id="more-1256"></span></p>
+<p>不管怎么说，很简单吧，下面还有几个：</p>
+<p><strong>1）给图片加阴影</strong></p>
+<p>给图片加阴影可以使用下面的这个命令：</p>
+<pre style="padding-left: 30px; text-align: left;"><strong>convert screenshot.jpg
+\( +clone -background black -shadow 60×5+0+5 \)
++swap -background white -layers merge +repage shadow.jpg</strong></pre>
+<p>效果如下：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/08/photo_gimp.png"></a><a href="https://coolshell.cn/wp-content/uploads/2009/08/photo_gimp.png"></a><a href="https://coolshell.cn/wp-content/uploads/2009/08/screenshot-suse.jpg"><img alt="screenshot-suse" class="alignleft" height="180" src="../wp-content/uploads/2009/08/screenshot-suse.jpg" title="screenshot-suse" width="240"/></a><a href="https://coolshell.cn/wp-content/uploads/2009/08/shadow.png"><img alt="shadow" height="200" src="../wp-content/uploads/2009/08/shadow.png" title="shadow" width="260"/></a> <a href="https://coolshell.cn/wp-content/uploads/2009/08/screenshot-suse.jpg"></a></p>
+<p><strong>2）把两个MP3拼起来</strong></p>
+<pre style="padding-left: 30px; text-align: left;"><strong>cat 1.mp3 2.mp3 &gt; combined.mp3</strong></pre>
+<p><strong>3）克隆一个硬盘设备</strong></p>
+<pre style="padding-left: 30px; text-align: left;"><strong>dd if=/dev/hda of=/dev/hdb</strong></pre>
+<p><strong>4）把ISO文件刻录光盘</strong></p>
+<pre style="padding-left: 30px; text-align: left;"><strong>cdrecord -v speed=8 dev=0,0,0 name_of_iso_file.iso</strong></pre>
+<p><strong>5）视频格式转换</strong></p>
+<p>AVI和Mpeg转换</p>
+<pre style="padding-left: 30px; text-align: left;"><strong>ffmpeg -i video_origine.avi video_finale.mpg
+ffmpeg -i video_origine.mpg video_finale.avi</strong></pre>
+<p>查看这个<a href="http://www.catswhocode.com/blog/19-ffmpeg-commands-for-all-needs" target="_blank">链接</a>，你可以看看ffmpeg可以干得更多。</p>
+<p><strong>6）替换文件中的文本</strong></p>
+<pre style="padding-left: 30px; text-align: left;"><strong>sed ’s/#FF0000/#0000FF/g’ main.css</strong></pre>
+<p>把main.css中的#FF0000(红色)替换成#0000FF（蓝色）</p>
+<p> </p>
+<p>如果你非常喜欢命令行的话，那么你一定要看一下下面这本书（免费在线）</p>
+<p>GNU/Linux命令行介绍：<a href="http://en.flossmanuals.net/gnulinux">http://en.flossmanuals.net/gnulinux</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7829.html"><img alt="28个Unix/Linux的命令行神器" height="150" src="../wp-content/uploads/2012/07/dstat_screenshot-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1256.html">你用Linux命令行吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

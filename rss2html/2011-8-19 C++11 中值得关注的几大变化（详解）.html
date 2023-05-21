@@ -1,0 +1,247 @@
+<html><body><p>源文章来自前C++标准委员会的 <a href="http://www.softwarequalityconnection.com/author/dannykalev/">Danny Kalev</a> 的 <a href="http://www.softwarequalityconnection.com/2011/06/the-biggest-changes-in-c11-and-why-you-should-care/" target="_blank">The Biggest Changes in C++11 (and Why You Should Care)</a>，赖勇浩做了一个<a href="http://blog.csdn.net/lanphaday/article/details/6564162" target="_blank">中文翻译在这里</a>。所以，我就不翻译了，我在这里仅对文中提到的这些变化“<strong>追问为什么要引入这些变化</strong>”的一个探讨，<strong>只有知道为了什么，用在什么地方，我们才能真正学到这个知识</strong>。而以此你可以更深入地了解这些变化。所以，本文不是翻译。因为写得有些仓促，所以难免有问题，还请大家指正。</p>
+<h4 class="color-programming">Lambda 表达式</h4>
+<p>Lambda表达式来源于函数式编程，说白就了就是在使用的地方定义函数，有的语言叫“闭包”，如果 lambda 函数没有传回值(例如 <tt>void</tt> )，其回返类型可被完全忽略。 定义在与 lambda 函数相同作用域的变量参考也可以被使用。这种的变量集合一般被称作 closure（闭包）。我在这里就不再讲这个事了。表达式的简单语法如下，</p>
+<p><code class="EnlighterJSRAW">[capture](parameters)-&gt;return_type {body}</code></p>
+<p>原文的作者给出了下面的例子：</p>
+<pre class="EnlighterJSRAW">int main()
+{
+   char s[]="Hello World!";
+   int Uppercase = 0; //modified by the lambda
+   for_each(s, s+sizeof(s), [&amp;Uppercase] (char c) {
+    if (isupper(c))
+     Uppercase++;
+    });
+ cout &lt;&lt; Uppercase &lt;&lt; " uppercase letters in: " &lt;&lt; s &lt;&lt;endl;
+}</pre>
+<p>在传统的STL中for_each() 这个玩意最后那个参数需要一个“函数对象”，所谓函数对象，其实是一个class，这个class重载了operator()，于是这个对象可以像函数的式样的使用。实现一个函数对象并不容易，需要使用template，比如下面这个例子就是函数对象的简单例子（实际的实现远比这个复杂）：</p>
+<p><span id="more-5265"></span></p>
+<pre class="EnlighterJSRAW">template &lt;class T&gt;
+class less
+{
+public:
+    bool operator()(const T&amp;l, const T&amp;r)const
+    {
+        return l &lt; r;
+    }
+};</pre>
+<p class="color-programming">所以，<strong>C++引入Lambda的最主要原因就是1）可以定义匿名函数，2）编译器会把其转成函数对象</strong>。相信你会和我一样，会疑问为什么以前STL中的ptr_fun()这个函数对象不能用？（ptr_fun()就是把一个自然函数转成函数对象的）。原因是，ptr_fun() 的局限是其接收的自然函数只能有1或2个参数。</p>
+<p class="color-programming">那么，除了方便外，为什么一定要使用Lambda呢？它比传统的函数或是函数对象有什么好处呢？我个人所理解的是，这种函数之年以叫“闭包”，就是因为其限制了别人的访问，更私有。也可以认为他是一次性的方法。Lambda表达式应该是简洁的，极私有的，为了更易的代码和更方便的编程。</p>
+<h4 class="color-programming">自动类型推导 auto</h4>
+<p>在这一节中，原文主要介绍了两个关键字 auto 和 deltype，示例如下：</p>
+<pre class="EnlighterJSRAW">auto x=0; //x has type int because 0 is int
+auto c='a'; //char
+auto d=0.5; //double
+auto national_debt=14400000000000LL;//long long</pre>
+<p>auto 最大的好处就是让代码简洁，尤其是那些模板类的声明，比如：STL中的容器的迭代子类型。</p>
+<p><code class="EnlighterJSRAW">vector&lt;int&gt;::const_iterator ci = vi.begin();</code></p>
+<p>可以变成：</p>
+<p><code class="EnlighterJSRAW">auto ci = vi.begin();</code></p>
+<p>模板这个特性让C++的代码变得很难读，不信你可以看看STL的源码，那是一个乱啊。使用auto必需一个初始化值，编译器可以通过这个初始化值推导出类型。因为auto是来简化模板类引入的代码难读的问题，如上面的示例，iteration这种类型就最适合用auto的，但是，我们不应该把其滥用。</p>
+<p>比如下面的代码的可读性就降低了。因为，我不知道ProcessData返回什么？int? bool? 还是对象？或是别的什么？这让你后面的程序不知道怎么做。</p>
+<p><code class="EnlighterJSRAW">auto obj = ProcessData(someVariables);</code></p>
+<p>但是下面的程序就没有问题，因为pObject的型别在后面的new中有了。</p>
+<p><code class="EnlighterJSRAW">auto pObject = new SomeType&lt;OtherType&gt;::SomeOtherType();</code></p>
+<h4>自动化推导 decltype</h4>
+<p>关于 <code>decltype</code> 是一个操作符，其可以评估括号内表达式的类型，其规则如下：</p>
+<ol>
+<li>如果表达式e是一个变量，那么就是这个变量的类型。</li>
+<li>如果表达式e是一个函数，那么就是这个函数返回值的类型。</li>
+<li>如果不符合1和2，如果e是左值，类型为T，那么decltype(e)是T&amp;；如果是右值，则是T。</li>
+</ol>
+<p>原文给出的示例如下，我们可以看到，这个让的确我们的定义变量省了很多事。</p>
+<pre class="EnlighterJSRAW">const vector&lt;int&gt; vi;
+typedef decltype (vi.begin()) CIT;
+CIT another_const_iterator;</pre>
+<p>还有一个适合的用法是用来typedef函数指针，也会省很多事。比如：</p>
+<pre class="EnlighterJSRAW"> decltype(&amp;myfunc) pfunc = 0;
+
+typedef decltype(&amp;A::func1) type;</pre>
+<h4>auto 和 decltype 的差别和关系</h4>
+<p><a href="http://en.wikipedia.org/wiki/C%2B%2B0x#Type_inference" rel="nofollow" target="_blank">Wikipedia 上是这么说的</a>（关于decltype的规则见上）</p>
+<pre class="EnlighterJSRAW">#include &lt;vector&gt;
+
+int main()
+{
+    const std::vector&lt;int&gt; v(1);
+    auto a = v[0];        // a 的类型是 int
+    decltype(v[0]) b = 1; // b 的类型是 const int&amp;, 因为函数的返回类型是
+                          // std::vector&lt;int&gt;::operator[](size_type) const
+    auto c = 0;           // c 的类型是 int
+    auto d = c;           // d 的类型是 int
+    decltype(c) e;        // e 的类型是 int, 因为 c 的类型是int
+    decltype((c)) f = c;  // f 的类型是 int&amp;, 因为 (c) 是左值
+    decltype(0) g;        // g 的类型是 int, 因为 0 是右值
+}
+</pre>
+<p>如果auto 和 decltype 在一起使用会是什么样子？能看下面的示例，下面这个示例也是引入decltype的一个原因——让C++有能力写一个 “ <a href="http://en.wikipedia.org/wiki/Wrapper_function" title="Wrapper function">forwarding function</a> 模板”，</p>
+<pre class="EnlighterJSRAW">
+template&lt; typename LHS, typename RHS&gt;
+  auto AddingFunc(const LHS &amp;lhs, const RHS &amp;rhs) -&gt; decltype(lhs+rhs)
+{return lhs + rhs;}
+</pre>
+<p>这个函数模板看起来相当费解，其用到了auto 和 decltype 来扩展了已有的模板技术的不足。怎么个不足呢？在上例中，我不知道AddingFunc会接收什么样类型的对象，这两个对象的 + 操作符返回的类型也不知道，老的模板函数无法定义AddingFunc返回值和这两个对象相加后的返回值匹配，所以，你可以使用上述的这种定义。</p>
+<h4 class="color-programming">统一的初始化语法</h4>
+<p>C/C++的初始化的方法比较，C++ 11 用大括号统一了这些初始化的方法。</p>
+<p>比如：POD的类型。</p>
+<pre class="EnlighterJSRAW">int arr[4]={0,1,2,3};
+struct tm today={0};</pre>
+<p>关于POD相说两句，所谓POD就是<a href="http://en.wikipedia.org/wiki/Plain_Old_Data_Structures" target="_blank">Plain Old Data</a>，当class/struct是<em>极简的(trivial)</em>、属于<em>标准布局(standard-layout)</em>，以及他的所有非静态（non-static）成员都是POD时，会被视为POD。如：</p>
+<pre class="EnlighterJSRAW">struct A { int m; }; // POD
+struct B { ~B(); int m; }; // non-POD, compiler generated default ctor
+struct C { C() : m() {}; ~C(); int m; }; // non-POD, default-initialising m</pre>
+<p>POD的初始化有点怪，比如上例，new A; 和new A(); 是不一样的，对于其内部的m，前者没有被初始化，后者被初始化了（不同 的编译器行为不一样，VC++和GCC不一样）。而非POD的初始化，则都会被初始化。</p>
+<p>从这点可以看出，C/C++的初始化问题很奇怪，所以，在C++ 2011版中就做了统一。原文作者给出了如下的示例：</p>
+<pre class="EnlighterJSRAW">
+C c {0,0}; //C++11 only. 相当于: C c(0,0);
+
+int* a = new int[3] { 1, 2, 0 }; /C++11 only
+
+class X {
+    int a[4];
+    public:
+        X() : a{1,2,3,4} {} //C++11, member array initializer
+};</pre>
+<p>容器的初始化：</p>
+<pre class="EnlighterJSRAW">// C++11 container initializer
+vector&lt;string&gt; vs={ "first", "second", "third"};
+map singers =
+{ {"Lady Gaga", "+1 (212) 555-7890"},
+{"Beyonce Knowles", "+1 (212) 555-0987"}};</pre>
+<p>还支持像Java一样的成员初始化：</p>
+<pre class="EnlighterJSRAW">class C
+{
+   int a=7; //C++11 only
+ public:
+   C();
+};</pre>
+<h4 class="color-programming">Delete 和 Default 函数</h4>
+<p>我们知道C++的编译器在你没有定义某些成员函数的时候会给你的类自动生成这些函数，比如，构造函数，拷贝构造，析构函数，赋值函数。有些时候，我们不想要这些函数，比如，构造函数，因为我们想做实现单例模式。传统的做法是将其声明成private类型。</p>
+<p>在新的C++中引入了两个指示符，delete意为告诉编译器不自动产生这个函数，default告诉编译器产生一个默认的。原文给出了下面两个例子：</p>
+<pre class="EnlighterJSRAW">struct A
+{
+    A()=default; //C++11
+    virtual ~A()=default; //C++11
+};</pre>
+<p>再如delete</p>
+<pre class="EnlighterJSRAW">struct NoCopy
+{
+    NoCopy &amp; operator =( const NoCopy &amp; ) = delete;
+    NoCopy ( const NoCopy &amp; ) = delete;
+};
+NoCopy a;
+NoCopy b(a); //compilation error, copy ctor is deleted</pre>
+<p>这里，我想说一下，为什么我们需要default？我什么都不写不就是default吗？不全然是，比如构造函数，因为只要你定义了一个构造函数，编译器就不会给你生成一个默认的了。所以，为了要让默认的和自定义的共存，才引入这个参数，如下例所示：</p>
+<pre class="EnlighterJSRAW">struct SomeType
+{
+ SomeType() = default; // 使用编译器生成的默认构造函数
+ SomeType(OtherType value);
+};</pre>
+<p>关于delete还有两个有用的地方是</p>
+<p>1）让你的对象只能生成在栈内存上：</p>
+<pre class="EnlighterJSRAW">struct NonNewable {
+    void *operator new(std::size_t) = delete;
+};</pre>
+<p>2）阻止函数的其形参的类型调用：（若尝试以 double 的形参调用 <code>f()</code>，将会引发编译期错误， 编译器不会自动将 double 形参转型为 int 再调用<code>f()</code>，如果传入的参数是double，则会出现编译错误）</p>
+<pre class="EnlighterJSRAW">void f(int i);
+ void f(double) = delete;</pre>
+<h4 class="color-programming">nullptr</h4>
+<p>C/C++的NULL宏是个被有很多潜在BUG的宏。因为有的库把其定义成整数0，有的定义成 (void*)0。在C的时代还好。但是在C++的时代，这就会引发很多问题。你可以上网看看。这是为什么需要 <code>nullptr</code> 的原因。 <code>nullptr</code> 是强类型的。</p>
+<pre class="EnlighterJSRAW">void f(int); //#1
+void f(char *);//#2
+//C++03
+f(0); //二义性
+//C++11
+f(nullptr) //无二义性，调用f(char*)</pre>
+<p><code>所以在新版中请以 nullptr</code> 初始化指针。</p>
+<h4 class="color-programming">委托构造</h4>
+<p>在以前的C++中，构造函数之间不能互相调用，所以，我们在写这些相似的构造函数里，我们会把相同的代码放到一个私有的成员函数中。</p>
+<pre class="EnlighterJSRAW">class SomeType {
+private:
+  int number;
+  string name;
+  SomeType( int i, string&amp;amp; s ) : number(i), name(s){}
+public:
+  SomeType( )               : SomeType( 0, "invalid" ){}
+  SomeType( int i )         : SomeType( i, "guest" ){}
+  SomeType( string&amp;amp; s ) : SomeType( 1, s ){ PostInit(); }
+};</pre>
+<p>但是，为了方便并不足让“委托构造”这个事出现，最主要的问题是，基类的构造不能直接成为派生类的构造，就算是基类的构造函数够了，派生类还要自己写自己的构造函数：</p>
+<pre class="EnlighterJSRAW">class BaseClass
+{
+public:
+  BaseClass(int iValue);
+};
+
+class DerivedClass : public BaseClass
+{
+public:
+  using BaseClass::BaseClass;
+};</pre>
+<p>上例中，派生类手动继承基类的构造函数， 编译器可以使用基类的构造函数完成派生类的构造。 而将基类的构造函数带入派生类的动作 无法选择性地部分带入， 所以，要不就是继承基类全部的构造函数，要不就是一个都不继承(不手动带入)。 此外，若牵涉到多重继承，从多个基类继承而来的构造函数不可以有相同的函数签名(signature)。 而派生类的新加入的构造函数也不可以和继承而来的基类构造函数有相同的函数签名，因为这相当于重复声明。（所谓函数签名就是函数的参数类型和顺序不）</p>
+<h4 class="color-programming">右值引用和move语义</h4>
+<p>在老版的C++中，临时性变量（称为右值”R-values”，位于赋值操作符之右）经常用作交换两个变量。比如下面的示例中的tmp变量。示例中的那个函数需要传递两个string的引用，但是在交换的过程中产生了对象的构造，内存的分配还有对象的拷贝构造等等动作，成本比较高。</p>
+<pre class="EnlighterJSRAW">void naiveswap(string &amp;amp;a, string &amp;amp;b)
+{
+ string temp = a;
+ a=b;
+ b=temp;
+}</pre>
+<p>C++ 11增加一个新的引用（reference）类型称作右值引用（R-value reference），标记为<tt>typename &amp;&amp;</tt>。他们能够以non-const值的方式传入，允许对象去改动他们。这项修正允许特定对象创造出move语义。</p>
+<p>举例而言，上面那个例子中，string类中保存了一个动态内存分存的char*指针，如果一个string对象发生拷贝构造（如：函数返回），string类里的char*内存只能通过创建一个新的临时对象，并把函数内的对象的内存copy到这个新的对象中，然后销毁临时对象及其内存。<strong>这是原来C++性能上重点被批评的事</strong>。</p>
+<p>能过右值引用，string的构造函数需要改成“move构造函数”，如下所示。这样一来，使得对某个<span style="font-family: monospace;">stirng</span>的右值引用可以单纯地从右值复制其内部C-style的指针到新的string，然后留下空的右值。这个操作不需要内存数组的复制，而且空的暂时对象的析构也不会释放内存。其更有效率。</p>
+<pre class="EnlighterJSRAW">class string
+{
+    string (string&amp;&amp;); //move constructor
+    string&amp;&amp; operator=(string&amp;&amp;); //move assignment operator
+};</pre>
+<p>The C++11 STL中广泛地使用了右值引用和move语议。因此，很多算法和容器的性能都被优化了。</p>
+<h4 class="color-programming">C++ 11 STL 标准库</h4>
+<p>C++ STL库在2003年经历了很大的整容手术 <a href="http://www.devsource.com/c/a/Languages/Grok-The-New-Features-in-Standard-C/">Library Technical Report 1</a> (TR1)。 TR1 中出现了很多新的容器类 (<code>unordered_set</code>, <code>unordered_map</code>, <code>unordered_multiset</code>, 和 <code>unordered_multimap</code>) 以及一些新的库支持诸如：正则表达式， tuples，函数对象包装，等等。 C++11 批准了 TR1 成为正式的C++标准，还有一些TR1 后新加的一些库，从而成为了新的C++ 11 STL标准库。这个库主要包含下面的功能：</p>
+<h5 class="color-programming">线程库</h5>
+<p>这们就不多说了，以前的STL饱受线程安全的批评。现在好 了。C++ 11 支持线程类了。这将涉及两个部分：第一、设计一个可以使多个线程在一个进程中共存的内存模型；第二、为线程之间的交互提供支持。第二部分将由程序库提供支持。大家可以看看<a href="http://en.wikipedia.org/wiki/Futures_and_promises" target="_blank">promises and futures</a>，其用于对象的同步。 <a href="http://www.stdthread.co.uk/doc/headers/future/async.html">async()</a> 函数模板用于发起并发任务，而 <a href="http://www.devx.com/cplus/10MinuteSolution/37436">thread_local</a> 为线程内的数据指定存储类型。更多的东西，可以查看 Anthony Williams的 <a href="http://www.devx.com/SpecialReports/Article/38883">Simpler Multithreading in C++0x</a>.</p>
+<h5 class="color-programming">新型智能指针</h5>
+<p>C++98 的知能指针是 <code>auto_ptr， 在C++ 11中被废弃了。</code>C++11  引入了两个指针类： <a href="http://www.informit.com/guides/content.aspx?g=cplusplus&amp;seqNum=239">shared_ptr</a> 和 <a href="http://www.informit.com/guides/content.aspx?g=cplusplus&amp;seqNum=400">unique_ptr</a>。 shared_ptr只是单纯的引用计数指针，<code>unique_ptr 是用来取代<code>auto_ptr</code></code>。 <code>unique_ptr</code> 提供 <code>auto_ptr</code> 大部份特性，唯一的例外是 <code>auto_ptr</code> 的不安全、隐性的左值搬移。不像 <code>auto_ptr</code>，<code>unique_ptr</code> 可以存放在 C++0x 提出的那些能察觉搬移动作的容器之中。</p>
+<p>为什么要这么干？大家可以看看《More Effective C++》中对 auto_ptr的讨论。</p>
+<h5 class="color-programming">新的算法</h5>
+<p>定义了一些新的算法： <code>all_of()</code>, <code>any_of()</code> 和 <code>none_of()。</code></p>
+<pre class="EnlighterJSRAW">#include &amp;lt;algorithm&amp;gt;
+//C++11 code
+//are all of the elements positive?
+all_of(first, first+n, ispositive()); //false
+//is there at least one positive element?
+any_of(first, first+n, ispositive());//true
+// are none of the elements positive?
+none_of(first, first+n, ispositive()); //false</pre>
+<p>使用新的copy_n()算法，你可以很方便地拷贝数组。</p>
+<pre class="EnlighterJSRAW">#include &amp;lt;algorithm&amp;gt;
+int source[5]={0,12,34,50,80};
+int target[5];
+//copy 5 elements from source to target
+copy_n(source,5,target);</pre>
+<p>使用 <code>iota()</code> 可以用来创建递增的数列。如下例所示：</p>
+<pre class="EnlighterJSRAW">include &amp;lt;numeric&amp;gt;
+int a[5]={0};
+char c[3]={0};
+iota(a, a+5, 10); //changes a to {10,11,12,13,14}
+iota(c, c+3, 'a'); //{'a','b','c'} </pre>
+<p>总之，看下来，C++11 还是很学院派，很多实用的东西还是没有，比如： XML，sockets，reflection，当然还有垃圾回收。看来要等到C++ 20了。呵呵。不过C++ 11在性能上还是很快。参看 Google’s <a href="http://www.itproportal.com/2011/06/07/googles-rates-c-most-complex-highest-performing-language/">benchmark tests</a>。原文还引用Stroustrup 的观点：C++11 是一门新的语言——一个更好的 C++。</p>
+<p>如果把所有的改变都列出来，你会发现真多啊。我估计C++ Primer那本书的厚度要增加至少30%以上。C++的门槛会不会越来越高了呢？我不知道，但我个人觉得这门语言的确是变得越来越令人望而却步了。（想起了某人和我说的一句话——学技术真的是太累了，还是搞方法论好混些？）</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5265.html">C++11 中值得关注的几大变化（详解）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

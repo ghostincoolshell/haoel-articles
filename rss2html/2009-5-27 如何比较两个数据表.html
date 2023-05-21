@@ -1,0 +1,447 @@
+<html><body><p>有些时候，我们可能想要比较一下两个数据表，以找到其中不同的数据。比如，在进行数据移植的时候，或是在合并数据的时候，或是在比对验证数据的时候。当然比较两个表，需要这两个表结构是一样的。</p>
+<p>我们先假设一下有如下表结构：</p>
+<pre class="EnlighterJSRAW">
+CREATE TABLE jajal
+(
+    user_id integer NOT NULL,
+    first_name character varying(255),
+    last_name character varying(255),
+    grade character(1),
+    CONSTRAINT jajal_pkey PRIMARY KEY (user_id)
+)
+</pre>
+<p><span id="more-925"></span><br/>
+然后，我们有两张表——jajal和jajal_copy，其内容如下：</p>
+<h4> jajal</h4>
+<table border="0" cellspacing="1" class="wptable rowstyle-alt" id="wptable-7">
+<thead>
+<tr>
+<th align="center" class="sortable" style="width: 30px;">user_id</th>
+<th align="center" class="sortable" style="width: 30px;">first_name</th>
+<th align="center" class="sortable" style="width: 30px;">last_name</th>
+<th align="center" class="sortable" style="width: 30px;">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" style="width: 30px;">1</td>
+<td align="center" style="width: 30px;">Some</td>
+<td align="center" style="width: 30px;">Dude</td>
+<td align="center" style="width: 30px;">A</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">2</td>
+<td align="center" style="width: 30px;">Other</td>
+<td align="center" style="width: 30px;">Guy</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">3</td>
+<td align="center" style="width: 30px;">You are</td>
+<td align="center" style="width: 30px;">Welcome</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">4</td>
+<td align="center" style="width: 30px;">What</td>
+<td align="center" style="width: 30px;">Other</td>
+<td align="center" style="width: 30px;">A</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">5</td>
+<td align="center" style="width: 30px;">INeed</td>
+<td align="center" style="width: 30px;">You</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">6</td>
+<td align="center" style="width: 30px;">Mixed</td>
+<td align="center" style="width: 30px;">Nuts</td>
+<td align="center" style="width: 30px;">Z</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">7</td>
+<td align="center" style="width: 30px;">Kirk</td>
+<td align="center" style="width: 30px;">Land</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">8</td>
+<td align="center" style="width: 30px;">Bit</td>
+<td align="center" style="width: 30px;">Shooter</td>
+<td align="center" style="width: 30px;">A</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">9</td>
+<td align="center" style="width: 30px;">Sun</td>
+<td align="center" style="width: 30px;">Microsystem</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">10</td>
+<td align="center" style="width: 30px;">Extra</td>
+<td align="center" style="width: 30px;">Fancy</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+</tbody>
+</table>
+<h4>jajal_copy</h4>
+<table border="0" cellspacing="1" class="wptable rowstyle-alt" id="wptable-8">
+<thead>
+<tr>
+<th align="center" class="sortable" style="width: 30px;">user_id</th>
+<th align="center" class="sortable" style="width: 30px;">first_name</th>
+<th align="center" class="sortable" style="width: 30px;">last_name</th>
+<th align="center" class="sortable" style="width: 30px;">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" style="width: 30px;">1</td>
+<td align="center" style="width: 30px;">Some</td>
+<td align="center" style="width: 30px;">Dude</td>
+<td align="center" style="width: 30px;">A</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">2</td>
+<td align="center" style="width: 30px;">Other</td>
+<td align="center" style="width: 30px;">Guy</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">3</td>
+<td align="center" style="width: 30px;">You are</td>
+<td align="center" style="width: 30px;">Welcome</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">4</td>
+<td align="center" style="width: 30px;">What</td>
+<td align="center" style="width: 30px;">Other</td>
+<td align="center" style="width: 30px;">A</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">5</td>
+<td align="center" style="width: 30px;">INeed</td>
+<td align="center" style="width: 30px;">You</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">6</td>
+<td align="center" style="width: 30px;">Mixed</td>
+<td align="center" style="width: 30px;">Nuts</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">7</td>
+<td align="center" style="width: 30px;">Kirk</td>
+<td align="center" style="width: 30px;">Land</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">8</td>
+<td align="center" style="width: 30px;">Bit</td>
+<td align="center" style="width: 30px;">Shooter</td>
+<td align="center" style="width: 30px;">A</td>
+</tr>
+<tr>
+<td align="center" style="width: 30px;">9</td>
+<td align="center" style="width: 30px;">Sun</td>
+<td align="center" style="width: 30px;">Microsystem</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">10</td>
+<td align="center" style="width: 30px;">Extra</td>
+<td align="center" style="width: 30px;">Fancy</td>
+<td align="center" style="width: 30px;">B</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>要比较这两张表的数据，找出不一样的数据行。我们可以使用<a href="http://en.wikipedia.org/wiki/Join_(SQL)#Outer_joins"><span style="color: #967001;">outer join</span></a> 技术。我给outer join做了一个链接，是Wikipedia的，如果你对这个技术不是很清楚，还请你行看看其技术细节。</p>
+<p>下面是具体的SQL语句：</p>
+<h4><span style="text-decoration: underline;">使用FULL OUTER JOIN</span></h4>
+<pre class="EnlighterJSRAW">
+SELECT
+     *
+FROM
+     jajal j
+     FULL OUTER JOIN jajal_copy jc ON jc.first_name = j.first_name
+     AND jc.last_name = j.last_name
+     AND jc.grade = j.grade
+     AND jc.user_id = j.user_id
+WHERE
+     j.user_id IS NULL
+     OR jc.user_id IS NULL
+</pre>
+<p>运行结果如下：</p>
+<table border="0" cellspacing="1" class="wptable rowstyle-alt" id="wptable-9">
+<thead>
+<tr>
+<th align="center" class="sortable" style="width: 30px;">user_id</th>
+<th align="center" class="sortable" style="width: 30px;">first_name</th>
+<th align="center" class="sortable" style="width: 30px;">last_name</th>
+<th align="center" class="sortable" style="width: 30px;">grade</th>
+<th align="center" class="sortable" style="width: 30px;">user_id</th>
+<th align="center" class="sortable" style="width: 30px;">first_name</th>
+<th align="center" class="sortable" style="width: 30px;">last_name</th>
+<th align="center" class="sortable" style="width: 30px;">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">6</td>
+<td align="center" style="width: 30px;">Mixed</td>
+<td align="center" style="width: 30px;">Nuts</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">6</td>
+<td align="center" style="width: 30px;">Mixed</td>
+<td align="center" style="width: 30px;">Nuts</td>
+<td align="center" style="width: 30px;">Z</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+<td align="center" style="width: 30px;">[NULL]</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h4><span style="text-decoration: underline;">使用NATURAL FULL OUTER JOIN</span></h4>
+<p>关于<a href="http://en.wikipedia.org/wiki/Join_(SQL)#Natural_join"><span style="color: #967001;">natural join</span></a>，你可以看看Wikipedia是怎么说的。</p>
+<pre class="EnlighterJSRAW">
+SELECT
+       *
+FROM
+       jajal j
+       NATURAL FULL OUTER JOIN jajal_copy jc
+WHERE
+       j.user_id IS NULL
+       OR jc.user_id IS NULL
+</pre>
+<p>运行结果如下：</p>
+<table border="0" cellspacing="1" class="wptable rowstyle-alt" id="wptable-10">
+<thead>
+<tr>
+<th align="center" class="sortable" style="width: 30px;">user_id</th>
+<th align="center" class="sortable" style="width: 30px;">first_name</th>
+<th align="center" class="sortable" style="width: 30px;">last_name</th>
+<th align="center" class="sortable" style="width: 30px;">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" style="width: 30px;">6</td>
+<td align="center" style="width: 30px;">Mixed</td>
+<td align="center" style="width: 30px;">Nuts</td>
+<td align="center" style="width: 30px;">C</td>
+</tr>
+<tr class="alt">
+<td align="center" style="width: 30px;">6</td>
+<td align="center" style="width: 30px;">Mixed</td>
+<td align="center" style="width: 30px;">Nuts</td>
+<td align="center" style="width: 30px;">Z</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h4><span style="text-decoration: underline;">MySQL SQL 代码</span></h4>
+<pre>MySQL 并不支持 FULL OUTER JOIN，但是我们可以使用LEFT JOIN 和 RIGHT JOIN 来实现这一功能。如下所示。</pre>
+<pre class="EnlighterJSRAW">
+SELECT
+*
+FROM
+jajal j
+LEFT JOIN jajal_copy jc ON jc.first_name = j.first_name
+AND jc.last_name = j.last_name
+AND jc.grade = j.grade
+AND jc.user_id = j.user_id
+WHERE
+jc.user_id IS NULL
+UNION ALL
+SELECT
+*
+FROM
+jajal j
+RIGHT JOIN jajal_copy jc ON jc.first_name = j.first_name
+AND jc.last_name = j.last_name
+AND jc.grade = j.grade
+AND jc.user_id = j.user_id
+WHERE
+j.user_id IS NULL
+</pre>
+<p>或者你更喜欢NATURAL JOIN 版本</p>
+<pre class="EnlighterJSRAW">
+SELECT
+*
+FROM
+jajal j
+NATURAL LEFT JOIN jajal_copy jc
+WHERE
+jc.user_id IS NULL
+UNION ALL
+SELECT
+*
+FROM
+jajal j
+NATURAL RIGHT JOIN jajal_copy jc
+WHERE
+j.user_id IS NULL
+</pre>
+<p>当然，如果你需要一个MySQL的存储过程的话，下面是一个示例：</p>
+<pre class="EnlighterJSRAW">
+DELIMITER $$
+
+CREATE PROCEDURE `db_schema`.`tablediff`
+    (schema_name VARCHAR(64), table1 VARCHAR(64), table2 VARCHAR(64))
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE sql_statement TEXT DEFAULT '';
+    DECLARE sql_statement_where TEXT DEFAULT '';
+    DECLARE sql_statement_pk TEXT DEFAULT '';
+    DECLARE col_name VARCHAR(64);
+    DECLARE col_name_cur CURSOR FOR
+        SELECT
+            COLUMN_NAME
+        FROM
+            information_schema.COLUMNS
+        WHERE
+            TABLE_SCHEMA = schema_name
+            AND TABLE_NAME = table1
+    ;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN col_name_cur;
+    traverse_columns: LOOP
+        FETCH col_name_cur INTO col_name;
+
+        IF done THEN
+            CLOSE col_name_cur;
+            LEAVE traverse_columns;
+        END IF;
+
+        SET sql_statement_where = CONCAT(sql_statement_where,
+            ' AND a.', col_name, ' = b.', col_name);
+        SET sql_statement_pk = CONCAT(sql_statement_pk,
+            'AND b.', col_name, ' IS NULL');
+    END LOOP;
+
+    SELECT
+        COLUMN_NAME INTO col_name
+    FROM
+        information_schema.KEY_COLUMN_USAGE
+    WHERE
+        CONSTRAINT_SCHEMA = schema_name
+        AND CONSTRAINT_NAME = 'PRIMARY'
+        AND TABLE_NAME = table1
+    LIMIT 1
+    ;
+    IF col_name IS NOT NULL THEN
+        SET sql_statement_pk = CONCAT('AND b.', col_name, ' IS NULL');
+    END IF;
+
+    SET sql_statement = CONCAT('SELECT * FROM ', schema_name, '.', table1, ' a LEFT JOIN ', schema_name, '.', table2, ' b ON TRUE');
+    SET sql_statement = CONCAT(sql_statement, sql_statement_where, ' WHERE TRUE ', sql_statement_pk);
+    SET sql_statement = CONCAT(sql_statement, ' UNION ALL SELECT * FROM ', schema_name, '.', table1, ' b RIGHT JOIN ', schema_name, '.', table2, ' a ON TRUE');
+    SET sql_statement = CONCAT(sql_statement, sql_statement_where, ' WHERE TRUE ', sql_statement_pk);
+
+    SET @s = sql_statement;
+    PREPARE stmt1 FROM @s;
+    EXECUTE stmt1;
+    DEALLOCATE PREPARE stmt1;
+
+END$$
+DELIMITER ;
+</pre>
+<p> </p>
+<p> </p>
+<h4><span style="text-decoration: underline;">PostgreSQL 下的SQL语句</span></h4>
+<p>下面是PostgreSQL的一个存储过程：</p>
+<pre class="EnlighterJSRAW">
+CREATE OR REPLACE FUNCTION tablediff (
+    IN schema_name VARCHAR(64),
+    IN table1 VARCHAR(64),
+    IN table2 VARCHAR(64)
+) RETURNS BIGINT AS
+$BODY$
+DECLARE
+    the_result BIGINT DEFAULT 0;
+    sql_statement TEXT DEFAULT '';
+    sql_statement_where TEXT DEFAULT '';
+    sql_statement_pk TEXT DEFAULT '';
+    col_name VARCHAR(64);
+    col_name_cur CURSOR FOR
+        SELECT
+            column_name
+        FROM
+            information_schema.columns
+        WHERE
+            table_catalog = schema_name
+            AND table_schema = 'public'
+            AND table_name = table1
+    ;
+BEGIN
+    OPEN col_name_cur;
+
+    LOOP
+        FETCH col_name_cur INTO col_name;
+        IF NOT FOUND THEN
+            EXIT;
+        END IF;
+
+        sql_statement_where := sql_statement_where || ' AND a.' || col_name || ' = b.' || col_name;
+    END LOOP;
+
+    SELECT
+        column_name INTO col_name
+    FROM
+        information_schema.table_constraints tc
+        JOIN information_schema.constraint_column_usage ccu ON
+            ccu.constraint_name = tc.constraint_name
+    WHERE
+        tc.table_catalog = schema_name
+        AND tc.table_schema = 'public'
+        AND tc.table_name = table1
+    LIMIT 1
+    ;
+
+    IF col_name IS NOT NULL THEN
+        sql_statement_pk := ' a.' || col_name || ' IS NULL';
+        sql_statement_pk := sql_statement_pk || ' OR b.' || col_name || ' IS NULL';
+    END IF;
+
+    sql_statement := 'SELECT COUNT(*) FROM ' || schema_name || '.public.' || table1 || ' a FULL OUTER JOIN ' || schema_name || '.public.' || table2 || ' b ON TRUE';
+    sql_statement := sql_statement || sql_statement_where || ' WHERE ' || sql_statement_pk;
+
+    EXECUTE sql_statement INTO the_result;
+
+    RETURN the_result;
+END;$BODY$
+LANGUAGE 'plpgsql' STABLE;
+</pre>
+<p> </p>
+<p>文章：<a href="http://www.microshell.com/database/sql/comparing-data-from-2-database-tables/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3433.html"><img alt="6个有用的MySQL语句" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7270.html"><img alt="NoSQL 数据建模技术" height="150" src="../wp-content/uploads/2012/05/overview2-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="../wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4939.html"><img alt="Quora使用到的技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/925.html">如何比较两个数据表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

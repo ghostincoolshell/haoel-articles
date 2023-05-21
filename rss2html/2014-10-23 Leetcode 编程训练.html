@@ -1,0 +1,35 @@
+<html><body><p><img alt="LeetCodeLogo (1)" class="alignright wp-image-12054 size-full" height="100" src="../wp-content/uploads/2014/10/LeetCodeLogo-1.png" width="121"/>Leetcode这个网站上的题都是一些经典的公司用来面试应聘者的面试题，很多人通过刷这些题来应聘一些喜欢面试算法的公司，比如：Google、微软、Facebook、Amazon之类的这些公司，基本上是应试教育的功利主义。</p>
+<p>我做这些题目的不是为了要去应聘这些公司，而是为了锻炼一下自己的算法和编程能力。因为我开始工作的时候基本没有这样的训练算法和编程的网站，除了大学里的“算法和数据结构”里的好些最基础最基础的知识，基本上没有什么训练。所以，当我看到有人在做这些题的时候，我也蠢蠢欲动地想去刷一下。</p>
+<p>于是，我花了3-4个月的业余时间，我把<a href="https://oj.leetcode.com/problems/" target="_blank">Leetcode的154道题</a>全部做完了。（这也是最近我没有太多的时间来写博客的原因，你可以看到我之前<a href="https://coolshell.cn/articles/11847.html" target="_blank" title="谜题的答案和活动的心得体会">做的那个活动</a>中有几个算法题来自于Leetcode）有人说我时间太多了，这里声明一下，我基本上都是利用了晚上10点以后的时间来做这些题的。</p>
+<p>LeetCode的题大致分成两类：</p>
+<p style="padding-left: 30px;"><strong>1）基础算法的知识</strong>。这些题里面有大量的算法题，解这些题都是有套路的，不是用递归（深度优先DFS，广度优先BFS），就是要用动态规划（Dynamic Programming），或是拆半查找（Binary Search），或是回溯（Back tracing），或是分治法（Divide and Conquer），还有大量的对树，数组、链表、字符串和hash表的操作。<strong>通过做这些题能让你对这些最基础的算法的思路有非常扎实的了解和训练</strong>。对我而言，Dynamic Programming 是我的短板，尤其是一些比较复杂的问题，在推导递推公式上总是有思维的缺陷（数学是我的硬伤），通过做了这些题后，我能感到我在DP的思路上有了很大的收获。</p>
+<p style="padding-left: 30px;"><strong>2）编程题</strong>。比如：atoi，strstr，add two num，括号匹配，字符串乘法，通配符匹配，文件路径简化，Text Justification，反转单词等等，这些题的Edge Case, Corner Case有很多。这些题需要你想清楚了再干，只要你稍有疏忽，就会有几个case让你痛不欲生，而且一不小心就会让你的代码会写得又臭又长，无法阅读。<strong>通过做这些题，可以非常好的训练你对各种情况的考虑，以及你对程序代码组织的掌控（其实就是其中的状态变量）。</strong>还记得我在《<a href="https://coolshell.cn/articles/10822.html" target="_blank" title="函数式编程">函数式编程</a>》中说的，程序中的状态是你程序变得复杂难维护的直接原因。</p>
+<p>我觉得每个程序员都应该花时间和精力做这些题，因为你会从这些题中得到很大的收益。做完这些题后你一定会明白下面几个道理：</p>
+<p><span id="more-12052"></span></p>
+<p style="padding-left: 30px;"><strong>1）想清楚了再干</strong>。这个观点我以前就在《<a href="https://coolshell.cn/articles/5686.html" target="_blank" title="多些时间能少写些代码">多些时间可以少些代码</a>》说过。如果你拿到题就上去直接写代码的话，你一定会被各种case打回来了。然后呢，你一着急，你就会进入那种我在《<a href="https://coolshell.cn/articles/11656.html" target="_blank" title="开发团队的效率">开发团队的效率</a>》中说的那种毫无效率case by case的开发模式，而你也进入了“平庸模式”。于是你就会出现下图那样的情况。</p>
+<figure class="wp-caption aligncenter" id="attachment_12053" style="width: 440px;"><img alt="Case-by-Case Developement" class="size-full wp-image-12053" height="231" src="../wp-content/uploads/2014/10/bug_fixing.gif" width="440"/><figcaption class="wp-caption-text" id="caption-attachment-12053">Case-by-Case Development</figcaption></figure>
+<p style="padding-left: 30px;"><strong>2) 编程是脑力劳动，急不得</strong>。这个事情在这做这些题的时候你就会发现，要么是脑子转不过来了，要么就是明明就差一点了，但程序怎么都调不对。如果你越着急的话，你就会发现你会离目标越远，而花的时间也会更多。另外，你会发现这些题基本上都是50行代码内就可以搞定的，但是为了这50行以内的代码，你要花好多时间和精力。coding  50行代码在我们的日常工作中分分钟就完成，而Leetcode里的50行代码却没那么简单，也许，用这个你就可以区别什么是码农，什么是程序员了。</p>
+<p style="padding-left: 30px;"><strong>3）加班要不得。</strong>因为我总是在晚上10点以后做题，所以，基本上都是在加班状态中工作。这种状态过上两三天，你就会发现，整个大脑已经不转了，而且不但不转，还会犯很多低级错误，很多事情都想不清楚，一个晚上都在和程序的状态控制做搏斗，代码写得越来越乱，越来越没条理。于是这种时候，我都会休息几天，不做题了，然后再做题的时候，就觉得非常地清楚。可见加班 是编程最致命的敌人！</p>
+<p>我把我的C++代码放到了Github上，大家也帮我review一下，看看有没有可以改善的。</p>
+<p style="text-align: center;"><strong><a href="https://github.com/haoel/leetcode" target="_blank">https://github.com/haoel/leetcode</a></strong></p>
+<p>好了，不多说了，<strong>我希望大家有时间都去练练LeetCode，无论是找工作还是对你的编程能力会有非常大的提高</strong>。</p>
+<p> </p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8138.html"><img alt="为什么我反对纯算法面试题" height="150" src="../wp-content/uploads/2012/08/250px-Sheldon_Cooper-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8138.html">为什么我反对纯算法面试题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19612.html"><img alt="50年前的登月程序和程序员有多硬核" height="150" src="../wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19612.html">50年前的登月程序和程序员有多硬核</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9543.html"><img alt="“C++的数组不支持多态”？" height="150" src="../wp-content/uploads/2013/04/weibo-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9543.html">“C++的数组不支持多态”？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8790.html"><img alt="程序算法与人生选择" height="150" src="../wp-content/uploads/2012/12/choice-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8790.html">程序算法与人生选择</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

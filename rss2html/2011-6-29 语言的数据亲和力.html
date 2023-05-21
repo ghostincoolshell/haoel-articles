@@ -1,0 +1,180 @@
+<html><body><p><strong>[ 感谢 <a href="http://www.cnblogs.com/weidagang2046/" target="_blank">Todd 同学</a>投递本文 ]</strong></p>
+<p><span style="font-family: 'Lucida Console';">目前，程序设计语言似乎进入了一个蓬勃发展的时期，Javascript、Perl、Python、Ruby、Groovy等一批较新的语言正越来越多地被熟悉和使用，而C++、C#、Java等主流语言也在不断地融入函数式和动态性特征。程序员的百宝箱中可供选择的宝贝是越来多了，而社区中关于语言间的比较和争论也更为热烈，我们常常见到关于“面向过程和面向对象的比较”、“动态语言和静态语言的比较”、“命令式和函数式范式的比较”等比较。我注意到这类讨论的关注点多集中于设计相关话题，如“动态语言的Duck typing多态和静态语言的继承多态的比较”，“Prototype based和Class based的比较”等。但我认为还有一个十分重要的方面值得关注，这就是数据处理。</span></p>
+<p><span style="font-family: 'Lucida Console';">数据处理之所以重要是因为不论是本地信息存储还是系统间信息交换都需要建立在一定的数据格式基础上。另外，不管语言属于那种范式，设计上采用什么模式，在微观层次上程序很大一部分工作都是在做数据处理。所以，从数据处理角度比较和理解语言间的差异有重要的现实意义。虽然数据通常是平台和语言无关的，但不同的语言在处理某种格式的数据时会表现出不同的难度，甚至某些数据格式只能采用特定的语言才能实现，这就是数据亲和力的不同。</span></p>
+<p><span style="font-family: 'Lucida Console';">语言的数据亲和力(Data Affinity)指的是语言的数据模型与某种数据格式之间的匹配程度。语言对某种数据格式亲和力越强，则操作某类数据越容易。</span></p>
+<p> </p>
+<h4><strong><span style="font-family: 'Lucida Console';">二进制字节块格式</span></strong></h4>
+<p> </p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">在偏底层的操作系统、嵌入式和通信系统中，二进制的字节块是最常见的一种数据格式。二进制数据布局紧凑和接近机器的特点使得它常常作为系统间通信或系统文件的数据格式，但一般高级语言都不方便直接和0101打交道，而是基于记录、结构体和类等结构化表示操作数据，这就存在着在底层的二进制字节块和高层的结构化数据直接的转换问题。</span></p>
+<p><span style="font-family: 'Lucida Console';"><span id="more-4905"></span><br/>
+</span></p>
+<p><span style="font-family: 'Lucida Console';">C语言作为最主要的系统语言具有很高的字节块数据亲和力。这不仅因为C语言具有指针可以直接访问内存以外，还因为C的结构体(struct)可以和字节块建立起直接的映射关系。例如，在基于Socket连接的分布式系统中服务器端和客户端通过二进制的字节数据进行通信，通信双方只要事先定义共用的结构体，发送方先创建相应的结构体变量并填充字段，然后把变量对应的内存块copy到Socket，接收方从Socket读取字节块，然后把字节块强制类型转换为相应的结构体指针即可读取个字段信息。整个过程中通信的双方都没有复杂的信息编码和解码的过程。示例代码如下：</span></p>
+<pre class="EnlighterJSRAW">struct t_data {
+    int version;
+    char type[10];
+    float value;
+};
+
+//发送方
+struct t_data data;
+data.version = 1;
+strcpy(data.type,  “degree”);
+data.value = 189.0;
+send(socket,  &amp;data,  sizeof(data));
+
+//接收方
+struct t_data data;
+read(socket,  &amp;data,  sizeof(data));
+printf(“%d, %s, %f”, data.version,  data.type, data.value);</pre>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">上面的方法在实际应用中还需要注意内存对齐问题和大小端问题。内存对齐问题可以通过编译器预处理命令来进行控制，保证内存中struct结构与传输的字节块具有相同的对齐方式；大小端问题需要通信的双方采用同样的大小端方式，否则就需要进行转换。</span></p>
+<p><span style="font-family: 'Lucida Console';">C++可以完全兼容C的结构体，但C++的类(包括class和struct)中如果定义了虚函数，则会丧失结构的字节块数据亲和力，这是C++编程时需要权衡的一个因素。而除了C/C++，其他语言中则难以见到字节块数据亲和力，其原因在于C/C++允许控制结构体/对象的内存布局，并允许对指针进行非类型安全的强制类型转换，这都是在Java，C#等语言中不允许的。所以，在Java、C#中进行字节块的编码解码就只能按照协议一个字段一个字段地按偏移量和长度进行解析。C/C++的指针以及结构体和内存的直接映射带来了对字节块数据的亲和力，但同时也留下了内存访问和类型安全的隐患；而Java、C#在拥有引用安全和类型安全的同时也失去了对字节块数据的亲和力。</span></p>
+<p> </p>
+<p> </p>
+<h4><span style="font-family: 'Lucida Console';"><strong>文本格式</strong> </span></h4>
+<p><span style="font-family: 'Lucida Console';">文本格式是另一种十分常见的数据格式。《Unix编程艺术》中是这样描述文本格式的：”Text streams are a valuable universal format because they’re easy for human beings to read, write, and edit without specialized tools ”。基于文本流的管道处理是一种备受赞誉的Unix风格。Shell可以通过管道把各种功能单一的命令串联起来，让文本流在管道上流动，因而Shell语言具有很好的文本数据亲和力。许多文本数据处理任务Bash都可以一行搞定，这就是Hacker们酷爱的One Liner风格。</span></p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">下面我们来看两个用Bash进行文本处理的例子：</span></p>
+<p><span style="font-family: 'Lucida Console';">1. 统计当前目录下的gz文件数目：</span></p>
+<p><code class="EnlighterJSRAW">ls –l *.gz | wc –l</code></p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">2. 在Web服务器日子service.log中统计2011年6月26和27两天中每天中各页面的PV</span></p>
+<p><code class="EnlighterJSRAW">cat service.log | grep  ^2011-06-2[6-7] | cut –d ‘ ‘ –f 1, 3 | sort | uniq –c</code></p>
+<p> </p>
+<p>service.log:</p>
+<p style="padding-left: 30px;"><span style="font-family: 'Lucida Console';">2011-06-25 13:00:55 /music/c.htm Safari<br/>
+…<br/>
+2011-06-26 08:01:23 /main.htm IE<br/>
+2011-06-26 08:03:01 /sports/b.htm Chrome<br/>
+…<br/>
+2011-06-27 11:41:06 /main.htm IE<br/>
+2011-06-27 11:52:41 /news/a.htm Firefox</span></p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">输出:</span></p>
+<p style="padding-left: 30px;"><span style="font-family: 'Lucida Console';">210 2011-06-26 /main.htm<br/>
+231 2011-06-26 /news/a.htm<br/>
+155 2011-06-26 /sports/b.htm<br/>
+288 2011-06-27 /main.htm<br/>
+292 2011-06-27 /news/a.htm<br/>
+161 2011-06-27 /sports/b.htm</span></p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">上面的两个简单文本数据处理任务如果是在C或C++下实现则要麻烦得多，代码量至少是十几行或者数十行，加上编译调试，整个开发效率可能比Shell低一个数量级。除了Shell外，Perl也是以强大的文本数据处理而闻名的。我们来看一个Perl正则表达式的例子：</span></p>
+<pre class="EnlighterJSRAW">while (&lt;STDIN&gt;) {
+    if (/hello\s(\w+)/i)  {
+        print “say hello to $1“
+     }
+     elsif (/goodbye\s(\w+)/i)  {
+         print “say goodbye to  $1”
+    }
+}</pre>
+<p><span style="font-family: 'Lucida Console';">输入：</span></p>
+<p style="padding-left: 30px;">HeLLo world</p>
+<p style="padding-left: 30px;">Goodbye bug</p>
+<p><span style="font-family: 'Lucida Console';">输出：</span></p>
+<p style="padding-left: 30px;">say hello to world</p>
+<p style="padding-left: 30px;">say goodbye to bug</p>
+<p><span style="font-family: 'Lucida Console';">上面的例子中我们看到Perl直接进行字符串匹配并进行数据提取的强大威力。Perl基于正则表达式的字符串处理不仅比C/C++等系统语言更强大，甚至比Python这样的动态语言也更强大和更方便，这是因为正则表达式是Perl语言的“一等公民”，这就使得Perl比其他以库的方式支持正则表达式功能的语言具有更好的文本数据亲和力。后来的Ruby也学习Perl把直接在语言上支持正则表达式。</span></p>
+<p> </p>
+<h4><strong><span style="font-family: 'Lucida Console';">结构化文本格式</span></strong></h4>
+<p><span style="font-family: 'Lucida Console';">XML是最近十几年来流行起来的一种通用（半）结构化的文本数据交换格式。XML除具有一般文本格式的优点外，还具有表达复杂的层次信息的优势，所以它至诞生以来就被大量用于配置文件和各种Web Service中。现代程序设计基本都少不了了XML打交道，不过在C++、Java和C#集中静态类型语言中处理XML却并不是一件十分轻松的事情。我们先来看一个Java解析和构建下面这个XML的例子：</span></p>
+<pre class="EnlighterJSRAW">&lt;langs type="current"&gt;
+  &lt;language&gt;Java&lt;/language&gt;
+  &lt;language&gt;Groovy&lt;/language&gt;
+  &lt;language&gt;JavaScript&lt;/language&gt;
+&lt;/langs&gt;</pre>
+<p> </p>
+<pre class="EnlighterJSRAW">//Java解析XML
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+try {
+    DocumentBuilder db = dbf.newDocumentBuilder();
+    Document doc = db.parse("src/languages.xml");
+    Element langs = doc.getDocumentElement();
+    System.out.println("type = " + langs.getAttribute("type"));
+    NodeList list = langs.getElementsByTagName("language");
+    for(int i = 0 ; i &amp;lt; list.getLength();i++) {
+        Element language = (Element) list.item(i);
+        System.out.println(language.getTextContent());
+    }
+}catch(Exception e) {
+    e.printStackTrace();
+}
+
+//Java创建XML
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+try {
+    DocumentBuilder db = dbf.newDocumentBuilder();
+    Document doc = db.newDocument();
+    Element langs = doc.createElement("langs");
+    langs.setAttribute("type", "current");
+    doc.appendChild(langs);
+
+    Element language1 = doc.createElement("language");
+    Text text1 = doc.createTextNode("Java");
+    language1.appendChild(text1);
+    langs.appendChild(language1);
+
+    Element language2 = doc.createElement("language");
+    Text text2 = doc.createTextNode("Groovy");
+    language2.appendChild(text2);
+    langs.appendChild(language2);
+    Element language3 = doc.createElement("language");
+    Text text3 = doc.createTextNode("JavaScript");
+    language3.appendChild(text3);
+    langs.appendChild(language3);
+} catch (Exception e) {
+    e.printStackTrace();
+}</pre>
+<p><span style="color: #800040; font-family: 'Lucida Console';"><br/>
+</span> 为了解析和创建小小的一段XML代码需要编写如此冗长的Java代码，而实现同样的功能动态语言Groovy则十分简洁：</p>
+<pre class="EnlighterJSRAW">//Groovy解析XML
+def langs = new XmlParser().parse("languages.xml")
+println "type = ${langs.attribute("type")}"
+langs.language.each{
+    println it.text()
+}
+//Groovy创建XML
+def xml = new groovy.xml.MarkupBuilder()
+xml.langs(type:"current"){
+   language("Java")
+   language("Groovy")
+   language("JavaScript")
+}</pre>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">上面Groovy操作XML的代码简洁而富有表达力，代码与XML几乎是一一对应的，如同直接在XML上进行操作的DSL一样，而相应的Java代码则看不到XML的影子。这说明Groovy具有很高的XML数据的亲和力。为什么Java和Groovy在XML亲和力方面有这样的差异呢？原因在于Java要求所有的方法和属性都必须先定义再调用，严格的静态类型检查使得Java只能把XML元素作为“二等公民”来表达；而Groovy则没有静态类型检查的限制，可以自由地使用方法和属性来表达XML结构。上面用Groovy创建XML的例子中，groovy.xml.MarkupBuilder类中实际上并没有langs, language这些方法，但会在调用的时候自动创建相应的XML结构。</span></p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">除了XML外，JSON是另一种通用的半结构化的纯文本数据交换格式，它常被视为轻量级的XML。JSON的本意是Javascript的对象表示(Javascript Object Notation)，它属于Javascript的语法子集，所以Javascript对JSON有原生的支持。下面就是一个在Javascript中创建JSON对象的例子：</span></p>
+<p>[javascript]var json = { “langs” :<br/>
+    {<br/>
+        "type” : "current”,<br/>
+       "language” :  ["Java”, "Groovy”, "Javascript”]<br/>
+    }<br/>
+}[/javascript]</p>
+<p><span style="font-family: 'Lucida Console';">许多Javascript程序都会通过AJAX都从服务器获取JSON字符串，然后把字符串解析为JSON对象。由于Javascript对JSON的原生支持，所以，在Javascript中解析JSON字符串可以采用通用的eval方式，如：</span></p>
+<p>[javascript]var json = eval(“(" +  jsonStr + “)");</p>
+<p>alert(json.langs.type);[/javascript]</p>
+<p><span style="font-family: 'Lucida Console';">甚至可以：</span></p>
+<p>[javascript]eval(“var json = ” +  jsonStr);</p>
+<p>alert(json.langs.type);[/javascript]</p>
+<p> </p>
+<p><span style="font-family: 'Lucida Console';">不过eval的通用性带来了一定的安全隐患，所以一般只建议对受信任的数据源采用eval方式解析JSON，对于不受信任的数据源可以采用专门的JSON解析库。无论如何Javascript对JSON的原生支持都使得Javascript创建和解析JSON数据十分的简单，也就是说Javascript具有很高的JSON数据亲和力。另外，Groovy 1.8也加入了对JSON的原生支持，操作JSON与Javascript一样方便。</span></p>
+<h4><strong><span style="font-family: 'Lucida Console';">总结</span></strong></h4>
+<p><span style="font-family: 'Lucida Console';">到这里为止本文篇幅已经很长了，只能列举二进制字节块格式、文本格式和结构化文本格式3种典型的数据格式。实际上，数据亲和力的话题还有很多值得探讨的，比如C#的Linq。本文的探讨算是抛砖引玉，目的在于引起大家注意在比较语言的时候不要忽略了数据亲和力这样一个重要方面。本文的错误或不足，敬请指正，谢谢！</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7992.html"><img alt="C++的坑真的多吗？" height="150" src="../wp-content/uploads/2012/08/cpp_small-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7992.html">C++的坑真的多吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5576.html"><img alt="那些曾伴我走过编程之路的软件" height="150" src="../wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5576.html">那些曾伴我走过编程之路的软件</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4905.html">语言的数据亲和力</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

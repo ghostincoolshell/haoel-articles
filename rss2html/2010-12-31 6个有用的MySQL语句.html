@@ -1,0 +1,74 @@
+<html><body><p>以前本站给大家介绍过《<a href="https://coolshell.cn/articles/1846.html" rel="bookmark" target="_blank">MySQL性能优化的最佳20+条经验</a>》，今天给大家介绍六条比较有用的MySQL的SQL语句，可能很多人都通过PHP来实现这些功能。</p>
+<h4>1. 计算年数</h4>
+<p>你想通过生日来计算这个人有几岁了。</p>
+<pre class="EnlighterJSRAW">
+
+SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(@dateofbirth)), '%Y') + 0;
+</pre>
+<h4>2. 两个时间的差</h4>
+<p>取得两个 datetime 值的差。假设 dt1 和 dt2 是 datetime 类型，其格式为 ‘yyyy-mm-dd hh:mm:ss’，那么它们之间所差的秒数为：</p>
+<pre class="EnlighterJSRAW">
+
+UNIX_TIMESTAMP( dt2 ) - UNIX_TIMESTAMP( dt1 )
+</pre>
+<p>除以60就是所差的分钟数，除以3600就是所差的小时数，再除以24就是所差的天数。</p>
+<h4>3. 显示某一列出现过N次的值</h4>
+<pre class="EnlighterJSRAW">
+
+SELECT id
+FROM tbl
+GROUP BY id
+HAVING COUNT(*) = N;
+</pre>
+<p><span id="more-3433"></span></p>
+<h4>4. 计算两个日子间的工作日</h4>
+<p>所谓工作日就是除出周六周日和节假日。</p>
+<pre class="EnlighterJSRAW">
+
+SELECT COUNT(*)
+FROM calendar
+WHERE d BETWEEN Start AND Stop
+  AND DAYOFWEEK(d) NOT IN(1,7)
+  AND holiday=0;
+</pre>
+<h4>5. 查找表中的主键</h4>
+<pre class="EnlighterJSRAW">
+
+SELECT k.column_name
+FROM information_schema.table_constraints t
+JOIN information_schema.key_column_usage k
+USING (constraint_name,table_schema,table_name)
+WHERE t.constraint_type='PRIMARY KEY'
+  AND t.table_schema='db'
+  AND t.table_name=tbl'
+</pre>
+<h4>6. 查看你的数库有多大</h4>
+<pre class="EnlighterJSRAW">
+
+SELECT
+  table_schema AS 'Db Name',
+  Round( Sum( data_length + index_length ) / 1024 / 1024, 3 ) AS 'Db Size (MB)',
+  Round( Sum( data_free ) / 1024 / 1024, 3 ) AS 'Free Space (MB)'
+FROM information_schema.tables
+GROUP BY table_schema ;
+</pre>
+<p>希望对你有帮助。</p>
+<p>文章：<a href="http://www.codeforest.net/6-useful-mysql-queries" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/925.html"><img alt="如何比较两个数据表" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/925.html">如何比较两个数据表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7270.html"><img alt="NoSQL 数据建模技术" height="150" src="../wp-content/uploads/2012/05/overview2-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="../wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4939.html"><img alt="Quora使用到的技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,97 @@
+<html><body><p><strong>概述：</strong>本文主要研究的是JAVA的字符串拼接的性能，原文中的测试代码在功能上并不等价，导致concat的测试意义不大。不过原作者在评论栏给了新的concat结果，如果有兴趣的同学建议自己修改代码测试。</p>
+<p>原文出处:<a href="http://www.venishjoe.net/2009/11/java-string-concatenation-and.html">http://www.venishjoe.net/2009/11/java-string-concatenation-and.html</a></p>
+<p>在JAVA中拼接两个字符串的最简便的方式就是使用操作符”+”了。如果你用”+”来连接固定长度的字符串，可能性能上会稍受影响，但是如果你是在循环中来”+”多个串的话，性能将指数倍的下降。假设有一个字符串，我们将对这个字符串做大量循环拼接操作，使用”+”的话将得到最低的性能。但是究竟这个性能有多差？如果我们同时也把StringBuffer,StringBuilder或String.concat()放入性能测试中，结果又会如何呢？本文将会就这些问题给出一个答案！<br/>
+<span id="more-2235"></span></p>
+<p>我们将使用<a href="http://perf4j.codehaus.org/index.html">Per4j</a>来计算性能，因为这个工具可以给我们一个完整的性能指标集合，比如最小，最大耗时，统计时间段的标准偏差等。在测试代码中，为了得到一个准确的标准偏差值，我们将执行20个拼接”*”50,000次的测试。下面是我们将使用到的拼接字符串的方法：</p>
+<ul>
+<li>Concatenation Operator (+)</li>
+<li>String concat method – concat(String str)</li>
+<li>StringBuffer append method – append(String str)</li>
+<li>StringBuilder append method – append(String str)</li>
+</ul>
+<p>最后，我们将看看字节码，来研究这些方法到底是如何执行的。现在，让我们先开始来创建我扪的类。注意为了计算每个循环的性能，代码中的每段测试代码都需要用Per4J库进行封装。首先我们先定义迭代次数</p>
+<pre class="EnlighterJSRAW">
+private static  final int  OUTER_ITERATION=20;
+private static final int INNER_ITERATION=50000;
+</pre>
+<p>接下来，我们将使用上述4个方法来实现我们的测试代码。</p>
+<pre class="EnlighterJSRAW">
+  	String addTestStr = "";
+  	String concatTestStr = "";
+  	StringBuffer concatTestSb = null;
+  	StringBuilder concatTestSbu = null;
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch("StringAddConcat");
+  	    addTestStr = "";
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    addTestStr += "*";
+  	    stopWatch.stop();
+  	}       
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch("StringConcat");
+  	    concatTestStr = "";
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    concatTestStr.concat("*");
+  	    stopWatch.stop();
+  	}
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch("StringBufferConcat");
+  	    concatTestSb = new StringBuffer();
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    concatTestSb.append("*");
+  	    stopWatch.stop();
+  	}
+  	 
+  	for (int outerIndex=0;outerIndex&lt;=OUTER_ITERATION;outerIndex++) {
+  	    StopWatch stopWatch = new LoggingStopWatch("StringBuilderConcat");
+  	    concatTestSbu = new StringBuilder();
+  	    for (int innerIndex=0;innerIndex&lt;=INNER_ITERATION;innerIndex++)
+  	    concatTestSbu.append("*");
+  	    stopWatch.stop();
+  	}
+</pre>
+<p>接下来通过运行程序来生成性能指标。我的运行环境是64位的Windown7操作系统，32位的JVM(7-ea) 带4GB内存，双核Quad 2.00GHz的CPU的机器.</p>
+<p>经过20次迭代后，我们得到如下的数据：<br/>
+<img alt="" class="alignnone" height="351" src="../wp-content/uploads/2010/03/String_Perf_Chart_217.png" title="结果" width="586"/></p>
+<p>结果非常完美如我们想象的那样。唯一比较有趣的事情是为什么String.concat也很不错，我们都知道，String是一个常类（初始化后就不会改变的类），那么为什么concat的性能会更好一些呢。(<strong>译者注</strong>：其实原文作者的测试代码有问题，对于concat()方法的测试代码应该写成concatTestStr=concatTestStr.concat(“*”)才对。)为了回答这个问题，我们应该看看concat反编译出来的字节码。在本文的下载包里面包含了所有的字节码，但是现在我们先看一下concat的这个代码片段：</p>
+<pre class="EnlighterJSRAW">
+    46:  new #6; //class java/lang/StringBuilder
+    49:  dup
+    50:  invokespecial   #7; //Method java/lang/StringBuilder."&lt;init&gt;":()V
+    53:  aload_1
+    54:  invokevirtual   #8; //Method java/lang/StringBuilder.append:
+             (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    57:  ldc #9; //String *
+    59:  invokevirtual   #8; //Method java/lang/StringBuilder.append:
+             (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    62:  invokevirtual   #10; //Method java/lang/StringBuilder.toString:()
+             Ljava/lang/String;
+    65:  astore_1
+    66:  iinc    7, 1
+    69:  goto    38
+</pre>
+<p>这段代码是String.concat()的字节码，从这段代码中，我们可以清楚的看到，concat()方法使用了StringBuilder，concat()的性能应该和StringBuilder的一样好，但是由于额外的创建StringBuilder和做.append(str).append(str).toString()的操作，使得concate的性能会受到一些影响，所以StringBuilder和String Cancate的时间是1.8和3.3。</p>
+<p>因此，即时在做最简单的拼接时，如果我们不想创建StringBuffer或StringBuilder实例使，我们也因该使用concat。但是对于大量的字符串拼接操作，我们就不应该使用concat(<strong>译者注：</strong>因为测试代码功能上并不完全等价，更换后的测试代码concat的平均处理时间是1650.9毫秒。这个结果在原文的评论里面。)，因为concat会降低你程序的性能，消耗你的cpu。因此，在不考虑线程安全和同步的情况下，为了获得最高的性能，我们应尽量使用StringBuilder</p>
+<p>本文的源代码，编译目标文件和字节码可以通过下面的这个链接获得：</p>
+<p>下载源代码，类和字节码：<a>String_Concatenation _Performance.zip</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="../wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2235.html">JAVA的字符串拼接与性能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,73 @@
+<html><body><p></p>
+<div id="_mcePaste"><strong><a href="http://code.google.com/p/zen-coding/" target="_blank">Zen Coding</a></strong> 一个用来简化编写 HTML，XML， XSL （或是其它一些诸如此类格式的编辑器）。其主要是用一种缩写方式的语法来书写大量重复和无味的HTML，很像CSS语法。下面是一个例子：</div>
+<pre>div#page&gt;div.logo+ul#navigation&gt;li*5&gt;a</pre>
+<div>展开后会成为下面这个样子：</div>
+<pre class="EnlighterJSRAW">
+&lt;div id="page"&gt;
+        &lt;div&gt;&lt;/div&gt;
+        &lt;ul id="navigation"&gt;
+                &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+<div id="_mcePaste">可以看出来，#代表ID，&gt;代表下一层。</div>
+<div><span id="more-2406"></span></div>
+<div>如果你写下：</div>
+<pre>select&gt;option#item-$*3</pre>
+<div>那么将会得到：</div>
+<pre class="EnlighterJSRAW">
+
+&lt;select&gt;
+	&lt;option id="item-1"&gt;&lt;/option&gt;
+	&lt;option id="item-2"&gt;&lt;/option&gt;
+	&lt;option id="item-3"&gt;&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+<div>看上去很不错吧。目前，其支持如下的编辑器：</div>
+<div>
+<p><span style="font-family: arial, sans-serif; line-height: normal;"> </span></p>
+<ul>
+<li><a href="http://code.google.com/p/zen-coding/wiki/AptanaHowToEn" style="color: #0000cc;">AptanaHowToEn</a></li>
+<li><strong>TextMate</strong> (Mac). Available in two flavors: basic snippets (Zen HTML and Zen CSS) and full-featured plugin (ZenCoding for TextMate). <sub>Bundles &gt; Zen Coding menu item</sub></li>
+<li><strong>Coda</strong> (Mac) — <a href="http://github.com/sergeche/tea-for-coda/downloads" rel="nofollow" style="color: #0000cc;">external download</a>, via <a href="http://onecrayon.com/tea/" rel="nofollow" style="color: #0000cc;">TEA for Coda</a>. <sub>Plug-ins &gt; TEA for Coda &gt; Zen Coding menu item</sub></li>
+<li><strong>Espresso</strong> (Mac) — <a href="http://github.com/sergeche/tea-for-espresso/downloads" rel="nofollow" style="color: #0000cc;">external download</a>, via <a href="http://onecrayon.com/tea/" rel="nofollow" style="color: #0000cc;">TEA for Espresso</a>. Zen Coding is bundled with Espresso by default, but you should upgrade ZC to latest version. <sub>Actions &gt; HTML menu item</sub></li>
+<li><strong>Komodo Edit/IDE</strong> (crossplatform) — <a href="http://community.activestate.com/xpi/zen-coding" rel="nofollow" style="color: #0000cc;">external download</a>. <sub>Tools &gt; Zen Coding menu item</sub></li>
+<li><strong>Notepad++</strong> (Windows). <sub>Zen Coding menu item</sub></li>
+<li><strong>PSPad</strong> (Windows). <sub>Scripts &gt; Zen Coding menu item</sub></li>
+<li><strong><tt style="font-size: 13px;">&lt;textarea&gt;</tt></strong> (browser-based). See <a href="http://zen-coding.ru/textarea/" rel="nofollow" style="color: #0000cc;">online demo</a>.</li>
+<li><strong>editArea</strong> (browser-based). See <a href="http://zen-coding.ru/demo/" rel="nofollow" style="color: #0000cc;">online demo</a>.</li>
+</ul>
+</div>
+<p>还有下面这些第三方的插件：</p>
+<ul>
+<li><strong>Dreamweaver</strong> (Windows, Mac)</li>
+<li><strong>Sublime Text</strong> (Windows)</li>
+<li><strong>UltraEdit</strong> (Windows)</li>
+<li><strong>TopStyle</strong> (Windows)</li>
+<li><strong>GEdit</strong> (crossplatform) — <a href="http://github.com/fmarcia/zen-coding-gedit" rel="nofollow">Franck Marcia’s plugin</a>, <a href="http://github.com/mikecrittenden/zen-coding-gedit" rel="nofollow">Mike Crittenden’s plugin</a></li>
+<li><strong>BBEdit/TextWrangler</strong> (Mac) — <a href="http://www.angelwatt.com/coding/zen-coding_bbedit.php" rel="nofollow">external download</a></li>
+<li><strong>Visual Studio</strong> (Windows) — <a href="http://zencoding.codeplex.com/" rel="nofollow">external download</a></li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17634.html"><img alt="Chrome开发者工具的小技巧" height="150" src="../wp-content/uploads/2017/01/pretty-code-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17634.html">Chrome开发者工具的小技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3903.html"><img alt="一些有意思的贴子和工具" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3063.html"><img alt="40个很不错的CSS技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3063.html">40个很不错的CSS技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2406.html">写HTML和CSS的新方法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

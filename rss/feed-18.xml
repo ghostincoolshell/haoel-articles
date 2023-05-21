@@ -1,0 +1,1936 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 18 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=18" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Thu, 16 Dec 2021 04:47:06 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>在Web上运行Linux</title>
+		<link>https://coolshell.cn/articles/4722.html</link>
+					<comments>https://coolshell.cn/articles/4722.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 19 May 2011 00:35:08 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[BusyBox]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[QEMU]]></category>
+		<category><![CDATA[TinyCC]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4722</guid>
+
+					<description><![CDATA[<p>一个叫Fabrice Bellard的程序员写了一段Javascript在Web浏览器中启动Linux（原网页，我把这个网页iframe在了下面），目前，你只能...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4722.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4722.html">在Web上运行Linux</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>一个叫Fabrice Bellard的程序员写了一段Javascript在Web浏览器中启动Linux（<a href="http://bellard.org/jslinux/" target="_blank">原网页</a>，我把这个网页iframe在了下面），目前，你只能使用Firefox 4和Chrome 11运行这个Linux。这不是什么假的模仿Linux的东西，这是实实在在的运行一个Linux。这一举动还引起了很多很牛人的关注，包括Javascript的创建者<a href="http://twitter.com/#!/BrendanEich/status/70393502328045568" target="_blank">Brendan Eich</a>。</p>
+<p align=center><button id="jslinux-stop" style="display: none" onclick="document.getElementById('jslinux').src='about:blank';document.getElementById('jslinux-stop').style.display='none';document.getElementById('jslinux-start').style.display='block';">清除启动</button><button  id="jslinux-start" onclick="document.getElementById('jslinux').src='http://bellard.org/jslinux/';document.getElementById('jslinux-start').style.display='none';document.getElementById('jslinux-stop').style.display='block';">开始启动</button></p>
+<p align=center><iframe loading="lazy" id="jslinux" frameborder="0" style="background:#000;border:0" width="700" height="540" src=""></iframe></p>
+<p><span id="more-4722"></span></p>
+<p>随后，Fabrice Bellard发布了相关的技术说明：<a href="http://bellard.org/jslinux/tech.html" target="_blank">http://bellard.org/jslinux/tech.html</a>，从这份文档中我们可以看到：</p>
+<ul>
+<li>这个模似器完全由Javascript写成</li>
+<li>CPU仿真器使用的是<a href="http://qemu.org/">QEMU</a>（接近于原古的486），为了装上Linux，其做了一些改动。</li>
+<li>Javascript的终端本来可以使用<a href="http://www.masswerk.at/termlib/">termlib</a>，但他还是自己写了一个，因为OS的按键和Web浏览器不一样（<a href="http://unixpapa.com/js/key.html">here</a>）</li>
+<li>Linux  使用了2.6.20内核，编译配置在<a href="http://bellard.org/jslinux/config_linux-2.6.20" target="_blank">这里</a>，并做了一些<a href="http://bellard.org/jslinux/patch_linux-2.6.20" target="_blank">小改动</a>。</li>
+<li>磁盘用的是Ram Disk，在启动的时候装载。其文件系统由<a href="http://buildroot.uclibc.org/">Buildroot</a> 和<a href="http://www.busybox.net/">BusyBox</a>产生。</li>
+<li>在Home目录下有一个hello.c的程序，你可以使用<a href="http://bellard.org/tcc">TinyCC</a>编译（tcc，参看酷壳的<a title="用TCC可以干些什么？" href="https://coolshell.cn/articles/786.html" target="_blank">这篇文章</a>）</li>
+</ul>
+<p>从这个事我有这些感触，</p>
+<ol>
+<li>在Web上运行一个Linux的操作系统不是问题。那么在Web上还有什么不能做的吗？</li>
+<li>Linux真是性能很高，在Javascript下运行感觉也不慢啊。</li>
+<li>真是Techno-Geek。</li>
+</ol>
+<p>&nbsp;<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4722.html">在Web上运行Linux</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4722.html/feed</wfw:commentRss>
+			<slash:comments>97</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python 和 PyGame 的一些示例</title>
+		<link>https://coolshell.cn/articles/4710.html</link>
+					<comments>https://coolshell.cn/articles/4710.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 18 May 2011 00:43:58 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[ebook]]></category>
+		<category><![CDATA[pygame]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4710</guid>
+
+					<description><![CDATA[<p>看到一个网页收集了很多使用Python和PyGame写游戏的示例，分享给大家。（注：我不知道用Python/PyGame写游戏其性能会怎么样，但是一些小游戏应该...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4710.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4710.html">Python 和 PyGame 的一些示例</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>看到<a href="http://cs.simpson.edu/?q=python_pygame_examples" target="_blank">一个网页</a>收集了很多使用Python和PyGame写游戏的示例，分享给大家。（注：我不知道用Python/PyGame写游戏其性能会怎么样，但是一些小游戏应该是没有问题的）</p>
+<p>这个网页同时给了一本<a href="http://cs.simpson.edu/files/CS_Intro_Book.pdf" target="_blank">介绍Python和PyGame的电子书</a>（PDF），下面的这些例子就是这本书的示例。所有的这些示例可以<a href="http://cs.simpson.edu/files/Python%20Examples.zip" target="_blank">打包下载</a>。</p>
+<h4>基础 Python 示例</h4>
+<ul>
+<li><a href="http://cs.simpson.edu/?q=if_statement_examples.py">if_statement_examples.py</a> &#8211; if 语句的一个简单示例</li>
+<li><a href="http://cs.simpson.edu/?q=for_loops_examples.py">for_loop_examples.py</a> &#8211; for 语句的一个简单示例.</li>
+<li><a href="http://cs.simpson.edu/?q=while_loop_examples.py">while_loop_examples.py</a> &#8211; while 语句的一个简单示例</li>
+</ul>
+<h4>Pygame 图形示例</h4>
+<table border="0" cellspacing="1" cellpadding="1">
+<tbody>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=pygame_base_template.py">pygame_base_template.py</a> &#8211; 开启一个黑的 pygame 窗口。当你要写一个新的代码时，你可以使用这个示例的代码初始化你的程序。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/pygame_base_template.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/pygame_base_template_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=simple_graphics_demo.py">simple_graphics_demo.py</a> &#8211; 作图，画一些简单的图形。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/simple_graphics_demo.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/simple_graphics_demo_thumb.png" alt="simple_graphics_demo_thumb.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<p><span id="more-4710"></span></p>
+<table border="0" cellspacing="1" cellpadding="1">
+<tbody>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=functions_and_graphics.py">functions_and_graphics.py</a> &#8211; 图一些雪人。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/functions_and_graphics.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/functions_and_graphics_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=animating_snow.py">animating_snow.py</a> &#8211; 下雪动画。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/animating_snow.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/animating_snow_thumb.png" alt="Animating Snow" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=move_keyboard.py">move_keyboard.py</a> &#8211; 使用键盘移动一个图形</p>
+<p><a href="http://cs.simpson.edu/?q=move_mouse.py">move_mouse.py</a> &#8211; 使用鼠标移动一个图形</p>
+<p><a href="http://cs.simpson.edu/?q=move_game_controller.py">move_game_controller.py</a> &#8211; 使用游戏手柄移动一个图形</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/move_keyboard.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/move_keyboard_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=bitmapped_graphics.py">bitmapped_graphics.py</a> &#8211; 显示一些图片（png, jpb），并加入一些声音。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/bitmapped_graphics.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/bitmapped_graphics_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=array_backed_grid.py">array_backed_grid.py</a> &#8211; 一个网格，可以用来开发一些棋类的游戏。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/array_backed_grid.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/array_backed_grid_thumb.png" alt="" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4>Pygame 示例</h4>
+<table border="0" cellspacing="1" cellpadding="1">
+<tbody>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=sprite_collect_blocks.py">sprite_collect_blocks.py</a> &#8211; 使用鼠标移动一个小点</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/sprite_collect_blocks.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/sprite_collect_blocks_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=sprite_collect_circle.py">sprite_collect_circle.py</a> &#8211; 和上面的示例一样，只不过是圆点。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/sprite_collect_circle.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/sprite_collect_circle_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=sprite_collect_graphic.py">sprite_collect_graphic.py</a> &#8211; 和上面的示例一样，只不过是图片。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/sprite_collect_graphic.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/sprite_collect_graphic_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=move_sprite_mouse.py">move_sprite_mouse.py</a> &#8211; 用鼠标移动一个点</p>
+<p><a href="http://cs.simpson.edu/?q=move_sprite_keyboard_jump.py">move_sprite_keyboard_jump.py</a> &#8211; 用键盘移动一个点（跳动式的）</p>
+<p><a href="http://cs.simpson.edu/?q=move_sprite_keyboard_smooth.py">move_sprite_keyboard_smooth.py</a> &#8211; 用键盘移动一个点（平滑式的）.</p>
+<p><a href="http://cs.simpson.edu/?q=move_sprite_game_controller.py">move_sprite_game_controller.py</a> &#8211; 用游戏手柄移动一个点</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/move_sprite_mouse.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/move_sprite_mouse_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=move_with_walls_example.py">move_with_walls_example.py</a> &#8211; 移动一个点，但是会被墙阻止。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/move_with_walls_example.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/move_with_walls_example_thumb.png" alt="" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4>游戏示例</h4>
+<table border="0" cellspacing="1" cellpadding="1">
+<tbody>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=bounce_ball_with_paddle.py">bounce_ball_with_paddle.py</a> &#8211; 两个玩家玩对碰球游戏，需要两个手柄。</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/bounce_ball_with_paddle.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/bounce_ball_with_paddle_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td><a href="http://cs.simpson.edu/?q=breakout_simple.py">breakout_simple.py</a> &#8211; 一个简单的游戏，显示 &#8220;Game Over&#8221; 信息.</td>
+<td><a href="http://cs.simpson.edu/files/python_examples/screenshots/breakout_simple.png"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/breakout_simple_thumb.png" alt="" /></a></td>
+</tr>
+<tr>
+<td>一个学生的作业. <a href="http://cs.simpson.edu/?q=node/62">Spring 2011</a></td>
+<td><a href="http://cs.simpson.edu/?q=node/62"><img decoding="async" src="http://cs.simpson.edu/files/2011spring.png" alt="" /></a></td>
+</tr>
+<tr>
+<td>另一个学生的作业.<a href="http://cs.simpson.edu/21"> Fall 2010</a></p>
+<p><a href="http://cs.simpson.edu/?q=node/23">Download games</a> &#8211; .</td>
+<td><a href="http://cs.simpson.edu/?q=node/21"><img decoding="async" src="http://cs.simpson.edu/files/python_examples/screenshots/sample_games_vid.png" alt="" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4>创建一个安装包</h4>
+<p><a href="http://cs.simpson.edu/?q=make_an_installer_for_your_python_program">Python Pygame 安装包教程 </a></p>
+<h4>搜索和排序示例</h4>
+<ul>
+<li><a href="http://cs.simpson.edu/files/example_sorted_names.txt">example_sorted_names.txt</a> &#8211; Sample file of names used in searching_example.py</li>
+<li><a href="http://cs.simpson.edu/?q=searching_example.py">searching_example.py</a> &#8211; Example linear and binary searches</li>
+<li><a href="http://cs.simpson.edu/files/AliceInWonderLand.txt">AliceInWonderLand.txt</a> &#8211; Text of Alice In Wonderland. Source: <a href="http://www.gutenberg.org/wiki/Main_Page">Project Gutenberg</a></li>
+<li><a href="http://cs.simpson.edu/files/AliceInWonderLand200.txt">AliceInWonderLand200.txt</a></li>
+<li><a href="http://cs.simpson.edu/files/dictionary.txt">dictionary.txt</a></li>
+<li><a href="http://cs.simpson.edu/?q=sorting_examples.py">sorting_examples.py</a> &#8211; Example code for the insertion and selection sorts.</li>
+</ul>
+<h4>文件示例</h4>
+<p><a href="http://cs.simpson.edu/?q=high_score.py">high_score.py</a> &#8211; Example that shows how to read and write a high score to the disk so that it persists between program runs.</p>
+<h4>其它信息</h4>
+<ul>
+<li><a href="http://www.pygame.org/">Pygame Website</a> &#8211; Pygame 主站</li>
+<li><a href="http://www.pygame.org/docs/">Pygame Documentation</a> &#8211; Pygame 文档</li>
+</ul>
+<p>（全文完）</p>
+<p>——————————</p>
+<p><strong><span style="color: #000000;">最后，不好意思很久没有更新酷壳，这段时间在国外出差，事多，5月31回国。大家见谅！</span></strong><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg" alt="两本电子书" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_title">两本电子书</a></li><li ><a href="https://coolshell.cn/articles/1928.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="如何使用Python操作摄像头" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1928.html" class="wp_rp_title">如何使用Python操作摄像头</a></li><li ><a href="https://coolshell.cn/articles/1157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="Python 自然语言处理" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1157.html" class="wp_rp_title">Python 自然语言处理</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" alt="Python修饰器的函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4710.html">Python 和 PyGame 的一些示例</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4710.html/feed</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>可视化的数据结构和算法</title>
+		<link>https://coolshell.cn/articles/4671.html</link>
+					<comments>https://coolshell.cn/articles/4671.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 04 May 2011 06:26:46 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4671</guid>
+
+					<description><![CDATA[<p>还记得之前发布过的那个关于可视化排序的文章吗？在网上又看到了一个旧金山大学David Galles做的各种可视化的数据结构和基本算法的主页，网址在这里，大家可以...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4671.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4671.html">可视化的数据结构和算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>还记得之前发布过的那个<a title="可视化的排序过程" href="https://coolshell.cn/articles/3933.html" target="_blank">关于可视化排序</a>的文章吗？在网上又看到了一个旧金山大学<a href="http://www.cs.usfca.edu/galles">David Galles</a>做的各种可视化的数据结构和基本算法的主页，<a href="http://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank">网址在这里</a>，大家可以看看。我把这个页面的目录列在下面并翻译了一下，大家可以直接点击了。</p>
+<p>不知道国内的教育有没有相关的教学课件，至少在我大学的时候是没有的。</p>
+<h4>基础</h4>
+<ul>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/StackArray.html">Stack栈: 数组实现</a></li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/StackLL.html">Stack栈: 链表实现</a></li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/QueueArray.html">Queues队列: 数组实现</a></li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/QueueLL.html">Queues队列: 链表实现</a></li>
+<li>Lists列表: 数组实现 ( <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版演示)</li>
+<li>Lists列表: 链表实现 ( <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版演示)</li>
+</ul>
+<h4>索引</h4>
+<ul>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/BST.html">Binary Search Trees</a> 二叉检索树</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/AVLTree.html">AVL Trees (平衡二叉检索树)</a></li>
+<li>Red-Black Trees 红黑树 ( <a href="http://www.cs.usfca.edu/~galles/visualization/flash.html">flash</a> 版本演示)</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/OpenHash.html">Open Hash Tables 开放哈希表(Closed Addressing 链地址法)</a></li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/ClosedHash.html">Closed Hash Tables  闭合哈希表 (Open Addressing 开放定址法)</a></li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/ClosedHashBucket.html">Closed Hash Tables, using buckets</a> 使用桶</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/BTree.html">B Trees</a> B树</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">B+ Trees</a> B+树</li>
+</ul>
+<p><span id="more-4671"></span></p>
+<p><a></a></p>
+<p><a></p>
+<li style="display: inline !important;">
+<h4>排序</h4>
+</li>
+<p></a></p>
+<ul>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html">Comparison Sorting</a> 比较式排序
+<ul>
+<li>Bubble Sort 冒泡排序</li>
+<li>Selection Sort 选择排序</li>
+<li>Insertion Sort 插入排序</li>
+<li>Shell Sort 希尔排序</li>
+<li>Merge Sort 归并排序</li>
+<li>Quck Sort 快速排序</li>
+</ul>
+</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/BucketSort.html">Bucket Sort</a> 桶排序</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/CountingSort.html">Counting Sort</a> 计数排序</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/RadixSort.html">Radix Sort</a> 基数排序</li>
+</ul>
+<h4>堆数据结构</h4>
+<ul>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/Heap.html">Heaps</a> 堆</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/BinomialQueue.html">Binomial Queues</a> 二项队列</li>
+</ul>
+<h4>图 算法</h4>
+<ul>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/BFS.html">Breadth-First Search</a> 广度优先搜索</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/DFS.html">Depth-First Search</a> 深度优先搜索</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html">Connected Components</a> 连通性</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/Dijkstra.html">Dijkstra&#8217;s Shortest Path</a> Dijkstra最短路径</li>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/Prim.html">Prim&#8217;s Minimum Cost Spanning Tree</a> 最小生成树</li>
+<li>Topological Sort  拓扑排序 ( <a href="http://www.cs.usfca.edu/~galles/visualization/flash.html">flash</a> 版本演示  <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版本演示)</li>
+<li>Floyd-Warshall 算法(解决任意两点间的最短路径的一种算法) (<a href="http://www.cs.usfca.edu/~galles/visualization/flash.html">flash</a> 版本演示 <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版本演示)</li>
+<li>基于<em>Kruskal</em>算法的最小生成树的构建 ( <a href="http://www.cs.usfca.edu/~galles/visualization/flash.html">flash</a> 版本演示 <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版本演示)</li>
+</ul>
+<h4>动态编程</h4>
+<ul>
+<li>计算 Fibonacci 数 ( <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版本演示)</li>
+</ul>
+<h4>其它&#8230;</h4>
+<ul>
+<li><a href="http://www.cs.usfca.edu/~galles/visualization/DisjointSets.html">Disjoint Sets</a> （MIT算法公开课中有一课讨论的是这个，见<a href="http://v.163.com/movie/2010/12/V/E/M6UTT5U0I_M6V2UDUVE.html" target="_blank">网易公开课</a>）</li>
+<li>Huffman Coding 哈夫曼编码 ( <a href="http://www.cs.usfca.edu/~galles/visualization/java/visualization.html">java</a> 版本演示)</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3933.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" alt="可视化的排序过程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3933.html" class="wp_rp_title">可视化的排序过程</a></li><li ><a href="https://coolshell.cn/articles/2583.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些重要的算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2583.html" class="wp_rp_title">一些重要的算法</a></li><li ><a href="https://coolshell.cn/articles/536.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/bubble-150x150.png" alt="一个显示排序过程的Python脚本" width="150" height="150" /></a><a href="https://coolshell.cn/articles/536.html" class="wp_rp_title">一个显示排序过程的Python脚本</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4671.html">可视化的数据结构和算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4671.html/feed</wfw:commentRss>
+			<slash:comments>50</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>狗日的开源软件许可证</title>
+		<link>https://coolshell.cn/articles/4657.html</link>
+					<comments>https://coolshell.cn/articles/4657.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 04 May 2011 00:25:17 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[BSD]]></category>
+		<category><![CDATA[DBAD]]></category>
+		<category><![CDATA[GNU]]></category>
+		<category><![CDATA[GPL]]></category>
+		<category><![CDATA[MIT]]></category>
+		<category><![CDATA[Programming]]></category>
+		<category><![CDATA[WTFPL]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4657</guid>
+
+					<description><![CDATA[<p>你知道这个世上有多少种开源软件的许可证吗？GPL，BSD，MIT，Apache？GNU上有个网页，上面记录了几乎所有的开源软件的许可证，真TMD的多，有开源的，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4657.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4657.html">狗日的开源软件许可证</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>你知道这个世上有多少种开源软件的许可证吗？GPL，BSD，MIT，Apache？GNU上有个网页，上面<a href="http://www.gnu.org/licenses/license-list.html" target="_blank">记录了几乎所有的开源软件的许可证</a>，真TMD的多，有开源的，有商用的，有软件的，有文档的，多得你都不想看了，天杀的，程序员们还真能鼓捣啊。不过，主流的也就几种——<a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GPL</a><a href="https://coolshell.cn/wp-content/uploads/2011/05/OSS-License.jpg"></a>、<a href="http://en.wikipedia.org/wiki/BSD_licenses">BSD</a>、<a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a>、<a href="http://www.mozilla.org/MPL/">Mozilla</a>、<a href="http://www.apache.org/licenses/LICENSE-2.0">Apache</a>等等。</p>
+<p>那么，你知道怎么区别他们吧？怎么选择他们吗？这里有一张比较复杂的图，在调侃这些纷繁的许可证（我不翻译了，这个图属于是发泄不满）</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2011/05/OSS-License.jpg"><img decoding="async" loading="lazy" title="OSS License" src="https://coolshell.cn/wp-content/uploads/2011/05/OSS-License.jpg" alt="" width="567" height="730" /></a></p>
+<p>下面是另一个图，这个图<a href="http://pbagwl.com/post/5078147450/description-of-popular-software-licenses" target="_blank">来自这里</a><a href="https://coolshell.cn/wp-content/uploads/2011/05/Infographic-of-popular-software-licenses.jpg"></a>，这个图并不恶搞，但其非常简单地说明了如何选择一个开源的许可证：</p>
+<p><span id="more-4657"></span></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2011/05/Infographic-of-popular-software-licenses.jpg"><img decoding="async" loading="lazy" title="Infographic of popular software licenses" src="https://coolshell.cn/wp-content/uploads/2011/05/Infographic-of-popular-software-licenses.jpg" alt="" width="560" height="446" /></a></p>
+<p style="text-align: left;">最后，正如<a title="BT雷人的程序语言（大全）" href="https://coolshell.cn/articles/4458.html" target="_blank">那些BT雷人的程序语言</a>一样，我想介绍两个比较独特的开源软件许可证给你，以辉映本文的标题——</p>
+<h4 style="text-align: left;">1、WTFPL</h4>
+<p style="text-align: left;"><a href="http://sam.zoy.org/wtfpl/COPYING" target="_blank">WTFPL</a>全称 What The Fuck Public License，这个许可证单从名字上就那么NB了，其许可证如下，相当的短，完全的自由，你的开源软件有自信用这个许可证吗？</p>
+<pre>            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
+
+ Copyright (C) 2004 Sam Hocevar &lt;sam@hocevar.net&gt;
+
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+  0. You just DO WHAT THE FUCK YOU WANT TO.</pre>
+<p style="text-align: left;">最后那句——You just DO WHAT THE FUCK YOU WANT TO 真是铿锵有力，怎么说怎么痛快，很有一种在看美国大片的感觉。这是我喜欢这个许可证的原因之一，即不限制你控制版权，也不限制你放弃版权！</p>
+<h4 style="text-align: left;">2、DBAD</h4>
+<p style="text-align: left;"><a href="https://github.com/SFEley/candy/blob/2f964916961a2dcccbb374cd389520ac2ac62226/LICENSE.markdown" target="_blank">DBAD</a>全称 Don&#8217;t Be A Dick，dick是什么我就不解释了，你自己查字典吧。这个许可证中定义了什么是dick，</p>
+<blockquote>
+<p style="text-align: left;">A person who <em>does not</em> respect the time and energy that have been invested in the Project, ……. A Dick is nearly always selfish, but not necessarily with deliberate intent; some Dicks are merely thoughtless. ……</p>
+</blockquote>
+<p style="text-align: left;">也就是项目中扯淡的人。这个许可证最NB的地方在于其不限制软件的版权，而是限制了软件开发中的人的行为。我真是太喜欢这个许可证了。（请参看其第四节Limitation ）</p>
+<p style="text-align: left;">（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3723.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="（麻省理工免费课程）计算机科学和编程导论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3723.html" class="wp_rp_title">（麻省理工免费课程）计算机科学和编程导论</a></li><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/19612.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" alt="50年前的登月程序和程序员有多硬核" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19612.html" class="wp_rp_title">50年前的登月程序和程序员有多硬核</a></li><li ><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" alt="Go编程模式：修饰器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_title">Go编程模式：修饰器</a></li><li ><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411-150x150.jpg" alt="如何重构“箭头型”代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_title">如何重构“箭头型”代码</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4657.html">狗日的开源软件许可证</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4657.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>读书笔记：对线程模型的批评</title>
+		<link>https://coolshell.cn/articles/4626.html</link>
+					<comments>https://coolshell.cn/articles/4626.html#comments</comments>
+		
+		<dc:creator><![CDATA[Ian.sino]]></dc:creator>
+		<pubDate>Tue, 03 May 2011 02:23:27 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[programming language]]></category>
+		<category><![CDATA[threading model]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4626</guid>
+
+					<description><![CDATA[<p>——感谢Ian.Sian投递本文—— 多线程模型是主流的并发编程模型。在过去几十年来，多线程模型一直是开发并发程序的有力工具。然而，它的历史并非总那么美好。19...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4626.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4626.html">读书笔记：对线程模型的批评</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span style="color: #cc0000;"><strong>——感谢Ian.Sian投递本文——</strong></span></p>
+<p>多线程模型是主流的并发编程模型。在过去几十年来，多线程模型一直是开发并发程序的有力工具。然而，它的历史并非总那么美好。1997年，NASA 的“火星探路者”号在执行任务的途中遭遇了严重的时序异常（参见 &#8220;<a href="http://research.microsoft.com/en-us/um/people/mbj/mars_pathfinder/mars_pathfinder.html" target="_blank">What really happend on Mars</a>&#8220;，注目 follow-up 中的<a href="http://research.microsoft.com/en-us/um/people/mbj/mars_pathfinder/Authoritative_Account.html" target="_blank">现身说法</a>），无法发回探测数据。如果不是 NASA 远程刷新了程序，它的结局就只能是报废在火星上。这一切都是由程序中潜藏的一个优先级反转 bug 造成的。更早的例子还有80年代的一系列 <a title="Therac-25" href="http://en.wikipedia.org/wiki/Therac-25" target="_blank">Therac-25</a> 型医用粒子加速器事故。在这些加速器释放出的过量辐射照射之下，数位病人死亡。事后调查显示，至少有一次发生事故的原因，是加速器的控制软件中，存在一个只能由特定操作序列引发的竞争条件 bug。你也许认为这些只是陈年往事，但是直到现在，即便是世界500强公司们高价买来的信息系统，也同样避免不了这些问题。这导致许多程序员认为线程是个潘多拉魔盒，对它采取能躲就躲的态度。然而近来计算机的发展使得躲猫猫的空间越来越小：随便从市场上淘一个CPU，它里面也有不止一个核心。未来的程序员只会有越来越多的机会接触到并发编程，而无法再独善其身了。</p>
+<p>加州大学伯克利分校教授，<a href="http://ptolemy.eecs.berkeley.edu/~eal/" target="_blank">爱德华 A. 李</a>在2006年做了一次题为<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-1.html" target="_blank">《线程的麻烦 (The Problem with Threads)》</a>的学术报告。在报告中他提到：看上去，多线程只是对核心语言的小小扩展，甚至可以以第三方库的形式存在。但实质上，多线程程序和原有的核心语言编写的程序已经完全不同了。其原因在于，由于多线程程序可能以任意的次序交错执行，程序再也无法像顺序执行时那样产生确定的结果。多线程程序容易编写(因为写的是顺序程序)，但是难分析，难调试，更容易出错。</p>
+<p>在我的想法中，产生问题的根源，是多线程模型作为对并发问题的一个抽象，是很不完善的。<span id="more-4626"></span>抽象的实质是对问题的转换。我们可以把抽象应用于一个问题，把它转换成另一个（或许）更简单的问题来解决。解决了转换后的简单问题，就意味着解决了原有的困难问题。严格来说，一个抽象一定要保存原有问题的结构，同时去除无关细节。但是，由于我们生活的世界并没有什么东西是完全“严格”的，现实中使用的抽象有时会隐藏解决问题的关键细节，或者残留一些不该漏出来的东西。评价一个抽象的好坏，也就不止是看它能节省多少代码，和它的界面有多优美这么简单，同时还要看看在一个问题被抽象转换之后，留了下来的细节还能不能好好地解决它。</p>
+<p>我们可以从这个意义上理解为什么线程模型是个很糟糕的抽象。一方面，对解决问题很关键的细节（如执行次序）被隐藏起来并受到了粗暴的对待。另一方面，线程模型极力兼容顺序程序的设计思想也使得如共享变量这样的，与线程不兼容的细节依然残留在程序员们的视线之内。我们无力控制程序的执行次序，而我们程序的正确性却依赖于对共享变量的有序变更。可以说，线程提供给我们的抽象简直是千疮百孔。我们还能用它干活，只是因为我们手里还有加锁机制，而它可以部分地堵上线程模型的漏洞。讽刺的是，引入加锁机制解决问题的同时，又带来了新的问题，所以我们编写多线程程序总会遇上死锁，活锁，优先级反转……等等。</p>
+<p>同样作为并发编程问题的抽象，<a href="http://c2.com/cgi/wiki?ActorsModel" target="_blank">角色模型</a>（Actor Model） 比线程模型好就好在，它的资源分享不像线程模型那样通过共享变量来进行。角色模型中的资源分享只能通过特定的机制（消息传递）来进行。你在角色模型里依然可能犯错误，如你可能制造死锁，也有可能造成优先级反转。但是没有共享变量就意味着没有了竞争条件，所以绝大部分资源也用不着上锁了。这样一来，原先至关重要的细节变得不那么重要，问题就这么解决了。</p>
+<p>一般来说，在修复一个糟糕的抽象时，可以采取的策略分如下两类：</p>
+<ul>
+<li>把造成问题的那部分抽象拿掉，直接露出底层的细节</li>
+<li>换一个和底层兼容性更好的抽象模型</li>
+</ul>
+<p>以 <a href="http://en.wikipedia.org/wiki/MapReduce" target="_blank">MapReduce </a>为例，它在解决分布式计算问题时，采取的是第一类策略。与现时流行的做法相反，MapReduce 并不试图制造计算是在单一场所完成的假象(流行话讲叫“云计算”)，相反它需要程序员自己把问题拆分到集群中不同的机器上。同时，它却隐藏了大量其他细节。这种另类策略导致批评 MapReduce “<a href="http://databasecolumn.vertica.com/database-innovation/mapreduce-a-major-step-backwards/" target="_blank">太底层，不通用</a>” 的声音不绝于耳， 然而这正是 MapReduce 聪明的地方。它放弃面面俱到，集中精力于高效地解决一小类问题（这类问题与排序问题有类似的结构），同时对其他的问题故意视而不见。它的流行证明了这一策略的成功。</p>
+<p>角色模型，通信进程（<a href="http://en.wikipedia.org/wiki/Communicating_sequential_processes" target="_blank">Communicating Sequential Processes</a>, CSP），以及函数式编程（FP）在应对并发编程问题时不约而同地选择了第二类策略。它们采用了与并发兼容性更好的抽象。角色模型与通信进程从线程模型的问题中抹去了共享变量，纯粹 FP 则抹掉了“变量”的可变性。CSP 还可以降低程序执行次序的不确定性（因为在CSP中执行次序默认是确定的，不确定性必须在程序设计时显式声明）。由于这些努力，这几种模型都避免了落入线程模型的麻烦中，得到了对并发问题的更优美的解法。我们可以说，这些模型提供的抽象比线程模型的都要好。很遗憾的是，它们尽管优美，但却乏人问津。角色模型与通信进程目前不被任何主流操作系统原生支持（微软在 Windows 7 附带的新并行运行时 <a href="http://msdn.microsoft.com/en-us/library/dd504870.aspx" target="_blank">ConcRT </a>中加入了基于角色模型的 Asynchronous Agents Library，使得状况稍微改观了一点）。FP 的年岁几乎和计算机语言的历史一样古老， 但它的市场份额直到现在也小得可怜。</p>
+<p>也许一切都是因为线程模型表面上那迷惑人的简单性，以及墨菲定律的变体：布劳尔技术惯性定律（已经成功的技术在新的，更好的技术出现时也会赖着不走）。我们曾经接纳了一个有缺点的解决方案，而现在我们被捆绑在这个方案上了。我们为线程模型写了成百上千万行的代码，而现在这些代码的重量束缚住我们的手脚，使得我们无法前行。</p>
+<p>解决线程模型带来的问题的正确做法，是推广新的，更完善的模型。既然解决问题的阻碍同时来自于新技术的低认知度和现有代码的拖累，很自然地有两个方面的工作要做。一、使得新技术更容易被多数程序员使用，二、想办法让现有的代码和新技术兼容。</p>
+<p>在兼容老代码这一头，我们已经有了一些行动。微软在 Windows 7 中提供一个称为<a href="http://msdn.microsoft.com/en-us/library/dd627187%28v=vs.85%29.aspx" target="_blank">用户模式调度 </a>(UMS) 的功能。UMS 可以将内核模式的线程转换为用户模式线程，而应用程序可以自己提供一个 UMS 调度器来调度它们。这意味着，我们现在有机会重载掉系统调度器的默认行为，而根据应用自身的特点给出更合理的调度安排来。这个功能可以用在构造更容易使用的并发模型上，这样开发的模型可以与老代码兼容（但 UMS 有一个让人迷惑的限制：只能用在64bit 的Windows 7 版本上）。</p>
+<p>同样地，在推广新技术方面，现在也有了很多成果。除了角色模型外，事务性内存(这又是一种避免竞争条件，从而避免加锁的方法)正在研究中；CSP 已经有了数个实现（如由 Kent 大学开发，针对 Java 的 <a href="http://www.cs.kent.ac.uk/projects/ofa/jcsp/" target="_blank">JCSP</a>），同时还有针对 CSP 的模型检证工具；至于 FP，最近因为人们认为 Web 系统的建模可以在函数式编程范式中更好的表达，FP 正在唤起人们的注意。我们缺的只剩下新技术的成功应用范例（实际上，前面的技术并不是没有成功范例，我们缺的是经验能够大规模运用的范例 ），以及一支理解这些技术的程序员大军了。对于这后一条，我甚至想，既然多线程编程唯一&#8221;容易&#8221;的事情是写代码，何不做出一种工具来让程序员们可以用写顺序程序的思维来在这些新模型中编写程序呢？这样的工具会帮助程序员利用线性程序的思维来理解代码，但是同时又让人注意到自己的改动正在影响系统的哪一部分。如果新模型的代码变得好理解了，也许更多的人会使用它们。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/02/gitlab-600-150x150.jpg" alt="从Gitlab误删除数据库想到的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17680.html" class="wp_rp_title">从Gitlab误删除数据库想到的</a></li><li ><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/08/HighAvailability-BK-150x150.png" alt="关于高可用的系统" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17459.html" class="wp_rp_title">关于高可用的系统</a></li><li ><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" alt="IoC/DIP其实是一种管理思想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_title">IoC/DIP其实是一种管理思想</a></li><li ><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Bret Victor &#8211; Inventing on Principle" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6775.html" class="wp_rp_title">Bret Victor &#8211; Inventing on Principle</a></li><li ><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/02/programming-language-150x150.jpg" alt="千万别惹程序员 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6639.html" class="wp_rp_title">千万别惹程序员 </a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4626.html">读书笔记：对线程模型的批评</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4626.html/feed</wfw:commentRss>
+			<slash:comments>37</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Amazon的书为什么卖到了$2000万</title>
+		<link>https://coolshell.cn/articles/4605.html</link>
+					<comments>https://coolshell.cn/articles/4605.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2011 04:41:41 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Amazon]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[eComm]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4605</guid>
+
+					<description><![CDATA[<p>最近，Amazon的新闻比较多，除了Amazon的云平台宕机外，还有一个被热炒的新闻是在Amazon的书店里，有一本书要买$23,698,655.93美元，相当...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4605.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4605.html">Amazon的书为什么卖到了$2000万</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近，Amazon的新闻比较多，除了<a title="关于Amazon云宕机的网贴收集" href="https://coolshell.cn/articles/4601.html" target="_blank">Amazon的云平台宕机</a>外，还有一个被热炒的新闻是在Amazon的书店里，有一本书要买$23,698,655.93美元，相当于1亿5千万人民币（如下图所示），这个事情是由UC Berkeley的生物学家Michael Eisen发现的，然后他在他的博客上写了<a title="Amazon’s $23,698,655.93 book about flies" href="http://www.michaeleisen.org/blog/?p=358" target="_blank">一篇文章来说明这个事情</a>。</p>
+<p>这本书是1992年，现在绝版了，生物学家决定上Amazon找一下，结果看到了有两本新书，还有一些二手的，二手书价比较正常，但是那两个新书的价都上了百万。这个生物学家还写了邮件给原作者和原作者开了玩笑。呵呵。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="lawrence_1" src="http://www.michaeleisen.org/blog/wp-content/uploads/2011/04/lawrence_1.png" alt="" width="600" height="378" /></p>
+<p>一般人可能就把这个事当成个笑话了，不过，教授就是教授，它还认真的研究了一下为什么会这样。</p>
+<p><span id="more-4605"></span></p>
+<p>首先，这个不是Amazon的订价的问题，这是Amazon的第三方商户平台两个商户报价，一个商户叫profnath，另一个商户叫bordeebook。我们的生物学教授观察这两个商户的书价了几天，看到了下面的结果：</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" title="lawrence_prices1" src="http://www.michaeleisen.org/blog/wp-content/uploads/2011/04/lawrence_prices1.png" alt="" width="386" height="159" /></p>
+<p>从上面的表中，我们可以看到，profnath商户的价格总是bordeebook的99.83%，而bordeebook的总是比profnath的高27.059%，很明显，这两个商户用的是程序在自动定价——“自动竞价”。</p>
+<ul>
+<li>profnath商户想把书买出去，所以，其订价要比最高价要低一些（99.83%），这个很容易理解。</li>
+<li>bordeebook商户为什么要比最高价要高1.27倍呢？合理的解释是，bordeebook并没有这本书，这个商户只是想用更多的选品来吸引买家，这样可以让人觉得他和竞争对手有一样多的选品。所以，他要把价订得高一点，这样就算是被人下单，他可以从别人手里把书买过来，然后再卖给卖家。27%的空间，够他赚了。</li>
+</ul>
+<p>因为两个商户订的比例不一样，所以，这两个商户的自动订价系统就成了相互涨价的程序——profnath以差0.17%差价跟上，而bordeebook以27%的幅度甩开，profnth再跟上，bordeebook再甩开……。于是最后的价格就到了$23,698,655.93美金。呵呵。</p>
+<p>下面，我说说我的收获——</p>
+<ul>
+<li><strong>能力</strong>：我非常欣赏这位生物学教授的求甚解的态度，这和<a title="Linux 2.6.39-rc3的一个插曲" href="https://coolshell.cn/articles/4576.html" target="_blank">Linus要求其团队成员的能力</a>如出一辙。赞一个！</li>
+<li><strong>商业</strong>：从这两个商户的行为看到了一种相反的商业技巧。profnath 和 bordeebook  都是聪明的商家。</li>
+<li><strong>电商</strong>：自动定价系统可能会成为未来电子商务的一个重要的方向。电子商务还有很多东西可以做啊。</li>
+<li><strong>程序</strong>：程序设计中需要加上边界条件，最高值和最低值（当然，我能理解为什么这两个商户没有回，因为不同的商品价格差得太大，也许他们也在卖一些几百万的商品）。</li>
+</ul>
+<p>最后，这本书的网址在这里《<a href="http://www.amazon.com/gp/offer-listing/0632030488/ref=dp_olp_0?ie=UTF8&amp;redirect=true&amp;qid=1303712892&amp;sr=8-1&amp;condition=all" target="_blank">The Making of a Fly: The Genetics of Animal Design</a>》，你可以看到价格又在攀升了，昨天我看的是200多美，我写这篇文章此时的价格是近1000美金了。呵呵。</p>
+<p>（全文完）</p>
+<p><span style="color: #cc0000; font-size: 14px;"><strong>（请勿用于商业用途，转载时请注明作者和出处）</strong></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/6470.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/01/12306-150x150.png" alt="由12306.cn谈谈网站性能技术 " width="150" height="150" /></a><a href="https://coolshell.cn/articles/6470.html" class="wp_rp_title">由12306.cn谈谈网站性能技术 </a></li><li ><a href="https://coolshell.cn/articles/6142.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/amazon_global_selling-150x150.jpg" alt="三个事和三个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6142.html" class="wp_rp_title">三个事和三个问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4605.html">Amazon的书为什么卖到了$2000万</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4605.html/feed</wfw:commentRss>
+			<slash:comments>28</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>关于Amazon云宕机的网贴收集</title>
+		<link>https://coolshell.cn/articles/4601.html</link>
+					<comments>https://coolshell.cn/articles/4601.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2011 14:49:07 +0000</pubDate>
+				<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[Amazon]]></category>
+		<category><![CDATA[AWS]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4601</guid>
+
+					<description><![CDATA[<p>最近，互联网上最大的事可能是Amazon的AWS宕机了，而且好几天都没有完全恢复。整个Internet都在讨论这个事，Internet很不高兴，后果可能很严重。...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4601.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4601.html">关于Amazon云宕机的网贴收集</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>最近，互联网上最大的事可能是Amazon的AWS宕机了，而且好几天都没有完全恢复。整个Internet都在讨论这个事，Internet很不高兴，后果可能很严重。可能是因为这个事件对中国没有影响，所以中文这边相关的文章不多，大家可以参考一下和讯网的这篇《<a href="http://tech.hexun.com/2011-04-24/128998619.html" target="_blank">伤不起！亚马逊史前最大宕机事件的启示</a>》。</p>
+<p>国外有人把所有和这个事件相关的贴子都收集了起来，都是一些相当不错的贴子和文章，尤其是一些经验教训的贴子，很受教，转给大家看看。这个贴子的<a href="http://highscalability.com/blog/2011/4/25/the-big-list-of-articles-on-the-amazon-outage.html" target="_blank">来源在这里</a>。</p>
+<h4>个别公司的经历，有好有坏</h4>
+<ul>
+<li><a href="http://status.heroku.com/incident/151">How Heroku Survived the Amazon Outage</a> on the Heroku status page</li>
+<li><a href="http://developers.simplegeo.com/blog/2011/04/26/how-simplegeo-stayed-up/">How SimpleGeo Stayed Up During the AWS Downtime</a> by Mike Malone</li>
+<li><a href="http://don.blogs.smugmug.com/2011/04/24/how-smugmug-survived-the-amazonpocalypse">How SmugMug survived the Amazonpocalypse</a> by Don MacAskill  (<a href="http://news.ycombinator.com/item?id=2480763">Hacker News</a> discussion)</li>
+<li><a href="http://dev.bizo.com/2011/04/how-bizo-survived-great-aws-outage-of.html">How Bizo survived the Great AWS Outage of 2011 relatively unscathed&#8230;</a> by Someone at Bizo</li>
+<li><a href="http://www.focus.com/questions/information-technology/amazon-ec2-has-gone-down--what-would-prefered-hosting-be/#comment43192">Joe Stump&#8217;s explanation</a> of how SimpleGeo survived</li>
+<li><a href="http://www.slideshare.net/adrianco/netflix-in-the-cloud-2011">How Netflix Survived the Outage</a></li>
+<li><a href="http://www.twilio.com/engineering/2011/04/22/why-twilio-wasnt-affected-by-todays-aws-issues/">Why Twilio Wasn’t Affected by Today’s AWS Issues</a> on Twilio Engineering&#8217;s Blog (<a href="http://news.ycombinator.com/item?id=2472999">Hacker News</a> thread)</li>
+<li><a href="http://www.reddit.com/r/announcements/comments/gva4t/on_reddits_outage/#">On reddit&#8217;s outage</a></li>
+<li><a href="http://www.quora.com/Quora-Outage-April-21-22-2011/What-caused-the-Quora-problems-outage-in-April-2011">What caused the Quora problems/outage in April 2011?</a></li>
+<li><a href="http://tomatohater.com/2011/04/21/recovering-amazon-cloud-outage/">Recovering from Amazon cloud outage</a> by Drew Engelson of PBS.
+<ul>
+<li>PBS was affected for a while primarily because we do use EBS-backed RDS databases. Despite being spread across multiple availability-zones, we weren’t easily able to launch new resources ANYWHERE in the East region since everyone else was trying to do the same. I ended up pushing the RDS stuff out West for the time being.  <a href="http://don.blogs.smugmug.com/2011/04/24/how-smugmug-survived-the-amazonpocalypse/#comment-4737">From Comment</a></li>
+</ul>
+</li>
+</ul>
+<p><span id="more-4601"></span></p>
+<h4>Amazon Web Services 讨论区</h4>
+<p>有一些有经验的人共享了很多相当不错的宕机的经历。</p>
+<ul>
+<li><a href="https://forums.aws.amazon.com/forum.jspa?forumID=30&amp;start=0">Amazon Web Services Discussion Forum</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65860&amp;tstart=0">Cost-effective backup plan from now on?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65649&amp;tstart=0">Life of our patients is at stake &#8211; I am desperately asking you to contact</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65897&amp;tstart=0"> Why did the EBS, RDS, Cloudformation, Cloudwatch and Beanstalk all fail?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65896&amp;tstart=0">Moved all resources off of AWS</a></li>
+<li><a href="https://forums.aws.amazon.com/forum.jspa?forumID=30&amp;start=300">Any success stories?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65784&amp;tstart=25">Is the mass exodus from East going to cause demand problems in the West?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65828&amp;tstart=25"> Finally back online after about 71 hours</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65834&amp;tstart=25">Amazon EC2 features vs windows azure</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65221&amp;tstart=25"> Aren&#8217;t Availability Zones supposed to be &#8220;insulated from failures&#8221;?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65850&amp;tstart=0">What a lot of people aren&#8217;t realizing about the downtime:</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=32044&amp;tstart=50&amp;start=150">ELB CNAME</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65457&amp;tstart=425"> Availability Zones were used in a misleading manner</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65371&amp;tstart=325">Tip: How to recover your instance</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65617&amp;tstart=325">Crying in Forum Gets Results, Silver-level AWS Premium Support Doesn&#8217;t</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65780&amp;tstart=25"> Well-worth reading: &#8220;design for failure&#8221; cloud deployment strategy</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65749&amp;tstart=25">New best practice</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65136&amp;tstart=475">Don&#8217;t bother with Premium Support</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65185&amp;tstart=450">Best practices for multi-region redundancy</a></li>
+<li> &#8220;<a href="https://forums.aws.amazon.com/thread.jspa?threadID=65450&amp;tstart=175">Postmortum</a>&#8220;</li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65513&amp;tstart=125">Learning from this case</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65388&amp;tstart=525"> Amazon, still no instructions what to do?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65338&amp;tstart=550">Anyone else prepared for an all-nighter?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65811&amp;tstart=100">Is Jeff Bezos going to give a public statement?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65857&amp;tstart=100"> Rackspace, GoGrid, StormonDemand and Others</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65815&amp;tstart=150">Jeff Barr, Werner Vogels and other AWS persons &#8211; where have you been???</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65168&amp;tstart=175">After you guys fix EBS do I have do anything on my side?</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65765&amp;tstart=225"> Need Help!!! Lives of people and billions in revenue are at risk now!!!</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65678&amp;tstart=275">I&#8217;ve Got A Suspicion</a></li>
+<li><a href="https://forums.aws.amazon.com/thread.jspa?threadID=65585&amp;tstart=325"> Farewell EC2, Farewell</a></li>
+</ul>
+<p>There were also many many instances of support and help in the log.</p>
+<h4>总结</h4>
+<ul>
+<li><a href="http://blog.rightscale.com/2011/04/25/amazon-ec2-outage-summary-and-lessons-learned/">Amazon EC2 outage: summary and lessons learned</a> by RightScale</li>
+<li><a href="http://www.randomhacks.net/articles/2011/04/25/aws-outage-timeline-and-recovery-strategy-downtimes">AWS outage timeline &amp; downtimes by recovery strategy</a> by Eric Kidd</li>
+<li><a href="http://www.datacenterknowledge.com/archives/2011/04/25/the-aftermath-of-amazons-cloud-outage">The Aftermath of Amazon’s Cloud Outage</a> by Rich Miller</li>
+</ul>
+<h4>立场：这是用户的错</h4>
+<ul>
+<li><a href="http://www.thestoragearchitect.com/2011/04/22/so-your-aws-based-application-is-down-dont-blame-amazon/">So Your AWS-based Application is Down? Don’t Blame Amazon</a> by The Storage Architect</li>
+<li><a href="http://stu.mp/2011/04/the-cloud-is-not-a-silver-bullet.html">The Cloud is not a Silver Bullet</a> by Joe Stump (<a href="http://news.ycombinator.com/item?id=2482581">Hacker News</a> thread)</li>
+<li><a href="http://broadcast.oreilly.com/2011/04/the-aws-outage-the-clouds-shining-moment.html">The AWS Outage: The Cloud&#8217;s Shining Moment</a> by George Reese (<a href="http://news.ycombinator.com/item?id=2477540">Hacker News</a> discussion)</li>
+<li><a href="http://blog.acrowire.com/cloud-computing/failing-to-plan-is-planning-to-fail">Failing to Plan is Planning to Fail</a> by Ted Theodoropoulos</li>
+<li><a href="http://groups.google.com/group/cloud-computing/browse_thread/thread/e8079a54e6a8c4b9/72756bf9e587869d?show_docid=72756bf9e587869d">Get a life and build redundancy/resiliency in your apps</a> on the Cloud Computing group</li>
+</ul>
+<h4>立场：这是Amazon的错</h4>
+<ul>
+<li><a href="http://www.readwriteweb.com/cloud/2011/04/almost-as-galling-as-the.php">Stop Blaming the Customers &#8211; the Fault is on Amazon Web Services</a> by Klint Finley</li>
+<li><a href="http://justinsb.posterous.com/aws-down-why-the-sky-is-falling">AWS is down: Why the sky is falling</a> by Justin Santa Barbara  (<a href="http://news.ycombinator.com/item?id=2471899">Hacker News</a> thread)</li>
+<li><a href="http://news.ycombinator.com/item?id=2469838">Amazon Web Services are down</a> &#8211; Huge Hacker News thread</li>
+</ul>
+<h4>教训和启示</h4>
+<ul>
+<li><a href="http://smoothspan.wordpress.com/2011/04/23/people-using-amazon-cloud-get-some-cheap-insurance-at-least/">People Using Amazon Cloud: Get Some Cheap Insurance At Least</a> by Bob Warfield</li>
+<li><a href="http://ronaldbradford.com/blog/basic-scalability-principles-to-avert-downtime-2011-04-23">Basic scalability principles to avert downtime</a> by Ronald Bradford</li>
+<li><a href="http://www.itworld.com/cloud-computing/158517/amazon-crash-reveals-cloud-computing-actually-based-data-centers">Amazon crash reveals &#8216;cloud&#8217; computing actually based on data centers</a> by Kevin Fogarty</li>
+<li><a href="http://www.zdnet.com/blog/saas/seven-lessons-to-learn-from-amazons-outage/1296">Seven lessons to learn from Amazon&#8217;s outage</a> By Phil Wainewright</li>
+<li><a href="http://www.cloudsigma.com/en/blog/2011/04/23/21-cloud-outages-lessons-learned">The Cloud and Outages : Five Key Lessons</a> by Patrick Baillie (<a href="http://groups.google.com/group/cloud-computing/browse_thread/thread/6e9549afbff6386f/05919d8527c69a09?show_docid=05919d8527c69a09#">Cloud Computing Group</a> discussion)</li>
+<li><a href="http://till.klampaeckel.de/blog/archives/151-Some-thoughts-on-outtages.html">Some thoughts on outages</a> by Till Klampaeckel</li>
+<li><a href="http://www.geekwire.com/2011/amazoncoms-real-problem-outage-communication">Amazon.com’s real problem isn’t the outage, it’s the communication</a> by Keith Smith</li>
+<li><a href="http://webmonkeyuk.wordpress.com/2011/04/21/how-to-work-around-amazon-ec2-outages/">How to work around Amazon EC2 outages</a> by James Cohen (<a href="http://news.ycombinator.com/item?id=2471258">Hacker News</a> thread)</li>
+<li><a href="http://agilesysadmin.net/ec2-outage-lessons">Today’s EC2 / EBS Outage: Lessons learned</a> on Agile Sysadmin</li>
+<li><a href="http://www.focus.com/questions/information-technology/amazon-ec2-has-gone-down--what-would-prefered-hosting-be/">Amazon EC2 has gone down -what would a prefered hosting platform be?</a> on Focus</li>
+<li><a href="http://cloudability.com/single-points-of-failure">Single Points of Failure</a> by Mat</li>
+<li><a href="http://www.reddit.com/r/programming/comments/gvac7/coping_with_cloud_downtime_with_puppet/">Coping with Cloud Downtime with Puppet</a></li>
+<li><a href="http://timcrawford.org/2011/04/21/amazon-outage-concerns-are-overblown/">Amazon Outage Concerns Are Overblown</a> by Tim Crawford</li>
+<li><a href="http://claylo.com/post/4817029650/where-there-are-clouds-it-sometimes-rains">Where There Are Clouds, It Sometimes Rains</a> by Clay Loveless</li>
+<li><a href="http://blog.learnboost.com/blog/availability-redundancy-and-failover-at-learnboost/">Availability, redundancy, failover and data backups at LearnBoost </a> by Guillermo Rauch</li>
+<li><a href="http://chrischandler.name/the-real-cost-of-cloud-hosting">Cloud hosting vs colocation</a> by Chris Chandler (<a href="http://news.ycombinator.com/item?id=2482123">Hacker News</a> thread)</li>
+<li><a href="http://arnon.me/2011/04/amazons-ec2-ebs-outage/">Amazon’s EC2 &amp; EBS outage</a> by Arnon Rotem-Gal-Oz</li>
+</ul>
+<h4>Vendor很生气</h4>
+<ul>
+<li><a href="http://www.productionscale.com/home/2011/4/22/on-clouds-and-spofs-or-the-great-aws-outage-of-april-2011.html#axzz1KZPTwX4z">Amazon Outage Proves Value of Riak’s Vision</a> by Basho</li>
+<li><a href="http://joyeur.com/2011/04/24/magical-block-store-when-abstractions-fail-us/">Magical Block Store: When Abstractions Fail Us</a> by Mark Joyent (<a href="http://news.ycombinator.com/item?id=2479613">Hacker News</a> discussion)</li>
+<li><a href="http://joyeur.com/2011/04/22/on-cascading-failures-and-amazons-elastic-block-store/">On Cascading Failures and Amazon’s Elastic Block Store</a> by Jason</li>
+<li><a href="http://cloudharmony.com/b/2011/04/unofficial-ec2-outage-postmortem-sky-is.html">An unofficial EC2 outage postmortem &#8211; the sky is not falling</a> from CloudHarmony</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22422.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/05/monolith.microservices-150x150.png" alt="是微服务架构不香还是云不香？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22422.html" class="wp_rp_title">是微服务架构不香还是云不香？</a></li><li ><a href="https://coolshell.cn/articles/17737.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/03/Amazon-Web-Services-Down-150x150.png" alt="AWS 的 S3 故障回顾和思考" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17737.html" class="wp_rp_title">AWS 的 S3 故障回顾和思考</a></li><li ><a href="https://coolshell.cn/articles/6142.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/amazon_global_selling-150x150.jpg" alt="三个事和三个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6142.html" class="wp_rp_title">三个事和三个问题</a></li><li ><a href="https://coolshell.cn/articles/5901.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="腾讯，竞争力 和 用户体验" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5901.html" class="wp_rp_title">腾讯，竞争力 和 用户体验</a></li><li ><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="来信， 创业 和 移动互联网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5815.html" class="wp_rp_title">来信， 创业 和 移动互联网</a></li><li ><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="SteveY对Amazon和Google平台的吐槽" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5701.html" class="wp_rp_title">SteveY对Amazon和Google平台的吐槽</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4601.html">关于Amazon云宕机的网贴收集</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4601.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Linux 2.6.39-rc3的一个插曲</title>
+		<link>https://coolshell.cn/articles/4576.html</link>
+					<comments>https://coolshell.cn/articles/4576.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2011 00:39:26 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4576</guid>
+
+					<description><![CDATA[<p>2011年4月12日，Linux 2.6.39-rc3发布了，Linus Torvalds写了一个发布邮件，其中包含了一个长长的为这个版本做过贡献的人员名单，这...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4576.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4576.html">Linux 2.6.39-rc3的一个插曲</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>2011年4月12日，Linux 2.6.39-rc3发布了，Linus Torvalds写了一个<a href="http://thread.gmane.org/gmane.linux.kernel/1124982">发布邮件</a>，其中包含了一个长长的为这个版本做过贡献的人员名单，这个名单中有很多看上去应该是中国人的名字，我挺为他们感到骄傲的（不知道你是否还记得以前本站的&#8221;<a title="谁写了Linux" href="https://coolshell.cn/articles/1360.html" target="_blank">Linux是由谁写的</a>&#8220;）。</p>
+<p>不过，没过一会，发现了一个bug，经过大家的调查（2.6.38版没有发现这个问题），很快，找到了原因，是因为一个内存地址的问题，一个叫Yinghai Lu的人（看其名字应该是中国人，其邮件是@kernel.org）<a href="http://thread.gmane.org/gmane.linux.kernel/1124982/focus=1126082" target="_blank">找到了原因</a>—— radeon card使用了一个不正确的内存地址[0xa0000000 &#8211; 0xc000000]。Joerg Roedel跟贴说，这个地址超出了4GB的内存，然后他和Alex Deucher聊了一会，觉得不应该是这个问题，因为这个地址应该是GPU的，而不是系统内存的。</p>
+<p>好像，Yinghai Lu没有理会他们说的不应该是这个问题，<a href="http://thread.gmane.org/gmane.linux.kernel/1124982/focus=1126133" target="_blank">给出了个fix</a>：</p>
+<pre data-enlighter-language="diff" class="EnlighterJSRAW">
+diff --git a/arch/x86/kernel/aperture_64.c b/arch/x86/kernel/aperture_64.c
+index 86d1ad4..3b6a9d5 100644
+--- a/arch/x86/kernel/aperture_64.c
++++ b/arch/x86/kernel/aperture_64.c
+@@ -83,7 +83,7 @@ static u32 __init allocate_aperture(void)
+ 	 * so don&#039;t use 512M below as gart iommu, leave the space for kernel
+ 	 * code for safe
+ 	 */
+-	addr = memblock_find_in_range(0, 1ULL&lt;&lt;32, aper_size, 512ULL&lt;&lt;20);
++	addr = memblock_find_in_range(0, 1ULL&lt;&lt;32, aper_size, 512ULL&lt;&lt;21);
+  	if (addr == MEMBLOCK_ERROR || addr + aper_size &gt; 0xffffffff) {
+ 		printk(KERN_ERR
+ 			&quot;Cannot allocate aperture memory hole (%lx,%uK)\n&quot;,
+</pre>
+<p>看到这个fix，Linus Torvalds不高兴了，他回贴问道：</p>
+<ul>
+<li>为什么全都是Magic Numbers？</li>
+<li>为什么0x80000000就那么特殊？</li>
+<li>为什么我们这样改就行？</li>
+</ul>
+<p>还说了这样一句话——</p>
+<p><span id="more-4576"></span></p>
+<blockquote><p>This kind of &#8220;I broke things, so now I will jiggle things randomly until they unbreak&#8221; is not acceptable. 这种“我把事搞砸了，就随意地调整直到事情又工作”的方式是不可接受的。</p></blockquote>
+<p>还说，这里即没有说明为什么我们fix在了正确的地方（也没有解释那些Magic Number是什么），也没有回滚那个有问题的patch。还说——</p>
+<blockquote><p>Don&#8217;t just make random changes. There really are only two acceptable models of development: &#8220;think and analyze&#8221; or &#8220;years and years of testing on thousands of machines&#8221;. Those two really do work.</p>
+<p>不要乱改。那里只有两个可行的开发模式：“思考和分析” 或是 “数年数年地不断地在几千台机器上测试”。这两个方式才是真正可行的。</p></blockquote>
+<p>当然，Yinghai Lu对<a href="http://thread.gmane.org/gmane.linux.kernel/1124982/focus=1126154" target="_blank">其做了解释</a>，说我们的确调查过了，老的代码用的内存地址是0x80000000，新的则是用0xa0000000，而0xa0000000不工作。这又引发了 Linus Torvalds 的<a href="http://thread.gmane.org/gmane.linux.kernel/1124982/focus=1126216" target="_blank">不满的回贴</a>。Linus说——</p>
+<blockquote><p>Yinghai, we have had this discussion before, and dammit, you need to understand the difference between &#8220;understanding the problem&#8221; and &#8220;put in random values until it works on one machine&#8221;.</p>
+<p>Yinghai，我们以前谈过这个事，该死的，你真的需要明白“理解一个错误”和“设一个随意的值直到其正常工作”的区别。</p>
+<p>There was absolutely _<span style="text-decoration: underline;">zero</span>_ analysis done. You do not actually understand WHY the numbers matter. You just look at two random numbers, and one works, the other does not. That&#8217;s not &#8220;analyzing&#8221;. That&#8217;s just &#8220;random number games&#8221;.</p>
+<p>这里就根本没有分析。你没有直正的明白<strong>为什么</strong>这些数字能行。你只看了两个随机的数，一个能行，另一个不行。这不是“分析”，这叫“随机数游戏”。</p>
+<p>If you cannot see and understand the difference between an actual analytical solution where you _<span style="text-decoration: underline;">understand</span>_ what the code is doing and  why, and &#8220;random numbers that happen to work on one machine&#8221;, I don&#8217;t know what to tell you.</p>
+<p>一个解决方案真正经过分析了那段代码干什么的为什么的，另一个是“随机数字可以让其在一台机器上运转”，如果你不能看到和理解他们之间的不同，那我不知道要和你说什么了。</p></blockquote>
+<p>然后，Linus Torvalds进行了谆谆教导——（相当的受用啊）</p>
+<blockquote><p>Let me repeat my point one more time.</p>
+<p>让我再一次重复一下我的观点</p>
+<p>You have TWO choices. Not more, not less:</p>
+<p>你有两个选择，不多也不少：</p>
+<p>&#8211; choice #1: go back to the old allocation model. It&#8217;s tested. It doesn&#8217;t regress. Admittedly we may not know exactly _<span style="text-decoration: underline;">why</span>_ it works, and it might not work on all machines, but it doesn&#8217;t cause regressions (ie the machines it doesn&#8217;t work on it _<span style="text-decoration: underline;">never</span>_ worked on).</p>
+<p>&#8211; <strong>选择一</strong>：回滚到老的分配模式。那是测试过的。它过了回归测试。诚然，我们也许不知道<strong>为什么</strong>那样能行，并且，即使是那样也不一定能在所有的机器上工作，但是其没有让回归测试有问题（这个代码<strong>永不可能</strong>在不能运行的系统上运行）</p>
+<p>And this doesn&#8217;t mean &#8220;old value for that _<span style="text-decoration: underline;">one</span>_ machine&#8221;. It means &#8220;old value for _<span style="text-decoration: underline;">every</span>_ machine&#8221;. So it means we revert the whole bottom-down thing entirely. Not just &#8220;change one random number so that the totally different allocation pattern happens to give the same result on one particular machine&#8221;.</p>
+<p>这并不代表“老的值只能在一台机器上工作”。这代表“老的值可以工作在每一台机器上”。所以，我们需要回滚整个代码改动。而不只是“为了一个特别的机器去修改一个和以前完全不一样的随机数”。</p>
+<p>&#8211; Choice #2: understand exactly _<span style="text-decoration: underline;">what</span>_ goes wrong, and fix it analytically (ie by _<span style="text-decoration: underline;">understanding</span>_ the problem, and being able to solve it exactly, and in a way you can argue about without having to resort to &#8220;magic happens&#8221;).</p>
+<p>&#8211; 选择二：真正搞清楚为什么会错，并且有分析地修改他（理解问题才能真正解决之，并且，只有没有“魔法发生”的时候你才可以来争论）</p>
+<p>Now, the whole analytic approach (aka &#8220;computer sciency&#8221; approach), where you can actually think about the problem without having any pesky &#8220;reality&#8221; impact the solution is obviously the one we tend to prefer. Sadly, it&#8217;s seldom the one we can use in reality when it comes to things like resource allocation, since we end up starting off with often buggy approximations of what the actual hardware is all about (ie broken firmware tables).</p>
+<p>现在，整个分析方法（亦称作“计算机科学”的方法）应该是你可以在没有在外界干扰下真正思考这个问题而得到的解决方案，这很明显是我们推崇的。只有在极罕见地情况下我们可以在有外界干扰下分析这种资源分配的事，因为我们只有了解倒底是什么样的硬件，我们才能最终远离bug（如：错误的固件表）</p>
+<p>So I&#8217;d love to know exactly why one random number works, and why another one doesn&#8217;t. But as long as we do _<span style="text-decoration: underline;">not</span>_ know the &#8220;Why&#8221; of it, we will have to revert.</p>
+<p>所以，我希望你能知道为什么一个随机数能行，而另一个不行。只要我们不知道，那么我们就不得和回滚整个改动。</p>
+<p>It really is that simple. It&#8217;s _<span style="text-decoration: underline;">always</span>_ that simple.</p>
+<p>这真的是很简单，而且这<strong>一直</strong>是那么简单。</p>
+<p>So the numbers shouldn&#8217;t be &#8220;magic&#8221;, they should have real explanations. And in the absense of real explanation, the model that works is &#8220;this is what we&#8217;ve always done&#8221;. Including, very much, the whole allocation order. Not just one random number on one random machine.</p>
+<p>所以，那些数不应该是“magic”的，他们应该有真正的说明。在有真正的说明的情况下，我们的开发模式才会工作。其包括了整个分配顺序。不只是那个在任意机器上的随机数。</p>
+<p style="text-align: center;">Linus</p>
+</blockquote>
+<p style="text-align: left;">后面的事不用说了。我没有想到Linux 内核组会有像Yinghai这样工作的方式，毕竟这是一个黑客级的开发团队。我个人对这个乱写代码的人执零容忍的态度，不管你干过什么，不管你哪里毕业的，不管你简历怎么样，不求甚解随意写代码的人我无法接受。我不知道Yinghai Lu会怎么样想，他/她会像我在“<a title="程序员那些悲催的事儿" href="https://coolshell.cn/articles/3980.html" target="_blank">程序员那些悲催的事儿</a>”中谈我经历那样知耻而后勇吗？能得到Linus的教导真是一件很不错的事。虽然，Linus教导的这些东西，都应该是程序员最最最基本的技能。<strong>fix bug一定要fix在root cause上啊</strong>，<strong>了解一个问题，不但要知其然，还要知其所以然啊</strong>，这都是老生长谈了。本站有很多提高程序员能力的文章，比如，<a title="优秀程序员的十个习惯" href="https://coolshell.cn/articles/222.html" target="_blank">这篇</a>，<a title="优质代码的十诫" href="https://coolshell.cn/articles/1007.html" target="_blank">这篇</a>，还有<a title="五个方法成为更好的程序员" href="https://coolshell.cn/articles/2606.html" target="_blank">这篇</a>。</p>
+<p style="text-align: left;">各位朋友，我真心希望你能从这个小插曲中明白点什么。</p>
+<p style="text-align: left;"><strong>&#8212;&#8211; 更新2011/04/27</strong>&#8212;&#8211;</p>
+<p style="text-align: left;">从本贴的回复中可以看到有朋友说如果时间紧，没有办法只能在不求甚解的地去fix bug，因为老板催。我认为这是老板的“急功近利”的问题。我想和大家说一下，你得想清楚你属于下面那种人：</p>
+<ol>
+<li>
+<div style="text-align: left;">你的老板给你压力，让你不得不乱fix，</div>
+</li>
+<li>
+<div style="text-align: left;">你认同只要时间紧bug是可以乱fix的。</div>
+</li>
+</ol>
+<p style="text-align: left;">如果你属于1），那我觉得还情由可原，这是管理问题。但这不能成为你对乱fix bug的理由。一般这种问题怎么解决：<strong>首先，给一个hot fix去救火，然后，有时间去调查root cause，最后经过分析和测试，给出一个final 的 offical fix</strong>。这就是应急的做法，根本不存在什么可以乱fix bug的做法。</p>
+<p style="text-align: left;">如果你属于2），那么我只能“过激”地说你没有成为程序员的资质！</p>
+<p>另外，<strong>快速地fix bug，并不等于，不求甚解的fix bug</strong>。大家不要把这两件事等同。</p>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;"><span style="color: #cc0000; font-size: 14px;"><strong>（请勿用于商业用途，转载时请注明作者和出处）</strong></span></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/linus_pointer_to_pointer-150x150.jpg" alt="Linus：利用二级指针删除单向链表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8990.html" class="wp_rp_title">Linus：利用二级指针删除单向链表</a></li><li ><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/12/eBPF-150x150.jpeg" alt="eBPF 介绍" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22320.html" class="wp_rp_title">eBPF 介绍</a></li><li ><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/03/linux.ninja_-150x150.png" alt="打造高效的工作环境 &#8211; Shell 篇" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19219.html" class="wp_rp_title">打造高效的工作环境 &#8211; Shell 篇</a></li><li ><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/12/docker-networking-1-150x150.png" alt="记一次Kubernetes/Docker网络排障" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18654.html" class="wp_rp_title">记一次Kubernetes/Docker网络排障</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4576.html">Linux 2.6.39-rc3的一个插曲</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4576.html/feed</wfw:commentRss>
+			<slash:comments>118</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>对程序员职业的一些建议</title>
+		<link>https://coolshell.cn/articles/4561.html</link>
+					<comments>https://coolshell.cn/articles/4561.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2011 05:29:44 +0000</pubDate>
+				<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4561</guid>
+
+					<description><![CDATA[<p>自从四年前被CSDN采访后（“职业规化就像软件工程”），经常会有网友（尤其是刚毕业的）写邮件来问我一些程序员职业生涯的一些问题，至到今天。比如，国企还是外企的选...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4561.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4561.html">对程序员职业的一些建议</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>自从四年前被CSDN采访后（“<a title="职业规划就像软件工程" href="http://blog.csdn.net/haoel/archive/2007/07/13/1688104.aspx" target="_blank">职业规化就像软件工程</a>”），经常会有网友（尤其是刚毕业的）写邮件来问我一些程序员职业生涯的一些问题，至到今天。比如，国企还是外企的选择，一直编程有没有前途等等问题。面对这样的邮件，我感到有很大的压力，因为如果我的回复很有可能会误人一生，但我另一方面又很想帮助这些人。所以，我基本上还是会尝试回一下这样的邮件。昨天，我又回了一封。但是我心里还是有点忐忑不安。害怕说错了什么。</p>
+<p>今天，我想把我的一些思路和建议写在这里，一方面供大家参考，另一方面也想听听大家对我的评判，这样不但对更多的人有帮助，同时对我自己也是一个帮助。</p>
+<p>下面是某网友前天给我发来的邮件：</p>
+<blockquote><p>我是一个刚刚毕业的大学生，我觉得自己对于程序员这个行业感到很迷惘，所以发邮件打扰您一下，麻烦了。</p>
+<p>我今年正在找工作，我现在有几家国企的offer，百度的offer还在等待，我觉得第一份工作对我来说很重要，因为第一份基本决定了近几年或者一辈子你在哪个行业发展。家里人都是希望我签国企，但是我自己对技术很感兴趣，一直希望能在技术上面走下去，签国企虽然很轻松但是我总觉得在技术上学不到什么有用的东西，所以我个人倾向是去百度。</p>
+<p>我现在很迷惘的是，如果我一直在程序员这个行业上走下去，以后的出路应该是什么呢？还是一直到高级工程师，还是项目管理这种程度吗？</p>
+<p>我现在听很多人在说程序员必需要转行，因为一辈子在编写代码，没有什么好的出路，对于这点，您有什么看法吗？我现在才刚刚从学校毕业，对IT这个行业也不是非常了解，但是我觉得自己自学能力很强，而且确实很想学些东西，你对于一个刚刚毕业的计算机学生有什么建议吗？</p></blockquote>
+<p>信件的内容我没有改变，我相信很多人都有相似的问题。我昨天给这们朋友回复了邮件，下面是我回复内容的一个整理。欢迎大家讨论。</p>
+<p>首先，我想说的是，<strong>这些东西只是我根据我的经历给出的建议，仅仅供大家去参考</strong>，<span style="color: #cc0000;"><strong>你的路你的人生要你自己决定，不要轻易的让人帮你决定，那怕是你的家人</strong></span>。</p>
+<p>如果我们把所的问题一起谈，那怎么说也说不清楚，所以，请允许我“<a title="一些软件设计的原则" href="https://coolshell.cn/articles/4535.html" target="_blank">关键点分离原则</a>”来分开说说。</p>
+<p><span id="more-4561"></span></p>
+<h4>一、对技术的热情</h4>
+<p>如果我们喜爱编程，喜爱技术的话，那么，我们就会投入热情，自己会去专研很多东西。就像你以前对某个东西痴迷一样，你可以在工作之余还在学习和专研这些东西，你会经常和人讨论这些东西。不知道你是否会和我一样有一种感觉，如果你不学习技术，你不去专研，你就怕被淘汰，你就会感到不舒服。</p>
+<p>所以，我们一定要问我们自己一下，我们自己喜欢技术吗？喜欢技术到什么程度。只是感兴趣还是喜欢？这两个不一样。<strong>兴趣能让你开始让你执着，但只有喜爱才会投入热情，只有投入热情才可能会出成绩</strong>。这个问题你要问问自己。</p>
+<ol>
+<li>你有多大的热情在这个事业上？</li>
+<li>你对你自己的自我价值的实现的诉求有多大？</li>
+</ol>
+<p>如果你很有热情，可能到了有些痴迷的程度的话，比如，你会因为专研某个问题，学习某个东西，尝试某个东西，达到废寝忘食的程度，而且以些为乐，那么我非常建议你走技术的路线。</p>
+<h4>二、对技术的能力</h4>
+<p>有兴趣，有热情，并不代表你就一定行。你需要很清楚地认识到，你还需要有能力（我在《<a title="再谈“我是怎么招聘程序员的”（上）" href="https://coolshell.cn/articles/4506.html" target="_blank">再谈“我是怎么招聘程序员”</a>》一文中说了程序员的四个事，操作技能，知识，经验，和能力，大家可以去看看我对“能力”的定义）。你需要反思和重审一下自己是否有能力，你的学习能力怎么样，是经常需要问人，还是可以自己专研？你的思路怎么样，是否能被有经验的人认可，还是能够影响别人？</p>
+<p><strong>兴趣和热情只能让你很执着，但并不一定能让你走好这条路，只有你的能力和你的强项才能让你走好这条路</strong>。希望大家能够清楚地认识到这其中的差别。</p>
+<p>所以，你一定要对自己做出一个判断，要学会反思，如果你是有能力的适合走技术路线的人，那以我非常建议你走技术路线。</p>
+<p>我也尝试创过业，但我觉得我这种人是“谋士”，不是能攻城拔寨的“将军”，创业更需要的是“将军”，我目前只能是一个辅佐他们的“谋士”，所以，我也只能尽力能成为一个级别高点的“谋士”。</p>
+<h4>三、再说说工作的事</h4>
+<p>我比较同意的&#8221;第一份基本决定了近几年或者一辈子你在哪个行业发展&#8221;，但又有一点点不是很同意。因为我毕业的时候，在银行混了两年，然后又去一个国企业呆了2年。所以，第一份工作并没有影响我的职业。但是，我必需承认——当我从银行出来的时候，我落后了，落后了还很多，我花了近5-6年的时候才把这个差距追了回来。</p>
+<p>所以，我有几个观点想告诉大家：</p>
+<p><strong> </strong></p>
+<ul>
+<li><span style="font-weight: normal;">第一份工作并不决定你的人生</span><strong><span style="font-weight: normal;">。因为你可以在2年内换工作。但是你头四年的做的事会对你的职业有影响。这里，我有两个案例分享一下。（我不用说太多了，相信大家自己能体会）</span></strong>
+<ul>
+<li>一个是我的同学70后，他以前是程序员，干了5/6年后不想干了，想转行，结果转不了，因为他的工作经历让他很难转行了，他问了一下自己是否愿意和那些刚毕业的80后拿一样的工作一起竞争，最后他自己都不愿意。后来，他去读了MBA，现在还做IT，现在做一些业务咨询方面的工作。不能算失败，但是时间浪费了。</li>
+<li>还有一个是我的同事，她CS专业毕业想做程序员，但最后为了进一个好的公司只能做QA，现在4年多了，她很想很想做dev，但是却抱怨工作没有给她这样的机会，4年多的QA经验让她很难成为Dev了。我从她做QA一年的时候就在和她说，如果你想做Dev，你就要有技术储备，多和dev在一起工作，QA又怎么样，如果我能读Dev的代码，我总有一天会成为Dev的。事实证明，她对技术并没有太多热情。现在也只能得过且过了。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>如果你觉得自己在技术有自信有热情，而且已经有一些成绩了，我强烈建议你去IT公司中锻炼，越尊重技术的的IT公司越好。就像打球一样，只有和比你厉害的人一起玩，你才会得提高。</li>
+</ul>
+<ul>
+<li>如果你对技术的热情一般，也没有太多的自我价值的追求，也不想拼搏，而且对吃大锅饭不反感，对没有激情的工作不反感的话，那么，你应该去事业单位，当个公务员，走走常规则的人生，养养老也不错。这里，我多说一句，根据中国的现在国情来看，如果你有自我价值的诉求，你要去大城市，去好的公司，走体制外的路线，如果你又不想来大城市 ，只想呆在地方的话，那么，我个人非常建议你走体制内的路线，在地方，只有体制内的路线是最好的。</li>
+</ul>
+<ul>
+<li>千万别去一些没有前途的小公司（要去小公司你得看看这个公司的人和业务），很多不起眼的小公司现在都变大了，能和一个公司一起成长是相当难得的（我现在就特别想要这方面的经历），现在这个社会，与其去那些很难成长为大公司的小的很不规范的公司，还不如自己创业。（<strong>更新2011/4/26</strong>：<a href="#comment-48180">@islet8  </a>  回复中的观点可能比我的更好——“我觉得第一份工作能尽量进大公司的确是有好处的，能够帮你建立起一套规范的、成熟的工作习惯了思维方式，经过一两年（在激情还没被磨灭之前）再挑一个靠谱的、能赌上自己前途的小公司（比如同事朋友等推荐过去的或是他们联合创立的）一起成长一遍，无论公司的成败，对个人来说，那都是成功了”）</li>
+</ul>
+<h4>四，技术可以做多长</h4>
+<p>在这里，我用我自己经历做个例子，我在软件编程上有14年了（加上大学里的项目就有16年了），虽然我今天是经理了，但是我还是喜欢编程。我以前也听到过别人说的——做技术太辛苦，没前途。我并不这样觉得，因为我觉得技术是实实在在的东西，很实在，这让我很踏实，踏实的感觉得好。因为，</p>
+<ul>
+<li>我个人觉得真正的稳定是，今天我离开 这个公司，我明天就能找到相应的工作。</li>
+<li>如果我的工作不成问题了，那么我就可以从谋生上升到事业的层次来。</li>
+<li>只有到了事业这个层次，我才能有所建树。</li>
+</ul>
+<p>另外，我觉得说出来的那些话的人要么就是“小猫钓鱼”的那些人，要么就是短视的人，你可以问问他们，哪个非技术的行业有前途，然后你去问问从事那个行业的人怎么样看？我15年来都在编程，虽然走了一些弯路，但是我很感谢那些中途退缩者，是他们让我这15年变得更有价值。15年从事同一个件事，这让我很有竞争力。有了竞争力，我的工作才不会是一个问题，我才能上升上事业的层次上来。</p>
+<p>当然，如果你发现你不适合，你无法坚持，那么我建议你还是想清楚，别的行业你能坚持吗？<strong>我们不害怕转行，害怕的是自己对自己缺乏认识，害怕的是小猫钓鱼，害怕的是一山望比一山高</strong>。</p>
+<h4>五，待遇和职位</h4>
+<p>比如你的职位，薪水，福利，等，我从来都不是很关心这些东西，这些都是次要的（其次重要的），最重要的是你的能力和经历，是那些可以写在你简历上的，让你引以自豪的经历和能力。（一定要自己引以自豪）。<strong>而你的职位，薪水，只不过是你能力和经历的附属品</strong>。</p>
+<p>把自己对待遇和职位的那个目标放在心里，踏踏实实做好今天的事，炼好自己的内功，注重经验的积累和总结，等待一个能让你量变引发质变的机会，用你的能力抓住它不要放手，你会发现你的路就在前方，通往这条路的门不知不觉已经开了。功到自然成，水到渠成。</p>
+<p>以上是我的一些建议，不一定对，其可能因为我的个人经历有局限，还希望听道大家的讨论和指点。</p>
+<p><span style="color: #cc0000; font-size: 14px;"><strong>（请勿用于商业用途，转载时请注明作者和出处）</strong></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4561.html">对程序员职业的一些建议</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4561.html/feed</wfw:commentRss>
+			<slash:comments>121</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Facebook 的系统架构</title>
+		<link>https://coolshell.cn/articles/4549.html</link>
+					<comments>https://coolshell.cn/articles/4549.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2011 05:39:26 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Facebook]]></category>
+		<category><![CDATA[StackExchange]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4549</guid>
+
+					<description><![CDATA[<p>来源：http://www.quora.com/What-is-Facebooks-architecture （由Micha?l Figuière回答） 根据我...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4549.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4549.html">Facebook 的系统架构</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong>来源</strong>：<a title="What is Facebook's Architecture?" href="http://www.quora.com/What-is-Facebooks-architecture" target="_blank">http://www.quora.com/What-is-Facebooks-architecture</a> （由<a href="http://www.quora.com/Micha%C3%ABl-Figui%C3%A8re">Micha?l Figuière</a>回答）</p>
+<p>根据我现有的阅读和谈话，我所理解的今天Facebook的架构如下：</p>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>Web 前端是由 PHP 写的。Facebook 的 <a href=" http://developers.facebook.com/blog/post/358" target="_blank">HipHop </a>[1] 会把PHP转成 C++ 并用 g++编译，这样就可以为模板和Web逻贺业务层提供高的性能。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>业务逻辑以Service的形式存在，其使用<a href="http://thrift.apache.org/" target="_blank">Thrift </a>[2]。这些Service根据需求的不同由PHP，C++或Java实现（也可以用到了其它的一些语言……）</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>用Java写的Services没有用到任何一个企业级的应用服务器，但用到了Facebook自己的定制的应用服务器。看上去好像是重新发明轮子，但是这些Services只被暴露给Thrift使用（绝大所数是这样），Tomcat太重量级了，即使是Jetty也可能太过了点，其附加值对Facebook所需要的没有意义。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>持久化由MySQL, <a href="http://memcached.org/" target="_blank">Memcached </a>[3], Facebook 的 <a href="http://cassandra.apache.org/" target="_blank">Cassandra </a>[4], Hadoop 的 <a href="http://hbase.apache.org/" target="_blank">HBase </a>[5] 完成。Memcached 使用了MySQL的内存Cache。Facebook 工程师承认他们的Cassandra 使用正在减少，因为他们更喜欢HBase，因为它的更简单的一致性模型，以到其MapReduce能力。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>离线处理使用Hadoop 和 Hive。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>日志，点击，feeds数据使用<a href="https://github.com/facebook/scribe" target="_blank">Scribe </a>[6]，把其聚合并存在 HDFS，其使用<a href="http://hadoopblog.blogspot.com/2009/06/hdfs-scribe-integration.html" target="_blank">Scribe-HDFS </a>[7]，因而允许使用MapReduce进行扩展分析。</li>
+</ul>
+<p><span id="more-4549"></span></p>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li><a href="http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919" target="_blank">BigPipe </a>[8] 是他们的定制技术，用来加速页面显示。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li><a href="http://www.varnish-cache.org/" target="_blank">Varnish Cache</a> [9]用作HTTP代理。他们用这个的原因是<a href="http://www.varnish-software.com/customers/facebook" target="_blank">高速和有效率</a>。 [10].</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>用来搞定用户<a href="http://www.facebook.com/note.php?note_id=76191543919" target="_blank">上传的十亿张照片的存储</a>，其由Haystack处理，Facebook自己开发了一个Ad-Hoc存储方案，其主要做了一些低层优化和“仅追加”写技术 [11].</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>Facebook Messages 使用了自己的架构，其明显地构建在了一个动态集群的基础架构上。业务逻辑和持久化被封装在一个所谓的&#8217;Cell&#8217;。每个‘Cell’都处理一部分用户，新的‘Cell’可以因为访问热度被添加[12]。 持久化归档使用HBase [13]。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>Facebook Messages 的搜索引擎由存储在HBase中的一个倒置索引的构建。 [14]</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>Facebook 搜索引擎实现细节据我所知目前是未知状态。</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>Typeahead 搜索使用了一个定制的存储和检索逻辑。 [15]</li>
+</ul>
+<ul style="margin: 5px 0px 0px 1.6em; padding: 0px; list-style-type: disc;">
+<li>Chat 基于一个Epoll 服务器，这个服务器由Erlang 开发，由Thrift存取 [16]</li>
+</ul>
+<p>关于那些供给给上述组件的资源，下面是一些信息和数量，但是有一些是未知的：</p>
+<ul>
+<li>Facebook估计有超过60,000 台服务器[16]。他们最新的数据中心在俄勒冈州的Prineville，其基于完全自定设计的硬件[17] 那是最近才公开的 <a href="http://opencompute.org" target="_blank">Open Compute 项目</a>[18]。</li>
+</ul>
+<ul>
+<li>300 TB 的数据存在 Memcached 中处理 [19]</li>
+</ul>
+<ul>
+<li>他们的Hadoop 和 Hive 集群由3000 服务器组成，每台服务器有8个核，32GB的内存，12TB的硬盘，全部有2万4千个CPU的核，96TB内存和36PB的硬盘。 [20]</li>
+</ul>
+<ul>
+<li>每天有1000亿的点击量，500亿张照片， 3 万亿个对象被 Cache，每天130TB的日志（<a href="http://www.facebook.com/note.php?note_id=409881258919" target="_blank">2010年7月的数据</a>） [21]</li>
+</ul>
+<p><strong>参考引用</strong></p>
+<p>[1] <em style="margin: 0px; padding: 0px;">HipHop for PHP</em>: <a href="http://developers.facebook.com/blog/post/358">http://developers.facebook.com/blog/post/358</a><br style="margin: 0px; padding: 0px;" />[2] <em style="margin: 0px; padding: 0px;">Thrift</em>: <a href="http://thrift.apache.org/">http://thrift.apache.org/</a><br style="margin: 0px; padding: 0px;" />[3] <em style="margin: 0px; padding: 0px;">Memcached</em>: <a href="http://memcached.org/">http://memcached.org/</a><br style="margin: 0px; padding: 0px;" />[4] <em style="margin: 0px; padding: 0px;">Cassandra</em>: <a href="http://cassandra.apache.org/">http://cassandra.apache.org/</a><br style="margin: 0px; padding: 0px;" />[5] <em style="margin: 0px; padding: 0px;">HBase</em>: <a href="http://hbase.apache.org/">http://hbase.apache.org/</a><br style="margin: 0px; padding: 0px;" />[6] <em style="margin: 0px; padding: 0px;">Scribe</em>: <a href="https://github.com/facebook/scribe">https://github.com/facebook/scribe</a><br style="margin: 0px; padding: 0px;" />[7] <em style="margin: 0px; padding: 0px;">Scribe-HDFS</em>: <a href="http://hadoopblog.blogspot.com/2009/06/hdfs-scribe-integration.html">http://hadoopblog.blogspot.com/2009/06/hdfs-scribe-integration.html</a><br style="margin: 0px; padding: 0px;" />[8] <em style="margin: 0px; padding: 0px;">BigPipe</em>: <a href="http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919">http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919</a><br style="margin: 0px; padding: 0px;" />[9] <em style="margin: 0px; padding: 0px;">Varnish Cache</em>: <a href="http://www.varnish-cache.org/">http://www.varnish-cache.org/</a><br style="margin: 0px; padding: 0px;" />[10] <em style="margin: 0px; padding: 0px;">Facebook goes for Varnish</em>: <a href="http://www.varnish-software.com/customers/facebook">http://www.varnish-software.com/customers/facebook</a><br style="margin: 0px; padding: 0px;" />[11] <em style="margin: 0px; padding: 0px;">Needle in a haystack</em>: efficient storage of billions of photos: <a href="http://www.facebook.com/note.php?note_id=76191543919">http://www.facebook.com/note.php?note_id=76191543919</a><br style="margin: 0px; padding: 0px;" />[12] <em style="margin: 0px; padding: 0px;">Scaling the Messages Application Back End</em>: <a href="http://www.facebook.com/note.php?note_id=10150148835363920">http://www.facebook.com/note.php?note_id=10150148835363920</a><br style="margin: 0px; padding: 0px;" />[13] <em style="margin: 0px; padding: 0px;">The Underlying Technology of Messages</em>: <a href="https://www.facebook.com/note.php?note_id=454991608919">https://www.facebook.com/note.php?note_id=454991608919</a><br style="margin: 0px; padding: 0px;" />[14] <em style="margin: 0px; padding: 0px;">The Underlying Technology of Messages Tech Talk</em>: <a href="http://www.facebook.com/video/video.php?v=690851516105">http://www.facebook.com/video/video.php?v=690851516105</a><br style="margin: 0px; padding: 0px;" />[15] <em style="margin: 0px; padding: 0px;">Facebook&#8217;s typeahead search architecture</em>: <a href="http://www.facebook.com/video/video.php?v=432864835468">http://www.facebook.com/video/video.php?v=432864835468</a><br style="margin: 0px; padding: 0px;" />[16] <em style="margin: 0px; padding: 0px;">Facebook Chat</em>: <a href="http://www.facebook.com/note.php?note_id=14218138919">http://www.facebook.com/note.php?note_id=14218138919</a><br style="margin: 0px; padding: 0px;" />[17] <em style="margin: 0px; padding: 0px;">Who has the most Web Servers?</em>: <a href="http://www.datacenterknowledge.com/archives/2009/05/14/whos-got-the-most-web-servers/">http://www.datacenterknowledge.com/archives/2009/05/14/whos-got-the-most-web-servers/</a><br style="margin: 0px; padding: 0px;" />[18] B<em style="margin: 0px; padding: 0px;">uilding Efficient Data Centers with the Open Compute Project</em>: <a href="http://www.facebook.com/note.php?note_id=10150144039563920">http://www.facebook.com/note.php?note_id=10150144039563920</a><br style="margin: 0px; padding: 0px;" />[19] <em style="margin: 0px; padding: 0px;">Open Compute Project</em>: <a href="http://opencompute.org/">http://opencompute.org/</a><br style="margin: 0px; padding: 0px;" />[20] <em style="margin: 0px; padding: 0px;">Facebook&#8217;s architecture presentation at Devoxx 2010</em>: <a href="http://www.devoxx.com">http://www.devoxx.com</a><br style="margin: 0px; padding: 0px;" />[21] <em style="margin: 0px; padding: 0px;">Scaling Facebook to 500 millions users and beyond</em>: <a href="http://www.facebook.com/note.php?note_id=409881258919">http://www.facebook.com/note.php?note_id=409881258919</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li><li ><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/09/react_patent-360x200-1-150x150.jpg" alt="关于Facebook 的 React 专利许可证" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18140.html" class="wp_rp_title">关于Facebook 的 React 专利许可证</a></li><li ><a href="https://coolshell.cn/articles/7448.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="扎克伯格的一封信：关于Facebook IPO" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7448.html" class="wp_rp_title">扎克伯格的一封信：关于Facebook IPO</a></li><li ><a href="https://coolshell.cn/articles/3721.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="Stack Exchange 的架构" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3721.html" class="wp_rp_title">Stack Exchange 的架构</a></li><li ><a href="https://coolshell.cn/articles/3396.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/Visualizing-Friendships-on-Facebook-150x150.png" alt="Facebook全球关系网" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3396.html" class="wp_rp_title">Facebook全球关系网</a></li><li ><a href="https://coolshell.cn/articles/562.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/13-09_menu_menu-150x150.jpg" alt="30种时尚的CSS网站导航条" width="150" height="150" /></a><a href="https://coolshell.cn/articles/562.html" class="wp_rp_title">30种时尚的CSS网站导航条</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4549.html">Facebook 的系统架构</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4549.html/feed</wfw:commentRss>
+			<slash:comments>49</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一些软件设计的原则</title>
+		<link>https://coolshell.cn/articles/4535.html</link>
+					<comments>https://coolshell.cn/articles/4535.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2011 00:24:18 +0000</pubDate>
+				<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Object-Oriented]]></category>
+		<category><![CDATA[Unix]]></category>
+		<category><![CDATA[面向对象]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4535</guid>
+
+					<description><![CDATA[<p>以前本站向大家介绍过一些软件开发的原则，比如优质代码的十诫和Unix传奇(下篇)中所以说的UNIX的设计原则。相信大家从中能够从中学了解到一些设计原理方面的知识...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4535.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站向大家介绍过一些软件开发的原则，比如<a title="优质代码的十诫" href="https://coolshell.cn/articles/1007.html" target="_blank" rel="bookmark noopener">优质代码的十诫</a>和<a title="Unix传奇(下篇)" href="https://coolshell.cn/articles/2324.html" target="_blank" rel="noopener">Unix传奇(下篇)</a>中所以说的UNIX的设计原则。相信大家从中能够从中学了解到一些设计原理方面的知识，正如我在《<a title="再谈“我是怎么招聘程序员的”（上）" href="https://coolshell.cn/articles/4506.html" target="_blank" rel="noopener">再谈“我是怎么招聘程序”</a>》中所说的，一个好的程序员通常由其操作技能、知识水平，经验层力和能力四个方面组成。在这里想和大家说说设计中的一些原则，我认为这些东西属于长期经验总结出来的知识。这些原则，每一个程序员都应该了解。但是请不要教条主义，在使用的时候还是要多多考虑实际情况。其实，<strong>下面这些原则，不单单只是软件开发，可以推广到其它生产活动中，甚至我们的生活中</strong>。</p>
+<h4>Don’t Repeat Yourself (DRY)</h4>
+<p>DRY 是一个最简单的法则，也是最容易被理解的。但它也可能是最难被应用的（因为要做到这样，我们需要在泛型设计上做相当的努力，这并不是一件容易的事）。它意味着，当我们在两个或多个地方的时候发现一些相似的代码的时候，我们需要把他们的共性抽象出来形一个唯一的新方法，并且改变现有的地方的代码让他们以一些合适的参数调用这个新的方法。</p>
+<p><strong>参考</strong>：<a title="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" rel="nofollow">http://en.wikipedia.org/wiki/Don%27t_repeat_yourself</a></p>
+<h4>Keep It Simple, Stupid (KISS)</h4>
+<p>KISS原则在设计上可能最被推崇的，在家装设计，界面设计 ，操作设计上，复杂的东西越来越被众人所BS了，而简单的东西越来越被人所认可，比如<a title="UI的恶梦" href="https://coolshell.cn/articles/1907.html" target="_blank" rel="noopener">这些UI的设计</a>和我们<a title="为什么中国的网页设计那么烂？" href="https://coolshell.cn/articles/3605.html" target="_blank" rel="noopener">中国网页</a>（尤其是<a title="微软用新浪来当反面教材" href="https://coolshell.cn/articles/3872.html" target="_blank" rel="noopener">新浪的网页</a>）者是负面的例子。“宜家”（IKEA）简约、效率的家居设计、生产思路；“微软”（Microsoft）“所见即所得”的理念；“谷歌”（Google)简约、直接的商业风格，无一例外的遵循了“kiss”原则，也正是“kiss”原则，成就了这些看似神奇的商业经典。而苹果公司的iPhone/iPad将这个原则实践到了极至。</p>
+<p><span id="more-4535"></span></p>
+<p>把一个事情搞复杂是一件简单的事，但要把一个复杂的事变简单，这是一件复杂的事。</p>
+<p><strong>参考</strong>：<a title="http://en.wikipedia.org/wiki/KISS_principle" href="http://en.wikipedia.org/wiki/KISS_principle" rel="nofollow">http://en.wikipedia.org/wiki/KISS_principle</a></p>
+<h4>Program to an interface, not an implementation</h4>
+<p>这是设计模式中最根本的哲学，注重接口，而不是实现，依赖接口，而不是实现。接口是抽象是稳定的，实现则是多种多样的。以后面我们会面向对象的SOLID原则中会提到我们的依赖倒置原则，就是这个原则的的另一种样子。还有一条原则叫 <strong>Composition over inheritance</strong>（喜欢组合而不是继承），这两条是那23个经典设计模式中的设计原则。</p>
+<h4>Command-Query Separation (CQS)  – 命令-查询分离原则</h4>
+<ul>
+<li>查询：当一个方法返回一个值来回应一个问题的时候，它就具有查询的性质；</li>
+<li>命令：当一个方法要改变对象的状态的时候，它就具有命令的性质；</li>
+</ul>
+<p>通常，一个方法可能是纯的Command模式或者是纯的Query模式，或者是两者的混合体。在设计接口时，如果可能，应该尽量使接口单一化，保证方法的行为严格的是命令或者是查询，这样查询方法不会改变对象的状态，没有副作用，而会改变对象的状态的方法不可能有返回值。也就是说：如果我们要问一个问题，那么就不应该影响到它的答案。实际应用，要视具体情况而定，语义的清晰性和使用的简单性之间需要权衡。将Command和Query功能合并入一个方法，方便了客户的使用，但是，降低了清晰性，而且，可能不便于基于断言的程序设计并且需要一个变量来保存查询结果。</p>
+<p>在系统设计中，很多系统也是以这样原则设计的，查询的功能和命令功能的系统分离，这样有则于系统性能，也有利于系统的安全性。</p>
+<p><strong>参考</strong>：<a title="http://en.wikipedia.org/wiki/Command-query_separation" href="http://en.wikipedia.org/wiki/Command-query_separation" rel="nofollow">http://en.wikipedia.org/wiki/Command-query_separation</a></p>
+<h4>You Ain’t Gonna Need It (YAGNI)</h4>
+<p>这个原则简而言之为——只考虑和设计必须的功能，避免过度设计。只实现目前需要的功能，在以后您需要更多功能时，可以再进行添加。</p>
+<ul>
+<li>如无必要，勿增复杂性。</li>
+<li>软件开发先是一场沟通博弈。</li>
+</ul>
+<p>以前本站有一篇关于<a title="代码重构的一个示例" href="https://coolshell.cn/articles/3005.html" target="_blank" rel="noopener">过度重构的文章</a>，这个示例就是这个原则的反例。而，WebSphere的设计者就<a href="http://www.bbc.co.uk/news/business-11944966" target="_blank" rel="noopener">表示过他过度设计了这个产品</a>。我们的程序员或是架构师在设计系统的时候，会考虑很多扩展性的东西，导致在架构与设计方面使用了大量折衷，最后导致项目失败。这是个令人感到讽刺的教训，因为本来希望尽可能延长项目的生命周期，结果反而缩短了生命周期。</p>
+<p><strong>参考</strong>：<a title="http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It" href="http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It" target="_blank" rel="nofollow noopener">http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It</a></p>
+<h4>Law of Demeter – 迪米特法则</h4>
+<p>迪米特法则(Law of Demeter)，又称“最少知识原则”（Principle of Least Knowledge），其来源于1987年荷兰大学的一个叫做Demeter的项目。Craig Larman把Law of Demeter又称作“不要和陌生人说话”。在《程序员修炼之道》中讲LoD的那一章叫作“解耦合与迪米特法则”。关于迪米特法则有一些很形象的比喻：</p>
+<ul>
+<li>如果你想让你的狗跑的话，你会对狗狗说还是对四条狗腿说？</li>
+<li>如果你去店里买东西，你会把钱交给店员，还是会把钱包交给店员让他自己拿？</li>
+</ul>
+<p>和狗的四肢说话？让店员自己从钱包里拿钱？这听起来有点荒唐，不过在我们的代码里这几乎是见怪不怪的事情了。</p>
+<p>对于LoD，正式的表述如下：</p>
+<blockquote><p>对于对象 &#8216;O&#8217; 中一个方法&#8217;M&#8217;，M应该只能够访问以下对象中的方法：</p>
+<ol>
+<li>对象O；</li>
+<li>与O直接相关的Component Object；</li>
+<li>由方法M创建或者实例化的对象；</li>
+<li>作为方法M的参数的对象。</li>
+</ol>
+</blockquote>
+<p>在《Clean Code》一书中，有一段Apache framework中的一段违反了LoD的代码：</p>
+<p style="padding-left: 30px;">final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();</p>
+<p>这么长的一串对其它对象的细节，以及细节的细节，细节的细节的细节&#8230;&#8230;的调用，增加了耦合，使得代码结构复杂、僵化，难以扩展和维护。</p>
+<p>在《重构》一书中的代码的环味道中有一种叫做“Feature Envy”(依恋情结），形象的描述了一种违反了LoC的情况。Feature Envy就是说一个对象对其它对象的内容更有兴趣，也就是说老是羡慕别的对象的成员、结构或者功能，大老远的调用人家的东西。这样的结构显然是不合理的。我们的程序应该写得比较“害羞”。不能像前面例子中的那个不把自己当外人的店员一样，拿过客人的钱包自己把钱拿出来。“害羞”的程序只和自己最近的朋友交谈。这种情况下应该调整程序的结构，让那个对象自己拥有它羡慕的feature，或者使用合理的设计模式（例如Facade和Mediator）。</p>
+<p><strong>参考</strong>：<a title="http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge" href="http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge" rel="nofollow">http://en.wikipedia.org/wiki/Principle_of_Least_Knowledge</a></p>
+<h4>面向对象的S.O.L.I.D 原则</h4>
+<p>一般来说这是面向对象的五大设计原则，但是，我觉得这些原则可适用于所有的软件开发。</p>
+<p><strong>Single Responsibility Principle (SRP) – 职责单一原则</strong></p>
+<p>关于单一职责原则，其核心的思想是：<strong>一个类，只做一件事，并把这件事做好，其只有一个引起它变化的原因</strong>。单一职责原则可以看作是低耦合、高内聚在面向对象原则上的引申，将职责定义为引起变化的原因，以提高内聚性来减少引起变化的原因。职责过多，可能引起它变化的原因就越多，这将导致职责依赖，相互之间就产生影响，从而极大的损伤其内聚性和耦合度。单一职责，通常意味着单一的功能，因此不要为一个模块实现过多的功能点，以保证实体只有一个引起它变化的原因。</p>
+<ul>
+<li>Unix/Linux是这一原则的完美体现者。各个程序都独立负责一个单一的事。</li>
+<li>Windows是这一原则的反面示例。几乎所有的程序都交织耦合在一起。</li>
+</ul>
+<p><strong>Open/Closed Principle (OCP) – 开闭原则</strong></p>
+<p>关于开发封闭原则，其核心的思想是：模块是可扩展的，而不可修改的。也就是说，<strong>对扩展是开放的，而对修改是封闭的</strong>。</p>
+<ul>
+<li>对扩展开放，意味着有新的需求或变化时，可以对现有代码进行扩展，以适应新的情况。</li>
+<li>对修改封闭，意味着类一旦设计完成，就可以独立完成其工作，而不要对类进行任何修改。</li>
+</ul>
+<p>对于面向对象来说，需要你依赖抽象，而不是实现，23个经典设计模式中的“策略模式”就是这个实现。对于非面向对象编程，一些API需要你传入一个你可以扩展的函数，比如我们的C 语言的qsort()允许你提供一个“比较器”，STL中的容器类的内存分配，ACE中的多线程的各种锁。对于软件方面，浏览器的各种插件属于这个原则的实践。</p>
+<p><strong>Liskov substitution principle (LSP) – 里氏代换原则</strong></p>
+<p>软件工程大师Robert C. Martin把里氏代换原则最终简化为一句话：“Subtypes must be substitutable for their base types”。也就是，子类必须能够替换成它们的基类。即：子类应该可以替换任何基类能够出现的地方，并且经过替换以后，代码还能正常工作。另外，不应该在代码中出现if/else之类对子类类型进行判断的条件。里氏替换原则LSP是使代码符合开闭原则的一个重要保证。正是由于子类型的可替换性才使得父类型的模块在无需修改的情况下就可以扩展。</p>
+<p>这么说来，似乎有点教条化，我非常建议大家看看这个原则个两个最经典的案例——“正方形不是长方形”和“鸵鸟不是鸟”。通过这两个案例，你会明白《墨子 小取》中说的 ——“娣，美人也，爱娣，非爱美人也….盗，人也；恶盗，非恶人也。”——妹妹虽然是美人，但喜欢妹妹并不代表喜欢美人。盗贼是人，但讨厌盗贼也并不代表就讨厌人类。<strong>这个原则让你考虑的不是语义上对象的间的关系，而是实际需求的环境</strong>。</p>
+<p>在很多情况下，在设计初期我们类之间的关系不是很明确，LSP则给了我们一个判断和设计类之间关系的基准：需不需要继承，以及怎样设计继承关系。</p>
+<p><strong>Interface Segregation Principle (ISP) – 接口隔离原则</strong></p>
+<p>接口隔离原则意思是把功能实现在接口中，而不是类中，使用多个专门的接口比使用单一的总接口要好。</p>
+<p>举个例子，我们对电脑有不同的使用方式，比如：写作，通讯，看电影，打游戏，上网，编程，计算，数据等，如果我们把这些功能都声明在电脑的抽类里面，那么，我们的上网本，PC机，服务器，笔记本的实现类都要实现所有的这些接口，这就显得太复杂了。所以，我们可以把其这些功能接口隔离开来，比如：工作学习接口，编程开发接口，上网娱乐接口，计算和数据服务接口，这样，我们的不同功能的电脑就可以有所选择地继承这些接口。</p>
+<p>这个原则可以提升我们“搭积木式”的软件开发。对于设计来说，Java中的各种Event Listener和Adapter，对于软件开发来说，不同的用户权限有不同的功能，不同的版本有不同的功能，都是这个原则的应用。</p>
+<p><strong>Dependency Inversion Principle (DIP) – 依赖倒置原则</strong></p>
+<p>高层模块不应该依赖于低层模块的实现，而是依赖于高层抽象。</p>
+<p>举个例子，墙面的开关不应该依赖于电灯的开关实现，而是应该依赖于一个抽象的开关的标准接口，这样，当我们扩展程序的时候，我们的开关同样可以控制其它不同的灯，甚至不同的电器。也就是说，电灯和其它电器继承并实现我们的标准开关接口，而我们的开关产商就可不需要关于其要控制什么样的设备，只需要关心那个标准的开关标准。这就是依赖倒置原则。</p>
+<p>这就好像浏览器并不依赖于后面的web服务器，其只依赖于HTTP协议。这个原则实在是太重要了，社会的分工化，标准化都是这个设计原则的体现。</p>
+<p><strong>参考</strong>：<a href="http://en.wikipedia.org/wiki/Solid_(object-oriented_design)">http://en.wikipedia.org/wiki/Solid_(object-oriented_design)</a></p>
+<h4>Common Closure Principle（CCP）– 共同封闭原则</h4>
+<p>一个包中所有的类应该对同一种类型的变化关闭。一个变化影响一个包，便影响了包中所有的类。一个更简短的说法是：一起修改的类，应该组合在一起（同一个包里）。如果必须修改应用程序里的代码，我们希望所有的修改都发生在一个包里（修改关闭），而不是遍布在很多包里。CCP原则就是把因为某个同样的原因而需要修改的所有类组合进一个包里。如果2个类从物理上或者从概念上联系得非常紧密，它们通常一起发生改变，那么它们应该属于同一个包。</p>
+<p>CCP延伸了开闭原则（OCP）的“关闭”概念，当因为某个原因需要修改时，把需要修改的范围限制在一个最小范围内的包里。</p>
+<p><strong>参考</strong>：<a href="http://c2.com/cgi/wiki?CommonClosurePrinciple">http://c2.com/cgi/wiki?CommonClosurePrinciple</a></p>
+<h4>Common Reuse Principle (CRP) – 共同重用原则</h4>
+<p>包的所有类被一起重用。如果你重用了其中的一个类，就重用全部。换个说法是，没有被一起重用的类不应该被组合在一起。CRP原则帮助我们决定哪些类应该被放到同一个包里。依赖一个包就是依赖这个包所包含的一切。当一个包发生了改变，并发布新的版本，使用这个包的所有用户都必须在新的包环境下验证他们的工作，即使被他们使用的部分没有发生任何改变。因为如果包中包含有未被使用的类，即使用户不关心该类是否改变，但用户还是不得不升级该包并对原来的功能加以重新测试。</p>
+<p>CCP则让系统的维护者受益。CCP让包尽可能大（CCP原则加入功能相关的类），CRP则让包尽可能小（CRP原则剔除不使用的类）。它们的出发点不一样，但不相互冲突。</p>
+<p><strong>参考</strong>：<a href="http://c2.com/cgi/wiki?CommonReusePrinciple">http://c2.com/cgi/wiki?CommonReusePrinciple</a></p>
+<h4>Hollywood Principle – 好莱坞原则</h4>
+<p>好莱坞原则就是一句话——“don&#8217;t call us, we&#8217;ll call you.”。意思是，好莱坞的经纪人们不希望你去联系他们，而是他们会在需要的时候来联系你。也就是说，所有的组件都是被动的，所有的组件初始化和调用都由容器负责。组件处在一个容器当中，由容器负责管理。</p>
+<p>简单的来讲，就是由容器控制程序之间的关系，而非传统实现中，由程序代码直接操控。这也就是所谓“控制反转”的概念所在：</p>
+<ol>
+<li>不创建对象，而是描述创建对象的方式。</li>
+<li>在代码中，对象与服务没有直接联系，而是容器负责将这些联系在一起。</li>
+</ol>
+<p>控制权由应用代码中转到了外部容器，控制权的转移，是所谓反转。</p>
+<p>好莱坞原则就是IoC（Inversion of Control）或DI（Dependency Injection ）的基础原则。这个原则很像依赖倒置原则，依赖接口，而不是实例，但是这个原则要解决的是怎么把这个实例传入调用类中？你可能把其声明成成员，你可以通过构造函数，你可以通过函数参数。但是 IoC可以让你通过配置文件，一个由Service Container 读取的配置文件来产生实际配置的类。但是程序也有可能变得不易读了，程序的性能也有可能还会下降。</p>
+<p><strong>参考</strong>：</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Hollywood_Principle">http://en.wikipedia.org/wiki/Hollywood_Principle</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Inversion_of_Control">http://en.wikipedia.org/wiki/Inversion_of_Control</a></li>
+</ul>
+<h4>High Cohesion &amp; Low/Loose coupling &amp; – 高内聚， 低耦合</h4>
+<p>这个原则是UNIX操作系统设计的经典原则，把模块间的耦合降到最低，而努力让一个模块做到精益求精。</p>
+<ul>
+<li>内聚：一个模块内各个元素彼此结合的紧密程度</li>
+<li>耦合：一个软件结构内不同模块之间互连程度的度量</li>
+</ul>
+<p>内聚意味着重用和独立，耦合意味着多米诺效应牵一发动全身。</p>
+<p><strong>参考</strong>：</p>
+<ul>
+<li><a title="http://en.wikipedia.org/wiki/Coupling_(computer_science)" href="http://en.wikipedia.org/wiki/Coupling_%28computer_science%29" rel="nofollow">http://en.wikipedia.org/wiki/Coupling_(computer_science)</a></li>
+<li><a title="http://en.wikipedia.org/wiki/Cohesion_(computer_science)" href="http://en.wikipedia.org/wiki/Cohesion_%28computer_science%29" rel="nofollow">http://en.wikipedia.org/wiki/Cohesion_(computer_science)</a></li>
+</ul>
+<h4>Convention over Configuration（CoC）– 惯例优于配置原则</h4>
+<p>简单点说，就是将一些公认的配置方式和信息作为内部缺省的规则来使用。例如，Hibernate的映射文件，如果约定字段名和类属性一致的话，基本上就可以不要这个配置文件了。你的应用只需要指定不convention的信息即可，从而减少了大量convention而又不得不花时间和精力啰里啰嗦的东东。配置文件很多时候相当的影响开发效率。</p>
+<p>Rails 中很少有配置文件（但不是没有，数据库连接就是一个配置文件），Rails 的fans号称期开发效率是 java 开发的 10 倍，估计就是这个原因。Maven也使用了CoC原则，当你执行mvn -compile命令的时候，不需要指源文件放在什么地方，而编译以后的class文件放置在什么地方也没有指定，这就是CoC原则。</p>
+<p><strong>参考</strong>：<a title="http://en.wikipedia.org/wiki/Convention_over_Configuration" href="http://en.wikipedia.org/wiki/Convention_over_Configuration" rel="nofollow">http://en.wikipedia.org/wiki/Convention_over_Configuration</a></p>
+<h4>Separation of Concerns (SoC) – 关注点分离</h4>
+<p>SoC 是计算机科学中最重要的努力目标之一。这个原则，就是在软件开发中，通过各种手段，将问题的各个关注点分开。如果一个问题能分解为独立且较小的问题，就是相对较易解决的。问题太过于复杂，要解决问题需要关注的点太多，而程序员的能力是有限的，不能同时关注于问题的各个方面。正如程序员的记忆力相对于计算机知识来说那么有限一样，程序员解决问题的能力相对于要解决的问题的复杂性也是一样的非常有限。在我们分析问题的时候，如果我们把所有的东西混在一起讨论，那么就只会有一个结果——乱。</p>
+<p>我记得在上一家公司有一个项目，讨论就讨论了1年多，项目本来不复杂，但是没有使用SoC，全部的东西混为一谈，再加上一堆程序员注入了各种不同的观点和想法，整个项目一下子就失控了。最后，本来一个1年的项目做了3年。</p>
+<p>实现关注点分离的方法主要有两种，一种是标准化，另一种是抽象与包装。标准化就是制定一套标准，让使用者都遵守它，将人们的行为统一起来，这样使用标准的人就不用担心别人会有很多种不同的实现，使自己的程序不能和别人的配合。Java EE就是一个标准的大集合。每个开发者只需要关注于标准本身和他所在做的事情就行了。就像是开发镙丝钉的人只专注于开发镙丝钉就行了，而不用关注镙帽是怎么生产的，反正镙帽和镙丝钉按标来就一定能合得上。不断地把程序的某些部分抽像差包装起来，也是实现关注点分离的好方法。一旦一个函数被抽像出来并实现了，那么使用函数的人就不用关心这个函数是如何实现的，同样的，一旦一个类被抽像并实现了，类的使用者也不用再关注于这个类的内部是如何实现的。诸如组件，分层，面向服务，等等这些概念都是在不同的层次上做抽像和包装，以使得使用者不用关心它的内部实现细节。</p>
+<p>说白了还是“高内聚，低耦合”。</p>
+<p><strong>参考</strong>：<a href="http://sulong.me/archives/99">http://sulong.me/archives/99</a></p>
+<h4>Design by Contract (DbC) – 契约式设计</h4>
+<p>DbC的核心思想是对软件系统中的元素之间相互合作以及“责任”与“义务”的比喻。这种比喻从商业活动中“客户”与“供应商”达成“契约”而得来。例如：</p>
+<ul>
+<li>供应商必须提供某种产品（责任），并且他有权期望客户已经付款（权利）。</li>
+<li>客户必须付款（责任），并且有权得到产品（权利）。</li>
+<li>契约双方必须履行那些对所有契约都有效的责任，如法律和规定等。</li>
+</ul>
+<p>同样的，如果在程序设计中一个模块提供了某种功能，那么它要：</p>
+<ul>
+<li>期望所有调用它的客户模块都保证一定的进入条件：这就是模块的先验条件（客户的义务和供应商的权利，这样它就不用去处理不满足先验条件的情况）。</li>
+<li>保证退出时给出特定的属性：这就是模块的后验条件——（供应商的义务，显然也是客户的权利）。</li>
+<li>在进入时假定，并在退出时保持一些特定的属性：不变式。</li>
+</ul>
+<p>契约就是这些权利和义务的正式形式。我们可以用“三个问题”来总结DbC，并且作为设计者要经常问：</p>
+<ul>
+<li>它期望的是什么？</li>
+<li>它要保证的是什么？</li>
+<li>它要保持的是什么？</li>
+</ul>
+<p>根据Bertrand Meyer氏提出的DBC概念的描述，对于类的一个方法，都有一个前提条件以及一个后续条件，前提条件说明方法接受什么样的参数数据等，只有前提条件得到满足时，这个方法才能被调用；同时后续条件用来说明这个方法完成时的状态，如果一个方法的执行会导致这个方法的后续条件不成立，那么这个方法也不应该正常返回。</p>
+<p>现在把前提条件以及后续条件应用到继承子类中，子类方法应该满足：</p>
+<ol>
+<li>前提条件不强于基类．</li>
+<li>后续条件不弱于基类．</li>
+</ol>
+<p>换句话说，通过基类的接口调用一个对象时，用户只知道基类前提条件以及后续条件。因此继承类不得要求用户提供比基类方法要求的更强的前提条件，亦即，继承类方法必须接受任何基类方法能接受的任何条件（参数）。同样，继承类必须顺从基类的所有后续条件，亦即，继承类方法的行为和输出不得违反由基类建立起来的任何约束，不能让用户对继承类方法的输出感到困惑。</p>
+<p>这样，我们就有了基于契约的LSP，基于契约的LSP是LSP的一种强化。</p>
+<p><strong>参考</strong>：<a href="http://en.wikipedia.org/wiki/Design_by_contract">http://en.wikipedia.org/wiki/Design_by_contract</a></p>
+<h4>Acyclic Dependencies Principle (ADP) – 无环依赖原则</h4>
+<p>包之间的依赖结构必须是一个直接的无环图形，也就是说，在依赖结构中不允许出现环（循环依赖）。如果包的依赖形成了环状结构，怎么样打破这种循环依赖呢？有2种方法可以打破这种循环依赖关系：第一种方法是创建新的包，如果A、B、C形成环路依赖，那么把这些共同类抽出来放在一个新的包D里。这样就把C依赖A变成了C依赖D以及A依赖D，从而打破了循环依赖关系。第二种方法是使用DIP（依赖倒置原则）和ISP（接口分隔原则）设计原则。</p>
+<p>无环依赖原则（ADP）为我们解决包之间的关系耦合问题。在设计模块时，不能有循环依赖。</p>
+<p><strong>参考</strong>：<a href="http://c2.com/cgi/wiki?AcyclicDependenciesPrinciple">http://c2.com/cgi/wiki?AcyclicDependenciesPrinciple</a></p>
+<h4>后记</h4>
+<p>上面这些原则可能有些学院派，也可能太为理论，我在这里说的也比较模糊和简单，这里只是给大家一个概貌，如果想要了解更多的东西，大家可以多google一下。</p>
+<p>不过这些原则看上去都不难，但是要用好却并不那么容易。要能把这些原则用得好用得精，而不教条，我的经验如下：（我以为这是一个理论到应用的过程）</p>
+<ol>
+<li>你可以先粗浅或是表面地知道这些原则。</li>
+<li>但不要急着马上就使用。</li>
+<li>在工作学习中观察和总结别人或自己的设计。</li>
+<li>再回过头来了回顾一下这些原则，相信你会有一些自己的心得。</li>
+<li>有适度地去实践一下。</li>
+<li>Goto第 3步。</li>
+</ol>
+<p>我相信可能还会有其实一些原则，欢迎大家提供。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/01/kiss-150x150.png" alt="从面向对象的设计模式看软件设计" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8961.html" class="wp_rp_title">从面向对象的设计模式看软件设计</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/07/inverted-bookshelf_thumb-150x150.jpg" alt="IoC/DIP其实是一种管理思想" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9949.html" class="wp_rp_title">IoC/DIP其实是一种管理思想</a></li><li ><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="如此理解面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8745.html" class="wp_rp_title">如此理解面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/7236.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/05/Bannière-Unix-linux-150x150.jpg" alt="用Unix的设计思想来应对多变的需求" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7236.html" class="wp_rp_title">用Unix的设计思想来应对多变的需求</a></li><li ><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="千万不要把 bool 设计成函数参数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5444.html" class="wp_rp_title">千万不要把 bool 设计成函数参数</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4535.html">一些软件设计的原则</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4535.html/feed</wfw:commentRss>
+			<slash:comments>69</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>再谈“我是怎么招聘程序员的”（上）</title>
+		<link>https://coolshell.cn/articles/4506.html</link>
+					<comments>https://coolshell.cn/articles/4506.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 20 Apr 2011 00:36:55 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4506</guid>
+
+					<description><![CDATA[<p>我以前写过一篇“我是怎么招聘程序员的”的文章（在CSDN那里有很多人进行了回复）。今天，我想再谈谈关于招聘和面试这方面的东西，主要是以下这些原因： 近半年来我在...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4506.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4506.html">再谈“我是怎么招聘程序员的”（上）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>我以前写过一篇“<a title="我是怎么招聘程序员的" href="https://coolshell.cn/articles/1870.html" target="_blank">我是怎么招聘程序员的</a>”的文章（在<a title="我是怎么招聘程序员（CSDN）" href="http://blog.csdn.net/haoel/archive/2009/12/18/5032418.aspx" target="_blank">CSDN那里</a>有很多人进行了回复）。今天，我想再谈谈关于招聘和面试这方面的东西，主要是以下这些原因：</p>
+<ul>
+<li>近半年来我在进行了大量的招聘工作，对面试有一些新的体会。</li>
+<li>酷壳最近发布了几篇趣味面试题（<a title="面试题：火车运煤问题" href="https://coolshell.cn/articles/4429.html" target="_blank">面试题一</a>，<a title="又一个有趣的面试题" href="https://coolshell.cn/articles/4162.html" target="_blank">面试题二</a>，<a title="“火柴棍式”程序员面试题" href="https://coolshell.cn/articles/3961.html" target="_blank">面试题三</a>），从回复中让我有一些思考。</li>
+<li>我有一个同事最近面试了一家公司，他和我分享了一个博士专家对他的面试，也让我思考了一些。</li>
+<li>在豆瓣上看到“<a title="知乎上某人写面试豆瓣产品经理的经历，很欢乐" href="http://www.douban.com/note/146145117/" target="_blank">知乎上某人写面试豆瓣产品经理的经历，很欢乐</a>”(亮点是面试官现身知乎亲自作答)</li>
+</ul>
+<p>所以，我很想把自己的这些新的想法再次写下来的。还是和以前一样，这篇文章同样是献给面试官的。我认为，面试的好坏完全在面试官而不是面试的人。下面是我对“<a title="我是怎么招聘程序员的" href="../articles/1870.html" target="_blank">我是怎么招聘程序员的</a>”一文中的一些加强性的观点。（关于一些点评，请参看<a href="https://coolshell.cn/articles/4490.html" target="_blank">本文下篇</a>）</p>
+<p>为了让我的文章有连续性，请允许我重申一下前文的几个重要观点。</p>
+<ul>
+<li><strong>只有应聘者真实和自然的表现，才能了解到最真实的东西</strong></li>
+<li><strong>重要的不是知识，重要的是其查找知识的能力</strong></li>
+<li><strong>重要的不是那个解题的答案，而是解题的思路和方法</strong></li>
+</ul>
+<h4>操作，知识，经验，能力</h4>
+<p>我们有很多的面试官似乎分不清，什么是操作能力，什么是知识，什么是经验，什么是能力，这导致了我们的面试官经常错误地对面试者下结论，我认为分不清这些事的人是没有资格做面试官的。所以，我有必要在这里把这个问题先讲清楚。</p>
+<p><span id="more-4506"></span></p>
+<p><img decoding="async" title="更多..." alt="" src="https://coolshell.cn/wp-includes/js/tinymce/plugins/wordpress/img/trans.gif" /></p>
+<ul>
+<li><strong>操作</strong>。我们的面试官分不清楚什么是操作技能，什么是知识，他们甚至认为操作技能就是知识甚至经验。比如他们会 问如下的问题，请问Java中的 final是什么意思？怎么查看进程的CPU利用率？怎么编写一个管道程序？怎么查看进程的程序路径？VI中的拷贝粘贴命令是什么？包括面向对象的XX模 式是什么。等等。我以为，<strong>这些能够通过查况相关操作手册或是能够google到的东西只能说明这个人的操作技术，并不能说明他有知识或有经验</strong>。</li>
+</ul>
+<ul>
+<li><strong>知识</strong>。知识是一个人认知和学习的体现，可能会是一些基础概念和知识。比如这些问题：TCP和UDP的优缺点比 较，链表和哈希表的优缺点的比较。什么是堆什么是栈？进程间是怎么通信的？进程和线程的优缺点？同步和异步的优缺点？面向对象的XX设计模式的主要原则是 什么，等等。我以为，<strong>“知其然”只是操作技术，“知其所以然”才是真正的知识</strong>。知识不够并不代表他不能工作，会操作技能就可以应付工作，但是知识的欠缺一定会限制你的经验和能力，同样会影响你的开发质量。</li>
+</ul>
+<ul>
+<li><strong>经验</strong>。经验通常跟一个人的经历有关系。一个人的知识范围，一个人经历过的事，通常会成为一个人经验的体现。面 试中，我们会问这些问题：你解决过最难的问题是什么？你是怎么设计这个系统的？你是怎么调试和测试你的程序的？你是怎么做性能调优的？什么样的代码是好的 代码？等等。对于工作年限不长的人来说，经历和做过的事的确会成为其经验的主要因素，尤其是业务上的有行业背景的东西。但是，我更以为，<strong>经验可能更多的是你对知识的运用和驾驭，是你对做过事情的反思和总结，是你对他人的学习，观察和交流</strong>。</li>
+</ul>
+<ul>
+<li><strong>能力</strong>。一个人的能力并不会因为知道东西少而不行，也不会因为没有经验而没有能力。<strong>一个人的能力是他做事情的一种态度，性格，想法，思路，行为，方法和风格</strong>。<strong>只要有热情，有想法，有好的行为方法，以及好的行事风格，那么知识和经验对他来说只是一个时间问题</strong>。 比如：学习能力，专研精神，分析能力，沟通能力，组织能力，问题调查能力，合作能力等等。所以，对于一个新手来说，也许他的知识和经验有限，但并不代表他 能力上有问题，但是对于一个老手来说，如果其存在知识和经验欠缺的问题，那么通常都是其能力的问题。你可能暂时怀才不遇，但我不相信你会长期怀才不遇。如 果是的话，那么你必然些问题其让你的能力发挥不出来。而此时，“没有经历过”只会是你“没有能力”的一个借口。</li>
+</ul>
+<p>我不否认这四样东西对于一个优秀的程序员来说都很重要。但是，通过上述的分析，我们可以知道，能力和经验和知识需要分开对待。当然，这些东西是相辅相成的，你的能力可以让你获得知识，你的知识可以让你更有经验，你的经验又会改变你的想法和思路，从而改善你的能力。<strong>在面试中，我们需要清楚的认识到，应聘者的操作技能，知识和经验只是其能力的必要条件，并不是充要条件，而我们更应该关注于应聘者的能力</strong>。</p>
+<ul>
+<li>如果面试只是考查这个人的操作技能的话，那么这个面试完全失败。这是一个没有资格的面试官。</li>
+<li>如果面试只是在考查这个人的知识和经验的话，那么成功了一半。因为你了解了基础知和做过的事，但这并不代表你完全了解他的真正能力。</li>
+<li>如果你能够在了解这个人的知识和经验的过程中重点关注其能力（态度、性格、想法，思路，行为，方法和风格），并能正确地评估这个人的能力，那么你的面试算是非常成功的。</li>
+</ul>
+<p>也许用这四个词来描述定套东西并不太合适，但我相信你明白我想表达的。另外，我想说的是，<strong>我们不是出个题来考倒应聘者，而是要找到应聘者的亮点和长处</strong>。</p>
+<h4>不要肤浅地认识算法题和智力题</h4>
+<p>很多公司都会在面试的时候给一些算法题或是一些智力题或是一些设计题，我相信算法题或是智力题是程序员们在面试过程中最反感的事了。很多人都很BS面试官问的算法题，因为他们认为面试官问的这些算法题或智力题在实际工作当中用不到。但我想在这里说，<strong>问难的算法智力题并没有错，错的很多面试官只是在肤浅甚至错误地理解着面试中的难题的目的</strong>。他们认为，能做出算法题和智力题的人就是聪明的人就是有能力的人，这种想法实在是相当的肤浅。</p>
+<p>其实，能解难题并不意味着这个人就有能力就能在工作中解决问题，你可以想想，小学奥数题可能比这些题更难，但并不意味着那些奥数能手就有实际工作能力。你可 以想一想你们班考试得高分的同学并不一定就是聪明的人，也不一定就是有能力的人，相反，这样的人往往者是在应试教育下培养出来的书呆子。</p>
+<p>所以，我认为解难题的过程更重要，你要主要是通过解题查看这个应聘者的思路，方法，运用到的知识，有没有一些经验，和你一起交互时和沟通得是否顺畅，等等，这些才是你重点要去观察的。当然，最终是要找到答案的。</p>
+<p>我想，让面试者解决一个难题的真正思路是：</p>
+<ul>
+<li><strong>看看他对知识的应用和理解</strong>。比如，他是否会用一些基础的数据结构和算法来解决算法题？</li>
+<li><strong>看看他的整个解题思路和想法</strong>。答案是次要的，他的想法和行为才是重要的。</li>
+<li><strong>看看他是如何和你讨论交流的</strong>。把面试者当成你未来的同事，当成你的工作伙伴，一起解题，一起讨论，这样可以看看大家是否可以在一起工作。</li>
+</ul>
+<p>这些方面才是考查应聘者的能力（思路，方法、态度，性格等），并顺带着考查面试者的经验和知识。下面是一些面试的点：</p>
+<ul>
+<li>应聘者在解算法题时会不会分解或简化这个难题。这是分析能力。</li>
+<li>应聘者在解算法题 时会不会使用一些基础知识，如数据结构和基础算法。这是知识。</li>
+<li>应聘者在解题 时和你讨论的过程中你有没有感到应聘者的专研精神和良好的沟通。</li>
+<li>应聘者在对待这个算法题的心态和态度。如，面试面是否有畏难情绪。</li>
+<li>应聘者在解题时的思路和方法是否得当，是否是比较科学的方法？</li>
+<li>等等。</li>
+</ul>
+<p><strong>在解难题 的过程中考查应聘者的能力才是最终目的，而不是为难应聘者，不然，你只是一个傲慢而无知的面试官</strong>。</p>
+<h4>模拟实际中的挑战和能力</h4>
+<p>作为面试官的你，你应该多想想你的工作，以及你的成长经历。这会对你的面试很有帮助。你在工作中解决问题的实际情况是什么？你写代码的实际情况是什么？你的成长经历是什么？你是怎么获得知识和能力的？你喜欢和什么样的人工作？<strong>相信你不难会发现你工作中的实际情况和面试的情况完全是两码事，那么，你怎么可以用这种与实际情况差别那么大的面试来评估一个人的能力呢</strong>？</p>
+<p>所以，最为理想的面试是一起工作一段时间。当然，这个在招聘过程中，操作起来几乎不可能，因此，这就要求我们的面试官尽可能地把面试的过程模拟成平时工作的 过程。大家一些讨论来解决一个难题，和应聘者一起回顾一下他已经做过的事情，并在回础的过程中相互讨论相互学习。下面举一个例子。</p>
+<p>我们知道，对于软件开发来说，开发软件不难，难是的下面是这些挑战：</p>
+<ol>
+<li>软件的维护成本远远大于软件的开发成本。</li>
+<li>软件的质量变得越来越重要，所以，测试工作也变得越来越重要。</li>
+<li>软件的需求总是在变的，软件的需求总是一点一点往上加的。</li>
+<li>程序中大量的代码都是在处理一些错误的或是不正常的流程。</li>
+</ol>
+<p>所 以，当我们在考查应聘者的代码能力时候，我们为什么不能模拟这样的过程呢？比如，让应聘者实现一个atoi()的函数，实现起来应该很简单，然后 不断地往上加新的需求或新的案例，比如：处理符号，处理非数字的字母的情况，处理有空格的情况，处理十六进制，处理二进制，处理“逗号”，等等，我们要看 应聘者是怎么修改他的代码的，怎么写测试案例的，怎么重构的，随着要处理的东西越来越多，他的代码是否还是那么易读和清晰。如果只是考查编码能力，一个小时，就问这一个问题，足矣。真正的程序员每天都在和这样的事打交道的。</p>
+<p>如果要考查应聘者的设计能力，同样可以如法泡制。不断地加新的功 能，新的需求。看看面试者的思路，想法，分 析的方法，和你的讨论是否流畅，说没说在 点上，思想清不清晰，会应用什么样的知识，他在设计这个系统时的经验是会是什么样的，面对不断的修改和越来越复杂的需求，他的设计是否还是那么好？</p>
+<p>当然，因为时间比较短，所以，你不能出太复杂的问题，这需要你精心设计一些精制的有代表性的问题。</p>
+<p>（末完，<a title="再谈“我是怎么招聘程序员的”（下）" href="https://coolshell.cn/articles/4490.html" target="_blank">请参看下篇</a>）</p>
+<p style="text-align: right;"><a title="再谈“我是怎么招聘程序员的”（下）" href="https://coolshell.cn/articles/4490.html" target="_blank"><strong>再谈“我是怎么招聘程序员的”（下）&gt;&gt;&gt;</strong></a></p>
+<p><span style="color: #ff0000;"><strong>（请勿用于商业用途，转载时请注明作者和出处）</strong></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/8138.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper-150x150.jpg" alt="为什么我反对纯算法面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8138.html" class="wp_rp_title">为什么我反对纯算法面试题</a></li><li ><a href="https://coolshell.cn/articles/4976.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="给程序员新手的一些建议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4976.html" class="wp_rp_title">给程序员新手的一些建议</a></li><li ><a href="https://coolshell.cn/articles/4490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/2.jpg" alt="再谈“我是怎么招聘程序员的”（下）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4490.html" class="wp_rp_title">再谈“我是怎么招聘程序员的”（下）</a></li><li ><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" alt="140个Google的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_title">140个Google的面试题</a></li><li ><a href="https://coolshell.cn/articles/1870.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/job-interview-150x150.gif" alt="我是怎么招聘程序员的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1870.html" class="wp_rp_title">我是怎么招聘程序员的</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4506.html">再谈“我是怎么招聘程序员的”（上）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4506.html/feed</wfw:commentRss>
+			<slash:comments>94</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>再谈“我是怎么招聘程序员的”（下）</title>
+		<link>https://coolshell.cn/articles/4490.html</link>
+					<comments>https://coolshell.cn/articles/4490.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 20 Apr 2011 00:35:07 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4490</guid>
+
+					<description><![CDATA[<p>&#60;&#60;&#60;再谈“我是怎么招聘程序员的”（上） 在上篇中，我们说到了一些认识人的方法（操作，知识，经验，能力），还有一些面试的方法（算法题，实际生产...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4490.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4490.html">再谈“我是怎么招聘程序员的”（下）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><strong><a title="再谈“我是怎么招聘程序员的”（上）" href="https://coolshell.cn/articles/4506.html" target="_blank"><strong>&lt;&lt;&lt;再谈“我是怎么招聘程序员的”（上）</strong></a></strong></p>
+<p>在上篇中，我们说到了一些认识人的方法（操作，知识，经验，能力），还有一些面试的方法（算法题，实际生产活动中的挑战），下面我们来说说，面试的风格，还有一些点评。<strong><strong><br />
+</strong></strong></p>
+<h4>把应聘者当成你的同事</h4>
+<p>有些公司的面试官，在面试过程中问你一个算法题，然后等着你解答了，如果你给出一个答案，然后就会问你有没有更好的答案，如果你给出了正确的答案，他们就会问你一个更难的问题，如此循环下去。他们基本上很少给你提示，甚至不停地质问你，挑战你，搞得应聘者很紧张。</p>
+<p>另外，有很多问题是没有标准答案的，或者说是，同一个答案的描述方法有多种，很多面试官会觉得你没有回答到他想要的答案，因此表现得有对你不屑，并表现出你不行的样子，并觉得你的能力有问题。真是可笑了。比如我一个朋友在回答什么是异步的问题时，举例说明了异步调用就是不能处理完就返回，并且需要传递一个回调函数给调用方以便完成后回调通知结果。这样的回答并没有错，但是这并不符合面试官心里想要的答案，面试官对此并不满意，进而认为我这个朋友还需要去多读读书。</p>
+<p>我相信大多数面试官都会这样干的。我想问问这样的面试官，<strong>你们有没有用面试的方式对过你的同事？在你的工作场景中，你会不会用面试的风格和你的同事进行交流和说话？</strong>不妨让我们来问我们自己下面几个问题：</p>
+<ul>
+<li>你在工作当中遇到难题时你是怎么解决的？你会和人讨论吗？你只用15分钟就能得出最优解吗？</li>
+<li>你在工作当中解决难题时是否会有一个人在旁边质问你并给你压力吗？</li>
+<li>你在工作当中会为难你的同事吗？会让你的同事紧张吗？你觉得在紧张的状态下能做好工作吗？</li>
+<li>你在工作中觉得同事的回答并不是你想要的答案，不是符合你的答案，你会认为你的同事不行吗？</li>
+<li>你的成长过程是什么样的？在是压力和天天被人质问的情况下成长的吗？</li>
+<li>大家都知道学校里应试教育的弊端，你觉得你的面试是不是一种应试呢？<br />
+（看看这么多的应聘者们都在做各种各样的算法题，这不就是一种应试吗？）</li>
+</ul>
+<p>想一想你的日常工作，问自己一下上面这些问题，想一想你自己的成长过程，想一想你和你的同事是怎么相处的，想一想你的日常工作中是什么样的，相信你自己也能得出结论的。</p>
+<p>如果你把应聘者当成自己未来的同事，那么你的面试会有下面的收获：</p>
+<p><span id="more-4490"></span></p>
+<ul>
+<li>面试的气氛会很不错，应聘者会放松，表现自然，更接受于真实的状态。</li>
+<li>面试中的交流和互动（而不是一问一答）会让你更全面的考查和了解一个人。</li>
+<li>非应试的面试，会让你了解得更多。</li>
+<li>真实的了解一个人，你才能做出真正正确的结论。</li>
+</ul>
+<h4>向应聘者学习</h4>
+<p>下面有几个观点</p>
+<ul>
+<li>面试的过程是一个相互学习的过程，并不是你为难面试者的过程。</li>
+<li>一问一答是很一种呆板死板的过程，相互讨论相互学习，有良好的互动才是好的面试过程。</li>
+<li>面试官要证明的不是你有多强有多聪明，而是要挖掘应聘者的优势和能力。</li>
+<li>面试官用为自己的问题预设好一个标准答案，看看应聘者能为你带来什么。</li>
+<li>向来应聘的人学习，而不是刁难。</li>
+</ul>
+<p><strong>无论你多牛，要难倒你实在是太容易了。出难题不是目的，难倒人也很容易，出难题只不过是用来了解应聘者能力的一个手段，而不是面试的全部</strong>。</p>
+<p>我不知道你喜欢不喜欢一些竞技类的运动？比如踢球，打篮球，羽毛球，下象棋等，你一般想和什么样的人玩？是差的，还是强的？所以，<strong>能够从面试者那里学到东西，喜欢和面试者一起工作，这才是面试真正的目的</strong>。</p>
+<p>对于一个团队来说，如果大家都是一样的想法，一样的主张，一样的倾向，那么这个团队最终会是一个闭塞的团队，你如果不能真正接纳不同想法的人，不同主张的人，那么你也将失去进步的机会。<strong>如果你的团队总是在招入和你一样的人，那么你的团队怎么可能会有out-of-box的想法呢？世界因为不同而美好</strong>。</p>
+<p>另外，对于公司来说，<strong>如果你招进来的人还不如已经有的人，作为一个公司，你又怎么能有更好的人让你的公司进步呢</strong>？</p>
+<p>所以，面试应该是向面试者学习的一个过程。当然，<strong>如果你从他身上学不到什么，那么你就教他一些吧。这样，就算是面试不通过，面试者也会欣然接受的</strong>。不然，让面试者产生一些负面情绪，出去说一些不好的话，也有损你和公司的形象。</p>
+<h4>一些相关的点评</h4>
+<p>下面是我根据酷壳的一些<a href="https://coolshell.cn/tag/interview" target="_blank">面试题的文章</a>后的回复、还有我朋友的经历，还有这篇有关豆瓣的产品经理的<a title="知乎上某人写面试豆瓣产品经理的经历，很欢乐" href="http://www.douban.com/note/146145117/" target="_blank">这篇文章</a>的一些点评。大家可以看看我从这些地方看到东西靠不靠谱。</p>
+<p><strong>酷壳的面试题中的答复</strong></p>
+<p>先说酷壳的那篇“<a title="“火柴棍式”程序员面试题" href="https://coolshell.cn/articles/3961.html" target="_blank">火柴棍式的面试题</a>”，这个面试题其实很没什么意思。主要考查你对代码逻辑的了解程度。因为设置了回复可见答案，所以这篇文章的回复量达千把条。从回复中，我看到：</p>
+<ul>
+<li>一些朋友想不出来就直接看答案了。我可以看出，有一些朋友习惯获得知识，而不习惯独立思考。甚至有畏难情绪，从另一方面来说，可以看出我国的教育还真不是一般的差。</li>
+<li>一些朋友想不全。从这点来看，我觉得很正常，尤其是想出两种来的，我可以感觉到他们的努力思考了，可能还做了一些尝试。挺不错的。可惜我看不到你思考的方式，是在纸上画了画，还是编译了个程序跑了跑，还是别的什么。这样我会了解你更多。</li>
+<li>一些朋友给出的答案中有错的。这说明了这类朋友可能不喜欢做测试，时常想当然，或是做事比较冲动，并不足够严谨。这么简单的程序，验证能花多少精力呢？</li>
+<li>还有少数的朋友没有看明白题目要求。这说明了这类朋友太粗心了，在工作当中可能会表现为误解需求和别人的话。沟通有问题。</li>
+</ul>
+<p>再说说那篇“<a title="面试题：火车运煤问题" href="https://coolshell.cn/articles/4429.html" target="_blank">火车运煤</a>”的问题，这个面试题我觉得主要是看看大家的解题思路，表达能力。</p>
+<ul>
+<li>首先，我很惊喜有人很快就用数学做了解答，很不错，这个人的数学功底很不错。能用数学解题的人一般来说都是算法比较强的人。</li>
+<li>有人说抱怨我没有说火车可以调头回去，所以没有想到这样的方法。如果是在面试中我会做提示的。我不会因为你不知道调头这个潜规则而否定你的。当然，如果你能想到的话说明你的脑袋还是比较灵的。</li>
+<li>还有很多人说他的方法比较土，只运了400吨煤，416吨的或333吨，一看就是没有看提示的，我觉得这些人能够通过独立思考找到方法，这类的人其实已经不错了。顺着这个思路优化也只是时间的问题了。</li>
+<li>更可喜的是，我看到了有一些朋友在看到别人的更好的方法后和自己的方法进行了比较，并找到了为什么自己的方法不如他的原因。这样的人我认为是懂得“总结”和“比较”的，这样的人总是在不断地学习和改善自己的。</li>
+<li>还有人说到了动态规划，如果是在面试的时候，我很想向这位朋友学习一下用动态规划来解这题。</li>
+<li>还有朋友说到了火车调头只能在有站的地方。这个朋友一看要么就是搞需求分析的人，要么就是较真的人。需要进一步了解。但不管怎么样，这样的朋友的观察能力是很不错的。</li>
+<li>还有一些朋友给出的答案是正确的。但是表达方面比较复杂，有些没有看懂。可见，解题 的能力是有的，只是表达能力还有待提高。</li>
+</ul>
+<p><strong>豆瓣产品经理的面试</strong></p>
+<p>再说说豆瓣上的<a title="知乎上某人写面试豆瓣产品经理的经历，很欢乐" href="http://www.douban.com/note/146145117/" target="_blank">这篇文章</a>，那篇文章里，面试官问了一个比较大的问题，那是仁者见仁，智者见智的问题，并且面试官并不满意应聘者给出的答案，并在用其主观意识强加一些东西给应聘者，并不断地和应聘者纠缠。后来，面试官回复到“重点测了两个问题：一是判别事情的标准和方法；二是在多种PK下产品经理的压力反应”。</p>
+<p>下面是我观察到的：</p>
+<ul>
+<li>其一、这种似事而非的仁者见仁，智者见仁，一万人有一万个答案。所以，这种怎么答都可以的问题是很难有标准的，我认为豆瓣的面试官以这种问题来考查面试者的标准太有问题了。更好的问题是：比较一下新浪和twitter这两个产品。</li>
+<li>其二、多种想法PK的压力反应。这点没有问题，如果有机会我想问问这位面试官，豆瓣产品经理们的PK各自的想法时是以这种纠缠的方式吗？如果是这样的话，那我很为你们担忧啊。</li>
+<li>其三、很明显，应聘者不知道面试官想说什么，所以应聘者总是给出一些模棱两可的回答。回答得很政客，呵呵。</li>
+<li>其四、问的问题都是一些假设性的问题，假设技术人员不可沟通。人家说了，还没有见过不能沟通的情况。结果还要继续追问。这样你既要观察不到你想要的，也搞得大家不愉快。更好的问题的：“请你给一个你和一个很难沟通的人沟通的示例”，或是当应聘者说了“坚持己见”的时候，也应该追问“能给一个你坚持己见的例子吗？”。</li>
+<li>其五、整个面试过程完全是在谈一些虚的东西，就像天上的浮云，一点实实在在的东西都没有。比如下面这两个实实在在的问题：“你以前设计过什么产品？”，“你和你的技术团队是怎么合作的？”</li>
+</ul>
+<p>这是一个完完全全失败的面试，这个面试官根本不懂面试，甚至工作方法也可能很有问题。也许他只是想找一个能够在工作中附和他的人。</p>
+<p><strong>朋友的面试</strong></p>
+<p>最后说说我那个朋友的面试，我的这个朋友学习能力很强，也很好专研，工作中解决了很多很困难甚至很底层的问题。他做软件开发时间并不长，但是他对这个行业很有热情，也很执着，并有着相当不错的技术功底。这天他遇到了一个面试官，根据朋友的描述，这位面试官，主要问题了三个问题，一个是关于异步的，一个是关于性能调优的，还有一个是关于学习能力的。</p>
+<ul>
+<li>问到异步的问题，我这个朋友说到了多线程中的异步调用，但是他可能问的是网络或是业务中的异步，要不然就是Linux 内核中的异步，当然他也没有说清楚，但他很不满意我朋友的答案，并让我朋友回去多看看书。</li>
+<li>问到性能调优的问题时，我这个朋友说了性能调优分三级，业务级，指令级和CPU级，并举例说了使用了一个叫VTune的性能分析工具。面试官却说原来你只懂Windows，有点不屑，并说他只会使用商业工具，更不屑。</li>
+<li>当我朋友向他澄清问题时，面试官只是摇头，叹气。并在应聘者作答的过程中不断的打断对方。</li>
+</ul>
+<p>我的看法如下：</p>
+<ul>
+<li>对于异步来说，我认为这是一种设计或是一种想法，可能会有很多种不同的实现方式，在不同的场景中会有不同的用法。面试官并没有考查应聘者对异步方法的理解，也没有考查异步方法可以用来解决什么，异步方法的优势和劣势，等等。只是觉得应聘者没有给出他想要的答案。</li>
+<li>对于性调优的问题，我认为应聘者的思路和知识都很不错，还有使用VTune的经验。无论使用Windows还是Linux，无论使用商业的还是开源的Profiler，很多东西都是相通的，怎么能够因为这个东西不对自己的口味而下结论。为什么不向人家学习一下VTune呢？使用工具只是操作技能啊。</li>
+<li>面试官应该是用微笑来鼓励应聘者的，而不是用摇头和叹气，频繁打断对方也是一个相当不好的习惯。看来这个面试官很不能接受不同的东西。</li>
+</ul>
+<p>这位有很不错的技术能力的人，看来并不适合做一个面试官，因为他面试的东西都只在知识层次，而且这位面试官有强烈的喜好和倾向，所以，他必然会错过那些有能力但并不合他口味的人。</p>
+<p>哎，面对这样的面试官，大家伤不起啊！</p>
+<p>（全文完）</p>
+<p><span style="color: #ff0000;"><strong>（请勿用于商业用途，转载时请注明作者和出处）</strong></span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/8138.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/250px-Sheldon_Cooper-150x150.jpg" alt="为什么我反对纯算法面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8138.html" class="wp_rp_title">为什么我反对纯算法面试题</a></li><li ><a href="https://coolshell.cn/articles/4976.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="给程序员新手的一些建议" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4976.html" class="wp_rp_title">给程序员新手的一些建议</a></li><li ><a href="https://coolshell.cn/articles/4506.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="再谈“我是怎么招聘程序员的”（上）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4506.html" class="wp_rp_title">再谈“我是怎么招聘程序员的”（上）</a></li><li ><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" alt="140个Google的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_title">140个Google的面试题</a></li><li ><a href="https://coolshell.cn/articles/1870.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/12/job-interview-150x150.gif" alt="我是怎么招聘程序员的" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1870.html" class="wp_rp_title">我是怎么招聘程序员的</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4490.html">再谈“我是怎么招聘程序员的”（下）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4490.html/feed</wfw:commentRss>
+			<slash:comments>73</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>BT雷人的程序语言（大全）</title>
+		<link>https://coolshell.cn/articles/4458.html</link>
+					<comments>https://coolshell.cn/articles/4458.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2011 00:34:50 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Befunge]]></category>
+		<category><![CDATA[BIT]]></category>
+		<category><![CDATA[brainfuck]]></category>
+		<category><![CDATA[Chef]]></category>
+		<category><![CDATA[Haifu]]></category>
+		<category><![CDATA[INTERCAL]]></category>
+		<category><![CDATA[Malbolge]]></category>
+		<category><![CDATA[Ook!]]></category>
+		<category><![CDATA[PerlYuYan]]></category>
+		<category><![CDATA[Piet]]></category>
+		<category><![CDATA[Shakespeare]]></category>
+		<category><![CDATA[Unlambda]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4458</guid>
+
+					<description><![CDATA[<p>还记得以前本站的BT雷人的程序语言吗？除了那几个Brainfuck，LOLCODE和WhiteSpace，我以为这些是比较BT的语言，但是自从这两天我在网上看到...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4458.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4458.html">BT雷人的程序语言（大全）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>还记得以前本站的<a title="BT雷人的程序语言" href="https://coolshell.cn/articles/1142.html" target="_blank">BT雷人的程序语言</a>吗？除了那几个<a href="http://www.muppetlabs.com/~breadbox/bf/" target="_blank">Brainfuck</a>，<a href="http://lolcode.com/" target="_blank">LOLCODE</a>和<a href="http://compsoc.dur.ac.uk/whitespace/index.php" target="_blank">WhiteSpace</a>，我以为这些是比较BT的语言，但是自从这两天我在网上看到一些（见文章最后的参考一节），我发现我错了，这个世界上，只有更变态，没有最变态。不相，你看看下面这些，简直变态到了极致啊。（下面的语言变态不分排名）</p>
+<h4>Befunge</h4>
+<p>第一个变态语言<a href="http://quadium.net/funge/spec98.html" target="_blank">Befunge</a>。<a href="http://en.wikipedia.org/wiki/Befunge" target="_blank">维基</a>上面说——这门语言由Chris Pressey在1993年创造，本意为设计一种为难编译器的语言……结果马上出现了一批编译器。Befunge的代码是二维的。它用 &lt; &gt; v ^ 这四个符号来控制一个指针在代码中移动，指针经过一个字符或数字则把它压入一个栈，四则运算符号的功能就是弹出栈顶两个元素进行计算后把结果压回去。用 _ 和 | 来表示有条件的方向选择：当栈顶元素为0时向右（上）走，否则向左（下）走。&amp; 和 ~ 分别用于读入数字或字符并压入栈，句号和逗号分别表示将栈顶元素作为整数或字符输出。最后以一个@符号表示程序结束。Befunge代码的注释不需要任何符号标明，你可以把注释写在程序的任何地方，只要运行时指针不会经过它就行了。</p>
+<p>下面这段Hello World代码：</p>
+<pre style="padding-left: 30px;">&gt;              v
+v  ,,,,,"Hello"&lt;
+&gt;48*,          v
+v,,,,,,"World!"&lt;
+&gt;25*,@</pre>
+<p>下面一个是算圆周率的代码，非常的壮观：</p>
+<p><span id="more-4458"></span></p>
+<pre style="padding-left: 30px;">aa*          v                  +------------------------+
+vp*9920p*9930&lt;                  | Pi generator in Bef-97 |
+&gt;:09a*pa*3/1+19a*p09a*g:09b*v   |                        |
+v_@# g*b90 p*b910        &lt; p&lt;   | 7/2/1997, Kevin Vigor  |
+&gt;19a*g:+1-29b*p19a*g::09v       +------------------------+
+v*a90g*b90*g*b91: _v#p*9&lt;
+&gt;g-#v_ 2a*+\$  v  :$
+&gt;\1-aa*ga*+v  p
+v1:/g*b92p*991:&lt;  *
+&gt;9b*p29b*g*199*g\v9
+v*b92p*aa-1g*990-&lt;9
+&gt;g2-29b*p099*g1-:0^
+v -9p*b92:%ag*991  &lt;
+&gt;#v_ 299*g1+299*p&gt;       ^
+&gt;09b*g:#v_$v
+v93p*b90-1&lt;
+&gt;9*g199*ga/+.v
+v:g*992 &lt;p*9 92-&lt;
+v_29b*g399*p ^
+&gt;09b*g:#v_v      1
+vp*b90-1    &lt; $      g
+&gt;199*g9<code data-enlighter-language="cb" class="EnlighterJSRAW">#v_&#039;9,v      *
+&gt;&#039;0, &gt;&#039; ,299^&lt;/pre&gt;
+通常认为Befunge是第一个基于“二维控制流”的语言，后来衍生出的一大批类似的语言都是受的Befunge影响。例如PingPong语言就是把Befunge的四种箭头符号换成正反斜杠，控制指针移动方向90度旋转，起一个反弹的作用。
+&lt;h4&gt;Chef&lt;/h4&gt;
+&lt;a href=&quot;http://www.dangermouse.net/esoteric/chef.html&quot; target=&quot;_blank&quot;&gt;Chef&lt;/a&gt;如其名一样“主厨”(&lt;a href=&quot;http://en.wikipedia.org/wiki/Chef_(programming_language)&quot; target=&quot;_blank&quot;&gt;Wiki link&lt;/a&gt;)，这门语言主要是为了让程序代码看起来像菜谱。这可以使得我们的&lt;a title=&quot;食客还是大厨&quot; href=&quot;https://coolshell.cn/articles/3589.html&quot; target=&quot;_blank&quot;&gt;程序员更像是大厨&lt;/a&gt;了，呵呵。该语言于2002年由David Morgan-Mar推出，核心是栈操作，特征就是——一套完整的Chef代码就是一个菜谱，程序名就是菜名，变量声明就是罗列原材料，后面一系列栈操作，就是菜肴的制作方法。把程序编写比作调和鼎鼐，有点意思，家庭主妇（或者“准家庭主妇”）试试看，权且当作人生预习。
+
+用Chef编写Hello World代码如下：（在其网站上还有一个&lt;a href=&quot;http://www.dangermouse.net/esoteric/chef_fib.html&quot; target=&quot;_blank&quot;&gt;斐波拉契数的例子&lt;/a&gt;）
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Hello World Souffle.
+
+Ingredients.
+72 g haricot beans
+101 eggs
+108 g lard
+111 cups oil
+32 zucchinis
+119 ml water
+114 g red salmon
+100 g dijon mustard
+33 potatoes
+
+Method.
+Put potatoes into the mixing bowl.
+Put dijon mustard into the mixing bowl.
+Put lard into the mixing bowl.
+Put red salmon into the mixing bowl.
+Put oil into the mixing bowl.
+Put water into the mixing bowl.
+Put zucchinis into the mixing bowl.
+Put oil into the mixing bowl.
+Put lard into the mixing bowl.
+Put lard into the mixing bowl.
+Put eggs into the mixing bowl.
+Put haricot beans into the mixing bowl.
+Liquefy contents of the mixing bowl.
+Pour contents of the mixing bowl into the baking dish.
+
+Serves 1.&lt;/pre&gt;
+代码解读——原材料名显然可以随便改成别的原料，哪怕用单个字母也可以，不过少了点趣味性，但原料前面代表数量的数字不能改，那是ASCII代码。接下来菜肴制作方法就是把一个个字母和符号（都是ASCII）压入栈（就是代码中的“Put XXX into the mixing bowl”，从最后一个感叹号开始压），最后再把你做的菜托出上桌。
+
+顺便说下，David Morgan-Mar已经设计出8种非主流编程语言了，还有一个变态的操作系统&lt;a href=&quot;http://www.dangermouse.net/esoteric/petrovich.html&quot; target=&quot;_blank&quot;&gt;Petrovich&lt;/a&gt;。  参看这位大哥的——&lt;a href=&quot;http://www.dangermouse.net/esoteric/&quot; target=&quot;_blank&quot;&gt;DM&#039;s Esoteric Programming Languages&lt;/a&gt;（下面会介绍这位老大搞出来的语言）
+&lt;h4&gt;&lt;strong&gt;Shakespeare&lt;/strong&gt;&lt;/h4&gt;
+&lt;a href=&quot;http://shakespearelang.sourceforge.net/&quot; target=&quot;_blank&quot;&gt;Shakespeare&lt;/a&gt;语言正如其名，其要让你的程序像“莎士比亚”的剧本一样充满艺术气息。
+
+这个语言于2001年由Karl Hasselstrom和Jon Aslund联合推出，Shakespeare的代码完全模仿莎士比亚的戏剧。它也是一个基于栈的程序语言，程序中出场的每一个人物都代表一个栈。Shakespeare的代码自由度很高，因此同一个程序你可以写出完全不同的代码出来。
+
+Shakespeare的Hello World代码如下（就是一部比较完整的“罗密欧与朱丽叶”的戏剧，作好心理准备）。“剧本”内容很无聊，就是一帮人在莫名其妙地称赞某些东西，里头还有古英语词汇，莎翁要是见了，可能会吐血。这里面Hello World或其ASCII码体现在全剧时不时出现的“The difference between……”句里面，根据各指代物品的好坏（比如鲜花算好的，牛粪算坏的）代表各数字，再进行各种运算最后相减（“The difference”暗指减法），得出一个字母或符号的ASCII码表。发明这个语言的人真是BT啊。
+&lt;pre style=&quot;padding-left: 60px;&quot;&gt;Romeo, a young man with a remarkable patience.
+Juliet, a likewise young woman of remarkable grace.
+Ophelia, a remarkable woman much in dispute with Hamlet.
+Hamlet, the flatterer of Andersen Insulting A/S.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Act I: Hamlet&#039;s insults and flattery.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Scene I: The insulting of Romeo.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Enter Hamlet and Romeo]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Hamlet:
+You lying stupid fatherless big smelly half-witted coward!
+You are as stupid as the difference between a handsome rich brave hero and thyself! Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;You are as brave as the sum of your fat little stuffed misused dusty old rotten codpiece and a beautiful fair warm peaceful sunny summer&#039;s day. You are as healthy as the difference between the sum of the sweetest reddest rose and my father and yourself! Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;You are as cowardly as the sum of yourself and the difference between a big mighty proud kingdom and a horse. Speak your mind.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Exit Romeo]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Scene II: The praising of Juliet.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Enter Juliet]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Hamlet:
+Thou art as sweet as the sum of the sum of Romeo and his horse and his black cat! Speak thy mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Exit Juliet]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Scene III: The praising of Ophelia.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Enter Ophelia]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Hamlet:
+Thou art as lovely as the product of a large rural town and my amazing bottomless embroidered purse. Speak thy mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Thou art as loving as the product of the bluest clearest sweetest sky and the sum of a squirrel and a white horse. Thou art as beautiful as the difference between Juliet and thyself. Speak thy mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Exeunt Ophelia and Hamlet]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Act II: Behind Hamlet&#039;s back.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Scene I: Romeo and Juliet&#039;s conversation.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Enter Romeo and Juliet]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Romeo:
+Speak your mind. You are as worried as the sum of yourself and the difference between my small smooth hamster and my nose. Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Juliet:
+Speak YOUR mind! You are as bad as Hamlet! You are as small as the difference between the square of the difference between my little pony and your big hairy hound and the cube of your sorry little codpiece. Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Exit Romeo]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Scene II: Juliet and Ophelia&#039;s conversation.&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Enter Ophelia]&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Juliet:
+Thou art as good as the quotient between Romeo and the sum of a small furry animal and a leech. Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;Ophelia:
+Thou art as disgusting as the quotient between Romeo and twice the difference between a mistletoe and an oozing infected blister! Speak your mind!&lt;/pre&gt;
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;[Exeunt]&lt;/pre&gt;
+&lt;h4&gt;BIT&lt;/h4&gt;
+&lt;a href=&quot;http://www.dangermouse.net/esoteric/bit.html&quot; target=&quot;_blank&quot;&gt;BIT语言&lt;/a&gt;也是 David Morgan-Mar 搞出来的。程序员在拥有访问所有数据的全部权限。这是一款强大的编程工具。在高级程序语言中，该工具可以操作这些令人费解的数据。
+
+看看下面这段代码，其展示了BIT的强大之处——代码和注释的完美统一。（很像BASIC）
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;LINE NUMBER ONE CODE READ GOTO ONE ZERO
+LINE NUMBER ONE ZERO CODE VARIABLE ZERO EQUALS THE JUMP REGISTER GOTO ONE ONE
+LINE NUMBER ONE ONE CODE READ GOTO ONE ZERO ZERO
+LINE NUMBER ONE ZERO ZERO CODE VARIABLE ONE EQUALS THE JUMP REGISTER GOTO ONE ZERO ONE
+LINE NUMBER ONE ZERO ONE CODE THE JUMP REGISTER EQUALS OPEN PARENTHESIS VARIABLE ZERO NAND VARIABLE ONE CLOSE PARENTHESIS NAND OPEN PARENTHESIS VARIABLE ZERO NAND VARIABLE ONE CLOSE PARENTHESIS GOTO ONE ONE ZERO IF THE JUMP REGISTER IS EQUAL TO ONE GOTO ONE ZERO ZERO ZERO IF THE JUMP REGISTER IS EQUAL TO ZERO
+LINE NUMBER ONE ONE ZERO CODE PRINT ONE GOTO ONE ONE ONE
+LINE NUMBER ONE ONE ONE CODE PRINT ZERO
+LINE NUMBER ONE ZERO ZERO ZERO CODE THE JUMP REGISTER EQUALS OPEN PARENTHESIS VARIABLE ZERO NAND VARIABLE ZERO CLOSE PARENTHESIS NAND OPEN PARENTHESIS VARIABLE ONE NAND VARIABLE ONE CLOSE PARENTHESIS GOTO ONE ZERO ZERO ONE IF THE JUMP REGISTER IS EQUAL TO ZERO GOTO ONE ZERO ONE ZERO IF THE JUMP REGISTER IS EQUAL TO ONE
+LINE NUMBER ONE ZERO ZERO ONE CODE PRINT ZERO
+LINE NUMBER ONE ZERO ONE ZERO CODE PRINT ONE&lt;/pre&gt;
+当然，对于空格和换行符，显得太冗余了，去掉他们也没有问题。
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;LINENUMBERONECODEREADGOTOONEZEROLINENUMBERONEZEROCODEVARIABLEZEROEQUALSTHEJUMPR
+EGISTERGOTOONEONELINENUMBERONEONECODEREADGOTOONEZEROZEROLINENUMBERONEZEROZEROCO
+DEVARIABLEONEEQUALSTHEJUMPREGISTERGOTOONEZEROONELINENUMBERONEZEROONECODETHEJUMP
+REGISTEREQUALSOPENPARENTHESISVARIABLEZERONANDVARIABLEONECLOSEPARENTHESISNANDOPE
+NPARENTHESISVARIABLEZERONANDVARIABLEONECLOSEPARENTHESISGOTOONEONEZEROIFTHEJUMPR
+EGISTERISEQUALTOONEGOTOONEZEROZEROZEROIFTHEJUMPREGISTERISEQUALTOZEROLINENUMBERO
+NEONEZEROCODEPRINTONEGOTOONEONEONELINENUMBERONEONEONECODEPRINTZEROLINENUMBERONE
+ZEROZEROZEROCODETHEJUMPREGISTEREQUALSOPENPARENTHESISVARIABLEZERONANDVARIABLEZER
+OCLOSEPARENTHESISNANDOPENPARENTHESISVARIABLEONENANDVARIABLEONECLOSEPARENTHESISG
+OTOONEZEROZEROONEIFTHEJUMPREGISTERISEQUALTOZEROGOTOONEZEROONEZEROIFTHEJUMPREGIS
+TERISEQUALTOONELINENUMBERONEZEROZEROONECODEPRINTZEROLINENUMBERONEZEROONEZEROCOD
+EPRINTONE&lt;/pre&gt;
+&lt;h4&gt;Haifu&lt;/h4&gt;
+&lt;a href=&quot;http://www.dangermouse.net/esoteric/haifu.html&quot; target=&quot;_blank&quot;&gt;Haifu&lt;/a&gt;程序语言也是David Morgan-Mar 搞出来的。从命名上就可以看出来它是一个汉语拼音。正是如此，作者想使用东方的哲学来创造一种编程的语言。其中还有Yin（阴）和 Yang（阳）——相当于布尔变量中的True/False，当然，也有金（Metal）木（Wood）水（Water）火（Fire）土（Earth）。呵呵。
+&lt;ul&gt;
+	&lt;li&gt;Wood: tree, grass, cherry, oak.&lt;/li&gt;
+	&lt;li&gt;Fire: flame, ash, smoke, embers.&lt;/li&gt;
+	&lt;li&gt;Earth: soil, mountain, rock, plain.&lt;/li&gt;
+	&lt;li&gt;Metal: sword, iron, plough, knife.&lt;/li&gt;
+	&lt;li&gt;Water: rain, snow, river, ice.&lt;/li&gt;
+&lt;/ul&gt;
+自然出现了一张关系表：
+&lt;table border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;3&quot;&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;元素关系&lt;/th&gt;
+&lt;th&gt;操作&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 生A&lt;/td&gt;
+&lt;td&gt;A+B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 克 A&lt;/td&gt;
+&lt;td&gt;A-B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 怕 A&lt;/td&gt;
+&lt;td&gt;A/B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 爱 A&lt;/td&gt;
+&lt;td&gt;A*B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 就是 A&lt;/td&gt;
+&lt;td&gt;如果A和B都是阳，则是阳，否则是阴&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;Piet&lt;/h4&gt;
+David Morgan-Mar 发明的用位图编程的&lt;a href=&quot;http://www.dangermouse.net/esoteric/piet.html&quot; target=&quot;_blank&quot;&gt;Piet语言&lt;/a&gt;也是BT到了极致，你还记得前两的那个“&lt;a title=&quot;我有一个Hello World的C++程序编译不过&quot; href=&quot;https://coolshell.cn/articles/4170.html&quot; target=&quot;_blank&quot;&gt;我的hello world编不过去&lt;/a&gt;”文章中的那个强人用windows的画图程序编程的例子吗？呵呵Piet完全是用位图编程的语言。
+
+下面这个图片就是其Hello World的示例：
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;a href=&quot;http://www.topdesignmag.com/wp-content/uploads/2011/04/Piet_hello_big.png&quot;&gt;&lt;img class=&quot;aligncenter&quot; title=&quot;Piet_hello_big&quot; src=&quot;http://www.dangermouse.net/esoteric/piet/Piet_hello_big.png&quot; alt=&quot;&quot; width=&quot;150&quot; height=&quot;145&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: left;&quot;&gt;再看看斐波拉契数列的程序示例:&lt;/p&gt;
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;a href=&quot;http://www.dangermouse.net/esoteric/piet/fibbig.gif&quot;&gt;&lt;img class=&quot;aligncenter&quot; src=&quot;http://www.dangermouse.net/esoteric/piet/fibbig.gif&quot; alt=&quot;&quot; width=&quot;110&quot; height=&quot;121&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+这里还有更多的示例：&lt;a href=&quot;http://www.dangermouse.net/esoteric/piet/samples.html&quot;&gt;http://www.dangermouse.net/esoteric/piet/samples.html&lt;/a&gt;
+&lt;h4&gt;&lt;strong&gt;Malbolge&lt;/strong&gt;&lt;/h4&gt;
+&lt;a href=&quot;http://www.lscheffer.com/malbolge.shtml&quot; target=&quot;_blank&quot;&gt;Malbolge语言&lt;/a&gt;，是最早的一个以代码丑陋为目标而设计出的程序语言，你几乎不可能读懂Malbolge的代码。它共有8条指令，所有运算都基于3进制，控制程序流的唯一指令是无条件跳转。其是BenOlmstead在1998年引进公共领域的深奥程序语言，名称来源于“the eighth circle of hell in Dante’s Inferno”，之后更名为Malbolge。
+
+这被认为是地狱级的编程语言。
+
+看看它的Hello World程序：
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;&lt;code&gt;(&#039;&amp;%:9]!~}|z2Vxwv-,POqponl$Hjig%eB@@&gt;}=&lt;M:9wv6WsU2T|nm-,jcL(I&amp;%$#&quot;
+ </code>]V?Tx&lt;uVtT<code data-enlighter-language="raw" class="EnlighterJSRAW">Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj&quot;Fhg${z@&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Unlambda&lt;/h4&gt;
+关于&lt;a href=&quot;http://www.madore.org/~david/programs/unlambda/&quot; target=&quot;_blank&quot;&gt;Unlambda语言&lt;/a&gt;，David Madore是这个语言的发明人，他于1976年8月3日生于法国，其是法国-加拿大籍数学家和计算机科学爱好者）。在unlambda里，所有东西都是函数。基本操作就是S， K， 和I三个组合子。当然，unlambda也加入一些扩展，让程序稍微好些一点。
+&lt;pre style=&quot;padding-left: 30px;&quot;&gt;</code><code data-enlighter-language="s" class="EnlighterJSRAW"></code><code data-enlighter-language="sii" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW">ki
+ </code><code data-enlighter-language="raw" class="EnlighterJSRAW">s</code><code data-enlighter-language="ks" class="EnlighterJSRAW">s</code>
+     <code data-enlighter-language="s" class="EnlighterJSRAW"></code><code data-enlighter-language="s" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW">ks</code><code data-enlighter-language="k" class="EnlighterJSRAW">s</code><code data-enlighter-language="kr" class="EnlighterJSRAW">s</code>
+               <code data-enlighter-language="s" class="EnlighterJSRAW"></code><code data-enlighter-language="si" class="EnlighterJSRAW">k</code><code data-enlighter-language="s" class="EnlighterJSRAW"></code><code data-enlighter-language="s" class="EnlighterJSRAW">k</code><code data-enlighter-language="d" class="EnlighterJSRAW">k
+                               </code><code data-enlighter-language="raw" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW"></code><code data-enlighter-language="raw" class="EnlighterJSRAW"></code>.H.e.l.l.o.,. .w.o.r.l.d.!
+                        k
+      k
+  <code data-enlighter-language="raw" class="EnlighterJSRAW">k</code><code data-enlighter-language="raw" class="EnlighterJSRAW">s</code><code data-enlighter-language="ksk" class="EnlighterJSRAW">s</code>`k.*</pre>
+<h4>Ook!</h4>
+<p><a href="http://www.dangermouse.net/esoteric/ook.html" target="_blank">Ook! 语言</a>也是David Morgan-Mar 发明的，与Brainfuck类似, 但用单词“<code>Ook！”</code>，“<code>Ook.</code>” 和“<code>Ook?</code>”代替。我们来看一个Hello World的一个示例：</p>
+<pre style="padding-left: 30px;">Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook! Ook? Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook! Ook! Ook? Ook! Ook? Ook.
+Ook! Ook. Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook! Ook? Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook?
+Ook! Ook! Ook? Ook! Ook? Ook. Ook. Ook. Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook! Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook! Ook. Ook. Ook? Ook. Ook? Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook? Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook! Ook! Ook? Ook! Ook? Ook. Ook! Ook.
+Ook. Ook? Ook. Ook? Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook? Ook. Ook. Ook.
+Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook. Ook? Ook! Ook! Ook? Ook! Ook? Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook.
+Ook? Ook. Ook? Ook. Ook? Ook. Ook? Ook. Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook.
+Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!
+Ook! Ook. Ook. Ook? Ook. Ook? Ook. Ook. Ook! Ook.</pre>
+<p>下面是一些转换器和解释器：</p>
+<ul>
+<li><a href="http://www.dangermouse.net/esoteric/Ook.java">Java Ook!-to-BrainF*** 和 BrainF***-to-Ook! 转换器</a>.</li>
+<li><a href="http://www.ruby-lang.org/en/raa-list.rhtml?name=RubyOok">Ook! Ruby解释器</a>.</li>
+<li><a href="http://www.orakel.ntnu.no/~oyving/code/python/pook.py">Ook! Python解释器</a>.</li>
+<li><a href="http://bluesorcerer.net/esoteric/ook.html">Ook!  .Net 编译器叫Ook#</a></li>
+<li><a href="http://search.cpan.org/search?module=Acme::Ook">Ook! perl 解释器</a>.</li>
+</ul>
+<h4><strong>TMMLPTEALPAITAFNFAL</strong></h4>
+<p>你没看错，上面这一排毫无意义的字母是一个语言的名称。它是The Multi-Million Language Project To End All Language Projects And Isn&#8217;t That A Fine Name For A Language的缩写。<a href="http://p-nand-q.com/humor/programming_languages/tmmlpteal.html" target="_blank">TMMLPTEALPAITAFNFAL语言</a>没有固定的语法规则，每一天都是不同的语法。例如，2000年10月13日你可以使用DIV但不能使用MOD；到了10月14日时你可以使用MOD了但DIV又不能用了。因此，你今天写的程序运行起来完全正常，但是到了明天就无法编译了。下面是一个TMMLPTEALPAITAFNFAL的Hello World程序，当然现在已经无法编译了。</p>
+<pre style="padding-left: 30px;"><code>DECLARE CELL 100 AS READPOS
+ DECLARE 10 AS NEWLINE
+ WRITE CHAR NEWLINE
+ COPY "Hello, World" TO CELL 0
+ COPY 0 TO READPOS
+ WHILE READPOS INDIRECT DO GOSUB 300
+ WRITE CHAR NEWLINE
+ RETURN
+LINE 300: WRITE CHAR READPOS INDIRECT
+ ADD 1 TO READPOS
+ RETURN</code></pre>
+<h4>INTERCAL</h4>
+<p><a href="http://catb.org/~esr/intercal/" target="_blank">INTERCAL语言</a>（<a href="http://en.wikipedia.org/wiki/INTERCAL" target="_blank">Wikipedia</a>）全称是“Compiler Language With No Pronounceable Acronym”。自认为是“超级黑客”的人可以试试用这个语言写程序。由老牌黑客<a href="http://en.wikipedia.org/wiki/Don_Woods">Don Woods</a> 和 <a href="http://en.wikipedia.org/wiki/James_M._Lyon">James M. Lyon</a> 在1972年发明，其是用来讽刺当时的那些编程语言。今天 这个语言有两个版本，一个是由牛人<a href="http://en.wikipedia.org/wiki/Eric_S._Raymond">Eric S. Raymond</a>维护的C-INTERCAL，另一个是Claudio Calvelli 维护的CLC-INTERCAL。（<strong>注</strong>：在自由软件启蒙阶段，<a href="http://en.wikipedia.org/wiki/Eric_S._Raymond">Eric S. Raymond</a>以如椽之笔呼啸而出，其核心著作被业界成为&#8221;五部曲&#8221;：《黑客道简史》（A Brief History of Hackerdom）、 《大教堂和市集》（The Cathedral and the Bazaar）、《如何成为一名黑客》（How To Become A Hacker）、《开拓智域》（Homesteading the Noosphere）、《魔法大锅炉》（The Magic Cauldron）。其中最著名的当然还是《大教堂和市集》，它在自由软件运动中的地位相当于基督教的《圣经》。而用黑客们的话说，这是&#8221;黑客藏经阁&#8221;的 第一个收藏。）</p>
+<p>来看看其Hello World的程序：</p>
+<pre style="padding-left: 30px;">DO ,1 &lt;- #13
+PLEASE DO ,1 SUB #1 &lt;- #238
+DO ,1 SUB #2 &lt;- #108
+DO ,1 SUB #3 &lt;- #112
+DO ,1 SUB #4 &lt;- #0
+DO ,1 SUB #5 &lt;- #64
+DO ,1 SUB #6 &lt;- #194
+DO ,1 SUB #7 &lt;- #48
+PLEASE DO ,1 SUB #8 &lt;- #22
+DO ,1 SUB #9 &lt;- #248
+DO ,1 SUB #10 &lt;- #168
+DO ,1 SUB #11 &lt;- #24
+DO ,1 SUB #12 &lt;- #16
+DO ,1 SUB #13 &lt;- #162
+PLEASE READ OUT ,1
+PLEASE GIVE UP</pre>
+<h4>HQ9++</h4>
+<p><a href="http://www.dangermouse.net/esoteric/hq9plusplus.html" target="_blank">HQ9++语言</a>同样是David Morgan-Mar 发明的，其带有四个指令的joke语言。</p>
+<ul>
+<li><strong>H</strong>: 输出 <a title="Hello,world!" href="http://www.esolangs.org/wiki/Hello%2C_world%21">“hello,world”</a></li>
+<li><strong>Q</strong>: 输出程序员的源代码</li>
+<li><strong>9</strong>: 打印 <a title="99 bottles of beer" href="http://www.esolangs.org/wiki/99_bottles_of_beer">“99 Bottles of Beer”</a> 的歌词</li>
+<li><strong>+</strong>: 累加器</li>
+</ul>
+<h4><strong>PerlYuYan</strong></h4>
+<p><a href="http://zh.wikipedia.org/wiki/PerlYuYan" target="_blank">PerlYuYa</a>n语言是一个能令人使用中文文言文开发程式 Perl 程式的 Perl 模块，由<a href="http://zh.wikipedia.org/wiki/%E5%94%90%E9%B3%B3">唐凤</a>于2002年一月发表。它是<a href="http://zh.wikipedia.org/wiki/%E4%B8%AD%E6%96%87%E7%B7%A8%E7%A8%8B%E8%AA%9E%E8%A8%80">中文编程语言</a>的尝试。作者利用中文的特质，将许多指令改成以一个中国汉字来表示，因而造成了文言语法的感觉。</p>
+<p>看看下面的这段代码，相当的文言文啊。有兴趣可以<a href="http://search.cpan.org/~autrijus/Lingua-Sinica-PerlYuYan-0.03/" target="_blank">去CPAN上下载</a>回来玩玩。</p>
+<pre style="padding-left: 30px;">#!/usr/local/bin/perl
+
+use Lingua::Sinica::PerlYuYan;
+
+用警兮用嚴。
+
+印道
+一至一
+哉兮
+
+印編曰雜申雜申矣
+  又纖曰龍鼠矣
+    又曰一矣
+
+亂曰
+國無人莫我知兮    又何懷乎故都
+既莫足與為美政兮  吾將從彭咸之所居</pre>
+<p>还有下面这个五言。</p>
+<pre style="padding-left: 30px;"><code># The Sieve of Eratosthenes - 埃拉托斯芬篩法
+use Lingua::Sinica::PerlYuYan;
+
+  用籌兮用嚴。井涸兮無礙
+。印曰最高矣  又道數然哉。
+。截起吾純風  賦小入大合。
+。習予吾陣地  並二至純風。
+。當起段賦取  加陣地合始。
+。陣地賦篩始  繫繫此雜段。
+。終陣地兮印  正道次標哉。
+。輸空接段點  列終註泰來。</code></pre>
+<p>&nbsp;</p>
+<h4>参考：</h4>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Category:Esoteric_programming_languages">Esoteric_programming_languages</a></li>
+<li><a href="http://www.topdesignmag.com/top-13-most-absurd-programming-languages/" target="_blank">Top 13 Most Absurd Programming Languages</a></li>
+<li><a href="http://wei.si/blog/2011/04/befunge-and-perlyuyan/" target="_blank">Befunge语言和文言文编程</a></li>
+<li><a href="http://hi.baidu.com/namekin/blog/item/9f36f21fc6be296df724e452.html" target="_blank">疯狂的编程语言——ENGLISH，Chef，Shakespeare</a></li>
+<li><a href="http://www.dangermouse.net/esoteric/" target="_blank">DM&#8217;s Esoteric Programming Languages</a></li>
+<li><a title="Permanent Link to 十大另类程序语言（上）" rel="bookmark" href="http://www.matrix67.com/blog/archives/253">十大另类程序语言（上）</a></li>
+<li><a title="Permanent Link to 十大另类程序语言（下）" rel="bookmark" href="http://www.matrix67.com/blog/archives/255">十大另类程序语言（下）</a></li>
+</ul>
+<p>看过这些，我我还有什么好说的呢，什么C/C++/Java，神马都是浮云了……</p>
+<div><span style="font-family: Simsun; line-height: normal; font-size: medium;">(全文完) </span></div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/1142.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="BT雷人的程序语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1142.html" class="wp_rp_title">BT雷人的程序语言</a></li><li ><a href="https://coolshell.cn/articles/8052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/220px-KnnClassification.svg_-150x150.png" alt="K Nearest Neighbor 算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8052.html" class="wp_rp_title">K Nearest Neighbor 算法</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/6112.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/resin01-150x150.png" alt="由一个问题到 Resin ClassLoader 的学习" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6112.html" class="wp_rp_title">由一个问题到 Resin ClassLoader 的学习</a></li><li ><a href="https://coolshell.cn/articles/5388.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="C语言中史上最愚蠢的Bug" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5388.html" class="wp_rp_title">C语言中史上最愚蠢的Bug</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4458.html">BT雷人的程序语言（大全）</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4458.html/feed</wfw:commentRss>
+			<slash:comments>61</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>面试题：火车运煤问题</title>
+		<link>https://coolshell.cn/articles/4429.html</link>
+					<comments>https://coolshell.cn/articles/4429.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2011 01:01:31 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[职场生涯]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=4429</guid>
+
+					<description><![CDATA[<p>这个可能是一个比较经典的智力题了，和以前的那个《赛马问题》很相似，其题目如下： 你是山西的一个煤老板，你在矿区开采了有3000吨煤需要运送到市场上去卖，从你的矿...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/4429.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/4429.html">面试题：火车运煤问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-full wp-image-1209" title="Question" src="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg" alt="" width="158" height="158" srcset="https://coolshell.cn/wp-content/uploads/2009/07/Question.jpg 158w, https://coolshell.cn/wp-content/uploads/2009/07/Question-150x150.jpg 150w" sizes="(max-width: 158px) 100vw, 158px" />这个可能是一个比较经典的智力题了，和以前的那个《<a title="面试题：赛马问题" href="https://coolshell.cn/articles/1202.html" target="_blank">赛马问题</a>》很相似，其题目如下：</p>
+<p style="padding-left: 30px;"><strong><span style="color: #008000;">你是山西的一个煤老板，你在矿区开采了有3000吨煤需要运送到市场上去卖，从你的矿区到市场有1000公里，你手里有一列烧煤的火车，这个火车最多只能装1000吨煤，且其能耗比较大——每一公里需要耗一吨煤。请问，作为一个懂编程的煤老板的你，你会怎么运送才能运最多的煤到集市？</span></strong></p>
+<p>这道题一开始看上去好像是无解的，因为你的火车每一公里就要消耗一吨煤，而到目的地有1000公里，而火车最多只能装1000吨媒。如果你的火车可以全部装下，到目的地也会被全部烧光，一丁点也不剩。所以，很多人的第一反应都是觉得这个不太可能。</p>
+<p>如果你一开始就觉得不太可能的话，这是很正常的。不过我不知道你还会不会继续思考下去，如果你不想思考下去了，那么我很为你担忧，因为你可能并不是一个不善于思考的人，而是一个畏难的人，还有可能是一个容易放弃的人。这对于你做好 一个需要大量思考的工作的程序员来说可能并不适合。</p>
+<p>我一开始也觉得不可能，后来想了一想，想到一个解法可以最多运送500吨煤到市场，方法如下：（<span style="color: #ff0000;">希望你先自己想一想再查看这个答案</span>）<br />
+<span id="more-4429"></span><br />
+<script>// <![CDATA[
+function showAnswer(){
+    document.getElementById('answer').style.display = '';
+}
+// ]]&gt;</script><br />
+【<a href="javascript:showAnswer();"><strong>查看答案</strong></a>】</p>
+<div id="answer" style="display: none; background-color: #eeeeee; padding: 10px 0px 5px 10px; border-style: dashed;">
+<ol>
+<li>装1000吨煤，走250公里，扔下500吨煤，回矿山。</li>
+<li>装1000吨煤，走到250公里处，拿起250吨煤继续向前到500公里处，扔下500吨煤，回矿山。此时火车上还有250吨，再加上在250公里处还有250吨煤，所以，火车是可以回矿山的。</li>
+<li>装上最后1000吨煤，走到500公里处，装上那里的500吨煤，然后一直走到目的。</li>
+</ol>
+<p>于是，你最多可以运送500吨煤到市场（当然，火车也回不去了，因为那矿山没有煤了）</p>
+</div>
+<p>好像这样很不错的了，不过还有更好的方法能运更多的媒过去。你知道这个方法吗？可以提示的是，就是以上述这个方法的思路。我先暂时不把答案放上来，你可以自己想想。过两天我把答案放上来。</p>
+<p>&nbsp;</p>
+<p><strong>更新（2011年4月17日）</strong>：大家都很聪明，533是应该是最优解，大家用了很多种方法阐述了这一过程，我最初的想法和朋友<a href="https://coolshell.cn/articles/4429.html#comment-44698" target="_blank">xPacificCoolShell</a>的一致！很高兴看到有更为科学的解法，受教了。另外，还有一些朋友提出火车不能随时随地调头的实际情况，非常不错，所以，以后这题不能用火车运煤了，可能是用马运草更好一点了。;)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="又一个有趣的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4162.html" class="wp_rp_title">又一个有趣的面试题</a></li><li ><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/21.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="打印质数的各种算法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3738.html" class="wp_rp_title">打印质数的各种算法</a></li><li ><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="输出从1到1000的数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3445.html" class="wp_rp_title">输出从1到1000的数</a></li><li ><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/googlequestion-150x150.jpg" alt="140个Google的面试题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3345.html" class="wp_rp_title">140个Google的面试题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4429.html">面试题：火车运煤问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/4429.html/feed</wfw:commentRss>
+			<slash:comments>335</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

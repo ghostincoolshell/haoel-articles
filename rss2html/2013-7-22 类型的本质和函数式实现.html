@@ -1,0 +1,209 @@
+<html><body><p><strong>（感谢 </strong><a href="http://weibo.com/weidagang" target="_blank">@文艺复兴记</a><strong>（todd） 投递此文）</strong></p>
+<p>在上一篇文章<a href="https://coolshell.cn/articles/9886.html">《二叉树迭代器算法》</a>中，我介绍了一种基于栈的二叉树迭代器实现。程序设计语言和Haskell大牛<a href="http://weibo.com/u/1684815495">@九瓜</a> 在看过之后评论到：</p>
+<blockquote><p>这里用了 stack 来做，有点偷懒，所以错失了一个抽象思考机会。如果我们能够理解二叉树到线性表的转换过程，完全可以把 Iterator 当作抽象的线性表来看，只要定义了关于 Iterator 的 empty, singleton, 还有 append 操作，实现二叉树的 Iterator 就变得非常直观。</p></blockquote>
+<p>“错失了一个抽象思考机会”是什么意思呢？我理解九瓜的意思是基于栈的实现虽然是正确的，但它缺乏对于迭代器类型本质的理解，不具有通用性。如果能对迭代器进行合适地抽象就可以像二叉树递归遍历一样自然地得出二叉树迭代器，甚至其他更复杂的数据结构，只要我们能写出它的遍历算法，迭代器算法都可以自然推出。</p>
+<h4>类型的本质</h4>
+<p>九瓜提到了通过empty, singleton和append操作对Iterator进行抽象，我本来打算直接根据这个思路介绍函数式的二叉树迭代器实现，但是考虑到其实首要的问题在于理解类型的本质，而并不是所有人都具备这个基础，不如先普及一下类型基础再进入具体实现。那么下面我们就先来认识一下类型到底是什么？我们先以来看看表示元素对的Pair类型，可能有人一提到Pair类型马上就会在脑海中浮现出下面的结构：</p>
+<p><span id="more-10169"></span></p>
+<pre class="EnlighterJSRAW">
+struct Pair {
+    int left;
+    int right;
+}
+</pre>
+<p>其实，这种理解是非本质的，Pair完全可以用2个元素的数组来表示，第一个元素表示left，第二个元素表示right：</p>
+<pre class="EnlighterJSRAW">
+struct Pair {
+    int elements[2];
+}
+</pre>
+<p>上面的两种不同表示是类型的不同实现，而<strong>类型的本质是由操作(Operation)和操作间的关系或不变式(Invariant)所定义的</strong>，我们称之为类型规范(Type Specification)。比如，Pair类型是这样定义的：</p>
+<pre class="EnlighterJSRAW">
+Type Pair:
+    Operations:
+        Pair make_pair(int x, int y)
+        int get_left(Pair pair)
+        int get_right(Pair pair)
+    Invariants:
+        get_left(make_pair(x, y)) == x  //对x, y构造的Pair取左元素等于x
+        get_right(make_pair(x, y)) == y  //对x, y构造的Pair取右元素等于y
+</pre>
+<p>也就是说只要是满足Pair类型规范，即定义了make_pair，get_left, get_right这3种操作，并且这些操作满足上面两个不变式，那么它这就是Pair类型。我们再来看看稍微复杂一点的Stack类型：</p>
+<pre class="EnlighterJSRAW">
+Type Stack:
+    Operations:
+        Stack make_stack()  //构造空栈
+        Stack push(Stack stack, int x)  //将元素x压栈，返回新栈
+        int top(stack)  //获取栈顶元素
+        Stack pop(Stack stack)  //将栈顶元素弹栈，返回新栈
+    Invariants:
+        top(push(stack, x)) == x  //栈顶元素为最后一次压栈值
+        pop(push(stack, x)) == stack  //对stack压栈后再弹栈等于原来的stack
+</pre>
+<p>Stack类型规范简言之就是FILO（先入后出），如果要形式化就是上面的不变式。为了加深理解，我们现在切换到测试视角来看一看，如果请你来编写一个Stack类的单元测试用例，你应该怎么写呢？许多朋友都不清楚单元测试到底测什么？怎么测？我见过不少人用一个测试用例单独对push做测试，用另一个测试用例对pop单独做测试，其主要原因就在于缺乏对类型本质的理解。其实，只要理解了类型的本质我们就知道孤立地看push或pop是没有任何意义的，它们的意义是在FILO关系下相互解释的，所以测试当然是基于类型规范来测试FILO不变式！这种基于类型规范的测试是一种黑盒测试，与类型的内部实现细节无关，只要单元测试覆盖了类型所定义的所有操作和不变式，那么不管内部怎么实现或优化，测试用例都不需要调整。反之，如果深入到了类型的内部实现做白盒测试，那这样的测试用例实际上就不再是反映其类型规范了，它会随着实现细节的调整而失效。</p>
+<p>更深一层来看，不仅是在Pair，Stack这样的微观层面，在一个系统的宏观层面同样可以采用类型视角，即考察系统定义了哪些操作？这些操作之间有什么样的关系或不变式？比如，你如何从类型的角度来看待MySQL这样一套数据库系统？MySQL系统定义了哪些操作？这些操作之间必须满足怎样的关系和不变式？不仅如此，类型视角除了可以应用于计算机系统，甚至还可以应用于生活中的事物，比如，你到超市购物可以寄存自己的包，在寄包的时候会获得一张密码条，取包时可以通过密码条打开箱子。你能从超市寄包这个例子中看出类型来吗？如果你看出来了，说明你对类型的理解真正融会贯通了！</p>
+<h4>类型的函数式实现</h4>
+<p>上面我们介绍了类型的本质在于操作和操作间的关系，下面我们要关注的是类型的实现。在上面的例子中，Pair的内部结构到底是什么，是一个left和一个right成员？还是一个两元素的数组？没有讲，也没关系，就好像Windows的Handle和Linux的FileDescriptor一样，它们都是一个标识，你并不需要关心它的值本身，你只需要用几个相关的函数创建和操作它就行了（上面超市寄包例子中的密码条和Windows中的Handle是什么关系，你看出来了吗？你需要理解密码条的内容吗？）。换句话说，只要满足类型规范，具体实现是可变的，使用者<strong>只依赖于类型规范而不依赖于其具体实现</strong>。这在面向对象语言中意味着接口保持不变而具体实现可以变化（这里把public方法视为一种广义的接口）。</p>
+<p>下面，我们还会看到的是不仅类型的内部实现可以变化，而且可以根本没有什么所谓的内部实现。这是什么意思呢？让我们来思考一下，是不是Pair内部一定要有什么东西来保存构造函数传入的left和right？我们能跳出这个定势吗？在函数式编程中，我们能做到：</p>
+<p>[javascript]<br/>
+//Javascript<br/>
+function make_pair(x, y) {<br/>
+    // 返回一个支持get_left和get_right操作的闭包(Closure)<br/>
+    return {<br/>
+        get_left : function() { return x },<br/>
+        get_right : function() { return y }<br/>
+    }<br/>
+}<br/>
+function get_left(pair) {<br/>
+    return pair.get_left();<br/>
+}<br/>
+function get_right(pair) {<br/>
+    return pair.get_right();<br/>
+}<br/>
+// Test case<br/>
+console.log(get_left(make_pair(1, 2))) //1<br/>
+console.log(get_right(make_pair(1, 2))) //2<br/>
+[/javascript]</p>
+<p>上面的关键代码在于make_pair的内部返回的不是一种具体的数据结构，而是一个支持get_left和get_right操作的闭包(Closure)，将来可以通过get_left和get_right来提取x, y。这种基于闭包的实现和我们通常采用的基于数据结构的实现的本质区别在哪里呢？不难发现，<strong>基于闭包的实现和类型规范是直接对应的</strong>，它并没有引入类型规范之外的东西，而基于数据结构的实现则隐藏了实现的细节。换句话说，如果要验证实现代码的正确性，对于前者只需要比对着类型规范，对于后者我们可能需要去仔细理解推敲其所采用的数据结构。对于Pair这样简单的结构二者差别不大，甚至基于数据结构的实现更简单，但是对于复杂的类型就容易体现出闭包实现的优势了。为了加深理解，我们再来看一个Stack的函数式实现：</p>
+<p>[javascript]<br/>
+//Javascript<br/>
+function make_stack() {<br/>
+    return null<br/>
+}<br/>
+function push(stack, x) {<br/>
+    return {<br/>
+        top : function() { return x },<br/>
+        pop : function() { return stack }<br/>
+    }<br/>
+}<br/>
+function top(stack) {<br/>
+    return stack.top()<br/>
+}<br/>
+function pop(stack) {<br/>
+    return stack.pop()<br/>
+}<br/>
+// Test case<br/>
+var stack = make_stack()<br/>
+stack = push(stack, 1)<br/>
+stack = push(stack, 2)<br/>
+stack = push(stack, 3)<br/>
+console.log(top(stack)) //3<br/>
+stack = pop(stack)<br/>
+console.log(top(stack)) //2<br/>
+stack = push(stack, 4)<br/>
+console.log(top(stack)) //4<br/>
+[/javascript]</p>
+<p>上面的所有函数都是采用了无副作用的纯函数式设计，可能习惯面向对象编程的朋友不是很习惯，不过这不影响我们对类型的讨论，而且它也很容易改造成面向对象的风格，感兴趣的朋友可以自己尝试对上面的代码进行简单的包装让它看起来像面向对象的样子。</p>
+<h4>函数式二叉树迭代器</h4>
+<p>上面我们介绍了类型的本质和函数式实现，下面我们再来看看Iterator类型又该如何定义和实现呢？ 思路当然还是从操作入手，考虑Iterator类型对应了哪些操作，它们的关系是什么？上面九瓜提示了Iterator类型可以抽象为线性表List类型，或者说Iterator本质上是一个List。为什么呢？其实，只要跳出“如何表示数据结构”的思维，从类型角度思考就很容易理解，因为Iterator和List都定义了相同的操作，Iterator的使用者完全不关心也不知道它背后到底是链表还是二叉树，你对Iterator的操作和一个List的操作完全一样。正是这个原因，STL等范型库才能通过Iterator将算法和数据结构解耦。</p>
+<p>怎么定义一个List类型呢？九瓜提到的empty(), singleton()和append()实际上就是和List打交道最多的Lisp语言的经典定义方式。Lisp是基于s-expression的，s-expression既可以视为线性表又可以视为树，本质上Lisp为List类型了构造、取首元素和取剩余元素等几种操作：</p>
+<pre class="EnlighterJSRAW">
+Type List:
+    Operations:
+        List empty()  //构造空表，通常由()这个文字量表示
+        List singleton(Element e)  //构造包含一个元素的表，通常由(e)这个文字量表示
+        Element first(List list)   //取list的第一个元素，通常又叫car操作
+        List rest(List list)  //取list除第一个元素外的剩余部分，通常又叫cdr操作
+        List append(List list1, List list2) //连接两个表
+    Invariants:
+        append(empty(), list) == list  //空表和表list连接后等于表list
+        append(list, empty()) == list  //空表和表list连接后等于表list
+        first(singleton(e)) == e  //对singleton(e)取首元素等于e
+        rest(singleton(e)) == empty()  //对singleton(e)取首元素外的剩余部分的结果为空表
+        append(first(list), rest(list)) == list  //对list的首尾两部分进行连接等于list本身
+        if list1 is not empty then
+            first(append(list1, list2)) == first(list1)  //对非空表list1于表list2的连接取首元素等于对非空表list1取首元素
+        if list1 is not empty then
+            rest(append(list1, list2)) == append(rest(list1), list2)  //对非空表list1于表list2的连接取首元素等于对非空表list1取首元素
+</pre>
+<p>有了上面的分析，我们相应地写出下面的List实现：</p>
+<p>[javascript]<br/>
+//Javascript<br/>
+function empty() {<br/>
+    return null<br/>
+}<br/>
+function singleton(e) {<br/>
+    return {<br/>
+        first: function() { return e },<br/>
+        rest: function() { return null }<br/>
+    }<br/>
+}<br/>
+function first(list) {<br/>
+    return list.first()<br/>
+}<br/>
+function rest(list) {<br/>
+    return list.rest()<br/>
+}<br/>
+function append(list1, list2) {<br/>
+    if (null == list1) return list2<br/>
+    if (null == list2) return list1</p>
+<p>    return {<br/>
+        first : function() { return first(list1) },<br/>
+        rest : function() { return append(rest(list1), list2) }<br/>
+    }<br/>
+}<br/>
+[/javascript]</p>
+<p>在此基础上可以进一步实现二叉树迭代器：</p>
+<p>[javascript]<br/>
+function make_binary_tree_iterator(node) {<br/>
+    return {<br/>
+        first : function() {<br/>
+            return null != node.left ? first(make_binary_tree_iterator(node.left)) : node<br/>
+        },<br/>
+        rest : function() {<br/>
+            var left_it = (null == node.left ? null : make_binary_tree_iterator(node.left))<br/>
+            var root_it = singleton(node)<br/>
+            var right_it = (null == node.right ? null : make_binary_tree_iterator(node.right))<br/>
+            var it = append(append(left_it, root_it), right_it)<br/>
+            return rest(it)<br/>
+        }<br/>
+    }<br/>
+}<br/>
+//======== Test case ========<br/>
+var tree = {<br/>
+    value : 1,<br/>
+        left : {<br/>
+            value : 2,<br/>
+            left : { value : 4, left : null, right : null },<br/>
+            right : null<br/>
+        },<br/>
+        right : {<br/>
+            value : 3,<br/>
+            left : null,<br/>
+            right : { value : 7, left : null, right : null }<br/>
+    }<br/>
+}<br/>
+for (var it = make_binary_tree_iterator(tree); null != it; it = rest(it)) {<br/>
+    console.log(first(it).value)<br/>
+}<br/>
+[/javascript]</p>
+<p>上面的make_binary_tree_iterator在List类型的基础上按照二叉树遍历过程构造了一个List。不知道你是否注意到了，为什么它不像下面这个例子一样直接返回一个List，而要构造一个闭包呢？</p>
+<p>[javascript]<br/>
+function make_binary_tree_iterator(node) {<br/>
+    var left_it = (null == node.left ? null : make_binary_tree_iterator(node.left))<br/>
+    var root_it = singleton(node)<br/>
+    var right_it = (null == node.right ? null : make_binary_tree_iterator(node.right))<br/>
+    return append(append(left_it, root_it), right_it)<br/>
+}<br/>
+[/javascript]</p>
+<p>这里关键的区别在于闭包是惰性求值的，也就是说只有当真正开始迭代遍历的时候才会逐渐对各个函数进行求值，而上面的函数递归调用是非惰性的，会从一开始就把所有结点展开成线性表。如果你对这一点还不能很好地理解，可以尝试在各个函数中加log跟踪函数的调用过程。</p>
+<h4>总结</h4>
+<p>本文介绍了类型的本质在于它所定义的操作以及操作之间的关系和不变式。类型的实现关键在于满足类型规范的要求，而具体实现是可以变化的，使用者和测试用例都应该只依赖于类型规范而不依赖于具体实现。函数式的类型实现往往和类型规范是直接对应的，简单通用，但可能有性能问题，而命令式的类型实现往往会引入复杂的内部数据结构，但是其优点是高效。这两种实现并不是完全互斥的，有时候可以将二者相结合达到简单与高效的结合。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="../wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10739.html"><img alt="Lua简明教程" height="150" src="../wp-content/uploads/2013/12/lua-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10739.html">Lua简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10337.html"><img alt="数据即代码：元驱动编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10337.html">数据即代码：元驱动编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

@@ -1,0 +1,82 @@
+<html><body><p><img alt="" class="aligncenter size-full" height="220" src="../wp-content/uploads/2017/08/enable-https-banner.png" width="700"/>今天，我把CoolShell变成https的安全访问了。我承认这件事有点晚了，因为之前的HTTP的问题也有网友告诉我，被国内的电信运营商在访问我的网站时加入了一些弹窗广告。另外，HTTP的网站在搜索引擎中的rank会更低。所以，这事早就应该干了。现在用HTTP访问CoolShell会被得到一个 301 的HTTPS的跳转。下面我分享一下启用HTTPS的过程。</p>
+<p>我用的是 <a href="https://letsencrypt.org" rel="noopener noreferrer" target="_blank">Let’s Encrypt</a>这个免费的解决方案。Let’s Encrypt 是一个于2015年推出的数字证书认证机构，将通过旨在消除当前手动创建和安装证书的复杂过程的自动化流程，为安全网站提供免费的SSL/TLS证书。这是由<a href="https://letsencrypt.org/isrg/" rel="noopener noreferrer" target="_blank">互联网安全研究小组</a>（ISRG – Internet Security Research Group，一个公益组织）提供的服务。主要赞助商包括<a href="https://www.eff.org" rel="noopener noreferrer" target="_blank" title="电子前哨基金会">电子前哨基金会</a>，<a class="mw-redirect" href="https://www.mozilla.org/foundation/" rel="noopener noreferrer" target="_blank" title="Mozilla基金会">Mozilla基金会</a>，<a href="https://www.akamai.com/" rel="noopener noreferrer" target="_blank" title="Akamai">Akamai</a>以及Cisco等公司（<a href="https://letsencrypt.org/sponsors/" rel="noopener noreferrer" target="_blank">赞助商列表</a>）。<sup class="reference" id="cite_ref-3"></sup></p>
+<p>2015年6月，Let’s Encrypt得到了一个存储在硬件安全模块中的离线的RSA根证书。这个由IdenTrust证书签发机构交叉签名的根证书被用于签署两个证书。其中一个就是用于签发请求的证书，另一个则是保存在本地的证书，这个证书用于在上一个证书出问题时作备份证书之用。因为IdenTrust的CA根证书目前已被预置于主流浏览器中，所以Let’s Encrypt签发的证书可以从项目开始就被识别并接受，甚至当用户的浏览器中没有信任ISRG的根证书时也可以。</p>
+<p><span id="more-18094"></span></p>
+<p>以上介绍文字来自 Wikipedia 的 <a href="https://zh.wikipedia.org/wiki/Let%27s_Encrypt" rel="noopener noreferrer" target="_blank">Let’s Encrypt 词条</a>。</p>
+<p>为你的网站来安装一个证书十分简单，只需要使用电子子前哨基金会EFF的 <a href="https://certbot.eff.org" rel="noopener noreferrer" target="_blank">Certbot</a>，就可以完成。</p>
+<p style="padding-left: 30px;">1）首先，打开 <a href="https://certbot.eff.org" rel="noopener noreferrer" target="_blank">https://certbot.eff.org</a> 网页。</p>
+<p style="padding-left: 30px;">2）在那个机器上图标下面，你需要选择一下你用的 Web 接入软件 和你的 操作系统。比如，我选的，<code>nginx</code> 和 <code>Ubuntu 14.04</code></p>
+<p style="padding-left: 30px;">3）然后就会跳转到一个安装教程网页。你就照着做一遍就好了。</p>
+<p>以Coolshell.cn为例 – Nginx + Ubuntu</p>
+<p>首先先安装相应的环境：</p>
+<pre class="EnlighterJSRAW">
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt-get update
+$ sudo apt-get install python-certbot-nginx
+</pre>
+<p>然后，运行如下命令：</p>
+<pre class="EnlighterJSRAW">
+$ sudo certbot --nginx
+</pre>
+<p><code>certbot</code> 会自动检查到你的 <code>nginx.conf</code> 下的配置，把你所有的虚拟站点都列出来，然后让你选择需要开启 https 的站点。你就简单的输入列表编号（用空格分开），然后，certbot 就帮你下载证书并更新 <code>nginx.conf</code> 了。</p>
+<p>你打开你的 <code>nginx.conf</code> 文件 ，你可以发现你的文件中的 <code>server</code> 配置中可能被做了如下的修改：</p>
+<pre class="EnlighterJSRAW">listen 443 ssl; # managed by Certbot
+ssl_certificate /etc/letsencrypt/live/coolshell.cn/fullchain.pem; # managed by Certbot
+ssl_certificate_key /etc/letsencrypt/live/coolshell.cn/privkey.pem; # managed by Certbot
+include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot</pre>
+<p>和</p>
+<pre class="EnlighterJSRAW"> # Redirect non-https traffic to https
+if ($scheme != "https") {
+  return 301 https://$host$request_uri;
+} # managed by Certbot</pre>
+<p> </p>
+<p>这里建议配置 http2，这要求 Nginx 版本要大于 1.9.5。HTTP2 具有更快的 HTTPS 传输性能，非常值得开启（<a href="http://blog.httpwatch.com/2015/01/16/a-simple-performance-comparison-of-https-spdy-and-http2/" rel="noopener noreferrer" target="_blank">关于性能你可以看一下这篇文章</a>）。需要开启HTTP/2其实很简单，只需要在 <code>nginx.conf</code> 的 <code>listen 443 ssl;</code> 后面加上 <code>http2</code> 就好了。如下所示：</p>
+<pre class="EnlighterJSRAW">listen 443 ssl http2; # managed by Certbot 
+ssl_certificate /etc/letsencrypt/live/coolshell.cn/fullchain.pem; # managed by Certbot 
+ssl_certificate_key /etc/letsencrypt/live/coolshell.cn/privkey.pem; # managed by Certbot 
+include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot</pre>
+<p>然后，就 <code>nginx -s reload</code> 就好了。</p>
+<p>但是，<strong>Let’s Encrypt 的证书90天就过期了</strong>，所以，你还要设置上自动化的更新脚本，最容易的莫过于使用 <code>crontab</code> 了。使用 <code>crontab -e</code> 命令加入如下的定时作业（每个月都强制更新一下）：</p>
+<pre class="EnlighterJSRAW">0 0 1 * * /usr/bin/certbot renew --force-renewal
+5 0 1 * * /usr/sbin/service nginx restart</pre>
+<p>当然，你也可以每天凌晨1点检查一下：</p>
+<p><code class="EnlighterJSRAW">0 1 * * * certbot renew </code></p>
+<p>注：crontab 中有六个字段，其含义如下：</p>
+<ul>
+<li>第1个字段：分钟 (0-59)</li>
+<li>第2个字段：小时 (0-23)</li>
+<li>第3个字段：日期 (1-31)</li>
+<li>第4个字段：月份 (1-12 [12 代表 December])</li>
+<li>第5个字段：一周当中的某天 (0-7 [7 或 0 代表星期天])</li>
+<li>/path/to/command – 计划执行的脚本或命令的名称</li>
+</ul>
+<p><strong>这么方便的同时，我不禁要问，如果是一些恶意的钓鱼网站也让自己的站点变成https的，这个对于一般用来说就有点难以防范了。哎……</strong></p>
+<p>当然，在nginx或apache上启用HTTPS后，还没有结束。因为你可能还需要修改一下你的网站，不然你的网站在浏览时会出现各种问题。</p>
+<p><strong>启用HTTPS后，你的网页中的所有的使用 <code>http://</code> 的方式的地方都要改成 <code>https://</code> 不然你的图片，js， css等非https的连接都会导致浏览器抱怨不安全而被block掉</strong>。所以，你还需要修改你的网页中那些 hard code <code>http://</code> 的地方。</p>
+<p>对于我这个使用wordpress的博客系统来说，有这么几个部分需要做修改。</p>
+<p style="padding-left: 30px;">1）首先是 wordpress的 常规设置中的 “<strong>WordPress 地址</strong>” 和 “<strong>站点地址</strong>” 需要变更为 https 的方式。</p>
+<p style="padding-left: 30px;">2）然后是文章内的图片等资源的链接需要变更为 https 的方式。对此，你可以使用一个叫 “<a href="https://wordpress.org/plugins/search-regex/" rel="noopener noreferrer" target="_blank">Search Regex</a>” 插件来批量更新你历史文章里的图片或别的资源的链接。比如：把 <code>http://coolshell.cn</code> 替换成了 <code>https://coolshell.cn</code></p>
+<p style="padding-left: 30px;">3）如果你像我一样启用了文章缓存（我用的是<a href="https://wordpress.org/plugins/wp-super-cache/" rel="noopener noreferrer" target="_blank">WP-SuperCache</a>插件），你还要去设置一下 “<strong>CDN</strong>” 页面中的 “Site URL” 和 “off-site URL” 确保生成出来的静态网页内是用https做资源链接的。</p>
+<p>基本上就是这些事。希望大家都来把自己的网站更新成 https 的。</p>
+<p>嗯，12306，你什么时候按照这个教程做一下你的证书？</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19395.html"><img alt="HTTP API 认证授权术" height="150" src="../wp-content/uploads/2019/05/Authorization-360x200-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19395.html">HTTP API 认证授权术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11021.html"><img alt="从“黑掉Github”学Web安全开发" height="150" src="../wp-content/uploads/2014/02/Github-Security-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11021.html">从“黑掉Github”学Web安全开发</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8767.html"><img alt="Web工程师的工具箱" height="150" src="../wp-content/uploads/2012/12/webtoolbox-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8767.html">Web工程师的工具箱</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6043.html"><img alt="Web开发中需要了解的东西" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6043.html">Web开发中需要了解的东西</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5987.html"><img alt="如何设计“找回用户帐号”功能" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/12.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5987.html">如何设计“找回用户帐号”功能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/18094.html">如何免费的让网站启用HTTPS</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

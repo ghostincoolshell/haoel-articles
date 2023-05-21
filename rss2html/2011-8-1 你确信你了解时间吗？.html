@@ -1,0 +1,57 @@
+<html><body><p>你还记得“<a href="https://coolshell.cn/articles/4811.html" rel="noopener" target="_blank" title="软件真的好难做啊">软件真的好难做</a>”中的那个有意思的例子吗？那个例子告诉我们软件开发中假设可能会是致命的事。今天，我又在StackOverflow上看到一个关于时间的问题——<a href="http://stackoverflow.com/questions/6841333/why-is-subtracting-these-two-times-in-1927-giving-a-strange-result" rel="noopener" target="_blank">为什么1927年12月31日的午夜时间这么奇怪</a>？提问题的这个人给了下面的一段java代码（我做一些修改，保证让你可以copy过去就可以编译运行）</p>
+<p>我在其中高亮了几行，这个程序就是想比较一下“<span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; line-height: 18px; white-space: pre;">1927-12-31 23:54:07<span class="Apple-style-span" style="font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; font-size: 13px; line-height: 19px; white-space: normal;">”  和  “<span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; line-height: 18px; white-space: pre;">1927-12-31 23:54:08<span class="Apple-style-span" style="font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; font-size: 13px; line-height: 19px; white-space: normal;">” 差几秒，很明显，是差一秒。但是程序的输出却不是这样的。</span></span></span></span></p>
+<pre class="EnlighterJSRAW">import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.TimeZone;
+class time{
+    public static void main(String[] args) throws ParseException {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        String str3 = "1927-12-31 23:54:07";
+        String str4 = "1927-12-31 23:54:08";
+        Date sDt3 = sf.parse(str3);
+        Date sDt4 = sf.parse(str4);
+        long ld3 = sDt3.getTime() /1000;
+        long ld4 = sDt4.getTime() /1000;
+        System.out.println(ld3);
+        System.out.println(ld4);
+        System.out.println(ld4-ld3);
+    }
+}</pre>
+<p> </p>
+<p><span id="more-5075"></span></p>
+<p>下面，让我们来看看程序的输出：（是的，差出353秒钟来）</p>
+<blockquote><p><code>-1325491905<br/>
+-1325491552<br/>
+353</code></p></blockquote>
+<p>Stackoverflow真的很强大，在大家要求发问者给出时区（中国上海）的15分钟内就解决了这个问题。相当的令人惊叹。原因是什么呢？大家需要围观一下<a href="http://www.timeanddate.com/worldclock/clockchange.html?n=237&amp;year=1927" rel="noopener" target="_blank">这个网页</a>。（为了怕被墙或是被和谐，我已习惯了抓屏保存，如果有人能开发一个软件能随看随抓，然后如果源被删了可以P2P的从已下载了的人那里获取，那么这个软件应该会很有国内市场。蛋扯远了，Sorry）</p>
+<p style="text-align: center;"><img alt="" class="aligncenter size-full wp-image-5077" height="335" src="../wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS.png" title="Time changes in year 1927 for China – ShanghaiS" width="598"/></p>
+<p>从上图中我们可以看到—— 在1927年12月31日23:59:59时，往后面的一秒应该是1928年1月1日 0:0:0，但是这个时间被往后调整了5分52秒，而成了，1927年12月31日的，23:54:08，于是，完成了352秒的穿越。于是我们的Java程序出了这样的一个问题，这真是一个奇迹。</p>
+<p>为什么会有这个调整呢？我居然Google不到，不过，我在这个timeanddate.com上查看了一下北京的时间，发现北京的时间只到1970年，于是我猜想，中国近代历史乱七八糟的政权交替可能是这个原因。于是我看 了一下北京和上海物理时差，果然，北京上海的时差在5分50秒左右。<strong>因此，我觉得这个时间的变化应该是从上海（南京）时间变成了北京时间</strong>。至于你信不信，反正我是信了。</p>
+<p>从这个事，我得到下面的一些启示：</p>
+<ol>
+<li>Java在的时区实现相当的强大啊。这种细节都能考虑到。</li>
+<li>本地时间的完全就是一锅粥，应该尽量不用。</li>
+<li>如果你要开发和时区有关系的程序，你的系统里一定要使用GMT标准时间，仅在显示的时候才转成本地时间。</li>
+</ol>
+<div>各位无证程序员们，看到这个例子，你们是不是感到编程的压力了？呵呵。</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4758.html"><img alt="如何写出无法维护的代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1992.html"><img alt="程序员眼中的编程语言" height="150" src="../wp-content/uploads/2009/12/language-fanboys-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/5075.html">你确信你了解时间吗？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

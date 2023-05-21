@@ -1,0 +1,228 @@
+<html><body><p>本文主要向你演示如何使用JavaExcel API来读写Excel文件。关于JavaExcel API，这是一个开源的lib库。其相关的feature如下：</p>
+<li>支持Excel 95, 97, 2000, <span style="color: #ff0000;">XP, 2003</span> 的制表页。</li>
+<li>可以读写相关的Excel公式 （仅支持Excel 97 及以后版本）</li>
+<li>可以生成 Excel 2000 格式的xls文件。</li>
+<li>支持字体，数字和日期格式。</li>
+<li>支持单元格的阴影，边框和颜色。</li>
+<li>可以修改已存在的制表页。</li>
+<li>国际化多语言集。(公式目前支持，英文，法文，西班牙文和德文）</li>
+<li>支持图表拷贝。</li>
+<li><span style="color: #ff0000;">支持图片的插入和复制。</span></li>
+<li>日志生成可以使用Jakarta Commons Logging, log4j, JDK 1.4 Logger, 等。</li>
+<li>更多……</li>
+<p>你可以在这里下载：<a href="http://jexcelapi.sourceforge.net/">http://jexcelapi.sourceforge.net/</a>，然后，把jxl.jar加到你的Java的classpath中。</p>
+<p>下面是两段例程，一段是如何创建Excel，一段是如何读取Excel。</p>
+<p><span id="more-1954"></span></p>
+<p><strong>创建Excel</strong></p>
+<pre class="EnlighterJSRAW">package writer;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
+
+import jxl.CellView;
+import jxl.Workbook;
+import jxl.WorkbookSettings;
+import jxl.format.UnderlineStyle;
+import jxl.write.Formula;
+import jxl.write.Label;
+import jxl.write.Number;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+
+public class WriteExcel {
+
+	private WritableCellFormat timesBoldUnderline;
+	private WritableCellFormat times;
+	private String inputFile;
+	
+public void setOutputFile(String inputFile) {
+	this.inputFile = inputFile;
+	}
+
+	public void write() throws IOException, WriteException {
+		File file = new File(inputFile);
+		WorkbookSettings wbSettings = new WorkbookSettings();
+
+		wbSettings.setLocale(new Locale("en", "EN"));
+
+		WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
+		workbook.createSheet("Report", 0);
+		WritableSheet excelSheet = workbook.getSheet(0);
+		createLabel(excelSheet);
+		createContent(excelSheet);
+
+		workbook.write();
+		workbook.close();
+	}
+
+	private void createLabel(WritableSheet sheet)
+			throws WriteException {
+		// Lets create a times font
+		WritableFont times10pt = new WritableFont(WritableFont.TIMES, 10);
+		// Define the cell format
+		times = new WritableCellFormat(times10pt);
+		// Lets automatically wrap the cells
+		times.setWrap(true);
+
+		// Create create a bold font with unterlines
+		WritableFont times10ptBoldUnderline = new WritableFont(
+				WritableFont.TIMES, 10, WritableFont.BOLD, false,
+				UnderlineStyle.SINGLE);
+		timesBoldUnderline = new WritableCellFormat(times10ptBoldUnderline);
+		// Lets automatically wrap the cells
+		timesBoldUnderline.setWrap(true);
+
+		CellView cv = new CellView();
+		cv.setFormat(times);
+		cv.setFormat(timesBoldUnderline);
+		cv.setAutosize(true);
+
+		// Write a few headers
+		addCaption(sheet, 0, 0, "Header 1");
+		addCaption(sheet, 1, 0, "This is another header");
+		
+
+	}
+
+	private void createContent(WritableSheet sheet) throws WriteException,
+			RowsExceededException {
+		// Write a few number
+		for (int i = 1; i &lt; 10; i++) {
+			// First column
+			addNumber(sheet, 0, i, i + 10);
+			// Second column
+			addNumber(sheet, 1, i, i * i);
+		}
+		// Lets calculate the sum of it
+		StringBuffer buf = new StringBuffer();
+		buf.append("SUM(A2:A10)");
+		Formula f = new Formula(0, 10, buf.toString());
+		sheet.addCell(f);
+		buf = new StringBuffer();
+		buf.append("SUM(B2:B10)");
+		f = new Formula(1, 10, buf.toString());
+		sheet.addCell(f);
+
+		// Now a bit of text
+		for (int i = 12; i &lt; 20; i++) {
+			// First column
+			addLabel(sheet, 0, i, "Boring text " + i);
+			// Second column
+			addLabel(sheet, 1, i, "Another text");
+		}
+	}
+
+	private void addCaption(WritableSheet sheet, int column, int row, String s)
+			throws RowsExceededException, WriteException {
+		Label label;
+		label = new Label(column, row, s, timesBoldUnderline);
+		sheet.addCell(label);
+	}
+
+	private void addNumber(WritableSheet sheet, int column, int row,
+			Integer integer) throws WriteException, RowsExceededException {
+		Number number;
+		number = new Number(column, row, integer, times);
+		sheet.addCell(number);
+	}
+
+	private void addLabel(WritableSheet sheet, int column, int row, String s)
+			throws WriteException, RowsExceededException {
+		Label label;
+		label = new Label(column, row, s, times);
+		sheet.addCell(label);
+	}
+
+	public static void main(String[] args) throws WriteException, IOException {
+		WriteExcel test = new WriteExcel();
+		test.setOutputFile("c:/temp/lars.xls");
+		test.write();
+		System.out
+				.println("Please check the result file under c:/temp/lars.xls ");
+	}
+}
+</pre>
+<p><strong>读取Excel</strong><br/>
+ </p>
+<pre class="EnlighterJSRAW">package reader;
+
+import java.io.File;
+import java.io.IOException;
+
+import jxl.Cell;
+import jxl.CellType;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+
+public class ReadExcel {
+
+	private String inputFile;
+
+	public void setInputFile(String inputFile) {
+		this.inputFile = inputFile;
+	}
+
+	public void read() throws IOException  {
+		File inputWorkbook = new File(inputFile);
+		Workbook w;
+		try {
+			w = Workbook.getWorkbook(inputWorkbook);
+			// Get the first sheet
+			Sheet sheet = w.getSheet(0);
+			// Loop over first 10 column and lines
+
+			for (int j = 0; j &lt; sheet.getColumns(); j++) {
+				for (int i = 0; i &lt; sheet.getRows(); i++) {
+					Cell cell = sheet.getCell(j, i);
+					CellType type = cell.getType();
+					if (cell.getType() == CellType.LABEL) {
+						System.out.println("I got a label "
+								+ cell.getContents());
+					}
+
+					if (cell.getType() == CellType.NUMBER) {
+						System.out.println("I got a number "
+								+ cell.getContents());
+					}
+
+				}
+			}
+		} catch (BiffException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		ReadExcel test = new ReadExcel();
+		test.setInputFile("c:/temp/lars.xls");
+		test.read();
+	}
+
+}
+</pre>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11175.html"><img alt="Java中的CopyOnWrite容器" height="150" src="../wp-content/uploads/2014/03/cow-copy-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9703.html"><img alt="无锁HashMap的原理与实现" height="150" src="../wp-content/uploads/2013/05/图1-3-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9703.html">无锁HashMap的原理与实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1954.html">Java读写Excel</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

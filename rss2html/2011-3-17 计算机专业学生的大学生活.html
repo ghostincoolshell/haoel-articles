@@ -1,0 +1,32 @@
+<html><body><p>下面看到某国外的同学描述的自己的大学生活，呵呵。做一下解释，</p>
+<ul>
+<li>正常的生活是，10点到17点上课，17点到22点是放松和work（chill相当于relax），22点到凌晨1点是社交活动，然后睡8小时。</li>
+<li>计算机专业的学生的生活是，只要你脑子还在转就work，脑子不转了，就睡2小时。（<del>原来，国外的计算机大学的同学们在大学时就已在疯狂工作了，课都不上</del>）（work是在校的学术作业项目（谢谢网友rho指正））</li>
+</ul>
+<figure class="wp-caption aligncenter" style="width: 584px;"><a href="http://i.imgur.com/4kQAz.jpg" target="_blank"><img alt="计算机专业学生的大学生活" class="" height="779" src="http://i.imgur.com/4kQAz.jpg" title="计算机专业学生的大学生活" width="584"/></a><figcaption class="wp-caption-text">计算机专业学生的大学生活</figcaption></figure>
+<p>不过，看了一下上面的代码，我发现了两个问题：</p>
+<ol>
+<li>sleep(2)，在posix下是秒，在windows下是毫秒。</li>
+<li>(hour &gt;= 22  &amp;&amp;  hour &lt; 1) 这个表达式永假。正确的是(hour &gt;= 22 || hour &lt; 1)</li>
+</ol>
+<p>当然，我们并不能下结论——该同学的在学校里并没有学好编程。因为，你不知道Sleep 和 &amp;&amp; 有没有被重载了。（你要把&amp;&amp;在某些情况下重载成||的行为也不是不可能 。<strong>注：在c++中，你无法重载内建类型的操作符</strong>）</p>
+<p>——————</p>
+<p><span style="color: #008000;">最后说明一下，最近事太多（一个项目要上线，另一个项目需求分析和设计、招聘、酷壳服务器迁移、带孩子、申请签证、给人做培训），所以没有更新，大家见谅</span>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22157.html"><img alt="谈谈公司对员工的监控" height="150" src="../wp-content/uploads/2022/02/monitoring-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22157.html">谈谈公司对员工的监控</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21589.html"><img alt="如何做一个有质量的技术分享" height="150" src="../wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21589.html">如何做一个有质量的技术分享</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20977.html"><img alt="程序员如何把控自己的职业" height="150" src="../wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20977.html">程序员如何把控自己的职业</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20765.html"><img alt="MegaEase的远程工作文化" height="150" src="../wp-content/uploads/2020/01/remote-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20765.html">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3928.html">计算机专业学生的大学生活</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

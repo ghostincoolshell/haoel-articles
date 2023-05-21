@@ -1,0 +1,341 @@
+<html><body><p><figure class="wp-caption alignright" id="attachment_21254" style="width: 296px;"><img alt="" class="wp-image-21254 size-medium" height="300" src="../wp-content/uploads/2020/12/go.generate-296x300.png" width="296"/><figcaption class="wp-caption-text" id="caption-attachment-21254">图片来源：<a href="https://gophersource.com/" rel="noopener" target="_blank">GopherSource</a></figcaption></figure></p>
+<p>在本篇文章中，我们将要学习一下Go语言的代码生成的玩法。Go语言代码生成主要还是用来解决编程泛型的问题，泛型编程主要解决的问题是因为静态类型语言有类型，所以，相关的算法或是对数据处理的程序会因为类型不同而需要复制一份，这样导致数据类型和算法功能耦合的问题。泛型编程可以解决这样的问题，就是说，在写代码的时候，不用关心处理数据的类型，只需要关心相当处理逻辑。泛型编程是静态语言中非常非常重要的特征，如果没有泛型，我们很难做到多态，也很难完成抽象，会导致我们的代码冗余量很大。</p>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第6 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go 编程模式：Go Generation</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-prev">« <a href="https://coolshell.cn/articles/21164.html" rel="prev" title="Go编程模式：Map-Reduce">上一篇文章</a></span><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/17929.html" rel="next" title="Go编程模式：修饰器">下一篇文章</a> »</span></nav></section>
+<h4>现实中的类比</h4>
+<p>举个现实当中的例子，用螺丝刀来做具比方，螺丝刀本来就是一个拧螺丝的动作，但是因为螺丝的类型太多，有平口的，有十字口的，有六角的……螺丝还有大小尺寸，导致我们的螺丝刀为了要适配各种千奇百怪的螺丝类型（样式和尺寸），导致要做出各种各样的螺丝刀。</p>
+<table>
+<tbody>
+<tr>
+<td><img alt="" class="aligncenter wp-image-21180 size-medium" height="225" src="../wp-content/uploads/2020/12/type01-300x225.png" width="300"/></td>
+<td><img alt="" class="aligncenter wp-image-21181 size-medium" height="225" src="../wp-content/uploads/2020/12/type02-300x225.png" width="300"/></td>
+</tr>
+</tbody>
+</table>
+<p>而真正的抽象是螺丝刀不应该关心螺丝的类型，只要关注好自己的功能是否完备，并让自己可以适配于不同类型的螺丝，如下所示，这就是所谓的泛型编程要解决的实际问题。</p>
+<p><span id="more-21179"></span></p>
+<table>
+<tbody>
+<tr>
+<td colspan="2"><img alt="" class="aligncenter wp-image-21182 size-medium" height="226" src="../wp-content/uploads/2020/12/type03-300x226.png" width="300"/></td>
+</tr>
+</tbody>
+</table>
+<h4>Go语方的类型检查</h4>
+<p>因为Go语言目前并不支持真正的泛型，所以，只能用 <code>interface{}</code> 这样的类似于 <code>void*</code> 这种过度泛型来玩这就导致了我们在实际过程中就需要进行类型检查。Go语言的类型检查有两种技术，一种是 Type Assert，一种是Reflection。</p>
+<h5>Type Assert</h5>
+<p>这种技术，一般是对某个变量进行 <code>.(type)</code>的转型操作，其会返回两个值， <code>variable, error</code>，第一个返回值是被转换好的类型，第二个是如果不能转换类型，则会报错。</p>
+<p>比如下面的示例，我们有一个通用类型的容器，可以进行 <code>Put(val)</code>和 <code>Get()</code>，注意，其使用了 <code>interface{}</code>作泛型</p>
+<pre class="EnlighterJSRAW">//Container is a generic container, accepting anything.
+type Container []interface{}
+
+//Put adds an element to the container.
+func (c *Container) Put(elem interface{}) {
+    *c = append(*c, elem)
+}
+//Get gets an element from the container.
+func (c *Container) Get() interface{} {
+    elem := (*c)[0]
+    *c = (*c)[1:]
+    return elem
+}</pre>
+<p>在使用中，我们可以这样使用</p>
+<pre class="EnlighterJSRAW">intContainer := &amp;Container{}
+intContainer.Put(7)
+intContainer.Put(42)</pre>
+<p>但是，在把数据取出来时，因为类型是 <code>interface{}</code> ，所以，你还要做一个转型，如果转型成功能才能进行后续操作（因为 <code>interface{}</code>太泛了，泛到什么类型都可以放）下在是一个Type Assert的示例：</p>
+<pre class="EnlighterJSRAW">// assert that the actual type is int
+elem, ok := intContainer.Get().(int)
+if !ok {
+    fmt.Println("Unable to read an int from intContainer")
+}
+
+fmt.Printf("assertExample: %d (%T)\n", elem, elem)
+</pre>
+<h5>Reflection</h5>
+<p>对于反射，我们需要把上面的代码修改如下：</p>
+<pre class="EnlighterJSRAW">type Container struct {
+    s reflect.Value
+}
+func NewContainer(t reflect.Type, size int) *Container {
+    if size &lt;=0  { size=64 }
+    return &amp;Container{
+        s: reflect.MakeSlice(reflect.SliceOf(t), 0, size), 
+    }
+}
+func (c *Container) Put(val interface{})  error {
+    if reflect.ValueOf(val).Type() != c.s.Type().Elem() {
+        return fmt.Errorf(“Put: cannot put a %T into a slice of %s", 
+            val, c.s.Type().Elem()))
+    }
+    c.s = reflect.Append(c.s, reflect.ValueOf(val))
+    return nil
+}
+func (c *Container) Get(refval interface{}) error {
+    if reflect.ValueOf(refval).Kind() != reflect.Ptr ||
+        reflect.ValueOf(refval).Elem().Type() != c.s.Type().Elem() {
+        return fmt.Errorf("Get: needs *%s but got %T", c.s.Type().Elem(), refval)
+    }
+    reflect.ValueOf(refval).Elem().Set( c.s.Index(0) )
+    c.s = c.s.Slice(1, c.s.Len())
+    return nil
+}</pre>
+<p>上面的代码并不难读，这是完全使用 reflection的玩法，其中</p>
+<ul>
+<li>在 <code>NewContainer()</code>会根据参数的类型初始化一个Slice</li>
+<li>在 <code>Put()</code>时候，会检查 <code>val</code> 是否和Slice的类型一致。</li>
+<li>在 <code>Get()</code>时，我们需要用一个入参的方式，因为我们没有办法返回 <code>reflect.Value</code> 或是 <code>interface{}</code>，不然还要做Type Assert</li>
+<li>但是有类型检查，所以，必然会有检查不对的道理 ，因此，需要返回 <code>error</code></li>
+</ul>
+<p>于是在使用上面这段代码的时候，会是下面这个样子：</p>
+<pre class="EnlighterJSRAW">f1 := 3.1415926
+f2 := 1.41421356237
+
+c := NewMyContainer(reflect.TypeOf(f1), 16)
+
+if err := c.Put(f1); err != nil {
+  panic(err)
+}
+if err := c.Put(f2); err != nil {
+  panic(err)
+}
+
+g := 0.0
+
+if err := c.Get(&amp;g); err != nil {
+  panic(err)
+}
+fmt.Printf("%v (%T)\n", g, g) //3.1415926 (float64)
+fmt.Println(c.s.Index(0)) //1.4142135623</pre>
+<p>我们可以看到，Type Assert是不用了，但是用反射写出来的代码还是有点复杂的。那么有没有什么好的方法？</p>
+<h4>它山之石</h4>
+<p>对于泛型编程最牛的语言 C++ 来说，这类的问题都是使用 Template来解决的。</p>
+<table style="border: 0px;">
+<tbody>
+<tr style="background: none;">
+<td style="border: 0px;">
+<pre class="EnlighterJSRAW">//用&lt;class T&gt;来描述泛型
+template &lt;class T&gt; 
+T GetMax (T a, T b)  { 
+    T result; 
+    result = (a&gt;b)? a : b; 
+    return (result); 
+} 
+</pre>
+</td>
+<td style="border: 0px;">
+<pre class="EnlighterJSRAW">int i=5, j=6, k; 
+//生成int类型的函数
+k=GetMax&lt;int&gt;(i,j);
+ 
+long l=10, m=5, n; 
+//生成long类型的函数
+n=GetMax&lt;long&gt;(l,m); 
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>C++的编译器会在编译时分析代码，根据不同的变量类型来自动化的生成相关类型的函数或类。C++叫模板的具体化。</p>
+<p>这个技术是编译时的问题，所以，不需要我们在运行时进行任何的运行的类型识别，我们的程序也会变得比较的干净。</p>
+<p>那么，我们是否可以在Go中使用C++的这种技术呢？答案是肯定的，只是Go的编译器不帮你干，你需要自己动手。</p>
+<h4>Go Generator</h4>
+<p>要玩 Go的代码生成，你需要三件事：</p>
+<ol>
+<li>一个函数模板，其中设置好相应的占位符。</li>
+<li>一个脚本，用于按规则来替换文本并生成新的代码。</li>
+<li>一行注释代码。</li>
+</ol>
+<h5>函数模板</h5>
+<p>我们把我们之前的示例改成模板。取名为 <code>container.tmp.go</code> 放在 <code>./template/</code>下</p>
+<pre class="EnlighterJSRAW">package PACKAGE_NAME
+type GENERIC_NAMEContainer struct {
+    s []GENERIC_TYPE
+}
+func NewGENERIC_NAMEContainer() *GENERIC_NAMEContainer {
+    return &amp;GENERIC_NAMEContainer{s: []GENERIC_TYPE{}}
+}
+func (c *GENERIC_NAMEContainer) Put(val GENERIC_TYPE) {
+    c.s = append(c.s, val)
+}
+func (c *GENERIC_NAMEContainer) Get() GENERIC_TYPE {
+    r := c.s[0]
+    c.s = c.s[1:]
+    return r
+}</pre>
+<p>我们可以看到函数模板中我们有如下的占位符：</p>
+<ul>
+<li><code>PACKAGE_NAME</code> – 包名</li>
+<li><code>GENERIC_NAME</code> – 名字</li>
+<li><code>GENERIC_TYPE</code> – 实际的类型</li>
+</ul>
+<p>其它的代码都是一样的。</p>
+<h5>函数生成脚本</h5>
+<p>然后，我们有一个叫<code>gen.sh</code>的生成脚本，如下所示：</p>
+<pre class="EnlighterJSRAW">#!/bin/bash
+
+set -e
+
+SRC_FILE=${1}
+PACKAGE=${2}
+TYPE=${3}
+DES=${4}
+#uppcase the first char
+PREFIX="$(tr '[:lower:]' '[:upper:]' &lt;&lt;&lt; ${TYPE:0:1})${TYPE:1}"
+
+DES_FILE=$(echo ${TYPE}| tr '[:upper:]' '[:lower:]')_${DES}.go
+
+sed 's/PACKAGE_NAME/'"${PACKAGE}"'/g' ${SRC_FILE} | \
+    sed 's/GENERIC_TYPE/'"${TYPE}"'/g' | \
+    sed 's/GENERIC_NAME/'"${PREFIX}"'/g' &gt; ${DES_FILE}</pre>
+<p>其需要4个参数：</p>
+<ul>
+<li>模板源文件</li>
+<li>包名</li>
+<li>实际需要具体化的类型</li>
+<li>用于构造目标文件名的后缀</li>
+</ul>
+<p>然后其会用 <code>sed</code> 命令去替换我们的上面的函数模板，并生成到目标文件中。（关于sed命令请参看本站的《<a href="https://coolshell.cn/articles/9104.html" rel="noopener" target="_blank" title="sed 简明教程">sed 简明教程</a>》）</p>
+<h5>生成代码</h5>
+<p>接下来，我们只需要在代码中打一个特殊的注释：</p>
+<pre class="EnlighterJSRAW">//go:generate ./gen.sh ./template/container.tmp.go gen uint32 container
+func generateUint32Example() {
+    var u uint32 = 42
+    c := NewUint32Container()
+    c.Put(u)
+    v := c.Get()
+    fmt.Printf("generateExample: %d (%T)\n", v, v)
+}
+
+//go:generate ./gen.sh ./template/container.tmp.go gen string container
+func generateStringExample() {
+    var s string = "Hello"
+    c := NewStringContainer()
+    c.Put(s)
+    v := c.Get()
+    fmt.Printf("generateExample: %s (%T)\n", v, v)
+}</pre>
+<p>其中，</p>
+<ul>
+<li>第一个注释是生成包名为 <code>gen</code> 类型为 <code>uint32</code> 目标文件名以 <code>container</code> 为后缀</li>
+<li>第二个注释是生成包名为 <code>gen</code> 类型为 <code>string</code> 目标文件名以 <code>container</code> 为后缀</li>
+</ul>
+<p>然后，在工程目录中直接执行 <code> go generate</code> 命令，就会生成如下两份代码，</p>
+<p>一份文件名为<code>uint32_container.go</code></p>
+<pre class="EnlighterJSRAW">package gen
+
+type Uint32Container struct {
+    s []uint32
+}
+func NewUint32Container() *Uint32Container {
+    return &amp;Uint32Container{s: []uint32{}}
+}
+func (c *Uint32Container) Put(val uint32) {
+    c.s = append(c.s, val)
+}
+func (c *Uint32Container) Get() uint32 {
+    r := c.s[0]
+    c.s = c.s[1:]
+    return r
+}</pre>
+<p>另一份的文件名为 <code>string_container.go</code></p>
+<pre class="EnlighterJSRAW">package gen
+
+type StringContainer struct {
+    s []string
+}
+func NewStringContainer() *StringContainer {
+    return &amp;StringContainer{s: []string{}}
+}
+func (c *StringContainer) Put(val string) {
+    c.s = append(c.s, val)
+}
+func (c *StringContainer) Get() string {
+    r := c.s[0]
+    c.s = c.s[1:]
+    return r
+}
+</pre>
+<p>这两份代码可以让我们的代码完全编译通过，所付出的代价就是需要多执行一步 <code>go generate</code> 命令。</p>
+<h4>新版Filter</h4>
+<p>现在我们再回头看看我们之前《<a href="https://coolshell.cn/articles/21164.html" rel="noopener" target="_blank">Go编程模式：Map-Reduce</a>》中的那些个用反射整出来的例子，有了这样的技术，我就不必在代码里用那些晦涩难懂的反射来做运行时的类型检查了。我们可以写下很干净的代码，让编译器在编译时检查类型对不对。下面是一个Fitler的模板文件 <code>filter.tmp.go</code>：</p>
+<pre class="EnlighterJSRAW">package PACKAGE_NAME
+
+type GENERIC_NAMEList []GENERIC_TYPE
+
+type GENERIC_NAMEToBool func(*GENERIC_TYPE) bool
+
+func (al GENERIC_NAMEList) Filter(f GENERIC_NAMEToBool) GENERIC_NAMEList {
+    var ret GENERIC_NAMEList
+    for _, a := range al {
+        if f(&amp;a) {
+            ret = append(ret, a)
+        }
+    }
+    return ret
+}
+</pre>
+<p>于是我们可在需要使用这个的地方，加上相关的 go generate 的注释</p>
+<pre class="EnlighterJSRAW">type Employee struct {
+  Name     string
+  Age      int
+  Vacation int
+  Salary   int
+}
+
+//go:generate ./gen.sh ./template/filter.tmp.go gen Employee filter
+func filterEmployeeExample() {
+
+  var list = EmployeeList{
+    {"Hao", 44, 0, 8000},
+    {"Bob", 34, 10, 5000},
+    {"Alice", 23, 5, 9000},
+    {"Jack", 26, 0, 4000},
+    {"Tom", 48, 9, 7500},
+  }
+
+  var filter EmployeeList
+  filter = list.Filter(func(e *Employee) bool {
+    return e.Age &gt; 40
+  })
+
+  fmt.Println("----- Employee.Age &gt; 40 ------")
+  for _, e := range filter {
+    fmt.Println(e)
+  }
+
+  filter = list.Filter(func(e *Employee) bool {
+    return e.Salary &lt;= 5000
+  })
+
+  fmt.Println("----- Employee.Salary &lt;= 5000 ------")
+  for _, e := range filter {
+    fmt.Println(e)
+  }
+}</pre>
+<h4>第三方工具</h4>
+<p>我们并不需要自己手写 <code>gen.sh</code> 这样的工具类，已经有很多第三方的已经写好的可以使用。下面是一个列表：</p>
+<ul>
+<li>Genny –  <a href="https://github.com/cheekybits/genny">https://github.com/cheekybits/genny</a></li>
+<li>Generic – <a href="https://github.com/taylorchu/generic">https://github.com/taylorchu/generic</a></li>
+<li>GenGen – <a href="https://github.com/joeshaw/gengen">https://github.com/joeshaw/gengen</a></li>
+<li>Gen – <a href="https://github.com/clipperhouse/gen">https://github.com/clipperhouse/gen</a></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="../wp-content/uploads/2020/12/go.line_.-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="../wp-content/uploads/2020/12/go.options-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

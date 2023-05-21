@@ -1,0 +1,1509 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 20 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=20" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Wed, 21 Dec 2011 15:16:28 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>计算机专业学生的大学生活</title>
+		<link>https://coolshell.cn/articles/3928.html</link>
+					<comments>https://coolshell.cn/articles/3928.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 17 Mar 2011 09:55:38 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3928</guid>
+
+					<description><![CDATA[<p>下面看到某国外的同学描述的自己的大学生活，呵呵。做一下解释， 正常的生活是，10点到17点上课，17点到22点是放松和work（chill相当于relax），2...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3928.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3928.html">计算机专业学生的大学生活</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面看到某国外的同学描述的自己的大学生活，呵呵。做一下解释，</p>
+<ul>
+<li>正常的生活是，10点到17点上课，17点到22点是放松和work（chill相当于relax），22点到凌晨1点是社交活动，然后睡8小时。</li>
+<li>计算机专业的学生的生活是，只要你脑子还在转就work，脑子不转了，就睡2小时。（<del>原来，国外的计算机大学的同学们在大学时就已在疯狂工作了，课都不上</del>）（work是在校的学术作业项目（谢谢网友rho指正））</li>
+</ul>
+<figure style="width: 584px" class="wp-caption aligncenter"><a href="http://i.imgur.com/4kQAz.jpg" target="_blank"><img decoding="async" loading="lazy" class="     " title="计算机专业学生的大学生活" src="http://i.imgur.com/4kQAz.jpg" alt="计算机专业学生的大学生活" width="584" height="779" /></a><figcaption class="wp-caption-text">计算机专业学生的大学生活</figcaption></figure>
+<p>不过，看了一下上面的代码，我发现了两个问题：</p>
+<ol>
+<li>sleep(2)，在posix下是秒，在windows下是毫秒。</li>
+<li>(hour &gt;= 22  &amp;&amp;  hour &lt; 1) 这个表达式永假。正确的是(hour &gt;= 22 || hour &lt; 1)</li>
+</ol>
+<p>当然，我们并不能下结论——该同学的在学校里并没有学好编程。因为，你不知道Sleep 和 &amp;&amp; 有没有被重载了。（你要把&amp;&amp;在某些情况下重载成||的行为也不是不可能 。<strong>注：在c++中，你无法重载内建类型的操作符</strong>）</p>
+<p>——————</p>
+<p><span style="color: #008000;">最后说明一下，最近事太多（一个项目要上线，另一个项目需求分析和设计、招聘、酷壳服务器迁移、带孩子、申请签证、给人做培训），所以没有更新，大家见谅</span>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/10/communication-150x150.png" alt="聊聊团队协同和协同工具" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22298.html" class="wp_rp_title">聊聊团队协同和协同工具</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/monitoring-150x150.jpeg" alt="谈谈公司对员工的监控" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22157.html" class="wp_rp_title">谈谈公司对员工的监控</a></li><li ><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2021/07/knowledge_sharing-300x169-1-150x150.jpeg" alt="如何做一个有质量的技术分享" width="150" height="150" /></a><a href="https://coolshell.cn/articles/21589.html" class="wp_rp_title">如何做一个有质量的技术分享</a></li><li ><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/08/programmer.01-e1596792460687-150x150.png" alt="程序员如何把控自己的职业" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20977.html" class="wp_rp_title">程序员如何把控自己的职业</a></li><li ><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/01/remote-150x150.jpg" alt="MegaEase的远程工作文化" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20765.html" class="wp_rp_title">MegaEase的远程工作文化</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3928.html">计算机专业学生的大学生活</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3928.html/feed</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>中国仍是IE6的重灾区</title>
+		<link>https://coolshell.cn/articles/3921.html</link>
+					<comments>https://coolshell.cn/articles/3921.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 10 Mar 2011 00:41:05 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[IE]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3921</guid>
+
+					<description><![CDATA[<p>“IE6于10年前诞生，现在应该是我们同IE6告别的时候了。”微软公司日前推出IE6倒计时网站（the Internet Explorer 6 Countdow...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3921.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3921.html">中国仍是IE6的重灾区</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>“IE6于10年前诞生，现在应该是我们同IE6告别的时候了。”微软公司日前推出IE6倒计时网站（the Internet Explorer 6 Countdown，网址为<span style="color: #0066cc;"><a href="http://www.ie6countdown.com/" target="_blank">www.ie6countdown.com</a></span>），旨在尽早淘汰IE6，让用户升级到新版IE浏览器。</p>
+<p>值得注意一点的是，在这张百分比图上所显示的目前仍在使用IE6浏览器上网的百分比第一的是中国——34.5%，这个符合我国国情——什么都要争第一。我国人口世界第一占全世界1/4，网民也是世界第一，还在使用IE6的网民占全世界的1/3，可以我国网民的严重落后。根据<a href="http://www.cnnic.net.cn/dtygg/dtgg/201101/t20110118_20250.html" target="_blank">CNNIC今年的报告</a>，我国现有4.5亿网民，34%也就是1.5亿用户，也就是说你身边每三个人中就有一个在用IE6。而中国的IE6网民占全世界使用IE6网民的一半。</p>
+<p>另外，我发现亚洲是重灾区啊，包括中日韩台印都很猛啊，看来微软在亚洲的营销的确不错。</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3922" title="IE6 Countdown" src="https://coolshell.cn/wp-content/uploads/2011/03/IE6-Countdown.png" alt="" width="495" height="365" srcset="https://coolshell.cn/wp-content/uploads/2011/03/IE6-Countdown.png 495w, https://coolshell.cn/wp-content/uploads/2011/03/IE6-Countdown-300x221.png 300w, https://coolshell.cn/wp-content/uploads/2011/03/IE6-Countdown-366x270.png 366w" sizes="(max-width: 495px) 100vw, 495px" /></p>
+<p>我查看了一下Coolshell.cn的2011年到今天为止访问统计，排名第一是的Chrome(41.5%)，第二位的是Firefox(23.22%)，第三位的是IE8(10.7%)，第四位的是IE6(4.8%)。IE6的IP数有6400+。</p>
+<p>看来，在我国程序员这个人群中，越来越多的人使用Chrome+Firefox，挺喜人的，但是IE6还有4.8%，还不如土耳其，马来西亚，印尼等国家。<br />
+<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01-150x150.png" alt="新浪微博的XSS攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_title">新浪微博的XSS攻击</a></li><li ><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/affc-image1-150x150.png" alt="微软用新浪来当反面教材" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3872.html" class="wp_rp_title">微软用新浪来当反面教材</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3921.html">中国仍是IE6的重灾区</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3921.html/feed</wfw:commentRss>
+			<slash:comments>56</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Google图片搜索下的的C String</title>
+		<link>https://coolshell.cn/articles/3806.html</link>
+					<comments>https://coolshell.cn/articles/3806.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 04 Mar 2011 04:40:40 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[String]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3806</guid>
+
+					<description><![CDATA[<p>周五了，来轻松一下。如果你在Google的图片搜索里搜索“C String”，你会看到很多相当Sexy的图片，C String真是很性感，丁字裤（T Strin...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3806.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3806.html">Google图片搜索下的的C String</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>周五了，来轻松一下。如果你在Google的图片搜索里搜索“C String”，你会看到很多相当Sexy的图片，C String真是很性感，丁字裤（T String）已经算不了什么了，看了一下图片，才发现原来还有男士了，太猛了。</p>
+<p><a href="http://www.google.com.hk/images?hl=zh-cn&amp;newwindow=1&amp;safe=strict&amp;q=C%20String&amp;um=1&amp;ie=UTF-8&amp;source=og&amp;sa=N&amp;tab=wi&amp;biw=1280&amp;bih=677"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3807" title="Google图片搜索的C String" src="https://coolshell.cn/wp-content/uploads/2011/02/C_String.jpg" alt="" width="500" height="313" srcset="https://coolshell.cn/wp-content/uploads/2011/02/C_String.jpg 500w, https://coolshell.cn/wp-content/uploads/2011/02/C_String-300x188.jpg 300w, https://coolshell.cn/wp-content/uploads/2011/02/C_String-431x270.jpg 431w" sizes="(max-width: 500px) 100vw, 500px" /></a></p>
+<p>如果C String是这个样子，那么，其尾部应该有null终止符，而且最危险的是缓冲区溢出（Buffer Overflow）。哈哈。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3549.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/28.jpg" alt="Android将允许纯C/C++开发应用" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3549.html" class="wp_rp_title">Android将允许纯C/C++开发应用</a></li><li ><a href="https://coolshell.cn/articles/12199.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/22.jpg" alt="C++ STL string的Copy-On-Write技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12199.html" class="wp_rp_title">C++ STL string的Copy-On-Write技术</a></li><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3806.html">Google图片搜索下的的C String</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3806.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一些有意思的贴子和工具</title>
+		<link>https://coolshell.cn/articles/3903.html</link>
+					<comments>https://coolshell.cn/articles/3903.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 04 Mar 2011 00:25:39 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[CSS3]]></category>
+		<category><![CDATA[ebook]]></category>
+		<category><![CDATA[Game]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[iPhone]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3903</guid>
+
+					<description><![CDATA[<p>又到了介绍各种杂项的时候了，正如以前的这三篇（这篇，这篇，和这篇）文章一样，本篇文章也给你介绍一些最近出现的一些有趣的东西。希望你能喜欢。 先说找工作吧，电影《...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3903.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>又到了介绍各种杂项的时候了，正如以前的这三篇（<a title="一些非常有意思的杂项资源" href="https://coolshell.cn/articles/3013.html" target="_blank">这篇</a>，<a title="一些杂项资源" href="https://coolshell.cn/articles/3437.html" target="_blank">这篇</a>，和<a title="一些有意思的网站和贴子" href="https://coolshell.cn/articles/3480.html" target="_blank">这篇</a>）文章一样，本篇文章也给你介绍一些最近出现的一些有趣的东西。希望你能喜欢。</p>
+<p>先说找工作吧，电影《<a title="社交网络（豆瓣）" href="http://movie.douban.com/subject/3205624/" target="_blank">该页无法显示</a>》里的那个<a href="http://www.facebook.com" target="_blank">facebook</a>主页上的<strong><a title="FaceBook的招聘题" href="http://www.facebook.com/careers/puzzles.php" target="_blank">招聘网页</a></strong>上是列了一堆问题，你可以去看看，你可以使用c/c++，Erlang，Haskell，Java，Perl，Python，PHP，Ruby来解题，不过只接受Unix/Linux下的版本， 不接受Windows的版本。无独有偶，<a href="http://www.dropbox.com/" target="_blank">DropBox</a>的<strong><a title="DropBox的招聘题 " href="http://www.dropbox.com/jobs/challenges" target="_blank">招聘网页</a></strong>上也是些算法题，大家可以过去看看，不过需要翻墙。（现在，对于美国互联网企业来说，如果你没有被<a title="中国的C2C模式" href="https://coolshell.cn/articles/3820.html" target="_blank">C2C</a>，说明你根本不存在，如果你没有被墙，说明你还不算成功）</p>
+<p>接下来给大家介绍一些文档和教程吧，都是英文的。</p>
+<ul>
+<li><strong><a href="http://www.harding.edu/fmccown/java_csharp_comparison.html" target="_blank">Java和C#的完整比较</a></strong>。这是一个相当完整的比较Java和C#语言的网页。很有意思，有助于你了解Java和C#的各种特性和不同。</li>
+</ul>
+<ul>
+<li><strong><a href="http://use-the-index-luke.com/" target="_blank">SQL 性能调优</a></strong>。这个文档覆盖了<em>IBM DB2</em>, <em>MySQL</em>, <em>Oracle</em>,<em>PostgreSQL</em> 和 <em>Microsoft SQL Server</em>。不过这个电子书还没有写完，你可以使用其<a href="http://use-the-index-luke.com/blog/feed" target="_blank">RSS</a>, <a href="http://twitter.com/MarkusWinand">twitter</a> 或 <a title="Like on Facebook" href="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Use-The-Index-Luke/157726730906717?ref%3Dts&amp;layout=standard&amp;show_faces=true&amp;width=250&amp;action=like&amp;colorscheme=light&amp;height=80">Facebook</a> 来跟踪其进度。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.cleveralgorithms.com/" target="_blank">Clever Algorithms</a></strong>。这个电子书也是免费的。其主要面向一些AI和面向自然的算法，一共45个。其包括概率随机算法，迭代进化算法，物理算法，可能性算法，蚂蚁蜜蜂式算法，免疫算法，神经算法等。里面大量的高等数学公式对我来说我已经看不懂了。不过，我相信这个电子书非常适合搞理论研究的人，或是需要抄袭一篇论文以顺利毕业的人使用。</li>
+</ul>
+<ul>
+<li><strong><a href="http://blog.gingertech.net/wp-content/uploads/2011/01/LCA_MM_AVProc2011/#slide1" target="_blank">HTML5 Audio &amp; Video 处理</a></strong>。这是一组在线的幻灯片，请使用键盘光标键翻页。这是一组带着各种演示的幻灯片，对于你要学习HTML5的声音和视频相关的知识很有帮助。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.mikeash.com/pyblog/friday-qa-2010-12-31-c-macro-tips-and-tricks.html" target="_blank">C 语言的宏</a></strong>。你想知道C语的宏有哪些有些意思的用法吗？这篇文档不会让你失望的。其由浅入深地向你介绍了宏的各种用法。</li>
+</ul>
+<ul>
+<li><strong><a href="http://stringoftheseus.com/blog/2011/01/10/api-sorting-algorithms/" target="_blank">各种语言的排序算法</a></strong>。你想知道各种语言其默认的排序算法用的是<a title="一个排序算法比较的网站" href="https://coolshell.cn/articles/399.html" target="_blank">哪种排序算法</a>吗？看看这篇文章吧。</li>
+</ul>
+<ul>
+<li><strong><a href="http://fixplz.blourp.com/blog/=phys" target="_blank">物理模拟F#教程</a></strong>。相信你一定玩过那种游戏，画一个任意形状的石头，其会从天上落下以砸下面的一个东西，这个教程用.NET的F#向大家说明了这种东西怎么去做。（<a href="http://fixplz.blourp.com/blog/img/fsphys.rar" target="_blank">演示程序</a>）</li>
+</ul>
+<p><span id="more-3903"></span></p>
+<ul>
+<li><strong><a href="http://www.helixsoft.nl/articles/circle/sincos.htm" target="_blank">Sin &amp; Cos游戏教程</a></strong>。这篇文章向你介绍了一些游戏编程的技术。</li>
+</ul>
+<ul>
+<li><strong><a href="http://damienradtke.org/unofficial-introduction-to-gnome-application-dev/" target="_blank">GNOME开发介绍</a></strong>。这是一个非官方的介绍GNOME应用开发的教程，简单清楚，很适合初学者。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.korokithakis.net/tutorials/python" target="_blank">10分钟学会Python</a></strong>。是的，也许你和我一样，很恨这样几天就学好一门语言的书，比如：<a title="“21天教你学会C++”" href="https://coolshell.cn/articles/2250.html" target="_blank">21天学好C++</a>。这个更夸张，10分钟。TNND。不过，当我看了一下后，我觉得其很适合初学者对Python有一个感性的认识。</li>
+</ul>
+<ul>
+<li><strong><a href="http://nicolasgallagher.com/css-drop-shadows-without-images/" target="_blank">CSS阴影教程</a></strong>。这是一篇教你种CSS做出种式样式的阴影效果的教程，这里是<a href="http://nicolasgallagher.com/css-drop-shadows-without-images/demo/" target="_blank">演示</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="http://gergo.erdi.hu/blog/2011-02-13-developing_iphone_applications_in_haskell___a_tutorial/" target="_blank">用Haskell开发iPhone应用</a></strong>。这是一个教程序，告诉你如何用Haskell开发iOS的应用程序。</li>
+</ul>
+<p>下面，再让我给你介绍一些和Web开发相关的开源的库。</p>
+<ul>
+<li><strong><a href="http://www.photon-project.com/" target="_blank">Photon</a></strong>。这是一个号称高性能的轻量级的PHP应用服务器框架。号称比Zend，Symfony和mod_php快3-10倍。</li>
+</ul>
+<ul>
+<li><strong><a href="http://web.chemdoodle.com/" target="_blank">ChemDoodle</a></strong>。这是一个用来画一些化学分子式的基于HTML5的类库和API，支持2D/3D，很强大。兼容于所有产商的支持HTML5的浏览器。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.limejs.com/" target="_blank">LimeJS</a></strong>。这个JS库可以让你方便得制作一些触摸屏的小游戏。<a href="http://www.limejs.com/static/roundball/index.html" target="_blank">演示一</a>，<a href="http://www.limejs.com/static/zlizer/index.html" target="_blank">演示二</a>。（<a title="JS游戏引擎列表" href="https://coolshell.cn/articles/3516.html" target="_blank">一些游戏相关的JS</a>）</li>
+</ul>
+<ul>
+<li><strong><a href="https://github.com/ruidlopes/spellcheckthejs" target="_blank">拼写检查</a></strong>。这是一个英文拼写检查的JS。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.clips.ua.ac.be/pages/pattern" target="_blank">Pattern</a></strong>。这是东东很强大，用于做Web挖掘，其有一组工具用来从Google, Twitter, Wikipedia，Web爬虫，HTML上获得数据，并进行文本分析和数据图形化显示。你可以上这里看看<a href="http://www.clips.ua.ac.be/demos" target="_blank">相关演示</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.appcelerator.com/products/titanium-mobile-application-development/">Titanium Mobile</a></strong>。你想让你的代码同时支持iPhone和Android吗？这是一个跨平台的开发工具。这里有<a href="http://agiliq.com/blog/2011/02/iphoneandroid-application-development-using-titani/" target="_blank">一个教程</a>。</li>
+</ul>
+<ul>
+<li><strong><a href="http://css3buttons.michaelhenriksen.dk/" target="_blank">CSS3的按钮</a></strong>。这里可以去下载一个CSS3的库，里面有N多的按钮风格，感觉都很酷。</li>
+</ul>
+<p>接下来，介绍一些小工具。</p>
+<ul>
+<li><strong><a href="http://caniuse.com/" target="_blank">Web兼容性表</a></strong>。你想看看各种浏览器对HTML5，CSS3，SVG的支持吗？这个网站可以让你看到所有的主流浏览器的兼容表。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.qgrep.com/" target="_blank">qgrep</a></strong>。嫌grep不够快吗？试试qgrep吧，支持OSX,  Linux 和 Windows。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.cam.hi-ho.ne.jp/oishi/indexen.html" target="_blank">XKeymacs</a></strong>。你有Emacs情结吗？如果有的话，试试这个工具吧，在windows里到处c-x c-c, c-x c-s, c-p, c-n什么什么的。挺有意思的。好吧，不是有意思，是BT。</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.sublimetext.com/blog/articles/sublime-text-2-public-alpha" target="_blank">Sublime Text 2</a></strong>。虽然目前只是Alpha版本，但是这个看上去真的很不错。尤其是用来查看代码。支持Windows, Linux和OSX。</li>
+</ul>
+<ul>
+<li><strong><a href="http://code.google.com/p/vs-android/" target="_blank">VS-Android</a></strong>。这个项目让你可以在Visual Studio 2010的IDE下开发Android NDK C/C++的程序。</li>
+</ul>
+<p>其它东西。</p>
+<ul>
+<li><strong><a href="http://rigaux.org/language-study/scripting-language/" target="_blank">脚本语言排名</a></strong>。这个网页不但对所有的脚本语言进行了排名，还对一些操作进行了比较。</li>
+</ul>
+<ul>
+<li>HTML5的3D演示，这里有几个HTML5的3D演示，你可以看看，<a title="sketch/" href="http://hakim.se/experiments/html5/sketch/#1966de71" target="_blank">演示一</a>，<a title="蛋白质分子式" href="http://jolecule.appspot.com/pdb/1mbo#view:4mfct8" target="_blank">演示二</a>，<a title="立方体" href="http://dl.dropbox.com/u/59304/labs/cubeStable.html" target="_blank">演示三</a>，<a title="坦克游戏" href="http://dl.dropbox.com/u/59304/labs/tankGame.html" target="_blank">演示四</a>。</li>
+</ul>
+<ul>
+<li>说到Web上的3D，你可能需要看看Adobe的<a title="Molehill APIs" href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/features/molehill.html" target="_blank">Molehill (3D GPU accelerated) APIs</a>，这里有一篇<a href="http://www.bytearray.org/?p=2810" target="_blank">介绍文章</a>。</li>
+</ul>
+<ul>
+<li>还记得那个<a title="流体力学的演示" href="https://coolshell.cn/articles/3421.html" target="_blank">流体力学的演示</a>吗？现在有人把其做到了<a href="http://www.infi.nl/blog/view/id/98/Liquid_on_iPhone_and_iPad" target="_blank">iPhone/iPad上</a>。</li>
+</ul>
+<p>就这么多吧，也许没什么意思，那也请你见谅了。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/05/Render-Process-150x150.jpg" alt="浏览器的渲染原理简介" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9666.html" class="wp_rp_title">浏览器的渲染原理简介</a></li><li ><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/03/css-layouts-150x150.gif" alt="CSS 布局:40个教程、技巧、例子和最佳实践" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6840.html" class="wp_rp_title">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li ><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/11/stackparts.com_-150x150.png" alt="一些文章资源和趣闻" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5537.html" class="wp_rp_title">一些文章资源和趣闻</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3903.html/feed</wfw:commentRss>
+			<slash:comments>24</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>另类UX让你输入强口令</title>
+		<link>https://coolshell.cn/articles/3877.html</link>
+					<comments>https://coolshell.cn/articles/3877.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 03 Mar 2011 01:26:41 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[password]]></category>
+		<category><![CDATA[UI]]></category>
+		<category><![CDATA[UX]]></category>
+		<category><![CDATA[口令]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3877</guid>
+
+					<description><![CDATA[<p>昨天和大家说了一下关于口令破解的一些东西，那篇文章告诉我们需要设置一个比较强的不易破解的口令。 今天在网上看到一个强大的jQuery插件，叫NakedPassw...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3877.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p><script src="http://www.nakedpassword.com/javascripts/jquery.js" type="text/javascript"></script> <script src="http://www.nakedpassword.com/javascripts/naked_password.0.2.2.min.js" type="text/javascript"></script></p>
+<p><script type="text/javascript">  	$(document).ready(function() { 	     $("input:password").nakedPassword({path: "http://www.nakedpassword.com/np_images/"}); 		});</script></p>
+<p>昨天和大家说了一下<a title="破解你的口令" href="https://coolshell.cn/articles/3801.html" target="_blank">关于口令破解</a>的一些东西，那篇文章告诉我们需要设置一个比较强的不易破解的口令。</p>
+<p>今天在网上看到一个强大的jQuery插件，叫<a title="NakedPassword.com" href="http://www.nakedpassword.com/" target="_blank">NakedPassword</a>，其通过“<strong>强大的用户体验</strong>”让你输入一个比较强且不易被破解的口令。虽然有点另类，但是我个人相当欣赏这个UX，因为UX实在是太到位了——<strong>只有你输入的口令比较强，图片中的女人才会脱光衣服</strong>。</p>
+<p>下面是演示：</p>
+<p style="text-align: center;">请输入你的口令（输入时出现效果）</p>
+<p style="text-align: center;">
+<input id="test" style="font-size: 25px;" type="password" /></p>
+<p>这个例子和<a title="用户界面和用户体验的差别" href="https://coolshell.cn/articles/3142.html" target="_blank">以前的那个例子</a>一样，告诉你UX设计是重要性。</p>
+<p>（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" alt="CSDN明文口令泄露的启示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_title">CSDN明文口令泄露的启示</a></li><li ><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/passwords-150x150.png" alt="破解你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3801.html" class="wp_rp_title">破解你的口令</a></li><li ><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Twitter的禁用口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_title">Twitter的禁用口令</a></li><li ><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何管理并设计你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_title">如何管理并设计你的口令</a></li><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3877.html/feed</wfw:commentRss>
+			<slash:comments>52</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>微软用新浪来当反面教材</title>
+		<link>https://coolshell.cn/articles/3872.html</link>
+					<comments>https://coolshell.cn/articles/3872.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 03 Mar 2011 00:30:49 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[IE]]></category>
+		<category><![CDATA[Sina]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3872</guid>
+
+					<description><![CDATA[<p>微软的IE的Blog发布了这样一篇文章，以此来展示IE9是如何过滤广告和ActiveX控件的功能。其使用了“新浪”来做为反面案例，新浪并不是第一次成为反面案例了...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3872.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3872.html">微软用新浪来当反面教材</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">微软的<a href="http://blogs.msdn.com/b/ie/" target="_blank">IE的Blog</a>发布了这样<a href="http://ie.microsoft.com/testdrive/IEBlog/2011/Feb/affc-image1.png" target="_blank">一篇文章</a>，以此来展示IE9是如何过滤广告和ActiveX控件的功能。其使用了“新浪”来做为反面案例，新浪并不是第一次成为反面案例了，之前就有人用新浪等网站来表明<a title="为什么中国的网页设计那么烂？" href="https://coolshell.cn/articles/3605.html" target="_blank">中国的网站的设计是怎么个烂法</a>。呵呵。伟大的新浪。</p>
+<p>下面是新浪的在IE9下没有开启过滤的样子，我们要吧看到满天飞的flash，广告，还有视频……</p>
+<div class="mceTemp mceIEcenter" style="text-align: left;">
+<dl class="wp-caption aligncenter" style="width: 575px;">
+<dt class="wp-caption-dt"><a href="http://ie.microsoft.com/testdrive/IEBlog/2011/Feb/affc-image1.png"><img decoding="async" loading="lazy" class="  " title="新浪网站没有使用IE9的过滤功能" src="http://ie.microsoft.com/testdrive/IEBlog/2011/Feb/affc-image1.png" alt="新浪网站没有使用IE9的过滤功能" width="565" height="411" /></a></dt>
+<dd class="wp-caption-dd">新浪网站没有使用IE9的过滤功能</dd>
+</dl>
+</div>
+<p style="text-align: left;">下面是开启了过滤功能后的新浪网页（个人感觉还是那么乱，没办法底子太差了）</p>
+<p style="text-align: left;"><span id="more-3872"></span></p>
+<figure style="width: 565px" class="wp-caption aligncenter"><a href="http://ie.microsoft.com/testdrive/IEBlog/2011/Feb/affc-image2.png"><img decoding="async" loading="lazy" class="  " title="IE9开启了ActiveX过滤功能后的新浪网页" src="http://ie.microsoft.com/testdrive/IEBlog/2011/Feb/affc-image2.png" alt="IE9开启了ActiveX过滤功能后的新浪网页" width="565" height="411" /></a><figcaption class="wp-caption-text">IE9开启了ActiveX过滤功能后的新浪网页</figcaption></figure>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/5247.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="国内微博和Twitter的最大不同" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5247.html" class="wp_rp_title">国内微博和Twitter的最大不同</a></li><li ><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01-150x150.png" alt="新浪微博的XSS攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_title">新浪微博的XSS攻击</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3872.html">微软用新浪来当反面教材</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3872.html/feed</wfw:commentRss>
+			<slash:comments>28</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>中国的C2C模式</title>
+		<link>https://coolshell.cn/articles/3820.html</link>
+					<comments>https://coolshell.cn/articles/3820.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 02 Mar 2011 00:58:17 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[C2C]]></category>
+		<category><![CDATA[Web]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3820</guid>
+
+					<description><![CDATA[<p>C2C不是电了商务里的C2C，而是Copy to China的缩写，以前，我们以Made in China著称，现在我们会以C2C著称。toxicat制作了下面...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3820.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3820.html">中国的C2C模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<p style="text-align: left;">C2C不是电了商务里的C2C，而是Copy to China的缩写，以前，我们以Made in China著称，现在我们会以C2C著称。toxicat制作了下面这个图片(<a href="http://9gag.com/gag/83592" target="_blank">源图</a>)，大家慢慢欣赏，我相信，如果要把所有的C2C都列上去的话，那么，可能会上很长的一个图片。还记得那篇<a title="为什么中国的网页设计那么烂？" href="https://coolshell.cn/articles/3605.html" target="_blank">为什么中国的网页设计那么烂？</a>吗？呵呵。何止是互联网，其它东西不也是C2C吗？</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3822" title="Copy to China" src="https://coolshell.cn/wp-content/uploads/2011/03/C2C_cover.jpg" alt="" width="489" height="234" srcset="https://coolshell.cn/wp-content/uploads/2011/03/C2C_cover.jpg 698w, https://coolshell.cn/wp-content/uploads/2011/03/C2C_cover-300x144.jpg 300w, https://coolshell.cn/wp-content/uploads/2011/03/C2C_cover-563x270.jpg 563w" sizes="(max-width: 489px) 100vw, 489px" /></p>
+<p style="text-align: left;"><span id="more-3820"></span><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3821" title="伟大的C2C模式" src="https://coolshell.cn/wp-content/uploads/2011/03/C2C.jpg" alt="" width="698" height="5194" /></p>
+<p style="text-align: left;">————————————————</p>
+<p style="text-align: left;">与此同时，<a href="http://cn.reuters.com/article/CNTopGenNews/idCNCHINA-3878520110301" target="_blank">路透社报道</a>: 美国将百度列入“恶名市场”名单 &#8211; 美国政府周一再次将中国最大网络搜索引擎百度列入假冒和盗版产品的年度“恶名市场”名单。美国企业界希望此名单能促使美国国会对这些“流氓网站”采取行动。（<a href="http://www.bbc.co.uk/zhongwen/simp/world/2011/03/110301_china_usa_trade_piracy.shtml" target="_blank">BBC</a>：与百度一同被列入此名单的还有淘宝、北京秀水街、北京海龙电脑市场、上海杨浦颐高数码城、深圳罗湖市场、香港女人街、义务小商品市场、<a href="http://91.com/" target="_blank">91.com</a>，以及TV Ants）</p>
+<p style="text-align: left;">（全文完）</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/1053-DHH-150x150.jpg" alt="DHH 谈混合移动应用开发" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12225.html" class="wp_rp_title">DHH 谈混合移动应用开发</a></li><li ><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/12/html6-150x150.jpeg" alt="HTML6 展望" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12206.html" class="wp_rp_title">HTML6 展望</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3820.html">中国的C2C模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3820.html/feed</wfw:commentRss>
+			<slash:comments>63</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>破解你的口令</title>
+		<link>https://coolshell.cn/articles/3801.html</link>
+					<comments>https://coolshell.cn/articles/3801.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 02 Mar 2011 00:35:48 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[bcrypt]]></category>
+		<category><![CDATA[password]]></category>
+		<category><![CDATA[口令]]></category>
+		<category><![CDATA[安全]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3801</guid>
+
+					<description><![CDATA[<p>在网上看到一张口令破解的表格，如下所示（第一列是口令长度，第二列是全小写的口令，第三列是有大写字母的口令，第四列是又加上了数字和其它字符的口令） 如果你想知道自...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3801.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3801.html">破解你的口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>在网上看到一张口令破解的表格，如下所示（第一列是口令长度，第二列是全小写的口令，第三列是有大写字母的口令，第四列是又加上了数字和其它字符的口令）</p>
+<p><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-3802" title="破解你的口令所需要的时间" src="https://coolshell.cn/wp-content/uploads/2011/02/passwords.png" alt="" width="500" height="163" srcset="https://coolshell.cn/wp-content/uploads/2011/02/passwords.png 500w, https://coolshell.cn/wp-content/uploads/2011/02/passwords-300x98.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p>如果你想知道自己的口令花多少时间可以被破确，你可以访问下面这个网站：（<strong><em>更新2011/3/2晚10点15</em></strong>）</p>
+<p style="text-align: center;"><strong><a href="http://howsecureismypassword.net/" target="_blank">http://howsecureismypassword.net/</a></strong></p>
+<p>这里先说一个这里说的口令破解。一般来说用户的口令都是以MD5编码加密放在数据库里的，MD5是不可逆的，所以，当你拿到你一串被MD5后的字串，你可以使用暴力破解——穷举所有的可能口令的MD5字串，然后和数据库里的对比，比对了你就知道口令了。当然，你一定要清楚，在某些审查很严重的地方，互联网内容提供商不一定会把你的口令以MD5加密，甚至就是明文（Plain Text）保存，所以你还需要小心，关于如何设计你的口令，<a title="如何设计你的口令" href="https://coolshell.cn/articles/2428.html" target="_blank">请参看这篇文章</a>。</p>
+<p>从上面这表格我们可以看到，你的口令最好是在8个长度以上，而且一定要有在小写和数字，最好再加上其它字符，这样你的口令被破解的时候最需要463年，这样就比较安全了。当然，如果你的口令使用了一些常用的单词，那就另说了，现在破解口令一般都不会使用暴力破解，都是用一个尝用口令字典表来尝试——比如<a title="Twitter的禁用口令" href="https://coolshell.cn/articles/2451.html" target="_blank">这篇文章所说的字典表</a>。</p>
+<p>但我提醒一下，这张表里中的时间忽略了一个问题，那就是并行，<strong>可以使用多台电脑多个进程并行破解口令</strong>，这样一来，上表中的时间就可大打折扣了。你只需要愿意花2000美刀，你就能够找到一个地方，1秒种计算7亿个口令，因为MD5，SHA这类的算法性能太好了。所以，你可能需要使用新的算法来加密你的口令，这种算法最好加上时间，也就是在算法的计算时间加长。呵呵，慢也有慢的好处。可能你需要考虑一下bcrypt算法，你<a title="如何防范密码被破解" href="https://coolshell.cn/articles/2078.html" target="_blank">可以查看本站的这篇文章</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li><li ><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" alt="CSDN明文口令泄露的启示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/6193.html" class="wp_rp_title">CSDN明文口令泄露的启示</a></li><li ><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="你会做Web上的用户登录功能吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5353.html" class="wp_rp_title">你会做Web上的用户登录功能吗？</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="Twitter的禁用口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2451.html" class="wp_rp_title">Twitter的禁用口令</a></li><li ><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="如何管理并设计你的口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2428.html" class="wp_rp_title">如何管理并设计你的口令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3801.html">破解你的口令</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3801.html/feed</wfw:commentRss>
+			<slash:comments>44</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>如何调试makefile变量</title>
+		<link>https://coolshell.cn/articles/3790.html</link>
+					<comments>https://coolshell.cn/articles/3790.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 01 Mar 2011 00:34:38 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[makefile]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3790</guid>
+
+					<description><![CDATA[<p>六、七年前写过一篇《跟我一起写Makefile》，直到今天，还有一些朋友问我一些Makefile的问题，老实说，我有一段时间没有用Makefile了，生疏了。回...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3790.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3790.html">如何调试makefile变量</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>六、七年前写过一篇《<a title="跟我一起写Makefile" href="http://blog.csdn.net/haoel/archive/2004/02/24/2886.aspx" target="_blank">跟我一起写Makefile</a>》，直到今天，还有一些朋友问我一些Makefile的问题，老实说，我有一段时间没有用Makefile了，生疏了。回顾，这几年来大家问题我的问题，其实很多时候是makefile的调试问题。所以，就像我在之前的那篇<a title="GDB中应该知道的几个调试方法" href="https://coolshell.cn/articles/3643.html" target="_blank">关于GDB的技巧的文章</a>中做的一样，在这里向大家介绍一个小小的调试变量的技巧。相信一定对你有用。</p>
+<p>对于Makefile中的各种变量，可能是我们比较头痛的事了。我们要查看他们并不是很方便，需要修改makefile加入echo命令。这有时候很不方便。其实我们可以制作下面一个专门用来输出变量的makefile（假设名字叫：vars.mk）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+%:
+        @echo &#039;$*=$($*)&#039;
+
+d-%:
+        @echo &#039;$*=$($*)&#039;
+        @echo &#039;  origin = $(origin $*)&#039;
+        @echo &#039;   value = $(value  $*)&#039;
+        @echo &#039;  flavor = $(flavor $*)&#039;
+</pre>
+<p>这样一来，我们可以使用make命令的-f参数来查看makefile中的相关变量（包括make的内建变量，比如：COMPILE.c或MAKE_VERSION之类的）。<strong>注意：第二个以“d-”为前缀的目标可以用来打印关于这个变量更为详细的东西</strong>（后面有详细说明）<br />
+<span id="more-3790"></span></p>
+<p>假设我们的makefile是这个样子（test.mk）</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+
+OBJDIR := objdir
+OBJS := $(addprefix $(OBJDIR)/,foo.o bar.o baz.o)
+
+foo = $(bar)bar = $(ugh)ugh = Huh?
+
+CFLAGS = $(include_dirs) -O
+include_dirs = -Ifoo -Ibar
+CFLAGS := $(CFLAGS) -Wall
+
+MYOBJ := a.o b.o c.o
+MYSRC := $(MYOBJ:.o=.c)</pre>
+<p>那么，我们可以这样进行调试：</p>
+<pre data-enlighter-language="shell" class="EnlighterJSRAW">
+
+[hchen@RHELSVR5]$ make -f test.mk -f var.mk OBJS
+OBJS=objdir/foo.o objdir/bar.o objdir/baz.o
+
+[hchen@RHELSVR5]$ make -f test.mk -f var.mk d-foo
+foo=Huh?
+  origin = file
+  value = $(bar)
+  flavor = recursive
+
+[hchen@RHELSVR5]$ make -f test.mk -f var.mk d-CFLAGS
+CFLAGS=-Ifoo -Ibar -O -O
+  origin = file
+  value = -Ifoo -Ibar -O -O
+  flavor = simple
+
+[hchen@RHELSVR5]$  make -f test.mk -f var.mk d-COMPILE.c
+COMPILE.c=cc -Ifoo -Ibar -O -Wall   -c
+  origin = default
+  flavor = recursive
+   value = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+</pre>
+<p>我们可以看到：</p>
+<ul>
+<li>make的第一个-f后是要测试的makefile，第二个是我们的debug makefile。</li>
+<li>后面直接跟变量名，如果在变量名前加&#8221;d-&#8220;，则输出更为详细的东西。</li>
+</ul>
+<p>说一说&#8221;d-&#8221; 前缀（其意为details），其中调用了下面三个参数。</p>
+<ul>
+<li><span style="font-family: 'Courier New';"><a style="font-family: 'Courier New';" href="http://www.gnu.org/software/make/manual/make.html#Origin-Function">$(origin)</a><span style="font-family: 'Courier New';">：告诉你这个变量是来自哪儿，file表示文件，environment表示环境变量，还有environment override，command line，override，automatic等。</span></span></li>
+<li><span style="font-family: 'Courier New';"><a href="http://www.gnu.org/software/make/manual/make.html#Value-Function">$(value)</a>：打出这个变量没有被展开的样子。比如上述示例中的 foo 变量。</span></li>
+<li><span style="font-family: 'Courier New';"><a href="http://www.gnu.org/software/make/manual/make.html#Flavor-Function">$(flavor)</a>：有两个值，simple表示是一般展开的变量，recursive表示递归展开的变量。</span></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3790.html">如何调试makefile变量</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3790.html/feed</wfw:commentRss>
+			<slash:comments>35</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>打印质数的各种算法</title>
+		<link>https://coolshell.cn/articles/3738.html</link>
+					<comments>https://coolshell.cn/articles/3738.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 28 Feb 2011 01:14:10 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[趣味问题]]></category>
+		<category><![CDATA[Algorithm]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Coding]]></category>
+		<category><![CDATA[Puzzle]]></category>
+		<category><![CDATA[Template]]></category>
+		<category><![CDATA[面试]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3738</guid>
+
+					<description><![CDATA[<p>打印质数的算法应该是学习计算机编程的一个经典的问题，在这里想给大家展示一些方法，相信这些方法会对你的编程有一定的启发作用。请你注意几点， 实际应用和教学应用有很...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3738.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3738.html">打印质数的各种算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>打印质数的算法应该是学习计算机编程的一个经典的问题，在这里想给大家展示一些方法，相信这些方法会对你的编程有一定的启发作用。请你注意几点，</p>
+<ul>
+<li>实际应用和教学应用有很大的差别。</li>
+<li>最后的那个使用编译时而不是运行时的方法大家可以重点看看。</li>
+</ul>
+<h4>教科书的示例</h4>
+<p>首先，先给一个教科书的示例。下面这个示例应该是教科书（至少是我上大学时的教科学）中算法复杂度最好的例子了。其想法很简单，先写一个判断是否是质数的函数isPrime()，然后从1到n分别调用isPrime()函数来检查。检查是否是质数的算法是核心，其简单的使用从2到n的开根的数作为除数。这样的算法复杂度几乎是O(n*log(n))，看上去不错，但其实很不经济。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+#include &lt;iostream&gt;
+using namespace std;
+
+bool isPrime(int nr)
+{
+    for (int d = 2; (d * d) &lt; (nr + 1); ++d){
+        if (!(nr % d)){
+            return false;
+        }
+     }
+    return true;
+}
+
+int main (int argc, char * const argv[])
+{
+    for (int i = 0; i &lt; 50; ++i){
+        if (isPrime(i)){
+            cout &lt;&lt; i &lt;&lt; endl;
+        }
+    }
+}
+</pre>
+<h4><span id="more-3738"></span>较好的算法</h4>
+<p>我们知道，我们的算法如果写成线性算法，也就是O(n)，已经算是不错了，但是最好的是O(Log(n))的算法，这是一个对数级的算法，著名的二分取中（Binary Search）正是O(Log(n))的算法。<strong>通常来说，O(Log(n))的算法都是以排除法做为手段的</strong>。所以，找质数的算法完全可以采用排除法的方式。如下所示，这种算法的复杂度是<em>O</em><em>(n(log(logn)))。</em></p>
+<p><strong>示例：打印30以内的质数</strong></p>
+<p>一、初始化如下列表。</p>
+<pre> 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30</pre>
+<p>二、把第一个数（2）取出来，去掉所有可以被2整除的数。</p>
+<pre> 2  3     5     7     9    11    13    15    17    19    21    23    25    27    29</pre>
+<p>三、取第二个数（3），去掉所有可以被 3整除的数。</p>
+<pre> 2  3     5     7          11    13          17    19          23    25          29</pre>
+<p>四、取第三个数（5），因为4已经被去除了，再去掉所有可以被5整除的数。</p>
+<pre> 2  3     5     7          11    13          17    19          23                29</pre>
+<p>接下来的数是7，但是7的平方是49，其大于了30，所以我们可以停止计算了。剩下的数就是所有的质数了。</p>
+<h4>实际应用的算法</h4>
+<p>实际应用中，我们通常不会使用上述的两种算法，因为那是理论学院派的算法。实际中的算法是，我把质数事先就计算好，放在一个文件中，然后在程序启动时（注意是在启动时读这个文件，而不是运行时每调用一次就读一次文件），读取这个文件，然后打印出来就可以了。如果需要查找的化，二分查找或是hash表查找将会获得巨大的性能提升。当然，这样的方法对于空间来说比前面两个都要消耗得大，但是你可以有O(log(n))或是O(1)的时间复杂度。</p>
+<p>所以，我想在这里提醒大家——<strong>实际和理论的的方法很不一样的</strong>，千万不要读书读成书呆子。在游戏编程的世界里，大量的数据都不是运行计算的，而都是写在文件中的。比如，一个火焰效果，一个人物跑动的动作，都是事先写在文件中的。</p>
+<h4>使用编译时而不是运行时</h4>
+<p>下面这个例子（本例参考于<a href="http://www.intermediaware.com/blog/846/hack-of-the-day-fast-prime-numbers" target="_blank">这里</a>）你需要注意了，这是一个高级用法，使用模式来在编译时计算质数，而不是运行时。这种技术使用了C++编译器对模板的特化时的处理来生成自己相要的结果。这种方法在技术上是相当Cool的，但并不一定实用，这里只是想像大家展示这种用法。这是C++的最骨灰级的用法了。</p>
+<p>请看下面的两个模板类，第一个模板以递归的方式检查是否是质数，第二个方法是递归的退出条件（当N=1时），对于模板的重载，请参看相关的C++书籍。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+template&lt;int N, int D = N - 1&gt;
+struct isPrime {
+    enum {
+        result = (N % D) &amp;&amp; isPrime&lt;N, D-1&gt;::result
+    };
+};
+
+template&lt;int N&gt;
+struct isPrime&lt;N, 1&gt; {
+    enum {
+        result = true
+    };
+};
+</pre>
+<p>于是，通过这个模板，我们可以使用下面的代码来检查是否是质数：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+if (isPrime&lt;3&gt;::result)
+    cout &lt;&lt; &quot;Guess what: 3 is a prime!&quot;;
+</pre>
+<p>下一步，我们需要打出一个区间内的质数，所以，我们需要继续设计我们的print模板。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+template&lt;int N, bool ISPRIME&gt;
+struct printIfPrime {
+    static inline void print() {}
+};
+
+template &lt;int N&gt;
+struct printIfPrime&lt;N, true&gt; {
+    static inline void print() {
+        std::cout &lt;&lt; N &lt;&lt; endl;
+    }
+};
+</pre>
+<p>从上面的代码中，我们可以看到，我们的第一个实际是什么也没做，而第二个有输出，注意第二个的模板参数中有一个true，其意味着那个质数的判断。于是我们就可以给出下面的代码来尝试着打印出一段区间内的质数：（<strong>请不要编译！！</strong>因为那会让编译器进入无限循环中，原因是printPrimes会不停地调用自己永不停止）</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+template&lt;int N, int MAX&gt;
+struct printPrimes {
+    static inline void print()
+    {
+        printIfPrime&lt;N, isPrime&lt;N&gt;::result&gt;::print();
+        printPrimes&lt;N + 1, MAX&gt;::print();
+    }
+};
+</pre>
+<p>为了避免这个问题，你需要再加一个模板类，如下所示。这样当N变成MAX的时候，递归就结束了。</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+template&lt;int N&gt;
+struct printPrimes&lt;N, N&gt; {
+    static inline void print() {
+        printIfPrime&lt;N, isPrime&lt;N&gt;::result&gt;::print();
+    }
+};
+</pre>
+<p>最后，让我们来看看最终的调用：</p>
+<pre data-enlighter-language="c" class="EnlighterJSRAW">
+int main (int argc, char * const argv[])
+{
+    printPrimes&lt;2, 40&gt;::print();
+    return 0;
+}
+</pre>
+<p>这个方法很NB，但是有两个问题：</p>
+<ul>
+<li>比较耗编译时间。</li>
+<li>不能在运行时输入MAX的值。</li>
+</ul>
+<p>不过，相信这种玩法会启动你很多的编程思路。</p>
+<p>当然，还有以前说过的那个——《<span style="font-weight: bold;"><a title="检查素数的正则表达式" rel="bookmark" href="https://coolshell.cn/articles/2704.html" target="_blank">检查素数的正则表达式</a></span>》</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="http://coolshell.cn/articles/7965.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/fork01jpg-150x150.jpg" alt="一个fork的面试题" width="150" height="150" /></a><a href="http://coolshell.cn/articles/7965.html" class="wp_rp_title">一个fork的面试题</a></li><li ><a href="http://coolshell.cn/articles/1857.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="C 语言整型谜题" width="150" height="150" /></a><a href="http://coolshell.cn/articles/1857.html" class="wp_rp_title">C 语言整型谜题</a></li><li ><a href="http://coolshell.cn/articles/6010.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="一些有意思的算法代码" width="150" height="150" /></a><a href="http://coolshell.cn/articles/6010.html" class="wp_rp_title">一些有意思的算法代码</a></li><li ><a href="http://coolshell.cn/articles/3961.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/8.jpg" alt="“火柴棍式”程序员面试题" width="150" height="150" /></a><a href="http://coolshell.cn/articles/3961.html" class="wp_rp_title">“火柴棍式”程序员面试题</a></li><li ><a href="http://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="http://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3738.html">打印质数的各种算法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3738.html/feed</wfw:commentRss>
+			<slash:comments>45</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>（麻省理工免费课程）计算机科学和编程导论</title>
+		<link>https://coolshell.cn/articles/3723.html</link>
+					<comments>https://coolshell.cn/articles/3723.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 28 Feb 2011 00:25:07 +0000</pubDate>
+				<category><![CDATA[技术读物]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[程序设计]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Course]]></category>
+		<category><![CDATA[ebook]]></category>
+		<category><![CDATA[MIT]]></category>
+		<category><![CDATA[Programming]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3723</guid>
+
+					<description><![CDATA[<p>以前本站推荐过麻省理工的C/C++的课程，今天在他们的网站看到上有一组关于计算机科学和编程导论的免费公开课（视频是Youtube的），我看了几个课程，我觉得讲得...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3723.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3723.html">（麻省理工免费课程）计算机科学和编程导论</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站推荐过<a href="https://coolshell.cn/articles/2474.html" target="_blank">麻省理工的C/C++的课程</a>，今天在他们的网站看到上有一组关于<a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/" target="_blank">计算机科学和编程导论的免费公开课</a>（视频是Youtube的），我看了几个课程，我觉得讲得很系统啊，而且有一点一通百通的感觉。虽然是理论课，但是可以感到我国的教育还是有很大差距的。这个组课程推荐给大家（需要翻墙），视频都有字幕，计算机科学系毕业的同学应该会很容易听懂。强烈推荐。（网友Aslan指出已经有人搬运到优酷上了，<a href="http://www.youku.com/playlist_show/id_3940564_ascending_1_mode_pic_page_1.html" target="_blank">链接在这里</a>，遗憾的是没有字幕，另外，不知道为什么会说是Python学习）</p>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="1: Introduction and Goals; Data Types, Operators, and Variables" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-1">&nbsp;</p>
+<p></a><a title="1: Introduction and Goals; Data Types, Operators, and Variables" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-1"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-1/lec01.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">1: Introduction and Goals; Data Types, Operators, and Variables</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-1">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p0.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="2: Branching, Conditionals, and Iteration" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-2">&nbsp;</p>
+<p></a><a title="2: Branching, Conditionals, and Iteration" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-2"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-2/lec02.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">2: Branching, Conditionals, and Iteration</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-2">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p1.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="3: Common Code Patterns: Iterative Programs" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-3">&nbsp;</p>
+<p></a><a title="3: Common Code Patterns: Iterative Programs" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-3"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-3/lec03.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">3: Common Code Patterns: Iterative Programs</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-3">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p2.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<p><span id="more-3723"></span></p>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="4: Abstraction through Functions; Introduction to Recursion" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-4">&nbsp;</p>
+<p></a><a title="4: Abstraction through Functions; Introduction to Recursion" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-4"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-4/lec04.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">4: Abstraction through Functions; Introduction to Recursion</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-4">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p3.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="5: Floating Point Numbers, Successive Refinement, Finding Roots" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-5">&nbsp;</p>
+<p></a><a title="5: Floating Point Numbers, Successive Refinement, Finding Roots" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-5"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-5/lec05.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">5: Floating Point Numbers, Successive Refinement, Finding Roots</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-5">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p4.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="6: Bisection Methods, Newton/Raphson, Introduction to Lists" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-6">&nbsp;</p>
+<p></a><a title="6: Bisection Methods, Newton/Raphson, Introduction to Lists" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-6"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-6/lec06.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">6: Bisection Methods, Newton/Raphson, Introduction to Lists</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-6">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p5.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="7: Lists and Mutability, Dictionaries, Introduction to Efficiency" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-7">&nbsp;</p>
+<p></a><a title="7: Lists and Mutability, Dictionaries, Introduction to Efficiency" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-7"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-7/lec07.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">7: Lists and Mutability, Dictionaries, Introduction to Efficiency</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-7">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p6.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="8: Complexity: Log, Linear, Quadratic, Exponential Algorithms" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-8">&nbsp;</p>
+<p></a><a title="8: Complexity: Log, Linear, Quadratic, Exponential Algorithms" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-8"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-8/lec08.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">8: Complexity: Log, Linear, Quadratic, Exponential Algorithms</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-8">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p7.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="9: Binary Search, Bubble and Selection Sorts" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-9">&nbsp;</p>
+<p></a><a title="9: Binary Search, Bubble and Selection Sorts" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-9"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-9/lec09.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">9: Binary Search, Bubble and Selection Sorts</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-9">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p8.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="10: Divide and Conquer Methods, Merge Sort, Exceptions" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-10">&nbsp;</p>
+<p></a><a title="10: Divide and Conquer Methods, Merge Sort, Exceptions" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-10"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-10/lec10.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">10: Divide and Conquer Methods, Merge Sort, Exceptions</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-10">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p9.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="11: Testing and Debugging" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-11">&nbsp;</p>
+<p></a><a title="11: Testing and Debugging" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-11"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-11/lec11.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">11: Testing and Debugging</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-11">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p10.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="12: Debugging, Knapsack Problem, Introduction to Dynamic Programming" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-12">&nbsp;</p>
+<p></a><a title="12: Debugging, Knapsack Problem, Introduction to Dynamic Programming" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-12"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-12/lec12.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">12: Debugging, Knapsack Problem, Introduction to Dynamic Programming</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-12">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p11.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="13: Dynamic Programming: Overlapping Subproblems, Optimal Substructure" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-13">&nbsp;</p>
+<p></a><a title="13: Dynamic Programming: Overlapping Subproblems, Optimal Substructure" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-13"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-13/lec13.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">13: Dynamic Programming: Overlapping Subproblems, Optimal Substructure</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-13">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p12.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="14: Introduction to Object-oriented Programming" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-14">&nbsp;</p>
+<p></a><a title="14: Introduction to Object-oriented Programming" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-14"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-14/lec14.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">14: Introduction to Object-oriented Programming</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-14">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p13.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="15: Abstract Data Types, Classes and Methods" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-15">&nbsp;</p>
+<p></a><a title="15: Abstract Data Types, Classes and Methods" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-15"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-15/lec15.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">15: Abstract Data Types, Classes and Methods</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-15">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p14.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="16: Encapsulation, Inheritance, Shadowing" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-16">&nbsp;</p>
+<p></a><a title="16: Encapsulation, Inheritance, Shadowing" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-16"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-16/lec16.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">16: Encapsulation, Inheritance, Shadowing</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-16">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p15.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="17: Computational Models: Random Walk Simulation" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-17">&nbsp;</p>
+<p></a><a title="17: Computational Models: Random Walk Simulation" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-17"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-17/lec17.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">17: Computational Models: Random Walk Simulation</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-17">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p16.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="18: Presenting Simulation Results, Pylab, Plotting" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-18">&nbsp;</p>
+<p></a><a title="18: Presenting Simulation Results, Pylab, Plotting" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-18"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-18/lec18.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">18: Presenting Simulation Results, Pylab, Plotting</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-18">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p17.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="19: Biased Random Walks, Distributions" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-19">&nbsp;</p>
+<p></a><a title="19: Biased Random Walks, Distributions" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-19"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-19/lec19.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">19: Biased Random Walks, Distributions</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-19">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p18.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="20: Monte Carlo Simulations, Estimating pi" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-20">&nbsp;</p>
+<p></a><a title="20: Monte Carlo Simulations, Estimating pi" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-20"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-20/lec20.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">20: Monte Carlo Simulations, Estimating pi</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-20">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p19.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="21: Validating Simulation Results, Curve Fitting, Linear Regression" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-21">&nbsp;</p>
+<p></a><a title="21: Validating Simulation Results, Curve Fitting, Linear Regression" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-21"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-21/lec21.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">21: Validating Simulation Results, Curve Fitting, Linear Regression</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-21">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p20.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="22: Normal, Uniform, and Exponential Distributions" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-22">&nbsp;</p>
+<p></a><a title="22: Normal, Uniform, and Exponential Distributions" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-22"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-22/lec22.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">22: Normal, Uniform, and Exponential Distributions</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-22">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p21.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="23: Stock Market Simulation" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-23">&nbsp;</p>
+<p></a><a title="23: Stock Market Simulation" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-23"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-23/lec23.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">23: Stock Market Simulation</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-23">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p22.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+<tr>
+<td width="120"><a title="24: Course Overview; What Do Computer Scientists Do?" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-24">&nbsp;</p>
+<p></a><a title="24: Course Overview; What Do Computer Scientists Do?" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-24"><img decoding="async" src="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-24/lec24.jpg" alt="" /></a></td>
+<td>
+<p class="mediatitle">24: Course Overview; What Do Computer Scientists Do?</p>
+<p><a class="bullet medialink" href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00-introduction-to-computer-science-and-programming-fall-2008/video-lectures/lecture-24">Youtube（英文字幕）</a></p>
+<p><a href="http://v.youku.com/v_playlist/f4862914o1p23.html" target="_blank">优酷（无字幕）</a></td>
+</tr>
+</tbody>
+</table>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4657.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/05/OSS-License-150x150.jpg" alt="狗日的开源软件许可证" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4657.html" class="wp_rp_title">狗日的开源软件许可证</a></li><li ><a href="https://coolshell.cn/articles/2474.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="（麻省理工免费课程）C语言内存管理和C++面向对象编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2474.html" class="wp_rp_title">（麻省理工免费课程）C语言内存管理和C++面向对象编程</a></li><li ><a href="https://coolshell.cn/articles/19612.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" alt="50年前的登月程序和程序员有多硬核" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19612.html" class="wp_rp_title">50年前的登月程序和程序员有多硬核</a></li><li ><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/06/go-hardhat-150x150.png" alt="Go编程模式：修饰器" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17929.html" class="wp_rp_title">Go编程模式：修饰器</a></li><li ><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/04/IMG_7411-150x150.jpg" alt="如何重构“箭头型”代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17757.html" class="wp_rp_title">如何重构“箭头型”代码</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3723.html">（麻省理工免费课程）计算机科学和编程导论</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3723.html/feed</wfw:commentRss>
+			<slash:comments>171</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>敏捷水管工</title>
+		<link>https://coolshell.cn/articles/3778.html</link>
+					<comments>https://coolshell.cn/articles/3778.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 25 Feb 2011 00:39:44 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[pair-programming]]></category>
+		<category><![CDATA[TDD]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3778</guid>
+
+					<description><![CDATA[<p>本文来自Terazen Technology Inc的创始人+CTO的 David Ing的《Agile Plumbers》（这也墙？），我的其文中的这个帮事翻...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3778.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3778.html">敏捷水管工</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>本文来自Terazen Technology Inc的创始人+CTO的 <a href="http://ca.linkedin.com/in/davidjing" target="_blank">David Ing</a>的《<a href="http://david.ing.name/2010/12/24/agile-plumbers/" target="_blank">Agile Plumbers</a>》（这也墙？），我的其文中的这个帮事翻译过来（和前些天发的<a title="SOAP的S是Simple" href="https://coolshell.cn/articles/3585.html">SOAP的S是Simple</a>异曲同工）。</p>
+<p>也许你会觉得这个比喻不恰当。但我想告诉你的是，这个故事告诉我们，教条主义和以方法论为中心的危险。<a title="十条不错的编程观点" href="https://coolshell.cn/articles/2424.html" target="_blank">十条不错的编程观点</a>中第一条—— <strong>The only “best practice” you should be using all the time is “<span style="color: #ff0000;">Use Your Brain</span>”.</strong></p>
+<p>————————————————————</p>
+<p>(门铃响……)</p>
+<p><strong>事主：</strong>啊, Agile 水管工吗？ 请进，感谢谢你们这么快就来了——这的确很紧急，我这真是很乱。</p>
+<p><strong>水管工1</strong>: 先生，没问题，我们就是敏捷的。在我给你做Presentation前，我先给你介绍一下我的两个同事。</p>
+<p><strong>事主</strong>：Presentation？啊，我们有时间吗？这的水已经流得到处都是了……</p>
+<p><strong>水管工1</strong>：……先生，我们必需坚持这个。我们只是想保证你能成为动态搜寻解决方法的一份子。你是我们的 champion sponsor，也就是我们团队内的 consultant！你可以提供一个白板给我们使用吗？</p>
+<p><strong>事主</strong>：我没听懂，你们不觉得这变复杂了吗？我觉得我应该告诉你们这水是从房子哪儿流出来的，就是那……</p>
+<p><strong>水管工2</strong>：你这有让我脱衣服的地儿吗？</p>
+<p><strong>事主</strong>：什么？</p>
+<p><span id="more-3778"></span></p>
+<p><strong>水管工2</strong>：我要坐在你的浴盆里——我还需要肥皂和托鞋。因为我们运作的方法是“测试驱动”， Red, Green, Red。你可以看到我们是怎么驱动的……</p>
+<p><strong>事主</strong>：为什么你会需要这样做？水都从楼梯上流下来了，水管爆裂了，马桶堵了，你能现在就开始吗？</p>
+<p><strong>水管工3</strong>：非常不错的feedback——感谢你！你介意先填一下这些 3&#215;5 的卡片吗？我希望你能使用名词，让我们迭代一下刚才你说的“水灾……</p>
+<p><strong>水管工1</strong>：别那么着急，Domain Model 可以等的，让我们现在先生成一些想法——我们应该先把所有的业务需求都写出来，然后调查其动机。先生，是不是所有的功能都是 “关键业务’”？你能先给马桶评个等级吗？另外，如果你有100美金……</p>
+<p><strong>事主</strong>：你在开玩笑吗？你看，如果你们不能干这个，那么我就……</p>
+<p><strong>水管工2</strong>：我去拿个扳手。</p>
+<p><strong>事主</strong>：好！终于！等等，你就拿来一个扳手？可是你们有三个人哦。</p>
+<p><strong>水管工</strong>1：不这样的，先生！我还是在这里做个初始的Presentation，我一会就走了。但是，我还是会对项目的进度非常感兴趣的。我会打电话过来参加明天的 stand-up meeting。</p>
+<p><strong>水管工2</strong> ：另外，和你阐清一下，我们两个留下来的会分享同一把扳手，因为我们是结对水管工……</p>
+<p><strong>水管工3</strong>：……你能看到这会更有生产率，我们轮流使用这把扳手。并能保证很高的质量以及持续的工作激情！</p>
+<p><strong>事主</strong>：我没搞懂——你们以前应该就干过这个事了吗，不是吗？500美金的出场费还不能让你们有工作激情？</p>
+<p><strong>水管工1</strong>：你得想得长远一些，先生。你看，我们可以一起来经历整个过程。这是多么令人兴奋的事！我对此超级兴奋！</p>
+<p><strong>水管工</strong>2：哦，不。看看这个，这些是铜制的水管吗？有多少人在这住？</p>
+<p><strong>事主</strong>：什么？这个房子有5年了。就我和我太太在这里，但是你问这个是什么意思？</p>
+<p><strong>水管工3</strong>：嗯~~。我有些害怕，情况并没有那么简单！这些都是Legacy的水管，我们需要对它们做重构，而且，这些老的水管也无法适合我们新型的板手。重构看起来并不难……</p>
+<p><strong>水管工2</strong>：喔，我们可以使用新的在机场使用的防水层系统。另外，还有更多的工作需要花在一个大的O型环性能配置上， 但是这会让住在这里的数千人都到影响。我想，我们得做个迭代……</p>
+<p><strong>事主</strong>：什么？？！！</p>
+<p><strong>水管工1</strong>：先生，也许我们可以从你这做一些case study。我们可以为这里创新。让我们先安排一个游戏，这样我们可以进行一个头脑风暴。而最简单有可能做的事——先生，你有水桶吗？</p>
+<p><strong>事主</strong>：够了！你们给我滚出去！真是荒唐——很明显，你们根本不知道你们在做什么。给我滚出去！</p>
+<p><strong>水管工</strong>1：先生，我开始怀疑你根本没有一个Fackbook社交平台策略（Facebook Social Platform Strategy）用来做解决方案？</p>
+<p>————————————————</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Bob大叔和Jim Coplien对TDD的论战" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_title">Bob大叔和Jim Coplien对TDD的论战</a></li><li ><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="再谈敏捷和ThoughtWorks中国咨询师" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_title">再谈敏捷和ThoughtWorks中国咨询师</a></li><li ><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/feedback_cycle-150x150.jpg" alt="[转]TDD到底美还是不美？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_title">[转]TDD到底美还是不美？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3778.html">敏捷水管工</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3778.html/feed</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>再谈敏捷和ThoughtWorks中国咨询师</title>
+		<link>https://coolshell.cn/articles/3745.html</link>
+					<comments>https://coolshell.cn/articles/3745.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 10:23:26 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[TDD]]></category>
+		<category><![CDATA[ThoughtWorks]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3745</guid>
+
+					<description><![CDATA[<p>前言说明 之所以用了“再”，是因为之前的两篇文章—— 我在《那些炒作过度的技术和概念》中批评了ThoughtWorks中国咨询师的咨询方法是以一种接近于教条、炒...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3745.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3745.html">再谈敏捷和ThoughtWorks中国咨询师</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<h4>前言说明</h4>
+<p>之所以用了“再”，是因为之前的两篇文章——</p>
+<ul>
+<li>我在《<a title="那些炒作过度的技术和概念" href="https://coolshell.cn/articles/3609.html">那些炒作过度的技术和概念</a>》中批评了ThoughtWorks中国咨询师的咨询方法是以一种接近于教条、炒作、洗脑和电视购物的方法（虽然我心底觉得有时候有时候更像传销），当然，批评是没有意义的，所以我也给了中国ThoughtWorks那些年轻的咨询师们一些我认为有建设性的建议。</li>
+</ul>
+<ul>
+<li>我在《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html">TDD并不是看上去的那么美</a>》一文中列举了一些在实际中使用TDD可能会出现的问题和难题，以此来告诉大家在使用TDD时需要注意的东西。就像是在《<a href="https://coolshell.cn/articles/16.html" target="_blank">结对编程的利与弊</a>》说的一样，只有真正知道一件事情的利弊，你才能用好它。</li>
+</ul>
+<p>当然，这两篇文章都不可避免得招来了ThoughtWorks咨询师和Agile信仰者们的很多回复，我也有开始沉不住气回复了很多，当然，有一半以上的不是学术上的讨论，而是对我个人的攻击。甚至，在这两篇文章发布后，酷壳（CoolShell.cn）受到<a href="https://coolshell.cn/articles/3686.html" target="_blank">持续性的黑客攻击</a>。</p>
+<p>本来已经过去的事，今天却又发现这两篇文章的访问量和评论又上来了，才发现原来是InfoQ的这篇文章——《<a href="http://www.infoq.com/cn/articles/virtual-panel-tdd" target="_blank">虚拟座谈会：TDD有多美？</a>》，加上很多我在评论中的观点，以及ThoughtWorks和InfoQ之前给我的来信中谈到的一些观点。我很不自然地想把我的一些观点总结并罗列在这里。主要分成四块—— 1）<strong>我对整个事情的基本观点</strong>，2）<strong>对于方法论的观点，3）对于TW中国咨询师的观点</strong>，4）<strong>还有和TW和InfoQ住来信件中的观点</strong><strong>。</strong></p>
+<p><strong>————————————————</strong></p>
+<h4>基本观点</h4>
+<p>首先，我想说明一下我的基本观点。</p>
+<p><span id="more-3745"></span></p>
+<p>一、<strong>真金不怕火炼</strong>。我就像大家一样，平时总是会或多或少的埋怨点什么。大街上有人随便做个事，你会和他较真吗？不会。这个事也一样，我就像大家茶余饭后批评房价和物价一样，你们没有必要那么较真，不值得这样小题大作（除非你们真的心虚了），如果你做得好的话，真金不怕火炼，我这点批评算得了什么。<strong>你们玩的是“敏捷”不是“敏感”</strong>。</p>
+<p>二、<strong>从正反面思考</strong>。我和大家一样，喜欢思考，喜欢从正面和反面一同思考问题，我有质疑的癖好，我希望大家都有这样的思考方式。注意，<strong>质疑的结果不是为了质疑而质疑，而是去寻找完整认识的一种方法</strong>。</p>
+<p>三、<strong>观点的自由</strong>。我不是一棍大打死一片的人，我不完全否定敏捷（我的那两篇文章都有一再说明过了），同时我也不会完全同意敏捷。我不会因为敏捷有不好的地方我一棍子打死，我同样不会因为敏捷的好处就大唱赞歌。任何事物都有好有坏，我寻求的是自由地发表我的观点。<strong>我反对观点的极端，但我追求观点的自由</strong>。</p>
+<p><strong>四、观点的不同。</strong>观点只有不同才会让人思路完整，观点只有不同才会迸发出火花，世界的进展正是因为有不同的观点。如果敏捷的咨询师和信仰者们不接受不同观点，不接受批评，那么你们将无法进步和发展，如果你们妄图让所有人都持认可敏捷的和谐观点，那么你们将会变得邪恶。<strong>没有批评，赞美也会变得没有意义</strong>。</p>
+<p><strong>————————————————</strong></p>
+<h4>对于敏捷方法论的观点</h4>
+<p>一、<strong>没有好的方法，只有适不适合的方法</strong>。正如没有好的设计，只有适不适合的设计一样。喜欢足球的朋友都知道，世界级的足球队中，巴西队玩的是个人艺术足球，德国队玩的是整体和纪律性足球，意大利玩的是防守型足球，但是他们都有夺世界杯冠军的实力，如果你硬要让巴西队去整意大利的风格，或是让德国整巴西的风格，那就悲剧了。<strong>敏捷是不会是适合所有人所有项目的，就像不是所有的人都有运动的天赋一样</strong>。</p>
+<p>二、<strong>软件开发的中心是人和项目，而不是方法</strong>。千万不要把方法放在中心，改变项目的性质和人的习惯去适应这个方法。正确的方法是，以人和项目为中心，了解项目中所有人的想法和做事的风格，以及项目的性质，从而决定采用什么样的方法。大家可以看看<a href="http://www.infoq.com/cn/articles/virtual-panel-tdd" target="_blank">InfoQ上那几个“专家”关于TDD的对话</a>，除了Google的测试经理外，其它人从到到尾谈的都是TDD方法，谈的都是如果要TDD，人应该怎么怎么样。<strong>这就是敏捷最大的问题——教条主义横行，以方法论为中心横行</strong>。我批判的就是这个！</p>
+<p>三、<strong>好的方法不是讲出来的，而是在实践中改善出来的</strong>。好的方法不用去讲出来的，而是从团队内部自发出来的。如果敏捷方法论很不错的话，那么应该会在现实中体现出来。<strong>真正好的方法是团队内部根据自身情况在不同的项目上使用的不同的方法</strong>。（注：请不要使用XUnit, Spring，ANT等程序框架举例，因为那些项目的用户是程序员）</p>
+<p>四，<strong>方法论不是一种理论</strong>。敏捷的鼓吹者说，TDD让你更关注设计，TDD更能了解需求。理论上，你可以把TDD拔到这样的高度，甚至更高的高度。可是具体实践上呢，你会发现在有压力的状态下你的程序员关注得更多的是测试过不过，在和用户沟通的时候，你会发现，根本没有一种好的方法论可以把需求完全搞清。如果TDD可以完全搞清需求，还要迭代干什么，直接waterfall了（其它关于TDD的观点请看我的文章《<a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html">TDD并不是看上去的那么美</a>》）理论和实际的差别的很大的。</p>
+<p><strong>————————————————</strong></p>
+<h4><strong>对于ThoughtWorks咨询师的批评观点</strong></h4>
+<p>对于 下面这些言论，我就不一一点名了，因为我觉得这和咨询师没有关系，这和TW中国公司的管理理念有关系。</p>
+<ul>
+<li>中国ThoughtWorks某些咨询师通常在加入公司很短的时间内（1-2年），基本上都以被冠以“高级咨询师”。1-2年能做几个项目？我以为能给人做咨询的人都是在技能上让人佩服的那种人。20出头还是埋头苦干，努力学习，积累经验的时候，经验都不够，就可以给人咨询。</li>
+</ul>
+<ul>
+<li>中国ThoughtWorks某些咨询师们，喜欢翻译国外的书，但从不自己写书，他们喜欢blog，他们的blog里都里大量的Agile的方法，而很少有对技术的见解，以及技术细节知识性的文章，在他们的blog中，你很难看见代码。</li>
+</ul>
+<ul>
+<li>中国ThoughtWorks的咨询师们，喜欢参加各种研讨会，以及各种论坛，媒体采访。看看<a href="http://www.infoq.com/cn/articles/sofware-outsourcing-eco-crisis-3" target="_blank">这篇文章</a>，空洞，空洞，还是空洞。</li>
+</ul>
+<ul>
+<li>中国ThoughtWorks某些咨询师们大多都比较敏感，都是坚定不移的敏捷信徒。你别说有不同观点了，你就问个有点疑问的问题，他们就敏感了，就要反驳或是教育你了。</li>
+</ul>
+<ul>
+<li>中国ThoughtWorks某些咨询师们大多都很能说，和他们在一起，你基本上说不上话，就算说得上，他们也不会听你的，而且在不停地说教。大多数时候，他们都有很多的神一般的理论，比如：“你这不是真正的敏捷，真正的敏捷不是这样的”，“TDD中的T，是什么测试都无所谓。它就是设计。”，“TDD更强调设计，而不是测试本身。所以，TDD并不适用于菜鸟程序员。”，“你是在用锤子拔钉子”，“敏捷不需要文档，代码不需要注释”，“能学会的人他不需要看这些文字，不能学会的人他看了也是白看”，“它不是对不对的问题，它是可笑的”，“要使用一种设计方法，你就必须（1）会做设计；（2）做设计。它难在有些项目不做设计，有些人不会做设计”……</li>
+</ul>
+<p>大家可以看看<a href="http://www.infoq.com/cn/articles/virtual-panel-tdd" target="_blank">InfoQ的这个针对本章文章的讨论</a>，注意熊节同学的观点，他是在谈TDD呢，还是在说我呢？可见他是带着目的来参加这个讨论会的。但是大家有多少人看明白了他在说什么？他除了敏感，除了那些“神一般的观点”，你真的实在不知道他在说什么，你是不是和我一样，对他的发言感到很空洞呢？（熊节同学可能以为InfoQ把我邀请去了，其实我没有去。大家可以去看看，<strong><span style="color: #ff0000;">那不是讨论，那是一群TDD的信徒们在自己炒作自己呢</span></strong>）</p>
+<p>我不厌其烦地再给咨询师们提那个建议——<strong>咨询师就像裁缝，不是只为设计时装的设计师，你们做的是量体裁衣的活儿。对于不同的身材，不同的体质，要用不同的财料和尺寸; 对于不同的性格，将会是不同的风格; 对于不同的场景，也将会是不同的服装，游泳和出席宴会是两种不同的服装。服装的好坏不是服装本身漂亮不漂亮，而是合不合身，搭配地好不好，适不适合相应的场景，着衣的人感觉到的是不是舒服</strong>。</p>
+<p>——————————————</p>
+<h4>关于ThoughtWorks和InfoQ给我的信</h4>
+<p>文章写得太长了，大家见笑了，也见谅！这是最后一段了。</p>
+<p>1） TW的王效珅在春节前和我有几次电子邮件的往。我觉得王效珅是个很出色的公关人员，她用硬朗来形容我，把我一下子形容老了几十岁。她希望和我做沟通，希望让我和TW的咨询师谈一谈，我没有答应，也没有拒绝。春节期间还给我打来了电话祝我春节快乐，真是太让我感动了。她尊称我老师，可是我并不买帐，因为我觉得我没有资格成为老师，我也建议她也不要随便叫人老师。下面，是我给她的回信中的观点。</p>
+<p>在谈到如何管理项目时，我这样回复她的</p>
+<blockquote><p>你可以理解成——你们就像是黄埔军校，西点军校出来的高材生，而我就则是一个天天在各种战场上摸爬滚打并被打得灰头土脸的土贼。我不相信流程和各种Best Practice，我只相信的是人。</p>
+<p>我最关心的是软件开发中的三件事，第一个是人，第二个还是人，第三个还是人。第一个人是实现项目的人，第二个是项目的所有人，第三个是项目外周边有关系的人。我不但关心他们的想法，他们的软/硬能力，我还更关心他们的风格，他们的性格，还有他们的成长经历。这样我才能在权衡项目中那些各种乱七八糟东西的时候，懂得怎么plan，怎么run，怎么communication，怎么manage 才会是真正有效的（效果+效率）。motivate和项目有关的每个人，这才是我心中的敏捷！（这其中是需要花大量的心血的，相当的影响寿命）</p></blockquote>
+<p>在谈到是否见面时，我是这样回复她的</p>
+<ul>
+<blockquote>
+<li>其一，在网上，不只是我的言论对TW有微辞，需要我们每一个人每一个公司树立一个好的心态就好了（网上骂我的也很多，我自以为我的心情还不错）。</li>
+<li>其二，如果做的好，那就经得住考验，经得住质疑，好的东西一定会有好的结果，有了结果，拿结果和事实说话，这是最好的方式。</li>
+<li>其三，你说的那位技术上的同事，据你说是对我很欣赏，也常看酷壳，那么以前应该交流过才对啊，不应该是我质疑了你们的时候。呵呵。</li>
+<li>其四，我绝对不是一棍子打死一片的人（我原文中也多次提过Agile中有一些提法是不错的），但是我也不是看到一个好的就大唱颂歌的人。</li>
+</blockquote>
+</ul>
+<p>2）关于InfoQ张凯峰主编的来信，原文如下：</p>
+<blockquote><p><span style="font-family: 微软雅黑; font-size: x-small;"><br />
+From: xxxxx@infoq.com<br />
+Date: Tue, 15 Feb 2011 20:24:27 +0800<br />
+Subject: 邀请参加TDD虚拟座谈会的讨论<br />
+To: haoel@hotmail.com<br />
+</span></p>
+<p>陈皓你好，</p>
+<p>我是InfoQ中文站的主编张凯峰。最近你的《TDD并不是看上去的那么美》一文引起的广泛的关注，我们想就此做一次虚拟的座谈会讨论，邀请你来参与一下关于TDD的讨论。邀请的专家还包括thoughtworks的咨询师，以及其他敏捷方面的专家。以给读者更加广泛的视角和分享。欢迎参加，谢谢。</p>
+<p>以下是问题，可以把每个问题的答案发回给我。截止时间是两天。任何问题，请与我沟通，谢谢。</p>
+<p>请介绍你自己，以及TDD的实践经验。<br />
+TDD跟Test是什么关系呢？TDD的T就是Unit Test吗？<br />
+你认为实施TDD需要怎样的前提条件？TDD难在哪儿？<br />
+TDD之于需求、设计、代码质量是怎样的关系和影响？<br />
+你认为实施TDD容易犯的错误是什么？TDD的不足在哪些方面？<br />
+一般开发者需要多久能掌握TDD呢？请向读者推荐一下TDD的学习资料吧。</p>
+<p>Thanks,</p>
+<p>&#8212;<br />
+张凯峰 | Kevin Zhang | InfoQ China Managing Editor<br />
+InfoQ China：http://www.infoq.com/cn</p></blockquote>
+<p>我的回复如下（我老婆 说我回复得太贫了，我接受！）</p>
+<blockquote><p><span style="font-family: 微软雅黑; font-size: x-small;">From: haoel@hotmail.com<br />
+To: xxxxx@infoq.com<br />
+Subject: RE: 邀请参加TDD虚拟座谈会的讨论<br />
+Date: Tue, 15 Feb 2011 21:45:51 +0800</span></p>
+<p>张凯峰主编，您好！</p>
+<p>谢谢你们关注我的文章，见笑了。</p>
+<p>你们真是很厉害，相当善于发掘热点新闻。果然是媒体的专业素质。;-)</p>
+<p>我的文章不应该有那么大的能量，一个根本没有推广的个人blog，随便发布一些自己的想法，不是自我炒作，自己的blog嘛，想啥说啥，就像大街上的阿猫阿狗一样随便发表点个人意见，不会有人在意的。哪能引得您们的关注。真是让我受宠若惊。</p>
+<p>另外，你问到的那些问题，绝大多数的答案都在我的那篇文章里了。如果你们想转载我的文章，转过去就是了，只要注明作者和出处就OK了。千万不要用于任何的商业目的和炒作，这样我会很不高兴的。</p>
+<p>所以，我还是谢绝这个讨论了。如果你真想找人讨论的话，执我这样观点的人并不在少数，Google一下，可以找到很多。尤其是国外的，有些作者和我一样，都是做了十几年的项目的，都是做大大小小也有20来个项目的，各种人，各种事，各种项目都经历过很多，找那些人岂不更好？</p>
+<p>P.S，您的邮件还真强势，在“谢谢”和“谢谢”中就直接让我回答这些问题，还只限两天时间。真是个大主编，让我学到了“谢谢”的另一种用法。谢谢！</p>
+<p>祝 工作顺利！<br />
+陈皓</p></blockquote>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>我的观点就是我的观点，无论你同不同意，喜不喜欢，都是我的观点，</strong></span></p>
+<p style="text-align: center;"><strong><span style="font-size: 16px;">他就在那里，不卑不亢，不多不少</span></strong></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Bob大叔和Jim Coplien对TDD的论战" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_title">Bob大叔和Jim Coplien对TDD的论战</a></li><li ><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="敏捷水管工" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_title">敏捷水管工</a></li><li ><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/feedback_cycle-150x150.jpg" alt="[转]TDD到底美还是不美？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3766.html" class="wp_rp_title">[转]TDD到底美还是不美？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3745.html">再谈敏捷和ThoughtWorks中国咨询师</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3745.html/feed</wfw:commentRss>
+			<slash:comments>150</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>[转]TDD到底美还是不美？</title>
+		<link>https://coolshell.cn/articles/3766.html</link>
+					<comments>https://coolshell.cn/articles/3766.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 07:41:24 +0000</pubDate>
+				<category><![CDATA[流程方法]]></category>
+		<category><![CDATA[agile]]></category>
+		<category><![CDATA[TDD]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3766</guid>
+
+					<description><![CDATA[<p>下面的文章转自Todd Wei 的《TDD到底美还是不美？》，对于这篇文章，我个人能过透过作者的观点感受到他的项目中使用TDD的难点，同样可以感受到作者内心的纠...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3766.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3766.html">[转]TDD到底美还是不美？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<div id="body_66167">
+<p><span id="quote_66167"> </span></p>
+<p><span style="font-size: 11pt;"><strong>下面的文章转自Todd Wei 的《<a href="http://www.cnblogs.com/weidagang2046/archive/2011/02/23/1963277.html" target="_blank">TDD到底美还是不美？</a>》，对于这篇文章，我个人能过透过作者的观点感受到他的项目中使用TDD的难点，同样可以感受到作者内心的纠结。不管怎么样，我能够感到作者Todd Wei在独立思考，独立思考总是好的，因为那是走向成熟的必要条件。(<span style="color: #800000;">另，大家可以移步过去看看相关的评论，挺有意思的</span>)</strong></span></p>
+<p>————————————————————————————————————</p>
+<p><span style="font-size: 10pt;">最近CoolShell上的一篇</span><a title="TDD并不是看上去的那么美" href="https://coolshell.cn/articles/3649.html"><span style="font-size: 10pt;">《TDD并不是看上去的那么美》</span></a><span style="font-size: 10pt;">引起了敏捷社区的高度关注和激励辩论。今天，InfoQ甚至专门举行了一个“虚拟座谈会”</span><a title="《TDD有多美》" href="http://www.infoq.com/cn/articles/virtual-panel-tdd"><span style="font-size: 10pt;">《TDD有多美？》</span></a><span style="font-size: 10pt;">，几位国内敏捷社区的名人专门就此问题展开了深入地讨论。不论结果如何，这个纯技术的探讨精神还是非常值得赞赏的。事件实际上可以简单地归纳为“一个有一定影响力的开发人员质疑TDD，一群敏捷社区名人对TDD进行解释和辩护”。现在，就让我坚定地站在CoolShell一边，为对TDD的质疑和批判添砖加瓦吧！</span></p>
+</div>
+<p><span style="font-size: 10pt;">TDD的核心理念是什么呢？第一是Specification by Example，即把测试用例作为表达需求的一种方式。传统的需求表达方式包括文档，Use Case等，而TDD强调通过测试用例来表达需求。另外，TDD的测试用例是黑盒的基于外部接口的，所以，它实际上又是对外部接口的设计。如何看待测试用例是TDD与传统测试的一个重要区别。“不把测试用例单纯地视为测试，而从需求和设计的角度来看测试用例”的理念本身是好的。另外，TDD的第二个理念是Test First，强调测试对于实现的驱动作用，先写测试用例，再实现和重构。在Specification by Example的理念下，Test First的实质是“先理解清楚需求，并做好外部接口设计，把它转化为测试用例，然后再来实现和重构”。 </span></p>
+<p><span style="font-size: 10pt;">我认为，Specification by Example是不错的，因为测试用例作具有精确性，容易自动化的优点，这是传统的文档和Use Case在表达需求时所欠缺的地方。但</span><strong>Test First理念本身则有很大的问题</strong>，尤其“在没有测试用例失败之前，不要写任何一行代码”的极端方式则更是极端的错误。<br />
+<span id="more-3766"></span></p>
+<p><span id="quote_66167" style="font-size: 10pt;">如果测试用例是需求和设计，那么为什么不能先写出测试用例（即理解清楚需求做好外部接口设计）再来实现呢？这不是我们最熟悉的先需求再设计再编码吗？答案是：</span><span id="quote_66167" style="font-size: 10pt;"><strong>不能执行的测试用例（Test First）和能执行的测试用例有着天壤之别</strong>。不能执行的测试用例和写在纸上的文档相比对实现的指导意义不见得能好到哪里去！除非是一些很简单的情况下，在实际的软件开发中，你很难在没有执行测试用例的情况下写出真正符合最终需求的测试用例来。比如：你做一个页面，页面的效果需求和设计通常会在真正可以运行之后不断调整。如果片面强调测试对实现的驱动作用，那么实际上隐含了“需求可以在实现之前固定下来”的假设，这是非常不敏捷的和不现实的！我认为要做到真正的敏捷必须承认<strong>“需求无法在用户真正能运行看到效果之前明确下来“</strong>。由此可见，Test First和瀑布式思想没有区别，都强调需求先于实现，而忽略了软件需求的产生是一个在实际运行中不断调整探索完善的过程。TDD无非是把需求分析的结果用测试用例表达，替代传统用文档表达需求，但从宏观上看，TDD和瀑布比是换汤不换药。除了简单情况，不存在脱离实现的需求，你能够在明确了需求之后就实现出一套linux系统吗？既然你根本无法实现一套linux系统，那么这样所谓的需求又有多大的意义呢？所以，能提出什么样的需求不能脱离你的实现能力。<strong>需求和实现之间不是简单的谁驱动谁，而是一种相互反馈的关系</strong>，这与需求用什么方式表达没有关系。到目前为主，我推崇的方式是快速实现，在实际运行中体验效果，不断优化探索和明确需求，当需求达到一个比较稳定的程度才编写测试用例将需求固化下来。</span></p>
+<div>
+<p><span id="quote_66167" style="font-size: 10pt;">上面的论述主要针对贴近用户的外部需求（如ATDD），下面我会进一步解释即使是在内部的单元测试级别TDD仍然有问题。我们还是首先从需求入手，思考一下单元的需求是哪里来的呢？答案是：需求来自于设计， 也就是说高层模块的内部设计产生了低层模块的需求。而这种内部设计具有很大的不稳定性，带有很多假设的成分，在没有进行集成测试的情况下，很难讲这种内部设计是否合理。实际项目开发通常会在集成运行之后不断调整内部的设计，即影响单元的需求。那么，如果是按测试驱动，首先按不成熟的内部设计把一个个单元需求编写成单元测试再来实现，实际上大大推迟了能进行集成测试的时间，  对于真正快速弄清需求稳定设计反而是不利的。假设最终还是所有单元都完成，然后开始运行集成或验收测试，这时候有两种可能：1.用户看到实际效果，决定调整需求；2.发现未集成前的很多假设不成立。不论是哪一种情况发生，以前所写的单元测试都面临着被废弃或必须修改的命运。实际上，多数与业务相关的单元测试用例比起集成或验收测试用例更加不稳定，因为它会受到所有其上层模块的需求和设计变动的影响。由于我们在不稳定的单元测试上浪费了大量的时间（按我的经验编写单元测试比编写实现更耗时），这就导致了迟迟无法进行集成看到实际效果，也没有办法敏捷地应对需求的调整。也就是说具有讽刺意味的，</span><span id="quote_66167" style="font-size: 10pt;"><strong>Test First理念居然是和敏捷理念矛盾的！</strong></span></p>
+<p>所以，我认为TDD的理念Specification by Example没错，但Test   First即“在实现之前把需求和外部接口设计转化成测试用例”的理念错了。真正符合实际开发情况的理念是“需求是在实际运行过程中根据效果不断探索调整得来的，不可能脱离实际运行写出真正符合最终需求的测试用例来”。所以，<strong>我们真正应该做的是尽快看到实际运行的效果</strong>，而测试作为固化的需求和设计是在看到效果之后。<strong>过度的TDD只会导致迟迟看不到实际运行效果，看到效果需要调整需求又会废掉或改掉一大堆的测试用例。</strong>实际上，越是外部的需求其变更带来的影响和代价越大，越是需要尽早明确。从宏观上看，<strong>TDD所谓的快速反馈实际上是加快内部反馈，延迟了外部反馈，这无异于本末倒置</strong>。而大量需要修改或作废的测试用例其实是一种很大的浪费，这和消除浪费的精益思想也是矛盾的！</p>
+<div>
+<p><span id="quote_66167"> </span></p>
+<div><img decoding="async" loading="lazy" src="http://images.cnblogs.com/cnblogs_com/weidagang2046/feedback_cycle.jpg" border="0" alt="" width="564" height="436" /></div>
+</div>
+</div>
+<p><span id="quote_66167" style="font-size: 10pt;">上面这幅cost/length_of_feedback_cycle图是我们常见的用于说明敏捷方法比传统方法具有更短的反馈周期，更小代价的应对变化。从图中我们可以清晰的看到在验收测试中发现的需求错误导致的代价是最高的。如果验收测试往后推迟一点，发现错误的代价将按非线性地增长。上面我们已经论述了，任何方法都不可能消除验收测试后对需求的调整，因为这是需求产生的正常过程。我们唯一可以做的是尽可能地缩短验收测试的反馈周期，但是很不幸TDD大量的内部测试只会导致推迟验收测试的时间，从而大大增加代价。<br />
+</span></p>
+<div>
+<div><span style="font-size: 10pt;">下面这段话来自于InfoQ文章</span><a title="《Mock不是测试的银弹》" href="http://www.infoq.com/cn/articles/thoughtworks-practice-partvi"><span style="font-size: 10pt;">《Mock不是测试的银弹》</span></a><span style="font-size: 10pt;">：“在使用JMock框架后测试编写起来更容易，运行速度更快，也更稳定，然而出乎意料的是产品质量并没有如我们所预期的随着不断添加  的测试而变得愈加健壮，虽然产品代码的单元测试覆盖率超过了80%，然而在发布前进行全面测试时，常常发现严重的功能缺陷而不得不一轮轮的修复缺陷、回归  测试。为什么编写了大量的测试还会频繁出现这些问题呢？ ”这描述的情况和我在实践中遇到的情况类似，不过很可惜文章并没有找到问题真正的原因。真正的原因不是什么Mock不Mock，而是TDD的单元测试是基于开发人员的假设，这些假设的测试即使全部通过代码覆盖率100%，到了集成测试发现假设根本不成立又怎能保证高质量？</span></div>
+</div>
+<p><span id="quote_66167" style="font-size: 10pt;">当然，我不是全盘否定TDD。TDD在某些需求特别固定的场合是适用的，尤其是与具体业务关系不大的需求，比如：写一个通用的数据结构，实现一个通用算法。TDD的先关注需求和思考外部接口设计的理念也对促进开发人员的抽象思维有很大益处。另外，TDD通常也具有较高的代码覆盖率。本文的主要观点在于：实际项目中，不要期望可以在实现之前完全明确需求，需求是在实际运行看到效果之后才逐步明确的；我们的开发过程必须能够敏捷地适应需求的变化，而TDD的Test First理念恰好与之矛盾。所以，对于TDD不了解的朋友，我建议应该学习和实践TDD，从而获得其益处；同时我也提醒TDD存在理论上的缺陷，这是在实践中需要特别留意的。</span></p>
+<p><span style="font-size: 10pt;">(全文完)</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/09/fight-150x150.jpg" alt="“单元测试要做多细？”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8209.html" class="wp_rp_title">“单元测试要做多细？”</a></li><li ><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="Test-Driven Development？别逗了" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5531.html" class="wp_rp_title">Test-Driven Development？别逗了</a></li><li ><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="在新浪微博上关于敏捷的一些讨论" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5143.html" class="wp_rp_title">在新浪微博上关于敏捷的一些讨论</a></li><li ><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" alt="Bob大叔和Jim Coplien对TDD的论战" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4891.html" class="wp_rp_title">Bob大叔和Jim Coplien对TDD的论战</a></li><li ><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="敏捷水管工" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3778.html" class="wp_rp_title">敏捷水管工</a></li><li ><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/26.jpg" alt="再谈敏捷和ThoughtWorks中国咨询师" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3745.html" class="wp_rp_title">再谈敏捷和ThoughtWorks中国咨询师</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3766.html">[转]TDD到底美还是不美？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3766.html/feed</wfw:commentRss>
+			<slash:comments>34</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Stack Exchange 的架构</title>
+		<link>https://coolshell.cn/articles/3721.html</link>
+					<comments>https://coolshell.cn/articles/3721.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 23 Feb 2011 05:31:04 +0000</pubDate>
+				<category><![CDATA[技术新闻]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[StackExchange]]></category>
+		<category><![CDATA[StackOverflow]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=3721</guid>
+
+					<description><![CDATA[<p>近日，Stack Exchange系统管理员blog上发布了一篇关于Stack Exchange的架构一瞥，其包括了Stack Overflow, Server...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/3721.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/3721.html">Stack Exchange 的架构</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>近日，Stack Exchange系统管理员blog上发布了一篇关于<a href="http://blog.serverfault.com/post/stack-exchanges-architecture-in-bullet-points/" target="_blank">Stack Exchange的架构一瞥</a>，其包括了Stack Overflow, Server Fault 和 Super User的 Stack Exchange 网络。注意最后一个关于人员的配置。希望能给大家一些相关的参考。</p>
+<h4>网络流量</h4>
+<ul>
+<li>每月9千5百万个PV</li>
+<li>每秒800 HTTP 请求</li>
+<li>每秒180 DNS 请求</li>
+<li>每秒55Mb 的带宽</li>
+</ul>
+<h4>数据中心</h4>
+<ul>
+<li>1 机柜 位于俄勒冈的 <a href="http://www.peakinternet.com/">Peak Internet</a> (用于<a href="http://chat.stackexchange.com/">chat</a> 和<a href="http://data.stackexchange.com/">Data Explorer</a>)</li>
+<li>2 机框 位于 纽约的 <a href="http://www.peer1.com/">Peer 1</a> ( 用于其它的 Stack Exchange Network)</li>
+</ul>
+<p><span id="more-3721"></span></p>
+<h4>生产服务器</h4>
+<ul>
+<li>12 Web Servers (Windows Server 2008 R2)</li>
+<li>2 Database Servers (Windows Server 2008 R2 and SQL Server 2008 R2)</li>
+<li>2 Load Balancers (Ubuntu Server and HAProxy)</li>
+<li>2 Caching Servers (Redis on CentOS)</li>
+<li>1 Router / Firewall (Ubuntu Server)</li>
+<li>3 DNS Servers (Bind on CentOS)</li>
+</ul>
+<p>(生产服务器不含故障备份和管理服务器)</p>
+<h4>使用了的相关的软件和技术</h4>
+<ul>
+<li><a href="http://www.microsoft.com/net/">C# / .NET</a></li>
+<li><a href="http://www.microsoft.com/windowsserver2008/en/us/default.aspx">Windows Server 2008 R2</a></li>
+<li><a href="http://www.microsoft.com/sqlserver/en/us/default.aspx">SQL Server 2008 R2</a></li>
+<li><a href="http://www.ubuntu.com/server">Ubuntu Server</a></li>
+<li><a href="http://www.centos.org/">CentOS</a></li>
+<li><a href="http://haproxy.1wt.eu/">HAProxy</a> 用于负载均衡</li>
+<li><a href="http://redis.io/">Redis</a> 用于缓存</li>
+<li><a href="http://sourceforge.net/projects/ccnet/">CruiseControl.NET</a> 用于做builds</li>
+<li><a href="http://lucene.apache.org/lucene.net/">Lucene.NET</a> 用于搜索</li>
+<li><a href="http://www.bacula.org/en/">Bacula</a> 用于做备份</li>
+<li><a href="http://www.nagios.org/">Nagios</a> (with n2rrd and drraw plugins) 用于系统监控</li>
+<li><a href="http://www.splunk.com/">Splunk</a> 用于日志</li>
+<li><a href="http://www.red-gate.com/products/dba/sql-monitor/">SQL Monitor from Red Gate</a> 用于监控SQL Server</li>
+<li><a href="http://mercurial.selenic.com/">Mercurial</a> / <a href="http://www.fogcreek.com/kiln/">Kiln</a> 用于源码管理</li>
+<li><a href="http://www.isc.org/software/bind">Bind</a> 用于 DNS</li>
+</ul>
+<h4>程序员和系统管理员</h4>
+<ul>
+<li>14 程序员</li>
+<li>2 系统管理员</li>
+</ul>
+<p><span>（全文完）</span><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/5075.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png" alt="你确信你了解时间吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5075.html" class="wp_rp_title">你确信你了解时间吗？</a></li><li ><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Quora使用到的技术" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4939.html" class="wp_rp_title">Quora使用到的技术</a></li><li ><a href="https://coolshell.cn/articles/4549.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="Facebook 的系统架构" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4549.html" class="wp_rp_title">Facebook 的系统架构</a></li><li ><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/6.jpg" alt="StackOverflow的404错误页" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2529.html" class="wp_rp_title">StackOverflow的404错误页</a></li><li ><a href="https://coolshell.cn/articles/1242.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" alt="23,148,855,308,184,500" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1242.html" class="wp_rp_title">23,148,855,308,184,500</a></li><li ><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/13.jpg" alt="如何防范密码被破解" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2078.html" class="wp_rp_title">如何防范密码被破解</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3721.html">Stack Exchange 的架构</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/3721.html/feed</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

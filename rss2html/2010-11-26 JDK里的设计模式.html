@@ -1,0 +1,212 @@
+<html><body><p>下面是JDK中有关23个经典设计模式的示例，在stakeoverflow也有相应的讨论：<br/>
+<a href="http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns" target="_blank">http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns</a></p>
+<h4><strong><span style="text-decoration: underline;">Structural（结构模式）</span></strong></h4>
+<div><strong>Adapter:</strong><br/>
+把一个接口或是类变成另外一种。
+<ul>
+<li>java.util.Arrays#asList()</li>
+<li>javax.swing.JTable(TableModel)</li>
+<li>java.io.InputStreamReader(InputStream)</li>
+<li>java.io.OutputStreamWriter(OutputStream)</li>
+<li>javax.xml.bind.annotation.adapters.XmlAdapter#marshal()</li>
+<li>javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()</li>
+</ul>
+<p><strong>Bridge:</strong><br/>
+把抽象和实现解藕，于是接口和实现可在完全独立开来。</p>
+<ul>
+<li>AWT (提供了抽象层映射于实际的操作系统)</li>
+<li>JDBC</li>
+</ul>
+<p><strong>Composite:</strong><br/>
+让使用者把单独的对象和组合对象混用。</p>
+<ul>
+<li>javax.swing.JComponent#add(Component)</li>
+<li>java.awt.Container#add(Component)</li>
+<li>java.util.Map#putAll(Map)</li>
+<li>java.util.List#addAll(Collection)</li>
+<li>java.util.Set#addAll(Collection)</li>
+</ul>
+</div>
+<p><span id="more-3320"></span></p>
+<div>
+<p><strong>Decorator:</strong><br/>
+为一个对象动态的加上一系列的动作，而不需要因为这些动作的不同而产生大量的继承类。这个模式在JDK中几乎无处不在，所以，下面的列表只是一些典型的。</p>
+<ul>
+<li>java.io.BufferedInputStream(InputStream)</li>
+<li>java.io.DataInputStream(InputStream)</li>
+<li>java.io.BufferedOutputStream(OutputStream)</li>
+<li>java.util.zip.ZipOutputStream(OutputStream)</li>
+<li>java.util.Collections#checked[List|Map|Set|SortedSet|SortedMap]()</li>
+</ul>
+<p><strong>Facade:</strong><br/>
+用一个简单的接口包状一组组件，接口，抽象或是子系统。</p>
+<ul>
+<li>java.lang.Class</li>
+<li>javax.faces.webapp.FacesServlet</li>
+</ul>
+<p><strong>Flyweight:</strong><br/>
+有效率地存储大量的小的对象。</p>
+<ul>
+<li>java.lang.Integer#valueOf(int)</li>
+<li>java.lang.Boolean#valueOf(boolean)</li>
+<li>java.lang.Byte#valueOf(byte)</li>
+<li>java.lang.Character#valueOf(char)</li>
+</ul>
+<p><strong>Proxy:</strong><br/>
+用一个简单的对象来代替一个复杂的对象。</p>
+<ul>
+<li>java.lang.reflect.Proxy</li>
+<li>RMI</li>
+</ul>
+</div>
+<div>
+<h4><strong><span style="text-decoration: underline;">Creational（创建模式）</span></strong></h4>
+</div>
+<div><strong> </strong><strong>Abstract factory:</strong><br/>
+创建一组有关联的对象实例。这个模式在JDK中也是相当的常见，还有很多的framework例如Spring。我们很容易找到这样的实例。
+<ul>
+<li>java.util.Calendar#getInstance()</li>
+<li>java.util.Arrays#asList()</li>
+<li>java.util.ResourceBundle#getBundle()</li>
+<li>java.sql.DriverManager#getConnection()</li>
+<li>java.sql.Connection#createStatement()</li>
+<li>java.sql.Statement#executeQuery()</li>
+<li>java.text.NumberFormat#getInstance()</li>
+<li>javax.xml.transform.TransformerFactory#newInstance()</li>
+</ul>
+<p><strong>Builder:</strong><br/>
+主要用来简化一个复杂的对象的创建。这个模式也可以用来实现一个 <a href="http://en.wikipedia.org/wiki/Fluent_interface" target="_blank">Fluent Interface</a>。</p>
+<ul>
+<li>java.lang.StringBuilder#append()</li>
+<li>java.lang.StringBuffer#append()</li>
+<li>java.sql.PreparedStatement</li>
+<li>javax.swing.GroupLayout.Group#addComponent()</li>
+</ul>
+<p><strong>Factory:</strong><br/>
+简单来说，按照需求返回一个类型的实例。</p>
+<ul>
+<li>java.lang.Proxy#newProxyInstance()</li>
+<li>java.lang.Object#toString()</li>
+<li>java.lang.Class#newInstance()</li>
+<li>java.lang.reflect.Array#newInstance()</li>
+<li>java.lang.reflect.Constructor#newInstance()</li>
+<li>java.lang.Boolean#valueOf(String)</li>
+<li>java.lang.Class#forName()</li>
+</ul>
+<p><strong>Prototype:</strong><br/>
+使用自己的实例创建另一个实例。有时候，创建一个实例然后再把已有实例的值拷贝过去，是一个很复杂的动作。所以，使用这个模式可以避免这样的复杂性。</p>
+<ul>
+<li>java.lang.Object#clone()</li>
+<li>java.lang.Cloneable</li>
+</ul>
+<p><strong>Singleton:</strong><br/>
+只允许一个实例。在 Effective Java中建议使用Emun.</p>
+<ul>
+<li>java.lang.Runtime#getRuntime()</li>
+<li>java.awt.Toolkit#getDefaultToolkit()</li>
+<li>java.awt.GraphicsEnvironment#getLocalGraphicsEnvironment()</li>
+<li>java.awt.Desktop#getDesktop()</li>
+</ul>
+<h4><strong><span style="text-decoration: underline;">Behavioral(行为模式)</span></strong></h4>
+<p><strong>Chain of responsibility:</strong><br/>
+把一个对象在一个链接传递直到被处理。在这个链上的所有的对象有相同的接口（抽象类）但却有不同的实现。</p>
+<ul>
+<li>java.util.logging.Logger#log()</li>
+<li>javax.servlet.Filter#doFilter()</li>
+</ul>
+<p><strong>Command:</strong><br/>
+把一个或一些命令封装到一个对象中。</p>
+<ul>
+<li>java.lang.Runnable</li>
+<li>javax.swing.Action</li>
+</ul>
+<p><strong>Interpreter:</strong><br/>
+一个语法解释器的模式。</p>
+<ul>
+<li>java.util.Pattern</li>
+<li>java.text.Normalizer</li>
+<li>java.text.Format</li>
+</ul>
+<p><strong>Iterator:</strong><br/>
+提供一种一致的方法来顺序遍历一个容器中的所有元素。</p>
+<ul>
+<li>java.util.Iterator</li>
+<li>java.util.Enumeration</li>
+</ul>
+<p><strong>Mediator:</strong><br/>
+用来减少对象单的直接通讯的依赖关系。使用一个中间类来管理消息的方向。</p>
+<ul>
+<li>java.util.Timer</li>
+<li>java.util.concurrent.Executor#execute()</li>
+<li>java.util.concurrent.ExecutorService#submit()</li>
+<li>java.lang.reflect.Method#invoke()</li>
+</ul>
+<p><strong>Memento:</strong><br/>
+给一个对象的状态做一个快照。Date类在内部使用了一个long型来做这个快照。</p>
+<ul>
+<li>java.util.Date</li>
+<li>java.io.Serializable</li>
+</ul>
+<p><strong>Null Object:</strong><br/>
+这个模式用来解决如果一个Collection中没有元素的情况。</p>
+<ul>
+<li>java.util.Collections#emptyList()</li>
+<li>java.util.Collections#emptyMap()</li>
+<li>java.util.Collections#emptySet()</li>
+</ul>
+<p><strong>Observer:</strong><br/>
+允许一个对象向所有的侦听的对象广播自己的消息或事件。</p>
+<ul>
+<li>java.util.EventListener</li>
+<li>javax.servlet.http.HttpSessionBindingListener</li>
+<li>javax.servlet.http.HttpSessionAttributeListener</li>
+<li>javax.faces.event.PhaseListener</li>
+</ul>
+<p><strong>State:</strong><br/>
+这个模式允许你可以在运行时很容易地根据自身内部的状态改变对象的行为。</p>
+<ul>
+<li>java.util.Iterator</li>
+<li>javax.faces.lifecycle.LifeCycle#execute()</li>
+</ul>
+<p><strong>Strategy:</strong><br/>
+定义一组算法，并把其封装到一个对象中。然后在运行时，可以灵活的使用其中的一个算法。</p>
+<ul>
+<li>java.util.Comparator#compare()</li>
+<li>javax.servlet.http.HttpServlet</li>
+<li>javax.servlet.Filter#doFilter()</li>
+</ul>
+<p><strong>Template method:</strong><br/>
+允许子类重载部分父类而不需要完全重写。</p>
+<ul>
+<li>java.util.Collections#sort()</li>
+<li>java.io.InputStream#skip()</li>
+<li>java.io.InputStream#read()</li>
+<li>java.util.AbstractList#indexOf()</li>
+</ul>
+<p><strong>Visitor:</strong></p>
+<p>作用于某个对象群中各个对象的操作. 它可以使你在不改变这些对象本身的情况下,定义作用于这些对象的新操作.</p>
+<ul>
+<li>javax.lang.model.element.Element 和javax.lang.model.element.ElementVisitor</li>
+<li>javax.lang.model.type.TypeMirror 和javax.lang.model.type.TypeVisitor</li>
+</ul>
+<p>（全文完）</p>
+</div>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11541.html"><img alt="面向GC的Java编程" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11541.html">面向GC的Java编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11454.html"><img alt="从LongAdder看更高效的无锁实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3320.html">JDK里的设计模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

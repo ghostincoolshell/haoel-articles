@@ -1,0 +1,173 @@
+<html><body><p>这些最为奇怪的程序语言的特性，来自stackoverflow.com，原贴在<a href="http://stackoverflow.com/questions/1995113?sort=votes&amp;page=1" target="_blank">这里</a>。我摘选了一些例子，的确是比较怪异，让我们一个一个来看看。 </p>
+<p><strong>1、C语言中的数组</strong> </p>
+<p style="padding-left: 30px;">在C/C++中，a[10] 可以写成 10[a] </p>
+<p style="padding-left: 30px;">“Hello World”[i] 也可以写成 i[“Hello World”] </p>
+<p>这样的特性是不是很怪异？如果你想知道为什么的话，你可以看看本站的这篇文章——《<a href="https://coolshell.cn/articles/945.html" target="_blank">C语言的谜题</a>》中的第12题。 </p>
+<p><strong>2、在Javascript中</strong> </p>
+<p> ‘5’ + 3 的结果是：’53’<br/>
+ ‘5’ – 3 的结果是：2 </p>
+<p><strong>3、C/C++中的Trigraphs</strong> </p>
+<pre class="EnlighterJSRAW">int main() {
+   cout &lt;&lt; "LOL??!";
+}</pre>
+<p>上面的这段程序会输出： “LOL|”，这是因为 ??! 被转成了 | ，关于Trigraphs，下面有个表格： </p>
+<p><span id="more-2053"></span></p>
+<table style="width: 237px; height: 184px;">
+<tbody>
+<tr valign="top">
+<td>??=</td>
+<td>#</td>
+</tr>
+<tr valign="top">
+<td>??(</td>
+<td>[</td>
+</tr>
+<tr valign="top">
+<td>??/</td>
+<td>\</td>
+</tr>
+<tr valign="top">
+<td>??)</td>
+<td>]</td>
+</tr>
+<tr valign="top">
+<td>??’</td>
+<td>^</td>
+</tr>
+<tr valign="top">
+<td>??&lt;</td>
+<td>{</td>
+</tr>
+<tr valign="top">
+<td>??!</td>
+<td>|</td>
+</tr>
+<tr valign="top">
+<td>??&gt;</td>
+<td>}</td>
+</tr>
+<tr valign="top">
+<td>??-</td>
+<td>~</td>
+</tr>
+</tbody>
+</table>
+<p>  </p>
+<p><strong>4、JavaScript 的条件表</strong> </p>
+<p>看到下面这个表，不难理解为什么Javascript程序员为什么痛苦了——《<a href="https://coolshell.cn/articles/1850.html" rel="bookmark">Javascript程序员嘴最脏??</a>》 </p>
+<p>[javascript]”        ==   ‘0’           //false<br/>
+0         ==   ”            //true<br/>
+0         ==   ‘0’           //true<br/>
+false     ==   ‘false’       //false<br/>
+false     ==   ‘0’           //true<br/>
+false     ==   undefined     //false<br/>
+false     ==   null          //false<br/>
+null      ==   undefined     //true<br/>
+" \t\r\n" ==   0             //true[/javascript] </p>
+<p><strong>5、Java的Integer cache</strong> </p>
+<pre class="EnlighterJSRAW">Integer foo = 1000;
+Integer bar = 1000;
+ 
+foo &lt;= bar; // true
+foo &gt;= bar; // true
+foo == bar; // false
+ 
+//然后，如果你的 foo 和 bar 的值在 127 和 -128 之间（包括）
+//那么，其行为则改变了：
+ 
+Integer foo = 42;
+Integer bar = 42;
+ 
+foo &lt;= bar; // true
+foo &gt;= bar; // true
+foo == bar; // true</pre>
+<p>为什么会这样呢？你需要了解一下Java Interger Cache，下面是相关的程序，注意其中的注释</p>
+<pre class="EnlighterJSRAW">/**
+     * Returns a &lt;tt&gt;Integer&lt;/tt&gt; instance representing the specified
+     * &lt;tt&gt;int&lt;/tt&gt; value.
+     * If a new &lt;tt&gt;Integer&lt;/tt&gt; instance is not required, this method
+     * should generally be used in preference to the constructor
+     * &lt;a href="mailto:{@link"&gt;{@link&lt;/a&gt; #Integer(int)}, as this method is likely to yield
+     * significantly better space and time performance by caching
+     * frequently requested values.
+     *
+     * @param  i an &lt;code&gt;int&lt;/code&gt; value.
+     * @return a &lt;tt&gt;Integer&lt;/tt&gt; instance representing &lt;tt&gt;i&lt;/tt&gt;.
+     * @since  1.5
+     */
+    public static Integer valueOf(int i) {
+        if(i &gt;= -128 &amp;&amp; i &lt;= IntegerCache.high)
+            return IntegerCache.cache[i + 128];
+        else
+            return new Integer(i);
+    }
+</pre>
+<p><strong>5、Perl的那些奇怪的变量</strong></p>
+<p>[perl]$.<br/>
+$_<br/>
+$_#<br/>
+$$<br/>
+$[<br/>
+@_[/perl]</p>
+<p>其所有的这些怪异的变量请参看：<a href="http://www.kichwa.com/quik_ref/spec_variables.html">http://www.kichwa.com/quik_ref/spec_variables.html</a> </p>
+<p><strong>6、Java的异常返回</strong></p>
+<p>请看下面这段程序，你觉得其返回true还是false？</p>
+<pre class="EnlighterJSRAW">try {
+    return true;
+} finally {
+    return false;
+}</pre>
+<p>在 javascript 和python下，其行为和Java的是一样的。 </p>
+<p><strong>7、C语言中的Duff device</strong></p>
+<p>下面的这段程序你能看得懂吗？这就是所谓的Duff Device，相当的怪异。</p>
+<pre class="EnlighterJSRAW">void duff_memcpy( char* to, char* from, size_t count ) {
+    size_t n = (count+7)/8;
+    switch( count%8 ) {
+    case 0: do{ *to++ = *from++;
+    case 7:     *to++ = *from++;
+    case 6:     *to++ = *from++;
+    case 5:     *to++ = *from++;
+    case 4:     *to++ = *from++;
+    case 3:     *to++ = *from++;
+    case 2:     *to++ = *from++;
+    case 1:     *to++ = *from++;
+            }while(--n&gt;0);
+    }
+} </pre>
+<p><strong>8、PHP中的字符串当函数用</strong></p>
+<p>PHP中的某些用法也是很怪异的</p>
+<pre class="EnlighterJSRAW">$x = "foo";
+function foo(){ echo "wtf"; }
+$x();</pre>
+<p><strong>9、在C++中，你可以使用空指针调用静态函数</strong></p>
+<pre class="EnlighterJSRAW">class Foo {
+  public:
+    static void bar() {
+      std::cout &lt;&lt; "bar()" &lt;&lt; std::endl;
+    }
+};
+ 
+int main(void) {
+  Foo * foo = NULL;
+  foo-&gt;bar(); //=&gt; WTF!?
+  return 0; // Ok!
+}</pre>
+<p>呵呵。的确是挺怪异的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1850.html"><img alt="Javascript程序员嘴最脏??" height="150" src="../wp-content/uploads/2009/11/programming_language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1850.html">Javascript程序员嘴最脏??</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1992.html"><img alt="程序员眼中的编程语言" height="150" src="../wp-content/uploads/2009/12/language-fanboys-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1992.html">程序员眼中的编程语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1839.html"><img alt="编程语言汽车" height="150" src="../wp-content/uploads/2009/11/oscar-meyer-wienermobile-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1839.html">编程语言汽车</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1532.html"><img alt="到处都是Unix的胎记" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1532.html">到处都是Unix的胎记</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2053.html">最为奇怪的程序语言的特性</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

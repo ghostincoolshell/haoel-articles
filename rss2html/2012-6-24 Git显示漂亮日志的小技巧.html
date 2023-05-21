@@ -1,0 +1,32 @@
+<html><body><p>原文：<a href="http://garmoncheg.blogspot.com/2012/06/pretty-git-log.html" target="_blank">http://garmoncheg.blogspot.com/2012/06/pretty-git-log.html</a> （墙）</p>
+<p>Git的传统log如下所示，你喜欢吗？</p>
+<p style="text-align: center;"><img alt="" class="size-full wp-image-7758 aligncenter" height="321" src="../wp-content/uploads/2012/06/git.log_.01.png" title="默认的Git的log" width="578"/></p>
+<p style="text-align: left;">看看下面这个你喜不喜欢？（点击图片看大图）</p>
+<p style="text-align: left;"><span id="more-7755"></span></p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2012/06/git.log_.02.png"><img alt="" class="aligncenter wp-image-7759" height="280" src="../wp-content/uploads/2012/06/git.log_.02.png" title="改进版的Git的日志" width="620"/></a></p>
+<p style="text-align: left;">要做到这样，命令行如下：</p>
+<p><code class="EnlighterJSRAW">git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --</code></p>
+<p>这样有点长了，我们可以这样：</p>
+<p><code class="EnlighterJSRAW">git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --"</code></p>
+<p>然后，我们就可以使用这样的短命令了：</p>
+<p><code class="EnlighterJSRAW">git lg</code></p>
+<p>如果你想看看git log –pretty=format的参数，你可以看看<a href="http://git-scm.com/book/zh/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2" target="_blank">这篇文章</a>。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3288.html"><img alt="版本管理器的发展史" height="150" src="../wp-content/uploads/2010/11/scmhistory-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3288.html">版本管理器的发展史</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22320.html"><img alt="eBPF 介绍" height="150" src="../wp-content/uploads/2022/12/eBPF-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22320.html">eBPF 介绍</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18654.html"><img alt="记一次Kubernetes/Docker网络排障" height="150" src="../wp-content/uploads/2018/12/docker-networking-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18654.html">记一次Kubernetes/Docker网络排障</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/7755.html">Git显示漂亮日志的小技巧</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

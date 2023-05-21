@@ -1,0 +1,39 @@
+<html><body><p>在StackOverflow上有这样<a href="http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers" target="_blank">一个贴子</a>，楼主说，我有下面这样的一个C++程序，为什么编译不通过啊。其让我想起了以前的这两个帖子《<a href="https://coolshell.cn/articles/1391.html" target="_blank" title="编程真难啊">编程真难啊</a>》和《<a href="https://coolshell.cn/articles/1693.html" target="_blank" title="给我一个序列号">给我一个序列号</a>》。<strong>仅以此篇文章祝大家假期快乐吧</strong>。</p>
+<figure class="wp-caption aligncenter" style="width: 535px;"><img alt="hello world 程序" class="" height="214" src="http://i.stack.imgur.com/JQXWL.png" title="hello world 程序" width="535"/><figcaption class="wp-caption-text">hello world 程序</figcaption></figure>
+<p style="text-align: left;">楼主还给出了相关的编译出错的信息（相信你一看就明白问题在哪里了，你应该还会发出一声“靠”！！！）</p>
+<p>先是用Visual C++ 2010编译</p>
+<pre class="EnlighterJSRAW">c:\dev&gt;cl /nologo helloworld.png
+cl : Command line warning D9024 : unrecognized source file type 'helloworld.png', object file assumed
+helloworld.png : fatal error LNK1107: invalid or corrupt file: cannot read at 0x5172</pre>
+<p>再用G++ 4.5.2编译</p>
+<p><span id="more-4170"></span></p>
+<pre class="EnlighterJSRAW">c:\dev&gt;g++ helloworld.png
+helloworld.png: file not recognized: File format not recognized
+collect2: ld returned 1 exit status</pre>
+<p>再用clang编译</p>
+<pre class="EnlighterJSRAW">c:\dev&gt;clang++ helloworld.png
+helloworld.png: file not recognized: File format not recognized
+collect2: ld returned 1 exit status
+clang++: error: linker (via gcc) command failed with exit code 1 (use -v to see invocation)</pre>
+<p style="text-align: left;">不过，最强大的，有人居然给出了一个fix，靠！<br/>
+（下面的图片是一个4M大的gif动画，演示了整个过程，下载可能需要一定的时间。）</p>
+<figure class="wp-caption aligncenter" style="width: 570px;"><a href="http://i.imgur.com/QlGpd.gif"><img alt="hello world 的解决方案" class="" height="252" src="http://i.imgur.com/QlGpd.gif" title="hello world 的解决方案" width="570"/></a><figcaption class="wp-caption-text">hello world 的解决方案 （图片有点大4M，请耐心等待下载）</figcaption></figure>
+<p>真是BT啊，呵呵。<strong>仅以此篇文章祝大家假期快乐吧</strong>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4170.html">我有一个Hello World的C++程序编译不过</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

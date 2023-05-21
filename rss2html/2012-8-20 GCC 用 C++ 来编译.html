@@ -1,0 +1,71 @@
+<html><body><p>GCC在2012年8月15日的时候，merge了一个patch – <a href="http://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=2b15d2ba7eb3a25dfb15a7300f4ee7a141ee8539" target="_blank">Merge from cxx-conversion branch</a>，这意味着，以后在GCC的编译只能用C++的编译器了，也意味着，gcc的实现代码开始转向C++了。</p>
+<p>你可能会有两个问题，</p>
+<ul>
+<li>一个问题是为什么GCC要转成C++的实现？</li>
+</ul>
+<ul>
+<li>没有C++的编译器，我怎么编译C++编译器的代码？这不是“鸡生蛋还是蛋生鸡”的问题么？</li>
+</ul>
+<p>那，我们来看一看吧。</p>
+<h4>为什么要用C++</h4>
+<p>在<a href="http://gcc.gnu.org/wiki/cxx-conversion" target="_blank">GNU的C++ Conversion文档</a>中，我们可以在Background中看到这样的描述：</p>
+<blockquote><p>Whether we use C or C++, we need to try to ensure that interfaces are easy to understand, that the code is reasonably modular, that the internal documentation corresponds to the code, that it is possible for new developers to write new passes and to fix bugs. Those are the important issues for us to consider. The C++ features which are not present in C — features which are well documented in many books and many web sites — are not an important issue.</p></blockquote>
+<p>这句话的意思可以理解为，今天GCC在用C语言的实现已经有点hold不住了，因为，开发人员觉得，不管我们用C或C++，都需要努力确保接口是容易理解的，这样我们的代码是想当理性地被模块化的，这样内部文档和代码一致，这样可以更好地组织代码，这样有利于新人了fix-bug。而C++正好可以让他们更好的完成这些东西。</p>
+<p>GNU还给出了下面这些理由：</p>
+<p><span id="more-8115"></span></p>
+<ul>
+<li>C++ 是一种标准化的，大众的，流行的语言。</li>
+<li>C++ 是C90的超集。</li>
+<li>C++作为C的扩展和C在性能上一样好。</li>
+<li>C++ 在一些有意义的案例上支持更干净的代码。</li>
+<li>C++ 让你更容易去写一个更干净的接口。</li>
+<li>C++ 永远不会让你的代码变得更丑。</li>
+<li>C++ 不是万灵药，他是C的一个改进。</li>
+</ul>
+<p>然后，给了一个PDF <a href="http://airs.com/ian/cxx-slides.pdf">http://airs.com/ian/cxx-slides.pdf</a>，这是Google 的<a href="http://airs.com/ian/" target="_blank"> Ian Lance Taylor</a>的的一个PPT，这个文档可以让大家更好地理解我在《<a href="https://coolshell.cn/articles/7992.html" target="_blank" title="C++的坑真的多吗？">C++的坑多吗？</a>》一文中那些观点。<strong>我都不知道我要说多少遍C++的封装，继承和多态比C语言在代码组织上要好得多得多</strong>。大家还是自己看一下代码吧：</p>
+<p><strong><span style="color: #800000;">数据结构的操作</span> —— </strong>你写的一定不会有STL好</p>
+<p style="padding-left: 30px;"><strong><a href="https://coolshell.cn/wp-content/uploads/2012/08/VEC-vs-vector.jpg"><img alt="" class="size-full wp-image-8119 alignnone" height="343" src="../wp-content/uploads/2012/08/VEC-vs-vector.jpg" title="VEC vs vector" width="542"/></a></strong></p>
+<p><span style="color: #800000;"><strong>结构套结构还是继承？</strong></span></p>
+<p style="padding-left: 30px;"><a href="https://coolshell.cn/wp-content/uploads/2012/08/tree-structure.jpg"><img alt="" class="wp-image-8118 alignnone" height="550" src="../wp-content/uploads/2012/08/tree-structure.jpg" title="tree-structure" width="629"/></a></p>
+<p><span style="color: #800000;"><strong>函数指针还是多态？</strong></span></p>
+<div style="padding-left: 30px;"><a href="https://coolshell.cn/wp-content/uploads/2012/08/TARGET-vs-Target.jpg"><img alt="" class="wp-image-8117 alignnone" height="470" src="../wp-content/uploads/2012/08/TARGET-vs-Target.jpg" title="TARGET vs Target" width="391"/></a></div>
+<p><span style="color: #800000;"><strong>垃圾回收 还是 智能指针？</strong></span></p>
+<div style="padding-left: 30px;"><a href="https://coolshell.cn/wp-content/uploads/2012/08/GC-vs-Smart-Pointer.jpg"><img alt="" class="wp-image-8116 alignnone" height="337" src="../wp-content/uploads/2012/08/GC-vs-Smart-Pointer.jpg" title="GC vs Smart Pointer" width="473"/></a></div>
+<p><span style="color: #800000;"><strong>Why not C++? </strong></span></p>
+<ul>
+<li><strong>C++慢吗</strong>？某些特性会慢，但是有时C++更快，你可以只用你喜欢的C++特性。</li>
+<li><strong>C++复杂吗？</strong>它只不过是另一种编程语言，他可以让你对程序员维护更简单。</li>
+<li><strong>FSF不喜欢C++！</strong>因为FSF（自由软件基金会）这些人不写代码。</li>
+</ul>
+<p><a href="https://coolshell.cn/wp-content/uploads/2012/08/Why-not-C++.jpg"><img alt="" class="aligncenter wp-image-8120" height="418" src="../wp-content/uploads/2012/08/Why-not-C++.jpg" title="Why not C++" width="478"/></a></p>
+<div></div>
+<h4>Bootstrapping</h4>
+<p>最后，我想来介绍一下<a href="http://en.wikipedia.org/wiki/Bootstrapping_%28compilers%29" target="_blank">Bootstrapping</a>。 所谓Bootstrapping，就是用自己这个语言写编译器来编译自己，也就是说如果你要编译gcc，你需要用一个c的编译器来编译之，这个就是bootstrapped process，自举过程。包括 <a href="http://en.wikipedia.org/wiki/BASIC" title="BASIC">BASIC</a>, <a href="http://en.wikipedia.org/wiki/Algol" title="Algol">Algol</a>, <a href="http://en.wikipedia.org/wiki/C_(programming_language)" title="C (programming language)">C</a>, <a href="http://en.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a>, <a href="http://en.wikipedia.org/wiki/Pascal_programming_language" title="Pascal programming language">Pascal</a>, <a href="http://en.wikipedia.org/wiki/PL/I" title="PL/I">PL/I</a>, <a href="http://en.wikipedia.org/wiki/Factor_programming_language" title="Factor programming language">Factor</a>, <a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)" title="Haskell (programming language)">Haskell</a>, <a href="http://en.wikipedia.org/wiki/Modula-2" title="Modula-2">Modula-2</a>, <a href="http://en.wikipedia.org/wiki/Oberon_programming_language" title="Oberon programming language">Oberon</a>, <a href="http://en.wikipedia.org/wiki/OCaml" title="OCaml">OCaml</a>,<a href="http://en.wikipedia.org/wiki/Common_Lisp" title="Common Lisp">Common Lisp</a>, <a href="http://en.wikipedia.org/wiki/Scheme_(programming_language)" title="Scheme (programming language)">Scheme</a>, <a href="http://en.wikipedia.org/wiki/Java_(programming_language)" title="Java (programming language)">Java</a>, <a href="http://en.wikipedia.org/wiki/Python_(programming_language)" title="Python (programming language)">Python</a>, <a href="http://en.wikipedia.org/wiki/Scala_(programming_language)" title="Scala (programming language)">Scala</a> 等语言都这么干。</p>
+<p>这样干的好处主要是，自己可以测试自己，编译器的改善和语言的改善相辅相成。</p>
+<p>但是，这是一个“鸡生蛋，还是蛋生鸡”的问题，如果你需要用X语言来写一个X语言编译器的语言，你可以这样干：</p>
+<ul>
+<li>用Y语言来实现X的语言解释器或编译器。 <a href="http://en.wikipedia.org/wiki/Niklaus_Wirth" title="Niklaus Wirth">Niklaus Wirth</a> 说 <a href="http://en.wikipedia.org/wiki/Pascal_programming_language" title="Pascal programming language">Pascal</a> 的第一个编译器是由 <a href="http://en.wikipedia.org/wiki/Fortran" title="Fortran">Fortran</a> 写的。</li>
+<li>已存在用Y语言写的X语言的编译器或解释器。<a href="http://en.wikipedia.org/wiki/Scheme_(programming_language)" title="Scheme (programming language)">Scheme</a> 就是这么干的。</li>
+<li>已经有一个编译器来编译一个早期版本的X语言，然后就可以用早期版本的X语言来编译新版本的X语言了。<a href="http://en.wikipedia.org/wiki/Java_(programming_language)" title="Java (programming language)">Java</a>，<a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)" title="Haskell (programming language)">Haskell</a>, 和最初版的 <a href="http://en.wikipedia.org/wiki/Free_Pascal" title="Free Pascal">Free Pascal</a> 就是这么干的。</li>
+<li>X在某平台上的编译器已经存在，可以使用交叉编译技术来编译另一个平台上X语言，C语言就是这么干的。</li>
+<li>用X语言写一个编译器，然后手动编译之（不需要特别优化），（注：手动编译估计就是手动翻译成机器汇编代码），然后再运行这个手动编译的编译器来编译这个编译器的源码，并优化之。<a href="http://en.wikipedia.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a> 在他的 <a href="http://en.wikipedia.org/wiki/WEB" title="WEB">WEB</a> <a href="http://en.wikipedia.org/wiki/Literate_programming" title="Literate programming">literate programming</a> 系统里用到了这个方法。</li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8115.html">GCC 用 C++ 来编译</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

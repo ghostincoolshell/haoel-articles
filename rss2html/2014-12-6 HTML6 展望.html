@@ -1,0 +1,153 @@
+<html><body><p></p>
+<h3><img alt="html6" class="size-full wp-image-12211 alignright" height="225" src="../wp-content/uploads/2014/12/html6.jpeg" width="225"/></h3>
+<h3>HTML5 概述</h3>
+<p>HTML5 是 HTML 语言最受欢迎的版本之一，它支持音频和视频、离线存储、移动端、和标签属性等等。还提供了&lt;article&gt;, &lt;section&gt;, &lt;header&gt;这样的标签来帮助开发者更好地组织页面内容。然而 HTML5 规范仍然没有最后定稿，并且它并不是一个真正意义上的语义标记语言。</p>
+<h3>HTML6 展望</h3>
+<p>你有没有曾经希望能在 HTML 中使用自定义标签？比如：使用&lt;logo&gt;来显示你的网站logo，还有使用&lt;toolbar&gt;来显示工具栏等等。我们经常使用&lt;div id=”container”&gt;和&lt;div id=”wrapper”&gt;来组织页面，在 HTML6 里我们希望可以直接使用象&lt;container&gt;和&lt;wrapper&gt;这样的自定义标签。</p>
+<p>和 XML 一样，HTML6 应该支持 namespace（命名空间），如：xmlns:xhtml=”http://www.w3.org/1999/xhtml”</p>
+<p>HTML6 代码样例：</p>
+<p><span id="more-12206"></span></p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;html:meta type="title" value="Page Title"&gt;
+ &lt;html:meta type="description" value="HTML example with namespaces"&gt;
+ &lt;html:link src="css/mainfile.css" title="Styles" type="text/css"&gt;
+ &lt;html:link src="js/mainfile.js" title="Script" type="text/javascript"&gt;
+ &lt;/html:head&gt;
+ &lt;html:body&gt;
+ &lt;header&gt;
+ &lt;logo&gt;
+ &lt;html:media type="image" src="images/xyz.png"&gt;
+ &lt;/logo&gt;
+ &lt;nav&gt;
+ &lt;html:a href="/img1"&gt;a1&lt;/a&gt;
+ &lt;html:a href="/img2"&gt;a2&lt;/a&gt;
+ &lt;/nav&gt;
+ &lt;/header&gt;
+ &lt;content&gt;
+ &lt;article&gt;
+ &lt;h1&gt;Heading of main article&lt;/h1&gt;
+ &lt;h2&gt;Sub-heading of main article&lt;/h2&gt;
+ &lt;p&gt;[...]&lt;/p&gt;
+ &lt;p&gt;[...]&lt;/p&gt;
+ &lt;/article&gt;
+ &lt;article&gt;
+ &lt;h1&gt;The concept of HTML6&lt;/h1&gt;
+ &lt;h2&gt;Understanding the basics&lt;/h2&gt;
+ &lt;p&gt;[...]&lt;/p&gt;
+ &lt;/article&gt;
+ &lt;/content&gt;
+ &lt;footer&gt;
+ &lt;copyright&gt;This site is © to Anonymous 2014&lt;/copyright&gt;
+ &lt;/footer&gt;
+ &lt;/html:body&gt;
+ &lt;/html:html&gt;</pre>
+<p>在上面的代码中，你也许注意到了一些奇怪的&lt;html:x&gt;标签，它们是 W3C 和 HTML6 规范中在命名空间里定义的标签。例如：&lt;html:title&gt;负责设定你浏览器的标题栏文字，&lt;html:media&gt;负责显示图片等等。用户可以自己定义标签以便 JavaScript 和 CSS 识别和处理，这样页面代码会更易读，语义更清晰。</p>
+<h3>HTML6 APIs</h3>
+<p>HTML6 的标签前带有命名空间，如：&lt;html:html&gt;, &lt;html:head&gt;等等。</p>
+<p>1. &lt;html:html&gt;</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;// this is equivalent to &lt;html&gt; tag written in previous HTML versions
+ &lt;!-- sample of HTML document --&gt;
+ &lt;/html:html&gt;</pre>
+<p>2. &lt;html:head&gt; 和 &lt;head&gt; 标签一样。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;!-- Main content would come here, like the &lt;html:title&gt; tag --&gt;
+ &lt;/html:head&gt;
+ &lt;/html:html&gt;</pre>
+<p>3. &lt;html:title&gt; 和 &lt;title&gt; 标签类似。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;/html:head&gt;
+ &lt;/html:html&gt;</pre>
+<p>4. &lt;html:meta&gt; 和 &lt;meta&gt; 标签类似，不同之处在于，在 HTML5 中你只能使用标准的元数据类型，如：”keywords”, “description”, “author”等，而在 HTML6 中你可以使用任何元数据类型。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;html:meta type="description" value="HTML example with namespaces"&gt;
+ &lt;/html:head&gt;
+ &lt;/html:html&gt;</pre>
+<p>5. &lt;html:link&gt; 和 HTML6 之前版本的 &lt;link&gt; 标签类似。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;html:link src="js/mainfile.js" title="Script" type="text/javascript"&gt;
+ &lt;/html:head&gt;
+ &lt;/html:html&gt;</pre>
+<p>6. &lt;html:body&gt; 和 &lt;body&gt; 标签一样。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;/html:head&gt;
+ &lt;html:body&gt;
+ &lt;!-- This is where your website content is placed --&gt;
+ &lt;/html:body&gt;
+ &lt;/html:html&gt;</pre>
+<p>7. &lt;html:a&gt; 和 &lt;a&gt; 标签类似，区别是 &lt;html:a&gt; 只有 “href” 一个属性。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;/html:head&gt;
+ &lt;html:body&gt;
+ &lt;html:a href="http://siteurl"&gt;Go to siteurl.com!&lt;/html:a&gt;
+ &lt;/html:body&gt;
+ &lt;/html:html&gt;</pre>
+<p>8. &lt;html：button&gt; 和 &lt;button&gt; 及 &lt;input type=”button”&gt; 一样。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;/html:head&gt;
+ &lt;html:body&gt;
+ &lt;html:button&gt;Click Here&lt;/html:button&gt;
+ &lt;/html:body&gt;
+ &lt;/html:html&gt;</pre>
+<p>9. &lt;html:media&gt; 涵盖 &lt;img&gt;, &lt;video&gt;, &lt;embed&gt; 等标签的所有功能。&lt;html:media&gt; 的好处是你不用根据不同的媒体文件类型使用不同的标签，媒体的类型由浏览器从文件内容（类型属性，扩展名，和MIME type）中来判断。</p>
+<pre>&lt;!DOCTYPE html&gt;
+ &lt;html:html&gt;
+ &lt;html:head&gt;
+ &lt;html:title&gt;A Look Into HTML6&lt;/html:title&gt;
+ &lt;/html:head&gt;
+ &lt;html:body&gt;
+ &lt;!-- Image would come here --&gt;
+ &lt;html:media src="img1/logo.jpg" type="image"&gt;
+ &lt;!-- Video doesn't need a type --&gt;
+ &lt;html:media src="videos/slide.mov"&gt;
+ &lt;/html:body&gt;
+ &lt;/html:html&gt;</pre>
+<h3>标签类型(Tag types)概述</h3>
+<p>和 HTML5 一样， HTML6 也有两种标签类型：单标签（single tag) 和双标签（double tag）</p>
+<pre>&lt;html:meta type="author" content="single tag"&gt;
+ &lt;html:meta type="author" content="double tag" /&gt;</pre>
+<p>单标签不需要结束符’/’</p>
+<h3>结语</h3>
+<p>HTML6 规范还未发布，本文原作者 <a href="http://html6spec.com/">Oscar Godson</a> 只是为我们提供了一个对 HTML6 规范的展望，或者说他希望 HTML6 能够支持的一些新特性。</p>
+<p>原文链接：<a href="http://java.dzone.com/articles/look-html6-what-it-and-what">A Look Into HTML6 – What Is It, and What Does it Have to Offer?</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9666.html"><img alt="浏览器的渲染原理简介" height="150" src="../wp-content/uploads/2013/05/Render-Process-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9666.html">浏览器的渲染原理简介</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6840.html"><img alt="CSS 布局:40个教程、技巧、例子和最佳实践" height="150" src="../wp-content/uploads/2012/03/css-layouts-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6840.html">CSS 布局:40个教程、技巧、例子和最佳实践</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5537.html"><img alt="一些文章资源和趣闻" height="150" src="../wp-content/uploads/2011/11/stackparts.com_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5537.html">一些文章资源和趣闻</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4795.html"><img alt="开源中最好的Web开发的资源" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4795.html">开源中最好的Web开发的资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3903.html"><img alt="一些有意思的贴子和工具" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3903.html">一些有意思的贴子和工具</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/12206.html">HTML6 展望</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

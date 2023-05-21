@@ -1,0 +1,356 @@
+<html><body><p>本文主要起因是，一次在微博上和朋友关于嵌套好几层的if-else语句的代码重构的讨论（<a href="http://weibo.com/1401880315/ECmCW0oy2" rel="noopener noreferrer" target="_blank">微博原文</a>），在微博上大家有各式各样的问题和想法。按道理来说这些都是编程的基本功，似乎不太值得写一篇文章，不过我觉得很多东西可以从一个简单的东西出发，到达本质，所以，我觉得有必要在这里写一篇的文章。不一定全对，只希望得到更多的讨论，因为有了更深入的讨论才能进步。</p>
+<p>文章有点长，我在文章最后会给出相关的思考和总结陈词，你可以跳到结尾。</p>
+<p>所谓箭头型代码，基本上来说就是下面这个图片所示的情况。</p>
+<p><img alt="" class="aligncenter wp-image-17758 size-full" height="511" src="../wp-content/uploads/2017/04/IMG_7411.jpg" width="720"/></p>
+<p>那么，这样“箭头型”的代码有什么问题呢？看上去也挺好看的，有对称美。但是……</p>
+<p>关于箭头型代码的问题有如下几个：</p>
+<p><span id="more-17757"></span></p>
+<p>1）我的显示器不够宽，箭头型代码缩进太狠了，需要我来回拉水平滚动条，这让我在读代码的时候，相当的不舒服。</p>
+<p>2）除了宽度外还有长度，有的代码的<code>if-else</code>里的<code>if-else</code>里的<code>if-else</code>的代码太多，读到中间你都不知道中间的代码是经过了什么样的层层检查才来到这里的。</p>
+<p>总而言之，<strong>“箭头型代码”如果嵌套太多，代码太长的话，会相当容易让维护代码的人（包括自己）迷失在代码中，因为看到最内层的代码时，你已经不知道前面的那一层一层的条件判断是什么样的，代码是怎么运行到这里的，所以，箭头型代码是非常难以维护和Debug的</strong>。</p>
+<h4>微博上的案例 与 Guard Clauses</h4>
+<p>OK，我们先来看一下微博上的那个示例，代码量如果再大一点，嵌套再多一点，你很容易会在条件中迷失掉（下面这个示例只是那个“大箭头”下的一个小箭头）</p>
+<pre class="EnlighterJSRAW">
+FOREACH(Ptr&lt;WfExpression&gt;, argument, node-&gt;arguments) {
+    int index = manager-&gt;expressionResolvings.Keys().IndexOf(argument.Obj());
+    if (index != -1) {
+        auto type = manager-&gt;expressionResolvings.Values()[index].type;
+        if (! types.Contains(type.Obj())) {
+            types.Add(type.Obj());
+            if (auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L"CastResult", true)) {
+                int count = group-&gt;GetMethodCount();
+                for (int i = 0; i &lt; count; i++) { auto method = group-&gt;GetMethod(i);
+                    if (method-&gt;IsStatic()) {
+                        if (method-&gt;GetParameterCount() == 1 &amp;&amp;
+                            method-&gt;GetParameter(0)-&gt;GetType()-&gt;GetTypeDescriptor() == description::GetTypeDescriptor&lt;DescriptableObject&gt;() &amp;&amp;
+                            method-&gt;GetReturn()-&gt;GetTypeDescriptor() != description::GetTypeDescriptor&lt;void&gt;() ) {
+                            symbol-&gt;typeInfo = CopyTypeInfo(method-&gt;GetReturn());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</pre>
+<p>上面这段代码，可以把条件反过来写，然后就可以把箭头型的代码解掉了，重构的代码如下所示：</p>
+<pre class="EnlighterJSRAW">
+FOREACH(Ptr&lt;WfExpression&gt;, argument, node-&gt;arguments) {
+    int index = manager-&gt;expressionResolvings.Keys().IndexOf(argument.Obj());
+    if (index == -1)  continue;
+    
+    auto type = manager-&gt;expressionResolvings.Values()[index].type;
+    if ( types.Contains(type.Obj()))  continue;
+    
+    types.Add(type.Obj());
+
+    auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L"CastResult", true);
+    if  ( ! group ) continue;
+ 
+    int count = group-&gt;GetMethodCount();
+    for (int i = 0; i &lt; count; i++) { auto method = group-&gt;GetMethod(i);
+        if (! method-&gt;IsStatic()) continue;
+       
+        if ( method-&gt;GetParameterCount() == 1 &amp;&amp;
+               method-&gt;GetParameter(0)-&gt;GetType()-&gt;GetTypeDescriptor() == description::GetTypeDescriptor&lt;DescriptableObject&gt;() &amp;&amp;
+               method-&gt;GetReturn()-&gt;GetTypeDescriptor() != description::GetTypeDescriptor&lt;void&gt;() ) {
+            symbol-&gt;typeInfo = CopyTypeInfo(method-&gt;GetReturn());
+            break;
+        }
+    }
+}
+</pre>
+<p>这种代码的重构方式叫 <strong>Guard Clauses</strong></p>
+<ul>
+<li><a href="https://martinfowler.com/" rel="noopener noreferrer" target="_blank">Martin Fowler</a> 的 Refactoring 的网站上有相应的说明《<a href="https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html" rel="noopener noreferrer" target="_blank">Replace Nested Conditional with Guard Clauses</a>》。</li>
+</ul>
+<ul>
+<li><a href="https://blog.codinghorror.com/" rel="noopener noreferrer" target="_blank">Coding Horror</a> 上也有一篇文章讲了这种重构的方式 —— 《<a href="https://blog.codinghorror.com/flattening-arrow-code/" rel="noopener noreferrer" target="_blank">Flattening Arrow Code</a>》</li>
+</ul>
+<ul>
+<li><a href="http://stackoverflow.com/" rel="noopener noreferrer" target="_blank">StackOverflow</a> 上也有相关的问题说了这种方式 —— 《<a href="http://stackoverflow.com/questions/356121/refactor-nested-if-statement-for-clarity" rel="noopener noreferrer" target="_blank">Refactor nested IF statement for clarity</a>》</li>
+</ul>
+<p>这里的思路其实就是，<strong>让出错的代码先返回，前面把所有的错误判断全判断掉，然后就剩下的就是正常的代码了</strong>。</p>
+<h4>抽取成函数</h4>
+<p>微博上有些人说，continue 语句破坏了阅读代码的通畅，我觉得他们一定没有好好读这里面的代码，其实，我们可以看到，所有的 if 语句都是在判断是否出错的情况，所以，在维护代码的时候，你可以完全不理会这些 if 语句，因为都是出错处理的，而剩下的代码都是正常的功能代码，反而更容易阅读了。当然，一定有不是上面代码里的这种情况，那么，不用continue ，我们还能不能重构呢？</p>
+<p>当然可以，抽成函数：</p>
+<pre class="EnlighterJSRAW">
+bool CopyMethodTypeInfo(auto &amp;method, auto &amp;group, auto &amp;symbol) 
+{
+    if (! method-&gt;IsStatic()) {
+        return true;
+    }
+    if ( method-&gt;GetParameterCount() == 1 &amp;&amp;
+           method-&gt;GetParameter(0)-&gt;GetType()-&gt;GetTypeDescriptor() == description::GetTypeDescriptor&lt;DescriptableObject&gt;() &amp;&amp;
+           method-&gt;GetReturn()-&gt;GetTypeDescriptor() != description::GetTypeDescriptor&lt;void&gt;() ) {
+        symbol-&gt;typeInfo = CopyTypeInfo(method-&gt;GetReturn());
+        return false;
+    }
+    return true;
+}
+
+void ExpressionResolvings(auto &amp;manager, auto &amp;argument, auto &amp;symbol) 
+{
+    int index = manager-&gt;expressionResolvings.Keys().IndexOf(argument.Obj());
+    if (index == -1) return;
+    
+    auto type = manager-&gt;expressionResolvings.Values()[index].type;
+    if ( types.Contains(type.Obj())) return;
+
+    types.Add(type.Obj());
+    auto group = type-&gt;GetTypeDescriptor()-&gt;GetMethodGroupByName(L"CastResult", true);
+    if  ( ! group ) return;
+
+    int count = group-&gt;GetMethodCount();
+    for (int i = 0; i &lt; count; i++) { auto method = group-&gt;GetMethod(i);
+        if ( ! CopyMethodTypeInfo(method, group, symbol) ) break;
+    }
+}
+
+...
+...
+FOREACH(Ptr&lt;WfExpression&gt;, argument, node-&gt;arguments) {
+    ExpressionResolvings(manager, arguments, symbol)
+}
+...
+...
+</pre>
+<p>你发出现，抽成函数后，代码比之前变得更容易读和更容易维护了。不是吗？</p>
+<p>有人说：“如果代码不共享，就不要抽取成函数！”，持有这个观点的人太死读书了。函数是代码的封装或是抽象，并不一定用来作代码共享使用，函数用于屏蔽细节，让其它代码耦合于接口而不是细节实现，这会让我们的代码更为简单，简单的东西都能让人易读也易维护。这才是函数的作用。</p>
+<h4>嵌套的 if 外的代码</h4>
+<p>微博上还有人问，原来的代码如果在各个 if 语句后还有要执行的代码，那么应该如何重构。比如下面这样的代码。</p>
+<pre class="EnlighterJSRAW">
+//原版
+for(....) {
+    do_before_cond1()
+    if (cond1) {
+        do_before_cond2();
+        if (cond2) {
+            do_before_cond3();
+            if (cond3) {
+                do_something();
+            }
+            do_after_cond3();
+        }
+        do_after_cond2();
+    }
+    do_after_cond1();
+}</pre>
+<p>上面这段代码中的那些 <code>do_after_condX()</code> 是无论条件成功与否都要执行的。所以，我们拉平后的代码如下所示：</p>
+<pre class="EnlighterJSRAW">
+//重构第一版
+for(....) {
+    do_before_cond1();
+    if ( !cond1 ) {
+        do_after_cond1();
+        continue
+    } 
+    do_after_cond1();
+
+    do_before_cond2();
+    if ( !cond2 ) { 
+        do_after_cond2();
+        continue;
+    }
+    do_after_cond2();
+
+    do_before_cond3();
+    if ( !cond3 ) {
+        do_after_cond3();
+        continue;
+    }
+    do_after_cond3();
+
+    do_something();  
+}</pre>
+<p>你会发现，上面的 <code>do_after_condX</code> 出现了两份。<strong>如果 if 语句块中的代码改变了某些<code>do_after_condX</code>依赖的状态，那么这是最终版本。</strong></p>
+<p>但是，如果它们之前没有依赖关系的话，根据 DRY 原则，我们就可以只保留一份，那么直接掉到 if 条件前就好了，如下所示：</p>
+<pre class="EnlighterJSRAW">
+//重构第二版
+for(....) {
+    do_before_cond1();
+    do_after_cond1();
+    if ( !cond1 ) continue;
+ 
+    do_before_cond2();
+    do_after_cond2();
+    if ( !cond2 ) continue;
+
+    do_before_cond3();
+    do_after_cond3();
+    if ( !cond3 ) continue;
+
+    do_something();  
+}</pre>
+<p>此时，你会说，我靠，居然，改变了执行的顺序，把条件放到 <code>do_after_condX()</code> 后面去了。这会不会有问题啊？</p>
+<p>其实，你再分析一下之前的代码，你会发现，本来，cond1 是判断 do_before_cond1() 是否出错的，如果有成功了，才会往下执行。而 do_after_cond1() 是无论如何都要执行的。从逻辑上来说，do_after_cond1()其实和do_before_cond1()的执行结果无关，而 cond1 却和是否去执行 do_before_cond2() 相关了。如果我把断行变成下面这样，反而代码逻辑更清楚了。</p>
+<pre class="EnlighterJSRAW">
+//重构第三版
+for(....) {
+
+    do_before_cond1();
+    do_after_cond1();
+
+
+    if ( !cond1 ) continue;  // &lt;-- cond1 成了是否做第二个语句块的条件
+    do_before_cond2();
+    do_after_cond2();
+
+    if ( !cond2 ) continue; // &lt;-- cond2 成了是否做第三个语句块的条件
+    do_before_cond3();
+    do_after_cond3();
+
+    if ( !cond3 ) continue; //&lt;-- cond3 成了是否做第四个语句块的条件
+    do_something(); 
+ 
+}
+</pre>
+<p>于是乎，在未来维护代码的时候，维护人一眼看上去就明白，代码在什么时候会执行到哪里。 这个时候，你会发现，把这些语句块抽成函数，代码会干净的更多，再重构一版：</p>
+<pre class="EnlighterJSRAW">
+//重构第四版
+bool do_func3() {
+   do_before_cond2();
+   do_after_cond2();
+   return cond3;
+}
+
+bool do_func2() {
+   do_before_cond2();
+   do_after_cond2();
+   return cond2;
+}
+
+bool do_func1() {
+   do_before_cond1();
+   do_after_cond1();
+   return cond1;
+}
+
+// for-loop 你可以重构成这样
+for (...) {
+    bool cond = do_func1();
+    if (cond) cond = do_func2();
+    if (cond) cond = do_func3();
+    if (cond) do_something();
+}
+
+// for-loop 也可以重构成这样
+for (...) {
+    if ( ! do_func1() ) continue;
+    if ( ! do_func2() ) continue;
+    if ( ! do_func3() ) continue;
+    do_something();
+}
+</pre>
+<p>上面，我给出了两个版本的for-loop，你喜欢哪个？我喜欢第二个。这个时候，因为for-loop里的代码非常简单，就算你不喜欢 continue ，这样的代码阅读成本已经很低了。</p>
+<h4>状态检查嵌套</h4>
+<p>接下来，我们再来看另一个示例。下面的代码的伪造了一个场景——把两个人拉到一个一对一的聊天室中，因为要检查双方的状态，所以，代码可能会写成了“箭头型”。</p>
+<pre class="EnlighterJSRAW">
+int ConnectPeer2Peer(Conn *pA, Conn* pB, Manager *manager)
+{
+    if ( pA-&gt;isConnected() ) {
+        manager-&gt;Prepare(pA);
+        if ( pB-&gt;isConnected() ) {
+            manager-&gt;Prepare(pB);
+            if ( manager-&gt;ConnectTogther(pA, pB) ) {
+                pA-&gt;Write("connected");
+                pB-&gt;Write("connected");
+                return S_OK;
+            }else{
+                return S_ERROR;
+            }
+
+        }else {
+            pA-&gt;Write("Peer is not Ready, waiting...");
+            return S_RETRY;
+        }
+    }else{
+        if ( pB-&gt;isConnected() ) {
+            manager-&gt;Prepare();
+            pB-&gt;Write("Peer is not Ready, waiting...");
+            return S_RETRY;
+        }else{
+            pA-&gt;Close();
+            pB-&gt;Close();
+            return S_ERROR;
+        }
+    }
+    //Shouldn't be here!
+    return S_ERROR;
+}</pre>
+<p>重构上面的代码，我们可以先分析一下上面的代码，说明了，上面的代码就是对 PeerA 和 PeerB 的两个状态 “连上”， “未连上” 做组合 “状态” （注：实际中的状态应该比这个还要复杂，可能还会有“断开”、“错误”……等等状态）， 于是，我们可以把代码写成下面这样，合并上面的嵌套条件，对于每一种组合都做出判断。这样一来，逻辑就会非常的干净和清楚。</p>
+<pre class="EnlighterJSRAW">
+int ConnectPeer2Peer(Conn *pA, Conn* pB, Manager *manager)
+{
+    if ( pA-&gt;isConnected() ) {
+        manager-&gt;Prepare(pA);
+    }
+
+    if ( pB-&gt;isConnected() ) {
+        manager-&gt;Prepare(pB);
+    }
+
+    // pA = YES &amp;&amp; pB = NO
+    if (pA-&gt;isConnected() &amp;&amp; ! pB-&gt;isConnected()  ) {
+        pA-&gt;Write("Peer is not Ready, waiting");
+        return S_RETRY;
+    // pA = NO &amp;&amp; pB = YES
+    }else if ( !pA-&gt;isConnected() &amp;&amp; pB-&gt;isConnected() ) {
+        pB-&gt;Write("Peer is not Ready, waiting");
+        return S_RETRY;
+    // pA = YES &amp;&amp; pB = YES
+    }else if (pA-&gt;isConnected() &amp;&amp; pB-&gt;isConnected()  ) {
+        if ( ! manager-&gt;ConnectTogther(pA, pB) ) {
+            return S_ERROR;
+        }
+        pA-&gt;Write("connected");
+        pB-&gt;Write("connected");
+        return S_OK;
+    }
+
+    // pA = NO, pB = NO
+    pA-&gt;Close();
+    pB-&gt;Close();
+    return S_ERROR;
+}</pre>
+<h4>延伸思考</h4>
+<p>对于 <code>if-else</code> 语句来说，一般来说，就是检查两件事：<strong>错误</strong> 和 <strong>状态</strong>。</p>
+<h5>检查错误</h5>
+<p>对于检查错误来说，使用 Guard Clauses 会是一种标准解，但我们还需要注意下面几件事：</p>
+<p style="padding-left: 30px;">1）当然，出现错误的时候，还会出现需要释放资源的情况。你可以使用 <code>goto fail;</code> 这样的方式，但是最优雅的方式应该是C++面向对象式的 RAII 方式。</p>
+<p style="padding-left: 30px;">2）以错误码返回是一种比较简单的方式，这种方式有很一些问题，比如，如果错误码太多，判断出错的代码会非常复杂，另外，正常的代码和错误的代码会混在一起，影响可读性。所以，在更为高组的语言中，使用 <code>try-catch</code> 异常捕捉的方式，会让代码更为易读一些。</p>
+<h5>检查状态</h5>
+<p>对于检查状态来说，实际中一定有更为复杂的情况，比如下面几种情况：</p>
+<p style="padding-left: 30px;">1）像TCP协议中的两端的状态变化。</p>
+<p style="padding-left: 30px;">2）像shell各个命令的命令选项的各种组合。</p>
+<p style="padding-left: 30px;">3）像游戏中的状态变化（一棵非常复杂的状态树）。</p>
+<p style="padding-left: 30px;">4）像语法分析那样的状态变化。</p>
+<p>对于这些复杂的状态变化，其本上来说，你需要先定义一个状态机，或是一个子状态的组合状态的查询表，或是一个状态查询分析树。</p>
+<p><strong>写代码时，代码的运行中的控制状态或业务状态是会让你的代码流程变得混乱的一个重要原因，重构“箭头型”代码的一个很重要的工作就是重新梳理和描述这些状态的变迁关系</strong>。</p>
+<h4>总结</h4>
+<p>好了，下面总结一下，把“箭头型”代码重构掉的几个手段如下：</p>
+<p>1）<strong>使用 Guard Clauses </strong>。 尽可能的让出错的先返回， 这样后面就会得到干净的代码。</p>
+<p>2）<strong>把条件中的语句块抽取成函数</strong>。 有人说：“如果代码不共享，就不要抽取成函数！”，持有这个观点的人太死读书了。函数是代码的封装或是抽象，并不一定用来作代码共享使用，函数用于屏蔽细节，让其它代码耦合于接口而不是细节实现，这会让我们的代码更为简单，简单的东西都能让人易读也易维护，<strong>写出让人易读易维护的代码才是重构代码的初衷</strong>！</p>
+<p>3）<strong>对于出错处理，使用try-catch异常处理和<a href="http://stackoverflow.com/questions/2321511/what-is-meant-by-resource-acquisition-is-initialization-raii" rel="noopener noreferrer" target="_blank">RAII机制</a></strong>。返回码的出错处理有很多问题，比如：A) 返回码可以被忽略，B) 出错处理的代码和正常处理的代码混在一起，C) 造成函数接口污染，比如像atoi()这种错误码和返回值共用的糟糕的函数。</p>
+<p>4）<strong>对于多个状态的判断和组合，如果复杂了，可以使用“组合状态表”，或是状态机加Observer的状态订阅的设计模式</strong>。这样的代码即解了耦，也干净简单，同样有很强的扩展性。</p>
+<p>5） <strong>重构“箭头型”代码其实是在帮你重新梳理所有的代码和逻辑，这个过程非常值得为之付出</strong>。重新整思路去想尽一切办法简化代码的过程本身就可以让人成长。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19612.html"><img alt="50年前的登月程序和程序员有多硬核" height="150" src="../wp-content/uploads/2019/07/1920px-Margaret_Hamilton_-_restoration-e1563697198766-1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19612.html">50年前的登月程序和程序员有多硬核</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17929.html"><img alt="Go编程模式：修饰器" height="150" src="../wp-content/uploads/2017/06/go-hardhat-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11656.html"><img alt="开发团队的效率" height="150" src="../wp-content/uploads/2014/06/software_development-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11656.html">开发团队的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11432.html"><img alt="从Code Review 谈如何做技术" height="150" src="../wp-content/uploads/2014/04/code_review-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11432.html">从Code Review 谈如何做技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/17757.html">如何重构“箭头型”代码</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

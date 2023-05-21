@@ -1,0 +1,74 @@
+<html><body><p>在SlidesShare.net上有这么<a href="http://www.slideshare.net/cog/chmod-x-chmod" target="_blank">一个幻灯片</a>，其说了如下的一个面试题：</p>
+<blockquote><p>如果某天你的Unix/Linux系统上的chomd命令被某人去掉了x属性（执行属性），<br/>
+那么，你如何恢复呢？</p></blockquote>
+<p>下面是一些答案：</p>
+<p><strong>1）重新安装</strong>。对于Debian的系统：</p>
+<p><code class="EnlighterJSRAW">sudo apt-get install --reinstall coreutils</code></p>
+<p><strong>2）使用语言级的chmod</strong>。</p>
+<ul>
+<li>Perl：perl-e ‘chmod 0755, “/bin/chmod”‘</li>
+<li>Python：python -c “import os;os.chmod(‘/bin/chmod’, 0755)”</li>
+<li>Node.js：require(“fs”).chmodSync(“/bin/chmod”, 0755);</li>
+<li>C程序：</li>
+</ul>
+<pre class="EnlighterJSRAW">#include &lt;sys/types.h&gt;
+#include&lt;sys/stat.h&gt;
+void main()
+{
+chmod("/bin/chmod", 0000755);
+}</pre>
+<p><span id="more-3136"></span></p>
+<p><strong>3）使用已有的可执行文件。</strong></p>
+<pre class="EnlighterJSRAW">
+$cat - &gt; chmod.c
+void main(){}
+^D
+
+$cc chmod.c
+$cat /bin/chmod &gt; a.out
+$./a.out 0755 /bin/chmod
+</pre>
+<pre class="EnlighterJSRAW">
+$cp true &gt; new_chmod
+$cat /bin/chmod &gt; new_chmod
+$./new_chmod 0755 /bin/chmod
+</pre>
+<p><strong>4）使用GNU tar命令</strong></p>
+<pre class="EnlighterJSRAW">$tar --mode 0755 -cf chmod.tar /bin/chmod
+$tar xvf chmod.tar</pre>
+<p><code class="EnlighterJSRAW">tar --mode 755 -cvf - chmod | tar -xvf -</code></p>
+<p><strong>5）使用cpio</strong> （第19到24字节为file mode – <a href="http://4bxf.sl.pt" target="_blank">http://4bxf.sl.pt</a>）</p>
+<pre class="EnlighterJSRAW">
+echo chmod |
+cpio -o |
+perl -pe 's/^(.{21}).../${1}755/' |
+cpio -i -u</pre>
+<p><strong>6）使用hardcore</strong></p>
+<p><code class="EnlighterJSRAW">alias chmod='/lib/ld-2.11.1.so ./chmod'</code></p>
+<p><strong>7）使用Emacs</strong></p>
+<blockquote><p>Ctrl+x b &gt; * scratch*<br/>
+(set-file-modes “/bin/chmod” (string-to-number “0755” 8))<br/>
+Ctrl+j</p></blockquote>
+<p>嗯，挺强大的，不过为什么不用install命令呢？</p>
+<pre class="EnlighterJSRAW">install -m 755 /bin/chmod /tmp/chmod
+mv /tmp/chmod /bin/chmod</pre>
+<p>各位，你的方法呢？</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3437.html"><img alt="一些杂项资源" height="150" src="../wp-content/uploads/2010/12/ediff-small-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3437.html">一些杂项资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3125.html"><img alt="主流文本编辑器学习曲线" height="150" src="../wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3125.html">主流文本编辑器学习曲线</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2271.html"><img alt="Emacs配色在线生成器" height="150" src="../wp-content/uploads/2010/03/emacs_color_theme-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2271.html">Emacs配色在线生成器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1640.html"><img alt="文件备份的几个简单命令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1640.html">文件备份的几个简单命令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4270.html"><img alt="Eclipse开发Android应用程序入门" height="150" src="../wp-content/uploads/2011/04/install-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4270.html">Eclipse开发Android应用程序入门</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17061.html"><img alt="Docker基础技术：AUFS" height="150" src="../wp-content/uploads/2015/08/docker-filesystems-busyboxrw-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17061.html">Docker基础技术：AUFS</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3136.html">chmod -x chmod的N种解法</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

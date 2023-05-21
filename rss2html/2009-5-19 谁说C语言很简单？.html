@@ -1,0 +1,122 @@
+<html><body><p></p>
+<p class="li-enumerate">前两天，Neo写了一篇《<a href="https://coolshell.cn/articles/830.html">语言的歧义</a>》其使用C语言讨论了一些语言的歧义。大家应该也顺便了解了一下C语言中的很多不可思异的东西，可能也是你从未注意到的东西。</p>
+<p class="li-enumerate">是的，C语言并不简单，让我们来看看下面这些示例：</p>
+<ol class="enumerate" type="1">
+<li class="li-enumerate"><strong>为什么下面的代码会返回0？(这题应该很简单吧)<br/>
+</strong>
+<pre class="verbatim"><span style="color: #0000ff;">  int x;
+  return x == (1 &amp;&amp; x);
+</span></pre>
+<p>本题主要是关于C/C++中变量初始化的问题。</p></li>
+<p><span id="more-873"></span></p>
+<li class="li-enumerate"><strong>为什么下面的代码会返回0而不是-1？</strong>
+<pre class="verbatim"><span style="color: #0000ff;"> return ((1 - sizeof(int)) &gt;&gt; 32);
+</span></pre>
+<p>答案：<tt>sizeof</tt> 是一个unsigned的类型，所以……</p></li>
+<li class="li-enumerate"><strong>代码作用域是一件很诡异的事，下面这个函数返回值是什么？<br/>
+</strong>
+<pre class="verbatim"><span style="color: #0000ff;">int x = 5;
+int f() {
+  int x = 3;
+  {
+    extern int x;
+    return x;
+  }
+}
+</span></pre>
+<p>答案：5</p></li>
+<li class="li-enumerate"><strong>函数和函数指针可以相互转换。下面的语句哪些是合法的？<br/>
+</strong>
+<pre class="verbatim"><span style="color: #0000ff;">int (*pf)(void);
+int f(void)
+{
+
+   pf = &amp;f; <span style="color: #008000;">// 没问题</span>
+   pf = ***f; <span style="color: #008000;">// 取址？</span>
+   pf(); <span style="color: #008000;">// 函数指针可以调用？
+</span>   (****pf)();  <span style="color: #008000;">// 这又是什么？</span>
+   (***************f)(); <span style="color: #008000;">// 这个够变态了吧？</span>
+}
+</span></pre>
+<p>答案：全部合法。</p></li>
+<li class="li-enumerate"><strong>初始化可能是ISO C中最难的部分了。无论是MSVC 还是GCC 都没有完全实现。GCC 可能更接近标准。在下面的代码中，<tt>i.nested.y</tt> 和<tt>i.nested.z的最终值是什么？</tt></strong>
+<pre class="verbatim"><span style="color: #0000ff;">struct {
+   int x;
+   struct {
+       int y, z;
+   } nested;
+} i = { .nested.y = 5, 6, .x = 1, 2 };
+</span></pre>
+<p>答案：2和6</p></li>
+<li class="li-enumerate"><strong>下面这个示例是C语言的痛，main函数返回值是什么？</strong>
+<pre class="verbatim"><span style="color: #0000ff;">typedef struct
+{
+  char *key;
+  char *value;
+} T1;
+
+typedef struct
+{
+  long type;
+  char *value;
+} T3;
+
+T1 a[] =
+{
+  {
+    "",
+    ((char *)&amp;((T3) {1, (char *) 1}))
+  }
+};
+int main() {
+   T3 *pt3 = (T3*)a[0].value;
+   return pt3-&gt;value;
+}
+</span></pre>
+<p>答案：1（你知道为什么吗？）</p></li>
+<li class="li-enumerate"><strong>下面这个例就更变态了。在GCC的文档中，这个语法是合法的，但是不知道为什么GCC并没有实现。下面的代码返回 2.</strong>
+<pre class="verbatim"><span style="color: #0000ff;"> return ((int []){1,2,3,4})[1];
+</span></pre>
+<p> </p></li>
+<li class="li-enumerate"><strong>在下面的这个示例中，有一个“bar” 函数及其函数指针 “pbar” 的两个拷贝(static 类型一般作用于语句块或文件域).</strong>
+<pre class="verbatim"><span style="color: #0000ff;">  int foo() {
+     static bar();
+     static (*pbar)() = bar;
+
+  }
+
+  static bar() {
+    return 1;
+  }
+
+  static (*pbar)() = 0;
+</span></pre>
+<p> </p></li>
+<li class="li-enumerate"><strong>下面的这个函数返回值是什么？取决于编译器是先处理unsigned long转型，还是负号。</strong>
+<pre class="verbatim"><span style="color: #0000ff;">  unsigned long foo() {
+    return (unsigned long) - 1 / 8;
+  }
+</span></pre>
+<p>如果是： <tt>((unsigned long) - 1) / 8，那将是一个很大的数。<br/>
+</tt><tt>如果是：</tt> <tt>(unsigned long) (- 1 / 8 )</tt>, 那将是 0</p></li>
+</ol>
+<p class="li-enumerate">是的，这样使用C语言可能很奇怪，不过我们可以从另一方面了解C语言的很多我们不常注意的特性。C语言其实并不容易。</p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11466.html"><img alt="C语言的整型溢出问题" height="150" src="../wp-content/uploads/2014/04/c99-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/873.html">谁说C语言很简单？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

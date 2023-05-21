@@ -1,0 +1,121 @@
+<html><body><p>对于SQL的Join，在学习起来可能是比较乱的。我们知道，<a href="http://en.wikipedia.org/wiki/Join_(SQL)" target="_blank">SQL的Join语法</a>有很多inner的，有outer的，有left的，有时候，对于Select出来的结果集是什么样子有点不是很清楚。Coding Horror上有<a href="http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html" target="_blank">一篇文章</a>（实在不清楚为什么Coding Horror也被墙）通过 文氏图 <a href="http://en.wikipedia.org/wiki/Venn_diagram" target="_blank">Venn diagrams</a> 解释了SQL的Join。我觉得清楚易懂，转过来。</p>
+<p>假设我们有两张表。</p>
+<ul>
+<li><strong>Table A</strong> 是左边的表。</li>
+<li><strong>Table B</strong> 是右边的表。</li>
+</ul>
+<p>其各有四条记录，其中有两条记录是相同的，如下所示：</p>
+<pre>id name       id  name
+-- ----       --  ----
+1  <span style="color: red;">Pirate</span>     1   Rutabaga
+2  Monkey     2   <span style="color: red;">Pirate</span>
+3  <span style="color: red;">Ninja</span>      3   Darth Vader
+4  Spaghetti  4   <span style="color: red;">Ninja</span></pre>
+<p>下面让我们来看看不同的Join会产生什么样的结果。</p>
+<p><span id="more-3463"></span></p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+<strong>INNER JOIN</strong> TableB
+ON TableA.name = TableB.name
+
+id  name       id   name
+--  ----       --   ----
+1   Pirate     2    Pirate
+3   Ninja      4    Ninja</pre>
+<p><strong>Inner join</strong><br/>
+产生的结果集中，是A和B的交集。</p></td>
+<td><img alt="Venn diagram of SQL inner join" border="0" src="../wp-content/uploads/2011/01/Inner_Join.png"/></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+<strong>FULL OUTER JOIN</strong> TableB
+ON TableA.name = TableB.name
+
+id    name       id    name
+--    ----       --    ----
+1     Pirate     2     Pirate
+2     Monkey     <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+3     Ninja      4     Ninja
+4     Spaghetti  <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       1     Rutabaga
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       3     Darth Vader</pre>
+<p><strong>Full outer join</strong> 产生A和B的并集。但是需要注意的是，对于没有匹配的记录，则会以null做为值。</p></td>
+<td><img alt="Venn diagram of SQL cartesian join" border="0" height="197" src="../wp-content/uploads/2011/01/Full_Outer_Join.png" width="300"/></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+<strong>LEFT OUTER JOIN</strong> TableB
+ON TableA.name = TableB.name
+
+id  name       id    name
+--  ----       --    ----
+1   Pirate     2     Pirate
+2   Monkey     <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+3   Ninja      4     Ninja
+4   Spaghetti  <span style="color: gray;">null</span>  <span style="color: gray;">null</span></pre>
+<p><strong>Left outer join</strong> 产生表A的完全集，而B表中匹配的则有值，没有匹配的则以null值取代。</p></td>
+<td><img alt="Venn diagram of SQL left join" border="0" src="../wp-content/uploads/2011/01/Left_Outer_Join.png"/></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
+<strong>WHERE TableB.id IS null</strong> 
+
+id  name       id     name
+--  ----       --     ----
+2   Monkey     <span style="color: gray;">null</span>   <span style="color: gray;">null</span>
+4   Spaghetti  <span style="color: gray;">null</span>   <span style="color: gray;">null</span></pre>
+<p>产生在A表中有而在B表中没有的集合。</p></td>
+<td><img alt="join-left-outer.png" border="0" src="../wp-content/uploads/2011/01/Left_Out_Join_2.png"/></td>
+</tr>
+<tr>
+<td>
+<pre>SELECT * FROM TableA
+FULL OUTER JOIN TableB
+ON TableA.name = TableB.name
+<strong>WHERE TableA.id IS null
+OR TableB.id IS null
+</strong>
+id    name       id    name
+--    ----       --    ----
+2     Monkey     <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+4     Spaghetti  <span style="color: gray;">null</span>  <span style="color: gray;">null</span>
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       1     Rutabaga
+<span style="color: gray;">null</span>  <span style="color: gray;">null</span>       3     Darth Vader</pre>
+<p>产生A表和B表都没有出现的数据集。</p></td>
+<td><img alt="join-outer.png" border="0" src="../wp-content/uploads/2011/01/Full_Outer_Join_2.png"/></td>
+</tr>
+</tbody>
+</table>
+<p>还需要注册的是我们还有一个是“交差集” <strong>cross join</strong>, 这种Join没有办法用文式图表示，因为其就是把表A和表B的数据进行一个N*M的组合，即笛卡尔积。表达式如下：</p>
+<pre>SELECT * FROM TableA
+<strong>CROSS JOIN</strong> TableB</pre>
+<p>这个笛卡尔乘积会产生 4 x 4 = 16 条记录，一般来说，我们很少用到这个语法。但是我们得小心，如果不是使用嵌套的select语句，一般系统都会产生笛卡尔乘积然再做过滤。这是对于性能来说是非常危险的，尤其是表很大的时候。</p>
+<p><em><strong>更新:2014年3月30日</strong></em></p>
+<p><img alt="" class="aligncenter size-full wp-image-11371" height="472" src="../wp-content/uploads/2011/01/SQL-Join.jpg" width="600"/></p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8711.html"><img alt="程序员疫苗：代码注入" height="150" src="../wp-content/uploads/2012/12/200906020837401710-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8711.html">程序员疫苗：代码注入</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7490.html"><img alt="性能调优攻略" height="150" src="../wp-content/uploads/2012/06/f1-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7490.html">性能调优攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7270.html"><img alt="NoSQL 数据建模技术" height="150" src="../wp-content/uploads/2012/05/overview2-1-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7270.html">NoSQL 数据建模技术</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6639.html"><img alt="千万别惹程序员 " height="150" src="../wp-content/uploads/2012/02/programming-language-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6639.html">千万别惹程序员 </a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3433.html"><img alt="6个有用的MySQL语句" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3433.html">6个有用的MySQL语句</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1957.html"><img alt="Web程序的最佳测试数据" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1957.html">Web程序的最佳测试数据</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3463.html">图解SQL的Join</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

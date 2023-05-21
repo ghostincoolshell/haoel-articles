@@ -1,0 +1,76 @@
+<html><body><p>用过USB摄像头的都知道，你需要使用鼠标来操作它，比如截个图，录个像什么的，要点N次鼠标，对于我们那些不喜欢多次点击鼠标的人来说，这是一件很boring的事情，所以，本文将教你如何使用Python来操作摄像头。</p>
+<p>这里，我们需要三个Python库： <a href="http://videocapture.sourceforge.net/">VideoCapture</a>， <a href="http://www.pythonware.com/products/pil/">PIL</a>  和 <a href="http://www.pygame.org/">pygame</a>。使用这三个库你可以非常容易的编写一个摄像头程序。之所以使用pygame，其目的就是因为这个库可以处理视频帧（fps）。下面是代码：</p>
+<pre class="EnlighterJSRAW">from VideoCapture import Device
+import ImageDraw, sys, pygame, time
+from pygame.locals import *
+from PIL import ImageEnhance
+
+res = (640,480)
+pygame.init()
+cam = Device()
+cam.setResolution(res[0],res[1])
+screen = pygame.display.set_mode((640,480))
+pygame.display.set_caption('Webcam')
+pygame.font.init()
+font = pygame.font.SysFont("Courier",11)
+
+def disp(phrase,loc):
+    s = font.render(phrase, True, (200,200,200))
+    sh = font.render(phrase, True, (50,50,50))
+    screen.blit(sh, (loc[0]+1,loc[1]+1))
+    screen.blit(s, loc)
+
+brightness = 1.0
+contrast = 1.0
+shots = 0
+
+while 1:
+    camshot = ImageEnhance.Brightness(cam.getImage()).enhance(brightness)
+    camshot = ImageEnhance.Contrast(camshot).enhance(contrast)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+    keyinput = pygame.key.get_pressed()
+    if keyinput[K_1]: brightness -= .1
+    if keyinput[K_2]: brightness += .1
+    if keyinput[K_3]: contrast -= .1
+    if keyinput[K_4]: contrast += .1
+    if keyinput[K_q]: cam.displayCapturePinProperties()
+    if keyinput[K_w]: cam.displayCaptureFilterProperties()
+    if keyinput[K_s]:
+        filename = str(time.time()) + ".jpg"
+        cam.saveSnapshot(filename, quality=80, timestamp=0)
+        shots += 1
+    camshot = pygame.image.frombuffer(camshot.tostring(), res, "RGB")
+    screen.blit(camshot, (0,0))
+    disp("S:" + str(shots), (10,4))
+    disp("B:" + str(brightness), (10,16))
+    disp("C:" + str(contrast), (10,28))
+    pygame.display.flip()</pre>
+<p>这段代码中的一些要点的解释如下：</p>
+<p><span id="more-1928"></span></p>
+<ul>
+<li>第15行的那个函数是在视频上显示些信息。这个例子中，显示的是抓图的数量以及当前的亮度和对比度。这个函数先显示深灰色的文本，然后偏移几个像素，再显示浅灰色的，这样可以有阴影的效果。</li>
+<li>第26行是在调整亮度和对比度。30-33行是在设置数字键1-4用于调整亮度和对比度。</li>
+<li>34 和35行是在设置 ‘q’ 和 ‘w’ 来显示摄像头的对话框。在那里你可以调整分辨率和暴光度等等。</li>
+<li>36行及以下的代码，是在存一个抓图文件。文件名中使用了当前时间。.</li>
+</ul>
+<p>希望这个小程序能给你开启一个如何写摄像头的程序。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4710.html"><img alt="Python 和 PyGame 的一些示例" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4710.html">Python 和 PyGame 的一些示例</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="../wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1928.html">如何使用Python操作摄像头</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

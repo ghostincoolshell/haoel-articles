@@ -1,0 +1,1587 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>第 30 页 &#8211; 酷 壳 &#8211; CoolShell</title>
+	<atom:link href="https://coolshell.cn/feed?paged=30" rel="self" type="application/rss+xml" />
+	<link>https://coolshell.cn</link>
+	<description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>
+	<lastBuildDate>Wed, 04 May 2011 00:41:56 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2</generator>
+	<item>
+		<title>九个PHP很有用的功能</title>
+		<link>https://coolshell.cn/articles/2394.html</link>
+					<comments>https://coolshell.cn/articles/2394.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 06 May 2010 00:37:49 +0000</pubDate>
+				<category><![CDATA[PHP脚本]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[PHP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2394</guid>
+
+					<description><![CDATA[<p>下面是九个PHP中很有用的功能，不知道你用过了吗？ 1. 函数的任意数目的参数 你可能知道PHP允许你定义一个默认参数的函数。但你可能并不知道PHP还允许你定义...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2394.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2394.html">九个PHP很有用的功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面是九个PHP中很有用的功能，不知道你用过了吗？</p>
+<h4><span>1. 函数的任意数目的参数</span></h4>
+<p>你可能知道PHP允许你定义一个默认参数的函数。但你可能并不知道PHP还允许你定义一个完全任意的参数的函数</p>
+<p>下面是一个示例向你展示了默认参数的函数：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 两个默认参数的函数
+function foo($arg1 = &#039;&#039;, $arg2 = &#039;&#039;) {
+
+	echo &quot;arg1: $arg1\n&quot;;
+	echo &quot;arg2: $arg2\n&quot;;
+
+}
+
+foo(&#039;hello&#039;,&#039;world&#039;);
+/* 输出:
+arg1: hello
+arg2: world
+*/
+
+foo();
+/* 输出:
+arg1:
+arg2:
+*/
+</pre>
+<p>现在我们来看一看一个不定参数的函数，其使用到了?<a href="http://us2.php.net/manual/en/function.func-get-args.php">func_get_args()</a>方法：<br />
+<span id="more-2394"></span></p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 是的，形参列表为空
+function foo() {
+
+	// 取得所有的传入参数的数组
+	$args = func_get_args();
+
+	foreach ($args as $k =&gt; $v) {
+		echo &quot;arg&quot;.($k+1).&quot;: $v\n&quot;;
+	}
+
+}
+
+foo();
+/* 什么也不会输出 */
+
+foo(&#039;hello&#039;);
+/* 输出
+arg1: hello
+*/
+
+foo(&#039;hello&#039;, &#039;world&#039;, &#039;again&#039;);
+/* 输出
+arg1: hello
+arg2: world
+arg3: again
+*/
+</pre>
+<h4><span>2. </span>使用 Glob() 查找文件</h4>
+<p>很多PHP的函数都有一个比较长的自解释的函数名，但是，当你看到?<a href="http://us.php.net/manual/en/function.glob.php">glob()</a> 的时候，你可能并不知道这个函数是用来干什么的，除非你对它已经很熟悉了。</p>
+<p>你可以认为这个函数就好?<a href="http://php.net/manual/en/function.scandir.php">scandir()</a> 一样，其可以用来查找文件。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 取得所有的后缀为PHP的文件
+$files = glob(&#039;*.php&#039;);
+
+print_r($files);
+/* 输出:
+Array
+(
+    [0] =&gt; phptest.php
+    [1] =&gt; pi.php
+    [2] =&gt; post_output.php
+    [3] =&gt; test.php
+)
+*/
+</pre>
+<p>你还可以查找多种后缀名</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 取PHP文件和TXT文件
+$files = glob(&#039;*.{php,txt}&#039;, GLOB_BRACE);
+
+print_r($files);
+/* 输出:
+Array
+(
+    [0] =&gt; phptest.php
+    [1] =&gt; pi.php
+    [2] =&gt; post_output.php
+    [3] =&gt; test.php
+    [4] =&gt; log.txt
+    [5] =&gt; test.txt
+)
+*/
+</pre>
+<p>你还可以加上路径：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+$files = glob(&#039;../images/a*.jpg&#039;);
+
+print_r($files);
+/* 输出:
+Array
+(
+    [0] =&gt; ../images/apple.jpg
+    [1] =&gt; ../images/art.jpg
+)
+*/
+</pre>
+<p>如果你想得到绝对路径，你可以调用?<a href="http://php.net/manual/en/function.realpath.php">realpath()</a> 函数：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+$files = glob(&#039;../images/a*.jpg&#039;);
+
+// applies the function to each array element
+$files = array_map(&#039;realpath&#039;,$files);
+
+print_r($files);
+/* output looks like:
+Array
+(
+    [0] =&gt; C:\wamp\www\images\apple.jpg
+    [1] =&gt; C:\wamp\www\images\art.jpg
+)
+*/
+</pre>
+<h4><span>3. </span>内存使用信息</h4>
+<p>观察你程序的内存使用能够让你更好的优化你的代码。</p>
+<p>PHP 是有垃圾回收机制的，而且有一套很复杂的内存管理机制。你可以知道你的脚本所使用的内存情况。要知道当前内存使用情况，你可以使用?<a href="http://us2.php.net/manual/en/function.memory-get-usage.php">memory_get_usage()</a> 函数，如果你想知道使用内存的峰值，你可以调用<a href="http://us2.php.net/manual/en/function.memory-get-peak-usage.php">memory_get_peak_usage()</a> 函数。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+echo &quot;Initial: &quot;.memory_get_usage().&quot; bytes \n&quot;;
+/* 输出
+Initial: 361400 bytes
+*/
+
+// 使用内存
+for ($i = 0; $i &lt; 100000; $i++) {
+	$array []= md5($i);
+}
+
+// 删除一半的内存
+for ($i = 0; $i &lt; 100000; $i++) {
+	unset($array[$i]);
+}
+
+echo &quot;Final: &quot;.memory_get_usage().&quot; bytes \n&quot;;
+/* prints
+Final: 885912 bytes
+*/
+
+echo &quot;Peak: &quot;.memory_get_peak_usage().&quot; bytes \n&quot;;
+/* 输出峰值
+Peak: 13687072 bytes
+*/
+</pre>
+<h4><span>4. </span>CPU使用信息</h4>
+<p>使用?<a href="http://us2.php.net/manual/en/function.getrusage.php">getrusage()</a> 函数可以让你知道CPU的使用情况。注意，这个功能在Windows下不可用。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+print_r(getrusage());
+/* 输出
+Array
+(
+    [ru_oublock] =&gt; 0
+    [ru_inblock] =&gt; 0
+    [ru_msgsnd] =&gt; 2
+    [ru_msgrcv] =&gt; 3
+    [ru_maxrss] =&gt; 12692
+    [ru_ixrss] =&gt; 764
+    [ru_idrss] =&gt; 3864
+    [ru_minflt] =&gt; 94
+    [ru_majflt] =&gt; 0
+    [ru_nsignals] =&gt; 1
+    [ru_nvcsw] =&gt; 67
+    [ru_nivcsw] =&gt; 4
+    [ru_nswap] =&gt; 0
+    [ru_utime.tv_usec] =&gt; 0
+    [ru_utime.tv_sec] =&gt; 0
+    [ru_stime.tv_usec] =&gt; 6269
+    [ru_stime.tv_sec] =&gt; 0
+)
+
+*/
+</pre>
+<p>这个结构看上出很晦涩，除非你对CPU很了解。下面一些解释：</p>
+<ul>
+<li>ru_oublock: 块输出操作</li>
+<li>ru_inblock: 块输入操作</li>
+<li>ru_msgsnd: 发送的message</li>
+<li>ru_msgrcv: 收到的message</li>
+<li>ru_maxrss: 最大驻留集大小</li>
+<li>ru_ixrss: 全部共享内存大小</li>
+<li>ru_idrss:全部非共享内存大小</li>
+<li>ru_minflt: 页回收</li>
+<li>ru_majflt: 页失效</li>
+<li>ru_nsignals: 收到的信号</li>
+<li>ru_nvcsw: 主动上下文切换</li>
+<li>ru_nivcsw: 被动上下文切换</li>
+<li>ru_nswap: 交换区</li>
+<li>ru_utime.tv_usec: 用户态时间 (microseconds)</li>
+<li>ru_utime.tv_sec: 用户态时间(seconds)</li>
+<li>ru_stime.tv_usec: 系统内核时间 (microseconds)</li>
+<li>ru_stime.tv_sec: 系统内核时间?(seconds)</li>
+</ul>
+<p>要看到你的脚本消耗了多少CPU，我们需要看看“用户态的时间”和“系统内核时间”的值。秒和微秒部分是分别提供的，您可以把微秒值除以100万，并把它添加到秒的值后，可以得到有小数部分的秒数。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// sleep for 3 seconds (non-busy)
+sleep(3);
+
+$data = getrusage();
+echo &quot;User time: &quot;.
+	($data[&#039;ru_utime.tv_sec&#039;] +
+	$data[&#039;ru_utime.tv_usec&#039;] / 1000000);
+echo &quot;System time: &quot;.
+	($data[&#039;ru_stime.tv_sec&#039;] +
+	$data[&#039;ru_stime.tv_usec&#039;] / 1000000);
+
+/* 输出
+User time: 0.011552
+System time: 0
+*/
+</pre>
+<p>sleep是不占用系统时间的，我们可以来看下面的一个例子：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// loop 10 million times (busy)
+for($i=0;$i&lt;10000000;$i++) {
+
+}
+
+$data = getrusage();
+echo &quot;User time: &quot;.
+	($data[&#039;ru_utime.tv_sec&#039;] +
+	$data[&#039;ru_utime.tv_usec&#039;] / 1000000);
+echo &quot;System time: &quot;.
+	($data[&#039;ru_stime.tv_sec&#039;] +
+	$data[&#039;ru_stime.tv_usec&#039;] / 1000000);
+
+/* 输出
+User time: 1.424592
+System time: 0.004204
+*/
+</pre>
+<p>这花了大约14秒的CPU时间，几乎所有的都是用户的时间，因为没有系统调用。</p>
+<p>系统时间是CPU花费在系统调用上的上执行内核指令的时间。下面是一个例子：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+$start = microtime(true);
+// keep calling microtime for about 3 seconds
+while(microtime(true) - $start &lt; 3) {
+
+}
+
+$data = getrusage();
+echo &quot;User time: &quot;.
+	($data[&#039;ru_utime.tv_sec&#039;] +
+	$data[&#039;ru_utime.tv_usec&#039;] / 1000000);
+echo &quot;System time: &quot;.
+	($data[&#039;ru_stime.tv_sec&#039;] +
+	$data[&#039;ru_stime.tv_usec&#039;] / 1000000);
+
+/* prints
+User time: 1.088171
+System time: 1.675315
+*/
+</pre>
+<p>我们可以看到上面这个例子更耗CPU。</p>
+<h4><span>5. </span>系统常量</h4>
+<p>PHP 提供非常有用的<a href="http://php.net/manual/en/language.constants.predefined.php">系统常量</a> 可以让你得到当前的行号 (__LINE__)，文件 (__FILE__)，目录 (__DIR__)，函数名 (__FUNCTION__)，类名(__CLASS__)，方法名(__METHOD__) 和名字空间 (__NAMESPACE__)，很像C语言。</p>
+<p>我们可以以为这些东西主要是用于调试，当也不一定，比如我们可以在include其它文件的时候使用?__FILE__ (当然，你也可以在 PHP 5.3以后使用 __DIR__ )，下面是一个例子。</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// this is relative to the loaded script&#039;s path
+// it may cause problems when running scripts from different directories
+require_once(&#039;config/database.php&#039;);
+
+// this is always relative to this file&#039;s path
+// no matter where it was included from
+require_once(dirname(__FILE__) . &#039;/config/database.php&#039;);
+</pre>
+<p>下面是使用 __LINE__ 来输出一些debug的信息，这样有助于你调试程序：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// some code
+// ...
+my_debug(&quot;some debug message&quot;, __LINE__);
+/* 输出
+Line 4: some debug message
+*/
+
+// some more code
+// ...
+my_debug(&quot;another debug message&quot;, __LINE__);
+/* 输出
+Line 11: another debug message
+*/
+
+function my_debug($msg, $line) {
+	echo &quot;Line $line: $msg\n&quot;;
+}
+</pre>
+<h4><span>6.生成唯一的ID</span></h4>
+<p>有很多人使用 md5() 来生成一个唯一的ID，如下所示：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// generate unique string
+echo md5(time() . mt_rand(1,1000000));
+</pre>
+<p>其实，PHP中有一个叫?<a href="http://us2.php.net/manual/en/function.uniqid.php">uniqid()</a> 的函数是专门用来干这个的：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// generate unique string
+echo uniqid();
+/* 输出
+4bd67c947233e
+*/
+
+// generate another unique string
+echo uniqid();
+/* 输出
+4bd67c9472340
+*/
+</pre>
+<p>可能你会注意到生成出来的ID前几位是一样的，这是因为生成器依赖于系统的时间，这其实是一个非常不错的功能，因为你是很容易为你的这些ID排序的。这点MD5是做不到的。</p>
+<p>你还可以加上前缀避免重名：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 前缀
+echo uniqid(&#039;foo_&#039;);
+/* 输出
+foo_4bd67d6cd8b8f
+*/
+
+// 有更多的熵
+echo uniqid(&#039;&#039;,true);
+/* 输出
+4bd67d6cd8b926.12135106
+*/
+
+// 都有
+echo uniqid(&#039;bar_&#039;,true);
+/* 输出
+bar_4bd67da367b650.43684647
+*/
+</pre>
+<p>而且，生成出来的ID会比MD5生成的要短，这会让你节省很多空间。</p>
+<h4><span>7. </span>序列化</h4>
+<p>你是否会把一个比较复杂的数据结构存到数据库或是文件中？你并不需要自己去写自己的算法。PHP早已为你做好了，其提供了两个函数：?<a href="http://php.net/manual/en/function.serialize.php">serialize()</a> 和 <a href="http://www.php.net/manual/en/function.unserialize.php">unserialize()</a>:</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// 一个复杂的数组
+$myvar = array(
+	&#039;hello&#039;,
+	42,
+	array(1,&#039;two&#039;),
+	&#039;apple&#039;
+);
+
+// 序列化
+$string = serialize($myvar);
+
+echo $string;
+/* 输出
+a:4:{i:0;s:5:&quot;hello&quot;;i:1;i:42;i:2;a:2:{i:0;i:1;i:1;s:3:&quot;two&quot;;}i:3;s:5:&quot;apple&quot;;}
+*/
+
+// 反序例化
+$newvar = unserialize($string);
+
+print_r($newvar);
+/* 输出
+Array
+(
+    [0] =&gt; hello
+    [1] =&gt; 42
+    [2] =&gt; Array
+        (
+            [0] =&gt; 1
+            [1] =&gt; two
+        )
+
+    [3] =&gt; apple
+)
+*/
+</pre>
+<p>这是PHP的原生函数，然而在今天JSON越来越流行，所以在PHP5.2以后，PHP开始支持JSON，你可以使用 json_encode() 和 json_decode() 函数</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// a complex array
+$myvar = array(
+	&#039;hello&#039;,
+	42,
+	array(1,&#039;two&#039;),
+	&#039;apple&#039;
+);
+
+// convert to a string
+$string = json_encode($myvar);
+
+echo $string;
+/* prints
+[&quot;hello&quot;,42,[1,&quot;two&quot;],&quot;apple&quot;]
+*/
+
+// you can reproduce the original variable
+$newvar = json_decode($string);
+
+print_r($newvar);
+/* prints
+Array
+(
+    [0] =&gt; hello
+    [1] =&gt; 42
+    [2] =&gt; Array
+        (
+            [0] =&gt; 1
+            [1] =&gt; two
+        )
+
+    [3] =&gt; apple
+)
+*/
+</pre>
+<p>这看起来更为紧凑一些了，而且还兼容于Javascript和其它语言。但是对于一些非常复杂的数据结构，可能会造成数据丢失。</p>
+<h4><span>8. </span>字符串压缩</h4>
+<p>当我们说到压缩，我们可能会想到文件压缩，其实，字符串也是可以压缩的。PHP提供了?<a href="http://php.net/manual/en/function.gzcompress.php">gzcompress()</a> 和 <a href="http://www.php.net/manual/en/function.gzuncompress.php">gzuncompress()</a> 函数：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+$string =
+&quot;Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. Nunc ut elit id mi ultricies
+adipiscing. Nulla facilisi. Praesent pulvinar,
+sapien vel feugiat vestibulum, nulla dui pretium orci,
+non ultricies elit lacus quis ante. Lorem ipsum dolor
+sit amet, consectetur adipiscing elit. Aliquam
+pretium ullamcorper urna quis iaculis. Etiam ac massa
+sed turpis tempor luctus. Curabitur sed nibh eu elit
+mollis congue. Praesent ipsum diam, consectetur vitae
+ornare a, aliquam a nunc. In id magna pellentesque
+tellus posuere adipiscing. Sed non mi metus, at lacinia
+augue. Sed magna nisi, ornare in mollis in, mollis
+sed nunc. Etiam at justo in leo congue mollis.
+Nullam in neque eget metus hendrerit scelerisque
+eu non enim. Ut malesuada lacus eu nulla bibendum
+id euismod urna sodales. &quot;;
+
+$compressed = gzcompress($string);
+
+echo &quot;Original size: &quot;. strlen($string).&quot;\n&quot;;
+/* 输出原始大小
+Original size: 800
+*/
+
+echo &quot;Compressed size: &quot;. strlen($compressed).&quot;\n&quot;;
+/* 输出压缩后的大小
+Compressed size: 418
+*/
+
+// 解压缩
+$original = gzuncompress($compressed);
+</pre>
+<p>几乎有<span style="font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; line-height: 19px; white-space: normal; font-size: 13px;">50% 压缩比率。同时，你还可以使用?<a href="http://www.php.net/manual/en/function.gzencode.php">gzencode()</a> 和 <a href="http://www.php.net/manual/en/function.gzdecode.php">gzdecode()</a> 函数来压缩，只不用其用了不同的压缩算法。</span></p>
+<h4><span>9. 注册停止</span>函数</h4>
+<p>有一个函数叫做?<a href="http://www.php.net/manual/en/function.register-shutdown-function.php">register_shutdown_function()</a>，可以让你在整个脚本停时前运行代码。让我们看下面的一个示例：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+// capture the start time
+$start_time = microtime(true);
+
+// do some stuff
+// ...
+
+// display how long the script took
+echo &quot;execution took: &quot;.
+		(microtime(true) - $start_time).
+		&quot; seconds.&quot;;
+</pre>
+<p>上面这个示例只不过是用来计算某个函数运行的时间。然后，如果你在函数中间调用?<a href="http://php.net/manual/en/function.exit.php">exit()</a> 函数，那么你的最后的代码将不会被运行到。并且，如果该脚本在浏览器终止（用户按停止按钮），其也无法被运行。</p>
+<p>而当我们使用了register_shutdown_function()后，你的程序就算是在脚本被停止后也会被运行：</p>
+<pre data-enlighter-language="php" class="EnlighterJSRAW">
+$start_time = microtime(true);
+
+register_shutdown_function(&#039;my_shutdown&#039;);
+
+// do some stuff
+// ...
+
+function my_shutdown() {
+	global $start_time;
+
+	echo &quot;execution took: &quot;.
+			(microtime(true) - $start_time).
+			&quot; seconds.&quot;;
+}
+</pre>
+<p>文章：<a href="http://net.tutsplus.com/tutorials/php/9-useful-php-functions-and-features-you-need-to-know/" target="_blank">来源</a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/07/muxnt-150x150.jpg" alt="代码执行的效率" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7886.html" class="wp_rp_title">代码执行的效率</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li><li ><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/08/Pagination-e1312791884744-150x150.jpg" alt="PHP分页技术的代码和示例" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5160.html" class="wp_rp_title">PHP分页技术的代码和示例</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/02/1128-150x150.jpg" alt="Web开发人员速查卡" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3684.html" class="wp_rp_title">Web开发人员速查卡</a></li><li ><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="最为奇怪的程序语言的特性" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2053.html" class="wp_rp_title">最为奇怪的程序语言的特性</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2394.html">九个PHP很有用的功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2394.html/feed</wfw:commentRss>
+			<slash:comments>26</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>McAfee误杀svchost.exe</title>
+		<link>https://coolshell.cn/articles/2376.html</link>
+					<comments>https://coolshell.cn/articles/2376.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 23 Apr 2010 00:45:21 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[McAfee]]></category>
+		<category><![CDATA[svchost]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2376</guid>
+
+					<description><![CDATA[<p>这两天，杀毒软件又出事了。还记得2007年5月，那次是Norton把简体中文Windows下的netapi32.dll 和 lsasrv.dll。最近的一次是，...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2376.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2376.html">McAfee误杀svchost.exe</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>这两天，杀毒软件又出事了。还记得2007年5月，那次是Norton把简体中文Windows下的netapi32.dll 和 lsasrv.dll。最近的一次是，2008年11月，AVG把user32.dll给干掉了。</p>
+<p>这次是McAfee的5958版病毒库，导致McAfee误杀了Windows XP SP3下的svchost.exe，这最终导致了Windows不断地重复启动，据说有数十万PC成了小白鼠。简单地到Twitter和各国外技术社区看看，真是受灾严重啊。</p>
+<p>下面是出错信息：</p>
+<pre>The file C:WINDOWS\system32\svchost.exe contains the W32/Wecorl.a Virus.
+Undetermined clean error, OAS denied access and continued.
+Detected using Scan engine version 5400.1158 DAT version 5958.0000.</pre>
+<p>其实，可能大家都误解了，McAfee把svchost.exe识别为一个恶意程序，我觉得这是一种“实事求是”的态度啊，svchost.exe难道不是Windows下的万恶之源吗？多少年来，svchost.exe成为了多少病毒，木马和流氓程序的温床，这么多年过去了，Windows用户们默默地承受着svchost.exe所带来的痛苦，经过这么长的时间，只有McAfee不惧M$的淫威第一个站出来把svchost.exe揪出来办了，这是一种什么样的精神啊……<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/1528.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/10/seo-cartoon-150x150.jpg" alt="图片搜索引擎优化Checklist" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1528.html" class="wp_rp_title">图片搜索引擎优化Checklist</a></li><li ><a href="https://coolshell.cn/articles/4605.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/04/lawrence_1-150x150.png" alt="Amazon的书为什么卖到了$2000万" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4605.html" class="wp_rp_title">Amazon的书为什么卖到了$2000万</a></li><li ><a href="https://coolshell.cn/articles/2606.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="五个方法成为更好的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2606.html" class="wp_rp_title">五个方法成为更好的程序员</a></li><li ><a href="https://coolshell.cn/articles/2785.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="JS1K 演示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2785.html" class="wp_rp_title">JS1K 演示</a></li><li ><a href="https://coolshell.cn/articles/290.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/19.jpg" alt="雷人的程序注释" width="150" height="150" /></a><a href="https://coolshell.cn/articles/290.html" class="wp_rp_title">雷人的程序注释</a></li><li ><a href="https://coolshell.cn/articles/3244.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Photo-editor-150x150.jpg" alt="在线作图编辑服务" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3244.html" class="wp_rp_title">在线作图编辑服务</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2376.html">McAfee误杀svchost.exe</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2376.html/feed</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>谷歌Chrome取消&#8221;http://&#8221;</title>
+		<link>https://coolshell.cn/articles/2367.html</link>
+					<comments>https://coolshell.cn/articles/2367.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 22 Apr 2010 03:12:24 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Chrome]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2367</guid>
+
+					<description><![CDATA[<p>谷歌下一个版本的Chrome浏览器软件将缺少一个在近20年来一直是浏览器的一个特点的功能：在地址栏中的“http://”。目前开发人员版本的Chrome浏览器已...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2367.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2367.html">谷歌Chrome取消”http://”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>谷歌下一个版本的Chrome浏览器软件将缺少一个在近20年来一直是浏览器的一个特点的功能：在地址栏中的“http://”。目前开发人员版本的Chrome浏览器已经做了这种改变。这个变化虽然看起来很小，但是，已经在Chrome网站引起了程序员们很大的争议。</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR.png"><img decoding="async" loading="lazy" class="aligncenter size-full wp-image-2373" title="Google Chrome 取消 http://" src="https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR.png" alt="" width="343" height="183" srcset="https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR.png 343w, https://coolshell.cn/wp-content/uploads/2010/04/URL-BAR-300x160.png 300w" sizes="(max-width: 343px) 100vw, 343px" /></a></p>
+<p>在Google Chrome的开发站点上，又有了一个很热的BUG——<a href="http://code.google.com/p/chromium/issues/detail?id=41467" target="_blank">Issue  41467</a>（上一次的一热议的BUG是的《<a rel="bookmark" href="https://coolshell.cn/articles/1781.html" target="_blank">Go语言更名Issue 9</a>》），这个BUG目前已被关闭。不过在其它地方还在热议中，如：<a href="http://www.reddit.com/r/programming/comments/bt0oh/issue_41467_url_bar_no_longer_shows_http/" target="_blank">Reddit.com</a>。基本上来说，90%以上的程序员反对的，他们希望Google的Chrome可以给一个设置关闭或打开这一功能。</p>
+<p>一些程序员觉得这是违反了RFC，并且觉得这是在向End User传播一种很不好的东西，那就是网址可以不用http://，这样一来会给程序员增加很多麻烦，比如：他们的程序无法使用http://这一关键字来检查用户的输出，等等。</p>
+<p>iPhone浏览器的也是这样的， 不过当你把光标放到地址栏中，其会显示http://，广大程序员希望Chrome也实现这一方案。然而，<a href="http://code.google.com/p/chromium/issues/detail?id=41467" target="_blank">Issue  41467</a>目前的状态是“WontFix”，呵呵。</p>
+<p>有人说，如果你在地址栏中直接输入网址，没有协议前缀，默认就是http://，Google用的就是这个特性，然后，你可以试试在地址栏中输入“<a rel="nofollow" href="ftp://ftp.gnu.org/gnu">ftp.gnu.org/gnu</a>”，你会发现，自动加入的不是http://而是ftp://，呵呵。</p>
+<p>有人说，既然你要省，不如也把www.和后面的.com加上/也省了，因为这些都是默认的嘛。直接打google就OK了。Chrome开发团队说，没有www.和.com/只能算是一个主机名，不能算是DNS域名。呵呵。</p>
+<p>还有人说，搞这种隐藏的最恶心的就是Windows，隐藏文件后缀名，隐藏系统文件，太扯了，于是，像sexy_girls.jpg.exe，huge-tits.jpg.src这样玩意儿让某些电脑知识薄弱意志不坚定的人深受其害。</p>
+<p>如果有空，请留下你的观点。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2023/02/chatgpt-150x150.jpg" alt="我看ChatGPT: 为啥谷歌掉了千亿美金" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22398.html" class="wp_rp_title">我看ChatGPT: 为啥谷歌掉了千亿美金</a></li><li ><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2022/02/http_method-150x150.png" alt="“一把梭：REST API 全用 POST”" width="150" height="150" /></a><a href="https://coolshell.cn/articles/22173.html" class="wp_rp_title">“一把梭：REST API 全用 POST”</a></li><li ><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/10/HTTP-770x513-300x200-1-150x150.jpg" alt="HTTP的前世今生" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19840.html" class="wp_rp_title">HTTP的前世今生</a></li><li ><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/08/enable-https-banner-150x150.png" alt="如何免费的让网站启用HTTPS" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18094.html" class="wp_rp_title">如何免费的让网站启用HTTPS</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/inbox2-640x264-150x150.jpg" alt="Google Inbox如何跨平台重用代码？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12136.html" class="wp_rp_title">Google Inbox如何跨平台重用代码？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2367.html">谷歌Chrome取消”http://”</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2367.html/feed</wfw:commentRss>
+			<slash:comments>35</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>两个C++的资源</title>
+		<link>https://coolshell.cn/articles/2365.html</link>
+					<comments>https://coolshell.cn/articles/2365.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 19 Apr 2010 01:17:19 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[Boost]]></category>
+		<category><![CDATA[C++]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2365</guid>
+
+					<description><![CDATA[<p>第一个是一个C++第三方类库的A-Z：（http://www.trumphurst.com/cpplibs/cpplibs.php）其中包含了： 开源的C++的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2365.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2365.html">两个C++的资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>第一个是一个C++第三方类库的A-Z：（<a href="http://www.trumphurst.com/cpplibs/cpplibs.php" target="_blank">http://www.trumphurst.com/cpplibs/cpplibs.php</a>）其中包含了：</p>
+<ul>
+<li>开源的C++的第三方类库列表</li>
+<li>商业的C++的第三方类库列表</li>
+<li>一些经典的C++的随书源码</li>
+<li>一些C++相关的工具</li>
+</ul>
+<p>不过，这个网站好像最新更新是在2008年。</p>
+<p>第二个是Boost C++的一个教程：（<a href="http://en.highscore.de/cpp/boost/" target="_blank">http://en.highscore.de/cpp/boost/</a>）</p>
+<ul>
+<li><a href="http://en.highscore.de/cpp/boost/introduction.html">Chapter 1: Introduction</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/smartpointers.html">Chapter 2: Smart Pointers</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/functionobjects.html">Chapter 3: Function Objects</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/eventhandling.html">Chapter 4: Event Handling</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/stringhandling.html">Chapter 5: String Handling</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/multithreading.html">Chapter 6: Multithreading</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/asio.html">Chapter 7: Asynchronous Input and Output</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/interprocesscommunication.html">Chapter 8: Interprocess Communication</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/filesystem.html">Chapter 9: Filesystem</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/datetime.html">Chapter 10: Date and Time</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/serialization.html">Chapter 11: Serialization</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/parser.html">Chapter 12: Parser</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/containers.html">Chapter 13: Containers</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/datastructures.html">Chapter 14: Data Structures</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/errorhandling.html">Chapter 15: Error Handling</a></li>
+<li><a href="http://en.highscore.de/cpp/boost/castoperators.html">Chapter 16: Cast Operators</a></li>
+</ul>
+<p>这个教程可能是写得比较不错的了，不过是英文的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" alt="Rust语言的编程范式" width="150" height="150" /></a><a href="https://coolshell.cn/articles/20845.html" class="wp_rp_title">Rust语言的编程范式</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/10/edsm-150x150.gif" alt="State Threads 回调终结者" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12012.html" class="wp_rp_title">State Threads 回调终结者</a></li><li ><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/04/c99-150x150.jpg" alt="C语言的整型溢出问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11466.html" class="wp_rp_title">C语言的整型溢出问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2365.html">两个C++的资源</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2365.html/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>MSDN中的两个命名</title>
+		<link>https://coolshell.cn/articles/2363.html</link>
+					<comments>https://coolshell.cn/articles/2363.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Mon, 19 Apr 2010 00:45:12 +0000</pubDate>
+				<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[MSDN]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2363</guid>
+
+					<description><![CDATA[<p>第一个叫：DestroyPhysicalMonitor http://msdn.microsoft.com/en-us/library/dd692936(VS....</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2363.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2363.html">MSDN中的两个命名</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>第一个叫：<strong>DestroyPhysicalMonitor</strong></p>
+<p><a href="http://msdn.microsoft.com/en-us/library/dd692936(VS.85).aspx">http://msdn.microsoft.com/en-us/library/dd692936(VS.85).aspx</a></p>
+<p>在你的程序中调用这个函数，不知道你敢不敢在运行程序。呵呵。</p>
+<p>第二个叫：<strong>INITCOMMONCONTROLSEX</strong> &#8211;</p>
+<p><a href="http://msdn.microsoft.com/en-us/library/bb775507(VS.85).aspx">http://msdn.microsoft.com/en-us/library/bb775507(VS.85).aspx</a></p>
+<p>Initialize Common Control Sex ??? 真是淫者见淫啊。呵呵</p>
+<p>不知道还有没有其它有趣的？欢迎大家跟贴。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/rank_scatter1-150x150.png" alt="编程语言流行度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3385.html" class="wp_rp_title">编程语言流行度</a></li><li ><a href="https://coolshell.cn/articles/591.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/04/book-of-ruby-complete-150x150.png" alt="免费电子书：Ruby Complete" width="150" height="150" /></a><a href="https://coolshell.cn/articles/591.html" class="wp_rp_title">免费电子书：Ruby Complete</a></li><li ><a href="https://coolshell.cn/articles/2184.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/03/bt_js_demo-150x150.jpg" alt="BT工作原理演示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2184.html" class="wp_rp_title">BT工作原理演示</a></li><li ><a href="https://coolshell.cn/articles/4458.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="BT雷人的程序语言（大全）" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4458.html" class="wp_rp_title">BT雷人的程序语言（大全）</a></li><li ><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/09/image008-150x150.jpg" alt="一些文章和各种资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5224.html" class="wp_rp_title">一些文章和各种资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2363.html">MSDN中的两个命名</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2363.html/feed</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个jQuery的插件</title>
+		<link>https://coolshell.cn/articles/2357.html</link>
+					<comments>https://coolshell.cn/articles/2357.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 14 Apr 2010 05:42:36 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[IE]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2357</guid>
+
+					<description><![CDATA[<p>jQuery这个强大的玩意我就不多说了，不知道可以上网搜搜看。IE6我也不多说了，这可能是史上骂名最多的一个浏览器，网上有N多的声讨IE6的文章，你也可以参看本...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2357.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2357.html">一个jQuery的插件</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>jQuery这个强大的玩意我就不多说了，不知道可以上网搜搜看。IE6我也不多说了，这可能是史上骂名最多的一个浏览器，网上有N多的声讨IE6的文章，你也可以参看本站的《<a rel="bookmark" href="https://coolshell.cn/articles/1817.html">9个最常见IE的Bug及其fix</a>》和《<a rel="bookmark" href="https://coolshell.cn/articles/1245.html">IE的CSS相关的BUG</a>》，如果你今天还在用IE6，或是IE类浏览器，那请让我小小的BS你一下。</p>
+<p>这个jQuery的Plugin可能是有史以来所有plugin中最有个性的一个，因为这个plugin什么也不干，其会用户的IE6版的浏览器直接Crash掉。这个plugin叫jQuery Crash，其网页链接在下面，是一个四星级的插件，仅仅435个字节。</p>
+<p style="text-align: center;"><a href="http://plugins.jquery.com/project/crash" target="_blank">http://plugins.jquery.com/project/crash</a></p>
+<p style="text-align: left;">其是这样介绍自己的，有脏话，我就不翻译了。</p>
+<blockquote><p>A jQuery plugin for crashing IE6. That&#8217;ll teach those motherf!%@*#s to upgrade their s#*t.</p></blockquote>
+<p>其它，让IE系例的浏览器挂掉，并不需要Javascript，你可以尝试点击下面这个页面，这是一个纯HTML的页面，没有任何的CSS，或是JS的东西，只有HTML。请小心打开（如果在Firefox中打开也可能会挂，Chrome中没事）</p>
+<p style="text-align: center;"><a href="http://www.gregmerideth.net/html/iecrash.html" target="_blank">http://www.gregmerideth.net/html/iecrash.html</a></p>
+<p>这个纯HTML的来源是本来是作者写了一个程序生成了一个N层嵌套的表格，结果在IE5中导致了IE5不响应直到Crash并使用了100%的CPU资源，这么多年过去了，还是老样子，在我的dual-core+IE7上，也是一样，占了50%的CPU，而且还有很高的内核使用，最后只能把进程给kill了。BT啊，纯HTML都会让IE这样。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/08/ajax_error-150x150.jpg" alt="一次Ajax查错的经历" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li ><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/04/Green-Computing-150x150.jpg" alt="做个环保主义的程序员" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7186.html" class="wp_rp_title">做个环保主义的程序员</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/sina_xss01-150x150.png" alt="新浪微博的XSS攻击" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4914.html" class="wp_rp_title">新浪微博的XSS攻击</a></li><li ><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="开源中最好的Web开发的资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4795.html" class="wp_rp_title">开源中最好的Web开发的资源</a></li><li ><a href="https://coolshell.cn/articles/3921.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/03/IE6-Countdown-150x150.png" alt="中国仍是IE6的重灾区" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3921.html" class="wp_rp_title">中国仍是IE6的重灾区</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2357.html">一个jQuery的插件</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2357.html/feed</wfw:commentRss>
+			<slash:comments>23</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>telnet的一个Bug</title>
+		<link>https://coolshell.cn/articles/2352.html</link>
+					<comments>https://coolshell.cn/articles/2352.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 14 Apr 2010 01:10:20 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[telnet]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2352</guid>
+
+					<description><![CDATA[<p>下面这个链接是Linux分发包Ubuntu的关于Telnet命令的Man Page， http://manpages.ubuntu.com/manpages/k...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2352.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2352.html">telnet的一个Bug</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面这个链接是Linux分发包Ubuntu的关于Telnet命令的Man Page，</p>
+<p style="text-align: center;"><a href="http://manpages.ubuntu.com/manpages/karmic/man1/telnet-ssl.1.html" target="_blank">http://manpages.ubuntu.com/manpages/karmic/man1/telnet-ssl.1.html</a></p>
+<p style="text-align: left;">打开这个Man Page，把页面拉到最后一行，你会看到下面这个BUG（“BUGS：源代码不易读！”）</p>
+<pre>     The source code is not comprehensible.</pre>
+<p>Telnet的源代码在这里：<a href="http://packages.ubuntu.com/source/dapper/netkit-telnet" target="_blank">http://packages.ubuntu.com/source/dapper/netkit-telnet</a>，下载下来一看，还真是不易读，简单地看了一下代码，发现至少有这样一些问题：</p>
+<ul>
+<li>空格和Tab键混用的缩进，导致很多代码在没有缩进。</li>
+<li>大量的#if #else以及大量的各种预编译宏。以及一些怪异的宏。如：</li>
+</ul>
+<p style="padding-left: 60px;">#ifndef B19200<br />
+#define B19200 B9600<br />
+#endif</p>
+<p style="padding-left: 60px;">#ifndef B38400<br />
+#define B38400 B19200<br />
+#endif</p>
+<ul>
+<li>什么叫在C中写C++，第一次见。（在terminal.cc中间居然出现了几个class）</li>
+<li>变量命名很不直观，大量的old, tmp, c1, c2, s1, s2, s3 等学校里用的变量名，只有作者自己知道是什么意思。函数命令的风格也不一致，编程风格也很不一致，基本没有编程规范。</li>
+</ul>
+<p>的确很不易读。不管怎么样，很欣赏在man page中把源码的易读性列为BUG的这种作法。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4826.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/06/GNUTotalSplit-150x150.png" alt="GNU/Linux下有多少是GNU的？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4826.html" class="wp_rp_title">GNU/Linux下有多少是GNU的？</a></li><li ><a href="https://coolshell.cn/articles/1644.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="装完Ubuntu 9.10后要干的事" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1644.html" class="wp_rp_title">装完Ubuntu 9.10后要干的事</a></li><li ><a href="https://coolshell.cn/articles/1097.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="Ksplice Uptrack — Ubuntu更新不用重启" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1097.html" class="wp_rp_title">Ksplice Uptrack — Ubuntu更新不用重启</a></li><li ><a href="https://coolshell.cn/articles/501.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" alt="Ubuntu的并行启动" width="150" height="150" /></a><a href="https://coolshell.cn/articles/501.html" class="wp_rp_title">Ubuntu的并行启动</a></li><li ><a href="https://coolshell.cn/articles/14.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2009/03/zcover-150x150.jpg" alt="Java书籍Top 10" width="150" height="150" /></a><a href="https://coolshell.cn/articles/14.html" class="wp_rp_title">Java书籍Top 10</a></li><li ><a href="https://coolshell.cn/articles/5075.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2011/07/Time-changes-in-year-1927-for-China-–-ShanghaiS-150x150.png" alt="你确信你了解时间吗？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5075.html" class="wp_rp_title">你确信你了解时间吗？</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2352.html">telnet的一个Bug</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2352.html/feed</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Unix传奇(上篇)</title>
+		<link>https://coolshell.cn/articles/2322.html</link>
+					<comments>https://coolshell.cn/articles/2322.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 09 Apr 2010 00:45:27 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[Bill Joy]]></category>
+		<category><![CDATA[Dennis Ritchie]]></category>
+		<category><![CDATA[Ken Thompson]]></category>
+		<category><![CDATA[Linus Torvalds]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Richard Stallman]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2322</guid>
+
+					<description><![CDATA[<p>【本文曾于2007年3月于我在CSDN上的BLOG发布，现在我把其搬到酷壳来，一来是觉得这段历史相当传奇，值得大家再看看，二来也和我在酷壳上发布的一些文章相互链...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2322.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2322.html">Unix传奇(上篇)</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><span style="color: #808080;">【本文曾于2007年3月于</span><a href="http://blog.csdn.net/haoel" target="_blank"><span style="color: #0000ff;">我在CSDN上的BLOG</span></a><span style="color: #808080;">发布，现在我把其搬到酷壳来，一来是觉得这段历史相当传奇，值得大家再看看，二来也和我在酷壳上发布的一些文章相互链接。】</span></p>
+<hr />
+<p>了解过去，我们才能知其然，更知所以然。总结过去，我们才会知道我们明天该如何去规划，该如何去走。在时间的滚轮中，许许多的东西就像流星一样一闪而逝，而有些东西却能经受着时间的考验散发着经久的魅力，让人津津乐道，流传至今。要知道明天怎么去选择，怎么去做，不是盲目地跟从今天各种各样琳琅满目前沿技术，而应该是去 —— 认认真真地了解和回顾历史。 </p>
+<p>Unix是目前还在存活的操作系统的元老了，走过了40年的历程（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1032.html" target="_blank">Unix 40年：Unix年鉴</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1023.html">Unix 40年：昨天，今天和明天</a>》）。在技术更新如此迅速的计算机世界的今天，Unix始终保持它那神圣的光环，它那曲折和令人叹息的历史，以及由它引发的思想变革，对当今计算机文化造成的深远影响，这40年所产生的人和事，让它成为了一个传奇，不能不让人为之惊叹。</p>
+<p>这是一段所有从事计算机行业人员尤其是软件开发人员需要了解的历史。Unix的传奇历史是整个计算机世界文化最具代表性的，它对整个计算机世界文化的影响也是最巨大，最深远的。他给人带来的不单单的对过去的回味，更为我们带来了计算机世界的新思潮。</p>
+<p>了解这段的历史的人，才能体会计算机世界变迁过程中的是是非非，才能了解计算机世界中的文化，从而才能参与到整个计算机革命的大潮中。希望这段历史，这篇文章能让你感受到计算机世界那强力的脉搏，从而让你踏上这条令人充满激情的道路。</p>
+<p><strong><a href="https://coolshell.cn/articles/2322.html" target="_blank">上篇</a></strong></p>
+<ul>
+<li>Unix起源</li>
+<li>Unix分裂</li>
+<li>Unix的法律纠纷</li>
+<li>GNU开源组织</li>
+<li>Linux横空出世</li>
+<li>Linux今天的领袖</li>
+</ul>
+<p><span id="more-2322"></span></p>
+<p><strong><a href="https://coolshell.cn/articles/2324.html" target="_blank">下篇</a></strong></p>
+<ul>
+<li>Unix与黑客文化</li>
+<li>Unix的历史教训</li>
+<li>Unix 家族谱</li>
+<li>Unix的特点</li>
+<li>Unix的影响和哲学</li>
+<li>Unix痛恨者手册</li>
+</ul>
+<p> </p>
+<h3>Unix 起源</h3>
+<p> 回顾Unix历史，我们就要说一下一个叫MULTICS（Multiplexed Information and Computing Service）的项目。上世纪六十年代时，大部份计算机都是采用批处理（Batch Processing）的方式（也就是说，当作业积累一定数量的时候，计算机才会进行处理）。那时，我们熟知的美国电话及电报公司（American Telephone and Telegraph Inc.；AT&amp;T）、通用电器公司（General Electrics；G.E.）及麻省理工学院（Massachusetts Institute of Technology；MIT）计划合作开发一个多用途（General-Purpose）、分时（Time-Sharing）及多用户（Multi-User）的操作系统，也就是这个MULTICS，其被设计运行在GE-645大型主机上。不过，这个项目由于太过复杂，整个目标过于庞大，糅合了太多的特性，进展太慢，几年下来都没有任何成果，而且性能都很低。于是到了1969年2月，贝尔实验室（Bell Labs）决定退出这个项目。</p>
+<p> 熟悉这段历史的人都知道，贝尔实验室中的有个叫Ken Thompson的人，他为MULTICS这个操作系统写游戏了个叫“Space Travel”的游戏，在MULTICS上经过实际运行后，他发现游戏速度很慢而且耗费昂贵 —— 每次运行会花费75美元。退出这个项目以后。他为了让这个游戏能玩，所以他找来Dennis Ritchie为这个游戏开发一个极其简单的操作系统。这就是后来的Unix。（值得一提的是，当时他们本想在DEC-10上写，后来没有申请到，只好在实验室的墙角边找了一台被人遗弃的Digital PDP-7的迷你计算机进行他们的计划，这台计算机上连个操作系统都没有，于是他们用汇编语言仅一个月的时间就开发了一个操作系统的原型）他们的同事Brian Kernighan非常不喜欢这个系统，嘲笑Ken Thompson说：“你写的系统好真差劲，干脆叫Unics算了。”Unics的名字就是相对于MULTICS的一种戏称，后业改成了Unix。于是，Unix就在这样被游戏和玩笑创造了，当时是1969年8月。也就是这一年，Linux之父Linus Torvalds在芬兰出生了。</p>
+<p>1971年，Ken Thompson写了充分长篇的申请报告，申请到了一台PDP-11/24的机器。于是Unix第一版出来了。在一台PDP-11/24的机器上完成。这台电脑只有24KB的物理内存和500K磁盘空间。Unix占用了12KB的内存，剩下的一半内存可以支持两用户进行Space Travel的游戏。而著名的fork()系统调用也就是在这时出现的。</p>
+<p>到了1973年的时候，Ken Thompson 与Dennis Ritchie感到用汇编语言做移植太过于头痛，他们想用高级语言来完成第三版，对于当时完全以汇编语言来开发程序的年代，他们的想法算是相当的疯狂。一开始他们想尝试用Fortran，可是失败了。后来他们用一个叫BCPL（Basic Combined Programming Language）的语言开发，他们整合了BCPL形成B语言，后来Dennis Ritchie觉得B语言还是不能满足要求，就是就改良了B语言，这就是今天的大名鼎鼎的C语言。于是，Ken Thompson 与Dennis Ritchie成功地用C语言重写了Unix的第三版内核。至此，Unix这个操作系统修改、移植相当便利，为Unix日后的普及打下了坚实的基础。而Unix和C完美地结合成为一个统一体，C与Unix很快成为世界的主导。</p>
+<p>Unix的第一篇文章 “The UNIX Time Sharing System”由Ken Thompson和Dennis</p>
+<p>Ritchie于1974年7月的 the Communications of the ACM发表。这是UNIX与外界的首次接触。结果引起了学术界的广泛兴趣并对其源码索取，所以，Unix第五版就以“仅用于教育目的”的协议，提供给各大学作为教学之用，成为当时操作系统课程中的范例教材。各大学公司开始通过Unix源码对Unix进行了各种各样的改进和扩展。于是，Unix开始广泛流行。</p>
+<p style="text-align: center;"><img decoding="async" src="http://p.blog.csdn.net/images/p_blog_csdn_net/haoel/15190/o_unixrichiethompson.jpg" alt="" /><br />
+Ken Thompson &amp; Dennis Ritchie</p>
+<p> </p>
+<h3>Unix分裂</h3>
+<p>1978年，对 Unix而言是革命性的一年；因为学术界的老大柏克利大学 （UC Berkeley），推出了一份以第六版为基础，加上一些改进和新功能而成的 Unix。这就是著名的“1 BSD（1st Berkeley Software Distribution）”，开创了Unix的另一个分支：BSD 系列。 同时期，AT&amp;T成立USG（Unix Support Group），将 Unix变成商业化的产品。从此，BSD的 Unix 便和AT&amp;T 的Unix 分庭抗礼，Unix就分为System IV和4.x BSD这两大主流，各自蓬勃发展。</p>
+<p>1979年发布的Unix 第七版被称为是“最后一个真正的Unix”，这个版本的Unix内核只有40K bytes。后来这个版本被移植到VAX机上（我在大学时学习C语言时用过这个VAX机，我还记得那时上VAX机最大的爱好就是使用talk命令和别人聊天，呵呵）。20世纪80年代相继发布的8、9、10版本只授权给了少数大学。</p>
+<p>1982年，AT&amp;T基于版本7开发了UNIX System Ⅲ的第一个版本，这是一个商业版本仅供出售。为了解决混乱的UNIX版本情况，AT&amp;T综合了其他大学和公司开发的各种UNIX，开发了UNIX System V Release 1。这个新的UNIX商业发布版本不再包含源代码，所以加州大学Berkeley分校继续开发BSD UNIX，作为UNIX System III和V的替代选择。BSD对UNIX最重要的贡献之一是TCP/IP。BSD 有8个主要的发行版中包含了TCP/IP：4.1c、4.2、4.3、4.3-Tahoe、4.3-Reno、Net2、4.4以及 4.4-lite。这些发布版中的TCP/IP代码几乎是现在所有系统中TCP/IP实现的前辈，包括AT&amp;T System V UNIX 和Microsoft Windows中的TCP/IP都参照了BSD的源码。</p>
+<p>同时，其他一些公司也开始为其自己的小型机或工作站提供商业版本的UNIX系统，有些选择System V作为基础版本，有些则选择了BSD。BSD的一名主要开发者，Bill Joy，在BSD基础上开发了SunOS，并最终创办了Sun Microsystems。</p>
+<p style="text-align: center;"> <img decoding="async" src="http://p.blog.csdn.net/images/p_blog_csdn_net/haoel/15190/o_bill_joy.gif" alt="" /><br />
+Bill Joy</p>
+<p> 1991年，一群BSD开发者（Donn Seeley、Mike Karels、Bill Jolitz 和 Trent Hein）离开了加州大学，创办了Berkeley Software Design, Inc (BSDI)。BSDI是第一家在便宜常见的Intel平台上提供全功能商业BSD UNIX的厂商。后来Bill Jolitz 离开了BSDI，开始了386BSD的工作。386BSD被认为是FreeBSD、OpenBSD 和 NetBSD、DragonFlyBSD的先辈。</p>
+<p>这是一个AT&amp;T妄图私有化的Unix的时代。为了私有化Unix，1986年IEEE指定了一个委员会制定了一个一个开放作业系统的标准,称为 POSIX (Portable Operating Systems Interface)。最后加上个X，不知道是为了好听，还是因为这本质上是UNIX的标准。当然，AT&amp;T的Unix取得了这个标准制订战争的胜利，还取得了Unix这个注册商标。此时BSD的拥护者自喻为冷酷无情的公司帝国的反抗军。就销售量来说，AT&amp;T UNIX始终赶不上BSD/Sun。到1990年，AT&amp;T与BSD版本已难明显区分，因为彼此都有采用对方的新发明。</p>
+<p> 这段时期，从实验室出来的被全世界所分享的Unix，正处于被私有化的关键时期。（这里有一个笑话——《<a rel="bookmark" href="https://coolshell.cn/articles/1439.html" target="_blank">Alice梦游UNIX仙境</a>》）</p>
+<h3>Unix的法律纠纷</h3>
+<p> Berkeley Software Design, Inc（BSDI）很快就与AT&amp;T的UNIX Systems Laboratories（USL）附属公司产生了法律纠纷，USL是AT&amp;T注册的公司。AT&amp;T为了拥有System V版权，以及Unix商标，为了垄断Unix，1992年，USL正式对BSDI提起诉讼，说BSD剽窃他的源码。而最终了结了好评如潮的BSD系统。</p>
+<p>由于最后判决悬而未决，这桩法律诉讼将BSD后裔的开发，特别是自由软件，延迟了两年，这导致没有法律问题的Linux内核获得了极大的支持。Linux跟386BSD的开发几乎同时起步，Linus说，当时如果有自由的基于386的Unix-like操作系统，他就可能不会创造Linux。尽管无法预料这给以后的软件业究竟造成了什么样的影响（如果没有这个法律纠纷，很有可能没有今天的革命性的Linux），但有一点可以肯定，Linux更加丰富了这块土壤。</p>
+<p>这场官司一直打到 AT&amp;T将自己的Unix系统实验室卖掉，新接手的Novell公司采取了一种比较开明的做法，允许BSDI自由发布自己的BSD，但是前提是必须将来自于AT&amp;T的代码完全删除，于是诞生了4.4 BSD Lite版，由于这个版本不存在法律问题，4.4BSD Lite成为了现代BSD系统的基础版本。</p>
+<p>这桩诉讼最终在1994年1月了结，更多地满足了BSDI的利益。伯克利套件的18,000个文件中，只有3个文件要求删除，另有70个文件要求修改，并显示USL的版权说明。这项调解另外要求，USL不得对4.4BSD提起诉讼，不管是用户还是BSDI代码的分发者。于是，BSD Unix走上了复兴的道路。BSD的开发也走向了几个不同的方向，并最终导致了FreeBSD、OpenBSD和NetBSD的出现。</p>
+<p>从AT&amp;T意识到了Unix的商业价值，不再将Unix源码授权给学术机构以来，到以后的几十年，Unix仍在不断变化，其版权所有者不断变更，授权者的数量也在增加。Unix的版权曾经为AT&amp;T所有，之后Novell拥有了Unix，再之后Novell又将版权出售给了SCO（这一事实双方尚存在争议）。有很多大公司在取得了Unix的授权之后，开发了自己的Unix产品。（几年前，据传闻微软为了限制Linux，微软让SCO到法院告Linux剽窃其源码）</p>
+<p>由于Unix是由C语言写的，所以修改和移植都很容易，因此，很多商业公司及学术机构均加入这个操作系统的研发，各个不同版本的Unix也开始蓬勃发展。这才产生了今天这么多的各式各样的Unix衍生产品。如AIX、Solaris、HP-UX、IRIX、OSF、Ultrix等等。（这些商业化的Unix基本上都是源于AT&amp;T授权的Unix System V）</p>
+<h3>Unix开源组织</h3>
+<p>AT&amp;T的这种商业态度，让当时许许多的Unix的爱好者和软件开发者们感到相当的痛心和忧虑，他们认为商业化的种种限制并不利于产生的发展，相反还能导制产品出现诸多的问题。随着商业化Unix的版本的种种限制和诸多问题，引起了大众的不满和反对。于是，大家开始有组织地结成“反叛联盟”以此对抗欺行罢市的AT&amp;T等商业化行为。</p>
+<p>另一方面，关于“大教堂”（集权、封闭、受控、保密）和“集市”（分权、公开、精细的同僚复审）两种开发模式的对比成为了新思潮的中心思想。这个新思潮对IT业产生了非常深远影响。为整个计算机世界带来了革命性的价值观。</p>
+<p><img decoding="async" src="http://p.blog.csdn.net/images/p_blog_csdn_net/haoel/15190/o_richard_stallman.jpg" alt="" align="right" />此时，一个名叫Richard Stallman的领袖出现了，他认为Unix是一个相当好的操作系统，如果大家都能够将自己所学贡献出来，那么这个系统将会更加的优异！他倡导的Open Source的概念，就是针对Unix这一事实反对实验室里的产品商业化私有化。尽管Stallman既不是、也从来没有成为一个Unix程序员，但在后1980的大环境下，实现一个仿Unix操作系统成了他追求的明确战略目标。Richard Stallman早期的捐助者大都是新踏入Unix土地的老牌ARPANET黑客，他们对代码共享的使命感甚至比那些有更多Unix背景的人强烈。</p>
+<p>为了这个理想，Richard Stallman于1984年创业了GNU，计划开发一套与Unix相互兼容的的软件。1985 年 Richard Stallman 又创立了自由软件基金会（Free Software Foundation）来为 GNU 计划提供技术、法律以及财政支持。尽管 GNU 计划大部分时候是由个人自愿无偿贡献，但 FSF 有时还是会聘请程序员帮助编写。当 GNU 计划开始逐渐获得成功时，一些商业公司开始介入开发和技术支持。当中最著名的就是之后被 Red Hat 兼并的 Cygnus Solutions。</p>
+<p>GNU组织的建立，延续了当年Unix刚出现时的情形，并为这种情形建立了可靠的法律和财务保障。GNU 工程十几年以来, 已经成为一个对软件开发主要的影响力量， 创造了无数的重要的工具。例如：强健的编译器，有力的文本编辑器，甚至一个全功能的操作系统。从那时开始，许多程序员聚集起来开始开发一个自由的、高质量、易理解的软件，让这使得Unix社区生机勃勃，一派繁荣景象。</p>
+<p> 自90年代发起这个计划以来，GNU 开始大量的产生或收集各种系统所必备的组件，像是——函数库（libraries）、编译器（compilers）、调式工具（debugs）、文本编辑器（text editors）、网站服务器（web server），以及一个Unix的使用者接口（Unix shell）等等，等等。但由于种种原因，GNU一直没有开发操作系统的kernel。正当Richard Stallman在为操作系统内核伤脑筋的时候，Linux出现了。</p>
+<h3>Linux横空出世</h3>
+<p><img decoding="async" loading="lazy" src="http://p.blog.csdn.net/images/p_blog_csdn_net/haoel/15190/o_linus.gif" alt="" width="230" height="186" align="left" />1990年，Linus Torvalds还是芬兰赫尔辛基大学的一名学生，最初是用汇编语言写了一个在80386保护模式下处理多任务切换的程序，后来从Minix（Andy Tanenbaum教授所写的很小 的Unix操作系统,主要用于操作系统教学）得到灵感，进一步产生了自认为狂妄的想法——写一个比Minix更好的Minix，于是开始写了一些硬件的设备驱动程序，一个小的文件系统。这样0.0.1版本的Linux就出来了，但是它只具有操作系统内核的勉强的雏形，甚至不能运行，你必须在有Minix的机器上编译以后才能玩。这时候Linus已经完全着迷而不想停止，决定踢开Minix，于是在1991年10 月5号发布Linux 0.0.2版本,在这个版本中已经可以运行bash 和gcc。</p>
+<p>从一开始，Linus就决定自由扩散Linux，包括原代码，随即Linux引起黑客们（hacker）的注意，通过计算机网络加入了Linux的内核开发。Linux倾向于成为一个黑客的系统——直到今天，在Linux社区里内核的开发被认为是真正的编程。由于一批高水平黑客的加入，使Linux 发展迅猛，几乎一两个礼拜就有新版或修正版的出现，到1993年底94年初，Linux 1.0终于诞生了！Linux 1.0已经是一个功能完备的操作系统，而且内核写得紧凑高效，可以充分发挥硬件的性能，在4M内存的80386机器上也表现得非常好，至今人们还在津津乐道。时至今日，kernel的版本已经出到2.6。Linux的发展不像传统的软件工程，它完全是透过网络，集合世界各地的高手而成的一套操作系统，在这里我们也可以见识到网络快速传播的威力。Linux初次让整个世界感觉到了开源力量和网络力量的如此强大。（Linux 的标志和吉祥物是一只名字叫做 Tux 的 企鹅，标志的由来是因为Linus在澳洲时曾被一只动物园里的企鹅咬了一口，便选择了企鹅作为Linux的标志。）</p>
+<p>Linux 的历史是和GNU紧密联系在一起的。从1983年开始的GNU计划致力于开发一个自由并且完整的类Unix操作系统，包括软件开发工具和各种应用程序。到1991年 Linux 内核发布的时候，GNU已经几乎完成了除了系统内核之外的各种必备软件的开发。在 Linus Torvalds 和其它开发人员的努力下，GNU组件可以运行于Linux内核之上。整个内核是基于 GNU 通用公共许可，也就是GPL（GNU General Public License，GNU通用公共许可证）的，但是Linux内核并不是GNU 计划的一部分。1994年3月，Linux1.0版正式发布，Marc Ewing成立了 Red Hat 软件公司，成为最著名的 Linux 分销商之一。</p>
+<p>严格来讲，Linux这个词本身只表示Linux内核，但在实际上人们已经习惯了用Linux来形容整个基于Linux内核，并且使用GNU 工程各种工具和应用程序的操作系统(也被称为GNU/Linux)。基于这些组件的Linux软件被称为Linux发行版。一般来讲，一个Linux发行套件包含大量的软件，比如软件开发工具，数据库，Web服务器（例如Apache)，X Window，桌面环境（比如GNOME和KDE），办公套件（比如OpenOffice.org），等等。</p>
+<p>1991至1995年间，Linux从概念型的0.1版本内核原型，发展成为能够在性能和特性上均堪媲美专有Unix的操作系统，并且在连续正常工作时间等重要统计数据上打败了这些Unix中的绝大部分。1995年，Linux找到了自己的杀手级应用——开源的web服务器Apache。就像Linux，Apache出众地稳定和高效。很快，运行Apache的Linux机器成了全球ISP平台的首选。约60%的网站选用Apache，轻松击败了另两个主要的专有型竞争对手。今天的LAMP（Linux , Apache, MySQL, PHP）已经成为了架构Web服务器的主要首选。</p>
+<p> 现如今的Linux不但可以装在几乎所有的主流服务器上，当然也包括桌面的X86系统中。其还常常被用于嵌入式系统，机顶盒、手机、交换机、游戏机、PDA、网络交换机、路由器、等等，都是因为Linux那精彩的内核。</p>
+<p>Linux的出现，不仅仅给世界带来了一个免费的操作系统，也不仅仅是对Unix自由、共享的文化的延续，它的出现带给了计算机世界自Unix、GNU以来更为成熟的思想和文化。</p>
+<h3>Linux今天的领袖</h3>
+<p><strong> </strong></p>
+<p>Linux和GNU关系是比较微妙的。那时，自由软件基金会编写的用户软件工具包铺平了一条摆脱高成本专有软件开发工具的前进道路。意识服从经济，而不是领导：一些新手加入了RMS的革命运动，高举GPL大旗，另一些人则更认同整体意义上的Unix传统，加入了反对GPL的阵营，但其他大部分人置身事外，一心编码。</p>
+<p>Linus Torvalds巧妙地跨越了GPL和反GPL的派别之争。他利用GNU工具包搭起了自创的Linux内核，用GPL的传染性质保护它，但拒绝认同Richard Stallman的许可协议反映的思想体系计划。Linus Torvalds明确表示他认为自由软件一般情况下更好，但他偶尔也用专有软件。即使在他自己的事业中，他也拒绝成为狂热分子。这一点极大地吸引了大多数黑客，他们虽然早就反感Richard Stallman的言辞，但他们的怀疑论一直缺个有影响力或者令人信服的代言人。而Linus Torvalds正好充当了这一角色。</p>
+<p> <img decoding="async" src="http://p.blog.csdn.net/images/p_blog_csdn_net/haoel/15190/o_Linus_Torvalds.jpg" alt="" align="right" />Linus Torvalds令人愉快的实用主义及灵活而低调的行事风格，促使黑客文化在1993至1997年间取得了一连串令人惊奇的胜利，不仅仅在技术上的成功，还让围绕Linux操作系统的发行、服务和支持产业有了坚实的开端。结果，他的名望和影响也一飞冲天。Torvalds成为了互联网时代的英雄；到1995年为止，他只用了四年时间就在整个黑客文化界声名显赫，而Richard Stallman为此花了十五年，而且他还远远超过了Stallman向外界贩卖“自由软件”的记录。与Torvalds相比，Richard Stallman的言辞渐渐显得既刺耳又无力。（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1278.html" target="_blank">Linus Torvalds 语录 Top 10</a>》）</p>
+<p>今天，我们也说不清楚是GNU Linux还是Linux GNU。Linux既不排斥开源，也不排斥商业化，Linus认为好的软件是需要免费和商业化共同推进的。正是这种革命性的想法，造就了今天的Linux火红的局面（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1360.html" target="_blank">谁写了Linux</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1283.html" target="_blank">Linux基金会的广告</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/85.html" target="_blank">Linux Distribution Timeline</a>》）。Linux就像一股清泉流入了所有人的心中，引发了很多的启迪和思考。</p>
+<p><a href="https://coolshell.cn/articles/2324.html" target="_blank"><strong>Unix传奇（下篇） &gt;&gt;&gt;&gt;</strong></a></p>
+<h2><strong>(</strong><strong>转载时请注明作者和出处。未经许可，请勿用于商业用途</strong><strong>)</strong></h2>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" alt="Unix 50 年：Ken Thompson 的密码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/19996.html" class="wp_rp_title">Unix 50 年：Ken Thompson 的密码</a></li><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9917.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/10.jpg" alt="Alan Cox：大教堂、市集与市议会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9917.html" class="wp_rp_title">Alan Cox：大教堂、市集与市议会</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2322.html">Unix传奇(上篇)</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2322.html/feed</wfw:commentRss>
+			<slash:comments>125</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Unix传奇(下篇)</title>
+		<link>https://coolshell.cn/articles/2324.html</link>
+					<comments>https://coolshell.cn/articles/2324.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Fri, 09 Apr 2010 00:44:57 +0000</pubDate>
+				<category><![CDATA[Unix/Linux]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[Unix]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2324</guid>
+
+					<description><![CDATA[<p>【本文曾于2007年3月于我在CSDN上的BLOG发布，现在我把其搬到酷壳来，一来是觉得这段历史相当传奇，值得大家再看看，二来也和我在酷壳上发布的一些文章相互链...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2324.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2324.html">Unix传奇(下篇)</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script></p>
+<div>
+<p><span style="color: #888888;">【本文曾于2007年3月于</span><a href="http://blog.csdn.net/haoel" target="_blank"><span style="color: #0000ff;">我在CSDN上的BLOG</span></a><span style="color: #888888;">发布，现在我把其搬到酷壳来，一来是觉得这段历史相当传奇，值得大家再看看，二来也和我在酷壳上发布的一些文章相互链接。】</span></p>
+<hr />
+<p><a href="https://coolshell.cn/articles/2322.html" target="_blank"><strong>&lt;&lt;&lt;&lt;   Unix传奇（上篇）</strong></a></div>
+<div></div>
+<div>Unix是目前还在存活的操作系统的元老了，走过了40年的历程（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1032.html" target="_blank">Unix 40年：Unix年鉴</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1023.html">Unix 40年：昨天，今天和明天</a>》）。由它引发的思想变革，对当今计算机文化造成的深远影响。这是一段所有从事计算机行业人员尤其是软件开发人员需要了解的历史。Unix的传奇历史是整个计算机世界文化最具代表性的，它对整个计算机世界文化的影响也是最巨大，最深远的。他给人带来的不单单的对过去的回味，更为我们带来了计算机世界的新思潮。</div>
+<div></div>
+<div>
+<p><strong><a href="https://coolshell.cn/articles/2324.html" target="_blank">下篇</a></strong></p>
+<ul>
+<li>Unix与黑客文化</li>
+<li>Unix的历史教训</li>
+<li>Unix 家族谱</li>
+<li>Unix的特点</li>
+<li>Unix的影响和哲学</li>
+<li>Unix痛恨者手册</li>
+</ul>
+</div>
+<p><span id="more-2324"></span></p>
+<div>
+<ul></ul>
+<p><strong><a href="https://coolshell.cn/articles/2322.html" target="_blank">上篇</a></strong></p>
+<ul>
+<li>Unix起源</li>
+<li>Unix分裂</li>
+<li>Unix的法律纠纷</li>
+<li>GNU开源组织</li>
+<li>Linux横空出世</li>
+<li>Linux今天的领袖</li>
+</ul>
+</div>
+<h3>Unix与黑客文化</h3>
+<p>黑客的文化和Unix的商业化存在着必然的联系。自从Unix出现，黑客文化就与之而来。</p>
+<p>1993初，一个悲观的观察家撰文指出，已经有理由认为Unix的传奇故事连同他带有黑客文明将一同破产。许多人预测，从那时起Unix将在六月内死亡。他们很清楚，十年的Unix商业化，使自由跨平台的Unix梦以失败告终。Unix允诺的跨平台可移植性，在一打大公司专有的Unix版本之间不停地斗嘴中丢失，一个完美的操作系统最终沦为多种版本的一团乱麻，这应该说是人类文明史上的一个重大悲剧。</p>
+<p>在专有软件社会中，只有像微软一样的“集权制，大教堂”生产方式才能成功。那个时代的人悲观地相信，技术世界的个人英雄主义时代已经结束，软件工业和发展中的互联网络将逐渐地由像微软一样的巨型企业支配，再也没有“佐罗”，世界是恺撒大帝的世界，计算机文明将进入黑暗的帝国时代。黑客已经死了，自由不付存在。</p>
+<p>自从Unix出现以来，第一代的Unix黑客似乎垂垂老矣，衣食不饱( Berkeley计算机科学研究组在1994丢失了自己基金)。这是一个抑压的时代。专有的商业Unix的结果证明那么沉重、那么盲目、那么不适当，以致微软能够用那次等技术的Windows抢走他们生存的空间，拿走他们的干粮。黑客世界的残余力量被逼到了世界上的角落里，苟延残喘。</p>
+<p>就在黑客文化日渐衰落之时，美国新闻周刊的资深记者Steven Levy完成了著名的《黑客列传》一书，书中着力介绍了一个人物：Richard M. Stallman的故事，他是麻省理工学院（MIT）人工智能实验室领袖人物，坚决反对实验室的研究成果商业化。他是商业软件社会中坚强的一员，决不随波逐流，建立了全新的黑客文化。</p>
+<p>Richard M. Stallman（他的登陆名RMS更为人熟知）早在1970年代晚期就已经证明他是当时最有能力的程序员之一。Emacs编辑器就是他众多发明中的一项。RMS的目标是将后1980的松散黑客社群变成一台有组织的社会化机器以达到一个单纯的革命目标。也许他未意识到，他的言行与当年卡尔·马克思号召产业无产阶级反抗工作的努力如出一辙。RMS宣言引发的争论至今仍存于黑客文化中。他的纲要远不止于维护一个代码库，已经暗含了废除软件知识产权主张的精髓。RMS通过“自由软件（free software）”让黑客文化更加有自我意识。当然，这个充满魅力又具争议的人物本身已经成为了一个黑客文化英雄。</p>
+<p><em>只有痴迷的“黑客”和具有创造力的怪人结成的反叛联盟才能把我们从愚蠢中拯救出来——他们接着教导我们，真正的专业和奉献精神，正是我们在屈服于世俗观念的“合理商业做法”之前的所作所为。 </em><em>——</em>《<em>The Art of Unix Programming</em>》<em> </em></p>
+<p>RMS让世界上所有的人都知道，入侵电脑系统只是低级不入流的黑客干的事，真正的黑客，是为了自由，为了软件的自由，为了挑战计算机世界中的霸权主义而斗争。他们不是街头小混混，他们更像是绿林好汉，更像是罗宾汉，更像是佐罗。就像渴望民主的人民同专制的政府斗争一样。RMS领导着许多的黑客通过互联网向专有软件发出宣战。</p>
+<p>X Windows是首批由服务于全球各地不同组织的许多个人以团队形式开发的大规模开源项目之一。电子邮件使创意得以在这个群体中快速传播，问题由此得以快速解决，而开发者可以人尽其才。软件更新可以在数小时之内发送到位，使得每个节点在整个开发过程中步调一致。网络改变了软件的开发模式。</p>
+<p>另一方面，RMS的理论体系有许多东西非常有争议，他的GPL被认为是一种“病毒式”的协议，BSD的fans和老牌Unix黑客们认为，他们编写Unix的年头都比GPL声明要长得多，GPL依然有太多的限制，而BSD协议则比GPL更加的自由。另一方面，RMS走向了另一个极端，他是完全反版权的，反商业化的。把软件产品从强制收费推向了强制免费、共享和开源，这也为他带来了许多许多的争议。</p>
+<p>在RMS组织黑客闹革命的年代里，没有多少黑客认同于RMS的理论体系，更多的他们参与GNU只是为了体现那种在互联网上协同工作，令人激动的工作模式。自从GNU设立以来，争议不断，而黑客文化却从未有统一在他的理想体系之下。</p>
+<p>自从Linux出现以后，一个新的黑客领袖出现了，Linus Torvalds的中庸态度网聚了世界上顶尖的黑客，其绕过了GPL和反GPL的派系之争，他使用GNU的工具从而以GPL的“传染性”保护了Linux，但他同时也不承认RMS的理论思想体系，他即开源，又支持商业化。虽然，他没有带给黑客们什么重要的思想体系或统一的价值观，但他整合了全世界黑客的阵营，让所有的黑客的行为都围绕着Linux这一事物进行。他以“用自由软件是因为它运行得更好”轻而易举地盖过了“用自由软件是因为所有软件都该是自由的”。</p>
+<p>1998年初，这种新思潮促使网景公司（Netscape Communications）公布了其Mozilla浏览器的源码。媒体对此事件的关注促成了Linux在华尔街的上市，推动了1999－2001年间科技股的繁荣。事实证明，此事无论对黑客文化的历史还是对Unix的历史都是一个转折点。</p>
+<h3>Unix的历史教训</h3>
+<p>下面的文字出自《<em>The Art of Unix Programming</em>》（Unix编程艺术）。令今天我们所有人所反思。</p>
+<p>在Unix历史中，最大的规律就是： （看看《<a rel="bookmark" href="https://coolshell.cn/articles/1360.html" target="_blank">谁写了Linux</a>》你就会知道这一规律）</p>
+<p><strong>距开源越近就越繁荣。任何将Unix</strong><strong>专有化的企图，只能陷入停滞和衰败。</strong></p>
+<p>回顾过去，我们早该认识到这一点。1984年至今，我们浪费了十年时间才学到这个教训。如果我们日后不思悔改，可能还得大吃苦头。</p>
+<p>虽然我们在软件设计这个重要但狭窄的领域比其他人聪明，但这不能使我们摆脱对技术与经济相互作用影响的茫然，而这些就发生在我们的眼皮底下。即使Unix社区中最具洞察力、最具远见卓识的思想家，他们的眼光终究有限。对今后的教训就是：<strong>过度依赖任何一种技术或者商业模式都是错误的</strong>——相反，保持软件及其设计传统的的灵活性才是长存之道。</p>
+<p>另一个教训是：<strong>别和低价而灵活的方案较劲</strong>。或者，换句话说，低档的硬件只要数量足够，就能爬上性能曲线而最终获胜。经济学家Clayton Christensen称之为“破坏性技术”，他在《创新者窘境》（The Innovator&#8217;s Dilemma）[Christensen]一书中以磁盘驱动器、蒸汽挖土机和摩托车为例阐明了这种现象的发生。当小型机取代大型机、工作站和服务器取代小型机以及日用Intel机器又取代工作站和服务器时，我们也看到了这种现象。开源运动获得成功正是由于软件的大众化。Unix要繁荣，就必须继续采用吸纳低价而灵活的方案的诀窍，而不是去反对它们。</p>
+<p>最后，旧学派的Unix社区因采用了传统的公司组织、财务和市场等命令机制而最终未能实现“职业化”。只有痴迷的“黑客”和具有创造力的怪人结成的反叛联盟才能把我们从愚蠢中拯救出来——他们接着教导我们，真正的专业和奉献精神，正是我们在屈服于世俗观念的“合理商业做法”之前的所作所为。</p>
+<h3>Unix族谱</h3>
+<p>Unix的故事仍旧延续着……，许多网站也为这段历史留下记录。一个详细记录Unix历史的网站（http://www.levenez.com/unix/），这个网站忠实记载着1969～2005 年Unix发展的大事，而且还有 PDF 档案可供下载，上面有一个庞大的UNIX家族版本树，让人叹为观止。网站的首页陈列每个时期Unix的历史，也代表着无数工程师的心血与努力。</p>
+<p>下面是一个简单的Unix的族谱：</p>
+<pre>     |--AT&amp;T (1969)-----\
+     |                  |
+     |              V6 (1976)
+     |                  |
+     |              V7 (1979)
+     |                  |
+     |   Novell owns AT&amp;T's Unix (by 1994)
+     |     _____________|____________________
+     |     |       |      |        |         |
+     |    AIX    IRIX    SCO   HP-UX   Solaris 2.X
+     |   (IBM)   (SGI)          (HP)     (Sun)
+     |
+     |
+     |--Berkley (1977)-----\
+     |                     |
+     |                  1BSD (1977)
+UNIX-|                     |
+     |                4.4BSD (1993)
+     |                     |
+     |                   Net/2
+     |                     |
+     |               4.4BSD-Lite (by 1995)
+     |     ________________|____________________________________
+     |     |       |          |         |          |            |
+     |   SunOS   Ultrix   NetBSD    OSF/1   NeXTSTEP   Mac OS X
+     |   (Sun)   (DEC)   (Various)  (DEC)    (NeXT)    (Apple)
+     |                   (FreeBSD)
+     |
+     |
+     |--Hybrids----\
+                   |
+                Linux (Various)
+                   |
+                   |____________________________________________
+                   |    |      |          |              |      |
+                   | RedHat  Debian  Mandrake   Slackware    S.u.S.E.
+                   |                          (Walnut Creek)
+                   |
+                   |_____________________________________________
+                       |        |           |          |        |
+                    MkLinux  LinuxPPC  TurboLinux  OpenLinux  CorelLinux
+                    (Apple)                        (Caldera)   (Corel)</pre>
+<p>点些查看《<a rel="bookmark" href="https://coolshell.cn/articles/85.html" target="_blank">Linux 分发包族谱</a>》</p>
+<h3>Unix的特点</h3>
+<p>现在的文献中提到Unix基本上是说，由Ken Thompson和Dennis Ritchie共同开发的。而通过历史我们也能发现，Unix的主要是由Ken Thompson写下的。但在学术界，Dennis Ritchie的名字往往被排在了Ken Thompson前面的。这就是因为，Dennis Ritchie不但发明了C语言，而且当时他设计Unix操作系统的设计思想，影响了整个世界，直到今天。</p>
+<p>当时，他们开发UNIX，没有正式立项，是Ken Thompson和Dennis Ritchie等少数几个人偷偷干的，如果一切都要从头从新设计，那几乎是不可能的。所以，Unix吸取与借鉴了Multics的经验，如内核，进程，层次式目录，面向流的I/O，把设备当作文件，……等等。但是Unix在继承中又有创新，比如Unix采用一种无格式的文件结构，文件由字节串加\0组成。这带来两大好处：一是在说明文件时不必加进许多无关的“填充物”，二是任何程序的输出可直接用作其他任何程序的输入，不必经过转换。后面这一点叫做“管道”(piping)，这就是Unix首创的。此外，像把设备当作文件，从而简化了设备管理这一操作系统设计中的难题，虽然不是UNIX的发明，但是实现上它采用了一些新方法，比Multics更高明一些。</p>
+<p>下面是Unix的特点：（30多年过去了，这些东西早已变成经典）</p>
+<ul>
+<li><strong>Everything (including hardware) is a file<br />
+</strong>所有的事物（甚至硬件本身）都是一个的文件。</li>
+<li><strong>Configuration data stored in text<br />
+</strong>以文本形式储存配置数据。</li>
+<li><strong>Small, single-purpose program<br />
+</strong>程序尽量朝向小而单一的目标设计</li>
+<li><strong>Avoid captive user interfaces<br />
+</strong>尽量避免令人困惑的用户接口</li>
+<li><strong>Ability to chain program together to perform complex tasks<br />
+</strong>将几个程序连结起来，处理大而复杂的工作。</li>
+</ul>
+<h3>Unix的影响和哲学</h3>
+<p>Unix是第三次工业革命中计算机软件领域最具代表性的产物。在这近40年中，由Unix造成的影响是最有深远意义的。就我看来，Unix为软件领域带来了至少以下有积极的东西，由这些东西所引发的直接或间接的事物更是举不胜数。</p>
+<ol>
+<li>软件开发的若干哲学和思想。</li>
+<li>全民参与推动软件，代码共享的模式。</li>
+<li>开启了黑客文化和开源项目。</li>
+<li>免费和商业的完美结合的Linux。</li>
+<li> C语言，而后发展的C++，Java等等类C的语言和脚本。（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1984.html" target="_blank">C语言的演变史</a>》）</li>
+<li> TCP/IP，其的Socket编程已成为今天通用的网络编程主流。（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1532.html" target="_blank">到处都是Unix的胎记</a>》）</li>
+</ol>
+<p>不能不说，AT&amp;T虽然发展了Unix，但今天Unix的混乱的局面也和AT&amp;T 有着直接原因。但反过来说，如果没有AT&amp;T的反面教材，今天的GNU/Linux很有可能也不会出现。AT&amp;T究竟是限制了Unix的发展，还是以反面示例促进了Unix社区，已不好评说。今天，软件是商业化好还是开源好的争论还在继续，纵观这几十年来Unix的历史，Linux的划时代地出现。相信你会得出自己的结论。不管怎么样，Unix的经历对计算机领域贡献的不单单是技术，他给我们提供了丰富而生动的教材。特别是Unix引发的哲学，让今天的我们依然受益不浅。</p>
+<p>说到Unix为我们所带来的软件开发的哲学，我必需要说一说。Unix遵循的原则是KISS（Keep it simple, stupid）。在<a href="http://en.wikipedia.org/wiki/Unix_philosophy">http://en.wikipedia.org/wiki/Unix_philosophy</a> 上有很多的基本上大同小异的Unix哲学，都是很经典的。</p>
+<p>Doug McIlroy 是认为UNIX的哲学是这样的：三条哲学，简明扼要，就是这三条哲学贯穿着整个Unix世界。尤其是第一条“do one thing and do it well”真是相当精彩！</p>
+<ul>
+<li><strong>Write programs that do one thing and do it well.</strong></li>
+<li><strong>Write programs to work together.</strong></li>
+<li><strong>Write programs to handle text streams, because that is a universal interface.</strong></li>
+</ul>
+<p>只要是Unix的程序员，他们会比别的程序员在任何时候都会不停地强调着这三条哲学。</p>
+<p>而《<em>The Art of Unix Programming</em>》总结了下面这些哲学，都是至理名言啊。</p>
+<ul>
+<li>Rule of Modularity: Write simple parts connected by clean interfaces.</li>
+<li>Rule of Clarity: Clarity is better than cleverness.</li>
+<li>Rule of Composition: Design programs to be connected to other programs.</li>
+<li>Rule of Separation: Separate policy from mechanism; separate interfaces from engines.</li>
+<li>Rule of Simplicity: Design for simplicity; add complexity only where you must.</li>
+<li>Rule of Parsimony: Write a big program only when it is clear by demonstration that nothing else will do.</li>
+<li>Rule of Transparency: Design for visibility to make inspection and debugging easier.</li>
+<li>Rule of Robustness: Robustness is the child of transparency and simplicity.</li>
+<li>Rule of Representation: Fold knowledge into data so program logic can be stupid and robust.</li>
+<li>Rule of Least Surprise: In interface design, always do the least surprising thing.</li>
+<li>Rule of Silence: When a program has nothing surprising to say, it should say nothing.</li>
+<li>Rule of Repair: When you must fail, fail noisily and as soon as possible.</li>
+<li>Rule of Economy: Programmer time is expensive; conserve it in preference to machine time.</li>
+<li>Rule of Generation: Avoid hand-hacking; write programs to write programs when you can.</li>
+<li>Rule of Optimization: Prototype before polishing. Get it working before you optimize it.</li>
+<li>Rule of Diversity: Distrust all claims for &#8220;one true way&#8221;.</li>
+<li>Rule of Extensibility: Design for the future, because it will be here sooner than you think.</li>
+</ul>
+<p>X Windows 的设计者 Mike Gancarz 给出了下面九条哲学思想</p>
+<ol>
+<li><em>Small is beautiful.</em></li>
+<li><em>Make each program do one thing well.</em></li>
+<li><em>Build a prototype as soon as possible.</em></li>
+<li><em>Choose portability over efficiency.</em></li>
+<li><em>Store data in flat text files.</em></li>
+<li><em>Use software leverage to your advantage.</em></li>
+<li><em>Use shell scripts to increase leverage and portability.</em></li>
+<li><em>Avoid captive user interfaces.</em></li>
+<li><em>Make every program a filter.</em></li>
+</ol>
+<p>在今天，这种思想依然被传承着，在影响着世界上各个角落的每一个程序员。</p>
+<h3>Unix痛恨者手册</h3>
+<p>这里还需要值得一提的是一本叫《The Unix-Haters Handbook》，中文译做《Unix痛恨者手册》。可以在这里下载：<a href="http://research.microsoft.com/~daniel/uhh-download.html">http://research.microsoft.com/~daniel/uhh-download.html</a>。其中以调侃的语气声讨了Unix的种种不是。虽然这是十年前的一本书了，但还是值得一读。这本书指出了许多Unix的设计错误，指出了种种看起来很合理的设计走向了荒谬，还这样调侃了C语言——“如果说C语言给足了让你上吊的绳子，那么，C++在给了你足够的绳子把你的邻居全部捆起来之后，还给了你足够的绳子让你为一艘小帆船装上帆，最后你还有足够的绳子把自己吊死在帆船的桅杆上”。呵呵，相当的尖酸刻薄吧。里面有一句对操作系统的评价是这样的：“The fundamental difference between Unix and the Macintosh operating system is that <strong>Unix was designed to please programmers</strong>, whereas the Mac was designed to please users. (Windows, on the other hand, was designed to please accountants.”（Windows设计给会计人员？！连计算机用户都不是了，呵呵）</p>
+<p>不过，我可以感觉得到这本书的作者在书中对Unix的感情是比较复杂的，爱恨交加，在书的最后有这样一句话“would anyone have spent this much time and effort writing about how much they hated Unix if they didn&#8217;t secretly love it? I&#8217;ll leave that to the readers to judge, but in the end, it really doesn&#8217;t matter: If this book doesn&#8217;t kill Unix, nothing will”。是的，如果Unix能够存活这么长的时间，那么，不会有什么东西可以把他消灭了。</p>
+<p>从《Unix痛恨者手册》这本书，再加上Unix的历史，我们可以感到Unix的经历的风风雨雨，在Unix上面出现有种种教训，近40年的历程，Unix历经磨难，几近夭折，一路走来的确很不容易，让人由衷感叹。今天的Unix，今天的软件工业和以前相比已是不可同日而语。很大程度上，这些都要归功于这个充满苍桑的Unix。</p>
+<h3>后记</h3>
+<p>在中国我们开始学习计算机的时候，我们被Microsoft所创造的文化所笼罩里。就在Unix出现革命性的转变，在Unix影响计算机世界文化的那几年里，科班出生专业开发人员学习的是MS-DOS和微软的文化，我们犹如一个井底之蛙一样，对外面的翻天覆地的变化无动于衷。微软创造的文化在我们这里尤其地根深蒂固，我们几乎忘记了另外一边的Unix（参看《<a rel="bookmark" href="https://coolshell.cn/articles/1032.html" target="_blank">Unix 40年：Unix年鉴</a>》、《<a rel="bookmark" href="https://coolshell.cn/articles/1023.html">Unix 40年：昨天，今天和明天</a>》）。</p>
+<p>在那充满激情的Unix的岁月里，大伙为了科研目的或个人兴趣在Unix上进行各种开发，并且不计较金钱利益，将这些源码公开，互相共享。在那里，开发和自由成为主题，正因为如此，当今的世界才如此丰富多采。在40年Unix文化和技术积淀的里面，蕴涵着比较纯正的计算机文化和思想。</p>
+<p>纵观整个Unix的历史过程中，许许多多的程序员、工程师前辈们在Unix中所摸爬滚打，他们的辛勤地、他们呕心沥血地跟随Unix，努力建立一个繁荣的计算机世界的文明。Unix不是一个简简单单的操作系统。有人说，Unix是程序员设计给程序员的，一点没错。Unix的近40年历史造就了它的博大精深，它给程序员们带来的绝不仅仅只是技术上的知识。它的失误，它的无奈，它的精神，它的荣耀，它从技术和思想上都启迪着我们。对于程序员来说，学习Unix就等同于向前辈程序学习。无论你是什么样的程序员，你都应该了解Unix，这是开发人员的根，前面的开发者造就了它，而它又在引领后面的开发人员，它是前辈程序员们交给我们的一份礼物，一个接力棒，它是开发人员赖以生存的土壤，是上一辈程序员留给我们这一代程序员开启未来的钥匙。Unix就像一个程序员教父一样，理当受到我们的尊敬和崇拜。</p>
+<h3>参考资料</h3>
+<ul>
+<li>Peter H. Salus 的《<em>A Quarter Century of UNIX</em>》，这被认为是UNIX的标准历史。</li>
+<li>Eric S. Raymond 的《<em>The Art of Unix Programming</em>》</li>
+<li><a href="http://www.wikipedia.org/">http://www.wikipedia.org/</a> 维基百科</li>
+<li><a href="http://www.computerhope.com/history/">http://www.computerhope.com/history/</a> Computer History</li>
+<li><a href="http://www.lotsir.com/Blog/article.asp?id=494">http://www.lotsir.com/Blog/article.asp?id=494</a> Lotsir&#8217;s Blog — 《<em>Unix&amp;Linux</em><em>历史重温</em>》</li>
+<li><a href="http://www.aka.org.cn/Docs/hacker-history.html">http://www.aka.org.cn/Docs/hacker-history.html</a> 《<em>黑客文化简史</em>》</li>
+<li><a href="http://www.simson.net/ref/ugh.pdf">http://www.simson.net/ref/ugh.pdf</a> 《<em>The UNIX-HATERS Handbook</em>》</li>
+<li><a href="http://free-electrons.com/doc/free_software/img0.html">http://free-electrons.com/doc/free_software/img0.html</a> 《<em>GNU/Linux Free Software</em>》幻灯片</li>
+<li><a href="http://cm.bell-labs.com/cm/cs/who/dmr/hist.html">http://cm.bell-labs.com/cm/cs/who/dmr/hist.html</a> <em>Dennis M. Ritchie </em>《<em>The Evolution of the Unix Time-sharing System</em>》</li>
+</ul>
+<h2>(转载时请注明作者和出处。未经许可，请勿用于商业用途)</h2>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/systemd-1-150x150.jpeg" alt="Linux PID 1 和 Systemd" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17998.html" class="wp_rp_title">Linux PID 1 和 Systemd</a></li><li ><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/11/tux-fork-150x150.gif" alt="vfork 挂掉的一个问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12103.html" class="wp_rp_title">vfork 挂掉的一个问题</a></li><li ><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/08/puzzle-150x150.png" alt="谜题的答案和活动的心得体会" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11847.html" class="wp_rp_title">谜题的答案和活动的心得体会</a></li><li ><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/sed-superman-150x150.png" alt="sed 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9104.html" class="wp_rp_title">sed 简明教程</a></li><li ><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/02/awk-150x150.jpg" alt="AWK 简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9070.html" class="wp_rp_title">AWK 简明教程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2324.html">Unix传奇(下篇)</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2324.html/feed</wfw:commentRss>
+			<slash:comments>80</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>史上最糟糕的网站</title>
+		<link>https://coolshell.cn/articles/2313.html</link>
+					<comments>https://coolshell.cn/articles/2313.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 07 Apr 2010 01:35:00 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[UI]]></category>
+		<category><![CDATA[website]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2313</guid>
+
+					<description><![CDATA[<p>下面罗列了一些可能是史上最糟糕的网站，当你打开这些网站的时候，请不要太过惊讶，你可以尝试着欣赏一下，不可否认，如果你使劲全力去欣赏，你还是可以找到一些亮点的。呵...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2313.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2313.html">史上最糟糕的网站</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>下面罗列了一些可能是史上最糟糕的网站，当你打开这些网站的时候，请不要太过惊讶，你可以尝试着欣赏一下，不可否认，如果你使劲全力去欣赏，你还是可以找到一些亮点的。呵呵。</p>
+<ol>
+<li><a href="http://www.shufsd.org/" target="_blank">http://www.shufsd.org/</a>，这个网站让我想到了我97年在大学里开始学习HTML的时光，该网页的风格可能比当时我做的还要好一些，不过基本上是很类似的。</li>
+<li><a href="http://www.havenworks.com/" target="_blank">http://www.havenworks.com/</a>，这个网站呢？先介绍这个网站主要是让你对后面的网站有个过渡，老实说，这个网站比起后面的来说，还算可以了。这个网站教会我们如何分类网页上的信息</li>
+<li><a href="http://www.arngren.net/" target="_blank">http://www.arngren.net/</a>，这个网站教你如何在固定空间的网页上放置更多的信息。这好像是我们日常生活当中经常出现的问题，如何把更多的东西放进一个固定的箱子里，我们不停地调整着物品摆放的位置和顺序……</li>
+<li><a href="http://www.team2stool.com/" target="_blank">http://www.team2stool.com/</a>，开始了，这个网站教会我们如何把图片无序地组织起来。</li>
+<li><a href="http://yvettesbridalformal.com/index.htm" target="_blank">http://yvettesbridalformal.com/index.htm</a>，嗯，初看起来吓一大跳，这个网页教你如何制作一个惊悚的网页，不过往细里看，看久一会，你会发现，这个网页设计得很的印象派的风格，也许是一种艺术。</li>
+<li><a href="http://www.dokimos.org/ajff/" target="_blank">http://www.dokimos.org/ajff/</a>，什么叫炫，这就叫炫，太炫了，眼睛就炫花了。打开这个网页的时候，要注意浏览器上边的提示条，耶稣真的很强大啊。</li>
+<li><a href="http://www.belladesoto.us/" target="_blank">http://www.belladesoto.us/</a>，打开这个网页要小心啊，因为这个网页可能比BT下载还猛，据说可能会占用你半GB的带宽。小心啊。</li>
+<li><a href="http://www.superbad.com/" target="_blank">http://www.superbad.com/</a>，这可能是史上最无厘头的网页了，不知道这个网站要干什么，找到可以点的地方点吧，打开一个网页，再点击其中的链接，又打开一个网页，不一会儿你就会在一层又一层的网页中迷路了，好在每次打开的网页都风格迥然，倒也不会觉得单一。</li>
+</ol>
+<p>你还知道一些BT的网站吗？欢迎和我们一样分享。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/0.jpg" alt="一些有意思的文章和资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4220.html" class="wp_rp_title">一些有意思的文章和资源</a></li><li ><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="另类UX让你输入强口令" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3877.html" class="wp_rp_title">另类UX让你输入强口令</a></li><li ><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/Drop-Down-Menu-Scripts-5-150x150.jpg" alt="30+ Web下拉菜单" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3207.html" class="wp_rp_title">30+ Web下拉菜单</a></li><li ><a href="https://coolshell.cn/articles/3142.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/UI-150x150.gif" alt="用户界面和用户体验的差别" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3142.html" class="wp_rp_title">用户界面和用户体验的差别</a></li><li ><a href="https://coolshell.cn/articles/3097.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/W_600-150x150.jpg" alt="Windows的达尔文进化图" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3097.html" class="wp_rp_title">Windows的达尔文进化图</a></li><li ><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/09/biolab-150x150.jpg" alt="一些非常有意思的杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3013.html" class="wp_rp_title">一些非常有意思的杂项资源</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2313.html">史上最糟糕的网站</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2313.html/feed</wfw:commentRss>
+			<slash:comments>34</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>微软的安全补丁分析</title>
+		<link>https://coolshell.cn/articles/2305.html</link>
+					<comments>https://coolshell.cn/articles/2305.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Tue, 06 Apr 2010 00:42:44 +0000</pubDate>
+				<category><![CDATA[Windows]]></category>
+		<category><![CDATA[业界新闻]]></category>
+		<category><![CDATA[操作系统]]></category>
+		<category><![CDATA[网络安全]]></category>
+		<category><![CDATA[安全补丁]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2305</guid>
+
+					<description><![CDATA[<p>截止至2009年底，大约有90%的微软安全补丁是把管理员权限给disable了。根据 BeyondTrust的报告，到今年3月分，Windows 7 有57%的...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2305.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2305.html">微软的安全补丁分析</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><img decoding="async" loading="lazy" class="alignright size-full wp-image-2308" title="微软大量的安全补丁移除管理员权限" src="https://coolshell.cn/wp-content/uploads/2010/04/mshole.jpg" alt="" width="220" height="220" srcset="https://coolshell.cn/wp-content/uploads/2010/04/mshole.jpg 220w, https://coolshell.cn/wp-content/uploads/2010/04/mshole-150x150.jpg 150w, https://coolshell.cn/wp-content/uploads/2010/04/mshole-200x200.jpg 200w" sizes="(max-width: 220px) 100vw, 220px" />截止至2009年底，大约有90%的微软安全补丁是把管理员权限给disable了。根据 <a href="http://www.beyondtrust.com/">BeyondTrust</a>的报告，到今年3月分，Windows 7 有57%的安全补丁是以移除管理员权限作为解决方法的，相比较而言，Windows 2000 是 53%，Windows XP 是 62%，Windows Server 2003 是 55%，Windows Vista 是 54% 以及 Windows Server 2008 是 53%，而最牛的要算是 —— 100% 的 Microsoft Office 和 94%  Internet Explorer （其中100% 的 IE8 ）的安全补丁是移除管理员权限。</p>
+<p>这对于某些公司的IT部门来说是个好消息，因为这些公司的IT部门通常是不会让公司的员工有本机的管理员权限的，根据微软大量的安全补丁是移除某些管理员权限的这一特性，这意味着对于本机只有一般用户权限IT管理，将会防住很大一部份的恶意攻击。</p>
+<p>Paul Cooke, Windows Client Enterprise Security主管说：“我们相信，如果你只是用一般用户来操作Windows的话，这会是一种很好的方式”。而这一提法，相对于Unix的尽可能的不用root用户操作系统这一观点，整整落后了几十年，Windows的用户很习惯于在Administrator下操作系统，这样，一旦中招，任何程序都以系统管理员的权限运行，所以结果也是毁灭性的。这样操作电脑的方式对于Unix的用户来说简直是不可想像的，因为在Unix下，99%的情况下，操作者都不会使用管理员的账号。</p>
+<p>还记得以前和朋友的一段对话：</p>
+<p><span id="more-2305"></span></p>
+<p style="padding-left: 30px;">朋友：“为什么Windows下很容易中病毒，Unix/Linux下却不常见？杀毒软件在Windows下是必备的，但还是很容易中招，而Unix/Linux却可以祼奔。”</p>
+<p style="padding-left: 30px;">陈皓：“那是因为大家都用Windows的Administrator用户操作电脑，而且文件系统都没有权限设置。不像Unix/Linux，没人总是用root操作电脑，而且，所有的文件和目限都有权限。所以，Windows下，一中病毒，病毒就会以管理员的权限运行，不但破坏你的系统甚至干掉你的杀毒软件。而Unix/Linux下，就算中毒，干掉的也是当前用户下的文件，对于系统文件和系统进程来说，不会有任何问题。”</p>
+<p style="padding-left: 30px;">朋友：“那么在Windows下，如何和Unix/Liunx一样使用？”</p>
+<p style="padding-left: 30px;">陈皓：“首先，尽量不要使用Adminstrator用户，使用User用户操作电脑。并且把文件系统格式化成NTFS，这样才能设置上权限。把C盘的根目录，%Windows%以及%System%目录，注册表的关键位置（服务、启动等），都设置上只有Administrator可写，User只读。这样一来，就算是中毒，病毒最多改写当关用户文件，其根本无法操作C盘根目录和Windows%以及%System%目录以及注册表的关键位置，还有IE的插件等（这些地方都是病毒最爱去的地方），中毒后不会对系统造成伤害。在这种情况下，你就算没有杀毒软件祼奔也没有问题”</p>
+<p style="padding-left: 30px;">朋友：“嗯，听起来不错。不过这样整是不是太麻烦了，特别是要装一些软件什么的。”</p>
+<p style="padding-left: 30px;">陈皓：“是的，没错。按道理来说，各个用户的软件应该是装在其用户的目录和环境下，而不应该装在系统的目录下，Unix/Liunx就是这么做的，但是Windows并没有提供这样的方式，很多软件都要去Adminstrator下安装，所以，在系统上装上一些恶意插件，流氓软件也就很正常了。没办法，这就是Windows和Unix/Liunx的差别了，Windows出生的时候就是单用户的，Unix/Liunx则是多用户的，这是Windows先天设计的缺陷，所以，今天这样的局面也是理所当然的。”</p>
+<p>上面的这段对话，也许有助于你了解Windows，安全等方面的东西。下面，让我们再来用一组数据结束本文。</p>
+<p>总体来说，去年一年中64%的所有的微软安全补丁把管理员权限给移除了。如果你只考虑Critical级别的安全补丁，那么有点到80%补丁是移除管理员权限，如果只考虑远程攻击方面的，那么这个比率是84% 。相关的报道请查看如下文章：</p>
+<li><a href="http://www.beyondtrust.com/downloads/whitepapers/documents/wp039_BeyondTrust_2009_Microsoft_Vulnerability_Analysis.pdf">90% of Critical Microsoft Windows 7 Vulnerabilities are Mitigated by Eliminating Admin Rights</a> (beyondtrust.com)</li>
+<li><a href="http://news.cnet.com/8301-27080_3-20001359-245.html">Report: Windows 7 holes eased by axing admin rights</a> (news.cnet.com)</li>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2014/09/bashbug-150x150.jpg" alt="bash代码注入的安全漏洞" width="150" height="150" /></a><a href="https://coolshell.cn/articles/11973.html" class="wp_rp_title">bash代码注入的安全漏洞</a></li><li ><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2012/06/f1-150x150.jpg" alt="性能调优攻略" width="150" height="150" /></a><a href="https://coolshell.cn/articles/7490.html" class="wp_rp_title">性能调优攻略</a></li><li ><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="10大经典错误" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5107.html" class="wp_rp_title">10大经典错误</a></li><li ><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" alt="如何学好C语言" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4102.html" class="wp_rp_title">如何学好C语言</a></li><li ><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="纯文本配置还是注册表" width="150" height="150" /></a><a href="https://coolshell.cn/articles/4077.html" class="wp_rp_title">纯文本配置还是注册表</a></li><li ><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/11/Learn-Python-The-Hard-Way-150x150.jpg" alt="两本电子书" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3270.html" class="wp_rp_title">两本电子书</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2305.html">微软的安全补丁分析</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2305.html/feed</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Google居然在阻止人们自杀？</title>
+		<link>https://coolshell.cn/articles/2296.html</link>
+					<comments>https://coolshell.cn/articles/2296.html#comments</comments>
+		
+		<dc:creator><![CDATA[mailper]]></dc:creator>
+		<pubDate>Thu, 01 Apr 2010 04:57:29 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2296</guid>
+
+					<description><![CDATA[<p>中文的Google会不会出onebox来劝阻人们翻墙？ suicide prevention onebox poison control onebox （转载本...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2296.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2296.html">Google居然在阻止人们自杀？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>中文的Google会不会出onebox来劝阻人们翻墙？</p>
+<p><span style="font-family: arial,helvetica,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;"><a href="http://www.google.com/search?q=ways+to+commit+suicide" target="_blank">suicide prevention onebox</a></span></p>
+<p><a href="http://www.google.com/search?q=poison+control" target="_blank"><span style="font-family: arial,helvetica,sans-serif;">poison control onebox</span></a></p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2010/04/googleOnebox.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2295" title="googleOnebox" src="https://coolshell.cn/wp-content/uploads/2010/04/googleOnebox.png" alt="" width="500" height="426" srcset="https://coolshell.cn/wp-content/uploads/2010/04/googleOnebox.png 500w, https://coolshell.cn/wp-content/uploads/2010/04/googleOnebox-300x256.png 300w, https://coolshell.cn/wp-content/uploads/2010/04/googleOnebox-317x270.png 317w" sizes="(max-width: 500px) 100vw, 500px" /></a><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/2785.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="JS1K 演示" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2785.html" class="wp_rp_title">JS1K 演示</a></li><li ><a href="https://coolshell.cn/articles/2507.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/06/5176XS40F9L._SL500_AA300_-150x150.jpg" alt="2000年的iMac和2010年的iPhone" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2507.html" class="wp_rp_title">2000年的iMac和2010年的iPhone</a></li><li ><a href="https://coolshell.cn/articles/1283.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/27.jpg" alt="Linux基金会的广告" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1283.html" class="wp_rp_title">Linux基金会的广告</a></li><li ><a href="https://coolshell.cn/articles/2806.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/08/coolshell.programmer-150x150.jpg" alt="程序员版的凡客" width="150" height="150" /></a><a href="https://coolshell.cn/articles/2806.html" class="wp_rp_title">程序员版的凡客</a></li><li ><a href="https://coolshell.cn/articles/671.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="Python调用C语言函数" width="150" height="150" /></a><a href="https://coolshell.cn/articles/671.html" class="wp_rp_title">Python调用C语言函数</a></li><li ><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="GDB 7.0 发布" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1525.html" class="wp_rp_title">GDB 7.0 发布</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2296.html">Google居然在阻止人们自杀？</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2296.html/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>C++ 程序员自信心曲线图</title>
+		<link>https://coolshell.cn/articles/2287.html</link>
+					<comments>https://coolshell.cn/articles/2287.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Thu, 01 Apr 2010 01:02:15 +0000</pubDate>
+				<category><![CDATA[C/C++语言]]></category>
+		<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[Programmer]]></category>
+		<category><![CDATA[程序员]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2287</guid>
+
+					<description><![CDATA[<p>学习C++很长时间了，也看过很多程序员学习C++的历程。总体来说，C++是一个“双刃剑”式的语言，只有那些熟悉他的人才能把C++这门语言用好。Linus曾说过：...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2287.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2287.html">C++ 程序员自信心曲线图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>学习C++很长时间了，也看过很多程序员学习C++的历程。总体来说，C++是一个“双刃剑”式的语言，只有那些熟悉他的人才能把C++这门语言用好。Linus曾说过：“<strong>C++是一门很<a href="https://coolshell.cn/articles/1724.html" target="_blank">恐怖的语言</a>，而比它更恐怖的是很多不合格的程序员在使用着它</strong>”。是的，C++并不是一门速成的语言，其是一门需要长时间磨练和学习的语言，那些说自己熟悉C++语言的程序只能算是轻浮的。详见<a title="“21天教你学会C++”" href="https://coolshell.cn/articles/2250.html" target="_blank">“21天教你学会C++ ”</a>。</p>
+<p>下面是一个C++程序员在学习过程序中的一个自信心曲线图：</p>
+<p style="text-align: center;"><a href="https://coolshell.cn/wp-content/uploads/2010/03/c++.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2292" title="C++ 程序员自信心曲线图" src="https://coolshell.cn/wp-content/uploads/2010/03/c++.png" alt="" width="500" height="411" srcset="https://coolshell.cn/wp-content/uploads/2010/03/c++.png 500w, https://coolshell.cn/wp-content/uploads/2010/03/c++-300x247.png 300w, https://coolshell.cn/wp-content/uploads/2010/03/c++-328x270.png 328w" sizes="(max-width: 500px) 100vw, 500px" /></a> </p>
+<p>程序员在一开始学习C++的时候，用C++的语法写C觉得很牛，也会觉得自己很快掌握了C++语言，对一切都充满了信心。他们告诉你他们懂C++，其它他们错误，但我们不能说他们在撒谎，因为人总是不知道自己不知道什么。此后，当他们在C++的学习历程中，发现了很多很多稀奇古怪的东西，还有很多相当底层和复杂的东西，他们的将会变得很受挫，很沮丧，还始变得怀疑起，自信心开始下降，甚至有时候他们靠人品来编程。只到有一天，开始开窃，觉得C++的世界不能乱来，需要一定的规则，一定的方法，于是通过大量的错误不停地总结和反省，最终自信心又会被建立起来，<a href="https://coolshell.cn/articles/2250.html" target="_blank">经历多年的历练后</a>，才能恢复自信。</p>
+<p>对于大多数的自称自己熟悉C++的程序员来说，基本上来说他们都是用C++的语法来写C。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" alt="API设计原则 &#8211; Qt官网的设计实践总结" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18024.html" class="wp_rp_title">API设计原则 &#8211; Qt官网的设计实践总结</a></li><li ><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" alt="Leetcode 编程训练" width="150" height="150" /></a><a href="https://coolshell.cn/articles/12052.html" class="wp_rp_title">Leetcode 编程训练</a></li><li ><a href="https://coolshell.cn/articles/9543.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/04/weibo-150x150.jpg" alt="“C++的数组不支持多态”？" width="150" height="150" /></a><a href="https://coolshell.cn/articles/9543.html" class="wp_rp_title">“C++的数组不支持多态”？</a></li><li ><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" alt="对技术的态度" width="150" height="150" /></a><a href="https://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li><li ><a href="https://coolshell.cn/articles/5388.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/15.jpg" alt="C语言中史上最愚蠢的Bug" width="150" height="150" /></a><a href="https://coolshell.cn/articles/5388.html" class="wp_rp_title">C语言中史上最愚蠢的Bug</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2287.html">C++ 程序员自信心曲线图</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2287.html/feed</wfw:commentRss>
+			<slash:comments>193</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>又一个Javascript试验田</title>
+		<link>https://coolshell.cn/articles/2276.html</link>
+					<comments>https://coolshell.cn/articles/2276.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 31 Mar 2010 04:41:32 +0000</pubDate>
+				<category><![CDATA[Web开发]]></category>
+		<category><![CDATA[轶事趣闻]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2276</guid>
+
+					<description><![CDATA[<p>以前本站发布过一篇《哥是玩程序的》文章向大家展示了用Javascript干的些怪异的事。看来，这样的人并不在少数，这不，我又发现了一个，这回这个好像更有技术含量...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2276.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2276.html">又一个Javascript试验田</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script>以前本站发布过一篇《<a href="https://coolshell.cn/articles/1932.html" target="_blank">哥是玩程序的</a>》文章向大家展示了用Javascript干的些怪异的事。看来，这样的人并不在少数，这不，我又发现了一个，这回这个好像更有技术含量一些，下面是其试验程序的列表：</p>
+<p style="text-align: center;"><a href="http://www.andrew-hoyer.com/experiments">http://www.andrew-hoyer.com/experiments</a></p>
+<table>
+<tbody>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/sudoku"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/SudokuThumb.jpg?1265581473" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/sudoku">Simple Sudoku Solver</a> 这是一个“数独游戏”，其在你游戏的过程中可以在空格处提示你可能的数字。</p>
+<p class="exp_date">February 2010</p>
+</td>
+</tr>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/cloth"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/ClothThumb.jpg?1250545758" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/cloth">Cloth Simulation</a> 这是一个极端的布料仿真程序。使用鼠标拖曳，按着g键拖曳可以把布悬挂起来。</p>
+<p class="exp_date">August 2009</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><span id="more-2276"></span></p>
+<table>
+<tbody>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/numbers"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/NumbersThumb.jpg?1247627086" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/numbers">Numbers to Words</a> 这是一个把阿拉伯数字变成英文说明的演示。</p>
+<p class="exp_date">June 2009</p>
+</td>
+</tr>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/particle_system"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/ParticleSystemThumb.jpg?1247626980" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/particle_system">N-Bodies Particle System</a> 可以模拟物理学上的原子核与电子圆周运动的的样子。</p>
+<p class="exp_date">April 2009</p>
+</td>
+</tr>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/quantum_cryptography"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/QuantumThumb.jpg?1247626989" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/quantum_cryptography">Quantum Cryptography</a> 一篇文章介绍了什么叫“量子加密”。</p>
+<p class="exp_date">March 2009</p>
+</td>
+</tr>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/dripsessions"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/DripSessionsThumb.jpg?1247627110" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/dripsessions">Drip Sessions</a> 一个流淌的效果。</p>
+<p class="exp_date">February 2009</p>
+</td>
+</tr>
+<tr>
+<td><a href="http://www.andrew-hoyer.com/experiments/robotarm"><br />
+<img decoding="async" class="exp_thumbnail" src="http://www.andrew-hoyer.com/images/experiments/RoboticArmThumb.jpg?1247627096" alt="Bacon and Eggs Thumbnail" /><br />
+</a></td>
+<td><a class="important" href="http://www.andrew-hoyer.com/experiments/robotarm">Robotic Arm</a> 一个机械手臂的演示程序。</p>
+<p class="exp_date">December 2008</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2018/05/300x262-150x150.jpg" alt="程序员练级攻略（2018)  与我的专栏" width="150" height="150" /></a><a href="https://coolshell.cn/articles/18360.html" class="wp_rp_title">程序员练级攻略（2018)  与我的专栏</a></li><li ><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2017/01/pretty-code-150x150.gif" alt="Chrome开发者工具的小技巧" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17634.html" class="wp_rp_title">Chrome开发者工具的小技巧</a></li><li ><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2016/10/drawing-recursive-150x150.jpg" alt="如何读懂并写出装逼的函数式代码" width="150" height="150" /></a><a href="https://coolshell.cn/articles/17524.html" class="wp_rp_title">如何读懂并写出装逼的函数式代码</a></li><li ><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/yoda-lambda-150x150.png" alt="函数式编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10822.html" class="wp_rp_title">函数式编程</a></li><li ><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2013/12/lua-150x150.gif" alt="Lua简明教程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10739.html" class="wp_rp_title">Lua简明教程</a></li><li ><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" alt="数据即代码：元驱动编程" width="150" height="150" /></a><a href="https://coolshell.cn/articles/10337.html" class="wp_rp_title">数据即代码：元驱动编程</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2276.html">又一个Javascript试验田</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2276.html/feed</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Emacs配色在线生成器</title>
+		<link>https://coolshell.cn/articles/2271.html</link>
+					<comments>https://coolshell.cn/articles/2271.html#comments</comments>
+		
+		<dc:creator><![CDATA[陈皓]]></dc:creator>
+		<pubDate>Wed, 31 Mar 2010 01:15:19 +0000</pubDate>
+				<category><![CDATA[杂项资源]]></category>
+		<category><![CDATA[编程工具]]></category>
+		<category><![CDATA[Emacs]]></category>
+		<guid isPermaLink="false">http://coolshell.cn/?p=2271</guid>
+
+					<description><![CDATA[<p>http://alexpogosyan.com/color-theme-creator/ 点击“Generate config file”，你可以看到生成的Em...</p>
+<p class="read-more"><a class="btn btn-default" href="https://coolshell.cn/articles/2271.html"> Read More<span class="screen-reader-text">  Read More</span></a></p>
+The post <a href="https://coolshell.cn/articles/2271.html">Emacs配色在线生成器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></description>
+										<content:encoded><![CDATA[<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3415450859608158"
+     crossorigin="anonymous"></script><a href="http://alexpogosyan.com/color-theme-creator/">http://alexpogosyan.com/color-theme-creator/</a></p>
+<p>点击“Generate config file”，你可以看到生成的Emacs配色配置。</p>
+<p style="text-align: center;"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2272" title="Emacs Color Theme Creator" src="https://coolshell.cn/wp-content/uploads/2010/03/emacs_color_theme.jpg" alt="" width="400" height="278" srcset="https://coolshell.cn/wp-content/uploads/2010/03/emacs_color_theme.jpg 400w, https://coolshell.cn/wp-content/uploads/2010/03/emacs_color_theme-300x209.jpg 300w, https://coolshell.cn/wp-content/uploads/2010/03/emacs_color_theme-388x270.jpg 388w" sizes="(max-width: 400px) 100vw, 400px" /></p>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 &#8211; CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+
+<div class="wp_rp_wrap  wp_rp_vertical_m" ><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li ><a href="https://coolshell.cn/articles/3437.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/12/ediff-small-150x150.png" alt="一些杂项资源" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3437.html" class="wp_rp_title">一些杂项资源</a></li><li ><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/3.jpg" alt="chmod -x chmod的N种解法" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3136.html" class="wp_rp_title">chmod -x chmod的N种解法</a></li><li ><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/uploads/2010/10/horrorstories.txt-150x150.jpg" alt="主流文本编辑器学习曲线" width="150" height="150" /></a><a href="https://coolshell.cn/articles/3125.html" class="wp_rp_title">主流文本编辑器学习曲线</a></li><li ><a href="https://coolshell.cn/articles/1626.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" alt="ldd 的一个安全问题" width="150" height="150" /></a><a href="https://coolshell.cn/articles/1626.html" class="wp_rp_title">ldd 的一个安全问题</a></li><li ><a href="https://coolshell.cn/articles/435.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" alt="Python中实现多属性排序" width="150" height="150" /></a><a href="https://coolshell.cn/articles/435.html" class="wp_rp_title">Python中实现多属性排序</a></li><li ><a href="https://coolshell.cn/articles/428.html" class="wp_rp_thumbnail"><img src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" alt="程序员需要具备的基本技能" width="150" height="150" /></a><a href="https://coolshell.cn/articles/428.html" class="wp_rp_title">程序员需要具备的基本技能</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/2271.html">Emacs配色在线生成器</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.]]></content:encoded>
+					
+					<wfw:commentRss>https://coolshell.cn/articles/2271.html/feed</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

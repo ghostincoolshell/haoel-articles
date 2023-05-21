@@ -1,0 +1,203 @@
+<html><body><p>Shell也叫做命令行界面，它是*nix操作系统下用户和计算机的交互界面。Shell这个词是指操作系统中提供访问内核服务的程序。</p>
+<p>这篇文章向大家介绍Shell一些非广为人知、但却实用有趣的知识，权当品尝shell主食后的甜点吧。</p>
+<h4>科普</h4>
+<p>先科普几个你可能不知道的事实：</p>
+<ul>
+<li>Shell几乎是和Unix操作系统一起诞生，第一个Unix Shell是肯·汤普逊（Ken Thompson）以Multics上的Shell为模范在1971年改写而成，并命名Thompson sh。即便是后来流行的bash（shell的一种变体），它的年龄实际上比当前流行的所有的Linux kernel都大，可谓在Linux系统上是先有Shell再有Kernel。</li>
+</ul>
+<ul>
+<li>当前绝大部分*nix和MacOS操作系统里的默认的Shell都是bash，bash由Brian Fox在1987年创造，全称Bourne Again shell ( bash)。</li>
+</ul>
+<ul>
+<li>你或许听说除了bash之外，还有Bourne shell ( sh)，Korn shell ( ksh)，C shell （包括 csh and tcsh），但是你知道这个星球上一共存在着大约50多种不同的shell么？想了解他们，请参考 <a href="http://www.freebsd.org/ports/shells.html" rel="noopener" target="_blank">http://www.freebsd.org/ports/shells.html</a>。</li>
+</ul>
+<ul>
+<li>每个月<a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html" rel="noopener" target="_blank">tiobe</a>上都会给一个编程语言的排名，来显示各种语言的流行度。排名指数综合了全球范围内使用该语言的工程师人数、教学的课程数和第三方供应商数。截止至2012年11月份，tiobe公布的编程语言排行榜里，bash的指数是0.56%排名22位。如果算上它旗下的awk 0.21%和tcl 0.146%，大概就能排到14名。注意这里还不包括bash的同源的兄弟姐妹csh、ksh等，算上它们，shell家族有望接近前十。值得一提的是一直以来shell的排名就很稳定，不像某些“暴发户”语言，比如objective-c，这些语言的流行完全是因为当前Apple系的崛起，但这种热潮极有可能来得快去得更快。</li>
+</ul>
+<p><span id="more-8619"></span></p>
+<p><img alt="" class="aligncenter size-full wp-image-18796" height="614" src="../wp-content/uploads/2012/11/shell.01.png" width="616"/></p>
+<p><img alt="" class="aligncenter size-full wp-image-18797" height="531" src="../wp-content/uploads/2012/11/shell.02.png" width="290"/></p>
+<p> </p>
+<p>全球最大的源代码仓库Github里，shell相关的项目数占到了8%，跻身前5和Java相当，可见在实战工程里，shell可谓宝刀不老。图片来源，<a href="https://github.com/languages">参见这里</a></p>
+<p><img alt="" class="aligncenter size-full wp-image-18798" height="284" src="../wp-content/uploads/2012/11/shell.03.png" width="700"/></p>
+<h4>一些强大的命令</h4>
+<p>再分享一些可能你不知道的shell用法和脚本，简单&amp;强大！</p>
+<p><em>在阅读以下部分前，强烈建议读者打开一个shell实验，这些都不是shell教科书里的大路货哦：）</em></p>
+<ul>
+<li><strong><code>!$</code></strong><br/>
+<code>!$</code>是一个特殊的环境变量，它代表了上一个命令的最后一个字符串。如：你可能会这样：
+<pre class="EnlighterJSRAW">$mkdir mydir
+$mv mydir yourdir
+$cd yourdir</pre>
+<p>可以改成：</p>
+<pre class="EnlighterJSRAW">$mkdir mydir
+$mv !$ yourdir
+$cd !$</pre>
+</li>
+</ul>
+<ul>
+<li><strong><code>sudo !!</code></strong><br/>
+以root的身份执行上一条命令 。<br/>
+场景举例：比如Ubuntu里用<code>apt-get</code>安装软件包的时候是需要root身份的，我们经常会忘记在<code>apt-get</code>前加<code>sudo</code>。每次不得不加上<code>sudo</code>再重新键入这行命令，这时可以很方便的用<code>sudo !!</code>完事。<br/>
+（陈皓注：在shell下，有时候你会输入很长的命令，你可以使用!xxx来重复最近的一次命令，比如，你以前输入过，vi /where/the/file/is, 下次你可以使用 !vi 重得上次最近一次的vi命令。）</li>
+</ul>
+<ul>
+<li><strong><code>cd –</code></strong><br/>
+回到上一次的目录 。<br/>
+场景举例：当前目录为<code>/home/a</code>，用<code>cd ../b</code>切换到<code>/home/b</code>。这时可以通过反复执行<code>cd –</code>命令在<code>/home/a</code>和<code>/home/b</code>之间来回方便的切换。<br/>
+（陈皓注：cd ~ 是回到自己的Home目录，cd ~user，是进入某个用户的Home目录）</li>
+</ul>
+<ul>
+<li><strong><code>'ALT+.' or '&lt;ESC&gt; .'</code></strong><br/>
+热建alt+. 或 esc+. 可以把上次命令行的参数给重复出来。</li>
+</ul>
+<ul>
+<li><strong><code>^old^new</code></strong><br/>
+替换前一条命令里的部分字符串。<br/>
+场景：<code>echo "wanderful"</code>，其实是想输出<code>echo "wonderful"</code>。只需要<code>^a^o</code>就行了，对很长的命令的错误拼写有很大的帮助。（陈皓注：也可以使用 <strong>!!:gs/old/new</strong>）</li>
+</ul>
+<ul>
+<li><strong><code>du -s * | sort -n | tail</code></strong><br/>
+列出当前目录里最大的10个文件。</li>
+</ul>
+<ul>
+<li><strong><code>:w !sudo tee %</code></strong><br/>
+在vi中保存一个只有root可以写的文件</li>
+</ul>
+<ul>
+<li><strong><code>date -d@1234567890</code></strong><br/>
+时间截转时间</li>
+</ul>
+<ul>
+<li>
+<div title="Click to select this command">
+<div><strong><code>&gt; file.txt</code></strong><br/>
+创建一个空文件，比touch短。</div>
+</div>
+</li>
+</ul>
+<ul>
+<li><strong><code>mtr coolshell.cn</code></strong><br/>
+mtr命令比traceroute要好。</li>
+</ul>
+<ul>
+<li>在命令行前加空格，该命令不会进入history里。</li>
+</ul>
+<ul>
+<li><strong><code>echo "ls -l" | at midnight</code></strong><br/>
+在某个时间运行某个命令。</li>
+</ul>
+<ul>
+<li><strong><code>curl -u user:pass -d status="Tweeting from the shell" http://twitter.com/statuses/update.xml</code></strong><br/>
+命令行的方式更新twitter。</li>
+</ul>
+<ul>
+<li><strong><code>curl -u username --silent "https://mail.google.com/mail/feed/atom" | perl -ne 'print "\t" if /&lt;name&gt;/; print "$2\n" if /&lt;(title|name)&gt;(.*)&lt;\/\1&gt;/;'</code></strong><br/>
+检查你的gmail未读邮件</li>
+</ul>
+<ul>
+<li><strong><code>ps aux | sort -nk +4 | tail</code></strong><br/>
+列出头十个最耗内存的进程</li>
+</ul>
+<ul>
+<li><strong><code>man ascii</code></strong><br/>
+显示ascii码表。<br/>
+场景：忘记ascii码表的时候还需要google么?尤其在天朝网络如此“顺畅”的情况下，就更麻烦在GWF多应用一次规则了，直接用本地的<code>man ascii</code>吧。</li>
+</ul>
+<ul>
+<li><strong><code>ctrl-x e</code></strong><br/>
+快速启动你的默认编辑器（由变量$EDITOR设置）。</li>
+</ul>
+<ul>
+<li><strong><code>netstat –tlnp</code></strong><br/>
+列出本机进程监听的端口号。（陈皓注：netstat -anop 可以显示侦听在这个端口号的进程）</li>
+</ul>
+<ul>
+<li><strong><code>tail -f /path/to/file.log | sed '/^Finished: SUCCESS$/ q'</code></strong><br/>
+当file.log里出现Finished: SUCCESS时候就退出tail，这个命令用于实时监控并过滤log是否出现了某条记录。</li>
+</ul>
+<ul>
+<li><strong><code>ssh user@server bash &lt; /path/to/local/script.sh</code></strong><br/>
+在远程机器上运行一段脚本。这条命令最大的好处就是不用把脚本拷到远程机器上。</li>
+</ul>
+<ul>
+<li><strong><code>ssh user@host cat /path/to/remotefile | diff /path/to/localfile -</code></strong><br/>
+比较一个远程文件和一个本地文件</li>
+</ul>
+<ul>
+<li>
+<div title="Click to select this command">
+<div><strong><code>net rpc shutdown -I ipAddressOfWindowsPC -U username%password</code></strong><br/>
+远程关闭一台Windows的机器</div>
+</div>
+</li>
+</ul>
+<ul>
+<li><strong><code>screen -d -m -S some_name ping my_router</code></strong><br/>
+后台运行一段不终止的程序，并可以随时查看它的状态。<code>-d -m</code>参数启动“分离”模式，<code>-S</code>指定了一个session的标识。可以通过<code>-R</code>命令来重新“挂载”一个标识的session。更多细节请参考screen用法 <code>man screen</code>。</li>
+</ul>
+<ul>
+<li><strong><code>wget --random-wait -r -p -e robots=off -U mozilla http://www.example.com</code></strong><br/>
+下载整个www.example.com网站。（注：别太过分，大部分网站都有防爬功能了：））</li>
+</ul>
+<ul>
+<li><strong><code>curl ifconfig.me</code></strong><br/>
+当你的机器在内网的时候，可以通过这个命令查看外网的IP。</li>
+</ul>
+<ul>
+<li><strong><code>convert input.png -gravity NorthWest -background transparent -extent 720x200  output.png</code></strong><br/>
+改一下图片的大小尺寸</li>
+</ul>
+<ul>
+<li><strong><code>lsof –i</code></strong><br/>
+实时查看本机网络服务的活动状态。</li>
+</ul>
+<ul>
+<li><strong><code>vim scp://username@host//path/to/somefile</code></strong><br/>
+vim一个远程文件</li>
+</ul>
+<ul>
+<li><strong><code>python -m SimpleHTTPServer</code></strong><br/>
+一句话实现一个HTTP服务，把当前目录设为HTTP服务目录，可以通过<code>http://localhost:8000</code>访问 这也许是这个星球上最简单的HTTP服务器的实现了。</li>
+</ul>
+<ul>
+<li><strong><code>history | awk '{CMD[$2]++;count++;} END { for (a in CMD )print CMD[a] " " CMD[a]/count*100 "% " a }' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10</code></strong><br/>
+(陈皓注：有点复杂了，history|awk ‘{print $2}’|awk ‘BEGIN {FS=”|”} {print $1}’|sort|uniq -c|sort -rn|head -10)<br/>
+这行脚本能输出你最常用的十条命令，由此甚至可以洞察你是一个什么类型的程序员。</li>
+</ul>
+<ul>
+<li>
+<div title="Click to select this command">
+<div><strong><code>tr -c "[:digit:]" " " &lt; /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"</code></strong><br/>
+想看看Marix的屏幕效果吗？（不是很像，但也很Cool!）</div>
+</div>
+</li>
+</ul>
+<p>看不懂行代码？没关系，系统的学习一下*nix shell脚本吧，力荐<a href="http://www.ituring.com.cn/book/980">《Linux命令行与Shell脚本编程大全》</a>。</p>
+<h4>参考文献：</h4>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Unix_shell#Shell_categories">Unix Shell Wiki</a></li>
+<li><a href="https://github.com">Github language ranking</a></li>
+<li><a href="http://www.softpanorama.org/People/Shell_giants/introduction.shtml">An introduction of Unix Shell history</a></li>
+<li><a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html" rel="noopener" target="_blank">Tiobe Software</a></li>
+<li><a href="http://www.commandlinefu.com/" rel="noopener" target="_blank">http://www.commandlinefu.com/</a></li>
+</ul>
+<p><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="../wp-content/uploads/2013/02/awk-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19219.html"><img alt="打造高效的工作环境 – Shell 篇" height="150" src="../wp-content/uploads/2019/03/linux.ninja_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12103.html"><img alt="vfork 挂掉的一个问题" height="150" src="../wp-content/uploads/2014/11/tux-fork-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/8619.html">你可能不知道的Shell</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

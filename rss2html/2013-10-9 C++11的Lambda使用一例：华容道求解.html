@@ -1,0 +1,90 @@
+<html><body><p><strong>（感谢网友 <a href="http://weibo.com/u/1701018393?source=webim" target="_blank"><img alt="" src="http://tp2.sinaimg.cn/1701018393/50/1297990315/1"/></a><a href="http://weibo.com/u/1701018393?source=webim" target="_blank" title="bnu_chenshuo"> @bnu_chenshuo </a>投稿）</strong></p>
+<p style="text-align: center;"><img alt="" class="wp-image-10490 alignright" height="227" src="../wp-content/uploads/2013/10/huarong.png" width="365"/></p>
+<p>华容道是一个有益的智力游戏，游戏规则不再赘述。用计算机求解华容道也是一道不错的编程练习题，为了寻求最少步数，求解程序一般用广度优先搜索算法。华容道的一种常见开局如图 1 所示。</p>
+<p>广度优先搜索算法求解华容道的基本步骤：</p>
+<ol>
+<li>准备两个“全局变量”，队列 Q 和和集合 S，S 代表“已知局面”。初时 Q 和 S 皆为空。</li>
+<li>将初始局面加入队列 Q 的末尾，并将初始局面设为已知。</li>
+<li>当队列不为空时，从 Q 的队首取出当前局面 <code>curr</code>。如果队列为空则结束搜索，表明无解。</li>
+<li>如果 <code>curr</code> 是最终局面（曹操位于门口，图 2），则结束搜索，否则继续到第 5 步。</li>
+<li>考虑 <code>curr</code> 中每个可以移动的棋子，试着上下左右移动一步，得到新局面 <code>next</code>，如果新局面未知（<code>next</code> ∉ S），则把它加入队列 Q，并设为已知。这一步可能产生多个新局面。</li>
+<li>回到第2步。</li>
+</ol>
+<p>其中“局面已知”并不要求每个棋子的位置相同，而是指棋子的投影的形状相同（代码中用 mask 表示），例如交换图 1 中的张飞和赵云并不产生新局面，这一规定可以大大缩小搜索空间。</p>
+<p>以上步骤很容易转换为 C++ 代码，这篇文章重点关注的是第 5 步的实现。</p>
+<p><span id="more-10476"></span></p>
+<pre class="EnlighterJSRAW">// 第 1 步
+std::unordered_set&lt;Mask&gt; seen;
+std::deque&lt;State&gt; queue;
+
+// 第 2 步
+State initial;
+// 填入 initial，略。
+queue.push_back(initial);
+seen.insert(initial.toMask());
+
+// 第 3 步
+while (!queue.empty())
+{
+  const State curr = queue.front();
+  queue.pop_front();
+
+  // 第 4 步
+  if (curr.isSolved())
+    break;
+
+  // 第 5 步
+  for (const State&amp; next : curr.moves())
+  {
+    auto result = seen.insert(next.toMask());
+    if (result.second)
+      queue.push_back(next);
+  }
+}</pre>
+<p>在以上原始实现中，<code>curr.move()</code> 将返回一个 <code>std::vector&lt;State&gt;</code> 临时对象。一种节省开销的办法是准备一个 <code>std::vector&lt;State&gt;</code> “涂改变量”，让 <code>curr.move()</code> 反复修改它，比如改成：</p>
+<pre class="EnlighterJSRAW">// 第 1 步新增一个 scratch 变量
+std::vector&lt;State&gt; nextMoves;
+
+// 第 3 步
+while (!queue.empty())
+{
+  // ...
+  // 第 5 步
+  curr.fillMoves(&amp;nextMoves);
+  for (const State&amp; next : nextMoves)
+  { /* 略 */ }
+}</pre>
+<p>还有一种彻底不用这个 <code>std::vector&lt;State&gt;</code> 的办法，把一部分逻辑以 lambda 的形式传给 <code>curr.move()</code>，代码的结构基本不变：</p>
+<pre class="EnlighterJSRAW">// 第 3 步
+while (!queue.empty())
+{
+  // ...
+  // 第 5 步
+  curr.move([&amp;seen, &amp;queue](const State&amp; next) {
+    auto result = seen.insert(next.toMask());
+    if (result.second)
+      queue.push_back(next);
+  });
+}</pre>
+<p>这样一来，主程序的逻辑依然清晰，不必要的开销也降到了最小。</p>
+<p>在我最早的实现中，<code>curr.move()</code> 的参数是 <code>const std::function&lt;void(const State&amp;)&gt; &amp;</code>，但是我发现这里每次构造 <code>std::function&lt;void(const State&amp;)&gt;</code> 对象都会分配一次内存，似乎有些不值。因此在现在的实现中 <code>curr.move()</code> 是个函数模板，这样就能自动匹配lambda参数（通常是个 struct 对象），省去了 <code>std::function</code>的内存分配。</p>
+<p>本文完整的代码见 <a href="https://github.com/chenshuo/recipes/blob/master/puzzle/huarong.cc">https://github.com/chenshuo/recipes/…/puzzle/huarong.cc</a>，需用 GCC 4.7 编译，求解图 1 的题目的耗时约几十毫秒。</p>
+<p><strong>练习：</strong>修改程序，打印每一步移动棋子的情况。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22422.html"><img alt="是微服务架构不香还是云不香？" height="150" src="../wp-content/uploads/2023/05/monolith.microservices-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22422.html">是微服务架构不香还是云不香？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12052.html"><img alt="Leetcode 编程训练" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12052.html">Leetcode 编程训练</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12012.html"><img alt="State Threads 回调终结者" height="150" src="../wp-content/uploads/2014/10/edsm-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12012.html">State Threads 回调终结者</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/10476.html">C++11的Lambda使用一例：华容道求解</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

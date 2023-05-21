@@ -1,0 +1,105 @@
+<html><body><p>本篇文章主要教你如何使用 <a href="http://www.vim.org/">Vim</a> 分屏功能。</p>
+<p style="text-align: center;"><img alt="vim-windows" height="391" src="../wp-content/uploads/2009/11/vimwindows.png" style="display: inline;" title="vim-windows" width="550"/></p>
+<p><span id="more-2645"> <img alt="" src="https://coolshell.cn/wp-includes/js/tinymce/plugins/wordpress/img/trans.gif" title="更多..."/><span id="more-1679"></span></span></p>
+<h4>分屏启动Vim</h4>
+<ol>
+<li>使用大写的O参数来垂直分屏。
+<pre><code>vim -On file1 file2 ...</code></pre>
+</li>
+<li>使用小写的o参数来水平分屏。
+<pre><code>vim -on file1 file2 ...</code></pre>
+</li>
+</ol>
+<p><strong>注释:</strong> n是数字，表示分成几个屏。</p>
+<h4>关闭分屏</h4>
+<ol>
+<li>关闭当前窗口。
+<pre><code>Ctrl+W c</code></pre>
+</li>
+<li>关闭当前窗口，如果只剩最后一个了，则退出Vim。
+<pre><code>Ctrl+W q</code></pre>
+</li>
+</ol>
+<h4>分屏</h4>
+<ol>
+<li>上下分割当前打开的文件。
+<pre><code>Ctrl+W s</code></pre>
+</li>
+<li>上下分割，并打开一个新的文件。
+<pre><code>:sp filename</code></pre>
+</li>
+<li>左右分割当前打开的文件。
+<pre><code>Ctrl+W v</code></pre>
+</li>
+<li>左右分割，并打开一个新的文件。
+<pre>:vsp filename</pre>
+</li>
+</ol>
+<h4>移动光标</h4>
+<p>Vi中的光标键是h, j, k, l，要在各个屏间切换，只需要先按一下Ctrl+W</p>
+<ol>
+<li>把光标移到<strong>右边</strong>的屏。
+<pre><code>Ctrl+W l</code></pre>
+</li>
+<li>把光标移到<strong>左边</strong>的屏中。
+<pre><code>Ctrl+W h</code></pre>
+</li>
+<li>把光标移到<strong>上边</strong>的屏中。
+<pre><code>Ctrl+W k</code></pre>
+</li>
+<li>把光标移到<strong>下边</strong>的屏中。
+<pre><code>Ctrl+W j</code></pre>
+</li>
+<li>把光标移到<strong>下一个</strong>的屏中。.
+<pre>Ctrl+W w</pre>
+</li>
+</ol>
+<h4>移动分屏</h4>
+<p>这个功能还是使用了Vim的光标键，只不过都是大写。当然了，如果你的分屏很乱很复杂的话，这个功能可能会出现一些非常奇怪的症状。</p>
+<ol>
+<li>向右移动。
+<pre><code>Ctrl+W L</code></pre>
+</li>
+<li>向左移动
+<pre><code>Ctrl+W H</code></pre>
+</li>
+<li>向上移动
+<pre><code>Ctrl+W K</code></pre>
+</li>
+<li>向下移动
+<pre><code>Ctrl+W J</code></pre>
+</li>
+</ol>
+<h4>屏幕尺寸</h4>
+<p>下面是改变尺寸的一些操作，主要是高度，对于宽度你可以使用[Ctrl+W &lt;]或是[Ctrl+W &gt;]，但这可能需要最新的版本才支持。</p>
+<ol>
+<li>让所有的屏都有一样的高度。
+<pre><code>Ctrl+W =</code></pre>
+</li>
+<li>增加高度。
+<pre><code>Ctrl+W +</code></pre>
+</li>
+<li>减少高度。
+<pre><code>Ctrl+W -</code></pre>
+</li>
+</ol>
+<p><code>也许还有其它我不知道的，欢迎你补充。</code></p>
+<p><code>（全文完）</code><!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11312.html"><img alt="无插件Vim编程技巧" height="150" src="../wp-content/uploads/2014/03/success_vim-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11312.html">无插件Vim编程技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7829.html"><img alt="28个Unix/Linux的命令行神器" height="150" src="../wp-content/uploads/2012/07/dstat_screenshot-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7829.html">28个Unix/Linux的命令行神器</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7166.html"><img alt="游戏：VIM大冒险" height="150" src="../wp-content/uploads/2012/04/vimadventuresgamefun-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7166.html">游戏：VIM大冒险</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5224.html"><img alt="一些文章和各种资源" height="150" src="../wp-content/uploads/2011/09/image008-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5224.html">一些文章和各种资源</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5479.html"><img alt="给程序员的VIM速查卡" height="150" src="../wp-content/uploads/2011/09/vim_cheat_sheet_for_programmers_print-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5479.html">给程序员的VIM速查卡</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/1679.html">Vim的分屏功能</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

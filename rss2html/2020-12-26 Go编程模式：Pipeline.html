@@ -1,0 +1,208 @@
+<html><body><p><img alt="" class="aligncenter wp-image-21258 size-large" height="119" src="../wp-content/uploads/2020/12/go.line_.-1024x191.png" width="640"/></p>
+<p>本篇文章，我们着重介绍Go编程中的Pipeline模式。对于Pipeline用过Unix/Linux命令行的人都不会陌生，他是一种把各种命令拼接起来完成一个更强功能的技术方法。在今天，流式处理，函数式编程，以及应用网关对微服务进行简单的API编排，其实都是受pipeline这种技术方式的影响，Pipeline这种技术在可以很容易的把代码按单一职责的原则拆分成多个高内聚低耦合的小模块，然后可以很方便地拼装起来去完成比较复杂的功能。</p>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第8 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go编程模式：Pipeline</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-prev">« <a href="https://coolshell.cn/articles/17929.html" rel="prev" title="Go编程模式：修饰器">上一篇文章</a></span><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/21263.html" rel="next" title="Go 编程模式：k8s Visitor 模式">下一篇文章</a> »</span></nav></section>
+<h4>HTTP 处理</h4>
+<p>这种Pipeline的模式，我们在《<a href="https://coolshell.cn/articles/17929.html" rel="noopener" target="_blank" title="Go编程模式：修饰器">Go编程模式：修饰器</a>》中有过一个示例，我们在这里再重温一下。在那篇文章中，我们有一堆如 <code>WithServerHead()</code> 、<code>WithBasicAuth()</code> 、<code>WithDebugLog()</code>这样的小功能代码，在我们需要实现某个HTTP API 的时候，我们就可以很容易的组织起来。</p>
+<p>原来的代码是下面这个样子：</p>
+<p><span id="more-21228"></span></p>
+<pre class="EnlighterJSRAW">http.HandleFunc("/v1/hello", WithServerHeader(WithAuthCookie(hello)))
+http.HandleFunc("/v2/hello", WithServerHeader(WithBasicAuth(hello)))
+http.HandleFunc("/v3/hello", WithServerHeader(WithBasicAuth(WithDebugLog(hello))))</pre>
+<p>通过一个代理函数：</p>
+<pre class="EnlighterJSRAW">type HttpHandlerDecorator func(http.HandlerFunc) http.HandlerFunc
+func Handler(h http.HandlerFunc, decors ...HttpHandlerDecorator) http.HandlerFunc {
+    for i := range decors {
+        d := decors[len(decors)-1-i] // iterate in reverse
+        h = d(h)
+    }
+    return h
+}</pre>
+<p>我们就可以移除不断的嵌套像下面这样使用了：</p>
+<pre class="EnlighterJSRAW">http.HandleFunc("/v4/hello", Handler(hello,
+                WithServerHeader, WithBasicAuth, WithDebugLog))</pre>
+<h4>Channel 管理</h4>
+<p>当然，如果你要写出一个<a href="https://coolshell.cn/articles/17929.html#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BF%AE%E9%A5%B0%E5%99%A8" rel="noopener" target="_blank">泛型的pipeline框架</a>并不容易，而使用<a href="https://coolshell.cn/articles/21179.html" rel="noopener" target="_blank" title="GO 编程模式：Go Generation">Go Generation</a>，但是，我们别忘了Go语言最具特色的 Go Routine 和 Channel 这两个神器完全也可以被我们用来构造这种编程。</p>
+<p>Rob Pike在 <a href="https://blog.golang.org/pipelines" rel="noopener" target="_blank">Go Concurrency Patterns: Pipelines and cancellation</a> 这篇blog中介绍了如下的一种编程模式。</p>
+<h5>Channel转发函数</h5>
+<p>首先，我们需一个 <code>echo()</code>函数，其会把一个整型数组放到一个Channel中，并返回这个Channel</p>
+<pre class="EnlighterJSRAW">func echo(nums []int) &lt;-chan int {
+  out := make(chan int)
+  go func() {
+    for _, n := range nums {
+      out &lt;- n
+    }
+    close(out)
+  }()
+  return out
+}</pre>
+<p>然后，我们依照这个模式，我们可以写下这个函数。</p>
+<h5>平方函数</h5>
+<pre class="EnlighterJSRAW">func sq(in &lt;-chan int) &lt;-chan int {
+  out := make(chan int)
+  go func() {
+    for n := range in {
+      out &lt;- n * n
+    }
+    close(out)
+  }()
+  return out
+}
+</pre>
+<h5>过滤奇数函数</h5>
+<pre class="EnlighterJSRAW">func odd(in &lt;-chan int) &lt;-chan int {
+  out := make(chan int)
+  go func() {
+    for n := range in {
+      if n%2 != 0 {
+        out &lt;- n
+      }
+    }
+    close(out)
+  }()
+  return out
+}
+</pre>
+<h5>求和函数</h5>
+<pre class="EnlighterJSRAW">func sum(in &lt;-chan int) &lt;-chan int {
+  out := make(chan int)
+  go func() {
+    var sum = 0
+    for n := range in {
+      sum += n
+    }
+    out &lt;- sum
+    close(out)
+  }()
+  return out
+}</pre>
+<p>然后，我们的用户端的代码如下所示：（注：<strong>你可能会觉得，<code>sum()</code>，<code>odd()</code> 和 <code>sq()</code>太过于相似。你其实可以通过我们之前的<a href="https://coolshell.cn/articles/21164.html" rel="noopener" target="_blank">Map/Reduce编程模式</a>或是<a href="https://coolshell.cn/articles/21179.html" rel="noopener" target="_blank">Go Generation的方式</a>来合并一下</strong>）</p>
+<pre class="EnlighterJSRAW">var nums = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+for n := range sum(sq(odd(echo(nums)))) {
+  fmt.Println(n)
+}</pre>
+<p>上面的代码类似于我们执行了Unix/Linux命令： <code>echo $nums | sq | sum</code></p>
+<p>同样，如果你不想有那么多的函数嵌套，你可以使用一个代理函数来完成。</p>
+<pre class="EnlighterJSRAW">type EchoFunc func ([]int) (&lt;- chan int) 
+type PipeFunc func (&lt;- chan int) (&lt;- chan int) 
+
+func pipeline(nums []int, echo EchoFunc, pipeFns ... PipeFunc) &lt;- chan int {
+  ch  := echo(nums)
+  for i := range pipeFns {
+    ch = pipeFns[i](ch)
+  }
+  return ch
+}</pre>
+<p>然后，就可以这样做了：</p>
+<pre class="EnlighterJSRAW">var nums = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}    
+for n := range pipeline(nums, gen, odd, sq, sum) {
+    fmt.Println(n)
+  }</pre>
+<h4>Fan in/Out</h4>
+<p>动用Go语言的 Go Routine和 Channel还有一个好处，就是可以写出1对多，或多对1的pipeline，也就是Fan In/ Fan Out。下面，我们来看一个Fan in的示例：</p>
+<p>我们想通过并发的方式来对一个很长的数组中的质数进行求和运算，我们想先把数组分段求和，然后再把其集中起来。</p>
+<p>下面是我们的主函数：</p>
+<pre class="EnlighterJSRAW">func makeRange(min, max int) []int {
+  a := make([]int, max-min+1)
+  for i := range a {
+    a[i] = min + i
+  }
+  return a
+}
+
+func main() {
+  nums := makeRange(1, 10000)
+  in := echo(nums)
+
+  const nProcess = 5
+  var chans [nProcess]&lt;-chan int
+  for i := range chans {
+    chans[i] = sum(prime(in))
+  }
+
+  for n := range sum(merge(chans[:])) {
+    fmt.Println(n)
+  }
+}</pre>
+<p>再看我们的 <code>prime()</code> 函数的实现 ：</p>
+<pre class="EnlighterJSRAW">func is_prime(value int) bool {
+  for i := 2; i &lt;= int(math.Floor(float64(value) / 2)); i++ {
+    if value%i == 0 {
+      return false
+    }
+  }
+  return value &gt; 1
+}
+
+func prime(in &lt;-chan int) &lt;-chan int {
+  out := make(chan int)
+  go func ()  {
+    for n := range in {
+      if is_prime(n) {
+        out &lt;- n
+      }
+    }
+    close(out)
+  }()
+  return out
+}</pre>
+<p>我们可以看到，</p>
+<ul>
+<li>我们先制造了从1到10000的一个数组，</li>
+<li>然后，把这堆数组全部 <code>echo</code>到一个channel里 – <code>in</code></li>
+<li>此时，生成 5 个 Channel，然后都调用 <code>sum(prime(in))</code> ，于是每个Sum的Go Routine都会开始计算和</li>
+<li>最后再把所有的结果再求和拼起来，得到最终的结果。</li>
+</ul>
+<p>其中的merge代码如下：</p>
+<pre class="EnlighterJSRAW">func merge(cs []&lt;-chan int) &lt;-chan int {
+  var wg sync.WaitGroup
+  out := make(chan int)
+
+  wg.Add(len(cs))
+  for _, c := range cs {
+    go func(c &lt;-chan int) {
+      for n := range c {
+        out &lt;- n
+      }
+      wg.Done()
+    }(c)
+  }
+  go func() {
+    wg.Wait()
+    close(out)
+  }()
+  return out
+}</pre>
+<p>用图片表示一下，整个程序的结构如下所示：</p>
+<p><img alt="" class="aligncenter size-large wp-image-21231" height="266" src="../wp-content/uploads/2020/12/pipeline-1024x425.png" width="640"/></p>
+<h4>延伸阅读</h4>
+<p>如果你还想了解更多的这样的与并发相关的技术，可以参看下面这些资源：</p>
+<ul>
+<li><b>Go</b> <b>Concurrency</b> <b>Patterns</b><b></b> – <b>Rob</b> <b>Pike –</b> 2012 Google I/O <b><br/>
+</b>presents the basics of Go‘s concurrency primitives and several ways to apply them.<br/>
+<u><a href="https://www.youtube.com/watch?v=f6kdp27TYZs">https://www.youtube.com/watch?v=f6kdp27TYZs</a></u></li>
+<li><b>Advanced Go Concurrency Patterns </b>– <b>Rob</b> <b>Pike</b> – 2013 Google I/O <b><br/>
+</b>covers more complex uses of Go’s primitives, especially select.<br/>
+<a href="https://blog.golang.org/advanced-go-concurrency-patterns">https://blog.golang.org/advanced-go-concurrency-patterns</a></li>
+<li><b>Squinting at Power Series </b>– <b>Douglas McIlroy</b>‘s paper <b><br/>
+</b>shows how Go-like concurrency provides elegant support for complex calculations.<br/>
+<a href="https://swtch.com/~rsc/thread/squint.pdf">https://swtch.com/~rsc/thread/squint.pdf</a></li>
+</ul>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21263.html"><img alt="Go 编程模式：k8s Visitor 模式" height="150" src="../wp-content/uploads/2020/12/go.k8s-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="../wp-content/uploads/2020/12/go.generate-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="../wp-content/uploads/2020/12/go.options-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

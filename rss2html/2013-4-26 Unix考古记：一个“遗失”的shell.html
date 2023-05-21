@@ -1,0 +1,260 @@
+<html><body><p><span style="color: #cc0000;"><strong>(感谢网友Leo投递此文)</strong></span></p>
+<p>谨以此文纪念伟大的计算机科学巨匠<a href="http://en.wikipedia.org/wiki/Ken_Thompson" target="_blank">Ken Thompson</a>和<a href="http://en.wikipedia.org/wiki/Dennis_Ritchie" target="_blank">Dennis Ritchie</a>，并同时向其他所有为Unix发展做出贡献的黑客致敬。</p>
+<h4>历史的尘埃</h4>
+<p>Unix作为一个举世闻名的操作系统已有40余年的历史，围绕着这个古老的操作系统的发展又衍生出了一系列外围软件生态群，其中一个非常重要的组件就是shell。<strong>它是操作系统最外层的接口，负责直接面向用户交互并提供内核服务，</strong>包括命令行接口(CLI)或图形界面接口(GUI)两种形式。以CLI为例，它提供一套命令规范，是一种解释性语言，将用户输入经过解释器(interpreter)输出使其转化成真正的系统调用，实现人机交互的功能。</p>
+<p>和操作系统一样，shell也经历了一个漫长的演变史。如今大部分资料讲述最古老的shell都是从1977年的<a href="http://en.wikipedia.org/wiki/Bourne_shell" target="_blank">Bourne Shell</a>说起的，它最初移植到<a href="http://en.wikipedia.org/wiki/Version_7_Unix" target="_blank">Unix V7</a>上，被追认整个shell家族成员的鼻祖，后来的种群都是从其身上分支出来的。</p>
+<p><img alt="Linux shells since 1977 " class="aligncenter" src="https://www.ibm.com/developerworks/linux/library/l-linux-shells/figure1.gif"/></p>
+<p>对于1977年之前的历史很多资料大多一笔带过或略过不提。事实上，第一个移植到Unix上的shell却不是<a href="http://en.wikipedia.org/wiki/Stephen_Richard_Bourne" target="_blank">Steve Bourne</a>写的，早在1975年5月，贝尔实验室就对外发布了第一个广泛传播的Unix版本——<a href="http://en.wikipedia.org/wiki/UNIX_V6" target="_blank">Unix V6</a>（之前开发的版本只供内部研究之用），其根目录下的/bin/sh是第一个Unix自带的shell，由Ken Thompson写的，因此也被称为<a href="http://en.wikipedia.org/wiki/Thompson_shell" target="_blank">Thompson Shell</a>。甚至，更早可以追溯到1971年的时候，Thompson Shell就作为一个独立于内核的应用程序而实现了，只不过从1975年正式问世到1977年被取代，短短两年的寿命使得它很少为大多数人所认识。</p>
+<p><span id="more-9410"></span></p>
+<p>关于Thompson Shell被取代的原因在后文中会给出说明，这里着重介绍一下该shell本身的一些技术细节。坦白讲，关于Thompson Shell的资料有点稀缺，但至少还能从网上找到<a href="http://minnie.tuhs.org/Archive/PDP-11/Distributions/research/Dennis_v6/" target="_blank">源代码</a>和<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man" target="_blank">在线文档</a>。Thompson Shell本身是由一个不足900行代码的解释器和一些外部命令工具组件(utilities)构成，用<a href="http://en.wikipedia.org/wiki/K%26R_C#K.26R_C" target="_blank">K&amp;R C</a>写成，下面给出各个组件的相关源码和文档链接。</p>
+<ul>
+<li><strong>解释器sh</strong>：解析各种shell命令，包括内置命令和外部命令；源码sh.c；安装路径/bin/sh；手册<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/sh.1" target="_blank">sh(1)</a>。</li>
+</ul>
+<ul>
+<li><strong>内置命令</strong>手册包括<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/chdir.1" target="_blank">chdir(1)</a>，<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/login.1" target="_blank">login(1)</a>，<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/newgrp.1" target="_blank">newgrp(1)</a>，<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/shift.1" target="_blank">shift(1)</a>，<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/wait.1" target="_blank">wait(1)</a>。</li>
+</ul>
+<p>下面是外部命令：</p>
+<ul>
+<li><strong>exit命令</strong>：退出一个文件；源码exit.c；安装路径/bin/exit；手册<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/exit.1" target="_blank">exit(1)</a>。</li>
+</ul>
+<ul>
+<li><strong>goto命令</strong>：在一个文件内跳转shell控制流程；源码goto.c；安装路径/bin/goto；手册<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/goto.1" target="_blank">goto(1)</a>。</li>
+</ul>
+<ul>
+<li><strong>if命令</strong>：条件判断表达式，是test命令的前身；源码if.c；安装路径/bin/if), 手册<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/if.1" target="_blank">if(1)</a>。</li>
+</ul>
+<ul>
+<li><strong>glob命令</strong>：扩展命令参数通配符；源码glob.c；安装路径/etc/glob；手册<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man8/glob.8" target="_blank">glob(8)</a>。</li>
+</ul>
+<h4>命令结构和规范</h4>
+<p>尽管后来遭“埋汰”，Thompson Shell仍有着不容否认的历史地位，其最大的价值在于<strong>它奠定了shell命令语言结构和规范的基础，而且其解释器具有跨平台的可移植性，并影响到了后来包括Bourne Shell在内的各种脚本语言设计实现。</strong>下面我们就以其中5个特性重温一些大家已经耳熟能详的命令规范，你也可以通过<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/sh.1" target="_blank">sh(1)</a>手册查看原始资料。</p>
+<ul>
+<li><strong>过滤器/管道线(filter/pipeline)。</strong>这绝对是要载入Unix史册的发明，创立者是<a href="http://en.wikipedia.org/wiki/Douglas_McIlroy" target="_blank">Douglas McIlroy</a>，Thompson Shell引入并实现了这个伟大的概念——一个或多个命令组成一根过滤器的链条，由’|’或’^’符号分隔。除最后一个命令之外，每个命令的标准输出都被作为下一个命令的标准输入。这样每个命令都作为一个独立的进程来运行，并通过管道与邻近的进程相连接。圆括弧内的命令序列整体上可以替代单个命令作为过滤器实现，比如用户可以输入”(A;B)|C”。</li>
+</ul>
+<ul>
+<li><strong>命令序列和后台进程。</strong>分号’;’指示多个命令序列化执行。’&amp;’符号指示该命令在后台异步执行，使得前面的管道线不必等待其终止，仅仅报告一个进程id，这样用户以后可以通过kill命令与它通信。有益于进程管理。</li>
+</ul>
+<ul>
+<li><strong>I/O重定向。</strong>它利用了Unix设计上的一个重要特性——<strong>一切皆文件</strong>，用三个符号表示：”重定向输出，如果文件不存在则创建它，如果文件存在则截断它；’&gt;&gt;’追加模式重定向输出，如果文件不存在则创建它，如果文件存在则追加输出至末尾处。</li>
+</ul>
+<ul>
+<li><strong>通配符扩展(globbing)。</strong>通配符的概念源自于正则表达式，使得解释器智能地处理用户不完全输入，比如记不清文件名、一次性输入多个文件等。’?’匹配任意单一字符；’*’匹配任意字符串（包括空串）；成对'[‘和’]’定义了字符集合一个类，可匹配方括号内任意成员，用’-‘两端可指定一系列连续字符匹配范围。</li>
+</ul>
+<ul>
+<li><strong>参数传递。</strong>这里主要引入了位置参数和选项参数的概念：’$n’指示shell调用的第n个参数替代；还定义了两个选项参数’-t’和’-c’，前者用于交互，导致shell从标准输入中读入一行作为用户执行的系统命令，后者指示shell将附带的下一个参数作为命令执行（可正确处理换行符），是对’-t’的补充，特别是调用者已经读取了命令其中某些字符的情况下。如果不带选项参数则直接读取文件名</li>
+</ul>
+<h4>解释器的原理与实现</h4>
+<p>接下来马上要进入核心部分了，为了搞懂shell解释器原理，我们要对其整个工作流程做个描述（这里给出一份带注解的sh.c源码剖析）。读过《编译原理》的同学知道，解释器的实现跟编译器差不多，只不过省略了生成目标代码这一步，直接将用户输入（shell命令）转化成输出（系统调用）。<strong>软件前端是一致的，包括预处理、词法扫描、语法分析和语义分析，最后还要附加一个进程管理。</strong>当然相较于现代编译器，Thompson Shell解释器在算法和规模上都要简单得多，不过原理上是相通的，何况年代上要比Lex &amp; Yacc还要早。麻雀虽小，五脏俱全，对于初学者来说，从Thompson Shell去入手编译原理或许不失为一种好选择。</p>
+<h4>预处理(preprocessor)</h4>
+<p>同C预处理器需要事先将源代码中包含的宏和头文件展开一样，Thompson Shell首先需要处理命令中的<strong>选项参数</strong>和<strong>位置参数</strong>。选项参数有两种’-t’和’-c’，决定了shell从标准输入还是参数缓存中读取字符（见<a href="http://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/man/man1/sh.1" target="_blank">sh(1)</a>）。此外字符序列中还要处理<strong>反斜杠’\’</strong>，判断是转义字符还是行接续符，前者对下一个字符设置引用标识，表明做普通字符处理，后者将紧邻其后换行符过滤掉。</p>
+<p>位置参数是<strong>美元符号’$’</strong>打头的，后带一个数字，如’$n’，预处理器对shell命令参数从头开始计数，返回数字n指定的参数位置。如果遇上double’$$’，则表示当前的进程标识，调用getpid()获取。</p>
+<p>注意到预处理器需要一次读取多个字符，这样就会多读一个不必要的字符。对此解释器提供了一种<strong>预读(peek)</strong>方式，即每次从输入流读取一个字符时，放入一个预读缓存里（只有一个int大小的堆栈），也叫<strong>回退(push back)</strong>。此后先从预读缓存中读取，如果缓存被读完，则从输入流中读取。</p>
+<h4>词法扫描(lexical scanning)</h4>
+<p>经过预处理后的字符序列将被切割成为一系列<strong>词法记号(token)</strong>，安置在token列表中，扫描器将对以下几类字符做如下处理。</p>
+<ul>
+<li><strong>空格和tab</strong>：简单过滤。</li>
+</ul>
+<ul>
+<li><strong>引号</strong>：需要成对出现，字符本身被过滤，一对引号之间所有字符都被设置引用标识，作为一个token。</li>
+</ul>
+<ul>
+<li><strong>元字符</strong>：如’&amp;’，’|’等，字符本身作为一个单独token。</li>
+</ul>
+<ul>
+<li><strong>其他字符</strong>：一律填充token，直到碰上以上字符分隔为止。</li>
+</ul>
+<p>举一个例子，当我们输入命令”(ls; cat tail) &gt;junk”，那么token列表映像将是这样的：</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9537" height="176" src="../wp-content/uploads/2013/04/图1.jpg" width="523"/></p>
+<h4>语法分析(syntax parser)</h4>
+<p>语法分析就是将token列表中的元素作为<strong>表达式(expression)</strong>并以节点为单位构建语法树，简单命令是一个表达式，而复合命令以及命令序列是多个表达式的组合。Thompson Shell中以简单数组作为语法树的容器，实际上这是结构体的一种变形，只不过每个成员字段大小都一样（都是sizeof int）而已。一个语法树节点最多有6个字段（大小根据类型可变），分别是</p>
+<ul>
+<li><strong>DTYP（节点类型）</strong>：每个节点都有唯一的类型，又分为四种——TCOM（简单命令）、TPAR（复合命令）、TFIL（过滤器/管道线）、TLST（命令序列）。</li>
+</ul>
+<ul>
+<li><strong>DLEF（左子树节点）</strong>：相当于链表指针，根据DTYP定义有所不同。如过滤器类型左子树节点为前一个命令的输出重定向文件，右子树节点为后一个命令的输入重定向文件。</li>
+</ul>
+<ul>
+<li><strong>DRIG（右子树节点）</strong>：同上。</li>
+</ul>
+<ul>
+<li><strong>DFLG（节点属性）</strong>：这是个标志位(flag)，决定该节点包含命令的属性以及以什么样的状态执行。</li>
+</ul>
+<ul>
+<li><strong>DSPR（子命令）</strong>：两重含义，对于简单命令，该字段为空；对于复合命令，该字段指向子语法树节点。</li>
+</ul>
+<ul>
+<li><strong>DCOM（命令字符）</strong>：引用命令字符序列。</li>
+</ul>
+<p>语法树节点生成顺序根据token列表中每个元素的<strong>优先级(priority)</strong>而定，首先遍历整个列表，找到优先级最高的token作为根节点，再分别生成左右子树，这是一种最简单的<strong>自顶向下(top-down)</strong>解决方案。各个token优先级视DTYP字段而定</p>
+<table border="1" cellpadding="0" cellspacing="0" class="aligncenter" width="367">
+<tbody>
+<tr>
+<td valign="top" width="91">
+<p align="center">优先级</p>
+</td>
+<td valign="top" width="180">
+<p align="center">Token</p>
+</td>
+<td valign="top" width="96">
+<p align="center">DTYP</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center">第一级</p>
+</td>
+<td valign="top" width="180">
+<p align="center">‘&amp;’  ‘;’  ‘\n’</p>
+</td>
+<td valign="top" width="96">
+<p align="center">TLST</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center">第二级</p>
+</td>
+<td valign="top" width="180">
+<p align="center">‘|’  ‘^’</p>
+</td>
+<td valign="top" width="96">
+<p align="center">TFIL</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center">第三级</p>
+</td>
+<td valign="top" width="180">
+<p align="center"> ‘(‘  ‘)’</p>
+</td>
+<td valign="top" width="96">
+<p align="center">TPAR</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center">第四级</p>
+</td>
+<td valign="top" width="180">
+<p align="center">其它字符</p>
+</td>
+<td valign="top" width="96">
+<p align="center">TCOM</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>语法树的构建过程中还使用了一种基于<strong>“有限状态机(finite-state machine)”</strong>的动态规划算法，其实现是将整个逻辑流程划分为四个状态：syntax、syn1、syn2、syn3，对应于上面token优先级，程序在每个状态下都生成一个相应类型的节点，同时还生成四种策略，以决议下一步将转移到何种状态（根据优先级搜索对应的token）。这个四种策略分别是</p>
+<ul>
+<li><strong>生成左子树</strong>：左边token列表递进到下层状态。</li>
+</ul>
+<ul>
+<li><strong>生成右子树</strong>：右边token列表并回溯到上层状态或递归调用。</li>
+</ul>
+<ul>
+<li><strong>找不到对应token</strong>：保持原有token列表递进到下层状态。</li>
+</ul>
+<ul>
+<li><strong>生成节点</strong>：直接返回节点。</li>
+</ul>
+<p>当我们遍历完整个token列表后，程序总是能返回最初的调用点，即根节点上，从而生成一棵完整的语法树。这种算法的好处是<strong>程序员不必关注具体实现的每个细枝末节，只要关注相应的状态并制定对应的转移策略即可。</strong>还值得一提的是每个转移策略都是发生在赋值语句或返回语句上，并使用函数实参保存临时变量，这样就避免了调用次数过多导致堆栈溢出。</p>
+<p>依旧举两个个例子，比如命令”A &amp; ; B | C”对应的语法树</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9538" height="264" src="../wp-content/uploads/2013/04/图2.jpg" width="350"/></p>
+<p>命令”(A ; B) | C”对应的语法树：</p>
+<p style="text-align: center;"><img alt="" class="aligncenter wp-image-9539" height="345" src="../wp-content/uploads/2013/04/图3.jpg" width="350"/></p>
+<h4>语义分析(Semantic Analyzer)</h4>
+<p>语法分析仅仅停留在token表达式合法性层面上，它并不知道该表达式是否有意义，比如哪些命令是要后台运行，哪些命令的I/O被重定向到管道线上，通配符该如何扩展等等，这时候要靠语义分析了。这里的“语义”体现在对特殊字符的动态处理以及语法树节点的字段设置，根据<strong>上下文(context)</strong>而定。比如对于元字符’&gt;’，我们要判断输出重定向到哪个文件，是截断还是追加。对于通配符’?’、’*’和'[…]’，我们要决定对哪些字符进行扩展，这些在/etc/glob中专门处理。对于语法树节点，除了自身固有属性之外，还需要继承上层节点的属性，以及下推属性到下层子树节点，下面列了一张表格说明。</p>
+<table border="1" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td valign="top" width="67">
+<p align="center">DTYP</p>
+</td>
+<td valign="top" width="217">
+<p align="center">DLEF/DRIG</p>
+</td>
+<td valign="top" width="227">
+<p align="center">DFLG</p>
+</td>
+<td valign="top" width="57">
+<p align="center">DSPR</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="67">
+<p align="center">TLST</p>
+</td>
+<td valign="top" width="217">可以为空，也可以是其它节点，类型可以是TLST/TFIL/TCOM</td>
+<td valign="top" width="227">自身属性为0；如果带’&amp;’，则下推属性FINT|FAND|FPRS到左右子树（忽略信号、后台异步，打印pid）</td>
+<td valign="top" width="57">空</td>
+</tr>
+<tr>
+<td valign="top" width="67">
+<p align="center">TFIL</p>
+</td>
+<td valign="top" width="217">必须同时存在、，类型只能是TCOM或TPAR</td>
+<td valign="top" width="227">自身属性继承自上层TLST；下推FPIN到左子树节点；下推FPOU到右子树节点。</td>
+<td valign="top" width="57">空</td>
+</tr>
+<tr>
+<td valign="top" width="67">
+<p align="center">TPAR</p>
+</td>
+<td valign="top" width="217">空</td>
+<td rowspan="2" valign="top" width="227">继承上层的TLST和TFIL；如果是追加模式重定向输出，加上FCAT；如果是复合命令中最后一个子命令，加上FPAR， 将不会fork子进程。</td>
+<td valign="top" width="57">子命令</td>
+</tr>
+<tr>
+<td valign="top" width="67">
+<p align="center">TCOM</p>
+</td>
+<td valign="top" width="217">左子树节点为输入重定向文件，右子树为节点输出重定向文件。</td>
+<td valign="top" width="57">空</td>
+</tr>
+</tbody>
+</table>
+<h4>执行命令(Executor)</h4>
+<p>当前面一系列步骤之后，如果错误计数为0，则解释器从语法树的根节点开始，<strong>深度优先遍历</strong>所有节点，并根据前面语法和语义分析得到的类型和属性，一一执行所包含的命令，以生成最后的系统调用。</p>
+<p>对于<strong>命令序列(TLST)节点</strong>，从左至右顺序执行子树节点命令。</p>
+<p>对于<strong>过滤器(TFIL)节点</strong>，创建管道文件句柄，作为左右子树的重定向文件。</p>
+<p>对于<strong>简单命令(TCOM)和复合命令(TPAR)节点</strong>，首先筛选出系统内置命令(built-in)，对于剩下的外部命令则fork一个子进程执行它。如果是复合命令中最后一个子命令，那么仍在原来的进程上执行而不必创建新进程。可执行文件路径按先后顺序搜索：①本地路径；②/bin；③/usr/bin。</p>
+<p><strong>多进程环境下，特别要注意文件句柄管理</strong>。命令间共享标准输入输出设备之外，还会重定向到管道线，而父进程在fork之后子进程会获取一份文件句柄拷贝，所以<span style="color: #ff0000;"><strong>父进程必须在fork之后立即关闭闲置的管道线句柄（如果有的话）以免造成资源泄漏，子进程也将在重定向之后关闭管道线句柄。</strong></span></p>
+<p>对于<strong>后台命令</strong>需要打印pid，但不需要响应中断信号，父进程也不必等待子进程终止。其余进程命令执行中可捕获中断信号，并转入相应的处理函数。</p>
+<p>解释器用内置的errno全局变量保存进程终止状态，并生成<strong>终止报告(termination report)</strong>，系统调用wait()用于返回终止进程的pid并输出报告消息索引。</p>
+<h4>孰优孰劣</h4>
+<p>尽管Thompson Shell是一款优秀的命令解释器，还产生了多项历史创举，但遗憾的是依然得不到命运女神的垂青，这要归咎于其自身的缺陷——<strong>功能单一、命令分散、控制流过于简单，尚无法用来编写脚本(script)</strong>。随着Unix日益壮大，它已经无法应付趋于繁杂的编程项目了。那时还出现了一个叫<a href="http://en.wikipedia.org/wiki/John_Mashey" target="_blank">John Mashey</a>的人写的<a href="http://en.wikipedia.org/wiki/PWB_shell" target="_blank">PWB Shell</a>（又叫做Mashey Shell），基于Thompson Shell做了些改进，扩展了命令集，增加了shell变量，还增加了if-then-else-endif，for，while等控制逻辑。不幸的是它比Thompson Shell更短命，因为1977年它遇上了一个强劲的对手。</p>
+<p>没错，那就是Bourne Shell，它的主要优点是真正实现了结构化脚本编程，比之前的shell实现得都要好，更要命的是它与前两个shell都不兼容，于是一场标准化的论战开始了。在<a href="http://en.wikipedia.org/wiki/David_Korn_(computer_scientist)" target="_blank">David G. Korn</a>（<a href="http://en.wikipedia.org/wiki/Korn_shell" target="_blank">ksh</a>作者）写的<a href="http://www.in-ulm.de/~mascheck/bourne/korn.html" target="_blank">“ksh – An Extensible High Level Language”</a>一文中提及，Steve Bourne和John Mashey在三次连续的Unix用户组集会上争论他们各自的理由。在这些集会之间，各自增进他们的shell来拥有对方的功能。还设立了一个委员会来选择标准shell，最终还是选择了Bourne shell作为标准。</p>
+<p>于是从Unix V7开始就有了前面所说的”Bourne Shell Family”。然而历史上没有完美的技术，随着八、九十年代操作系统迅猛发展，针对Bourne Shell的诟病也越来越多了。在解释器本身实现上，我看到网上一个对其评价是<a href="http://lwn.net/Articles/471015/" target="_blank">“universally considered to be one of the most horrible C code ever written”</a>，至于原因去看一下mac.h就知道了，包括基本运算符、关键字在内的大量宏定义使得整个代码看上去简直不是C写的，也许Bourne是想把解释器打造成自己独特的风格吧，也难怪后来的bash以<strong>“born again”</strong>命名就是对其祖先的戏谑性调侃。另外<a href="http://www.in-ulm.de/~mascheck/bourne/segv.html" target="_blank">内存管理</a>上的一些毛病带来平台可移植性问题，至于其中的技术细节有点高级，超出本文范畴。</p>
+<h4>Thompson Again Shell?</h4>
+<p>虽然历史没有给Thompson Shell一个机会，但它并非就此同Unix V6那样一同沦为开源博物馆上的古老“化石”。作为出自顶级黑客之手的作品，作为伴随Unix那样伟大操作系统一同曾经流行计算机的产物，至今仍受国内外程序员的缅怀，或将其改写，或为其作注。比如国外一个站点<a href="http://v6shell.org/" target="_blank">v6shell.org</a>上就实现了一个免费开源的可移植性shell，它兼容并扩充原来的Thompson Shell并且可用来做脚本编程。再比如中国程序员<a href="http://blog.chinaunix.net/uid-20106293-id-142129.html" target="_blank">寒蝉退士</a>在其个人博客上发布了一个注解版，并对原版做了一些改写，主要是将<strong>K&amp;R C</strong>转为<strong>ANSI C</strong>，并且符合<strong>POSIX规范</strong>，使原本晦涩难懂的源码变得清晰易读起来。正是因为接触到他的版本激起了我对老Unix的考古兴趣，才有了这篇“考古笔记”。我在想不知今后会不会像bash那样，出一个tash来呢？</p>
+<h4>一些感想</h4>
+<p>本来全文应该就此结束了，但此时此刻不禁想多说几句。这篇笔记当初并非有意而为之，在hacking源码的过程中感想积累多了也就逐渐成章了。看代码、作注解、查资料、写此文，前后历经四个多礼拜，是在繁杂的工作中“挤乳沟”挤出来的零散时间片拼凑起来的，虽然文字不长但也算耗费了一番心血，酸甜苦辣心中自明，体会到踏上社会之后潜下心做研究之艰难。如今面对这样一份不到900行写成的，没有一行多余的代码，<strong>简洁(clarity)、干净(clean)、快速(fast)，</strong>这就是Pure C的魅力，我深为这种厚重的编程功力所折服，正所谓<strong>“大道至简”</strong>吧。虽然要完全弄懂它需要很多时间，但我相信这种代价却是值得的。</p>
+<p>最后再八卦一下，2011年Dennis Ritchie去世了，有人生前问过他“学C需要多久才能成为熟练开发者并写出重要产品代码？”，Ritchie回答“我不知道，我从没去学过C。”<a href="http://www.cs.columbia.edu/~aho/Talks/12-09-07_DMR.pdf" target="_blank">(I don’t know. I never had to learn C.)</a>其实这里已经给出了答案——<strong>那就是没有比去阅读Unix源代码更好的选择了，某种意义上C语言就是为Unix而生的。</strong></p>
+<p><img alt="Dennis Mac Ritchie" class="aligncenter" height="314" src="http://th05.deviantart.net/fs71/PRE/f/2011/296/7/2/dennis_ritchie_by_juanosborne-d4dooi9.jpg" width="611"/></p>
+<h4>参考资料</h4>
+<p><a href="http://www.tuhs.org/" target="_blank">The Unix Heritage Society</a>：Unix社区遗产，上面有v6和v7以及其它一些衍生版本的操作系统源代码。</p>
+<p><a href="http://www.in-ulm.de/~mascheck/bourne/" target="_blank">The Traditional Bourne Shell Family</a>：Bourne Shell家族简史。</p>
+<p><a href="http://v6shell.org/" target="_blank">v6shell</a>：osh，一个基于Thompson Shell的开源可移植性old shell。</p>
+<p><a href="http://blog.chinaunix.net/uid-20106293-id-142129.html" target="_blank">寒蝉退士的博客</a>：Thompson Shell的一个注解版。</p>
+<p><a href="https://www.ibm.com/developerworks/linux/library/l-linux-shells/index.html?ca=drs-" target="_blank">Evolution of shells in Linux</a>：简述Linux Shell演变史。</p>
+<p>附录一个中文注释的 <a href="https://coolshell.cn/wp-content/uploads/2013/04/shell源码.zip">shell源码</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/19996.html"><img alt="Unix 50 年：Ken Thompson 的密码" height="150" src="../wp-content/uploads/2019/11/ken.dennis-300x186-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/19996.html">Unix 50 年：Ken Thompson 的密码</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/9070.html"><img alt="AWK 简明教程" height="150" src="../wp-content/uploads/2013/02/awk-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/9070.html">AWK 简明教程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8883.html"><img alt="应该知道的Linux技巧" height="150" src="../wp-content/uploads/2013/01/linux-bash-300x225-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8883.html">应该知道的Linux技巧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8619.html"><img alt="你可能不知道的Shell" height="150" src="../wp-content/uploads/2012/11/shell.01-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8619.html">你可能不知道的Shell</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2322.html"><img alt="Unix传奇(上篇)" height="150" src="../wp-content/uploads/2010/04/o_unixrichiethompson-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2322.html">Unix传奇(上篇)</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1761.html"><img alt="Go语言源码的一个改动" height="150" src="../wp-content/uploads/2009/11/spell_it_with_e-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1761.html">Go语言源码的一个改动</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/9410.html">Unix考古记：一个“遗失”的shell</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

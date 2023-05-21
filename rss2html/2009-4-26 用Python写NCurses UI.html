@@ -1,0 +1,128 @@
+<html><body><p><a href="https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses.jpg"></a>Ncurses是一个能提供基于文本终端窗口功能的动态库. Ncurses可以:</p>
+<ul>
+<li>可以使用整个屏幕</li>
+<li>创建和管理一个窗口</li>
+<li>使用8种不同的彩色</li>
+<li>为您的程序提供鼠标支持</li>
+<li>使用键盘上的功能键</li>
+</ul>
+<p>Ncurses可以在任何遵循ANSI/POSIX标准的Unix/Linux系统上运行，除此之外，它还可以从系统数据库中检测终端的属性,，并且自动进行调整,提供一个不受终端约束的接口。因此,Ncurses可以在不同的系统平台和不同的终端上工作的非常好。</p>
+<p><span id="more-677"></span></p>
+<p>mc工具集就是一个用ncurses写的很好的例子,而且在终端上系统核心配置的界面同样是用ncurses编写的. 下面就是它们的截图：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/ncurses_example.jpg"><img alt="ncurses_example" class="alignnone size-full wp-image-678" height="423" src="../wp-content/uploads/2009/04/ncurses_example.jpg" title="ncurses_example" width="526"/></a></p>
+<p>当然，在我们这篇文章中，我们不会教你怎么写NCurses程序，我们只是想告诉你如何用Python来写Ncurses的程序，示例会非常简单，点到为止。</p>
+<p>在此之前，我们先简单的回顾一下如何使用Python的一些简单的语法。</p>
+<p>先看看一个最简单的Python程序：</p>
+<pre class="EnlighterJSRAW">
+print "How easy is this?" 
+
+x = 1
+y = 2
+z = x + y
+
+print "Result of x + y is", z
+</pre>
+<p>程序很简单，我就不多说，把这个文件存成test.py，然后在命令行下调用python test.py就可以看到输出了。</p>
+<p>下面我们再来看一个Python的函数定义——还是很简单，我也不用多说了。</p>
+<pre class="EnlighterJSRAW">
+def saystuff(mystring):
+     print "You said:", mystring 
+
+saystuff("Bach rules")
+saystuff("So does Telemann")
+</pre>
+<p>好，言归正传，让我们来看一下，如何在Python中使用NCurses，下面是一个小例程：</p>
+<pre class="EnlighterJSRAW">
+import curses 
+
+myscreen = curses.initscr()
+
+myscreen.border(0)
+myscreen.addstr(12, 25, "Python curses in action!")
+myscreen.refresh()
+myscreen.getch()
+
+curses.endwin()
+</pre>
+<p>注意这个示例中的第一行import curses，表明使用curses库，然后这个示像在屏幕中间输出“Python curses in action!”字样，其中坐标为12, 25，注意，在字符界面下，80 x 25是屏幕大小，其用的是字符，而不是像素。下面是运行后的抓屏：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/python_ncursespy.jpg"><img alt="python_ncursespy" class="alignnone size-full wp-image-679" height="413" src="../wp-content/uploads/2009/04/python_ncursespy.jpg" title="python_ncursespy" width="674"/></a></p>
+<p> 最后，我们再来看一个数字菜单的示例：</p>
+<pre class="EnlighterJSRAW">
+#!/usr/bin/env python
+
+from os import system
+import curses
+
+def get_param(prompt_string):
+     screen.clear()
+     screen.border(0)
+     screen.addstr(2, 2, prompt_string)
+     screen.refresh()
+     input = screen.getstr(10, 10, 60)
+     return input
+
+def execute_cmd(cmd_string):
+     system("clear")
+     a = system(cmd_string)
+     print ""
+     if a == 0:
+          print "Command executed correctly"
+     else:
+          print "Command terminated with error"
+     raw_input("Press enter")
+     print ""
+
+x = 0
+
+while x != ord('4'):
+     screen = curses.initscr()
+
+     screen.clear()
+     screen.border(0)
+     screen.addstr(2, 2, "Please enter a number...")
+     screen.addstr(4, 4, "1 - Add a user")
+     screen.addstr(5, 4, "2 - Restart Apache")
+     screen.addstr(6, 4, "3 - Show disk space")
+     screen.addstr(7, 4, "4 - Exit")
+     screen.refresh()
+
+     x = screen.getch()
+
+     if x == ord('1'):
+          username = get_param("Enter the username")
+          homedir = get_param("Enter the home directory, eg /home/nate")
+          groups = get_param("Enter comma-separated groups, eg adm,dialout,cdrom")
+          shell = get_param("Enter the shell, eg /bin/bash:")
+          curses.endwin()
+          execute_cmd("useradd -d " + homedir + " -g 1000 -G " + groups + " -m -s " + shell + " " + username)
+     if x == ord('2'):
+          curses.endwin()
+          execute_cmd("apachectl restart")
+     if x == ord('3'):
+          curses.endwin()
+          execute_cmd("df -h")
+
+curses.endwin()
+</pre>
+<p>下面是运行时的显示：</p>
+<p><a href="https://coolshell.cn/wp-content/uploads/2009/04/python_ncurses.jpg"><img alt="python_ncurses" class="alignnone size-full wp-image-680" height="221" src="../wp-content/uploads/2009/04/python_ncurses.jpg" title="python_ncurses" width="394"/></a></p>
+<p>如果你你了解NCurses编程，你可以看看相关的Linux HOW-TO的文章，链接在这里：<a href="http://www.linux.org/docs/ldp/howto/NCURSES-Programming-HOWTO/index.html" target="_blank">Linux Documentation Project’s NCURSES Programming How To</a></p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11265.html"><img alt="Python修饰器的函数式编程" height="150" src="../wp-content/uploads/2014/03/snake-hat-new-year-schedule-800x960-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10822.html"><img alt="函数式编程" height="150" src="../wp-content/uploads/2013/12/yoda-lambda-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10822.html">函数式编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/10169.html"><img alt="类型的本质和函数式实现" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/5.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/10169.html">类型的本质和函数式实现</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7886.html"><img alt="代码执行的效率" height="150" src="../wp-content/uploads/2012/07/muxnt-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7886.html">代码执行的效率</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4939.html"><img alt="Quora使用到的技术" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/29.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4939.html">Quora使用到的技术</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/677.html">用Python写NCurses UI</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

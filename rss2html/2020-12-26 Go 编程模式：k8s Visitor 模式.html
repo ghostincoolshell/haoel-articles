@@ -1,0 +1,259 @@
+<html><body><p><img alt="" class="alignright size-medium wp-image-21270" height="300" src="../wp-content/uploads/2020/12/go.k8s-265x300.png" width="265"/>本篇文章主要想讨论一下，Kubernetes 的 <code>kubectl</code> 命令中的使用到到的一个编程模式 – Visitor（注：其实，<code>kubectl</code> 主要使用到了两个一个是Builder，另一个是Visitor）。本来，Visitor 是面向对象设计模英中一个很重要的设计模款（参看Wikipedia<a href="https://en.wikipedia.org/wiki/Visitor_pattern" rel="noopener" target="_blank"> Visitor Pattern词条</a>），这个模式是一种将算法与操作对象的结构分离的一种方法。这种分离的实际结果是能够在不修改结构的情况下向现有对象结构添加新操作，是遵循开放/封闭原则的一种方法。这篇文章我们重点看一下 <code>kubelet</code> 中是怎么使用函数式的方法来实现这个模式的。</p>
+<section class="post-series"><h3 class="post-series-title">本文是全系列中第9 / 10篇：<a href="https://coolshell.cn/articles/series/go%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%bc%8f">Go编程模式</a></h3><ul class="post-series-list"><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21128.html">Go编程模式：切片，接口，时间和性能</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21140.html">Go 编程模式：错误处理</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/17929.html">Go编程模式：修饰器</a></span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></span></li><li class="post-series-item-current post-series-item"><span class="post-series-item-title">Go 编程模式：k8s Visitor 模式</span></li><li class="post-series-item"><span class="post-series-item-title"><a href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></span></li></ul><nav class="post-series-nav"><span class="post-series-nav-prev">« <a href="https://coolshell.cn/articles/21228.html" rel="prev" title="Go编程模式：Pipeline">上一篇文章</a></span><span class="post-series-nav-next"><a href="https://coolshell.cn/articles/21615.html" rel="next" title="Go编程模式 ： 泛型编程">下一篇文章</a> »</span></nav></section>
+<h4>一个简单示例</h4>
+<p>我们还是先来看一个简单设计模式的Visitor的示例。</p>
+<ul>
+<li>我们的代码中有一个<code>Visitor</code>的函数定义，还有一个<code>Shape</code>接口，其需要使用 <code>Visitor</code>函数做为参数。</li>
+<li>我们的实例的对象 <code>Circle</code>和 <code>Rectangle</code>实现了 <code>Shape</code> 的接口的 <code>accept()</code> 方法，这个方法就是等外面给我传递一个Visitor。</li>
+</ul>
+<p><span id="more-21263"></span></p>
+<pre class="EnlighterJSRAW">package main
+
+import (
+    "encoding/json"
+    "encoding/xml"
+    "fmt"
+)
+
+type Visitor func(shape Shape)
+
+type Shape interface {
+    accept(Visitor)
+}
+
+type Circle struct {
+    Radius int
+}
+
+func (c Circle) accept(v Visitor) {
+    v(c)
+}
+
+type Rectangle struct {
+    Width, Heigh int
+}
+
+func (r Rectangle) accept(v Visitor) {
+    v(r)
+}
+</pre>
+<p>然后，我们实现两个Visitor，一个是用来做JSON序列化的，另一个是用来做XML序列化的</p>
+<pre class="EnlighterJSRAW">func JsonVisitor(shape Shape) {
+    bytes, err := json.Marshal(shape)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(string(bytes))
+}
+
+func XmlVisitor(shape Shape) {
+    bytes, err := xml.Marshal(shape)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(string(bytes))
+}
+</pre>
+<p>下面是我们的使用Visitor这个模式的代码</p>
+<pre class="EnlighterJSRAW">func main() {
+  c := Circle{10}
+  r :=  Rectangle{100, 200}
+  shapes := []Shape{c, r}
+
+  for _, s := range shapes {
+    s.accept(JsonVisitor)
+    s.accept(XmlVisitor)
+  }
+
+}</pre>
+<p>其实，这段代码的目的就是想解耦 数据结构和 算法，使用 Strategy 模式也是可以完成的，而且会比较干净。<strong>但是在有些情况下，多个Visitor是来访问一个数据结构的不同部分，这种情况下，数据结构有点像一个数据库，而各个Visitor会成为一个个小应用。</strong> <code>kubectl</code>就是这种情况。</p>
+<h4>k8s相关背景</h4>
+<p>接下来，我们再来了解一下相关的知识背景：</p>
+<ul>
+<li>对于Kubernetes，其抽象了很多种的Resource，比如：Pod, ReplicaSet, ConfigMap, Volumes, Namespace, Roles …. 种类非常繁多，这些东西构成为了Kubernetes的数据模型（点击 <a href="https://github.com/kubernauts/practical-kubernetes-problems/blob/master/images/k8s-resources-map.png" rel="noopener" target="_blank">Kubernetes Resources 地图</a> 查看其有多复杂）</li>
+<li><code>kubectl</code> 是Kubernetes中的一个客户端命令，操作人员用这个命令来操作Kubernetes。<code>kubectl</code> 会联系到 Kubernetes 的API Server，API Server会联系每个节点上的 <code>kubelet</code> ，从而达到控制每个结点。</li>
+<li><code>kubectl</code> 主要的工作是处理用户提交的东西（包括，命令行参数，yaml文件等），然后其会把用户提交的这些东西组织成一个数据结构体，然后把其发送给 API Server。</li>
+<li>相关的源代码在 <code>src/k8s.io/cli-runtime/pkg/resource/visitor.go</code> 中（<a href="https://github.com/kubernetes/kubernetes/blob/cea1d4e20b4a7886d8ff65f34c6d4f95efcb4742/staging/src/k8s.io/cli-runtime/pkg/resource/visitor.go" rel="noopener" target="_blank">源码链接</a>）</li>
+</ul>
+<p><code>kubectl</code> 的代码比较复杂，不过，其本原理简单来说，<strong>它从命令行和yaml文件中获取信息，通过Builder模式并把其转成一系列的资源，最后用 Visitor 模式模式来迭代处理这些Reources</strong>。</p>
+<p>下面我们来看看 <code>kubectl</code> 的实现，为了简化，我用一个小的示例来表明 ，而不是直接分析复杂的源码。</p>
+<h4>kubectl的实现方法</h4>
+<h5>Visitor模式定义</h5>
+<p>首先，<code>kubectl</code> 主要是用来处理 <code>Info</code>结构体，下面是相关的定义：</p>
+<pre class="EnlighterJSRAW">type VisitorFunc func(*Info, error) error
+
+type Visitor interface {
+    Visit(VisitorFunc) error
+}
+
+type Info struct {
+    Namespace   string
+    Name        string
+    OtherThings string
+}
+func (info *Info) Visit(fn VisitorFunc) error {
+  return fn(info, nil)
+}</pre>
+<p>我们可以看到，</p>
+<ul>
+<li>有一个 <code>VisitorFunc</code> 的函数类型的定义</li>
+<li>一个 <code>Visitor</code> 的接口，其中需要 <code>Visit(VisitorFunc) error</code>  的方法（这就像是我们上面那个例子的 <code>Shape</code> ）</li>
+<li>最后，为<code>Info</code> 实现 <code>Visitor</code> 接口中的 <code>Visit()</code> 方法，实现就是直接调用传进来的方法（与前面的例子相仿）</li>
+</ul>
+<p>我们再来定义几种不同类型的 Visitor。</p>
+<h5>Name Visitor</h5>
+<p>这个Visitor 主要是用来访问 <code>Info</code> 结构中的 <code>Name</code> 和 <code>NameSpace</code> 成员</p>
+<pre class="EnlighterJSRAW">type NameVisitor struct {
+  visitor Visitor
+}
+
+func (v NameVisitor) Visit(fn VisitorFunc) error {
+  return v.visitor.Visit(func(info *Info, err error) error {
+    fmt.Println("NameVisitor() before call function")
+    err = fn(info, err)
+    if err == nil {
+      fmt.Printf("==&gt; Name=%s, NameSpace=%s\n", info.Name, info.Namespace)
+    }
+    fmt.Println("NameVisitor() after call function")
+    return err
+  })
+}</pre>
+<p>我们可以看到，上面的代码：</p>
+<ul>
+<li>声明了一个 <code>NameVisitor</code> 的结构体，这个结构体里有一个 <code>Visitor</code> 接口成员，这里意味着多态。</li>
+<li>在实现 <code>Visit()</code> 方法时，其调用了自己结构体内的那个 <code>Visitor</code>的 <code>Visitor()</code> 方法，这其实是一种修饰器的模式，用另一个Visitor修饰了自己（关于修饰器模式，参看《<a href="https://coolshell.cn/articles/17929.html" rel="noopener" target="_blank" title="Go编程模式：修饰器">Go编程模式：修饰器</a>》）</li>
+</ul>
+<h5>Other Visitor</h5>
+<p>这个Visitor主要用来访问 <code>Info</code> 结构中的 <code>OtherThings</code> 成员</p>
+<pre class="EnlighterJSRAW">type OtherThingsVisitor struct {
+  visitor Visitor
+}
+
+func (v OtherThingsVisitor) Visit(fn VisitorFunc) error {
+  return v.visitor.Visit(func(info *Info, err error) error {
+    fmt.Println("OtherThingsVisitor() before call function")
+    err = fn(info, err)
+    if err == nil {
+      fmt.Printf("==&gt; OtherThings=%s\n", info.OtherThings)
+    }
+    fmt.Println("OtherThingsVisitor() after call function")
+    return err
+  })
+}</pre>
+<p>实现逻辑同上，我就不再重新讲了</p>
+<h5>Log Visitor</h5>
+<pre class="EnlighterJSRAW">type LogVisitor struct {
+  visitor Visitor
+}
+
+func (v LogVisitor) Visit(fn VisitorFunc) error {
+  return v.visitor.Visit(func(info *Info, err error) error {
+    fmt.Println("LogVisitor() before call function")
+    err = fn(info, err)
+    fmt.Println("LogVisitor() after call function")
+    return err
+  })
+}</pre>
+<h5>使用方代码</h5>
+<p>现在我们看看如果使用上面的代码：</p>
+<pre class="EnlighterJSRAW">func main() {
+  info := Info{}
+  var v Visitor = &amp;info
+  v = LogVisitor{v}
+  v = NameVisitor{v}
+  v = OtherThingsVisitor{v}
+
+  loadFile := func(info *Info, err error) error {
+    info.Name = "Hao Chen"
+    info.Namespace = "MegaEase"
+    info.OtherThings = "We are running as remote team."
+    return nil
+  }
+  v.Visit(loadFile)
+}</pre>
+<p>上面的代码，我们可以看到</p>
+<ul>
+<li>Visitor们一层套一层</li>
+<li>我用 <code>loadFile</code> 假装从文件中读如数据</li>
+<li>最后一条 <code>v.Visit(loadfile)</code> 我们上面的代码就全部开始激活工作了。</li>
+</ul>
+<p>上面的代码输出如下的信息，你可以看到代码的执行顺序是怎么执行起来了</p>
+<pre class="EnlighterJSRAW">LogVisitor() before call function
+NameVisitor() before call function
+OtherThingsVisitor() before call function
+==&gt; OtherThings=We are running as remote team.
+OtherThingsVisitor() after call function
+==&gt; Name=Hao Chen, NameSpace=MegaEase
+NameVisitor() after call function
+LogVisitor() after call function</pre>
+<p>我们可以看到，上面的代码有以下几种功效：</p>
+<ul>
+<li>解耦了数据和程序。</li>
+<li>使用了修饰器模式</li>
+<li>还做出来pipeline的模式</li>
+</ul>
+<p>所以，其实，我们是可以把上面的代码重构一下的。</p>
+<h5>Visitor修饰器</h5>
+<p>下面，我们用<a href="https://coolshell.cn/articles/17929.html" rel="noopener" target="_blank" title="Go编程模式：修饰器">修饰器模式</a>来重构一下上面的代码。</p>
+<pre class="EnlighterJSRAW">type DecoratedVisitor struct {
+  visitor    Visitor
+  decorators []VisitorFunc
+}
+
+func NewDecoratedVisitor(v Visitor, fn ...VisitorFunc) Visitor {
+  if len(fn) == 0 {
+    return v
+  }
+  return DecoratedVisitor{v, fn}
+}
+
+// Visit implements Visitor
+func (v DecoratedVisitor) Visit(fn VisitorFunc) error {
+  return v.visitor.Visit(func(info *Info, err error) error {
+    if err != nil {
+      return err
+    }
+    if err := fn(info, nil); err != nil {
+      return err
+    }
+    for i := range v.decorators {
+      if err := v.decorators[i](info, nil); err != nil {
+        return err
+      }
+    }
+    return nil
+  })
+}</pre>
+<p>上面的代码并不复杂，</p>
+<ul>
+<li>用一个 <code>DecoratedVisitor</code> 的结构来存放所有的<code>VistorFunc</code>函数</li>
+<li><code>NewDecoratedVisitor</code> 可以把所有的 <code>VisitorFunc</code>转给它，构造 <code>DecoratedVisitor</code> 对象。</li>
+<li><code>DecoratedVisitor</code>实现了 <code>Visit()</code> 方法，里面就是来做一个for-loop，顺着调用所有的 <code>VisitorFunc</code></li>
+</ul>
+<p>于是，我们的代码就可以这样运作了：</p>
+<pre class="EnlighterJSRAW">info := Info{}
+var v Visitor = &amp;info
+v = NewDecoratedVisitor(v, NameVisitor, OtherVisitor)
+
+v.Visit(LoadFile)</pre>
+<p>是不是比之前的那个简单？注意，这个<code>DecoratedVisitor</code> 同样可以成为一个Visitor来使用。</p>
+<p>好，上面的这些代码全部存在于 <code>kubectl</code> 的代码中，你看懂了这里面的代码逻辑，相信你也能够看懂 <code>kubectl</code> 的代码了。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21615.html"><img alt="Go编程模式 ： 泛型编程" height="150" src="../wp-content/uploads/2021/09/go-generics-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21615.html">Go编程模式 ： 泛型编程</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21228.html"><img alt="Go编程模式：Pipeline" height="150" src="../wp-content/uploads/2020/12/go.line_.-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21228.html">Go编程模式：Pipeline</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21214.html"><img alt="Go编程模式：委托和反转控制" height="150" src="../wp-content/uploads/2020/12/go.pair_-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21214.html">Go编程模式：委托和反转控制</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21179.html"><img alt="Go 编程模式：Go Generation" height="150" src="../wp-content/uploads/2020/12/go.generate-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21179.html">Go 编程模式：Go Generation</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21164.html"><img alt="Go编程模式：Map-Reduce" height="150" src="../wp-content/uploads/2020/12/go.map_.reduce-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21164.html">Go编程模式：Map-Reduce</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/21146.html"><img alt="Go 编程模式：Functional Options" height="150" src="../wp-content/uploads/2020/12/go.options-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/21146.html">Go 编程模式：Functional Options</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/21263.html">Go 编程模式：k8s Visitor 模式</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

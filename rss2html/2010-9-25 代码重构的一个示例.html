@@ -1,0 +1,54 @@
+<html><body><p>还记得以前和大家提到过的《<a href="https://coolshell.cn/articles/2058.html" target="_blank">各种流行的编程风格</a>》吗？有一些人问我那些编程风格具体是什么样子的。下面是一个代码重构的实例，让我们看看那个流行的编程风格是实践是什么样的。下面的这个实践不是虚构，如有雷同，请对号入座。</p>
+<p>首先，我们有一个表达式如下所示：</p>
+<p><code class="EnlighterJSRAW">s = 7;</code></p>
+<p>很明显，这个表达式的变量名太没意义了，很不利于程序的可读性，所以，我们需要取一个有意义的变量名：</p>
+<p><code class="EnlighterJSRAW">slots = 7;</code></p>
+<p>很好，不过，那个常量7是hard-code或是一个Magic number，而且，这常量没有名字也不利于代码的可读性啊。再改：</p>
+<p><span id="more-3005"></span></p>
+<pre class="EnlighterJSRAW">SEVEN = 7;
+...
+slots = SEVEN;</pre>
+<p>靠！上面，是这是哪门子的改法？（不过，我保证这是真实发生的），常量名也要有意义一点嘛，再改：</p>
+<pre class="EnlighterJSRAW">SLOTS_PER_WIDGET = 7;
+...
+slots = SLOTS_PER_WIDGET;</pre>
+<p>这还差不多，不过，名字可能会重名啊，最好放到一个类中：</p>
+<pre class="EnlighterJSRAW">import widgetConstants;
+...
+slots = widgetConstants.SLOTS_PER_WIDGET;</pre>
+<p>现在看起来好很多了，不过，即然面向对象了，我们当然要学会使用Design Pattern，比如Factory啊，或是Singleton啊什么的：</p>
+<pre class="EnlighterJSRAW">widgetModelFactory = WidgetModelFactory.getInstance();
+widgetModel = widgetModelFactory.getWidgetModel() ;
+slots = widgetModel.getSlotsPerWidget();</pre>
+<p>当然，要是考虑到整体的类结构，上面的那些还不够，下面是我们最终的重构代码：（欢迎来到真实的Java世界）</p>
+<pre class="EnlighterJSRAW">context = Context.getCurrentContext();
+serviceDirectoryFactory = ServiceDirectoryFactory.getServiceDirectory(context);
+serviceDirectory = serviceDirectoryFactory.getServiceDirectory(context);
+serviceDescriptor = ServiceDescriptorFactory.getDescriptor("widgetModelFactory");
+widgetModelFactoryServiceLocator = serviceDirectory.getServiceLocator(serviceDescriptor,context);
+widgetModelFactory = (WidgetModelFactory)widgetModelFactoryServiceLocator.findService(context);
+widgetModel = widgetModelFactory.getWidgetModel(context);
+
+slots = widgetModel.getSlotsPerWidget();</pre>
+<p>这就是我们的面像对象的编程模式，记得N年前在面试那家著名的以鼓吹敏捷方法论的公司时，在用程序实现一个程序题的时候，他们对我的程序很不屑一顾，原因有两个，其一、我没有使用TDD写UT Case，其二、我的程序里没有设计模式。（我才知道，编程原来是为了测试和设计模式，而不是为了原来的需求），今天，仅以此文献给钟爱于<a href="https://coolshell.cn/articles/2058.html" target="_blank">那些流行编码风格</a>的程序员们。</p>
+<p>其实，这段代码也是如下而已罢了。</p>
+<p><code class="EnlighterJSRAW">slots = thisWidget.getSlotCount();</code></p>
+<p>(全文完)<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18024.html"><img alt="API设计原则 – Qt官网的设计实践总结" height="150" src="../wp-content/uploads/2017/07/api-design-300x278-2-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18024.html">API设计原则 – Qt官网的设计实践总结</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5444.html"><img alt="千万不要把 bool 设计成函数参数" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/14.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5444.html">千万不要把 bool 设计成函数参数</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5292.html"><img alt="弱爆程序员的特征值" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/23.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5292.html">弱爆程序员的特征值</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5201.html"><img alt="重构代码的7个阶段" height="150" src="../wp-content/uploads/2011/08/538efefbjw1dt8f6ua5rpg-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5201.html">重构代码的7个阶段</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4875.html"><img alt="一个空格引发的惨剧" height="150" src="../wp-content/uploads/2011/06/20110620115951113-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4875.html">一个空格引发的惨剧</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4758.html"><img alt="如何写出无法维护的代码" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/30.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3005.html">代码重构的一个示例</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

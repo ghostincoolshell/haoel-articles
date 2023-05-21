@@ -1,0 +1,55 @@
+<html><body><p>这里向大家介绍一个C++的字符串格式化库，叫cpptempl，这个库支持对字符串格式的条件，循环，变量插入。看上去很不错，只不过其是基于boost库的。</p>
+<p>下面是一个例子：</p>
+<pre class="EnlighterJSRAW">// The text template
+wstring text = L"I heart {$place}!" ;
+// Data to feed the template engine
+cpptempl::data_map data ;
+// {$place} =&gt; Okinawa
+data[L"place"] = cpptempl::make_data(L"Okinawa");
+// parse the template with the supplied data dictionary
+wstring result = cpptempl::parse(text, data) ;</pre>
+<p>输出结果是：</p>
+<blockquote><p>I heart Okinawa!</p></blockquote>
+<p>是不是很方便？让我们看一个更复杂的例子：</p>
+<p><span id="more-3258"></span></p>
+<pre class="EnlighterJSRAW">// You'd probably load this template from a file in real life.
+wstring text = L"&lt;h3&gt;Locations&lt;/h3&gt;\n&lt;ul&gt;\n"
+    L"{% for place in places %}"
+    L"&lt;li&gt;{$place}&lt;/li&gt;\n"
+    L"{% endfor %}"
+    L"&lt;/ul&gt;" ;
+// Create the list of items
+cpptempl::data_list places;
+places.push_back(cpptempl::make_data(L"Okinawa"));
+places.push_back(cpptempl::make_data(L"San Francisco"));
+// Now set this in the data map
+cpptempl::data_map data ;
+data[L"places"] = cpptempl::make_data(places);
+// parse the template with the supplied data dictionary
+wstring result = cpptempl::parse(text, data) ;</pre>
+<p>输出结果是：</p>
+<blockquote><p>&lt;h3&gt;Locations&lt;/h3&gt;<br/>
+&lt;ul&gt;<br/>
+&lt;li&gt;Okinawa&lt;/li&gt;<br/>
+&lt;li&gt;San Francisco&lt;/li&gt;<br/>
+&lt;/ul&gt;</p></blockquote>
+<p>更为详细的说明请到这里：<a href="http://bitbucket.org/ginstrom/cpptemplate/wiki/Home" target="_blank">http://bitbucket.org/ginstrom/cpptemplate/wiki/Home</a>。</p>
+<p>Google也有一个类似的库叫ctemplate：<a href="http://code.google.com/p/google-ctemplate/" target="_blank">http://code.google.com/p/google-ctemplate/</a> 提供相似的方法，你也可以试试看。与Google相对应的Java库叫Hapax：<a href="http://code.google.com/p/hapax/" target="_blank">http://code.google.com/p/hapax/</a>。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/20845.html"><img alt="Rust语言的编程范式" height="150" src="../wp-content/uploads/2020/03/rust-social-wide-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/20845.html">Rust语言的编程范式</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/7992.html"><img alt="C++的坑真的多吗？" height="150" src="../wp-content/uploads/2012/08/cpp_small-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/7992.html">C++的坑真的多吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5576.html"><img alt="那些曾伴我走过编程之路的软件" height="150" src="../wp-content/uploads/2011/10/00.QuickBasic_PDS_IDE-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5576.html">那些曾伴我走过编程之路的软件</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3258.html">C++的字符串格式化库</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

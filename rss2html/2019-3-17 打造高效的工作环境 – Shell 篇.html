@@ -1,0 +1,241 @@
+<html><body><p></p>
+<blockquote><p><strong>注：本文由<a href="https://github.com/rayjun" rel="noopener noreferrer" target="_blank">雷俊</a>(Javaer/Emacser)和我一起编辑，所以文章版权归雷俊与我共同所有，转载者必需注明出处和我们两位作者。原文最早发于酷壳微信公众号，后来我又做了一些修改，再发到博客这边。</strong></p></blockquote>
+<p><img alt="" class="alignright size-full wp-image-19230" height="220" src="../wp-content/uploads/2019/03/linux.ninja_.png" width="255"/>程序员是一个很懒的群体，总想着能够让代码为自己干活，他们不断地把工作生活中的一些事情用代码自动化了，从而让整个社会的效率运作地越来越高。所以，程序员在准备去优化这个世界的时候，都会先要优化自己的工作环境，是所谓“工欲善其事，必先利其器”。</p>
+<p>我们每个程序员都应该打造一套让自己更为高效的工作环境。那怕就是让你少输入一次命令，少按一次键，少在鼠标和键盘间切换一次，都会让程序员的工作变得更为的高效。所以，程序员一般需要一台性能比较好，不会因为开了太多的网页或程序就卡得不行的电脑，还要配备多个显示器，一个显示器写代码，一个查文档，一个测试运行结果，而不必在各种窗口来来回回的切换……在大量的窗口间切换经常会迷路，而且也容易出错（分不清线上或测试环境）……</p>
+<p>除了硬件上的装备，软件上也是能够提升程序员生产力的地方，<strong>在软件层面提升程序员生产力的东西有一个很重要的事就是命令行和脚本</strong>，使用鼠标和图形界面则会大大降低程序员的生产力。酷壳以前也写过一些，如《<a href="https://coolshell.cn/articles/8619.html" rel="noopener noreferrer" target="_blank">你可能不知道的Shell</a>》和《 <a href="https://coolshell.cn/articles/8883.html" rel="noopener noreferrer" target="_blank">应该知道的Linux技巧</a>》，但是Unix/Linux Shell就是一个大宝库，怎么写也写不完，不然，怎么会有“Where is the Shell, there is a way”。</p>
+<p><span id="more-19219"></span></p>
+<h4>命令行</h4>
+<p>在不同的操作系统下，都有着很不错的命令行工具，比如 Mac 下的 <strong>Iterm2</strong>，Linux 下的原生命令行，如果你是在 Windows 下工作，问题也不大，因为 Windows 下现在有了 <strong>WSL</strong>。WSL 提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间，例如 Ubuntu，openSUSE，SUSE Linux Enterprise Server，Debian和Kali Linux。这样的用户空间可能包含 Bash shell 和命令语言，使用本机 GNU/Linux 命令行工具（sed，awk 等），编程语言解释器（Ruby，Python 等），甚至是图形应用程序（使用主机端的X窗口系统）。</p>
+<p>使用命令行可以完成所有日常的操作，新建文件夹（mkdir）、新建文件（touch）、移动（mv）、复制（cp）、删除（rm）等等。而且使用 Linux/Unix 命令行最好的方式是可以用 <code>awk</code>、<code>sed</code>、<code>grep</code>、<code>xargs</code>、<code>find</code>、<code>sort</code> 等等这样的命令，然后用管道把其串起来，就可以完成一个你想要的功能，尤其是一些简单的数据统计功能。这是Linux命令行不可比拟的优势。比如：</p>
+<ul>
+<li>查看连接你服务器 top10 用户端的 IP 地址：</li>
+</ul>
+<p><code>netstat -nat | awk '{print $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10</code></p>
+<ul>
+<li>查看一下你最常用的10个命令：</li>
+</ul>
+<p><code>cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10</code></p>
+<p>（注：<code>awk</code> 和 <code>sed</code> 是两大神器，所以，我以前的也有两篇文章来介绍它们——《<a href="https://coolshell.cn/articles/9070.html" rel="noopener noreferrer" target="_blank">awk简明教程</a>》和《<a href="https://coolshell.cn/articles/9104.html" rel="noopener noreferrer" target="_blank">sed简明教程</a>》，你可以前往一读）</p>
+<p>在命令行中使用 <strong>alias</strong> 可以将使用频率很高命令或者比较复杂的命令合并成一个命令，或者修改原生的命令。</p>
+<p>下面这几个命令，可能是你天天都在敲的。所以，你应该设置成 alias 来提高效率</p>
+<pre class="EnlighterJSRAW">
+alias nis="npm install --save "
+alias svim='sudo vim'
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+alias install='sudo apt get install'
+alias update='sudo apt-get update; sudo apt-get upgrade'
+alias ..="cd .."
+alias ...="cd ..; cd .."
+alias www='python -m SimpleHTTPServer 8000'
+alias sock5='ssh -D 8080 -q -C -N -f user@your.server'
+</pre>
+<p>你还可以参考如下的一些文章，看看别人是怎么用好 <code>alias</code> 的</p>
+<ul>
+<li><a href="https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html" rel="nofollow">30 Handy Bash Shell Aliases For Linux / Unix / Mac OS X</a></li>
+<li><a href="https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases" rel="nofollow">What are your favorite bash aliases?</a></li>
+<li><a href="https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/" rel="nofollow">23 Handy Bash Shell Aliases For Unix, Linux, and Mac OS X</a></li>
+<li><a href="https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/" rel="nofollow">A few more of my favorite Bash aliases</a></li>
+</ul>
+<p>命令行中除了原生的命令之外，还有很多可以提升使用体验的工具。下面罗列一些很不错的命令，把原生的命令增强地很厉害:</p>
+<ul>
+<li><a href="https://github.com/clvv/fasd" rel="noopener noreferrer" target="_blank"><strong>fasd</strong></a> 增强了 <code>cd</code> 命令 。</li>
+<li><a href="https://github.com/sharkdp/bat" rel="noopener noreferrer" target="_blank"><strong>bat</strong></a> 增强了 <code>cat</code> 命令 。如果你想要有语法高亮的 <code>cat</code>，可以试试 <a href="https://github.com/jingweno/ccat" rel="noopener noreferrer" target="_blank"><strong>ccat</strong></a> 命令。</li>
+<li><a href="https://github.com/ogham/exa" rel="noopener noreferrer" target="_blank"><strong>exa</strong></a> 增强了 <code>ls</code> 命令，如果你需要在很多目录上浏览各种文件 ，<a href="https://github.com/ranger/ranger" rel="noopener noreferrer" target="_blank"><strong>ranger</strong></a> 命令可以比 <code>cd</code> 和 <code>cat</code> 更有效率，甚至可以在你的终端预览图片。</li>
+<li><a href="https://github.com/sharkdp/fd" rel="noopener noreferrer" target="_blank"><strong>fd</strong></a> 是一个比 <code>find</code> 更简单更快的命令，他还会自动地忽略掉一些你配置在 <code>.gitignore</code> 中的文件，以及 <code>.git</code> 下的文件。</li>
+<li><a href="https://github.com/junegunn/fzf" rel="noopener noreferrer" target="_blank"><strong>fzf</strong></a> 会是一个很好用的文件搜索神器，其主要是搜索当前目录以下的文件，还可以使用 <code>fzf --preview 'cat {}'</code>边搜索文件边浏览内容。</li>
+<li><code>grep</code> 是一个上古神器，然而，<a href="https://beyondgrep.com/" rel="noopener noreferrer" target="_blank"><strong>ack</strong></a>、<a href="https://github.com/ggreer/the_silver_searcher" rel="noopener noreferrer" target="_blank"><strong>ag</strong></a> 和 <a href="https://github.com/BurntSushi/ripgrep" rel="noopener noreferrer" target="_blank"><strong>rg</strong></a> 是更好的grep，和上面的 <code>fd</code>一样，在递归目录匹配的时候，会使用你配置在 <code>.gitignore</code> 中的规则。</li>
+<li><code>rm</code> 是一个危险的命令，尤其是各种 <code>rm -rf …</code>，所以，<a href="https://github.com/andreafrancia/trash-cli/" rel="noopener noreferrer" target="_blank"><strong>trash</strong></a> 是一个更好的删除命令。</li>
+<li><code>man</code> 命令是好读文档的命令，但是man的文档有时候太长了，所以，你可以试试 <a href="https://github.com/tldr-pages/tldr" rel="noopener noreferrer" target="_blank"><strong>tldr</strong></a> 命令，把文档上的一些示例整出来给你看。</li>
+<li>如果你想要一个图示化的<code>ping</code>，你可以试试 <a href="https://github.com/denilsonsa/prettyping" rel="noopener noreferrer" target="_blank"><strong>prettyping</strong></a> 。</li>
+<li>如果你想搜索以前打过的命令，不要再用 Ctrl +R 了，你可以使用加强版的 <a href="https://github.com/dvorka/hstr" rel="noopener noreferrer" target="_blank"><strong>hstr</strong></a>  。</li>
+<li><a href="https://hisham.hm/htop/" rel="noopener noreferrer" target="_blank"><strong>htop</strong></a>  是 top 的一个加强版。然而，还有很多的各式各样的top，比如：用于看IO负载的 <a href="http://guichaz.free.fr/iotop/" rel="noopener noreferrer" target="_blank"><strong>iotop</strong></a>，网络负载的 <a href="http://www.ex-parrot.com/~pdw/iftop/" rel="noopener noreferrer" target="_blank"><strong>iftop</strong></a>, 以及把这些top都集成在一起的 <a href="https://github.com/Atoptool/atop" rel="noopener noreferrer" target="_blank"><strong>atop</strong></a>。</li>
+<li><a href="https://dev.yorhel.nl/ncdu" rel="noopener noreferrer" target="_blank"><strong>ncdu</strong></a>  比 du 好用多了用。另一个选择是 <a href="https://github.com/jarun/nnn" rel="noopener noreferrer" target="_blank">nnn</a>。</li>
+<li>如果你想把你的命令行操作建录制成一个 SVG 动图，那么你可以尝试使用 <a href="https://asciinema.org/" rel="noopener noreferrer" target="_blank"><strong>asciinema</strong></a> 和 <a href="https://github.com/marionebl/svg-term-cli" rel="noopener noreferrer" target="_blank"><strong>svg-trem</strong></a> 。</li>
+<li><a href="https://github.com/jakubroztocil/httpie" rel="noopener noreferrer" target="_blank"><strong>httpie</strong></a> 是一个可以用来替代 <code>curl</code> 和 <code>wget</code> 的 http 客户端，<code>httpie</code> 支持 json 和语法高亮，可以使用简单的语法进行 http 访问: <code>http -v github.com</code>。</li>
+<li><a href="https://github.com/tmux/tmux" rel="noopener noreferrer" target="_blank"><strong>tmux</strong></a> 在需要经常登录远程服务器工作的时候会很有用，可以保持远程登录的会话，还可以在一个窗口中查看多个 shell 的状态。</li>
+<li><a href="https://github.com/klaussinani/taskbook" rel="noopener noreferrer" target="_blank"><strong>Taskbook</strong></a> 是可以完全在命令行中使用的任务管理器 ，支持 ToDo 管理，还可以为每个任务加上优先级。</li>
+<li><a href="https://github.com/Russell91/sshrc" rel="noopener noreferrer" target="_blank"><strong>sshrc</strong></a> 是个神器，在你登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置。</li>
+<li><a href="https://github.com/allinurl/goaccess" rel="noopener noreferrer" target="_blank"><strong>goaccess</strong></a>  这个是一个轻量级的分析统计日志文件的工具，主要是分析各种各样的 access log。</li>
+</ul>
+<p>关于这些增加命令，主要是参考自下面的这些文章</p>
+<ol>
+<li><a href="https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4" rel="nofollow noopener noreferrer" target="_blank">10 Tools To Power Up Your Command Line</a></li>
+<li><a href="https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737" rel="nofollow noopener noreferrer" target="_blank">5 More Tools To Power Up Your Command Line (Part 2 Of Series)</a></li>
+<li><a href="https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53" rel="nofollow noopener noreferrer" target="_blank">Power Up Your Command Line, Part 3</a></li>
+<li><a href="https://darrenburns.net/posts/tools/" rel="nofollow noopener noreferrer" target="_blank">Power Up Your Command Line</a></li>
+<li><a href="https://hacker-tools.github.io/" rel="nofollow noopener noreferrer" target="_blank">Hacker Tools</a></li>
+</ol>
+<h4>Shell 和脚本</h4>
+<p>shell 是可以与计算机进行高效交互的文本接口。shell 提供了一套交互式的编程语言（脚本），shell的种类很多，比如 <strong>sh</strong>、<strong>bash</strong>、<strong>zsh</strong> 等。</p>
+<p>shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。</p>
+<p>现在比较流行的是 <strong>zsh</strong> + <a href="https://ohmyz.sh/" rel="noopener noreferrer" target="_blank"><strong>oh-my-zsh</strong></a> + <a href="https://github.com/zsh-users/zsh-autosuggestions" rel="noopener noreferrer" target="_blank"><strong>zsh-autosuggestions</strong></a> 的组合，你也可以试试看。其中 zsh 和 oh-my-zsh 算是常规操作了，但是 zsh-autosuggestions 特别有用，可以超级快速的帮你补全你输入过的命令，让命令行的操作更加高效。</p>
+<p>另外，<strong><a href="https://fishshell.com/" rel="noopener noreferrer" target="_blank">fish</a> </strong>也是另外一个牛逼的shell，比如：命令行自动完成（根据历史记录），命令行命令高亮，当你要输入命令行参数的时候，自动提示有哪些参数…… fish在很多地方也是用起来很爽的。和上面的 oh-my-zsh 有点不分伯仲了。</p>
+<p>你也许会说，用 Python 脚本或 PHP 来写脚本会比 Shell 更好更没有 bug，但我要申辩一下:</p>
+<ul>
+<li>其一，如果你有一天要维护线上机器的时候，或是到了银行用户的系统（与外网完全隔离，而且服务器上没有安装 Python/PHP 或是他们的的高级库，那么，你只有 Shell 可以用了）。</li>
+<li>其二，而且，如果要跟命令行交互很多的话，Shell 是不二之选，试想一下，如果你要去 100 台远程的机器上查access.log 日志中有没有某个错误，完成这个工作你是用 PHP/Python 写脚本快还是用 Shell 写脚本快呢？</li>
+</ul>
+<p>所以，<strong>我们还要学会只使用传统的grep/awk/sed等等这些POSIX的原生的系统默认安装的命令</strong>。</p>
+<p>当然，要写好一个脚本并不容易，下面有一些小模板供你参考：</p>
+<p>处理命令行参数的一个样例</p>
+<pre class="EnlighterJSRAW">while [ "$1" != "" ]; do
+    case $1 in
+        -s  )   shift	
+		SERVER=$1 ;;  
+        -d  )   shift
+		DATE=$1 ;;
+	--paramter|p ) shift
+		PARAMETER=$1;;
+        -h|help  )   usage # function call
+                exit ;;
+        * )     usage # All other parameters
+                exit 1
+    esac
+    shift
+done </pre>
+<p>命令行菜单的一个样例</p>
+<pre class="EnlighterJSRAW">
+#!/bin/bash
+# Bash Menu Script Example
+
+PS3='Please enter your choice: '
+options=("Option 1" "Option 2" "Option 3" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Option 1")
+            echo "you chose choice 1"
+            ;;
+        "Option 2")
+            echo "you chose choice 2"
+            ;;
+        "Option 3")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+</pre>
+<p>颜色定义，你可以使用 <code>echo -e "${Blu}blue ${Red}red ${RCol}etc...."</code> 进行有颜色文本的输出</p>
+<pre class="EnlighterJSRAW">
+RCol='\e[0m'    # Text Reset
+
+# Regular           Bold                Underline           High Intensity      BoldHigh Intens     Background          High Intensity Backgrounds
+Bla='\e[0;30m';     BBla='\e[1;30m';    UBla='\e[4;30m';    IBla='\e[0;90m';    BIBla='\e[1;90m';   On_Bla='\e[40m';    On_IBla='\e[0;100m';
+Red='\e[0;31m';     BRed='\e[1;31m';    URed='\e[4;31m';    IRed='\e[0;91m';    BIRed='\e[1;91m';   On_Red='\e[41m';    On_IRed='\e[0;101m';
+Gre='\e[0;32m';     BGre='\e[1;32m';    UGre='\e[4;32m';    IGre='\e[0;92m';    BIGre='\e[1;92m';   On_Gre='\e[42m';    On_IGre='\e[0;102m';
+Yel='\e[0;33m';     BYel='\e[1;33m';    UYel='\e[4;33m';    IYel='\e[0;93m';    BIYel='\e[1;93m';   On_Yel='\e[43m';    On_IYel='\e[0;103m';
+Blu='\e[0;34m';     BBlu='\e[1;34m';    UBlu='\e[4;34m';    IBlu='\e[0;94m';    BIBlu='\e[1;94m';   On_Blu='\e[44m';    On_IBlu='\e[0;104m';
+Pur='\e[0;35m';     BPur='\e[1;35m';    UPur='\e[4;35m';    IPur='\e[0;95m';    BIPur='\e[1;95m';   On_Pur='\e[45m';    On_IPur='\e[0;105m';
+Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    BICya='\e[1;96m';   On_Cya='\e[46m';    On_ICya='\e[0;106m';
+Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
+</pre>
+<p>取当前运行脚本绝对路径的示例：（注：Linux下可以用 <code>dirname $(readlink -f $0)</code> ）</p>
+<pre class="EnlighterJSRAW">
+FILE="$0"
+while [[ -h ${FILE} ]]; do
+    FILE="`readlink "${FILE}"`"
+done
+pushd "`dirname "${FILE}"`" &gt; /dev/null
+DIR=`pwd -P`
+popd &gt; /dev/null
+</pre>
+<p>如何在远程服务器运行一个本地脚本</p>
+<pre class="EnlighterJSRAW">#无参数
+ssh user@server 'bash -s' &lt; local.script.sh
+
+#有参数
+ssh user@server ARG1="arg1" ARG2="arg2" 'bash -s' &lt; local_script.sh
+</pre>
+<p>如何检查一个命令是否存在，用 <code>which</code> 吗？最好不要用，因为很多操作系统的 <code>which</code> 命令没有设置退出状态码，这样你不知道是否是有那个命令。所以，你应该使用下面的方式。</p>
+<pre class="EnlighterJSRAW">
+# POSIX 兼容:
+command -v [the_command]
+
+# bash 环境:
+hash [the_command]
+type [the_command]
+
+# 示例：
+gnudate() {
+    if hash gdate 2&gt; /dev/null; then
+        gdate "$@"
+    else
+        date "$@"
+    fi
+}
+</pre>
+<p>然后，如果要写出健壮性更好的脚本，下面是一些相关的技巧：</p>
+<ul>
+<li>使用 <code>-e</code> 参数，如：<code>set -e</code> 或是 <code>#!/bin/sh -e</code>，这样设置会让你的脚本出错就会停止运行，这样一来可以防止你的脚本在出错的情况下还在拼拿地干活停不下来。</li>
+<li>使用 <code>-u</code> 参数，如： <code>set -eu</code>，这意味着，如果你代码中有变量没有定义，就会退出。</li>
+<li>对一些变理，你可以使用默认值。如：<code>${FOO:-'default'}</code></li>
+<li>处理你代码的退出码。这样方便你的脚本跟别的命令行或脚本集成。</li>
+<li>尽量不要使用 <code>;</code> 来执行多个命令，而是使用 <code>&amp;&amp;</code>，这样会在出错的时候停止运行后续的命令。</li>
+<li>对于一些字符串变量，使用引号括起，避免其中有空格或是别的什么诡异字符。</li>
+<li>如果你的脚有参数，你需要检查脚本运行是否带了你想要的参数，或是，你的脚本可以在没有参数的情况下安全的运行。</li>
+<li>为你的脚本设置 <code>-h</code> 和 <code>--help</code> 来显示帮助信息。千万不要把这两个参数用做为的功能。</li>
+<li>使用 <code>$()</code> 而不是 <code class="EnlighterJSRAW"></code> 来获得命令行的输出，主要原因是易读。</li>
+<li>小心不同的平台，尤其是 MacOS 和 Linux 的跨平台。</li>
+<li>对于 <code>rm -rf</code> 这样的高危操作，需要检查后面的变量名是否为空，比如：<code>rm -rf $MYDIDR/*</code> 如果 <code>$MYDIR</code>为空，结果是灾难性的。</li>
+<li>考虑使用 “find/while” 而不是 “for/find”。如：<code>for F in $(find . -type f) ; do echo $F; done</code> 写成 <code>find . -type f | while read F ; do echo $F ; done</code> 不但可以容忍空格，而且还更快。</li>
+<li>防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在。</li>
+</ul>
+<p>你还可以使用ShellCheck 来帮助你检查你的脚本。</p>
+<ul>
+<li><a href="https://www.shellcheck.net/" rel="noopener noreferrer" target="_blank">https://www.shellcheck.net/</a></li>
+</ul>
+<p>最后推荐一些 Shell 和脚本的参考资料。</p>
+<p>各种有意思的命令拼装，一行命令走天涯:</p>
+<ul>
+<li><a href="http://www.bashoneliners.com/" rel="nofollow noopener noreferrer" target="_blank">http://www.bashoneliners.com/</a></li>
+<li><a href="http://www.shell-fu.org/" rel="nofollow noopener noreferrer" target="_blank">http://www.shell-fu.org/</a></li>
+<li><a href="http://www.commandlinefu.com/" rel="nofollow noopener noreferrer" target="_blank">http://www.commandlinefu.com/</a></li>
+</ul>
+<p>下面是一些脚本集中营，你可以在里面淘到各种牛X的脚本：</p>
+<ul>
+<li><a href="http://www.shelldorado.com/scripts/" rel="nofollow noopener noreferrer" target="_blank">http://www.shelldorado.com/scripts/</a></li>
+<li><a href="https://snippets.siftie.com/public/tag/bash/" rel="nofollow noopener noreferrer" target="_blank">https://snippets.siftie.com/public/tag/bash/</a></li>
+<li><a href="https://bash.cyberciti.biz/" rel="nofollow noopener noreferrer" target="_blank">https://bash.cyberciti.biz/</a></li>
+<li><a href="https://github.com/alexanderepstein/Bash-Snippets" rel="noopener noreferrer" target="_blank">https://github.com/alexanderepstein/Bash-Snippets</a></li>
+<li><a href="https://github.com/miguelgfierro/scripts" rel="noopener noreferrer" target="_blank">https://github.com/miguelgfierro/scripts</a></li>
+<li><a href="https://github.com/epety/100-shell-script-examples" rel="noopener noreferrer" target="_blank">https://github.com/epety/100-shell-script-examples</a></li>
+<li><a href="https://github.com/ruanyf/simple-bash-scripts" rel="noopener noreferrer" target="_blank">https://github.com/ruanyf/simple-bash-scripts</a></li>
+</ul>
+<p>甚至写脚本都可以使用框架:</p>
+<ul>
+<li>写bash脚本的框架 <a href="https://github.com/Bash-it/bash-it" rel="noopener noreferrer" target="_blank">https://github.com/Bash-it/bash-it</a></li>
+</ul>
+<p>Google的Shell脚本的代码规范：</p>
+<ul>
+<li><a href="https://google.github.io/styleguide/shell.xml" rel="nofollow noopener noreferrer" target="_blank">https://google.github.io/styleguide/shell.xml</a></li>
+</ul>
+<p>最后，别忘了几个和shell有关的索引资源：</p>
+<ul>
+<li><a href="https://github.com/alebcay/awesome-shell" rel="noopener noreferrer" target="_blank">https://github.com/alebcay/awesome-shell</a></li>
+<li><a href="https://github.com/awesome-lists/awesome-bash" rel="noopener noreferrer" target="_blank">https://github.com/awesome-lists/awesome-bash</a></li>
+<li><a href="https://terminalsare.sexy/" rel="nofollow noopener noreferrer" target="_blank">https://terminalsare.sexy/</a></li>
+</ul>
+<p>最后，如果你还有什么别的更好的玩的东西，欢迎在评论区留言，或是到 <a href="https://github.com/coolshellx/articles" rel="noopener noreferrer" target="_blank">coolshellx/ariticles @ github</a> 修改本文。</p>
+<p>（全文完）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/8088.html"><img alt="对技术的态度" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/7.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/8088.html">对技术的态度</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4990.html"><img alt="程序员技术练级攻略" height="150" src="../wp-content/uploads/2011/07/programmer-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4990.html">程序员技术练级攻略</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22298.html"><img alt="聊聊团队协同和协同工具" height="150" src="../wp-content/uploads/2022/10/communication-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22298.html">聊聊团队协同和协同工具</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/22173.html"><img alt="“一把梭：REST API 全用 POST”" height="150" src="../wp-content/uploads/2022/02/http_method-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/22173.html">“一把梭：REST API 全用 POST”</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/19219.html">打造高效的工作环境 – Shell 篇</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

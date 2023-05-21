@@ -1,0 +1,69 @@
+<html><body><p>我们知道Unix/Linux下的程序配置文件从来都是纯文本的，你可以自由地修改和查看，他们也没有什么什么XML之类的玩意（参看XML的这两篇文章：<a href="https://coolshell.cn/articles/2504.html" target="_blank" title="信XML，得永生！">一</a>，<a href="https://coolshell.cn/articles/3498.html" target="_blank" title="信XML，得自信">二</a>），这个最重要的Unix文化（参看<a href="https://coolshell.cn/articles/2324.html" target="_blank" title="Unix传奇(下篇)">Unix传奇下篇</a>）40多年来就这么沿续下来了。我很佩服Microsoft的创新能力，一会儿用INI，一会儿用注册表，一会又是用XML，这就是<a href="https://coolshell.cn/articles/3008.html" target="_blank" title="Windows编程革命简史">Windows的编程中那“强大”的创新</a>。在网上又看到有人在争论为什么用注册表而不是纯文本，所以，写下这篇文章。</p>
+<h4>引入注册表所谓的原因</h4>
+<p>首先，让我们来看一下为什么微软觉得要使用注册表而不是ini文件，下面是一些其列出来的ini方面的毛病：</p>
+<ul>
+<li>ini文件不支持Unicode</li>
+<li>ini文件的安全权限不够</li>
+<li>ini文件在多进程下存取会有问题</li>
+<li>如果一个进程锁上了这个文件，另一个进程就无法获得，只能出错。</li>
+<li>ini文件只能包含字符串，无法使用二进制</li>
+<li>解析ini文件相对来说性能比较慢，第一次读写都需要把整个文件读入内存，然后再写回去。</li>
+<li>ini文件最大只有32K</li>
+<li>ini文件的默认目录在Windows系统目录下，只能这个目录只能Windows管理员才能访问</li>
+<li>ini只能包含了两层，对于多层不支持。</li>
+<li>把ini文件放在中央服务器上管理很困难。</li>
+</ul>
+<p>而微软说，注册表可以完美地解决这些问题。居然微软只说到了ini文件，但我觉得不单单是ini，所有的以纯文本方式保存配置文件的方法都会出现上述这样的问题。</p>
+<h4>我的观点</h4>
+<p>那么，当你在看到这些言论时，你是怎么想的？你有没有经过自己的独立思考？还是你觉得注册表完美地解决了所有的一切？下面是我的一些观点：</p>
+<p><span id="more-4077"></span></p>
+<ul>
+<li><span style="color: #800000;">首先，我们要知道没有任何一件事是完美的，凡事必然有好的一面，也有不好的一面。</span></li>
+<li><span style="color: #800000;">其次，当我们在改进一个东西时，不单单要解决其不好的东西，还要把其好的东西给传承下来。</span></li>
+</ul>
+<p>所以，当你看到一些只说好或是只说坏的东西时，这往往意味着“宗教”或“洗脑”，这正是需要你独立思考的时候。</p>
+<h4>纯文本配置文件的好处</h4>
+<p>下面，是我觉得纯文本配置文件的好处（我用Unix下的纯文本配置文件来举例）：</p>
+<ul>
+<li>很容易进行版本管理（配置文件和程序代码一样都需要版本控制）</li>
+<li>很容易移植到别的平台</li>
+<li>很容易自定义文本文件的格式和语法，已也有相关的库支持（ini只支持ANSI字符，只有32K，只支持两级，那是ini的问题，解决这些问题不需要引入注册表）</li>
+<li>可以在配置文本中写注释信息</li>
+<li>你要很容易的使用grep，awk，sed等等以及来和脚本集成。</li>
+<li>你可以很容易地拆分配置文件把其放到conf.d中，这样一来，你就非常灵活
+<ul>
+<li>你就不用整个文件都读入内存，</li>
+<li>你也可以分别设置上不同的存取权限，</li>
+<li>同样可以减小多个进程同时存取的问题</li>
+<li>同样可以引用别的二进制配置的文件</li>
+</ul>
+</li>
+<li>你可以很容易地产生备份或是在不同的配置中来回地切换配置文件以进行调试。</li>
+<li>你可以很容易地使用rsync来向中央服务器同步你的配置文件。或者使用NFS/NIS直接就把配置放在中央服务器上。</li>
+</ul>
+<h4>真正的原因</h4>
+<p>可见，Windows 的注册表并没有把纯文本配置文件的这些好处都带过来，所以，经过这样的独立思考，我们可以知道，微软引入注册表的真正原因是——</p>
+<ul>
+<li>让你的程序不具移植性，让你的软件永远运行在Windows上。</li>
+<li>增加你编程的复杂度和你维护配置文件的复杂度，让你在痛苦之后，苦苦哀求微软再发布下一个“创新”。</li>
+</ul>
+<p>各位程序员——Windows是很危险的，你们还是回火星去吧。</p>
+<p>（<strong>全文完，转载时请注明作者和出处</strong>）<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/4102.html"><img alt="如何学好C语言" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/25.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/4102.html">如何学好C语言</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/1272.html"><img alt="操作系统航空公司" height="150" src="../wp-content/uploads/2009/08/linux_airline-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/1272.html">操作系统航空公司</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/18360.html"><img alt="程序员练级攻略（2018)  与我的专栏" height="150" src="../wp-content/uploads/2018/05/300x262-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/18360.html">程序员练级攻略（2018)  与我的专栏</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/17998.html"><img alt="Linux PID 1 和 Systemd" height="150" src="../wp-content/uploads/2017/07/systemd-1-150x150.jpeg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/17998.html">Linux PID 1 和 Systemd</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/12103.html"><img alt="vfork 挂掉的一个问题" height="150" src="../wp-content/uploads/2014/11/tux-fork-150x150.gif" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/12103.html">vfork 挂掉的一个问题</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/11847.html"><img alt="谜题的答案和活动的心得体会" height="150" src="../wp-content/uploads/2014/08/puzzle-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/4077.html">纯文本配置还是注册表</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>

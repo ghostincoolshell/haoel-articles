@@ -1,0 +1,54 @@
+<html><body><p>现在在网上要小心，无论是<a href="https://coolshell.cn/articles/2428.html" target="_blank">保护好你的用户名和帐号</a>，还是我们的电子邮件地址。在网上有很多爬虫程序专爬我们的电子邮件地址，一量被爬中了，那么你的邮箱里就是一堆又一堆的垃圾邮件，就好像我的haoel(at)hotmail.com一样，在7、8年前，每天几千封的垃圾邮件。现在hotmail的垃圾邮件过滤得好一些了，不过也有每天40封左右的垃圾邮件。但是我们在自己的网页上又需要发布自己的email地址。所以我们需要搞乱我们的邮件地址，就像那种非常规的<a href="https://coolshell.cn/articles/933.html" target="_blank">搞乱代码一样</a>。不过，我们还需要能认人读的出来。</p>
+<p>一般来说，在网上现在很普遍的做法是——</p>
+<ul>
+<li>1）用图片，可以用PHP动态生成那个验证码式的。</li>
+<li>2）把@变成at，把点变成dot，如 haoel(at)hotmail(dot)com之类的。</li>
+<li>3）把a变成@，写成haoel@hotm@mail.com</li>
+</ul>
+<p>不过这些还是能被爬到，用图片的方法不利于用户拷贝粘贴。下面介绍几种方法：</p>
+<h4>第一种：使用CSS样式</h4>
+<p><strong>反转字序</strong></p>
+<pre class="EnlighterJSRAW">
+span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
+&lt;p&gt;&lt;span&gt;moc.liamtoh@leoah&lt;/span&gt;&lt;/p&gt;</pre>
+<p><span id="more-3595"></span></p>
+<p><strong>加入些不显示的字符串</strong></p>
+<pre class="EnlighterJSRAW">p span.hide { display:none; }
+&lt;p&gt;foo@bar&lt;span class="hide"&gt;null&lt;/span&gt;.baz&lt;/p&gt;</pre>
+<h4>第二种：使用Javascript</h4>
+<p>最为简单的方法是：</p>
+<p>[javascript]document.write("haoel" + "@" + "hotmail" + "." + "com");[/javascript]</p>
+<p>或是：</p>
+<p>[javascript]&lt;script type="text/javascript"&gt;<br/>
+&lt;!–<br/>
+	var string1 = "@";<br/>
+	var string2 = "haoel";<br/>
+	var string3 = "hotmail.com";<br/>
+	var string4 = string2 + string1 + string3;<br/>
+	document.write("&lt;a href=" + "mail" + "to:" + string2 + string1 + string3 + "&gt;" + string4 + "&lt;/a&gt;");<br/>
+//–&gt;<br/>
+&lt;/script&gt;[/javascript]</p>
+<p>不过更为强大的是使用ROT13加密，这里有一个<a href="http://rot13.de/" target="_blank">ROT13的在线工具</a>，或是使用PHP的ROT13的函数<a href="http://ch2.php.net/str_rot13" target="_blank">str_rot13</a>。</p>
+<p>[javascript]&lt;script type=”text/javascript”&gt;<br/>
+document.write(“&lt;n uers=\"znvygb:unbry@ubgznvy.pbz\"&gt;”.replace(/[a-zA-Z]/g,<br/>
+function(c){return String.fromCharCode((c&lt;=”Z”?90:122)&gt;=(c=c.charCodeAt(0)+13)?c:c-26);}));<br/>
+&lt;/script&gt;陈皓的电子邮件&lt;/a&gt;[/javascript]</p>
+<p>这些方法还是很有效果的。<!--
+
+
+
+<p align="center"><a href= target=_blank><img decoding="async" src=""></a></p>
+
+
+
+
+
+<p align="center"><img decoding="async" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.weixin.jpg"> <img decoding="async" loading="lazy" src="https://coolshell.cn/wp-content/uploads/2020/03/coolshell.mini_.jpg" width="300" height="300"> <br />关注CoolShell微信公众账号和微信小程序</p>
+
+ 
+
+--></p>
+<div style="margin-top: 15px; font-size: 16px; color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="https://coolshell.cn/">酷 壳 – CoolShell</a> ，请勿用于任何商业用途）</strong></p>
+</div>
+<div class="wp_rp_wrap wp_rp_vertical_m"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/6193.html"><img alt="CSDN明文口令泄露的启示" height="150" src="../wp-content/uploads/2011/12/63071edagw1doah4id8l4j-150x150.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/6193.html">CSDN明文口令泄露的启示</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/5353.html"><img alt="你会做Web上的用户登录功能吗？" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/24.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/5353.html">你会做Web上的用户登录功能吗？</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3877.html"><img alt="另类UX让你输入强口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/20.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3877.html">另类UX让你输入强口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/3801.html"><img alt="破解你的口令" height="150" src="../wp-content/uploads/2011/02/passwords-150x150.png" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/3801.html">破解你的口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2451.html"><img alt="Twitter的禁用口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/18.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2451.html">Twitter的禁用口令</a></li><li><a class="wp_rp_thumbnail" href="https://coolshell.cn/articles/2428.html"><img alt="如何管理并设计你的口令" height="150" src="https://coolshell.cn/wp-content/plugins/wordpress-23-related-posts-plugin/static/thumbs/17.jpg" width="150"/></a><a class="wp_rp_title" href="https://coolshell.cn/articles/2428.html">如何管理并设计你的口令</a></li></ul></div></div>The post <a href="https://coolshell.cn/articles/3595.html">如何“加密”你的email地址</a> first appeared on <a href="https://coolshell.cn">酷 壳 - CoolShell</a>.</body></html>
